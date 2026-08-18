@@ -1,0 +1,86 @@
+{
+  "F1_LICENSE_TRIPLE_CONTRADICTION": {
+    "severity": "P0_CRITICAL",
+    "issue": "3 afirmaciones de licencia distintas en el MISMO archivo",
+    "evidence": {
+      "license_top": "AliceLabs LLC Proprietary \u2014 see https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/LICENSE",
+      "trust.license": "MIT",
+      "trust.open_source": false,
+      "npm_license": "MNNC-1.0"
+    },
+    "fix": "Unificar a MNNC-1.0 (ya publicada en npm, mantener consistencia)"
+  },
+  "F2_GITHUB_URL_DUAL_AND_404": {
+    "severity": "P0_CRITICAL",
+    "issue": "2 URLs de GitHub distintas en el mismo archivo, AMBAS rotas",
+    "evidence": {
+      "trust.github": "https://github.com/alicelabs-llc",
+      "license_url": "github.com/edgarfloresguerra2011-a11y/marketnow (404)",
+      "npm_repository": "git+https://github.com/edgarfloresguerra2011-a11y/marketnow.git"
+    },
+    "fix": "Crear repo real en github.com/alicelabs-llc/marketnow o usar existente"
+  },
+  "F3_FOUNDING_DATE_TRIPLE": {
+    "severity": "P1_HIGH",
+    "issue": "3 fechas de fundaci\u00f3n distintas entre fuentes",
+    "evidence": {
+      "landing_html": "Founded 2024 by Edison Flores",
+      "agent.json_trust.maintainer": "AliceLabs LLC (Wyoming, USA, founded 2025)",
+      "github_org_created_at": "2026-03-30 (alicelabs-llc)",
+      "npm_package_created": "2026-06-29"
+    },
+    "fix": "Unificar a 2025 (fundaci\u00f3n legal Wyoming) y separar fundaci\u00f3n vs lanzamiento p\u00fablico"
+  },
+  "F4_SKILL_COUNT_INCONSISTENT": {
+    "severity": "P1_HIGH",
+    "issue": "5 conteos de skills distintos entre fuentes",
+    "evidence": {
+      "agent.json_description": "5,023 MCP servers",
+      "agent.json_pricing_explanation": "7,063 skills",
+      "landing_html_main": "9,248 MCP servers indexed",
+      "landing_html_categories_sum": "5,831 (1976+1891+782+348+328+292+288+224=5829, +43 hand-curated)",
+      "skills_lite_json_actual": "9,248 skills",
+      "sitemap": "9,248 skills mentioned in /catalog"
+    },
+    "fix": "Usar 9,248 como fuente \u00fanica de verdad (consistente con API viva)"
+  },
+  "F5_PRICING_MODEL_TRIPLE": {
+    "severity": "P0_CRITICAL",
+    "issue": "Modelo de negocio incompatible entre landing y agent.json",
+    "evidence": {
+      "landing_html": "$0.99-$9.99 One-Time (cobra al comprador)",
+      "agent.json_pricing_model": "MarketNow does NOT sell skills (cobra al vendedor)",
+      "agent.json_seller_tiers": "FREE / PRO $9.99/mo / ENTERPRISE $49.99/mo"
+    },
+    "fix": "Confirmar modelo B2B (vendedor) y eliminar menci\u00f3n de $0.99-$9.99 en landing"
+  },
+  "F6_VERSION_DRIFT_NPM_VS_DOCS": {
+    "severity": "P1_HIGH",
+    "issue": "Versi\u00f3n npm (1.10.0) vs tools declaradas (13) vs tools antiguas mencionadas",
+    "evidence": {
+      "npm_latest": "1.10.0 (released 2026-08-09)",
+      "npm_total_versions": "15 (1.5.1 \u2192 1.10.0)",
+      "landing_html_says": "13 tools including marketnow_verify_atc_spec",
+      "agent.json_declared": "(no version field, no tool list)"
+    },
+    "fix": "Agregar campo version y tools[] a agent.json, mantener sincronizado con npm"
+  },
+  "F7_MANIFEST_JSON_404": {
+    "severity": "P2_MEDIUM",
+    "issue": "/api/manifest.json returns 404 pero est\u00e1 en robots.txt como endpoint v\u00e1lido",
+    "evidence": {
+      "robots.txt": "Allow: /api/manifest.json",
+      "actual_response": "404 NOT_FOUND (hkg1::r4rln-1787094222473-0d92bbb10226)"
+    },
+    "fix": "Implementar /api/manifest.json o quitarlo de robots.txt"
+  },
+  "F8_TRACK_RECORD_LANDING_INCONSISTENCY": {
+    "severity": "P2_MEDIUM",
+    "issue": "landing dice 'Founded 2024', trust.track_record_disclosure dice 'AliceLabs LLC founded 2025' y 'MarketNow launched publicly 2026'",
+    "evidence": {
+      "landing": "Maintained by AliceLabs LLC Founded 2024 by Edison Flores",
+      "trust.track_record_disclosure": "AliceLabs LLC founded 2025 in Wyoming, USA. MarketNow launched publicly 2026."
+    },
+    "fix": "Aclarar: AliceLabs fundada 2025, MarketNow lanzado 2026, eliminar menci\u00f3n de 2024"
+  }
+}

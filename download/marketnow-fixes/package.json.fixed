@@ -1,0 +1,133 @@
+{
+  "name": "marketnow-mcp",
+  "version": "1.10.0",
+  "description": "MarketNow MCP Server v1.10.0 — ATC/1.0 Spec Verifier release. Adds marketnow_verify_atc_spec, a self-contained ATC/1.0 conformance verifier that accepts ANY Agent Trust Card (regardless of issuer — MarketNow Sentinel CA, third-party CA, or self-signed tes",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "marketnow-mcp": "index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "keywords": [
+    "agent-commerce",
+    "agent-payments",
+    "agent-payments-protocol",
+    "agent-skills",
+    "agent-trust",
+    "agent-trust-card",
+    "ai-agents",
+    "aider",
+    "aliceLabs",
+    "anthropic",
+    "ap2",
+    "atc",
+    "atc-spec",
+    "base",
+    "blockchain-payments",
+    "canonical-json",
+    "capability-manifest",
+    "claude",
+    "claude-desktop",
+    "cline",
+    "continue",
+    "cursor",
+    "ed25519",
+    "gemini",
+    "jcs",
+    "langchain",
+    "llamaindex",
+    "marketnow",
+    "marketplace",
+    "mcp",
+    "mcp-directory",
+    "mcp-marketplace",
+    "mcp-registry",
+    "mcp-security",
+    "mcp-server",
+    "mcp-skills",
+    "mcp-tools",
+    "model-context-protocol",
+    "openai",
+    "owasp",
+    "owasp-mcp-cheat-sheet",
+    "rfc-8032",
+    "rfc-8785",
+    "search",
+    "security-audit",
+    "sentinel",
+    "skills",
+    "tool-fingerprinting",
+    "tools",
+    "trust-layer",
+    "usdc",
+    "x402"
+  ],
+  "author": {
+    "name": "AliceLabs LLC",
+    "email": "info@alicelabs.site",
+    "url": "https://marketnow.site"
+  },
+  "license": "MNNC-1.0",
+  "homepage": "https://marketnow.site",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alicelabs-llc/marketnow.git",
+    "directory": "mcp-server"
+  },
+  "bugs": {
+    "url": "https://github.com/alicelabs-llc/marketnow/issues",
+    "email": "support@alicelabs.site"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0",
+    "canonicalize": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "mcpName": "io.github.edgarfloresguerra2011-a11y/marketnow",
+  "gitHead": "6910b5b83026772919791a75e91b6f02240225fa",
+  "_id": "marketnow-mcp@1.10.0",
+  "_nodeVersion": "24.18.0",
+  "_npmVersion": "11.16.0",
+  "dist": {
+    "integrity": "sha512-pyPtQpMP41qiCyGUXAuNcvijjQ5fNsytBOIyJLw/7KfakGnV4hHozb2Zb3riCdtun30dGNgJs1kUndie3avprw==",
+    "shasum": "bd8a4901fcf78fcf6f2f35672a52a48fcf80c968",
+    "tarball": "https://registry.npmjs.org/marketnow-mcp/-/marketnow-mcp-1.10.0.tgz",
+    "fileCount": 7,
+    "unpackedSize": 88227,
+    "signatures": [
+      {
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U",
+        "sig": "MEUCIQDkjfWG8o2hHzJ52iOed4KmgQGN+hJnvS91GRnovUAjSwIgbSOjPrYkuHfoStg4GIEo0hw2uhfxHh9K6b8QWgvk0b4="
+      }
+    ]
+  },
+  "_npmUser": {
+    "name": "eddyflores100",
+    "email": "eddyflores100@gmail.com"
+  },
+  "directories": {},
+  "maintainers": [
+    {
+      "name": "eddyflores100",
+      "email": "eddyflores100@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages-npm-production",
+    "tmp": "tmp/marketnow-mcp_1.10.0_1786319245223_0.28237602426674724"
+  },
+  "_hasShrinkwrap": false,
+  "funding": {
+    "type": "AliceLabs LLC commercial license",
+    "url": "https://marketnow.site/pricing"
+  },
+  "mcp": {
+    "version": "1.0",
+    "spec": "https://spec.modelcontextprotocol.io/"
+  }
+}

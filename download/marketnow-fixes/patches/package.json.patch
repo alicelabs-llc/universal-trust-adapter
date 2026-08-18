@@ -1,0 +1,131 @@
+--- a/package.json
++++ b/package.json
+@@ -12,71 +12,74 @@
+     "dev": "node --watch index.js"
+   },
+   "keywords": [
+-    "mcp",
+-    "model-context-protocol",
+-    "mcp-server",
+-    "mcp-marketplace",
+-    "mcp-directory",
+-    "mcp-registry",
+-    "mcp-skills",
+-    "mcp-tools",
+-    "mcp-security",
+-    "ai-agents",
+-    "agent-skills",
+     "agent-commerce",
+     "agent-payments",
++    "agent-payments-protocol",
++    "agent-skills",
+     "agent-trust",
++    "agent-trust-card",
++    "ai-agents",
++    "aider",
++    "aliceLabs",
++    "anthropic",
++    "ap2",
++    "atc",
++    "atc-spec",
++    "base",
++    "blockchain-payments",
++    "canonical-json",
++    "capability-manifest",
+     "claude",
+     "claude-desktop",
+-    "cursor",
+     "cline",
+     "continue",
+-    "aider",
+-    "anthropic",
+-    "openai",
++    "cursor",
++    "ed25519",
+     "gemini",
++    "jcs",
+     "langchain",
+     "llamaindex",
+-    "x402",
+-    "ap2",
+-    "agent-payments-protocol",
+-    "sentinel",
+-    "security-audit",
++    "marketnow",
++    "marketplace",
++    "mcp",
++    "mcp-directory",
++    "mcp-marketplace",
++    "mcp-registry",
++    "mcp-security",
++    "mcp-server",
++    "mcp-skills",
++    "mcp-tools",
++    "model-context-protocol",
++    "openai",
+     "owasp",
+     "owasp-mcp-cheat-sheet",
+-    "tool-fingerprinting",
+-    "capability-manifest",
+-    "marketplace",
++    "rfc-8032",
++    "rfc-8785",
++    "search",
++    "security-audit",
++    "sentinel",
+     "skills",
++    "tool-fingerprinting",
+     "tools",
+-    "search",
+-    "usdc",
+-    "base",
+-    "blockchain-payments",
+     "trust-layer",
+-    "ed25519",
+-    "atc",
+-    "agent-trust-card",
+-    "atc-spec",
+-    "rfc-8032",
+-    "rfc-8785",
+-    "jcs",
+-    "canonical-json",
+-    "aliceLabs"
++    "usdc",
++    "x402"
+   ],
+   "author": {
+     "name": "AliceLabs LLC",
+-    "email": "info@alicelabs.site"
++    "email": "info@alicelabs.site",
++    "url": "https://marketnow.site"
+   },
+   "license": "MNNC-1.0",
+   "homepage": "https://marketnow.site",
+   "repository": {
+     "type": "git",
+-    "url": "git+https://github.com/edgarfloresguerra2011-a11y/marketnow.git",
++    "url": "git+https://github.com/alicelabs-llc/marketnow.git",
+     "directory": "mcp-server"
+   },
+   "bugs": {
+-    "url": "https://github.com/edgarfloresguerra2011-a11y/marketnow/issues"
++    "url": "https://github.com/alicelabs-llc/marketnow/issues",
++    "email": "support@alicelabs.site"
+   },
+   "dependencies": {
+     "@modelcontextprotocol/sdk": "^0.5.0",
+@@ -118,5 +121,13 @@
+     "host": "s3://npm-registry-packages-npm-production",
+     "tmp": "tmp/marketnow-mcp_1.10.0_1786319245223_0.28237602426674724"
+   },
+-  "_hasShrinkwrap": false
++  "_hasShrinkwrap": false,
++  "funding": {
++    "type": "AliceLabs LLC commercial license",
++    "url": "https://marketnow.site/pricing"
++  },
++  "mcp": {
++    "version": "1.0",
++    "spec": "https://spec.modelcontextprotocol.io/"
++  }
+ }
