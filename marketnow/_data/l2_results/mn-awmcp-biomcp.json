@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-biomcp",
+  "timestamp": "2026-07-06T03:08:40Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 3,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 2376,
+  "stdout_sample": "Query genes, variants, trials, articles, drugs, diseases, and more from leading public biomedical data sources  Usage: biomcp [OPTIONS] <COMMAND>  Commands:   search      Search for entities   get         Get entity by ID   variant     Variant cross-entity helpers   drug        Drug cross-entity helpers   disease     Disease cross-entity helpers   article     Article cross-entity helpers   gene        Gene cross-entity helpers   pathway     Pathway cross-entity helpers   protein     Protein cros",
+  "l2_score": 7,
+  "l2_risk_level": "low"
+}

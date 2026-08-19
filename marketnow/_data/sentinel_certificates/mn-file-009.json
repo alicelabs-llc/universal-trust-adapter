@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6179973",
+  "skill_id": "mn-file-009",
+  "skill_name": "JSON Formatter",
+  "issued_at": "2026-07-06T05:36:19.973Z",
+  "expires_at": "2026-07-13T05:36:19.973Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "9a043ee5c32e7960de465467fe00c8d2f7a9d1b492c2f0cb540f3cccec49491c",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-file-009"
+}

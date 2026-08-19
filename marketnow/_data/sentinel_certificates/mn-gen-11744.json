@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5762501",
+  "skill_id": "mn-gen-11744",
+  "skill_name": "Shopify-mcp-complete",
+  "issued_at": "2026-07-06T05:29:22.501Z",
+  "expires_at": "2026-07-13T05:29:22.501Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "5556afb918f11b5a3f7daedc5590e9cdcc2b01a8add771a09e1170d61da6fb4e",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-11744"
+}

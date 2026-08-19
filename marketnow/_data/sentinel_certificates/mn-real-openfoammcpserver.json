@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0282019",
+  "skill_id": "mn-real-openfoammcpserver",
+  "skill_name": "openfoam-mcp-server",
+  "issued_at": "2026-07-26T04:31:22.019Z",
+  "expires_at": "2026-08-02T04:31:22.019Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "e9e5c25b8359875c7cd9121d4d41c7c0b7ee7fa62d0e1446cb2ef3c6e3c34247",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-openfoammcpserver"
+}

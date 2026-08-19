@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5433239",
+  "skill_id": "mn-gen-03684",
+  "skill_name": "Enhanced-memory-mcp",
+  "issued_at": "2026-07-06T05:23:53.239Z",
+  "expires_at": "2026-07-13T05:23:53.239Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "2e0b2f8d08c2a538f21b3bba2d745ee4d5d7b551f8f3d656e4050af9ff26f3ca",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-03684"
+}

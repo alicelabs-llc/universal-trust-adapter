@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0092448",
+  "skill_id": "mn-real-aviationstackmcp",
+  "skill_name": "aviationstack-mcp",
+  "issued_at": "2026-07-26T04:28:12.448Z",
+  "expires_at": "2026-08-02T04:28:12.448Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "426172545f1a28c7a8454f0f5b1fd5f946fd443caf6c3f47d91c27e431ae5a9f",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-aviationstackmcp"
+}

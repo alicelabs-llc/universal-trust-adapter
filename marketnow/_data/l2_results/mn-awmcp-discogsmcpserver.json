@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-discogsmcpserver",
+  "timestamp": "2026-07-06T03:00:20Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 0,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 1,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 262,
+  "stdout_sample": "[dotenv@17.2.2] injecting env (0) from .env -- tip: \u2699\ufe0f  write to custom object with { processEnv: myObject } [ERROR 2026-07-06T03:00:20.549Z] Failed to run the Discogs MCP Server:  Error: Missing required environment variables: DISCOGS_PERSONAL_ACCESS_TOKEN ",
+  "l2_score": 5,
+  "l2_risk_level": "medium"
+}

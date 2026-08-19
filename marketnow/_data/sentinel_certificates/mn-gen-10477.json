@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5712206",
+  "skill_id": "mn-gen-10477",
+  "skill_name": "Playbooks-mcp",
+  "issued_at": "2026-07-06T05:28:32.206Z",
+  "expires_at": "2026-07-13T05:28:32.206Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 4,
+  "max_score": 10,
+  "risk_level": "high",
+  "risk_breakdown": {
+    "l15_l16": "high",
+    "l2": "not_available",
+    "final": "high"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "82af440595f1fd93728f54b55d711d5165a0b86be0637d2b8c453b8045b5bf11",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-10477"
+}

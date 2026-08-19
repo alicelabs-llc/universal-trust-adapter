@@ -1,0 +1,17 @@
+{
+  "name": "marketnow-audit",
+  "version": "1.0.0",
+  "description": "Free MCP security audit CLI — 10-layer audit, signed ATC, catalog listing",
+  "type": "module",
+  "main": "audit.mjs",
+  "bin": {
+    "marketnow-audit": "audit.mjs"
+  },
+  "scripts": {
+    "audit": "node audit.mjs"
+  },
+  "keywords": ["mcp", "security", "audit", "free", "cli", "marketnow"],
+  "author": "AliceLabs LLC <info@alicelabs.site>",
+  "license": "MIT",
+  "homepage": "https://marketnow.site"
+}

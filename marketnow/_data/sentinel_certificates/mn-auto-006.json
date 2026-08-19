@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6161243",
+  "skill_id": "mn-auto-006",
+  "skill_name": "Email Trigger",
+  "issued_at": "2026-07-06T05:36:01.243Z",
+  "expires_at": "2026-07-13T05:36:01.243Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 0,
+  "max_score": 10,
+  "risk_level": "critical",
+  "risk_breakdown": {
+    "l15_l16": "critical",
+    "l2": "not_available",
+    "final": "critical"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 1,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "6766b9980e38c4d878fbde8cd46e06c7f42acd808381099e94e28924ac365d2a",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-auto-006"
+}

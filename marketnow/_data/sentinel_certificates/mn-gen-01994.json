@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5358048",
+  "skill_id": "mn-gen-01994",
+  "skill_name": "Claude-channel-plugins",
+  "issued_at": "2026-07-06T05:22:38.048Z",
+  "expires_at": "2026-07-13T05:22:38.048Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "43db35586d8633085136e94413ac3b4ba66934edd354f0f7c856789d23d73f30",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-01994"
+}

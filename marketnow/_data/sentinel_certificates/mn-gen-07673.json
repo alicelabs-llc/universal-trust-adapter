@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5602579",
+  "skill_id": "mn-gen-07673",
+  "skill_name": "Mcp-server-hackernews",
+  "issued_at": "2026-07-06T05:26:42.579Z",
+  "expires_at": "2026-07-13T05:26:42.579Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "2eef04221d0c7565eed14213e085039e04c862f1d3dc68df0852f21ef4a478dc",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-07673"
+}

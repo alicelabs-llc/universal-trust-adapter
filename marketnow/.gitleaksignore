@@ -1,0 +1,33 @@
+# MarketNow Gitleaks Ignore File
+# ================================
+# This file lists all known false-positive secret detections in the repo.
+# Most are honeypots (intentionally fake) documented in HONEYPOTS.md.
+# 
+# Format: one finding per line, either as:
+#   <rule_id>:<file>:<commit_sha>
+# or as a comment explaining why it's ignored.
+
+# Honeypot files — these contain FAKE credentials by design
+aep-marketplace/api/security.js
+aep-marketplace/lib/honeypot.mjs
+
+# Skills catalog — contains descriptions from external repos
+aep-marketplace/public/api/skills-lite.json
+aep-marketplace/public/api/skills.json
+aep-marketplace/public/api/skills_index.json
+
+# Test files with fake credentials
+scripts/smoke-*.mjs
+scripts/smoke-*.py
+scripts/e2e-*.mjs
+
+# Documentation with example tokens
+HONEYPOTS.md
+*.md
+
+# GitHub Actions workflows with example tokens
+.github/workflows/*.yml
+
+# Env example files
+.env.example
+*.env.example

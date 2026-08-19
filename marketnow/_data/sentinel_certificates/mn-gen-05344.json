@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5503436",
+  "skill_id": "mn-gen-05344",
+  "skill_name": "Json-mcp-server",
+  "issued_at": "2026-07-06T05:25:03.436Z",
+  "expires_at": "2026-07-13T05:25:03.436Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "502ec8f98f2a5ec862c65af5a44ed5beeea5a8a84a2566aa6d0ef4c16027a539",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-05344"
+}

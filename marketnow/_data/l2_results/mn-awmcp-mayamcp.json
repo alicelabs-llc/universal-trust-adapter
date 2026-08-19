@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-mayamcp",
+  "timestamp": "2026-07-06T03:01:59Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "failed_to_start",
+  "failure_reason": "Container command failed to execute \u2014 see stdout_sample.",
+  "behavioral_analysis": {
+    "network_attempts": 0,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 76,
+  "stdout_sample": "python: can't open file '/app/main.py': [Errno 2] No such file or directory ",
+  "l2_score": 0,
+  "l2_risk_level": "unknown"
+}

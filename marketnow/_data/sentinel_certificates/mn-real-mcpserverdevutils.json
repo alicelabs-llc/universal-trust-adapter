@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9936777",
+  "skill_id": "mn-real-mcpserverdevutils",
+  "skill_name": "mcp-server-devutils",
+  "issued_at": "2026-07-26T04:25:36.777Z",
+  "expires_at": "2026-08-02T04:25:36.777Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 4,
+  "max_score": 10,
+  "risk_level": "high",
+  "risk_breakdown": {
+    "l15_l16_l17": "high",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "high"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a281247589083ab39e3a368c7a6a105cd6f1a91b5eeb4b0c355d34dd08e1bfca",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-mcpserverdevutils"
+}

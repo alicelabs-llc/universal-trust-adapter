@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="28" viewBox="0 0 180 28" role="img" aria-label="ATC Compatible">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0e14"/>
+      <stop offset="1" stop-color="#11161f"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#00f299"/>
+      <stop offset="1" stop-color="#00b377"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="28" rx="4" fill="url(#bg)"/>
+  <rect x="0.5" y="0.5" width="179" height="27" rx="3.5" fill="none" stroke="#2a3142" stroke-width="1"/>
+  <!-- Shield icon -->
+  <path d="M 14 7 L 22 10 L 22 16 C 22 20.5 18.5 23.5 14 24.5 C 9.5 23.5 6 20.5 6 16 L 6 10 Z" fill="url(#shield)"/>
+  <path d="M 11 15 L 13 17 L 17.5 12" stroke="#0a0e14" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Text -->
+  <text x="32" y="13" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10" fill="#8b949e" font-weight="500">ATC</text>
+  <text x="32" y="22" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" fill="#e6edf3" font-weight="600">Compatible</text>
+  <!-- Version -->
+  <rect x="140" y="6" width="32" height="16" rx="3" fill="#0d2818" stroke="#00f299" stroke-width="0.5"/>
+  <text x="156" y="16" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="9" fill="#00f299" font-weight="600" text-anchor="middle">v1.0</text>
+</svg>

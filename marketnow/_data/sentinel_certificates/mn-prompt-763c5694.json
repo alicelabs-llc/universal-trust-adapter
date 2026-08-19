@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8069087",
+  "skill_id": "mn-prompt-763c5694",
+  "skill_name": "Especialista Cloud Forensics + IR",
+  "issued_at": "2026-07-15T01:14:29.087Z",
+  "expires_at": "2026-07-22T01:14:29.087Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 2,
+  "max_score": 10,
+  "risk_level": "critical",
+  "risk_breakdown": {
+    "l15_l16_l17": "critical",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "critical"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "368fbf1a88c2752f41aa0283e74e60ac6d5072caff164e8697bd7f816f09aee5",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-763c5694"
+}

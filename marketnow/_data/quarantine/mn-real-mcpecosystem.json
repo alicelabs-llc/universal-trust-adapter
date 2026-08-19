@@ -1,0 +1,82 @@
+{
+  "certificate_id": "MN-SC-2026-0000NaN",
+  "skill_id": "mn-real-mcpecosystem",
+  "skill_name": "mcp-ecosystem",
+  "timestamp": "2026-07-24T03:19:28.190Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L1.7 + L1.8 + L1.9 (Deep Individual Audit)",
+  "overall_score": 5,
+  "max_score": 10,
+  "risk_level": "critical",
+  "risk_breakdown": {
+    "l15_l16_l17_l18_l19": "critical",
+    "l2": "not_available",
+    "final": "critical"
+  },
+  "quarantine_recommended": true,
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l17": true,
+    "l18": true,
+    "l19": true,
+    "l2": false,
+    "l3": false
+  },
+  "checks": [
+    {
+      "name": "L1.5 AUTH",
+      "status": "warning",
+      "risk": "medium",
+      "detail": "No auth required"
+    },
+    {
+      "name": "L1.6 SEMGREP",
+      "status": "pass",
+      "risk": "low",
+      "detail": "18 rules, 0 findings"
+    },
+    {
+      "name": "L1.6 SECRETS",
+      "status": "pass",
+      "risk": "low",
+      "detail": "18 patterns, 0 findings"
+    },
+    {
+      "name": "L1.7 BINARY",
+      "status": "pass",
+      "risk": "low",
+      "detail": "No binaries or launchers detected"
+    },
+    {
+      "name": "L1.7 MALWARE",
+      "status": "pass",
+      "risk": "low",
+      "detail": "7 patterns checked, 0 findings"
+    },
+    {
+      "name": "L1.8 FAMILIES",
+      "status": "pass",
+      "risk": "low",
+      "detail": "28 families checked, 0 matches (README scanned)"
+    },
+    {
+      "name": "L1.9 INJECTION",
+      "status": "fail",
+      "risk": "critical",
+      "detail": "1 injection patterns: role_hijacking"
+    }
+  ],
+  "source": {
+    "type": "github",
+    "url": "https://github.com/SynkraAI/mcp-ecosystem",
+    "note": "Real MCP server. 28 stars.",
+    "stars": 28,
+    "language": "Unknown",
+    "last_push": "2025-12-09T22:54:56Z"
+  },
+  "signature": {
+    "algorithm": "SHA-256",
+    "value": "08557658e5b8e38856711c6b6ad1e1f5dd9ca2721a702011710dcbc57562338a",
+    "signed_by": "Sentinel Deep Auditor"
+  }
+}

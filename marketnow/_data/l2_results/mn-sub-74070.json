@@ -1,0 +1,92 @@
+{
+  "skill_id": "mn-sub-74070",
+  "timestamp": "2026-07-29T14:26:49Z",
+  "l2_version": "2.5",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s",
+    "gvisor": "gvisor-active",
+    "seccomp_profile": "n/a (gVisor userspace kernel active)"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "analysis_layers": {
+    "stdout_passive": {
+      "network_attempts": 0,
+      "fs_write_attempts": 0,
+      "process_spawns": 0,
+      "credential_leakage": 0,
+      "crash_detected": 0,
+      "dynamic_imports": 0
+    },
+    "strace_syscalls": {
+      "file_access_sensitive": 0,
+      "file_write_outside_tmp": 0,
+      "network_connect": 0,
+      "process_exec": 0,
+      "process_fork": 0,
+      "permission_escalation": 0,
+      "sensitive_paths_accessed": []
+    },
+    "mcp_probe_active": {
+      "tools_discovered": 0,
+      "tools_tested": 0,
+      "adversarial_findings": 0,
+      "critical_findings": 0,
+      "high_findings": 0,
+      "details": [],
+      "leaked_data": []
+    },
+    "filesystem_diff": {
+      "files_created": 0,
+      "files_modified": 0,
+      "files_deleted": 0,
+      "suspicious_changes": []
+    },
+    "l25_seccomp_violations": {
+      "total_violations": 0,
+      "ptrace_attempted": false,
+      "bpf_attempted": false,
+      "mount_attempted": false,
+      "kexec_attempted": false,
+      "clone3_attempted": false,
+      "unshare_attempted": false,
+      "blocked_syscalls": []
+    },
+    "l25_suspicious_files": {
+      "ssh_files": false,
+      "env_files": false,
+      "cron_files": false,
+      "key_files": false,
+      "details": []
+    },
+    "l26_egress_proxy": {
+      "total_requests": 0,
+      "allowed_requests": 0,
+      "blocked_requests": 0,
+      "blocked_domains": [],
+      "allowed_domains": [],
+      "metadata_endpoint_access": false,
+      "localhost_access": false,
+      "private_range_access": false
+    }
+  },
+  "stdout_size_bytes": 438,
+  "stdout_sample": "docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: unable to retrieve OCI runtime error (open /run/containerd/io.containerd.runtime.v2.task/moby/1c33663184f602ecd68b29e4905c15b506b7d53b150d04aeaeb9322912059f95/log.json: no such file or directory): /usr/local/bin/runsc did not terminate successfully: exit status 1  Run 'docker run --help' for more information ",
+  "l2_score": 10,
+  "l2_risk_level": "low",
+  "findings_summary": {
+    "total_critical": 0,
+    "total_high": 0,
+    "sensitive_paths_accessed": [],
+    "leaked_data": [],
+    "suspicious_fs_changes": [],
+    "egress_blocked_domains": [],
+    "egress_metadata_access": false
+  }
+}

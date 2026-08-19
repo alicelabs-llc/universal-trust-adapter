@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0289247",
+  "skill_id": "mn-real-anansi",
+  "skill_name": "anansi",
+  "issued_at": "2026-07-26T04:31:29.247Z",
+  "expires_at": "2026-08-02T04:31:29.247Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "9bb683fb495d938e6d4867ad66c363dc3b0b916fc102852f37cd69b54c3f0042",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-anansi"
+}

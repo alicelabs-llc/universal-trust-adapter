@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0447244",
+  "skill_id": "mn-real-minerudocumentexplor",
+  "skill_name": "MinerU-Document-Explorer",
+  "issued_at": "2026-07-26T04:34:07.244Z",
+  "expires_at": "2026-08-02T04:34:07.244Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "4d2f883840a877081c5521ba8de46aded38fe188ae1ceba83ece4ce840066430",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-minerudocumentexplor"
+}

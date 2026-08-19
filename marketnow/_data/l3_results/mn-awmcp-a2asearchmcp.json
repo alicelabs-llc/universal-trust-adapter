@@ -1,0 +1,12 @@
+{
+  "skill_id": "mn-awmcp-a2asearchmcp",
+  "skill_name": "a2asearch-mcp",
+  "checked_at": "2026-07-26T06:09:45.427Z",
+  "l3_status": "stable",
+  "drift_detected": false,
+  "drift_severity": "none",
+  "quarantine_recommended": false,
+  "drift_items": [],
+  "baseline_captured_at": "2026-07-06T02:39:17Z",
+  "message": "No drift detected. Skill behavior matches L2 baseline."
+}

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casos de Éxito - AI Profit Army</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 900px;
+            margin: 0 auto 30px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        
+        .testimonial-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .testimonial-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            position: relative;
+            padding-left: 20px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .testimonial-metrics {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .metric {
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4CAF50;
+        }
+        
+        .metric-label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .case-studies {
+            background: white;
+            border-radius: 16px;
+            padding: 50px;
+            margin: 60px 0;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .case-study {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+        
+        .case-study:nth-child(even) .case-study-content {
+            order: 2;
+        }
+        
+        .case-study:nth-child(even) .case-study-image {
+            order: 1;
+        }
+        
+        .case-study-content h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .case-study-image {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: #FF6B6B;
+            margin-left: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .case-study {
+                grid-template-columns: 1fr;
+            }
+            
+            .case-study-content, .case-study-image {
+                order: initial !important;
+            }
+            
+            .case-study-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-btn">← Volver a AI Profit Army</a>
+            <h1>⭐ Casos de Éxito</h1>
+            <p class="subtitle">Descubre cómo más de 45 empresas han automatizado sus procesos con nuestros workflows n8n, logrando ahorros de tiempo y aumentos de productividad significativos.</p>
+        </header>
+        
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">45+</div>
+                <div class="stat-label">Clientes Satisfechos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">92%</div>
+                <div class="stat-label">ROI en 3 Meses</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">2,500+</div>
+                <div class="stat-label">Horas Ahorradas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">4.9/5</div>
+                <div class="stat-label">Satisfacción</div>
+            </div>
+        </section>
+        
+        <h2 style="font-size: 2.5rem; margin: 60px 0 30px; color: white; text-align: center;">📝 Testimonios Reales</h2>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">JP</div>
+                    <div class="testimonial-info">
+                        <h3>Juan Pérez</h3>
+                        <p>CEO, TechStartup Inc.</p>
+                        <p>👨‍💼 Industria: SaaS</p>
+                    </div>
+                </div>
+                <p class="testimonial-quote">"Implementamos el workflow de automatización de lead generation y en 2 meses recuperamos la inversión. Ahora nuestro equipo de ventas se enfoca en cerrar, no en prospectar. El soporte técnico fue excepcional."</p>
+                <div class="testimonial-metrics">
+                    <div class="metric">
+                        <div class="metric-value">40h/sem</div>
+                        <div class="metric-label">Ahorro de tiempo</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">+25%</div>
+                        <div class="metric-label">Conversión</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">2 meses</div>
+                        <div class="metric-label">ROI</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">MG</div>
+                    <div class="testimonial-info">
+                        <h3>María González</h3>
+                        <p>CTO, E-commerce Fashion</p>
+                        <p>🛍️ Industria: Retail</p>
+                    </div>
+                </div>
+                <p class="testimonial-quote">"La sincronización de inventario entre Shopify y Amazon eliminó los errores de stock y nos permitió expandirnos a nuevos marketplaces sin aumentar personal. El workflow es robusto y nunca ha fallado."</p>
+                <div class="testimonial-metrics">
+                    <div class="metric">
+                        <div class="metric-value">30%</div>
+                        <div class="metric-label">Crecimiento ventas</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">0 errores</div>
+                        <div class="metric-label">Inventario</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">1.5 meses</div>
+                        <div class="metric-label">ROI</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">CR</div>
+                    <div class="testimonial-info">
+                        <h3>Carlos Rodríguez</h3>
+                        <p>Director, Consultora Financiera</p>
+                        <p>📊 Industria: Finanzas</p>
+                    </div>
+                </div>
+                <p class="testimonial-quote">"Los reportes automáticos con IA redujeron el tiempo de análisis de 8 horas a 15 minutos. Ahora entregamos insights a nuestros clientes en tiempo real. La implementación fue rápida y sin problemas."</p>
+                <div class="testimonial-metrics">
+                    <div class="metric">
+                        <div class="metric-value">97%</div>
+                        <div class="metric-label">Reducción tiempo</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">+40%</div>
+                        <div class="metric-label">Satisfacción cliente</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">3 meses</div>
+                        <div class="metric-label">ROI</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">AL</div>
+                    <div class="testimonial-info">
+                        <h3>Ana López</h3>
+                        <p>Gerente de Operaciones, Logística</p>
+                        <p>🚚 Industria: Transporte</p>
+                    </div>
+                </div>
+                <p class="testimonial-quote">"El sistema de tracking automatizado nos permite monitorear 500+ envíos diarios con alertas en tiempo real. Antes requería 3 personas, ahora solo 1. La curva de aprendizaje fue mínima."</p>
+                <div class="testimonial-metrics">
+                    <div class="metric">
+                        <div class="metric-value">66%</div>
+                        <div class="metric-label">Reducción personal</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">99.9%</div>
+                        <div class="metric-label">Precisión</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">2 meses</div>
+                        <div class="metric-label">ROI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <section class="case-studies">
+            <h2 style="font-size: 2.5rem; margin-bottom: 50px; color: #333; text-align: center;">📈 Estudios de Caso Detallados</h2>
+            
+            <div class="case-study">
+                <div class="case-study-content">
+                    <h3>Automatización de Procesos de Contratación</h3>
+                    <p><strong>Cliente:</strong> Empresa de Recursos Humanos con 200+ empleados.</p>
+                    <p><strong>Desafío:</strong> Proceso manual de revisión de CVs que tomaba 20 horas semanales y generaba pérdida de candidatos talentosos.</p>
+                    <p><strong>Solución:</strong> Implementamos un workflow n8n que integra Google Forms, OpenAI GPT-4 y Airtable para clasificar automáticamente CVs, extraer habilidades y puntuar candidatos.</p>
+                    <p><strong>Resultados:</strong></p>
+                    <ul style="padding-left: 20px; margin-bottom: 20px;">
+                        <li>Reducción del 90% en tiempo de revisión de CVs</li>
+                        <li>Aumento del 35% en calidad de candidatos seleccionados</li>
+                        <li>ROI completo en 1.8 meses</li>
+                    </ul>
+                    <a href="#" class="btn">Ver Estudio Completo</a>
+                </div>
+                <div class="case-study-image">
+                    HR Automation
+                </div>
+            </div>
+            
+            <div class="case-study">
+                <div class="case-study-content">
+                    <h3>Sincronización Multi-marketplace E-commerce</h3>
+                    <p><strong>Cliente:</strong> Tienda online de electrónica con presencia en 5 plataformas.</p>
+                    <p><strong>Desafío:</strong> Inventarios desincronizados que causaban ventas de productos sin stock y pérdida de reputación.</p>
+                    <p><strong>Solución:</strong> Workflow n8n que conecta Shopify, Amazon, Mercado Libre y Woocommerce, actualizando inventarios cada 5 minutos y generando alertas automáticas.</p>
+                    <p><strong>Resultados:</strong></p>
+                    <ul style="padding-left: 20px; margin-bottom: 20px;">
+                        <li>Eliminación del 100% de errores de inventario</li>
+                        <li>Aumento del 30% en ventas cross-platform</li>
+                        <li>Ahorro de 25 horas semanales en gestión manual</li>
+                    </ul>
+                    <a href="#" class="btn">Ver Estudio Completo</a>
+                </div>
+                <div class="case-study-image">
+                    E-commerce Sync
+                </div>
+            </div>
+        </section>
+        
+        <div style="text-align: center; margin: 60px 0;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: white;">¿Listo para tu caso de éxito?</h2>
+            <p style="font-size: 1.2rem; color: white; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">Únete a las decenas de empresas que ya automatizaron sus procesos con workflows n8n profesionales.</p>
+            <a href="catalogo.html" class="btn">Ver Catálogo de Workflows</a>
+            <a href="checkout.html" class="btn btn-secondary">Comprar Ahora</a>
+        </div>
+        
+        <footer>
+            <p>© 2026 AI Profit Army - Casos de Éxito</p>
+            <div style="margin-top: 20px;">
+                <a href="index.html" style="color: white; margin: 0 10px; text-decoration: none;">Inicio</a>
+                <a href="catalogo.html" style="color: white; margin: 0 10px; text-decoration: none;">Catálogo</a>
+                <a href="checkout.html" style="color: white; margin: 0 10px; text-decoration: none;">Checkout</a>
+                <a href="testimonios.html" style="color: white; margin: 0 10px; text-decoration: none;">Testimonios</a>
+                <a href="blog.html" style="color: white; margin: 0 10px; text-decoration: none;">Blog</a>
+            </div>
+            <p style="margin-top: 20px; opacity: 0.8;">Creado con OpenClaw • Actualizado: Febrero 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

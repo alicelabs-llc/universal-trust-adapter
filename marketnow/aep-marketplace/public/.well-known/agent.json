@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "v1.0",
+  "agent": {
+    "name": "MarketNow \u2014 Agent Skill Exchange",
+    "description": "The largest MCP skill marketplace for AI agents. Browse 8,845+ verified MCP servers, each secured by Sentinel L2.5 gVisor sandbox security audit. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
+    "url": "https://marketnow.site",
+    "version": "4.0.0"
+  },
+  "capabilities": {
+    "protocols": {
+      "mcp": {
+        "versions": [
+          "2024-11-05",
+          "2025-03-26"
+        ],
+        "endpoints": {
+          "sse": "https://marketnow.site/api/mcp",
+          "websocket": "wss://marketnow.site/api/mcp",
+          "jsonrpc": "https://marketnow.site/api/mcp"
+        },
+        "tools": [
+          {
+            "name": "search_skills",
+            "description": "Search the marketplace for MCP skills by query, category, or minimum security score"
+          },
+          {
+            "name": "get_skill",
+            "description": "Retrieve full metadata, install command, and security score for a specific skill"
+          },
+          {
+            "name": "get_categories",
+            "description": "List all available skill categories with counts"
+          },
+          {
+            "name": "health",
+            "description": "Check marketplace API connectivity and stats"
+          }
+        ]
+      },
+      "a2a": {
+        "version": "1.0",
+        "agentCard": "https://marketnow.site/.well-known/agent.json",
+        "services": [
+          {
+            "id": "skill-search",
+            "name": "MCP Skill Search",
+            "description": "AI agents can search and retrieve MCP server configurations from 8,845+ verified skills. Supports natural language queries, category filtering, and security score thresholds.",
+            "commissionRate": 0.2,
+            "referralEndpoints": {
+              "register": "https://marketnow.site/api/agent/register",
+              "commission": "https://marketnow.site/api/agent/commission"
+            }
+          }
+        ]
+      }
+    },
+    "discovery": {
+      "wellKnown": {
+        "mcp": "https://marketnow.site/.well-known/mcp.json",
+        "agent": "https://marketnow.site/.well-known/agent.json"
+      },
+      "sitemap": "https://marketnow.site/sitemap.xml",
+      "robots": "https://marketnow.site/robots.txt"
+    },
+    "atc": {
+      "version": "1.0.0",
+      "endpoint": "https://marketnow.site/api/atc",
+      "spec": "https://marketnow.site/atc-spec.json",
+      "description": "Agent Trust Card — identity, trust score, and payment for AI agents. The trust layer for A2A + MCP."
+    }
+  },
+  "security": {
+    "sentinelL1": {
+      "checks": [
+        "Repo Exists",
+        "Has README",
+        "Has Manifest",
+        "Has License",
+        "No Secrets",
+        "No Malicious Code"
+      ],
+      "scoreRange": "0-6",
+      "totalScanned": 8845,
+      "averageScore": 4.3,
+      "passRate": "53.3%"
+    }
+  },
+  "economy": {
+    "currencies": [
+      "ETH",
+      "BNB",
+      "SOL",
+      "BTC",
+      "USDC"
+    ],
+    "paymentWallet": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee",
+    "commissionRate": "0.20 (20% to referral agents)",
+    "pricing": "Dynamic per-skill from $0.50-$50.00"
+  },
+  "blockchain": {
+    "network": "Base (Ethereum L2)",
+    "walletAddress": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee",
+    "supportedNetworks": [
+      "ethereum",
+      "bsc",
+      "solana",
+      "bitcoin"
+    ]
+  }
+}

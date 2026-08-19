@@ -1,0 +1,67 @@
+{
+  "name": "agent-trust-card",
+  "version": "1.1.1",
+  "description": "ATC/1.0 SDK v1.1.0 — issue, verify, and inspect Agent Trust Cards in any JavaScript runtime (Node.js >=18, Deno, Bun, browsers). Now with HTTP revocation list fetch (fetch_revocation option, 5s timeout). Framework-agnostic, zero external deps beyond `canonicalize` (RFC 8785 JCS). Includes CLI (`atc verify card.json`, `atc issue`, `atc inspect`), sync verifyATCSync() for non-async callers, async verifyATC() with optional revocation list fetch. Implements the ATC/1.0 specification (10 controls: ATC-001 Identity through ATC-010 Runtime Trust, 8 required + 2 optional) using Ed25519 (RFC 8032) signatures and RFC 8785 JCS canonical JSON. Maintained by AliceLabs LLC (Wyoming, USA, 2026).",
+  "type": "module",
+  "main": "./src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./verify": "./src/verify.mjs",
+    "./issue": "./src/issue.mjs",
+    "./keys": "./src/keys.mjs"
+  },
+  "bin": {
+    "atc": "./bin/atc.mjs"
+  },
+  "scripts": {
+    "start": "node bin/atc.mjs",
+    "test": "node test/conformance.mjs",
+    "dev": "node --watch bin/atc.mjs"
+  },
+  "keywords": [
+    "atc",
+    "agent-trust-card",
+    "atc-spec",
+    "ai-agents",
+    "agent-identity",
+    "agent-security",
+    "agent-trust",
+    "ed25519",
+    "rfc-8032",
+    "rfc-8785",
+    "jcs",
+    "canonical-json",
+    "mcp",
+    "model-context-protocol",
+    "a2a",
+    "cli",
+    "sdk",
+    "verifiable-credentials",
+    "trust-layer",
+    "aliceLabs"
+  ],
+  "author": "AliceLabs LLC <info@alicelabs.site>",
+  "license": "MNNC-1.0",
+  "homepage": "https://marketnow.site/atc",
+  "repository": {
+    "type": "git",
+    "url": "https://marketnow.site/atc",
+    "directory": "atc-sdk"
+  },
+  "bugs": {
+    "url": "mailto:support@alicelabs.site"
+  },
+  "dependencies": {
+    "canonicalize": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "src/",
+    "bin/",
+    "README.md",
+    "LICENSE",
+    "CONFORMANCE.md"
+  ]
+}

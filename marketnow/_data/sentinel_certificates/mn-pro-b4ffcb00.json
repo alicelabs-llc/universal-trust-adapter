@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6123487",
+  "skill_id": "mn-pro-b4ffcb00",
+  "skill_name": "Multi-Cloud K8s Manager",
+  "issued_at": "2026-07-06T05:35:23.487Z",
+  "expires_at": "2026-07-13T05:35:23.487Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "f7f7dda1b79faed5974b5576360d7cc1c1e9c43d33c54c2f44d6bb1d26550a4d",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-pro-b4ffcb00"
+}

@@ -1,0 +1,53 @@
+{
+  "submission_id": "sub_533zprh4gexv",
+  "skill_id": "mn-sub-32175",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T14:25:56.131Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch2",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "be64d4815e6a2aea"
+  },
+  "repo": {
+    "url": "https://github.com/modelcontextprotocol/modelcontextprotocol",
+    "full_name": "modelcontextprotocol/modelcontextprotocol",
+    "owner": "modelcontextprotocol",
+    "name": "modelcontextprotocol",
+    "description": "Specification and documentation for the Model Context Protocol",
+    "stars": 8753,
+    "language": "TypeScript",
+    "license": "NOASSERTION",
+    "pushed_at": "2026-07-29T02:05:52Z",
+    "archived": false,
+    "topics": []
+  },
+  "skill": {
+    "id": "mn-sub-32175",
+    "name": "modelcontextprotocol",
+    "slug": "modelcontextprotocol-2175",
+    "description": "Specification and documentation for the Model Context Protocol",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/modelcontextprotocol/modelcontextprotocol",
+      "submitted_at": "2026-07-29T14:25:56.131Z"
+    },
+    "install": "npx -y @modelcontextprotocol/specification",
+    "author": "modelcontextprotocol",
+    "version": "0.1.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T15:25:56.131Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-3947979",
+  "promoted_at": "2026-07-30T15:05:49.031Z"
+}

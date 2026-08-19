@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-0929601",
+  "skill_id": "mn-real-vibe",
+  "skill_name": "vibe",
+  "issued_at": "2026-07-12T04:35:29.601Z",
+  "expires_at": "2026-07-19T04:35:29.601Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "8347034f176e096b31bb0c753715b877cd40f353988193b16bcccdfad4460ef8",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-vibe"
+}

@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6110196",
+  "skill_id": "mn-sal-00047",
+  "skill_name": "RocketReach MCP",
+  "issued_at": "2026-07-06T05:35:10.196Z",
+  "expires_at": "2026-07-13T05:35:10.196Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a8efdc85356883834b0f2bd947b37f846c5c4b91bca83b72b38e06b67c55b799",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-sal-00047"
+}

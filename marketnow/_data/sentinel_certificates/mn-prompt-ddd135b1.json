@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8082824",
+  "skill_id": "mn-prompt-ddd135b1",
+  "skill_name": "Especialista Search Database + Elasticsearch",
+  "issued_at": "2026-07-15T01:14:42.824Z",
+  "expires_at": "2026-07-22T01:14:42.824Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "ad6d2b996bf27eabde8ed83d339d18778958728fe9a5fa9a2c28dbb180c35a53",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-ddd135b1"
+}

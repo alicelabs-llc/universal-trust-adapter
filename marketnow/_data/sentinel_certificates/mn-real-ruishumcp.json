@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0463641",
+  "skill_id": "mn-real-ruishumcp",
+  "skill_name": "ruishu-mcp",
+  "issued_at": "2026-07-26T04:34:23.641Z",
+  "expires_at": "2026-08-02T04:34:23.641Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 3,
+  "max_score": 10,
+  "risk_level": "critical",
+  "risk_breakdown": {
+    "l15_l16_l17": "critical",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "critical"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "5567ff40f85db5b89b5fb6b0dd55cfa1c3c9463aebb18ea35a96e16d7dc727da",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-ruishumcp"
+}

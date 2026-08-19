@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9730960",
+  "skill_id": "mn-gen-05032",
+  "skill_name": "ibge-br-mcp",
+  "issued_at": "2026-07-26T04:22:10.960Z",
+  "expires_at": "2026-08-02T04:22:10.960Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "62844c1fcdb6a86955c67f11c9edc7c33c1a812109b6fdbfffba4b774d00fef6",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-05032"
+}

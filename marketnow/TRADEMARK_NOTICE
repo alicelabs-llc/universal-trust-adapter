@@ -1,0 +1,59 @@
+SENTINEL TRADEMARK NOTICE
+==========================
+Version 1.0 — July 6, 2026
+
+"Sentinel" is a trademark of AliceLabs LLC.
+
+The following are trademarks of AliceLabs LLC and may not be used
+without express written permission:
+
+  - "Sentinel" (the security audit engine name)
+  - "Sentinel Certified" (the certification badge)
+  - "Sentinel L1.5", "Sentinel L1.6", "Sentinel L2" (the audit layers)
+  - "MN-SC" (certificate prefix, stands for MarketNow-Sentinel-Certificate)
+  - The Sentinel shield logo (🛡️ as used in certification contexts)
+  - "MarketNow" (the marketplace name)
+  - "Trust Layer for Agent Commerce" (tagline)
+
+PERMITTED USES
+--------------
+
+1. CERTIFIED SKILLS
+   Skill authors who have been certified by Sentinel MAY display:
+   - The "Sentinel Certified" badge in their README
+   - The text "Sentinel Certified" when describing their skill
+   - A link to https://marketnow.site/verify for verification
+
+2. VERIFICATION
+   Any person or service MAY:
+   - Verify Sentinel certificates via the public API
+   - Reference the Sentinel certification system in reviews or articles
+   - Link to https://marketnow.site/sentinel-transparency
+
+3. ATTRIBUTION
+   Press, bloggers, and analysts MAY reference Sentinel by name when
+   covering the MCP security ecosystem, provided they attribute the
+   trademark to AliceLabs LLC:
+   "Sentinel™ is a trademark of AliceLabs LLC"
+
+PROHIBITED USES
+---------------
+
+You may NOT:
+  - Use "Sentinel" or "Sentinel Certified" for products not certified
+    by AliceLabs LLC
+  - Create competing certification systems using the Sentinel name
+  - Imply that AliceLabs LLC endorses your product
+  - Use the Sentinel logo or badge design without permission
+  - Register domain names containing "sentinel" + "mcp" or "sentinel" + "cert"
+
+REPORTING VIOLATIONS
+--------------------
+
+Report trademark violations to: legal@alicelabs.site
+
+=====================================================================
+
+AliceLabs LLC
+Wyoming, USA
+https://marketnow.site

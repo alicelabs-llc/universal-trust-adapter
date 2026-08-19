@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Profit Army - Automatización con IA para Negocios</title>
+    <meta name="description" content="Automatiza tu negocio con workflows n8n profesionales. Más de 45 workflows listos para implementar con ROI garantizado en 3 meses. Ahorra hasta 40 horas semanales.">
+    <meta name="keywords" content="automatización, n8n, workflows, IA, ecommerce, marketing, SaaS, consultores, freelancers">
+    <meta name="author" content="AI Profit Army">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI Profit Army - Automatización con IA para Negocios">
+    <meta property="og:description" content="Más de 45 workflows n8n profesionales para automatizar tu negocio con ROI garantizado.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aiprofitarmy.com">
+    <meta property="og:image" content="https://aiprofitarmy.com/images/og-image.jpg">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "AI Profit Army Workflows",
+        "description": "Workflows profesionales de automatización n8n para negocios",
+        "brand": {
+            "@type": "Brand",
+            "name": "AI Profit Army"
+        },
+        "offers": {
+            "@type": "AggregateOffer",
+            "offerCount": "3",
+            "lowPrice": "499",
+            "highPrice": "3999",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "45"
+        }
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="main-header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                🤖 <span>AI Profit Army</span>
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+            <nav class="nav-links">
+                <a href="#problemas">Problemas</a>
+                <a href="#soluciones">Soluciones</a>
+                <a href="#demo">Demo</a>
+                <a href="#precios">Precios</a>
+                <a href="#faq">FAQ</a>
+                <a href="catalogo.html" class="btn-outline">Catálogo</a>
+                <a href="#cta" class="btn-primary">Comenzar</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Automatiza Tu Negocio con IA y Multiplica Tus Ganancias</h1>
+                <p class="hero-subtitle">
+                    Más de 45 workflows n8n profesionales listos para implementar. 
+                    Ahorra hasta 40 horas semanales, reduce errores y escala tu negocio 
+                    con automatización inteligente. <strong>ROI garantizado en 3 meses.</strong>
+                </p>
+                
+                <!-- Countdown Timer -->
+                <div class="countdown-timer">
+                    <div class="countdown-title">🚀 <strong>OFERTA DE LANZAMIENTO:</strong> 50% OFF termina en:</div>
+                    <div class="countdown-digits">
+                        <div class="countdown-unit">
+                            <span class="days">01</span>
+                            <span class="unit-label">Días</span>
+                        </div>
+                        <div class="countdown-unit">
+                            <span class="hours">23</span>
+                            <span class="unit-label">Horas</span>
+                        </div>
+                        <div class="countdown-unit">
+                            <span class="minutes">59</span>
+                            <span class="unit-label">Minutos</span>
+                        </div>
+                        <div class="countdown-unit">
+                            <span class="seconds">59</span>
+                            <span class="unit-label">Segundos</span>
+                        </div>
+                    </div>
+                    <div class="countdown-note" style="margin-top: 10px; font-size: 0.9rem; color: #f72585;">
+                        ⚡ <strong>PRIMEROS 10 CLIENTES:</strong> 50% de descuento + consultoría gratuita
+                    </div>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="#precios" class="btn btn-primary btn-large" style="background: linear-gradient(135deg, #f72585 0%, #7209b7 100%);">
+                        ⚡ OBTENER 50% OFF AHORA
+                    </a>
+                    <a href="#demo" class="btn btn-secondary btn-large">🎬 Ver Demo en Video</a>
+                </div>
+                
+                <!-- Trust Badges -->
+                <div class="trust-badges">
+                    <div class="badge">
+                        <div class="badge-icon">✅</div>
+                        <div>ROI Garantizado 3 Meses</div>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">🔒</div>
+                        <div>Pago Seguro SSL</div>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">⭐</div>
+                        <div>45+ Clientes Satisfechos</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hero Video -->
+            <div class="hero-video">
+                <div class="video-placeholder">
+                    <div class="play-btn">▶</div>
+                    <div style="text-align: center;">
+                        <h3 style="color: white; margin-bottom: 1rem;">Demo en Video: Automatización en 2 Minutos</h3>
+                        <p style="color: rgba(255,255,255,0.8);">Ver cómo configuramos un workflow completo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Free Checklist Banner -->
+    <section class="checklist-banner">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-text">
+                    <h3>🎁 <strong>Descarga Gratis:</strong> Checklist "10 Pasos para Automatizar LinkedIn"</h3>
+                    <p>Aprende a generar 50+ leads por día automáticamente. Guía paso a paso + templates.</p>
+                </div>
+                <div class="banner-action">
+                    <a href="linkedin-checklist.html" class="btn btn-accent">Descargar Gratis →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problems & Solutions -->
+    <section class="problems-section" id="problemas">
+        <div class="container">
+            <h2 class="section-title">¿Estás Perdiendo <span>Dinero y Tiempo</span> con Procesos Manuales?</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+                Identificamos los 3 problemas principales que enfrentan las empresas y te ofrecemos soluciones específicas con automatización.
+            </p>
+            
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">⏰</div>
+                    <h3>Pérdida de Tiempo en Tareas Repetitivas</h3>
+                    <p>Tus empleados pasan horas haciendo copy-paste entre sistemas, enviando emails manuales y actualizando hojas de cálculo.</p>
+                    <p><strong>Resultado:</strong> Hasta 40 horas semanales desperdiciadas.</p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">💸</div>
+                    <h3>Errores Humanos que Cuestan Dinero</h3>
+                    <p>Errores en facturación, envíos duplicados, datos inconsistentes entre plataformas y clientes insatisfechos.</p>
+                    <p><strong>Resultado:</strong> Pérdidas de hasta $5,000 mensuales.</p>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">📉</div>
+                    <h3>Falta de Escalabilidad</h3>
+                    <p>Tu negocio no puede crecer porque los procesos manuales colapsan. No puedes atender más clientes sin contratar más personal.</p>
+                    <p><strong>Resultado:</strong> Estancamiento y oportunidades perdidas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="problems-section" id="soluciones" style="background: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Nuestras <span>Soluciones</span> de Automatización</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+                Workflows específicos diseñados para resolver cada problema, con implementación garantizada en 48 horas.
+            </p>
+            
+            <div class="problems-grid">
+                <div class="problem-card solution">
+                    <div class="problem-icon">⚡</div>
+                    <h3>Automatización Completa</h3>
+                    <p>Workflows que conectan tus herramientas (CRM, email, Shopify, APIs) y automatizan procesos end-to-end.</p>
+                    <p><strong>Resultado:</strong> Recupera 40 horas semanales para enfocarte en crecimiento.</p>
+                </div>
+                
+                <div class="problem-card solution">
+                    <div class="problem-icon">🤖</div>
+                    <h3>IA para Eliminar Errores</h3>
+                    <p>Procesamiento inteligente de documentos, validación automática de datos y decisiones basadas en IA.</p>
+                    <p><strong>Resultado:</strong> Errores reducidos a 0% y ahorro de $5,000 mensuales.</p>
+                </div>
+                
+                <div class="problem-card solution">
+                    <div class="problem-icon">🚀</div>
+                    <h3>Escalabilidad Instantánea</h3>
+                    <p>Sistemas que manejan 10x más volumen sin necesidad de personal adicional. Crece sin límites.</p>
+                    <p><strong>Resultado:</strong> Capacidad para multiplicar clientes y ventas automáticamente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="container">
+            <h2 class="section-title">Empresas que <span>Confían</span> en AI Profit Army</h2>
+            
+            <div class="logos-grid">
+                <div class="logo-item">TechStartup Inc</div>
+                <div class="logo-item">E‑commerce Fashion</div>
+                <div class="logo-item">Consultora XYZ</div>
+                <div class="logo-item">Agencia Digital</div>
+                <div class="logo-item">SaaS Platform</div>
+                <div class="logo-item">FinTech Corp</div>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "Implementamos 5 workflows de AI Profit Army y en 2 meses recuperamos la inversión. 
+                        Ahora ahorramos 35 horas semanales y los errores en facturación desaparecieron."
+                    </p>
+                    <p class="testimonial-author">María González, CTO</p>
+                    <p class="testimonial-role">E‑commerce Fashion</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="testimonios.html" class="btn btn-primary">Ver Todos los Casos de Éxito</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo -->
+    <section class="interactive-demo" id="demo">
+        <div class="container">
+            <h2 class="section-title">Demo <span>Interactiva</span> en Tiempo Real</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+                Observa cómo nuestros workflows procesan datos, toman decisiones automáticas y generan resultados. 
+                Los números a continuación son en tiempo real.
+            </p>
+            
+            <div class="demo-container">
+                <div class="demo-content">
+                    <h3>Workflow de Automatización de Marketing</h3>
+                    <p>Este ejemplo muestra cómo un workflow captura leads de LinkedIn, los clasifica con IA, 
+                    envía emails personalizados y los sincroniza con tu CRM automáticamente.</p>
+                    <ul style="list-style: none; padding-left: 0; margin: 2rem 0;">
+                        <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                            <span style="background: #4cc9f0; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">1</span>
+                            Captura leads automáticamente
+                        </li>
+                        <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                            <span style="background: #4361ee; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">2</span>
+                            Clasificación con IA por intención de compra
+                        </li>
+                        <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                            <span style="background: #7209b7; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">3</span>
+                            Emails personalizados automáticos
+                        </li>
+                        <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                            <span style="background: #f72585; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">4</span>
+                            Sincronización con CRM y reportes
+                        </li>
+                    </ul>
+                    <a href="#precios" class="btn btn-primary">Quiero Este Workflow</a>
+                </div>
+                
+                <div class="demo-visual">
+                    <div class="demo-placeholder">
+                        <div style="text-align: center; color: white;">
+                            <h3 style="margin-bottom: 1rem;">Workflow en Ejecución</h3>
+                            <p>Procesando datos en tiempo real...</p>
+                        </div>
+                    </div>
+                    <div class="demo-stats">
+                        <div class="stat">
+                            <div class="stat-value">45</div>
+                            <div class="stat-label">Workflows</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">89%</div>
+                            <div class="stat-label">Automatización</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">3.2x</div>
+                            <div class="stat-label">ROI</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="precios">
+        <div class="container">
+            <h2 class="section-title">Planes y <span>Precios</span> Transparentes</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+                Elige el plan que mejor se adapte a tus necesidades. Todos incluyen implementación, soporte y 
+                <strong>garantía de ROI de 30 días.</strong>
+            </p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">🏁 Básico</h3>
+                        <div class="pricing-price">
+                            <span style="text-decoration: line-through; color: var(--gray); font-size: 1.5rem;">$499</span>
+                            <span style="color: #f72585; font-size: 2.5rem;">$249</span>
+                        </div>
+                        <p class="pricing-period">🔥 50% OFF - Pago único</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ 1 workflow específico</li>
+                        <li>✅ Implementación completa</li>
+                        <li>✅ Soporte 30 días</li>
+                        <li>✅ Documentación detallada</li>
+                        <li class="disabled">❌ Personalizaciones</li>
+                        <li class="disabled">❌ Dashboard avanzado</li>
+                    </ul>
+                    <a href="checkout.html?plan=basico" class="btn btn-primary" style="width: 100%; background: linear-gradient(135deg, #4361ee 0%, #3a56d4 100%);">
+                        ⚡ Comprar Ahora - $249
+                    </a>
+                    <div style="text-align: center; margin-top: 10px; font-size: 0.9rem; color: var(--success);">
+                        ✅ Ahorras $250
+                    </div>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-badge">MÁS VENDIDO</div>
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">🚀 Profesional</h3>
+                        <div class="pricing-price">
+                            <span style="text-decoration: line-through; color: var(--gray); font-size: 1.5rem;">$1,299</span>
+                            <span style="color: #f72585; font-size: 2.5rem;">$649</span>
+                        </div>
+                        <p class="pricing-period">🔥 50% OFF - Pago único</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ 3 workflows a elección</li>
+                        <li>✅ Personalizaciones incluidas</li>
+                        <li>✅ Soporte 90 días</li>
+                        <li>✅ Integración entre workflows</li>
+                        <li>✅ Dashboard de monitoreo</li>
+                        <li>✅ Actualizaciones gratuitas</li>
+                    </ul>
+                    <a href="checkout.html?plan=profesional" class="btn btn-secondary" style="width: 100%; background: linear-gradient(135deg, #f72585 0%, #7209b7 100%);">
+                        ⚡ Comprar Ahora - $649
+                    </a>
+                    <div style="text-align: center; margin-top: 10px; font-size: 0.9rem; color: var(--success);">
+                        ✅ Ahorras $650 + Consultoría Gratis
+                    </div>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">🏢 Empresa</h3>
+                        <div class="pricing-price">
+                            <span style="text-decoration: line-through; color: var(--gray); font-size: 1.5rem;">$3,999</span>
+                            <span style="color: #f72585; font-size: 2.5rem;">$1,999</span>
+                        </div>
+                        <p class="pricing-period">🔥 50% OFF - Primer mes</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ Workflows ilimitados</li>
+                        <li>✅ Soporte prioritario 24/7</li>
+                        <li>✅ Personalización total</li>
+                        <li>✅ Entrenamiento para tu equipo</li>
+                        <li>✅ Monitoreo proactivo</li>
+                        <li>✅ ROI garantizado por contrato</li>
+                    </ul>
+                    <a href="checkout.html?plan=empresa" class="btn btn-primary" style="width: 100%; background: linear-gradient(135deg, #4361ee 0%, #3a56d4 100%);">
+                        ⚡ Contactar Ventas - $1,999/mes
+                    </a>
+                    <div style="text-align: center; margin-top: 10px; font-size: 0.9rem; color: var(--success);">
+                        ✅ Ahorras $2,000 + Setup Gratis
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pricing-guarantee">
+                <div class="guarantee-badge" style="background: linear-gradient(135deg, #f72585 0%, #7209b7 100%);">
+                    <span>⚡</span>
+                    <span>OFERTA DOBLE GARANTÍA</span>
+                </div>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                    <strong>1️⃣ 50% DE DESCUENTO + 2️⃣ GARANTÍA DE 30 DÍAS</strong>
+                </p>
+                <p style="color: var(--gray); margin-bottom: 1rem;">
+                    ⚡ <strong>Oferta limitada:</strong> Primeros 10 clientes obtienen 50% OFF<br>
+                    🛡️ <strong>Garantía extendida:</strong> 30 días para probar + devolución 100%<br>
+                    🎁 <strong>Bonus extra:</strong> Consultoría de automatización gratuita ($500 valor)
+                </p>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 1.5rem;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 800; color: #f72585;">10</div>
+                        <div style="font-size: 0.9rem;">Cupones Restantes</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 800; color: #4361ee;">23:59:59</div>
+                        <div style="font-size: 0.9rem;">Tiempo Restante</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title">Preguntas <span>Frecuentes</span></h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+                Respuestas a las dudas más comunes sobre nuestros workflows y automatización.
+            </p>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Necesito conocimientos técnicos para usar los workflows?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        No, nosotros nos encargamos de toda la implementación. Te entregamos los workflows configurados y listos para usar. Solo necesitas acceso a las herramientas que quieres automatizar (CRM, email, etc.).
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cuánto tiempo tarda la implementación?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        La mayoría de los workflows están listos en 24-48 horas. Los más complejos pueden tomar hasta 5 días. Te mantendremos informado en cada paso.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Qué pasa si necesito modificaciones después?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Los planes Profesional y Empresa incluyen modificaciones gratuitas durante el período de soporte. El plan Básico incluye ajustes menores. Siempre puedes actualizar tu plan.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cómo funciona la garantía de ROI?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Si en 30 días no ves los resultados esperados (medibles en tiempo ahorrado, errores reducidos o ingresos aumentados), te devolvemos el 100% de lo pagado. Solo necesitas compartir métricas básicas.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Ofrecen soporte técnico?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Sí, todos los planes incluyen soporte. El plan Básico incluye soporte por email/chat (respuesta en 24h). Profesional: soporte prioritario (4h). Empresa: soporte 24/7 por chat, teléfono y videollamada.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Puedo ver ejemplos de workflows antes de comprar?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        ¡Claro! Solicita una demo personalizada y te mostraremos workflows reales funcionando. También puedes explorar nuestro catálogo con descripciones detalladas de cada workflow.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="products-section" id="productos">
+        <div class="container">
+            <h2 class="section-title">Productos <span>Destacados</span></h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+                Workflows n8n profesionales listos para implementar. Cada producto incluye tutorial completo, soporte y garantía.
+            </p>
+            
+            <div class="products-preview">
+                <div class="product-preview-card">
+                    <div class="product-badge">Más Vendido</div>
+                    <h3>LinkedIn Lead Generator Pro</h3>
+                    <p class="product-price">$97</p>
+                    <p class="product-desc">Genera 50+ leads cualificados por día automáticamente en LinkedIn.</p>
+                    <ul class="product-features">
+                        <li>✅ Workflow n8n completo</li>
+                        <li>✅ Video tutorial paso a paso</li>
+                        <li>✅ Soporte 7 días</li>
+                        <li>✅ Garantía de devolución</li>
+                    </ul>
+                    <a href="products.html#linkedin" class="btn btn-primary">Ver Detalles</a>
+                </div>
+                
+                <div class="product-preview-card">
+                    <div class="product-badge">Nuevo</div>
+                    <h3>Social Media Content Factory</h3>
+                    <p class="product-price">$147</p>
+                    <p class="product-desc">30 días de contenido para redes sociales en 1 hora.</p>
+                    <ul class="product-features">
+                        <li>✅ Generación con IA</li>
+                        <li>✅ Programación automática</li>
+                        <li>✅ 5 redes sociales</li>
+                        <li>✅ Analytics integrados</li>
+                    </ul>
+                    <a href="products.html#social" class="btn btn-primary">Ver Detalles</a>
+                </div>
+                
+                <div class="product-preview-card">
+                    <div class="product-badge">Productividad</div>
+                    <h3>Notion & Clockify Sync</h3>
+                    <p class="product-price">$97</p>
+                    <p class="product-desc">Sincronización en tiempo real entre tareas y tiempo.</p>
+                    <ul class="product-features">
+                        <li>✅ Sincronización bidireccional</li>
+                        <li>✅ Reportes automáticos</li>
+                        <li>✅ Dashboard integrado</li>
+                        <li>✅ Plantillas incluidas</li>
+                    </ul>
+                    <a href="products.html#notion" class="btn btn-primary">Ver Detalles</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="products.html" class="btn btn-large">Ver Todos los Productos (5)</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-section" id="cta">
+        <div class="container">
+            <h2>Comienza a Automatizar Tu Negocio Hoy</h2>
+            <p>
+                Únete a más de 45 empresas que ya ahorran tiempo, reducen errores y escalan con AI Profit Army. 
+                Implementación rápida, soporte experto y ROI garantizado.
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="products.html" class="btn btn-large">Ver Productos</a>
+                <a href="#demo" class="btn btn-large">Ver Demo Interactiva</a>
+            </div>
+            
+            <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
+                💳 Pago seguro • 🔒 SSL 256-bit • 🛡️ Garantía de 7 días • 📧 Soporte incluido
+            </p>
+        </div>
+    </section>
+
+    <!-- Productos Individuales -->
+    <section class="products-showcase" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 80px 0;">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">🎯 <span>Productos Individuales</span> - Listos para Usar</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.2rem; color: #555;">
+                Workflows n8n específicos que resuelven problemas concretos. Descarga inmediata después del pago.
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 50px;">
+                <div style="background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 5px solid #667eea;">
+                    <div style="display: inline-block; padding: 5px 15px; background: #f0f4ff; color: #667eea; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 15px;">
+                        Ventas & Leads
+                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #333;">LinkedIn Lead Generator Pro</h3>
+                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">
+                        Genera 20-50 leads calificados por día automáticamente. Incluye scraping, enriquecimiento y exportación.
+                    </p>
+                    <div style="font-size: 2rem; font-weight: 800; color: #4CAF50; margin-bottom: 20px;">$97</div>
+                    <a href="products.html" style="display: block; padding: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 10px; text-align: center; font-weight: 600; transition: all 0.3s ease;">
+                        COMPRAR AHORA
+                    </a>
+                </div>
+                
+                <div style="background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 5px solid #4CAF50;">
+                    <div style="display: inline-block; padding: 5px 15px; background: #e8f5e9; color: #4CAF50; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 15px;">
+                        Marketing
+                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #333;">Email Marketing Automator</h3>
+                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">
+                        Sistema completo de email marketing automatizado con segmentación y analytics.
+                    </p>
+                    <div style="font-size: 2rem; font-weight: 800; color: #4CAF50; margin-bottom: 20px;">$67</div>
+                    <a href="products.html" style="display: block; padding: 15px; background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; text-decoration: none; border-radius: 10px; text-align: center; font-weight: 600; transition: all 0.3s ease;">
+                        COMPRAR AHORA
+                    </a>
+                </div>
+                
+                <div style="background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 5px solid #FF6B6B;">
+                    <div style="display: inline-block; padding: 5px 15px; background: #ffebee; color: #FF6B6B; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 15px;">
+                        Pack Completo
+                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #333;">Automation Business Pack</h3>
+                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">
+                        5 workflows premium + soporte 30 días + actualizaciones 1 año. Ahorra $147.
+                    </p>
+                    <div style="font-size: 2rem; font-weight: 800; color: #FF6B6B; margin-bottom: 20px;">$297</div>
+                    <a href="products.html" style="display: block; padding: 15px; background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%); color: white; text-decoration: none; border-radius: 10px; text-align: center; font-weight: 600; transition: all 0.3s ease;">
+                        COMPRAR PACK
+                    </a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="products.html" style="display: inline-block; padding: 15px 40px; background: white; color: #667eea; text-decoration: none; border-radius: 50px; font-weight: 600; border: 2px solid #667eea; transition: all 0.3s ease;">
+                    VER TODOS LOS PRODUCTOS (5+)
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflows n8n Showcase -->
+    <section class="workflows-showcase" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 80px 0;">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 30px; color: white;">🚀 <span style="color: #4cc9f0;">36 Workflows n8n</span> Comerciales Listos</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.2rem; color: rgba(255,255,255,0.9);">
+                Acabamos de importar <strong>36 workflows profesionales</strong> de automatización. Cada uno está probado, documentado y listo para implementar en tu negocio.
+            </p>
+            
+            <!-- Workflows Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-bottom: 50px;">
+                <!-- Workflow 1: Notion-Todoist -->
+                <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+                        <div>
+                            <div style="display: inline-block; padding: 5px 15px; background: rgba(76, 201, 240, 0.2); color: #4cc9f0; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 10px;">
+                                ⭐ Workflow Estrella
+                            </div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: white;">Notion ↔ Todoist Sync</h3>
+                        </div>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: #4cc9f0;">$1,500/mes</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px; line-height: 1.6;">
+                        Sincronización bidireccional en tiempo real entre Notion y Todoist. 246 nodos, 15 integraciones.
+                    </p>
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <span style="padding: 5px 12px; background: rgba(255,255,255,0.1); border-radius: 20px; font-size: 0.85rem;">✅ 246 nodos</span>
+                        <span style="padding: 5px 12px; background: rgba(255,255,255,0.1); border-radius: 20px; font-size: 0.85rem;">🤖 IA integrada</span>
+                        <span style="padding: 5px 12px; background: rgba(255,255,255,0.1); border-radius: 20px; font-size: 0.85rem;">🔄 Tiempo real</span>
+                    </div>
+                    <a href="#cta" style="display: block; padding: 15px; background: linear-gradient(135deg, #4cc9f0 0%, #4361ee 100%); color: white; text-decoration: none; border-radius: 10px; text-align: center; font-weight: 600; transition: all 0.3s ease;">
+                        SOLICITAR DEMO GRATIS
+                    </a>
+                </div>
+                
+                <!-- Workflow 2: Resume Screening -->
+                <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+                        <div>
+                            <div style="display: inline-block; padding: 5px 15px; background: rgba(67, 97, 238, 0.2); color: #4361ee; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 10px;">
+                                🤖 IA Avanzada
+                            </div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: white;">Resume Screening AI</h3>
+                        </div>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: #4361ee;">$1,800/mes</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px; line-height: 1.6;">
+                        Screening de CVs con Gemini + ElevenLabs. Entrevistas conductuales automatizadas, scoring AI.
+                    </p>
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <span style="padding: 5px 12px; background: rgba(255,255,255,0.1); border-radius: 20px; font-size: 0.85rem;">🤖 Gemini AI</span>
+                        <span style="padding: 5px 12px; background: rgba(255,255,255,0.1); border-radius: 20px; font-size: 0.85rem;">🎤 ElevenLabs</span>
+                        <span style="padding: 5px 12px; background: rgba(255,255,255,0.1); border-radius: 20px; font-size: 0.85rem;">📊 Scoring AI</span>
+                    </div>
+                    <a href="#cta" style="display: block; padding: 15px; background: linear-gradient(135deg, #4361ee 0%, #7209b7 100%); color: white; text-decoration: none; border-radius: 10px; text-align: center; font-weight: 600; transition: all 0.3s ease;">
+                        SOLICITAR DEMO GRATIS
+                    </a>
+                </div>
+                
+                <!-- Workflow 3: YouTube Summarization -->
+                <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+                        <div>
+                            <div style="display: inline-block; padding: 5px 15px; background: rgba(114, 9, 183, 0.2); color: #7209b7; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 10px;">
+                                🎥 Content Automation
+                            </div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: white;">YouTube Summarization</h3>
+                        </div>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: #7209b7;">$1,200/mes</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px; line-height: 1.6;">
+                        Automatización completa de resúmenes de YouTube: transcripción, análisis, resumen, publicación.
+                    </p>
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <span style="padding: 5px 12px; background: rgba(255,255,255,0.1); border-radius: 20px; font-size: 0.85rem;">🎬 YouTube API</span>
+                        <span style="padding: 5px 12px; background: rgba(255,255,255,0.1); border-radius: 20px; font-size: 0.85rem;">📝 Transcripción</span>
+                        <span style="padding: 5px 12px; background: rgba(255,255,255,0.1); border-radius: 20px; font-size: 0.85rem;">🤖 Resumen IA</span>
+                    </div>
+                    <a href="#cta" style="display: block; padding: 15px; background: linear-gradient(135deg, #7209b7 0%, #f72585 100%); color: white; text-decoration: none; border-radius: 10px; text-align: center; font-weight: 600; transition: all 0.3s ease;">
+                        SOLICITAR DEMO GRATIS
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin: 50px 0;">
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; font-weight: 800; color: #4cc9f0; margin-bottom: 10px;">36</div>
+                    <div style="color: rgba(255,255,255,0.8);">Workflows Activos</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; font-weight: 800; color: #4361ee; margin-bottom: 10px;">$18K</div>
+                    <div style="color: rgba(255,255,255,0.8);">Valor Mensual</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; font-weight: 800; color: #7209b7; margin-bottom: 10px;">246</div>
+                    <div style="color: rgba(255,255,255,0.8);">Nodos (máx)</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; font-weight: 800; color: #f72585; margin-bottom: 10px;">15</div>
+                    <div style="color: rgba(255,255,255,0.8);">Integraciones</div>
+                </div>
+            </div>
+            
+            <!-- CTA -->
+            <div style="text-align: center; margin-top: 50px;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: white;">🚀 <span style="color: #4cc9f0;">Oferta Especial de Lanzamiento</span></h3>
+                <p style="color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto 30px; font-size: 1.1rem;">
+                    <strong>50% de descuento</strong> en los primeros 5 clientes. Precio normal: $1,500/mes → <strong style="color: #4cc9f0;">$750/mes</strong> (primeros 3 meses).
+                </p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <a href="#cta" style="display: inline-block; padding: 18px 40px; background: linear-gradient(135deg, #4cc9f0 0%, #4361ee 100%); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem; transition: all 0.3s ease;">
+                        🚀 APLICAR DESCUENTO 50%
+                    </a>
+                    <a href="workflows-catalogo.html" style="display: inline-block; padding: 18px 40px; background: rgba(255,255,255,0.1); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem; border: 2px solid rgba(255,255,255,0.3); transition: all 0.3s ease;">
+                        📋 VER CATÁLOGO COMPLETO
+                    </a>
+                </div>
+                <p style="margin-top: 30px; color: rgba(255,255,255,0.7); font-size: 0.9rem;">
+                    ⏰ Oferta válida solo hoy, 11 de Febrero 2026. 5 cupos disponibles.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>🤖 AI Profit Army</h4>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
+                        Automatización profesional con workflows n8n. ROI garantizado en 30 días.
+                    </p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: white; font-size: 1.5rem;">📱</a>
+                        <a href="#" style="color: white; font-size: 1.5rem;">📧</a>
+                        <a href="#" style="color: white; font-size: 1.5rem;">💼</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4>Producto</h4>
+                    <ul class="footer-links">
+                        <li><a href="catalogo.html">Catálogo de Workflows</a></li>
+                        <li><a href="#precios">Precios</a></li>
+                        <li><a href="#demo">Demo Interactiva</a></li>
+                        <li><a href="testimonios.html">Casos de Éxito</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>Por Nicho</h4>
+                    <ul class="footer-links">
+                        <li><a href="agencias.html">Agencias de Marketing</a></li>
+                        <li><a href="ecommerce.html">E-commerce</a></li>
+                        <li><a href="saas.html">Startups SaaS</a></li>
+                        <li><a href="consultores.html">Consultores</a></li>
+                        <li><a href="freelancers.html">Freelancers</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>Contacto</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:ventas@aiprofitarmy.com">ventas@aiprofitarmy.com</a></li>
+                        <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+                        <li><a href="#">Soporte 24/7</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos de Servicio</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© <span id="current-year">2026</span> AI Profit Army - Automatización con workflows n8n. Todos los derechos reservados.</p>
+                <p style="margin-top: 10px;">Creado con OpenClaw • Optimizado para máxima conversión</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Live Chat Widget -->
+    <div class="live-chat-widget">
+        <button class="chat-toggle" onclick="toggleChat()">💬</button>
+    </div>
+
+    <!-- Exit Intent Popup -->
+    <div class="exit-intent-popup" id="exit-intent-popup">
+        <div class="popup-content">
+            <button class="popup-close">✕</button>
+            <h3 style="margin-bottom: 1rem;">¡Espera! 🚀</h3>
+            <p style="margin-bottom: 1.5rem;">
+                Obtén un <strong>descuento del 15%</strong> en tu primer workflow si compras hoy.
+                Además, te regalamos una consultoría de automatización gratuita.
+            </p>
+            <div class="countdown-timer" style="margin: 1.5rem 0;">
+                <div class="countdown-title">La oferta expira en:</div>
+                <div class="countdown-digits">
+                    <div class="countdown-unit">
+                        <span class="minutes">05</span>
+                        <span class="unit-label">Minutos</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="seconds">00</span>
+                        <span class="unit-label">Segundos</span>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <a href="#precios" class="btn btn-primary" onclick="hideExitPopup()">Aplicar Descuento</a>
+                <button class="btn btn-outline" onclick="hideExitPopup()">No, gracias</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    
+    <!-- Schema markup for FAQ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "¿Necesito conocimientos técnicos para usar los workflows?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No, nosotros nos encargamos de toda la implementación. Te entregamos los workflows configurados y listos para usar. Solo necesitas acceso a las herramientas que quieres automatizar (CRM, email, etc.)."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Cuánto tiempo tarda la implementación?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "La mayoría de los workflows están listos en 24-48 horas. Los más complejos pueden tomar hasta 5 días. Te mantendremos informado en cada paso."
+                }
+            }
+        ]
+    }
+    </script>
+</body>
+</html>

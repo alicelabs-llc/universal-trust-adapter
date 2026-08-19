@@ -1,0 +1,125 @@
+{
+  "$schema": "https://marketnow.site/.well-known/mcp.schema.json",
+  "name": "marketnow",
+  "description": "MarketNow \u2014 Trust layer for agent commerce. 8,845 MCP-compatible skills with Sentinel L2.5 gVisor sandbox security audits, x402 payments (HTTP 402 + USDC on Base), and AP2 delegated mandates. AliceLabs LLC Proprietary. Maintained by AliceLabs LLC (Wyoming, USA, 2025).",
+  "version": "1.4.0",
+  "homepage": "https://marketnow.site",
+  "repository": "https://github.com/edgarfloresguerra2011-a11y/marketnow",
+  "npm_package": "marketnow-mcp",
+  "npm_url": "https://www.npmjs.com/package/marketnow-mcp",
+  "install": "npx -y marketnow-mcp",
+  "transport": {
+    "type": "http+sse",
+    "http_url": "https://marketnow.site/api/mcp",
+    "stdio_command": "npx -y marketnow-mcp",
+    "sse_url": "https://marketnow.site/api/mcp",
+    "note": "Supports both HTTP (SSE + JSON-RPC) and stdio transport."
+  },
+  "tools": [
+    {
+      "name": "search_skills",
+      "description": "Search skills by query, category, or max price"
+    },
+    {
+      "name": "get_skill",
+      "description": "Get full details of a specific skill by ID or slug"
+    },
+    {
+      "name": "list_categories",
+      "description": "List all 58 categories with counts"
+    },
+    {
+      "name": "get_manifest",
+      "description": "Get marketplace metadata (8,845 skills, pricing tiers, commission)"
+    },
+    {
+      "name": "get_install_command",
+      "description": "Get the npx install command for a skill"
+    }
+  ],
+  "config_examples": {
+    "claude_desktop": {
+      "mcpServers": {
+        "marketnow": {
+          "command": "npx",
+          "args": [
+            "-y",
+            "marketnow-mcp"
+          ]
+        }
+      }
+    },
+    "cursor": {
+      "mcpServers": {
+        "marketnow": {
+          "command": "npx",
+          "args": [
+            "-y",
+            "marketnow-mcp"
+          ]
+        }
+      }
+    },
+    "cline": {
+      "mcpServers": {
+        "marketnow": {
+          "command": "npx",
+          "args": [
+            "-y",
+            "marketnow-mcp"
+          ]
+        }
+      }
+    }
+  },
+  "marketplace_stats": {
+    "total_skills": 8845,
+    "categories": 58,
+    "price_min_usd": 0.99,
+    "price_max_usd": 9.99,
+    "price_avg_usd": 3.8,
+    "currency": "USD",
+    "payment_model": "one-time",
+    "no_subscriptions": true,
+    "no_credits": true
+  },
+  "verification": {
+    "sentinel_l1": "Automated static analysis on every submission (repo exists, README, package manifest, license, no hardcoded secrets, no malicious patterns)",
+    "human_review": "Manual review by MarketNow team before listing (24-48h)",
+    "score_range": "0-10 (minimum 4/6 required to list)"
+  },
+  "security": {
+    "csp": true,
+    "hsts": true,
+    "x_frame_options": "DENY",
+    "cors": "Open for GET /api/* read endpoints",
+    "no_secrets_in_client": true
+  },
+  "listings": [
+    {
+      "directory": "mcp.so",
+      "url": "https://mcp.so/server/marketnow-mcp---aep-agent-exchange-protocol/edgarfloresguerra2011-a11y",
+      "status": "listed",
+      "note": "Listed but data is outdated (shows 8,845 skills, mentions crypto payments that don't exist). Contact mcp.so to update."
+    },
+    {
+      "directory": "glama.ai",
+      "url": "https://glama.ai/mcp/connectors?query=MarketNow+MCP",
+      "status": "listed"
+    },
+    {
+      "directory": "npm",
+      "url": "https://www.npmjs.com/package/marketnow-mcp",
+      "status": "published",
+      "version": "1.0.0"
+    }
+  ],
+  "contact": {
+    "email": "info@alicelabs.site",
+    "github": "edgarfloresguerra2011-a11y"
+  },
+  "license": "MNNC-1.0",
+  "maintainer": "AliceLabs LLC (Wyoming, USA, 2025)",
+  "founder": "Edison Flores",
+  "generated_at": "2026-07-04T00:00:00Z"
+}

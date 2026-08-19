@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-mcpgateway",
+  "timestamp": "2026-07-06T02:59:18Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 0,
+    "fs_write_attempts": 1,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 234,
+  "stdout_sample": "Warning: upgrade check failed: Read-only file system (os error 30) [2m2026-07-06T02:59:18.217735Z[0m [31mERROR[0m [2mmcp_gateway[0m[2m:[0m Failed to load configuration: Configuration error: Config file not found: /config.yaml ",
+  "l2_score": 8,
+  "l2_risk_level": "low"
+}

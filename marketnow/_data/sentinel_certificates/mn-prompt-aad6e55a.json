@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8373428",
+  "skill_id": "mn-prompt-aad6e55a",
+  "skill_name": "Catering business operations",
+  "issued_at": "2026-07-15T01:19:33.428Z",
+  "expires_at": "2026-07-22T01:19:33.428Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "822136b9b0711d02e8b3d6779889df17b1307ed35d15e5811e0e6f05fad3d3c8",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-aad6e55a"
+}

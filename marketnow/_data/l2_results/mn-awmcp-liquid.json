@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-liquid",
+  "timestamp": "2026-07-06T02:57:49Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "failed_to_start",
+  "failure_reason": "Container command failed to execute \u2014 see stdout_sample.",
+  "behavioral_analysis": {
+    "network_attempts": 1,
+    "fs_write_attempts": 1,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 1867,
+  "stdout_sample": "Traceback (most recent call last):   File \"/usr/local/lib/python3.12/pathlib.py\", line 1311, in mkdir     os.mkdir(self, mode) FileNotFoundError: [Errno 2] No such file or directory: '/root/.liquid/adapters'  During handling of the above exception, another exception occurred:  Traceback (most recent call last):   File \"/usr/local/bin/liquid-mcp\", line 8, in <module>     sys.exit(main())              ^^^^^^   File \"/usr/local/lib/python3.12/site-packages/liquid/mcp_server.py\", line 649, in main  ",
+  "l2_score": 0,
+  "l2_risk_level": "unknown"
+}

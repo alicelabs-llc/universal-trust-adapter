@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6232642",
+  "skill_id": "mn-sale-008",
+  "skill_name": "Sales Coaching Platform",
+  "issued_at": "2026-07-06T05:37:12.642Z",
+  "expires_at": "2026-07-13T05:37:12.642Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a9b7f88a258a0936ceea6db2a39fba9c659b2e88275a80a6fb4819b57eb0f0bc",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-sale-008"
+}

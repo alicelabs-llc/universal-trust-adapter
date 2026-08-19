@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8212162",
+  "skill_id": "mn-prompt-5f618fc3",
+  "skill_name": "Especialista Coffee Industry + Roasting",
+  "issued_at": "2026-07-15T01:16:52.162Z",
+  "expires_at": "2026-07-22T01:16:52.162Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a0895467d3aabac5c9d4352e9f360c8d063c9ed36bc2c3a2c7d965701c29d588",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-5f618fc3"
+}

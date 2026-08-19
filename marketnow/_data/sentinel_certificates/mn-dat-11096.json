@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5737274",
+  "skill_id": "mn-dat-11096",
+  "skill_name": "Xeron688/xiaohongshu-mcp",
+  "issued_at": "2026-07-06T05:28:57.274Z",
+  "expires_at": "2026-07-13T05:28:57.274Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "d89b25e4cc7e21bdf6e639c87261132bef964adbcb41c31baf3fd72586b5d9a7",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-dat-11096"
+}

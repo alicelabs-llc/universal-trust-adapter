@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5809430",
+  "skill_id": "mn-gen-12926",
+  "skill_name": "Ukagaka-doc-mcp",
+  "issued_at": "2026-07-06T05:30:09.430Z",
+  "expires_at": "2026-07-13T05:30:09.430Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "96797f420852a7ca792f72085c0e7de2033a494c6c3d343f424f5c93b0e2788a",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-12926"
+}

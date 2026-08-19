@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5643333",
+  "skill_id": "mn-gen-08827",
+  "skill_name": "Aaronshaf/mdq",
+  "issued_at": "2026-07-06T05:27:23.333Z",
+  "expires_at": "2026-07-13T05:27:23.333Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "f0f7e93380c9ea99742d7cc3d4e61f5aad627e56807b9b839f741770f9aac13d",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-08827"
+}

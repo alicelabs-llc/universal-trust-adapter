@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9995986",
+  "skill_id": "mn-real-portalmcpserver",
+  "skill_name": "portal-mcp-server",
+  "issued_at": "2026-07-26T04:26:35.986Z",
+  "expires_at": "2026-08-02T04:26:35.986Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a8f80187a25be752aa34b3139832a526252c928b282f5105c6f52530a167a581",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-portalmcpserver"
+}

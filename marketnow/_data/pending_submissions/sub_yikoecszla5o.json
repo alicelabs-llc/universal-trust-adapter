@@ -1,0 +1,59 @@
+{
+  "submission_id": "sub_yikoecszla5o",
+  "skill_id": "mn-sub-08751",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T06:05:50.124Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "be64d4815e6a2aea"
+  },
+  "repo": {
+    "url": "https://github.com/langchain-ai/langchain-mcp-adapters",
+    "full_name": "langchain-ai/langchain-mcp-adapters",
+    "owner": "langchain-ai",
+    "name": "langchain-mcp-adapters",
+    "description": "LangChain 🔌 MCP",
+    "stars": 3617,
+    "language": "Python",
+    "license": "MIT",
+    "pushed_at": "2026-07-27T18:36:57Z",
+    "archived": false,
+    "topics": [
+      "langchain",
+      "langgraph",
+      "mcp",
+      "python",
+      "tools"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-08751",
+    "name": "langchain-mcp-adapters",
+    "slug": "langchain-mcp-adapters-8751",
+    "description": "LangChain 🔌 MCP",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/langchain-ai/langchain-mcp-adapters",
+      "submitted_at": "2026-07-29T06:05:50.124Z"
+    },
+    "install": "git clone https://github.com/langchain-ai/langchain-mcp-adapters",
+    "author": "langchain-ai",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T07:05:50.124Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-4039037",
+  "promoted_at": "2026-07-30T15:07:20.009Z"
+}

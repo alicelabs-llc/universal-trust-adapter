@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5693585",
+  "skill_id": "mn-gen-10035",
+  "skill_name": "Openspec-flow",
+  "issued_at": "2026-07-06T05:28:13.585Z",
+  "expires_at": "2026-07-13T05:28:13.585Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "dd89f572e386242a6addde6a73604786fac8cfa354ee4caf86d9f71088fc00ef",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-10035"
+}

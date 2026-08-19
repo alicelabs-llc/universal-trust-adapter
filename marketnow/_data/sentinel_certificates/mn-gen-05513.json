@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9734838",
+  "skill_id": "mn-gen-05513",
+  "skill_name": "mcp-knowledge-graph",
+  "issued_at": "2026-07-26T04:22:14.838Z",
+  "expires_at": "2026-08-02T04:22:14.838Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "high",
+  "risk_breakdown": {
+    "l15_l16_l17": "high",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "high"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 1,
+    "l2_execution_status": null
+  },
+  "signature": "168b0ea48e2893f55b6299847147846cf490858802c7082f4ab72ed9e7a41e25",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-05513"
+}

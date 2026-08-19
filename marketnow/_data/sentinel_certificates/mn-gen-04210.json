@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5454464",
+  "skill_id": "mn-gen-04210",
+  "skill_name": "Freelance-os",
+  "issued_at": "2026-07-06T05:24:14.464Z",
+  "expires_at": "2026-07-13T05:24:14.464Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "20d1829bae9580340c1ac323fce24a5f6b659416f942c642bcdb449c98ccbfce",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-04210"
+}

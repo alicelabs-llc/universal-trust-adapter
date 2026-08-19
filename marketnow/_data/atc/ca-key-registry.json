@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "description": "CA Key Registry — lists all CA keys used to sign ATCs. Verifiers check this to reject ATCs signed by retired keys.",
+  "updated_at": "2026-07-23T00:00:00Z",
+  "keys": [
+    {
+      "key_id": "ca-key-001",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA8p1XlAnt5QRCGbyDRi8+U9MCvt8Xyzq36Rar45JHszM=\n-----END PUBLIC KEY-----",
+      "algorithm": "Ed25519",
+      "status": "active",
+      "created_at": "2026-07-16T00:00:00Z",
+      "note": "Initial CA keypair generated when ATC was first implemented."
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8215129",
+  "skill_id": "mn-prompt-ea518bb5",
+  "skill_name": "Arquitecto de APIs REST paginadas con cursores reales",
+  "issued_at": "2026-07-15T01:16:55.129Z",
+  "expires_at": "2026-07-22T01:16:55.129Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 2,
+  "max_score": 10,
+  "risk_level": "high",
+  "risk_breakdown": {
+    "l15_l16_l17": "high",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "high"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 5,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "9058c369372b5839389ea82b38c003c51c53cbac99589b467186169daf724e5c",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-ea518bb5"
+}

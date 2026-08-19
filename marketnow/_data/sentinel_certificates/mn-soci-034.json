@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6190449",
+  "skill_id": "mn-soci-034",
+  "skill_name": "Social Media Engagement",
+  "issued_at": "2026-07-06T05:36:30.449Z",
+  "expires_at": "2026-07-13T05:36:30.449Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a6fc46b5d0fb0a859d7fb5eac22099b4ab6c699459751809694e45842ccb1fda",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-soci-034"
+}

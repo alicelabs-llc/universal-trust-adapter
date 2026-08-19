@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-aiskillstore",
+  "timestamp": "2026-07-06T02:39:55Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 0,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 74,
+  "stdout_sample": "AI Skill Store MCP Server \uc2dc\uc791 (\uc5f0\uacb0 \ub300\uc0c1: https://aiskillstore.io) ",
+  "l2_score": 10,
+  "l2_risk_level": "low"
+}

@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5473051",
+  "skill_id": "mn-res-04628",
+  "skill_name": "Houtini/google-knowledge-graph-mcp",
+  "issued_at": "2026-07-06T05:24:33.051Z",
+  "expires_at": "2026-07-13T05:24:33.051Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "6bf359b6f9cd8264cd9537d8e3b8ee70d8fc8423b5065a9d474e694adb6566a0",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-res-04628"
+}

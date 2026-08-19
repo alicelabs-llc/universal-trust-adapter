@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5573587",
+  "skill_id": "mn-gen-07073",
+  "skill_name": "Mcp-memory-keeper",
+  "issued_at": "2026-07-06T05:26:13.587Z",
+  "expires_at": "2026-07-13T05:26:13.587Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "f49c05c3da9d5f36eb935a79ced98591c7c5125b4ba1c7bb3f2942e15216939f",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-07073"
+}

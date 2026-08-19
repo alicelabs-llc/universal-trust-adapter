@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5477112",
+  "skill_id": "mn-gen-04727",
+  "skill_name": "Greenlight",
+  "issued_at": "2026-07-06T05:24:37.112Z",
+  "expires_at": "2026-07-13T05:24:37.112Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "593d596e968b8ef9a186cd0a355f8958d684542908767991c3de16d6789cd4ec",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-04727"
+}

@@ -1,0 +1,186 @@
+[
+  {
+    "name": "Developer Tools",
+    "slug": "developer-tools",
+    "count": 6204,
+    "url": "https://www.marketnow.site/registry?cat=developer-tools",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "AI/ML",
+    "slug": "ai-ml",
+    "count": 450,
+    "url": "https://www.marketnow.site/registry?cat=ai-ml",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Data",
+    "slug": "data",
+    "count": 422,
+    "url": "https://www.marketnow.site/registry?cat=data",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Search",
+    "slug": "search",
+    "count": 341,
+    "url": "https://www.marketnow.site/registry?cat=search",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Finance",
+    "slug": "finance",
+    "count": 291,
+    "url": "https://www.marketnow.site/registry?cat=finance",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Security",
+    "slug": "security",
+    "count": 172,
+    "url": "https://www.marketnow.site/registry?cat=security",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Productivity",
+    "slug": "productivity",
+    "count": 153,
+    "url": "https://www.marketnow.site/registry?cat=productivity",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Marketing",
+    "slug": "marketing",
+    "count": 113,
+    "url": "https://www.marketnow.site/registry?cat=marketing",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Sales",
+    "slug": "sales",
+    "count": 101,
+    "url": "https://www.marketnow.site/registry?cat=sales",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "File System",
+    "slug": "file-system",
+    "count": 91,
+    "url": "https://www.marketnow.site/registry?cat=file-system",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Version Control",
+    "slug": "version-control",
+    "count": 79,
+    "url": "https://www.marketnow.site/registry?cat=version-control",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Browser Automation",
+    "slug": "browser-automation",
+    "count": 74,
+    "url": "https://www.marketnow.site/registry?cat=browser-automation",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Legal",
+    "slug": "legal",
+    "count": 60,
+    "url": "https://www.marketnow.site/registry?cat=legal",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Cloud Platforms",
+    "slug": "cloud-platforms",
+    "count": 54,
+    "url": "https://www.marketnow.site/registry?cat=cloud-platforms",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Monitoring",
+    "slug": "monitoring",
+    "count": 53,
+    "url": "https://www.marketnow.site/registry?cat=monitoring",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Education",
+    "slug": "education",
+    "count": 42,
+    "url": "https://www.marketnow.site/registry?cat=education",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "DevOps",
+    "slug": "devops",
+    "count": 39,
+    "url": "https://www.marketnow.site/registry?cat=devops",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Healthcare",
+    "slug": "healthcare",
+    "count": 39,
+    "url": "https://www.marketnow.site/registry?cat=healthcare",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Media",
+    "slug": "media",
+    "count": 39,
+    "url": "https://www.marketnow.site/registry?cat=media",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Communication",
+    "slug": "communication",
+    "count": 33,
+    "url": "https://www.marketnow.site/registry?cat=communication",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Web APIs",
+    "slug": "web-apis",
+    "count": 28,
+    "url": "https://www.marketnow.site/registry?cat=web-apis",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Design",
+    "slug": "design",
+    "count": 17,
+    "url": "https://www.marketnow.site/registry?cat=design",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Content",
+    "slug": "content",
+    "count": 2,
+    "url": "https://www.marketnow.site/registry?cat=content",
+    "bulk_imported": false,
+    "disclosure": null
+  }
+]

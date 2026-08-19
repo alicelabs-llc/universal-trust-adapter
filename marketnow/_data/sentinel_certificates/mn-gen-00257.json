@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5285967",
+  "skill_id": "mn-gen-00257",
+  "skill_name": "Gsd-agent-inbox",
+  "issued_at": "2026-07-06T05:21:25.967Z",
+  "expires_at": "2026-07-13T05:21:25.967Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "2a54b7867c264a77ee4f5588d68c7cc9dccbbc5d3c07935b008c2a32d51da4aa",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-00257"
+}

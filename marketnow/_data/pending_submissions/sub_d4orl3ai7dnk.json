@@ -1,0 +1,53 @@
+{
+  "submission_id": "sub_d4orl3ai7dnk",
+  "skill_id": "mn-sub-30739",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T05:55:01.472Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "be64d4815e6a2aea"
+  },
+  "repo": {
+    "url": "https://github.com/modelcontextprotocol/typescript-sdk",
+    "full_name": "modelcontextprotocol/typescript-sdk",
+    "owner": "modelcontextprotocol",
+    "name": "typescript-sdk",
+    "description": "The official TypeScript SDK for Model Context Protocol servers and clients",
+    "stars": 12983,
+    "language": "TypeScript",
+    "license": "NOASSERTION",
+    "pushed_at": "2026-07-29T05:03:22Z",
+    "archived": false,
+    "topics": []
+  },
+  "skill": {
+    "id": "mn-sub-30739",
+    "name": "typescript-sdk",
+    "slug": "typescript-sdk-0739",
+    "description": "The official TypeScript SDK for Model Context Protocol servers and clients",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/modelcontextprotocol/typescript-sdk",
+      "submitted_at": "2026-07-29T05:55:01.472Z"
+    },
+    "install": "npx -y @modelcontextprotocol/sdk",
+    "author": "modelcontextprotocol",
+    "version": "2.0.0-alpha.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T06:55:01.472Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-3974556",
+  "promoted_at": "2026-07-30T15:06:15.608Z"
+}

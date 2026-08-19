@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-opdstarnhimcp",
+  "timestamp": "2026-07-06T03:08:54Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 0,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 73,
+  "stdout_sample": "[opdstar-nhi-mcp v0.9.2] Ready. Powered by OPDSTAR (https://opdstar.com) ",
+  "l2_score": 10,
+  "l2_risk_level": "low"
+}

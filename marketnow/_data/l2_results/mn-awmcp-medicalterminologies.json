@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-medicalterminologies",
+  "timestamp": "2026-07-06T03:10:22Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 2,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 623,
+  "stdout_sample": "{\"level\":30,\"time\":1783307364226,\"pid\":1,\"hostname\":\"168a4f8f58e1\",\"server\":\"medical-terminologies-mcp\",\"transport\":\"http\",\"msg\":\"Initializing server...\"} {\"level\":30,\"time\":1783307364230,\"pid\":1,\"hostname\":\"168a4f8f58e1\",\"name\":\"medical-terminologies-mcp\",\"version\":\"1.5.7\",\"tool_count\":31,\"host\":\"0.0.0.0\",\"port\":3000,\"msg\":\"Server started over Streamable HTTP\"} {\"level\":30,\"time\":1783307364230,\"pid\":1,\"hostname\":\"168a4f8f58e1\",\"server\":\"medical-terminologies-mcp\",\"version\":\"1.5.7\",\"msg\":\"Server",
+  "l2_score": 7,
+  "l2_risk_level": "low"
+}

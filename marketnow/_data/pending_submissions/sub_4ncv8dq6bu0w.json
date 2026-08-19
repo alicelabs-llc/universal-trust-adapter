@@ -1,0 +1,58 @@
+{
+  "submission_id": "sub_4ncv8dq6bu0w",
+  "skill_id": "mn-sub-71989",
+  "status": "promoted",
+  "submitted_at": "2026-07-26T23:51:13.856Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_outreach",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "7cd7c636737d277b"
+  },
+  "repo": {
+    "url": "https://github.com/upstash/context7",
+    "full_name": "upstash/context7",
+    "owner": "upstash",
+    "name": "context7",
+    "description": "Context7 Platform -- Up-to-date code documentation for LLMs and AI code editors",
+    "stars": 59794,
+    "language": "TypeScript",
+    "license": "MIT",
+    "pushed_at": "2026-07-25T03:38:35Z",
+    "archived": false,
+    "topics": [
+      "llm",
+      "mcp",
+      "mcp-server",
+      "vibe-coding"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-71989",
+    "name": "context7",
+    "slug": "context7-1989",
+    "description": "Context7 Platform -- Up-to-date code documentation for LLMs and AI code editors",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/upstash/context7",
+      "submitted_at": "2026-07-26T23:51:13.856Z"
+    },
+    "install": "npx -y @upstash/context7",
+    "author": "upstash",
+    "version": "1.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-27T00:51:13.856Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-1771258",
+  "promoted_at": "2026-07-27T00:22:52.567Z"
+}

@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0551989",
+  "skill_id": "mn-real-directorskill",
+  "skill_name": "DirectorSkill",
+  "issued_at": "2026-07-26T04:35:51.989Z",
+  "expires_at": "2026-08-02T04:35:51.989Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "0c6d1342319ca144a0204b0204ff418172f99f71aa85f0ae7ff93374778456e0",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-directorskill"
+}

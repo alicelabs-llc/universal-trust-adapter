@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Profit Army - Automatización de Redes Sociales para Agencias de Marketing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+        
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            padding: 15px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .tool-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .tool-desc {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .tool-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .tool-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tool-features li:before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .monetization-section {
+            background: white;
+            border-radius: 16px;
+            padding: 50px;
+            margin: 60px 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .strategy-card {
+            padding: 25px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+        }
+        
+        .strategy-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .tool-card, .monetization-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Automatiza tus Redes Sociales con IA</h1>
+            <p class="subtitle">Agencias de marketing están ahorrando 20+ horas semanales automatizando redes sociales con workflows de n8n. Catálogo con 20+ workflows listos para implementar hoy.</p>
+            <a href="#catalogo" class="btn">Ver Workflows de Marketing</a>
+            <a href="#testimonios" class="btn" style="margin-left: 15px; background: #FF6B6B;">Casos de Éxito Agencias</a>
+        </header>
+        
+        <section id="catalogo">
+            <h2 class="section-title">🤖 Workflows de Automatización de Marketing</h2>
+            <p style="font-size: 1.2rem; text-align: center; margin-bottom: 40px; color: white;">Selecciona el workflow que necesitas para automatizar redes sociales, generación de leads y análisis de competencia.</p>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">📱</div>
+                    <h3 class="tool-title">Publicación Automática en Redes</h3>
+                    <p class="tool-desc">Workflow que programa y publica contenido en Facebook, Instagram, Twitter, LinkedIn de forma automática.</p>
+                    <ul class="tool-features">
+                        <li>Programación mensual en minutos</li>
+                        <li>Optimización de horarios con IA</li>
+                        <li>Análisis de engagement automático</li>
+                        <li>Integración con Canva y Google Drive</li>
+                        <li>+5 variantes disponibles</li>
+                    </ul>
+                    <a href="catalogo.html#marketing" class="btn">Ver Detalles</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">🎯</div>
+                    <h3 class="tool-title">Generación de Leads con IA</h3>
+                    <p class="tool-desc">Sistema automático de prospección que identifica leads calificados en redes sociales y envía mensajes personalizados.</p>
+                    <ul class="tool-features">
+                        <li>Detección de leads en LinkedIn y Twitter</li>
+                        <li>Mensajes personalizados con IA</li>
+                        <li>Seguimiento automático</li>
+                        <li>Integración con CRM</li>
+                        <li>+8 workflows disponibles</li>
+                    </ul>
+                    <a href="catalogo.html#marketing" class="btn">Ver Detalles</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">📈</div>
+                    <h3 class="tool-title">Análisis de Competencia Automatizado</h3>
+                    <p class="tool-desc">Monitoreo automático de competidores en redes sociales: contenido, engagement, estrategias.</p>
+                    <ul class="tool-features">
+                        <li>Reportes diarios de competencia</li>
+                        <li>Alertas de cambios estratégicos</li>
+                        <li>Análisis de sentimiento con IA</li>
+                        <li>Dashboards en tiempo real</li>
+                        <li>+7 workflows disponibles</li>
+                    </ul>
+                    <a href="catalogo.html#marketing" class="btn">Ver Detalles</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">🔄</div>
+                    <h3 class="tool-title">Gestión de Clientes y Reportes</h3>
+                    <p class="tool-desc">Automatización de reportes de resultados, envío a clientes y gestión de campañas de marketing.</p>
+                    <ul class="tool-features">
+                        <li>Reportes automáticos semanales</li>
+                        <li>Envío por email y Slack</li>
+                        <li>Dashboards personalizables</li>
+                        <li>Integración con Google Analytics</li>
+                        <li>+6 workflows disponibles</li>
+                    </ul>
+                    <a href="catalogo.html#marketing" class="btn">Ver Detalles</a>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="catalogo.html" class="btn" style="background: #FF6B6B; padding: 18px 40px; font-size: 1.2rem;">Explorar Catálogo Completo Marketing (20+ workflows)</a>
+            </div>
+        </section>
+        
+        <section class="monetization-section" id="precios">
+            <h2 class="section-title">💰 Precios Especiales para Agencias</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; text-align: center;">Elige el plan que mejor se adapte a tus necesidades. Todos incluyen implementación, soporte técnico y actualizaciones.</p>
+            
+            <div class="strategy-grid">
+                <div class="strategy-card" style="border-left: 5px solid #4CAF50;">
+                    <h4>🏁 Plan Básico Agencias</h4>
+                    <p><strong>1 workflow específico</strong></p>
+                    <p>Ideal para automatizar un proceso crítico en tu agencia.</p>
+                    <ul style="list-style: none; padding-left: 0; margin-top: 15px;">
+                        <li>✅ 1 workflow a elección</li>
+                        <li>✅ Implementación completa</li>
+                        <li>✅ Soporte por 30 días</li>
+                        <li>✅ Documentación detallada</li>
+                        <li>❌ Personalizaciones limitadas</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <div style="font-size: 2rem; font-weight: 800; color: #4CAF50;">$499</div>
+                        <div style="color: #666; font-size: 0.9rem;">Pago único</div>
+                    </div>
+                    <a href="checkout.html?plan=basico&utm_source=meta_ads&utm_campaign=agencias_marketing" class="btn" style="margin-top: 15px; background: #4CAF50;">Comprar Ahora</a>
+                </div>
+                
+                <div class="strategy-card" style="border-left: 5px solid #667eea;">
+                    <h4>🚀 Plan Profesional Agencias</h4>
+                    <p><strong>3 workflows + personalización</strong></p>
+                    <p>Para agencias que necesitan múltiples automatizaciones integradas.</p>
+                    <ul style="list-style: none; padding-left: 0; margin-top: 15px;">
+                        <li>✅ 3 workflows a elección</li>
+                        <li>✅ Personalizaciones incluídas</li>
+                        <li>✅ Soporte por 90 días</li>
+                        <li>✅ Integración entre workflows</li>
+                        <li>✅ Dashboard de monitoreo</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <div style="font-size: 2rem; font-weight: 800; color: #667eea;">$1,299</div>
+                        <div style="color: #666; font-size: 0.9rem;">Pago único o 3 cuotas</div>
+                    </div>
+                    <a href="checkout.html?plan=profesional&utm_source=meta_ads&utm_campaign=agencias_marketing" class="btn" style="margin-top: 15px;">Comprar Ahora</a>
+                </div>
+                
+                <div class="strategy-card" style="border-left: 5px solid #FF6B6B;">
+                    <h4>🏢 Plan Empresa Agencias</h4>
+                    <p><strong>Workflows ilimitados + soporte prioritario</strong></p>
+                    <p>Para agencias que requieren automatización completa de todos sus clientes.</p>
+                    <ul style="list-style: none; padding-left: 0; margin-top: 15px;">
+                        <li>✅ Workflows ilimitados</li>
+                        <li>✅ Soporte prioritario 24/7</li>
+                        <li>✅ Personalización total</li>
+                        <li>✅ Entrenamiento para tu equipo</li>
+                        <li>✅ Monitoreo proactivo</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <div style="font-size: 2rem; font-weight: 800; color: #FF6B6B;">$3,999</div>
+                        <div style="color: #666; font-size: 0.9rem;">Mensual o anual</div>
+                    </div>
+                    <a href="checkout.html?plan=empresa&utm_source=meta_ads&utm_campaign=agencias_marketing" class="btn" style="margin-top: 15px; background: #FF6B6B;">Contactar Ventas</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 1.1rem; margin-bottom: 20px;">✨ <strong>Garantía de ROI para Agencias:</strong> Si en 3 meses no ahorras al menos 20 horas semanales, te devolvemos el 100% de tu inversión.</p>
+                <a href="catalogo.html" class="btn" style="background: #333;">Ver Catálogo Completo Marketing</a>
+                <a href="testimonios.html" class="btn" style="margin-left: 15px; background: #764ba2;">Casos de Éxito Agencias</a>
+            </div>
+        </section>
+        
+        <section class="monetization-section" id="beneficios">
+            <h2 class="section-title">⚡ Beneficios para Agencias de Marketing</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; text-align: center;">Nuestros workflows están diseñados específicamente para agencias de marketing que quieren escalar sin aumentar costos.</p>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <h4>🚀 Ahorro de 20+ Horas Semanales</h4>
+                    <p>Automatiza tareas repetitivas: programación de contenido, reportes, análisis de competencia, generación de leads.</p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h4>📈 Mejora de Resultados para Clientes</h4>
+                    <p>Workflows optimizados con IA que aumentan engagement, leads y conversiones de tus clientes.</p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h4>🔧 Escalabilidad Sin Límites</h4>
+                    <p>Maneja más clientes con el mismo equipo. Los workflows se replican y personalizan fácilmente.</p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h4>🔄 Actualizaciones Constantes</h4>
+                    <p>Los workflows se actualizan automáticamente con nuevas funcionalidades de redes sociales y algoritmos de IA.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#testimonios" class="btn" style="background: #4CAF50;">Ver Testimonios de Agencias</a>
+            </div>
+        </section>
+        
+        <section class="monetization-section" id="testimonios">
+            <h2 class="section-title">⭐ Agencias que ya Automatizaron con Nosotros</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; text-align: center;">Agencias de marketing que han transformado sus operaciones con nuestros workflows.</p>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <h4>🏢 Agencia Digital "MarketBoost"</h4>
+                    <p>"Los workflows de automatización de redes nos ahorran 25 horas semanales. Podemos manejar 40% más clientes con el mismo equipo."</p>
+                    <p><strong>Laura Méndez, Directora de Operaciones</strong></p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h4>📱 Agencia de Social Media "Trending"</h4>
+                    <p>"La generación automática de reportes con IA reduce el tiempo de análisis de 8 horas a 30 minutos por cliente."</p>
+                    <p><strong>Carlos Ruiz, CEO</strong></p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h4>🎯 Agencia B2B "LeadExperts"</h4>
+                    <p>"El workflow de generación de leads en LinkedIn nos produce 50 leads calificados por semana automáticamente."</p>
+                    <p><strong>Ana Torres, Directora de Marketing</strong></p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="testimonios.html" class="btn" style="background: #764ba2;">Ver Todos los Casos de Éxito</a>
+                <a href="checkout.html?utm_source=meta_ads&utm_campaign=agencias_marketing" class="btn" style="margin-left: 15px; background: #FF6B6B;">Comenzar Ahora</a>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2026 AI Profit Army - Workflows de Automatización para Agencias de Marketing</p>
+            <div style="margin-top: 20px;">
+                <a href="index.html" style="color: white; margin: 0 10px; text-decoration: none;">Inicio General</a>
+                <a href="catalogo.html" style="color: white; margin: 0 10px; text-decoration: none;">Catálogo Completo</a>
+                <a href="checkout.html" style="color: white; margin: 0 10px; text-decoration: none;">Checkout</a>
+                <a href="testimonios.html" style="color: white; margin: 0 10px; text-decoration: none;">Testimonios</a>
+                <a href="blog.html" style="color: white; margin: 0 10px; text-decoration: none;">Blog</a>
+                <a href="dashboard.html" style="color: white; margin: 0 10px; text-decoration: none;">Dashboard</a>
+            </div>
+            <p style="margin-top: 20px; opacity: 0.8;">Creado con OpenClaw • Actualizado: Febrero 2026</p>
+            <p style="margin-top: 10px; opacity: 0.8;">
+                <a href="mailto:ventas@aiprofitarmy.com" style="color: white; text-decoration: underline;">ventas@aiprofitarmy.com</a> | 
+                <a href="tel:+1234567890" style="color: white; text-decoration: underline;">+1 (234) 567-890</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

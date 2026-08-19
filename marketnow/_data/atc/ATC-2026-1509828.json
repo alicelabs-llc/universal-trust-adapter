@@ -1,0 +1,46 @@
+{
+  "card_id": "ATC-2026-1509828",
+  "status": "active",
+  "payload": {
+    "card_id": "ATC-2026-1509828",
+    "schema_version": "1.1.0",
+    "decision_authority": "consumer",
+    "agent_id": "final_test",
+    "agent_name": "final_test",
+    "identity": {
+      "public_key": "EEEE",
+      "key_algorithm": "Ed25519"
+    },
+    "trust": {
+      "sentinel_review_score": 0,
+      "sentinel_score": 0,
+      "audit_layers_passed": {},
+      "composite_trust": 0,
+      "risk_level": "not_audited",
+      "certificate_id": null
+    },
+    "capabilities": {
+      "provides": [],
+      "protocol_language": "mcp",
+      "translate": true
+    },
+    "payment": {
+      "method": "x402 + USDC on Base L2",
+      "wallet_address": null
+    },
+    "metadata": {
+      "issued_at": "2026-08-09T02:11:49.828Z",
+      "expires_at": "2026-11-07T02:11:49.828Z",
+      "issuer": "MarketNow Sentinel CA",
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-1509828"
+    }
+  },
+  "signature": {
+    "algorithm": "Ed25519 (RFC 8032)",
+    "value": "924ac8f76011df58cd19c718a56cf092d9594d9f2577f195bfd1ac77becefdf8f81e035c802a9c5534507e98740459980b74ec4848cf925d00fc07a868fcfe06",
+    "signed_by": "MarketNow Sentinel CA",
+    "signed_at": "2026-08-09T02:11:49.828Z",
+    "canonical_json": "JSON.stringify(payload, Object.keys(payload).sort())",
+    "verify_with": "GET /api/atc?action=ca-key"
+  }
+}

@@ -1,0 +1,64 @@
+# MarketNow — Sentinel L3 Continuous Runtime Monitor (Weekly)
+# ============================================================
+#
+# Runs weekly to re-audit all L2-certified skills. Compares current
+# runtime behavior against the L2 baseline fingerprint. If drift is
+# detected, the skill is flagged for re-audit or quarantine.
+#
+# This addresses the community feedback:
+#   "Certification is point-in-time. Attacks are runtime."
+#
+# Schedule: Weekly Sunday 03:00 UTC (after L2 re-audit at 02:00)
+# Manual: workflow_dispatch
+
+name: Sentinel L3 Continuous Monitor
+
+on:
+  schedule:
+    - cron: '0 3 * * 0'  # Sunday 03:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sentinel-l3
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run L3 continuous monitoring
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SENTINEL_CERT_SECRET: ${{ secrets.SENTINEL_CERT_SECRET }}
+        run: |
+          echo "Running L3 continuous runtime monitoring..."
+          node scripts/l3-continuous-monitor.mjs || true
+
+      - name: Commit L3 results
+        run: |
+          if [ -d _data/l3_results ] && [ -n "$(ls _data/l3_results/*.json 2>/dev/null)" ]; then
+            git config user.name "MarketNow Sentinel Bot"
+            git config user.email "info@alicelabs.site"
+            git add _data/l3_results/
+            if git diff --cached --quiet; then
+              echo "No L3 changes to commit"
+            else
+              git commit -m "sentinel: L3 continuous monitoring — $(date -u +%Y-%m-%d)" || true
+              git push || echo "Push failed (will retry next week)"
+            fi
+          else
+            echo "No L3 results to commit"
+          fi

@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8243907",
+  "skill_id": "mn-prompt-9649a545",
+  "skill_name": "Cold calling script B2B que genera reuniones",
+  "issued_at": "2026-07-15T01:17:23.907Z",
+  "expires_at": "2026-07-22T01:17:23.907Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "6de7f5ca1e655a096ccdb3f9b6efa35999a652e9bc28019f9786e52b582fa66e",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-9649a545"
+}

@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6149196",
+  "skill_id": "mn-pro-e06e192f",
+  "skill_name": "Game In-App Purchase",
+  "issued_at": "2026-07-06T05:35:49.196Z",
+  "expires_at": "2026-07-13T05:35:49.196Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "3c05db1cbcc2ae7524285f7359d237dfdedd974cb46f3151b7f7378d95227750",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-pro-e06e192f"
+}

@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5440896",
+  "skill_id": "mn-gen-03862",
+  "skill_name": "Faf-chrome-extension",
+  "issued_at": "2026-07-06T05:24:00.896Z",
+  "expires_at": "2026-07-13T05:24:00.896Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "2c56f9dde807b0f73f6cd49cab876797a6095c268a0fb466f1c08a2c72e2cfaa",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-03862"
+}

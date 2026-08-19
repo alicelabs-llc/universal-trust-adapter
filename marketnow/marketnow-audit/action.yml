@@ -1,0 +1,75 @@
+# MarketNow Audit — GitHub Action
+# ================================
+#
+# Audita cualquier servidor MCP con el pipeline de 10 capas de MarketNow.
+# Gratis. Sin autenticación. Sin pago.
+#
+# Uso en tu workflow:
+#
+#   - name: MarketNow Security Audit
+#     uses: edgarfloresguerra2011-a11y/marketnow-audit@v1
+#     with:
+#       repo-url: https://github.com/owner/your-mcp-server
+#
+# O para auditar el repo actual:
+#
+#   - name: MarketNow Security Audit (self)
+#     uses: edgarfloresguerra2011-a11y/marketnow-audit@v1
+#     with:
+#       repo-url: ${{ github.server_url }}/${{ github.repository }}
+
+name: 'MarketNow Security Audit'
+description: 'Free 10-layer MCP security audit. L1.5 metadata → L1.9 prompt injection → L2 sandbox. Get a signed ATC + catalog listing.'
+branding:
+  icon: 'shield'
+  color: 'blue'
+inputs:
+  repo-url:
+    description: 'GitHub repo URL of the MCP server to audit'
+    required: true
+outputs:
+  submission-id:
+    description: 'The submission ID from MarketNow'
+  skill-id:
+    description: 'The assigned skill ID'
+  l15-score:
+    description: 'L1.5 metadata score (0-10)'
+  l2-status:
+    description: 'L2 sandbox audit status (queued/running/completed)'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Submit to MarketNow
+      shell: bash
+      run: |
+        echo "Submitting ${{ inputs.repo-url }} to MarketNow..."
+        RESPONSE=$(curl -s -X POST https://marketnow.site/api/submit-skill \
+          -H "Content-Type: application/json" \
+          -d '{"repo_url": "${{ inputs.repo-url }}", "submitter_agent_id": "github-actions"}')
+        
+        echo "Response: $RESPONSE"
+        
+        SUBMISSION_ID=$(echo "$RESPONSE" | python3 -c "import json,sys; print(json.load(sys.stdin).get('submission_id',''))" 2>/dev/null || echo "")
+        SKILL_ID=$(echo "$RESPONSE" | python3 -c "import json,sys; print(json.load(sys.stdin).get('skill_id',''))" 2>/dev/null || echo "")
+        L15_SCORE=$(echo "$RESPONSE" | python3 -c "import json,sys; print(json.load(sys.stdin).get('audit',{}).get('l15_score',''))" 2>/dev/null || echo "")
+        L2_STATUS=$(echo "$RESPONSE" | python3 -c "import json,sys; print(json.load(sys.stdin).get('audit',{}).get('l2_status',''))" 2>/dev/null || echo "")
+        
+        echo "submission-id=$SUBMISSION_ID" >> $GITHUB_OUTPUT
+        echo "skill-id=$SKILL_ID" >> $GITHUB_OUTPUT
+        echo "l15-score=$L15_SCORE" >> $GITHUB_OUTPUT
+        echo "l2-status=$L2_STATUS" >> $GITHUB_OUTPUT
+        
+        if [ -z "$SUBMISSION_ID" ]; then
+          echo "⚠️ Submission failed. Check the response above."
+          exit 1
+        fi
+        
+        echo "✅ Submitted!"
+        echo "   Submission ID: $SUBMISSION_ID"
+        echo "   Skill ID: $SKILL_ID"
+        echo "   L1.5 Score: $L15_SCORE/10"
+        echo "   L2 Status: $L2_STATUS"
+        echo ""
+        echo "Check status: https://marketnow.site/api/submit-skill?submission_id=$SUBMISSION_ID"
+        echo "View skill: https://marketnow.site/skill/$SKILL_ID"

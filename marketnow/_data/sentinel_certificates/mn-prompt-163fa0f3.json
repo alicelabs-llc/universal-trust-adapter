@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8355079",
+  "skill_id": "mn-prompt-163fa0f3",
+  "skill_name": "Data warehouse on Postgres",
+  "issued_at": "2026-07-15T01:19:15.079Z",
+  "expires_at": "2026-07-22T01:19:15.079Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 10,
+  "max_score": 10,
+  "risk_level": "low",
+  "risk_breakdown": {
+    "l15_l16_l17": "low",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "low"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 0,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "e6202551d1b1e66d21a01ad97527fa601b6c1459e69a88cc1d4674790332cd55",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-163fa0f3"
+}

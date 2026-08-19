@@ -1,0 +1,58 @@
+{
+  "submission_id": "sub_19k6zrzahk3u",
+  "skill_id": "mn-sub-76147",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T14:26:49.482Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch2",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "7cd7c636737d277b"
+  },
+  "repo": {
+    "url": "https://github.com/Codium-ai/cover-agent",
+    "full_name": "qodo-ai/qodo-cover",
+    "owner": "Codium-ai",
+    "name": "cover-agent",
+    "description": "Qodo-Cover: An AI-Powered Tool for Automated Test Generation and Code Coverage Enhancement! 💻🤖🧪🐞",
+    "stars": 5567,
+    "language": "Python",
+    "license": "AGPL-3.0",
+    "pushed_at": "2026-04-05T12:27:16Z",
+    "archived": false,
+    "topics": [
+      "agents",
+      "ai",
+      "test-automation",
+      "testing"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-76147",
+    "name": "qodo-cover",
+    "slug": "cover-agent-6147",
+    "description": "Qodo-Cover: An AI-Powered Tool for Automated Test Generation and Code Coverage Enhancement! 💻🤖🧪🐞",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/Codium-ai/cover-agent",
+      "submitted_at": "2026-07-29T14:26:49.482Z"
+    },
+    "install": "git clone https://github.com/Codium-ai/cover-agent",
+    "author": "Codium-ai",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T15:26:49.482Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-3937340",
+  "promoted_at": "2026-07-30T15:05:38.574Z"
+}

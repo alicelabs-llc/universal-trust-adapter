@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5568321",
+  "skill_id": "mn-gen-06959",
+  "skill_name": "Rog0x/mcp-json-tools",
+  "issued_at": "2026-07-06T05:26:08.321Z",
+  "expires_at": "2026-07-13T05:26:08.321Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "3a791b48809b88682f11a5983799cc48dcc9d5c5b2dcfde5a589792c305bfac3",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-06959"
+}

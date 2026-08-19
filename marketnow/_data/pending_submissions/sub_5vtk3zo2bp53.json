@@ -1,0 +1,59 @@
+{
+  "submission_id": "sub_5vtk3zo2bp53",
+  "skill_id": "mn-sub-95231",
+  "status": "pending_l2_audit",
+  "submitted_at": "2026-07-27T00:47:06.759Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_outreach_v2",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "96365e5c70a99ff4"
+  },
+  "repo": {
+    "url": "https://github.com/google-gemini/gemini-cli",
+    "full_name": "google-gemini/gemini-cli",
+    "owner": "google-gemini",
+    "name": "gemini-cli",
+    "description": "An open-source AI agent that brings the power of Gemini directly into your terminal.",
+    "stars": 106203,
+    "language": "TypeScript",
+    "license": "Apache-2.0",
+    "pushed_at": "2026-07-27T00:38:39Z",
+    "archived": false,
+    "topics": [
+      "ai",
+      "ai-agents",
+      "cli",
+      "gemini",
+      "gemini-api",
+      "mcp-client",
+      "mcp-server"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-95231",
+    "name": "gemini-cli",
+    "slug": "gemini-cli-5231",
+    "description": "An open-source AI agent that brings the power of Gemini directly into your terminal.",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/google-gemini/gemini-cli",
+      "submitted_at": "2026-07-27T00:47:06.759Z"
+    },
+    "install": "npx -y @google/gemini-cli",
+    "author": "google-gemini",
+    "version": "0.54.0-nightly.20260722.gf743ab579"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "queued",
+    "l2_scheduled_at": "2026-07-27T01:47:06.759Z"
+  },
+  "atc_preallocated": false,
+  "atc_card_id": null
+}

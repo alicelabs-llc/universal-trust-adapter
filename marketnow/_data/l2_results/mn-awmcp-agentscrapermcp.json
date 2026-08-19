@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-agentscrapermcp",
+  "timestamp": "2026-07-06T03:13:02Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 3,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 941,
+  "stdout_sample": "INFO:     Started server process [1] INFO:     Waiting for application startup. [07/06/26 03:12:04] INFO     StreamableHTTP       streamable_http_manager.py:131                              session manager                                                                  started                                             INFO:     Application startup complete. INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit) INFO:     127.0.0.1:34978 - \"GET /health HTTP/1.1\" 200 OK INFO:  ",
+  "l2_score": 7,
+  "l2_risk_level": "low"
+}

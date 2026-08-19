@@ -1,0 +1,74 @@
+{
+  "submission_id": "sub_go4skaetbo2i",
+  "skill_id": "mn-sub-19264",
+  "status": "promoted",
+  "submitted_at": "2026-07-27T00:47:05.370Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_outreach_v2",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "96365e5c70a99ff4"
+  },
+  "repo": {
+    "url": "https://github.com/n8n-io/n8n",
+    "full_name": "n8n-io/n8n",
+    "owner": "n8n-io",
+    "name": "n8n",
+    "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+    "stars": 198120,
+    "language": "TypeScript",
+    "license": "NOASSERTION",
+    "pushed_at": "2026-07-27T00:42:52Z",
+    "archived": false,
+    "topics": [
+      "ai",
+      "apis",
+      "automation",
+      "cli",
+      "data-flow",
+      "development",
+      "integration-framework",
+      "integrations",
+      "ipaas",
+      "low-code",
+      "low-code-platform",
+      "mcp",
+      "mcp-client",
+      "mcp-server",
+      "n8n",
+      "no-code",
+      "self-hosted",
+      "typescript",
+      "workflow",
+      "workflow-automation"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-19264",
+    "name": "n8n",
+    "slug": "n8n-9264",
+    "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/n8n-io/n8n",
+      "submitted_at": "2026-07-27T00:47:05.370Z"
+    },
+    "install": "npx -y n8n-monorepo",
+    "author": "n8n-io",
+    "version": "2.32.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-27T01:47:05.371Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-3550025",
+  "promoted_at": "2026-07-27T00:52:30.958Z"
+}

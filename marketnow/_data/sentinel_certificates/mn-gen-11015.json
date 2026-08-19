@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5734050",
+  "skill_id": "mn-gen-11015",
+  "skill_name": "Ralph-mcp",
+  "issued_at": "2026-07-06T05:28:54.050Z",
+  "expires_at": "2026-07-13T05:28:54.050Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "96f3a13d61080f18a5e27dbb9388455f4449ce401e1d9e0e9c8cb5d6627bc2f4",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-11015"
+}

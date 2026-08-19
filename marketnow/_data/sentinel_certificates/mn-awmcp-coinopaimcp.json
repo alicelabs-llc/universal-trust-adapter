@@ -1,0 +1,33 @@
+{
+  "certificate_id": "MN-SC-2026-9794688",
+  "skill_id": "mn-awmcp-coinopaimcp",
+  "skill_name": "coinopai-mcp",
+  "issued_at": "2026-07-26T04:23:14.688Z",
+  "expires_at": "2026-08-02T04:23:14.688Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "low",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": true
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_score": 10,
+    "l2_execution_status": "ran_idle"
+  },
+  "signature": "fa3f1156c10e78bbd7b8cef1d994eeb808404333a506ed1a4b3853a739e9c04d",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-awmcp-coinopaimcp"
+}

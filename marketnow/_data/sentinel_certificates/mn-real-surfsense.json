@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0911951",
+  "skill_id": "mn-real-surfsense",
+  "skill_name": "SurfSense",
+  "issued_at": "2026-07-26T04:41:51.951Z",
+  "expires_at": "2026-08-02T04:41:51.951Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "9aa6be89ac4468c40a704c92e64624b78ab6d0750e7231ed7b06bc387bfcffc4",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-surfsense"
+}

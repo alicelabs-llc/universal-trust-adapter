@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5789986",
+  "skill_id": "mn-sys-12409",
+  "skill_name": "Systemprompt/mcp-taskchecker",
+  "issued_at": "2026-07-06T05:29:49.986Z",
+  "expires_at": "2026-07-13T05:29:49.986Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "b6fc9f7c39533033adc3144f7a50e875981f983bca035078014a6f6ccc285e47",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-sys-12409"
+}

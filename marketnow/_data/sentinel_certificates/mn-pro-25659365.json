@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6125537",
+  "skill_id": "mn-pro-25659365",
+  "skill_name": "Cloud Security Posture Mgmt",
+  "issued_at": "2026-07-06T05:35:25.537Z",
+  "expires_at": "2026-07-13T05:35:25.537Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "ea0ed7a19a5525b8c092191138658336b5bdf31f1b880e07468e9339a99b924e",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-pro-25659365"
+}

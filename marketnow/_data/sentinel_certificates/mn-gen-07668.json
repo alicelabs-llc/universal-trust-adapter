@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5602578",
+  "skill_id": "mn-gen-07668",
+  "skill_name": "Mcp-server-gpt-image",
+  "issued_at": "2026-07-06T05:26:42.578Z",
+  "expires_at": "2026-07-13T05:26:42.578Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "e264d452d961059ff74cc28bf5b7400312992c3df25c41c648cb1c850ba3431a",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-07668"
+}

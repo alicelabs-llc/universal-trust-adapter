@@ -1,0 +1,164 @@
+{
+  "skills": [
+    {
+      "slug": "multi-platform-publisher",
+      "name": "Multi-Platform Publisher Pro",
+      "version": "1.0.0",
+      "price_usd": 47.00,
+      "description": "Suite completa de publicacion cruzada para KDP, Gumroad, Hotmart y Shopify",
+      "category": "publishing",
+      "tier": "premium",
+      "features": [
+        "Investigacion de nichos con puntuacion de competencia",
+        "Generacion de listings optimizados SEO por plataforma",
+        "Sincronizacion de precios multiplataforma",
+        "Plantillas de email marketing para lanzamientos",
+        "Analisis KDP con datos de competencia reales"
+      ]
+    },
+    {
+      "slug": "memcore-ai",
+      "name": "MemCore AI",
+      "version": "1.0.0",
+      "price_usd": 39.00,
+      "description": "Arquitectura de memoria persistente para agentes de IA",
+      "category": "infrastructure",
+      "tier": "premium",
+      "features": [
+        "Memoria jerarquica persistente entre sesiones",
+        "Base de datos vectorial incorporada",
+        "Perfiles de usuario con historial contextual",
+        "Sistema de recuerdos con priorizacion",
+        "Compresion automatica de contexto largo"
+      ]
+    },
+    {
+      "slug": "agent-pricing-engine",
+      "name": "Agent Pricing Engine",
+      "version": "1.0.0",
+      "price_usd": 57.00,
+      "description": "Motor de precios dinamicos, cotizaciones y negociacion automatica",
+      "category": "business",
+      "tier": "premium",
+      "features": [
+        "4 modelos de pricing: costo+, valor, mercado, dinamico",
+        "Generacion automatica de cotizaciones profesionales",
+        "Motor de negociacion con contraofertas inteligentes",
+        "Analisis de elasticidad de precios",
+        "Sistema de facturacion y cobros"
+      ]
+    },
+    {
+      "slug": "multimodal-content-factory",
+      "name": "Multimodal Content Factory",
+      "version": "1.0.0",
+      "price_usd": 44.00,
+      "description": "Un input → Todos los formatos: blog, redes, video, audio, email",
+      "category": "content",
+      "tier": "premium",
+      "features": [
+        "Repurpso de contenido a 10+ formatos",
+        "Adaptacion de tono por plataforma",
+        "Generacion de hilos de Twitter/X",
+        "Guiones de video corto y largo",
+        "SEO multilingue integrado"
+      ]
+    },
+    {
+      "slug": "autonomous-quality-assurance",
+      "name": "Autonomous QA Agent",
+      "version": "1.0.0",
+      "price_usd": 49.00,
+      "description": "Auto-verificacion de outputs con deteccion de alucinaciones y auto-fix",
+      "category": "development",
+      "tier": "premium",
+      "features": [
+        "5 puertas de calidad automaticas",
+        "Deteccion de alucinaciones en LLMs",
+        "Verificacion factual con web search",
+        "Auto-correccion de errores comunes",
+        "Reportes de calidad por output"
+      ]
+    },
+    {
+      "slug": "lead-generation-automation",
+      "name": "Lead Generation Automator",
+      "version": "1.0.0",
+      "price_usd": 67.00,
+      "description": "Descubrimiento y scoring autonomo de prospectos B2B/B2C",
+      "category": "sales",
+      "tier": "premium",
+      "features": [
+        "Busqueda multicanal (LinkedIn, web, directorios)",
+        "Enriquecimiento automatico de datos",
+        "Scoring predictivo de leads",
+        "Secuencias de outreach automatizadas",
+        "CRM integracion lista"
+      ]
+    },
+    {
+      "slug": "api-marketplace-aggregator",
+      "name": "API Marketplace Aggregator",
+      "version": "1.0.0",
+      "price_usd": 34.00,
+      "description": "Descubrimiento de APIs, comparacion de precios y boveda de keys",
+      "category": "development",
+      "tier": "standard",
+      "features": [
+        "Busqueda en 50+ marketplaces de APIs",
+        "Comparacion de precios en tiempo real",
+        "Boveda segura de API keys",
+        "Generacion de codigo de integracion",
+        "Monitoreo de disponibilidad y costos"
+      ]
+    },
+    {
+      "slug": "agent-ecommerce-suite",
+      "name": "Agent Ecommerce Suite",
+      "version": "1.0.0",
+      "price_usd": 79.00,
+      "description": "Gestion completa de tienda online: productos, pedidos, marketing, analytics",
+      "category": "ecommerce",
+      "tier": "premium",
+      "features": [
+        "Creacion y configuracion de tienda",
+        "Gestion de catalogo e inventario",
+        "Procesamiento de pedidos autonomo",
+        "Marketing automation integrado",
+        "Analytics y reportes de ventas"
+      ]
+    },
+    {
+      "slug": "cross-platform-browser-agent",
+      "name": "Cross-Platform Browser Agent",
+      "version": "1.0.0",
+      "price_usd": 44.00,
+      "description": "Automation universal de navegadores con selectores auto-curativos",
+      "category": "automation",
+      "tier": "premium",
+      "features": [
+        "Soporte Chrome, Firefox, Edge, Safari",
+        "Selectores auto-curativos ante cambios UI",
+        "Monitoreo de websites sin API",
+        "Anti-deteccion para scraping etico",
+        "Workflow recorder visual"
+      ]
+    },
+    {
+      "slug": "agent-sentiment-orchestrator",
+      "name": "Agent Sentiment Orchestrator",
+      "version": "1.0.0",
+      "price_usd": 54.00,
+      "description": "Monitoreo de marca multicanal con analisis de sentimiento y respuesta orquestada",
+      "category": "marketing",
+      "tier": "premium",
+      "features": [
+        "Monitoreo en 20+ canales (redes, reviews, foros)",
+        "Analisis multidimensional de sentimiento",
+        "Alertas y escalacion automatica",
+        "Orquestacion de respuestas multicanal",
+        "Reportes de reputacion de marca"
+      ]
+    }
+  ]
+}

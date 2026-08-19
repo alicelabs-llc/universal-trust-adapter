@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-retiopagemap",
+  "timestamp": "2026-07-06T03:21:40Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 0,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 571,
+  "stdout_sample": "[2m2026-07-06T03:21:39.557397Z[0m [[32m[1minfo     [0m] [1mrobots.txt checking enabled (disable with --ignore-robots)[0m [[0m[1m[34mpagemap.server[0m][0m [2m2026-07-06T03:21:39.557565Z[0m [[32m[1minfo     [0m] [1mLEGAL: Users are responsible for complying with target website terms of service and applicable laws.[0m [[0m[1m[34mpagemap.server[0m][0m [2m2026-07-06T03:21:39.561863Z[0m [[32m[1minfo     [0m] [1mStarting PageMap MCP server (stdio, allow_local=False, ignore",
+  "l2_score": 10,
+  "l2_risk_level": "low"
+}

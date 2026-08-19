@@ -1,0 +1,130 @@
+[
+  {
+    "name": "Developer Tools",
+    "slug": "developer-tools",
+    "count": 7230,
+    "url": "https://www.marketnow.site/registry?cat=developer-tools",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Search",
+    "slug": "search",
+    "count": 405,
+    "url": "https://www.marketnow.site/registry?cat=search",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "AI/ML",
+    "slug": "ai-ml",
+    "count": 383,
+    "url": "https://www.marketnow.site/registry?cat=ai-ml",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Data",
+    "slug": "data",
+    "count": 283,
+    "url": "https://www.marketnow.site/registry?cat=data",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Finance",
+    "slug": "finance",
+    "count": 227,
+    "url": "https://www.marketnow.site/registry?cat=finance",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Security",
+    "slug": "security",
+    "count": 180,
+    "url": "https://www.marketnow.site/registry?cat=security",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "File System",
+    "slug": "file-system",
+    "count": 112,
+    "url": "https://www.marketnow.site/registry?cat=file-system",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Version Control",
+    "slug": "version-control",
+    "count": 98,
+    "url": "https://www.marketnow.site/registry?cat=version-control",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Browser Automation",
+    "slug": "browser-automation",
+    "count": 95,
+    "url": "https://www.marketnow.site/registry?cat=browser-automation",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Cloud Platforms",
+    "slug": "cloud-platforms",
+    "count": 70,
+    "url": "https://www.marketnow.site/registry?cat=cloud-platforms",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Monitoring",
+    "slug": "monitoring",
+    "count": 67,
+    "url": "https://www.marketnow.site/registry?cat=monitoring",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Communication",
+    "slug": "communication",
+    "count": 42,
+    "url": "https://www.marketnow.site/registry?cat=communication",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Web APIs",
+    "slug": "web-apis",
+    "count": 36,
+    "url": "https://www.marketnow.site/registry?cat=web-apis",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Community Submitted",
+    "slug": "community-submitted",
+    "count": 18,
+    "url": "https://www.marketnow.site/registry?cat=community-submitted",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Productivity",
+    "slug": "productivity",
+    "count": 1,
+    "url": "https://www.marketnow.site/registry?cat=productivity",
+    "bulk_imported": false,
+    "disclosure": null
+  },
+  {
+    "name": "Marketing",
+    "slug": "marketing",
+    "count": 1,
+    "url": "https://www.marketnow.site/registry?cat=marketing",
+    "bulk_imported": false,
+    "disclosure": null
+  }
+]

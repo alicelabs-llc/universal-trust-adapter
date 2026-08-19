@@ -1,0 +1,56 @@
+{
+  "submission_id": "sub_w2gjbu5l7ios",
+  "skill_id": "mn-sub-73517",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T05:55:07.996Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "96365e5c70a99ff4"
+  },
+  "repo": {
+    "url": "https://github.com/microsoft/playwright-mcp",
+    "full_name": "microsoft/playwright-mcp",
+    "owner": "microsoft",
+    "name": "playwright-mcp",
+    "description": "Playwright MCP server",
+    "stars": 35589,
+    "language": "TypeScript",
+    "license": "Apache-2.0",
+    "pushed_at": "2026-07-25T08:58:14Z",
+    "archived": false,
+    "topics": [
+      "mcp",
+      "playwright"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-73517",
+    "name": "playwright-mcp",
+    "slug": "playwright-mcp-3517",
+    "description": "Playwright MCP server",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/microsoft/playwright-mcp",
+      "submitted_at": "2026-07-29T05:55:07.996Z"
+    },
+    "install": "npx -y @playwright/mcp",
+    "author": "microsoft",
+    "version": "0.0.78"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T06:55:07.996Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-4030337",
+  "promoted_at": "2026-07-30T15:07:11.239Z"
+}

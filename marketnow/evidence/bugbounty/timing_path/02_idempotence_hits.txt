@@ -1,0 +1,6 @@
+﻿C:\Users\Usuario\.openclaw\workspace\e-voting\voting-server\src\main\java\ch\post\it\evoting\votingserver\idempotence\IdempotenceService.java:35: public <U, P extends Hashable> U execute(final T context, final String executionKey, final P payload, final Supplier<U> execution,
+C:\Users\Usuario\.openclaw\workspace\e-voting\voting-server\src\main\java\ch\post\it\evoting\votingserver\idempotence\IdempotenceService.java:39: final ImmutableByteArray payloadHash = hash.recursiveHash(payload);
+C:\Users\Usuario\.openclaw\workspace\e-voting\voting-server\src\main\java\ch\post\it\evoting\votingserver\idempotence\IdempotenceService.java:47: if (!payloadHash.equals(executedPayloadHash)) {
+C:\Users\Usuario\.openclaw\workspace\e-voting\voting-server\src\main\java\ch\post\it\evoting\votingserver\idempotence\IdempotenceService.java:58: public <P extends Hashable> void execute(final T context, final String executionKey, final P payload, final Runnable execution) {
+C:\Users\Usuario\.openclaw\workspace\e-voting\voting-server\src\main\java\ch\post\it\evoting\votingserver\idempotence\IdempotenceService.java:60: final ImmutableByteArray payloadHash = hash.recursiveHash(payload);
+C:\Users\Usuario\.openclaw\workspace\e-voting\voting-server\src\main\java\ch\post\it\evoting\votingserver\idempotence\IdempotenceService.java:67: if (!payloadHash.equals(executedPayloadHash)) {

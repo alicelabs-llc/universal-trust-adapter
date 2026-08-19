@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-depwire",
+  "timestamp": "2026-07-06T02:41:13Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "failed_to_start",
+  "failure_reason": "Node.js MODULE_NOT_FOUND \u2014 the fallback Dockerfile CMD [\"node\", \"index.js\"] does not match this server's entrypoint. The MCP server never actually ran.",
+  "behavioral_analysis": {
+    "network_attempts": 0,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 867,
+  "stdout_sample": "node:internal/modules/esm/resolve:283     throw new ERR_MODULE_NOT_FOUND(           ^  Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/app/dist/chunk-IG4AE2V4.js' imported from /app/dist/index.js     at finalizeResolution (node:internal/modules/esm/resolve:283:11)     at moduleResolve (node:internal/modules/esm/resolve:952:10)     at defaultResolve (node:internal/modules/esm/resolve:1188:11)     at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)     at #cachedDefaultReso",
+  "l2_score": 0,
+  "l2_risk_level": "unknown"
+}

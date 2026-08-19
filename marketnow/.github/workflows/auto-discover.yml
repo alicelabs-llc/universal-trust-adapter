@@ -1,0 +1,138 @@
+# MarketNow — Auto-Discovery & Synthetic Replacement (Weekly)
+# ==============================================================
+#
+# Runs automatically every week to:
+#   1. Discover new MCP servers from awesome-mcp-servers + GitHub Search
+#   2. Import them as real skills with GitHub source.url
+#   3. Replace synthetic skills with real counterparts (keeping IDs)
+#   4. Mark remaining synthetics as `synthetic: true` (honest disclosure)
+#   5. Regenerate the catalog (skills.json, skills-lite.json, etc.)
+#   6. Commit changes to master
+#
+# The sentinel-l2-reaudit.yml workflow (runs at 02:00 UTC) will pick up
+# the new skills and trigger L2 sandbox audits for all of them.
+# The sentinel-certify-all.yml workflow (runs at 01:00 UTC) will
+# regenerate all certificates with the new L2 results.
+#
+# Schedule: Sunday 00:30 UTC (30 min before certify-all at 01:00)
+# Manual: workflow_dispatch
+
+name: Auto-Discovery & Synthetic Replacement
+
+on:
+  schedule:
+    - cron: '30 0 * * 0'  # Sunday 00:30 UTC
+  workflow_dispatch:
+    inputs:
+      max_new:
+        description: 'Max new skills to import (0 = no limit)'
+        required: false
+        default: '0'
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auto-discover
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run massive GitHub indexer (40+ queries, 1000s of repos)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Running massive indexer..."
+          node scripts/massive-indexer.cjs || true
+
+      - name: Run auto-discovery (awesome-mcp + replacement)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAX_NEW: ${{ github.event.inputs.max_new || '0' }}
+        run: |
+          ARGS=""
+          if [ "$MAX_NEW" != "0" ] && [ -n "$MAX_NEW" ]; then
+            ARGS="--max $MAX_NEW"
+          fi
+          node scripts/auto-discover-mcp.mjs $ARGS
+
+      - name: Regenerate catalog
+        run: |
+          cd aep-marketplace
+          node generate_skills.cjs
+          node scripts/generate-skills-lite.cjs
+
+      - name: Commit changes
+        run: |
+          git config user.name "MarketNow Discovery Bot"
+          git config user.email "discovery@marketnow.site"
+
+          # Check if anything changed
+          if git diff --quiet HEAD -- aep-marketplace/public/api/skills_index.json; then
+            echo "No new skills discovered. Exiting."
+            exit 0
+          fi
+
+          # Count changes
+          NEW_COUNT=$(git diff --stat HEAD -- aep-marketplace/public/api/skills_index.json | tail -1)
+          echo "Changes: $NEW_COUNT"
+
+          git add aep-marketplace/public/api/skills_index.json \
+                  aep-marketplace/public/api/skills.json \
+                  aep-marketplace/public/api/skills-lite.json \
+                  aep-marketplace/public/api/categories.json \
+                  aep-marketplace/public/api/manifest.json \
+                  aep-marketplace/public/api/agent.json \
+                  aep-marketplace/src/data/all_skills.json
+
+          git commit -m "auto-discovery: import new MCP servers + replace synthetics
+
+          Weekly automated discovery run.
+          Sources: awesome-mcp-servers + GitHub Search API (topic:mcp-server)
+          Actions: imported new real MCP servers, replaced matching synthetics,
+          marked remaining synthetics with synthetic: true flag.
+
+          The sentinel-l2-reaudit workflow (next run) will trigger L2 sandbox
+          audits for all new skills with source.url.
+          The sentinel-certify-all workflow will regenerate certificates."
+
+          # Push with retry
+          for i in 1 2 3 4 5; do
+            if git push 2>&1; then
+              echo "✓ Push succeeded on attempt $i"
+              exit 0
+            fi
+            echo "⚠ Push attempt $i failed — pulling rebase and retrying..."
+            sleep $((i * 2))
+            git pull --rebase origin master || {
+              git rebase --abort 2>/dev/null || true
+              exit 1
+            }
+          done
+          echo "✗ Could not push after 5 attempts"
+          exit 1
+
+      - name: Upload discovery report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: discovery-report-${{ github.run_id }}
+          path: |
+            scripts/discovery-report.json
+            scripts/import-log.json
+            _data/
+          retention-days: 7
+          if-no-files-found: ignore

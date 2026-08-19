@@ -1,0 +1,35 @@
+# MarketNow — Generate ATC Index (Hourly)
+# ==========================================
+#
+# Reads all ATC files and creates _data/atc/_index.json
+# This reduces listATCs() from 58 API calls to 1 API call.
+#
+# Schedule: hourly at :20 (after promote-submissions at :15)
+
+name: Generate ATC Index
+
+on:
+  schedule:
+    - cron: '20 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate ATC index
+        env:
+          MANDATES_GITHUB_TOKEN: ${{ secrets.MANDATES_GITHUB_TOKEN }}
+          MANDATES_REPO: edgarfloresguerra2011-a11y/marketnow
+        run: |
+          node scripts/generate-atc-index.mjs

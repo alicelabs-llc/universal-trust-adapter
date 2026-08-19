@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5767912",
+  "skill_id": "mn-gen-11863",
+  "skill_name": "Skilljack/mcp",
+  "issued_at": "2026-07-06T05:29:27.912Z",
+  "expires_at": "2026-07-13T05:29:27.912Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "f7619260c208459d82154a1560ee57a418c8e34aae14afad5e66b14688c77032",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-11863"
+}

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCP Config Generator — MarketNow</title>
+<meta name="description" content="Generate MCP server config JSON for Claude Desktop, Cursor, Cline. Select skills, get config instantly.">
+<link rel="canonical" href="https://marketnow.site/tools/config-generator.html" />
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#050505;color:#e2e8f0;line-height:1.6;padding:20px;max-width:900px;margin:0 auto}
+h1{color:#3b82f6;font-size:1.8em;margin-bottom:0.3em}
+h2{color:#22c553;margin-top:1.5em;font-size:1.2em}
+select,input{background:#1e293b;border:1px solid #334155;color:#e2e8f0;padding:8px 12px;border-radius:6px;width:100%;margin:4px 0}
+button{background:#3b82f6;color:white;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:1em;margin:4px 2px}
+button:hover{background:#2563eb}
+.copy-btn{background:#22c553}
+.copy-btn:hover{background:#16a34a}
+pre{background:#0d1117;border:1px solid #1e293b;padding:16px;border-radius:8px;overflow-x:auto;margin:1em 0;font-size:0.9em}
+.skill-item{background:#1e293b;padding:12px;border-radius:8px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
+.skill-item button{background:#ef4444;padding:4px 12px;font-size:0.85em}
+.badge{display:inline-block;background:#1e40af;color:#93c5fd;padding:2px 8px;border-radius:12px;font-size:0.8em;margin-left:8px}
+.tab{display:inline-block;padding:8px 16px;background:#1e293b;color:#94a3b8;border-radius:6px 6px 0 0;cursor:pointer;margin-right:4px}
+.tab.active{background:#3b82f6;color:white}
+.tab-content{display:none}.tab-content.active{display:block}
+a{color:#3b82f6}
+</style>
+</head>
+<body>
+<h1>🔧 MCP Config Generator</h1>
+<p>Select skills from MarketNow's catalog and generate the config JSON for your MCP client.</p>
+
+<h2>1. Select your MCP client</h2>
+<div>
+  <span class="tab active" onclick="switchTab('claude')">Claude Desktop</span>
+  <span class="tab" onclick="switchTab('cursor')">Cursor</span>
+  <span class="tab" onclick="switchTab('cline')">Cline</span>
+  <span class="tab" onclick="switchTab('continue')">Continue</span>
+</div>
+
+<h2>2. Add skills</h2>
+<p style="color:#64748b;font-size:0.9em">Search and add skills to your config:</p>
+<input type="text" id="searchBox" placeholder="Search skills... (e.g., filesystem, github, scraper)" oninput="searchSkills()" />
+
+<div id="searchResults" style="margin:1em 0"></div>
+
+<h2>3. Selected skills</h2>
+<div id="selectedSkills">
+  <div class="skill-item" style="justify-content:center;color:#64748b">No skills selected yet. Search above to add.</div>
+</div>
+
+<h2>4. Your config</h2>
+<div id="configTabs">
+  <span class="tab active" onclick="switchConfigTab('json')">JSON Config</span>
+  <span class="tab" onclick="switchConfigTab('npx')">NPX Commands</span>
+</div>
+
+<div id="configJson" class="tab-content active">
+  <pre id="configOutput"><code>// Add this to your MCP client config file:
+// Claude Desktop: ~/Library/Application Support/Claude/claude_desktop_config.json (macOS)
+//                 %APPDATA%\Claude\claude_desktop_config.json (Windows)
+// Cursor: Settings → MCP → Add Server
+// Cline: c_mcp_settings.json
+
+{
+  "mcpServers": {
+    "marketnow": {
+      "command": "npx",
+      "args": ["-y", "marketnow-mcp"]
+    }
+  }
+}</code></pre>
+  <button class="copy-btn" onclick="copyConfig()">📋 Copy Config</button>
+</div>
+
+<div id="configNpx" class="tab-content">
+  <pre id="npxOutput"><code># Install MarketNow MCP server
+npx -y marketnow-mcp
+
+# Or install specific skills:
+# (add npx commands for selected skills here)</code></pre>
+  <button class="copy-btn" onclick="copyNpx()">📋 Copy Commands</button>
+</div>
+
+<h2>Need more skills?</h2>
+<p>Browse all 8,764 security-audited MCP servers at <a href="https://marketnow.site/registry">marketnow.site/registry</a></p>
+
+<script>
+let selectedSkills = [];
+let allSkills = [];
+
+// Load free skills for quick search
+fetch('https://marketnow.site/api/free-skills.json')
+  .then(r => r.json())
+  .then(data => {
+    allSkills = data.slice(0, 200); // Limit for performance
+    // Always include marketnow-mcp
+    selectedSkills = [{
+      id: 'marketnow',
+      name: 'MarketNow MCP',
+      install: 'npx -y marketnow-mcp',
+      command: 'npx',
+      args: ['-y', 'marketnow-mcp']
+    }];
+    updateUI();
+  })
+  .catch(e => console.error('Failed to load skills:', e));
+
+function switchTab(client) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  // Config format is the same for all clients, just update the comment
+  updateConfig();
+}
+
+function switchConfigTab(tab) {
+  document.querySelectorAll('#configTabs .tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('configJson').classList.remove('active');
+  document.getElementById('configNpx').classList.remove('active');
+  document.getElementById('config' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+}
+
+function searchSkills() {
+  const query = document.getElementById('searchBox').value.toLowerCase();
+  const results = document.getElementById('searchResults');
+  
+  if (!query || query.length < 2) {
+    results.innerHTML = '';
+    return;
+  }
+  
+  const matches = allSkills.filter(s => 
+    (s.name || '').toLowerCase().includes(query) ||
+    (s.description || '').toLowerCase().includes(query) ||
+    (s.tags || []).some(t => t.toLowerCase().includes(query))
+  ).slice(0, 10);
+  
+  if (matches.length === 0) {
+    results.innerHTML = '<p style="color:#64748b">No matches. Try "filesystem", "github", "scraper", etc.</p>';
+    return;
+  }
+  
+  results.innerHTML = matches.map(s => `
+    <div class="skill-item">
+      <div>
+        <strong>${s.name || s.id}</strong>
+        <span class="badge">score: ${s.sentinel_score || '?'}</span>
+        <br><span style="font-size:0.85em;color:#94a3b8">${(s.description || '').slice(0, 80)}</span>
+      </div>
+      <button onclick="addSkill('${s.id}', '${(s.name || s.id).replace(/'/g, "\\'")}', '${s.install || ''}')" style="background:#22c553">+ Add</button>
+    </div>
+  `).join('');
+}
+
+function addSkill(id, name, install) {
+  if (selectedSkills.find(s => s.id === id)) return;
+  
+  // Parse install command
+  let command = 'npx';
+  let args = ['-y', install.replace('npx -y ', '').replace('npx ', '') || id];
+  
+  if (install && install.startsWith('npx')) {
+    const parts = install.split(' ');
+    command = parts[0];
+    args = parts.slice(1);
+  }
+  
+  selectedSkills.push({ id, name, install, command, args });
+  document.getElementById('searchBox').value = '';
+  document.getElementById('searchResults').innerHTML = '';
+  updateUI();
+}
+
+function removeSkill(id) {
+  selectedSkills = selectedSkills.filter(s => s.id !== id);
+  updateUI();
+}
+
+function updateUI() {
+  // Update selected skills list
+  const list = document.getElementById('selectedSkills');
+  if (selectedSkills.length === 0) {
+    list.innerHTML = '<div class="skill-item" style="justify-content:center;color:#64748b">No skills selected.</div>';
+  } else {
+    list.innerHTML = selectedSkills.map(s => `
+      <div class="skill-item">
+        <div><strong>${s.name}</strong> <span style="font-size:0.8em;color:#64748b">${s.id}</span></div>
+        <button onclick="removeSkill('${s.id}')">✕ Remove</button>
+      </div>
+    `).join('');
+  }
+  updateConfig();
+}
+
+function updateConfig() {
+  const config = { mcpServers: {} };
+  const npxCommands = ['# Install MCP servers:'];
+  
+  selectedSkills.forEach(s => {
+    config.mcpServers[s.id] = {
+      command: s.command,
+      args: s.args
+    };
+    npxCommands.push(`${s.install || s.command + ' ' + s.args.join(' ')}`);
+  });
+  
+  const configStr = `// Add this to your MCP client config file:
+// Claude Desktop: ~/Library/Application Support/Claude/claude_desktop_config.json (macOS)
+// Cursor: Settings → MCP → Add Server
+// Cline: c_mcp_settings.json
+
+${JSON.stringify(config, null, 2)}`;
+  
+  document.getElementById('configOutput').innerHTML = '<code>' + escapeHtml(configStr) + '</code>';
+  document.getElementById('npxOutput').innerHTML = '<code>' + escapeHtml(npxCommands.join('\n')) + '</code>';
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function copyConfig() {
+  const text = document.getElementById('configOutput').textContent;
+  navigator.clipboard.writeText(text);
+  alert('Config copied to clipboard!');
+}
+
+function copyNpx() {
+  const text = document.getElementById('npxOutput').textContent;
+  navigator.clipboard.writeText(text);
+  alert('Commands copied to clipboard!');
+}
+</script>
+</body>
+</html>

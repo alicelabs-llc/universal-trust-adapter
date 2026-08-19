@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8345503",
+  "skill_id": "mn-prompt-ac6ad9cc",
+  "skill_name": "Copywriting for customer onboarding complete kit",
+  "issued_at": "2026-07-15T01:19:05.503Z",
+  "expires_at": "2026-07-22T01:19:05.503Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "cecd536c5c1d658f10b7c487642d8ac0ac5b219fbb3fd190d9b248fecaa40cf3",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-ac6ad9cc"
+}

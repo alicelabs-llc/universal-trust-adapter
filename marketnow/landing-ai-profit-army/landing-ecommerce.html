@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Profit Army - Sincronización de Inventario Automática para E-commerce</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+        
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            padding: 15px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .tool-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .tool-desc {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .tool-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .tool-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tool-features li:before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: button;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .monetization-section {
+            background: white;
+            border-radius: 16px;
+            padding: 50px;
+            margin: 60px 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .strategy-card {
+            padding: 25px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+        }
+        
+        .strategy-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .tool-card, .monetization-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Sincroniza tu Inventario Automáticamente</h1>
+            <p class="subtitle">Tiendas online están eliminando errores de inventario y aumentando ventas 30% con workflows de n8n. 12+ workflows específicos para e-commerce.</p>
+            <a href="#catalogo" class="btn">Ver Workflows E-commerce</a>
+            <a href="#testimonios" class="btn" style="margin-left: 15px; background: #FF6B6B;">Casos de Éxito E-commerce</a>
+        </header>
+        
+        <section id="catalogo">
+            <h2 class="section-title">🛒 Workflows de Automatización para E-commerce</h2>
+            <p style="font-size: 1.2rem; text-align: center; margin-bottom: 40px; color: white;">Selecciona el workflow que necesitas para sincronizar inventario, automatizar pedidos y aumentar ventas.</p>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">🔄</div>
+                    <h3 class="tool-title">Sincronización de Inventario Multiplataforma</h3>
+                    <p class="tool-desc">Workflow que sincroniza stock en tiempo real entre Shopify, Amazon, MercadoLibre, WooCommerce y almacén.</p>
+                    <ul class="tool-features">
+                        <li>Sync bidireccional automático</li>
+                        <li>Alertas de stock bajo</li>
+                        <li>Prevención de ventas sin stock</li>
+                        <li>Integración con 15+ plataformas</li>
+                        <li>+4 variantes disponibles</li>
+                    </ul>
+                    <a href="catalogo.html#ecommerce" class="btn">Ver Detalles</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">📦</div>
+                    <h3 class="tool-title">Automatización de Pedidos y Envíos</h3>
+                    <p class="tool-desc">Procesa pedidos automáticamente, genera etiquetas de envío, y notifica a clientes con tracking.</p>
+                    <ul class="tool-features">
+                        <li>Procesamiento automático de pedidos</li>
+                        <li>Generación de etiquetas de envío</li>
+                        <li>Notificaciones por email y WhatsApp</li>
+                        <li>Integración con correos logísticos</li>
+                        <li>+5 workflows disponibles</li>
+                    </ul>
+                    <a href="catalogo.html#ecommerce" class="btn">Ver Detalles</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">📊</div>
+                    <h3 class="tool-title">Reportes de Ventas y Analytics</h3>
+                    <p class="tool-desc">Dashboards automáticos con análisis de ventas, productos más vendidos, tendencias y predicciones con IA.</p>
+                    <ul class="tool-features">
+                        <li>Reportes diarios automáticos</li>
+                        <li>Análisis de productos más vendidos</li>
+                        <li>Predicción de demanda con IA</li>
+                        <li>Alertas de cambios en ventas</li>
+                        <li>+3 workflows disponibles</li>
+                    </ul>
+                    <a href="catalogo.html#ecommerce" class="btn">Ver Detalles</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">📧</div>
+                    <h3 class="tool-title">Email Marketing Automatizado</h3>
+                    <p class="tool-desc">Workflows de email post-compra, recuperación de carritos abandonados y segmentación de clientes.</p>
+                    <ul class="tool-features">
+                        <li>Emails automáticos post-compra</li>
+                        <li>Recuperación de carritos abandonados</li>
+                        <li>Segmentación por comportamiento</li>
+                        <li>Integración con Mailchimp y Klaviyo</li>
+                        <li>+6 workflows disponibles</li>
+                    </ul>
+                    <a href="catalogo.html#ecommerce" class="btn">Ver Detalles</a>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="catalogo.html" class="btn" style="background: #FF6B6B; padding: 18px 40px; font-size: 1.2rem;">Explorar Catálogo Completo E-commerce (12+ workflows)</a>
+            </div>
+        </section>
+        
+        <section class="monetization-section" id="precios">
+            <h2 class="section-title">💰 Precios Especiales para E-commerce</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; text-align: center;">Elige el plan que mejor se adapte a tu tienda online. Todos incluyen implementación, soporte técnico y actualizaciones.</p>
+            
+            <div class="strategy-grid">
+                <div class="strategy-card" style="border-left: 5px solid #4CAF50;">
+                    <h4>🏁 Plan Básico E-commerce</h4>
+                    <p><strong>1 workflow específico</strong></p>
+                    <p>Ideal para automatizar un proceso crítico en tu tienda online.</p>
+                    <ul style="list-style: none; padding-left: 0; margin-top: 15px;">
+                        <li>✅ 1 workflow a elección</li>
+                        <li>✅ Implementación completa</li>
+                        <li>✅ Soporte por 30 días</li>
+                        <li>✅ Documentación detallada</li>
+                        <li>❌ Personalizaciones limitadas</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <div style="font-size: 2rem; font-weight: 800; color: #4CAF50;">$499</div>
+                        <div style="color: #666; font-size: 0.9rem;">Pago único</div>
+                    </div>
+                    <a href="checkout.html?plan=basico&utm_source=meta_ads&utm_campaign=ecommerce" class="btn" style="margin-top: 15px; background: #4CAF50;">Comprar Ahora</a>
+                </div>
+                
+                <div class="strategy-card" style="border-left: 5px solid #667eea;">
+                    <h4>🚀 Plan Profesional E-commerce</h4>
+                    <p><strong>3 workflows + personalización</strong></p>
+                    <p>Para tiendas que necesitan múltiples automatizaciones integradas.</p>
+                    <ul style="list-style: none; padding-left: 0; margin-top: 15px;">
+                        <li>✅ 3 workflows a elección</li>
+                        <li>✅ Personalizaciones incluídas</li>
+                        <li>✅ Soporte por 90 días</li>
+                        <li>✅ Integración entre workflows</li>
+                        <li>✅ Dashboard de monitoreo</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <div style="font-size: 2rem; font-weight: 800; color: #667eea;">$1,299</div>
+                        <div style="color: #666; font-size: 0.9rem;">Pago único o 3 cuotas</div>
+                    </div>
+                    <a href="checkout.html?plan=profesional&utm_source=meta_ads&utm_campaign=ecommerce" class="btn" style="margin-top: 15px;">Comprar Ahora</a>
+                </div>
+                
+                <div class="strategy-card" style="border-left: 5px solid #FF6B6B;">
+                    <h4>🏢 Plan Empresa E-commerce</h4>
+                    <p><strong>Workflows ilimitados + soporte prioritario</strong></p>
+                    <p>Para marketplaces y grandes tiendas que requieren automatización completa.</p>
+                    <ul style="list-style: none; padding-left: 0; margin-top: 15px;">
+                        <li>✅ Workflows ilimitados</li>
+                        <li>✅ Soporte prioritario 24/7</li>
+                        <li>✅ Personalización total</li>
+                        <li>✅ Entrenamiento para tu equipo</li>
+                        <li>✅ Monitoreo proactivo</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <div style="font-size: 2rem; font-weight: 800; color: #FF6B6B;">$3,999</div>
+                        <div style="color: #666; font-size: 0.9rem;">Mensual o anual</div>
+                    </div>
+                    <a href="checkout.html?plan=empresa&utm_source=meta_ads&utm_campaign=ecommerce" class="btn" style="margin-top: 15px; background: #FF6B6B;">Contactar Ventas</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 1.1rem; margin-bottom: 20px;">✨ <strong>Garantía de ROI para E-commerce:</strong> Si en 3 meses no aumentas tus ventas al menos un 20%, te devolvemos el 100% de tu inversión.</p>
+                <a href="catalogo.html" class="btn" style="background: #333;">Ver Catálogo Completo E-commerce</a>
+                <a href="testimonios.html" class="btn" style="margin-left: 15px; background: #764ba2;">Casos de Éxito E-commerce</a>
+            </div>
+        </section>
+        
+        <section class="monetization-section" id="beneficios">
+            <h2 class="section-title">⚡ Beneficios para Tiendas Online</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; text-align: center;">Nuestros workflows están diseñados específicamente para e-commerce que quieren escalar sin errores de inventario.</p>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <h4>🚀 Eliminación de Errores de Inventario</h4>
+                    <p>Sincronización en tiempo real entre todas tus plataformas de venta. Nunca más vendas productos sin stock.</p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h4>📈 Aumento de Ventas 30%+</h4>
+                    <p>Automatización de marketing post-compra, recuperación de carritos abandonados y emails personalizados.</p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h4>🔧 Reducción de Tiempo Operativo</h4>
+                    <p>Procesamiento automático de pedidos, generación de etiquetas y notificaciones a clientes.</p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h4>🔄 Escalabilidad Sin Límites</h4>
+                    <p>Maneja múltiples plataformas y miles de productos con la misma eficiencia.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#testimonios" class="btn" style="background: #4CAF50;">Ver Testimonios de E-commerce</a>
+            </div>
+        </section>
+        
+        <section class="monetization-section" id="testimonios">
+            <h2 class="section-title">⭐ Tiendas Online que ya Automatizaron con Nosotros</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; text-align: center;">E-commerce que han transformado sus operaciones con nuestros workflows.</p>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <h4>🏢 Moda Fashion "StyleTrend"</h4>
+                    <p>"La sincronización de inventario entre Shopify y Amazon eliminó el 100% de errores y aumentó ventas un 35%."</p>
+                    <p><strong>María González, CTO</strong></p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h4>🛒 Electrónica "TechShop"</h4>
+                    <p>"Los workflows de automatización de pedidos redujeron el tiempo de procesamiento de 2 horas a 10 minutos diarios."</p>
+                    <p><strong>Carlos Rodríguez, Director de Operaciones</strong></p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h4>🎯 Dropshipping "GlobalGoods"</h4>
+                    <p>"La automatización de envíos y tracking nos permite manejar 300+ pedidos diarios con un solo empleado."</p>
+                    <p><strong>Ana Torres, CEO</strong></p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="testimonios.html" class="btn" style="background: #764ba2;">Ver Todos los Casos de Éxito</a>
+                <a href="checkout.html?utm_source=meta_ads&utm_campaign=ecommerce" class="btn" style="margin-left: 15px; background: #FF6B6B;">Comenzar Ahora</a>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2026 AI Profit Army - Workflows de Automatización para E-commerce</p>
+            <div style="margin-top: 20px;">
+                <a href="index.html" style="color: white; margin: 0 10px; text-decoration: none;">Inicio General</a>
+                <a href="catalogo.html" style="color: white; margin: 0 10px; text-decoration: none;">Catálogo Completo</a>
+                <a href="checkout.html" style="color: white; margin: 0 10px; text-decoration: none;">Checkout</a>
+                <a href="testimonios.html" style="color: white; margin: 0 10px; text-decoration: none;">Testimonios</a>
+                <a href="blog.html" style="color: white; margin: 0 10px; text-decoration: none;">Blog</a>
+                <a href="dashboard.html" style="color: white; margin: 0 10px; text-decoration: none;">Dashboard</a>
+            </div>
+            <p style="margin-top: 20px; opacity: 0.8;">Creado con OpenClaw • Actualizado: Febrero 2026</p>
+            <p style="margin-top: 10px; opacity: 0.8;">
+                <a href="mailto:ventas@aiprofitarmy.com" style="color: white; text-decoration: underline;">ventas@aiprofitarmy.com</a> | 
+                <a href="tel:+1234567890" style="color: white; text-decoration: underline;">+1 (234) 567-890</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

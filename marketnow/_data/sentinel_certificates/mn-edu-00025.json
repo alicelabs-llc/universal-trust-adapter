@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6094542",
+  "skill_id": "mn-edu-00025",
+  "skill_name": "Chegg Study Help",
+  "issued_at": "2026-07-06T05:34:54.542Z",
+  "expires_at": "2026-07-13T05:34:54.542Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "db6bb931602e22150e7df2b27cbb0f2d67e1e9fdb73d90c1d2df85d51e1374da",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-edu-00025"
+}

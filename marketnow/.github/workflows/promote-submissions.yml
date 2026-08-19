@@ -1,0 +1,44 @@
+# MarketNow — Promote Submissions Workflow
+# ===========================================
+#
+# Runs hourly to promote skills from _data/pending_submissions/ to the
+# main catalog when their L2 Docker sandbox audit has passed.
+#
+# Closes the loop: submit → L1.5+L1.7 sync → L2 sandbox audit →
+# promote to catalog → issue ATC → skill is discoverable.
+#
+# Schedule: hourly at :15 (15 min after the hour)
+# Manual: workflow_dispatch
+
+name: Promote Submissions to Catalog
+
+on:
+  schedule:
+    - cron: '15 * * * *'  # hourly at :15
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: promote-submissions
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run promotion script
+        env:
+          MANDATES_GITHUB_TOKEN: ${{ secrets.MANDATES_GITHUB_TOKEN }}
+          MANDATES_REPO: edgarfloresguerra2011-a11y/marketnow
+          ATC_API_URL: https://marketnow.site/api/atc
+        run: |
+          node scripts/promote-submissions.mjs

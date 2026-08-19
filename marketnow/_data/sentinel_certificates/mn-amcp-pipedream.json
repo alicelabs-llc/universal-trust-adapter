@@ -1,0 +1,33 @@
+{
+  "certificate_id": "MN-SC-2026-9791606",
+  "skill_id": "mn-amcp-pipedream",
+  "skill_name": "pipedream",
+  "issued_at": "2026-07-26T04:23:11.606Z",
+  "expires_at": "2026-08-02T04:23:11.606Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 5,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "unknown",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": true
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_score": 0,
+    "l2_execution_status": "failed_to_start"
+  },
+  "signature": "202a0a4b719bae4a7041f3368a1b5a626ddcacadcbbc13dd1ed6db51502015c4",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-amcp-pipedream"
+}

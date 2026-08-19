@@ -1,0 +1,74 @@
+{
+  "submission_id": "sub_cqr9njtgbrbc",
+  "skill_id": "mn-sub-79641",
+  "status": "promoted",
+  "submitted_at": "2026-07-27T00:47:09.576Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_outreach_v2",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "7cd7c636737d277b"
+  },
+  "repo": {
+    "url": "https://github.com/ruvnet/ruflo",
+    "full_name": "ruvnet/ruflo",
+    "owner": "ruvnet",
+    "name": "ruflo",
+    "description": "🌊 The leading agent meta-harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, RAG integration, and native Claude Code / Codex / Hermes and many more Integrated",
+    "stars": 66128,
+    "language": "TypeScript",
+    "license": "MIT",
+    "pushed_at": "2026-07-27T00:32:50Z",
+    "archived": false,
+    "topics": [
+      "agentic-ai",
+      "agentic-framework",
+      "agentic-workflow",
+      "agents",
+      "ai-agents",
+      "ai-assistant",
+      "ai-coding",
+      "ai-skills",
+      "autonomous-agents",
+      "claude-code",
+      "codex",
+      "harness",
+      "mcp-server",
+      "multi-agent",
+      "multi-agent-systems",
+      "npm",
+      "skills",
+      "swarm",
+      "swarm-intelligence",
+      "typescript"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-79641",
+    "name": "ruflo",
+    "slug": "ruflo-9641",
+    "description": "🌊 The leading agent meta-harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, RAG integration, and native Claude Code / Codex / Hermes and many more Integrated",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/ruvnet/ruflo",
+      "submitted_at": "2026-07-27T00:47:09.576Z"
+    },
+    "install": "npx -y claude-flow",
+    "author": "ruvnet",
+    "version": "3.32.13"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-27T01:47:09.576Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-4330524",
+  "promoted_at": "2026-07-27T01:05:31.432Z"
+}

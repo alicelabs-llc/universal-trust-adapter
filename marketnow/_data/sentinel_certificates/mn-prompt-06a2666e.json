@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8296982",
+  "skill_id": "mn-prompt-06a2666e",
+  "skill_name": "Video script YouTube retention",
+  "issued_at": "2026-07-15T01:18:16.982Z",
+  "expires_at": "2026-07-22T01:18:16.982Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "f75ad359bd6155da6e28bcd0f2849c13cdcbf0c2ad6a0764a14e4189da091c55",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-06a2666e"
+}

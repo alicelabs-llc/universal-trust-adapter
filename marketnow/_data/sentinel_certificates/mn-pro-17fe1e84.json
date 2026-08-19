@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6152626",
+  "skill_id": "mn-pro-17fe1e84",
+  "skill_name": "Audio Podcast Host",
+  "issued_at": "2026-07-06T05:35:52.626Z",
+  "expires_at": "2026-07-13T05:35:52.626Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "b7576cfae318ce2154674e01887409e438dce760e2099cfcc85d6e6a05c8331c",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-pro-17fe1e84"
+}

@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-cortex",
+  "timestamp": "2026-07-06T02:53:34Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 0,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 2,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 3306,
+  "stdout_sample": "Usage: cortex [options] [command]  Local-first knowledge orchestrator \u2014 remembers what you decided, why, and where.  Options:   -V, --version                         output the version number   --config <path>                       Config file path   --verbose                             Show debug-level output (default: false)   --quiet                               Suppress all non-error output (default:                                         false)   --json                                Out",
+  "l2_score": 5,
+  "l2_risk_level": "medium"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "@marketnow/mcp-server",
+  "version": "1.0.0",
+  "description": "MCP Server for MarketNow — browse, search, and install MCP skills directly from your AI agent",
+  "type": "module",
+  "bin": {
+    "marketnow-mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "keywords": ["mcp", "ai-agents", "skills", "marketplace", "tools"],
+  "author": "MarketNow",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}

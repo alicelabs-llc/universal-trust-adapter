@@ -1,0 +1,12 @@
+{
+  "skill_id": "mn-awmcp-diagramzumcp",
+  "skill_name": "diagramzu-mcp",
+  "checked_at": "2026-07-26T06:09:45.436Z",
+  "l3_status": "stable",
+  "drift_detected": false,
+  "drift_severity": "none",
+  "quarantine_recommended": false,
+  "drift_items": [],
+  "baseline_captured_at": "2026-07-06T03:05:00Z",
+  "message": "No drift detected. Skill behavior matches L2 baseline."
+}

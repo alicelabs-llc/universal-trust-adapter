@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8334123",
+  "skill_id": "mn-prompt-17cd2b32",
+  "skill_name": "Copywriting for product launch social proof",
+  "issued_at": "2026-07-15T01:18:54.123Z",
+  "expires_at": "2026-07-22T01:18:54.123Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "d9b63c220c8ff1d65d1d5317b91dbe2e8b0c1a9e491de134c93102da51a351bd",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-17cd2b32"
+}

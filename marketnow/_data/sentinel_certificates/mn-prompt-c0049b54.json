@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8221736",
+  "skill_id": "mn-prompt-c0049b54",
+  "skill_name": "Implementador de FinOps con cost optimization",
+  "issued_at": "2026-07-15T01:17:01.736Z",
+  "expires_at": "2026-07-22T01:17:01.736Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "31f528c000f7c78bd5d74328dd6f5f8582bbd38c7f50a57c12c138f8b82a4883",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-c0049b54"
+}

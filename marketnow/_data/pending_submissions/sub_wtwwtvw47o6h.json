@@ -1,0 +1,53 @@
+{
+  "submission_id": "sub_wtwwtvw47o6h",
+  "skill_id": "mn-sub-03094",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T05:55:15.113Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "be64d4815e6a2aea"
+  },
+  "repo": {
+    "url": "https://github.com/andybrandt/mcp-simple-arxiv",
+    "full_name": "andybrandt/mcp-simple-arxiv",
+    "owner": "andybrandt",
+    "name": "mcp-simple-arxiv",
+    "description": "Tool to  work with arXiv, provide LLM with ability to search and read papers from there",
+    "stars": 200,
+    "language": "Python",
+    "license": "MIT",
+    "pushed_at": "2026-02-19T10:18:35Z",
+    "archived": false,
+    "topics": []
+  },
+  "skill": {
+    "id": "mn-sub-03094",
+    "name": "mcp-simple-arxiv",
+    "slug": "mcp-simple-arxiv-3094",
+    "description": "Tool to  work with arXiv, provide LLM with ability to search and read papers from there",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/andybrandt/mcp-simple-arxiv",
+      "submitted_at": "2026-07-29T05:55:15.113Z"
+    },
+    "install": "git clone https://github.com/andybrandt/mcp-simple-arxiv",
+    "author": "andybrandt",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T06:55:15.113Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-4036129",
+  "promoted_at": "2026-07-30T15:07:17.075Z"
+}

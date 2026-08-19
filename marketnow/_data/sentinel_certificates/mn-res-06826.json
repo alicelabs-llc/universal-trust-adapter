@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5562371",
+  "skill_id": "mn-res-06826",
+  "skill_name": "Adenot/mcp-google-search",
+  "issued_at": "2026-07-06T05:26:02.371Z",
+  "expires_at": "2026-07-13T05:26:02.371Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "ae856ee2756bcf4d3479bca02e111419d3043974759c0c4df40a90b9ef26e8d9",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-res-06826"
+}

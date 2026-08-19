@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5696143",
+  "skill_id": "mn-gen-10103",
+  "skill_name": "Orra-mcp",
+  "issued_at": "2026-07-06T05:28:16.143Z",
+  "expires_at": "2026-07-13T05:28:16.143Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "d8d3b2444b19f706a71df0b4e4abe9f6adaff0461b2faef8602364ec7a034bbb",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-10103"
+}

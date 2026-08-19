@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5342033",
+  "skill_id": "mn-gen-01613",
+  "skill_name": "Building-standards-act-mcp",
+  "issued_at": "2026-07-06T05:22:22.033Z",
+  "expires_at": "2026-07-13T05:22:22.033Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "1fe06decfc1ac9e108dd494ef53f1e9c1ed93abdaaafafe7e56db64e8545cc32",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-01613"
+}

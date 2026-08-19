@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5430044",
+  "skill_id": "mn-gen-03609",
+  "skill_name": "8ux-co/eelzap-mcp-server",
+  "issued_at": "2026-07-06T05:23:50.044Z",
+  "expires_at": "2026-07-13T05:23:50.044Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "3012044f3f66dbdd2d3e9b9bf7d36b3d2bd1fbcba460759bbf8fe264e5d4a4b4",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-03609"
+}

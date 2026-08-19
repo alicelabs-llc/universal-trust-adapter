@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6182990",
+  "skill_id": "mn-file-039",
+  "skill_name": "Barcode Scanner",
+  "issued_at": "2026-07-06T05:36:22.990Z",
+  "expires_at": "2026-07-13T05:36:22.990Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "b99dd7bf6e9e128a4a3dadf376fae3d881b6ce7ad156455682cff08698c46557",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-file-039"
+}

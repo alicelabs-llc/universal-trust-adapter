@@ -1,0 +1,605 @@
+{
+  "devto_seen_comments": {
+    "3ai2o": {
+      "article_id": 4069146,
+      "username": "alexshev"
+    },
+    "3ahb2": {
+      "article_id": 4069005,
+      "username": "23cse_132_ritikagaur_984"
+    },
+    "3al0i": {
+      "article_id": 4069005,
+      "username": "pakvothe"
+    },
+    "3af12": {
+      "article_id": 4054543,
+      "username": "custralis"
+    },
+    "3b3co": {
+      "article_id": 4129017,
+      "username": "kordless"
+    },
+    "3b9nm": {
+      "article_id": 4153510,
+      "username": "mads_hansen_27b33ebfee4c9"
+    },
+    "3b9pe": {
+      "article_id": 4153510,
+      "username": "nazar-boyko"
+    },
+    "3ba1i": {
+      "article_id": 4153510,
+      "username": "alexshev"
+    },
+    "3bbjn": {
+      "article_id": 4162091,
+      "username": "mads_hansen_27b33ebfee4c9"
+    },
+    "3bbm9": {
+      "article_id": 4153510,
+      "username": "wrencalloway"
+    },
+    "3bbno": {
+      "article_id": 4153510,
+      "username": "mads_hansen_27b33ebfee4c9"
+    },
+    "3bc5f": {
+      "article_id": 4162090,
+      "username": "anp2network"
+    },
+    "3bd3g": {
+      "article_id": 4162090,
+      "username": "jkming"
+    },
+    "3bf86": {
+      "article_id": 4181753,
+      "username": "wrencalloway"
+    },
+    "3bf8d": {
+      "article_id": 4181753,
+      "username": "anp2network"
+    },
+    "3bf9b": {
+      "article_id": 4181753,
+      "username": "mads_hansen_27b33ebfee4c9"
+    },
+    "3bhe2": {
+      "article_id": 4192373,
+      "username": "mads_hansen_27b33ebfee4c9"
+    },
+    "3bhef": {
+      "article_id": 4192373,
+      "username": "mayank609"
+    },
+    "3bhgn": {
+      "article_id": 4162091,
+      "username": "neelagiri65"
+    },
+    "3bhgb": {
+      "article_id": 4153510,
+      "username": "neelagiri65"
+    },
+    "3bhjp": {
+      "article_id": 4192373,
+      "username": "wrencalloway"
+    },
+    "3blgc": {
+      "article_id": 4153510,
+      "username": "reneza"
+    },
+    "3blpl": {
+      "article_id": 4210477,
+      "username": "mads_hansen_27b33ebfee4c9"
+    },
+    "3c15i": {
+      "article_id": 4192373,
+      "username": "bogumi_jankiewicz_fcfce0"
+    },
+    "3c61m": {
+      "article_id": 4266661,
+      "username": "topstar_ai"
+    },
+    "3c61p": {
+      "article_id": 4266660,
+      "username": "topstar_ai"
+    }
+  },
+  "github_seen_comments": {
+    "4886144709": {
+      "repo": "public-apis/public-apis",
+      "issue_num": 6489,
+      "username": "F2207-VS"
+    },
+    "4886145756": {
+      "repo": "public-apis/public-apis",
+      "issue_num": 6489,
+      "username": "F2207-VS"
+    },
+    "4901708469": {
+      "repo": "public-apis/public-apis",
+      "issue_num": 6489,
+      "username": "F2207-VS"
+    },
+    "4902699622": {
+      "repo": "public-apis/public-apis",
+      "issue_num": 6489,
+      "username": "F2207-VS"
+    },
+    "4911464170": {
+      "repo": "public-apis/public-apis",
+      "issue_num": 6489,
+      "username": "F2207-VS"
+    },
+    "4917542375": {
+      "repo": "TensorBlock/awesome-mcp-servers",
+      "issue_num": 1089,
+      "username": "wilsonccccc"
+    },
+    "4912514356": {
+      "repo": "crewAIInc/crewAI",
+      "issue_num": 6463,
+      "username": "0xbrainkid"
+    },
+    "4913815056": {
+      "repo": "crewAIInc/crewAI",
+      "issue_num": 6463,
+      "username": "mayank609"
+    },
+    "4887405826": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4887406243": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898134567": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898346996": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898386365": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898426342": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898518840": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898569299": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898571729": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898609270": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898657614": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898663569": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898735105": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898795942": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898852691": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898898881": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898900647": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898914030": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898944511": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4898945119": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899104436": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899117139": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899171668": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899178273": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899178683": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899228016": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899233700": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899262328": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899269224": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899278314": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899299788": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899305918": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899323280": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899412340": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899413959": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899471450": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899483330": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899488679": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899503310": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899513415": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899525304": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899532535": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899536297": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899543392": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899555047": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899555999": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899620474": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899639739": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899656539": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4899683762": {
+      "repo": "xpaysh/awesome-x402",
+      "issue_num": 728,
+      "username": "reckoning89"
+    },
+    "4870266573": {
+      "repo": "edgarfloresguerra2011-a11y/marketnow",
+      "issue_num": 2,
+      "username": "maxim-ultra"
+    },
+    "4950071097": {
+      "repo": "edgarfloresguerra2011-a11y/marketnow",
+      "issue_num": 2,
+      "username": "AmitabhainArunachala"
+    },
+    "4953381319": {
+      "repo": "edgarfloresguerra2011-a11y/marketnow",
+      "issue_num": 2,
+      "username": "AmitabhainArunachala"
+    },
+    "4932475390": {
+      "repo": "public-apis/public-apis",
+      "issue_num": 6489,
+      "username": "F2207-VS"
+    },
+    "4950111572": {
+      "repo": "public-apis/public-apis",
+      "issue_num": 6489,
+      "username": "F2207-VS"
+    },
+    "4965214668": {
+      "repo": "public-apis/public-apis",
+      "issue_num": 6489,
+      "username": "F2207-VS"
+    },
+    "4999037462": {
+      "repo": "microsoft/autogen",
+      "issue_num": 7965,
+      "username": "0xbrainkid"
+    },
+    "5002619463": {
+      "repo": "microsoft/autogen",
+      "issue_num": 7924,
+      "username": "Sravan1011"
+    },
+    "5017944862": {
+      "repo": "crewAIInc/crewAI",
+      "issue_num": 6463,
+      "username": "Correctover"
+    },
+    "5024248237": {
+      "repo": "crewAIInc/crewAI",
+      "issue_num": 6463,
+      "username": "impeachmentright"
+    },
+    "5028576787": {
+      "repo": "microsoft/autogen",
+      "issue_num": 7924,
+      "username": "impeachmentright"
+    },
+    "5041915874": {
+      "repo": "microsoft/autogen",
+      "issue_num": 7924,
+      "username": "Sravan1011"
+    },
+    "5048564560": {
+      "repo": "jaw9c/awesome-remote-mcp-servers",
+      "issue_num": 446,
+      "username": "doteyeso-ops"
+    },
+    "5048462979": {
+      "repo": "PipedreamHQ/awesome-mcp-servers",
+      "issue_num": 94,
+      "username": "doteyeso-ops"
+    },
+    "5054555920": {
+      "repo": "crewAIInc/crewAI",
+      "issue_num": 6619,
+      "username": "IgorGanapolsky"
+    },
+    "5054901142": {
+      "repo": "crewAIInc/crewAI",
+      "issue_num": 6463,
+      "username": "IgorGanapolsky"
+    },
+    "5058991554": {
+      "repo": "PipedreamHQ/awesome-mcp-servers",
+      "issue_num": 94,
+      "username": "doteyeso-ops"
+    },
+    "5065931047": {
+      "repo": "PipedreamHQ/awesome-mcp-servers",
+      "issue_num": 94,
+      "username": "doteyeso-ops"
+    },
+    "5072578251": {
+      "repo": "microsoft/autogen",
+      "issue_num": 7924,
+      "username": "IgorGanapolsky"
+    },
+    "5072384874": {
+      "repo": "microsoft/autogen",
+      "issue_num": 7965,
+      "username": "IgorGanapolsky"
+    },
+    "5072941327": {
+      "repo": "microsoft/autogen",
+      "issue_num": 7990,
+      "username": "IgorGanapolsky"
+    },
+    "5076708558": {
+      "repo": "microsoft/autogen",
+      "issue_num": 7924,
+      "username": "Sravan1011"
+    },
+    "5076964462": {
+      "repo": "doteyeso-ops/action-ref-conformance",
+      "issue_num": 1,
+      "username": "doteyeso-ops"
+    },
+    "5076964423": {
+      "repo": "doteyeso-ops/mcp-server-vibes-coded",
+      "issue_num": 1,
+      "username": "doteyeso-ops"
+    },
+    "5076963532": {
+      "repo": "PipedreamHQ/awesome-mcp-servers",
+      "issue_num": 94,
+      "username": "doteyeso-ops"
+    },
+    "5076846886": {
+      "repo": "edgarfloresguerra2011-a11y/marketnow",
+      "issue_num": 22,
+      "username": "Sravan1011"
+    },
+    "5078359815": {
+      "repo": "edgarfloresguerra2011-a11y/marketnow",
+      "issue_num": 22,
+      "username": "Sravan1011"
+    },
+    "5079218428": {
+      "repo": "doteyeso-ops/mcp-server-vibes-coded",
+      "issue_num": 1,
+      "username": "doteyeso-ops"
+    },
+    "5079063315": {
+      "repo": "PipedreamHQ/awesome-mcp-servers",
+      "issue_num": 94,
+      "username": "doteyeso-ops"
+    },
+    "5079218373": {
+      "repo": "PipedreamHQ/awesome-mcp-servers",
+      "issue_num": 94,
+      "username": "doteyeso-ops"
+    },
+    "5081924954": {
+      "repo": "PipedreamHQ/awesome-mcp-servers",
+      "issue_num": 94,
+      "username": "doteyeso-ops"
+    },
+    "5081930222": {
+      "repo": "PipedreamHQ/awesome-mcp-servers",
+      "issue_num": 94,
+      "username": "doteyeso-ops"
+    },
+    "5086461746": {
+      "repo": "PipedreamHQ/awesome-mcp-servers",
+      "issue_num": 94,
+      "username": "doteyeso-ops"
+    },
+    "5092322303": {
+      "repo": "PipedreamHQ/awesome-mcp-servers",
+      "issue_num": 94,
+      "username": "doteyeso-ops"
+    },
+    "5106254172": {
+      "repo": "PipedreamHQ/awesome-mcp-servers",
+      "issue_num": 94,
+      "username": "doteyeso-ops"
+    },
+    "5108490297": {
+      "repo": "edgarfloresguerra2011-a11y/marketnow",
+      "issue_num": 2,
+      "username": "angguntrie3-lgtm"
+    },
+    "5124721768": {
+      "repo": "modelcontextprotocol/servers",
+      "issue_num": 4471,
+      "username": "localden"
+    },
+    "5124721575": {
+      "repo": "modelcontextprotocol/servers",
+      "issue_num": 4478,
+      "username": "localden"
+    },
+    "5127129366": {
+      "repo": "sickn33/agentic-awesome-skills",
+      "issue_num": 1044,
+      "username": "sickn33"
+    },
+    "5134259763": {
+      "repo": "edgarfloresguerra2011-a11y/marketnow",
+      "issue_num": 22,
+      "username": "Sravan1011"
+    }
+  },
+  "npm_last_downloads": 237,
+  "github_last_stars": 1,
+  "last_report": null,
+  "initialized_at": "2026-07-10T01:27:15.724696+00:00",
+  "last_check": "2026-07-30T18:42:15.957979+00:00"
+}

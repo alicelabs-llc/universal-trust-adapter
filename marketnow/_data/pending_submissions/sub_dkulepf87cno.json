@@ -1,0 +1,53 @@
+{
+  "submission_id": "sub_dkulepf87cno",
+  "skill_id": "mn-sub-02005",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T05:55:00.180Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "7cd7c636737d277b"
+  },
+  "repo": {
+    "url": "https://github.com/modelcontextprotocol/python-sdk",
+    "full_name": "modelcontextprotocol/python-sdk",
+    "owner": "modelcontextprotocol",
+    "name": "python-sdk",
+    "description": "The official Python SDK for Model Context Protocol servers and clients",
+    "stars": 23766,
+    "language": "Python",
+    "license": "MIT",
+    "pushed_at": "2026-07-28T18:17:18Z",
+    "archived": false,
+    "topics": []
+  },
+  "skill": {
+    "id": "mn-sub-02005",
+    "name": "python-sdk",
+    "slug": "python-sdk-2005",
+    "description": "The official Python SDK for Model Context Protocol servers and clients",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/modelcontextprotocol/python-sdk",
+      "submitted_at": "2026-07-29T05:55:00.180Z"
+    },
+    "install": "git clone https://github.com/modelcontextprotocol/python-sdk",
+    "author": "modelcontextprotocol",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T06:55:00.180Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-3977736",
+  "promoted_at": "2026-07-30T15:06:18.687Z"
+}

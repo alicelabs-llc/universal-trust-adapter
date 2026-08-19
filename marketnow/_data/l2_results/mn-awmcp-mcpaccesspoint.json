@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-mcpaccesspoint",
+  "timestamp": "2026-07-06T03:02:59Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "failed_to_start",
+  "failure_reason": "Container command failed to execute \u2014 see stdout_sample.",
+  "behavioral_analysis": {
+    "network_attempts": 0,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 459,
+  "stdout_sample": "Starting MCP Access Point... Port: 8080 Config file: /app/config/config.yaml  thread 'main' panicked at src/main.rs:40:59: Failed to load configuration: Error { etype: ReadError, esource: Unset, retry: Decided(false), cause: Some(Os { code: 2, kind: NotFound, message: \"No such file or directory\" }), context: Some(Owned(\"Unable to read conf file from /app/config/config.yaml\")) } note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace ",
+  "l2_score": 0,
+  "l2_risk_level": "unknown"
+}

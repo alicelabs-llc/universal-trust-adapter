@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6183013",
+  "skill_id": "mn-file-040",
+  "skill_name": "Document Archive Manager",
+  "issued_at": "2026-07-06T05:36:23.013Z",
+  "expires_at": "2026-07-13T05:36:23.013Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a49d7c9846f2fb503dff4b33c986e779113d589fbb2d3cc00b013a14f33f9c44",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-file-040"
+}

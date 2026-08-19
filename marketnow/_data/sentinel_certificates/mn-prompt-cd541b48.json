@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8352229",
+  "skill_id": "mn-prompt-cd541b48",
+  "skill_name": "Self-serve analytics platform",
+  "issued_at": "2026-07-15T01:19:12.229Z",
+  "expires_at": "2026-07-22T01:19:12.229Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "23faab33eb30283943d37e9436d776d56a0b90d5cb4e7de195f0fa24a16f319f",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-cd541b48"
+}

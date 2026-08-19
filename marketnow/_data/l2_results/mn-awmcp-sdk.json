@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-sdk",
+  "timestamp": "2026-07-06T02:39:39Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 0,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 2,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 242,
+  "stdout_sample": "[2sio-mcp] starting in introspection mode \u2014 no signer configured.   Set EVM_PRIVATE_KEY=0x<64hex>  to pay in USDC on Base, OR   set SOLANA_PRIVATE_KEY=<base58> to pay in USDC on Solana.   Either or both. Tool discovery works without a key. ",
+  "l2_score": 5,
+  "l2_risk_level": "medium"
+}

@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5713315",
+  "skill_id": "mn-gen-10493",
+  "skill_name": "Playwright-parallel-mcp",
+  "issued_at": "2026-07-06T05:28:33.315Z",
+  "expires_at": "2026-07-13T05:28:33.315Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "39cc01d8dfc74184c6f4455e0d1a70c73f01dfec0849f25b5c4f96d5d8b37ee7",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-10493"
+}

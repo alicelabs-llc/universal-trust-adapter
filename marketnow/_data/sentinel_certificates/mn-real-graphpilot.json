@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9949747",
+  "skill_id": "mn-real-graphpilot",
+  "skill_name": "graphpilot",
+  "issued_at": "2026-07-26T04:25:49.747Z",
+  "expires_at": "2026-08-02T04:25:49.747Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "high",
+  "risk_breakdown": {
+    "l15_l16_l17": "high",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "high"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 1,
+    "l2_execution_status": null
+  },
+  "signature": "a982124949141f9e08a292f3d4408d2caeddba8cde10b13c86a0154664193f2d",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-graphpilot"
+}

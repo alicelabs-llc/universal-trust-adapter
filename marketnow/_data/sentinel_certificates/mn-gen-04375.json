@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5462134",
+  "skill_id": "mn-gen-04375",
+  "skill_name": "Makingchatbots/genesys-cloud-mcp-server",
+  "issued_at": "2026-07-06T05:24:22.134Z",
+  "expires_at": "2026-07-13T05:24:22.134Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "6861caf2b6de455a066b0250bed5671208c3179db3f76e0fb81bacdbe2bb0f50",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-04375"
+}

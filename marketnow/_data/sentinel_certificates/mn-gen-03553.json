@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5428523",
+  "skill_id": "mn-gen-03553",
+  "skill_name": "Planningo/duul",
+  "issued_at": "2026-07-06T05:23:48.523Z",
+  "expires_at": "2026-07-13T05:23:48.523Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 4,
+  "max_score": 10,
+  "risk_level": "high",
+  "risk_breakdown": {
+    "l15_l16": "high",
+    "l2": "not_available",
+    "final": "high"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "383e4753b9b3cc3fb940749c80c2b7ecb07b23f16b07efb61f7b62d9a8396c5b",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-03553"
+}

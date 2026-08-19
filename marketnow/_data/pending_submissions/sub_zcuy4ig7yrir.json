@@ -1,0 +1,57 @@
+{
+  "submission_id": "sub_zcuy4ig7yrir",
+  "skill_id": "mn-sub-90927",
+  "status": "promoted",
+  "submitted_at": "2026-07-26T04:05:20.211Z",
+  "submitter": {
+    "agent_id": "agent_vibe_test",
+    "email": null,
+    "ref_code": "ref_f92d4211",
+    "ip_hash": "98850996c17608e6"
+  },
+  "repo": {
+    "url": "https://github.com/doteyeso-ops/mcp-server-vibes-coded",
+    "full_name": "doteyeso-ops/mcp-server-vibes-coded",
+    "owner": "doteyeso-ops",
+    "name": "mcp-server-vibes-coded",
+    "description": "MCP server wrapping Vibes-Coded's 93 pay-per-call x402 agent-tool endpoints (reliability guards, memory, cost control) as discoverable MCP tools. Includes a pay tool + 24h day-pass.",
+    "stars": 1,
+    "language": "Python",
+    "license": "MIT",
+    "pushed_at": "2026-07-25T21:55:01Z",
+    "archived": false,
+    "topics": [
+      "agent-skills",
+      "mcp",
+      "x402"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-90927",
+    "name": "vibes-coded-mcp",
+    "slug": "mcp-server-vibes-coded-0927",
+    "description": "MCP + Outcome APIs for vibes-coded.com — x402 USDC (Solana primary, Base ExactEvm), prepaid X-Vibes-Key, action-receipt with optional ref_code provenance (citation-join).",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/doteyeso-ops/mcp-server-vibes-coded",
+      "submitted_at": "2026-07-26T04:05:20.211Z"
+    },
+    "install": "git clone https://github.com/doteyeso-ops/mcp-server-vibes-coded",
+    "author": "doteyeso-ops",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-26T05:05:20.212Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-6464656",
+  "promoted_at": "2026-07-26T22:54:25.614Z"
+}

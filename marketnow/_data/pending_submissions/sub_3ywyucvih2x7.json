@@ -1,0 +1,56 @@
+{
+  "submission_id": "sub_3ywyucvih2x7",
+  "skill_id": "mn-sub-74070",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T14:26:27.211Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch2",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "96365e5c70a99ff4"
+  },
+  "repo": {
+    "url": "https://github.com/punkpeye/awesome-mcp-servers",
+    "full_name": "punkpeye/awesome-mcp-servers",
+    "owner": "punkpeye",
+    "name": "awesome-mcp-servers",
+    "description": "A collection of MCP servers.",
+    "stars": 91545,
+    "language": null,
+    "license": "MIT",
+    "pushed_at": "2026-07-29T10:26:20Z",
+    "archived": false,
+    "topics": [
+      "ai",
+      "mcp"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-74070",
+    "name": "awesome-mcp-servers",
+    "slug": "awesome-mcp-servers-4070",
+    "description": "A collection of MCP servers.",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/punkpeye/awesome-mcp-servers",
+      "submitted_at": "2026-07-29T14:26:27.211Z"
+    },
+    "install": "git clone https://github.com/punkpeye/awesome-mcp-servers",
+    "author": "punkpeye",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T15:26:27.211Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-3941595",
+  "promoted_at": "2026-07-30T15:05:42.648Z"
+}

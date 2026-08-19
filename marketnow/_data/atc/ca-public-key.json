@@ -1,0 +1,10 @@
+{
+  "ca_name": "MarketNow Sentinel CA",
+  "algorithm": "Ed25519",
+  "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA8p1XlAnt5QRCGbyDRi8+U9MCvt8Xyzq36Rar45JHszM=\n-----END PUBLIC KEY-----",
+  "public_key_format": "SPKI/PKCS8 PEM",
+  "created_at": "2026-07-16T02:51:35.905Z",
+  "usage": "Use this key to verify ATC signatures via crypto.verify(null, data, publicKey, signature)",
+  "url": "https://marketnow.site/api/atc?action=ca-key",
+  "note": "This is the public key. The corresponding private key is held by MarketNow as a Vercel env var and is never exposed."
+}

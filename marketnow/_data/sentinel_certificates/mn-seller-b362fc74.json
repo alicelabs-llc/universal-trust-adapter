@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6236651",
+  "skill_id": "mn-seller-b362fc74",
+  "skill_name": "Secret Detector Pro",
+  "issued_at": "2026-07-06T05:37:16.651Z",
+  "expires_at": "2026-07-13T05:37:16.651Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "509f802425d953edfcb95e135be462283af0e1c83e6eec37c3c04eddd0f6d111",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-seller-b362fc74"
+}

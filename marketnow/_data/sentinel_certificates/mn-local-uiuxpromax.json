@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9056135",
+  "skill_id": "mn-local-uiuxpromax",
+  "skill_name": "ui-ux-pro-max",
+  "issued_at": "2026-07-15T01:30:56.135Z",
+  "expires_at": "2026-07-22T01:30:56.135Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "df7fac7e0066b33f80a35e0288bea473dcc8d7def0230852b58a84488e393a07",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-local-uiuxpromax"
+}

@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0291082",
+  "skill_id": "mn-real-ols4",
+  "skill_name": "ols4",
+  "issued_at": "2026-07-26T04:31:31.082Z",
+  "expires_at": "2026-08-02T04:31:31.082Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "52118f6b59ab35833b7f13dfd73e5218718d4e111c85e7f4bb77db6a9020fc88",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-ols4"
+}

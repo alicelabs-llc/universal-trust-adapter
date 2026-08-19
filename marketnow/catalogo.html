@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Workflows n8n - AI Profit Army</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 900px;
+            margin: 0 auto 30px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .workflow-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid #667eea;
+        }
+        
+        .workflow-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        .workflow-category {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #f0f4ff;
+            color: #667eea;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .workflow-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.3;
+        }
+        
+        .workflow-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 3px;
+        }
+        
+        .workflow-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #28a745;
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8fff9;
+            border-radius: 10px;
+            border: 2px dashed #28a745;
+        }
+        
+        .workflow-desc {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .workflow-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .workflow-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .workflow-features li:before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .summary-section {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .summary-card {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        
+        .summary-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .summary-label {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .catalog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .workflow-card, .summary-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-btn">← Volver a AI Profit Army</a>
+            <h1>📋 Catálogo de Workflows n8n</h1>
+            <p class="subtitle">45 workflows profesionales de automatización listos para implementar. Transforma procesos manuales en flujos automatizados que ahorran tiempo, reducen errores y escalan tu negocio.</p>
+        </header>
+        
+        <section class="summary-section">
+            <h2 style="font-size: 2rem; margin-bottom: 20px; color: #333; text-align: center;">📊 Resumen de Valor Comercial</h2>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="summary-value">45</div>
+                    <div class="summary-label">Workflows Disponibles</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value">$500-$4,500</div>
+                    <div class="summary-label">Precio Mensual</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value">3 meses</div>
+                    <div class="summary-label">ROI Promedio</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value">40 hrs/sem</div>
+                    <div class="summary-label">Ahorro de Tiempo</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; text-align: center;">
+                <p style="font-size: 1.1rem; color: #666; line-height: 1.6;">
+                    Cada workflow está diseñado para automatizar procesos específicos, conectando sistemas dispares (CRM, ERP, CMS, APIs) en flujos unificados que eliminan hasta el 95% de errores humanos y procesan 10x más volumen sin aumentar personal.
+                </p>
+            </div>
+        </section>
+        
+        <div style="text-align: center; margin: 40px 0;">
+            <div style="display: inline-flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 30px;">
+                <a href="#ia" class="btn" style="background: #667eea; padding: 10px 20px; font-size: 0.9rem;">🤖 IA & Automatización</a>
+                <a href="#ecommerce" class="btn" style="background: #4CAF50; padding: 10px 20px; font-size: 0.9rem;">🛒 E-commerce</a>
+                <a href="#marketing" class="btn" style="background: #FF6B6B; padding: 10px 20px; font-size: 0.9rem;">📈 Marketing</a>
+                <a href="#operaciones" class="btn" style="background: #764ba2; padding: 10px 20px; font-size: 0.9rem;">🛠️ Operaciones</a>
+                <a href="#soporte" class="btn" style="background: #FF9800; padding: 10px 20px; font-size: 0.9rem;">👨‍💼 Soporte</a>
+                <a href="#finanzas" class="btn" style="background: #009688; padding: 10px 20px; font-size: 0.9rem;">💰 Finanzas</a>
+            </div>
+            <p style="color: white; font-size: 1.1rem;">Selecciona una categoría para ver los workflows específicos. Cada workflow incluye precios, descripción y botón de compra.</p>
+        </div>
+        
+        <h2 style="font-size: 2rem; margin: 40px 0 20px; color: white; text-align: center;">🚀 Workflows Destacados</h2>
+        
+        <div class="catalog-grid">
+            <!-- Workflow 1 -->
+            <div class="workflow-card">
+                <div class="workflow-category">AI Automation</div>
+                <h3 class="workflow-title">Realtime Notion Todoist 2-way Sync Template</h3>
+                <div class="workflow-stats">
+                    <div class="stat">
+                        <div class="stat-value">246</div>
+                        <div class="stat-label">Nodos</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">29</div>
+                        <div class="stat-label">Integraciones</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">Complex</div>
+                        <div class="stat-label">Complejidad</div>
+                    </div>
+                </div>
+                <div class="workflow-price">$4,500/mes</div>
+                <p class="workflow-desc">Sincronización bidireccional en tiempo real entre Notion y Todoist. Mantiene tareas, proyectos y notas perfectamente sincronizadas.</p>
+                <ul class="workflow-features">
+                    <li>Sincronización en tiempo real</li>
+                    <li>246 nodos de automatización</li>
+                    <li>29 integraciones diferentes</li>
+                    <li>ROI: 2-3 meses</li>
+                </ul>
+                <a href="http://localhost:5678" target="_blank" class="btn">Solicitar Implementación</a>
+            </div>
+            
+            <!-- Workflow 2 -->
+            <div class="workflow-card">
+                <div class="workflow-category">AI Automation</div>
+                <h3 class="workflow-title">Agent Workflow</h3>
+                <div class="workflow-stats">
+                    <div class="stat">
+                        <div class="stat-value">113</div>
+                        <div class="stat-label">Nodos</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">59</div>
+                        <div class="stat-label">Integraciones</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">Complex</div>
+                        <div class="stat-label">Complejidad</div>
+                    </div>
+                </div>
+                <div class="workflow-price">$3,390/mes</div>
+                <p class="workflow-desc">Workflow de agente IA con múltiples integraciones para automatización avanzada de procesos empresariales.</p>
+                <ul class="workflow-features">
+                    <li>59 integraciones diferentes</li>
+                    <li>Automatización de agentes IA</li>
+                    <li>Procesos empresariales complejos</li>
+                    <li>Escalable y personalizable</li>
+                </ul>
+                <a href="http://localhost:5678" target="_blank" class="btn">Solicitar Implementación</a>
+            </div>
+            
+            <!-- Workflow 3 -->
+            <div class="workflow-card">
+                <div class="workflow-category">Marketing & AI</div>
+                <h3 class="workflow-title">Automated Social Media Content Publishing Factory</h3>
+                <div class="workflow-stats">
+                    <div class="stat">
+                        <div class="stat-value">100</div>
+                        <div class="stat-label">Nodos</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">11</div>
+                        <div class="stat-label">Integraciones</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">Complex</div>
+                        <div class="stat-label">Complejidad</div>
+                    </div>
+                </div>
+                <div class="workflow-price">$3,000/mes</div>
+                <p class="workflow-desc">Fábrica automatizada de contenido para redes sociales con composición de prompts IA y programación inteligente.</p>
+                <ul class="workflow-features">
+                    <li>Generación automática de contenido</li>
+                    <li>Composición de prompts IA</li>
+                    <li>Programación multi-plataforma</li>
+                    <li>Análisis de engagement</li>
+                </ul>
+                <a href="http://localhost:5678" target="_blank" class="btn">Solicitar Implementación</a>
+            </div>
+            
+            <!-- Workflow 4 -->
+            <div class="workflow-card">
+                <div class="workflow-category">E-commerce & AI</div>
+                <h3 class="workflow-title">Notion to Clockify Sync Template</h3>
+                <div class="workflow-stats">
+                    <div class="stat">
+                        <div class="stat-value">68</div>
+                        <div class="stat-label">Nodos</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">13</div>
+                        <div class="stat-label">Integraciones</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">Complex</div>
+                        <div class="stat-label">Complejidad</div>
+                    </div>
+                </div>
+                <div class="workflow-price">$2,040/mes</div>
+                <p class="workflow-desc">Sincronización de tiempo y tareas entre Notion y Clockify para gestión precisa de proyectos y facturación.</p>
+                <ul class="workflow-features">
+                    <li>Sincronización tiempo/tareas</li>
+                    <li>Facturación automática</li>
+                    <li>Gestión de proyectos</li>
+                    <li>Reportes detallados</li>
+                </ul>
+                <a href="http://localhost:5678" target="_blank" class="btn">Solicitar Implementación</a>
+            </div>
+            
+            <!-- Workflow 5 -->
+            <div class="workflow-card">
+                <div class="workflow-category">Customer Support</div>
+                <h3 class="workflow-title">Unpaid Invoice Reminder</h3>
+                <div class="workflow-stats">
+                    <div class="stat">
+                        <div class="stat-value">IA + Slack + Sheets</div>
+                        <div class="stat-label">Tecnología</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">Automático</div>
+                        <div class="stat-label">Frecuencia</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">Medium</div>
+                        <div class="stat-label">Complejidad</div>
+                    </div>
+                </div>
+                <div class="workflow-price">$1,500/mes</div>
+                <p class="workflow-desc">Sistema de recordatorios automáticos de facturas pendientes usando IA, Slack y Google Sheets.</p>
+                <ul class="workflow-features">
+                    <li>Recordatorios automáticos</li>
+                    <li>Integración IA para personalización</li>
+                    <li>Slack para notificaciones</li>
+                    <li>Google Sheets para tracking</li>
+                </ul>
+                <a href="http://localhost:5678" target="_blank" class="btn">Solicitar Implementación</a>
+            </div>
+            
+            <!-- Workflow 6 -->
+            <div class="workflow-card">
+                <div class="workflow-category">Marketing</div>
+                <h3 class="workflow-title">HDW Lead Geländewagen</h3>
+                <div class="workflow-stats">
+                    <div class="stat">
+                        <div class="stat-value">93</div>
+                        <div class="stat-label">Nodos</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">Generación Leads</div>
+                        <div class="stat-label">Enfoque</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">Complex</div>
+                        <div class="stat-label">Complejidad</div>
+                    </div>
+                </div>
+                <div class="workflow-price">$2,790/mes</div>
+                <p class="workflow-desc">Sistema automatizado de generación y prospección de leads con múltiples fuentes y enriquecimiento de datos.</p>
+                <ul class="workflow-features">
+                    <li>Generación automática de leads</li>
+                    <li>Prospección inteligente</li>
+                    <li>Enriquecimiento de datos</li>
+                    <li>Segmentación avanzada</li>
+                </ul>
+                <a href="http://localhost:5678" target="_blank" class="btn">Solicitar Implementación</a>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin: 50px 0;">
+            <p style="font-size: 1.2rem; color: white; margin-bottom: 20px;">✨ <strong>¿Interesado en otros workflows?</strong> Tenemos 39 workflows adicionales en categorías como AI Automation, E-commerce, Customer Support y Operations.</p>
+            <a href="http://localhost:5678" target="_blank" class="btn" style="background: #FF6B6B; display: inline-block; width: auto; padding: 15px 40px;">Contactar para Catálogo Completo</a>
+        </div>
+        
+        <footer>
+            <p>© 2026 AI Profit Army - Catálogo de Workflows n8n</p>
+            <p style="margin-top: 20px; opacity: 0.8;">Creado con OpenClaw • Actualizado: Febrero 2026</p>
+            <p style="margin-top: 10px; opacity: 0.8;"><a href="index.html" style="color: white; text-decoration: underline;">Volver a la página principal</a></p>
+        </footer>
+    </div>
+</body>
+</html>

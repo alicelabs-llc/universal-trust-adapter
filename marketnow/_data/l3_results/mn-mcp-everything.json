@@ -1,0 +1,12 @@
+{
+  "skill_id": "mn-mcp-everything",
+  "skill_name": "MCP Everything Server (Official Test Reference)",
+  "checked_at": "2026-07-26T06:09:45.454Z",
+  "l3_status": "stable",
+  "drift_detected": false,
+  "drift_severity": "none",
+  "quarantine_recommended": false,
+  "drift_items": [],
+  "baseline_captured_at": "2026-07-05T22:01:36Z",
+  "message": "No drift detected. Skill behavior matches L2 baseline."
+}

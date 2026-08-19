@@ -1,0 +1,52 @@
+{
+  "card_id": "ATC-2026-3937340",
+  "status": "active",
+  "payload": {
+    "card_id": "ATC-2026-3937340",
+    "schema_version": "1.1.0",
+    "decision_authority": "consumer",
+    "agent_id": "skill.mn-sub-76147",
+    "agent_name": "qodo-cover",
+    "identity": {
+      "public_key": "marketnow-skill:mn-sub-76147",
+      "key_algorithm": "Ed25519"
+    },
+    "trust": {
+      "sentinel_review_score": 0,
+      "audit_layers_passed": {},
+      "composite_trust": 0,
+      "risk_level": "not_audited",
+      "certificate_id": null
+    },
+    "capabilities": {
+      "provides": [
+        "mcp-server"
+      ],
+      "protocol_language": "mcp",
+      "translate": true
+    },
+    "payment": {
+      "method": "x402 + USDC on Base L2",
+      "wallet_address": null
+    },
+    "metadata": {
+      "issued_at": "2026-07-30T15:05:37.340Z",
+      "expires_at": "2026-10-28T15:05:37.340Z",
+      "issuer": "MarketNow Sentinel CA",
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-3937340"
+    }
+  },
+  "signature": {
+    "algorithm": "Ed25519 (RFC 8032)",
+    "value": "f5ad51ca65957a60804f12b3d3edf372d1e9c27bfc8bb8366c6e4935088ecf288c17808e940d5d912b3a279f22a7e3455131342ae745de1a934390df5d82970b",
+    "signed_by": "MarketNow Sentinel CA",
+    "signed_at": "2026-07-30T15:05:37.340Z",
+    "canonical_json": "RFC 8785 JCS (JSON Canonicalization Scheme)",
+    "verify_with": "GET /api/atc?action=ca-key",
+    "signed_payload_hash": "25f5da7f4a68b52431151b7f2de906bdfb09bcaca3e934fc3f1300fd66b872a5",
+    "resigned_at": "2026-08-13T19:59:59.549Z",
+    "resign_reason": "Aug 13, 2026: fixed forward-slash escaping per RFC 8785 §3.2.2.2, removed sentinel_score alias from signed payload, added ca_key_id. Bug reported by @anp2network.",
+    "canonicalization_method": "RFC_8785_JCS",
+    "ca_key_id": "MCowBQYDK2VwAyEA"
+  }
+}

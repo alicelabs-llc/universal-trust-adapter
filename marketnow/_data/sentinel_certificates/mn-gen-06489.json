@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5546866",
+  "skill_id": "mn-gen-06489",
+  "skill_name": "Rog0x/mcp-color-tools",
+  "issued_at": "2026-07-06T05:25:46.866Z",
+  "expires_at": "2026-07-13T05:25:46.866Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "db6d9d451eada2061ae57d2a078121f8d583ee12bd2d611497cee5184467cecc",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-06489"
+}

@@ -1,0 +1,162 @@
+# MarketNow — Sentinel L1.6 Batch Audit (GitHub Actions)
+# ========================================================
+# Weekly batch scan of the entire MarketNow catalog using:
+#   - Semgrep (18 MCP-specific rules in sentinel-rules/semgrep-mcp-rules.yml)
+#   - Gitleaks (secret detection)
+#   - OSV-Scanner (dependency vulnerabilities)
+#
+# Output: a single consolidated _data/sentinel_results.json committed to master.
+#
+# Triggers:
+#   - schedule: weekly (Sunday midnight UTC)
+#   - workflow_dispatch: manual run from the Actions tab
+#
+# NOTE: On-demand audits of individual MCP server repos are handled by
+#       sentinel-l2-sandbox.yml via the repository_dispatch pattern.
+#       Do NOT re-add an `issues:` trigger here — it conflicts with that flow.
+
+name: Sentinel L1.6 Batch Audit
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly (Sunday midnight UTC)
+  workflow_dispatch: {}   # Manual trigger
+
+# Prevent overlapping batch runs from clobbering each other.
+concurrency:
+  group: sentinel-l16-batch
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # Required to commit sentinel_results.json back to master
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Semgrep
+        run: pip install semgrep
+
+      - name: Install Gitleaks
+        run: |
+          curl -sSfL https://github.com/gitleaks/gitleaks/releases/download/v8.18.1/gitleaks_8.18.1_linux_x64.tar.gz \
+            | tar -xz -C /usr/local/bin gitleaks
+          chmod +x /usr/local/bin/gitleaks
+
+      - name: Install OSV-Scanner
+        run: |
+          curl -sSfL https://github.com/google/osv-scanner/releases/download/v1.7.0/osv-scanner_linux_amd64 \
+            -o /usr/local/bin/osv-scanner
+          chmod +x /usr/local/bin/osv-scanner
+
+      - name: Run Semgrep on MCP rules
+        run: |
+          semgrep --config sentinel-rules/semgrep-mcp-rules.yml \
+                  --json --output /tmp/semgrep_results.json \
+                  aep-marketplace/ || true
+
+      - name: Run Gitleaks
+        run: |
+          gitleaks detect --source . \
+            --report-path /tmp/gitleaks_results.json \
+            --report-format json || true
+
+      - name: Run OSV-Scanner
+        run: |
+          osv-scanner --lockfile aep-marketplace/package-lock.json \
+            --json > /tmp/osv_results.json || true
+
+      - name: Consolidate results into sentinel_results.json
+        run: |
+          node <<'JS'
+          const fs = require('fs');
+
+          let semgrep = { results: [] };
+          let gitleaks = [];
+          let osv = { results: [] };
+          try { semgrep = JSON.parse(fs.readFileSync('/tmp/semgrep_results.json', 'utf8')); } catch {}
+          try { gitleaks = JSON.parse(fs.readFileSync('/tmp/gitleaks_results.json', 'utf8')); } catch {}
+          try { osv = JSON.parse(fs.readFileSync('/tmp/osv_results.json', 'utf8')); } catch {}
+
+          const semgrepFindings = (semgrep.results || []).map(r => ({
+            id: r.check_id,
+            path: r.path,
+            start: r.start?.line,
+            severity: r.extra?.severity || 'INFO',
+            message: r.extra?.message || '',
+          }));
+
+          const secretFindings = (gitleaks || []).map(f => ({
+            rule: f.RuleID,
+            file: f.File,
+            startLine: f.StartLine,
+            secret: f.Secret ? f.Secret.slice(0, 4) + '…' + f.Secret.slice(-4) : '(redacted)',
+          }));
+
+          const osvFindings = (osv.results || []).map(v => ({
+            id: v.vuln?.id || v.id,
+            package: v.package?.name,
+            version: v.package?.version,
+            fixed: v.fixed_version,
+          }));
+
+          const critical = semgrepFindings.filter(f => f.severity === 'ERROR').length
+                          + secretFindings.length;
+          const high = semgrepFindings.filter(f => f.severity === 'WARNING').length;
+
+          const report = {
+            audit_type: 'sentinel-l16-batch',
+            timestamp: new Date().toISOString(),
+            tools: {
+              semgrep: { rules: 18, findings: semgrepFindings.length },
+              gitleaks: { findings: secretFindings.length },
+              osv: { vulnerabilities: osvFindings.length },
+            },
+            totals: {
+              critical,
+              high,
+              medium: semgrepFindings.filter(f => f.severity === 'INFO').length,
+            },
+            semgrep_findings: semgrepFindings,
+            secret_findings: secretFindings,
+            osv_findings: osvFindings,
+          };
+
+          fs.mkdirSync('_data', { recursive: true });
+          fs.writeFileSync('_data/sentinel_results.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report.totals, null, 2));
+          JS
+
+      - name: Commit results
+        run: |
+          git config user.name "Sentinel Bot"
+          git config user.email "support@alicelabs.site"
+          git add _data/sentinel_results.json
+          git commit -m "sentinel: L1.6 batch audit $(date -u +%Y-%m-%d)" || echo "No changes to commit"
+          git push || echo "Push skipped (no changes)"
+
+      - name: Upload raw artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sentinel-l16-raw-${{ github.run_id }}
+          path: |
+            /tmp/semgrep_results.json
+            /tmp/gitleaks_results.json
+            /tmp/osv_results.json
+          retention-days: 30

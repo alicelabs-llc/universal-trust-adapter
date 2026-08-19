@@ -1,0 +1,48 @@
+{
+  "card_id": "ATC-2026-4026838",
+  "status": "active",
+  "payload": {
+    "card_id": "ATC-2026-4026838",
+    "schema_version": "1.1.0",
+    "decision_authority": "consumer",
+    "agent_id": "skill.mn-sub-43233",
+    "agent_name": "Scrapling",
+    "identity": {
+      "public_key": "marketnow-skill:mn-sub-43233",
+      "key_algorithm": "Ed25519"
+    },
+    "trust": {
+      "sentinel_review_score": 0,
+      "sentinel_score": 0,
+      "audit_layers_passed": {},
+      "composite_trust": 0,
+      "risk_level": "not_audited",
+      "certificate_id": null
+    },
+    "capabilities": {
+      "provides": [
+        "mcp-server"
+      ],
+      "protocol_language": "mcp",
+      "translate": true
+    },
+    "payment": {
+      "method": "x402 + USDC on Base L2",
+      "wallet_address": null
+    },
+    "metadata": {
+      "issued_at": "2026-07-30T15:07:06.838Z",
+      "expires_at": "2026-10-28T15:07:06.838Z",
+      "issuer": "MarketNow Sentinel CA",
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-4026838"
+    }
+  },
+  "signature": {
+    "algorithm": "Ed25519 (RFC 8032)",
+    "value": "aee9928bc089d27309bca18719d5710050efdbc2a19a4839aecf0d4dd72df8de5389fef2ce381ed1f2a21cc5d844f9532b38ab6fcc170b06e1baed599c10de0f",
+    "signed_by": "MarketNow Sentinel CA",
+    "signed_at": "2026-07-30T15:07:06.838Z",
+    "canonical_json": "JSON.stringify(payload, Object.keys(payload).sort())",
+    "verify_with": "GET /api/atc?action=ca-key"
+  }
+}

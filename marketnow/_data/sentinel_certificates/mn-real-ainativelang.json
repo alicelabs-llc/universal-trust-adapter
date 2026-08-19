@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0140986",
+  "skill_id": "mn-real-ainativelang",
+  "skill_name": "ainativelang",
+  "issued_at": "2026-07-26T04:29:00.986Z",
+  "expires_at": "2026-08-02T04:29:00.986Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "17b2a8c2256c145b7a5e7fe66f7402ae8999b37d1826f4b339d5e53c94c0acc7",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-ainativelang"
+}

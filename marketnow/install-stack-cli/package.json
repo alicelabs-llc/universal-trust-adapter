@@ -1,0 +1,13 @@
+{
+  "name": "@marketnow/install-stack",
+  "version": "1.0.0",
+  "description": "One-click multi-skill installation for MarketNow agent stacks",
+  "bin": {
+    "install-stack": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": ["mcp", "marketnow", "agent", "stack", "bundle"],
+  "license": "UNLICENSED"
+}

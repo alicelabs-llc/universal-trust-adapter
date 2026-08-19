@@ -1,0 +1,58 @@
+{
+  "submission_id": "sub_jor6ruea7jq4",
+  "skill_id": "mn-sub-57794",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T05:55:09.340Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "7cd7c636737d277b"
+  },
+  "repo": {
+    "url": "https://github.com/GongRzhe/Office-PowerPoint-MCP-Server",
+    "full_name": "GongRzhe/Office-PowerPoint-MCP-Server",
+    "owner": "GongRzhe",
+    "name": "Office-PowerPoint-MCP-Server",
+    "description": "A MCP (Model Context Protocol) server for PowerPoint manipulation using python-pptx. This server provides tools for creating, editing, and manipulating PowerPoint presentations through the MCP protocol.",
+    "stars": 1847,
+    "language": "Python",
+    "license": "MIT",
+    "pushed_at": "2025-12-31T13:23:39Z",
+    "archived": true,
+    "topics": []
+  },
+  "skill": {
+    "id": "mn-sub-57794",
+    "name": "Office-PowerPoint-MCP-Server",
+    "slug": "office-powerpoint-mcp-server-7794",
+    "description": "A MCP (Model Context Protocol) server for PowerPoint manipulation using python-pptx. This server provides tools for creating, editing, and manipulating PowerPoint presentations through the MCP protocol.",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/GongRzhe/Office-PowerPoint-MCP-Server",
+      "submitted_at": "2026-07-29T05:55:09.340Z"
+    },
+    "install": "git clone https://github.com/GongRzhe/Office-PowerPoint-MCP-Server",
+    "author": "GongRzhe",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 7,
+    "l15_findings": [
+      {
+        "severity": "high",
+        "code": "archived"
+      }
+    ],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T06:55:09.340Z",
+    "overall_score": 9
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-3989391",
+  "promoted_at": "2026-07-30T15:06:30.429Z"
+}

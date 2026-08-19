@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6143004",
+  "skill_id": "mn-pro-3649180f",
+  "skill_name": "IoT Battery Optimizer",
+  "issued_at": "2026-07-06T05:35:43.004Z",
+  "expires_at": "2026-07-13T05:35:43.004Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 5,
+  "max_score": 10,
+  "risk_level": "high",
+  "risk_breakdown": {
+    "l15_l16": "high",
+    "l2": "not_available",
+    "final": "high"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "5537ab9d0612db8ac9f92f3a8a5d750981acbd3757c0cf854bf0a91b21ad3cb4",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-pro-3649180f"
+}

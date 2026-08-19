@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5562903",
+  "skill_id": "mn-gen-06841",
+  "skill_name": "Mcp-graphql-schema",
+  "issued_at": "2026-07-06T05:26:02.903Z",
+  "expires_at": "2026-07-13T05:26:02.903Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "cbe0713b8caba368a88aabe6a2c996a30357c55e50c55e12cacfe9765a5c364a",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-06841"
+}

@@ -1,0 +1,279 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marketnow.site/schemas/atc-1.0.json",
+  "title": "ATC/1.0 — Agent Trust Card",
+  "type": "object",
+  "required": [
+    "spec_version",
+    "card_id",
+    "issuer",
+    "identity",
+    "attestation",
+    "capabilities",
+    "evidence",
+    "risk",
+    "revocation",
+    "validity"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "spec_version": {
+      "type": "string",
+      "const": "ATC/1.0",
+      "description": "Specification version. Must be 'ATC/1.0'."
+    },
+    "card_id": {
+      "type": "string",
+      "pattern": "^ATC-\\d{4}-\\d{6,}$",
+      "description": "Unique card identifier. Format: ATC-YYYY-NNNNNNN (e.g. ATC-2026-7777670)."
+    },
+    "issuer": {
+      "type": "object",
+      "required": ["ca_id", "ca_public_key", "ca_algorithm", "ca_url"],
+      "additionalProperties": false,
+      "properties": {
+        "ca_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 64,
+          "description": "CA identifier (e.g. 'alicelabs-sentinel-ca')."
+        },
+        "ca_public_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]{43,44}={0,2}$",
+          "description": "Base64 Ed25519 public key in SPKI format (44 base64 chars for the full SPKI, or 43+1 for raw 32-byte key)."
+        },
+        "ca_algorithm": {
+          "type": "string",
+          "enum": ["Ed25519"],
+          "description": "Signature algorithm. ATC/1.0 mandates Ed25519."
+        },
+        "ca_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL where the CA publishes its key + revocation list."
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "required": ["agent_id", "agent_name", "agent_owner"],
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$",
+          "description": "Globally unique agent identifier. UUID v4 RECOMMENDED."
+        },
+        "agent_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "Human-readable agent name."
+        },
+        "agent_owner": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "Organization or individual that owns this agent."
+        },
+        "owner_contact": {
+          "type": "string",
+          "format": "uri",
+          "description": "mailto: or https: URL for contacting the owner."
+        }
+      }
+    },
+    "attestation": {
+      "type": "object",
+      "required": ["subject_public_key", "subject_algorithm", "signature", "signed_payload_hash"],
+      "additionalProperties": false,
+      "properties": {
+        "subject_public_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]{43,44}={0,2}$",
+          "description": "Base64 Ed25519 public key of the agent (32 raw bytes or 44-byte SPKI)."
+        },
+        "subject_algorithm": {
+          "type": "string",
+          "enum": ["Ed25519"]
+        },
+        "signature": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]{86,88}={0,2}$",
+          "description": "Base64 Ed25519 signature (64 raw bytes → 86+2 base64 chars)."
+        },
+        "signed_payload_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Hex SHA-256 of the RFC 8785 JCS canonical payload."
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "required": ["filesystem", "network", "shell", "credentials", "process"],
+      "additionalProperties": false,
+      "properties": {
+        "filesystem": {
+          "type": "object",
+          "required": ["read", "write"],
+          "properties": {
+            "read": { "type": "string", "enum": ["none", "own_dir", "temp_dir", "home_dir", "system", "all"] },
+            "write": { "type": "string", "enum": ["none", "own_dir", "temp_dir", "home_dir", "system", "all"] }
+          }
+        },
+        "network": {
+          "type": "object",
+          "required": ["egress", "ingress"],
+          "properties": {
+            "egress": { "type": "string", "enum": ["none", "allowlist", "all"] },
+            "ingress": { "type": "string", "enum": ["none", "bound_ports", "all"] }
+          }
+        },
+        "shell": {
+          "type": "object",
+          "required": ["exec", "spawn"],
+          "properties": {
+            "exec": { "type": "string", "enum": ["none", "sandboxed", "unrestricted"] },
+            "spawn": { "type": "string", "enum": ["none", "sandboxed", "unrestricted"] }
+          }
+        },
+        "credentials": {
+          "type": "object",
+          "required": ["read_env", "read_files"],
+          "properties": {
+            "read_env": { "type": "string", "enum": ["none", "allowlist", "all"] },
+            "read_files": { "type": "string", "enum": ["none", "allowlist", "all"] }
+          }
+        },
+        "process": {
+          "type": "object",
+          "required": ["subprocess", "signals"],
+          "properties": {
+            "subprocess": { "type": "string", "enum": ["none", "sandboxed", "unrestricted"] },
+            "signals": { "type": "string", "enum": ["none", "own", "all"] }
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["audit_pipeline", "audit_completed_at", "static_checks", "dynamic_checks", "runtime_checks", "findings"],
+      "additionalProperties": false,
+      "properties": {
+        "audit_pipeline": { "type": "string" },
+        "audit_completed_at": { "type": "string", "format": "date-time" },
+        "static_checks": {
+          "type": "object",
+          "required": ["metadata", "semgrep_rules_count", "secret_patterns_count", "dependency_scan", "malware_patterns_count", "malware_family_signatures_count", "prompt_injection_rules_count"],
+          "properties": {
+            "metadata": { "type": "boolean" },
+            "semgrep_rules_count": { "type": "integer", "minimum": 0 },
+            "secret_patterns_count": { "type": "integer", "minimum": 0 },
+            "dependency_scan": { "type": "boolean" },
+            "malware_patterns_count": { "type": "integer", "minimum": 0 },
+            "malware_family_signatures_count": { "type": "integer", "minimum": 0 },
+            "prompt_injection_rules_count": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "dynamic_checks": {
+          "type": "object",
+          "required": ["sandbox_run", "sandbox_runtime_ms", "sandbox_exit_code", "sandbox_network_blocked", "sandbox_fs_read_only", "sandbox_cap_drop_all"],
+          "properties": {
+            "sandbox_run": { "type": "boolean" },
+            "sandbox_runtime_ms": { "type": "integer", "minimum": 0 },
+            "sandbox_exit_code": { "type": "integer" },
+            "sandbox_network_blocked": { "type": "boolean" },
+            "sandbox_fs_read_only": { "type": "boolean" },
+            "sandbox_cap_drop_all": { "type": "boolean" }
+          }
+        },
+        "runtime_checks": {
+          "type": "object",
+          "required": ["interceptor_rules_count", "interceptor_blocks", "interceptor_warns"],
+          "properties": {
+            "interceptor_rules_count": { "type": "integer", "minimum": 0 },
+            "interceptor_blocks": { "type": "integer", "minimum": 0 },
+            "interceptor_warns": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["layer", "rule_id", "severity", "description"],
+            "properties": {
+              "layer": { "type": "string" },
+              "rule_id": { "type": "string" },
+              "severity": { "type": "string", "enum": ["info", "low", "medium", "high", "critical"] },
+              "description": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "required": ["trust_score", "risk_level", "decision_authority", "score_explanation", "scored_at"],
+      "additionalProperties": false,
+      "properties": {
+        "trust_score": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "risk_level": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+        "decision_authority": { "type": "string", "enum": ["issuer", "consumer"], "const": "consumer" },
+        "score_explanation": { "type": "string" },
+        "scored_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "revocation": {
+      "type": "object",
+      "required": ["revocation_check_url", "revocation_check_method", "revocation_check_required"],
+      "additionalProperties": false,
+      "properties": {
+        "revocation_check_url": { "type": "string", "format": "uri" },
+        "revocation_check_method": { "type": "string", "enum": ["ocsp", "crl", "simple_json"] },
+        "revocation_check_required": { "type": "boolean" }
+      }
+    },
+    "validity": {
+      "type": "object",
+      "required": ["issued_at", "expires_at", "max_ttl_days"],
+      "additionalProperties": false,
+      "properties": {
+        "issued_at": { "type": "string", "format": "date-time" },
+        "expires_at": { "type": "string", "format": "date-time" },
+        "max_ttl_days": { "type": "integer", "minimum": 1, "maximum": 365 }
+      }
+    },
+    "delegation": {
+      "type": ["object", "null"],
+      "required": ["parent_card_id", "delegated_capabilities", "delegation_signature"],
+      "properties": {
+        "parent_card_id": { "type": "string", "pattern": "^ATC-\\d{4}-\\d{6,}$" },
+        "delegated_capabilities": { "type": "object" },
+        "delegation_signature": { "type": "string" }
+      }
+    },
+    "runtime_trust": {
+      "type": ["object", "null"],
+      "required": ["observed_behavior", "behavioral_score", "drift_detected", "last_observed_at"],
+      "properties": {
+        "observed_behavior": {
+          "type": "object",
+          "required": ["calls_blocked", "calls_warned", "calls_allowed", "observation_window_hours"],
+          "properties": {
+            "calls_blocked": { "type": "integer", "minimum": 0 },
+            "calls_warned": { "type": "integer", "minimum": 0 },
+            "calls_allowed": { "type": "integer", "minimum": 0 },
+            "observation_window_hours": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "behavioral_score": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "drift_detected": { "type": "boolean" },
+        "last_observed_at": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

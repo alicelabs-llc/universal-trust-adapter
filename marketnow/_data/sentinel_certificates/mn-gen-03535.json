@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5427413",
+  "skill_id": "mn-gen-03535",
+  "skill_name": "Devonthink-mcp-server",
+  "issued_at": "2026-07-06T05:23:47.413Z",
+  "expires_at": "2026-07-13T05:23:47.413Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 3,
+  "max_score": 10,
+  "risk_level": "high",
+  "risk_breakdown": {
+    "l15_l16": "high",
+    "l2": "not_available",
+    "final": "high"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "cfc81efde0d6a2857e9a56840ae159b05b8a5030c6fa0fe2c22814fd3df2aa55",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-03535"
+}

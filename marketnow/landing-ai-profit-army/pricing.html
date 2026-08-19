@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MarketNow - Premium AI Agent Skills</title>
+<meta name="description" content="MarketNow marketplace - Deploy autonomous AI agents for e-commerce, lead generation, content creation, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{--bg:#0a0e1a;--bg2:#111827;--card:#1a1f35;--card-h:#1f2547;--bd:#1e2a4a;--a:#00d4ff;--a2:#0099cc;--g:#00ff88;--g2:#00cc6a;--t:#f1f5f9;--t2:#94a3b8;--t3:#64748b;--f:'Inter',sans-serif;--m:'JetBrains Mono',monospace}
+body{font-family:var(--f);background:var(--bg);color:var(--t);min-height:100vh;line-height:1.6;overflow-x:hidden}
+.bg-grid{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px}
+.bg-glow{position:fixed;top:-30%;left:-20%;width:70%;height:70%;background:radial-gradient(ellipse,rgba(0,212,255,0.06),transparent 70%);pointer-events:none;z-index:0;animation:gp 8s ease-in-out infinite}
+.bg-glow-2{position:fixed;bottom:-20%;right:-10%;width:60%;height:60%;background:radial-gradient(ellipse,rgba(0,255,136,0.04),transparent 70%);pointer-events:none;z-index:0;animation:gp 10s ease-in-out infinite reverse}
+@keyframes gp{0%,100%{opacity:0.6;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
+nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,14,26,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,0.08);transition:all .3s}
+nav.s{border-bottom-color:rgba(0,212,255,0.15);background:rgba(10,14,26,0.95)}
+.nb{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+.bi{width:36px;height:36px;background:linear-gradient(135deg,var(--a),var(--g));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:#0a0e1a}
+.bt{font-size:1.25rem;font-weight:700;color:var(--t)}
+.bt span{color:var(--a)}
+.nl{display:flex;align-items:center;gap:1.5rem;list-style:none}
+.nl a{color:var(--t2);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s;padding:.5rem 0;position:relative}
+.nl a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--a);transition:width .3s}
+.nl a:hover{color:var(--t)}
+.nl a:hover::after{width:100%}
+.nc{padding:.6rem 1.5rem;background:linear-gradient(135deg,var(--a),var(--a2));border-radius:8px;color:#0a0e1a !important;font-weight:600 !important;transition:all .3s !important}
+.nc::after{display:none !important}
+.nc:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,212,255,0.3);color:#0a0e1a !important}
+.mb{display:none;background:none;border:none;color:var(--t);font-size:1.5rem;cursor:pointer;padding:.5rem}
+.hero{position:relative;z-index:1;padding:140px 2rem 80px;text-align:center;max-width:900px;margin:0 auto}
+.hb{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.2rem;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.2);border-radius:50px;font-size:.8rem;font-weight:500;color:var(--a);margin-bottom:1.5rem;letter-spacing:.5px}
+.hero h1{font-size:clamp(1.8rem,5vw,3.5rem);font-weight:800;line-height:1.15;margin-bottom:1rem;background:linear-gradient(135deg,#f1f5f9 0%,var(--a) 50%,var(--g) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.15rem;color:var(--t2);max-width:650px;margin:0 auto 2rem;line-height:1.7}
+.hs{display:flex;justify-content:center;gap:3rem;margin-top:2.5rem;flex-wrap:wrap}
+.hst{text-align:center}
+.hsn{font-size:1.8rem;font-weight:700;color:var(--g);font-family:var(--m)}
+.hsl{font-size:.85rem;color:var(--t3);margin-top:.15rem}
+.sh{text-align:center;margin-bottom:3rem;position:relative;z-index:1}
+.sh h2{font-size:2.2rem;font-weight:700;margin-bottom:.75rem}
+.sh h2 span{color:var(--a)}
+.sh p{color:var(--t2);font-size:1rem;max-width:550px;margin:0 auto}
+.st{display:inline-block;padding:.35rem 1rem;background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.15);border-radius:50px;font-size:.75rem;font-weight:600;color:var(--g);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1rem}
+.ss{padding:0 2rem 5rem;max-width:1280px;margin:0 auto}
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;position:relative;z-index:1}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:1.75rem;position:relative;transition:all .3s;display:flex;flex-direction:column}
+.c::before{content:'';position:absolute;inset:-1px;border-radius:17px;padding:1px;background:linear-gradient(135deg,rgba(0,212,255,0.2),transparent,rgba(0,255,136,0.1));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;pointer-events:none}
+.c:hover{transform:translateY(-4px);border-color:rgba(0,212,255,0.2);background:var(--card-h);box-shadow:0 8px 40px rgba(0,212,255,0.08)}
+.c:hover::before{opacity:1}
+.ch{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}
+.ci{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:rgba(0,212,255,0.1);color:var(--a);flex-shrink:0}
+.ci.g{background:rgba(0,255,136,0.1);color:var(--g)}
+.ci.pu{background:rgba(139,92,246,0.1);color:#a78bfa}
+.ci.o{background:rgba(245,158,11,0.1);color:#fbbf24}
+.ci.pk{background:rgba(236,72,153,0.1);color:#f472b6}
+.tb{font-size:.65rem;font-weight:700;padding:.3rem .8rem;border-radius:50px;text-transform:uppercase;letter-spacing:1px;flex-shrink:0}
+.tb.premium{background:linear-gradient(135deg,rgba(245,158,11,0.15),rgba(249,115,22,0.15));color:#fbbf24;border:1px solid rgba(245,158,11,0.2)}
+.tb.std{background:linear-gradient(135deg,rgba(139,92,246,0.15),rgba(99,102,241,0.15));color:#a78bfa;border:1px solid rgba(139,92,246,0.2)}
+.ct{font-size:1.15rem;font-weight:700;margin-bottom:.35rem}
+.cp{font-size:2.2rem;font-weight:800;color:var(--a);font-family:var(--m);line-height:1.2;margin-bottom:1.25rem}
+.cf{list-style:none;margin-bottom:1.5rem;flex:1}
+.cf li{padding:.4rem 0;font-size:.88rem;color:var(--t2);display:flex;align-items:flex-start;gap:.6rem}
+.cf li i{color:var(--g);font-size:.75rem;margin-top:.3rem;flex-shrink:0}
+.lc{display:inline-flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--t3);margin-bottom:1rem;padding:.25rem .75rem;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.1);border-radius:6px;align-self:flex-start}
+.lc i{color:var(--g);font-size:.65rem}
+.btn{width:100%;padding:.85rem;border:none;border-radius:10px;font-family:var(--f);font-size:.95rem;font-weight:600;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.5rem;color:#0a0e1a;background:linear-gradient(135deg,var(--a),var(--a2));position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,0.1));opacity:0;transition:opacity .3s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(0,212,255,0.3)}
+.btn:hover::after{opacity:1}
+.btn.grn{background:linear-gradient(135deg,var(--g),var(--g2))}
+.btn.grn:hover{box-shadow:0 6px 25px rgba(0,255,136,0.3)}
+.bs{padding:0 2rem 5rem;max-width:1280px;margin:0 auto}
+.bg{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem;position:relative;z-index:1}
+.bc{background:linear-gradient(135deg,#1a1f35,#1a2038);border:1px solid var(--bd);border-radius:20px;padding:2rem;position:relative;transition:all .3s;overflow:hidden}
+.bc.bv{border-color:rgba(0,212,255,0.3);background:linear-gradient(135deg,#1a1f35,#0f1a35)}
+.bc.bv::before{content:'';position:absolute;inset:-1px;border-radius:21px;padding:1px;background:linear-gradient(135deg,var(--a),var(--g),var(--a));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;animation:spin 4s linear infinite}
+@keyframes spin{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
+.bb{position:absolute;top:1rem;right:1rem;padding:.3rem .9rem;background:linear-gradient(135deg,#ef4444,#dc2626);border-radius:50px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.bt2{font-size:1.3rem;font-weight:700;margin-bottom:.5rem}
+.bsk{font-size:.82rem;color:var(--t3);margin-bottom:1rem;line-height:1.5}
+.bpr{display:flex;align-items:baseline;gap:.75rem;margin-bottom:1.25rem}
+.bp{font-size:2.5rem;font-weight:800;color:var(--a);font-family:var(--m)}
+.bo{font-size:1.1rem;color:var(--t3);text-decoration:line-through}
+.bsv{font-size:.75rem;font-weight:600;color:var(--g);padding:.25rem .7rem;background:rgba(0,255,136,0.1);border-radius:6px}
+.bf{list-style:none;margin-bottom:1.5rem}
+.bf li{padding:.35rem 0;font-size:.85rem;color:var(--t2);display:flex;align-items:center;gap:.6rem}
+.bf li i{color:var(--g);font-size:.7rem}
+.bnb{width:100%;padding:.95rem;border:none;border-radius:12px;font-family:var(--f);font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.bnb.bv{background:linear-gradient(135deg,var(--a),var(--g));color:#0a0e1a}
+.bnb.bv:hover{box-shadow:0 6px 30px rgba(0,212,255,0.3);transform:translateY(-2px)}
+.bnb.sc{background:var(--card);color:var(--t);border:1px solid var(--bd)}
+.bnb.sc:hover{background:var(--card-h);border-color:var(--a)}
+.ps{padding:0 2rem 4rem;max-width:800px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.ps h3{font-size:1.1rem;font-weight:600;margin-bottom:1.5rem;color:var(--t2)}
+.pm{display:flex;justify-content:center;align-items:center;gap:2.5rem;flex-wrap:wrap}
+.pmi{display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:1.25rem 2rem;background:var(--card);border:1px solid var(--bd);border-radius:12px;transition:all .3s;min-width:120px}
+.pmi:hover{border-color:var(--a);background:var(--card-h);transform:translateY(-2px)}
+.pmi i{font-size:2rem}
+.pmi .fa-paypal{color:#0070ba}
+.pmi .fa-btc{color:#f7931a}
+.pmi .fa-ethereum{color:#8b8cf7}
+.pmi .fa-credit-card{color:var(--a)}
+.pmi span{font-size:.8rem;color:var(--t2);font-weight:500}
+.ft{border-top:1px solid var(--bd);padding:2rem;text-align:center;position:relative;z-index:1;background:var(--bg2)}
+.fl{display:flex;justify-content:center;gap:2rem;margin-bottom:1rem;flex-wrap:wrap}
+.fl a{color:var(--t3);text-decoration:none;font-size:.85rem;transition:color .2s;display:flex;align-items:center;gap:.4rem}
+.fl a:hover{color:var(--a)}
+.fc{font-size:.8rem;color:var(--t3)}
+.mo{display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1rem}
+.mo.active{display:flex}
+.m{background:var(--card);border:1px solid var(--bd);border-radius:20px;max-width:520px;width:100%;padding:2.5rem;position:relative;animation:mi .3s}
+@keyframes mi{from{opacity:0;transform:scale(0.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.mc{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--t3);font-size:1.2rem;cursor:pointer;transition:color .2s;padding:.4rem}
+.mc:hover{color:var(--t)}
+.mi{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 1rem;background:rgba(0,212,255,0.1);color:var(--a)}
+.m h3{text-align:center;font-size:1.3rem;font-weight:700;margin-bottom:.5rem}
+.msn{text-align:center;font-size:1rem;color:var(--a);font-weight:500;margin-bottom:1.5rem}
+.mpr{text-align:center;font-size:2rem;font-weight:800;color:var(--a);font-family:var(--m);margin-bottom:1.5rem}
+.mpo{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem}
+.mpb{padding:.85rem;border:1px solid var(--bd);border-radius:10px;font-family:var(--f);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .3s;background:var(--bg2);color:var(--t);display:flex;align-items:center;justify-content:center;gap:.5rem}
+.mpb:hover{border-color:var(--a);background:var(--card-h)}
+.mpb.pp{color:#0070ba}
+.mpb.pp:hover{background:rgba(0,112,186,0.1)}
+.mpb.cr{color:#f7931a}
+.mpb.cr:hover{background:rgba(247,147,26,0.1)}
+.mpb.pr{background:linear-gradient(135deg,var(--a),var(--a2));color:#0a0e1a;border:none;grid-column:1/-1}
+.mpb.pr:hover{box-shadow:0 4px 20px rgba(0,212,255,0.3);transform:translateY(-1px)}
+.ms{text-align:center;font-size:.75rem;color:var(--t3);display:flex;align-items:center;justify-content:center;gap:.4rem}
+.ms i{color:var(--g)}
+@media(max-width:768px){
+.nl{display:none}
+.mb{display:block}
+.nl.mo2{display:flex;flex-direction:column;position:absolute;top:72px;left:0;width:100%;background:rgba(10,14,26,0.98);backdrop-filter:blur(20px);padding:1.5rem 2rem;border-bottom:1px solid var(--bd);gap:1rem}
+.hero{padding:120px 1rem 60px}
+.hs{gap:1.5rem}
+.sg{grid-template-columns:1fr}
+.bg{grid-template-columns:1fr}
+.m{padding:1.5rem}
+.mpo{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+<div class="bg-glow-2"></div>
+
+<nav id="nav">
+<a href="#" class="nb"><div class="bi">M</div><span class="bt">Market<span>Now</span></span></a>
+<button class="mb" id="mobBtn" aria-label="Menu"><i class="fas fa-bars"></i></button>
+<ul class="nl" id="navL">
+<li><a href="https://ai-profit-army.vercel.app">Home</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#bundles">Bundles</a></li>
+<li><a href="https://ai-profit-army.vercel.app" class="nc"><i class="fas fa-arrow-up-right-from-square"></i> Visit Store</a></li>
+</ul>
+</nav>
+
+<section class="hero">
+<div class="hb"><i class="fas fa-sparkles"></i> AI Agent Marketplace</div>
+<h1>MarketNow<br>Premium AI Agent Skills</h1>
+<p>Deploy production-ready autonomous AI agents that handle real business workflows. One license, lifetime use &mdash; no subscriptions.</p>
+<div class="hs">
+<div class="hst"><div class="hsn">10</div><div class="hsl">Agent Skills</div></div>
+<div class="hst"><div class="hsn">$514</div><div class="hsl">Total Value</div></div>
+<div class="hst"><div class="hsn">42%</div><div class="hsl">Max Savings</div></div>
+<div class="hst"><div class="hsn">&check;</div><div class="hsl">Lifetime License</div></div>
+</div>
+</section>
+
+<section class="ss" id="skills">
+<div class="sh"><div class="st">Agent Skills</div><h2>Choose Your <span>Agent Skill</span></h2><p>Each skill is a complete, drop-in agent capability with full documentation and lifetime updates.</p></div>
+<div class="sg" id="sg"></div>
+</section>
+
+<section class="bs" id="bundles">
+<div class="sh"><div class="st">Best Value</div><h2>Savings <span>Bundles</span></h2><p>Combine skills and save big. All bundles include lifetime license and updates.</p></div>
+<div class="bg" id="bg"></div>
+</section>
+
+<section class="ps">
+<h3><i class="fas fa-lock" style="color:var(--g);margin-right:.5rem"></i>Accepted Payment Methods</h3>
+<div class="pm">
+<div class="pmi"><i class="fab fa-paypal"></i><span>PayPal</span></div>
+<div class="pmi"><i class="fab fa-btc"></i><span>Bitcoin</span></div>
+<div class="pmi"><i class="fab fa-ethereum"></i><span>Ethereum</span></div>
+<div class="pmi"><i class="fas fa-credit-card"></i><span>Credit Card</span></div>
+</div>
+</section>
+
+<footer class="ft">
+<div class="fl">
+<a href="https://ai-profit-army.vercel.app"><i class="fas fa-globe"></i> AI Profit Army</a>
+<a href="https://github.com/edgarfloresguerra2011-a11y/marketnow" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+<a href="#"><i class="fas fa-file-contract"></i> License</a>
+<a href="#"><i class="fas fa-envelope"></i> Support</a>
+</div>
+<div class="fc">&copy; 2026 MarketNow by <strong>Edison Flores (AliceLabs LLC)</strong>. All rights reserved.</div>
+</div>
+<div style="max-width:900px;margin:0 auto;padding:2rem 2rem 0;position:relative;z-index:1;text-align:center;border-top:1px solid var(--bd);">
+<div style="display:inline-block;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:1.25rem 2rem;margin-top:2rem;">
+<div style="font-size:.75rem;color:var(--t3);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:1px;">VENDOR &mdash; SEND PAYMENT DIRECTLY TO</div>
+<div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+<div style="background:var(--bg2);padding:.6rem 1rem;border-radius:8px;font-size:.8rem;">
+<i class="fab fa-paypal" style="color:#0070ba"></i> <strong>PayPal:</strong> support@alicelabs.site
+</div>
+<div style="background:var(--bg2);padding:.6rem 1rem;border-radius:8px;font-size:.8rem;font-family:var(--m);">
+<i class="fab fa-ethereum" style="color:#8b8cf7"></i> <strong>USDC (Base):</strong> 0x3247a5E0A96c8FB048...
+</div>
+<div style="background:var(--bg2);padding:.6rem 1rem;border-radius:8px;font-size:.8rem;font-family:var(--m);">
+<i class="fab fa-btc" style="color:#f7931a"></i> <strong>USDT (TRON):</strong> TXYZ1234567890...
+</div>
+</div>
+</div>
+</footer>
+
+<div class="mo" id="modal">
+<div class="m">
+<button class="mc" id="mClose"><i class="fas fa-times"></i></button>
+<div class="mi"><i class="fas fa-shopping-cart"></i></div>
+<h3>Purchase License</h3>
+<div class="msn" id="mName">-</div>
+<div class="mpr" id="mPrice">$0</div>
+<div class="mpo">
+<button class="mpb pp" id="payBtn1"><i class="fab fa-paypal"></i> PayPal</button>
+<button class="mpb cr" id="payBtn2"><i class="fab fa-btc"></i> Crypto</button>
+<button class="mpb pr" id="payBtn3"><i class="fas fa-credit-card"></i> Pay with Card</button>
+</div>
+<div class="ms"><i class="fas fa-shield-alt"></i> Secure checkout via SSL &middot; <i class="fas fa-infinity"></i> Lifetime license</div>
+</div>
+</div>
+
+<script>
+const skills = [
+{id:"mpp",name:"Multi-Platform Publisher",price:47,tier:"Premium",ico:"fas fa-book-open",ic:"o",
+f:["Publish to KDP, Gumroad, Hotmart & Shopify","AI-generated covers & previews","Cross-platform launch campaigns","Unified product dashboard"]},
+{id:"mem",name:"MemCore AI",price:39,tier:"Premium",ico:"fas fa-brain",ic:"pu",
+f:["Persistent cross-session memory","User preference learning","Context window optimization","Auto-summarization engine"]},
+{id:"ape",name:"Agent Pricing Engine",price:57,tier:"Premium",ico:"fas fa-tags",ic:"pk",
+f:["Dynamic value-based pricing calculator","Estimate complexity & time cost","Generate professional quotes","Negotiation mode & terms"]},
+{id:"mcf",name:"Multimodal Content Factory",price:44,tier:"Premium",ico:"fas fa-palette",ic:"pu",
+f:["One input to many output formats","Auto-adapt for blog, social & video","AI visual asset generation","Cross-platform publishing"]},
+{id:"aqa",name:"Autonomous QA Agent",price:49,tier:"Premium",ico:"fas fa-shield-halved",ic:"g",
+f:["Self-verify outputs for correctness","Hallucination detection engine","Format & policy compliance","Automated quality gates"]},
+{id:"lga",name:"Lead Generation Automator",price:67,tier:"Premium",ico:"fas fa-users",ic:"o",
+f:["Find & enrich B2B/B2C prospects","Automated contact data scraping","AI-powered lead scoring","Build targeted outreach lists"]},
+{id:"ama",name:"API Marketplace Aggregator",price:34,tier:"Standard",ico:"fas fa-plug",ic:"pu",
+f:["Discover 1000+ third-party APIs","Side-by-side pricing comparison","Unified key management","One-click integration"]},
+{id:"aes",name:"Agent Ecommerce Suite",price:79,tier:"Premium",ico:"fas fa-store",ic:"o",
+f:["Full-stack autonomous store management","Order processing & inventory","Customer support automation","Marketing campaign engine"]},
+{id:"cba",name:"Cross-Platform Browser Agent",price:44,tier:"Premium",ico:"fas fa-window-maximize",ic:"g",
+f:["Automate any website without API","Form filling & data extraction","Multi-step workflow automation","Visual monitoring & alerts"]},
+{id:"aso",name:"Agent Sentiment Orchestrator",price:54,tier:"Premium",ico:"fas fa-chart-line",ic:"pk",
+f:["Multi-channel sentiment analysis","Auto-prioritize brand alerts","Context-aware response generation","Human escalation routing"]}
+];
+
+const bundles = [
+{name:"Bundle All 10 Skills",skills:"All 10 Premium Agent Skills",price:297,orig:514,sv:"42% OFF",
+f:["Every skill in the catalog","Full lifetime license","Priority support","All future updates"],best:true},
+{name:"Sales Suite Bundle",skills:"Pricing Engine + Lead Gen + Ecommerce + Sentiment",price:203,orig:257,sv:"21% OFF",
+f:["Complete sales pipeline automation","From lead to conversion to support","Full lifetime license","Unified integration"],best:false},
+{name:"Content Bundle",skills:"Publisher + Content Factory + Sentiment",price:91,orig:145,sv:"37% OFF",
+f:["End-to-end content production","Multi-platform distribution","Sentiment-driven optimization","Full lifetime license"],best:false}
+];
+
+function renderSkills(){
+const g=document.getElementById("sg");
+g.innerHTML=skills.map(s=>{
+const tCls=s.tier==="Premium"?"premium":"std";
+const bCls=s.name==="Agent Ecommerce Suite"||s.name==="Lead Generation Automator"?"grn":"";
+return '<div class="c">'+
+'<div class="ch"><div class="ci '+s.ic+'"><i class="'+s.ico+'"></i></div><span class="tb '+tCls+'">'+s.tier+'</span></div>'+
+'<div class="ct">'+s.name+'</div>'+
+'<div class="cp">$'+s.price+'</div>'+
+'<ul class="cf">'+s.f.map(f=>'<li><i class="fas fa-check"></i>'+f+'</li>').join("")+'</ul>'+
+'<div class="lc"><i class="fas fa-check-circle"></i> License verified &amp; active</div>'+
+'<button class="btn '+bCls+'" onclick="openModal(\''+s.name+'\','+s.price+')"><i class="fas fa-shopping-cart"></i> Buy Now &mdash; $'+s.price+'</button>'+
+'</div>'
+}).join("");
+}
+
+function renderBundles(){
+const g=document.getElementById("bg");
+g.innerHTML=bundles.map(b=>{
+return '<div class="bc'+(b.best?' bv':'')+'">'+
+(b.best?'<div class="bb">Best Value</div>':'')+
+'<div class="bt2">'+b.name+'</div>'+
+'<div class="bsk">'+b.skills+'</div>'+
+'<div class="bpr"><span class="bp">$'+b.price+'</span><span class="bo">$'+b.orig+'</span><span class="bsv">'+b.sv+'</span></div>'+
+'<ul class="bf">'+b.f.map(f=>'<li><i class="fas fa-check"></i>'+f+'</li>').join("")+'</ul>'+
+'<button class="bnb '+(b.best?'bv':'sc')+'" onclick="openModal(\''+b.name+'\','+b.price+')"><i class="fas fa-gem"></i> Get Bundle &mdash; $'+b.price+'</button>'+
+'</div>'
+}).join("");
+}
+
+function openModal(name,price){
+document.getElementById("mName").textContent=name;
+document.getElementById("mPrice").textContent="$"+price;
+document.getElementById("modal").classList.add("active");
+document.body.style.overflow="hidden";
+}
+
+function closeModal(){
+document.getElementById("modal").classList.remove("active");
+document.body.style.overflow="";
+}
+
+document.getElementById("mClose").onclick=closeModal;
+document.getElementById("modal").onclick=function(e){if(e.target===this)closeModal()};
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal()});
+
+document.getElementById("payBtn1").onclick=function(){
+var name=document.getElementById("mName").textContent;
+var price=document.getElementById("mPrice").textContent;
+var subject="MarketNow Purchase: "+name+" - "+price;
+var body="Hello, I want to purchase:\n\n"+name+" - "+price+"\n\nMy email: [YOUR EMAIL]\nMy preferred platform: PayPal\n\nPlease send invoice.";
+window.location.href="mailto:support@alicelabs.site?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
+closeModal()};
+document.getElementById("payBtn2").onclick=function(){
+var name=document.getElementById("mName").textContent;
+var price=document.getElementById("mPrice").textContent;
+var msg="=== MARKETNOW CRYPTO PAYMENT ===\n\nSkill: "+name+"\nAmount: "+price+"\n\n--- SEND TO ---\nUSDC (Base Network):\n0x3247a5E0A96c8FB048Aa9c8b1Be7d15dfFb8Ad57\n\nUSDT (TRON TRC-20):\nTXYZ1234567890TRONADDRESS\n\nPayPal (if crypto not available):\nsupport@alicelabs.site\n\nAfter payment, send TXID to the same email to receive your license key.";
+alert(msg);
+closeModal()};
+document.getElementById("payBtn3").onclick=function(){
+window.location.href="mailto:support@alicelabs.site?subject=MarketNow%20Card%20Purchase&body=Hello%2C%20I%20want%20to%20purchase%20via%20credit%20card.%20Please%20send%20invoice.";
+closeModal()};
+
+document.getElementById("mobBtn").onclick=function(){
+document.getElementById("navL").classList.toggle("mo2");
+};
+
+window.onscroll=function(){
+const n=document.getElementById("nav");
+if(window.scrollY>50){n.classList.add("s")}else{n.classList.remove("s")}
+};
+
+renderSkills();
+renderBundles();
+</script>
+</body>
+</html>

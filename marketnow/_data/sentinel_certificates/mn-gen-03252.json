@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5415464",
+  "skill_id": "mn-gen-03252",
+  "skill_name": "Destiny2-mcp-server",
+  "issued_at": "2026-07-06T05:23:35.464Z",
+  "expires_at": "2026-07-13T05:23:35.464Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "d60e2f28c6c58f7a3f0a310cc62debcadbb62a719f697e553c5e2ac28a5ce9c9",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-03252"
+}

@@ -1,0 +1,82 @@
+{
+  "name": "marketnow",
+  "version": "1.0.0",
+  "description": "MarketNow MCP Server — search and discover 5,054 verified MCP skills from any agent runtime",
+  "homepage": "https://marketnow.site",
+  "npm_package": "marketnow-mcp",
+  "npm_url": "https://www.npmjs.com/package/marketnow-mcp",
+  "install": "npx -y marketnow-mcp",
+  "transport": "stdio",
+  "note": "MarketNow MCP server uses stdio transport (not HTTP). Install via npx -y marketnow-mcp and add to your agent's MCP config. HTTP transport (SSE/WebSocket) is on the roadmap.",
+  "tools": [
+    {
+      "name": "search_skills",
+      "description": "Search skills by query, category, or max price",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "Natural language or keyword search" },
+          "category": { "type": "string", "description": "Filter by category" },
+          "max_price": { "type": "number", "description": "Maximum price in USD" },
+          "limit": { "type": "number", "description": "Max results (default 10)" }
+        }
+      }
+    },
+    {
+      "name": "get_skill",
+      "description": "Get full details of a specific skill",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "skill_id": { "type": "string", "description": "Skill ID (e.g. mn-ai-00001) or slug" }
+        },
+        "required": ["skill_id"]
+      }
+    },
+    {
+      "name": "list_categories",
+      "description": "List all 25 categories with counts",
+      "inputSchema": { "type": "object", "properties": {} }
+    },
+    {
+      "name": "get_manifest",
+      "description": "Get marketplace metadata",
+      "inputSchema": { "type": "object", "properties": {} }
+    },
+    {
+      "name": "get_install_command",
+      "description": "Get the install command for a skill",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "skill_id": { "type": "string" }
+        },
+        "required": ["skill_id"]
+      }
+    }
+  ],
+  "config_examples": {
+    "claude_desktop": {
+      "mcpServers": {
+        "marketnow": {
+          "command": "npx",
+          "args": ["-y", "marketnow-mcp"]
+        }
+      }
+    }
+  },
+  "marketplace_stats": {
+    "total_skills": 5054,
+    "categories": 25,
+    "price_min_usd": 0,
+    "price_max_usd": 9.99,
+    "price_avg_usd": 2.50,
+    "currency": "USD",
+    "payment_model": "one-time"
+  },
+  "discovery": {
+    "well_known": "https://marketnow.site/.well-known/mcp.json",
+    "agent_json": "https://marketnow.site/api/agent.json",
+    "manifest": "https://marketnow.site/api/manifest.json"
+  }
+}

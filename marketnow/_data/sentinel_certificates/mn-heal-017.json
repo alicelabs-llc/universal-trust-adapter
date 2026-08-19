@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6212217",
+  "skill_id": "mn-heal-017",
+  "skill_name": "Remote Patient Monitor",
+  "issued_at": "2026-07-06T05:36:52.217Z",
+  "expires_at": "2026-07-13T05:36:52.217Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "dcb379b6123acb28c9a9e56159a0a8312485e1d5929d9769a38676b86a7632fc",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-heal-017"
+}

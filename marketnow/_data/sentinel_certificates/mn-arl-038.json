@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6063205",
+  "skill_id": "mn-arl-038",
+  "skill_name": "Conversation Flow Designer",
+  "issued_at": "2026-07-06T05:34:23.205Z",
+  "expires_at": "2026-07-13T05:34:23.205Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 5,
+  "max_score": 10,
+  "risk_level": "high",
+  "risk_breakdown": {
+    "l15_l16": "high",
+    "l2": "not_available",
+    "final": "high"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "91e91552b1d226004e21e2509e6e3f6ccc283afe8e364ab773e085aa24112f84",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-arl-038"
+}

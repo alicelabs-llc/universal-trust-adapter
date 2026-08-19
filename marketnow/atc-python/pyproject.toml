@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-trust-card"
+version = "1.0.1"
+description = "ATC/1.0 Python SDK — issue and verify Agent Trust Cards (Ed25519, RFC 8785 JCS, SHA-256)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MNNC-1.0 (AliceLabs LLC Proprietary)" }
+authors = [{ name = "AliceLabs LLC", email = "info@alicelabs.site" }]
+keywords = [
+    "atc",
+    "agent-trust-card",
+    "ai-agents",
+    "agent-identity",
+    "agent-security",
+    "ed25519",
+    "rfc-8032",
+    "rfc-8785",
+    "jcs",
+    "mcp",
+    "verifiable-credentials",
+    "trust-layer"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: Other/Proprietary License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "cryptography>=41.0",
+    "requests>=2.28",
+]
+
+[project.urls]
+Homepage = "https://marketnow.site/atc"
+Repository = "https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/atc-python"
+Documentation = "https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md"
+"Bug Tracker" = "https://github.com/edgarfloresguerra2011-a11y/marketnow/issues"
+
+[tool.setuptools.packages.find]
+include = ["atc_sdk*"]
+
+[project.scripts]
+atc = "atc_sdk.cli:main"

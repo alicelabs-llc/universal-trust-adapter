@@ -1,0 +1,33 @@
+{
+  "certificate_id": "MN-SC-2026-9832715",
+  "skill_id": "mn-awmcp-opdstarnhimcp",
+  "skill_name": "opdstar-nhi-mcp",
+  "issued_at": "2026-07-26T04:23:52.715Z",
+  "expires_at": "2026-08-02T04:23:52.715Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "low",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": true
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_score": 10,
+    "l2_execution_status": "ran"
+  },
+  "signature": "7a099db53f5ce880c6c2a0251f2289a4245d4c628e1023d272709cdb8929c85a",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-awmcp-opdstarnhimcp"
+}

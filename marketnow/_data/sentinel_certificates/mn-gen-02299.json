@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5371888",
+  "skill_id": "mn-gen-02299",
+  "skill_name": "Claude-terminal-panel",
+  "issued_at": "2026-07-06T05:22:51.888Z",
+  "expires_at": "2026-07-13T05:22:51.888Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a16eb87c296c39a291d79e2d93aa9d43a7b11343a83dd2797d7be36dd23ef782",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-02299"
+}

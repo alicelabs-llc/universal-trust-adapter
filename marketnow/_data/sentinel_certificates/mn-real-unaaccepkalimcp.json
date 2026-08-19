@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-0924855",
+  "skill_id": "mn-real-unaaccepkalimcp",
+  "skill_name": "kali-mcp",
+  "issued_at": "2026-07-12T04:35:24.855Z",
+  "expires_at": "2026-07-19T04:35:24.855Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "fceb704c65bd5e127b81b011428f4acd1b0d50ef3c80ca63dae99137940b0b3d",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-unaaccepkalimcp"
+}

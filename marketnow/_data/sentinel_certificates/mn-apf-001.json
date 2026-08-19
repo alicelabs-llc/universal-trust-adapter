@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6085275",
+  "skill_id": "mn-apf-001",
+  "skill_name": "Latency Optimizer",
+  "issued_at": "2026-07-06T05:34:45.275Z",
+  "expires_at": "2026-07-13T05:34:45.275Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "c18228fe886d514d4eafe46848c774cf640a7c101642d10d53bd6c512255f9a2",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-apf-001"
+}

@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5387652",
+  "skill_id": "mn-gen-02672",
+  "skill_name": "Companyscope-mcp",
+  "issued_at": "2026-07-06T05:23:07.652Z",
+  "expires_at": "2026-07-13T05:23:07.652Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "5a6579df94d9364621eeae326cdf834b61d7ff754815687390a1974c818fddd5",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-02672"
+}

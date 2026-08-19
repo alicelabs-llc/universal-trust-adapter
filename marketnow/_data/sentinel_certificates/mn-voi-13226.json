@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5822370",
+  "skill_id": "mn-voi-13226",
+  "skill_name": "Voicepeak-mcp",
+  "issued_at": "2026-07-06T05:30:22.370Z",
+  "expires_at": "2026-07-13T05:30:22.370Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "c4cbea462b01cd3c0fb1f8b498ec18f80d59f726b24f60092996cbfb5453539d",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-voi-13226"
+}

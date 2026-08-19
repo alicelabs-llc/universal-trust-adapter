@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-agentdeals",
+  "timestamp": "2026-07-06T02:56:19Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 3,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 249,
+  "stdout_sample": "agentdeals MCP server running on http://localhost:3000/mcp [referral-health] Checked 1 URLs: 0 valid, 1 invalid Sitemap ping www.bing.com failed: fetch failed Sitemap ping www.google.com failed: fetch failed IndexNow: skipped (INDEXNOW_KEY not set) ",
+  "l2_score": 7,
+  "l2_risk_level": "low"
+}

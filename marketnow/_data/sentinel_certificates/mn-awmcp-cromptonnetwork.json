@@ -1,0 +1,33 @@
+{
+  "certificate_id": "MN-SC-2026-9819625",
+  "skill_id": "mn-awmcp-cromptonnetwork",
+  "skill_name": "crompton-network",
+  "issued_at": "2026-07-26T04:23:39.625Z",
+  "expires_at": "2026-08-02T04:23:39.625Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 5,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "unknown",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": true
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_score": 0,
+    "l2_execution_status": "failed_to_start"
+  },
+  "signature": "196320eafaff67d6bf3758a523a3f8d89ef1ef03cb6b72039a1ac7876d01624f",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-awmcp-cromptonnetwork"
+}

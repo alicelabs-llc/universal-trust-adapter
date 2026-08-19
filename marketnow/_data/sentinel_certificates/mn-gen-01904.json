@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5354278",
+  "skill_id": "mn-gen-01904",
+  "skill_name": "Web-content-extractor-mcp",
+  "issued_at": "2026-07-06T05:22:34.278Z",
+  "expires_at": "2026-07-13T05:22:34.278Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "08bb18a0b15026d9d365e81fb6fb02d8659dc29657f7ba8d2df111ff2a409a07",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-01904"
+}
