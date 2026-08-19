@@ -8,7 +8,7 @@
  *   4. Compute SHA-256 of the canonical bytes → `signed_payload_hash`
  *   5. Sign the canonical bytes with the CA's Ed25519 private key → `signature`
  *
- * See: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md#atc-006--signature
+ * See: https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md#atc-006--signature
  */
 
 import { createHash } from 'node:crypto';

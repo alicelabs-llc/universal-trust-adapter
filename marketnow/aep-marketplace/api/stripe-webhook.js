@@ -75,7 +75,7 @@ async function handleCheckoutComplete(session) {
   try {
     const cfg = {
       token: process.env.MANDATES_GITHUB_TOKEN,
-      repo: process.env.MANDATES_REPO || 'edgarfloresguerra2011-a11y/marketnow',
+      repo: process.env.MANDATES_REPO || 'alicelabs-llc/marketnow',
       branch: process.env.MANDATES_BRANCH || 'master',
     };
     if (cfg.token) {

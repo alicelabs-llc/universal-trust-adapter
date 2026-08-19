@@ -35,7 +35,7 @@ Then a Python probe sends 60+ adversarial inputs across 6 categories:
 
 **Result:** 10/10 (low risk). Anthropic's server is clean. No network calls, no fs writes, no process spawns, no credential leakage, no suspicious file creation.
 
-Full audit result (public): https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/_data/l2_results/mn-mcp-filesystem.json
+Full audit result (public): https://github.com/alicelabs-llc/marketnow/blob/master/_data/l2_results/mn-mcp-filesystem.json
 
 **The 6 analysis layers:**
 1. stdout_passive — grep patterns in container output
@@ -55,7 +55,7 @@ Cost: ~5-10% overhead on syscall-heavy workloads. For MCP servers (mostly JSON-R
 - L4: Supply chain attestation (SLSA Level 3)
 - L5: Third-party audit (Trail of Bits, Cure53)
 
-If you want your MCP server audited, open an issue: https://github.com/edgarfloresguerra2011-a11y/marketnow/issues
+If you want your MCP server audited, open an issue: https://github.com/alicelabs-llc/marketnow/issues
 
 ---
 
@@ -75,7 +75,7 @@ I built [MarketNow](https://marketnow.site) — a marketplace for MCP servers wh
 **The result:** 10/10 (low risk). Anthropic's server is clean. ✓
 
 Full audit JSON (public):
-https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/_data/l2_results/mn-mcp-filesystem.json
+https://github.com/alicelabs-llc/marketnow/blob/master/_data/l2_results/mn-mcp-filesystem.json
 
 **What the audit checks:**
 - Did the server try to make network calls? (gVisor netstack + --network none)
@@ -97,7 +97,7 @@ There's no sandboxing built into MCP. You're trusting the author.
 
 MarketNow adds the security signal. Every server in the [registry](https://marketnow.site/registry) has a Sentinel score 0-10 and a signed SHA-256 certificate verifiable at [/verify](https://marketnow.site/verify).
 
-If you want your MCP server audited, open an issue: https://github.com/edgarfloresguerra2011-a11y/marketnow/issues
+If you want your MCP server audited, open an issue: https://github.com/alicelabs-llc/marketnow/issues
 
 ---
 
@@ -140,7 +140,7 @@ npx -y marketnow-mcp
 ```
 Works with Claude Desktop, Cursor, Cline, Continue, Aider — and any MCP-compatible runtime.
 
-If you want your MCP server audited, open an issue: https://github.com/edgarfloresguerra2011-a11y/marketnow/issues
+If you want your MCP server audited, open an issue: https://github.com/alicelabs-llc/marketnow/issues
 
 ---
 
@@ -173,4 +173,4 @@ Every server gets a score 0-10 and a signed SHA-256 certificate. Public verifica
 
 43 free skills, no signup. Paid skills $0.99-$9.99 one-time (Stripe or USDC on Base L2).
 
-If you want your MCP server audited, open an issue: https://github.com/edgarfloresguerra2011-a11y/marketnow/issues
+If you want your MCP server audited, open an issue: https://github.com/alicelabs-llc/marketnow/issues

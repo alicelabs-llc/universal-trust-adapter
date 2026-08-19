@@ -76,7 +76,7 @@ npx -y marketnow-mcp@1.7.0
 
 - Submit: https://marketnow.site/submit
 - Spec: https://marketnow.site/api/atc?action=spec
-- GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- GitHub: https://github.com/alicelabs-llc/marketnow
 - npm: https://www.npmjs.com/package/marketnow-mcp
 - Blog post: https://dev.to/edison_flores_6d2cd381b13
 

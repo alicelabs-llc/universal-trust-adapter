@@ -67,7 +67,7 @@ jobs:
           const path = require('path');
 
           const TOKEN = process.env.GITHUB_TOKEN;
-          const REPO = 'edgarfloresguerra2011-a11y/marketnow';
+          const REPO = 'alicelabs-llc/marketnow';
           const MAX = parseInt(process.env.MAX_SKILLS || '0', 10);
 
           if (!TOKEN) {

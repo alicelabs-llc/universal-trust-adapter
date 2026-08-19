@@ -7,14 +7,14 @@
 # Uso en tu workflow:
 #
 #   - name: MarketNow Security Audit
-#     uses: edgarfloresguerra2011-a11y/marketnow-audit@v1
+#     uses: alicelabs-llc/marketnow-audit@v1
 #     with:
 #       repo-url: https://github.com/owner/your-mcp-server
 #
 # O para auditar el repo actual:
 #
 #   - name: MarketNow Security Audit (self)
-#     uses: edgarfloresguerra2011-a11y/marketnow-audit@v1
+#     uses: alicelabs-llc/marketnow-audit@v1
 #     with:
 #       repo-url: ${{ github.server_url }}/${{ github.repository }}
 

@@ -75,7 +75,7 @@ Every one of our 8,582 MCP servers is now certified:
 - 🔍 Verify any certificate: https://marketnow.site/verify
 - 📊 Live dashboard: https://marketnow.site/sentinel-transparency
 - 📋 API: `GET /api/audit-skill?certificate=1&skillId=mn-gen-00003`
-- 💻 Open source: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- 💻 Open source: https://github.com/alicelabs-llc/marketnow
 
 ## What's next
 

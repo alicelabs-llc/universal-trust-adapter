@@ -1,10 +1,10 @@
 # agent-trust-card (Python)
 
-> **Issue and verify Agent Trust Cards in Python.** A small, framework-agnostic SDK for the [ATC/1.0 specification](https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md). Works in Python 3.9+.
+> **Issue and verify Agent Trust Cards in Python.** A small, framework-agnostic SDK for the [ATC/1.0 specification](https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md). Works in Python 3.9+.
 
 [![PyPI version](https://img.shields.io/pypi/v/agent-trust-card.svg)](https://pypi.org/project/agent-trust-card/)
 [![License: AliceLabs Proprietary](https://img.shields.io/badge/License-Proprietary-red)](LICENSE)
-[![Spec: ATC/1.0](https://img.shields.io/badge/Spec-ATC%2F1.0-brightgreen)](https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md)
+[![Spec: ATC/1.0](https://img.shields.io/badge/Spec-ATC%2F1.0-brightgreen)](https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md)
 
 ## Install
 
@@ -92,7 +92,7 @@ If you issue an ATC in Python and verify it in Node.js (or vice versa), the sign
 ## Conformance tests
 
 ```bash
-git clone https://github.com/edgarfloresguerra2011-a11y/marketnow.git
+git clone https://github.com/alicelabs-llc/marketnow.git
 cd marketnow/atc-python
 pip install cryptography requests
 python3 tests/test_conformance.py
@@ -105,3 +105,12 @@ Expected: 22/22 assertions passing.
 MNNC-1.0 (AliceLabs LLC Proprietary). For licensing: legal@alicelabs.site
 
 Built by AliceLabs LLC (Wyoming, USA) — founder Edison Flores.
+
+## Timeline
+
+- **2025**: AliceLabs LLC legally founded in Wyoming, USA (founder Edison Flores, Ecuadorian)
+- **2026-03-30**: GitHub organization `github.com/alicelabs-llc` created
+- **2026-06-29**: MarketNow launched publicly (first npm release: `marketnow-mcp@1.5.1`)
+- **2026-08-09**: Current npm latest: `marketnow-mcp@1.10.0` (15 versions total)
+- **2026-08-19**: Independent audit by Z.ai (8 findings F1-F8 applied, see REPORT.pdf)
+

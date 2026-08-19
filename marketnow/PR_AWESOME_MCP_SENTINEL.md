@@ -40,7 +40,7 @@ Add to the **Marketplaces** section (or create one):
 - Catalog: https://marketnow.site/registry
 - Transparency dashboard: https://marketnow.site/sentinel-transparency
 - Verify a certificate: https://marketnow.site/verify
-- GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- GitHub: https://github.com/alicelabs-llc/marketnow
 - API docs: https://marketnow.site/api/agent.json
 - llms.txt: https://marketnow.site/llms.txt
 

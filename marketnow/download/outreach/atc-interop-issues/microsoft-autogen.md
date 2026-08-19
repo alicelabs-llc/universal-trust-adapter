@@ -23,13 +23,13 @@ I noticed issue #7965 ("Agent Trust Cards (ATC) — cryptographic trust for mult
 
 A formal, versioned, testable spec for Agent Trust Cards — the same SSL-certificate-for-agents pattern that #7965 describes. We published it as a vendor-neutral specification so any CA (Microsoft, OpenAI, MarketNow, or a self-signed test CA) can issue ATCs and any runtime can verify them.
 
-- **Spec**: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md
-- **JSON Schema**: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/schemas/atc-1.0.json
-- **Reference implementation** (Node.js, ~200 lines): https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/reference-impl/atc-1.0.mjs
-- **Test vectors**: https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/docs/atc-spec/test-vectors
+- **Spec**: https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md
+- **JSON Schema**: https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/schemas/atc-1.0.json
+- **Reference implementation** (Node.js, ~200 lines): https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/reference-impl/atc-1.0.mjs
+- **Test vectors**: https://github.com/alicelabs-llc/marketnow/tree/master/docs/atc-spec/test-vectors
 - **Standalone SDK** (npm: `agent-trust-card`): https://www.npmjs.com/package/agent-trust-card
-- **Conformance suite** (8 tests, 23 assertions, all passing): https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/atc-sdk/CONFORMANCE.md
-- **Browser playground** (zero-install, uses WebCrypto): https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/atc-sdk/playground.html
+- **Conformance suite** (8 tests, 23 assertions, all passing): https://github.com/alicelabs-llc/marketnow/blob/master/atc-sdk/CONFORMANCE.md
+- **Browser playground** (zero-install, uses WebCrypto): https://github.com/alicelabs-llc/marketnow/blob/master/atc-sdk/playground.html
 
 ### The 8 required controls (ATC/1.0)
 

@@ -12,7 +12,7 @@
  *   atc verify my-card.json
  *   atc inspect ATC-2026-0000001.json
  *
- * Spec: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md
+ * Spec: https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -68,7 +68,7 @@ ${BOLD}EXAMPLES${RESET}
   ${DIM}atc${RESET} inspect card.json
 
 ${BOLD}SPEC${RESET}
-  ATC/${ATC_SPEC_VERSION.split('/')[1]} — https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md
+  ATC/${ATC_SPEC_VERSION.split('/')[1]} — https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md
 
 ${BOLD}VERSION${RESET}
   atc-sdk@1.0.0 — AliceLabs LLC (Wyoming, USA, 2026)

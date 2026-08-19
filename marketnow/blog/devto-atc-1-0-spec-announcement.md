@@ -11,7 +11,7 @@ A few weeks ago I noticed something uncomfortable. After I published my ATC (Age
 
 But here is the thing: **it does not matter who thought of it first.** What matters is who ships a formal, versioned, testable specification first.
 
-So today I am publishing [ATC/1.0](https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md) — an open specification for Agent Trust Cards with:
+So today I am publishing [ATC/1.0](https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md) — an open specification for Agent Trust Cards with:
 
 - **10 controls** (8 required, 2 optional)
 - **JSON Schema** for the envelope
@@ -163,7 +163,7 @@ That's the whole cryptographic core.
 The repo ships with 5 test vectors that exercise the full spec:
 
 ```bash
-git clone https://github.com/edgarfloresguerra2011-a11y/marketnow.git
+git clone https://github.com/alicelabs-llc/marketnow.git
 cd marketnow/docs/atc-spec
 npm install canonicalize
 node ./test-vectors/generate.mjs
@@ -224,7 +224,7 @@ My dev.to article ["AI agents need SSL certificates too — so I built ATC (Agen
 
 I do **not** claim Microsoft, OpenAI, or Continue copied Edison. Coincidental convergence is plausible and the problem is real. I assert only chronological ordering.
 
-The full chronology with citations is in [`PRIOR-ART-TIMELINE.md`](https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/PRIOR-ART-TIMELINE.md).
+The full chronology with citations is in [`PRIOR-ART-TIMELINE.md`](https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/PRIOR-ART-TIMELINE.md).
 
 ---
 
@@ -240,7 +240,7 @@ If you are not sure whether to trust an agent that hands you an ATC, **don't tru
 
 ### 2. Challenge the prior art timeline
 
-If you find a publicly verifiable artifact that pre-dates July 13, 2026 and describes the specific ATC architecture (CA + Ed25519 + trust score + revocation + capabilities), open a PR against [`PRIOR-ART-TIMELINE.md`](https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/PRIOR-ART-TIMELINE.md). I will update the timeline and credit you.
+If you find a publicly verifiable artifact that pre-dates July 13, 2026 and describes the specific ATC architecture (CA + Ed25519 + trust score + revocation + capabilities), open a PR against [`PRIOR-ART-TIMELINE.md`](https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/PRIOR-ART-TIMELINE.md). I will update the timeline and credit you.
 
 I will not remove entries that contradict my narrative. The purpose of that document is truth, not advocacy.
 
@@ -274,11 +274,11 @@ npx -y marketnow-mcp@1.9.0
 Then ask Claude Desktop: *"Verify the ATC for card_id ATC-2026-7777670"* — Claude will call `marketnow_verify_trust` with the `card_id`, which hits the live MarketNow ATC API and returns the verification result.
 
 Or read the spec directly:
-- **Spec**: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md
-- **JSON Schema**: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/schemas/atc-1.0.json
-- **Reference implementation**: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/reference-impl/atc-1.0.mjs
-- **Test vectors**: https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/docs/atc-spec/test-vectors
-- **Prior art timeline**: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/PRIOR-ART-TIMELINE.md
+- **Spec**: https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md
+- **JSON Schema**: https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/schemas/atc-1.0.json
+- **Reference implementation**: https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/reference-impl/atc-1.0.mjs
+- **Test vectors**: https://github.com/alicelabs-llc/marketnow/tree/master/docs/atc-spec/test-vectors
+- **Prior art timeline**: https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/PRIOR-ART-TIMELINE.md
 
 PRs welcome. Issues welcome. Competing specs welcome.
 
@@ -286,4 +286,4 @@ The market is converging. Let's ship the spec.
 
 ---
 
-*MarketNow is security infrastructure for AI agents, built by AliceLabs LLC (Wyoming, USA). Founder: Edison Flores. The Sentinel audit pipeline has performed 1,211,488 security checks and quarantined 80 malicious skills. Audit report: [marketnow.site/api/audit-report.json](https://marketnow.site/api/audit-report.json). ATC/1.0 spec: [github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/docs/atc-spec](https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/docs/atc-spec).*
+*MarketNow is security infrastructure for AI agents, built by AliceLabs LLC (Wyoming, USA). Founder: Edison Flores. The Sentinel audit pipeline has performed 1,211,488 security checks and quarantined 80 malicious skills. Audit report: [marketnow.site/api/audit-report.json](https://marketnow.site/api/audit-report.json). ATC/1.0 spec: [github.com/alicelabs-llc/marketnow/tree/master/docs/atc-spec](https://github.com/alicelabs-llc/marketnow/tree/master/docs/atc-spec).*

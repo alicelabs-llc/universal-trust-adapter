@@ -23,7 +23,7 @@ async function verifyATC(cardId) {
   }
 
   // 3. Fetch the full ATC record from GitHub for independent signature check
-  const rawUrl = `https://raw.githubusercontent.com/edgarfloresguerra2011-a11y/marketnow/master/_data/atc/${cardId}.json`;
+  const rawUrl = `https://raw.githubusercontent.com/alicelabs-llc/marketnow/master/_data/atc/${cardId}.json`;
   const rawRes = await fetch(rawUrl);
   if (!rawRes.ok) {
     return { valid: false, reason: 'could_not_fetch_record' };

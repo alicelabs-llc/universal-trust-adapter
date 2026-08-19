@@ -40,7 +40,7 @@ Backend marks purchase as complete, grants license
 The serverless functions need a Node.js backend. Vercel is free for small projects.
 
 1. Go to https://vercel.com → Sign up / Log in
-2. Click "Add New Project" → Import your GitHub repo `edgarfloresguerra2011-a11y/marketnow`
+2. Click "Add New Project" → Import your GitHub repo `alicelabs-llc/marketnow`
 3. Configure:
    - **Framework Preset:** Vite
    - **Root Directory:** `aep-marketplace`

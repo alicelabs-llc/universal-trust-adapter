@@ -4,7 +4,7 @@ description: "Trust layer for agent commerce. 8,560 MCP-compatible skills with S
 version: "1.3.0"
 license: MNNC-1.0
 homepage: https://marketnow.site
-repository: https://github.com/edgarfloresguerra2011-a11y/marketnow
+repository: https://github.com/alicelabs-llc/marketnow
 icon: https://marketnow.site/favicon.svg
 
 server:

@@ -36,7 +36,7 @@ SENTINEL_CERT_SECRET=honeypot-fake-canary-do-not-use
         filemode = true
         bare = false
 [remote "origin"]
-        url = https://github.com/edgarfloresguerra2011-a11y/marketnow.git
+        url = https://github.com/alicelabs-llc/marketnow.git
 [branch "master"]
         remote = origin
         merge = refs/heads/master
@@ -123,7 +123,7 @@ function serveHoneypotResponse(req, res, originalPath) {
 }
 
 const GITHUB_TOKEN = process.env.MANDATES_GITHUB_TOKEN;
-const REPO = process.env.MANDATES_REPO || 'edgarfloresguerra2011-a11y/marketnow';
+const REPO = process.env.MANDATES_REPO || 'alicelabs-llc/marketnow';
 const BRANCH = 'master';
 const QUARANTINE_PATH = '_data/quarantine';
 
@@ -306,7 +306,7 @@ export default async function handler(req, res) {
             stats: {
                 total_endpoints: 12,
                 total_security_layers: 10,
-                total_skills: 8845,
+                total_skills: 9,248,
                 total_atcs: 3,
                 npm_version: '1.5.1',
             },

@@ -55,11 +55,11 @@ MarketNow is **no longer a marketplace** — it is security infrastructure for A
 
 - Website: https://marketnow.site
 - npm: https://www.npmjs.com/package/marketnow-mcp (v1.9.0 published)
-- GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- GitHub: https://github.com/alicelabs-llc/marketnow
 - Server metadata: https://marketnow.site/api/manifest
 - Transparency report: https://marketnow.site/api/audit-report.json
 - OWASP compliance matrix: https://marketnow.site/api/owasp
-- Audit document (in npm tarball): https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/mcp-server/AUDIT.md
+- Audit document (in npm tarball): https://github.com/alicelabs-llc/marketnow/blob/master/mcp-server/AUDIT.md
 
 ## Stats (all real, all public)
 

@@ -47,4 +47,13 @@ Pin it in your agent runtime. If it changes, the CA has been rotated.
 
 - Live: https://marketnow.site/atc
 - Spec: https://marketnow.site/atc-spec.json
-- GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- GitHub: https://github.com/alicelabs-llc/marketnow
+
+## Timeline
+
+- **2025**: AliceLabs LLC legally founded in Wyoming, USA (founder Edison Flores, Ecuadorian)
+- **2026-03-30**: GitHub organization `github.com/alicelabs-llc` created
+- **2026-06-29**: MarketNow launched publicly (first npm release: `marketnow-mcp@1.5.1`)
+- **2026-08-09**: Current npm latest: `marketnow-mcp@1.10.0` (15 versions total)
+- **2026-08-19**: Independent audit by Z.ai (8 findings F1-F8 applied, see REPORT.pdf)
+

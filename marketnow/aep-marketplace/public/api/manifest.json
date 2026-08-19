@@ -55,7 +55,7 @@
       "marketnow_recommend_skills",
       "marketnow_get_owasp_compliance"
     ],
-    "audit_doc": "https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/mcp-server/AUDIT.md"
+    "audit_doc": "https://github.com/alicelabs-llc/marketnow/blob/master/mcp-server/AUDIT.md"
   },
   "pricing": {
     "free": "$0 — Basic Sentinel scan, trust score, public report",

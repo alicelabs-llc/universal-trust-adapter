@@ -81,7 +81,7 @@ curl -X POST https://marketnow.site/api/submit-skill \
 
 ### As a security researcher
 
-Open an issue at https://github.com/edgarfloresguerra2011-a11y/marketnow/issues with your findings. We review within 24h and credit all contributors.
+Open an issue at https://github.com/alicelabs-llc/marketnow/issues with your findings. We review within 24h and credit all contributors.
 
 ### As a standards body
 
@@ -103,6 +103,6 @@ Contact us at legal@alicelabs.site or comment on this issue. We'll share schema 
 ## Links
 
 - Spec: https://marketnow.site/api/atc?action=spec
-- GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- GitHub: https://github.com/alicelabs-llc/marketnow
 - npm: https://www.npmjs.com/package/marketnow-mcp
 - Contact: legal@alicelabs.site | support@alicelabs.site | info@alicelabs.site

@@ -62,7 +62,7 @@ MarketNow 在 MCP 生态系统中是独特的:
 
 - **网站:** https://marketnow.site
 - **npm:** https://www.npmjs.com/package/marketnow-mcp
-- **GitHub:** https://github.com/edgarfloresguerra2011-a11y/marketnow
+- **GitHub:** https://github.com/alicelabs-llc/marketnow
 - **API:** https://marketnow.site/api/agent.json
 - **许可证:** MIT
 ```
@@ -76,6 +76,6 @@ MCP 兼容代理技能的开放市场. 搜索, 发现和安装 5,054+ 验证的 
 
 - **安装:** `npx -y marketnow-mcp`
 - **npm:** https://www.npmjs.com/package/marketnow-mcp
-- **GitHub:** https://github.com/edgarfloresguerra2011-a11y/marketnow
+- **GitHub:** https://github.com/alicelabs-llc/marketnow
 - **网站:** https://marketnow.site
 ```

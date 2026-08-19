@@ -98,7 +98,7 @@ Ask your agent: "Submit my MCP server at github.com/user/my-server to MarketNow"
 - Security: https://marketnow.site/api/security
 - Analytics: https://marketnow.site/api/agent-analytics
 - Trust: https://marketnow.site/trust
-- GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- GitHub: https://github.com/alicelabs-llc/marketnow
 - npm: \`npx -y marketnow-mcp\` (v1.5.1)
 
 ### Languages

@@ -65,3 +65,12 @@ Connect any MCP-compatible AI client (Claude, Cursor, Windsurf, etc.) to MarketN
 ## License
 
 MIT © AliceLabs
+
+## Timeline
+
+- **2025**: AliceLabs LLC legally founded in Wyoming, USA (founder Edison Flores, Ecuadorian)
+- **2026-03-30**: GitHub organization `github.com/alicelabs-llc` created
+- **2026-06-29**: MarketNow launched publicly (first npm release: `marketnow-mcp@1.5.1`)
+- **2026-08-09**: Current npm latest: `marketnow-mcp@1.10.0` (15 versions total)
+- **2026-08-19**: Independent audit by Z.ai (8 findings F1-F8 applied, see REPORT.pdf)
+

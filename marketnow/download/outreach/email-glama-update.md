@@ -21,7 +21,7 @@ MarketNow is **no longer a marketplace** — it is **security infrastructure for
 | Tagline | 12 MCP tools (marketnow_* namespace) backed by Sentinel — a 10-layer security audit pipeline (1.2M checks, 80 quarantined) |
 | Transport | stdio only (via `npx -y marketnow-mcp@1.9.0`) |
 | npm | marketnow-mcp@1.9.0 |
-| GitHub | https://github.com/edgarfloresguerra2011-a11y/marketnow |
+| GitHub | https://github.com/alicelabs-llc/marketnow |
 | License | AliceLabs LLC Proprietary (MNNC-1.0) |
 | Categories | Security, Infrastructure, Certification, Marketplace, Aggregator |
 | Tags | mcp, security, sentinel, audit, owasp, ed25519, agent-trust, tool-fingerprinting, capability-manifest, interceptor, sandbox, gvisor |
@@ -41,7 +41,7 @@ MarketNow is **no longer a marketplace** — it is **security infrastructure for
 
 ## Tools (12, all `marketnow_*` namespaced)
 
-The v1.9.0 server enforces 4 golden rules for autonomous agent consumption (full audit at https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/mcp-server/AUDIT.md):
+The v1.9.0 server enforces 4 golden rules for autonomous agent consumption (full audit at https://github.com/alicelabs-llc/marketnow/blob/master/mcp-server/AUDIT.md):
 
 - **Rule A**: Deterministic `marketnow_` snake_case tool names (no collisions)
 - **Rule B**: Intent-oriented descriptions (WHEN/WHY, not WHAT)
@@ -77,7 +77,7 @@ The 12 tools:
 
 - Website: https://marketnow.site
 - npm: https://www.npmjs.com/package/marketnow-mcp (v1.9.0)
-- GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- GitHub: https://github.com/alicelabs-llc/marketnow
 - Server metadata: https://marketnow.site/api/manifest
 - Transparency report: https://marketnow.site/api/audit-report.json
 - OWASP compliance matrix: https://marketnow.site/api/owasp

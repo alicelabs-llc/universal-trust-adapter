@@ -36,7 +36,7 @@ jobs:
       - name: Run viral loop tracker
         env:
           MANDATES_GITHUB_TOKEN: ${{ secrets.MANDATES_GITHUB_TOKEN }}
-          MANDATES_REPO: edgarfloresguerra2011-a11y/marketnow
+          MANDATES_REPO: alicelabs-llc/marketnow
           NPM_PACKAGE: marketnow-mcp
         run: |
           DAYS_ARG="--days=${{ github.event.inputs.days || '30' }}"

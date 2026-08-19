@@ -13,7 +13,7 @@ GitHub stars son la métrica #1 de credibilidad social. Tienes 1 star después d
 ---
 
 If you found this useful, please ⭐ the MarketNow repo on GitHub:
-[github.com/edgarfloresguerra2011-a11y/marketnow](https://github.com/edgarfloresguerra2011-a11y/marketnow)
+[github.com/alicelabs-llc/marketnow](https://github.com/alicelabs-llc/marketnow)
 
 Stars help other developers discover the project. It's free for you and means a lot to me.
 ```
@@ -35,7 +35,7 @@ But only 1 GitHub star ⭐
 
 If you've used MCP servers, starred any MCP repo, or care about agent security — a star on MarketNow would help other developers find it:
 
-github.com/edgarfloresguerra2011-a11y/marketnow
+github.com/alicelabs-llc/marketnow
 
 It's free. It takes 2 seconds. It means a lot 🙏
 ```
@@ -48,7 +48,7 @@ Cuando respondas issues en otros repos (awesome-mcp-servers, etc.), añade al fi
 
 ```
 PS: If MarketNow is useful to you, a ⭐ on the repo helps others discover it:
-https://github.com/edgarfloresguerra2011-a11y/marketnow
+https://github.com/alicelabs-llc/marketnow
 ```
 
 ---
@@ -64,7 +64,7 @@ But only 1 GitHub star. Stars are how developers discover projects — without t
 
 If you use MCP servers (Claude Desktop, Cursor, Cline), a star would help others find this:
 
-https://github.com/edgarfloresguerra2011-a11y/marketnow
+https://github.com/alicelabs-llc/marketnow
 
 No pressure. Just trying to get the word out.
 ```
@@ -76,7 +76,7 @@ No pressure. Just trying to get the word out.
 Añadir al inicio del README.md:
 
 ```markdown
-[![GitHub stars](https://img.shields.io/github/stars/edgarfloresguerra2011-a11y/marketnow?style=social)](https://github.com/edgarfloresguerra2011-a11y/marketnow)
+[![GitHub stars](https://img.shields.io/github/stars/alicelabs-llc/marketnow?style=social)](https://github.com/alicelabs-llc/marketnow)
 [![npm downloads](https://img.shields.io/npm/dw/marketnow-mcp)](https://www.npmjs.com/package/marketnow-mcp)
 
 > ⭐ If MarketNow is useful to you, please star the repo. It helps other developers discover it.

@@ -66,7 +66,7 @@
   "agent_registration": {
     "description": "Agents can register themselves to build reputation and get personalized recommendations",
     "endpoint": "POST /api/agent-register (coming soon — GitHub issue based for now)",
-    "github_issue": "https://github.com/edgarfloresguerra2011-a11y/marketnow/issues/new?title=Agent+Registration&body=Agent+name,+capabilities,+contact",
+    "github_issue": "https://github.com/alicelabs-llc/marketnow/issues/new?title=Agent+Registration&body=Agent+name,+capabilities,+contact",
     "fields": {
       "agent_name": "string — name of the agent",
       "agent_type": "coding | research | data | finance | communication | security",
@@ -99,7 +99,7 @@
   },
   
   "stats": {
-    "total_skills": 8845,
+    "total_skills": 9,248,
     "audited": 5120,
     "l2_tested": 206,
     "free_skills": 65,

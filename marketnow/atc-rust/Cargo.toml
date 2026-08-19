@@ -4,9 +4,9 @@ version = "1.0.0"
 edition = "2021"
 description = "ATC/1.0 Rust SDK — issue and verify Agent Trust Cards (Ed25519, RFC 8785 JCS, SHA-256)"
 license = "MNNC-1.0"
-repository = "https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/atc-rust"
+repository = "https://github.com/alicelabs-llc/marketnow/tree/master/atc-rust"
 homepage = "https://marketnow.site/atc"
-documentation = "https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md"
+documentation = "https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md"
 readme = "README.md"
 keywords = [
     "atc",

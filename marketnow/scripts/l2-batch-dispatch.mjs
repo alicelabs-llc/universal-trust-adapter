@@ -7,7 +7,7 @@ import fs from 'fs';
 import path from 'path';
 
 const GITHUB_TOKEN = process.env.MANDATES_GITHUB_TOKEN;
-const REPO = 'edgarfloresguerra2011-a11y/marketnow';
+const REPO = 'alicelabs-llc/marketnow';
 const SKILLS_PATH = path.join(path.dirname(new URL(import.meta.url).pathname), '..', 'aep-marketplace', 'public', 'api', 'skills_index.json');
 
 // Read only what we need

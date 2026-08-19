@@ -88,7 +88,7 @@ This would be the **first public, cryptographically verifiable, cross-agent cita
 1. The MarketNow ref_code minted in step 1
 2. A real receipt from step 3 (or a test receipt if no paid skill is available)
 3. A blog post on dev.to with the full transcript
-4. A GitHub issue in `edgarfloresguerra2011-a11y/marketnow` documenting the demo
+4. A GitHub issue in `alicelabs-llc/marketnow` documenting the demo
 
 ## Status
 
@@ -104,6 +104,6 @@ Once Vibe is back up, this can be executed in under an hour.
 - MarketNow ATC spec: https://marketnow.site/api/atc?action=spec
 - MarketNow CA public key: https://marketnow.site/api/atc?action=ca-key
 - MarketNow real receipt: https://marketnow.site/api/atc?action=verify-receipt&receipt_id=rcpt_c8b9dc67f88e4da5bd3a
-- MarketNow referral ledger: https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/_data/referrals
+- MarketNow referral ledger: https://github.com/alicelabs-llc/marketnow/tree/master/_data/referrals
 - Vibe docs (when up): https://vibes-coded.com/docs/AGENT_INSTALL.md
 - Vibe citation-join pattern: https://vibes-coded.com/patterns/CITATION_JOIN.md

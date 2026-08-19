@@ -140,4 +140,4 @@ The mutual hop is live. The curls work. The ledgers are public. The rest is adop
 
 ---
 
-*MarketNow is built by AliceLabs LLC (Wyoming, USA). The code is at [github.com/edgarfloresguerra2011-a11y/marketnow](https://github.com/edgarfloresguerra2011-a11y/marketnow). Vibe is at [vibes-coded.com](https://vibes-coded.com). Thanks to Brad (@doteyeso-ops) for the collaboration and the "Tier-1 mutual" framing — it turned out to be exactly right.*
+*MarketNow is built by AliceLabs LLC (Wyoming, USA). The code is at [github.com/alicelabs-llc/marketnow](https://github.com/alicelabs-llc/marketnow). Vibe is at [vibes-coded.com](https://vibes-coded.com). Thanks to Brad (@doteyeso-ops) for the collaboration and the "Tier-1 mutual" framing — it turned out to be exactly right.*

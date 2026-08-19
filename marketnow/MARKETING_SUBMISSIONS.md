@@ -88,7 +88,7 @@ This document contains:
 
 🔗 URL: https://marketnow.site
 📦 npm: marketnow-mcp@1.9.0 (https://www.npmjs.com/package/marketnow-mcp)
-💻 GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+💻 GitHub: https://github.com/alicelabs-llc/marketnow
 🔌 MCP Server: `npx -y marketnow-mcp`
 📖 OWASP Compliance: https://marketnow.site/api/owasp
 📊 Audit Report: https://marketnow.site/api/audit-report.json
@@ -195,7 +195,7 @@ You can verify all current data at:
 - https://www.npmjs.com/package/marketnow-mcp (npm package, v1.9.0)
 
 npm package: marketnow-mcp@1.9.0
-GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+GitHub: https://github.com/alicelabs-llc/marketnow
 
 Thanks for maintaining mcp.so — it's a great resource for the MCP community!
 
@@ -258,7 +258,7 @@ Pricing:
 URLs:
 - Website: https://marketnow.site
 - npm: https://www.npmjs.com/package/marketnow-mcp
-- GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- GitHub: https://github.com/alicelabs-llc/marketnow
 - OWASP compliance: https://marketnow.site/api/owasp
 - Audit report: https://marketnow.site/api/audit-report.json
 - MCP config:
@@ -326,7 +326,7 @@ MCP 服务器 v1.9.0 — 12 个工具, 全部使用 `marketnow_*` 命名空间:
 链接:
 - 网站: https://marketnow.site
 - npm: https://www.npmjs.com/package/marketnow-mcp
-- GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- GitHub: https://github.com/alicelabs-llc/marketnow
 - OWASP 合规: https://marketnow.site/api/owasp
 - 审计报告: https://marketnow.site/api/audit-report.json
 
@@ -404,7 +404,7 @@ MarketNow is unique among MCP servers because:
 ### Links
 - Website: https://marketnow.site
 - npm: https://www.npmjs.com/package/marketnow-mcp
-- GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- GitHub: https://github.com/alicelabs-llc/marketnow
 - OWASP: https://marketnow.site/api/owasp
 - Audit: https://marketnow.site/api/audit-report.json
 ````

@@ -64,7 +64,7 @@
       "description": "Skill has not been audited (no Sentinel certificate)",
       "severity": "warning",
       "agent_action": "warn user that skill is unaudited, proceed with caution",
-      "user_action": "Request an audit at github.com/edgarfloresguerra2011-a11y/marketnow/issues"
+      "user_action": "Request an audit at github.com/alicelabs-llc/marketnow/issues"
     },
     "SANDBOX_VIOLATION": {
       "code": "SBOX_001",

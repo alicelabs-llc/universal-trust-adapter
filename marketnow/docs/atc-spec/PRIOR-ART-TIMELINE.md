@@ -244,7 +244,7 @@ If ATC/1.0 becomes a de-facto standard, the question of "who thought of it first
 
 ```
 AliceLabs LLC. "ATC Prior Art Timeline." 2026-08-10.
-https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/PRIOR-ART-TIMELINE.md
+https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/PRIOR-ART-TIMELINE.md
 ```
 
 ## How to challenge this timeline

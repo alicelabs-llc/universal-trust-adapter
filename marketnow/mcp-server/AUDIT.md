@@ -186,4 +186,4 @@ If you must support both names during a transition window, run two server instan
 ---
 
 *Maintained by AliceLabs LLC — Wyoming, USA. Report issues at
-https://github.com/edgarfloresguerra2011-a11y/marketnow/issues*
+https://github.com/alicelabs-llc/marketnow/issues*

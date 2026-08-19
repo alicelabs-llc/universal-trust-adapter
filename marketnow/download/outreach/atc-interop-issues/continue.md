@@ -20,13 +20,13 @@ Issue #12996 proposes "Agent Trust Cards (ATC) — SSL certificates for AI agent
 
 **ATC/1.0 — Agent Trust Card Protocol Specification** (2026-08-10)
 
-- **Spec**: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md
-- **JSON Schema**: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/schemas/atc-1.0.json
-- **Reference implementation** (Node.js, ~200 lines): https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/reference-impl/atc-1.0.mjs
+- **Spec**: https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md
+- **JSON Schema**: https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/schemas/atc-1.0.json
+- **Reference implementation** (Node.js, ~200 lines): https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/reference-impl/atc-1.0.mjs
 - **Standalone SDK** (npm: `agent-trust-card`): https://www.npmjs.com/package/agent-trust-card
-- **Conformance suite** (8 tests, 23 assertions, all passing): https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/atc-sdk/CONFORMANCE.md
+- **Conformance suite** (8 tests, 23 assertions, all passing): https://github.com/alicelabs-llc/marketnow/blob/master/atc-sdk/CONFORMANCE.md
 - **Browser playground** (zero-install, uses WebCrypto): https://marketnow.site/atc/playground
-- **Prior art timeline** (honest chronology of ATC and adjacent work): https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/PRIOR-ART-TIMELINE.md
+- **Prior art timeline** (honest chronology of ATC and adjacent work): https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/PRIOR-ART-TIMELINE.md
 
 ### The 8 required controls
 

@@ -13,9 +13,15 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0"
   },
-  "keywords": ["mcp", "ai-agents", "skills", "marketplace", "tools"],
+  "keywords": [
+    "mcp",
+    "ai-agents",
+    "skills",
+    "marketplace",
+    "tools"
+  ],
   "author": "MarketNow",
-  "license": "MIT",
+  "license": "MNNC-1.0",
   "engines": {
     "node": ">=18"
   }

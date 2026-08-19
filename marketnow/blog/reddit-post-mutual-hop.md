@@ -33,6 +33,6 @@ Still 0 paid purchases, 0 real commission. But the infrastructure now has its fi
 
 If you build MCP servers and want to try the submit flow, it's free: `POST https://marketnow.site/api/submit-skill` with `{"repo_url": "..."}`. L1.5+L1.7 run synchronously, L2 sandbox audit queues via GitHub Actions (~2 min).
 
-Code: https://github.com/edgarfloresguerra2011-a11y/marketnow
+Code: https://github.com/alicelabs-llc/marketnow
 Submit: https://marketnow.site/submit
 Spec: https://marketnow.site/api/atc?action=spec

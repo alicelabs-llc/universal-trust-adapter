@@ -2,7 +2,7 @@
 
 ## 1. mcp.directory/submit (mejor impacto, auto-pull)
 1. Abrir https://mcp.directory/submit
-2. Ingresar GitHub URL: `https://github.com/edgarfloresguerra2011-a11y/marketnow`
+2. Ingresar GitHub URL: `https://github.com/alicelabs-llc/marketnow`
 3. Ellos auto-detectan: name, description, stars, README → publicado en 24h
 
 ---
@@ -13,7 +13,7 @@
 |---|---|
 | **Type** | MCP Server |
 | **Name** | MarketNow Skills Marketplace |
-| **URL** | `https://github.com/edgarfloresguerra2011-a11y/marketnow` |
+| **URL** | `https://github.com/alicelabs-llc/marketnow` |
 | **Server Config** | Ver JSON abajo |
 
 ```json

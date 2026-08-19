@@ -59,7 +59,7 @@ import {
 } from '../lib/referral-tracker.mjs';
 
 const GITHUB_TOKEN = process.env.MANDATES_GITHUB_TOKEN;
-const REPO = process.env.MANDATES_REPO || 'edgarfloresguerra2011-a11y/marketnow';
+const REPO = process.env.MANDATES_REPO || 'alicelabs-llc/marketnow';
 const BRANCH = 'master';
 const ATC_DIR = '_data/atc';
 const CA_PRIVATE_KEY_PEM = process.env.MARKETNOW_ATC_CA_PRIVATE_KEY;

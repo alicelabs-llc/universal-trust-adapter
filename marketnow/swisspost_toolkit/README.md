@@ -28,3 +28,12 @@ python swisspost_toolkit/quick_verify.py kdf "ruta/KDFService.java"
 
 ## Nota
 Los hallazgos `NEEDS_DYNAMIC` requieren PoC runtime antes de enviar a YesWeHack.
+
+## Timeline
+
+- **2025**: AliceLabs LLC legally founded in Wyoming, USA (founder Edison Flores, Ecuadorian)
+- **2026-03-30**: GitHub organization `github.com/alicelabs-llc` created
+- **2026-06-29**: MarketNow launched publicly (first npm release: `marketnow-mcp@1.5.1`)
+- **2026-08-09**: Current npm latest: `marketnow-mcp@1.10.0` (15 versions total)
+- **2026-08-19**: Independent audit by Z.ai (8 findings F1-F8 applied, see REPORT.pdf)
+

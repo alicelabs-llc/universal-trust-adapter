@@ -66,4 +66,4 @@ Get a signed ATC. Get listed in the catalog. Get a Sentinel score. All free.
 
 - https://marketnow.site/submit
 - https://marketnow.site/api/atc?action=spec
-- https://github.com/edgarfloresguerra2011-a11y/marketnow
+- https://github.com/alicelabs-llc/marketnow

@@ -44,9 +44,9 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://marketnow.site/atc"
-Repository = "https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/atc-python"
-Documentation = "https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md"
-"Bug Tracker" = "https://github.com/edgarfloresguerra2011-a11y/marketnow/issues"
+Repository = "https://github.com/alicelabs-llc/marketnow/tree/master/atc-python"
+Documentation = "https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md"
+"Bug Tracker" = "https://github.com/alicelabs-llc/marketnow/issues"
 
 [tool.setuptools.packages.find]
 include = ["atc_sdk*"]

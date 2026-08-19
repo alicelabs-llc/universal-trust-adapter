@@ -57,7 +57,7 @@ atc-spec/
 npm install canonicalize
 
 # Clone the repo
-git clone https://github.com/edgarfloresguerra2011-a11y/marketnow.git
+git clone https://github.com/alicelabs-llc/marketnow.git
 cd marketnow/docs/atc-spec
 
 # Verify the minimal test vector
@@ -139,7 +139,7 @@ See [`PRIOR-ART-TIMELINE.md`](./PRIOR-ART-TIMELINE.md) for the full chronology w
 
 ## How to contribute
 
-PRs welcome at https://github.com/edgarfloresguerra2011-a11y/marketnow.
+PRs welcome at https://github.com/alicelabs-llc/marketnow.
 
 ### Contribution license
 
@@ -158,7 +158,7 @@ By contributing to ATC/1.0, you agree to release your contributions under the [W
 ```
 AliceLabs LLC. "ATC/1.0 — Agent Trust Card Protocol Specification."
 Version 1.0.0-draft. 2026-08-10.
-https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md
+https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md
 ```
 
 ## License

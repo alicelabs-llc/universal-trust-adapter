@@ -11,7 +11,7 @@
  * Persistence: GitHub repo as a database (file-per-mandate at
  * `_data/mandates/mand_xxx.json` on master branch). No external
  * services required beyond a GitHub PAT — uses the existing
- * edgarfloresguerra2011-a11y/marketnow repo.
+ * alicelabs-llc/marketnow repo.
  *
  * Why GitHub?
  *   - Free, no signup, no new credentials
@@ -26,7 +26,7 @@
  *
  * Required env vars:
  *   MANDATES_GITHUB_TOKEN  — GitHub PAT with repo scope
- *   MANDATES_REPO          — default: edgarfloresguerra2011-a11y/marketnow
+ *   MANDATES_REPO          — default: alicelabs-llc/marketnow
  *   MANDATES_BRANCH        — default: master
  *   MANDATES_PATH          — default: _data/mandates
  *
@@ -98,7 +98,7 @@ function validateWebhookUrl(url) {
 function repoConfig() {
   return {
     token: process.env.MANDATES_GITHUB_TOKEN,
-    repo: process.env.MANDATES_REPO || 'edgarfloresguerra2011-a11y/marketnow',
+    repo: process.env.MANDATES_REPO || 'alicelabs-llc/marketnow',
     branch: process.env.MANDATES_BRANCH || 'master',
     path: process.env.MANDATES_PATH || '_data/mandates',
   };

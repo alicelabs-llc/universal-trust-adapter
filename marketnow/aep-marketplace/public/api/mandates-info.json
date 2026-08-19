@@ -19,7 +19,7 @@
     "default_ttl_days": 90
   },
   "persistence": "GitHub repo as database. Each mandate is stored as a JSON file at _data/mandates/mand_xxx.json. Every create / spend / revoke is a git commit — fully auditable in the repo history. No external DB service required.",
-  "audit_log_url": "https://github.com/edgarfloresguerra2011-a11y/marketnow/commits/master/_data/mandates",
+  "audit_log_url": "https://github.com/alicelabs-llc/marketnow/commits/master/_data/mandates",
   "how_it_works": [
     {
       "step": 1,

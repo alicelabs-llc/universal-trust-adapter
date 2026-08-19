@@ -1,13 +1,13 @@
 # MarketNow — Posts para Redes y Plataformas
 
 ## Reddit (r/MCP)
-**Title:** I built a 3-layer security audit for MCP servers — 11,115+ already certified with signed certificates
+**Title:** I built a 3-layer security audit for MCP servers — 9,248+ already certified with signed certificates
 
 **Body:**
 
 Hi r/MCP,
 
-I've been building MarketNow (an MCP skills marketplace) and just completed a major milestone: every MCP server in the catalog (11,115+) is now audited by Sentinel, our 3-layer security pipeline.
+I've been building MarketNow (an MCP skills marketplace) and just completed a major milestone: every MCP server in the catalog (9,248+) is now audited by Sentinel, our 3-layer security pipeline.
 
 ### The problem
 
@@ -64,7 +64,7 @@ API: `GET https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-00
 3. 8,550 of 8,582 skills used the same npm package — OSV API caching reduced 8,577 calls to 28
 4. Vercel Hobby caps at 12 serverless functions — had to merge endpoints
 
-Source: https://github.com/edgarfloresguerra2011-a11y/marketnow
+Source: https://github.com/alicelabs-llc/marketnow
 
 What do you think? Is security certification for MCP servers something the ecosystem needs?
 
@@ -78,14 +78,14 @@ What do you think? Is security certification for MCP servers something the ecosy
 ---
 
 ## Reddit (r/artificial)
-**Title:** 11,115 MCP servers audited — found 16 critical security risks (including credential exfiltration)
+**Title:** 9,248 MCP servers audited — found 16 critical security risks (including credential exfiltration)
 
 **Body:** Focus on the findings: what the 16 critical skills do, what the 125 high-risk ones look like, and why agents calling third-party tools need a trust layer.
 
 ---
 
 ## Hacker News
-**Title:** Show HN: MarketNow – 11,115 MCP servers certified with 3-layer security audit (Sentinel)
+**Title:** Show HN: MarketNow – 9,248 MCP servers certified with 3-layer security audit (Sentinel)
 
 **URL:** https://marketnow.site
 
@@ -94,7 +94,7 @@ What do you think? Is security certification for MCP servers something the ecosy
 ---
 
 ## dev.to Article
-**Title:** "How I built a 3-layer security audit for 11,115 MCP servers"
+**Title:** "How I built a 3-layer security audit for 9,248 MCP servers"
 
 **Outline:**
 1. The problem: MCP servers run arbitrary code
@@ -106,14 +106,14 @@ What do you think? Is security certification for MCP servers something the ecosy
 7. MCP stdio: empty stdout is good
 8. Vercel 12-function limit workaround
 9. Signed SHA-256 certificates
-10. Results: 11,115 certified, risk breakdown
+10. Results: 9,248 certified, risk breakdown
 11. GitHub Push Protection caught a hardcoded token
 12. What's next: gVisor, Firecracker
 
 ---
 
 ## Twitter/X Thread
-1/ 🛡️ We just certified all 11,115 MCP servers in MarketNow with SHA-256 signed Sentinel certificates.
+1/ 🛡️ We just certified all 9,248 MCP servers in MarketNow with SHA-256 signed Sentinel certificates.
 
 3-layer audit:
 • L1.5: 6 metadata checks
@@ -146,11 +146,11 @@ The 16 critical include servers that try to read ~/.ssh/id_rsa and /etc/shadow w
 5/ Transparency dashboard: marketnow.site/sentinel-transparency
 
 Live stats:
-- 11,115 certified
+- 9,248 certified
 - 206 with L2 Docker sandbox results
 - Weekly cron re-audits everything
 
-All code: github.com/edgarfloresguerra2011-a11y/marketnow
+All code: github.com/alicelabs-llc/marketnow
 
 #MCP #AI #Security
 

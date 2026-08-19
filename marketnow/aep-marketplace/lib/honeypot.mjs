@@ -105,7 +105,7 @@ SENTINEL_CERT_SECRET=honeypot-fake-cert-secret-do-not-use
         bare = false
         logallrefupdates = true
 [remote "origin"]
-        url = https://github.com/edgarfloresguerra2011-a11y/marketnow.git
+        url = https://github.com/alicelabs-llc/marketnow.git
         fetch = +refs/heads/*:refs/remotes/origin/*
 [branch "master"]
         remote = origin

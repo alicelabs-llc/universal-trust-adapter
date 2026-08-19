@@ -72,7 +72,7 @@ curl -X POST https://marketnow.site/api/submit-skill \
 L1.5+L1.7 run synchronously. L2 sandbox audit queues via GitHub Actions (~2 min). If it passes (score ≥ 7), the skill is promoted to the catalog automatically within ~1 hour (hourly cron).
 
 **Links:**
-- Code: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- Code: https://github.com/alicelabs-llc/marketnow
 - Submit: https://marketnow.site/submit
 - Spec: https://marketnow.site/api/atc?action=spec
 - npm: `npx -y marketnow-mcp@1.7.0` (11 tools)

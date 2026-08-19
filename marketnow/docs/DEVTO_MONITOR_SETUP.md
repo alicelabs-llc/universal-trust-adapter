@@ -26,7 +26,7 @@ The monitor sends emails through your Gmail account. For security, Gmail require
 
 ### Step 2: Add GitHub Secrets
 
-Go to: https://github.com/edgarfloresguerra2011-a11y/marketnow/settings/secrets/actions
+Go to: https://github.com/alicelabs-llc/marketnow/settings/secrets/actions
 
 Click "New repository secret" for each of these:
 
@@ -39,7 +39,7 @@ Click "New repository secret" for each of these:
 
 ### Step 3: Verify the workflow is enabled
 
-Go to: https://github.com/edgarfloresguerra2011-a11y/marketnow/actions/workflows/devto-monitor.yml
+Go to: https://github.com/alicelabs-llc/marketnow/actions/workflows/devto-monitor.yml
 
 - The workflow runs automatically every hour at minute :00
 - You can also click "Run workflow" to test it manually
@@ -69,7 +69,7 @@ If no new comments:
 
 To run the monitor manually and verify the email works:
 
-1. Go to https://github.com/edgarfloresguerra2011-a11y/marketnow/actions/workflows/devto-monitor.yml
+1. Go to https://github.com/alicelabs-llc/marketnow/actions/workflows/devto-monitor.yml
 2. Click "Run workflow" → "Run workflow"
 3. Wait ~2 minutes for the run to complete
 4. Check the run logs — you should see:

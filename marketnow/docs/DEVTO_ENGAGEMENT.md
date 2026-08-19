@@ -24,7 +24,7 @@ Our findings:
 The active probe approach catches what static analysis misses — you have to actually run the server and send malicious inputs to see what it does.
 
 Full methodology: marketnow.site/security
-Results public: github.com/edgarfloresguerra2011-a11y/marketnow
+Results public: github.com/alicelabs-llc/marketnow
 
 Would love to compare notes on your scanning methodology!
 ```

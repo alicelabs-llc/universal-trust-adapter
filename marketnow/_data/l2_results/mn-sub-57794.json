@@ -77,7 +77,7 @@
     }
   },
   "stdout_size_bytes": 438,
-  "stdout_sample": "docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: unable to retrieve OCI runtime error (open /run/containerd/io.containerd.runtime.v2.task/moby/a564f318d455e602f0a79f87c881f40552b5d90ae287063fb270105940ae31db/log.json: no such file or directory): /usr/local/bin/runsc did not terminate successfully: exit status 1  Run 'docker run --help' for more information ",
+  "stdout_sample": "docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: unable to retrieve OCI runtime error (open /run/containerd/io.containerd.runtime.v2.task/moby/a564f318d455e602f0a79f87c881f40552b5d90ae289,248fb270105940ae31db/log.json: no such file or directory): /usr/local/bin/runsc did not terminate successfully: exit status 1  Run 'docker run --help' for more information ",
   "l2_score": 10,
   "l2_risk_level": "low",
   "findings_summary": {

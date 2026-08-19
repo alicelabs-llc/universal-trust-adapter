@@ -111,7 +111,7 @@ async function fetchReceipt(receiptId) {
 }
 
 async function fetchRawReceipt(receiptId) {
-  const url = `https://raw.githubusercontent.com/edgarfloresguerra2011-a11y/marketnow/master/_data/receipts/${receiptId}.json`;
+  const url = `https://raw.githubusercontent.com/alicelabs-llc/marketnow/master/_data/receipts/${receiptId}.json`;
   const r = await fetch(url);
   if (!r.ok) throw new Error(`Failed to fetch raw receipt: ${r.status}`);
   return await r.json();

@@ -47,7 +47,7 @@ Anthropic's filesystem MCP scored 10/10 (low risk):
 ✓ No .ssh/.env/cron files created
 
 Full audit JSON is public:
-github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/_data/l2_results/mn-mcp-filesystem.json
+github.com/alicelabs-llc/marketnow/blob/master/_data/l2_results/mn-mcp-filesystem.json
 
 🧵 4/5
 
@@ -57,7 +57,7 @@ MarketNow: the trust layer for agent commerce.
 → 8,760+ MCP servers: marketnow.site/registry
 → Free skills (no signup): marketnow.site/api/free-skills.json
 → Install the MCP server: npx -y marketnow-mcp
-→ GitHub: github.com/edgarfloresguerra2011-a11y/marketnow
+→ GitHub: github.com/alicelabs-llc/marketnow
 
 Next: L3 Firecracker microVM (Q1 2027), L4 supply chain attestation, L5 third-party audit by Trail of Bits.
 

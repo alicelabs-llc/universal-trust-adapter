@@ -2,13 +2,13 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "MarketNow",
   "tagline": "Trust layer for agent commerce",
-  "description": "Trust layer for agent commerce. Discovery is solved (MCP registry, Smithery, Glama); trust is not. MarketNow provides Sentinel security audits, AP2-compatible mandates, x402 payments, and human-in-the-loop-by-default agent spending. 8,845 MCP servers, $0.99-$9.99 one-time, 65 free. AliceLabs LLC Proprietary, maintained by AliceLabs LLC.",
+  "description": "Trust layer for agent commerce. Discovery is solved (MCP registry, Smithery, Glama); trust is not. MarketNow provides Sentinel security audits, AP2-compatible mandates, x402 payments, and human-in-the-loop-by-default agent spending. 9,248 MCP servers, $0.99-$9.99 one-time, 65 free. AliceLabs LLC Proprietary, maintained by AliceLabs LLC.",
   "url": "https://marketnow.site",
   "api_base": "https://marketnow.site/api",
   "version": "2.0.0",
   "last_updated": "2026-07-02T00:00:00.000Z",
   "stats": {
-    "total_skills": 8845,
+    "total_skills": 9,248,
     "free_skills": 43,
     "categories": 58,
     "languages": [
@@ -74,7 +74,7 @@
   },
   "license": "MNNC-1.0 (Non-Commercial)",
   "open_source": false,
-  "github": "https://github.com/edgarfloresguerra2011-a11y/marketnow",
+  "github": "https://github.com/alicelabs-llc/marketnow",
   "npm": "https://www.npmjs.com/package/marketnow-mcp",
   "mcp_server": {
     "install": "npx -y marketnow-mcp",
@@ -84,7 +84,7 @@
     "largest MCP marketplace (we are the trust layer, not the largest)",
     "no humans needed (human-in-loop is default; silent requires opt-in)",
     "ETH/BSC/SOL/BTC payments (USDC on Base only)",
-    "8845 skills (current count is 8845)",
+    "9,248 skills (current count is 9,248)",
     "open registry with no manual approval (mandates default to notify mode)"
   ],
   "canonical_sources": {
