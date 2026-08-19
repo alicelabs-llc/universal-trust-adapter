@@ -1,7 +1,7 @@
 {
   "name": "MarketNow Skills API",
-  "version": "5.0.0",
-  "description": "Security infrastructure for AI agents. Sentinel audits MCP servers and agent tools, produces security evidence and trust scores.",
+  "version": "2.0.0",
+  "description": "Open marketplace for AI agent skills — MCP compatible. Every skill has a real description from its source repository.",
   "base_url": "https://www.marketnow.site/api",
   "total_skills": 9248,
   "categories_count": 16,
@@ -9,11 +9,7 @@
     "all_skills": "/api/skills.json",
     "categories": "/api/categories.json",
     "manifest": "/api/manifest.json",
-    "stats": "/api/skills_stats.json",
-    "audit_report": "/api/audit-report.json",
-    "owasp_compliance": "/api/owasp",
-    "trust_score": "/api/trust-score?skillId={id}",
-    "interceptor": "/api/interceptor"
+    "stats": "/api/skills_stats.json"
   },
   "usage": {
     "fetch_all": "GET https://www.marketnow.site/api/skills.json",
@@ -21,48 +17,5 @@
     "by_tag": "Filter client-side: skills.filter(s => s.tags.includes('mcp'))",
     "search": "Filter client-side: skills.filter(s => s.name.toLowerCase().includes(query))"
   },
-  "generated_at": "2026-08-09T01:58:57.634Z",
-  "positioning": "Security infrastructure for AI agents — not a marketplace. The marketplace (9,248 MCP skills, all free to install) is distribution; Sentinel is the product.",
-  "stats": {
-    "audited": 5662,
-    "l25_tested": 257,
-    "security_checks_performed": 1211488,
-    "threats_detected": 1030,
-    "critical_blocked": 80,
-    "verified_safe": 8288,
-    "quarantined": 81,
-    "risky_skills": 54,
-    "safe_skills": 8238,
-    "atc_issued": 57,
-    "sentinel_version": "L1.5 → L3 (10 layers) + Interceptor + ATC + x402 + A2A"
-  },
-  "mcp_server": {
-    "npm": "marketnow-mcp@1.9.0",
-    "command": "npx -y marketnow-mcp@1.9.0",
-    "tools_count": 12,
-    "namespace": "marketnow_*",
-    "tools": [
-      "marketnow_search_skills",
-      "marketnow_get_skill",
-      "marketnow_list_categories",
-      "marketnow_get_manifest",
-      "marketnow_get_install_command",
-      "marketnow_verify_trust",
-      "marketnow_verify_receipt",
-      "marketnow_submit_skill",
-      "marketnow_mint_referral",
-      "marketnow_lookup_referral",
-      "marketnow_recommend_skills",
-      "marketnow_get_owasp_compliance"
-    ],
-    "audit_doc": "https://github.com/alicelabs-llc/marketnow/blob/master/mcp-server/AUDIT.md"
-  },
-  "pricing": {
-    "free": "$0 — Basic Sentinel scan, trust score, public report",
-    "developer": "$49-99 — Deep audit, signed report",
-    "professional": "$199-499 — Runtime testing, Trust Card, re-audit",
-    "continuous": "$99-499/month — Monitoring, CVE tracking, auto re-audit",
-    "enterprise": "$5k-50k+/year — Private audits, API, SLA"
-  },
-  "pricing_coherence_note": "All 9,248 skills in the catalog are free to INSTALL (distribution). The paid product is Sentinel (security audit). The MCP server itself is free to install and use; paid actions kick in when you need a signed Trust Card, runtime testing, or continuous monitoring."
+  "generated_at": "2026-08-19T02:06:11.288Z"
 }
