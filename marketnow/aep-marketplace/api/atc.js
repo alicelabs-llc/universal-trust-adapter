@@ -1295,6 +1295,105 @@ export default async function handler(req, res) {
         }
       }
 
+      // ── trust: unified trust decision (POST handler — enriched per @anp2network's request 2026-08-17) ──
+      // POST /api/atc?action=trust — combines Sentinel + ATC + Policy + Interceptor
+      // Returns decision + rule_id + inputs (content-addressed) + evidence_url
+      if (postAction === 'trust') {
+        const { agent_id, skill_id, action: reqAction, atc_card_id, policy: userPolicy } = body;
+        if (!agent_id || !skill_id) return res.status(400).json({ error: 'agent_id and skill_id required' });
+        const policy = { min_trust_score: 5, allow_filesystem_write: false, allow_network: 'allowlist', allow_shell: 'none', allow_credentials_access: false, allow_process_spawn: false, require_atc: true, ...userPolicy };
+        const reasons = []; const violations = []; let allowed = true;
+
+        // Step 1: Sentinel assessment
+        let toolScore = 0; let toolEvidence = {};
+        try {
+          const skillsRes = await fetch('https://marketnow.site/api/skills.json');
+          const skills = await skillsRes.json();
+          const skill = skills.find(s => s.id === skill_id || s.slug === skill_id);
+          if (skill) {
+            toolScore = skill.sentinel_score || 0;
+            toolEvidence = { skill_id: skill.id, sentinel_score: toolScore, category: skill.category, sentinel_version: 'v2.5' };
+            if (toolScore < policy.min_trust_score) { allowed = false; violations.push({ rule: 'min_trust_score', expected: '>='+policy.min_trust_score, actual: toolScore }); reasons.push(`Tool score ${toolScore} < min ${policy.min_trust_score}`); }
+            else reasons.push(`Tool score ${toolScore}/10 OK`);
+          } else { toolEvidence = { skill_id, found: false }; reasons.push(`Skill ${skill_id} not found`); if (policy.min_trust_score > 0) { allowed = false; violations.push({ rule: 'min_trust_score', actual: 0 }); } }
+        } catch (e) { reasons.push(`Sentinel error: ${e.message}`); }
+
+        // Step 2: ATC verification
+        let identityVerified = false; let agentScore = 0; let certId = null; let expAt = null;
+        if (policy.require_atc) {
+          try {
+            const crlRes = await fetch('https://marketnow.site/api/atc?action=revocation-list');
+            const crlData = await crlRes.json();
+            const card = (crlData.cards || []).find(c => c.agent_id === agent_id && c.status === 'active') || (crlData.cards || []).find(c => c.card_id === atc_card_id && c.status === 'active');
+            if (card) { identityVerified = true; agentScore = card.sentinel_review_score || 0; certId = card.card_id; expAt = card.expires_at; reasons.push(`ATC ${certId} verified — score ${agentScore}/10`); }
+            else { allowed = false; violations.push({ rule: 'require_atc', actual: 'not found' }); reasons.push(`No ATC for agent ${agent_id}`); }
+          } catch (e) { reasons.push(`ATC error: ${e.message}`); }
+        }
+
+        // Step 3: Interceptor
+        let intDecision = 'allow';
+        if (reqAction && reqAction !== 'discover') {
+          try {
+            const intRes = await fetch('https://marketnow.site/api/interceptor', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', method: 'tools/call', params: { name: reqAction, arguments: body.action_args || {} } }) });
+            const intData = await intRes.json();
+            intDecision = intData.decision || 'allow';
+            if (intDecision === 'block') { allowed = false; violations.push(...(intData.violations || []).map(v => ({ rule: 'interceptor_'+v.rule_id, message: v.message }))); reasons.push(`Interceptor blocked: ${(intData.violations||[]).map(v=>v.message).join(', ')}`); }
+            else reasons.push('Interceptor: allowed');
+          } catch (e) { reasons.push(`Interceptor skip: ${e.message}`); }
+        }
+
+        // ── Enriched response per @anp2network's request (2026-08-17) ──
+        // Each input is content-addressed (sha256) so callers can re-run the policy
+        // locally and disagree with a named step instead of with the verdict.
+        const decisionId = `td_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
+        const policyVersion = '2026-08-19';
+        const inputs_consumed = [
+          { name: 'agent_id', value: agent_id, content_address: `sha256:${crypto.createHash('sha256').update(JSON.stringify(agent_id)).digest('hex')}` },
+          { name: 'skill_id', value: skill_id, content_address: `sha256:${crypto.createHash('sha256').update(JSON.stringify(skill_id)).digest('hex')}` },
+          { name: 'action', value: reqAction || '(discover)', content_address: `sha256:${crypto.createHash('sha256').update(JSON.stringify(reqAction || '(discover)')).digest('hex')}` },
+          { name: 'atc_card_id', value: atc_card_id || null, content_address: `sha256:${crypto.createHash('sha256').update(JSON.stringify(atc_card_id || null)).digest('hex')}` },
+          { name: 'policy', value: policy, content_address: `sha256:${crypto.createHash('sha256').update(rfc8785Canonicalize(policy)).digest('hex')}` }
+        ];
+
+        const ruleFired = violations.length > 0 ? violations[0].rule : 'allow_by_default';
+
+        const evidenceRecord = {
+          decision_id: decisionId,
+          decision: allowed ? 'ALLOW' : 'BLOCK',
+          rule_id: `${ruleFired}/${policyVersion}`,
+          rule_fired_at: new Date().toISOString(),
+          policy_version: policyVersion,
+          inputs: inputs_consumed,
+          reasons,
+          violations,
+          evidence_hash: `sha256:${crypto.createHash('sha256').update(
+            decisionId + (allowed ? 'ALLOW' : 'BLOCK') + ruleFired +
+            inputs_consumed.map(i => i.content_address).join('|')
+          ).digest('hex')}`
+        };
+
+        return res.status(200).json({
+          // Compact form (backward compatible)
+          allowed, agent_trust_score: agentScore, tool_security_score: toolScore,
+          identity_verified: identityVerified, policy_compliant: violations.length === 0,
+          certificate_id: certId, expires_at: expAt,
+          evidence: { sentinel: toolEvidence, atc: identityVerified ? { card_id: certId, trust_score: agentScore } : null, interceptor: { decision: intDecision } },
+          reasons, violations, decision_authority: 'consumer', decision_made_at: new Date().toISOString(),
+          architecture: 'DISCOVER → SENTINEL → IDENTITY → TRUST → POLICY → ENFORCEMENT → AUDIT',
+
+          // ── Enriched fields per @anp2network's request ──
+          decision_id: decisionId,
+          decision: allowed ? 'ALLOW' : 'BLOCK',
+          rule_id: `${ruleFired}/${policyVersion}`,
+          rule_fired_at: evidenceRecord.rule_fired_at,
+          policy_version: policyVersion,
+          inputs: inputs_consumed,
+          evidence_url: `https://marketnow.site/api/trust/evidence/${decisionId}`,
+          evidence_record: evidenceRecord,
+          re_run_instructions: 'To re-run this decision locally: fetch the policy at /api/policies.json, fetch the same inputs (content_addressed), apply the policy_version rules, and compare your verdict to this one.'
+        });
+      }
+
       // ── issue: create + sign + persist a new ATC ──
       if (postAction === 'issue') {
         const { agent_id, agent_name, public_key, capabilities, protocol_language, wallet_address, skill_id, proof_signature, proof_message } = body;
