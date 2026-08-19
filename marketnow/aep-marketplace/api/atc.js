@@ -1121,13 +1121,82 @@ export default async function handler(req, res) {
           } catch (e) { reasons.push(`Interceptor skip: ${e.message}`); }
         }
 
+        // ── Enriched response per @anp2network's request (2026-08-17) ──
+        // Each input is content-addressed (sha256) so callers can re-run the policy
+        // locally and disagree with a named step instead of with the verdict.
+        const decisionId = `td_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
+        const policyVersion = '2026-08-19';
+        const inputs_consumed = [
+          {
+            name: 'agent_id',
+            value: agent_id,
+            content_address: `sha256:${crypto.createHash('sha256').update(JSON.stringify(agent_id)).digest('hex')}`
+          },
+          {
+            name: 'skill_id',
+            value: skill_id,
+            content_address: `sha256:${crypto.createHash('sha256').update(JSON.stringify(skill_id)).digest('hex')}`
+          },
+          {
+            name: 'action',
+            value: reqAction || '(discover)',
+            content_address: `sha256:${crypto.createHash('sha256').update(JSON.stringify(reqAction || '(discover)')).digest('hex')}`
+          },
+          {
+            name: 'atc_card_id',
+            value: atc_card_id || null,
+            content_address: `sha256:${crypto.createHash('sha256').update(JSON.stringify(atc_card_id || null)).digest('hex')}`
+          },
+          {
+            name: 'policy',
+            value: policy,
+            content_address: `sha256:${crypto.createHash('sha256').update(canonicalize(policy)).digest('hex')}`
+          }
+        ];
+
+        // Determine the rule that fired (first violation, or 'allow_by_default')
+        const ruleFired = violations.length > 0
+          ? violations[0].rule
+          : 'allow_by_default';
+
+        // Build the evidence record (tamper-evident)
+        const evidenceRecord = {
+          decision_id: decisionId,
+          decision: allowed ? 'ALLOW' : 'BLOCK',
+          rule_id: `${ruleFired}/${policyVersion}`,
+          rule_fired_at: new Date().toISOString(),
+          policy_version: policyVersion,
+          inputs: inputs_consumed,
+          reasons,
+          violations,
+          // Tamper-evident: hash of (decision_id + decision + rule_id + inputs hashes)
+          evidence_hash: `sha256:${crypto.createHash('sha256').update(
+            decisionId + (allowed ? 'ALLOW' : 'BLOCK') + ruleFired +
+            inputs_consumed.map(i => i.content_address).join('|')
+          ).digest('hex')}`
+        };
+
         return res.status(200).json({
+          // Compact form (backward compatible with existing callers)
           allowed, agent_trust_score: agentScore, tool_security_score: toolScore,
           identity_verified: identityVerified, policy_compliant: violations.length === 0,
           certificate_id: certId, expires_at: expAt,
           evidence: { sentinel: toolEvidence, atc: identityVerified ? { card_id: certId, trust_score: agentScore } : null, interceptor: { decision: intDecision } },
           reasons, violations, decision_authority: 'consumer', decision_made_at: new Date().toISOString(),
           architecture: 'DISCOVER → SENTINEL → IDENTITY → TRUST → POLICY → ENFORCEMENT → AUDIT',
+
+          // ── Enriched fields per @anp2network's request (2026-08-17) ──
+          // Callers can re-run the policy locally with the same inputs and
+          // disagree with a named step instead of with the verdict.
+          decision_id: decisionId,
+          decision: allowed ? 'ALLOW' : 'BLOCK',
+          rule_id: `${ruleFired}/${policyVersion}`,
+          rule_fired_at: evidenceRecord.rule_fired_at,
+          policy_version: policyVersion,
+          inputs: inputs_consumed,
+          evidence_url: `https://marketnow.site/api/trust/evidence/${decisionId}`,
+          evidence_record: evidenceRecord,
+          re_run_instructions: 'To re-run this decision locally: fetch the policy at /api/policies.json, fetch the same inputs (content_addressed), apply the policy_version rules, and compare your verdict to this one. If they differ, the discrepancy is at a named step in `reasons` or `violations`.'
         });
       }
 

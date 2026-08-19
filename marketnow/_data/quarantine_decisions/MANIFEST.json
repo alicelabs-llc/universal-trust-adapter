@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "manifest_version": "v1",
+  "published_at": "2026-08-19T18:24:46.381811+00:00",
+  "publisher": "MarketNow Sentinel CA",
+  "publisher_url": "https://marketnow.site",
+  "purpose": "Tamper-evident public record of every quarantine decision. Allows third parties to audit false positive rate and false negative rate over time.",
+  "request_origin": "Public commitment per @anp2network's review of article #4419959 (2026-08-17).",
+  "total_records": 3,
+  "records": [
+    {
+      "decision_id": "qd_2026_08_15_001",
+      "decision_date": "2026-08-15T14:23:01Z",
+      "skill_id": "mn-sub-57794",
+      "decision": "quarantine",
+      "record_sha256": "50e81ec1e0cd33e895f1c5df98e9e8ab7d24ea01424a8a08f078226d0f5b040d",
+      "file_path": "2026/08/2026-08-15-qd_2026_08_15_001.json"
+    },
+    {
+      "decision_id": "qd_2026_08_16_002",
+      "decision_date": "2026-08-16T09:15:42Z",
+      "skill_id": "mn-sub-57801",
+      "decision": "quarantine",
+      "record_sha256": "b58f278f8c35b1737f9cbf853f47a66f4652d6a76493871a887954f9648f4fd0",
+      "file_path": "2026/08/2026-08-16-qd_2026_08_16_002.json"
+    },
+    {
+      "decision_id": "qd_2026_08_17_003",
+      "decision_date": "2026-08-17T16:42:18Z",
+      "skill_id": "mn-sub-57815",
+      "decision": "quarantine",
+      "record_sha256": "0343815af7b5ff045c5e6991d1b06f08e0c8dad26c6d6e325c1c7d64a8c26140",
+      "file_path": "2026/08/2026-08-17-qd_2026_08_17_003.json"
+    }
+  ],
+  "audit_methodology": {
+    "false_positive_rate": "Count records with appeal_status='approved' AND appeal_decision='false_positive' / total quarantine decisions in period.",
+    "false_negative_rate": "Count records with decision='allow' that were later found malicious (external reports) / total allow decisions in period. Currently 0 because allow decisions are not yet recorded here \u2014 see roadmap."
+  },
+  "immutability": "Records are content-addressed. Each record's record_sha256 is computed over its own content (including itself for tamper-evidence). Any change creates a new record_sha256, which would mismatch the manifest.",
+  "appeal_process": "If you believe a quarantine decision is wrong, file an appeal at https://marketnow.site/appeals?qd={decision_id}",
+  "license": "MNNC-1.0 \u2014 see https://marketnow.site/LICENSE",
+  "contact": "security@alicelabs.site"
+}

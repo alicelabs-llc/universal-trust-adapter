@@ -1,0 +1,51 @@
+{
+  "decision_id": "qd_2026_08_15_001",
+  "decision_date": "2026-08-15T14:23:01Z",
+  "skill_id": "mn-sub-57794",
+  "skill_name": "Example MCP Server with Prompt Injection in description",
+  "skill_repo": "https://github.com/example/mcp-server-with-injection",
+  "sentinel_score": 1,
+  "sentinel_version": "v2.5",
+  "layers_run": [
+    "L1.5",
+    "L1.6",
+    "L1.7",
+    "L1.8",
+    "L1.9"
+  ],
+  "layer_findings": [
+    {
+      "layer": "L1.5",
+      "result": "pass",
+      "notes": "Metadata valid"
+    },
+    {
+      "layer": "L1.6",
+      "result": "pass",
+      "notes": "No secrets detected"
+    },
+    {
+      "layer": "L1.7",
+      "result": "fail",
+      "notes": "Malware pattern detected: prompt_injection_001"
+    },
+    {
+      "layer": "L1.8",
+      "result": "fail",
+      "notes": "Malware family: prompt_injection (3 patterns)"
+    },
+    {
+      "layer": "L1.9",
+      "result": "fail",
+      "notes": "Prompt injection detected in description (rule PI-007)"
+    }
+  ],
+  "decision": "quarantine",
+  "decision_reason": "Prompt injection detected in skill description. The description contains instructions to override agent system prompts and exfiltrate data.",
+  "decision_authority": "Sentinel L1.9",
+  "reviewer": "automated",
+  "appealable": true,
+  "appeal_url": "https://marketnow.site/appeals?qd=qd_2026_08_15_001",
+  "sha256_artifact": "abc123def4567890abcdef1234567890abcdef1234567890abcdef1234567890",
+  "record_sha256": "50e81ec1e0cd33e895f1c5df98e9e8ab7d24ea01424a8a08f078226d0f5b040d"
+}

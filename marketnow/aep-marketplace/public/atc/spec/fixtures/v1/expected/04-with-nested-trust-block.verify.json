@@ -1,0 +1,8 @@
+{
+  "fixture_id": "04-with-nested-trust-block",
+  "expected_outcome": "valid",
+  "expected_canonical_bytes": "{\"agent_id\":\"test_agent\",\"agent_name\":\"Test Agent\",\"capabilities\":{\"protocol_language\":\"mcp\",\"provides\":[\"search\",\"read\"],\"translate\":true},\"card_id\":\"ATC-FIXTURE-004\",\"decision_authority\":\"consumer\",\"identity\":{\"key_algorithm\":\"Ed25519\",\"public_key\":\"MCowBQYDK2VwAyEATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\"},\"metadata\":{\"expires_at\":\"2027-08-19T00:00:00Z\",\"issued_at\":\"2026-08-19T00:00:00Z\",\"issuer\":\"MarketNow Sentinel CA\",\"revocation_url\":\"https://marketnow.site/api/atc?action=verify&card_id=ATC-FIXTURE-004\"},\"payment\":{\"method\":\"x402 + USDC on Base L2\",\"wallet_address\":\"0x1234567890abcdef1234567890abcdef12345678\"},\"schema_version\":\"1.1.0\",\"trust\":{\"audit_layers_passed\":{\"L1.5\":true,\"L1.6\":true,\"L1.7\":true,\"L1.8\":true,\"L1.9\":true,\"L2.5\":true},\"certificate_id\":\"mn-cert-atc-fixture-004\",\"composite_trust\":7,\"risk_level\":\"medium\",\"sentinel_review_score\":7,\"sentinel_score\":7}}",
+  "expected_digest_sha256": "028fe417e5b17c44c82c683cc5966e0ebdae82d2ba52ed2bff0b677faa8bdfea",
+  "expected_verify_result": true,
+  "expected_verify_reason": "Card signature is valid and the card is not revoked or expired"
+}
