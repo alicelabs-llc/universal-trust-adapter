@@ -1,0 +1,56 @@
+{
+  "submission_id": "sub_5stwre53h6uy",
+  "skill_id": "mn-sub-04513",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T14:26:32.314Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch2",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "96365e5c70a99ff4"
+  },
+  "repo": {
+    "url": "https://github.com/punkpeye/awesome-mcp-clients",
+    "full_name": "punkpeye/awesome-mcp-clients",
+    "owner": "punkpeye",
+    "name": "awesome-mcp-clients",
+    "description": "A collection of MCP clients.",
+    "stars": 6533,
+    "language": null,
+    "license": "MIT",
+    "pushed_at": "2026-06-07T18:57:48Z",
+    "archived": false,
+    "topics": [
+      "clients",
+      "mcp"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-04513",
+    "name": "awesome-mcp-clients",
+    "slug": "awesome-mcp-clients-4513",
+    "description": "A collection of MCP clients.",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/punkpeye/awesome-mcp-clients",
+      "submitted_at": "2026-07-29T14:26:32.314Z"
+    },
+    "install": "git clone https://github.com/punkpeye/awesome-mcp-clients",
+    "author": "punkpeye",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T15:26:32.314Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-3951137",
+  "promoted_at": "2026-07-30T15:05:52.160Z"
+}

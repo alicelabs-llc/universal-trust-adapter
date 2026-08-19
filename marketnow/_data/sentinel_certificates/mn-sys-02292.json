@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5370516",
+  "skill_id": "mn-sys-02292",
+  "skill_name": "Claude-systemd-mcp",
+  "issued_at": "2026-07-06T05:22:50.516Z",
+  "expires_at": "2026-07-13T05:22:50.516Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "c762f381e4cc451dde38bf13d6e194b46c027a8261e71aa31bea03c45e3db9d7",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-sys-02292"
+}

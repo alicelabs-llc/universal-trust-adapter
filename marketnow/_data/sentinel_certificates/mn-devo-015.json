@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6200114",
+  "skill_id": "mn-devo-015",
+  "skill_name": "Service Dependency Map",
+  "issued_at": "2026-07-06T05:36:40.114Z",
+  "expires_at": "2026-07-13T05:36:40.114Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "62c481478e5e248a14e0a0830c97484a33a93362e8508abbdd767957b98c6625",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-devo-015"
+}

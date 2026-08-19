@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5820333",
+  "skill_id": "mn-gen-13157",
+  "skill_name": "Vibecoding-system",
+  "issued_at": "2026-07-06T05:30:20.333Z",
+  "expires_at": "2026-07-13T05:30:20.333Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "d23fac385dbdcd6db84d173c8109f908ef27def0940ccd5b16d3be9deb97c3d6",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-13157"
+}

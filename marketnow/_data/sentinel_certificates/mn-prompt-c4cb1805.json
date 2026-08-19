@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8237362",
+  "skill_id": "mn-prompt-c4cb1805",
+  "skill_name": "Independent contractor agreement tech",
+  "issued_at": "2026-07-15T01:17:17.362Z",
+  "expires_at": "2026-07-22T01:17:17.362Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "fe15e68c1776526c3f4318705c9c0db62e19022b2744f4a47b91c4c71790aede",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-c4cb1805"
+}

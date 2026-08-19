@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-abletonmind",
+  "timestamp": "2026-07-06T03:02:17Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 1,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 1999,
+  "stdout_sample": "[2026-07-06T03:02:17.469Z] [INFO] ableton-mind starting {\"version\":\"0.1.1\",\"node\":\"20.20.2\"} [2026-07-06T03:02:17.472Z] [WARN] Ableton bridge unavailable; starting MCP server in offline mode {\"error\":\"failed to connect: connect ECONNREFUSED 127.0.0.1:9876\"} [2026-07-06T03:02:17.481Z] [INFO] server ready {\"tools\":[\"play\",\"stop\",\"set_tempo\",\"track_list\",\"track_get_info\",\"track_create\",\"track_upsert\",\"track_set_name\",\"track_set_volume\",\"create_midi_clip\",\"clip_add_notes\",\"clip_fire\",\"clip_stop\",\"cl",
+  "l2_score": 7,
+  "l2_risk_level": "low"
+}

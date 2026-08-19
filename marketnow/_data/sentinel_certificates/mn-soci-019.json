@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6188723",
+  "skill_id": "mn-soci-019",
+  "skill_name": "Community Forum",
+  "issued_at": "2026-07-06T05:36:28.723Z",
+  "expires_at": "2026-07-13T05:36:28.723Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a0451a6b21bf964d5b4892e08ce978b04570c883663d6658e88d14849982bb23",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-soci-019"
+}

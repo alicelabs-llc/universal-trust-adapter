@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5736833",
+  "skill_id": "mn-gen-11088",
+  "skill_name": "Recraft-mcp",
+  "issued_at": "2026-07-06T05:28:56.833Z",
+  "expires_at": "2026-07-13T05:28:56.833Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "78a686a5e5c3af6bf960e7bc4a892347e3a53f14598f5c3a2b1a64f8cea7bc8f",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-11088"
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://smithery.ai/schema/server-card.json",
+  "name": "marketnow",
+  "displayName": "MarketNow — Agent Skill Marketplace",
+  "description": "The open marketplace for MCP-compatible agent skills. 8,845 verified skills across 58 categories. Micro-priced from $0.99 to $9.99. Every skill includes a Sentinel security report, ready-to-use system prompt, and auto-configured install. 5 languages: EN, ES, ZH, PT, FR.",
+  "version": "1.0.1",
+  "type": "stdio",
+  "command": "npx",
+  "args": ["-y", "marketnow-mcp"],
+  "tools": [
+    {
+      "name": "search_skills",
+      "description": "Search 8,845 MCP skills by query, category, price, or language",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {"type": "string", "description": "Search query"},
+          "category": {"type": "string", "description": "Filter by category"},
+          "max_price": {"type": "number", "description": "Max price in USD"},
+          "language": {"type": "string", "description": "Filter by language (en, es, zh, pt, fr)"},
+          "limit": {"type": "number", "description": "Max results", "default": 20}
+        }
+      }
+    },
+    {
+      "name": "get_skill",
+      "description": "Get full details of a skill including system prompt, sentinel report, and setup requirements",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "skill_id": {"type": "string", "description": "Skill ID or slug"}
+        },
+        "required": ["skill_id"]
+      }
+    },
+    {
+      "name": "list_categories",
+      "description": "List all 58 categories with skill counts",
+      "inputSchema": {"type": "object", "properties": {}}
+    },
+    {
+      "name": "get_manifest",
+      "description": "Get marketplace metadata: total skills, pricing tiers, commission rates",
+      "inputSchema": {"type": "object", "properties": {}}
+    },
+    {
+      "name": "get_install_command",
+      "description": "Get the npx install command for a skill",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "skill_id": {"type": "string", "description": "Skill ID or slug"}
+        },
+        "required": ["skill_id"]
+      }
+    }
+  ],
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "api_key": {
+        "type": "string",
+        "description": "Optional MarketNow API key for authenticated requests (higher rate limits)",
+        "title": "API Key (optional)"
+      }
+    },
+    "additionalProperties": false
+  },
+  "metadata": {
+    "website": "https://marketnow.site",
+    "npm": "https://www.npmjs.com/package/marketnow-mcp",
+    "github": "https://github.com/edgarfloresguerra2011-a11y/marketnow",
+    "license": "MIT",
+    "categories": ["marketplace", "ai", "tools", "search"],
+    "tags": ["marketplace", "ai", "tools", "search", "mcp", "skills", "agents"],
+    "author": {
+      "name": "alicelabs",
+      "email": "info@alicelabs.site"
+    }
+  }
+}

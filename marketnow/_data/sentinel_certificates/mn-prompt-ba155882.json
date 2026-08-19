@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8128281",
+  "skill_id": "mn-prompt-ba155882",
+  "skill_name": "Especialista Treasury + Cash Management",
+  "issued_at": "2026-07-15T01:15:28.281Z",
+  "expires_at": "2026-07-22T01:15:28.281Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "f9b3da310609705e99ea6c3bf9130c66b503a2064f69e61bc3e0e47955c5439d",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-ba155882"
+}

@@ -1,0 +1,166 @@
+{
+  "seen_comments": {
+    "3ai2o": {
+      "article_id": 4069146,
+      "article_title": "MarketNow 2.0: 5 languages, 63 countries, 675 npm downloads \u2014 2 weeks in",
+      "username": "alexshev",
+      "created_at": "2026-07-05T18:40:30Z",
+      "marked_seen_reason": "User replied manually on 2026-07-07"
+    },
+    "3af12": {
+      "article_id": 4054543,
+      "article_title": "How to sandbox an MCP server with Docker (--network none is your best friend)",
+      "username": "custralis",
+      "created_at": "2026-07-02T22:16:56Z",
+      "marked_seen_reason": "User replied manually on 2026-07-07"
+    },
+    "3ahb2": {
+      "article_id": 4069005,
+      "article_title": "5 idiomas, 8,560 skills: c\u00f3mo construimos un marketplace MCP multiling\u00fce",
+      "username": "23cse_132_ritikagaur_984",
+      "created_at": "2026-07-05T02:02:12Z",
+      "marked_seen_reason": "User replied manually on 2026-07-07"
+    },
+    "3al0i": {
+      "article_id": 4069005,
+      "article_title": "5 idiomas, 8,560 skills: c\u00f3mo construimos un marketplace MCP multiling\u00fce",
+      "username": "pakvothe",
+      "created_at": "2026-07-07T13:21:51Z"
+    },
+    "3b3co": {
+      "article_id": 4129017,
+      "article_title": "I created a protocol for AI agents to talk to each other \u2014 ACP (Agent Communication Protocol)",
+      "username": "kordless",
+      "created_at": "2026-07-13T04:06:08Z"
+    },
+    "3b9nm": {
+      "article_id": 4153510,
+      "article_title": "I built 8 security layers for an MCP marketplace. Here's what each one actually catches.",
+      "username": "mads_hansen_27b33ebfee4c9",
+      "created_at": "2026-07-16T01:22:42Z"
+    },
+    "3b9pe": {
+      "article_id": 4153510,
+      "article_title": "I built 8 security layers for an MCP marketplace. Here's what each one actually catches.",
+      "username": "nazar-boyko",
+      "created_at": "2026-07-16T03:11:16Z"
+    },
+    "3ba1i": {
+      "article_id": 4153510,
+      "article_title": "I built 8 security layers for an MCP marketplace. Here's what each one actually catches.",
+      "username": "alexshev",
+      "created_at": "2026-07-16T04:44:38Z"
+    },
+    "3bbjn": {
+      "article_id": 4162091,
+      "article_title": "Post-mortem: a trojan slipped into my MCP marketplace. Here's what I built to stop it happening again.",
+      "username": "mads_hansen_27b33ebfee4c9",
+      "created_at": "2026-07-17T04:19:27Z"
+    },
+    "3bbm9": {
+      "article_id": 4153510,
+      "article_title": "I built 8 security layers for an MCP marketplace. Here's what each one actually catches.",
+      "username": "wrencalloway",
+      "created_at": "2026-07-17T06:28:20Z"
+    },
+    "3bc5f": {
+      "article_id": 4162090,
+      "article_title": "ATC is now real: Ed25519-signed agent trust cards with working verify + revoke",
+      "username": "anp2network",
+      "created_at": "2026-07-17T11:06:54Z"
+    },
+    "3bbno": {
+      "article_id": 4153510,
+      "article_title": "I built 8 security layers for an MCP marketplace. Here's what each one actually catches.",
+      "username": "mads_hansen_27b33ebfee4c9",
+      "created_at": "2026-07-17T07:21:48Z"
+    },
+    "3bd3g": {
+      "article_id": 4162090,
+      "article_title": "ATC is now real: Ed25519-signed agent trust cards with working verify + revoke",
+      "username": "jkming",
+      "created_at": "2026-07-18T03:06:46Z"
+    },
+    "3bf86": {
+      "article_id": 4181753,
+      "article_title": "Responding to feedback: runtime trust, CA key rotation, and the canonicalization bug",
+      "username": "wrencalloway",
+      "created_at": "2026-07-19T20:16:41Z"
+    },
+    "3bf8d": {
+      "article_id": 4181753,
+      "article_title": "Responding to feedback: runtime trust, CA key rotation, and the canonicalization bug",
+      "username": "anp2network",
+      "created_at": "2026-07-19T20:34:51Z"
+    },
+    "3bf9b": {
+      "article_id": 4181753,
+      "article_title": "Responding to feedback: runtime trust, CA key rotation, and the canonicalization bug",
+      "username": "mads_hansen_27b33ebfee4c9",
+      "created_at": "2026-07-19T22:19:43Z"
+    },
+    "3bhe2": {
+      "article_id": 4192373,
+      "article_title": "L3: I built continuous runtime monitoring because certification is point-in-time, attacks are runtime",
+      "username": "mads_hansen_27b33ebfee4c9",
+      "created_at": "2026-07-21T04:20:36Z"
+    },
+    "3bhef": {
+      "article_id": 4192373,
+      "article_title": "L3: I built continuous runtime monitoring because certification is point-in-time, attacks are runtime",
+      "username": "mayank609",
+      "created_at": "2026-07-21T04:38:12Z"
+    },
+    "3bhjp": {
+      "article_id": 4192373,
+      "article_title": "L3: I built continuous runtime monitoring because certification is point-in-time, attacks are runtime",
+      "username": "wrencalloway",
+      "created_at": "2026-07-21T06:59:38Z"
+    },
+    "3bhgn": {
+      "article_id": 4162091,
+      "article_title": "Post-mortem: a trojan slipped into my MCP marketplace. Here's what I built to stop it happening again.",
+      "username": "neelagiri65",
+      "created_at": "2026-07-21T05:34:40Z"
+    },
+    "3bhgb": {
+      "article_id": 4153510,
+      "article_title": "I built 8 security layers for an MCP marketplace. Here's what each one actually catches.",
+      "username": "neelagiri65",
+      "created_at": "2026-07-21T05:23:52Z"
+    },
+    "3blpl": {
+      "article_id": 4210477,
+      "article_title": "L1.9: I built a prompt injection firewall for AI agents (28 detection rules)",
+      "username": "mads_hansen_27b33ebfee4c9",
+      "created_at": "2026-07-23T10:20:17Z"
+    },
+    "3blgc": {
+      "article_id": 4153510,
+      "article_title": "I built 8 security layers for an MCP marketplace. Here's what each one actually catches.",
+      "username": "reneza",
+      "created_at": "2026-07-23T07:10:46Z"
+    },
+    "3c15i": {
+      "article_id": 4192373,
+      "article_title": "L3: I built continuous runtime monitoring because certification is point-in-time, attacks are runtime",
+      "username": "bogumi_jankiewicz_fcfce0",
+      "created_at": "2026-07-27T10:54:56Z"
+    },
+    "3c61m": {
+      "article_id": 4266661,
+      "article_title": "\u514d\u8d39MCP\u5b89\u5168\u5ba1\u8ba1 \u2014 10\u5c42\u5ba1\u8ba1 + Ed25519\u4fe1\u4efb\u5361 (\u4e2d\u6587\u7248)",
+      "username": "topstar_ai",
+      "created_at": "2026-07-30T01:08:31Z"
+    },
+    "3c61p": {
+      "article_id": 4266660,
+      "article_title": "Verify any MCP server trust in 1 command (free, Ed25519, no auth)",
+      "username": "topstar_ai",
+      "created_at": "2026-07-30T01:09:52Z"
+    }
+  },
+  "last_check": "2026-07-30T01:28:43.028496+00:00",
+  "initialized_at": "2026-07-07T04:55:55.856023+00:00",
+  "notes": "Initial state \u2014 3 comments marked as seen because user replied manually before the monitor was deployed."
+}

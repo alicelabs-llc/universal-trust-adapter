@@ -1,0 +1,80 @@
+{
+  "description": "Sample capability manifests covering the spectrum from minimal to full access.",
+  "samples": [
+    {
+      "name": "read-only agent (no writes, no network)",
+      "capabilities": {
+        "filesystem": {
+          "read": "own_dir",
+          "write": "none"
+        },
+        "network": {
+          "egress": "none",
+          "ingress": "none"
+        },
+        "shell": {
+          "exec": "none",
+          "spawn": "none"
+        },
+        "credentials": {
+          "read_env": "none",
+          "read_files": "none"
+        },
+        "process": {
+          "subprocess": "none",
+          "signals": "none"
+        }
+      }
+    },
+    {
+      "name": "sandboxed dev agent",
+      "capabilities": {
+        "filesystem": {
+          "read": "home_dir",
+          "write": "temp_dir"
+        },
+        "network": {
+          "egress": "allowlist",
+          "ingress": "none"
+        },
+        "shell": {
+          "exec": "sandboxed",
+          "spawn": "none"
+        },
+        "credentials": {
+          "read_env": "allowlist",
+          "read_files": "none"
+        },
+        "process": {
+          "subprocess": "sandboxed",
+          "signals": "own"
+        }
+      }
+    },
+    {
+      "name": "unrestricted agent (NOT RECOMMENDED — high blast radius)",
+      "capabilities": {
+        "filesystem": {
+          "read": "all",
+          "write": "all"
+        },
+        "network": {
+          "egress": "all",
+          "ingress": "all"
+        },
+        "shell": {
+          "exec": "unrestricted",
+          "spawn": "unrestricted"
+        },
+        "credentials": {
+          "read_env": "all",
+          "read_files": "all"
+        },
+        "process": {
+          "subprocess": "unrestricted",
+          "signals": "all"
+        }
+      }
+    }
+  ]
+}

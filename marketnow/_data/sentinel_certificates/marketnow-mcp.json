@@ -1,0 +1,115 @@
+{
+  "certificate_id": "MN-SC-2026-ATCROOT",
+  "skill_id": "marketnow-mcp",
+  "skill_name": "MarketNow MCP Server",
+  "timestamp": "2026-07-18T03:38:12.271677+00:00",
+  "auditor": "Sentinel L1.5 + L1.6 + L1.7 + L1.8 + L2 (self-audit by AliceLabs)",
+  "overall_score": 10,
+  "max_score": 10,
+  "risk_level": "low",
+  "risk_breakdown": {
+    "l15_l16_l17_l18": "low",
+    "l2": "low",
+    "final": "low"
+  },
+  "quarantine_recommended": false,
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l17": true,
+    "l18": true,
+    "l2": true,
+    "l2_score": 10,
+    "l2_risk_level": "low"
+  },
+  "checks": [
+    {
+      "name": "AUTH",
+      "status": "pass",
+      "risk": "low",
+      "detail": "MCP server uses stdio transport \u2014 no network auth needed"
+    },
+    {
+      "name": "TOOL_DESCRIPTIONS",
+      "status": "pass",
+      "risk": "low",
+      "detail": "No prompt injection patterns detected"
+    },
+    {
+      "name": "INPUT_VALIDATION",
+      "status": "pass",
+      "risk": "low",
+      "detail": "All inputs validated via zod schema"
+    },
+    {
+      "name": "CORS_ORIGIN",
+      "status": "pass",
+      "risk": "low",
+      "detail": "Not applicable \u2014 stdio transport"
+    },
+    {
+      "name": "OAUTH_SCOPES",
+      "status": "pass",
+      "risk": "low",
+      "detail": "No OAuth tokens \u2014 uses public API"
+    },
+    {
+      "name": "RATE_LIMITING",
+      "status": "pass",
+      "risk": "low",
+      "detail": "API calls rate-limited server-side"
+    },
+    {
+      "name": "L1.6 SEMGREP RULES",
+      "status": "pass",
+      "risk": "low",
+      "detail": "18 rules checked, 0 findings"
+    },
+    {
+      "name": "L1.6 SECRET DETECTION",
+      "status": "pass",
+      "risk": "low",
+      "detail": "18 patterns checked, 0 secrets found"
+    },
+    {
+      "name": "L1.6 OSV DEPENDENCIES",
+      "status": "pass",
+      "risk": "low",
+      "detail": "OSV API checked \u2014 no known vulnerabilities"
+    },
+    {
+      "name": "L1.7 MALWARE SCAN",
+      "status": "pass",
+      "risk": "low",
+      "detail": "8 malware patterns checked, 0 binaries, 0 launchers, 0 nested archives"
+    },
+    {
+      "name": "L1.8 MALWARE FAMILIES",
+      "status": "pass",
+      "risk": "low",
+      "detail": "17 family signatures checked, 0 matches"
+    },
+    {
+      "name": "L2 SANDBOX",
+      "status": "pass",
+      "risk": "low",
+      "detail": "Ran in gVisor sandbox (--network none, --read-only). No malicious behavior detected."
+    }
+  ],
+  "source": {
+    "type": "github",
+    "url": "https://github.com/edgarfloresguerra2011-a11y/marketnow",
+    "note": "Self-audit by AliceLabs LLC. Source code is public and verifiable."
+  },
+  "signature": {
+    "algorithm": "SHA-256",
+    "value": "2cc2c8c14b2be89ced3a0ad688fec3dad33cec3611bb91d19aa287477a49e70c",
+    "signed_by": "Sentinel Batch Auditor (GitHub Actions)",
+    "note": "Self-audit certificate. The MarketNow MCP server is maintained by AliceLabs LLC and its source code is public."
+  },
+  "validity": {
+    "issued_at": "2026-07-18T03:38:12.271677+00:00",
+    "expires_at": "2026-10-16T00:00:00Z",
+    "days_valid": 90
+  }
+}

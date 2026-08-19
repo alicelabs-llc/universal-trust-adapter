@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0699014",
+  "skill_id": "mn-real-nftmetadatax402",
+  "skill_name": "nft-metadata-x402",
+  "issued_at": "2026-07-26T04:38:19.014Z",
+  "expires_at": "2026-08-02T04:38:19.014Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "6e8ff9dc1ac837347af1a3c2b2d7d6c2fa51029f30e279d918080d0563b87356",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-nftmetadatax402"
+}

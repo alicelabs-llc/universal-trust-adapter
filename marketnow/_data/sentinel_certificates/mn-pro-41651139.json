@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6137553",
+  "skill_id": "mn-pro-41651139",
+  "skill_name": "Mobile A/B Testing SDK",
+  "issued_at": "2026-07-06T05:35:37.553Z",
+  "expires_at": "2026-07-13T05:35:37.553Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "f69bb3e2b9f3704caea1fbc902acbf9b3b52dc8e2df6b73b04e26fd3721b57c1",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-pro-41651139"
+}

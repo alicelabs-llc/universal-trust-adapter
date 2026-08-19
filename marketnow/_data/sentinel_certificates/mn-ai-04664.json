@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5475006",
+  "skill_id": "mn-ai-04664",
+  "skill_name": "Goosecontainer",
+  "issued_at": "2026-07-06T05:24:35.006Z",
+  "expires_at": "2026-07-13T05:24:35.006Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "dfbc874fe56ec3a11a11e002b117e4a2030b70f5a05a7a3b051e384ebb48c52b",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-ai-04664"
+}

@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5470378",
+  "skill_id": "mn-gen-04551",
+  "skill_name": "Go-playground-mcp",
+  "issued_at": "2026-07-06T05:24:30.378Z",
+  "expires_at": "2026-07-13T05:24:30.378Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "073758832167ea47f556a6f7aee229d8cbae81a0ed2ee226e7e64a4c87716f51",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-04551"
+}

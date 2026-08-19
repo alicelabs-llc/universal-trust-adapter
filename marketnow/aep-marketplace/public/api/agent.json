@@ -1,0 +1,497 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "MarketNow",
+  "description": "Trust layer for agent commerce. Discovery is solved (MCP registry, Smithery, Glama); trust is not. MarketNow provides Sentinel security audits, AP2-compatible mandates, x402 payment protocol, and human-in-the-loop-by-default agent spending. 5,023 MCP servers, B2B pricing. AliceLabs LLC proprietary (see SENTINEL-LICENSE), maintained by AliceLabs LLC.",
+  "url": "https://marketnow.site",
+  "api_base": "https://marketnow.site/api",
+  "positioning": {
+    "what_we_are": "The trust layer for agent commerce. Not the biggest catalog — the safest place for an agent to spend real money.",
+    "what_we_are_not": "A discovery registry. Use registry.modelcontextprotocol.io, Smithery, Glama, or PulseMCP for discovery. Use MarketNow for trust: security audits, payment verification, mandate enforcement, dispute resolution.",
+    "wedge": "The official MCP registry solves discovery but has 64.7M entries from 1,691 packages — massive duplication, zero signal, active supply-chain attacks. MarketNow is the trust layer on top of any catalog.",
+    "standards": {
+      "payments": "x402 (HTTP 402 Payment Required) — implementing, governed by Linux Foundation with Coinbase, Cloudflare, Stripe, Google, Visa",
+      "mandates": "AP2 (Agent Payments Protocol) — implementing, by Google with Visa/Mastercard/PayPal/Coinbase + 60 partners",
+      "discovery": "MCP Server Cards — monitoring, will adopt when spec stabilizes",
+      "identity": "MCP Registry namespace verification — planning, via GitHub OAuth or DNS"
+    },
+    "standards_page": "https://marketnow.site/standards"
+  },
+  "trust_model": {
+    "protocol": "ATC/AP2 (delegated mandates)",
+    "summary": "Three purchase modes designed for both human oversight and agent autonomy. Human-in-the-loop is the default; silent autonomous spending is opt-in only.",
+    "default_notification_mode": "notify",
+    "notification_modes": {
+      "notify": "DEFAULT — agent buys autonomously, principal gets email/webhook alert on every purchase",
+      "notify_and_veto": "agent buys, principal gets alert + 5-minute veto window (veto flow on roadmap)",
+      "silent": "fully autonomous, no alerts. Requires explicit confirmSilentAutonomy=true field — opt-in only"
+    },
+    "modes": [
+      {
+        "mode": "instant_download",
+        "applies_to": "Free skills (price = 0) and verified open-source skills",
+        "agent_action": "POST /api/agent-purchase with {skillId}",
+        "human_action": "None required",
+        "response": "license key + system_prompt + install command immediately"
+      },
+      {
+        "mode": "instant_purchase",
+        "applies_to": "Paid skills where a valid mandate exists and price <= perPurchaseCapUsd and price <= (spendingLimit - spent). Default notificationMode is 'notify' — the principal is alerted on every purchase.",
+        "agent_action": "POST /api/agent-purchase with {skillId, mandateId, txHash, walletAddress}",
+        "human_action": "None required at purchase time — but receives a notification (email/webhook) immediately after. Can revoke the mandate at any time.",
+        "response": "license key + system_prompt after on-chain USDC verification; mandate ledger updated; notification sent"
+      },
+      {
+        "mode": "requires_human_approval",
+        "applies_to": "Paid skills when no mandate is on file, or mandate is exhausted/expired/below cap",
+        "agent_action": "Receive the response and surface to operator, or wait for mandate creation",
+        "human_action": "Approve via Stripe Checkout, or create/renew a mandate at /mandates",
+        "response": "options.option_1_stripe.url + options.option_2_create_mandate.url"
+      }
+    ],
+    "guarantees": [
+      "Every paid purchase is verified on-chain via eth_getTransactionReceipt on Base",
+      "Every mandate spend is recorded in a public git commit at _data/mandates/ — auditable in the repo history",
+      "Mandates default to 'notify' mode — the principal is alerted on every purchase",
+      "'silent' mode (no notifications) requires explicit confirmSilentAutonomy=true — opt-in only",
+      "Mandates can be revoked instantly by the principal (human wallet owner) from /mandates",
+      "Hard caps: max $500 total per mandate, max $50 per single purchase (cannot be raised)",
+      "Default 90-day expiry; mandates auto-expire",
+      "Sentinel L2.5 gVisor sandbox security audit is self-declared — see /trust for the full disclosure and roadmap to third-party audit"
+    ]
+  },
+  "pricing": {
+    "model": "MarketNow does NOT sell skills. We administer a free marketplace + sell Sentinel subscriptions to sellers.",
+    "skills_are_free": true,
+    "explanation": "All 7,063 skills in the catalog are FREE to install and use. MarketNow does not charge per-skill. Our revenue comes from SELLERS who want to list/sell their skills — they subscribe to Sentinel (the security audit pipeline) and we take a commission on each sale.",
+    "revenue_streams": {
+      "1_marketplace_administration": "Free — anyone can browse/install the 7,063 skills at no cost",
+      "2_sentinel_subscriptions_for_sellers": "Sellers who want to list/sell their skills subscribe to Sentinel",
+      "3_commission_on_sales": "When a seller sells a skill, MarketNow takes 20% (15% if affiliate is used)",
+      "4_addons": "Featured listings, verified seller badge, priority review",
+      "5_affiliate_program": "5% commission to referrers, paid monthly via Stripe Connect (min $50)"
+    },
+    "seller_tiers": {
+      "FREE": {
+        "price_usd": 0,
+        "period": "forever",
+        "max_skills": 3,
+        "includes": [
+          "Basic Sentinel L1 scan",
+          "Standard review queue (24-48h)",
+          "Community support"
+        ]
+      },
+      "PRO": {
+        "price_usd_per_month": 9.99,
+        "max_skills": 25,
+        "includes": [
+          "Priority Sentinel scan (<6h)",
+          "Featured badge on listings",
+          "Analytics dashboard",
+          "Custom slug URLs",
+          "Email support"
+        ]
+      },
+      "ENTERPRISE": {
+        "price_usd_per_month": 49.99,
+        "max_skills": "unlimited",
+        "includes": [
+          "Instant Sentinel scan (<1h)",
+          "Premium featured placement",
+          "Advanced analytics + revenue reports",
+          "API access for bulk operations",
+          "Dedicated account manager",
+          "Custom commission rates (negotiable)",
+          "Priority support (Slack channel)"
+        ]
+      }
+    },
+    "seller_addons": {
+      "featured_listing": {
+        "price_usd": 4.99,
+        "period": "30 days",
+        "description": "Boost your skill to the top of search results"
+      },
+      "verified_seller_badge": {
+        "price_usd": 19.99,
+        "period": "one-time",
+        "description": "Get a ✓ Verified badge on all your skills. Requires KYC verification."
+      },
+      "priority_review": {
+        "price_usd": 2.99,
+        "period": "per skill",
+        "description": "Skip the queue. Your skill is reviewed within 6 hours instead of 24-48h."
+      }
+    },
+    "storage_fee": {
+      "applies_to": "FREE tier only (PRO/ENTERPRISE include unlimited storage)",
+      "free_threshold": 3,
+      "price_per_skill_usd": 0.5,
+      "period": "month",
+      "description": "FREE tier includes your first 3 skills at no cost. After that, $0.50 per skill per month covers hosting, Sentinel scanning, and continuous monitoring."
+    },
+    "commission_on_sales": {
+      "seller_keeps": "80%",
+      "marketnow_takes": "20% (15% if affiliate is used)",
+      "affiliate_gets": "5% (deducted from MarketNow's share, not seller's)",
+      "note": "Seller always keeps 80%. The 5% affiliate commission comes out of MarketNow's 20% share."
+    },
+    "no_per_skill_fees_for_buyers": true,
+    "no_subscriptions_for_buyers": true,
+    "no_credits": true,
+    "signup_as_seller": "https://marketnow.site/submit",
+    "average": 0,
+    "min": 0,
+    "max": 0
+  },
+  "endpoints": {
+    "list_all_skills": {
+      "method": "GET",
+      "path": "/api/skills.json",
+      "returns": "Array of all skills with price, category, tags, install command",
+      "cache": "1 hour",
+      "size_hint": "~7 MB uncompressed, ~1.5 MB gzipped"
+    },
+    "get_skill": {
+      "method": "GET",
+      "path": "/api/skills/{id}.json",
+      "returns": "Single skill detail (NOTE: not yet implemented, use list_all_skills and filter client-side)",
+      "fallback": "GET /api/skills.json and filter by id"
+    },
+    "categories": {
+      "method": "GET",
+      "path": "/api/categories.json",
+      "returns": "Array of {name, slug, count} for all categories"
+    },
+    "manifest": {
+      "method": "GET",
+      "path": "/api/manifest.json",
+      "returns": "API metadata, total_skills count, version"
+    },
+    "agent_instructions": {
+      "method": "GET",
+      "path": "/api/agent.json",
+      "returns": "This file — machine-readable agent instructions"
+    },
+    "search": {
+      "method": "GET",
+      "path": "/api/search",
+      "params": {
+        "q": "string",
+        "category": "string",
+        "max_price": "number",
+        "language": "string",
+        "limit": "number"
+      },
+      "returns": "Array of matching skills with relevance scores"
+    },
+    "agent_purchase": {
+      "method": "POST",
+      "path": "/api/agent-purchase",
+      "description": "Dual-mode purchase: instant for free / mandated, requires approval otherwise.",
+      "body": {
+        "skillId": "string (required)",
+        "walletAddress": "string (required for paid)",
+        "txHash": "string (required for paid — USDC Transfer on Base)",
+        "mandateId": "string (optional — enables autonomous purchase within pre-approved limit)",
+        "agentId": "string (optional)"
+      },
+      "response_modes": [
+        "instant_download",
+        "instant_purchase",
+        "direct_purchase",
+        "requires_payment",
+        "requires_human_approval"
+      ],
+      "verification": "USDC Transfer event parsed from eth_getTransactionReceipt on Base (chainId 8453)"
+    },
+    "mandates": {
+      "method": "GET | POST",
+      "path": "/api/mandates",
+      "description": "Manage delegated spending mandates (ATC/AP2).",
+      "actions": {
+        "create": "POST /api/mandates with {owner, agentId, spendingLimitUsd, perPurchaseCapUsd, categories, expiresAt}",
+        "get": "GET /api/mandates?id=mand_xxx",
+        "list_by_owner": "GET /api/mandates?owner=0x...",
+        "list_by_agent": "GET /api/mandates?agent=agent_xxx",
+        "revoke": "POST /api/mandates?action=revoke&id=mand_xxx",
+        "spend": "POST /api/mandates?action=spend {id, amount, txHash}  (called internally by agent-purchase)"
+      },
+      "limits": {
+        "max_total_usd": 500,
+        "max_per_purchase_usd": 50,
+        "default_ttl_days": 90
+      },
+      "ui": "https://marketnow.site/mandates"
+    },
+    "agent_wallet": {
+      "method": "GET",
+      "path": "/api/agent-wallet",
+      "returns": "Payment instructions for agents (USDC contract, Base RPC, code samples in Python/JS)"
+    },
+    "audit_skill": {
+      "method": "POST",
+      "path": "/api/audit-skill",
+      "description": "Sentinel L1.5+L1.6+L2 security audit — runs 3 layers: 6 metadata checks + 18 Semgrep rules + 18 secret patterns + OSV API + L2 Docker sandbox results",
+      "checks": [
+        "AUTH",
+        "TOOL_DESCRIPTIONS (prompt injection)",
+        "INPUT_VALIDATION",
+        "CORS_ORIGIN",
+        "OAUTH_SCOPES",
+        "RATE_LIMITING_ERROR_LEAKAGE",
+        "L1.6 SEMGREP RULES (18 MCP-specific patterns)",
+        "L1.6 SECRET DETECTION (Stripe, AWS, GitHub, JWT, private keys)",
+        "L1.6 OSV DEPENDENCIES (real-time api.osv.dev)",
+        "L2 Docker sandbox (if skill has GitHub repo)"
+      ],
+      "returns": {
+        "overall_score": "0-10 (L1.5 + L1.6 adjusted by L2 multiplier)",
+        "risk_level": "low | medium | high | critical",
+        "risk_breakdown": {
+          "l15_l16": "risk from static analysis",
+          "l2": "risk from Docker sandbox (or 'not_available')",
+          "final": "worst of l15_l16 and l2"
+        }
+      }
+    },
+    "certificate_lookup": {
+      "method": "GET",
+      "path": "/api/audit-skill?certificate=1&skillId={skillId}",
+      "description": "Retrieve the signed Sentinel certificate for a skill. Certificates are regenerated weekly by the batch audit (Sunday 01:00 UTC) and signed with SHA-256.",
+      "params": {
+        "certificate": "must be '1'",
+        "skillId": "the skill ID (e.g., mn-gen-00003)"
+      },
+      "returns": {
+        "status": "certified | not_audited",
+        "certificate": {
+          "certificate_id": "MN-SC-2026-XXXXXXX",
+          "skill_id": "string",
+          "skill_name": "string",
+          "issued_at": "ISO 8601 timestamp",
+          "expires_at": "ISO 8601 timestamp (7 days from issue)",
+          "overall_score": "0-10",
+          "risk_level": "low | medium | high | critical",
+          "risk_breakdown": "object",
+          "layers_run": {
+            "l15": "boolean",
+            "l16": "boolean",
+            "l2": "boolean"
+          },
+          "layer_details": "object with findings per layer",
+          "signature": "SHA-256 hex string",
+          "signature_algorithm": "SHA-256",
+          "verification_url": "https://marketnow.site/verify?skillId=X"
+        }
+      },
+      "example": "GET https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-00003"
+    },
+    "sentinel_status": {
+      "method": "GET",
+      "path": "/api/audit-skill?sentinel-status=1",
+      "description": "Aggregate Sentinel status: latest L1.6 batch audit, L2 sandbox coverage, and total certified skills count.",
+      "returns": {
+        "l16_batch": "latest weekly batch audit results (Semgrep + Gitleaks + OSV)",
+        "l2_sandbox": "Docker sandbox coverage with per-skill summaries",
+        "certificates": {
+          "count": "total certified skills (from _summary.json)",
+          "by_risk": "object with low/medium/high/critical counts"
+        }
+      }
+    },
+    "verify_purchase": {
+      "method": "GET",
+      "path": "/api/verify-purchase",
+      "params": {
+        "sessionId": "string - Stripe session ID"
+      },
+      "returns": {
+        "verified": "boolean",
+        "skillId": "string",
+        "licenseKey": "string"
+      }
+    },
+    "atc": {
+      "method": "GET / POST",
+      "path": "/api/atc",
+      "actions": {
+        "issue": "POST /api/atc {action:'issue', agent_id, public_key, capabilities?, skill_id?, wallet_address?}",
+        "verify": "GET /api/atc?action=verify&card_id=ATC-2026-XXXXX — verify an Agent Trust Card (identity, validity, review evidence)",
+        "verify_receipt": "GET /api/atc?action=verify-receipt&receipt_id=rcpt_xxxxxxxxxxxx — verify a signed delivery proof for a completed purchase",
+        "revoke": "POST /api/atc {action:'revoke', card_id, reason}",
+        "list": "GET /api/atc — list all ATCs",
+        "ca_key": "GET /api/atc?action=ca-key — Ed25519 CA public key (pin this in your runtime)",
+        "spec": "GET /api/atc?action=spec — full ATC protocol spec (v1.1.0)",
+        "translate": "POST /api/atc {action:'translate', from, to, message} — translate between LangChain/MCP/AutoGen/CrewAI/OpenAI Functions"
+      },
+      "schema_version": "1.1.0",
+      "decision_authority": "consumer",
+      "what_the_atc_answers": [
+        "identity binding (Ed25519 public key)",
+        "issuer (which CA vouches for the binding)",
+        "validity state (valid | revoked, with timestamp + reason)",
+        "review evidence (Sentinel score, layers passed, audit timestamp, artifact hash)"
+      ],
+      "what_the_atc_does_NOT_answer": [
+        "should this agent be trusted? (runtime policy decision)",
+        "is this agent safe for MY context? (consumer decides)",
+        "will this agent behave at runtime? (covered by L3, separate layer)"
+      ],
+      "action_receipts": {
+        "description": "Signed delivery proof for completed purchases. Emitted automatically by POST /api/agent-purchase on instant_purchase and direct_purchase modes.",
+        "storage": "_data/receipts/{receipt_id}.json in the public GitHub repo (audit ledger)",
+        "cryptography": "Ed25519 (RFC 8032) over RFC 8785 JCS canonical JSON",
+        "interop_with_vibe": {
+          "mandate_id": "vibe_decision_ref (content-addressed auth citation)",
+          "settle_txhash": "vibe_settle_coordinate (orthogonal to receipt)",
+          "atc_card_id": "co-sign or cite (does NOT replace settle receipt)",
+          "receipt_id": "vibe_action_receipt (offline-verifiable delivery proof)"
+        }
+      }
+    },
+    "bundles": {
+      "method": "GET",
+      "path": "/api/bundles.json",
+      "returns": "Array of skill bundles with discounts"
+    },
+    "openapi": {
+      "method": "GET",
+      "path": "/api/openapi.json",
+      "returns": "OpenAPI 3.1 specification"
+    },
+    "capability_schema": {
+      "method": "GET",
+      "path": "/api/capability-schema.json",
+      "returns": "JSON Schema for skill capabilities"
+    }
+  },
+  "skill_schema": {
+    "id": "string, format: mn-{category-abbrev}-{number}, e.g. mn-ai-00001",
+    "name": "string, human-readable",
+    "slug": "string, URL-safe, used in install command",
+    "description": "string, real description from source repository",
+    "category": "string, one of N categories (see /api/categories.json)",
+    "tags": "string[], keywords for search and filtering",
+    "price": "number, USD (always 0 — MarketNow does not sell skills. If seller_priced=true, the seller set this price and MarketNow takes 5% commission.)",
+    "seller_priced": "boolean — false (default) means MarketNow free skill; true means a third-party seller set the price",
+    "currency": "string, always 'USD' (only relevant if seller_priced=true)",
+    "license": "string, always 'AliceLabs LLC' (MarketNow licenses are issued by AliceLabs LLC)",
+    "verified": "boolean — DEPRECATED. True only for human-reviewed skills (43 today). Use review_status instead.",
+    "review_status": "string — one of: 'auto-scanned' (Sentinel L1.5 ran, no human review — 8,517 skills today), 'human-reviewed' (a human at AliceLabs inspected the repo — 43 skills today), 'maintainer-verified' (GitHub maintainer signed a claim of authorship — 0 today, program not launched)",
+    "permissions": "object — { network: string[], filesystem: string[], env_vars: string[], subprocess: bool, disclosure: string }. Declarative only — not enforced at runtime. See /trust.",
+    "source": "object — { type: 'github' | 'curated' | 'bulk-import', url: str | null, note: string }. Discloses where the skill listing came from.",
+    "usdc_disclaimer": "string — standard text on every skill explaining USDC is irreversible on-chain and the dispute process",
+    "sentinel_score": "number, 0-10, security audit score",
+    "install": "string, shell command to install the skill",
+    "author": "string, upstream repo owner",
+    "version": "string, semver"
+  },
+  "workflow_for_agents": {
+    "step_1_discover": "GET /api/search?q=your_query — find a skill",
+    "step_2_evaluate": "Read description, tags, sentinel_score, system_prompt preview",
+    "step_3_choose_mode": "ALL skills in MarketNow are FREE (price=0). Just POST /api/agent-purchase with {skillId} to get the license + system_prompt instantly. If seller_priced=true (rare — third-party seller set a price), then: if you have a mandateId → send USDC, then call agent-purchase with {skillId, mandateId, txHash}. If no mandate → ask the human to create a mandate at /mandates or pay via Stripe.",
+    "step_4_purchase": "POST /api/agent-purchase",
+    "step_5_install": "Run the 'install' field as a shell command, e.g. npx -y @marketnow/install <slug>",
+    "step_6_use": "Call the skill from your agent runtime using the system_prompt + capabilities returned"
+  },
+  "rate_limits": {
+    "anonymous": "60 requests per minute to /api/* endpoints",
+    "authenticated": "600 requests per minute to /api/* endpoints",
+    "bulk_download_hint": "Cache /api/skills.json locally — refresh every 24h max"
+  },
+  "authentication": {
+    "optional": "Most read endpoints are public (no auth required)",
+    "required_for": [
+      "/api/checkout/create-session",
+      "/api/vault"
+    ],
+    "method": "Bearer token in Authorization header",
+    "obtain_via": "Sign up via the web UI at https://marketnow.site/?login=true"
+  },
+  "protocols": [
+    "MCP v1.0",
+    "HTTP/1.1",
+    "HTTPS",
+    "JSON",
+    "ATC/AP2 (delegated mandates)"
+  ],
+  "mcp_server": {
+    "name": "marketnow-mcp",
+    "version": "1.6.0",
+    "npm_url": "https://www.npmjs.com/package/marketnow-mcp",
+    "description": "MarketNow as an MCP server — search and discover skills from any MCP-compatible agent runtime (Claude Desktop, Cursor, Cline). v1.6.0 adds verify_receipt tool for action-receipt verification.",
+    "install": "npx -y marketnow-mcp",
+    "tools": [
+      "search_skills",
+      "get_skill",
+      "list_categories",
+      "get_manifest",
+      "get_install_command",
+      "verify_trust",
+      "verify_receipt",
+      "submit_skill",
+      "recommend_skills"
+    ],
+    "new_in_v1_6_0": [
+      "verify_receipt(receipt_id) — verify a signed delivery proof (action-receipt) for a completed purchase",
+      "ATC schema v1.1.0: sentinel_review_score + decision_authority fields",
+      "Action-receipts emitted on every paid purchase (instant_purchase + direct_purchase modes)"
+    ],
+    "config_claude_desktop": {
+      "mcpServers": {
+        "marketnow": {
+          "command": "npx",
+          "args": [
+            "-y",
+            "marketnow-mcp"
+          ]
+        }
+      }
+    },
+    "repo": "https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/mcp-server"
+  },
+  "affiliate_program": {
+    "commission": "5% of sale price",
+    "how_it_works": "Generate your affiliate code at /dashboard, share links with your code, earn 5% per sale",
+    "payout_threshold_usd": 50,
+    "payout_schedule": "monthly via Stripe Connect"
+  },
+  "seller_program": {
+    "commission": "20% per sale (seller keeps 80%)",
+    "submit_url": "https://marketnow.site/submit",
+    "verification": "Sentinel L1 (automated) + human review (24-48h)",
+    "payout_schedule": "monthly via Stripe Connect"
+  },
+  "content_type": "application/json; charset=utf-8",
+  "cors": "Access-Control-Allow-Origin: * (open for agent consumption)",
+  "documentation": {
+    "quickstart": "https://marketnow.site/handshake",
+    "mandates_ui": "https://marketnow.site/mandates",
+    "trust_roadmap": "https://marketnow.site/trust",
+    "about_us": "https://marketnow.site/about",
+    "catalog_transparency": "https://marketnow.site/catalog",
+    "security_methodology": "https://marketnow.site/security",
+    "policies": "https://marketnow.site/policies",
+    "registry": "https://marketnow.site/registry",
+    "this_file": "https://marketnow.site/api/agent.json"
+  },
+  "generated_at": "2026-08-09T01:58:58.258Z",
+  "trust": {
+    "license": "MIT",
+    "open_source": false,
+    "github": "https://github.com/alicelabs-llc",
+    "maintainer": "AliceLabs LLC (Wyoming, USA, founded 2025) — founder Edison Flores. Public GitHub org: github.com/alicelabs-llc",
+    "security_audit": "Sentinel L1.5 (self-declared, automated 6-point MCP security scan). Third-party audit pending — see /trust.",
+    "human_oversight": "Default mandate mode is 'notify' — humans are alerted on every purchase. Silent autonomous mode requires explicit opt-in.",
+    "track_record_disclosure": "AliceLabs LLC founded 2025 in Wyoming, USA. MarketNow launched publicly 2026. Founder Edison Flores is Ecuadorian. No third-party press coverage yet. No public bug bounty yet. Trust is being built, not claimed.",
+    "public_roadmap": "https://marketnow.site/trust",
+    "source_available": true
+  },
+  "license": "AliceLabs LLC Proprietary — see https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/LICENSE",
+  "contact": {
+    "legal": "legal@alicelabs.site",
+    "support": "support@alicelabs.site",
+    "general": "info@alicelabs.site"
+  }
+}

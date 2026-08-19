@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Playground — MarketNow</title>
+<meta name="description" content="Try MarketNow's API live. Search skills, get certificates, test MCP endpoint.">
+<link rel="canonical" href="https://marketnow.site/tools/playground.html" />
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#050505;color:#e2e8f0;line-height:1.6;padding:20px;max-width:1000px;margin:0 auto}
+h1{color:#3b82f6;font-size:1.8em;margin-bottom:0.3em}
+h2{color:#22c553;margin-top:1.5em;font-size:1.2em}
+.endpoint{background:#1e293b;padding:12px;border-radius:8px;margin:8px 0;cursor:pointer;border:2px solid transparent;transition:border 0.2s}
+.endpoint:hover{border-color:#3b82f6}
+.endpoint.active{border-color:#3b82f6}
+.method{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:bold;margin-right:8px}
+.GET{background:#22c553;color:white}
+.POST{background:#f97316;color:white}
+input,textarea{background:#0d1117;border:1px solid #334155;color:#e2e8f0;padding:8px 12px;border-radius:6px;width:100%;margin:4px 0;font-family:monospace}
+button{background:#3b82f6;color:white;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:1em;margin:4px 0}
+button:hover{background:#2563eb}
+pre{background:#0d1117;border:1px solid #1e293b;padding:16px;border-radius:8px;overflow-x:auto;margin:1em 0;font-size:0.85em;max-height:400px;overflow-y:auto}
+a{color:#3b82f6}
+.stat{display:inline-block;margin:8px 16px;text-align:center}
+.stat-num{font-size:1.5em;color:#3b82f6;font-weight:bold;display:block}
+.stat-label{font-size:0.85em;color:#94a3b8}
+</style>
+</head>
+<body>
+<h1>🧪 API Playground</h1>
+<p>Test MarketNow's API endpoints live. Click an endpoint, fill parameters, hit Send.</p>
+
+<div id="stats">
+  <div class="stat"><span class="stat-num" id="statSkills">...</span><span class="stat-label">Skills</span></div>
+  <div class="stat"><span class="stat-num" id="statFree">...</span><span class="stat-label">Free</span></div>
+  <div class="stat"><span class="stat-num" id="statCats">...</span><span class="stat-label">Categories</span></div>
+</div>
+
+<h2>Select an endpoint</h2>
+<div id="endpoints"></div>
+
+<h2>Parameters</h2>
+<div id="params" style="margin:1em 0"></div>
+<button onclick="sendRequest()">🚀 Send Request</button>
+
+<h2>Response</h2>
+<pre id="response"><code>Click an endpoint above, then "Send Request" to see the response here.</code></pre>
+
+<h2>MCP Protocol Test</h2>
+<p>Test the MCP HTTP endpoint directly:</p>
+<button onclick="testMCP('initialize')" style="background:#a855f7">Test: initialize</button>
+<button onclick="testMCP('tools/list')" style="background:#a855f7">Test: tools/list</button>
+<button onclick="testMCP('health')" style="background:#a855f7">Test: tools/call health</button>
+<pre id="mcpResponse" style="margin-top:1em"><code>MCP responses will appear here.</code></pre>
+
+<script>
+const API_BASE = 'https://marketnow.site/api';
+const endpoints = [
+  { method:'GET', path:'/search', label:'Search skills', params:[{name:'q',placeholder:'filesystem',required:true},{name:'max_price',placeholder:'5',required:false},{name:'limit',placeholder:'10',required:false}] },
+  { method:'GET', path:'/free-skills.json', label:'List free skills', params:[] },
+  { method:'GET', path:'/agent.json', label:'Agent instructions', params:[] },
+  { method:'GET', path:'/agent-ping.json', label:'Agent ping (live stats)', params:[] },
+  { method:'GET', path:'/trust.json', label:'Trust roadmap', params:[] },
+  { method:'GET', path:'/policies.json', label:'Policies', params:[] },
+  { method:'GET', path:'/audit-skill?certificate=1&skillId=mn-mcp-filesystem', label:'Get security certificate', params:[{name:'skillId',placeholder:'mn-mcp-filesystem',required:true}] },
+];
+
+let activeEndpoint = null;
+
+// Load stats
+fetch(API_BASE + '/agent-ping.json').then(r=>r.json()).then(d=>{
+  const stats = d.stats || {};
+  document.getElementById('statSkills').textContent = stats.total_skills || '8,764';
+  document.getElementById('statFree').textContent = '65';
+  document.getElementById('statCats').textContent = '23';
+}).catch(()=>{});
+
+// Render endpoints
+const epDiv = document.getElementById('endpoints');
+endpoints.forEach((ep, i) => {
+  const div = document.createElement('div');
+  div.className = 'endpoint';
+  div.innerHTML = `<span class="method ${ep.method}">${ep.method}</span> <strong>${ep.path}</strong><br><span style="font-size:0.85em;color:#94a3b8">${ep.label}</span>`;
+  div.onclick = () => selectEndpoint(i);
+  epDiv.appendChild(div);
+});
+
+function selectEndpoint(i) {
+  document.querySelectorAll('.endpoint').forEach(e => e.classList.remove('active'));
+  document.querySelectorAll('.endpoint')[i].classList.add('active');
+  activeEndpoint = endpoints[i];
+  
+  const paramsDiv = document.getElementById('params');
+  if (activeEndpoint.params.length === 0) {
+    paramsDiv.innerHTML = '<p style="color:#64748b">No parameters needed.</p>';
+  } else {
+    paramsDiv.innerHTML = activeEndpoint.params.map(p => 
+      `<label>${p.name}${p.required?' *':''}</label><input id="param_${p.name}" placeholder="${p.placeholder}" />`
+    ).join('');
+  }
+}
+
+function sendRequest() {
+  if (!activeEndpoint) { alert('Select an endpoint first'); return; }
+  
+  let url = API_BASE + activeEndpoint.path;
+  
+  // Add query params
+  if (activeEndpoint.params.length > 0) {
+    const queryParams = [];
+    activeEndpoint.params.forEach(p => {
+      const val = document.getElementById('param_' + p.name)?.value;
+      if (val) queryParams.push(`${p.name}=${encodeURIComponent(val)}`);
+    });
+    if (queryParams.length > 0 && !url.includes('?')) {
+      url += '?' + queryParams.join('&');
+    } else if (queryParams.length > 0) {
+      url += '&' + queryParams.join('&');
+    }
+  }
+  
+  // Handle certificate endpoint
+  if (activeEndpoint.path.includes('certificate=1') && !url.includes('skillId=')) {
+    const skillId = document.getElementById('param_skillId')?.value || 'mn-mcp-filesystem';
+    url = API_BASE + '/audit-skill?certificate=1&skillId=' + skillId;
+  }
+  
+  document.getElementById('response').innerHTML = '<code>Loading...</code>';
+  
+  fetch(url)
+    .then(r => r.text())
+    .then(text => {
+      try {
+        const json = JSON.parse(text);
+        document.getElementById('response').innerHTML = '<code>' + escapeHtml(JSON.stringify(json, null, 2)) + '</code>';
+      } catch {
+        document.getElementById('response').innerHTML = '<code>' + escapeHtml(text.slice(0, 2000)) + '</code>';
+      }
+    })
+    .catch(e => {
+      document.getElementById('response').innerHTML = '<code style="color:#ef4444">Error: ' + e.message + '</code>';
+    });
+}
+
+function testMCP(method) {
+  const mcpUrl = 'https://marketnow.site/api/mcp';
+  let body;
+  
+  if (method === 'initialize') {
+    body = {jsonrpc:'2.0',id:1,method:'initialize',params:{protocolVersion:'2024-11-05',capabilities:{},clientInfo:{name:'playground',version:'1.0'}}};
+  } else if (method === 'tools/list') {
+    body = {jsonrpc:'2.0',id:2,method:'tools/list',params:{}};
+  } else if (method === 'health') {
+    body = {jsonrpc:'2.0',id:3,method:'tools/call',params:{name:'health',arguments:{}}};
+  }
+  
+  document.getElementById('mcpResponse').innerHTML = '<code>Testing...</code>';
+  
+  fetch(mcpUrl, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(body)
+  })
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById('mcpResponse').innerHTML = '<code>' + escapeHtml(JSON.stringify(d, null, 2)) + '</code>';
+  })
+  .catch(e => {
+    document.getElementById('mcpResponse').innerHTML = '<code style="color:#ef4444">Error: ' + e.message + '</code>';
+  });
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>

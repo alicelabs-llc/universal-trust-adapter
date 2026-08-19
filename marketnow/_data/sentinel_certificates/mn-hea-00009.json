@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6096696",
+  "skill_id": "mn-hea-00009",
+  "skill_name": "PACS Integration",
+  "issued_at": "2026-07-06T05:34:56.696Z",
+  "expires_at": "2026-07-13T05:34:56.696Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "b755548ed23664e53eb002796670821fda6629fbfdbf6523a3c26b9042a688b0",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-hea-00009"
+}

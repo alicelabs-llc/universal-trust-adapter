@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5670198",
+  "skill_id": "mn-gen-09533",
+  "skill_name": "Nexus-mcp-bridge",
+  "issued_at": "2026-07-06T05:27:50.198Z",
+  "expires_at": "2026-07-13T05:27:50.198Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "b90b58c78741610b5c8f11d49293b287da2d5cb67d1fa1cd12e7fdb6c116d4a9",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-09533"
+}

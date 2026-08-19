@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9769024",
+  "skill_id": "mn-ai-11087",
+  "skill_name": "reclaim-mcp-server",
+  "issued_at": "2026-07-26T04:22:49.024Z",
+  "expires_at": "2026-08-02T04:22:49.024Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "08c0e480fcf0b366dcac861a8fbef4db648b9fd59b74ba9e0bd4e7e511460350",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-ai-11087"
+}

@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5818301",
+  "skill_id": "mn-gen-13120",
+  "skill_name": "Vega-mcp",
+  "issued_at": "2026-07-06T05:30:18.301Z",
+  "expires_at": "2026-07-13T05:30:18.301Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "8cbcfed1f0a17b9615816d02ea1e18ae89d92961f4237a6a3edcfef22479be91",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-13120"
+}

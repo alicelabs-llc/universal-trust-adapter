@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5758289",
+  "skill_id": "mn-gen-11645",
+  "skill_name": "Sequential-thinking-slim",
+  "issued_at": "2026-07-06T05:29:18.289Z",
+  "expires_at": "2026-07-13T05:29:18.289Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "5d6b9b8c6e4293aa16f99b2ba544bce703df66753b3dcfb64d3d991b99d0f1a5",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-11645"
+}

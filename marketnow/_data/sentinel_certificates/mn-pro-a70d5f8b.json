@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6131528",
+  "skill_id": "mn-pro-a70d5f8b",
+  "skill_name": "Database Partitioning Advisor",
+  "issued_at": "2026-07-06T05:35:31.528Z",
+  "expires_at": "2026-07-13T05:35:31.528Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "2026b4a675306385117078c0e37410053a5f01f8a3f88f3f0289ecb925277aed",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-pro-a70d5f8b"
+}

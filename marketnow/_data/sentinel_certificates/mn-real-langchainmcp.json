@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0168404",
+  "skill_id": "mn-real-langchainmcp",
+  "skill_name": "langchain-mcp",
+  "issued_at": "2026-07-26T04:29:28.404Z",
+  "expires_at": "2026-08-02T04:29:28.404Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "ab8b97acbd8dc788e5b6cccaa9210f7a647228c2e4285bb8f0b3c43f678b3106",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-langchainmcp"
+}

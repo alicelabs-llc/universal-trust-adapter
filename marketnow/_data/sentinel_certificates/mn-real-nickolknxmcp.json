@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0902176",
+  "skill_id": "mn-real-nickolknxmcp",
+  "skill_name": "nickol-knx-mcp",
+  "issued_at": "2026-07-26T04:41:42.176Z",
+  "expires_at": "2026-08-02T04:41:42.176Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "18b30072646b8bdb2cfa5bde99a7e97fb4074c009a291f5b6ed71c0f1ccdd7e8",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-nickolknxmcp"
+}

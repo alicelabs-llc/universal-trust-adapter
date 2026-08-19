@@ -1,0 +1,58 @@
+# MarketNow — Merge Conflict Guard
+# =================================
+# Fails the CI if any tracked file in the repo still contains unresolved
+# Git merge-conflict markers:
+#   <<<<<<<
+#   =======
+#   >>>>>>>
+#
+# This prevents shipping a half-merged file to production (which is exactly
+# what happened with sentinel-l16-audit.yml on commit e7837a0f).
+#
+# Triggers: every PR and every push to master.
+
+name: Merge Conflict Guard
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  check-conflicts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Scan for unresolved merge-conflict markers
+        run: |
+          set -e
+          # Search all tracked files for the canonical Git merge-conflict markers:
+          #   <<<<<<< <branch>    (7 '<' + space + label, start of conflict)
+          #   =======             (exactly 7 '=' and nothing else on the line)
+          #   >>>>>>> <branch>    (7 '>' + space + label, end of conflict)
+          #
+          # The `=======$` anchor (end-of-line) is critical — without it, ASCII
+          # art separators like "==========" in agent-discover.txt trigger false
+          # positives.
+          CONFLICTS=$(git grep -nI -E '^(<<<<<<< |=======$|>>>>>>> )' -- . || true)
+
+          if [ -n "$CONFLICTS" ]; then
+            echo "::error::Unresolved merge conflict markers found in tracked files."
+            echo ""
+            echo "$CONFLICTS" | while IFS= read -r line; do
+              echo "  $line"
+            done
+            echo ""
+            echo "Fix: open each file listed above, resolve the conflict manually,"
+            echo "     and remove ALL <<<<<<< / ======= / >>>>>>> markers before committing."
+            exit 1
+          fi
+
+          echo "✅ No unresolved merge-conflict markers found."

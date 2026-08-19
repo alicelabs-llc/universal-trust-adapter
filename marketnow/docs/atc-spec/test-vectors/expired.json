@@ -1,0 +1,96 @@
+{
+  "description": "An ATC with expires_at in the past (2026-01-02). Should fail with \"ATC expired\".",
+  "ca_public_key": "MCowBQYDK2VwAyEAEMrdFxjw1vHP4R+2C+FrB/gmuz7BqwvsAtRFJoPkzCU=",
+  "atc": {
+    "spec_version": "ATC/1.0",
+    "card_id": "ATC-2026-0000001",
+    "issuer": {
+      "ca_id": "alicelabs-sentinel-ca",
+      "ca_public_key": "MCowBQYDK2VwAyEAEMrdFxjw1vHP4R+2C+FrB/gmuz7BqwvsAtRFJoPkzCU=",
+      "ca_algorithm": "Ed25519",
+      "ca_url": "https://marketnow.site/api/atc"
+    },
+    "identity": {
+      "agent_id": "alicelabs-test-agent-001",
+      "agent_name": "Test Agent",
+      "agent_owner": "AliceLabs LLC",
+      "owner_contact": "mailto:test@alicelabs.site"
+    },
+    "attestation": {
+      "subject_public_key": "MCowBQYDK2VwAyEA3e0fmnVutq/T88PdCFjJDNYdDO8ajyEmeK40nxC6W1M=",
+      "subject_algorithm": "Ed25519",
+      "signature": "ZD+35wm/YOOzk24/LLIwdhrSzT/thfJJTH0VaG6z8lbHlCVRbl8GI7GzSQy/q7yQ/6s1Q7aymtNLD7yn5pO+Cg==",
+      "signed_payload_hash": "b056d89b5045c4c5ee0452faaf31aff8e088fc4388e9ceb2cc8c89e386f895b9"
+    },
+    "capabilities": {
+      "filesystem": {
+        "read": "own_dir",
+        "write": "own_dir"
+      },
+      "network": {
+        "egress": "allowlist",
+        "ingress": "none"
+      },
+      "shell": {
+        "exec": "sandboxed",
+        "spawn": "none"
+      },
+      "credentials": {
+        "read_env": "allowlist",
+        "read_files": "none"
+      },
+      "process": {
+        "subprocess": "none",
+        "signals": "own"
+      }
+    },
+    "evidence": {
+      "audit_pipeline": "Sentinel L1.5 → L1.9 → L2.5 → L3",
+      "audit_completed_at": "2026-08-10T12:00:00Z",
+      "static_checks": {
+        "metadata": true,
+        "semgrep_rules_count": 36,
+        "secret_patterns_count": 18,
+        "dependency_scan": true,
+        "malware_patterns_count": 8,
+        "malware_family_signatures_count": 48,
+        "prompt_injection_rules_count": 32
+      },
+      "dynamic_checks": {
+        "sandbox_run": true,
+        "sandbox_runtime_ms": 12453,
+        "sandbox_exit_code": 0,
+        "sandbox_network_blocked": true,
+        "sandbox_fs_read_only": true,
+        "sandbox_cap_drop_all": true
+      },
+      "runtime_checks": {
+        "interceptor_rules_count": 5,
+        "interceptor_blocks": 0,
+        "interceptor_warns": 0
+      },
+      "findings": []
+    },
+    "risk": {
+      "trust_score": 9,
+      "risk_level": "low",
+      "score_explanation": "Clean audit, no findings, sandbox passed",
+      "scored_at": "2026-08-10T12:01:00Z",
+      "decision_authority": "consumer"
+    },
+    "revocation": {
+      "revocation_check_url": "https://marketnow.site/api/atc?action=revocation-list",
+      "revocation_check_method": "simple_json",
+      "revocation_check_required": true
+    },
+    "validity": {
+      "issued_at": "2026-01-01T00:00:00Z",
+      "expires_at": "2026-01-02T00:00:00Z",
+      "max_ttl_days": 1
+    }
+  },
+  "expected": {
+    "valid": false,
+    "errors_contain": "ATC expired"
+  }
+}

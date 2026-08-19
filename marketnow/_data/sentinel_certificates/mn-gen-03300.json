@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5418666",
+  "skill_id": "mn-gen-03300",
+  "skill_name": "Orchestra-mcp/devtools",
+  "issued_at": "2026-07-06T05:23:38.666Z",
+  "expires_at": "2026-07-13T05:23:38.666Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "c8fb91a46596eca7afa2a2b41ad9d6e76391202d10c057596e9f0423308d4734",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-03300"
+}

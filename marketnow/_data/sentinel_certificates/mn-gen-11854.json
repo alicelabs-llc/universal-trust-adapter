@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5767461",
+  "skill_id": "mn-gen-11854",
+  "skill_name": "Skilldex-cli",
+  "issued_at": "2026-07-06T05:29:27.461Z",
+  "expires_at": "2026-07-13T05:29:27.461Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "1f3276fc201f1162b6b4c7f4bf42a58d0c10fd06ede7464ca7f6ba5cad1a3849",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-11854"
+}

@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0730627",
+  "skill_id": "mn-real-brainlayer",
+  "skill_name": "brainlayer",
+  "issued_at": "2026-07-26T04:38:50.627Z",
+  "expires_at": "2026-08-02T04:38:50.627Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "85ba0fa650cfea809e9d74a0c56ce37b274eb8d82f387100329cf966412e1a9b",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-brainlayer"
+}

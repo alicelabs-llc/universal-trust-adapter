@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9907509",
+  "skill_id": "mn-real-mcpserverweaviate",
+  "skill_name": "mcp-server-weaviate",
+  "issued_at": "2026-07-26T04:25:07.509Z",
+  "expires_at": "2026-08-02T04:25:07.509Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "b8b60f62925530109865f89bcf753f4d61781412d91c32d89e804a785112ab74",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-mcpserverweaviate"
+}

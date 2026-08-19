@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6206500",
+  "skill_id": "mn-edte-039",
+  "skill_name": "Education SIS-LMS Bridge",
+  "issued_at": "2026-07-06T05:36:46.500Z",
+  "expires_at": "2026-07-13T05:36:46.500Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a3a84199f00c2bedd647cc2c4d97d056c422bafb15923cbd5ded83fcb489b675",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-edte-039"
+}

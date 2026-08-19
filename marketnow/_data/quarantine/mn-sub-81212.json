@@ -1,0 +1,79 @@
+{
+  "certificate_id": "MN-SC-2026-0000NaN",
+  "skill_id": "mn-sub-81212",
+  "skill_name": "inspector",
+  "timestamp": "2026-07-27T07:32:39.599Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L1.7 + L1.8 + L1.9 (Deep Individual Audit)",
+  "overall_score": 1,
+  "max_score": 10,
+  "risk_level": "critical",
+  "risk_breakdown": {
+    "l15_l16_l17_l18_l19": "critical",
+    "l2": "not_available",
+    "final": "critical"
+  },
+  "quarantine_recommended": true,
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l17": true,
+    "l18": true,
+    "l19": true,
+    "l2": false,
+    "l3": false
+  },
+  "checks": [
+    {
+      "name": "L1.5 AUTH",
+      "status": "warning",
+      "risk": "medium",
+      "detail": "No auth required"
+    },
+    {
+      "name": "L1.6 SEMGREP",
+      "status": "pass",
+      "risk": "low",
+      "detail": "18 rules, 0 findings"
+    },
+    {
+      "name": "L1.6 SECRETS",
+      "status": "pass",
+      "risk": "low",
+      "detail": "18 patterns, 0 findings"
+    },
+    {
+      "name": "L1.7 BINARY",
+      "status": "pass",
+      "risk": "low",
+      "detail": "No binaries or launchers detected"
+    },
+    {
+      "name": "L1.7 MALWARE",
+      "status": "pass",
+      "risk": "low",
+      "detail": "7 patterns checked, 0 findings"
+    },
+    {
+      "name": "L1.8 FAMILIES",
+      "status": "fail",
+      "risk": "critical",
+      "detail": "1 malware families matched: Emotet"
+    },
+    {
+      "name": "L1.9 INJECTION",
+      "status": "pass",
+      "risk": "low",
+      "detail": "32 rules checked, 0 injections"
+    }
+  ],
+  "source": {
+    "type": "community-submitted",
+    "url": "https://github.com/modelcontextprotocol/inspector",
+    "submitted_at": "2026-07-26T23:51:15.270Z"
+  },
+  "signature": {
+    "algorithm": "SHA-256",
+    "value": "fbc251e9a547aed529ee4d85d5fadd3acabeaca5cef1d104d14d3c44a1ba68c6",
+    "signed_by": "Sentinel Deep Auditor"
+  }
+}

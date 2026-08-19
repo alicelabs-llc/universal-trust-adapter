@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8075159",
+  "skill_id": "mn-prompt-d33b7749",
+  "skill_name": "Especialista Acceptance Testing + BDD",
+  "issued_at": "2026-07-15T01:14:35.159Z",
+  "expires_at": "2026-07-22T01:14:35.159Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "53f089307ecdc09c6ecac4d59051006a526e2aed0d8a7fa24113c7f5ecf7a3a0",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-d33b7749"
+}

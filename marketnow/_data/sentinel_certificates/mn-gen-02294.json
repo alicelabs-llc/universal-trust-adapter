@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9709856",
+  "skill_id": "mn-gen-02294",
+  "skill_name": "claude-task-master",
+  "issued_at": "2026-07-26T04:21:49.856Z",
+  "expires_at": "2026-08-02T04:21:49.856Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a08fc3e840979f8bbfd776a29c725a88330d17f03d81e0d0e5425d6de234f73f",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-02294"
+}

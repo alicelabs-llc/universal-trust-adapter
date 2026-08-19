@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6192903",
+  "skill_id": "mn-web-023",
+  "skill_name": "Form Filler Bot",
+  "issued_at": "2026-07-06T05:36:32.903Z",
+  "expires_at": "2026-07-13T05:36:32.903Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "58c1e7b60fa9a60036c6e555b7b586a827ffc1ad359772436504d0361e29b504",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-web-023"
+}

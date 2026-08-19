@@ -1,0 +1,23 @@
+{
+  "id": "mand_40955inkzsxd",
+  "owner": "0x39dddf5aedb58a559cf195fb8bdf23f0604bf5ee",
+  "agentId": "test",
+  "agentName": "unspecified",
+  "spendingLimitUsd": 10,
+  "spentUsd": 0,
+  "perPurchaseCapUsd": 10,
+  "categories": [
+    "*"
+  ],
+  "expiresAt": "2026-09-30T18:49:50.641Z",
+  "createdAt": "2026-07-02T18:49:50.643Z",
+  "status": "active",
+  "signature": "0x_test_signature",
+  "txCount": 0,
+  "notificationMode": "notify",
+  "notificationEmail": "test@test.com",
+  "notificationWebhook": null,
+  "vetoWindowSeconds": 0,
+  "ap2": null,
+  "taskScope": null
+}

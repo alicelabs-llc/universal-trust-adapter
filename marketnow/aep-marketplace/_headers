@@ -1,0 +1,19 @@
+/*
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  Pragma: no-cache
+  Expires: 0
+  X-Content-Type-Options: nosniff
+
+/api/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  Pragma: no-cache
+  Expires: 0
+  Content-Type: application/json; charset=utf-8
+  X-Content-Type-Options: nosniff
+  X-Robots-Tag: index, follow
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

@@ -1,0 +1,82 @@
+{
+  "certificate_id": "MN-SC-2026-0000NaN",
+  "skill_id": "mn-real-mcpservercomparedge",
+  "skill_name": "mcp-server-comparedge",
+  "timestamp": "2026-07-26T06:37:57.572Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L1.7 + L1.8 + L1.9 (Deep Individual Audit)",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17_l18_l19": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "quarantine_recommended": false,
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l17": true,
+    "l18": true,
+    "l19": true,
+    "l2": false,
+    "l3": false
+  },
+  "checks": [
+    {
+      "name": "L1.5 AUTH",
+      "status": "warning",
+      "risk": "medium",
+      "detail": "No auth required"
+    },
+    {
+      "name": "L1.6 SEMGREP",
+      "status": "pass",
+      "risk": "low",
+      "detail": "18 rules, 0 findings"
+    },
+    {
+      "name": "L1.6 SECRETS",
+      "status": "pass",
+      "risk": "low",
+      "detail": "18 patterns, 0 findings"
+    },
+    {
+      "name": "L1.7 BINARY",
+      "status": "pass",
+      "risk": "low",
+      "detail": "No binaries or launchers detected"
+    },
+    {
+      "name": "L1.7 MALWARE",
+      "status": "pass",
+      "risk": "low",
+      "detail": "7 patterns checked, 0 findings"
+    },
+    {
+      "name": "L1.8 FAMILIES",
+      "status": "pass",
+      "risk": "low",
+      "detail": "28 families checked, 0 matches (README scanned)"
+    },
+    {
+      "name": "L1.9 INJECTION",
+      "status": "pass",
+      "risk": "low",
+      "detail": "32 rules checked, 0 injections"
+    }
+  ],
+  "source": {
+    "type": "github",
+    "url": "https://github.com/comparedge/mcp-server-comparedge",
+    "note": "Real MCP server. 3 stars. Language: JavaScript. Last push: 2026-07-10T23:44:36Z. Discovered via auto-discovery.",
+    "stars": 3,
+    "language": "JavaScript",
+    "last_push": "2026-07-10T23:44:36Z"
+  },
+  "signature": {
+    "algorithm": "SHA-256",
+    "value": "9127444cbb6f6be6596c72e11400f2c1e3711a3b9327c3402a32eb42fa7f69a4",
+    "signed_by": "Sentinel Deep Auditor"
+  }
+}

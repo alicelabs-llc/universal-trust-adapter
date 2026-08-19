@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5296043",
+  "skill_id": "mn-ai-00491",
+  "skill_name": "Ai-developer-tools-mcp",
+  "issued_at": "2026-07-06T05:21:36.043Z",
+  "expires_at": "2026-07-13T05:21:36.043Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "4348ecd2fc04b616fa608ad61cc08d79c409639547de2a78fb60527dea11b3a2",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-ai-00491"
+}

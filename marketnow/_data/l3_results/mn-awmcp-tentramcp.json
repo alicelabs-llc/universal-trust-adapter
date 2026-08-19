@@ -1,0 +1,12 @@
+{
+  "skill_id": "mn-awmcp-tentramcp",
+  "skill_name": "tentra-mcp",
+  "checked_at": "2026-07-26T06:09:45.452Z",
+  "l3_status": "stable",
+  "drift_detected": false,
+  "drift_severity": "none",
+  "quarantine_recommended": false,
+  "drift_items": [],
+  "baseline_captured_at": "2026-07-06T03:05:06Z",
+  "message": "No drift detected. Skill behavior matches L2 baseline."
+}

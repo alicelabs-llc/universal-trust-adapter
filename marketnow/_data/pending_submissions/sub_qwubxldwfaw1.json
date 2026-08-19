@@ -1,0 +1,74 @@
+{
+  "submission_id": "sub_qwubxldwfaw1",
+  "skill_id": "mn-sub-72903",
+  "status": "promoted",
+  "submitted_at": "2026-07-27T01:17:54.529Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_outreach_v3",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "96365e5c70a99ff4"
+  },
+  "repo": {
+    "url": "https://github.com/DeusData/codebase-memory-mcp",
+    "full_name": "DeusData/codebase-memory-mcp",
+    "owner": "DeusData",
+    "name": "codebase-memory-mcp",
+    "description": "High-performance code intelligence MCP server. Indexes codebases into a persistent knowledge graph — average repo in milliseconds. 158 languages, sub-ms queries, 99% fewer tokens. Single static binary, zero dependencies.",
+    "stars": 35605,
+    "language": "C",
+    "license": "MIT",
+    "pushed_at": "2026-07-27T00:01:35Z",
+    "archived": false,
+    "topics": [
+      "aider",
+      "ast",
+      "claude-code",
+      "code-analysis",
+      "code-intelligence",
+      "codex",
+      "cursor",
+      "cypher",
+      "developer-tools",
+      "gemini-cli",
+      "graph-visualization",
+      "kilocode",
+      "knowledge-graph",
+      "mcp",
+      "mcp-server",
+      "model-context-protocol",
+      "opencode",
+      "sqlite",
+      "tree-sitter",
+      "windsurf"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-72903",
+    "name": "codebase-memory-mcp",
+    "slug": "codebase-memory-mcp-2903",
+    "description": "High-performance code intelligence MCP server. Indexes codebases into a persistent knowledge graph — average repo in milliseconds. 158 languages, sub-ms queries, 99% fewer tokens. Single static binary, zero dependencies.",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/DeusData/codebase-memory-mcp",
+      "submitted_at": "2026-07-27T01:17:54.529Z"
+    },
+    "install": "git clone https://github.com/DeusData/codebase-memory-mcp",
+    "author": "DeusData",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-27T02:17:54.529Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-1518802",
+  "promoted_at": "2026-07-28T23:31:59.702Z"
+}

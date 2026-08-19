@@ -1,0 +1,79 @@
+{
+  "certificate_id": "MN-SC-2026-0000NaN",
+  "skill_id": "mn-awmcp-mcpserverkubernetes",
+  "skill_name": "mcp-server-kubernetes",
+  "timestamp": "2026-07-24T02:52:34.673Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L1.7 + L1.8 + L1.9 (Deep Individual Audit)",
+  "overall_score": 0,
+  "max_score": 10,
+  "risk_level": "high",
+  "risk_breakdown": {
+    "l15_l16_l17_l18_l19": "high",
+    "l2": "not_available",
+    "final": "high"
+  },
+  "quarantine_recommended": true,
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l17": true,
+    "l18": true,
+    "l19": true,
+    "l2": false,
+    "l3": false
+  },
+  "checks": [
+    {
+      "name": "L1.5 AUTH",
+      "status": "warning",
+      "risk": "medium",
+      "detail": "No auth required"
+    },
+    {
+      "name": "L1.6 SEMGREP",
+      "status": "pass",
+      "risk": "low",
+      "detail": "18 rules, 0 findings"
+    },
+    {
+      "name": "L1.6 SECRETS",
+      "status": "pass",
+      "risk": "low",
+      "detail": "18 patterns, 0 findings"
+    },
+    {
+      "name": "L1.7 BINARY",
+      "status": "pass",
+      "risk": "low",
+      "detail": "No binaries or launchers detected"
+    },
+    {
+      "name": "L1.7 MALWARE",
+      "status": "pass",
+      "risk": "low",
+      "detail": "7 patterns checked, 0 findings"
+    },
+    {
+      "name": "L1.8 FAMILIES",
+      "status": "pass",
+      "risk": "low",
+      "detail": "28 families checked, 0 matches (README scanned)"
+    },
+    {
+      "name": "L1.9 INJECTION",
+      "status": "pass",
+      "risk": "low",
+      "detail": "32 rules checked, 0 injections"
+    }
+  ],
+  "source": {
+    "type": "github",
+    "url": "https://github.com/Flux159/mcp-server-kubernetes",
+    "note": "Imported from awesome-mcp-servers. Repo: Flux159/mcp-server-kubernetes."
+  },
+  "signature": {
+    "algorithm": "SHA-256",
+    "value": "fe0941867f1367cabee74cd92eb0e5065f86e290c71823ae004a99ad4a107c54",
+    "signed_by": "Sentinel Deep Auditor"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "submission_id": "sub_tyc4yhsif8sn",
+  "skill_id": "mn-sub-82995",
+  "status": "promoted",
+  "submitted_at": "2026-07-27T01:17:51.815Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_outreach_v3",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "7cd7c636737d277b"
+  },
+  "repo": {
+    "url": "https://github.com/bytedance/UI-TARS-desktop",
+    "full_name": "bytedance/UI-TARS-desktop",
+    "owner": "bytedance",
+    "name": "UI-TARS-desktop",
+    "description": "The Open-Source Multimodal AI Agent Stack: Connecting Cutting-Edge AI Models and Agent Infra",
+    "stars": 38310,
+    "language": "TypeScript",
+    "license": "Apache-2.0",
+    "pushed_at": "2026-07-01T03:03:19Z",
+    "archived": false,
+    "topics": [
+      "agent",
+      "agent-tars",
+      "browser-use",
+      "computer-use",
+      "cowork",
+      "gui-agent",
+      "gui-operator",
+      "mcp",
+      "mcp-server",
+      "multimodal",
+      "tars",
+      "ui-tars",
+      "vision",
+      "vlm"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-82995",
+    "name": "UI-TARS-desktop",
+    "slug": "ui-tars-desktop-2995",
+    "description": "The Open-Source Multimodal AI Agent Stack: Connecting Cutting-Edge AI Models and Agent Infra",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/bytedance/UI-TARS-desktop",
+      "submitted_at": "2026-07-27T01:17:51.815Z"
+    },
+    "install": "npx -y monorepo",
+    "author": "bytedance",
+    "version": "0.0.1"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-27T02:17:51.815Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-5326924",
+  "promoted_at": "2026-07-27T01:22:07.807Z"
+}

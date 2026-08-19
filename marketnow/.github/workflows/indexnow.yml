@@ -1,0 +1,161 @@
+# MarketNow — IndexNow Auto-Ping
+# ================================
+# IndexNow is a protocol supported by Bing, Yandex, Naver, Seznam, and Yep
+# that lets you notify search engines of new/changed URLs INSTANTLY.
+# Without IndexNow, Bing/Yandex can take weeks to discover new pages.
+#
+# This workflow runs on every push to master (after deploy) and pings
+# all IndexNow-enabled search engines with our key URLs.
+#
+# Get a key at: https://www.bing.com/indexnow
+# Our key file: /home/z/my-project/marketnow/aep-marketplace/public/indexnow-key.txt
+
+name: IndexNow Ping
+
+on:
+  workflow_run:
+    workflows: ["Deploy to GitHub Pages"]
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    # Only run if the deploy workflow succeeded
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate IndexNow key (if not present)
+        run: |
+          KEY_FILE="aep-marketplace/public/indexnow-key.txt"
+          if [ ! -f "$KEY_FILE" ]; then
+            # Generate a random UUID-style key
+            KEY=$(openssl rand -hex 16)
+            echo "$KEY" > "$KEY_FILE"
+            echo "Generated new IndexNow key: $KEY"
+            # Commit it back to the repo so the key file is publicly accessible
+            git config user.name "MarketNow Bot"
+            git config user.email "info@alicelabs.site"
+            git add "$KEY_FILE"
+            git commit -m "chore: add IndexNow key file for search engine pings" || true
+            git push || true
+          else
+            echo "IndexNow key already exists"
+          fi
+          cat "$KEY_FILE"
+
+      - name: Ping IndexNow (Bing, Yandex, Naver, Seznam, Yep)
+        env:
+          SITE: marketnow.site
+        run: |
+          KEY=$(cat aep-marketplace/public/indexnow-key.txt)
+          echo "Using IndexNow key: $KEY"
+          echo "Site: $SITE"
+          echo ""
+
+          # URLs to ping — all our public pages
+          URLS=(
+            "https://$SITE/"
+            "https://$SITE/registry"
+            "https://$SITE/submit"
+            "https://$SITE/pricing"
+            "https://$SITE/mandates"
+            "https://$SITE/trust"
+            "https://$SITE/about"
+            "https://$SITE/catalog"
+            "https://$SITE/embed"
+            "https://$SITE/standards"
+            "https://$SITE/security"
+            "https://$SITE/handshake"
+            "https://$SITE/policies"
+            "https://$SITE/governance"
+            "https://$SITE/vault"
+            "https://$SITE/llms.txt"
+            "https://$SITE/llms-full.txt"
+            "https://$SITE/agent-discover.txt"
+            "https://$SITE/robots.txt"
+            "https://$SITE/sitemap.xml"
+            "https://$SITE/api/skills.json"
+            "https://$SITE/api/agent.json"
+            "https://$SITE/api/categories.json"
+            "https://$SITE/api/manifest.json"
+            "https://$SITE/api/free-skills.json"
+            "https://$SITE/.well-known/agent.json"
+            "https://$SITE/.well-known/ai-plugin.json"
+            "https://$SITE/.well-known/mcp.json"
+            "https://$SITE/.well-known/mcp-marketplace.json"
+          )
+
+          # Build the JSON payload
+          JSON=$(cat <<EOF
+          {
+            "host": "$SITE",
+            "key": "$KEY",
+            "keyLocation": "https://$SITE/indexnow-key.txt",
+            "urlList": [
+          EOF
+          )
+          for i in "${!URLS[@]}"; do
+            if [ "$i" -lt $((${#URLS[@]} - 1)) ]; then
+              JSON+="              \"${URLS[$i]}\","
+            else
+              JSON+="              \"${URLS[$i]}\""
+            fi
+            JSON+=$'\n'
+          done
+          JSON+="            ]"
+          JSON+="          }"
+
+          echo "=== Payload ==="
+          echo "$JSON" | python3 -m json.tool
+          echo ""
+
+          # Ping each IndexNow endpoint
+          ENDPOINTS=(
+            "https://api.indexnow.org/indexnow"
+            "https://www.bing.com/indexnow"
+            "https://yandex.com/indexnow"
+            "https://searchadvisor.naver.com/indexnow"
+            "https://search.seznam.cz/indexnow"
+          )
+
+          for EP in "${ENDPOINTS[@]}"; do
+            echo "→ Pinging $EP"
+            HTTP_CODE=$(curl -s -o /tmp/resp.txt -w "%{http_code}" \
+              -X POST "$EP" \
+              -H "Content-Type: application/json" \
+              -d "$JSON" \
+              --max-time 15)
+            echo "  HTTP $HTTP_CODE"
+            if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "202" ]; then
+              echo "  ✓ Accepted"
+            elif [ "$HTTP_CODE" = "422" ]; then
+              echo "  ⚠ Key validation pending (422) — search engine will verify the key file"
+            else
+              echo "  ⚠ Unexpected response:"
+              cat /tmp/resp.txt 2>/dev/null | head -5
+            fi
+            echo ""
+          done
+
+      - name: Ping Google (via sitemap fetch)
+        env:
+          SITE: marketnow.site
+        run: |
+          # Google doesn't support IndexNow, but we can trigger a recrawl
+          # by fetching the sitemap via Google's ping endpoint
+          echo "→ Pinging Google sitemap endpoint"
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+            "https://www.google.com/ping?sitemap=https://$SITE/sitemap.xml" \
+            --max-time 15)
+          echo "  HTTP $HTTP_CODE"
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "  ✓ Google acknowledged sitemap ping"
+          else
+            echo "  ⚠ Google ping returned $HTTP_CODE (may be deprecated, but harmless)"
+          fi

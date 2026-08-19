@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5303522",
+  "skill_id": "mn-ai-00638",
+  "skill_name": "Rashidazarang/airtable-mcp",
+  "issued_at": "2026-07-06T05:21:43.522Z",
+  "expires_at": "2026-07-13T05:21:43.522Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "05de22fe0e7ceea1d3b8da5264d94a5fd2f5cc4a35b278d4b6c9066b8aaa9fc3",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-ai-00638"
+}

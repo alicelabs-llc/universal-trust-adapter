@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8132716",
+  "skill_id": "mn-prompt-eccb0962",
+  "skill_name": "Especialista Financial Analytics + BI",
+  "issued_at": "2026-07-15T01:15:32.716Z",
+  "expires_at": "2026-07-22T01:15:32.716Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "594cb58d13dbab6252a472604ad5dce1c513c83bb2adea9c2aff73e3c6c21831",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-eccb0962"
+}

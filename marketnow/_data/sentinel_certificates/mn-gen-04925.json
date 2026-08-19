@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5484172",
+  "skill_id": "mn-gen-04925",
+  "skill_name": "Devabdultech/hn-mcp-server",
+  "issued_at": "2026-07-06T05:24:44.172Z",
+  "expires_at": "2026-07-13T05:24:44.172Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "d9dc45f0c2c78d3c7bc4edc0a6312a3140a6fd2ef7608149ab14bf487cbd1d3a",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-04925"
+}

@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6060375",
+  "skill_id": "mn-arl-013",
+  "skill_name": "Multi-Step Reasoning Engine",
+  "issued_at": "2026-07-06T05:34:20.375Z",
+  "expires_at": "2026-07-13T05:34:20.375Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "27a56dad19717a2085656f5e751d7d0ff76d41fcb6b8c46180712c8969336a33",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-arl-013"
+}

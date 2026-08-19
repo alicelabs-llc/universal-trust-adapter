@@ -1,0 +1,53 @@
+{
+  "submission_id": "sub_bo0fi7kjty3p",
+  "skill_id": "mn-sub-46018",
+  "status": "promoted",
+  "submitted_at": "2026-07-25T04:41:54.661Z",
+  "submitter": {
+    "agent_id": "agent_e2e_final",
+    "email": null,
+    "ref_code": "ref_d5444f97",
+    "ip_hash": "96365e5c70a99ff4"
+  },
+  "repo": {
+    "url": "https://github.com/modelcontextprotocol/servers",
+    "full_name": "modelcontextprotocol/servers",
+    "owner": "modelcontextprotocol",
+    "name": "servers",
+    "description": "Model Context Protocol Servers",
+    "stars": 88866,
+    "language": "TypeScript",
+    "license": "NOASSERTION",
+    "pushed_at": "2026-07-10T03:30:19Z",
+    "archived": false,
+    "topics": []
+  },
+  "skill": {
+    "id": "mn-sub-46018",
+    "name": "servers",
+    "slug": "servers-6018",
+    "description": "Model Context Protocol Servers",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/modelcontextprotocol/servers",
+      "submitted_at": "2026-07-25T04:41:54.661Z"
+    },
+    "install": "npx -y @modelcontextprotocol/servers",
+    "author": "modelcontextprotocol",
+    "version": "0.6.2"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-25T05:41:54.661Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-6202714",
+  "promoted_at": "2026-07-26T03:23:23.811Z"
+}

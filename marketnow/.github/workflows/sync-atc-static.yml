@@ -1,0 +1,75 @@
+# MarketNow — Sync ATC Static Files + Trigger Vercel Deploy
+# =================================================================
+#
+# This workflow runs when ATC files change in _data/atc/ and:
+#   1. Regenerates the _index.json and public/api/atc-index.json
+#   2. Copies individual ATC files to public/api/atc/
+#   3. Commits the changes back to master
+#   4. Triggers a Vercel production deploy via Deploy Hook
+#
+# This keeps the static files (which the Vercel serverless function reads)
+# in sync with the GitHub-stored ATC data.
+#
+# Setup required:
+#   - Set VERCEL_DEPLOY_HOOK_URL secret in GitHub repo settings
+#     (Vercel dashboard → Project → Settings → Git → Deploy Hooks → Create)
+#   - Set MANDATES_GITHUB_TOKEN secret (already exists)
+
+name: Sync ATC Static Files
+
+on:
+  push:
+    paths:
+      - '_data/atc/**'
+      - '_data/receipts/**'
+    branches:
+      - master
+  schedule:
+    # Run every 6 hours to catch any missed updates
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.MANDATES_GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Sync ATC static files
+        run: |
+          node scripts/sync-atc-static.mjs
+
+      - name: Commit changes
+        run: |
+          git config user.name "MarketNow Sync Bot"
+          git config user.email "info@alicelabs.site"
+          git add _data/atc/_index.json aep-marketplace/public/api/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: sync ATC static files [skip ci]" || true
+            git push
+            echo "Changes pushed"
+          fi
+
+      - name: Trigger Vercel deploy
+        if: env.VERCEL_DEPLOY_HOOK_URL != ''
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          echo "Triggering Vercel deploy..."
+          curl -X POST "$VERCEL_DEPLOY_HOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d '{"ref": "master"}' \
+            || echo "Deploy hook failed (will deploy on next push)"

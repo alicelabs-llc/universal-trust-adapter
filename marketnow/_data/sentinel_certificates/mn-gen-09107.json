@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5655069",
+  "skill_id": "mn-gen-09107",
+  "skill_name": "Miyo-satori",
+  "issued_at": "2026-07-06T05:27:35.069Z",
+  "expires_at": "2026-07-13T05:27:35.069Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "e08906786b93efa7e7a1402ae56eb4fff22ad3bdf43b362e4b603f09730b4752",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-09107"
+}

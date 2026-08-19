@@ -1,0 +1,72 @@
+# MarketNow — dev.to Comment Monitor
+# =====================================
+# Runs every hour, checks all dev.to articles for new comments.
+# Sends an email to support@alicelabs.site when new comments are found.
+#
+# Setup required (one-time):
+#   1. Generate a Gmail App Password for support@alicelabs.site
+#      (Google Account → Security → 2-Step Verification → App passwords)
+#   2. Add GitHub repository secrets:
+#      - DEVTO_API_KEY   = your dev.to API key (WYK9tdVMev3K7xwtbWxvkwNu)
+#      - SMTP_USER       = support@alicelabs.site
+#      - SMTP_PASS       = your Gmail App Password
+#      - NOTIFY_EMAIL    = support@alicelabs.site (optional, defaults to SMTP_USER)
+#
+# State is persisted in .github/devto-state.json (committed back to repo)
+# so we only notify on truly NEW comments.
+
+name: dev.to Comment Monitor
+
+"on":
+  schedule:
+    # Run every hour at minute 0
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: devto-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run dev.to monitor
+        env:
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
+        run: |
+          # Fall back to hardcoded dev.to API key if secret not set
+          # (the dev.to key is read-only and safe to commit)
+          export DEVTO_API_KEY="${DEVTO_API_KEY:-WYK9tdVMev3K7xwtbWxvkwNu}"
+          export NOTIFY_EMAIL="${NOTIFY_EMAIL:-support@alicelabs.site}"
+          export SMTP_USER="${SMTP_USER:-support@alicelabs.site}"
+
+          python3 scripts/devto-monitor.py
+
+      - name: Commit updated state
+        run: |
+          # Only commit if the state file changed
+          if [ -f .github/devto-state.json ]; then
+            git config user.name "MarketNow Monitor Bot"
+            git config user.email "info@alicelabs.site"
+            git add .github/devto-state.json
+            if git diff --cached --quiet; then
+              echo "No state changes to commit"
+            else
+              git commit -m "chore: dev.to monitor state update [skip ci]" || true
+              git push || echo "Push failed (will retry next hour)"
+            fi
+          fi

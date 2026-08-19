@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9728550",
+  "skill_id": "mn-blo-04642",
+  "skill_name": "google-search-console-mcp",
+  "issued_at": "2026-07-26T04:22:08.550Z",
+  "expires_at": "2026-08-02T04:22:08.550Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "b692a19288779e9c336eb2ef00cef5cc6b39ccd9e33ab212672899e6b0f391ad",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-blo-04642"
+}

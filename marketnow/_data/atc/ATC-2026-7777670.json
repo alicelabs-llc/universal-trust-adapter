@@ -1,0 +1,57 @@
+{
+  "card_id": "ATC-2026-7777670",
+  "status": "active",
+  "payload": {
+    "card_id": "ATC-2026-7777670",
+    "agent_id": "agent.alicelabs.marketnow",
+    "agent_name": "MarketNow Discovery Agent",
+    "identity": {
+      "public_key": "MCowBQYDK2VwAyEAalg5E/VFKGMV59X7mBhttQHV+tendDZTCSkRrWcuvMA=",
+      "key_algorithm": "Ed25519"
+    },
+    "trust": {
+      "sentinel_score": 10,
+      "audit_layers_passed": {
+        "l15": true,
+        "l16": true,
+        "l17": true,
+        "l18": true,
+        "l2": true,
+        "l2_score": 10,
+        "l2_risk_level": "low"
+      },
+      "composite_trust": 10,
+      "risk_level": "low",
+      "certificate_id": "MN-SC-2026-ATCROOT"
+    },
+    "capabilities": {
+      "provides": [
+        "skill_search",
+        "skill_recommendation",
+        "security_audit",
+        "agent_trust_verification",
+        "skill_submission"
+      ],
+      "protocol_language": "mcp",
+      "translate": true
+    },
+    "payment": {
+      "method": "x402 + USDC on Base L2",
+      "wallet_address": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee"
+    },
+    "metadata": {
+      "issued_at": "2026-07-23T03:36:17.670Z",
+      "expires_at": "2026-10-21T03:36:17.670Z",
+      "issuer": "MarketNow Sentinel CA",
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-7777670"
+    }
+  },
+  "signature": {
+    "algorithm": "Ed25519 (RFC 8032)",
+    "value": "eb159c7fc7f0782cc2e2ece7dca89beae50b08348848e9e5bb72b78fb300cc15812232be46daa49904423fc3228ab02609bfbd36ce1bb61e7f0d743d18785905",
+    "signed_by": "MarketNow Sentinel CA",
+    "signed_at": "2026-07-23T03:36:17.670Z",
+    "canonical_json": "JSON.stringify(payload, Object.keys(payload).sort())",
+    "verify_with": "GET /api/atc?action=ca-key"
+  }
+}

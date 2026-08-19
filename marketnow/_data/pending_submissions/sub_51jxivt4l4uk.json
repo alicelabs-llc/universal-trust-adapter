@@ -1,0 +1,58 @@
+{
+  "submission_id": "sub_51jxivt4l4uk",
+  "skill_id": "mn-sub-62799",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T06:05:43.244Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "96365e5c70a99ff4"
+  },
+  "repo": {
+    "url": "https://github.com/modelcontextprotocol/inspector",
+    "full_name": "modelcontextprotocol/inspector",
+    "owner": "modelcontextprotocol",
+    "name": "inspector",
+    "description": "Visual testing tool for MCP servers",
+    "stars": 10517,
+    "language": "TypeScript",
+    "license": null,
+    "pushed_at": "2026-07-28T23:19:50Z",
+    "archived": false,
+    "topics": []
+  },
+  "skill": {
+    "id": "mn-sub-62799",
+    "name": "inspector",
+    "slug": "inspector-2799",
+    "description": "Visual testing tool for MCP servers",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/modelcontextprotocol/inspector",
+      "submitted_at": "2026-07-29T06:05:43.244Z"
+    },
+    "install": "npx -y @modelcontextprotocol/inspector",
+    "author": "modelcontextprotocol",
+    "version": "2.0.0"
+  },
+  "audit": {
+    "l15_score": 9,
+    "l15_findings": [
+      {
+        "severity": "medium",
+        "code": "no_license"
+      }
+    ],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T07:05:43.244Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-3944883",
+  "promoted_at": "2026-07-30T15:05:46.011Z"
+}

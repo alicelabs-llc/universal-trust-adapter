@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0848340",
+  "skill_id": "mn-real-ob1",
+  "skill_name": "OB1",
+  "issued_at": "2026-07-26T04:40:48.340Z",
+  "expires_at": "2026-08-02T04:40:48.340Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "296281dd19b2e1aefca92e07d87da8e300c0bc8c627d787964b53114228ed264",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-ob1"
+}

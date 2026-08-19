@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8254517",
+  "skill_id": "mn-prompt-d5b7847f",
+  "skill_name": "Sales RFP response process",
+  "issued_at": "2026-07-15T01:17:34.517Z",
+  "expires_at": "2026-07-22T01:17:34.517Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "98f5dd38baaa623182dfeb66a3308faf3dc29fdc14285d1cf4b9e45570374741",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-d5b7847f"
+}

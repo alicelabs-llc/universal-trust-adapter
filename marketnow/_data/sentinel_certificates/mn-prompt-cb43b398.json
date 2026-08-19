@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8277458",
+  "skill_id": "mn-prompt-cb43b398",
+  "skill_name": "HR service center operations",
+  "issued_at": "2026-07-15T01:17:57.458Z",
+  "expires_at": "2026-07-22T01:17:57.458Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "51da0fe6a0c715045788360d27517902a2dafdb070b0499ca70644c1e29484c9",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-cb43b398"
+}

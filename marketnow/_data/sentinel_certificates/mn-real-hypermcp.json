@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0132889",
+  "skill_id": "mn-real-hypermcp",
+  "skill_name": "hyper-mcp",
+  "issued_at": "2026-07-26T04:28:52.889Z",
+  "expires_at": "2026-08-02T04:28:52.889Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a9dacf917a0e4feb365a1e4eafbf0313bc44b252020eac237a2d5c2c5c89ae9b",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-hypermcp"
+}

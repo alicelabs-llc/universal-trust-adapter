@@ -1,0 +1,61 @@
+{
+  "card_id": "ATC-2026-7777670",
+  "status": "active",
+  "payload": {
+    "card_id": "ATC-2026-7777670",
+    "agent_id": "agent.alicelabs.marketnow",
+    "agent_name": "MarketNow Discovery Agent",
+    "identity": {
+      "public_key": "MCowBQYDK2VwAyEAalg5E/VFKGMV59X7mBhttQHV+tendDZTCSkRrWcuvMA=",
+      "key_algorithm": "Ed25519"
+    },
+    "trust": {
+      "audit_layers_passed": {
+        "l15": true,
+        "l16": true,
+        "l17": true,
+        "l18": true,
+        "l2": true,
+        "l2_score": 10,
+        "l2_risk_level": "low"
+      },
+      "composite_trust": 10,
+      "risk_level": "low",
+      "certificate_id": "MN-SC-2026-ATCROOT"
+    },
+    "capabilities": {
+      "provides": [
+        "skill_search",
+        "skill_recommendation",
+        "security_audit",
+        "agent_trust_verification",
+        "skill_submission"
+      ],
+      "protocol_language": "mcp",
+      "translate": true
+    },
+    "payment": {
+      "method": "x402 + USDC on Base L2",
+      "wallet_address": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee"
+    },
+    "metadata": {
+      "issued_at": "2026-07-23T03:36:17.670Z",
+      "expires_at": "2026-10-21T03:36:17.670Z",
+      "issuer": "MarketNow Sentinel CA",
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-7777670"
+    }
+  },
+  "signature": {
+    "algorithm": "Ed25519 (RFC 8032)",
+    "value": "791d61c4c6f38a6d1d47bcd9bac1d8e971ee62fe8e1101a9e5f7648f6ae69a798d432a67ead4b4bc15b24b908e4515cbf5811cf50ac188043d5172ea63dc3205",
+    "signed_by": "MarketNow Sentinel CA",
+    "signed_at": "2026-07-23T03:36:17.670Z",
+    "canonical_json": "RFC 8785 JCS (JSON Canonicalization Scheme)",
+    "verify_with": "GET /api/atc?action=ca-key",
+    "signed_payload_hash": "a607d90cd4cca75feaa352121def9de614e4e41907bb00ba4aa82cb48bbd041c",
+    "resigned_at": "2026-08-13T19:59:59.558Z",
+    "resign_reason": "Aug 13, 2026: fixed forward-slash escaping per RFC 8785 §3.2.2.2, removed sentinel_score alias from signed payload, added ca_key_id. Bug reported by @anp2network.",
+    "canonicalization_method": "RFC_8785_JCS",
+    "ca_key_id": "MCowBQYDK2VwAyEA"
+  }
+}

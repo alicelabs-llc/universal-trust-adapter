@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6115820",
+  "skill_id": "mn-ai-022",
+  "skill_name": "ML Experiment Reproducer",
+  "issued_at": "2026-07-06T05:35:15.820Z",
+  "expires_at": "2026-07-13T05:35:15.820Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "6e8cc895bd4fc5f51ddab13b796a7b40b53fb5a2fe3216a9464f6da4027c6221",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-ai-022"
+}

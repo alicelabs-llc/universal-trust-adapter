@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build output
+dist/
+**/dist/
+dist-ssr/
+**/dist-ssr/
+.vercel/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Editor directories
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Cloudflare / Wrangler
+.wrangler/
+**/.wrangler/
+
+# Cache
+.cache/
+*.pyc
+__pycache__/
+
+# Backups
+*.bak
+*.original.bak
+
+# OS
+Thumbs.db
+
+# ─── n8n workflow templates (third-party reference data) ───────────────
+# These 61 commercial n8n workflow templates (PUQ Docker, hdwLinkedin,
+# SignalFx examples, etc.) were downloaded as reference material. They are
+# not part of the MarketNow product, contain no code we depend on, and
+# their embedded example credentials trigger false-positive gitleaks hits
+# in the weekly L1.6 batch audit.
+#
+# To work with them locally, clone them into a SEPARATE repo or just drop
+# the folder back in for development — it won't be tracked by git.
+n8n-workflows/

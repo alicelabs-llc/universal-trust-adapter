@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8028145",
+  "skill_id": "mn-prompt-d6749ac7",
+  "skill_name": "Especialista Angular 17 + Signals",
+  "issued_at": "2026-07-15T01:13:48.145Z",
+  "expires_at": "2026-07-22T01:13:48.145Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "859bd0fa8107f36d654bbb5b8eb8d3bd2aee3be753e6e0b157280315ed853abb",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-d6749ac7"
+}

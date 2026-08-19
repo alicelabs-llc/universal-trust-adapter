@@ -1,0 +1,74 @@
+{
+  "submission_id": "sub_urjhkxjxkft5",
+  "skill_id": "mn-sub-43233",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T06:05:10.793Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "7cd7c636737d277b"
+  },
+  "repo": {
+    "url": "https://github.com/D4Vinci/Scrapling",
+    "full_name": "D4Vinci/Scrapling",
+    "owner": "D4Vinci",
+    "name": "Scrapling",
+    "description": "🕷️ An adaptive Web Scraping framework that handles everything from a single request to a full-scale crawl!",
+    "stars": 71664,
+    "language": "Python",
+    "license": "BSD-3-Clause",
+    "pushed_at": "2026-07-27T11:01:17Z",
+    "archived": false,
+    "topics": [
+      "ai",
+      "ai-scraping",
+      "automation",
+      "crawler",
+      "crawling",
+      "crawling-python",
+      "data",
+      "data-extraction",
+      "mcp",
+      "mcp-server",
+      "playwright",
+      "python",
+      "scraping",
+      "selectors",
+      "stealth",
+      "web-scraper",
+      "web-scraping",
+      "web-scraping-python",
+      "webscraping",
+      "xpath"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-43233",
+    "name": "Scrapling",
+    "slug": "scrapling-3233",
+    "description": "🕷️ An adaptive Web Scraping framework that handles everything from a single request to a full-scale crawl!",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/D4Vinci/Scrapling",
+      "submitted_at": "2026-07-29T06:05:10.793Z"
+    },
+    "install": "git clone https://github.com/D4Vinci/Scrapling",
+    "author": "D4Vinci",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T07:05:10.794Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-4026838",
+  "promoted_at": "2026-07-30T15:07:08.142Z"
+}

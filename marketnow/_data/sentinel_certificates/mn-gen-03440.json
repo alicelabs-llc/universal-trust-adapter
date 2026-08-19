@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9717969",
+  "skill_id": "mn-gen-03440",
+  "skill_name": "mcp-documentation-server",
+  "issued_at": "2026-07-26T04:21:57.969Z",
+  "expires_at": "2026-08-02T04:21:57.969Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "1e4907982c6c02080360a4cc366d2e0de81f7a8bb8fa992a5376bcc8db2dc441",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-03440"
+}

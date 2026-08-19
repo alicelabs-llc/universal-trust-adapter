@@ -1,0 +1,275 @@
+# MarketNow Sentinel L1.6 — MCP-Specific Semgrep Rules
+# =======================================================
+# These rules detect security issues specific to MCP servers:
+# 1. Prompt injection in tool descriptions
+# 2. Insecure shell execution
+# 3. Hardcoded credentials
+# 4. Dangerous filesystem access
+# 5. Unrestricted network access
+# 6. Eval/exec of untrusted input
+#
+# Usage:
+#   semgrep scan --config=semgrep-mcp-rules.yml --json <repo_path>
+#
+# Each rule has a severity (ERROR = blocks listing, WARNING = flags)
+
+rules:
+  # ============================================================
+  # 1. PROMPT INJECTION IN TOOL DESCRIPTIONS
+  # ============================================================
+  
+  - id: mcp-prompt-injection-ignore-previous
+    languages: [javascript, typescript, python]
+    severity: ERROR
+    message: "Potential prompt injection in tool description: 'ignore previous instructions' pattern detected"
+    patterns:
+      - pattern-regex: '(?i)(ignore|disregard|forget)\s+(all\s+)?(previous|prior|above)\s+(instructions?|prompts?|rules?|commands?)'
+    metadata:
+      category: prompt-injection
+      confidence: high
+      mcp-specific: true
+
+  - id: mcp-prompt-injection-system-prompt-override
+    languages: [javascript, typescript, python]
+    severity: ERROR
+    message: "Potential prompt injection: attempting to override system prompt"
+    patterns:
+      - pattern-regex: '(?i)(you\s+are\s+now|new\s+instructions?|system\s+prompt\s+is|your\s+new\s+role|act\s+as\s+if\s+you\s+are)'
+    metadata:
+      category: prompt-injection
+      confidence: high
+      mcp-specific: true
+
+  - id: mcp-prompt-injection-secret-extraction
+    languages: [javascript, typescript, python]
+    severity: ERROR
+    message: "Potential prompt injection: instructing LLM to extract or reveal secrets"
+    patterns:
+      - pattern-regex: '(?i)(reveal|show|print|output|exfiltrate|send)\s+(the\s+)?(api\s+key|secret|token|password|credential|env|environment\s+variables?)'
+    metadata:
+      category: prompt-injection
+      confidence: high
+      mcp-specific: true
+
+  - id: mcp-prompt-injection-jailbreak
+    languages: [javascript, typescript, python]
+    severity: WARNING
+    message: "Potential jailbreak pattern in tool description"
+    patterns:
+      - pattern-regex: '(?i)(jailbreak|DAN|developer\s+mode|admin\s+mode|god\s+mode|unrestricted|no\s+rules?|no\s+restrictions?)'
+    metadata:
+      category: prompt-injection
+      confidence: medium
+      mcp-specific: true
+
+  - id: mcp-prompt-injection-data-exfil
+    languages: [javascript, typescript, python]
+    severity: ERROR
+    message: "Potential data exfiltration instruction in tool description"
+    patterns:
+      - pattern-regex: '(?i)(send|upload|exfiltrate|transmit|post)\s+(all\s+|the\s+)?(data|files?|contents?|conversations?|messages?|history)\s+(to|via|using)\s+'
+    metadata:
+      category: prompt-injection
+      confidence: high
+      mcp-specific: true
+
+  # ============================================================
+  # 2. INSECURE SHELL EXECUTION
+  # ============================================================
+
+  - id: mcp-insecure-exec-user-input
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: "exec/execSync with user-controlled input — command injection risk"
+    patterns:
+      - pattern: |
+          $LIB.exec($INPUT, ...)
+      - pattern-either:
+          - pattern-inside: |
+              function $FUNC(...,$INPUT,...) {
+                ...
+              }
+          - pattern-inside: |
+              $HANDLER = async (...,$INPUT,...) => {
+                ...
+              }
+      - metavariable-regex:
+          metavariable: $LIB
+          regex: '(child_process|exec|execSync|spawn|spawnSync)'
+    metadata:
+      category: command-injection
+      confidence: high
+      cwe: "CWE-78"
+
+  - id: mcp-insecure-exec-python
+    languages: [python]
+    severity: ERROR
+    message: "os.system/subprocess with user input — command injection risk"
+    patterns:
+      - pattern-either:
+          - pattern: os.system($INPUT)
+          - pattern: subprocess.call($INPUT, shell=True)
+          - pattern: subprocess.Popen($INPUT, shell=True)
+          - pattern: os.popen($INPUT)
+      - pattern-inside: |
+          def $FUNC(...,$INPUT,...):
+            ...
+    metadata:
+      category: command-injection
+      confidence: high
+      cwe: "CWE-78"
+
+  - id: mcp-eval-user-input
+    languages: [javascript, typescript, python]
+    severity: ERROR
+    message: "eval() with potentially user-controlled input — arbitrary code execution"
+    patterns:
+      - pattern: eval($INPUT)
+      - pattern-inside: |
+          function $FUNC(...,$INPUT,...) {
+            ...
+          }
+    metadata:
+      category: code-injection
+      confidence: high
+      cwe: "CWE-94"
+
+  # ============================================================
+  # 3. HARDCODED CREDENTIALS
+  # ============================================================
+
+  - id: mcp-hardcoded-api-key
+    languages: [javascript, typescript, python]
+    severity: ERROR
+    message: "Hardcoded API key detected — should be in environment variable"
+    patterns:
+      - pattern-regex: '(api[_-]?key|apikey|secret[_-]?key|auth[_-]?token|access[_-]?token)\s*[:=]\s*["\x27][a-zA-Z0-9]{20,}["\x27]'
+    metadata:
+      category: hardcoded-secrets
+      confidence: high
+      cwe: "CWE-798"
+
+  - id: mcp-hardcoded-private-key
+    languages: [javascript, typescript, python]
+    severity: ERROR
+    message: "Hardcoded private key detected"
+    patterns:
+      - pattern-regex: '-----BEGIN\s+(RSA\s+|EC\s+|OPENSSH\s+)?PRIVATE\s+KEY-----'
+    metadata:
+      category: hardcoded-secrets
+      confidence: high
+      cwe: "CWE-798"
+
+  - id: mcp-hardcoded-wallet
+    languages: [javascript, typescript, python]
+    severity: ERROR
+    message: "Hardcoded wallet private key or mnemonic detected"
+    patterns:
+      - pattern-regex: '(private[_-]?key|mnemonic|seed[_-]?phrase)\s*[:=]\s*["\x27][a-zA-Z0-9\s]{20,}["\x27]'
+    metadata:
+      category: hardcoded-secrets
+      confidence: high
+      cwe: "CWE-798"
+
+  # ============================================================
+  # 4. DANGEROUS FILESYSTEM ACCESS
+  # ============================================================
+
+  - id: mcp-fs-read-ssh-keys
+    languages: [javascript, typescript, python]
+    severity: ERROR
+    message: "Reading SSH keys or sensitive system files"
+    patterns:
+      - pattern-regex: '(~\/\.ssh\/|\/etc\/passwd|\/etc\/shadow|\/root\/\.|~\/\.aws\/|~\/\.env)'
+    metadata:
+      category: filesystem-access
+      confidence: high
+      mcp-specific: true
+
+  - id: mcp-fs-write-outside-scope
+    languages: [javascript, typescript]
+    severity: WARNING
+    message: "Filesystem write outside expected scope"
+    patterns:
+      - pattern-either:
+          - pattern: fs.writeFileSync('/etc/$PATH', ...)
+          - pattern: fs.writeFileSync('/root/$PATH', ...)
+          - pattern: fs.writeFileSync('/var/$PATH', ...)
+          - pattern: fs.writeFileSync('/usr/$PATH', ...)
+    metadata:
+      category: filesystem-access
+      confidence: medium
+
+  # ============================================================
+  # 5. UNRESTRICTED NETWORK ACCESS
+  # ============================================================
+
+  - id: mcp-network-arbitrary-url
+    languages: [javascript, typescript]
+    severity: WARNING
+    message: "fetch/request with user-controlled URL — SSRF risk"
+    patterns:
+      - pattern-either:
+          - pattern: fetch($URL, ...)
+          - pattern: axios.get($URL, ...)
+          - pattern: axios.post($URL, ...)
+          - pattern: request($URL, ...)
+      - pattern-inside: |
+          function $FUNC(...,$URL,...) {
+            ...
+          }
+    metadata:
+      category: ssrf
+      confidence: medium
+      cwe: "CWE-918"
+
+  - id: mcp-network-data-exfil
+    languages: [javascript, typescript, python]
+    severity: ERROR
+    message: "Potential data exfiltration — sending data to hardcoded external URL"
+    patterns:
+      - pattern-regex: '(https?:\/\/(?!api\.|docs\.|github\.com|registry\.npmjs\.org|pypi\.org)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\/(upload|collect|exfil|steal|data))'
+    metadata:
+      category: data-exfiltration
+      confidence: high
+      mcp-specific: true
+
+  # ============================================================
+  # 6. DANGEROUS MCP-SPECIFIC PATTERNS
+  # ============================================================
+
+  - id: mcp-tool-name-spoofing
+    languages: [javascript, typescript, python]
+    severity: WARNING
+    message: "Tool name mimics a system tool — potential spoofing"
+    patterns:
+      - pattern-regex: '(?i)(name\s*:\s*["\x27](read_file|write_file|execute|system|shell|terminal|admin|root|sudo)["\x27])'
+    metadata:
+      category: tool-spoofing
+      confidence: medium
+      mcp-specific: true
+
+  - id: mcp-unrestricted-tool-registration
+    languages: [javascript, typescript]
+    severity: INFO
+    message: "Tool registered without input schema — inputs not validated"
+    patterns:
+      - pattern: |
+          $SERVER.tool($NAME, $DESC, $HANDLER)
+      - pattern-not: |
+          $SERVER.tool($NAME, $DESC, $SCHEMA, $HANDLER)
+    metadata:
+      category: missing-validation
+      confidence: low
+      mcp-specific: true
+
+  - id: mcp-env-var-leakage
+    languages: [javascript, typescript, python]
+    severity: WARNING
+    message: "Environment variables exposed in tool output — potential secret leakage"
+    patterns:
+      - pattern-regex: '(?i)(return|console\.log|print|output)\s*\(.*process\.env.*\)'
+    metadata:
+      category: secret-leakage
+      confidence: medium
+      mcp-specific: true

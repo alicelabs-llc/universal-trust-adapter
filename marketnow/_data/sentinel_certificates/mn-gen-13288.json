@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9784069",
+  "skill_id": "mn-gen-13288",
+  "skill_name": "wanderlog-mcp",
+  "issued_at": "2026-07-26T04:23:04.069Z",
+  "expires_at": "2026-08-02T04:23:04.069Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "f1d09a61d6edfb883094d1f6fa8897d7cbf13953729d901351c0d181ed6ee91d",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-13288"
+}

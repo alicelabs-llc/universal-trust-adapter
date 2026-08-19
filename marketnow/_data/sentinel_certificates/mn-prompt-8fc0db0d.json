@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8350453",
+  "skill_id": "mn-prompt-8fc0db0d",
+  "skill_name": "Reverse ETL for operational tools",
+  "issued_at": "2026-07-15T01:19:10.453Z",
+  "expires_at": "2026-07-22T01:19:10.453Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "f37641d1e89c5710c634151c2066c6753da717f80339eef83cfb538417b2c61d",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-8fc0db0d"
+}

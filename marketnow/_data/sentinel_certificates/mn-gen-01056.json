@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5319835",
+  "skill_id": "mn-gen-01056",
+  "skill_name": "Bamboo-mcp-server",
+  "issued_at": "2026-07-06T05:21:59.835Z",
+  "expires_at": "2026-07-13T05:21:59.835Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a646affcb929c19532902b3d65407d9419c85f8ea5de1f176d5b062942810744",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-01056"
+}

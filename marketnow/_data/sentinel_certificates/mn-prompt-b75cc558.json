@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8269356",
+  "skill_id": "mn-prompt-b75cc558",
+  "skill_name": "Audit internal SOX compliance",
+  "issued_at": "2026-07-15T01:17:49.356Z",
+  "expires_at": "2026-07-22T01:17:49.356Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "03646189157a4ee5c6efa3abcc4626dd908b8676d7e5639eefc6642bb11c7f4a",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-b75cc558"
+}

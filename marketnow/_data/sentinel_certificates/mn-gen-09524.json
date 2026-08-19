@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5669722",
+  "skill_id": "mn-gen-09524",
+  "skill_name": "Nextjs-mcp-middleware",
+  "issued_at": "2026-07-06T05:27:49.722Z",
+  "expires_at": "2026-07-13T05:27:49.722Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "c3eba81ab6503725f079dfa8e2270cc4d550deaadd67d7fb51bc04a0e9bd4890",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-09524"
+}

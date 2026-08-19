@@ -1,0 +1,56 @@
+{
+  "submission_id": "sub_qnoucbyn7emr",
+  "skill_id": "mn-sub-26838",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T05:55:02.739Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "be64d4815e6a2aea"
+  },
+  "repo": {
+    "url": "https://github.com/punkpeye/fastmcp",
+    "full_name": "punkpeye/fastmcp",
+    "owner": "punkpeye",
+    "name": "fastmcp",
+    "description": "A TypeScript framework for building MCP servers.",
+    "stars": 3238,
+    "language": "TypeScript",
+    "license": "MIT",
+    "pushed_at": "2026-07-27T18:53:14Z",
+    "archived": false,
+    "topics": [
+      "mcp",
+      "sse"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-26838",
+    "name": "fastmcp",
+    "slug": "fastmcp-6838",
+    "description": "A TypeScript framework for building MCP servers.",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/punkpeye/fastmcp",
+      "submitted_at": "2026-07-29T05:55:02.739Z"
+    },
+    "install": "npx -y fastmcp",
+    "author": "punkpeye",
+    "version": "1.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T06:55:02.739Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-4009289",
+  "promoted_at": "2026-07-30T15:06:50.305Z"
+}

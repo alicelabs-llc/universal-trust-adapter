@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://marketnow.site/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://marketnow.site/submit</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://marketnow.site/trust</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://marketnow.site/security</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://marketnow.site/mandates</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://marketnow.site/atc</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://marketnow.site/best-mcp-marketplace</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://marketnow.site/guides/how-to-publish-mcp-server</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://marketnow.site/guides/how-to-monetize-mcp-tools</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://marketnow.site/api/agent.json</loc><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://marketnow.site/api/openapi.yaml</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://marketnow.site/llms.txt</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
+</urlset>

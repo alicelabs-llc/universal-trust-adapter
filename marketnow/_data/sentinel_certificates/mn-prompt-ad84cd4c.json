@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8366609",
+  "skill_id": "mn-prompt-ad84cd4c",
+  "skill_name": "Restaurant operations optimization",
+  "issued_at": "2026-07-15T01:19:26.609Z",
+  "expires_at": "2026-07-22T01:19:26.609Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "5b218b1c095be15244e3ef8177e4ac04aa9e0d95f5467ce94d6dc49e6866fe12",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-ad84cd4c"
+}

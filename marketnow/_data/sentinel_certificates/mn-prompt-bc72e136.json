@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8318836",
+  "skill_id": "mn-prompt-bc72e136",
+  "skill_name": "Copywriting for customer testimonials",
+  "issued_at": "2026-07-15T01:18:38.836Z",
+  "expires_at": "2026-07-22T01:18:38.836Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "0e500faaaebffd420f8cc8c37af1bfcefdeb34f1b5bd3e1daf95ef8fd6e80b7a",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-bc72e136"
+}

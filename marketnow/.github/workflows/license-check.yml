@@ -1,0 +1,82 @@
+# MarketNow — License Header Checker
+# =====================================
+# Fails the CI if any Sentinel proprietary file is missing its copyright
+# header. This prevents accidental removal of legal notices.
+#
+# Triggers: every PR and every push to master.
+
+name: License Header Check
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  check-headers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Check Sentinel proprietary files have copyright headers
+        run: |
+          set -e
+          MISSING=0
+
+          # List of files that MUST have the "SENTINEL PROPRIETARY" header
+          SENTINEL_FILES=(
+            "aep-marketplace/lib/sentinel-audit.mjs"
+            "aep-marketplace/lib/sentinel-l16.mjs"
+            "aep-marketplace/lib/sentinel-l2-trigger.mjs"
+            "aep-marketplace/api/audit-skill.js"
+            "scripts/l2-analyze.py"
+            "scripts/l2-build-docker.sh"
+            "scripts/l2-parse-url.py"
+            "scripts/audit-all-skills.mjs"
+            "scripts/generate-badges.mjs"
+            "scripts/monitor-github-issue.mjs"
+          )
+
+          echo "Checking ${#SENTINEL_FILES[@]} Sentinel files for copyright headers..."
+
+          for file in "${SENTINEL_FILES[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "::warning::File not found: $file"
+              continue
+            fi
+
+            if grep -q "SENTINEL PROPRIETARY" "$file"; then
+              echo "✅ $file — header present"
+            else
+              echo "::error::$file is missing the SENTINEL PROPRIETARY copyright header."
+              echo "::error::Run 'node scripts/add-copyright-headers.mjs' to fix."
+              MISSING=$((MISSING + 1))
+            fi
+          done
+
+          if [ "$MISSING" -gt 0 ]; then
+            echo ""
+            echo "::error::$MISSING file(s) missing copyright headers."
+            echo "::error::Legal headers are REQUIRED for all Sentinel proprietary files."
+            echo "::error::Run: node scripts/add-copyright-headers.mjs"
+            exit 1
+          fi
+
+          echo ""
+          echo "✅ All Sentinel proprietary files have copyright headers."
+
+      - name: Check for merge conflict markers (from previous workflow)
+        run: |
+          set -e
+          CONFLICTS=$(git grep -nI -E '^(<<<<<<< |=======$|>>>>>>> )' -- . || true)
+          if [ -n "$CONFLICTS" ]; then
+            echo "::error::Unresolved merge conflict markers found."
+            exit 1
+          fi
+          echo "✅ No merge conflict markers."

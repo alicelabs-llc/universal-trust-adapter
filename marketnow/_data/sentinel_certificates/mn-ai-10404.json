@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5709542",
+  "skill_id": "mn-ai-10404",
+  "skill_name": "Pi-zai-mcp",
+  "issued_at": "2026-07-06T05:28:29.542Z",
+  "expires_at": "2026-07-13T05:28:29.542Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "efc01034e6657d68f14d6ffa892f6061c9772e5f17bcdb97aaa5232e6bff7ec4",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-ai-10404"
+}

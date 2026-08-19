@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6146714",
+  "skill_id": "mn-pro-1191424f",
+  "skill_name": "Token Vesting Scheduler",
+  "issued_at": "2026-07-06T05:35:46.714Z",
+  "expires_at": "2026-07-13T05:35:46.714Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "62abf326c2fa9baae407e8a94ddc7e7359a4eb7064c2d72646d5bb25c5c68278",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-pro-1191424f"
+}

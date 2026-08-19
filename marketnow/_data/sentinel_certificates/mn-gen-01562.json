@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5338995",
+  "skill_id": "mn-gen-01562",
+  "skill_name": "Browser-devtools-mcp",
+  "issued_at": "2026-07-06T05:22:18.995Z",
+  "expires_at": "2026-07-13T05:22:18.995Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "d556661ad9014311d804cf9e91a3f142588d4a1217df166f2155f887d507b88e",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-01562"
+}

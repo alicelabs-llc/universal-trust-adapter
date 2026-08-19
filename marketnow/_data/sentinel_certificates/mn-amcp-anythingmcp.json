@@ -1,0 +1,33 @@
+{
+  "certificate_id": "MN-SC-2026-9793911",
+  "skill_id": "mn-amcp-anythingmcp",
+  "skill_name": "anythingmcp",
+  "issued_at": "2026-07-26T04:23:13.911Z",
+  "expires_at": "2026-08-02T04:23:13.911Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 1,
+  "max_score": 10,
+  "risk_level": "high",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "high",
+    "final": "high"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": true
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_score": 2,
+    "l2_execution_status": "ran"
+  },
+  "signature": "7e0c97820ff5f45463d5b18fb6161bc8d322fe0cb6189613a02edbbe6ffacf2c",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-amcp-anythingmcp"
+}

@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-browsercontrolmcp",
+  "timestamp": "2026-07-06T03:14:55Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 0,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 1,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 736,
+  "stdout_sample": " > mcp-server@1.5.1 start > node dist/server.js  Browser API init error Error: EXTENSION_SECRET env var missing. See the extension's options page.     at BrowserAPI.init (/app/mcp-server/dist/browser-api.js:56:19)     at Object.<anonymous> (/app/mcp-server/dist/server.js:177:12)     at Module._compile (node:internal/modules/cjs/loader:1781:14)     at Object..js (node:internal/modules/cjs/loader:1913:10)     at Module.load (node:internal/modules/cjs/loader:1505:32)     at Function._load (node:int",
+  "l2_score": 5,
+  "l2_risk_level": "medium"
+}

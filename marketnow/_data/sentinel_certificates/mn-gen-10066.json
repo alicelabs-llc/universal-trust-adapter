@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5694045",
+  "skill_id": "mn-gen-10066",
+  "skill_name": "Optimizely-mcp-server",
+  "issued_at": "2026-07-06T05:28:14.045Z",
+  "expires_at": "2026-07-13T05:28:14.045Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "3f9126af8f1f5f1eda94b19e1708d89733eacd80d8b42c7461f4ca0a3b818045",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-10066"
+}

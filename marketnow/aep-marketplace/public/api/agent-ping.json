@@ -1,0 +1,122 @@
+{
+  "status": "alive",
+  "message": "MarketNow \u2014 Security infrastructure for AI agents. Sentinel: 10-layer audit pipeline, 1.2M checks performed, 80 skills quarantined. 12 MCP tools (marketnow_* namespace) in v1.9.0.",
+  "positioning": "Security infrastructure for AI agents \u2014 not a marketplace. The marketplace (9,248 MCP skills, all free to install) is distribution; the product is Sentinel.",
+  "version": "5.0.0",
+  "mcp_version": "1.10.0",
+  "stats": {
+    "total_skills": 9248,
+    "categories": 58,
+    "audited": 5662,
+    "l25_tested": 257,
+    "security_checks_performed": 1211488,
+    "threats_detected": 1030,
+    "critical_blocked": 80,
+    "verified_safe": 8288,
+    "quarantined": 81,
+    "risky_skills": 54,
+    "safe_skills": 8238,
+    "atc_issued": 57,
+    "sentinel_version": "L1.5 \u2192 L3 (10 layers) + Interceptor + ATC + x402 + A2A",
+    "mcp_server": "npx -y marketnow-mcp@1.9.0",
+    "mcp_tools_count": 13,
+    "mcp_namespace": "marketnow_*",
+    "ca_algorithm": "Ed25519 (RFC 8032)",
+    "canonical_json": "RFC 8785 JCS",
+    "owasp_controls_live": 4,
+    "owasp_controls_planned": 8,
+    "license": "MNNC-1.0 (AliceLabs LLC Proprietary)",
+    "maintainer": "AliceLabs LLC",
+    "company": "AliceLabs LLC (Wyoming, USA, 2026)",
+    "founder": "Edison Flores"
+  },
+  "pricing": {
+    "free": {
+      "price": "$0",
+      "features": [
+        "Basic Sentinel scan",
+        "Trust score",
+        "Public report",
+        "Public listing"
+      ]
+    },
+    "developer": {
+      "price": "$49-99",
+      "features": [
+        "Deep static analysis",
+        "Dependency analysis",
+        "Malware scan",
+        "Prompt injection",
+        "Sandbox",
+        "Signed report"
+      ]
+    },
+    "professional": {
+      "price": "$199-499",
+      "features": [
+        "Deep audit",
+        "Runtime testing",
+        "Remediation",
+        "Trust Card",
+        "Re-audit"
+      ]
+    },
+    "continuous": {
+      "price": "$99-499/month",
+      "features": [
+        "Continuous monitoring",
+        "CVE tracking",
+        "Dependency drift",
+        "Auto re-audit"
+      ]
+    },
+    "enterprise": {
+      "price": "$5k-50k+/year",
+      "features": [
+        "Private MCP audits",
+        "Custom policies",
+        "Compliance evidence",
+        "API",
+        "Dashboards",
+        "SLA"
+      ]
+    }
+  },
+  "endpoints": {
+    "search": "GET /api/search?q=",
+    "all_skills": "GET /api/skills.json",
+    "skills_lite": "GET /api/skills-lite.json",
+    "categories": "GET /api/categories.json",
+    "manifest": "GET /api/manifest.json",
+    "health": "GET /api/manifest?health",
+    "agent_docs": "GET /api/agent.json",
+    "openapi": "GET /api/openapi.json",
+    "openapi_yaml": "GET /api/openapi.yaml",
+    "bundles": "GET /api/bundles.json",
+    "audit_report": "GET /api/audit-report.json",
+    "owasp_compliance": "GET /api/owasp",
+    "trust_score": "GET /api/trust-score?skillId={id}",
+    "interceptor": "POST /api/interceptor",
+    "atc_verify": "GET /api/atc?action=verify&card_id={id}",
+    "atc_ca_key": "GET /api/atc?action=ca-key",
+    "audit": "POST /api/audit-skill",
+    "wallet": "GET /api/agent-wallet",
+    "purchase_usdc": "POST /api/agent-purchase",
+    "checkout_stripe": "POST /api/create-checkout-session",
+    "mandates": "GET/POST /api/mandates"
+  },
+  "mcp_tools": [
+    "marketnow_search_skills",
+    "marketnow_get_skill",
+    "marketnow_list_categories",
+    "marketnow_get_manifest",
+    "marketnow_get_install_command",
+    "marketnow_verify_trust",
+    "marketnow_verify_receipt",
+    "marketnow_submit_skill",
+    "marketnow_mint_referral",
+    "marketnow_lookup_referral",
+    "marketnow_recommend_skills",
+    "marketnow_get_owasp_compliance"
+  ]
+}

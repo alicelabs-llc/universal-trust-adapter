@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5492036",
+  "skill_id": "mn-gen-05106",
+  "skill_name": "Imap-mcp",
+  "issued_at": "2026-07-06T05:24:52.036Z",
+  "expires_at": "2026-07-13T05:24:52.036Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "7dd42c108c1b65a0a6c0b57536caea8cd0583391b222dcbb4bcdadf975de519e",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-05106"
+}

@@ -1,0 +1,39 @@
+name: Health Check Monitoring
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # Cada 30 minutos
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Run health checks
+        run: node health-check.js
+        env:
+          # Definir URLs reales como secrets
+          GITHUB_PAGES_URL: ${{ secrets.GITHUB_PAGES_URL }}
+          CLOUDFLARE_PAGES_URL: ${{ secrets.CLOUDFLARE_PAGES_URL }}
+          NETLIFY_URL: ${{ secrets.NETLIFY_URL }}
+      
+      - name: Notify on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const message = '❌ Health check falló para alguno de los hosts de AI Profit Army. Revisar logs.';
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Health Check Failure',
+              body: message
+            });

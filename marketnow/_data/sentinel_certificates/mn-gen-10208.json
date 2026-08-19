@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5702063",
+  "skill_id": "mn-gen-10208",
+  "skill_name": "Razroo/parallel-mcp",
+  "issued_at": "2026-07-06T05:28:22.063Z",
+  "expires_at": "2026-07-13T05:28:22.063Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "9e09fff366e960e5ad234e99592f4c765721f426b90045630067adfcc0d040bb",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-10208"
+}

@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9894959",
+  "skill_id": "mn-real-k8smcpserver",
+  "skill_name": "k8s-mcp-server",
+  "issued_at": "2026-07-26T04:24:54.959Z",
+  "expires_at": "2026-08-02T04:24:54.959Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "c47fa9b799c34e3312e710080f0cd644006f08ce63aa20954756105d16a74df7",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-k8smcpserver"
+}

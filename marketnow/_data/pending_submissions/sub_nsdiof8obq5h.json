@@ -1,0 +1,74 @@
+{
+  "submission_id": "sub_nsdiof8obq5h",
+  "skill_id": "mn-sub-57505",
+  "status": "promoted",
+  "submitted_at": "2026-07-27T00:47:08.069Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_outreach_v2",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "be64d4815e6a2aea"
+  },
+  "repo": {
+    "url": "https://github.com/D4Vinci/Scrapling",
+    "full_name": "D4Vinci/Scrapling",
+    "owner": "D4Vinci",
+    "name": "Scrapling",
+    "description": "🕷️ An adaptive Web Scraping framework that handles everything from a single request to a full-scale crawl!",
+    "stars": 71341,
+    "language": "Python",
+    "license": "BSD-3-Clause",
+    "pushed_at": "2026-07-26T20:23:36Z",
+    "archived": false,
+    "topics": [
+      "ai",
+      "ai-scraping",
+      "automation",
+      "crawler",
+      "crawling",
+      "crawling-python",
+      "data",
+      "data-extraction",
+      "mcp",
+      "mcp-server",
+      "playwright",
+      "python",
+      "scraping",
+      "selectors",
+      "stealth",
+      "web-scraper",
+      "web-scraping",
+      "web-scraping-python",
+      "webscraping",
+      "xpath"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-57505",
+    "name": "Scrapling",
+    "slug": "scrapling-7505",
+    "description": "🕷️ An adaptive Web Scraping framework that handles everything from a single request to a full-scale crawl!",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/D4Vinci/Scrapling",
+      "submitted_at": "2026-07-27T00:47:08.069Z"
+    },
+    "install": "git clone https://github.com/D4Vinci/Scrapling",
+    "author": "D4Vinci",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-27T01:47:08.070Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-4334376",
+  "promoted_at": "2026-07-27T01:05:35.162Z"
+}

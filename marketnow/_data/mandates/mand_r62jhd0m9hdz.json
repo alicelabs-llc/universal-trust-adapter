@@ -1,0 +1,19 @@
+{
+  "id": "mand_r62jhd0m9hdz",
+  "owner": "0x39dddf5aedb58a559cf195fb8bdf23f0604bf5ee",
+  "agentId": "agent_claude_persistent_test",
+  "agentName": "Claude",
+  "spendingLimitUsd": 15,
+  "spentUsd": 2.5,
+  "perPurchaseCapUsd": 3,
+  "categories": [
+    "*"
+  ],
+  "expiresAt": "2026-09-29T19:09:41.831Z",
+  "createdAt": "2026-07-01T19:09:41.831Z",
+  "status": "active",
+  "signature": null,
+  "txCount": 1,
+  "lastSpendAt": "2026-07-01T19:09:58.485Z",
+  "lastSpendTx": "0xdeadbeef"
+}

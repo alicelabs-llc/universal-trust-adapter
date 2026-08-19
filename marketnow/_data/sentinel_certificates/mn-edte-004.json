@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6201611",
+  "skill_id": "mn-edte-004",
+  "skill_name": "Grade Book System",
+  "issued_at": "2026-07-06T05:36:41.611Z",
+  "expires_at": "2026-07-13T05:36:41.611Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "1a3c0b7be78e0543a4c29f99f934558e71665d94d9e0e1f355c20887aee44084",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-edte-004"
+}

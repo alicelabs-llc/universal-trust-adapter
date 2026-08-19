@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9969726",
+  "skill_id": "mn-real-algovoiplatformadapt",
+  "skill_name": "AlgoVoi-Platform-Adapters",
+  "issued_at": "2026-07-26T04:26:09.726Z",
+  "expires_at": "2026-08-02T04:26:09.726Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "861844a2f3a60963cd7bb6cc07901c2798e75ddbd8fe475621f449e0411e1ced",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-algovoiplatformadapt"
+}

@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0694054",
+  "skill_id": "mn-real-webhooktesterx402",
+  "skill_name": "webhook-tester-x402",
+  "issued_at": "2026-07-26T04:38:14.054Z",
+  "expires_at": "2026-08-02T04:38:14.054Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 4,
+  "max_score": 10,
+  "risk_level": "critical",
+  "risk_breakdown": {
+    "l15_l16_l17": "critical",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "critical"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 1,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "3cb53223e9072fb4a986d59f431ea10785e1b8f8accfd774b9edda734dca242c",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-webhooktesterx402"
+}

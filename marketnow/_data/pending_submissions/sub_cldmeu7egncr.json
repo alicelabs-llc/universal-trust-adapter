@@ -1,0 +1,63 @@
+{
+  "submission_id": "sub_cldmeu7egncr",
+  "skill_id": "mn-sub-26478",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T14:26:07.035Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch2",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "be64d4815e6a2aea"
+  },
+  "repo": {
+    "url": "https://github.com/jlowin/fastmcp",
+    "full_name": "PrefectHQ/fastmcp",
+    "owner": "jlowin",
+    "name": "fastmcp",
+    "description": "🚀 The fast, Pythonic way to build MCP servers and clients.",
+    "stars": 26937,
+    "language": "Python",
+    "license": "Apache-2.0",
+    "pushed_at": "2026-07-29T13:58:11Z",
+    "archived": false,
+    "topics": [
+      "agents",
+      "fastmcp",
+      "llms",
+      "mcp",
+      "mcp-clients",
+      "mcp-servers",
+      "mcp-tools",
+      "model-context-protocol",
+      "python"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-26478",
+    "name": "fastmcp",
+    "slug": "fastmcp-6478",
+    "description": "🚀 The fast, Pythonic way to build MCP servers and clients.",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/jlowin/fastmcp",
+      "submitted_at": "2026-07-29T14:26:07.035Z"
+    },
+    "install": "git clone https://github.com/jlowin/fastmcp",
+    "author": "jlowin",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T15:26:07.035Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-3968185",
+  "promoted_at": "2026-07-30T15:06:09.294Z"
+}

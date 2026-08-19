@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6149213",
+  "skill_id": "mn-pro-44a7a783",
+  "skill_name": "Real-Time Spectator Mode",
+  "issued_at": "2026-07-06T05:35:49.213Z",
+  "expires_at": "2026-07-13T05:35:49.213Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "39dcb851f45666e9ed579d3a1e08630359a09c4633bc5e267b5559e5a9f1d220",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-pro-44a7a783"
+}

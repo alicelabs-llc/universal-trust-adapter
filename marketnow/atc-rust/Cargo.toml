@@ -1,0 +1,42 @@
+[package]
+name = "agent-trust-card"
+version = "1.0.0"
+edition = "2021"
+description = "ATC/1.0 Rust SDK — issue and verify Agent Trust Cards (Ed25519, RFC 8785 JCS, SHA-256)"
+license = "MNNC-1.0"
+repository = "https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/atc-rust"
+homepage = "https://marketnow.site/atc"
+documentation = "https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md"
+readme = "README.md"
+keywords = [
+    "atc",
+    "agent-trust-card",
+    "ai-agents",
+    "agent-identity",
+    "agent-security",
+    "ed25519",
+    "rfc-8032",
+    "rfc-8785",
+    "jcs",
+    "mcp",
+    "verifiable-credentials",
+    "trust-layer",
+]
+categories = ["cryptography", "authentication"]
+authors = ["AliceLabs LLC <info@alicelabs.site>"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", features = ["preserve_order"] }
+ed25519-dalek = { version = "2.1", features = ["rand_core", "pkcs8"] }
+rand = "0.8"
+sha2 = "0.10"
+base64 = "0.22"
+hex = "0.4"
+thiserror = "1.0"
+ureq = { version = "2.10", features = ["json"] }
+chrono = { version = "0.4", features = ["serde"] }
+regex = "1.10"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full"] }

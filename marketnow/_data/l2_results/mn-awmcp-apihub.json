@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-apihub",
+  "timestamp": "2026-07-06T02:56:46Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 2,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 527,
+  "stdout_sample": "INFO:     Started server process [1] INFO:     Waiting for application startup. StreamableHTTP session manager started INFO:     Application startup complete. INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit) INFO:     Shutting down INFO:     Waiting for application shutdown. StreamableHTTP session manager shutting down INFO:     Application shutdown complete. INFO:     Finished server process [1] Starting API Hub MCP in Streamable HTTP mode (JSON-based, tunnel-friendly)...",
+  "l2_score": 7,
+  "l2_risk_level": "low"
+}

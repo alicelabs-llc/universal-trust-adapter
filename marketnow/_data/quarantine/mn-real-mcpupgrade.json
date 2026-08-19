@@ -1,0 +1,82 @@
+{
+  "certificate_id": "MN-SC-2026-0000NaN",
+  "skill_id": "mn-real-mcpupgrade",
+  "skill_name": "mcp-upgrade",
+  "timestamp": "2026-07-24T03:29:01.206Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L1.7 + L1.8 + L1.9 (Deep Individual Audit)",
+  "overall_score": 5,
+  "max_score": 10,
+  "risk_level": "critical",
+  "risk_breakdown": {
+    "l15_l16_l17_l18_l19": "critical",
+    "l2": "not_available",
+    "final": "critical"
+  },
+  "quarantine_recommended": true,
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l17": true,
+    "l18": true,
+    "l19": true,
+    "l2": false,
+    "l3": false
+  },
+  "checks": [
+    {
+      "name": "L1.5 AUTH",
+      "status": "warning",
+      "risk": "medium",
+      "detail": "No auth required"
+    },
+    {
+      "name": "L1.6 SEMGREP",
+      "status": "pass",
+      "risk": "low",
+      "detail": "18 rules, 0 findings"
+    },
+    {
+      "name": "L1.6 SECRETS",
+      "status": "pass",
+      "risk": "low",
+      "detail": "18 patterns, 0 findings"
+    },
+    {
+      "name": "L1.7 BINARY",
+      "status": "pass",
+      "risk": "low",
+      "detail": "No binaries or launchers detected"
+    },
+    {
+      "name": "L1.7 MALWARE",
+      "status": "pass",
+      "risk": "low",
+      "detail": "7 patterns checked, 0 findings"
+    },
+    {
+      "name": "L1.8 FAMILIES",
+      "status": "fail",
+      "risk": "critical",
+      "detail": "1 malware families matched: Atomic Stealer"
+    },
+    {
+      "name": "L1.9 INJECTION",
+      "status": "pass",
+      "risk": "low",
+      "detail": "32 rules checked, 0 injections"
+    }
+  ],
+  "source": {
+    "type": "github",
+    "url": "https://github.com/Ramosagustinaolivia23/mcp-upgrade",
+    "note": "Real MCP server. 0 stars. Language: Go.",
+    "stars": 0,
+    "language": "Go",
+    "last_push": "2026-07-06T19:42:42Z"
+  },
+  "signature": {
+    "algorithm": "SHA-256",
+    "value": "b58b14e18a1d78a18bfb806a07ad074f17d56234965b99257c92b312a97be71f",
+    "signed_by": "Sentinel Deep Auditor"
+  }
+}

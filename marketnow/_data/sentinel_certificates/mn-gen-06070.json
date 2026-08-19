@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5530302",
+  "skill_id": "mn-gen-06070",
+  "skill_name": "Mapbox-map-tools-mcp",
+  "issued_at": "2026-07-06T05:25:30.302Z",
+  "expires_at": "2026-07-13T05:25:30.302Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "6ff746acbd978f46b2385f6d74f329a50fc886ba15a4f383fad1c61c5689b3aa",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-06070"
+}

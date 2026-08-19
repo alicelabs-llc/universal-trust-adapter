@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="28" viewBox="0 0 160 28" role="img" aria-label="ATC Verified">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0e14"/>
+      <stop offset="1" stop-color="#11161f"/>
+    </linearGradient>
+  </defs>
+  <rect width="160" height="28" rx="4" fill="url(#bg2)"/>
+  <rect x="0.5" y="0.5" width="159" height="27" rx="3.5" fill="none" stroke="#2a3142" stroke-width="1"/>
+  <!-- Checkmark in circle -->
+  <circle cx="14" cy="14" r="7" fill="#00d1ff" opacity="0.15"/>
+  <path d="M 10 14 L 13 17 L 18 11" stroke="#00d1ff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Text -->
+  <text x="28" y="13" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10" fill="#8b949e" font-weight="500">ATC</text>
+  <text x="28" y="22" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" fill="#e6edf3" font-weight="600">Verified</text>
+  <!-- Score chip -->
+  <rect x="120" y="6" width="32" height="16" rx="3" fill="#0d1f28" stroke="#00d1ff" stroke-width="0.5"/>
+  <text x="136" y="16" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="9" fill="#00d1ff" font-weight="600" text-anchor="middle">9/10</text>
+</svg>

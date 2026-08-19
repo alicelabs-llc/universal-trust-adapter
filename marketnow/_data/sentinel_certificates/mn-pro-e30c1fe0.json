@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6153080",
+  "skill_id": "mn-pro-e30c1fe0",
+  "skill_name": "Video Streaming Cost Optimizer",
+  "issued_at": "2026-07-06T05:35:53.080Z",
+  "expires_at": "2026-07-13T05:35:53.080Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a9d1eb6f9d393756a5414a6086645538ee7cd3d48fbe9fffd5e4d96626d4a904",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-pro-e30c1fe0"
+}

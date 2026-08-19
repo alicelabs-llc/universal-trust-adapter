@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8103243",
+  "skill_id": "mn-prompt-fa0fe7a1",
+  "skill_name": "Especialista Content Distribution + Amplification",
+  "issued_at": "2026-07-15T01:15:03.243Z",
+  "expires_at": "2026-07-22T01:15:03.243Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "f835bc848ddee2e64558a8f45c0ad1467f4de1c1425e5eefe3d4b664e1ee62c7",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-fa0fe7a1"
+}

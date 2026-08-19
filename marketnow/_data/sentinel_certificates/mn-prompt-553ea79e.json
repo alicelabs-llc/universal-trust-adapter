@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8276651",
+  "skill_id": "mn-prompt-553ea79e",
+  "skill_name": "Background check process compliant",
+  "issued_at": "2026-07-15T01:17:56.651Z",
+  "expires_at": "2026-07-22T01:17:56.651Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "8a63cf8d8bf33a93578672ec55cce239eb7a1404f2d0e6292b676d52b5bea460",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-553ea79e"
+}

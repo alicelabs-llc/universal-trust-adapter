@@ -1,0 +1,23 @@
+{
+  "receipt_id": "rcpt_c8b9dc67f88e4da5bd3a",
+  "receipt_version": "1.0.0",
+  "issued_at": "2026-07-25T03:44:59.155Z",
+  "mandate_id": "mand_e2e_test",
+  "settle_txhash": "0xe2etest19f97604f12",
+  "atc_card_id": "ATC-2026-7777670",
+  "delivered": {
+    "skill_id": "mn-e2e-test-001",
+    "license_key": "MN-E2ETEST-MRZTSQOI",
+    "content_sha256": "0a3666a0710c08aa6d0de92ce72beeb5b93124cce1bf3701c9d6cdeb543cb73e"
+  },
+  "amount_usd": 4.99,
+  "network": "base",
+  "signature": {
+    "algorithm": "Ed25519 (RFC 8032)",
+    "value": "5b103f6ae927ab4d7fe569a2e74bf2f9c07b0641133da85d1b369c5ce60dbe47b60503b398b4c7476bc6175439f3c527d2312a0fdf8b8da4356a1c669200eb08",
+    "signed_by": "MarketNow Sentinel CA",
+    "signed_at": "2026-07-25T03:44:59.155Z",
+    "canonical_json": "RFC 8785 JCS",
+    "verify_with": "GET /api/atc?action=ca-key"
+  }
+}

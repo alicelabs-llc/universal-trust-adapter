@@ -1,0 +1,107 @@
+# MarketNow — Deep Audit All Skills (Runs in background, takes hours)
+# =====================================================================
+#
+# Runs the full 10-layer Sentinel audit on every single skill, one by one.
+# Fetches READMEs from GitHub, scans for malware, prompt injection, secrets.
+# Takes as long as it takes — could be 2-4 hours for 8,845 skills.
+#
+# Schedule: Daily at 04:00 UTC (after L1.6 batch at 00:00 and L2 at 02:00)
+# Manual: workflow_dispatch with optional --max and --start args
+
+name: Deep Audit All Skills
+
+on:
+  schedule:
+    - cron: '0 4 * * *'  # Daily at 04:00 UTC
+  workflow_dispatch:
+    inputs:
+      max_skills:
+        description: 'Max skills to audit (0 = all 8,845)'
+        required: false
+        default: '0'
+      start_from:
+        description: 'Start from index (for resuming)'
+        required: false
+        default: '0'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deep-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120  # 2 hours max
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd aep-marketplace
+          npm install --no-audit --no-fund
+          cd ..
+          npm install jszip --no-audit --no-fund
+
+      - name: Run deep audit
+        env:
+          SENTINEL_CERT_SECRET: ${{ secrets.SENTINEL_CERT_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MANDATES_GITHUB_TOKEN: ${{ secrets.MANDATES_GITHUB_TOKEN }}
+        run: |
+          MAX="${{ github.event.inputs.max_skills || '0' }}"
+          START="${{ github.event.inputs.start_from || '0' }}"
+          
+          if [ "$MAX" = "0" ]; then
+            node scripts/deep-audit-all-skills.mjs --start $START
+          else
+            node scripts/deep-audit-all-skills.mjs --max $MAX --start $START
+          fi
+
+      - name: Commit results
+        run: |
+          git config user.name "MarketNow Sentinel Bot"
+          git config user.email "info@alicelabs.site"
+          
+          # Commit certificates
+          git add _data/sentinel_certificates/ -f
+          if git diff --cached --quiet; then
+            echo "No cert changes"
+          else
+            git commit -m "sentinel: deep audit $(date -u +%Y-%m-%d) — individual review" || true
+          fi
+          
+          # Commit quarantined skills
+          git add _data/quarantine/ -f
+          if git diff --cached --quiet; then
+            echo "No quarantine changes"
+          else
+            git commit -m "sentinel: quarantined skills from deep audit $(date -u +%Y-%m-%d)" || true
+          fi
+          
+          # Commit progress
+          git add _data/deep-audit-progress.json -f
+          if git diff --cached --quiet; then
+            echo "No progress changes"
+          else
+            git commit -m "chore: deep audit progress update [skip ci]" || true
+          fi
+          
+          git push || echo "Push failed (will retry next run)"
+
+      - name: Upload audit log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deep-audit-log
+          path: _data/deep-audit-progress.json
+          retention-days: 7

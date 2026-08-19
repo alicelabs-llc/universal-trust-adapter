@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5596271",
+  "skill_id": "mn-ai-07552",
+  "skill_name": "Openbnb/mcp-server-airbnb",
+  "issued_at": "2026-07-06T05:26:36.271Z",
+  "expires_at": "2026-07-13T05:26:36.271Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "c23fb0b86685c71ae3a1bc7ec06c0c008e3d27e3f825f31bae74730d31f7295d",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-ai-07552"
+}

@@ -1,0 +1,53 @@
+{
+  "submission_id": "sub_f6va04jafgzj",
+  "skill_id": "mn-sub-98233",
+  "status": "promoted",
+  "submitted_at": "2026-07-27T01:18:02.431Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_outreach_v3",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "be64d4815e6a2aea"
+  },
+  "repo": {
+    "url": "https://github.com/anthropics/anthropic-quickstarts",
+    "full_name": "anthropics/claude-quickstarts",
+    "owner": "anthropics",
+    "name": "anthropic-quickstarts",
+    "description": "A collection of projects designed to help developers quickly get started with building deployable applications using the Claude API",
+    "stars": 17320,
+    "language": "Python",
+    "license": "MIT",
+    "pushed_at": "2026-07-24T20:14:19Z",
+    "archived": false,
+    "topics": []
+  },
+  "skill": {
+    "id": "mn-sub-98233",
+    "name": "claude-quickstarts",
+    "slug": "anthropic-quickstarts-8233",
+    "description": "A collection of projects designed to help developers quickly get started with building deployable applications using the Claude API",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/anthropics/anthropic-quickstarts",
+      "submitted_at": "2026-07-27T01:18:02.431Z"
+    },
+    "install": "git clone https://github.com/anthropics/anthropic-quickstarts",
+    "author": "anthropics",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-27T02:18:02.431Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-5318998",
+  "promoted_at": "2026-07-27T01:21:59.889Z"
+}

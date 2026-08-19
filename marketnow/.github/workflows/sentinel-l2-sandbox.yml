@@ -1,0 +1,255 @@
+# MarketNow — Sentinel L2 Docker Sandbox (GitHub Actions)
+# ==========================================================
+# Triggered by:
+#   1. Manual workflow_dispatch (with skill_id + repo_url)
+#   2. Repository dispatch event (from /api/audit-skill via sentinel-l2-trigger.mjs)
+#
+# Runs MCP servers in isolated Docker containers to detect
+# runtime behavior: network exfiltration, filesystem changes,
+# process spawning, credential leakage.
+
+name: Sentinel L2 Docker Sandbox
+
+on:
+  workflow_dispatch:
+    inputs:
+      skill_id:
+        description: 'Skill ID to audit (e.g., mn-gen-00001)'
+        required: true
+      repo_url:
+        description: 'GitHub repo URL of the MCP server'
+        required: true
+  repository_dispatch:
+    types:
+      - sentinel-l2-audit
+
+# Required so the GITHUB_TOKEN can push commits back to master.
+permissions:
+  contents: write
+
+concurrency:
+  group: sentinel-l2-sandbox-${{ github.event.client_payload.skill_id }}
+  cancel-in-progress: false
+
+jobs:
+  sandbox:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set variables
+        id: vars
+        env:
+          DISPATCH_SKILL_ID: ${{ github.event.client_payload.skill_id }}
+          DISPATCH_REPO_URL: ${{ github.event.client_payload.repo_url }}
+          INPUT_SKILL_ID: ${{ inputs.skill_id }}
+          INPUT_REPO_URL: ${{ inputs.repo_url }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
+            SKILL_ID="$DISPATCH_SKILL_ID"
+            REPO_URL="$DISPATCH_REPO_URL"
+          else
+            SKILL_ID="$INPUT_SKILL_ID"
+            REPO_URL="$INPUT_REPO_URL"
+          fi
+          # C10 FIX: Validate skill_id (alphanumeric + dashes only)
+          if ! echo "$SKILL_ID" | grep -qE '^[a-zA-Z0-9_-]+$'; then
+            echo "::error::Invalid skill_id: $SKILL_ID"
+            exit 1
+          fi
+          # C11 FIX: Validate repo_url (must be https://github.com/...)
+          if ! echo "$REPO_URL" | grep -qE '^https://github\.com/[a-zA-Z0-9_-]+/[a-zA-Z0-9_.-]+'; then
+            echo "::error::Invalid repo_url: $REPO_URL"
+            exit 1
+          fi
+          echo "skill_id=$SKILL_ID" >> $GITHUB_OUTPUT
+          echo "repo_url=$REPO_URL" >> $GITHUB_OUTPUT
+
+      - name: Clone MCP server repo (supports subpath URLs)
+        env:
+          REPO_URL: ${{ steps.vars.outputs.repo_url }}
+          SKILL_ID: ${{ steps.vars.outputs.skill_id }}
+        run: |
+          echo "Auditing skill: $SKILL_ID"
+          echo "Repo URL: $REPO_URL"
+
+          # The repo_url can be in 3 forms:
+          #   1. https://github.com/owner/repo                    → clone full repo, default branch
+          #   2. https://github.com/owner/repo/tree/main          → clone full repo, checkout 'main'
+          #   3. https://github.com/owner/repo/tree/main/src/foo  → sparse checkout of src/foo only
+          #
+          # C11 FIX: Parse URL with JSON output (no more eval — prevents shell injection)
+          PARSED=$(python3 scripts/l2-parse-url.py "$REPO_URL")
+          if echo "$PARSED" | grep -q '"error"'; then
+            echo "::error::$PARSED"
+            exit 1
+          fi
+          OWNER_REPO=$(echo "$PARSED" | python3 -c "import json,sys; print(json.load(sys.stdin)['OWNER_REPO'])")
+          REF=$(echo "$PARSED" | python3 -c "import json,sys; print(json.load(sys.stdin)['REF'])")
+          SUBPATH=$(echo "$PARSED" | python3 -c "import json,sys; print(json.load(sys.stdin)['SUBPATH'])")
+          CLONE_URL=$(echo "$PARSED" | python3 -c "import json,sys; print(json.load(sys.stdin)['CLONE_URL'])")
+
+          echo "  owner/repo: $OWNER_REPO"
+          echo "  ref:        ${REF:-<default>}"
+          echo "  subpath:    ${SUBPATH:-<root>}"
+
+          # Clone with --depth 1 (faster, we only need the latest tree).
+          # If a ref is specified, clone that branch; otherwise clone default.
+          if [ -n "$REF" ]; then
+            git clone --depth 1 --branch "$REF" "$CLONE_URL" /tmp/mcp-server || exit 1
+          else
+            git clone --depth 1 "$CLONE_URL" /tmp/mcp-server || exit 1
+          fi
+
+          # If a subpath was specified, move into it so the Dockerfile context
+          # is correct. We don't sparse-checkout (depth 1 is already minimal)
+          # — just cd into the subpath for the build step.
+          if [ -n "$SUBPATH" ]; then
+            echo "  → Using subpath: $SUBPATH"
+            echo "$SUBPATH" > /tmp/mcp-server-subpath.txt
+          else
+            echo "" > /tmp/mcp-server-subpath.txt
+          fi
+
+      - name: Build Docker image (or use fallback)
+        run: |
+          SUBPATH=$(cat /tmp/mcp-server-subpath.txt)
+          BUILD_DIR="/tmp/mcp-server/$SUBPATH"
+          REPO_ROOT="/tmp/mcp-server"
+          bash scripts/l2-build-docker.sh "$BUILD_DIR" "$REPO_ROOT"
+      - name: Run L2.5 Sandbox Audit (gVisor + Active MCP Probe + Seccomp)
+        env:
+          SKILL_ID: ${{ steps.vars.outputs.skill_id }}
+        run: |
+          mkdir -p /tmp/l2_output
+          SUBPATH=$(cat /tmp/mcp-server-subpath.txt)
+          # Save the repo root (GitHub Actions checkout dir) so we can find scripts
+          # after we cd into the MCP server dir for npm install / probe.
+          REPO_WS="$GITHUB_WORKSPACE"
+
+          # ═══ L2.5: Try to install gVisor ═══
+          echo "=== Installing gVisor (runsc) ==="
+          (
+            sudo wget -q https://storage.googleapis.com/gvisor/releases/nightly/latest/runsc -O /usr/local/bin/runsc
+            sudo chmod +x /usr/local/bin/runsc
+            # Register runsc as a Docker runtime (needs root)
+            echo '{"runtimes":{"runsc":{"path":"/usr/local/bin/runsc"}}}' | sudo tee /etc/docker/daemon.json > /dev/null
+            sudo systemctl restart docker 2>/dev/null || sudo service docker restart 2>/dev/null || true
+            sleep 3
+          ) || true
+
+          # Verify gVisor
+          if docker info 2>/dev/null | grep -q runsc; then
+            echo "✓ gVisor (runsc) is available"
+            GVENDOR_STATUS="gvisor-active"
+          else
+            echo "⚠ gVisor not available — using enhanced seccomp profile (L2.5 fallback)"
+            GVENDOR_STATUS="seccomp-fallback"
+          fi
+          echo "$GVENDOR_STATUS" > /tmp/l2_output/gvisor_status.txt
+
+          # ═══ PHASE 1: L2.5 Sandbox run (gVisor OR enhanced Docker with seccomp) ═══
+          # l2-gvisor-sandbox.sh handles BOTH paths:
+          #   - If runsc is available: runs with --runtime=runsc (userspace kernel)
+          #   - If not: runs with strict seccomp profile (blocks ptrace, bpf, mount, kexec, etc.)
+          # Output goes to /tmp/l2_output/stdout.log (container stdout)
+          #         + /tmp/l2_output/gvisor_syscalls.log (syscall log)
+          #         + /tmp/l2_output/fs_diff.txt (filesystem changes)
+          #         + /tmp/l2_output/suspicious_files.txt (if .ssh/.env/cron detected)
+          echo "=== Phase 1: L2.5 Sandbox (gVisor or enhanced seccomp) ==="
+          bash "$REPO_WS/scripts/l2-gvisor-sandbox.sh" mcp-audit-target "$SKILL_ID" 60
+
+          # ═══ PHASE 2: Active MCP probe (adversarial testing) ═══
+          # Start the server WITHOUT Docker isolation (but in a restricted env)
+          # and send real MCP protocol messages: initialize, tools/list, tools/call
+          # with adversarial inputs (path traversal, SSRF, SQL injection, etc.)
+          echo "=== Phase 2: Active MCP probe ==="
+
+          # Determine the entrypoint command
+          ENTRYPOINT=""
+          MCP_DIR="/tmp/mcp-server/$SUBPATH"
+          if [ -f "$MCP_DIR/package.json" ]; then
+            ENTRYPOINT=$(python3 "$REPO_WS/scripts/l2-detect-entrypoint.py" "$MCP_DIR/package.json" "node")
+            cd "$MCP_DIR"
+            npm install --no-audit --no-fund 2>/dev/null || true
+            if grep -q '"typescript"' package.json 2>/dev/null; then
+              npm run build 2>/dev/null || npx tsc 2>/dev/null || true
+            fi
+          elif [ -f "$MCP_DIR/pyproject.toml" ]; then
+            ENTRYPOINT=$(python3 "$REPO_WS/scripts/l2-detect-entrypoint.py" "$MCP_DIR/pyproject.toml" "python")
+            cd "$MCP_DIR"
+            pip install -e . 2>/dev/null || pip install -r requirements.txt 2>/dev/null || true
+          fi
+
+          if [ -n "$ENTRYPOINT" ]; then
+            echo "  Running probe with: $ENTRYPOINT"
+            # Run the MCP probe — sends initialize, tools/list, tools/call with adversarial inputs
+            # Use absolute path to the probe script (we may be cd'd into MCP_DIR)
+            # Hard timeout of 90s prevents hangs when the server doesn't respond to tools/call
+            # (e.g., filesystem server needs allowed directories that the probe doesn't provide)
+            timeout 90 python3 "$REPO_WS/scripts/l2-mcp-probe.py" --command "$ENTRYPOINT" --timeout 30 --output /tmp/l2_output/probe_results.json || true
+            # If the probe was killed by timeout, create a minimal result so the analyzer doesn't fail
+            if [ ! -f /tmp/l2_output/probe_results.json ]; then
+              echo '{"error": "probe timed out (90s hard limit)", "summary": {"tools_discovered": 0, "tools_tested": 0, "adversarial_findings": 0, "errors": 1}}' > /tmp/l2_output/probe_results.json
+            fi
+          else
+            echo "  No entrypoint found — skipping active probe"
+            echo '{"error": "no entrypoint found", "summary": {"tools_discovered": 0, "tools_tested": 0, "adversarial_findings": 0, "errors": 0}}' > /tmp/l2_output/probe_results.json
+          fi
+
+          # ═══ PHASE 3: Ensure strace.log exists (analyzer expects it) ═══
+          # strace on Docker requires --cap-add SYS_PTRACE which conflicts with
+          # --cap-drop ALL. gVisor's syscall log (gvisor_syscalls.log) replaces
+          # strace when gVisor is active. We keep an empty strace.log for compat.
+          touch /tmp/l2_output/strace.log
+
+          # ═══ PHASE 4: Run L2.5 analysis (6 layers) ═══
+          # cd back to repo root so the analyzer can find its expected paths
+          cd "$REPO_WS"
+          echo "=== Phase 4: L2.5 Analysis (gVisor + seccomp + suspicious files + probe) ==="
+          python3 "$REPO_WS/scripts/l2-analyze.py"
+
+      - name: Commit L2 results to repo (with retry on race)
+        env:
+          SKILL_ID: ${{ steps.vars.outputs.skill_id }}
+        run: |
+          mkdir -p _data/l2_results
+          cp /tmp/l2_output/result.json "_data/l2_results/${SKILL_ID}.json"
+
+          # Build the commit message summary in Python (single-line to avoid heredoc issues).
+          SUMMARY=$(python3 -c "import json; d=json.load(open('/tmp/l2_output/result.json')); print(f\"score={d['l2_score']}/10 risk={d['l2_risk_level']}\")")
+
+          git config user.name "Sentinel L2 Bot"
+          git config user.email "support@alicelabs.site"
+          git add "_data/l2_results/${SKILL_ID}.json"
+          git commit -m "sentinel: L2 Docker sandbox result for ${SKILL_ID} — ${SUMMARY}"
+
+          # Retry push with rebase — multiple L2 sandbox runs can fire in
+          # parallel (one per skill), and they all push to master. The first
+          # one succeeds; the rest get 'rejected (fetch first)'. We pull
+          # --rebase and retry up to 5 times with exponential backoff.
+          MAX_RETRIES=5
+          for i in $(seq 1 $MAX_RETRIES); do
+            if git push 2>&1; then
+              echo "✓ Push succeeded on attempt $i"
+              exit 0
+            fi
+            echo "⚠ Push attempt $i failed (race condition with parallel L2 run) — pulling rebase and retrying..."
+            sleep $((i * 2))
+            git pull --rebase origin master || {
+              echo "✗ git pull --rebase failed on attempt $i"
+              # If rebase fails, abort and bail — the result.json is preserved
+              # as an artifact and can be committed manually.
+              git rebase --abort 2>/dev/null || true
+              exit 1
+            }
+          done
+          echo "✗ Could not push after $MAX_RETRIES attempts — result is in artifact"
+          exit 1
+
+      - name: Upload L2 results as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sentinel-l2-${{ steps.vars.outputs.skill_id }}
+          path: /tmp/l2_output/

@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5729383",
+  "skill_id": "mn-gen-10841",
+  "skill_name": "Pykrx-mcp-dev",
+  "issued_at": "2026-07-06T05:28:49.383Z",
+  "expires_at": "2026-07-13T05:28:49.383Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "bfd947a03b7736d6130ea6c232e5796c44cc6474041bc5786294bea0e79e175c",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-10841"
+}

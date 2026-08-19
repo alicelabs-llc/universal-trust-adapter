@@ -1,0 +1,116 @@
+MarketNow License — AliceLabs LLC Proprietary
+==============================================
+
+Copyright (c) 2026 AliceLabs LLC. All Rights Reserved.
+
+ALL CODE IN THIS REPOSITORY IS PROPRIETARY — PROPERTY OF ALICELABS LLC.
+No part of this codebase may be copied, redistributed, modified, or
+commercialized without express written permission from AliceLabs LLC.
+
+╔══════════════════════════════════════════════════════════════════╗
+║  EVERYTHING IS PROPRIETARY                                        ║
+╚══════════════════════════════════════════════════════════════════╝
+
+This includes, without limitation:
+
+  - The marketplace UI, API endpoints, and infrastructure code
+  - The Sentinel security audit engine (L1.5, L1.6, L2)
+  - The certificate signing and verification system
+  - The auto-discovery and synthetic replacement system
+  - The Docker sandbox configuration and analysis scripts
+  - The 3-layer audit pipeline design (L1.5 → L1.6 → L2)
+  - The certificate format (MN-SC-YYYY-XXXXXXX)
+  - The behavioral analysis patterns
+  - The execution_status taxonomy (ran, ran_idle, failed_to_start)
+
+╔══════════════════════════════════════════════════════════════════╗
+║  WHAT YOU CAN DO                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
+
+  ✅ READ the code for educational or evaluation purposes
+  ✅ VERIFY Sentinel certificates via the public API
+  ✅ DISPLAY the "Sentinel Certified" badge if your skill is certified
+  ✅ REFERENCE Sentinel/MarketNow in press, blogs, or reviews (with attribution)
+  ✅ CONTRIBUTE via pull requests (subject to CLA — copyright assigned to AliceLabs)
+
+╔══════════════════════════════════════════════════════════════════╗
+║  WHAT YOU CANNOT DO                                               ║
+╚══════════════════════════════════════════════════════════════════╝
+
+  ❌ COPY any code from this repository
+  ❌ REDISTRIBUTE any code, in whole or in part
+  ❌ BUILD a competing product using any part of this codebase
+  ❌ COMMERCIALIZE any part of this codebase without written permission
+  ❌ REBRAND or white-label any component
+  ❌ REMOVE copyright notices, trademark notices, or license headers
+  ❌ USE "Sentinel", "MarketNow", or related marks without permission
+  ❌ FORGE or falsify Sentinel certificates
+  ❌ REVERSE ENGINEER the certificate signing algorithm
+
+╔══════════════════════════════════════════════════════════════════╗
+║  COMMERCIAL LICENSING                                             ║
+╚══════════════════════════════════════════════════════════════════╝
+
+If you want to:
+  - Use MarketNow as a hosted service for your organization
+  - Deploy Sentinel internally for your own MCP servers
+  - Integrate MarketNow into a commercial product
+  - Build a white-label marketplace using our technology
+
+Contact:
+  - Legal: legal@alicelabs.site
+  - Support: support@alicelabs.site
+  - General: info@alicelabs.site
+
+Commercial licenses are granted on a case-by-case basis with
+written agreement from AliceLabs LLC.
+
+╔══════════════════════════════════════════════════════════════════╗
+║  BADGE ASSETS — CC-BY 4.0 (display only)                         ║
+╚══════════════════════════════════════════════════════════════════╝
+
+The "Sentinel Certified" SVG badges are licensed under Creative Commons
+Attribution 4.0 International (CC-BY 4.0) for DISPLAY PURPOSES ONLY.
+
+Skill authors MAY display the badges in their READMEs when their skill
+has been certified by MarketNow. Attribution must include a link to
+https://marketnow.site/verify.
+
+The badge SVGs may NOT be modified, rebranded, or used for uncertified
+products.
+
+╔══════════════════════════════════════════════════════════════════╗
+║  TRADEMARKS                                                       ║
+╚══════════════════════════════════════════════════════════════════╝
+
+"Sentinel", "Sentinel Certified", "Sentinel L1.5", "Sentinel L1.6",
+"Sentinel L2", "MN-SC", "MarketNow", "Trust Layer for Agent Commerce",
+and the Sentinel shield logo are trademarks of AliceLabs LLC.
+
+See TRADEMARK_NOTICE for full details.
+
+╔══════════════════════════════════════════════════════════════════╗
+║  PATENT                                                           ║
+╚══════════════════════════════════════════════════════════════════╝
+
+Patent pending on the 3-layer audit pipeline design (L1.5 → L1.6 → L2)
+and the certificate signing/verification system.
+
+╔══════════════════════════════════════════════════════════════════╗
+║  ENFORCEMENT                                                      ║
+╚══════════════════════════════════════════════════════════════════╝
+
+AliceLabs LLC will actively enforce its intellectual property rights
+against any party that copies, redistributes, or builds competing
+products using this codebase.
+
+Report violations: legal@alicelabs.site
+
+=====================================================================
+
+This license is governed by the laws of the State of Wyoming, USA.
+
+AliceLabs LLC
+Wyoming, USA
+https://marketnow.site
+legal@alicelabs.site

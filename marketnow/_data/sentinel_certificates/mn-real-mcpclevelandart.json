@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0667754",
+  "skill_id": "mn-real-mcpclevelandart",
+  "skill_name": "mcp-clevelandart",
+  "issued_at": "2026-07-26T04:37:47.754Z",
+  "expires_at": "2026-08-02T04:37:47.754Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "938daa019f9e8ac454ac631211cd7393edc8acbace0eaf82c33e5f12a8c0a936",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-mcpclevelandart"
+}

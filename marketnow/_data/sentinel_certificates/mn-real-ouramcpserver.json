@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-0989291",
+  "skill_id": "mn-real-ouramcpserver",
+  "skill_name": "oura-mcp-server",
+  "issued_at": "2026-07-12T04:36:29.291Z",
+  "expires_at": "2026-07-19T04:36:29.291Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "9b56f0aaafbcaeb65ec8d4534e5e35fb1b33c838b9c2f4f9b1e3845dc6604410",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-ouramcpserver"
+}

@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-1022951",
+  "skill_id": "mn-real-sanjarxclaudegram",
+  "skill_name": "claudegram",
+  "issued_at": "2026-07-12T04:37:02.951Z",
+  "expires_at": "2026-07-19T04:37:02.951Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "81986d4271f6593d22b092016ff1e9f5520b4a2f4521c610340fc1138fc8491f",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-sanjarxclaudegram"
+}

@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5372377",
+  "skill_id": "mn-gen-02302",
+  "skill_name": "Claude-tmux",
+  "issued_at": "2026-07-06T05:22:52.377Z",
+  "expires_at": "2026-07-13T05:22:52.377Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "03da12c2400086b3d1698b43068c9d40e4f8f9d9c5a7608ed29ebd27a8381a6a",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-02302"
+}

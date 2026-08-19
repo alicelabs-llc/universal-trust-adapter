@@ -1,0 +1,58 @@
+{
+  "submission_id": "sub_o3s1wy8z7chh",
+  "skill_id": "mn-sub-58577",
+  "status": "promoted",
+  "submitted_at": "2026-07-27T03:59:41.045Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_outreach_v4",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "96365e5c70a99ff4"
+  },
+  "repo": {
+    "url": "https://github.com/apappascs/mcp-servers-hub",
+    "full_name": "apappascs/mcp-servers-hub",
+    "owner": "apappascs",
+    "name": "mcp-servers-hub",
+    "description": "Discover the most comprehensive and up-to-date collection of MCP servers in the market. This repository serves as a centralized hub, offering an extensive catalog of open-source and proprietary MCP servers, complete with features, documentation links, and contributors.",
+    "stars": 327,
+    "language": null,
+    "license": null,
+    "pushed_at": "2026-07-26T14:57:30Z",
+    "archived": false,
+    "topics": []
+  },
+  "skill": {
+    "id": "mn-sub-58577",
+    "name": "mcp-servers-hub",
+    "slug": "mcp-servers-hub-8577",
+    "description": "Discover the most comprehensive and up-to-date collection of MCP servers in the market. This repository serves as a centralized hub, offering an extensive catalog of open-source and proprietary MCP servers, complete with features, documentation links, and contributors.",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/apappascs/mcp-servers-hub",
+      "submitted_at": "2026-07-27T03:59:41.045Z"
+    },
+    "install": "git clone https://github.com/apappascs/mcp-servers-hub",
+    "author": "apappascs",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 9,
+    "l15_findings": [
+      {
+        "severity": "medium",
+        "code": "no_license"
+      }
+    ],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-27T04:59:41.045Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-1515757",
+  "promoted_at": "2026-07-28T23:31:56.785Z"
+}

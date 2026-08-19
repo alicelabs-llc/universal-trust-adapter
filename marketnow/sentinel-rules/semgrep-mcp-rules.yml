@@ -1,0 +1,142 @@
+# MarketNow — MCP-specific Semgrep Rules
+# ========================================
+# 18 rules for MCP server security audit.
+# Used by Sentinel L1.6 (GitHub Actions batch) and available for manual runs.
+
+rules:
+  # Prompt Injection (6 rules)
+  - id: MCP-PI-001
+    message: "Prompt injection: 'ignore previous instructions' detected"
+    severity: ERROR
+    languages: [javascript, typescript, python]
+    patterns:
+      - pattern-regex: "ignore\\s+(?:all\\s+)?(?:previous|prior)\\s+instructions"
+
+  - id: MCP-PI-002
+    message: "Prompt injection: 'disregard the above' detected"
+    severity: ERROR
+    languages: [javascript, typescript, python]
+    patterns:
+      - pattern-regex: "disregard\\s+(?:the\\s+)?(?:above|previous)"
+
+  - id: MCP-PI-003
+    message: "Prompt injection: 'you are now' role override detected"
+    severity: WARNING
+    languages: [javascript, typescript, python]
+    patterns:
+      - pattern-regex: "you\\s+are\\s+now\\s+(?:a|an)\\s+(?:different|new|admin|root)"
+
+  - id: MCP-PI-004
+    message: "Prompt injection: 'forget everything' detected"
+    severity: ERROR
+    languages: [javascript, typescript, python]
+    patterns:
+      - pattern-regex: "forget\\s+(?:everything|all|your\\s+instructions)"
+
+  - id: MCP-PI-005
+    message: "Prompt injection: exfiltration instructions detected"
+    severity: ERROR
+    languages: [javascript, typescript, python]
+    patterns:
+      - pattern-regex: "(?:exfiltrate|steal|send).*(?:to|via).*(?:email|webhook|discord|telegram|api)"
+
+  - id: MCP-PI-006
+    message: "Prompt injection: system override command detected"
+    severity: WARNING
+    languages: [javascript, typescript, python]
+    patterns:
+      - pattern-regex: "(?:/system|/admin|/debug|/exec|/eval|/shell)"
+
+  # Command Injection (4 rules)
+  - id: MCP-CI-001
+    message: "Command injection: exec() with user input"
+    severity: ERROR
+    languages: [javascript, typescript]
+    patterns:
+      - pattern: exec($REQ)
+      - pattern: execSync($REQ)
+
+  - id: MCP-CI-002
+    message: "Command injection: os.system with user input"
+    severity: ERROR
+    languages: [python]
+    patterns:
+      - pattern: os.system($REQ)
+      - pattern: subprocess.call($REQ, shell=True)
+
+  - id: MCP-CI-003
+    message: "Dangerous: eval() with dynamic input"
+    severity: ERROR
+    languages: [javascript, typescript]
+    patterns:
+      - pattern: eval($REQ)
+
+  - id: MCP-CI-004
+    message: "Dangerous: child_process with string concatenation"
+    severity: WARNING
+    languages: [javascript, typescript]
+    patterns:
+      - pattern: child_process.exec("..." + $X)
+
+  # Secret Leakage (2 rules)
+  - id: MCP-SL-001
+    message: "Hardcoded API key detected"
+    severity: ERROR
+    languages: [javascript, typescript, python]
+    patterns:
+      - pattern-regex: "(?:api[_-]?key|api[_-]?secret)\\s*[:=]\\s*['\"][a-zA-Z0-9]{20,}['\"]"
+
+  - id: MCP-SL-002
+    message: "Wallet mnemonic detected"
+    severity: ERROR
+    languages: [javascript, typescript, python]
+    patterns:
+      - pattern-regex: "(?:mnemonic|seed[_-]?phrase|private[_-]?key)\\s*[:=]\\s*['\"][a-z\\s]{20,}['\"]"
+
+  # SSRF (2 rules)
+  - id: MCP-SS-001
+    message: "SSRF: fetch with user-controlled URL"
+    severity: WARNING
+    languages: [javascript, typescript]
+    patterns:
+      - pattern: fetch($REQ.URL)
+      - pattern: axios.get($REQ.URL)
+
+  - id: MCP-SS-002
+    message: "SSRF: internal IP access detected"
+    severity: WARNING
+    languages: [javascript, typescript, python]
+    patterns:
+      - pattern-regex: "(?:169\\.254\\.169\\.254|localhost|127\\.0\\.0\\.1)"
+
+  # Path Traversal (2 rules)
+  - id: MCP-PT-001
+    message: "Path traversal: readFile with user input"
+    severity: WARNING
+    languages: [javascript, typescript]
+    patterns:
+      - pattern: fs.readFile($REQ.path)
+
+  - id: MCP-PT-002
+    message: "Path traversal: directory traversal pattern detected"
+    severity: ERROR
+    languages: [javascript, typescript, python]
+    patterns:
+      - pattern-regex: "\\.\\./(?:\\.\\.\\/)*(?:etc|var|root|home|proc)"
+
+  # Tool Spoofing (1 rule)
+  - id: MCP-TS-001
+    message: "Tool name spoofing: impersonating system tool"
+    severity: WARNING
+    languages: [javascript, typescript]
+    patterns:
+      - pattern-regex: "(?:name|toolName)\\s*[:=]\\s*['\"](?:read_file|write_file|system|exec|shell|admin)['\"]"
+
+  # Missing inputSchema (1 rule)
+  - id: MCP-IS-001
+    message: "Missing inputSchema on tool registration"
+    severity: INFO
+    languages: [javascript, typescript]
+    patterns:
+      - pattern: registerTool($NAME, $DESC)
+        pattern-not: registerTool($NAME, $DESC, ..., inputSchema: ...)

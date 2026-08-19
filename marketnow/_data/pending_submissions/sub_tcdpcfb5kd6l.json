@@ -1,0 +1,66 @@
+{
+  "submission_id": "sub_tcdpcfb5kd6l",
+  "skill_id": "mn-sub-26106",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T06:05:07.389Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "96365e5c70a99ff4"
+  },
+  "repo": {
+    "url": "https://github.com/koala73/worldmonitor",
+    "full_name": "koala73/worldmonitor",
+    "owner": "koala73",
+    "name": "worldmonitor",
+    "description": "Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface",
+    "stars": 76078,
+    "language": "TypeScript",
+    "license": "NOASSERTION",
+    "pushed_at": "2026-07-29T05:24:18Z",
+    "archived": false,
+    "topics": [
+      "agent",
+      "ai",
+      "dashboard",
+      "geopolitics",
+      "mcp",
+      "mcp-server",
+      "monitoring",
+      "news",
+      "opensource",
+      "osint",
+      "palantir",
+      "situation"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-26106",
+    "name": "worldmonitor",
+    "slug": "worldmonitor-6106",
+    "description": "Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/koala73/worldmonitor",
+      "submitted_at": "2026-07-29T06:05:07.389Z"
+    },
+    "install": "npx -y world-monitor",
+    "author": "koala73",
+    "version": "2.10.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T07:05:07.389Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-4015637",
+  "promoted_at": "2026-07-30T15:06:56.640Z"
+}

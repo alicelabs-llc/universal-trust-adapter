@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5732988",
+  "skill_id": "mn-gen-10968",
+  "skill_name": "Qwen3-mcp-server",
+  "issued_at": "2026-07-06T05:28:52.988Z",
+  "expires_at": "2026-07-13T05:28:52.988Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "ade2d714969ff4b003e81f6bc346df09322512877f21c1370feddf51a97ee2a5",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-10968"
+}

@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0053810",
+  "skill_id": "mn-real-vectaramcp",
+  "skill_name": "vectara-mcp",
+  "issued_at": "2026-07-26T04:27:33.810Z",
+  "expires_at": "2026-08-02T04:27:33.810Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "234581d4576a91f7480d19aec422994f25465dee7d1636ce2769be57b78559bf",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-vectaramcp"
+}

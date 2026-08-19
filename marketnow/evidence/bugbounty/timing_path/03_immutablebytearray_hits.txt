@@ -1,0 +1,2 @@
+﻿C:\Users\Usuario\.openclaw\workspace\crypto-primitives\src\main\java\ch\post\it\evoting\cryptoprimitives\collection\ImmutableByteArray.java:78: public boolean equals(final Object o) {
+C:\Users\Usuario\.openclaw\workspace\crypto-primitives\src\main\java\ch\post\it\evoting\cryptoprimitives\collection\ImmutableByteArray.java:86: return Arrays.equals(elements, that.elements);

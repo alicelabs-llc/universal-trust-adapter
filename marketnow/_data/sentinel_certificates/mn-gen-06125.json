@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5532465",
+  "skill_id": "mn-gen-06125",
+  "skill_name": "Matrix-booking-mcp-server",
+  "issued_at": "2026-07-06T05:25:32.465Z",
+  "expires_at": "2026-07-13T05:25:32.465Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "9335e95cbd57ec8d17e2aed27c5de4ba81ef782f8e6d60c6c241ed7b7b48c69f",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-06125"
+}

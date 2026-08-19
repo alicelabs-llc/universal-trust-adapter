@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0150854",
+  "skill_id": "mn-real-antigravitylinkexten",
+  "skill_name": "antigravity-link-extension",
+  "issued_at": "2026-07-26T04:29:10.854Z",
+  "expires_at": "2026-08-02T04:29:10.854Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 3,
+  "max_score": 10,
+  "risk_level": "critical",
+  "risk_breakdown": {
+    "l15_l16_l17": "critical",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "critical"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 1,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "0edef9428897e61e79ffd8f9c572477fde2098828e903cba59325eac012882f5",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-antigravitylinkexten"
+}

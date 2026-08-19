@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9980773",
+  "skill_id": "mn-real-bridgemetricsmcp",
+  "skill_name": "bridge-metrics-mcp",
+  "issued_at": "2026-07-26T04:26:20.773Z",
+  "expires_at": "2026-08-02T04:26:20.773Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "17ae28f194ffc946c85b858e7f20f14d2e36f210a56e49db2b1eaf9bb84059e6",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-bridgemetricsmcp"
+}

@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5521414",
+  "skill_id": "mn-gen-05858",
+  "skill_name": "Lobehub/lobehub",
+  "issued_at": "2026-07-06T05:25:21.414Z",
+  "expires_at": "2026-07-13T05:25:21.414Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "309c5c8c7689de80bd435d147fd5aa186d1d2a3157eb519bbed01fb14b164ef3",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-05858"
+}

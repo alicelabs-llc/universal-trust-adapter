@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-mcpservertemplates",
+  "timestamp": "2026-07-06T02:41:11Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "failed_to_start",
+  "failure_reason": "Python crashed on startup (ImportError/ModuleNotFoundError/Traceback). The MCP server never actually ran.",
+  "behavioral_analysis": {
+    "network_attempts": 1,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 411,
+  "stdout_sample": "Traceback (most recent call last):   File \"/app/venv/bin/mcpt\", line 5, in <module>     from mcp_template import main   File \"/app/mcp_template/__init__.py\", line 25, in <module>     from mcp_template.backends.docker import DockerDeploymentService   File \"/app/mcp_template/backends/__init__.py\", line 5, in <module>     from cachetools import TTLCache, cached ModuleNotFoundError: No module named 'cachetools' ",
+  "l2_score": 0,
+  "l2_risk_level": "unknown"
+}

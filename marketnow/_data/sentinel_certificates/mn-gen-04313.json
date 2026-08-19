@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-9725297",
+  "skill_id": "mn-gen-04313",
+  "skill_name": "gcp-mcp",
+  "issued_at": "2026-07-26T04:22:05.297Z",
+  "expires_at": "2026-08-02T04:22:05.297Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "9447e1c9f974f08a04042ae337b4add34c699d08f5b2d662a8d9f2b093341d9d",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-04313"
+}

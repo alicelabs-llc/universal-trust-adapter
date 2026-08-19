@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5712166",
+  "skill_id": "mn-gen-10478",
+  "skill_name": "Wintermuted/playdate-mcp",
+  "issued_at": "2026-07-06T05:28:32.166Z",
+  "expires_at": "2026-07-13T05:28:32.166Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "aec584b5c149252e3c50502d47b39d81da3a2eb3a649e085ac5ddd099b139533",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-10478"
+}

@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8162194",
+  "skill_id": "mn-prompt-91d43dc7",
+  "skill_name": "Especialista Payments + Payment Gateways",
+  "issued_at": "2026-07-15T01:16:02.194Z",
+  "expires_at": "2026-07-22T01:16:02.194Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "5b1d9bff1d85cd8dc89ecd3aa10555f6033ebae5042d7df5c0d98e44840ce8cf",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-91d43dc7"
+}

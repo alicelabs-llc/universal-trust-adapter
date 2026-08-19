@@ -1,0 +1,96 @@
+name: Submit URLs to Google Indexing API
+
+permissions:
+  contents: read
+  pull-requests: write
+
+on:
+  push:
+    branches: [master]
+  schedule:
+    # Run weekly to re-submit URLs
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install cryptography
+      - name: Submit to Google Indexing API
+        env:
+          GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+        run: |
+          # Fail-loud if the secret is not set — do NOT silently crash on JSON parse
+          if [ -z "$GCP_SERVICE_ACCOUNT" ]; then
+            echo "⚠ GCP_SERVICE_ACCOUNT secret is not set."
+            echo "  To enable Google Indexing API pings:"
+            echo "  1. Create a GCP project at https://console.cloud.google.com"
+            echo "  2. Enable the Google Indexing API"
+            echo "  3. Create a Service Account with 'Indexing API Writer' role"
+            echo "  4. Download the JSON key"
+            echo "  5. Add it as a GitHub secret named GCP_SERVICE_ACCOUNT"
+            echo "  6. Verify ownership of marketnow.site in Google Search Console"
+            echo ""
+            echo "  Until then, IndexNow (Bing/Yandex) and Google sitemap ping cover indexing."
+            echo "  Skipping Google Indexing API submission."
+            exit 0
+          fi
+          echo "$GCP_SERVICE_ACCOUNT" > /tmp/service-account.json
+          python3 << 'PYEOF'
+          import json, time, urllib.request, urllib.parse, base64
+          from pathlib import Path
+          from cryptography.hazmat.primitives import hashes, serialization
+          from cryptography.hazmat.primitives.asymmetric import padding
+          
+          sa = json.loads(Path('/tmp/service-account.json').read_text())
+          header = {"alg": "RS256", "typ": "JWT", "kid": sa["private_key_id"]}
+          now = int(time.time())
+          claims = {"iss": sa["client_email"], "scope": "https://www.googleapis.com/auth/indexing", "aud": sa["token_uri"], "iat": now, "exp": now + 3600}
+          
+          def b64url(data): return base64.urlsafe_b64encode(data).rstrip(b'=').decode()
+          header_b64 = b64url(json.dumps(header).encode())
+          claims_b64 = b64url(json.dumps(claims).encode())
+          signing_input = f"{header_b64}.{claims_b64}".encode()
+          private_key = serialization.load_pem_private_key(sa["private_key"].encode(), password=None)
+          signature = private_key.sign(signing_input, padding.PKCS1v15(), hashes.SHA256())
+          jwt = f"{header_b64}.{claims_b64}.{b64url(signature)}"
+          
+          data = urllib.parse.urlencode({"grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer", "assertion": jwt}).encode()
+          req = urllib.request.Request(sa["token_uri"], data=data, method="POST")
+          req.add_header("Content-Type", "application/x-www-form-urlencoded")
+          resp = urllib.request.urlopen(req)
+          token = json.loads(resp.read())["access_token"]
+          
+          URLS = [f"https://marketnow.site{p}" for p in [
+              "/", "/registry", "/mandates", "/trust", "/standards",
+              "/about", "/catalog", "/listings", "/pricing", "/embed",
+              "/policies", "/security", "/handshake", "/submit", "/dashboard", "/blog",
+              "/api/agent.json", "/api/skills.json", "/api/categories.json",
+              "/api/manifest.json", "/api/free-skills.json", "/api/bundles.json",
+              "/api/policies.json", "/api/trust.json", "/api/about.json",
+              "/api/catalog.json", "/api/standards.json", "/api/listings.json",
+              "/api/mandates-info.json", "/api/openapi.yaml",
+              "/landing/ai-ml.html", "/landing/developer-tools.html",
+              "/landing/data.html", "/landing/web-api.html",
+              "/landing/productivity.html", "/landing/finance.html",
+              "/landing/communication.html", "/landing/security.html",
+          ]]
+          
+          success = 0
+          for url in URLS:
+              data = json.dumps({"url": url, "type": "URL_UPDATED"}).encode()
+              req = urllib.request.Request("https://indexing.googleapis.com/v3/urlNotifications:publish", data=data, method="POST")
+              req.add_header("Authorization", f"Bearer {token}")
+              req.add_header("Content-Type", "application/json")
+              try:
+                  urllib.request.urlopen(req)
+                  success += 1
+              except: pass
+          
+          print(f"Submitted {success}/{len(URLS)} URLs to Google Indexing API")
+          PYEOF

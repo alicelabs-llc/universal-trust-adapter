@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-0570172",
+  "skill_id": "mn-real-nexuscore",
+  "skill_name": "nexus-core",
+  "issued_at": "2026-07-26T04:36:10.172Z",
+  "expires_at": "2026-08-02T04:36:10.172Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "4b76b01e0570c686cf733956498eb887e75fd48a9aed1913dc50ea8b05f09757",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-real-nexuscore"
+}

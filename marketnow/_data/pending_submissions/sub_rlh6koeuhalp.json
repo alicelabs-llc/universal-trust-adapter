@@ -1,0 +1,56 @@
+{
+  "submission_id": "sub_rlh6koeuhalp",
+  "skill_id": "mn-sub-21179",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T14:26:37.165Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch2",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "96365e5c70a99ff4"
+  },
+  "repo": {
+    "url": "https://github.com/punkpeye/awesome-mcp-devtools",
+    "full_name": "punkpeye/awesome-mcp-devtools",
+    "owner": "punkpeye",
+    "name": "awesome-mcp-devtools",
+    "description": "A curated list of developer tools, SDKs, libraries, and testing utilities for Model Context Protocol (MCP) server development.",
+    "stars": 473,
+    "language": null,
+    "license": "MIT",
+    "pushed_at": "2026-04-14T00:30:57Z",
+    "archived": false,
+    "topics": [
+      "devtools",
+      "mcp"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-21179",
+    "name": "awesome-mcp-devtools",
+    "slug": "awesome-mcp-devtools-1179",
+    "description": "A curated list of developer tools, SDKs, libraries, and testing utilities for Model Context Protocol (MCP) server development.",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/punkpeye/awesome-mcp-devtools",
+      "submitted_at": "2026-07-29T14:26:37.165Z"
+    },
+    "install": "git clone https://github.com/punkpeye/awesome-mcp-devtools",
+    "author": "punkpeye",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T15:26:37.165Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-4012643",
+  "promoted_at": "2026-07-30T15:06:53.631Z"
+}

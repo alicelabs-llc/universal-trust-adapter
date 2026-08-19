@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6182997",
+  "skill_id": "mn-file-037",
+  "skill_name": "Document Classifier",
+  "issued_at": "2026-07-06T05:36:22.997Z",
+  "expires_at": "2026-07-13T05:36:22.997Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "7c51b6df2206d517fd9b88d12f0adde9930107437c4e6fec5e0229b0b0d3075f",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-file-037"
+}

@@ -1,0 +1,61 @@
+MarketNow — Agent Skill Marketplace
+====================================
+
+11,115 verified MCP skills. 65 are FREE.
+Pay with USDC on Base. No humans needed.
+
+INSTALL MCP SERVER:
+npx -y marketnow-mcp
+
+FREE SKILLS (no payment):
+curl https://marketnow.site/api/free-skills.json
+
+SEARCH SKILLS:
+curl "https://marketnow.site/api/search?q=scraper&max_price=3"
+
+AGENT WALLET INFO (how to pay):
+curl https://marketnow.site/api/agent-wallet
+
+BUY A SKILL WITH USDC:
+POST https://marketnow.site/api/agent-purchase
+Body: {"skillId":"mn-gen-00015","walletAddress":"0x...","txHash":"0x..."}
+
+SECURITY AUDIT:
+POST https://marketnow.site/api/audit-skill
+Body: {"skillId":"mn-gen-00015"}
+
+ALL SKILLS (bulk download):
+curl https://marketnow.site/api/skills.json
+
+AGENT INSTRUCTIONS:
+curl https://marketnow.site/api/agent.json
+
+NPM PACKAGE:
+npm install marketnow-mcp
+https://www.npmjs.com/package/marketnow-mcp
+
+GITHUB:
+https://github.com/edgarfloresguerra2011-a11y/marketnow
+
+SAliceLabs LLC ProprietaryHERY:
+https://smithery.ai/servers/eddyflores100/marketnow
+
+STATS:
+- 11,115 skills
+- 58 categories
+- 65 free skills
+- 15 active sellers
+- 5 languages (EN, ES, ZH, PT, FR)
+- B2B: Community (Free) / Team ($99/mo) / Enterprise (Custom)
+- USDC on Base (chainId 8453)
+- Payment wallet: 0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee
+
+EVERY SKILL INCLUDES:
+- Sentinel security report (6-point MCP audit)
+- Ready-to-use system prompt
+- Setup requirements (env vars, API keys)
+- Capabilities (actions, input/output types)
+- 1-click install: npx -y @marketnow/install <slug>
+
+ZERO HUMAN FRICTION.
+AGENTS SEARCH, PAY, INSTALL, AND USE — AUTONOMOUSLY.

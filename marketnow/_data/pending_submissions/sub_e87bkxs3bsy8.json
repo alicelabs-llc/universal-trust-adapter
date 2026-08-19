@@ -1,0 +1,62 @@
+{
+  "submission_id": "sub_e87bkxs3bsy8",
+  "skill_id": "mn-sub-27364",
+  "status": "promoted",
+  "submitted_at": "2026-07-26T23:51:12.464Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_outreach",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "7cd7c636737d277b"
+  },
+  "repo": {
+    "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+    "full_name": "ChromeDevTools/chrome-devtools-mcp",
+    "owner": "ChromeDevTools",
+    "name": "chrome-devtools-mcp",
+    "description": "Chrome DevTools for coding agents",
+    "stars": 47646,
+    "language": "TypeScript",
+    "license": "Apache-2.0",
+    "pushed_at": "2026-07-26T02:07:08Z",
+    "archived": false,
+    "topics": [
+      "browser",
+      "chrome",
+      "chrome-devtools",
+      "debugging",
+      "devtools",
+      "mcp",
+      "mcp-server",
+      "puppeteer"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-27364",
+    "name": "chrome-devtools-mcp",
+    "slug": "chrome-devtools-mcp-7364",
+    "description": "Chrome DevTools for coding agents",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "submitted_at": "2026-07-26T23:51:12.464Z"
+    },
+    "install": "npx -y chrome-devtools-mcp",
+    "author": "ChromeDevTools",
+    "version": "1.6.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-27T00:51:12.464Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-1777802",
+  "promoted_at": "2026-07-27T00:22:58.649Z"
+}

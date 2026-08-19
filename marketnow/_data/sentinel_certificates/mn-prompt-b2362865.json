@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8134032",
+  "skill_id": "mn-prompt-b2362865",
+  "skill_name": "Especialista Cost Optimization + Margin Improvement",
+  "issued_at": "2026-07-15T01:15:34.032Z",
+  "expires_at": "2026-07-22T01:15:34.032Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "a4dbe65264762b8faeae2ea958d768a7717c3d92c1497ad62b8b41d03fd8c631",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-b2362865"
+}

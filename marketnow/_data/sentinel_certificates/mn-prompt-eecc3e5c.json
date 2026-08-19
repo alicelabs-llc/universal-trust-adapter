@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8142801",
+  "skill_id": "mn-prompt-eecc3e5c",
+  "skill_name": "Especialista Education Leadership + Admin",
+  "issued_at": "2026-07-15T01:15:42.801Z",
+  "expires_at": "2026-07-22T01:15:42.801Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "df2d1e9f796e02d2bc6eb818f91894b4b58dbcc0d28bb2ff45d05b44ee0a8d31",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-eecc3e5c"
+}

@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5669196",
+  "skill_id": "mn-gen-09505",
+  "skill_name": "Neurelo/connect-mcp",
+  "issued_at": "2026-07-06T05:27:49.196Z",
+  "expires_at": "2026-07-13T05:27:49.196Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 8,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 2,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "6114294a36db44eef94fda10d49bf90b8773a4a848aa1774eb3ae3a35b5b4e1e",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-09505"
+}

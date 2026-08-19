@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-6102246",
+  "skill_id": "mn-leg-00026",
+  "skill_name": "Immigration Status Checker",
+  "issued_at": "2026-07-06T05:35:02.246Z",
+  "expires_at": "2026-07-13T05:35:02.246Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 7,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 3,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "1eb5dd168d4bf664bbd4e602e9da4a641a51cb9bf57e53f4fec55b3b6f2b7e3e",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-leg-00026"
+}

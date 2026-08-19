@@ -1,0 +1,53 @@
+{
+  "submission_id": "sub_drpk4t0l7aos",
+  "skill_id": "mn-sub-51326",
+  "status": "promoted",
+  "submitted_at": "2026-07-27T03:59:38.716Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_outreach_v4",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "96365e5c70a99ff4"
+  },
+  "repo": {
+    "url": "https://github.com/wong2/awesome-mcp-servers",
+    "full_name": "wong2/awesome-mcp-servers",
+    "owner": "wong2",
+    "name": "awesome-mcp-servers",
+    "description": "A curated list of Model Context Protocol (MCP) servers",
+    "stars": 4228,
+    "language": null,
+    "license": "MIT",
+    "pushed_at": "2026-07-13T12:44:30Z",
+    "archived": false,
+    "topics": []
+  },
+  "skill": {
+    "id": "mn-sub-51326",
+    "name": "awesome-mcp-servers",
+    "slug": "awesome-mcp-servers-1326",
+    "description": "A curated list of Model Context Protocol (MCP) servers",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/wong2/awesome-mcp-servers",
+      "submitted_at": "2026-07-27T03:59:38.716Z"
+    },
+    "install": "git clone https://github.com/wong2/awesome-mcp-servers",
+    "author": "wong2",
+    "version": "0.0.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-27T04:59:38.716Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-1509360",
+  "promoted_at": "2026-07-28T23:31:50.339Z"
+}

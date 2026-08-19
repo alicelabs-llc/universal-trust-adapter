@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-awmcp-chromemcpsecure",
+  "timestamp": "2026-07-06T03:20:13Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 0,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 0,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 726,
+  "stdout_sample": "node:fs:1386   const result = binding.mkdir(                          ^  Error: ENOENT: no such file or directory, mkdir '/app/logs'     at Object.mkdirSync (node:fs:1386:26)     at mkdirSecure (file:///app/dist/file-permissions.js:126:16)     at AuditLogger.ensureLogDir (file:///app/dist/logger.js:125:9)     at new AuditLogger (file:///app/dist/logger.js:121:18)     at file:///app/dist/logger.js:225:22     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)     at async ModuleLoader.",
+  "l2_score": 10,
+  "l2_risk_level": "low"
+}

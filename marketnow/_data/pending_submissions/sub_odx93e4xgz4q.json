@@ -1,0 +1,67 @@
+{
+  "submission_id": "sub_odx93e4xgz4q",
+  "skill_id": "mn-sub-01325",
+  "status": "promoted",
+  "submitted_at": "2026-07-29T14:26:22.298Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_batch2",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "be64d4815e6a2aea"
+  },
+  "repo": {
+    "url": "https://github.com/ravitemer/mcp-hub",
+    "full_name": "ravitemer/mcp-hub",
+    "owner": "ravitemer",
+    "name": "mcp-hub",
+    "description": "A centralized manager for Model Context Protocol (MCP) servers with dynamic server management and monitoring",
+    "stars": 505,
+    "language": "JavaScript",
+    "license": "MIT",
+    "pushed_at": "2025-10-24T02:17:55Z",
+    "archived": false,
+    "topics": [
+      "ai",
+      "chatgpt",
+      "claude-ai",
+      "llms",
+      "local-development",
+      "mcp",
+      "mcp-hub",
+      "mcp-servers",
+      "model-context-protocol",
+      "nodejs",
+      "process-management-server",
+      "server",
+      "smithery"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-01325",
+    "name": "mcp-hub",
+    "slug": "mcp-hub-1325",
+    "description": "A centralized manager for Model Context Protocol (MCP) servers with dynamic server management and monitoring",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/ravitemer/mcp-hub",
+      "submitted_at": "2026-07-29T14:26:22.298Z"
+    },
+    "install": "npx -y mcp-hub",
+    "author": "ravitemer",
+    "version": "4.2.1"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-29T15:26:22.298Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-3999783",
+  "promoted_at": "2026-07-30T15:06:40.731Z"
+}

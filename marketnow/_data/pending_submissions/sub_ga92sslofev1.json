@@ -1,0 +1,66 @@
+{
+  "submission_id": "sub_ga92sslofev1",
+  "skill_id": "mn-sub-22629",
+  "status": "promoted",
+  "submitted_at": "2026-07-27T01:17:59.677Z",
+  "submitter": {
+    "agent_id": "agent_marketnow_outreach_v3",
+    "email": "edison@alicelabs.site",
+    "ref_code": null,
+    "ip_hash": "be64d4815e6a2aea"
+  },
+  "repo": {
+    "url": "https://github.com/koala73/worldmonitor",
+    "full_name": "koala73/worldmonitor",
+    "owner": "koala73",
+    "name": "worldmonitor",
+    "description": "Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface",
+    "stars": 74776,
+    "language": "TypeScript",
+    "license": "NOASSERTION",
+    "pushed_at": "2026-07-26T22:32:21Z",
+    "archived": false,
+    "topics": [
+      "agent",
+      "ai",
+      "dashboard",
+      "geopolitics",
+      "mcp",
+      "mcp-server",
+      "monitoring",
+      "news",
+      "opensource",
+      "osint",
+      "palantir",
+      "situation"
+    ]
+  },
+  "skill": {
+    "id": "mn-sub-22629",
+    "name": "worldmonitor",
+    "slug": "worldmonitor-2629",
+    "description": "Real-time global intelligence dashboard. AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface",
+    "category": "Community Submitted",
+    "price": 0,
+    "review_status": "auto-scanned",
+    "source": {
+      "type": "community-submitted",
+      "url": "https://github.com/koala73/worldmonitor",
+      "submitted_at": "2026-07-27T01:17:59.677Z"
+    },
+    "install": "npx -y world-monitor",
+    "author": "koala73",
+    "version": "2.10.0"
+  },
+  "audit": {
+    "l15_score": 10,
+    "l15_findings": [],
+    "l17_blocked": false,
+    "l2_status": "completed",
+    "l2_scheduled_at": "2026-07-27T02:17:59.677Z",
+    "overall_score": 10
+  },
+  "atc_preallocated": true,
+  "atc_card_id": "ATC-2026-4992675",
+  "promoted_at": "2026-07-27T04:03:13.585Z"
+}

@@ -1,0 +1,32 @@
+{
+  "certificate_id": "MN-SC-2026-8184897",
+  "skill_id": "mn-prompt-08d11605",
+  "skill_name": "Especialista Election Law + Campaign Finance",
+  "issued_at": "2026-07-15T01:16:24.897Z",
+  "expires_at": "2026-07-22T01:16:24.897Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 9,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16_l17": "medium",
+    "l17_quarantine_recommended": false,
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 1,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "afddb3c723d01cb270848c9f0d7ddbf712cddb740abe74e0f08be60a5cb1f6fb",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-prompt-08d11605"
+}

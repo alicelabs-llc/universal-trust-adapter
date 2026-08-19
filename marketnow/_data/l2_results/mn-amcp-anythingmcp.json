@@ -1,0 +1,27 @@
+{
+  "skill_id": "mn-amcp-anythingmcp",
+  "timestamp": "2026-07-05T22:15:42Z",
+  "sandbox_config": {
+    "network": "none",
+    "filesystem": "read-only",
+    "capabilities": "dropped ALL",
+    "memory": "256m",
+    "cpu": "0.5",
+    "pids": "64",
+    "timeout": "60s"
+  },
+  "execution_status": "ran",
+  "failure_reason": null,
+  "behavioral_analysis": {
+    "network_attempts": 2,
+    "fs_write_attempts": 0,
+    "process_spawns": 0,
+    "credential_leakage": 6,
+    "crash_detected": 0,
+    "dynamic_imports": 0
+  },
+  "stdout_size_bytes": 1751,
+  "stdout_sample": "==> Running database migrations... Failed to load config file \"/app/backend\" as a TypeScript/JavaScript module. Error: PrismaConfigEnvError: Cannot resolve environment variable: DATABASE_URL. ==> Starting backend (port 4000)... ==> Starting frontend (port 3000)... ==> AnythingMCP running \u2014 backend PID=39, frontend PID=40 \u25c7 injected env (0) from ../../.env // tip: \u2318 custom filepath { path: '/custom/path/.env' } \u25c7 injected env (0) from ../.env // tip: \u2301 auth for agents [www.vestauth.com] \u25c7 injecte",
+  "l2_score": 2,
+  "l2_risk_level": "high"
+}

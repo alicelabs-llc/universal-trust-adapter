@@ -1,0 +1,51 @@
+# MarketNow — npm Package Provenance (Sigstore)
+# ================================================
+#
+# This workflow publishes marketnow-mcp to npm with Sigstore provenance.
+# Provenance allows users to verify that the package was built from
+# our GitHub source code — not injected by an attacker.
+#
+# Q4 2026 roadmap item.
+#
+# Requirements:
+#   - npm token with publish permission (NPM_TOKEN secret)
+#   - id-token: write permission (for Sigstore)
+#   - npm CLI v9.5+ (Node 20+)
+
+name: Publish npm with Provenance
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write  # Required for npm provenance (Sigstore)
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: cd mcp-server && npm ci
+
+      - name: Publish with provenance
+        run: cd mcp-server && npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Verify provenance
+        run: |
+          echo "Package published with provenance!"
+          echo "Verify with: npm view marketnow-mcp dist.attestations"
+          echo "Or: npm audit signatures"
+          npm view marketnow-mcp dist.attestations 2>/dev/null || echo "(attestations may take a few minutes to appear)"

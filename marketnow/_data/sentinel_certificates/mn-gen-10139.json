@@ -1,0 +1,31 @@
+{
+  "certificate_id": "MN-SC-2026-5697776",
+  "skill_id": "mn-gen-10139",
+  "skill_name": "Outlook-mcp-server",
+  "issued_at": "2026-07-06T05:28:17.776Z",
+  "expires_at": "2026-07-13T05:28:17.776Z",
+  "auditor": "Sentinel L1.5 + L1.6 + L2",
+  "overall_score": 6,
+  "max_score": 10,
+  "risk_level": "medium",
+  "risk_breakdown": {
+    "l15_l16": "medium",
+    "l2": "not_available",
+    "final": "medium"
+  },
+  "layers_run": {
+    "l15": true,
+    "l16": true,
+    "l2": false
+  },
+  "layer_details": {
+    "l15_findings": 4,
+    "l16_semgrep_findings": 0,
+    "l16_secret_findings": 0,
+    "l16_osv_findings": 0,
+    "l2_execution_status": null
+  },
+  "signature": "811340d37e151227f5529ab09ccafa776dcd07d7c7ab95a2fa3459e4ca2d0e50",
+  "signature_algorithm": "SHA-256",
+  "verification_url": "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-gen-10139"
+}
