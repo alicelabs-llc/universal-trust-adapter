@@ -155,7 +155,7 @@ const GITHUB_API = 'https://api.github.com';
 function usedTxRepoConfig() {
   return {
     token: process.env.MANDATES_GITHUB_TOKEN,
-    repo: process.env.MANDATES_REPO || 'edgarfloresguerra2011-a11y/marketnow',
+    repo: process.env.MANDATES_REPO || 'alicelabs-llc/marketnow',
     branch: process.env.MANDATES_BRANCH || 'master',
     path: '_data/used_txs',
   };
@@ -254,7 +254,7 @@ export default async function handler(req, res) {
 
     // Fetch job from GitHub ledger
     const GITHUB_TOKEN = process.env.MANDATES_GITHUB_TOKEN;
-    const REPO = process.env.MANDATES_REPO || 'edgarfloresguerra2011-a11y/marketnow';
+    const REPO = process.env.MANDATES_REPO || 'alicelabs-llc/marketnow';
     const BRANCH = 'master';
     try {
       const url = `https://api.github.com/repos/${REPO}/contents/_data/purchase_jobs/${encodeURIComponent(job_id)}.json?ref=${BRANCH}`;
@@ -297,7 +297,7 @@ export default async function handler(req, res) {
     if (!job_id) return res.status(400).json({ error: 'job_id required for cancel' });
 
     const GITHUB_TOKEN = process.env.MANDATES_GITHUB_TOKEN;
-    const REPO = process.env.MANDATES_REPO || 'edgarfloresguerra2011-a11y/marketnow';
+    const REPO = process.env.MANDATES_REPO || 'alicelabs-llc/marketnow';
     const BRANCH = 'master';
 
     try {
@@ -352,7 +352,7 @@ export default async function handler(req, res) {
   // ============================================================
   if (body.async === true && body.skillId) {
     const GITHUB_TOKEN = process.env.MANDATES_GITHUB_TOKEN;
-    const REPO = process.env.MANDATES_REPO || 'edgarfloresguerra2011-a11y/marketnow';
+    const REPO = process.env.MANDATES_REPO || 'alicelabs-llc/marketnow';
     const BRANCH = 'master';
     const crypto = await import('crypto');
     const jobId = 'job_' + crypto.randomUUID().replace(/-/g, '').slice(0, 20);

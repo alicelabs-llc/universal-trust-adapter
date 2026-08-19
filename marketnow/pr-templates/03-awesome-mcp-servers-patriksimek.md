@@ -55,7 +55,7 @@ MarketNow is a marketplace MCP server that allows any agent (Claude Desktop, Cur
 
 - **Website:** https://marketnow.site
 - **npm:** https://www.npmjs.com/package/marketnow-mcp
-- **GitHub:** https://github.com/edgarfloresguerra2011-a11y/marketnow
+- **GitHub:** https://github.com/alicelabs-llc/marketnow
 - **License:** MIT
 
 ## Checklist

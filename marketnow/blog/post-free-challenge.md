@@ -71,7 +71,7 @@ That's it. You get back a `submission_id` and `skill_id`. L1.5 + L1.7 run synchr
 
 - Submit: https://marketnow.site/submit
 - Spec: https://marketnow.site/api/atc?action=spec
-- GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- GitHub: https://github.com/alicelabs-llc/marketnow
 - npm: https://www.npmjs.com/package/marketnow-mcp
 
 If you build MCP servers, this is free trust infrastructure. Use it.

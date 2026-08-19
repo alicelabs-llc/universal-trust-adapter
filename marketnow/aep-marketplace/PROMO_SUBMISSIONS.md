@@ -19,7 +19,7 @@
 - **What to fill**:
   - Type: `Server`
   - Name: `MarketNow MCP - AEP Agent Exchange Protocol`
-  - URL: `https://github.com/edgarfloresguerra2011-a11y/marketnow`
+  - URL: `https://github.com/alicelabs-llc/marketnow`
   - Server Config (JSON):
 ```json
 {
@@ -133,7 +133,7 @@ Also features:
 - Per-skill SSR pages with OG meta tags
 - Crypto checkout with on-chain verification
 
-Open source at: github.com/edgarfloresguerra2011-a11y/marketnow
+Open source at: github.com/alicelabs-llc/marketnow
 ```
 
 ### How to Post to Telegram Groups

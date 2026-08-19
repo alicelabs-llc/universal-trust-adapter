@@ -1,3 +1,8 @@
+# NOTE: This is an appendix to MNNC-1.0 (the canonical license for this repo).
+# It applies specifically to the Sentinel security audit engine source code,
+# which has additional restrictions beyond MNNC-1.0.
+# See ./LICENSE for the full MNNC-1.0 text that governs the rest of the repo.
+
 SENTINEL PROPRIETARY LICENSE
 =============================
 Version 1.0 — July 6, 2026

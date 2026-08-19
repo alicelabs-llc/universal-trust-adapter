@@ -20,7 +20,7 @@ MarketNow（marketnow.site）では、6層の監査パイプライン（Sentinel
 
 各サーバーにはSHA-256署名証明書が発行されます。marketnow.site/verify で確認できます。
 
-監査結果は公開されています：github.com/edgarfloresguerra2011-a11y/marketnow
+監査結果は公開されています：github.com/alicelabs-llc/marketnow
 ```
 
 ### Zenn: "A Rabbit's Guide to MCP Security Measures"
@@ -60,7 +60,7 @@ MarketNow（marketnow.site）用6层审计管道（Sentinel）审计了8,764个M
 
 每个服务器获得SHA-256签名证书。可在 marketnow.site/verify 验证。
 
-审计结果公开：github.com/edgarfloresguerra2011-a11y/marketnow
+审计结果公开：github.com/alicelabs-llc/marketnow
 ```
 
 ### V2EX: "MCP-Server 真的有用么"
@@ -101,7 +101,7 @@ MarketNow (marketnow.site) — маркетплейс MCP-серверов с 6-
 
 Каждый сервер получает подписанный SHA-256 сертификат. Проверка: marketnow.site/verify
 
-Результаты публичны: github.com/edgarfloresguerra2011-a11y/marketnow
+Результаты публичны: github.com/alicelabs-llc/marketnow
 ```
 
 ## ═══ ENGLISH (Medium / Hashnode) ═══
@@ -141,7 +141,7 @@ Example: 3 servers out of 8,764 audited leaked environment variables when sent c
 
 Plus L2.5: gVisor sandbox for kernel-level isolation.
 
-Happy to collaborate on test cases or share our adversarial input set. github.com/edgarfloresguerra2011-a11y/marketnow
+Happy to collaborate on test cases or share our adversarial input set. github.com/alicelabs-llc/marketnow
 ```
 
 ### Hashnode: "What is Model Context Protocol (MCP): The 2026 Guide"

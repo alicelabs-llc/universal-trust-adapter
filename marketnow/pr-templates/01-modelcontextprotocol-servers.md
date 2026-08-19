@@ -62,7 +62,7 @@ MarketNow is unique in the MCP ecosystem:
 
 - **Website:** https://marketnow.site
 - **npm:** https://www.npmjs.com/package/marketnow-mcp
-- **GitHub:** https://github.com/edgarfloresguerra2011-a11y/marketnow
+- **GitHub:** https://github.com/alicelabs-llc/marketnow
 - **API:** https://marketnow.site/api/agent.json
 - **Discovery:** https://marketnow.site/.well-known/mcp.json
 - **License:** MIT
@@ -93,6 +93,6 @@ The open marketplace for MCP-compatible agent skills. Search, discover, and inst
 
 - **Install:** `npx -y marketnow-mcp`
 - **npm:** https://www.npmjs.com/package/marketnow-mcp
-- **GitHub:** https://github.com/edgarfloresguerra2011-a11y/marketnow
+- **GitHub:** https://github.com/alicelabs-llc/marketnow
 - **Website:** https://marketnow.site
 ```

@@ -27,7 +27,7 @@ import crypto from 'crypto';
 import { canonicalize as rfc8785Canonicalize } from './canonical-json.mjs';
 
 const GITHUB_TOKEN = process.env.MANDATES_GITHUB_TOKEN;
-const REPO = process.env.MANDATES_REPO || 'edgarfloresguerra2011-a11y/marketnow';
+const REPO = process.env.MANDATES_REPO || 'alicelabs-llc/marketnow';
 const BRANCH = 'master';
 const REFERRALS_DIR = '_data/referrals';
 

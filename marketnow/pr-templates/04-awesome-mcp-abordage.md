@@ -45,7 +45,7 @@ MarketNow is the open marketplace for MCP-compatible agent skills. It's an MCP s
 
 - Website: https://marketnow.site
 - npm: https://www.npmjs.com/package/marketnow-mcp
-- GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- GitHub: https://github.com/alicelabs-llc/marketnow
 - License: MIT
 ```
 

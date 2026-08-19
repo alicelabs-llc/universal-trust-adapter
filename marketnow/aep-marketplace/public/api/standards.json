@@ -106,7 +106,7 @@
     "Our current USDC flow is functionally similar to x402 (server returns payment challenge, client pays, server verifies) but does not use the HTTP 402 status code yet. Wrapping in progress. UPDATE: HTTP 402 now returned by /api/agent-purchase when payment required.",
     "Every status on this page is a git commit. When something moves from 'implementing' to 'done,' you will see it here first."
   ],
-  "commit_history_url": "https://github.com/edgarfloresguerra2011-a11y/marketnow/commits/master/aep-marketplace/src/pages/Standards.jsx",
+  "commit_history_url": "https://github.com/alicelabs-llc/marketnow/commits/master/aep-marketplace/src/pages/Standards.jsx",
   "related_pages": {
     "trust_roadmap": "https://marketnow.site/trust",
     "about": "https://marketnow.site/about",

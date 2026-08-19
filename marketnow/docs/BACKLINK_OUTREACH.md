@@ -127,7 +127,7 @@ Loved your article on [topic]. I'm building MarketNow — a marketplace where ev
 We've audited 8,764 servers and found [specific finding related to their article]. Thought you might find it interesting for a follow-up post.
 
 Full methodology: marketnow.site/security
-Audit results: github.com/edgarfloresguerra2011-a11y/marketnow
+Audit results: github.com/alicelabs-llc/marketnow
 
 Would love to compare notes on scanning methodology if you're open to it.
 

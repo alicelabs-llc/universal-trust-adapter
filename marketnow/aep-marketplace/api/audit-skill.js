@@ -41,7 +41,7 @@ import { setCorsHeaders } from '../lib/cors.mjs';
 import { secureLight } from '../lib/secure.mjs';
 
 const GITHUB_TOKEN = process.env.MANDATES_GITHUB_TOKEN;
-const REPO = process.env.MANDATES_REPO || 'edgarfloresguerra2011-a11y/marketnow';
+const REPO = process.env.MANDATES_REPO || 'alicelabs-llc/marketnow';
 const BRANCH = 'master';
 
 // 5-minute in-memory cache for the sentinel-status sub-endpoint.

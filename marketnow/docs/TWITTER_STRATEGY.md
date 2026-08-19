@@ -41,7 +41,7 @@ MCP server audit results (8,764 servers):
 ✗ 1 tried ptrace() (blocked by gVisor)
 ✗ 1 tried bpf() (blocked by gVisor)
 
-Full results: github.com/edgarfloresguerra2011-a11y/marketnow
+Full results: github.com/alicelabs-llc/marketnow
 ```
 
 ### Tweet 4 (comparison)
@@ -69,7 +69,7 @@ I've been building MarketNow for 2 weeks.
 But only 1 GitHub star ⭐
 
 If you use MCP servers, a star would help others find this:
-github.com/edgarfloresguerra2011-a11y/marketnow
+github.com/alicelabs-llc/marketnow
 
 It's free. It takes 2 seconds. 🙏
 ```

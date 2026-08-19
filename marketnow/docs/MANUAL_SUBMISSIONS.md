@@ -41,7 +41,7 @@ Works with Claude Desktop, Cursor, Cline, Continue, Aider.
 
 **GitHub Repository URL:**
 ```
-https://github.com/edgarfloresguerra2011-a11y/marketnow
+https://github.com/alicelabs-llc/marketnow
 ```
 
 **Website URL:**
@@ -179,7 +179,7 @@ The registry API returns:
 
 I build MarketNow (https://marketnow.site) — an open MCP marketplace with 8,760+ servers, each audited by Sentinel (6-layer pipeline: static analysis, pattern matching, active probe with 60+ adversarial inputs, gVisor sandbox). Every skill gets a signed SHA-256 certificate.
 
-Example: Anthropic's filesystem MCP scored 10/10 — https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/_data/l2_results/mn-mcp-filesystem.json
+Example: Anthropic's filesystem MCP scored 10/10 — https://github.com/alicelabs-llc/marketnow/blob/master/_data/l2_results/mn-mcp-filesystem.json
 ```
 
 ### Alternatives Considered (optional):
@@ -205,7 +205,7 @@ Related resources:
 - MarketNow: https://marketnow.site
 - Sentinel audit methodology: https://marketnow.site/security
 - API for fetching certificates: GET https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-filesystem
-- Example certificate (Anthropic filesystem MCP, score 10/10): https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/_data/l2_results/mn-mcp-filesystem.json
+- Example certificate (Anthropic filesystem MCP, score 10/10): https://github.com/alicelabs-llc/marketnow/blob/master/_data/l2_results/mn-mcp-filesystem.json
 - Dev.to writeup on the audit methodology: https://dev.to/edison_flores_6d2cd381b13/how-to-audit-an-mcp-server-6-layers-from-static-analysis-to-gvisor-sandbox-171i
 
 Note: I previously submitted this issue twice via the API and it was auto-closed by the triage bot as "automated submission". This is a manual submission via the web interface as requested.
@@ -225,7 +225,7 @@ El bot de langchain detecta submissions programáticas y las cierra automáticam
 ## 3. dev.to — Responder a @pakvothe
 ## ═══════════════════════════════════════════
 
-### Link: https://dev.to/edison_flores_6d2cd381b13/5-idiomas-8560-skills-como-construimos-un-marketplace-mcp-multilingue-30j4
+### Link: https://dev.to/edison_flores_6d2cd381b13/5-idiomas-9,248-skills-como-construimos-un-marketplace-mcp-multilingue-30j4
 
 ### Baja hasta el comentario de @pakvothe y dale "Reply"
 
@@ -246,4 +246,4 @@ Voy a probar el tier gratis. Si funciona bien para nuestro caso (8,760 skills co
 
 - [ ] 1. Submitir MarketNow a mcpm.sh (https://mcpm.sh)
 - [ ] 2. Submitir issue manual a langchain (https://github.com/langchain-ai/langchain/issues/new/choose)
-- [ ] 3. Responder a @pakvothe en dev.to (https://dev.to/edison_flores_6d2cd381b13/5-idiomas-8560-skills-como-construimos-un-marketplace-mcp-multilingue-30j4)
+- [ ] 3. Responder a @pakvothe en dev.to (https://dev.to/edison_flores_6d2cd381b13/5-idiomas-9,248-skills-como-construimos-un-marketplace-mcp-multilingue-30j4)

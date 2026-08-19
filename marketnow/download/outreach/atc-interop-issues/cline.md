@@ -21,13 +21,13 @@ Following up on issue #12376 (which I opened on 2026-07-18 proposing "Agent Trus
 The original proposal described the architecture conceptually. Since then, we've shipped:
 
 - **ATC/1.0 Specification** — formal spec with 10 controls (8 required, 2 optional):
-  https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md
+  https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md
 - **JSON Schema** (draft 2020-12):
-  https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/schemas/atc-1.0.json
+  https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/schemas/atc-1.0.json
 - **Reference implementation** (Node.js, ~200 lines, uses `node:crypto` + `canonicalize` for RFC 8785 JCS):
-  https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/reference-impl/atc-1.0.mjs
+  https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/reference-impl/atc-1.0.mjs
 - **5 test vectors** (CC0, public domain):
-  https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/docs/atc-spec/test-vectors
+  https://github.com/alicelabs-llc/marketnow/tree/master/docs/atc-spec/test-vectors
 - **Standalone SDK** (npm: `agent-trust-card`):
   https://www.npmjs.com/package/agent-trust-card
 - **CLI** (`atc init` / `atc issue` / `atc verify` / `atc inspect`):
@@ -35,14 +35,14 @@ The original proposal described the architecture conceptually. Since then, we've
   npx agent-trust-card verify card.json  # exits 0 if valid, 1 if invalid
   ```
 - **Conformance suite** (8 tests, 23 assertions, all passing):
-  https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/atc-sdk/CONFORMANCE.md
+  https://github.com/alicelabs-llc/marketnow/blob/master/atc-sdk/CONFORMANCE.md
 - **Browser playground** (zero-install, uses WebCrypto, no backend):
   https://marketnow.site/atc/playground
 - **MCP server tool** (`marketnow_verify_atc_spec` in `marketnow-mcp@1.10.0`):
   Any agent that loads `npx marketnow-mcp` can now verify ANY ATC against the spec.
   https://www.npmjs.com/package/marketnow-mcp
 - **Prior art timeline** (honest chronology of ATC and adjacent work):
-  https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/PRIOR-ART-TIMELINE.md
+  https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/PRIOR-ART-TIMELINE.md
 
 ### The 8 required controls (ATC/1.0)
 

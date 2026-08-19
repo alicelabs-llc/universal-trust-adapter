@@ -38,7 +38,7 @@ jobs:
       - name: Run promotion script
         env:
           MANDATES_GITHUB_TOKEN: ${{ secrets.MANDATES_GITHUB_TOKEN }}
-          MANDATES_REPO: edgarfloresguerra2011-a11y/marketnow
+          MANDATES_REPO: alicelabs-llc/marketnow
           ATC_API_URL: https://marketnow.site/api/atc
         run: |
           node scripts/promote-submissions.mjs

@@ -30,7 +30,7 @@ Hi HN, I built a security certification system for MCP (Model Context Protocol) 
 
 Live demo: https://marketnow.site/verify
 Transparency dashboard: https://marketnow.site/sentinel-transparency
-Source: https://github.com/edgarfloresguerra2011-a11y/marketnow
+Source: https://github.com/alicelabs-llc/marketnow
 
 The 3 layers:
 
@@ -56,7 +56,7 @@ Everything is verifiable:
 - Transparency dashboard: https://marketnow.site/sentinel-transparency
 - Verify any certificate: https://marketnow.site/verify
 - API: GET /api/audit-skill?certificate=1&skillId=mn-gen-00003
-- Source: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- Source: https://github.com/alicelabs-llc/marketnow
 
 The weekly cron re-audits everything every Sunday at 01:00 UTC. Certificates are signed with SHA-256 + a secret, valid for 7 days.
 

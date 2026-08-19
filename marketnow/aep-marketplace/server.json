@@ -1,13 +1,13 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.edgarfloresguerra2011-a11y/marketnow-mcp",
+  "name": "io.github.alicelabs-llc/marketnow-mcp",
   "title": "MarketNow — Trust Layer for Agent Commerce",
   "description": "Trust layer for agent commerce. 8,760 MCP-compatible skills with Sentinel L2 security audits (L1.5 + L1.6 + L2 v2.0 + L2.5 gVisor), x402 payments (HTTP 402 + USDC on Base), and AP2 delegated mandates. Human-in-the-loop by default. Maintained by AliceLabs LLC (Wyoming, USA, 2026).",
   "version": "1.3.1",
   "license": "MNNC-1.0",
   "homepage": "https://marketnow.site",
   "repository": {
-    "url": "https://github.com/edgarfloresguerra2011-a11y/marketnow",
+    "url": "https://github.com/alicelabs-llc/marketnow",
     "source": "github"
   },
   "remotes": [],

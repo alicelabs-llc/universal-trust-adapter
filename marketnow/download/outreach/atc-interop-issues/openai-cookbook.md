@@ -20,12 +20,12 @@ Issues #2865 and #2867 both proposed "Agent Trust Cards (ATC) — SSL certificat
 
 **ATC/1.0 — Agent Trust Card Protocol Specification** (2026-08-10)
 
-- **Spec**: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md
-- **JSON Schema**: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/schemas/atc-1.0.json
-- **Reference implementation** (Node.js): https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/reference-impl/atc-1.0.mjs
-- **Test vectors** (5 vectors, CC0): https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/docs/atc-spec/test-vectors
+- **Spec**: https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md
+- **JSON Schema**: https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/schemas/atc-1.0.json
+- **Reference implementation** (Node.js): https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/reference-impl/atc-1.0.mjs
+- **Test vectors** (5 vectors, CC0): https://github.com/alicelabs-llc/marketnow/tree/master/docs/atc-spec/test-vectors
 - **Standalone SDK** (npm: `agent-trust-card`): https://www.npmjs.com/package/agent-trust-card
-- **Conformance suite** (8 tests, 23 assertions): https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/atc-sdk/CONFORMANCE.md
+- **Conformance suite** (8 tests, 23 assertions): https://github.com/alicelabs-llc/marketnow/blob/master/atc-sdk/CONFORMANCE.md
 - **Browser playground** (zero-install, uses WebCrypto): https://marketnow.site/atc/playground
 
 ### The 8 required controls

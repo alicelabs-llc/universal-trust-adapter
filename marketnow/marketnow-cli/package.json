@@ -10,8 +10,15 @@
   "scripts": {
     "audit": "node audit.mjs"
   },
-  "keywords": ["mcp", "security", "audit", "free", "cli", "marketnow"],
+  "keywords": [
+    "mcp",
+    "security",
+    "audit",
+    "free",
+    "cli",
+    "marketnow"
+  ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
-  "license": "MIT",
+  "license": "MNNC-1.0",
   "homepage": "https://marketnow.site"
 }

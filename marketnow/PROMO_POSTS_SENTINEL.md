@@ -37,7 +37,7 @@ Today we completed a milestone: all 8,582 MCP servers in our catalog have been a
 **Transparency:**
 Every certificate is publicly verifiable at marketnow.site/verify
 Live dashboard: marketnow.site/sentinel-transparency
-All code is open: github.com/edgarfloresguerra2011-a11y/marketnow
+All code is open: github.com/alicelabs-llc/marketnow
 
 This is the first MCP marketplace to offer security certification. We believe trust layers like this will be essential as AI agents increasingly call third-party tools.
 
@@ -120,7 +120,7 @@ Live stats at: https://marketnow.site/sentinel-transparency
 
 5. **GitHub Push Protection caught a hardcoded token** — I accidentally committed a PAT in a script. GitHub refused the push. Good security feature.
 
-All code is open source: https://github.com/edgarfloresguerra2011-a11y/marketnow
+All code is open source: https://github.com/alicelabs-llc/marketnow
 
 What do you think? Is security certification for MCP servers something the ecosystem needs?
 
@@ -161,7 +161,7 @@ Clones the repo, builds a Docker image, runs it with `--network none --read-only
 - Transparency dashboard: https://marketnow.site/sentinel-transparency
 - Verify any certificate: https://marketnow.site/verify
 - API: `GET /api/audit-skill?certificate=1&skillId=mn-gen-00003`
-- Source: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- Source: https://github.com/alicelabs-llc/marketnow
 
 The weekly cron re-audits everything every Sunday at 01:00 UTC. Certificates are signed with SHA-256 + a secret, valid for 7 days.
 

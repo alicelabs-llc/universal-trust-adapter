@@ -6,7 +6,7 @@
 **URL (once deployed):** https://marketnow.site/linkedin-v25.png
 
 Download the image from the repo and attach it to your LinkedIn post:
-https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/aep-marketplace/public/linkedin-v25.png
+https://github.com/alicelabs-llc/marketnow/blob/master/aep-marketplace/public/linkedin-v25.png
 
 ---
 
@@ -46,7 +46,7 @@ Try it:
 → 8,760+ MCP servers: marketnow.site/registry
 → 43 free skills (no signup): marketnow.site/api/free-skills.json
 → Install the MCP server: npx -y marketnow-mcp
-→ Full audit result: github.com/edgarfloresguerra2011-a11y/marketnow
+→ Full audit result: github.com/alicelabs-llc/marketnow
 
 Built by 1 person. No investors. No marketing budget. Open source.
 
@@ -79,6 +79,6 @@ Why this matters: every MCP server you install gets read access to your filesyst
 
 → 8,760+ servers: marketnow.site/registry
 → Install: npx -y marketnow-mcp
-→ GitHub: github.com/edgarfloresguerra2011-a11y/marketnow
+→ GitHub: github.com/alicelabs-llc/marketnow
 
 #MCP #AI #Security #gVisor #Claude #Cybersecurity #OpenSource

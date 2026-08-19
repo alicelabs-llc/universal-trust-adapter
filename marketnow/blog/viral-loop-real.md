@@ -41,7 +41,7 @@ That's it. We were returning a TODO list, not doing the work.
 
 I ran the numbers in July:
 
-- **0 human-submitted skills** (all 8,845 were auto-imported from GitHub)
+- **0 human-submitted skills** (all 9,248 were auto-imported from GitHub)
 - **0 referral credits** (the "referral code" was a string in a comment, never persisted)
 - **0 PRs from external contributors** (one AI bot had opened two)
 - **347 npm downloads/week** (mostly crawlers indexing for LLMs)

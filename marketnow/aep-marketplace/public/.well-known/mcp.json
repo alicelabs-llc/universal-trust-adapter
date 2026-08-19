@@ -1,10 +1,10 @@
 {
   "$schema": "https://marketnow.site/.well-known/mcp.schema.json",
   "name": "marketnow",
-  "description": "MarketNow \u2014 Trust layer for agent commerce. 8,845 MCP-compatible skills with Sentinel L2.5 gVisor sandbox security audits, x402 payments (HTTP 402 + USDC on Base), and AP2 delegated mandates. AliceLabs LLC Proprietary. Maintained by AliceLabs LLC (Wyoming, USA, 2025).",
+  "description": "MarketNow \u2014 Trust layer for agent commerce. 9,248 MCP-compatible skills with Sentinel L2.5 gVisor sandbox security audits, x402 payments (HTTP 402 + USDC on Base), and AP2 delegated mandates. AliceLabs LLC Proprietary. Maintained by AliceLabs LLC (Wyoming, USA, 2025).",
   "version": "1.4.0",
   "homepage": "https://marketnow.site",
-  "repository": "https://github.com/edgarfloresguerra2011-a11y/marketnow",
+  "repository": "https://github.com/alicelabs-llc/marketnow",
   "npm_package": "marketnow-mcp",
   "npm_url": "https://www.npmjs.com/package/marketnow-mcp",
   "install": "npx -y marketnow-mcp",
@@ -30,7 +30,7 @@
     },
     {
       "name": "get_manifest",
-      "description": "Get marketplace metadata (8,845 skills, pricing tiers, commission)"
+      "description": "Get marketplace metadata (9,248 skills, pricing tiers, commission)"
     },
     {
       "name": "get_install_command",
@@ -73,7 +73,7 @@
     }
   },
   "marketplace_stats": {
-    "total_skills": 8845,
+    "total_skills": 9,248,
     "categories": 58,
     "price_min_usd": 0.99,
     "price_max_usd": 9.99,
@@ -100,7 +100,7 @@
       "directory": "mcp.so",
       "url": "https://mcp.so/server/marketnow-mcp---aep-agent-exchange-protocol/edgarfloresguerra2011-a11y",
       "status": "listed",
-      "note": "Listed but data is outdated (shows 8,845 skills, mentions crypto payments that don't exist). Contact mcp.so to update."
+      "note": "Listed but data is outdated (shows 9,248 skills, mentions crypto payments that don't exist). Contact mcp.so to update."
     },
     {
       "directory": "glama.ai",

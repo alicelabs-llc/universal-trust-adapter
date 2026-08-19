@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.edgarfloresguerra2011-a11y/marketnow",
+  "name": "io.github.alicelabs-llc/marketnow",
   "description": "MCP marketplace with 8,764 security-audited skills. Sentinel L2.5 gVisor sandbox.",
   "repository": {
-    "url": "https://github.com/edgarfloresguerra2011-a11y/marketnow",
+    "url": "https://github.com/alicelabs-llc/marketnow",
     "source": "github"
   },
   "version": "1.4.0",

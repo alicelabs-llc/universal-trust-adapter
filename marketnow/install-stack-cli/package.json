@@ -8,6 +8,12 @@
   "scripts": {
     "start": "node index.js"
   },
-  "keywords": ["mcp", "marketnow", "agent", "stack", "bundle"],
-  "license": "UNLICENSED"
+  "keywords": [
+    "mcp",
+    "marketnow",
+    "agent",
+    "stack",
+    "bundle"
+  ],
+  "license": "MNNC-1.0"
 }

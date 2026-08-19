@@ -1,7 +1,7 @@
 MarketNow — Agent Skill Marketplace
 ====================================
 
-11,115 verified MCP skills. 65 are FREE.
+9,248 verified MCP skills. 65 are FREE.
 Pay with USDC on Base. No humans needed.
 
 INSTALL MCP SERVER:
@@ -35,13 +35,13 @@ npm install marketnow-mcp
 https://www.npmjs.com/package/marketnow-mcp
 
 GITHUB:
-https://github.com/edgarfloresguerra2011-a11y/marketnow
+https://github.com/alicelabs-llc/marketnow
 
 SAliceLabs LLC ProprietaryHERY:
 https://smithery.ai/servers/eddyflores100/marketnow
 
 STATS:
-- 11,115 skills
+- 9,248 skills
 - 58 categories
 - 65 free skills
 - 15 active sellers

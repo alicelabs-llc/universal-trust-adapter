@@ -304,7 +304,7 @@ echo '{"jsonrpc":"2.0","method":"tools/call","params":{"name":"marketnow_get_ski
   node index.js | jq '.result'
 ```
 
-The npm package is [`marketnow-mcp@1.9.0`](https://www.npmjs.com/package/marketnow-mcp). The full source is on [GitHub](https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/mcp-server). The audit document is [`mcp-server/AUDIT.md`](https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/mcp-server/AUDIT.md).
+The npm package is [`marketnow-mcp@1.9.0`](https://www.npmjs.com/package/marketnow-mcp). The full source is on [GitHub](https://github.com/alicelabs-llc/marketnow/tree/master/mcp-server). The audit document is [`mcp-server/AUDIT.md`](https://github.com/alicelabs-llc/marketnow/blob/master/mcp-server/AUDIT.md).
 
 ---
 

@@ -15,7 +15,7 @@
  */
 
 const GITHUB_TOKEN = process.env.MANDATES_GITHUB_TOKEN || process.env.GH_TOKEN;
-const REPO = process.env.MANDATES_REPO || 'edgarfloresguerra2011-a11y/marketnow';
+const REPO = process.env.MANDATES_REPO || 'alicelabs-llc/marketnow';
 const BRANCH = 'master';
 const ATC_DIR = '_data/atc';
 

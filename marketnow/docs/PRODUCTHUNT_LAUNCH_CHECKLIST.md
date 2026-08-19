@@ -71,7 +71,7 @@ I'd love feedback on the audit methodology — especially from people who have b
 Built solo, no investors, no marketing budget. Just me and GitHub Actions. 🙏
 
 Try it: marketnow.site/registry
-GitHub: github.com/edgarfloresguerra2011-a11y/marketnow
+GitHub: github.com/alicelabs-llc/marketnow
 ```
 
 ### 00:15 AM PST — Notificar

@@ -92,7 +92,7 @@ Full write-up (with code snippets from the v1.7.0 → v1.9.0 diff) on dev.to:
 
 Try the v1.9.0 server: `npx -y marketnow-mcp@1.9.0`
 
-Audit document: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/mcp-server/AUDIT.md
+Audit document: https://github.com/alicelabs-llc/marketnow/blob/master/mcp-server/AUDIT.md
 
 #MCP #AI #Security #TypeScript
 
@@ -119,7 +119,7 @@ Body:
 >
 > Article: https://dev.to/edison_flores_6d2cd381b13/hardening-an-mcp-server-for-autonomous-agents-4-rules-i-learned-the-hard-way-441d
 > npm: https://www.npmjs.com/package/marketnow-mcp
-> GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+> GitHub: https://github.com/alicelabs-llc/marketnow
 
 ### Reddit (r/mcp)
 
@@ -138,7 +138,7 @@ Body:
 >
 > Full article with code snippets (v1.7.0 → v1.9.0 diff): https://dev.to/edison_flores_6d2cd381b13/hardening-an-mcp-server-for-autonomous-agents-4-rules-i-learned-the-hard-way-441d
 >
-> Audit document (in the npm tarball): https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/mcp-server/AUDIT.md
+> Audit document (in the npm tarball): https://github.com/alicelabs-llc/marketnow/blob/master/mcp-server/AUDIT.md
 >
 > Try it: `npx -y marketnow-mcp@1.9.0`
 >

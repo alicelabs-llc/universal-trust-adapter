@@ -229,8 +229,8 @@ LLMs-txt: https://marketnow.site/llms.txt
 LLMs-full-txt: https://marketnow.site/llms-full.txt
 
 # Agent-readable API endpoints
-# GET /api/agent.json — full machine-readable agent instructions (8,560 skills)
-# GET /api/skills.json — all 8,560 skills with capabilities and system prompts
+# GET /api/agent.json — full machine-readable agent instructions (9,248 skills)
+# GET /api/skills.json — all 9,248 skills with capabilities and system prompts
 # GET /api/search?q=query — server-side search with relevance scoring
 # GET /api/manifest.json — marketplace metadata (v4.0.0)
 # GET /api/categories.json — 58 categories with counts

@@ -42,7 +42,7 @@ const NOTIFICATION_MODES = ['silent', 'notify', 'notify_and_veto'];
 function repoConfig() {
   return {
     token: process.env.MANDATES_GITHUB_TOKEN,
-    repo: process.env.MANDATES_REPO || 'edgarfloresguerra2011-a11y/marketnow',
+    repo: process.env.MANDATES_REPO || 'alicelabs-llc/marketnow',
     branch: process.env.MANDATES_BRANCH || 'master',
     path: process.env.MANDATES_PATH || '_data/mandates',
   };

@@ -52,7 +52,7 @@ But the infrastructure exists before the use case finds it. When autonomous agen
 ## Links
 
 - Blog post: https://dev.to/edison_flores_6d2cd381b13/two-agent-trust-systems-zero-merged-code-the-marketnow-vibe-mutual-hop-3a8n
-- MarketNow code: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- MarketNow code: https://github.com/alicelabs-llc/marketnow
 - MarketNow ATC spec: https://marketnow.site/api/atc?action=spec
 - Vibe docs: https://vibes-coded.com/docs/AGENT_INSTALL.md
 - Vibe citation-join pattern: https://vibes-coded.com/patterns/CITATION_JOIN.md

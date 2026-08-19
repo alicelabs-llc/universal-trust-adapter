@@ -1,10 +1,10 @@
 # ATC SDK
 
-> **Issue and verify Agent Trust Cards in 5 minutes.** A tiny (~5KB), framework-agnostic SDK for the [ATC/1.0 specification](https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md). Works in any JavaScript runtime that supports `node:crypto` (Node.js >=18, Bun, Deno).
+> **Issue and verify Agent Trust Cards in 5 minutes.** A tiny (~5KB), framework-agnostic SDK for the [ATC/1.0 specification](https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md). Works in any JavaScript runtime that supports `node:crypto` (Node.js >=18, Bun, Deno).
 
 [![npm version](https://img.shields.io/npm/v/agent-trust-card.svg)](https://www.npmjs.com/package/agent-trust-card)
 [![License: AliceLabs Proprietary](https://img.shields.io/badge/License-Proprietary-red)](LICENSE)
-[![Spec: ATC/1.0](https://img.shields.io/badge/Spec-ATC%2F1.0-brightgreen)](https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md)
+[![Spec: ATC/1.0](https://img.shields.io/badge/Spec-ATC%2F1.0-brightgreen)](https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md)
 
 ---
 
@@ -12,7 +12,7 @@
 
 ATC (Agent Trust Card) is **SSL certificates for AI agents** — a cryptographic credential that lets an agent prove its identity, declare its capabilities, and carry its security audit evidence. Any peer agent can verify it offline without calling home.
 
-- **Spec**: [ATC/1.0](https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md) — 10 controls (8 required, 2 optional)
+- **Spec**: [ATC/1.0](https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md) — 10 controls (8 required, 2 optional)
 - **Crypto**: Ed25519 (RFC 8032) signatures + RFC 8785 JCS canonical JSON + SHA-256
 - **License**: MNNC-1.0 (AliceLabs LLC Proprietary). The spec is open; the SDK is proprietary.
 
@@ -127,7 +127,7 @@ Reconstructs a keypair from a saved private key. Useful for CAs that persist the
 
 ### `issueATC(caKeyPair, agentKeyPair, partialPayload)`
 
-Signs an ATC. Returns the complete, signed ATC document. See [ATC-006 in the spec](https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md#atc-006--signature) for the signature process.
+Signs an ATC. Returns the complete, signed ATC document. See [ATC-006 in the spec](https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md#atc-006--signature) for the signature process.
 
 ### `verifyATC(atc, options?)`
 
@@ -202,7 +202,7 @@ atc help                                    Show this message
 A conformant ATC/1.0 implementation MUST pass all 8 required controls. The conformance test suite is in [`test/conformance.mjs`](./test/conformance.mjs). Run it with:
 
 ```bash
-git clone https://github.com/edgarfloresguerra2011-a11y/marketnow.git
+git clone https://github.com/alicelabs-llc/marketnow.git
 cd marketnow/atc-sdk
 npm install
 npm test
@@ -217,7 +217,7 @@ See [`CONFORMANCE.md`](./CONFORMANCE.md) for the full conformance matrix.
 If your project implements ATC/1.0, you can add this badge to your README:
 
 ```markdown
-[![ATC Compatible](https://marketnow.site/badges/atc-compatible.svg)](https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md)
+[![ATC Compatible](https://marketnow.site/badges/atc-compatible.svg)](https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md)
 ```
 
 ![ATC Compatible](./badges/atc-compatible.svg)
@@ -229,8 +229,8 @@ If your project implements ATC/1.0, you can add this badge to your README:
 The market is converging on agent trust infrastructure from multiple directions — Microsoft AutoGen, OpenAI Cookbook, A2A Agent Cards, OpenA2A AIP, OATI, and others. ATC/1.0 is the first formal, versioned, testable specification for Agent Trust Cards.
 
 See:
-- [PRIOR-ART-TIMELINE.md](https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/PRIOR-ART-TIMELINE.md) — honest chronology of ATC and adjacent work
-- [SPEC.md](https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md) — the full specification
+- [PRIOR-ART-TIMELINE.md](https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/PRIOR-ART-TIMELINE.md) — honest chronology of ATC and adjacent work
+- [SPEC.md](https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md) — the full specification
 - [dev.to article](https://dev.to/edison_flores_6d2cd381b13/atc10-shipping-a-formal-spec-for-agent-trust-cards-instead-of-arguing-about-who-invented-them-h0l) — the strategic framing
 
 ---

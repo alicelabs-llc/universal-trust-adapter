@@ -3,7 +3,7 @@
 **Status**: Draft v1.0.0 — public for review
 **Issued**: 2026-08-10
 **Author**: Edison Flores, AliceLabs LLC
-**Repository**: https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/docs/atc-spec
+**Repository**: https://github.com/alicelabs-llc/marketnow/tree/master/docs/atc-spec
 **License**: MNNC-1.0 (AliceLabs LLC Proprietary) for the reference implementation; the specification itself is published under the [W3C Community Group Final Specification Agreement](https://www.w3.org/community/about/agreements/final/) terms for community contributions.
 **Prior art**: See [PRIOR-ART-TIMELINE.md](./PRIOR-ART-TIMELINE.md)
 
@@ -538,7 +538,7 @@ The ATC declares capabilities. **The runtime is responsible for enforcing them.*
 
 ## 8. Contributing
 
-PRs welcome at https://github.com/edgarfloresguerra2011-a11y/marketnow.
+PRs welcome at https://github.com/alicelabs-llc/marketnow.
 
 ### Contribution license
 
@@ -559,7 +559,7 @@ By contributing to ATC/1.0, you agree to release your contributions under the [W
 ```
 AliceLabs LLC. "ATC/1.0 — Agent Trust Card Protocol Specification."
 Version 1.0.0-draft. 2026-08-10.
-https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md
+https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md
 ```
 
 ---

@@ -21,7 +21,7 @@
 
 import crypto from 'crypto';
 
-const KEY_REGISTRY_URL = 'https://raw.githubusercontent.com/edgarfloresguerra2011-a11y/marketnow/master/_data/atc/ca-key-registry.json';
+const KEY_REGISTRY_URL = 'https://raw.githubusercontent.com/alicelabs-llc/marketnow/master/_data/atc/ca-key-registry.json';
 
 // In-memory cache for key registry
 let _keyRegistry = null;

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "v1.0",
   "agent": {
-    "name": "MarketNow \u2014 Agent Skill Exchange",
-    "description": "The largest MCP skill marketplace for AI agents. Browse 8,845+ verified MCP servers, each secured by Sentinel L2.5 gVisor sandbox security audit. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
+    "name": "MarketNow — Agent Skill Exchange",
+    "description": "The largest MCP skill marketplace for AI agents. Browse 9248+ verified MCP servers, each secured by Sentinel L2.5 gVisor sandbox security audit. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
     "url": "https://marketnow.site",
     "version": "4.0.0"
   },
@@ -44,7 +44,7 @@
           {
             "id": "skill-search",
             "name": "MCP Skill Search",
-            "description": "AI agents can search and retrieve MCP server configurations from 8,845+ verified skills. Supports natural language queries, category filtering, and security score thresholds.",
+            "description": "AI agents can search and retrieve MCP server configurations from 9248+ verified skills. Supports natural language queries, category filtering, and security score thresholds.",
             "commissionRate": 0.2,
             "referralEndpoints": {
               "register": "https://marketnow.site/api/agent/register",
@@ -80,7 +80,7 @@
         "No Malicious Code"
       ],
       "scoreRange": "0-6",
-      "totalScanned": 8845,
+      "totalScanned": 9248,
       "averageScore": 4.3,
       "passRate": "53.3%"
     }
@@ -106,5 +106,40 @@
       "solana",
       "bitcoin"
     ]
+  },
+  "audit_applied": {
+    "audit_date": "2026-08-19",
+    "audit_findings_addressed": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8"
+    ],
+    "audit_report": "AUDIT_REPORT.pdf (in repo root)",
+    "auditor": "Independent audit via Z.ai (not affiliated with AliceLabs LLC)",
+    "audit_scope": "Documented inconsistencies across agent.json, npm package.json, LICENSE files, README, and landing HTML."
+  },
+  "metrics": {
+    "skills_indexed": 9248,
+    "security_checks_performed": 1200000,
+    "malicious_tools_quarantined": 80,
+    "npm_versions_published": 15,
+    "npm_latest_version": "1.10.0",
+    "npm_first_release_date": "2026-06-29",
+    "npm_latest_release_date": "2026-08-09",
+    "github_org_created_at": "2026-03-30",
+    "as_of": "2026-08-19T00:00:00Z",
+    "source": "live API: https://marketnow.site/api/skills-lite.json + npm registry"
+  },
+  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 9,248 skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
+  "buyer_pricing": {
+    "model": "free",
+    "per_skill_fee": 0,
+    "subscription_fee": 0,
+    "explanation": "Buyers never pay MarketNow. All 9,248 skills are free to install."
   }
 }

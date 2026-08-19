@@ -21,12 +21,12 @@
  *
  * Env:
  *   MANDATES_GITHUB_TOKEN  — GitHub PAT with repo scope
- *   MANDATES_REPO          — default: edgarfloresguerra2011-a11y/marketnow
+ *   MANDATES_REPO          — default: alicelabs-llc/marketnow
  *   ATC_API_URL            — default: https://marketnow.site/api/atc
  */
 
 const GITHUB_TOKEN = process.env.MANDATES_GITHUB_TOKEN;
-const REPO = process.env.MANDATES_REPO || 'edgarfloresguerra2011-a11y/marketnow';
+const REPO = process.env.MANDATES_REPO || 'alicelabs-llc/marketnow';
 const BRANCH = 'master';
 const ATC_API_URL = process.env.ATC_API_URL || 'https://marketnow.site/api/atc';
 const DRY_RUN = process.argv.includes('--dry-run');

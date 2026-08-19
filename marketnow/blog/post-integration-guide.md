@@ -123,6 +123,6 @@ Tools: search_skills, get_skill, list_categories, get_manifest, get_install_comm
 
 - Spec: https://marketnow.site/api/atc?action=spec
 - OpenAPI: https://marketnow.site/api/openapi.yaml
-- GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- GitHub: https://github.com/alicelabs-llc/marketnow
 - npm: https://www.npmjs.com/package/marketnow-mcp
 - Submit: https://marketnow.site/submit

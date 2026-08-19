@@ -348455,7 +348455,7 @@
         "estimated_cost": "free"
       },
       "usage": "",
-      "system_prompt": "# marketnow\nSource: https://github.com/edgarfloresguerra2011-a11y/marketnow\nTrust layer for agent commerce. 8,845 MCP skills, Sentinel L2.5 gVisor sandbox security audits, AP2 mandates, x402 payments. AliceLabs LLC Proprietary."
+      "system_prompt": "# marketnow\nSource: https://github.com/alicelabs-llc/marketnow\nTrust layer for agent commerce. 8,845 MCP skills, Sentinel L2.5 gVisor sandbox security audits, AP2 mandates, x402 payments. AliceLabs LLC Proprietary."
     },
     "capabilities": {
       "execution_context": "local_runtime",
@@ -348476,7 +348476,7 @@
     },
     "source": {
       "type": "github",
-      "url": "https://github.com/edgarfloresguerra2011-a11y/marketnow",
+      "url": "https://github.com/alicelabs-llc/marketnow",
       "note": "Real MCP server. 1 stars. Language: JavaScript.",
       "stars": 1,
       "language": "JavaScript",

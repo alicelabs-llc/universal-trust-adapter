@@ -18,7 +18,7 @@ The audit pipeline (called Sentinel):
 - L2 v2.0: Active probe — sends real MCP protocol messages (initialize, tools/list, tools/call) with 60+ adversarial inputs across 6 categories: path traversal, SSRF, SQL injection, command injection, prompt injection, credential access
 - L2.5: gVisor sandbox — runs the server in a userspace kernel (what Google uses for Cloud Run). The server never touches the host kernel. Catches container escapes that standard Docker misses.
 
-I tested it on Anthropic's official filesystem MCP server. It scored 10/10 (low risk). The full audit result is public: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/_data/l2_results/mn-mcp-filesystem.json
+I tested it on Anthropic's official filesystem MCP server. It scored 10/10 (low risk). The full audit result is public: https://github.com/alicelabs-llc/marketnow/blob/master/_data/l2_results/mn-mcp-filesystem.json
 
 8,760+ servers indexed (all real — we deleted 6,092 synthetic entries in June). Source: GitHub (40+ search queries weekly), npm, Smithery.
 
@@ -39,7 +39,7 @@ I'd love feedback on the audit methodology — especially from people who have b
 
 ### Comment 1 (self-reply, immediately after posting):
 
-Source code for the audit runner (not the analyzer — that's proprietary): https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/scripts
+Source code for the audit runner (not the analyzer — that's proprietary): https://github.com/alicelabs-llc/marketnow/tree/master/scripts
 
 The key files:
 - l2-gvisor-sandbox.sh — installs gVisor, runs the container with --runtime=runsc

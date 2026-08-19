@@ -45,7 +45,7 @@
  *   console.log(result.valid);  // → true
  *   console.log(result.controls_passed);  // → ['ATC-001', 'ATC-002', ..., 'ATC-008']
  *
- * Spec: https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/docs/atc-spec/SPEC.md
+ * Spec: https://github.com/alicelabs-llc/marketnow/blob/master/docs/atc-spec/SPEC.md
  * License: MNNC-1.0 (AliceLabs LLC Proprietary)
  */
 

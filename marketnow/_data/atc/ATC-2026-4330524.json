@@ -39,7 +39,7 @@
   },
   "signature": {
     "algorithm": "Ed25519 (RFC 8032)",
-    "value": "36a972828539d80ea875d00523ccc5525266d7063719d83437309e5c0a071e404da1559e2ddfff4292ffa07a49e6555e33047b5c55e8ab19e04bb8a5b787b80b",
+    "value": "36a972828539d80ea875d00523ccc5525266d9,248719d83437309e5c0a071e404da1559e2ddfff4292ffa07a49e6555e33047b5c55e8ab19e04bb8a5b787b80b",
     "signed_by": "MarketNow Sentinel CA",
     "signed_at": "2026-07-27T01:05:30.524Z",
     "canonical_json": "JSON.stringify(payload, Object.keys(payload).sort())",

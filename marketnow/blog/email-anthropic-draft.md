@@ -44,7 +44,7 @@ We charge $0 for all of this. The audit, the ATC, the catalog, the MCP server (1
 - ATC spec: https://marketnow.site/api/atc?action=spec
 - CA public key: https://marketnow.site/api/atc?action=ca-key
 - Verify an ATC: https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-7777670
-- GitHub: https://github.com/edgarfloresguerra2011-a11y/marketnow
+- GitHub: https://github.com/alicelabs-llc/marketnow
 - npm: https://www.npmjs.com/package/marketnow-mcp
 - Blog post (mutual hop with Vibe): https://dev.to/edison_flores_6d2cd381b13/two-agent-trust-systems-zero-merged-code-the-marketnow-vibe-mutual-hop-3a8n
 

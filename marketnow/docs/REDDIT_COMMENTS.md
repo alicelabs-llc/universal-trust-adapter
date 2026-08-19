@@ -43,7 +43,7 @@ Plus gVisor sandbox (userspace kernel — the tech behind Google Cloud Run). The
 
 8,764 servers audited so far. 3 were leaking environment variables. 12 had hardcoded API keys. 1 tried ptrace(), 1 tried bpf() (both blocked by gVisor).
 
-Results are public: github.com/edgarfloresguerra2011-a11y/marketnow
+Results are public: github.com/alicelabs-llc/marketnow
 
 The protocol itself isn't the joke — the lack of security tooling around it is. That's what we're fixing.
 ```
@@ -70,7 +70,7 @@ Plus L2.5: gVisor sandbox (userspace kernel isolation). The server never touches
 
 Findings: 3 servers leaked env vars via tools/call (args passed to eval()). 12 had hardcoded API keys. 1 tried ptrace(), 1 tried bpf() — both blocked by gVisor.
 
-Full results public: github.com/edgarfloresguerra2011-a11y/marketnow
+Full results public: github.com/alicelabs-llc/marketnow
 
 Methodology: marketnow.site/security
 ```
@@ -142,5 +142,5 @@ We built a 6-layer audit pipeline (Sentinel) for this:
 Every server gets a signed SHA-256 certificate. Clients can verify before connecting.
 
 Full methodology: marketnow.site/security
-Code: github.com/edgarfloresguerra2011-a11y/marketnow
+Code: github.com/alicelabs-llc/marketnow
 ```

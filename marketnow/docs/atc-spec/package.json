@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MNNC-1.0",
   "type": "commonjs",
   "dependencies": {
     "canonicalize": "^3.0.0"

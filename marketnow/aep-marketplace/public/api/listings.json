@@ -7,7 +7,7 @@
   "summary": "Tracks the consistency of every external directory that lists MarketNow. An agent that discovers MarketNow via an external directory should see the same honest positioning as on marketnow.site.",
   "canonical_source_of_truth": {
     "url": "https://marketnow.site/api/agent.json",
-    "skills_count": 8845,
+    "skills_count": 9,248,
     "payment": "USDC on Base (chainId 8453) only — NOT ETH/BSC/SOL/BTC",
     "positioning": "Trust layer for agent commerce (NOT 'largest marketplace')",
     "license": "MNNC-1.0 (source-available, non-commercial) — NOT MIT",
@@ -23,7 +23,7 @@
       "version": "1.4.0",
       "last_checked": "2026-07-04",
       "what_we_fixed": [
-        "v1.2.0: description said '8,845+ verified skills' → now says '8,845 MCP-compatible skills'",
+        "v1.2.0: description said '9,248+ verified skills' → now says '9,248 MCP-compatible skills'",
         "v1.3.0: added 'trust layer for agent commerce' positioning",
         "v1.4.0: description now includes 'Sentinel L2, x402 (USDC on Base), AP2 mandates, AliceLabs LLC'",
         "v1.4.0: removed 'open-source' and 'mit' keywords (license is MNNC-1.0, not MIT)",
@@ -39,10 +39,10 @@
       "last_checked": "2026-07-04",
       "what_we_fixed": [
         "Smithery pulls from our server-card.json at /.well-known/mcp/server-card.json",
-        "Our server-card.json is up to date with current numbers (8,845 skills, USDC on Base, MNNC-1.0)"
+        "Our server-card.json is up to date with current numbers (9,248 skills, USDC on Base, MNNC-1.0)"
       ],
       "known_discrepancies": [
-        "Smithery HTML still shows '8,845' in some cached views (their crawler may not have re-indexed yet)"
+        "Smithery HTML still shows '9,248' in some cached views (their crawler may not have re-indexed yet)"
       ],
       "notes": "Smithery quality score: 84/100. Listing should reflect current data once Smithery re-crawls our server-card.json. Their cache TTL is typically 24-48h."
     },
@@ -52,7 +52,7 @@
       "status": "stale",
       "last_checked": "2026-07-04",
       "known_discrepancies": [
-        "Listing says '8,845 verified MCP-compatible skills' — should be 8,845",
+        "Listing says '9,248 verified MCP-compatible skills' — should be 9,248",
         "Listing says 'agent-to-agent crypto payments (ETH/BSC/SOL/BTC)' — we only support USDC on Base, NOT ETH/BSC/SOL/BTC directly",
         "Listing says 'open registry with no manual approval needed' — we removed this framing; human-in-loop is now the default for mandates",
         "Listing says 'largest open MCP skill marketplace' — we no longer claim to be the largest; we position as the trust layer",
@@ -76,7 +76,7 @@
         "Glama.ai now returns results for 'MarketNow MCP' search",
         "Glama crawls our server-card.json and GitHub repo for metadata"
       ],
-      "notes": "Glama.ai appears to have indexed MarketNow. Verify the listing shows current numbers (8,845 skills, USDC on Base, MNNC-1.0). If stale, Glama's crawler should refresh within 7-14 days."
+      "notes": "Glama.ai appears to have indexed MarketNow. Verify the listing shows current numbers (9,248 skills, USDC on Base, MNNC-1.0). If stale, Glama's crawler should refresh within 7-14 days."
     },
     {
       "name": "PulseMCP",
@@ -101,7 +101,7 @@
   ],
   "contact": {
     "email": "info@alicelabs.site",
-    "github": "https://github.com/edgarfloresguerra2011-a11y/marketnow",
+    "github": "https://github.com/alicelabs-llc/marketnow",
     "website": "https://marketnow.site"
   },
   "related_pages": {

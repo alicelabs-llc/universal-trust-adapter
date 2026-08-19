@@ -35,7 +35,7 @@ The conformance test suite is in [`test/conformance.mjs`](./test/conformance.mjs
 Run the suite:
 
 ```bash
-git clone https://github.com/edgarfloresguerra2011-a11y/marketnow.git
+git clone https://github.com/alicelabs-llc/marketnow.git
 cd marketnow/atc-sdk
 npm install
 npm test
@@ -85,7 +85,7 @@ These are CC0 (public domain). Use them freely.
 If your project passes conformance, you can display this badge:
 
 ```markdown
-[![ATC Compatible](https://marketnow.site/badges/atc-compatible.svg)](https://github.com/edgarfloresguerra2011-a11y/marketnow/blob/master/atc-sdk/CONFORMANCE.md)
+[![ATC Compatible](https://marketnow.site/badges/atc-compatible.svg)](https://github.com/alicelabs-llc/marketnow/blob/master/atc-sdk/CONFORMANCE.md)
 ```
 
 The badge SVG is at [`badges/atc-compatible.svg`](./badges/atc-compatible.svg).

@@ -67,7 +67,7 @@
 # legal@alicelabs.site
 #
 # For bug reports:
-# https://github.com/edgarfloresguerra2011-a11y/marketnow/issues
+# https://github.com/alicelabs-llc/marketnow/issues
 
 # ─── Crawler identification ────────────────────────────────────────────────
 # We log and welcome these AI crawlers (no rate limiting beyond standard):

@@ -30,6 +30,6 @@ jobs:
       - name: Generate ATC index
         env:
           MANDATES_GITHUB_TOKEN: ${{ secrets.MANDATES_GITHUB_TOKEN }}
-          MANDATES_REPO: edgarfloresguerra2011-a11y/marketnow
+          MANDATES_REPO: alicelabs-llc/marketnow
         run: |
           node scripts/generate-atc-index.mjs
