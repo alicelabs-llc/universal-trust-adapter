@@ -1,0 +1,60 @@
+{
+  "fixture_id": "16-invalid-policy-version",
+  "attack_vector": "invalid_policy_version_v2",
+  "description": "v2.0 requires policy_version to be a valid semver. This card has policy_version='invalid'. Verifiers MUST reject.",
+  "card": {
+    "card_id": "ATC-FIXTURE-V2-FAIL-16",
+    "status": "active",
+    "payload": {
+      "card_id": "ATC-FIXTURE-V2-FAIL-16",
+      "schema_version": "2.0.0",
+      "decision_authority": "consumer",
+      "agent_id": "test_v2_agent",
+      "agent_name": "Test v2 Agent",
+      "identity": {
+        "public_key": "MCowBQYDK2VwAyEATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+        "key_algorithm": "Ed25519"
+      },
+      "trust": {
+        "sentinel_review_score": 8,
+        "sentinel_score": 8,
+        "audit_layers_passed": {
+          "L1.5": true,
+          "L2.5": true
+        },
+        "composite_trust": 8,
+        "risk_level": "low",
+        "certificate_id": "mn-cert-atc-fixture-v2-fail-16"
+      },
+      "capabilities": {
+        "provides": [
+          "search"
+        ],
+        "protocol_language": "mcp",
+        "translate": true
+      },
+      "payment": {
+        "method": "x402 + USDC on Base L2",
+        "wallet_address": "0x1234"
+      },
+      "metadata": {
+        "issued_at": "2026-08-19T00:00:00Z",
+        "expires_at": "2027-08-19T00:00:00Z",
+        "issuer": "MarketNow Sentinel CA",
+        "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-FIXTURE-V2-FAIL-16"
+      }
+    },
+    "signature": {
+      "algorithm": "Ed25519 (RFC 8032)",
+      "value": "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab",
+      "signed_by": "MarketNow Sentinel CA",
+      "signed_at": "2026-08-19T00:00:00Z",
+      "canonical_json": "RFC_8785_JCS",
+      "ca_key_id": "MCowBQYDK2VwAyEA",
+      "evidence_hash": "sha256:1212121212121212121212121212121212121212121212121212121212121212",
+      "policy_version": "invalid"
+    }
+  },
+  "expected_outcome": "invalid",
+  "expected_verify_result": false
+}

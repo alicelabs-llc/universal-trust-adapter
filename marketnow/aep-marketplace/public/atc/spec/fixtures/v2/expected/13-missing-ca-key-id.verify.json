@@ -1,0 +1,6 @@
+{
+  "fixture_id": "13-missing-ca-key-id",
+  "expected_outcome": "invalid",
+  "expected_verify_result": false,
+  "expected_verify_reason": "v2.0 requires ca_key_id in every signature block. This card is missing it. v1 allowed optional ca_key_id; v2 makes it mandatory. Verifiers MUST reject."
+}

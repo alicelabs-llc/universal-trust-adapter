@@ -16,8 +16,8 @@
   },
   {
     "file": "lib/base-rpc-pool.mjs",
-    "sha": "75b81f9c370992192862b62c6aab653a3eef6606",
-    "size": 3574
+    "sha": "2006ec38344da4d14feb0003b63a81b3dbdba34f",
+    "size": 4697
   },
   {
     "file": "api/stripe-webhook.js",
@@ -346,8 +346,8 @@
   },
   {
     "file": "public/egress-allowlist.json",
-    "sha": "bba9edb118d22779997af88ead175ac26dd1eb4d",
-    "size": 1785
+    "sha": "d9d8d2a9f535c75ecf50ca2d7abbd687003e5a75",
+    "size": 1912
   },
   {
     "file": "public/sitemap-agents.xml",
@@ -436,7 +436,7 @@
   },
   {
     "file": "public/api/agent.json",
-    "sha": "17f5f7c30123bac1c6b8be228de0578a4617ffa0",
+    "sha": "b61d4364ed8fb36f2405441c4ee863bd4113745a",
     "size": 5047
   },
   {
@@ -511,7 +511,7 @@
   },
   {
     "file": "public/api/manifest.json",
-    "sha": "79dbb5cfd494f7a3872c902d28a74ad92e073564",
+    "sha": "d623caa328422692c25fe0c8ba87d2ebf69bc9b7",
     "size": 865
   },
   {
@@ -2035,14 +2035,9 @@
     "size": 581
   },
   {
-    "file": "vercel.json",
-    "sha": "50f80005ec8e68bed7c092405a173fc7754c5273",
-    "size": 9526
-  },
-  {
     "file": "package.json",
-    "sha": "8bb646597223c2c5d08896c0dc6b4baedb1fbd5a",
-    "size": 1299
+    "sha": "aa5f50c19d639c2ab80eec05257fcfe72c2d90af",
+    "size": 1641
   },
   {
     "file": "_headers",
@@ -2528,5 +2523,525 @@
     "file": "api/atc.js",
     "sha": "7688cc0bf30817a0d87a36eef7557c2f184470e8",
     "size": 95885
+  },
+  {
+    "file": "lib/crypto-v2.mjs",
+    "sha": "85cbd7fb0cf6a480a051a823965d37d68e5c5f49",
+    "size": 10204
+  },
+  {
+    "file": "lib/supabase-client.mjs",
+    "sha": "c02ccf2d05e304b1e16cd8462577ddad478df9c9",
+    "size": 15609
+  },
+  {
+    "file": "lib/license-verify-client.mjs",
+    "sha": "8a454a7666e8599671da2ed8ed27947c687ff01d",
+    "size": 17758
+  },
+  {
+    "file": "lib/license-ed25519.mjs",
+    "sha": "432711b4c5281be5d71983d8bd22917582ff8589",
+    "size": 19094
+  },
+  {
+    "file": "lib/rate-limit-redis.mjs",
+    "sha": "a0ee22603a6eab6e94f00be3fc008188b2bb198a",
+    "size": 7444
+  },
+  {
+    "file": "lib/blockchain-rpc.mjs",
+    "sha": "fc86c8ca1afdfaa95109d1f013aa561ca95eb1ec",
+    "size": 6933
+  },
+  {
+    "file": "lib/redis.mjs",
+    "sha": "befb758eace70575dd0a0903f0a0b5d2070a260d",
+    "size": 5630
+  },
+  {
+    "file": "lib/supabase.mjs",
+    "sha": "4a3985e20b03b91b60102fcdbdf915a0fe601a0b",
+    "size": 11424
+  },
+  {
+    "file": "public/atc/spec/MIGRATION_V1_TO_V2.md",
+    "sha": "100486942ef7e615080b3fe772ab37ec956263ea",
+    "size": 2324
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/13-missing-ca-key-id.verify.json",
+    "sha": "15a6ad05d05ff38155ab4861222a9f81de6628df",
+    "size": 294
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/14-old-canonicalization-method.verify.json",
+    "sha": "6fea50bcb139c032dff1f4a6ecdc24cffc386734",
+    "size": 349
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/16-invalid-policy-version.verify.json",
+    "sha": "14db6af00ad8addd00809107a74cafa9835c4c66",
+    "size": 261
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/15-missing-evidence-hash.verify.json",
+    "sha": "180e80bb11e82d7069ce27861fb5cef11b3edafc",
+    "size": 248
+  },
+  {
+    "file": "lib/blockchain-rpc-pool.mjs",
+    "sha": "1cca5e1cb0833c6339a72f0b8f9f778fb5424f23",
+    "size": 18083
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/13-missing-ca-key-id.json",
+    "sha": "af9dfbb4ea9ba5fa6c16a32790b70116148585fc",
+    "size": 2092
+  },
+  {
+    "file": "public/atc/spec/MIGRATION-v1-to-v2.md",
+    "sha": "f316069820eef234c29e5efb4e8f1e5d4e471653",
+    "size": 26771
+  },
+  {
+    "file": "public/atc/spec/atc-2.0.json",
+    "sha": "88e345ddf747acd3874af65dec222241aeeeb89d",
+    "size": 26118
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/MANIFEST.json",
+    "sha": "ef548cbe2aae0e8086412f8b9f8a5a1403c1d2ce",
+    "size": 15208
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/16-invalid-policy-version.json",
+    "sha": "4ddb01354dd2a189fc629d0213cce1cf05546dfb",
+    "size": 2061
+  },
+  {
+    "file": "public/atc/spec/SPEC-v2.md",
+    "sha": "5ebb9c3fdf25fc968a328c6f3c58b9af5abf7592",
+    "size": 55629
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/15-missing-evidence-hash.json",
+    "sha": "384c917d5bf46552333c1de9f7c11088f7d49114",
+    "size": 2050
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/14-old-canonicalization-method.json",
+    "sha": "21b1bd8444987cb1a3388af75a0e1fea4b2aa060",
+    "size": 2204
+  },
+  {
+    "file": "db/supabase_schema.sql",
+    "sha": "4f3810608e747ecf3fae42d32b7ce9e5885de345",
+    "size": 12617
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/verify-fixtures.mjs",
+    "sha": "0255d45a71266f86f35e81c823d5ce7466f49d73",
+    "size": 13800
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/verify-fixtures.py",
+    "sha": "a579d1d10218cf862042f47f3472620df22eb961",
+    "size": 10563
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/README.md",
+    "sha": "41e8ae1e075b82ef9c83723bb8daca0161e2675e",
+    "size": 4108
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/08-real-card-ATC-2026-3951137.json",
+    "sha": "34e360cd957bac6af0913fc00f58e9d042348b2b",
+    "size": 2921
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/17-real-card-ATC-2026-4327228.json",
+    "sha": "4b664f85e4ca50001dc5479a9d25af98159b21a2",
+    "size": 2910
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/07-real-card-ATC-2026-3550025.json",
+    "sha": "9b854f9d4ffe2f693677545b46b36d154ddd7778",
+    "size": 2905
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/13-real-card-ATC-2026-4036129.json",
+    "sha": "88b3faa340a2a35941ee11bc7c11d5ce478d57e9",
+    "size": 2918
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/09-real-card-ATC-2026-3968185.json",
+    "sha": "3257dda89c71a19d0eba8e1377ecf0e73ac365e9",
+    "size": 2909
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/04-real-card-ATC-2026-1178769.json",
+    "sha": "e51794541bc09204d0cf2e81fa1ad949fdbb8973",
+    "size": 2836
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/12-real-card-ATC-2026-4018808.json",
+    "sha": "aca40c2ea400bcaefdc666987548b30aec187f8d",
+    "size": 2912
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/03-real-card-ATC-2026-0995637.json",
+    "sha": "7e085af1925fa05f2b998fcb1f4a7c28e19fc9ba",
+    "size": 2852
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/10-real-card-ATC-2026-3984620.json",
+    "sha": "fc088dc33836cfff184ac6a0d916e0ae64c3d64e",
+    "size": 2921
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/14-real-card-ATC-2026-4299487.json",
+    "sha": "b4fb814e3bac16e9b027ffaee1716636d74c8c33",
+    "size": 2850
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/02-real-card-ATC-2026-0589270.json",
+    "sha": "c0fe48690c93330964faa3158ee091a5a138001c",
+    "size": 2848
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/11-real-card-ATC-2026-4002682.json",
+    "sha": "38875987f10cbe9033a7db8cbc302d54d9d6de77",
+    "size": 2917
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/15-real-card-ATC-2026-4304580.json",
+    "sha": "80ca50efd1a838eeab777f6b729428ebadaaa640",
+    "size": 2850
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/16-real-card-ATC-2026-4305564.json",
+    "sha": "722084d61f571e4d48fc23a5e39f70d2dc7f2709",
+    "size": 2850
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/05-real-card-ATC-2026-1361729.json",
+    "sha": "6bf1e6f66364db6633c0fdb58f29789ffc04ed4e",
+    "size": 2836
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail-against-orphaned-ca/06-real-card-ATC-2026-1700724.json",
+    "sha": "b073ace648ab8a8314e8d3d7ac3d5418aa51f475",
+    "size": 2921
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-pass/README.md",
+    "sha": "ce34e7bd384014f68d7356fd374516c1bb5b888e",
+    "size": 1565
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/12-low-trust.verify.json",
+    "sha": "4ab88da35d26ed1f1a258e673f5f563d28dd0a7b",
+    "size": 1301
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/01-minimal-card.verify.json",
+    "sha": "d2c8b2dd767a111696ee9417d32d69537879416d",
+    "size": 1306
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/14-max-trust.verify.json",
+    "sha": "5cdd5d2cfa5e3854bd94ce5588ef799ca29a0c5e",
+    "size": 1303
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/06-tampered-agent-id.verify.json",
+    "sha": "4ebe883bf3f13dfcee184b3bc83abefb9ae53117",
+    "size": 2760
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/12-future-issued-at.verify.json",
+    "sha": "922f6fc7e0f00bbd0c13c1f0a0b24824bffc0be7",
+    "size": 1775
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/04-with-nested-trust-block.verify.json",
+    "sha": "2b17fd2f9a8a29ed2cb30f494f4e7bb18fa2925a",
+    "size": 1317
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/12-real-card-ATC-2026-4018808.verify.json",
+    "sha": "457b14576acbca2949ca14d627fe23c7e84867c2",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/06-real-card-ATC-2026-1700724.verify.json",
+    "sha": "e6c498e279ef28613e8797569933bb68481fa3d1",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/02-high-trust-card.verify.json",
+    "sha": "722ae9b3eb7291cb3f14cc2f861c7789d756cd6a",
+    "size": 1306
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/03-real-card-ATC-2026-0995637.verify.json",
+    "sha": "0d994c12a5e128a44b6bb8b16f6a28d50da9ef57",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/11-card-id-mismatch.verify.json",
+    "sha": "09903a1c1dbef175c6756599d985d95752abe44a",
+    "size": 2049
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/08-no-wallet.verify.json",
+    "sha": "6bc4992d0d478a8970ab50438e3b319277759c03",
+    "size": 1234
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/03-with-sentinel-score.verify.json",
+    "sha": "8fe6f0f71b70e122094e0f713737dfbc6a019659",
+    "size": 1313
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/18-no-capabilities-provides.verify.json",
+    "sha": "5a77e930e337f761e733f84d4b6dcf1c2bbfeb88",
+    "size": 1296
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/16-real-card-ATC-2026-4305564.verify.json",
+    "sha": "402c8381b5f787ad7c661f1fe0a2df06df77f100",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/05-multiple-capabilities.verify.json",
+    "sha": "d88f432216f0d87c2dd2b086e02b5cee435c02ef",
+    "size": 1345
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/14-real-card-ATC-2026-4299487.verify.json",
+    "sha": "662e5dd5b96bded263fbc48053483997ef57693d",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/17-recent-issued.verify.json",
+    "sha": "f5852ec95c0394094e3dcd1e580403df2c2f9571",
+    "size": 1304
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/07-a2a-protocol.verify.json",
+    "sha": "e9735efae0b810b6718fe22f04063129ee4000a7",
+    "size": 1303
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/05-real-card-ATC-2026-1361729.verify.json",
+    "sha": "2765e4599eb5d9c31166213845a7faae3f7a4d46",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/03-revoked-card.verify.json",
+    "sha": "71c4d9d8243e7869b881ba8f39f7701c5ab273d5",
+    "size": 2320
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/10-special-chars-in-name.verify.json",
+    "sha": "44d476ccbfd4955ebb73435804847032fdfd0773",
+    "size": 1335
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/06-empty-capabilities.verify.json",
+    "sha": "25e658b2c547377cb270e3ed02509ca7e9e97dca",
+    "size": 1290
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/10-real-card-ATC-2026-3984620.verify.json",
+    "sha": "2c778668477af6d2c8f3d842b0f7c4ff28ed2be2",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/15-with-url-in-revocation.verify.json",
+    "sha": "c23896aa8149065c1fea9b99199409383160ecbc",
+    "size": 1322
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/05-expired-card.verify.json",
+    "sha": "461dc39d6cb0557aeb2cca41160a63d567df48ba",
+    "size": 1716
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/04-canonicalization-mismatch.verify.json",
+    "sha": "57aa1f924636f1bd261e68c79ab8092b758aaed8",
+    "size": 2451
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/07-tampered-public-key.verify.json",
+    "sha": "4b9e66cb5d84de9a28820ed16003772222084e54",
+    "size": 2753
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/19-translate-true.verify.json",
+    "sha": "33957354a21e662cf5205422b9cf40280593528e",
+    "size": 1305
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/17-real-card-ATC-2026-4327228.verify.json",
+    "sha": "f3d850a23cc050d239cc31d0c02eb5f000dbc610",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/09-invalid-signature-format.verify.json",
+    "sha": "886db4dfa8d111c31ca91e52adefeca3e765689c",
+    "size": 1950
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/02-rotated-key.verify.json",
+    "sha": "07805896422740ab8a29fffb6e31d8454e7ce146",
+    "size": 2284
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/01-tampered-nested-field.verify.json",
+    "sha": "2f4939ab5c4e69b66a99bad076ada70cccb7f9ec",
+    "size": 2936
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/04-real-card-ATC-2026-1178769.verify.json",
+    "sha": "ad2e32b9c6443d88797589bef1bd6c611c918ebc",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/15-real-card-ATC-2026-4304580.verify.json",
+    "sha": "99f1f15fcc4246a0471e312c3d596befeb511c37",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/08-real-card-ATC-2026-3951137.verify.json",
+    "sha": "6ae37b452008aaa3412c11e19d2a52c6edfe6177",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/11-real-card-ATC-2026-4002682.verify.json",
+    "sha": "ad84129a1a2983d75ea30bd8947bb299464a1ce2",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/13-zero-trust.verify.json",
+    "sha": "6f7755164d60c1bb845de1b5155184c4d1713b0b",
+    "size": 1309
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/13-real-card-ATC-2026-4036129.verify.json",
+    "sha": "8bb55ee4425e594eb7b396b812f1f7eba58b9850",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/07-real-card-ATC-2026-3550025.verify.json",
+    "sha": "0bbe8a788d7bd9f57e6774e39412c62c3bd22090",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/08-tampered-wallet-address.verify.json",
+    "sha": "1e36ab1cae004e27f5886a049148781aaef34df6",
+    "size": 2837
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/20-realistic-full.verify.json",
+    "sha": "1661cde6814fc96ba48f96696874c962bb684edf",
+    "size": 1327
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/09-long-agent-name.verify.json",
+    "sha": "b586226434da4c8986f9fdb14853a7ad089962f2",
+    "size": 1396
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/11-unicode-agent-name.verify.json",
+    "sha": "d76baf836bf4b734ffb2aad10a674a132846db1c",
+    "size": 1379
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/16-future-expiry.verify.json",
+    "sha": "6b2ae1b8fc793817a0fe744685cf1240cea6fa3b",
+    "size": 1304
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/09-real-card-ATC-2026-3968185.verify.json",
+    "sha": "2ba97020fec3750db157cc7afaee7140ab4d367c",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/10-wrong-signature-algorithm.verify.json",
+    "sha": "58377d18a8d3bb14eee103ffb8d54c096a0c471d",
+    "size": 2463
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/expected/02-real-card-ATC-2026-0589270.verify.json",
+    "sha": "db452b27f5826b536a9d14facfbdd99cc290b9ec",
+    "size": 688
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/06-tampered-agent-id.json",
+    "sha": "3a0d1790693232fa472106e2f3788e910e6cb382",
+    "size": 2694
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/03-revoked-card.json",
+    "sha": "2ce844b4f0acaf4168d8d418d82a7c97814b186e",
+    "size": 2141
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/07-tampered-public-key.json",
+    "sha": "4a4486bb730f40eecdd5b96f88ef4bdd238e3784",
+    "size": 2687
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/02-rotated-key.json",
+    "sha": "1a9ee718d30e2aa8867fa49e62c01bd3ee7d8b42",
+    "size": 2103
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/01-tampered-nested-field.json",
+    "sha": "aadefbfbb5b4feea0e23e249e25a5a39d77ae4f8",
+    "size": 2870
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/10-wrong-signature-algorithm.json",
+    "sha": "9160986cd2aa157e86afbafcbbe7ba6749aae20e",
+    "size": 2278
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/05-expired-card.json",
+    "sha": "c6ac1e550b30f13b7c48eaa89e90043ed0550577",
+    "size": 1498
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/08-tampered-wallet-address.json",
+    "sha": "fd0298eaae860cbe7fbd2c2f764b5fe04997fdd8",
+    "size": 2771
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/09-invalid-signature-format.json",
+    "sha": "927da8576fc4909949322f52d3a9478c68a78a4f",
+    "size": 1765
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/12-future-issued-at.json",
+    "sha": "b4e1298efe49b2cc8f4c9ef7d43ed4e776ac86ea",
+    "size": 1557
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/11-card-id-mismatch.json",
+    "sha": "116652f0d62ba20057b653f1c283794b6758a46a",
+    "size": 1864
+  },
+  {
+    "file": "public/atc/spec/fixtures/v2/must-fail/04-canonicalization-mismatch.json",
+    "sha": "100da84bd5d74a6501c8f30bb9b95de35ea24a21",
+    "size": 2270
+  },
+  {
+    "file": "vercel.json",
+    "sha": "400a62d3502678e0623122bb4ec40b6cd144eaa1",
+    "size": 9586
   }
 ]

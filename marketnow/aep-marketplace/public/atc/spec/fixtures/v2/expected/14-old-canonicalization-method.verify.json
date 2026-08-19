@@ -1,0 +1,6 @@
+{
+  "fixture_id": "14-old-canonicalization-method",
+  "expected_outcome": "invalid",
+  "expected_verify_result": false,
+  "expected_verify_reason": "v2.0 only accepts canonicalization_method=RFC_8785_JCS. This card uses the old ad-hoc JSON.stringify(payload, Object.keys(payload).sort()) method, which is deprecated in v2. Verifiers MUST reject."
+}

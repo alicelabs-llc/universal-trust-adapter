@@ -9,17 +9,17 @@
   "automaticAliases": [
     "aep-marketplace-edisons-projects-b0f771d8.vercel.app"
   ],
-  "bootedAt": 1787167800938,
-  "buildingAt": 1787167801911,
+  "bootedAt": 1787175004332,
+  "buildingAt": 1787175005301,
   "buildSkipped": false,
-  "createdAt": 1787167800938,
+  "createdAt": 1787175004332,
   "creator": {
     "uid": "wdzX8L5okHF4AQO444EPPA8h",
     "username": "eddyflores100-3754"
   },
   "deletedAt": null,
-  "id": "dpl_4GZq8gZoFVuLjf4izAtfEr3PGvXc",
-  "initReadyAt": 1787167827697,
+  "id": "dpl_ErqRty9kSjFjts972MrqeasyG5uR",
+  "initReadyAt": 1787175031009,
   "name": "aep-marketplace",
   "meta": {
     "lambdaRuntimeStats": "{\"nodejs\":12}"
@@ -31,7 +31,7 @@
     "framework": "vite"
   },
   "public": false,
-  "ready": 1787167827697,
+  "ready": 1787175031009,
   "readyState": "READY",
   "readySubstate": "PROMOTED",
   "regions": [
@@ -45,7 +45,7 @@
     "slug": "edisons-projects-b0f771d8"
   },
   "type": "LAMBDAS",
-  "url": "aep-marketplace-4gkvxbthj-edisons-projects-b0f771d8.vercel.app",
+  "url": "aep-marketplace-q3v1kwyap-edisons-projects-b0f771d8.vercel.app",
   "version": 2,
   "previewCommentsEnabled": true,
   "oidcTokenClaims": {
@@ -62,64 +62,64 @@
   },
   "lambdas": [
     {
-      "id": "bld_ggtihv3j9",
-      "createdAt": 1787167800666,
+      "id": "bld_rhxuwgcnd",
+      "createdAt": 1787175004056,
       "entrypoint": ".",
       "readyState": "READY",
-      "readyStateAt": 1787167800666,
+      "readyStateAt": 1787175004056,
       "output": [
         {
-          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-d8d26db4be3571f261f77001d64d787fca__",
-          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-d8d26db4be3571f261f77001d64d787fca"
+          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-726099708e52d1ce49f15aed00e4429c2b__",
+          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-726099708e52d1ce49f15aed00e4429c2b"
         },
         {
-          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-6ec189cfd44c63c4539d424edb4a76e314__",
-          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-6ec189cfd44c63c4539d424edb4a76e314"
+          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-43eabfa9788523ed66147dc92bdb584f55__",
+          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-43eabfa9788523ed66147dc92bdb584f55"
         },
         {
-          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-5a6a744eca2ec0fc250a07b5c2fab241ee__",
-          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-5a6a744eca2ec0fc250a07b5c2fab241ee"
+          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-f6a8ff0b9dcb19392765d315c2fd994236__",
+          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-f6a8ff0b9dcb19392765d315c2fd994236"
         },
         {
-          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-7f121935ef9dd9cbc8d7338b1f893778a3__",
-          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-7f121935ef9dd9cbc8d7338b1f893778a3"
+          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-d0b5de913b47df8947bae200d21468d3ad__",
+          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-d0b5de913b47df8947bae200d21468d3ad"
         },
         {
-          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-c77de5a5750461e8a5f98a8bdcaedfbbb9__",
-          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-c77de5a5750461e8a5f98a8bdcaedfbbb9"
+          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-2b381e2d4edc14808c642125c447ec2b06__",
+          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-2b381e2d4edc14808c642125c447ec2b06"
         },
         {
-          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-4c48dfa158db8d90f07e30752c5b883c8f__",
-          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-4c48dfa158db8d90f07e30752c5b883c8f"
+          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-52497e213f4544facae6a9f55546def34f__",
+          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-52497e213f4544facae6a9f55546def34f"
         },
         {
-          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-e038be7fecb11aaa9d060141dddc50e25b__",
-          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-e038be7fecb11aaa9d060141dddc50e25b"
+          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-16f966ea30b4e7982b27c5a97faebba581__",
+          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-16f966ea30b4e7982b27c5a97faebba581"
         },
         {
-          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-364a3a4b80f84072555086183e84038be8__",
-          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-364a3a4b80f84072555086183e84038be8"
+          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-a778a34c6dc9309bb476b97f89f050e4e2__",
+          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-a778a34c6dc9309bb476b97f89f050e4e2"
         },
         {
-          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-e83ac3c4c4979ee3cfa0d7d6631b7fc51e__",
-          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-e83ac3c4c4979ee3cfa0d7d6631b7fc51e"
+          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-fd05bb8827a9956203004e43e3bf2c5b00__",
+          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-fd05bb8827a9956203004e43e3bf2c5b00"
         },
         {
-          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-f3b831fdd3034d9c309c660cd32730afd3__",
-          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-f3b831fdd3034d9c309c660cd32730afd3"
+          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-73c908244c18fed04b2663b70f7707e50a__",
+          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-73c908244c18fed04b2663b70f7707e50a"
         },
         {
-          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-e82d65d1bfacaac49c731b4426468e57cf__",
-          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-e82d65d1bfacaac49c731b4426468e57cf"
+          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-28f909f5970afde2ef0a053844daee4e9f__",
+          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-28f909f5970afde2ef0a053844daee4e9f"
         },
         {
-          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-83add442f263c34d6e00c36c3f540cd32d__",
-          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-83add442f263c34d6e00c36c3f540cd32d"
+          "path": "__fn_team_DmoZusxMIKcqJhgRBmQ8B3dK-522d03e284678e40d318d604aa58d47a41__",
+          "functionName": "team_DmoZusxMIKcqJhgRBmQ8B3dK-522d03e284678e40d318d604aa58d47a41"
         }
       ]
     }
   ],
-  "aliasAssignedAt": 1787167827917,
+  "aliasAssignedAt": 1787175031225,
   "build": {
     "env": [
       "CI",
@@ -362,7 +362,7 @@
     "VERCEL_ENCRYPTED_ENV_FILENAME"
   ],
   "functions": null,
-  "inspectorUrl": "https://vercel.com/edisons-projects-b0f771d8/aep-marketplace/4GZq8gZoFVuLjf4izAtfEr3PGvXc",
+  "inspectorUrl": "https://vercel.com/edisons-projects-b0f771d8/aep-marketplace/ErqRty9kSjFjts972MrqeasyG5uR",
   "isInConcurrentBuildsQueue": false,
   "isInSystemBuildsQueue": false,
   "ownerId": "team_DmoZusxMIKcqJhgRBmQ8B3dK",

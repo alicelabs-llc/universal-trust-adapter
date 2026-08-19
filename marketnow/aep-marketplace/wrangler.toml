@@ -1,0 +1,13 @@
+name = "marketnow"
+compatibility_date = "2026-08-19"
+pages_build_output_dir = "dist"
+
+# Production environment.
+# `npx wrangler pages deploy` (without --env) deploys to "production".
+[env.production]
+name = "marketnow"
+
+# Preview environment (used for `--branch=preview` deploys).
+# Lets you run smoke tests on a non-production URL before promoting.
+[env.preview]
+name = "marketnow-preview"

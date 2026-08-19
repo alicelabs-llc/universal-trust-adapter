@@ -30,6 +30,9 @@
     "base-rpc.publicnode.com",
     "1rpc.io",
     "base.gateway.tenderly.co",
+    "base-mainnet.g.alchemy.com",
+    "eth-mainnet.g.alchemy.com",
+    "polygon-mainnet.g.alchemy.com",
     "api.stripe.com",
     "checkout.stripe.com"
   ],
@@ -42,7 +45,8 @@
     "*.googleapis.com",
     "*.cloudflare.com",
     "*.vercel.app",
-    "*.alicelabs.site"
+    "*.alicelabs.site",
+    "*.g.alchemy.com"
   ],
   "blocked_categories": {
     "metadata_endpoints": "169.254.169.254 (AWS/GCP/Azure metadata — SSRF prevention)",

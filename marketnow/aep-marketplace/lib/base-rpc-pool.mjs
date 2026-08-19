@@ -1,12 +1,34 @@
 /**
- * MarketNow — Base RPC Pool with Fallback
- * =========================================
+ * MarketNow — Base RPC Pool with Fallback (LEGACY FALLBACK LAYER)
+ * ===============================================================
  *
- * PROBLEMA: Usábamos solo `https://mainnet.base.org` (público, sin SLA,
+ * PHASE 4 (Ed25519 licenses + Alchemy RPC):
+ * This module is now the FALLBACK layer of the new
+ * `lib/blockchain-rpc-pool.mjs`. Callers should import the new module
+ * directly — it routes through Alchemy (dedicated, 99.9% SLA) first and
+ * only falls through to this file (4 public RPCs) on Alchemy failure.
+ *
+ *   import * as rpcPool from './blockchain-rpc-pool.mjs';
+ *   const { result, source } = await rpcPool.call('eth_getTransactionReceipt', [txHash]);
+ *
+ * The new module also exposes high-level helpers:
+ *   - getTransactionReceipt(txHash)    — with caching
+ *   - verifyUSDCPayment(txHash, amount, recipient)
+ *   - getBlockNumber()
+ *   - getStats()                       — circuit breaker + fallback stats
+ *
+ * See docs/ALCHEMY_SETUP.md for the env vars and design.
+ *
+ * This file remains unchanged so that:
+ *   - Existing callers that import `lib/base-rpc-pool.mjs` directly continue
+ *     to work (no breaking change).
+ *   - The new module can use it as the fallback layer without circular deps.
+ *
+ * PROBLEMA (original): Usábamos solo `https://mainnet.base.org` (público, sin SLA,
  *           rate limit no documentado). 100 usuarios concurrentes podían
  *           saturarlo → 429s y timeouts.
  *
- * SOLUCIÓN:
+ * SOLUCIÓN (legacy, still active as fallback):
  *   - Pool de 4 RPCs públicos de Base
  *   - Round-robin simple entre ellos
  *   - Si uno falla (429/timeout), marca como "bad" por 60s y prueba el siguiente

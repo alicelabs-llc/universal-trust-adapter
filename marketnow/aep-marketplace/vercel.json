@@ -274,7 +274,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.stripe.com https://mainnet.base.org https://base.gateway.tenderly.co https://base-rpc.publicnode.com https://1rpc.io; frame-ancestors 'none'; object-src 'none'; worker-src 'self'; base-uri 'self'; form-action 'self' https://checkout.stripe.com"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.stripe.com https://mainnet.base.org https://base.gateway.tenderly.co https://base-rpc.publicnode.com https://1rpc.io https://base-mainnet.g.alchemy.com https://*.g.alchemy.com; frame-ancestors 'none'; object-src 'none'; worker-src 'self'; base-uri 'self'; form-action 'self' https://checkout.stripe.com"
         }
       ]
     },

@@ -6,20 +6,21 @@
   "automaticAliases": [
     "aep-marketplace-edisons-projects-b0f771d8.vercel.app"
   ],
-  "bootedAt": 1787161331673,
-  "buildingAt": 1787161332567,
+  "bootedAt": 1787174948230,
+  "buildingAt": 1787174949175,
   "buildSkipped": false,
-  "createdAt": 1787161331673,
+  "createdAt": 1787174948230,
   "creator": {
     "uid": "wdzX8L5okHF4AQO444EPPA8h",
     "username": "eddyflores100-3754"
   },
   "deletedAt": null,
-  "errorCode": "module_not_found",
-  "errorMessage": "Command \"npm install && npm run build\" exited with 1",
+  "errorCode": "INVALID_VERCEL_CONFIG",
+  "errorLink": "https://vercel.com/docs/concepts/projects/project-configuration#functions",
+  "errorMessage": "Invalid vercel.json - `functions` should NOT have fewer than 1 properties.",
   "errorStep": "buildStep",
-  "id": "dpl_7CZRHEWSdpjcdjn4F8MMgncKnqA3",
-  "initReadyAt": 1787161344915,
+  "id": "dpl_CYxFBbDmUDXHnb48zRSHkqEyk1qN",
+  "initReadyAt": 1787174952162,
   "name": "aep-marketplace",
   "meta": {},
   "originCacheRegion": "iad1",
@@ -29,7 +30,7 @@
     "framework": "vite"
   },
   "public": false,
-  "ready": 1787161344915,
+  "ready": 1787174952162,
   "readyState": "ERROR",
   "regions": [
     "iad1"
@@ -42,7 +43,7 @@
     "slug": "edisons-projects-b0f771d8"
   },
   "type": "LAMBDAS",
-  "url": "aep-marketplace-b1385coh8-edisons-projects-b0f771d8.vercel.app",
+  "url": "aep-marketplace-7myayctnj-edisons-projects-b0f771d8.vercel.app",
   "version": 2,
   "previewCommentsEnabled": true,
   "oidcTokenClaims": {
@@ -59,11 +60,11 @@
   },
   "lambdas": [
     {
-      "id": "bld_f1q4kyche",
-      "createdAt": 1787161331363,
+      "id": "bld_eziddzyjm",
+      "createdAt": 1787174947922,
       "entrypoint": ".",
       "readyState": "READY",
-      "readyStateAt": 1787161331363,
+      "readyStateAt": 1787174947922,
       "output": []
     }
   ],
@@ -309,7 +310,7 @@
     "VERCEL_ENCRYPTED_ENV_FILENAME"
   ],
   "functions": null,
-  "inspectorUrl": "https://vercel.com/edisons-projects-b0f771d8/aep-marketplace/7CZRHEWSdpjcdjn4F8MMgncKnqA3",
+  "inspectorUrl": "https://vercel.com/edisons-projects-b0f771d8/aep-marketplace/CYxFBbDmUDXHnb48zRSHkqEyk1qN",
   "isInConcurrentBuildsQueue": false,
   "isInSystemBuildsQueue": false,
   "ownerId": "team_DmoZusxMIKcqJhgRBmQ8B3dK",
