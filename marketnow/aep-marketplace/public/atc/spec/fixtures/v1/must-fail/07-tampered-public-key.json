@@ -1,0 +1,95 @@
+{
+  "fixture_id": "07-tampered-public-key",
+  "attack_vector": "nested_public_key_tampering",
+  "description": "identity.public_key has been changed after signing. Signature must NOT verify.",
+  "card": {
+    "card_id": "ATC-FIXTURE-FAIL-07",
+    "schema_version": "1.1.0",
+    "decision_authority": "consumer",
+    "agent_id": "test_agent",
+    "agent_name": "Test Agent",
+    "identity": {
+      "public_key": "AAAABBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+      "key_algorithm": "Ed25519"
+    },
+    "trust": {
+      "sentinel_review_score": 8,
+      "sentinel_score": 8,
+      "audit_layers_passed": {
+        "L1.5": true,
+        "L1.6": true,
+        "L1.7": true,
+        "L1.8": true,
+        "L1.9": true,
+        "L2.5": true
+      },
+      "composite_trust": 8.0,
+      "risk_level": "low",
+      "certificate_id": "mn-cert-atc-fixture-fail-07"
+    },
+    "capabilities": {
+      "provides": [
+        "search",
+        "read"
+      ],
+      "protocol_language": "mcp",
+      "translate": true
+    },
+    "payment": {
+      "method": "x402 + USDC on Base L2",
+      "wallet_address": "0x1234567890abcdef1234567890abcdef12345678"
+    },
+    "metadata": {
+      "issued_at": "2026-08-19T00:00:00Z",
+      "expires_at": "2027-08-19T00:00:00Z",
+      "issuer": "MarketNow Sentinel CA",
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-FIXTURE-FAIL-07"
+    }
+  },
+  "original_card": {
+    "card_id": "ATC-FIXTURE-FAIL-07",
+    "schema_version": "1.1.0",
+    "decision_authority": "consumer",
+    "agent_id": "test_agent",
+    "agent_name": "Test Agent",
+    "identity": {
+      "public_key": "MCowBQYDK2VwAyEATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+      "key_algorithm": "Ed25519"
+    },
+    "trust": {
+      "sentinel_review_score": 8,
+      "sentinel_score": 8,
+      "audit_layers_passed": {
+        "L1.5": true,
+        "L1.6": true,
+        "L1.7": true,
+        "L1.8": true,
+        "L1.9": true,
+        "L2.5": true
+      },
+      "composite_trust": 8.0,
+      "risk_level": "low",
+      "certificate_id": "mn-cert-atc-fixture-fail-07"
+    },
+    "capabilities": {
+      "provides": [
+        "search",
+        "read"
+      ],
+      "protocol_language": "mcp",
+      "translate": true
+    },
+    "payment": {
+      "method": "x402 + USDC on Base L2",
+      "wallet_address": "0x1234567890abcdef1234567890abcdef12345678"
+    },
+    "metadata": {
+      "issued_at": "2026-08-19T00:00:00Z",
+      "expires_at": "2027-08-19T00:00:00Z",
+      "issuer": "MarketNow Sentinel CA",
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-FIXTURE-FAIL-07"
+    }
+  },
+  "expected_outcome": "invalid",
+  "expected_verify_result": false
+}

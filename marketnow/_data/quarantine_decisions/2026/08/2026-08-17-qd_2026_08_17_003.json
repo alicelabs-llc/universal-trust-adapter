@@ -1,0 +1,56 @@
+{
+  "decision_id": "qd_2026_08_17_003",
+  "decision_date": "2026-08-17T16:42:18Z",
+  "skill_id": "mn-sub-57815",
+  "skill_name": "Weather API MCP (false positive \u2014 appeal)",
+  "skill_repo": "https://github.com/example/weather-api-mcp",
+  "sentinel_score": 4,
+  "sentinel_version": "v2.5",
+  "layers_run": [
+    "L1.5",
+    "L1.6",
+    "L1.7",
+    "L1.8",
+    "L1.9"
+  ],
+  "layer_findings": [
+    {
+      "layer": "L1.5",
+      "result": "pass",
+      "notes": "Metadata valid"
+    },
+    {
+      "layer": "L1.6",
+      "result": "warn",
+      "notes": "Possible API key in tests/fixtures/.env.test (false positive \u2014 test fixture, not real)"
+    },
+    {
+      "layer": "L1.7",
+      "result": "pass",
+      "notes": "No malware patterns"
+    },
+    {
+      "layer": "L1.8",
+      "result": "pass",
+      "notes": "No malware families matched"
+    },
+    {
+      "layer": "L1.9",
+      "result": "pass",
+      "notes": "No prompt injection"
+    }
+  ],
+  "decision": "quarantine",
+  "decision_reason": "Possible API key in test fixtures. Quarantined pending human review.",
+  "decision_authority": "Sentinel L1.6",
+  "reviewer": "automated",
+  "appealable": true,
+  "appeal_url": "https://marketnow.site/appeals?qd=qd_2026_08_17_003",
+  "sha256_artifact": "7890123abcdef4567890123abcdef4567890123abcdef4567890123abcdef45",
+  "appeal_status": "approved",
+  "appeal_decision": "false_positive",
+  "appeal_decision_date": "2026-08-18T10:30:00Z",
+  "appeal_reviewer": "edison_flores",
+  "appeal_reason": "Confirmed: .env.test is a test fixture, not a real credential. Un-quarantined. L1.6 rule updated to skip test/fixtures/ directory.",
+  "record_sha256": "0343815af7b5ff045c5e6991d1b06f08e0c8dad26c6d6e325c1c7d64a8c26140"
+}

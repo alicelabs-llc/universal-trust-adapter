@@ -1,0 +1,12 @@
+{
+  "fixture_id": "03-revoked-card",
+  "attack_vector": "revoked_card_in_crl",
+  "expected_outcome": "invalid",
+  "expected_verify_result": false,
+  "expected_verify_reason": "Card has a valid signature but is in the Certificate Revocation List (CRL). Verifier must check status='revoked' AND consult the live CRL at /api/atc?action=revocation-list. Card ID ATC-FIXTURE-FAIL-03 should be in the must-fail CRL.",
+  "tampered_canonical_bytes": "{\"agent_id\":\"test_agent\",\"agent_name\":\"Test Agent\",\"capabilities\":{\"protocol_language\":\"mcp\",\"provides\":[\"search\",\"read\"],\"translate\":true},\"card_id\":\"ATC-FIXTURE-FAIL-03\",\"decision_authority\":\"consumer\",\"identity\":{\"key_algorithm\":\"Ed25519\",\"public_key\":\"MCowBQYDK2VwAyEATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\"},\"metadata\":{\"expires_at\":\"2027-08-19T00:00:00Z\",\"issued_at\":\"2026-08-19T00:00:00Z\",\"issuer\":\"MarketNow Sentinel CA\",\"revocation_url\":\"https://marketnow.site/api/atc?action=verify&card_id=ATC-FIXTURE-FAIL-03\"},\"payment\":{\"method\":\"x402 + USDC on Base L2\",\"wallet_address\":\"0x1234567890abcdef1234567890abcdef12345678\"},\"revocation_reason\":\"Compromised private key\",\"revoked_at\":\"2026-08-15T00:00:00Z\",\"schema_version\":\"1.1.0\",\"signature\":{\"algorithm\":\"Ed25519 (RFC 8032)\",\"ca_key_id\":\"MCowBQYDK2VwAyEA\",\"canonical_json\":\"RFC_8785_JCS\",\"signed_at\":\"2026-08-10T00:00:00Z\",\"signed_by\":\"MarketNow Sentinel CA\",\"value\":\"abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab\"},\"status\":\"revoked\",\"trust\":{\"audit_layers_passed\":{\"L1.5\":true,\"L1.6\":true,\"L1.7\":true,\"L1.8\":true,\"L1.9\":true,\"L2.5\":true},\"certificate_id\":\"mn-cert-atc-fixture-fail-03\",\"composite_trust\":8,\"risk_level\":\"low\",\"sentinel_review_score\":8,\"sentinel_score\":8}}",
+  "tampered_digest_sha256": "fa8c56b1c47de4c9c94f6910e7205402edc5793aa8ccc4deec21db764c82c173",
+  "original_canonical_bytes": null,
+  "original_digest_sha256": null,
+  "key_insight": "The tampered card's canonical bytes differ from the original's, so the signature (which was made over the original) must NOT verify against the tampered bytes. If a verifier returns true here, it has the nested-object canonicalization bug."
+}
