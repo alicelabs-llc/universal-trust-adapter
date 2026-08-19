@@ -7,19 +7,22 @@
     "generate": "node generate_skills.cjs",
     "prebuild": "node generate_skills.cjs",
     "dev": "node generate_skills.cjs && vite",
-    "build": "vite build && rm -f dist/api/categories.json dist/api/manifest.json dist/api/bundles.json",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^6.6.0",
     "@stripe/stripe-js": "^9.8.0",
+    "@supabase/supabase-js": "^2.45.0",
+    "@upstash/redis": "^1.34.0",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "ethers": "^6.17.0",
     "express": "^5.2.1",
     "framer-motion": "^12.38.0",
+    "hono": "^4.6.0",
     "jsonwebtoken": "^9.0.3",
     "jszip": "^3.10.1",
     "react": "^19.2.6",
@@ -42,5 +45,20 @@
     "vite": "^8.0.12",
     "wrangler": "^4.105.0"
   },
-  "license": "MNNC-1.0"
+  "license": "MNNC-1.0",
+  "atc_version": "2.0",
+  "config": {
+    "supabase_required_env": [
+      "SUPABASE_URL",
+      "SUPABASE_ANON_KEY",
+      "SUPABASE_SERVICE_ROLE_KEY"
+    ],
+    "upstash_required_env": [
+      "UPSTASH_REDIS_REST_URL",
+      "UPSTASH_REDIS_REST_TOKEN"
+    ],
+    "alchemy_required_env": [
+      "ALCHEMY_API_KEY"
+    ]
+  }
 }
