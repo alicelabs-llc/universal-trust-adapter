@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ✅ BRANDING UNIFICADO -->
+    <title>MarketNow — Agent Skill Marketplace</title>
+    <meta name="description" content="MarketNow is the open marketplace for AI agent skills. Search, discover and install 6,000+ MCP-compatible skills for autonomous agents." />
+    <meta name="application-name" content="MarketNow" />
+
+    <!-- ✅ OPEN GRAPH -->
+    <meta property="og:title" content="MarketNow — Agent Skill Marketplace" />
+    <meta property="og:description" content="Discover and install 6,000+ MCP-compatible skills for AI agents." />
+    <meta property="og:url" content="https://www.marketnow.site/" />
+    <meta property="og:type" content="website" />
+
+    <!-- ✅ AGENT DISCOVERY — crawlers y agentes pueden encontrar el API -->
+    <link rel="alternate" type="application/json" href="/api/skills.json" title="MarketNow Skills API" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <!-- ✅ AGENT-READABLE META -->
+    <meta name="api:skills" content="https://www.marketnow.site/api/skills.json" />
+    <meta name="api:search" content="https://www.marketnow.site/api/skills.json?q={query}" />
+    <meta name="api:categories" content="https://www.marketnow.site/api/categories.json" />
+
+    <style>
+      body { background-color: #050505; color: white; }
+    </style>
+    <script type="module" crossorigin src="/assets/index-B2ZJYEba.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CFsh1JKQ.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

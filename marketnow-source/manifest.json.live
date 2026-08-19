@@ -1,0 +1,19 @@
+{
+  "name": "MarketNow Skills API",
+  "version": "1.0.0",
+  "description": "Open marketplace for AI agent skills — MCP compatible",
+  "base_url": "https://www.marketnow.site/api",
+  "total_skills": 6000,
+  "endpoints": {
+    "all_skills": "/api/skills.json",
+    "categories": "/api/categories.json",
+    "manifest": "/api/manifest.json"
+  },
+  "usage": {
+    "fetch_all": "GET https://www.marketnow.site/api/skills.json",
+    "by_category": "Filter client-side: skills.filter(s => s.category === 'Finance')",
+    "by_tag": "Filter client-side: skills.filter(s => s.tags.includes('network'))",
+    "search": "Filter client-side: skills.filter(s => s.name.toLowerCase().includes(query))"
+  },
+  "generated_at": "2026-06-26T20:29:12.638Z"
+}

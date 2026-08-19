@@ -1,0 +1,52 @@
+[
+  {
+    "file": "agent.json",
+    "sha": "005e1761ac7424d3d5f26b40093fac3a7520a3e5",
+    "size": 27450
+  },
+  {
+    "file": ".well-known/agent.json",
+    "sha": "005e1761ac7424d3d5f26b40093fac3a7520a3e5",
+    "size": 27450
+  },
+  {
+    "file": "api/agent.json",
+    "sha": "005e1761ac7424d3d5f26b40093fac3a7520a3e5",
+    "size": 27450
+  },
+  {
+    "file": "package.fixed.json",
+    "sha": "e794e07ef5f78d58650f862237e356ba39b03276",
+    "size": 3411
+  },
+  {
+    "file": "README.fixed.md",
+    "sha": "722ccff8c65bf1da22cab19d1b3f592cb04f8c7d",
+    "size": 8362
+  },
+  {
+    "file": "LICENSE",
+    "sha": "dd42ad5fae8db550fbb1a86101e362ed91a695f5",
+    "size": 9562
+  },
+  {
+    "file": ".github/SECURITY.md",
+    "sha": "84308f14d9d3bc742a14855f8a7204e38bc9db15",
+    "size": 5187
+  },
+  {
+    "file": "NOTICE",
+    "sha": "b8bed94cc864404ed57c994763d33f11be5033e6",
+    "size": 562
+  },
+  {
+    "file": "vercel.json",
+    "sha": "12ba8c1a8d0ecbe92da84c8f8ed514224a9a995a",
+    "size": 857
+  },
+  {
+    "file": "REPORT.pdf",
+    "sha": "00a4a601115afe22ca8f0e397fd9f4883cfc63c3",
+    "size": 110127
+  }
+]

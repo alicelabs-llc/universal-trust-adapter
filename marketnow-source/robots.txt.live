@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Allow: /api/
+Allow: /api/skills.json
+Allow: /api/categories.json
+Allow: /sitemap.xml
+
+# MarketNow Agent Skill Marketplace
+# Skills API: https://www.marketnow.site/api/skills.json
+# Categories API: https://www.marketnow.site/api/categories.json
+# Search: https://www.marketnow.site/api/skills.json (filter by ?q=keyword client-side)
+
+Sitemap: https://www.marketnow.site/sitemap.xml
+
+

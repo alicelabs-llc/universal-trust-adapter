@@ -1,0 +1,38 @@
+{
+  "name": "MarketNow MCP Agent Commerce Terminal",
+  "description": "Autonomous Agent Marketplace — 13,859 MCP skills available for machine-to-machine purchase. Agents can browse, pay with USDC (Base/Solana), and download skills autonomously. 20% referral commission for referring agents.",
+  "url": "https://marketnow.site",
+  "version": "4.1.0",
+  "capabilities": {
+    "commerce": {
+      "type": "m2m-terminal",
+      "description": "Autonomous agent checkout. Agents send USDC and submit txHash to receive skill files.",
+      "endpoint": "https://marketnow.site/api/m2m-checkout",
+      "method": "POST",
+      "paymentMethods": ["base_usdc", "solana_usdc"],
+      "commissionRate": 0.20,
+      "settlement": "on-chain USDC"
+    },
+    "discovery": {
+      "mcp": "https://marketnow.site/api/mcp",
+      "a2a": "https://marketnow.site/.well-known/agent.json",
+      "openapi": "https://marketnow.site/api/openapi.yaml",
+      "skills": "https://marketnow.site/api/skills",
+      "agents": "https://marketnow.site/agents.json"
+    },
+    "referral": {
+      "description": "Agents earn 20% commission on every purchase they refer",
+      "register": "https://marketnow.site/api/agent/register",
+      "method": "POST"
+    }
+  },
+  "authentication": {
+    "type": "wallet-based",
+    "methods": ["walletAddress + signature", "agentToken"],
+    "endpoint": "https://marketnow.site/api/auth/agent-login"
+  },
+  "agent_wallet": {
+    "base_usdc": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee",
+    "solana_usdc": "So11yW4lletAddre55F0rAgents69"
+  }
+}

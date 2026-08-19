@@ -1,0 +1,1370 @@
+[
+  {
+    "name": "src",
+    "type": "directory",
+    "mode": 16749,
+    "children": [
+      {
+        "name": ".github",
+        "type": "directory",
+        "mode": 16749,
+        "children": [
+          {
+            "name": "workflows",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "deploy.yml",
+                "type": "file",
+                "mode": 33206,
+                "uid": "c4f8310649dec71d5b7b98b19cf5e2c7b67cb3cc"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": ".wrangler",
+        "type": "directory",
+        "mode": 16749,
+        "children": [
+          {
+            "name": "state",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "v3",
+                "type": "directory",
+                "mode": 16749,
+                "children": [
+                  {
+                    "name": "cache",
+                    "type": "directory",
+                    "mode": 16749,
+                    "children": [
+                      {
+                        "name": "miniflare-CacheObject",
+                        "type": "directory",
+                        "mode": 16749,
+                        "children": [
+                          {
+                            "name": "metadata.sqlite",
+                            "type": "file",
+                            "mode": 33206,
+                            "uid": "63a1477309c4848dd7c85facf2178031415cb9e6"
+                          },
+                          {
+                            "name": "metadata.sqlite-shm",
+                            "type": "file",
+                            "mode": 33206,
+                            "uid": "78a5087bbaa6fbb86842044ca65bd823e8270c4e"
+                          },
+                          {
+                            "name": "metadata.sqlite-wal",
+                            "type": "file",
+                            "mode": 33206,
+                            "uid": "ea4ad10209a6570f7cf70d5262bb918f8a3b6a8a"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "kv",
+                    "type": "directory",
+                    "mode": 16749,
+                    "children": [
+                      {
+                        "name": "miniflare-KVNamespaceObject",
+                        "type": "directory",
+                        "mode": 16749,
+                        "children": [
+                          {
+                            "name": "2c48247483bd8fed35e2dd340fa18919553ab9b02193aa2e5fad3ed49fbdab4c.sqlite",
+                            "type": "file",
+                            "mode": 33206,
+                            "uid": "63a1477309c4848dd7c85facf2178031415cb9e6"
+                          },
+                          {
+                            "name": "a6c8c60ecb28acfe4fbb25e58c24a4956d262a24582aa7f13a834d51fec663a8.sqlite",
+                            "type": "file",
+                            "mode": 33206,
+                            "uid": "63a1477309c4848dd7c85facf2178031415cb9e6"
+                          },
+                          {
+                            "name": "metadata.sqlite",
+                            "type": "file",
+                            "mode": 33206,
+                            "uid": "63a1477309c4848dd7c85facf2178031415cb9e6"
+                          },
+                          {
+                            "name": "2c48247483bd8fed35e2dd340fa18919553ab9b02193aa2e5fad3ed49fbdab4c.sqlite-shm",
+                            "type": "file",
+                            "mode": 33206,
+                            "uid": "e07febf17b1fa0d754d56055150ffd8ed404e505"
+                          },
+                          {
+                            "name": "2c48247483bd8fed35e2dd340fa18919553ab9b02193aa2e5fad3ed49fbdab4c.sqlite-wal",
+                            "type": "file",
+                            "mode": 33206,
+                            "uid": "b23603fe25d7abc0006ba5d36703e12b220158ff"
+                          },
+                          {
+                            "name": "a6c8c60ecb28acfe4fbb25e58c24a4956d262a24582aa7f13a834d51fec663a8.sqlite-shm",
+                            "type": "file",
+                            "mode": 33206,
+                            "uid": "796609d4b9e33084f5aa87bf24241132aa217966"
+                          },
+                          {
+                            "name": "a6c8c60ecb28acfe4fbb25e58c24a4956d262a24582aa7f13a834d51fec663a8.sqlite-wal",
+                            "type": "file",
+                            "mode": 33206,
+                            "uid": "bdbf632cc853a74d57eae070ec7904233ab868b1"
+                          },
+                          {
+                            "name": "metadata.sqlite-shm",
+                            "type": "file",
+                            "mode": 33206,
+                            "uid": "34abdae33b5e4ec2885c5264ada65e85a51e4e55"
+                          },
+                          {
+                            "name": "metadata.sqlite-wal",
+                            "type": "file",
+                            "mode": 33206,
+                            "uid": "0c4ba5ef7bd2530b5467e0af488350b137d58bd3"
+                          }
+                        ]
+                      },
+                      {
+                        "name": "7763872fdabf43ffb04307805214fe45",
+                        "type": "directory",
+                        "mode": 16749,
+                        "children": [
+                          {
+                            "name": "blobs",
+                            "type": "directory",
+                            "mode": 16749,
+                            "children": [
+                              {
+                                "name": "378de3a33c60a77dabb67c286f801bfcb9a17435640b6d0d0b195c9580160dcb0000019e2e25d3bd",
+                                "type": "file",
+                                "mode": 33206,
+                                "uid": "ffebf2e522e984d02df941e5e66fe0db063965aa"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "workflows",
+                    "type": "directory",
+                    "mode": 16822
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "tmp",
+            "type": "directory",
+            "mode": 16822
+          }
+        ]
+      },
+      {
+        "name": "marketnow-worker",
+        "type": "directory",
+        "mode": 16749,
+        "children": [
+          {
+            "name": ".wrangler",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "tmp",
+                "type": "directory",
+                "mode": 16822
+              }
+            ]
+          },
+          {
+            "name": "index.js",
+            "type": "file",
+            "mode": 33206,
+            "uid": "a31610f6e5c951226f098cf21c9841fbb60ae2a3"
+          },
+          {
+            "name": "wrangler.toml",
+            "type": "file",
+            "mode": 33206,
+            "uid": "d4d54246a5513de4035b3c0d2a788abc22662627"
+          }
+        ]
+      },
+      {
+        "name": "PROMO_SUBMISSIONS.md",
+        "type": "file",
+        "mode": 33206,
+        "uid": "ea1c8527870026239094e4f4ef3167343034f47c"
+      },
+      {
+        "name": "PR_AWESOME_MCP.md",
+        "type": "file",
+        "mode": 33206,
+        "uid": "12d390a4f6d1d5bb803ba5134f2d4f5d198741f6"
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "mode": 33206,
+        "uid": "1d35721c32661b17a1a86303a2a892f6bacda887"
+      },
+      {
+        "name": "README_MARKETFIX1.md",
+        "type": "file",
+        "mode": 33206,
+        "uid": "ca73a13d10be6387bab1230e51a65c971b852367"
+      },
+      {
+        "name": "SUBMIT.md",
+        "type": "file",
+        "mode": 33206,
+        "uid": "693dace454b36a05f0dfad0d8dc5ce394727df11"
+      },
+      {
+        "name": "_headers",
+        "type": "file",
+        "mode": 33206,
+        "uid": "68d0151fa2c0ccf3d5fa779fc47e9f31926a357f"
+      },
+      {
+        "name": "_routes.json",
+        "type": "file",
+        "mode": 33206,
+        "uid": "2d44ac0e13518510d13f182272474e71b5ec6a6d"
+      },
+      {
+        "name": "dist",
+        "type": "directory",
+        "mode": 16749,
+        "children": [
+          {
+            "name": "_routes.json",
+            "type": "file",
+            "mode": 33206,
+            "uid": "2d44ac0e13518510d13f182272474e71b5ec6a6d"
+          },
+          {
+            "name": ".well-known",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "agent.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "34b8d3bb7cb5c03a4c67c33fe58306b1ab88b2e6"
+              },
+              {
+                "name": "ai-plugin.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "a0f23ea6783026b050606d1586026d62b93893cc"
+              },
+              {
+                "name": "mcp.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "be46dcb422392729f783d08e381d26dc36e4e03b"
+              }
+            ]
+          },
+          {
+            "name": "_redirects",
+            "type": "file",
+            "mode": 33206,
+            "uid": "1cac6ff170cb5c0b57a4c460b4c30b82f247105a"
+          },
+          {
+            "name": "api",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "categories.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "66412664578d5dfd43f7ce5a1f227048de43fb74"
+              },
+              {
+                "name": "manifest.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "724648c3c1edb61c1892d51b4f55610ee3578047"
+              },
+              {
+                "name": "sentinel_scan.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "c9eeea8b75634319b2d3245e927920542492fbd2"
+              },
+              {
+                "name": "server.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "092c983b328d99114d116dc587ef07d48e529c7d"
+              },
+              {
+                "name": "skills.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "2be11d485badfa9564f7973f87a04f970c433ef6"
+              },
+              {
+                "name": "skills",
+                "type": "directory",
+                "mode": 16749,
+                "children": [
+                  {
+                    "name": "ai.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "432adbb5099da536bf76a6a0784d8df5e9004321"
+                  },
+                  {
+                    "name": "analysis.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "def752b5ebf2e9af3d0cd18f8c00531d39649dad"
+                  },
+                  {
+                    "name": "automation.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "be8cd7decfa6c395dbe02392a0144d563f881430"
+                  },
+                  {
+                    "name": "blockchain.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "9ebb32aea0cf414a5a9eb83c05052123e7e0a424"
+                  },
+                  {
+                    "name": "cognitive.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "6570d2569fc2ef9f739a923c067d05279d83d2b4"
+                  },
+                  {
+                    "name": "data.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "a3ae5adc64e8e51020d5c73c6172cf649d267349"
+                  },
+                  {
+                    "name": "devops.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "9e3852a9ea28f59a0e3688a6ac383e4d0c427406"
+                  },
+                  {
+                    "name": "education.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "03355583f67cba6606000ef80d6b0daffdf9476a"
+                  },
+                  {
+                    "name": "energy.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "a6666b589302de17274b186c175ae95ee49276e3"
+                  },
+                  {
+                    "name": "finance.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "7f11d77a2a778706eeda0ebcaff9bc6ef9879096"
+                  },
+                  {
+                    "name": "general.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "00afb8a421b0a1f5874775640a4fc6b34b6d23b2"
+                  },
+                  {
+                    "name": "healthcare.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "215eee334645bf77cccddf4c0aaf3ef611c153d0"
+                  },
+                  {
+                    "name": "iot.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "a40b7b5869cedf36614199ba6d573927048a4497"
+                  },
+                  {
+                    "name": "legal.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "fe1b8be6624da29575258a51b739c0b68278698a"
+                  },
+                  {
+                    "name": "logistics.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "c41182895de658f62e7daaf28ea8652306ccdbac"
+                  },
+                  {
+                    "name": "media.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "b925a16f734a76890fbacac6a691c8b770b658d3"
+                  },
+                  {
+                    "name": "messaging.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "8deb816e5e05b11662e80143f423b6c56b26c450"
+                  },
+                  {
+                    "name": "network.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "5ed4f55c519d194624d9aca67db9f79b232cd3c0"
+                  },
+                  {
+                    "name": "research.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "935132b99e59be4eeeb2e742ba9412f66936aedd"
+                  },
+                  {
+                    "name": "sales.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "7fe90c71b6322edbefe93e6f427a66692da0fe2c"
+                  },
+                  {
+                    "name": "security.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "8658e52dd10c7c38d0cb8d9b5e0d8606828b3b9f"
+                  },
+                  {
+                    "name": "system.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "b06c582d27b07209f3779bc2ff2488eea5066924"
+                  },
+                  {
+                    "name": "voice.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "d6765a129c2b5f60af9a99f73f27c23d1adbd00d"
+                  }
+                ]
+              },
+              {
+                "name": "skills_index.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "d31a746887130fff657b481f41cbf71efcbcf3fa"
+              },
+              {
+                "name": "skills_index.json.bak",
+                "type": "file",
+                "mode": 33206,
+                "uid": "d31a746887130fff657b481f41cbf71efcbcf3fa"
+              }
+            ]
+          },
+          {
+            "name": "assets",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "index-CmfY9RkO.css",
+                "type": "file",
+                "mode": 33206,
+                "uid": "d6fb703e069576feefc6659e272b6d464af3f1cd"
+              },
+              {
+                "name": "index-sh8tupor.js",
+                "type": "file",
+                "mode": 33206,
+                "uid": "00b565339902ec78bda4cb822abf2fe9358baffa"
+              }
+            ]
+          },
+          {
+            "name": "favicon.svg",
+            "type": "file",
+            "mode": 33206,
+            "uid": "3f5bb8f3a6a05b7ca68a62581d2dd5bc88812caf"
+          },
+          {
+            "name": "googlecfd72b7c796e2ead.html",
+            "type": "file",
+            "mode": 33206,
+            "uid": "e33679710f447728167477305a049e33b504c7fc"
+          },
+          {
+            "name": "icons.svg",
+            "type": "file",
+            "mode": 33206,
+            "uid": "338549eae25bfaaf4b52a004811c913c8b1915a2"
+          },
+          {
+            "name": "index.html",
+            "type": "file",
+            "mode": 33206,
+            "uid": "0925767837051077091521d195b47f74e71286ab"
+          },
+          {
+            "name": "openapi.yaml",
+            "type": "file",
+            "mode": 33206,
+            "uid": "9585b9dbcdf262f23d540f6f5b59aba15afd52ef"
+          },
+          {
+            "name": "robots.txt",
+            "type": "file",
+            "mode": 33206,
+            "uid": "5060ae17ac79d1ee355dbe280e3fc95ef1d8fb85"
+          },
+          {
+            "name": "sitemap.xml",
+            "type": "file",
+            "mode": 33206,
+            "uid": "33f135b3a7c1f797c37d438199e9fb91f561700b"
+          },
+          {
+            "name": "skills.min.json",
+            "type": "file",
+            "mode": 33206,
+            "uid": "ccf4843a4d43cc491cafbafd820c6dfd0bc93158"
+          }
+        ]
+      },
+      {
+        "name": "api",
+        "type": "directory",
+        "mode": 16749,
+        "children": [
+          {
+            "name": "index.js",
+            "type": "file",
+            "mode": 33206,
+            "uid": "61742b5c3ad4d1bd2c87d94da8c2ad6464d23b13"
+          }
+        ]
+      },
+      {
+        "name": "cdp_verify.cjs",
+        "type": "file",
+        "mode": 33206,
+        "uid": "e3df1c2c8dfcde84a4e7cdede34a2147a23c6ad5"
+      },
+      {
+        "name": "cf_cookies.py",
+        "type": "file",
+        "mode": 33206,
+        "uid": "f3831672e06e83e440a0b767d344f576a556f522"
+      },
+      {
+        "name": "cf_dns.py",
+        "type": "file",
+        "mode": 33206,
+        "uid": "61d720424f124abbe077e3434fc46645ae8b3691"
+      },
+      {
+        "name": "cf_dns_fix.cjs",
+        "type": "file",
+        "mode": 33206,
+        "uid": "08da3c0cb35b65673b970aee0aabaadd37c366f0"
+      },
+      {
+        "name": "cf_dns_list.js",
+        "type": "file",
+        "mode": 33206,
+        "uid": "2556a0b0f5c582695c8f3b4ecda64dd45d9696f8"
+      },
+      {
+        "name": "cf_instructions.js",
+        "type": "file",
+        "mode": 33206,
+        "uid": "aff498de5b0e4dabed4a18b40d0a5fcde3d3302c"
+      },
+      {
+        "name": "cf_login.py",
+        "type": "file",
+        "mode": 33206,
+        "uid": "6ef2d56c115af3540ca847300c01302627a9ca61"
+      },
+      {
+        "name": "cf_login_api.js",
+        "type": "file",
+        "mode": 33206,
+        "uid": "40a6a180c502676396794309bde640df1f3f5d7c"
+      },
+      {
+        "name": "cf_setup.js",
+        "type": "file",
+        "mode": 33206,
+        "uid": "2cebb5ca50886ae88e52be758b9bbc93324138bf"
+      },
+      {
+        "name": "public",
+        "type": "directory",
+        "mode": 16749,
+        "children": [
+          {
+            "name": ".well-known",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "agent.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "34b8d3bb7cb5c03a4c67c33fe58306b1ab88b2e6"
+              },
+              {
+                "name": "ai-plugin.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "a0f23ea6783026b050606d1586026d62b93893cc"
+              },
+              {
+                "name": "mcp.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "be46dcb422392729f783d08e381d26dc36e4e03b"
+              }
+            ]
+          },
+          {
+            "name": "_redirects",
+            "type": "file",
+            "mode": 33206,
+            "uid": "1cac6ff170cb5c0b57a4c460b4c30b82f247105a"
+          },
+          {
+            "name": "api",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "categories.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "66412664578d5dfd43f7ce5a1f227048de43fb74"
+              },
+              {
+                "name": "manifest.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "724648c3c1edb61c1892d51b4f55610ee3578047"
+              },
+              {
+                "name": "sentinel_scan.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "c9eeea8b75634319b2d3245e927920542492fbd2"
+              },
+              {
+                "name": "server.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "092c983b328d99114d116dc587ef07d48e529c7d"
+              },
+              {
+                "name": "skills.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "2be11d485badfa9564f7973f87a04f970c433ef6"
+              },
+              {
+                "name": "skills",
+                "type": "directory",
+                "mode": 16749,
+                "children": [
+                  {
+                    "name": "ai.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "432adbb5099da536bf76a6a0784d8df5e9004321"
+                  },
+                  {
+                    "name": "analysis.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "def752b5ebf2e9af3d0cd18f8c00531d39649dad"
+                  },
+                  {
+                    "name": "automation.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "be8cd7decfa6c395dbe02392a0144d563f881430"
+                  },
+                  {
+                    "name": "blockchain.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "9ebb32aea0cf414a5a9eb83c05052123e7e0a424"
+                  },
+                  {
+                    "name": "cognitive.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "6570d2569fc2ef9f739a923c067d05279d83d2b4"
+                  },
+                  {
+                    "name": "data.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "a3ae5adc64e8e51020d5c73c6172cf649d267349"
+                  },
+                  {
+                    "name": "devops.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "9e3852a9ea28f59a0e3688a6ac383e4d0c427406"
+                  },
+                  {
+                    "name": "education.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "03355583f67cba6606000ef80d6b0daffdf9476a"
+                  },
+                  {
+                    "name": "energy.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "a6666b589302de17274b186c175ae95ee49276e3"
+                  },
+                  {
+                    "name": "finance.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "7f11d77a2a778706eeda0ebcaff9bc6ef9879096"
+                  },
+                  {
+                    "name": "general.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "00afb8a421b0a1f5874775640a4fc6b34b6d23b2"
+                  },
+                  {
+                    "name": "healthcare.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "215eee334645bf77cccddf4c0aaf3ef611c153d0"
+                  },
+                  {
+                    "name": "iot.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "a40b7b5869cedf36614199ba6d573927048a4497"
+                  },
+                  {
+                    "name": "legal.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "fe1b8be6624da29575258a51b739c0b68278698a"
+                  },
+                  {
+                    "name": "logistics.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "c41182895de658f62e7daaf28ea8652306ccdbac"
+                  },
+                  {
+                    "name": "media.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "b925a16f734a76890fbacac6a691c8b770b658d3"
+                  },
+                  {
+                    "name": "messaging.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "8deb816e5e05b11662e80143f423b6c56b26c450"
+                  },
+                  {
+                    "name": "network.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "5ed4f55c519d194624d9aca67db9f79b232cd3c0"
+                  },
+                  {
+                    "name": "research.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "935132b99e59be4eeeb2e742ba9412f66936aedd"
+                  },
+                  {
+                    "name": "sales.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "7fe90c71b6322edbefe93e6f427a66692da0fe2c"
+                  },
+                  {
+                    "name": "security.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "8658e52dd10c7c38d0cb8d9b5e0d8606828b3b9f"
+                  },
+                  {
+                    "name": "system.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "b06c582d27b07209f3779bc2ff2488eea5066924"
+                  },
+                  {
+                    "name": "voice.json",
+                    "type": "file",
+                    "mode": 33206,
+                    "uid": "d6765a129c2b5f60af9a99f73f27c23d1adbd00d"
+                  }
+                ]
+              },
+              {
+                "name": "skills_index.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "d31a746887130fff657b481f41cbf71efcbcf3fa"
+              },
+              {
+                "name": "skills_index.json.bak",
+                "type": "file",
+                "mode": 33206,
+                "uid": "d31a746887130fff657b481f41cbf71efcbcf3fa"
+              }
+            ]
+          },
+          {
+            "name": "favicon.svg",
+            "type": "file",
+            "mode": 33206,
+            "uid": "3f5bb8f3a6a05b7ca68a62581d2dd5bc88812caf"
+          },
+          {
+            "name": "googlecfd72b7c796e2ead.html",
+            "type": "file",
+            "mode": 33206,
+            "uid": "e33679710f447728167477305a049e33b504c7fc"
+          },
+          {
+            "name": "icons.svg",
+            "type": "file",
+            "mode": 33206,
+            "uid": "338549eae25bfaaf4b52a004811c913c8b1915a2"
+          },
+          {
+            "name": "robots.txt",
+            "type": "file",
+            "mode": 33206,
+            "uid": "5060ae17ac79d1ee355dbe280e3fc95ef1d8fb85"
+          },
+          {
+            "name": "sitemap.xml",
+            "type": "file",
+            "mode": 33206,
+            "uid": "33f135b3a7c1f797c37d438199e9fb91f561700b"
+          },
+          {
+            "name": "skills.min.json",
+            "type": "file",
+            "mode": 33206,
+            "uid": "ccf4843a4d43cc491cafbafd820c6dfd0bc93158"
+          }
+        ]
+      },
+      {
+        "name": "src",
+        "type": "directory",
+        "mode": 16749,
+        "children": [
+          {
+            "name": "data",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "all_skills.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "2be11d485badfa9564f7973f87a04f970c433ef6"
+              },
+              {
+                "name": "skills-data.js",
+                "type": "file",
+                "mode": 33206,
+                "uid": "0c71b5af0b5c988f4901ce7c060f807387052fc9"
+              },
+              {
+                "name": "skills.js",
+                "type": "file",
+                "mode": 33206,
+                "uid": "3f411f005f1468725f7bd39717652706fc7d6867"
+              }
+            ]
+          },
+          {
+            "name": "App.css",
+            "type": "file",
+            "mode": 33206,
+            "uid": "84f5b0716c217287938db5f5200e0fe8e8e8da24"
+          },
+          {
+            "name": "App.jsx",
+            "type": "file",
+            "mode": 33206,
+            "uid": "32f9c02e48e2e1d66a7abc047c4163914e16ce55"
+          },
+          {
+            "name": "api",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "client.js",
+                "type": "file",
+                "mode": 33206,
+                "uid": "c072167a4e135f7b24b37157f7074d2c3935d711"
+              }
+            ]
+          },
+          {
+            "name": "assets",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "hero.png",
+                "type": "file",
+                "mode": 33206,
+                "uid": "013c992c30720bf156b62bd4c8a2760e71fe842a"
+              },
+              {
+                "name": "react.svg",
+                "type": "file",
+                "mode": 33206,
+                "uid": "f505ddc8ebe56bdc51efb721ef04923a8d3068dd"
+              },
+              {
+                "name": "vite.svg",
+                "type": "file",
+                "mode": 33206,
+                "uid": "e5b1d75f8a9c96f7b8657cbfcb59832b78ceeef1"
+              }
+            ]
+          },
+          {
+            "name": "components",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "AuthModal.jsx",
+                "type": "file",
+                "mode": 33206,
+                "uid": "fed7df2e6af8ec52c6bebae02781adfa4cdde900"
+              },
+              {
+                "name": "BackgroundOrbs.jsx",
+                "type": "file",
+                "mode": 33206,
+                "uid": "4bddd0e46c1903f571464235d1e3a66e6a84b9df"
+              },
+              {
+                "name": "Hero.jsx",
+                "type": "file",
+                "mode": 33206,
+                "uid": "14ed0b3df2cf1a84ae34f97dd2797a1753525c32"
+              },
+              {
+                "name": "Navbar.jsx",
+                "type": "file",
+                "mode": 33206,
+                "uid": "68499162e18348486262c48e0e8c4d701b898f72"
+              }
+            ]
+          },
+          {
+            "name": "index.css",
+            "type": "file",
+            "mode": 33206,
+            "uid": "d0ae4a525ccb72c55a08efc382098a685e7b7efe"
+          },
+          {
+            "name": "main.jsx",
+            "type": "file",
+            "mode": 33206,
+            "uid": "9ee7967c03d83d6a8dd74cf6341e235cff023eb9"
+          },
+          {
+            "name": "pages",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "Governance.jsx",
+                "type": "file",
+                "mode": 33206,
+                "uid": "9f8d99bd5d019962ce6d46e18c34b95a3c218425"
+              },
+              {
+                "name": "Handshake.jsx",
+                "type": "file",
+                "mode": 33206,
+                "uid": "a336e583fca5f3d4218f18d690e5828af633bfc2"
+              },
+              {
+                "name": "Policies.jsx",
+                "type": "file",
+                "mode": 33206,
+                "uid": "7281d98666fb9374d75de28d812b5431ff830a02"
+              },
+              {
+                "name": "Registry.jsx",
+                "type": "file",
+                "mode": 33206,
+                "uid": "799dd6428bba0ce125564946a0171433a781be66"
+              },
+              {
+                "name": "Security.jsx",
+                "type": "file",
+                "mode": 33206,
+                "uid": "7409c32c5b5a9c2f560c3c59654c77fc3342fdca"
+              },
+              {
+                "name": "SkillDetail.jsx",
+                "type": "file",
+                "mode": 33206,
+                "uid": "fb9119aa21556a532a8154316d31bb32cf095554"
+              },
+              {
+                "name": "Vault.jsx",
+                "type": "file",
+                "mode": 33206,
+                "uid": "8eeaec8336bd9b30481fcc92d265f78d2315fd7f"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "openapi.yaml",
+        "type": "file",
+        "mode": 33206,
+        "uid": "9585b9dbcdf262f23d540f6f5b59aba15afd52ef"
+      },
+      {
+        "name": "eslint.config.js",
+        "type": "file",
+        "mode": 33206,
+        "uid": "45349fd94206bc9d66031568cab6ee5a019f51cd"
+      },
+      {
+        "name": "functions",
+        "type": "directory",
+        "mode": 16749,
+        "children": [
+          {
+            "name": "api",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "[[route]].js",
+                "type": "file",
+                "mode": 33206,
+                "uid": "646a9a16718c94fbd5a858564294e705e50c349c"
+              },
+              {
+                "name": "db.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "8a68a093825ddc15dec104303f4599a0dfece6ca"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "generate_skills.cjs",
+        "type": "file",
+        "mode": 33206,
+        "uid": "ff26f4591786c0edefc9d72bf7a4fa00dee2cd2c"
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "mode": 33206,
+        "uid": "343292390183e0a699c635e42a75512fb80b3668"
+      },
+      {
+        "name": "load_kv.bat",
+        "type": "file",
+        "mode": 33206,
+        "uid": "0cd763f135fc4261203915eaf31c683db55018d8"
+      },
+      {
+        "name": "package-lock.json",
+        "type": "file",
+        "mode": 33206,
+        "uid": "0f90647b67813f7e792ef8a675cf113f38acb985"
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "mode": 33206,
+        "uid": "d4b8e57d4222012871b88d42739c18729639420d"
+      },
+      {
+        "name": "scan_and_package.cjs",
+        "type": "file",
+        "mode": 33206,
+        "uid": "d3a8e6633b39cec0146fe8976d457fa76caaa4ee"
+      },
+      {
+        "name": "scan_fast.cjs",
+        "type": "file",
+        "mode": 33206,
+        "uid": "eaef87212b28822bcd13e47a8317f2ad66fd0b91"
+      },
+      {
+        "name": "scan_medium.cjs",
+        "type": "file",
+        "mode": 33206,
+        "uid": "4941734b17f77bbc20d265caac2911ab8e3a54a4"
+      },
+      {
+        "name": "scan_verify.cjs",
+        "type": "file",
+        "mode": 33206,
+        "uid": "205473d82677e4761193091031f566a0c1f8b87a"
+      },
+      {
+        "name": "search.js",
+        "type": "file",
+        "mode": 33206,
+        "uid": "374ae3f2e89c6702f3c9c28362328d0bfdae2f90"
+      },
+      {
+        "name": "sentinel_bulk_scan.cjs",
+        "type": "file",
+        "mode": 33206,
+        "uid": "5fd6d928799a0de93e8da1a5b27605f4bffad6ef"
+      },
+      {
+        "name": "sentinel_chunked.cjs",
+        "type": "file",
+        "mode": 33206,
+        "uid": "0abad577553da38ba02f5cae512872c62db5d39a"
+      },
+      {
+        "name": "sentinel_results.json",
+        "type": "file",
+        "mode": 33206,
+        "uid": "0505a1fbe9af4da4a380621b31753143d08c2235"
+      },
+      {
+        "name": "server",
+        "type": "directory",
+        "mode": 16749,
+        "children": [
+          {
+            "name": "data",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "db.json",
+                "type": "file",
+                "mode": 33206,
+                "uid": "8017297579751662e3d9ca98c405dee8065e6514"
+              }
+            ]
+          },
+          {
+            "name": "db.js",
+            "type": "file",
+            "mode": 33206,
+            "uid": "7011a7b399feaabbb716f52e1eba69c239abf80c"
+          },
+          {
+            "name": "index.js",
+            "type": "file",
+            "mode": 33206,
+            "uid": "5bcb77970fc0f6895ac8778906d4f16b7a38ac83"
+          },
+          {
+            "name": "middleware",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "auth.js",
+                "type": "file",
+                "mode": 33206,
+                "uid": "29eaaa6e522f6410ebc7b2ef63999053143b292c"
+              }
+            ]
+          },
+          {
+            "name": "routes",
+            "type": "directory",
+            "mode": 16749,
+            "children": [
+              {
+                "name": "auth.js",
+                "type": "file",
+                "mode": 33206,
+                "uid": "1ac1511ab2238b54e94bc182dfd83d012138fceb"
+              },
+              {
+                "name": "checkout.js",
+                "type": "file",
+                "mode": 33206,
+                "uid": "6fb119d04695abeb15d69f73a5982bc6396d2281"
+              },
+              {
+                "name": "governance.js",
+                "type": "file",
+                "mode": 33206,
+                "uid": "3209ec70285c60d68126998e34cb3e617278a0e7"
+              },
+              {
+                "name": "handshake.js",
+                "type": "file",
+                "mode": 33206,
+                "uid": "d48a3238adcd4b9e81d399bca11cf57e6bc94d1c"
+              },
+              {
+                "name": "security.js",
+                "type": "file",
+                "mode": 33206,
+                "uid": "e8e8a468cfdc30b18fc2da5565b88faa076de62c"
+              },
+              {
+                "name": "skills.js",
+                "type": "file",
+                "mode": 33206,
+                "uid": "c55e46a4394bb9bb9f7051d3e9339c8135337ad4"
+              },
+              {
+                "name": "vault.js",
+                "type": "file",
+                "mode": 33206,
+                "uid": "4c552d2aae5c8b8d11d470c56476f91846e918d4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "test_head.html",
+        "type": "file",
+        "mode": 33206,
+        "uid": "0bb4f8ca46e61a48f15c3607bdebd12bf0ed85ec"
+      },
+      {
+        "name": "test_response.html",
+        "type": "file",
+        "mode": 33206,
+        "uid": "d3250866f3082331c0ae652d3482a1f6678cb895"
+      },
+      {
+        "name": "test_response2.html",
+        "type": "file",
+        "mode": 33206,
+        "uid": "ab6e1bc0fa86994ddfc75dee9257b0780c8cfe36"
+      },
+      {
+        "name": "test_routes.mjs",
+        "type": "file",
+        "mode": 33206,
+        "uid": "0c8295be178c905e4c024104f4387c51268f4e59"
+      },
+      {
+        "name": "test_verify.html",
+        "type": "file",
+        "mode": 33206,
+        "uid": "74c287808eeb813c7177e018876c38dae7686def"
+      },
+      {
+        "name": "upload.bat",
+        "type": "file",
+        "mode": 33206,
+        "uid": "34583bce5e110536ea8cbec275e1c5f8225c55dc"
+      },
+      {
+        "name": "vercel.json",
+        "type": "file",
+        "mode": 33206,
+        "uid": "0ccf66b63aff58a7863d7d13d76e973e1b7d8502"
+      },
+      {
+        "name": "vite.config.js",
+        "type": "file",
+        "mode": 33206,
+        "uid": "3c6d22996a97591ecbe93af05c33eb5a61a9fba3"
+      },
+      {
+        "name": "workers",
+        "type": "directory",
+        "mode": 16749,
+        "children": [
+          {
+            "name": "add_google_verify.cjs",
+            "type": "file",
+            "mode": 33206,
+            "uid": "f75587e8f7e9c397a4bf38151858121ef84d7607"
+          },
+          {
+            "name": "search.js",
+            "type": "file",
+            "mode": 33206,
+            "uid": "e42d5ab10c3bc9b7a84120ec982b0350ab88abfe"
+          }
+        ]
+      },
+      {
+        "name": "wrangler.toml",
+        "type": "file",
+        "mode": 33206,
+        "uid": "735dbd78c1678c9c0f163d843e6673c9dd74e069"
+      }
+    ]
+  },
+  {
+    "name": "out",
+    "type": "directory",
+    "mode": 16749,
+    "children": [
+      {
+        "name": "api",
+        "type": "directory",
+        "mode": 16749,
+        "children": [
+          {
+            "name": "index",
+            "type": "lambda",
+            "mode": 49590,
+            "uid": "team_DmoZusxMIKcqJhgRBmQ8B3dK-5f87110de08c2810508c0abe919c9e669a"
+          }
+        ]
+      }
+    ]
+  }
+]
