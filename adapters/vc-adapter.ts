@@ -1,9 +1,13 @@
 /**
  * @marketnow/trust-adapter-vc
  * W3C Verifiable Credentials 2.0 adapter
- * Spec: W3C VC Data Model 2.0
- * Format: JSON-LD + Data Integrity (Ed25519Signature2020)
- * MIT License — AliceLabs LLC 2026
+ *
+ * AliceLabs Source-Available License v1.0 (AL-1.0)
+ * Copyright (c) 2026 AliceLabs LLC. All rights reserved.
+ * https://github.com/eddyflores100-lang/universal-trust-adapter/blob/main/LICENSE-AL-1.0
+ *
+ * COMMERCIAL USE REQUIRES A SEPARATE COMMERCIAL LICENSE.
+ * Contact: legal@alicelabs.site
  */
 
 import type { TrustAdapter, UniversalTrustSchema, VerifyOptions, VerifyResult, IssueInput, IssuerKeys, NativeFormat } from './types';

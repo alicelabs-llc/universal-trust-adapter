@@ -1,9 +1,13 @@
 /**
  * @marketnow/trust-adapter-a2a
  * Google A2A (Agent2Agent) Agent Card adapter
- * Spec: A2A v1.0 (now under AAIF / Linux Foundation, Aug 2026)
- * Format: JSON-LD + OAuth
- * MIT License — AliceLabs LLC 2026
+ *
+ * AliceLabs Source-Available License v1.0 (AL-1.0)
+ * Copyright (c) 2026 AliceLabs LLC. All rights reserved.
+ * https://github.com/eddyflores100-lang/universal-trust-adapter/blob/main/LICENSE-AL-1.0
+ *
+ * COMMERCIAL USE REQUIRES A SEPARATE COMMERCIAL LICENSE.
+ * Contact: legal@alicelabs.site
  */
 
 import type { TrustAdapter, UniversalTrustSchema, VerifyOptions, VerifyResult, IssueInput, IssuerKeys, NativeFormat } from './types';

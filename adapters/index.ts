@@ -1,17 +1,13 @@
 /**
  * @marketnow/trust-core
- * Universal Trust Adapter — translates between all trust formats via UTS
+ * Package entrypoint — exports all adapters + createEngineWithAllAdapters helper
  *
- * Usage:
- *   import { TrustEngine, ATCAdapter, EATAdapter } from '@marketnow/trust-core';
+ * AliceLabs Source-Available License v1.0 (AL-1.0)
+ * Copyright (c) 2026 AliceLabs LLC. All rights reserved.
+ * https://github.com/eddyflores100-lang/universal-trust-adapter/blob/main/LICENSE-AL-1.0
  *
- *   const engine = new TrustEngine({
- *     adapters: [new ATCAdapter(), new EATAdapter()],
- *   });
- *
- *   const result = await engine.verifyAny(unknownPayload);
- *
- * MIT License — AliceLabs LLC 2026
+ * COMMERCIAL USE REQUIRES A SEPARATE COMMERCIAL LICENSE.
+ * Contact: legal@alicelabs.site
  */
 
 export { TrustEngine } from './trust-engine';

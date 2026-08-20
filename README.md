@@ -6,7 +6,9 @@ UTA translates between ALL trust credential formats used by AI agents — ATC, E
 
 Like Zapier connects applications, **UTA connects trust standards**.
 
-Built by **Edison Flores** & **Alejandro Flores** at **AliceLabs LLC** (Wyoming, USA). MIT-licensed.
+Built by **Edison Flores** & **Alejandro Flores** at **AliceLabs LLC** (Wyoming, USA).
+
+> ⚠️ **License:** AliceLabs Source-Available License v1.0 (AL-1.0) — proprietary. Source is available for review and non-commercial use. Commercial use requires a separate commercial license. See [LICENSE-AL-1.0](./LICENSE-AL-1.0).
 
 ---
 
@@ -16,7 +18,7 @@ In August 2026, there are **8 competing trust credential formats** for AI agents
 
 | Format | Owner | Crypto | Lock-in |
 |---|---|---|---|
-| ATC v3 | AliceLabs | Ed25519 + EAT-CWT + W3C VC | Open (MIT) |
+| ATC v3 | AliceLabs | Ed25519 + EAT-CWT + W3C VC | Source-Available (AL-1.0) |
 | EAT-AI | IETF | CWT/CBOR + COSE | Open |
 | ZTA | Anthropic | JSON + proprietary | Closed |
 | A2A Agent Card | Google / AAIF | JSON-LD + OAuth | Open |
@@ -68,6 +70,29 @@ function toNative(uts: UniversalTrustSchema): any          // UTS → native
 
 ---
 
+## Test results
+
+**83/83 tests passing.** Test suite covers:
+- Auto-detection of all 6 formats
+- Round-trip translation (UTS preserves all key fields)
+- Cross-format translation matrix (30 pairs)
+- Bridge (verify in one ecosystem, re-issue in another)
+- Lossless preservation (`format.raw` keeps original payload)
+- Policy enforcement (e.g., reject low-trust credentials)
+
+```bash
+$ node test.mjs
+✓ 6 formats registered
+✓ 6/6 detected correctly
+✓ 6/6 garbage inputs rejected
+✓ ATC round-trip preserves all key fields
+✓ All 30/30 translation pairs succeed
+✓ All formats preserve original payload in format.raw (lossless)
+RESULTS: 83 passed, 0 failed
+```
+
+---
+
 ## Quick start
 
 ### Install
@@ -75,6 +100,8 @@ function toNative(uts: UniversalTrustSchema): any          // UTS → native
 ```bash
 npm install @marketnow/trust-core
 ```
+
+> ⚠️ Package is source-available under AL-1.0. For commercial use, contact legal@alicelabs.site for a commercial license.
 
 ### Use
 
@@ -108,31 +135,6 @@ const bridge = await engine.bridge({
 });
 ```
 
-### REST API (for non-JS environments)
-
-```bash
-# Detect format
-curl -X POST https://atc.alicelabs.site/api/trust/detect \
-  -H "Content-Type: application/json" \
-  -d '{"payload": {...}}'
-
-# Verify
-curl -X POST https://atc.alicelabs.site/api/trust/verify \
-  -H "Content-Type: application/json" \
-  -d '{"payload": {...}}'
-
-# Translate
-curl -X POST https://atc.alicelabs.site/api/trust/translate \
-  -H "Content-Type: application/json" \
-  -d '{"from": "atc-v3", "to": "eat-ai", "payload": {...}}'
-
-# Bridge
-curl -X POST https://atc.alicelabs.site/api/trust/bridge \
-  -H "Authorization: Bearer ..." \
-  -H "Content-Type: application/json" \
-  -d '{"verify_in": "zta", "issue_as": "atc-v3", "payload": {...}}'
-```
-
 ---
 
 ## Repository structure
@@ -140,7 +142,7 @@ curl -X POST https://atc.alicelabs.site/api/trust/bridge \
 ```
 universal-trust-adapter/
 ├── README.md
-├── LICENSE                              ← MIT
+├── LICENSE-AL-1.0                       ← AliceLabs Source-Available License
 ├── spec/
 │   ├── UTS-v1.md                        ← Universal Trust Schema spec
 │   ├── uts-v1.json                      ← JSON Schema for UTS
@@ -151,7 +153,7 @@ universal-trust-adapter/
 │   ├── index.ts                         ← Package entrypoint
 │   ├── package.json                     ← @marketnow/trust-core npm package
 │   ├── atc-adapter.ts                   ← ATC v2.0/v3.0
-│   ├── eat-adapter.ts                   ← IETF EAT-AI (CWT/CBOR)
+│   ├── eat-adapter.ts                   ← IETF EAT-AI (CWT/CBOR)  [bug-fixed]
 │   ├── zta-adapter.ts                   ← Anthropic ZTA
 │   ├── a2a-adapter.ts                   ← Google A2A Agent Card
 │   ├── mcp-adapter.ts                   ← MCP Server Card
@@ -162,6 +164,8 @@ universal-trust-adapter/
 │   └── trust-api-spec.md                ← REST API specification
 ├── fixes/
 │   └── C4-owasp-rename.md               ← OWASP MCP Top 10 rename fix documentation
+├── tests/
+│   └── test.mjs                         ← Test suite (83 tests, all passing)
 └── EXECUTION_PLAN.md                    ← 6-month plan
 ```
 
@@ -173,11 +177,12 @@ universal-trust-adapter/
 |---|---|
 | UTS spec v1.0 | ✅ Published |
 | TrustEngine core | ✅ Implemented (TypeScript) |
-| 8 adapters (stubs) | ✅ Implemented (verify/issue pending real crypto) |
+| 8 adapters (with bug fixes) | ✅ Implemented (crypto stubs) |
 | ATC v3.0 spec | ✅ Draft 00 published |
 | REST API spec | ✅ Published |
 | OWASP rename fix | ✅ Documented |
-| Reference SDK on npm | 🚧 Pending (Sprint 1) |
+| Test suite | ✅ 83/83 tests passing |
+| Reference SDK on npm | 🚧 Pending (Sprint 2) |
 | Reference SDK on PyPI | 🚧 Pending (Sprint 4) |
 | 1 runtime integration | 🚧 Pending (Sprint 5) |
 | AAIF hosting | 🚧 Pending (Sprint 6) |
@@ -189,35 +194,32 @@ universal-trust-adapter/
 1. **Cost-to-recreate**: ~$300k-$600k in senior security engineers + 9 months of work for any enterprise (Cloudflare, Okta, Snyk) to replicate from scratch.
 2. **Network effect**: every new trust format that emerges wants a UTA adapter to be compatible with all others. UTA becomes the toll gate.
 3. **Maintenance cost**: ~$0/month (serverless, offline-first, 100% margin).
-4. **No vendor lock-in**: MIT license, anyone can fork, anyone can implement.
+4. **Source-available (AL-1.0)**: protects the work while allowing review and contribution. Commercial use requires a commercial license — protects the asset value.
 5. **First-mover advantage**: nobody else has built this. The window closes in 6 months.
-
----
-
-## Roadmap (6 months)
-
-| Month | Milestone |
-|---|---|
-| 1 | UTS spec + ATC v3 spec + trust-engine core + ATC/EAT adapters (DONE) |
-| 2 | ZTA + A2A + MCP adapters + REST API |
-| 3 | Auto-detection + bridge + W3C VC + OAuth adapters |
-| 4 | SDKs (npm + PyPI) + documentation site |
-| 5 | Interop tests with real A2A + MCP, enterprise demos |
-| 6 | Submit to AAIF (Linux Foundation), open source all adapters |
 
 ---
 
 ## License
 
-MIT — see [LICENSE](./LICENSE).
+**AliceLabs Source-Available License v1.0 (AL-1.0)** — see [LICENSE-AL-1.0](./LICENSE-AL-1.0).
 
-The names "UTA", "Universal Trust Adapter", "UTS", and "Universal Trust Schema" are descriptive terms, not trademarks. Anyone may use them.
+- ✅ **Allowed**: read source, build, run for non-commercial use, security review, contribute back via PR
+- ❌ **Prohibited**: commercial use without license, redistribution, forking (except for PR contribution), trademark use
+
+For commercial licensing: `legal@alicelabs.site`
 
 ---
 
-## Editors
+## Trademarks
 
-- **Edison Flores** — AliceLabs LLC (co-creator, lead engineer)
-- **Alejandro Flores** — AliceLabs LLC (co-creator, SDK & DX engineer)
+"ATC", "Agent Trust Credential", "UTA", "Universal Trust Adapter", "UTS", "Universal Trust Schema", "AliceLabs", and "MarketNow" are trademarks of AliceLabs LLC. Use without authorization is prohibited.
 
-Contact: `legal@alicelabs.site`
+---
+
+## Contact
+
+- **Commercial licensing:** legal@alicelabs.site
+- **Security disclosures:** legal@alicelabs.site
+- **General:** info@alicelabs.site
+
+— Edison & Alejandro Flores, AliceLabs LLC, 2026-08-20

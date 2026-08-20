@@ -1,9 +1,13 @@
 /**
  * @marketnow/trust-adapter-mcp
  * MCP (Model Context Protocol) Server Card adapter
- * Spec: MCP 2026-07-28
- * Format: JSON metadata (no signature by default)
- * MIT License — AliceLabs LLC 2026
+ *
+ * AliceLabs Source-Available License v1.0 (AL-1.0)
+ * Copyright (c) 2026 AliceLabs LLC. All rights reserved.
+ * https://github.com/eddyflores100-lang/universal-trust-adapter/blob/main/LICENSE-AL-1.0
+ *
+ * COMMERCIAL USE REQUIRES A SEPARATE COMMERCIAL LICENSE.
+ * Contact: legal@alicelabs.site
  */
 
 import type { TrustAdapter, UniversalTrustSchema, VerifyOptions, VerifyResult, IssueInput, IssuerKeys, NativeFormat } from './types';

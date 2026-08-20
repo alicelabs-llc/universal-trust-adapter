@@ -2,21 +2,22 @@
   "name": "@marketnow/trust-core",
   "version": "0.1.0",
   "description": "Universal Trust Adapter — translates between all trust credential formats (ATC, EAT-AI, ZTA, A2A, MCP, W3C VC, OAuth, SPIFFE) via Universal Trust Schema (UTS)",
-  "license": "MIT",
+  "license": "AL-1.0",
+  "licenseSEE": "https://github.com/eddyflores100-lang/universal-trust-adapter/blob/main/LICENSE-AL-1.0",
   "authors": [
     "Edison Flores <edison@alicelabs.site>",
     "Alejandro Flores <alejandro@alicelabs.site>"
   ],
-  "homepage": "https://github.com/eddyflores100-lang/atc-spec/tree/main/implementations/uta",
+  "homepage": "https://github.com/eddyflores100-lang/universal-trust-adapter",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eddyflores100-lang/atc-spec.git"
+    "url": "https://github.com/eddyflores100-lang/universal-trust-adapter.git"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "vitest run",
+    "test": "node tests/test.mjs",
     "lint": "eslint ."
   },
   "keywords": [

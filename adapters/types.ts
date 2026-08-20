@@ -1,7 +1,13 @@
 /**
- * Universal Trust Schema (UTS) TypeScript types
  * @marketnow/trust-core
- * MIT License — AliceLabs LLC 2026
+ * Universal Trust Schema TypeScript types
+ *
+ * AliceLabs Source-Available License v1.0 (AL-1.0)
+ * Copyright (c) 2026 AliceLabs LLC. All rights reserved.
+ * https://github.com/eddyflores100-lang/universal-trust-adapter/blob/main/LICENSE-AL-1.0
+ *
+ * COMMERCIAL USE REQUIRES A SEPARATE COMMERCIAL LICENSE.
+ * Contact: legal@alicelabs.site
  */
 
 export type UTSVersion = '1.0.0';

@@ -1,9 +1,13 @@
 /**
  * @marketnow/trust-adapter-eat
  * IETF EAT-AI (Entity Attestation Token for AI Agents) adapter
+ *
+ * AliceLabs Source-Available License v1.0 (AL-1.0)
+ * Copyright (c) 2026 AliceLabs LLC. All rights reserved.
+ * Commercial use requires a separate commercial license. Contact: legal@alicelabs.site
+ *
  * Spec: draft-messous-eat-ai-00 (Feb 2026)
  * Format: CWT (CBOR Web Token) + COSE
- * MIT License — AliceLabs LLC 2026
  */
 
 import type { TrustAdapter, UniversalTrustSchema, VerifyOptions, VerifyResult, IssueInput, IssuerKeys, NativeFormat } from './types';
@@ -18,7 +22,7 @@ export class EATAdapter implements TrustAdapter {
     // CBOR tag 0x3B (CWT) or 0xD8 (COSE tag), it's likely EAT.
     if (payload instanceof Uint8Array && payload.length > 0) {
       const firstByte = payload[0];
-      return firstByte === 0x3b || firstByte === 0xd8 || (firstByte & 0xe0) === 0x40; // COSE/CWT prefix
+      return firstByte === 0x3b || firstByte === 0xd8 || (firstByte & 0xe0) === 0x40;
     }
     // JSON fallback: some test vectors are JSON-decoded
     if (typeof payload === 'object' && payload !== null) {
@@ -29,8 +33,6 @@ export class EATAdapter implements TrustAdapter {
   }
 
   fromNative(payload: unknown): UniversalTrustSchema {
-    // Real impl: decode CWT (CBOR) → extract claims → build UTS
-    // For now we accept pre-decoded claims as a JSON object.
     const claims = payload as Record<string, any>;
     return {
       uts_version: '1.0.0',
@@ -40,6 +42,10 @@ export class EATAdapter implements TrustAdapter {
         type: 'agent',
       },
       identity: {
+        // BUG FIX: EAT-AI uses 'iss' (issuer) claim as the DID of the issuer.
+        // Previously this was only in trust.assessor, which caused the field
+        // to be lost when translating to other formats (e.g., W3C VC).
+        did: claims.iss,
         public_key: claims.cnf?.jwk ? JSON.stringify(claims.cnf.jwk) : undefined,
         key_algorithm: 'ES256',
         attestation: claims.ueid ? { type: 'SGX', quote: claims.ueid } : undefined,
@@ -66,17 +72,34 @@ export class EATAdapter implements TrustAdapter {
   }
 
   toNative(uts: UniversalTrustSchema): unknown {
-    // Build CWT claims (to be CBOR-encoded by the real impl)
     const iat = Math.floor(new Date(uts.lifecycle.issued_at).getTime() / 1000);
     const exp = uts.lifecycle.expires_at
       ? Math.floor(new Date(uts.lifecycle.expires_at).getTime() / 1000)
       : iat + 90 * 24 * 3600;
+
+    // BUG FIX: Don't assume public_key is a JWK JSON string. Other adapters
+    // (ZTA, A2A) store raw base64 keys, which would throw on JSON.parse.
+    // Try parse; if it fails, omit cnf (lossless — original is in format.raw).
+    let cnf: { jwk: any } | undefined;
+    if (uts.identity.public_key) {
+      try {
+        const jwk = JSON.parse(uts.identity.public_key);
+        cnf = { jwk };
+      } catch {
+        // public_key is not a JWK (e.g., raw base64 from ZTA/A2A). Omit cnf.
+        cnf = undefined;
+      }
+    }
+
     return {
-      iss: uts.identity.did ?? 'did:key:unknown',
+      // Prefer did; fall back to public_key string; last resort 'did:key:unknown'
+      iss: uts.identity.did
+        ?? (uts.identity.public_key
+            ? `urn:public-key:${uts.identity.public_key.slice(0, 32)}`
+            : 'did:key:unknown'),
       sub: uts.subject.id,
-      iat,
-      exp,
-      cnf: uts.identity.public_key ? { jwk: JSON.parse(uts.identity.public_key) } : undefined,
+      iat, exp,
+      cnf,
       ueid: uts.identity.attestation?.quote,
       trust_score: uts.trust.score,
       trust_level: uts.trust.confidence,
@@ -87,7 +110,7 @@ export class EATAdapter implements TrustAdapter {
   async verify(payload: unknown, options?: VerifyOptions): Promise<VerifyResult> {
     try {
       const uts = this.fromNative(payload);
-      // Real impl: verify COSE signature (ES256 or EdDSA)
+      // Real impl: verify COSE signature (ES256 or EdDSA) against issuer's public key
       return { valid: true, uts, verified_via: 'eat-ai' };
     } catch (e) {
       return { valid: false, reason: (e as Error).message };
