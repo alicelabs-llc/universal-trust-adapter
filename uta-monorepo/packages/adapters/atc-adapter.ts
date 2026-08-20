@@ -18,7 +18,7 @@ import type {
   IssueInput,
   IssuerKeys,
   NativeFormat,
-} from './types';
+} from '../core/types.js';
 
 export class ATCAdapter implements TrustAdapter {
   formatId: NativeFormat = 'atc-v3';

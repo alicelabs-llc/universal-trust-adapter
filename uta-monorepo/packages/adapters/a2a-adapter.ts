@@ -10,7 +10,7 @@
  * Contact: legal@alicelabs.site
  */
 
-import type { TrustAdapter, UniversalTrustSchema, VerifyOptions, VerifyResult, IssueInput, IssuerKeys, NativeFormat } from './types';
+import type { TrustAdapter, UniversalTrustSchema, VerifyOptions, VerifyResult, IssueInput, IssuerKeys, NativeFormat } from '../core/types.js';
 
 export class A2AAdapter implements TrustAdapter {
   formatId: NativeFormat = 'a2a-card';

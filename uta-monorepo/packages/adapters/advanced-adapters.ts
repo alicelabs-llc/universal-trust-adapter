@@ -295,7 +295,7 @@ export class SPIFFEAdapter {
       uts_version: '2.0.0',
       subject: {
         id: spiffeId,
-        name: spiffeId.split('/')[-1] || 'SPIFFE Workload',
+        name: spiffeId.split('/').at(-1) || 'SPIFFE Workload',
         type: 'service',
       },
       identity: {
