@@ -153,19 +153,17 @@ export async function verifyCredential(
   stages.push(await runStage('ISSUER_TRUST', () => {
     const issuer = extractIssuer(ctx.credential, ctx.format!);
 
+    // If policy specifies allowed issuers, enforce strictly
     if (ctx.policy?.allowed_issuers && ctx.policy.allowed_issuers.length > 0) {
       if (!ctx.policy.allowed_issuers.includes(issuer)) {
-        throw new Error(`Issuer '${issuer}' not in allowed list`);
+        throw new Error(`Issuer '${issuer}' not in allowed list: [${ctx.policy.allowed_issuers.join(', ')}]`);
       }
-    }
-
-    // Always trust MarketNow Sentinel CA (it's our own CA)
-    if (issuer === 'MarketNow Sentinel CA' || issuer === 'MarketNow') {
       return 'PASS';
     }
 
-    // For external issuers, log but pass (trust is configurable via policy)
-    return 'PASS';
+    // Without an allowed_issuers policy, DENY by default (fail-closed)
+    // This is a CHANGE from the previous stub that accepted any issuer
+    throw new Error(`Issuer '${issuer}' cannot be trusted: no allowed_issuers policy configured`);
   }));
 
   if (lastFailed(stages)) return deny(stages, startTime, '05_ISSUER');
@@ -231,8 +229,30 @@ export async function verifyCredential(
       throw new Error('Artifact binding required by policy but not present in credential');
     }
 
-    // Verify binding hash
-    // (In production: would verify against actual Git SHA + npm tarball + Docker digest)
+    // Verify binding_hash is correctly computed from the binding fields
+    const bindingObj = binding as Record<string, any>;
+    const gitSha = bindingObj.git?.commit_sha || bindingObj.git_commit_sha || '';
+    const npmSha = bindingObj.npm?.tarball_sha256 || bindingObj.npm_tarball_sha256;
+    const ociDigest = bindingObj.oci?.digest || bindingObj.docker_digest;
+
+    // Recompute the expected binding hash using the same JCS + SHA-256
+    const expectedBinding = canonicalize({
+      git_commit_sha: gitSha,
+      npm_tarball_sha256: npmSha,
+      docker_digest: ociDigest,
+    });
+    const expectedHash = `sha256:${canonicalHash(expectedBinding)}`;
+    const actualHash = bindingObj.binding_hash || '';
+
+    if (actualHash !== expectedHash) {
+      throw new Error(`Artifact binding hash mismatch: expected ${expectedHash.slice(0, 30)}, got ${actualHash.slice(0, 30)}`);
+    }
+
+    // NOTE: Full artifact verification (fetching actual Git/npm/OCI and comparing digests)
+    // requires network access and is done by the Trust Gateway at runtime, not by the
+    // offline verification pipeline. The pipeline verifies the binding_hash is
+    // correctly computed. The Gateway verifies the binding matches reality.
+
     return 'PASS';
   }));
 
@@ -274,10 +294,23 @@ export async function verifyCredential(
       return 'SKIP'; // No evidence to validate
     }
 
-    // Verify each evidence entry's hash (if present)
+    // Verify each evidence entry's hash against its content
     for (const e of evidence) {
       if (e.evidence_hash) {
-        // In production: would verify SHA-256 of the evidence content
+        // Recompute the expected hash from evidence fields
+        const evidenceContent = canonicalize({
+          layer: e.type || e.layer || '',
+          result: e.result,
+          details: e.details || '',
+          source: e.source || '',
+          timestamp: e.timestamp || '',
+        });
+        const expectedHash = canonicalHash(evidenceContent);
+        // Compare (evidence_hash may have sha256: prefix or be raw hex)
+        const actualHash = e.evidence_hash.replace(/^sha256:/, '');
+        if (actualHash !== expectedHash) {
+          throw new Error(`Evidence hash mismatch for ${e.type || e.layer}: expected ${expectedHash.slice(0, 20)}, got ${actualHash.slice(0, 20)}`);
+        }
       }
     }
 
@@ -369,9 +402,14 @@ function detectFormat(payload: unknown): NativeFormat | null {
   if (!payload || typeof payload !== 'object') return null;
   const p = payload as Record<string, unknown>;
 
-  // ATC: card_id + payload + signature
+  // ATC v3: atc_version starts with 3. + credential_id + signatures[]
+  if (p.atc_version && typeof p.atc_version === 'string' && p.atc_version.startsWith('3.')) {
+    return 'atc-v3';
+  }
+
+  // ATC v2: card_id + payload + signature
   if (p.card_id && p.payload && p.signature) {
-    return p.signature.ca_key_id ? 'atc-v2' : 'atc-v2';
+    return 'atc-v2';
   }
 
   // ZTA: zta_version or agent_id + trust.score (no card_id)

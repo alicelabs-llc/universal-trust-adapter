@@ -176,7 +176,7 @@ export interface IssueParams {
 export function issueATCv3(params: IssueParams): ATCv3Credential {
   const now = new Date();
   const expires = new Date(now.getTime() + params.expires_in_days * 24 * 60 * 60 * 1000);
-  const credential_id = `ATC-${now.getFullYear()}-${Math.random().toString(36).slice(2, 9).toUpperCase()}`;
+  const credential_id = `ATC-${now.getFullYear()}-${crypto.randomUUID().replace(/-/g, '').slice(0, 7).toUpperCase()}`;
 
   // 1. Build attestations with evidence hashes
   const attestations: ATCAttestation[] = (params.attestations || []).map(att => {

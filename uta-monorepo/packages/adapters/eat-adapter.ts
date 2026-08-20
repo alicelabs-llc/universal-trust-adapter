@@ -10,7 +10,7 @@
  * Format: CWT (CBOR Web Token) + COSE
  */
 
-import type { TrustAdapter, UniversalTrustSchema, VerifyOptions, VerifyResult, IssueInput, IssuerKeys, NativeFormat } from './types';
+import type { TrustAdapter, UniversalTrustSchema, VerifyOptions, VerifyResult, IssueInput, IssuerKeys, NativeFormat } from '../core/types.js';
 
 export class EATAdapter implements TrustAdapter {
   formatId: NativeFormat = 'eat-ai';

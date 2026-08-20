@@ -10,7 +10,7 @@
  * Contact: legal@alicelabs.site
  */
 
-import type { TrustAdapter, UniversalTrustSchema, VerifyOptions, VerifyResult, IssueInput, IssuerKeys, NativeFormat } from './types';
+import type { TrustAdapter, UniversalTrustSchema, VerifyOptions, VerifyResult, IssueInput, IssuerKeys, NativeFormat } from '../core/types.js';
 
 export class VCAdapter implements TrustAdapter {
   formatId: NativeFormat = 'w3c-vc';

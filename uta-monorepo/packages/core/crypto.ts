@@ -28,7 +28,10 @@ import crypto from 'node:crypto';
  */
 export function canonicalize(value: unknown): string {
   if (value === null) return 'null';
-  if (value === undefined) return 'null';
+  // undefined is NOT valid JSON — throw instead of coercing to null
+  if (value === undefined) {
+    throw new Error('JCS: undefined is not valid JSON and cannot be canonicalized');
+  }
 
   const type = typeof value;
 
@@ -53,7 +56,10 @@ export function canonicalize(value: unknown): string {
  * Integers: as-is. Floats: shortest round-trip representation.
  */
 function serializeNumber(num: number): string {
-  if (!Number.isFinite(num)) return 'null'; // RFC 8785: NaN/Infinity → null
+  if (!Number.isFinite(num)) {
+    // NaN and Infinity are NOT valid JSON — throw instead of coercing to null
+    throw new Error(`JCS: ${num} is not a valid JSON number (NaN/Infinity)`);
+  }
   if (Number.isInteger(num)) {
     // Check safe integer range
     if (Math.abs(num) > Number.MAX_SAFE_INTEGER) {
@@ -183,13 +189,16 @@ export function generateEd25519KeyPair(): Ed25519KeyPair {
   const { publicKey, privateKey } = crypto.generateKeyPairSync('ed25519');
   const publicKeyPem = publicKey.export({ type: 'spki', format: 'pem' }).toString();
   const privateKeyPem = privateKey.export({ type: 'pkcs8', format: 'pem' }).toString();
-  const publicKeyRaw = publicKey.export({ type: 'spki', format: 'der' }).toString('base64').slice(-44); // last 32 bytes
+  const publicKeyDer = publicKey.export({ type: 'spki', format: 'der' });
+  // Ed25519 SPKI DER: 12 bytes header + 32 bytes raw key = 44 bytes total
+  // Extract the raw 32-byte key explicitly (not by string slicing)
+  const publicKeyRaw = publicKeyDer.subarray(publicKeyDer.length - 32).toString('base64');
 
   return {
     publicKeyPem,
     privateKeyPem,
     publicKeyRaw,
-    keyId: crypto.createHash('sha256').update(publicKeyPem).digest('hex').slice(0, 16),
+    keyId: crypto.createHash('sha256').update(publicKeyDer).digest('hex').slice(0, 16),
   };
 }
 
@@ -437,18 +446,7 @@ export function computeArtifactBinding(
 }
 
 // ============================================================================
-// 6. Export everything
 // ============================================================================
-
-export {
-  canonicalize,
-  canonicalHash,
-  sign as ed25519Sign,
-  verify as ed25519Verify,
-  generateEd25519KeyPair,
-  generatePoPChallenge,
-  createPoPResponse,
-  verifyPoP,
-  computeArtifactBinding,
-  DOMAINS,
-};
+// All functions are already exported above via `export function` / `export const`.
+// No re-export block needed — that causes "Cannot redeclare" TypeScript errors.
+// ============================================================================

@@ -10,7 +10,7 @@
  * Contact: legal@alicelabs.site
  */
 
-export { TrustEngine } from './trust-engine';
+export { TrustEngine } from '../core/trust-engine.js';
 export type {
   TrustAdapter,
   UniversalTrustSchema,
@@ -40,7 +40,7 @@ export type {
   FilesystemAccess,
   ShellAccess,
   ProvenanceSource,
-} from './types';
+} from '../core/types.js';
 
 // All adapters
 export { ATCAdapter } from './atc-adapter';
@@ -53,7 +53,7 @@ export { OAuthAdapter } from './oauth-adapter';
 export { SPIFFEAdapter } from './spiffe-adapter';
 
 // Convenience: register all adapters at once
-import { TrustEngine } from './trust-engine';
+import { TrustEngine } from '../core/trust-engine.js';
 import { ATCAdapter } from './atc-adapter';
 import { EATAdapter } from './eat-adapter';
 import { ZTAAdapter } from './zta-adapter';
