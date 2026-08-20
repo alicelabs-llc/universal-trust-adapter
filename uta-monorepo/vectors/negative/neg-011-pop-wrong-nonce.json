@@ -1,0 +1,29 @@
+{
+  "vector_id": "neg-011-pop-wrong-nonce",
+  "description": "PoP response with nonce replaced (does not match challenge)",
+  "expected_result": "INVALID",
+  "public_key_ref": "agent_ed25519",
+  "domain": "UTA-ATC-V3-POP",
+  "signature_value": "0673368c83594d354f713779ee7d9011a535fe1d57a3201157132df09a2502bbc04dabc233e3e3783b765b680617fc8c062eae3c00e361476fdf1ed1db4d8b06",
+  "verification_input": null,
+  "canonical_sha256": null,
+  "generated_at": "2026-08-20T22:38:12.028Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "input": {
+    "challenge": {
+      "nonce": "57a0943bafdc3411d1fd94752db38a73cbee0bcd12d3464cf6831e067193bcd7",
+      "credential_id": "ATC-2026-ABCD123",
+      "audience": "marketnow-gateway",
+      "issued_at": "2026-08-20T22:38:12.027Z",
+      "expires_at": "2027-08-20T22:38:12.027Z"
+    },
+    "response": {
+      "nonce": "0000000000000000000000000000000000000000000000000000000000000000",
+      "credential_id": "ATC-2026-ABCD123",
+      "audience": "marketnow-gateway",
+      "timestamp": "2026-08-20T22:38:12.027Z",
+      "signature": "0673368c83594d354f713779ee7d9011a535fe1d57a3201157132df09a2502bbc04dabc233e3e3783b765b680617fc8c062eae3c00e361476fdf1ed1db4d8b06"
+    }
+  },
+  "expected_failure_reason": "nonce"
+}

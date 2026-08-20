@@ -1,0 +1,16 @@
+{
+  "vector_id": "mut-002-jwt-eddsa-middle-byte",
+  "description": "EdDSA JWT signing input with middle byte flipped",
+  "expected_result": "INVALID",
+  "public_key_ref": "ca_ed25519",
+  "domain": "JWT",
+  "signature_value": "No9fqa6r4t-3W1C9PKW9mr_0rGEc8LljthCzrTjVqkDC2CdhIrewaZayQzeMG2V5njqUdyvA0_-8EjTJjh_JDA",
+  "verification_input": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6IjU0ODhlYjdiNzJhN2IxNWMifQ.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIIOiJhZ2VudC0wMDMiLCJhdWQiOiJtYXJrZXRub3ctZ2F0ZXdheSIsImlhdCI6MTc4NzI2NTQ5MiwiZXhwIjoxNzg3MjY5MDkyLCJzY29wZSI6InRvb2xzOmNhbGwifQ",
+  "canonical_sha256": "2059b485ab20f95381a6a27560556b609540ec7f6060c1a8c25d4493c788b701",
+  "generated_at": "2026-08-20T22:38:12.047Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "input": {
+    "jwt": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6IjU0ODhlYjdiNzJhN2IxNWMifQ.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIIOiJhZ2VudC0wMDMiLCJhdWQiOiJtYXJrZXRub3ctZ2F0ZXdheSIsImlhdCI6MTc4NzI2NTQ5MiwiZXhwIjoxNzg3MjY5MDkyLCJzY29wZSI6InRvb2xzOmNhbGwifQ.No9fqa6r4t-3W1C9PKW9mr_0rGEc8LljthCzrTjVqkDC2CdhIrewaZayQzeMG2V5njqUdyvA0_-8EjTJjh_JDA"
+  },
+  "expected_failure_reason": "signature verification failed"
+}

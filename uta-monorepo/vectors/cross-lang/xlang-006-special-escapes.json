@@ -1,0 +1,16 @@
+{
+  "vector_id": "xlang-006-special-escapes",
+  "description": "Strings requiring JSON escape: backslash, quote, forward slash (must NOT escape /)",
+  "expected_result": "CANONICAL_MATCH",
+  "payload": {
+    "backslash": "a\\b",
+    "quote": "say \"hi\"",
+    "slash": "a/b/c"
+  },
+  "verification_input": "{\"backslash\":\"a\\\\b\",\"quote\":\"say \\\"hi\\\"\",\"slash\":\"a/b/c\"}",
+  "canonical_sha256": "099a87d880be702028f04b7f3ac7d2754e8cd62974f8743e6ed4b6ce17151e0a",
+  "canonical_length_bytes": 57,
+  "generated_at": "2026-08-20T22:38:12.051Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "cross_language_check": "Compute canonicalize(payload) using your local JCS (RFC 8785) implementation. The result MUST byte-for-byte match verification_input. The SHA-256 of those bytes MUST equal canonical_sha256."
+}

@@ -6,25 +6,32 @@
 
 | Capability | Code | Unit Test | Integration | External Vector | Production |
 |-----------|------|-----------|-------------|-----------------|------------|
-| Ed25519 (RFC 8032) | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
-| JCS (RFC 8785) | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
-| PoP (nonce challenge) | ✅ NonceStore + PoPManager | ⬜ | ⬜ | ⬜ | ⬜ |
-| Artifact binding | ✅ hash verify (JCS+SHA-256) | ⬜ | ⬜ | ⬜ | ⬜ |
-| Evidence verification | ✅ hash verify (JCS+SHA-256) | ⬜ | ⬜ | ⬜ | ⬜ |
-| Issuer trust | ✅ fail-closed (DENY unknown) | ⬜ | ⬜ | ⬜ | ⬜ |
-| Key binding | ✅ TrustRegistry | ⬜ | ⬜ | ⬜ | ⬜ |
-| JWT verification (RS256/ES256/EdDSA) | ✅ real crypto.verify | ⬜ | ⬜ | ⬜ | ⬜ |
-| W3C VC verification | ✅ Ed25519Signature2020 | ⬜ | ⬜ | ⬜ | ⬜ |
-| W3C VC issuance | ✅ real Ed25519 sign | ⬜ | ⬜ | ⬜ | ⬜ |
-| Action receipts | ✅ signed Ed25519 | ⬜ | ⬜ | ⬜ | ⬜ |
-| Gateway args_hash | ✅ JCS (not JSON.stringify) | ⬜ | ⬜ | ⬜ | ⬜ |
-| Revocation | ⚠️ CRL query only | ⬜ | ⬜ | ⬜ | ⬜ |
+| Ed25519 (RFC 8032) | ✅ | ✅ 8 vectors | ⬜ | ✅ 6 cross-lang | ⬜ |
+| JCS (RFC 8785) | ✅ | ✅ 6 cross-lang | ⬜ | ✅ canonical SHA-256 | ⬜ |
+| PoP (nonce challenge) | ✅ NonceStore + PoPManager | ✅ 2 vectors | ⬜ | ⬜ | ⬜ |
+| Artifact binding | ✅ hash verify (JCS+SHA-256) | ✅ in ATC vectors | ⬜ | ⬜ | ⬜ |
+| Evidence verification | ✅ hash verify (JCS+SHA-256) | ✅ in ATC vectors | ⬜ | ⬜ | ⬜ |
+| Issuer trust | ✅ fail-closed (DENY unknown) | ✅ | ⬜ | ⬜ | ⬜ |
+| Key binding | ✅ TrustRegistry | ✅ | ⬜ | ⬜ | ⬜ |
+| JWT verification (RS256/ES256/EdDSA) | ✅ real crypto.verify | ✅ 4 vectors (3 alg + 1 neg) | ⬜ | ⬜ | ⬜ |
+| W3C VC verification | ✅ Ed25519Signature2020 | ✅ 2 vectors | ⬜ | ⬜ | ⬜ |
+| W3C VC issuance | ✅ real Ed25519 sign | ✅ | ⬜ | ⬜ | ⬜ |
+| Action receipts | ✅ signed Ed25519 | ✅ 2 vectors | ⬜ | ⬜ | ⬜ |
+| Gateway args_hash | ✅ JCS (not JSON.stringify) | ✅ full SHA-256 | ⬜ | ⬜ | ⬜ |
+| Revocation | ✅ CRL + OCSP + Bitstring Status List | ✅ 3 vectors | ⬜ | ⬜ | ⬜ |
+| Domain separation | ✅ 5 distinct domains | ✅ 3 cross-domain tests | ⬜ | ⬜ | ⬜ |
+| Mutation detection | ✅ 1-byte → reject | ✅ 5 mutation vectors | ⬜ | ⬜ | ⬜ |
 | SLSA | 📄 documented | ⬜ | ⬜ | ⬜ | ⬜ |
-| Sigstore | 📄 documented | ⬜ | ⬜ | ⬜ | ⬜ |
+| Sigstore | ✅ bundle verifier | ✅ smoke test | ⬜ | ⬜ | ⬜ |
 | MCP Gateway | ⚠️ partial | ⬜ | ⬜ | ⬜ | ⬜ |
-| SBOM | 📄 documented | ⬜ | ⬜ | ⬜ | ⬜ |
+| SBOM | ✅ SPDX 2.3 generator | ✅ smoke test | ⬜ | ⬜ | ⬜ |
 
 **Legend:** ✅ implemented | ⚠️ partial | 📄 documented only | ⬜ not yet done
+
+**Total tests: 152 passing** (76 structural + 76 vector). Run with `npm test`.
+
+**Test vectors: 36 total** (8 positive + 17 negative + 5 mutation + 6 cross-language).
+All vectors use fixed test keypairs committed to `vectors/keys/` — reproducible across runs and implementations.
 
 ## Architecture (Frozen)
 

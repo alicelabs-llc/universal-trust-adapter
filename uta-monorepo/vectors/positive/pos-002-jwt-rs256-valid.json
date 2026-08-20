@@ -1,0 +1,15 @@
+{
+  "vector_id": "pos-002-jwt-rs256-valid",
+  "description": "OAuth JWT signed with RS256 (RSA PKCS#1 v1.5 + SHA-256)",
+  "expected_result": "VALID",
+  "public_key_ref": "ca_rsa",
+  "domain": "JWT",
+  "signature_value": "rhQHli29IYyXRD6q7EHXIP9odgEBH4ohr1ycxewG_MG14YPoDQopr9wMyEIhCzPebQWagMeCaNi6K-rTlWU2xZzqf7qm3VDySTd7q42yTjePBzIvOdMQ8vBtUDoJ9vD9iQPwmbya0uP4tmPpplp0ncY3mvmlVKh8m_d_BA2uQyiVDi8uA07HCfWPoblJdKot2ro7BPeZ7YW-ymNylZpLztyhhcdgkNZjWwF1NAZaTcxE7kftnK8PndjYjM0MoXqWXxpJvEdLIpp3Y0NgqtRmYtU1GBOfFQljw5kJRGaPoSP1pfF3dWq2QrAXZQyYRh7eqJaszBPBBa-QPYe_3qAbig",
+  "verification_input": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJiNGIyYTBjZDE1OWU3NzAifQ.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhZ2VudC0wMDEiLCJhdWQiOiJtYXJrZXRub3ctZ2F0ZXdheSIsImlhdCI6MTc4NzI2NTQ5MSwiZXhwIjoxNzg3MjY5MDkxLCJzY29wZSI6InRvb2xzOmNhbGwifQ",
+  "canonical_sha256": "e5ee36afb05a36aad0883994b56057afdc513af9d2b916960d3f120311308ae6",
+  "generated_at": "2026-08-20T22:38:11.997Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "input": {
+    "jwt": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJiNGIyYTBjZDE1OWU3NzAifQ.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhZ2VudC0wMDEiLCJhdWQiOiJtYXJrZXRub3ctZ2F0ZXdheSIsImlhdCI6MTc4NzI2NTQ5MSwiZXhwIjoxNzg3MjY5MDkxLCJzY29wZSI6InRvb2xzOmNhbGwifQ.rhQHli29IYyXRD6q7EHXIP9odgEBH4ohr1ycxewG_MG14YPoDQopr9wMyEIhCzPebQWagMeCaNi6K-rTlWU2xZzqf7qm3VDySTd7q42yTjePBzIvOdMQ8vBtUDoJ9vD9iQPwmbya0uP4tmPpplp0ncY3mvmlVKh8m_d_BA2uQyiVDi8uA07HCfWPoblJdKot2ro7BPeZ7YW-ymNylZpLztyhhcdgkNZjWwF1NAZaTcxE7kftnK8PndjYjM0MoXqWXxpJvEdLIpp3Y0NgqtRmYtU1GBOfFQljw5kJRGaPoSP1pfF3dWq2QrAXZQyYRh7eqJaszBPBBa-QPYe_3qAbig"
+  }
+}

@@ -11,7 +11,9 @@
   ],
   "scripts": {
     "build": "tsc -b",
-    "test": "node packages/conformance/run.js",
+    "test:structural": "node packages/conformance/run.js",
+    "test:vectors": "node packages/conformance/run-vectors.js",
+    "test": "node packages/conformance/run.js && node packages/conformance/run-vectors.js",
     "deploy": "node services/trust-api/deploy.js"
   }
 }

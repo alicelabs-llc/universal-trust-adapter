@@ -1,0 +1,151 @@
+{
+  "vector_id": "neg-017-atc-revoked-via-bitstring",
+  "description": "ATC v3 with valid signature but revoked via Bitstring Status List (bit 42 set)",
+  "expected_result": "INVALID",
+  "public_key_ref": "ca_ed25519",
+  "domain": "UTA-ATC-V3-CREDENTIAL",
+  "signature_value": "54d3e736418e40b8d141411b60a17d17aabf8c04046ce7ec83431d8224f582a0858dcaf11408be799051a1df3229bdf3881aba4216de7d3aeeb4989fbafec002",
+  "verification_input": null,
+  "canonical_sha256": null,
+  "generated_at": "2026-08-20T22:38:12.041Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "input": {
+    "atc_version": "3.0.0",
+    "credential_id": "ATC-2026-F0B7CE9",
+    "issuer": {
+      "did": "did:marketnow:ca",
+      "name": "MarketNow Sentinel CA",
+      "url": "https://marketnow.site",
+      "ca_key_id": "5488eb7b72a7b15c"
+    },
+    "subject": {
+      "agent_id": "test-agent-001",
+      "agent_name": "Test Agent",
+      "public_key": "4Z95p6aWjpyrnlrG_4372J5xoCGbmdRhIWoF0HkrzfQ",
+      "key_algorithm": "Ed25519",
+      "subject_type": "agent"
+    },
+    "artifact_binding": {
+      "git": {
+        "repository": "https://github.com/test/mcp-server",
+        "commit_sha": "abc123def4567890abcdef1234567890abcdef12"
+      },
+      "npm": {
+        "package": "universal-trust-adapter",
+        "version": "1.0.0",
+        "tarball_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "oci": {
+        "image": "marketnow/trust-adapter",
+        "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "binding_hash": "sha256:6477b7b370518af9b764e622c887c7d58e17fd5976edd21fa9c0b5841bca52d3"
+    },
+    "attestations": [
+      {
+        "type": "sentinel-audit",
+        "issuer": "MarketNow Sentinel CA",
+        "evidence": [
+          {
+            "layer": "L1.5",
+            "result": "pass",
+            "details": "Metadata valid",
+            "evidence_hash": "c123a123e9e9fceedb17868340d463e44d9e0ebe0c09d5b048358658f0ef226b"
+          },
+          {
+            "layer": "L1.6",
+            "result": "pass",
+            "details": "No secrets found",
+            "evidence_hash": "7dda56a0e9d8060911ae2a2ff7d1eeddd4873e1ffd4e09462d5d806a52cfab9d"
+          },
+          {
+            "layer": "L1.9",
+            "result": "pass",
+            "details": "No prompt injection",
+            "evidence_hash": "1bdd8f5f36b4aa762d542f7ebdf21cece93f0132951f47bc7580d9e19731fdb5"
+          },
+          {
+            "layer": "L2.5",
+            "result": "pass",
+            "details": "Sandbox passed",
+            "evidence_hash": "68ccaf10121a10f52f5ba7886ad667cb536b67b9aa499470250838980ad27339"
+          }
+        ],
+        "signed_at": "2026-08-20T22:38:12.038Z",
+        "signature_hash": "e8f8aca1b8b015e688e2a455eb4265bcd822688e072b632b92845b2e07ac9637"
+      }
+    ],
+    "capabilities": {
+      "provides": [
+        "search",
+        "read",
+        "verify"
+      ],
+      "requires": [],
+      "protocols": [
+        "mcp"
+      ]
+    },
+    "lifecycle": {
+      "issued_at": "2026-08-20T22:38:12.038Z",
+      "expires_at": "2027-08-20T22:38:12.038Z",
+      "revoked": false,
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-F0B7CE9",
+      "version": "3.0.0",
+      "status_list_credential_url": "uta-fixture://statuslist/test-list-1.json",
+      "status_list_index": 42,
+      "revocation_method": "BITSTRING_STATUS_LIST"
+    },
+    "assessment": {
+      "methodology": "Sentinel",
+      "methodology_version": "v2.5",
+      "score": 8,
+      "confidence": "high",
+      "risk_level": "low",
+      "computed_at": "2026-08-20T22:38:12.038Z",
+      "computed_by": "MarketNow Sentinel CA"
+    },
+    "signatures": [
+      {
+        "algorithm": "Ed25519 (RFC 8032)",
+        "value": "54d3e736418e40b8d141411b60a17d17aabf8c04046ce7ec83431d8224f582a0858dcaf11408be799051a1df3229bdf3881aba4216de7d3aeeb4989fbafec002",
+        "signed_by": "MarketNow Sentinel CA",
+        "signed_at": "2026-08-20T22:38:12.038Z",
+        "domain": "UTA-ATC-V3-CREDENTIAL",
+        "key_id": "5488eb7b72a7b15c",
+        "canonicalization": "RFC_8785_JCS",
+        "evidence_hash": "sha256:ffcb1fe1a3c6c53782bdd6121f13398bac9ca599c836dc704d4cbee4117273bf"
+      }
+    ]
+  },
+  "revocation_fixture": {
+    "kind": "BITSTRING_STATUS_LIST",
+    "url": "uta-fixture://statuslist/test-list-1.json",
+    "statusListCredential": {
+      "@context": [
+        "https://www.w3.org/2018/credentials/v1"
+      ],
+      "id": "uta-fixture://statuslist/test-list-1.json",
+      "type": [
+        "VerifiableCredential",
+        "BitstringStatusListCredential"
+      ],
+      "issuer": "did:marketnow:ca",
+      "issuanceDate": "2026-08-20T22:38:12.041Z",
+      "credentialSubject": {
+        "id": "uta-fixture://statuslist/test-list-1.json#list",
+        "type": "BitstringStatusList",
+        "statusPurpose": "revocation",
+        "encodedList": "H4sIAAAAAAAAA-3BAQ0AAAzDoEq5f5XXsQSo6gIAAAAAAAAAhj0J1euoACAAAA",
+        "ttl": 300
+      },
+      "proof": {
+        "type": "Ed25519Signature2020",
+        "proofValue": "7PgO9WhIeJtC--zrPraacn2p6tMK20jb3qSGwntAF53I-L2IUNBuMhLqNYckacW7TcE7szZRRFvZ5a_8nOSrDg",
+        "proofPurpose": "assertionMethod",
+        "created": "2026-08-20T22:38:12.041Z"
+      }
+    }
+  },
+  "expected_failure_reason": "revoked via BITSTRING_STATUS_LIST"
+}
