@@ -1,0 +1,5 @@
+.git
+.gitignore
+EXECUTION_PLAN.md
+*.zip
+node_modules/

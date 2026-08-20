@@ -1,31 +1,38 @@
 {
-  "name": "@marketnow/trust-core",
+  "name": "universal-trust-adapter",
   "version": "1.0.0",
-  "description": "Universal Trust Adapter (UTA) — translates between ALL agent trust credential formats via Universal Trust Schema (UTS). The USB-C of agent trust.",
+  "description": "Universal Trust Adapter (UTA) — translates between ALL agent trust credential formats (ATC, EAT-AI, ZTA, A2A, MCP) via Universal Trust Schema (UTS). The USB-C of agent trust.",
   "type": "module",
-  "main": "adapters/engine.mjs",
-  "exports": {
-    ".": "./adapters/engine.mjs",
-    "./schema": "./adapters/schema.mjs",
-    "./adapters/atc": "./adapters/atc.mjs"
+  "main": "api/trust.js",
+  "bin": {
+    "uta": "api/trust.js"
   },
   "scripts": {
-    "start": "node api/trust.js",
-    "test": "node tests/verify-all.mjs"
+    "start": "node api/trust.js"
   },
   "keywords": [
     "trust", "agent", "atc", "eat-ai", "zta", "a2a", "mcp",
     "w3c-vc", "oauth", "spiffe", "universal", "adapter",
-    "translation", "interoperability", "usb-c"
+    "translation", "interoperability", "usb-c", "ai-agent",
+    "agent-trust", "credential", "marketnow", "alicelabs"
   ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
   "license": "MNNC-1.0",
-  "homepage": "https://marketnow.site/api/trust",
+  "homepage": "https://universal-trust-adapter.vercel.app",
   "repository": {
     "type": "git",
     "url": "https://github.com/eddyflores100-lang/universal-trust-adapter"
   },
   "bugs": {
     "url": "https://github.com/eddyflores100-lang/universal-trust-adapter/issues"
-  }
+  },
+  "files": [
+    "adapters/",
+    "api/",
+    "spec/",
+    "fixes/",
+    "LICENSE",
+    "NOTICE",
+    "README.md"
+  ]
 }
