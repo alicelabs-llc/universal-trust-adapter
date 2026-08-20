@@ -4,14 +4,14 @@
   "expected_result": "INVALID",
   "public_key_ref": "ca_ed25519",
   "domain": "UTA-WRONG-DOMAIN",
-  "signature_value": "aa03b56c8c039412c39bca5cbe18147819bcfe24bf5fa5cf40ae6caa3b7dc5672452229e493c24f7f30f3710a833af87ad89a15da33f5a22d86fb68d9a389008",
+  "signature_value": "5c7afea9250a22440e17cf2f834431c4efbd32e4ea5e6557a428f7a141c67b9151b68eea28fdad641ec6d9a35996f7b192c1d69d12120ff241852c5071cf2104",
   "verification_input": null,
   "canonical_sha256": null,
-  "generated_at": "2026-08-20T22:38:12.022Z",
+  "generated_at": "2026-08-20T23:16:11.366Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "input": {
     "atc_version": "3.0.0",
-    "credential_id": "ATC-2026-E63A107",
+    "credential_id": "ATC-2026-815C414",
     "issuer": {
       "did": "did:marketnow:ca",
       "name": "MarketNow Sentinel CA",
@@ -71,7 +71,7 @@
             "evidence_hash": "68ccaf10121a10f52f5ba7886ad667cb536b67b9aa499470250838980ad27339"
           }
         ],
-        "signed_at": "2026-08-20T22:38:12.018Z",
+        "signed_at": "2026-08-20T23:16:11.363Z",
         "signature_hash": "e8f8aca1b8b015e688e2a455eb4265bcd822688e072b632b92845b2e07ac9637"
       }
     ],
@@ -87,10 +87,10 @@
       ]
     },
     "lifecycle": {
-      "issued_at": "2026-08-20T22:38:12.018Z",
-      "expires_at": "2027-08-20T22:38:12.018Z",
+      "issued_at": "2026-08-20T23:16:11.363Z",
+      "expires_at": "2027-08-20T23:16:11.363Z",
       "revoked": false,
-      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-E63A107",
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-815C414",
       "version": "3.0.0"
     },
     "assessment": {
@@ -99,19 +99,19 @@
       "score": 8,
       "confidence": "high",
       "risk_level": "low",
-      "computed_at": "2026-08-20T22:38:12.018Z",
+      "computed_at": "2026-08-20T23:16:11.363Z",
       "computed_by": "MarketNow Sentinel CA"
     },
     "signatures": [
       {
         "algorithm": "Ed25519 (RFC 8032)",
-        "value": "aa03b56c8c039412c39bca5cbe18147819bcfe24bf5fa5cf40ae6caa3b7dc5672452229e493c24f7f30f3710a833af87ad89a15da33f5a22d86fb68d9a389008",
+        "value": "5c7afea9250a22440e17cf2f834431c4efbd32e4ea5e6557a428f7a141c67b9151b68eea28fdad641ec6d9a35996f7b192c1d69d12120ff241852c5071cf2104",
         "signed_by": "MarketNow Sentinel CA",
-        "signed_at": "2026-08-20T22:38:12.018Z",
+        "signed_at": "2026-08-20T23:16:11.363Z",
         "domain": "UTA-WRONG-DOMAIN",
         "key_id": "5488eb7b72a7b15c",
         "canonicalization": "RFC_8785_JCS",
-        "evidence_hash": "sha256:2755975416a1ae6060d980fc0cfe671f1400c062ef28b2a05033d0cbd2e3be64"
+        "evidence_hash": "sha256:5c7a21751fb35701c768014143e985970ade08e89420996e8779ae8728c16384"
       }
     ]
   },

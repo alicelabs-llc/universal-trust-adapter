@@ -1,0 +1,73 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "SBOM for @marketnow/trust-adapters",
+  "documentNamespace": "https://marketnow.site/spdx/@marketnow/trust-adapters/1.0.0/1787266923724",
+  "creationInfo": {
+    "created": "2026-08-20T23:02:03.723Z",
+    "creators": [
+      "Organization: AliceLabs LLC",
+      "Tool: UTA-SBOM-Generator-1.0"
+    ],
+    "licenseListVersion": "3.20"
+  },
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-root",
+      "name": "@marketnow/trust-adapters",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "supplier": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "79590c12ab0c52e3046c50923c8605b8dbf15adcbc19a6f1191dbe592225e8cf"
+        }
+      ],
+      "description": "Trust format adapters — ATC, EAT, ZTA, A2A, MCP, VC, OAuth, SPIFFE"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-marketnow-trust-core",
+      "name": "@marketnow/trust-core",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "checksums": []
+    },
+    {
+      "SPDXID": "SPDXRef-Package-marketnow-uts",
+      "name": "@marketnow/uts",
+      "versionInfo": "2.0.0",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "checksums": []
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-Package-root",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-marketnow-trust-core"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-root",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-marketnow-uts"
+    }
+  ],
+  "documentDescribes": [
+    "SPDXRef-Package-root"
+  ],
+  "documentHash": "sha256:7ee650284ae52fd019664c49d00642032e8fa1fe2b8057bf088b1788fd8926eb"
+}

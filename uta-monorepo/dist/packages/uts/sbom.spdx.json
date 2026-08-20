@@ -1,0 +1,40 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "SBOM for @marketnow/uts",
+  "documentNamespace": "https://marketnow.site/spdx/@marketnow/uts/2.0.0/1787266923729",
+  "creationInfo": {
+    "created": "2026-08-20T23:02:03.729Z",
+    "creators": [
+      "Organization: AliceLabs LLC",
+      "Tool: UTA-SBOM-Generator-1.0"
+    ],
+    "licenseListVersion": "3.20"
+  },
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-root",
+      "name": "@marketnow/uts",
+      "versionInfo": "2.0.0",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "supplier": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "fa3183fa02175ff6791ad9107bdc2ab04f16e2c3c0039cb0297d7739527b31ae"
+        }
+      ],
+      "description": "Universal Trust Schema v2 — canonical trust data model"
+    }
+  ],
+  "relationships": [],
+  "documentDescribes": [
+    "SPDXRef-Package-root"
+  ],
+  "documentHash": "sha256:731d49b51142a10286678656d00d37752c1a7d9d7ad234eac3be98af424a20bd"
+}

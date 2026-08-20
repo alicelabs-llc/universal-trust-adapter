@@ -50,7 +50,7 @@ export class SPIFFEAdapter implements TrustAdapter {
         assessed_at: new Date().toISOString(),
       },
       capabilities: {
-        protocols: ['grpc', 'https'],
+        protocols: ['grpc', 'jsonrpc'],
       },
       provenance: { source: 'external' },
       lifecycle: {

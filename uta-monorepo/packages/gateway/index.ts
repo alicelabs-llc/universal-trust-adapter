@@ -24,6 +24,10 @@ export interface GatewayConfig {
   block_shell_exec: boolean;
   ca_public_key?: string; // PEM
   api_base_url?: string;
+  /** P3-5: List of trusted issuer DIDs. If empty, issuer trust is enforced
+   *  by the pipeline's default fail-closed behavior (DENY unknown).
+   *  Configure with the list of DIDs you want to ALLOW. */
+  allowed_issuers?: string[];
 }
 
 export const DEFAULT_CONFIG: GatewayConfig = {
@@ -89,6 +93,7 @@ export class TrustGateway {
         min_trust_score: this.config.min_trust_score,
         require_pop: this.config.require_pop,
         require_artifact_binding: this.config.require_artifact_binding,
+        allowed_issuers: this.config.allowed_issuers,
       },
     };
 

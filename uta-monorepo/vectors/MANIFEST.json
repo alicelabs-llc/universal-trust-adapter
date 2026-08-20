@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T22:38:12.053Z",
+  "generated_at": "2026-08-20T23:16:11.415Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "keys_manifest": "vectors/keys/manifest.json",
   "counts": {
@@ -55,5 +55,5 @@
       "xlang-006-special-escapes"
     ]
   },
-  "manifest_sha256": "a477950727fe483445e2622d9b627e2f5f2164c902439e90349578f4844293ee"
+  "manifest_sha256": "e777a69e80253fd1790e3979b6db676ba19a5d86d7046e692394d327ef0fae45"
 }

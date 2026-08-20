@@ -352,8 +352,10 @@ export function verifySigstoreBundle(
   }
 
   // 4. Check certificate validity window
-  const notBefore = cert.validFromDate || cert.validFrom;
-  const notAfter = cert.validToDate || cert.validTo;
+  const notBeforeRaw: string | Date | undefined = cert.validFrom as any;
+  const notAfterRaw: string | Date | undefined = cert.validTo as any;
+  const notBefore = notBeforeRaw ? new Date(notBeforeRaw) : undefined;
+  const notAfter = notAfterRaw ? new Date(notAfterRaw) : undefined;
   if (notBefore && now < notBefore) {
     issues.push(`certificate not yet valid (notBefore=${notBefore.toISOString()})`);
   }
@@ -379,11 +381,11 @@ export function verifySigstoreBundle(
       // ECDSA P-256 — signature is in DER format from Sigstore (despite spec saying raw)
       // Try DER first
       try {
-        signatureValid = crypto.verify('SHA256', content, { key: publicKey, dsaEncoding: 'der' }, signature);
+        signatureValid = crypto.verify('SHA256', content, { key: publicKey, dsaEncoding: 'der' } as any, signature);
       } catch {
         // Try IEEE P1363 (raw R||S)
         try {
-          signatureValid = crypto.verify('SHA256', content, { key: publicKey, dsaEncoding: 'ieee-p1363' }, signature);
+          signatureValid = crypto.verify('SHA256', content, { key: publicKey, dsaEncoding: 'ieee-p1363' } as any, signature);
         } catch {
           // give up
         }
@@ -435,8 +437,8 @@ export function verifySigstoreBundle(
     issues,
     signerIdentity,
     issuer,
-    notBefore: notBefore || undefined,
-    notAfter: notAfter || undefined,
+    notBefore,
+    notAfter,
     tlogVerified,
   };
 }
@@ -461,7 +463,7 @@ export function buildTestBundle(opts: {
   if (keyType === 'rsa') {
     signature = crypto.sign('RSA-SHA256', opts.content, privateKey);
   } else if (keyType === 'ec') {
-    signature = crypto.sign('SHA256', { key: privateKey, dsaEncoding: 'ieee-p1363' }, opts.content);
+    signature = crypto.sign('SHA256', { key: privateKey, dsaEncoding: 'ieee-p1363' } as any, opts.content);
   } else if (keyType === 'ed25519') {
     signature = crypto.sign(null, opts.content, privateKey);
   } else {

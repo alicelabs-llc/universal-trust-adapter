@@ -6,8 +6,8 @@
 export {
   canonicalize,
   canonicalHash,
-  ed25519Sign as sign,
-  ed25519Verify as verify,
+  sign as ed25519Sign,
+  verify as ed25519Verify,
   generateEd25519KeyPair,
   generatePoPChallenge,
   createPoPResponse,
@@ -20,6 +20,9 @@ export {
   type ArtifactBinding,
   type SignatureDomain,
 } from './crypto.js';
+
+// Backwards-compat aliases — old callers imported `sign` / `verify`.
+export { sign, verify } from './crypto.js';
 
 export {
   verifyCredential,

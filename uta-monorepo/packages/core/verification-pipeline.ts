@@ -365,14 +365,18 @@ export async function verifyCredential(
     // Verify each evidence entry's hash against its content
     for (const e of evidence) {
       if (e.evidence_hash) {
-        // Recompute the expected hash from evidence fields
-        const evidenceContent = canonicalize({
-          layer: e.type || e.layer || '',
-          result: e.result,
-          details: e.details || '',
-          source: e.source || '',
-          timestamp: e.timestamp || '',
-        });
+        // Recompute the expected hash from evidence fields.
+        // ATC v3 evidence_hash = SHA-256(canonicalize({layer, result, details}))
+        // (matches atc-v3.ts issueATCv3). For ATC v2 the fields are different.
+        const evidenceContent = ctx.format === 'atc-v3'
+          ? canonicalize({ layer: e.layer || '', result: e.result, details: e.details || '' })
+          : canonicalize({
+              layer: e.layer || e.type || '',
+              result: e.result,
+              details: e.details || '',
+              source: e.source || '',
+              timestamp: e.timestamp || '',
+            });
         const expectedHash = canonicalHash(evidenceContent);
         // Compare (evidence_hash may have sha256: prefix or be raw hex)
         const actualHash = e.evidence_hash.replace(/^sha256:/, '');
@@ -424,11 +428,13 @@ export async function verifyCredential(
 
 async function runStage(
   name: string,
-  fn: () => StageResult | Promise<StageResult>
+  fn: () => StageResult | Promise<StageResult | string> | string
 ): Promise<VerificationStage> {
   const start = Date.now();
   try {
-    const result = await fn();
+    const rawResult = await fn();
+    // Coerce string 'PASS'/'FAIL'/'SKIP' to StageResult
+    const result: StageResult = (typeof rawResult === 'string' ? rawResult : rawResult) as StageResult;
     return {
       name,
       result,
@@ -553,6 +559,26 @@ function extractSignatureData(payload: unknown, format: NativeFormat): {
         signature: (p.signature as any)?.value || null,
         domain: DOMAINS.ATC_V3_CREDENTIAL,
       };
+    case 'atc-v3': {
+      // ATC v3 has signatures[] array. Use the first signature.
+      // The payload for verification is the credential WITHOUT the signatures field.
+      const { signatures, ...rest } = p as any;
+      const firstSig = Array.isArray(signatures) ? signatures[0] : null;
+      return {
+        payload: rest,
+        signature: firstSig?.value || null,
+        domain: firstSig?.domain || DOMAINS.ATC_V3_CREDENTIAL,
+      };
+    }
+    case 'w3c-vc': {
+      // W3C VC has a proof block. Verification payload is credential WITHOUT proof.
+      const { proof, ...rest } = p as any;
+      return {
+        payload: rest,
+        signature: proof?.proofValue || null,
+        domain: 'W3C-VC-DATA-INTEGRITY',
+      };
+    }
     default:
       return { payload: p, signature: null, domain: DOMAINS.ATC_V3_CREDENTIAL };
   }
@@ -564,6 +590,10 @@ function extractIssuer(payload: unknown, format: NativeFormat): string {
   switch (format) {
     case 'atc-v2':
       return (p.payload as any)?.metadata?.issuer || 'unknown';
+    case 'atc-v3':
+      return (p.issuer as any)?.did || (p.issuer as any)?.name || 'unknown';
+    case 'w3c-vc':
+      return typeof p.issuer === 'string' ? p.issuer : ((p.issuer as any)?.id || 'unknown');
     case 'zta':
       return (p.trust as any)?.assessor || 'unknown';
     case 'eat-ai':
@@ -579,6 +609,12 @@ function extractKeyId(payload: unknown, format: NativeFormat): string | null {
   switch (format) {
     case 'atc-v2':
       return (p.signature as any)?.ca_key_id || null;
+    case 'atc-v3': {
+      const sigs = p.signatures as any[];
+      return (sigs && sigs[0]?.key_id) || (p.issuer as any)?.ca_key_id || null;
+    }
+    case 'w3c-vc':
+      return ((p.proof as any)?.verificationMethod as string)?.split('#').pop() || null;
     default:
       return null;
   }
@@ -590,6 +626,8 @@ function extractAgentPublicKey(payload: unknown, format: NativeFormat): string |
   switch (format) {
     case 'atc-v2':
       return (p.payload as any)?.identity?.public_key || null;
+    case 'atc-v3':
+      return (p.subject as any)?.public_key || null;
     case 'zta':
       return (p.identity as any)?.public_key || null;
     default:
@@ -620,6 +658,8 @@ function extractArtifactBinding(payload: unknown, format: NativeFormat): unknown
   switch (format) {
     case 'atc-v2':
       return (p.payload as any)?.provenance?.artifact_binding || null;
+    case 'atc-v3':
+      return (p.artifact_binding as any) || null;
     default:
       return null;
   }
@@ -694,8 +734,11 @@ function extractLifecycle(payload: unknown, format: NativeFormat): {
 
 function extractEvidence(payload: unknown, format: NativeFormat): Array<{
   type: string;
+  layer?: string;
   source: string;
   result: string;
+  details?: string;
+  timestamp?: string;
   evidence_hash?: string;
 }> {
   const p = payload as Record<string, unknown>;
@@ -703,6 +746,21 @@ function extractEvidence(payload: unknown, format: NativeFormat): Array<{
   switch (format) {
     case 'atc-v2':
       return (p.payload as any)?.trust?.evidence || [];
+    case 'atc-v3': {
+      // ATC v3 attestations[].evidence[] flattened
+      const attestations = (p.attestations as any[]) || [];
+      return attestations.flatMap(att =>
+        ((att.evidence as any[]) || []).map(e => ({
+          type: att.type,
+          layer: e.layer,
+          source: att.issuer,
+          result: e.result,
+          details: e.details,
+          timestamp: att.signed_at,
+          evidence_hash: e.evidence_hash,
+        }))
+      );
+    }
     case 'zta':
       return (p.trust as any)?.evidence || [];
     default:
@@ -716,8 +774,12 @@ function extractTrustScore(payload: unknown, format: NativeFormat): number {
   switch (format) {
     case 'atc-v2':
       return (p.payload as any)?.trust?.sentinel_review_score || 0;
+    case 'atc-v3':
+      return (p.assessment as any)?.score || 0;
     case 'zta':
       return (p.trust as any)?.score || 0;
+    case 'w3c-vc':
+      return (p.credentialSubject as any)?.trust_score || 0;
     default:
       return 0;
   }
