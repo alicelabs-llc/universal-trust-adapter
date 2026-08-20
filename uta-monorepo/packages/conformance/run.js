@@ -161,10 +161,67 @@ check('test script points to run.js', () => {
   return pkg.includes('node packages/conformance/run.js');
 });
 
+
+// ── P1 TESTS ──
+
+check('NonceStore exists (PoP persistence)', () => exists('packages/core/nonce-store.ts'));
+check('NonceStore has consume + anti-replay', () => {
+  const ns = readFile('packages/core/nonce-store.ts');
+  return ns.includes('consume') && ns.includes('replay attack detected');
+});
+check('RedisNonceStore exists (production PoP)', () => readFile('packages/core/nonce-store.ts').includes('RedisNonceStore'));
+check('PoPManager exists', () => readFile('packages/core/nonce-store.ts').includes('class PoPManager'));
+check('JWT verification is real (no UNSIGNED)', () => {
+  const c = readFile('packages/adapters/crypto-adapters.ts');
+  return c.includes('verifyJWT') && !c.includes('UNSIGNED');
+});
+check('JWT supports RS256 + ES256 + EdDSA', () => {
+  const c = readFile('packages/adapters/crypto-adapters.ts');
+  return c.includes('RS256') && c.includes('ES256') && c.includes('EdDSA');
+});
+check('JWT rejects "none" algorithm', () => {
+  return readFile('packages/adapters/crypto-adapters.ts').includes('"none" is forbidden');
+});
+check('W3C VC verification is real', () => {
+  const c = readFile('packages/adapters/crypto-adapters.ts');
+  return c.includes('verifyW3CVC') && c.includes('Ed25519Signature2020');
+});
+check('W3C VC issuance is real (no unsigned)', () => {
+  const c = readFile('packages/adapters/crypto-adapters.ts');
+  return c.includes('issueW3CVC') && !c.includes('unsigned');
+});
+check('TrustRegistry exists', () => exists('packages/core/trust-registry.ts'));
+check('TrustRegistry verifies key binding', () => {
+  const tr = readFile('packages/core/trust-registry.ts');
+  return tr.includes('verifyKeyBinding') && tr.includes('not in trust registry');
+});
+check('Action receipts exist', () => exists('packages/gateway/receipts.ts'));
+check('Receipts signed with Ed25519', () => {
+  const r = readFile('packages/gateway/receipts.ts');
+  return r.includes('ed25519Sign') && r.includes('Ed25519 (RFC 8032)');
+});
+check('Gateway args_hash uses JCS', () => {
+  const g = readFile('packages/gateway/index.ts');
+  return g.includes('canonicalize(args)') && !g.includes('JSON.stringify(args)');
+});
+check('Receipt evidence_hash is tamper-evident', () => {
+  const r = readFile('packages/gateway/receipts.ts');
+  return r.includes('evidence_hash') && r.includes('canonicalHash');
+});
+check('ReceiptGenerator + ReceiptStore exist', () => {
+  const r = readFile('packages/gateway/receipts.ts');
+  return r.includes('class ReceiptGenerator') && r.includes('class ReceiptStore');
+});
+check('Domain separation for receipts', () => {
+  return readFile('packages/gateway/receipts.ts').includes('DOMAINS.TRUST_DECISION');
+});
+check('args_hash uses full SHA-256 (not truncated)', () => {
+  return !readFile('packages/gateway/index.ts').includes('.slice(0, 16)');
+});
+
 console.log('\n' + '='.repeat(60));
 console.log(`UTA Conformance: ${passed}/${passed + failed} tests passed`);
 console.log(`Conformant: ${failed === 0 ? 'YES ✅' : 'NO ❌'}`);
-
 if (failed > 0) {
   console.log('\nFailures:');
 }

@@ -9,6 +9,8 @@
  */
 
 import { verifyCredential, type VerificationContext, type VerificationResult } from '../core/verification-pipeline.js';
+import { canonicalize, canonicalHash } from '../core/crypto.js';
+import { ActionReceipt, ReceiptGenerator, ReceiptStore } from './receipts.js';
 
 // ============================================================================
 // Trust Gateway Configuration
@@ -145,7 +147,7 @@ export class TrustGateway {
       /\.git\/config/i, /\/etc\/passwd/i, /\/etc\/shadow/i,
       /\.npmrc/i, /\.pypirc/i, /\.docker\/config/i,
     ];
-    const argsStr = JSON.stringify(args);
+    const argsStr = canonicalize(args);
     for (const p of patterns) {
       if (p.test(argsStr)) return p.source;
     }
@@ -159,7 +161,7 @@ export class TrustGateway {
       /\bnc\s+-l\b/i, /\bbash\s+-i\b/i, /\bpython\s+-c\b/i,
       /\beval\s*\(/i, /\bexec\s*\(/i, /\bsubprocess/i,
     ];
-    const argsStr = JSON.stringify(args);
+    const argsStr = canonicalize(args);
     for (const p of patterns) {
       if (p.test(argsStr)) return p.source;
     }
@@ -168,8 +170,11 @@ export class TrustGateway {
 
   // ── Helpers ──
   private hashArgs(args: Record<string, unknown>): string {
-    const crypto = require('node:crypto');
-    return `sha256:${crypto.createHash('sha256').update(JSON.stringify(args)).digest('hex').slice(0, 16)}`;
+    // P1-6: Use JCS for deterministic hashing (not JSON.stringify)
+    // This ensures that two objects with the same content but different key order
+    // produce the same hash.
+    const canonical = canonicalize(args);
+    return `sha256:${canonicalHash(canonical)}`; // Full 64-char hash, not truncated
   }
 
   private extractAgentId(credential: unknown): string {
