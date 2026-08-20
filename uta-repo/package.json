@@ -1,0 +1,31 @@
+{
+  "name": "@marketnow/trust-core",
+  "version": "1.0.0",
+  "description": "Universal Trust Adapter (UTA) — translates between ALL agent trust credential formats via Universal Trust Schema (UTS). The USB-C of agent trust.",
+  "type": "module",
+  "main": "adapters/engine.mjs",
+  "exports": {
+    ".": "./adapters/engine.mjs",
+    "./schema": "./adapters/schema.mjs",
+    "./adapters/atc": "./adapters/atc.mjs"
+  },
+  "scripts": {
+    "start": "node api/trust.js",
+    "test": "node tests/verify-all.mjs"
+  },
+  "keywords": [
+    "trust", "agent", "atc", "eat-ai", "zta", "a2a", "mcp",
+    "w3c-vc", "oauth", "spiffe", "universal", "adapter",
+    "translation", "interoperability", "usb-c"
+  ],
+  "author": "AliceLabs LLC <info@alicelabs.site>",
+  "license": "MNNC-1.0",
+  "homepage": "https://marketnow.site/api/trust",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eddyflores100-lang/universal-trust-adapter"
+  },
+  "bugs": {
+    "url": "https://github.com/eddyflores100-lang/universal-trust-adapter/issues"
+  }
+}
