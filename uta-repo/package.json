@@ -1,12 +1,9 @@
 {
   "name": "universal-trust-adapter",
   "version": "1.0.0",
-  "description": "Universal Trust Adapter (UTA) — translates between ALL agent trust credential formats (ATC, EAT-AI, ZTA, A2A, MCP) via Universal Trust Schema (UTS). The USB-C of agent trust.",
+  "description": "Universal Trust Adapter (UTA) — The USB-C of agent trust. Translates between ALL trust credential formats (ATC, EAT-AI, ZTA, A2A, MCP) via Universal Trust Schema (UTS). Built by AliceLabs LLC.",
   "type": "module",
   "main": "api/trust.js",
-  "bin": {
-    "uta": "api/trust.js"
-  },
   "scripts": {
     "start": "node api/trust.js"
   },
@@ -21,7 +18,7 @@
   "homepage": "https://universal-trust-adapter.vercel.app",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eddyflores100-lang/universal-trust-adapter"
+    "url": "git+https://github.com/eddyflores100-lang/universal-trust-adapter.git"
   },
   "bugs": {
     "url": "https://github.com/eddyflores100-lang/universal-trust-adapter/issues"
