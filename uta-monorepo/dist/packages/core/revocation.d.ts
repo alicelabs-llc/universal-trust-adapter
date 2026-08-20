@@ -207,3 +207,95 @@ export declare class CompositeRevocationChecker implements RevocationChecker {
     }): Promise<RevocationResult>;
 }
 export declare function issueCRL(payload: CRLPayload, caPrivateKeyPem: string, caKeyId: string): CRLDocument;
+/**
+ * Backend storage for OCSP responses.
+ * Implementations: in-memory (testing), Supabase (production), Redis (cache).
+ */
+export interface RevocationStore {
+    getStatus(credential_id: string): Promise<{
+        status: RevocationStatus;
+        revoked_at?: string;
+        reason?: string;
+    }>;
+}
+/**
+ * In-memory RevocationStore — for testing and small deployments.
+ */
+export declare class InMemoryRevocationStore implements RevocationStore {
+    private statuses;
+    setStatus(credential_id: string, status: RevocationStatus, reason?: string): void;
+    getStatus(credential_id: string): Promise<{
+        status: RevocationStatus;
+        revoked_at?: string;
+        reason?: string;
+    }>;
+}
+/**
+ * Build a signed OCSP response for a credential.
+ * Used by the OCSPResponder (server-side) AND by test fixtures (client-side).
+ */
+export declare function issueOCSPResponse(params: {
+    credential_id: string;
+    status: RevocationStatus;
+    issuer_did: string;
+    responder_did: string;
+    responder_private_key_pem: string;
+    responder_key_id: string;
+    nonce: string;
+    revoked_at?: string;
+    reason?: string;
+    next_update_hours?: number;
+}): OCSPResponse;
+/**
+ * Verify an OCSP response signature (used by the client-side checker when
+ * responderKeyPem is provided, and by other verifiers that need to check
+ * a cached response).
+ */
+export declare function verifyOCSPResponse(response: OCSPResponse, responderPublicKeyPem: string): boolean;
+/**
+ * Handle an OCSP request — the server-side entry point.
+ *
+ * Flow:
+ *   1. Parse request body ({ credential_id, issuer_did, nonce })
+ *   2. Validate nonce (32+ bytes hex) — reject if missing or malformed
+ *   3. Look up status in RevocationStore
+ *   4. Build signed OCSPResponse with the responder's private key
+ *   5. Return response (200 OK + JSON body)
+ *
+ * Errors return 400 (bad request) or 500 (internal error).
+ */
+export declare function handleOCSPRequest(requestBody: unknown, store: RevocationStore, responderKeys: {
+    did: string;
+    private_key_pem: string;
+    public_key_pem: string;
+    key_id: string;
+}): Promise<{
+    status: number;
+    body: OCSPResponse | {
+        error: string;
+    };
+}>;
+/**
+ * Create a Node.js http.Server that handles OCSP requests at POST /ocsp.
+ *
+ * Usage:
+ *   const server = createOCSPServer({ store, responderKeys, port: 8080 });
+ *   server.listen(8080);
+ *
+ * The server responds to:
+ *   POST /ocsp        — handle OCSP request (body: OCSPRequest JSON)
+ *   GET  /health      — health check
+ *   GET  /responder-key — return responder's public key PEM (for clients to pin)
+ */
+export declare function createOCSPServer(opts: {
+    store: RevocationStore;
+    responderKeys: {
+        did: string;
+        private_key_pem: string;
+        public_key_pem: string;
+        key_id: string;
+    };
+}): {
+    handler: (req: any, res: any) => Promise<void>;
+    listen: (port: number, host?: string) => Promise<void>;
+};

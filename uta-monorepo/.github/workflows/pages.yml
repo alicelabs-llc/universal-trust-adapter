@@ -1,0 +1,72 @@
+name: Deploy TypeDoc API Reference to GitHub Pages
+
+# P5-4: Publishes the TypeDoc-generated API reference to GitHub Pages.
+#
+# On every push to main, this workflow:
+#   1. Checks out the repo
+#   2. Installs dependencies (npm ci)
+#   3. Builds the TypeScript packages (tsc -b)
+#   4. Generates TypeDoc HTML (npm run docs → dist/docs/)
+#   5. Uploads the HTML as a GitHub Pages artifact
+#   6. Deploys to https://<owner>.github.io/universal-trust-adapter/
+#
+# The published site includes:
+#   - Class reference for every adapter (ATC v3, A2A, EAT, ZTA, MCP, OAuth, VC, SPIFFE)
+#   - Module-level documentation
+#   - Type hierarchy diagrams
+#   - Source code links (when git remote is configured)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-docs:
+    name: Build TypeDoc
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build TypeScript
+        run: npx tsc
+
+      - name: Generate TypeDoc
+        run: npx typedoc
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/docs
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build-docs
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
