@@ -1,11 +1,51 @@
 {
   "name": "@marketnow/trust-core",
   "version": "1.0.0",
-  "description": "Verification Core — 12-stage pipeline, Ed25519, JCS, PoP, Policy",
+  "description": "UTA Verification Core — 12-stage pipeline, Ed25519 (RFC 8032), JCS (RFC 8785), PoP, Revocation (CRL+OCSP+Bitstring), Supply Chain (SBOM+Sigstore)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE-AL-1.0",
+    "NOTICE"
+  ],
+  "keywords": [
+    "trust",
+    "ed25519",
+    "jcs",
+    "rfc8785",
+    "rfc8032",
+    "verifiable-credentials",
+    "w3c-vc",
+    "atc",
+    "mcp",
+    "agent-trust",
+    "revocation",
+    "crl",
+    "ocsp",
+    "bitstring-status-list",
+    "sbom",
+    "spdx",
+    "sigstore"
+  ],
+  "author": "AliceLabs LLC <info@alicelabs.site>",
+  "license": "AL-1.0",
+  "homepage": "https://github.com/eddyflores100-lang/universal-trust-adapter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eddyflores100-lang/universal-trust-adapter.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/eddyflores100-lang/universal-trust-adapter/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "docs": "typedoc"
   },
   "devDependencies": {
     "@types/node": "^20.0.0"

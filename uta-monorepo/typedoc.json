@@ -1,0 +1,28 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "packages/core/index.ts",
+    "packages/adapters/index.ts",
+    "packages/gateway/index.ts",
+    "packages/uts/index.ts"
+  ],
+  "out": "dist/docs",
+  "name": "Universal Trust Adapter (UTA) API",
+  "includeVersion": true,
+  "readme": "README.md",
+  "theme": "default",
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "excludeExternals": true,
+  "categorizeByGroup": true,
+  "categoryOrder": ["Core", "Adapters", "Gateway", "UTS", "*"],
+  "navigationLinks": {
+    "GitHub": "https://github.com/eddyflores100-lang/universal-trust-adapter"
+  },
+  "gitRevision": "main",
+  "logLevel": "Info",
+  "treatWarningsAsErrors": false,
+  "intentionallyNotExported": [
+    "UTSv2"  // type re-export, not part of public API
+  ]
+}

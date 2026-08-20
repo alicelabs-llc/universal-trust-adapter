@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "SBOM for @marketnow/trust-core",
-  "documentNamespace": "https://marketnow.site/spdx/@marketnow/trust-core/1.0.0/1787266923728",
+  "documentNamespace": "https://marketnow.site/spdx/@marketnow/trust-core/1.0.0/1787269032239",
   "creationInfo": {
-    "created": "2026-08-20T23:02:03.728Z",
+    "created": "2026-08-20T23:37:12.239Z",
     "creators": [
       "Organization: AliceLabs LLC",
       "Tool: UTA-SBOM-Generator-1.0"
@@ -17,19 +17,20 @@
       "SPDXID": "SPDXRef-Package-root",
       "name": "@marketnow/trust-core",
       "versionInfo": "1.0.0",
-      "downloadLocation": "NOASSERTION",
+      "downloadLocation": "https://github.com/eddyflores100-lang/universal-trust-adapter.git",
       "filesAnalyzed": false,
-      "licenseDeclared": "NOASSERTION",
-      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "AL-1.0",
+      "licenseConcluded": "AL-1.0",
       "copyrightText": "NOASSERTION",
-      "supplier": "NOASSERTION",
+      "supplier": "Organization: AliceLabs LLC <info@alicelabs.site>",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "2f5e2006004a9e902839f4cdbed0d9fa73fac8bb8ecb836349e24be7976cff77"
+          "checksumValue": "10906f8cae1e2448d238931bcd75893deedeeb9eb193f5eef6464c1170a2d7d3"
         }
       ],
-      "description": "Verification Core — 12-stage pipeline, Ed25519, JCS, PoP, Policy"
+      "homepage": "https://github.com/eddyflores100-lang/universal-trust-adapter",
+      "description": "UTA Verification Core — 12-stage pipeline, Ed25519 (RFC 8032), JCS (RFC 8785), PoP, Revocation (CRL+OCSP+Bitstring), Supply Chain (SBOM+Sigstore)"
     },
     {
       "SPDXID": "SPDXRef-Package-types-node",
@@ -53,5 +54,5 @@
   "documentDescribes": [
     "SPDXRef-Package-root"
   ],
-  "documentHash": "sha256:2792d4a9e3dd30e0b5e35a55a41ef2483016858d8f52753a3bc0cb6798fb1f07"
+  "documentHash": "sha256:32256e4328f669ddcbf29e244e77e3b99a566021c790d7727b5e209f7d689eae"
 }
