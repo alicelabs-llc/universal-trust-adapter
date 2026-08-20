@@ -1,0 +1,11 @@
+{
+  "name": "@marketnow/trust-adapters",
+  "version": "1.0.0",
+  "description": "Trust format adapters — ATC, EAT, ZTA, A2A, MCP, VC, OAuth, SPIFFE",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@marketnow/trust-core": "1.0.0",
+    "@marketnow/uts": "2.0.0"
+  }
+}

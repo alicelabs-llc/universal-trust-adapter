@@ -1,0 +1,7 @@
+{
+  "name": "@marketnow/uts",
+  "version": "2.0.0",
+  "description": "Universal Trust Schema v2 — canonical trust data model",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts"
+}

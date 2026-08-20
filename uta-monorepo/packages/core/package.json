@@ -1,0 +1,13 @@
+{
+  "name": "@marketnow/trust-core",
+  "version": "1.0.0",
+  "description": "Verification Core — 12-stage pipeline, Ed25519, JCS, PoP, Policy",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "node:crypto": "*"
+  }
+}
