@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-08-20T22:21:41.950Z",
+  "note": "FIXED TEST KEYS — committed to repo for reproducible vectors. DO NOT USE IN PRODUCTION.",
+  "keys": {
+    "ca_ed25519": {
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEACQursqqKxefWFbQtZBURH4R4XN98F5katG1utfBmfxw=\n-----END PUBLIC KEY-----\n",
+      "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIJbiWkzgaYS7y9QnVieCod0l3NO1XJR+LSS7ehJBXRS7\n-----END PRIVATE KEY-----\n",
+      "public_key_raw_b64url": "CQursqqKxefWFbQtZBURH4R4XN98F5katG1utfBmfxw",
+      "key_id": "5488eb7b72a7b15c",
+      "algorithm": "Ed25519"
+    },
+    "agent_ed25519": {
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA4Z95p6aWjpyrnlrG/4372J5xoCGbmdRhIWoF0HkrzfQ=\n-----END PUBLIC KEY-----\n",
+      "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIHWBYtslT14CKpRoIz/sty2/64Op1Hd/dXxh9Pmrp3NU\n-----END PRIVATE KEY-----\n",
+      "public_key_raw_b64url": "4Z95p6aWjpyrnlrG_4372J5xoCGbmdRhIWoF0HkrzfQ",
+      "key_id": "03cd876f8a32ee59",
+      "algorithm": "Ed25519"
+    },
+    "ca_rsa": {
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuI3QDQPnpFysTsr4OLdn\nmEwbc3J89DxdZamG0V8OClOkEjh9tFwGH7h96CwudIrJrLkV72ewe32N/6mgK4oU\n9JYEAlYx5nJMB4QZm4sIKQiE7FXJY2p0e2x+VYoKNEbsKZ2pPKEqd8Jcb3bHq8/G\n5fnXLn//xN7DvFRGW09msU5RFd+fPb8lDJcHbfOQkzhCqRTqmHfp8NyhS+9c7r3/\nECZTiSUqlea87zGijFAzdu7BnoJN5nKTKQmqr7PJ8yolFexomToVZo1txkCCJoRe\nI8YxYRPcA5M7jo21Qvw1Q9rKIOFU8eTiuLDryjpSA4J7spFgbR4UnerTRy9nPC9Z\nEwIDAQAB\n-----END PUBLIC KEY-----\n",
+      "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC4jdANA+ekXKxO\nyvg4t2eYTBtzcnz0PF1lqYbRXw4KU6QSOH20XAYfuH3oLC50ismsuRXvZ7B7fY3/\nqaArihT0lgQCVjHmckwHhBmbiwgpCITsVcljanR7bH5Vigo0Ruwpnak8oSp3wlxv\ndserz8bl+dcuf//E3sO8VEZbT2axTlEV3589vyUMlwdt85CTOEKpFOqYd+nw3KFL\n71zuvf8QJlOJJSqV5rzvMaKMUDN27sGegk3mcpMpCaqvs8nzKiUV7GiZOhVmjW3G\nQIImhF4jxjFhE9wDkzuOjbVC/DVD2sog4VTx5OK4sOvKOlIDgnuykWBtHhSd6tNH\nL2c8L1kTAgMBAAECggEACBqEqdL5EeOBLA3c1l4J7iBcDYwCZpWxTYHNygBlf8M/\nxLkMSVDHyA7JddoIHtU/7mtLcPFZniKGNf//E3UDCeD9w2iA1RXsYWFwimmRbdPS\nRQUDTG/j4M4ubJfHbkI1o8zTczZpxKEZKUp1kVq/PgvkDJum4cByUcuq3ImLqySq\nSviNEQepFSlTHc/5RmfarBSgHcH5CajfO7kRCwvWB8nxkK0v9ivGLuJS6rQfhzHV\na5CyusZuamcTARDchq6iGfUse/zQnBGn81Bnb9jk4wyxu2jG9JolUeY8DL7Vu7kb\nsqIoRnanyvIMRE0j1Rvvj36Twfix3I9bQ1/qIkA0kQKBgQD3NVhMGyghuZvcg4zI\nWFYtwkxCCJLxcJevYNzR5bEo0JOXZXT25OHLepIjg/WLxBVzDZek+240kyLmkdwT\nWUPkFJ+oofvvcBowfKT/pzhjC3RFOmXJ1+pkK8mTCPo3RE1R0z/mqLK67b9SYh9r\ncVPME0ngjwkmxrQ5p+9oUHbqqwKBgQC/HgtPUUJmrgLh7QDEC3SX6spNMdrRVOTg\nbdGA+QSs4px9N+8hJ91xUqd2C42b7XEjYnBXiTR6+pdgcCxSYfz1TlhdSzH/GNq6\nm0WQ4vaDVDLGoUg8zvQFMloJlhAfwPfFP3B7EhsITnE1rhTHtYU+qazsFY2ayav8\nJ8oMMN9LOQKBgFFjrct40XCxFGC4qvw3IUB1jPfcrMxy/m3OXUV58yb17PHWhHjZ\nCIIeu8iXpJs8lrdHjVrTMQh8POxer29rX0/TfnFdy32ckfLOxuAo5Qau+bvlKygW\nP2R1iisvtHnHshEzlQFTH20t42SzS5brO+SfoR4e2at7llC5OrhEbbJ7AoGAVw28\nYRjGgjbpITfvjV0acsiD9b2ryoY86u2a7ICBXK6sUW1VA2lBOQlJNj/09P2m91Mz\nkOvyd8IFiewOhEgWDTbukTBbSbNsjmuDuIdpelC0AD4exXQPOv7AfHVaStx+/93x\nwl1w6suwTZ9J394TH4PyPGdk5QjPyj/ljMAGNiECgYEA4hm5M2BkXvM6pLfUsx6L\nSBGSXHbE4UHxit6HLJnQjdn0cAlSqysSNy9AwLK+1gtvGx7y0i5PuGdz10hLzsDR\n+q201iKdv0YggFnioJaBoTee1joXo+zDP6pgXC1G2FGKx4MTx0R+Z9oxVJvNIg6I\nn6NnILDBGalOeWDKNrDa6LM=\n-----END PRIVATE KEY-----\n",
+      "key_id": "2b4b2a0cd159e770",
+      "algorithm": "RS256"
+    },
+    "ca_ecdsa": {
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAETTreEggxER5iR0lmcxyVzE99NuaO\nvbHsu6icHoY86W4m+/A/qKM91cxjZIPn7sxrcmgjSFZ0CbJNDsBU5jDAXg==\n-----END PUBLIC KEY-----\n",
+      "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg5LpsacTk0sps8VJU\nTpqaZOTfZVN+ovt5WJe6un8+YVqhRANCAARNOt4SCDERHmJHSWZzHJXMT3025o69\nsey7qJwehjzpbib78D+ooz3VzGNkg+fuzGtyaCNIVnQJsk0OwFTmMMBe\n-----END PRIVATE KEY-----\n",
+      "key_id": "28f3deb9da37c1fa",
+      "algorithm": "ES256"
+    },
+    "gateway_ed25519": {
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAo9LYGY5919YpfuwHYXRtPIlWcny454xqO2+FEXzPHxI=\n-----END PUBLIC KEY-----\n",
+      "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIH2RyLQU1UQDMrzjQOy+IzFCHJyZv/j37cA+SEZd9b8A\n-----END PRIVATE KEY-----\n",
+      "public_key_raw_b64url": "o9LYGY5919YpfuwHYXRtPIlWcny454xqO2-FEXzPHxI",
+      "key_id": "5ebfcfb9f7b15e5d",
+      "algorithm": "Ed25519"
+    }
+  }
+}

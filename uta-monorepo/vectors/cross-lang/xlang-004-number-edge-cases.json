@@ -1,0 +1,19 @@
+{
+  "vector_id": "xlang-004-number-edge-cases",
+  "description": "Number edge cases: 0, -0, 0.1, 1e10, 1E-10, MAX_SAFE_INTEGER",
+  "expected_result": "CANONICAL_MATCH",
+  "payload": {
+    "zero": 0,
+    "minus_zero": 0,
+    "float": 0.1,
+    "big": 10000000000,
+    "small": 1e-10,
+    "max_safe": 9007199254740991
+  },
+  "verification_input": "{\"big\":10000000000,\"float\":0.1,\"max_safe\":9007199254740991,\"minus_zero\":0,\"small\":1e-10,\"zero\":0}",
+  "canonical_sha256": "243af812c8383944517eba878506160bbf956347a28e69506e21ebddbd6f2f13",
+  "canonical_length_bytes": 97,
+  "generated_at": "2026-08-20T22:38:12.051Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "cross_language_check": "Compute canonicalize(payload) using your local JCS (RFC 8785) implementation. The result MUST byte-for-byte match verification_input. The SHA-256 of those bytes MUST equal canonical_sha256."
+}

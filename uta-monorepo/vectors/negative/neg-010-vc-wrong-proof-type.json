@@ -1,0 +1,33 @@
+{
+  "vector_id": "neg-010-vc-wrong-proof-type",
+  "description": "W3C VC with proof.type=JsonWebSignature2020 (only Ed25519Signature2020 supported)",
+  "expected_result": "INVALID",
+  "public_key_ref": "ca_ed25519",
+  "domain": null,
+  "signature_value": null,
+  "verification_input": null,
+  "canonical_sha256": null,
+  "generated_at": "2026-08-20T22:38:12.025Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "input": {
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1"
+    ],
+    "id": "urn:uuid:fbafc24a-b8b0-4b01-8c93-30542493e6db",
+    "type": [
+      "VerifiableCredential"
+    ],
+    "issuer": "did:marketnow:ca",
+    "issuanceDate": "2026-08-20T22:38:12.025Z",
+    "credentialSubject": {
+      "id": "did:marketnow:agent:001"
+    },
+    "proof": {
+      "type": "JsonWebSignature2020",
+      "proofValue": "AAA",
+      "proofPurpose": "assertionMethod",
+      "created": "2026-08-20T22:38:12.025Z"
+    }
+  },
+  "expected_failure_reason": "unsupported proof type"
+}

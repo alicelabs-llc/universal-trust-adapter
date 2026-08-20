@@ -1,0 +1,15 @@
+{
+  "vector_id": "pos-004-jwt-eddsa-valid",
+  "description": "OAuth JWT signed with EdDSA (Ed25519)",
+  "expected_result": "VALID",
+  "public_key_ref": "ca_ed25519",
+  "domain": "JWT",
+  "signature_value": "ENxVtilHjn3gPY4QbWPy4jjtYty2MPmCPOfcLu9YzRjbG1Di_RDt1RR_r6dklzrilkrIXRNgk2me3PQ8UXl1BA",
+  "verification_input": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6IjU0ODhlYjdiNzJhN2IxNWMifQ.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhZ2VudC0wMDMiLCJhdWQiOiJtYXJrZXRub3ctZ2F0ZXdheSIsImlhdCI6MTc4NzI2NTQ5MSwiZXhwIjoxNzg3MjY5MDkxLCJzY29wZSI6InRvb2xzOmNhbGwifQ",
+  "canonical_sha256": "14535b0b1673f772414695f4956044ce6ed176f6d9ad1c700819afb1747a193e",
+  "generated_at": "2026-08-20T22:38:11.998Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "input": {
+    "jwt": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6IjU0ODhlYjdiNzJhN2IxNWMifQ.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhZ2VudC0wMDMiLCJhdWQiOiJtYXJrZXRub3ctZ2F0ZXdheSIsImlhdCI6MTc4NzI2NTQ5MSwiZXhwIjoxNzg3MjY5MDkxLCJzY29wZSI6InRvb2xzOmNhbGwifQ.ENxVtilHjn3gPY4QbWPy4jjtYty2MPmCPOfcLu9YzRjbG1Di_RDt1RR_r6dklzrilkrIXRNgk2me3PQ8UXl1BA"
+  }
+}

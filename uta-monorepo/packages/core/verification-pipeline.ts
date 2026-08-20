@@ -12,6 +12,7 @@
 
 import { canonicalize, canonicalHash, verify as ed25519Verify, verifyPoP, DOMAINS, type PoPChallenge, type PoPResponse } from './crypto.js';
 import type { UniversalTrustSchema, NativeFormat } from './types.js';
+import type { RevocationChecker, RevocationResult } from './revocation.js';
 
 // ============================================================================
 // Stage Types
@@ -34,12 +35,32 @@ export interface VerificationContext {
   nonce?: string;
   pop_response?: PoPResponse;
   ca_public_key?: string; // PEM
+  /**
+   * P2-6: Revocation checker. If provided, stage 09 (LIFECYCLE) calls
+   * `revocation_checker.check()` in addition to the inline `lifecycle.revoked`
+   * boolean. The checker may use CRL, OCSP, or Bitstring Status List depending
+   * on the credential's declarations.
+   *
+   * If not provided, the pipeline falls back to checking only the inline
+   * `lifecycle.revoked` boolean (weaker — an attacker who can tamper with
+   * the credential JSON can flip the bit).
+   */
+  revocation_checker?: RevocationChecker;
+  /** Issuer DID — used by some revocation methods (OCSP, CRL signature verification) */
+  issuer_did?: string;
   policy?: {
     min_trust_score?: number;
     max_age_days?: number;
     require_pop?: boolean;
     require_artifact_binding?: boolean;
     allowed_issuers?: string[];
+    /**
+     * If true (default), an "unknown" revocation status (responder unreachable,
+     * status list not found, etc.) is treated as DENY (fail-closed).
+     * Set to false only in development/test environments where you want to
+     * see what the rest of the pipeline does without revocation answers.
+     */
+    fail_closed_unknown_revocation?: boolean;
   };
 }
 
@@ -259,7 +280,7 @@ export async function verifyCredential(
   if (lastFailed(stages)) return deny(stages, startTime, '08_PROVENANCE');
 
   // ── STAGE 09: LIFECYCLE / REVOCATION ────────────────────────────────────
-  stages.push(await runStage('LIFECYCLE', () => {
+  stages.push(await runStage('LIFECYCLE', async () => {
     const lifecycle = extractLifecycle(ctx.credential, ctx.format!);
 
     // Check expiry
@@ -277,9 +298,56 @@ export async function verifyCredential(
       }
     }
 
-    // Check revocation (in production: query Supabase CRL or Bitstring Status List)
+    // Check inline boolean (legacy / weak — attacker who can tamper JSON can flip it)
     if (lifecycle.revoked) {
-      throw new Error(`Credential is revoked: ${lifecycle.revocation_reason || 'no reason given'}`);
+      throw new Error(`Credential is revoked (inline): ${lifecycle.revocation_reason || 'no reason given'}`);
+    }
+
+    // P2-6: Real revocation check via RevocationChecker (CRL / OCSP / Bitstring)
+    // This is the STRONG check — it queries an external source that the
+    // attacker cannot tamper with.
+    if (ctx.revocation_checker) {
+      const credentialId = extractCredentialId(ctx.credential, ctx.format!);
+      if (credentialId) {
+        // Pull the revocation URL and status list info from the credential (if present)
+        const revocationUrl = (lifecycle as any).revocation_url;
+        const statusListIndex = (lifecycle as any).status_list_index;
+        const statusListCredentialUrl = (lifecycle as any).status_list_credential_url;
+        const revocationMethod = (lifecycle as any).revocation_method;
+
+        let result: RevocationResult;
+        try {
+          result = await ctx.revocation_checker.check({
+            credential_id: credentialId,
+            issuer_did: ctx.issuer_did,
+            revocation_url: revocationUrl,
+            status_list_index: statusListIndex,
+            status_list_credential_url: statusListCredentialUrl,
+            ca_public_key_pem: ctx.ca_public_key,
+            revocation_method: revocationMethod,
+          });
+        } catch (e) {
+          // Checker threw — treat as unknown (fail-closed if configured)
+          result = {
+            status: 'unknown',
+            method: 'NONE',
+            checked_at: new Date().toISOString(),
+            reason: `revocation checker error: ${e instanceof Error ? e.message : String(e)}`,
+            fail_closed_unknown: true,
+          };
+        }
+
+        if (result.status === 'revoked') {
+          throw new Error(`Credential is revoked via ${result.method}: ${result.reason || 'no reason given'} (revoked at ${result.revoked_at || 'unknown'})`);
+        }
+
+        if (result.status === 'unknown') {
+          const failClosed = ctx.policy?.fail_closed_unknown_revocation !== false; // default true
+          if (failClosed) {
+            throw new Error(`Revocation status unknown (fail-closed): ${result.reason || 'no reason'} [method=${result.method}]`);
+          }
+        }
+      }
     }
 
     return 'PASS';
@@ -535,8 +603,12 @@ function extractCredentialId(payload: unknown, format: NativeFormat): string {
   switch (format) {
     case 'atc-v2':
       return (p.card_id as string) || 'unknown';
+    case 'atc-v3':
+      return (p.credential_id as string) || 'unknown';
     case 'zta':
       return (p.agent_id as string) || 'unknown';
+    case 'w3c-vc':
+      return (p.id as string) || 'unknown';
     default:
       return 'unknown';
   }
@@ -558,6 +630,10 @@ function extractLifecycle(payload: unknown, format: NativeFormat): {
   expires_at?: string;
   revoked: boolean;
   revocation_reason?: string;
+  revocation_url?: string;
+  status_list_index?: number;
+  status_list_credential_url?: string;
+  revocation_method?: 'CRL' | 'OCSP' | 'BITSTRING_STATUS_LIST' | 'AUTO';
 } {
   const p = payload as Record<string, unknown>;
 
@@ -569,6 +645,38 @@ function extractLifecycle(payload: unknown, format: NativeFormat): {
         expires_at: meta.expires_at,
         revoked: p.status === 'revoked',
         revocation_reason: (p as any).revocation_reason,
+      };
+    }
+    case 'atc-v3': {
+      const lc = (p.lifecycle as any) || {};
+      return {
+        issued_at: lc.issued_at,
+        expires_at: lc.expires_at,
+        revoked: lc.revoked === true,
+        revocation_reason: lc.revocation_reason,
+        revocation_url: lc.revocation_url,
+        status_list_index: lc.status_list_index,
+        status_list_credential_url: lc.status_list_credential_url,
+        revocation_method: lc.revocation_method,
+      };
+    }
+    case 'w3c-vc': {
+      // W3C VC: revocation via credentialStatus (StatusList2021)
+      const cs = (p as any).credentialStatus;
+      if (cs && cs.type === 'StatusList2021Entry') {
+        return {
+          issued_at: (p as any).issuanceDate,
+          expires_at: (p as any).expirationDate,
+          revoked: false,
+          status_list_index: typeof cs.statusListIndex === 'string' ? parseInt(cs.statusListIndex, 10) : cs.statusListIndex,
+          status_list_credential_url: cs.statusListCredential,
+          revocation_method: 'BITSTRING_STATUS_LIST',
+        };
+      }
+      return {
+        issued_at: (p as any).issuanceDate,
+        expires_at: (p as any).expirationDate,
+        revoked: false,
       };
     }
     case 'zta': {

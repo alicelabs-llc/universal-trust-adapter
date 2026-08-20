@@ -1,0 +1,16 @@
+{
+  "vector_id": "neg-007-jwt-hs256",
+  "description": "JWT with alg=HS256 — symmetric, must be rejected",
+  "expected_result": "INVALID",
+  "public_key_ref": "ca_ed25519",
+  "domain": "JWT",
+  "signature_value": "JX5rOEMPCCXejtt9plg_9o2p4AFBkZa-0Z43qRnj8Mc",
+  "verification_input": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhdHRhY2tlciIsImV4cCI6MTc4NzI2OTA5Mn0",
+  "canonical_sha256": null,
+  "generated_at": "2026-08-20T22:38:12.022Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "input": {
+    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhdHRhY2tlciIsImV4cCI6MTc4NzI2OTA5Mn0.JX5rOEMPCCXejtt9plg_9o2p4AFBkZa-0Z43qRnj8Mc"
+  },
+  "expected_failure_reason": "HS256\" is not supported"
+}

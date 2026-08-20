@@ -1,0 +1,29 @@
+{
+  "vector_id": "neg-012-pop-expired",
+  "description": "PoP with expired challenge (expires_at in 2020)",
+  "expected_result": "INVALID",
+  "public_key_ref": "agent_ed25519",
+  "domain": "UTA-ATC-V3-POP",
+  "signature_value": "b6b2ec7f93278395832da1c5ad4633aa49e3a6bef63a4568312c3155da0ff67667c3a0d14c0b9a315b14b9278acad7fae9fff14407a5a762cd592d3e9f2b440c",
+  "verification_input": null,
+  "canonical_sha256": null,
+  "generated_at": "2026-08-20T22:38:12.028Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "input": {
+    "challenge": {
+      "nonce": "0582abd0c4788cc597b10267a9c628633cc3c0b5c709286ce15e1816fd1daa8d",
+      "credential_id": "ATC-2026-ABCD123",
+      "audience": "marketnow-gateway",
+      "issued_at": "2020-01-01T00:00:00.000Z",
+      "expires_at": "2020-01-01T00:05:00.000Z"
+    },
+    "response": {
+      "nonce": "0582abd0c4788cc597b10267a9c628633cc3c0b5c709286ce15e1816fd1daa8d",
+      "credential_id": "ATC-2026-ABCD123",
+      "audience": "marketnow-gateway",
+      "timestamp": "2020-01-01T00:00:00.000Z",
+      "signature": "b6b2ec7f93278395832da1c5ad4633aa49e3a6bef63a4568312c3155da0ff67667c3a0d14c0b9a315b14b9278acad7fae9fff14407a5a762cd592d3e9f2b440c"
+    }
+  },
+  "expected_failure_reason": "expired"
+}

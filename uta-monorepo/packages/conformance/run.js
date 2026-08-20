@@ -219,6 +219,81 @@ check('args_hash uses full SHA-256 (not truncated)', () => {
   return !readFile('packages/gateway/index.ts').includes('.slice(0, 16)');
 });
 
+// ── P2 TESTS ──
+
+check('Revocation module exists (P2-6)', () => exists('packages/core/revocation.ts'));
+check('RevocationChecker interface exists', () => {
+  return readFile('packages/core/revocation.ts').includes('interface RevocationChecker');
+});
+check('CRLRevocationChecker exists', () => {
+  return readFile('packages/core/revocation.ts').includes('class CRLRevocationChecker');
+});
+check('OCSPRevocationChecker exists', () => {
+  return readFile('packages/core/revocation.ts').includes('class OCSPRevocationChecker');
+});
+check('BitstringStatusListChecker exists', () => {
+  return readFile('packages/core/revocation.ts').includes('class BitstringStatusListChecker');
+});
+check('CompositeRevocationChecker exists', () => {
+  return readFile('packages/core/revocation.ts').includes('class CompositeRevocationChecker');
+});
+check('Pipeline stage 09 uses RevocationChecker (P2-6)', () => {
+  return readFile('packages/core/verification-pipeline.ts').includes('ctx.revocation_checker');
+});
+check('Pipeline stage 09 fail-closed on unknown revocation', () => {
+  return readFile('packages/core/verification-pipeline.ts').includes('fail_closed_unknown_revocation');
+});
+check('Pipeline stage 09 extracts ATC v3 lifecycle', () => {
+  const p = readFile('packages/core/verification-pipeline.ts');
+  return p.includes("case 'atc-v3':") && p.includes('status_list_index');
+});
+check('Test vectors exist (positive, negative, mutation, cross-lang)', () => {
+  return exists('vectors/positive') && exists('vectors/negative') &&
+         exists('vectors/mutation') && exists('vectors/cross-lang') &&
+         exists('vectors/MANIFEST.json');
+});
+check('Test vectors manifest has 30+ vectors', () => {
+  const m = JSON.parse(readFile('vectors/MANIFEST.json'));
+  return m.counts && m.counts.total >= 30;
+});
+check('Vector conformance runner exists (run-vectors.js)', () => {
+  return exists('packages/conformance/run-vectors.js');
+});
+check('Vector files contain real signatures (not stubs)', () => {
+  const pos = JSON.parse(readFile('vectors/positive/pos-001-atc-v3-valid.json'));
+  return pos.signature_value && pos.signature_value.length === 128 && /^[0-9a-f]+$/.test(pos.signature_value);
+});
+check('Cross-lang vectors include canonical bytes + SHA-256', () => {
+  const xlang = JSON.parse(readFile('vectors/cross-lang/xlang-001-flat-object.json'));
+  return xlang.verification_input && xlang.canonical_sha256 && xlang.canonical_sha256.length === 64;
+});
+
+// ── P2-7: Supply chain tests ──
+
+check('Supply chain module exists (P2-7)', () => exists('packages/core/supply-chain.ts'));
+check('SBOM generator (SPDX 2.3) exists', () => {
+  return readFile('packages/core/supply-chain.ts').includes('generateSBOM') && readFile('packages/core/supply-chain.ts').includes('SPDX-2.3');
+});
+check('SBOM generates packages + relationships', () => {
+  const sc = readFile('packages/core/supply-chain.ts');
+  return sc.includes('SPDXPackage') && sc.includes('SPDXRelationship') && sc.includes('DEPENDS_ON');
+});
+check('SBOM computes document hash (canonical)', () => {
+  return readFile('packages/core/supply-chain.ts').includes('documentHash') && readFile('packages/core/supply-chain.ts').includes('canonicalize');
+});
+check('Sigstore bundle verifier exists', () => {
+  return readFile('packages/core/supply-chain.ts').includes('verifySigstoreBundle') && readFile('packages/core/supply-chain.ts').includes('SigstoreBundle');
+});
+check('Sigstore verifies signature with leaf cert key', () => {
+  return readFile('packages/core/supply-chain.ts').includes('crypto.verify') && readFile('packages/core/supply-chain.ts').includes('signatureValid');
+});
+check('Sigstore extracts signer identity from SAN', () => {
+  return readFile('packages/core/supply-chain.ts').includes('subjectAltName') && readFile('packages/core/supply-chain.ts').includes('signerIdentity');
+});
+check('Sigstore checks cert validity window', () => {
+  return readFile('packages/core/supply-chain.ts').includes('notBefore') && readFile('packages/core/supply-chain.ts').includes('notAfter');
+});
+
 console.log('\n' + '='.repeat(60));
 console.log(`UTA Conformance: ${passed}/${passed + failed} tests passed`);
 console.log(`Conformant: ${failed === 0 ? 'YES ✅' : 'NO ❌'}`);

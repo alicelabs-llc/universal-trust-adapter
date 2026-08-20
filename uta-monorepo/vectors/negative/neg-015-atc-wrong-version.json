@@ -1,0 +1,119 @@
+{
+  "vector_id": "neg-015-atc-wrong-version",
+  "description": "ATC with atc_version=2.0.0 (must start with 3.)",
+  "expected_result": "INVALID",
+  "public_key_ref": "ca_ed25519",
+  "domain": "UTA-ATC-V3-CREDENTIAL",
+  "signature_value": "9729c147960ef6a8e056c8b76471a3443484ed2a614f3aad7d38a19f7c30e459787639f095c986d53e97ed38968141cc0ea572e94957dac404894912c0f8600c",
+  "verification_input": null,
+  "canonical_sha256": null,
+  "generated_at": "2026-08-20T22:38:12.037Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "input": {
+    "atc_version": "2.0.0",
+    "credential_id": "ATC-2026-EBC1C23",
+    "issuer": {
+      "did": "did:marketnow:ca",
+      "name": "MarketNow Sentinel CA",
+      "url": "https://marketnow.site",
+      "ca_key_id": "5488eb7b72a7b15c"
+    },
+    "subject": {
+      "agent_id": "test-agent-001",
+      "agent_name": "Test Agent",
+      "public_key": "4Z95p6aWjpyrnlrG_4372J5xoCGbmdRhIWoF0HkrzfQ",
+      "key_algorithm": "Ed25519",
+      "subject_type": "agent"
+    },
+    "artifact_binding": {
+      "git": {
+        "repository": "https://github.com/test/mcp-server",
+        "commit_sha": "abc123def4567890abcdef1234567890abcdef12"
+      },
+      "npm": {
+        "package": "universal-trust-adapter",
+        "version": "1.0.0",
+        "tarball_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "oci": {
+        "image": "marketnow/trust-adapter",
+        "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "binding_hash": "sha256:6477b7b370518af9b764e622c887c7d58e17fd5976edd21fa9c0b5841bca52d3"
+    },
+    "attestations": [
+      {
+        "type": "sentinel-audit",
+        "issuer": "MarketNow Sentinel CA",
+        "evidence": [
+          {
+            "layer": "L1.5",
+            "result": "pass",
+            "details": "Metadata valid",
+            "evidence_hash": "c123a123e9e9fceedb17868340d463e44d9e0ebe0c09d5b048358658f0ef226b"
+          },
+          {
+            "layer": "L1.6",
+            "result": "pass",
+            "details": "No secrets found",
+            "evidence_hash": "7dda56a0e9d8060911ae2a2ff7d1eeddd4873e1ffd4e09462d5d806a52cfab9d"
+          },
+          {
+            "layer": "L1.9",
+            "result": "pass",
+            "details": "No prompt injection",
+            "evidence_hash": "1bdd8f5f36b4aa762d542f7ebdf21cece93f0132951f47bc7580d9e19731fdb5"
+          },
+          {
+            "layer": "L2.5",
+            "result": "pass",
+            "details": "Sandbox passed",
+            "evidence_hash": "68ccaf10121a10f52f5ba7886ad667cb536b67b9aa499470250838980ad27339"
+          }
+        ],
+        "signed_at": "2026-08-20T22:38:12.034Z",
+        "signature_hash": "e8f8aca1b8b015e688e2a455eb4265bcd822688e072b632b92845b2e07ac9637"
+      }
+    ],
+    "capabilities": {
+      "provides": [
+        "search",
+        "read",
+        "verify"
+      ],
+      "requires": [],
+      "protocols": [
+        "mcp"
+      ]
+    },
+    "lifecycle": {
+      "issued_at": "2026-08-20T22:38:12.034Z",
+      "expires_at": "2027-08-20T22:38:12.034Z",
+      "revoked": false,
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-EBC1C23",
+      "version": "3.0.0"
+    },
+    "assessment": {
+      "methodology": "Sentinel",
+      "methodology_version": "v2.5",
+      "score": 8,
+      "confidence": "high",
+      "risk_level": "low",
+      "computed_at": "2026-08-20T22:38:12.034Z",
+      "computed_by": "MarketNow Sentinel CA"
+    },
+    "signatures": [
+      {
+        "algorithm": "Ed25519 (RFC 8032)",
+        "value": "9729c147960ef6a8e056c8b76471a3443484ed2a614f3aad7d38a19f7c30e459787639f095c986d53e97ed38968141cc0ea572e94957dac404894912c0f8600c",
+        "signed_by": "MarketNow Sentinel CA",
+        "signed_at": "2026-08-20T22:38:12.034Z",
+        "domain": "UTA-ATC-V3-CREDENTIAL",
+        "key_id": "5488eb7b72a7b15c",
+        "canonicalization": "RFC_8785_JCS",
+        "evidence_hash": "sha256:5d90542ee1cc466d24880025eba9c3e52d7091e5c5901da32bf3e0ef556ae7f7"
+      }
+    ]
+  },
+  "expected_failure_reason": "wrong atc_version"
+}

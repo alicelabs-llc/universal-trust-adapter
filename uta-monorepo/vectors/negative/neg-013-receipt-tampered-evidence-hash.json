@@ -1,0 +1,67 @@
+{
+  "vector_id": "neg-013-receipt-tampered-evidence-hash",
+  "description": "Action receipt with evidence_hash replaced",
+  "expected_result": "INVALID",
+  "public_key_ref": "gateway_ed25519",
+  "domain": "UTA-TRUST-DECISION",
+  "signature_value": "ac66847e461c626b05a40eb365625ef11f922bce30110a7d0c238adbac801d100fe7e8780c35e2d38d2042fb1611badfd2f14330b3a98f09ae9bd59fe996ff00",
+  "verification_input": null,
+  "canonical_sha256": null,
+  "generated_at": "2026-08-20T22:38:12.031Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "input": {
+    "receipt_id": "rcpt_f57ef8caf30142d2",
+    "decision": "ALLOW",
+    "agent_id": "test-agent-001",
+    "credential_id": "ATC-2026-ABCD123",
+    "tool_name": "mcp.tools.search",
+    "args_hash": "sha256:fcf804f32e1d12a0edfa35d423e737c416aeff60308b2e6fd61e6e1909d0b405",
+    "trust_score": 8,
+    "reason": "All stages passed",
+    "verification_stages": [
+      {
+        "name": "PARSE",
+        "result": "pass"
+      },
+      {
+        "name": "DETECT",
+        "result": "pass"
+      },
+      {
+        "name": "SCHEMA",
+        "result": "pass"
+      },
+      {
+        "name": "CRYPTO",
+        "result": "pass"
+      },
+      {
+        "name": "ISSUER",
+        "result": "pass"
+      },
+      {
+        "name": "KEY_BINDING",
+        "result": "pass"
+      },
+      {
+        "name": "POP",
+        "result": "pass"
+      },
+      {
+        "name": "DECISION",
+        "result": "ALLOW"
+      }
+    ],
+    "timestamp": "2026-08-20T22:38:12.030Z",
+    "gateway_version": "1.0.0",
+    "evidence_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "signature": {
+      "algorithm": "Ed25519 (RFC 8032)",
+      "value": "ac66847e461c626b05a40eb365625ef11f922bce30110a7d0c238adbac801d100fe7e8780c35e2d38d2042fb1611badfd2f14330b3a98f09ae9bd59fe996ff00",
+      "domain": "UTA-TRUST-DECISION",
+      "key_id": "5ebfcfb9f7b15e5d",
+      "signed_at": "2026-08-20T22:38:12.030Z"
+    }
+  },
+  "expected_failure_reason": "evidence_hash mismatch"
+}

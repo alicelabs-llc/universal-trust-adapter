@@ -1,0 +1,38 @@
+{
+  "vector_id": "neg-009-vc-wrong-key",
+  "description": "W3C VC signed with a different key than the verifier expects",
+  "expected_result": "INVALID",
+  "public_key_ref": "ca_ed25519",
+  "domain": "W3C-VC-DATA-INTEGRITY",
+  "signature_value": "VtNAL7aMdc4W5bm61Y1b_uKJ4btxmcdrSfqt-9IU1eJQXD3PrCw1eRvgRnXeIEo8xASwWGRwsjh_lJ3ozLcPAg",
+  "verification_input": null,
+  "canonical_sha256": null,
+  "generated_at": "2026-08-20T22:38:12.025Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "input": {
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1",
+      "https://w3id.org/security/suites/ed25519-2020/v1"
+    ],
+    "id": "urn:uuid:6b2dcf3c-cc9b-4876-bc03-930a87cd6be2",
+    "type": [
+      "VerifiableCredential",
+      "AgentTrustCredential"
+    ],
+    "issuer": "did:marketnow:ca",
+    "issuanceDate": "2026-08-20T22:38:12.025Z",
+    "credentialSubject": {
+      "id": "did:marketnow:agent:001",
+      "agent_id": "test-agent-001",
+      "trust_score": 8
+    },
+    "proof": {
+      "type": "Ed25519Signature2020",
+      "created": "2026-08-20T22:38:12.025Z",
+      "proofPurpose": "assertionMethod",
+      "proofValue": "VtNAL7aMdc4W5bm61Y1b_uKJ4btxmcdrSfqt-9IU1eJQXD3PrCw1eRvgRnXeIEo8xASwWGRwsjh_lJ3ozLcPAg",
+      "domain": "W3C-VC-DATA-INTEGRITY"
+    }
+  },
+  "expected_failure_reason": "verification failed"
+}

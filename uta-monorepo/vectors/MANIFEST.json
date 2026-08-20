@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-08-20T22:38:12.053Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "keys_manifest": "vectors/keys/manifest.json",
+  "counts": {
+    "positive": 8,
+    "negative": 17,
+    "mutation": 5,
+    "cross_lang": 6,
+    "total": 36
+  },
+  "vector_ids": {
+    "positive": [
+      "pos-001-atc-v3-valid",
+      "pos-002-jwt-rs256-valid",
+      "pos-003-jwt-es256-valid",
+      "pos-004-jwt-eddsa-valid",
+      "pos-005-vc-ed25519-valid",
+      "pos-006-pop-valid",
+      "pos-007-receipt-valid",
+      "pos-008-atc-not-revoked-via-crl"
+    ],
+    "negative": [
+      "neg-001-atc-tampered-sig",
+      "neg-002-atc-tampered-payload",
+      "neg-003-atc-expired",
+      "neg-004-atc-revoked",
+      "neg-005-atc-wrong-domain",
+      "neg-006-jwt-alg-none",
+      "neg-007-jwt-hs256",
+      "neg-008-jwt-tampered-sig",
+      "neg-009-vc-wrong-key",
+      "neg-010-vc-wrong-proof-type",
+      "neg-011-pop-wrong-nonce",
+      "neg-012-pop-expired",
+      "neg-013-receipt-tampered-evidence-hash",
+      "neg-014-atc-malformed-sig",
+      "neg-015-atc-wrong-version",
+      "neg-016-atc-revoked-via-crl",
+      "neg-017-atc-revoked-via-bitstring"
+    ],
+    "mutation": [
+      "mut-001-byte-0",
+      "mut-001-byte-middle",
+      "mut-001-byte-last",
+      "mut-002-jwt-eddsa-middle-byte",
+      "mut-003-vc-ed25519-middle-byte"
+    ],
+    "cross_lang": [
+      "xlang-001-flat-object",
+      "xlang-002-nested-array",
+      "xlang-003-unicode-keys",
+      "xlang-004-number-edge-cases",
+      "xlang-005-empty-collections",
+      "xlang-006-special-escapes"
+    ]
+  },
+  "manifest_sha256": "a477950727fe483445e2622d9b627e2f5f2164c902439e90349578f4844293ee"
+}

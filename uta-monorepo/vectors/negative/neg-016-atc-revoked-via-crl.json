@@ -1,0 +1,144 @@
+{
+  "vector_id": "neg-016-atc-revoked-via-crl",
+  "description": "ATC v3 with valid signature but listed as revoked in CRL (no inline revoked flag)",
+  "expected_result": "INVALID",
+  "public_key_ref": "ca_ed25519",
+  "domain": "UTA-ATC-V3-CREDENTIAL",
+  "signature_value": "20eeba65337645c40e82962b42bc2d917f412f5ae7e11d52608f2b9f911e08e29ff624768d2db226861fd67b052917458f82421279b16af4d7e4634427655d0f",
+  "verification_input": null,
+  "canonical_sha256": null,
+  "generated_at": "2026-08-20T22:38:12.038Z",
+  "spec": "UTA-P2-VECTORS/1.0",
+  "input": {
+    "atc_version": "3.0.0",
+    "credential_id": "ATC-2026-3A671AE",
+    "issuer": {
+      "did": "did:marketnow:ca",
+      "name": "MarketNow Sentinel CA",
+      "url": "https://marketnow.site",
+      "ca_key_id": "5488eb7b72a7b15c"
+    },
+    "subject": {
+      "agent_id": "test-agent-001",
+      "agent_name": "Test Agent",
+      "public_key": "4Z95p6aWjpyrnlrG_4372J5xoCGbmdRhIWoF0HkrzfQ",
+      "key_algorithm": "Ed25519",
+      "subject_type": "agent"
+    },
+    "artifact_binding": {
+      "git": {
+        "repository": "https://github.com/test/mcp-server",
+        "commit_sha": "abc123def4567890abcdef1234567890abcdef12"
+      },
+      "npm": {
+        "package": "universal-trust-adapter",
+        "version": "1.0.0",
+        "tarball_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "oci": {
+        "image": "marketnow/trust-adapter",
+        "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "binding_hash": "sha256:6477b7b370518af9b764e622c887c7d58e17fd5976edd21fa9c0b5841bca52d3"
+    },
+    "attestations": [
+      {
+        "type": "sentinel-audit",
+        "issuer": "MarketNow Sentinel CA",
+        "evidence": [
+          {
+            "layer": "L1.5",
+            "result": "pass",
+            "details": "Metadata valid",
+            "evidence_hash": "c123a123e9e9fceedb17868340d463e44d9e0ebe0c09d5b048358658f0ef226b"
+          },
+          {
+            "layer": "L1.6",
+            "result": "pass",
+            "details": "No secrets found",
+            "evidence_hash": "7dda56a0e9d8060911ae2a2ff7d1eeddd4873e1ffd4e09462d5d806a52cfab9d"
+          },
+          {
+            "layer": "L1.9",
+            "result": "pass",
+            "details": "No prompt injection",
+            "evidence_hash": "1bdd8f5f36b4aa762d542f7ebdf21cece93f0132951f47bc7580d9e19731fdb5"
+          },
+          {
+            "layer": "L2.5",
+            "result": "pass",
+            "details": "Sandbox passed",
+            "evidence_hash": "68ccaf10121a10f52f5ba7886ad667cb536b67b9aa499470250838980ad27339"
+          }
+        ],
+        "signed_at": "2026-08-20T22:38:12.037Z",
+        "signature_hash": "e8f8aca1b8b015e688e2a455eb4265bcd822688e072b632b92845b2e07ac9637"
+      }
+    ],
+    "capabilities": {
+      "provides": [
+        "search",
+        "read",
+        "verify"
+      ],
+      "requires": [],
+      "protocols": [
+        "mcp"
+      ]
+    },
+    "lifecycle": {
+      "issued_at": "2026-08-20T22:38:12.037Z",
+      "expires_at": "2027-08-20T22:38:12.037Z",
+      "revoked": false,
+      "revocation_url": "uta-fixture://crl/test-crl-1.json",
+      "version": "3.0.0",
+      "revocation_method": "CRL"
+    },
+    "assessment": {
+      "methodology": "Sentinel",
+      "methodology_version": "v2.5",
+      "score": 8,
+      "confidence": "high",
+      "risk_level": "low",
+      "computed_at": "2026-08-20T22:38:12.037Z",
+      "computed_by": "MarketNow Sentinel CA"
+    },
+    "signatures": [
+      {
+        "algorithm": "Ed25519 (RFC 8032)",
+        "value": "20eeba65337645c40e82962b42bc2d917f412f5ae7e11d52608f2b9f911e08e29ff624768d2db226861fd67b052917458f82421279b16af4d7e4634427655d0f",
+        "signed_by": "MarketNow Sentinel CA",
+        "signed_at": "2026-08-20T22:38:12.037Z",
+        "domain": "UTA-ATC-V3-CREDENTIAL",
+        "key_id": "5488eb7b72a7b15c",
+        "canonicalization": "RFC_8785_JCS",
+        "evidence_hash": "sha256:4a50b2b244418b464d388bbe7cc3a05b9c39a0b272bf8bd2ae197710baf4c0db"
+      }
+    ]
+  },
+  "revocation_fixture": {
+    "kind": "CRL",
+    "url": "uta-fixture://crl/test-crl-1.json",
+    "crl": {
+      "issuer": "did:marketnow:ca",
+      "revoked": [
+        {
+          "credential_id": "ATC-2026-3A671AE",
+          "revoked_at": "2026-08-21T00:00:00Z",
+          "reason": "key compromise"
+        }
+      ],
+      "this_update": "2026-08-20T22:38:12.038Z",
+      "next_update": "2026-08-21T22:38:12.038Z",
+      "crl_number": 1,
+      "signature": {
+        "algorithm": "Ed25519 (RFC 8032)",
+        "value": "509d6c0c2bd9943affca76987d423c29c3518ffad03523918c5e75c6297f6a2904c8e5f246377ed26ab07ebb5653e9eab3ce9f38f099e8650972ed0ffc4e1100",
+        "domain": "UTA-ATC-V3-CREDENTIAL",
+        "key_id": "5488eb7b72a7b15c",
+        "signed_at": "2026-08-20T22:38:12.038Z"
+      }
+    }
+  },
+  "expected_failure_reason": "revoked via CRL"
+}
