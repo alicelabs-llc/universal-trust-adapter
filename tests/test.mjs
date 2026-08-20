@@ -1,13 +1,3 @@
-/**
- * Universal Trust Adapter — Test Suite
- *
- * AliceLabs Source-Available License v1.0 (AL-1.0)
- * Copyright (c) 2026 AliceLabs LLC. All rights reserved.
- *
- * Test suite: 83 tests covering all adapters, translation matrix,
- * bridge, auto-detection, and lossless preservation.
- */
-
 // UTA Test Suite — runs against actual adapter implementations
 // Uses Node 24's built-in TypeScript stripping (no compilation needed)
 

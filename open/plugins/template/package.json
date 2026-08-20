@@ -1,0 +1,36 @@
+{
+  "name": "@marketnow/trust-adapter-template",
+  "version": "0.1.0",
+  "description": "MIT-licensed template for building custom trust adapters that plug into the Universal Trust Adapter (UTA).",
+  "license": "MIT",
+  "authors": [
+    "Edison Flores <edison@alicelabs.site>",
+    "Alejandro Flores <alejandro@alicelabs.site>"
+  ],
+  "homepage": "https://github.com/eddyflores100-lang/universal-trust-adapter/tree/main/open/plugins/template",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eddyflores100-lang/universal-trust-adapter.git",
+    "directory": "open/plugins/template"
+  },
+  "main": "trust-adapter-template.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo 'Add your tests here'"
+  },
+  "keywords": [
+    "trust",
+    "adapter",
+    "template",
+    "uta",
+    "universal-trust-adapter",
+    "plugin",
+    "extension"
+  ],
+  "peerDependencies": {
+    "@marketnow/trust-core": ">=0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  }
+}
