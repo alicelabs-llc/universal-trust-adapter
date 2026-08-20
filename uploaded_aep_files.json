@@ -1,38 +1,13 @@
 [
   {
-    "file": "api/search.js",
-    "sha": "b0022ae6b686538050973460e5847ad89ba8eb3e",
-    "size": 4093
-  },
-  {
-    "file": "api/mcp.js",
-    "sha": "4f5a00620c43a7f6d53d01773d4560e47fc9df63",
-    "size": 9207
-  },
-  {
     "file": "lib/base-rpc-pool.mjs",
     "sha": "2006ec38344da4d14feb0003b63a81b3dbdba34f",
     "size": 4697
   },
   {
-    "file": "api/stripe-webhook.js",
-    "sha": "418bf9e7c1fe1780e70cde870875fc6e55d16479",
-    "size": 7510
-  },
-  {
-    "file": "api/agent-economy.js",
-    "sha": "9bdc95acd79efcf544e6ff543c9f712b2f79c6e6",
-    "size": 10767
-  },
-  {
     "file": "lib/mandate-cache.cjs",
     "sha": "39f21f45614f86b1fb909a377ed8c97ce37a3aeb",
     "size": 1691
-  },
-  {
-    "file": "api/mandates.js",
-    "sha": "837eb415bb21da6f890fc06974b9b71802211eb7",
-    "size": 33419
   },
   {
     "file": "lib/a2a-support.mjs",
@@ -43,16 +18,6 @@
     "file": "lib/vibe-verifier.mjs",
     "sha": "252961f223d48943e44974b003a2f0012e5ad491",
     "size": 6351
-  },
-  {
-    "file": "api/manifest.js",
-    "sha": "83219e4392d03054453f8e91eae2668781034362",
-    "size": 5501
-  },
-  {
-    "file": "api/owasp.js",
-    "sha": "77803335dd6e17055981c541ca8aefd19e8d2f62",
-    "size": 14629
   },
   {
     "file": "lib/waf.mjs",
@@ -73,21 +38,6 @@
     "file": "lib/sentinel-l18.mjs",
     "sha": "e1fbc9038a92eac6013f48d194f2812d33f86ef0",
     "size": 18297
-  },
-  {
-    "file": "api/security.js",
-    "sha": "55140871b9237d44632be504dbf8c36fbe5913d4",
-    "size": 15624
-  },
-  {
-    "file": "api/agent-purchase.js",
-    "sha": "ddd25cc9f0a9309cd5ac452e4a5cda84e3cff999",
-    "size": 39089
-  },
-  {
-    "file": "api/audit-skill.js",
-    "sha": "e3ce6d027fbb7a5bc3f1ce5272aae7d1100e1072",
-    "size": 34283
   },
   {
     "file": "lib/ca-key-rotation.mjs",
@@ -2515,11 +2465,6 @@
     "size": 1519
   },
   {
-    "file": "api/atc.js",
-    "sha": "7688cc0bf30817a0d87a36eef7557c2f184470e8",
-    "size": 95885
-  },
-  {
     "file": "lib/crypto-v2.mjs",
     "sha": "85cbd7fb0cf6a480a051a823965d37d68e5c5f49",
     "size": 10204
@@ -3061,7 +3006,7 @@
   },
   {
     "file": "api/trust.js",
-    "sha": "c6507d6f293d3a1521602350facbb6cb91983f8f",
-    "size": 7117
+    "sha": "26d21fb06ffd207797f69c4a105e38a52bca859d",
+    "size": 25534
   }
 ]
