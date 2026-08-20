@@ -1,0 +1,2742 @@
+Sí. He hecho una revisión más profunda del **UTA + UTS + ATC + Sentinel + MarketNow**, contrastando el repositorio de UTA con la superficie pública de MarketNow y con los estándares actuales de MCP, A2A, SPIFFE, VC y supply-chain security.
+
+Mi conclusión principal es esta:
+
+> **La idea es bastante más potente de lo que parece, pero ahora mismo el mayor riesgo no es que falten features; es que AliceLabs está intentando construir demasiadas capas a la vez y algunas afirmaciones de “trust” todavía no están respaldadas por una cadena criptográfica/conformidad suficientemente rigurosa.**
+
+El camino correcto no es añadir otras 50 funciones. Es convertir lo que ya existe en una **trust infrastructure verificable, reproducible y difícil de falsificar**.
+
+---
+
+# 1. Cómo veo el ecosistema completo
+
+Yo lo organizaría así:
+
+```text
+                         ┌─────────────────────────┐
+                         │        MARKETNOW        │
+                         │ Discovery + Marketplace │
+                         └────────────┬────────────┘
+                                      │
+                         ┌────────────▼────────────┐
+                         │        SENTINEL         │
+                         │ Security / Evidence     │
+                         └────────────┬────────────┘
+                                      │
+                         ┌────────────▼────────────┐
+                         │          ATC            │
+                         │ Trust Credential        │
+                         └────────────┬────────────┘
+                                      │
+                         ┌────────────▼────────────┐
+                         │          UTA            │
+                         │ Universal Trust Adapter │
+                         └────────────┬────────────┘
+                                      │
+                         ┌────────────▼────────────┐
+                         │          UTS            │
+                         │ Canonical Trust Model   │
+                         └────────────┬────────────┘
+                                      │
+            ┌─────────────┬───────────┼───────────┬─────────────┐
+            ▼             ▼           ▼           ▼             ▼
+          ATC           A2A          MCP        W3C VC       SPIFFE
+                                     OAuth        EAT          ZTA
+```
+
+Esta arquitectura tiene sentido.
+
+**MarketNow** descubre/distribuye.
+
+**Sentinel** genera evidencia.
+
+**ATC** empaqueta una afirmación de confianza.
+
+**UTA** traduce/interopera.
+
+**UTS** proporciona el modelo canónico.
+
+La clave es que **no debes convertir UTA en otro marketplace** ni MarketNow en otro estándar de identidad.
+
+---
+
+# 2. Lo mejor de UTA
+
+El concepto de UTS como representación intermedia es bueno.
+
+La especificación actual define:
+
+* identidad
+* sujeto
+* trust score
+* evidencia
+* capacidades
+* políticas
+* provenance
+* lifecycle
+* formato original.
+
+Y plantea:
+
+> `Native → UTS → Native`
+
+en vez de construir un traductor específico para cada pareja.
+
+Eso es exactamente el tipo de abstracción que hace falta si quieres conectar muchos ecosistemas.
+
+Además, el repositorio ya tiene adapters para:
+
+* ATC
+* EAT
+* ZTA
+* A2A
+* MCP
+* OAuth
+* W3C VC
+* SPIFFE.
+
+La estructura del repo confirma que no es sólo una propuesta conceptual.
+
+---
+
+# 3. El problema número 1: UTS no puede ser simplemente un “JSON común”
+
+Este es probablemente mi cambio arquitectónico más importante.
+
+Actualmente UTS mezcla tres cosas diferentes:
+
+### A. Identity
+
+> ¿Quién eres?
+
+### B. Attestation / evidence
+
+> ¿Qué evidencia existe sobre ti?
+
+### C. Authorization / policy
+
+> ¿Qué tienes permitido hacer?
+
+Es mejor separarlas.
+
+Yo convertiría UTS en algo parecido a:
+
+```text
+UTS
+├── Subject
+├── Identity
+├── Attestations[]
+├── Capabilities[]
+├── Policies[]
+├── Provenance
+├── Lifecycle
+└── Bindings
+```
+
+No:
+
+```text
+trust.score = 8.7
+```
+
+como concepto central.
+
+Porque **“trust = 8.7” es una opinión**.
+
+Mientras que:
+
+```text
+artifact_digest = sha256(...)
+build_provenance = ...
+sentinel_scan = ...
+issuer = ...
+signature = ...
+expires = ...
+revocation = ...
+```
+
+son hechos verificables.
+
+---
+
+# 4. El trust score tiene que cambiar
+
+Actualmente `UTSTrust` define:
+
+```text
+score: number // 0-10
+confidence: low | medium | high
+evidence[]
+assessor
+```
+
+Yo mantendría el score **para UX**, pero jamás como fundamento criptográfico.
+
+En lugar de:
+
+> Trust = 8.4
+
+debería ser:
+
+```json
+{
+  "score": 8.4,
+  "score_model": "sentinel-v1.9",
+  "score_version": "1.9.3",
+  "score_inputs": [
+    "static-analysis",
+    "dependency-risk",
+    "runtime-observation",
+    "provenance"
+  ],
+  "evidence_root": "sha256:...",
+  "assessor": "did:key:..."
+}
+```
+
+Entonces un comprador puede preguntar:
+
+> ¿Por qué tiene 8.4?
+
+y obtener una respuesta reproducible.
+
+---
+
+# 5. La gran debilidad actual de UTA: criptografía
+
+Esto es prioritario.
+
+El adapter ATC dice literalmente:
+
+> `Real implementation would verify Ed25519 signature`
+
+y la emisión dice:
+
+> `Real implementation would sign with Ed25519 + populate signatures[0].proof_bytes`.
+
+Eso significa que **el adapter todavía no implementa realmente la parte más importante de un sistema de trust**.
+
+Y hay un detalle todavía más serio:
+
+`toNative()` genera:
+
+```text
+proof_bytes: "(unsigned — populate via issue())"
+```
+
+Por tanto:
+
+## Prioridad P0
+
+Implementar de verdad:
+
+* Ed25519 signing
+* Ed25519 verification
+* JCS / RFC 8785 canonicalization
+* key IDs
+* issuer binding
+* subject-key binding
+* signature domain separation
+* expiration
+* not-before
+* revocation
+* replay protection
+* algorithm agility.
+
+Hasta que eso esté terminado, yo **no llamaría a UTA un “trust verification engine”**.
+
+Lo llamaría:
+
+> **trust translation engine with credential verification architecture**
+
+Es más preciso.
+
+---
+
+# 6. No uses `format.raw` como mecanismo mágico de preservación
+
+La especificación dice que cuando hay campos que no tienen equivalente se conservan en:
+
+> `format.raw`
+
+Eso sirve para prototipar.
+
+Pero en producción tiene un problema:
+
+```text
+ATC
+ ↓
+UTS
+ ↓
+A2A
+ ↓
+UTS
+ ↓
+ATC
+```
+
+puede terminar reintroduciendo datos que **ya no eran semánticamente válidos** en el ecosistema intermedio.
+
+Yo introduciría:
+
+```text
+loss_profile
+semantic_loss
+preserved_extensions
+unsupported_claims
+```
+
+Ejemplo:
+
+```json
+{
+  "translation": {
+    "lossless": false,
+    "lost_claims": [
+      "tee_attestation"
+    ],
+    "preserved_extensions": [
+      "urn:alice:tee"
+    ]
+  }
+}
+```
+
+Y el bridge debe poder exigir:
+
+```text
+require_lossless=true
+```
+
+Si no es lossless:
+
+**NO BRIDGE.**
+
+Esto es especialmente importante para seguridad.
+
+---
+
+# 7. El round-trip “0% loss” necesita una definición matemática
+
+No basta con:
+
+```text
+deepEqual(A, A')
+```
+
+Porque puede ocurrir:
+
+```text
+A != A'
+```
+
+pero semánticamente ser equivalente.
+
+O al contrario:
+
+```text
+A == A'
+```
+
+porque se preservó `raw`, pero el significado de un claim cambió.
+
+Yo implementaría tres métricas:
+
+### Level 1 — byte loss
+
+```text
+canonical_bytes(A) == canonical_bytes(A')
+```
+
+### Level 2 — structural loss
+
+Todos los campos relevantes sobreviven.
+
+### Level 3 — semantic loss
+
+Las afirmaciones de seguridad conservan exactamente el mismo significado.
+
+Y el benchmark debería devolver:
+
+```text
+BYTE_LOSS       = 0
+STRUCTURAL_LOSS = 0
+SEMANTIC_LOSS   = 0
+```
+
+No simplemente:
+
+> 0% loss.
+
+---
+
+# 8. El autodetector también necesita rediseño
+
+Hay un problema concreto en el código.
+
+`detectFormat()` actualmente considera que un adapter que devuelve `true` tiene:
+
+```text
+confidence = 1.0
+```
+
+y escoge el primero.
+
+Eso **no es un confidence model**.
+
+Necesitas:
+
+```typescript
+detect(payload): DetectionResult
+```
+
+con algo como:
+
+```json
+{
+  "match": true,
+  "confidence": 0.993,
+  "signals": [
+    "atc_version",
+    "AgentTrustCredential",
+    "credential_subject",
+    "issuer",
+    "signatures"
+  ]
+}
+```
+
+Y si dos adapters tienen:
+
+```text
+ATC = 0.96
+VC  = 0.94
+```
+
+puedes decidir.
+
+Si:
+
+```text
+ATC = 0.51
+VC  = 0.49
+```
+
+debería devolver:
+
+> ambiguous format
+
+y **no intentar verificar automáticamente**.
+
+En security, un false positive de formato puede ser peligroso.
+
+---
+
+# 9. Hay que separar DETECTION de VERIFICATION
+
+Esto es crucial.
+
+Actualmente el flujo conceptual es:
+
+```text
+detect
+ ↓
+verify
+```
+
+Pero:
+
+> “parece un ATC”
+
+no significa:
+
+> “es un ATC válido”.
+
+Debe ser:
+
+```text
+PARSE
+ ↓
+DETECT
+ ↓
+SCHEMA VALIDATE
+ ↓
+CRYPTO VERIFY
+ ↓
+ISSUER TRUST
+ ↓
+SUBJECT BINDING
+ ↓
+PROVENANCE VERIFY
+ ↓
+REVOCATION
+ ↓
+POLICY EVALUATION
+ ↓
+TRUST DECISION
+```
+
+Cada etapa debe tener resultado independiente.
+
+---
+
+# 10. ATC debería parecerse más a un certificado que a un JSON con score
+
+La idea de ATC es buena.
+
+La propuesta pública de MarketNow ya lo plantea como una especie de “SSL certificate for AI agents”, con Ed25519, CA, revocación y score Sentinel. ([GitHub][1])
+
+Yo llevaría esa analogía mucho más lejos.
+
+ATC debería tener:
+
+```text
+ATC
+├── certificate_id
+├── subject
+├── subject_key
+├── issuer
+├── issuer_key
+├── valid_from
+├── valid_until
+├── artifact_binding
+├── capability_binding
+├── evidence
+├── policy
+├── revocation
+└── signature
+```
+
+Y sobre todo:
+
+## binding criptográfico al artefacto
+
+Por ejemplo:
+
+```text
+Git commit SHA
+        +
+package digest
+        +
+container image digest
+        +
+MCP server identity
+        ↓
+       ATC
+```
+
+Así no puedes tener:
+
+> certificado válido
+
+para:
+
+```text
+github.com/foo/mcp
+```
+
+y después ejecutar:
+
+```text
+npm package @foo/mcp
+```
+
+que contiene código completamente diferente.
+
+---
+
+# 11. Este es probablemente el mayor hueco de MarketNow
+
+La propia comparación pública de MarketNow reconoce que actualmente los marketplaces no resuelven completamente el problema:
+
+> GitHub repository ≠ published npm package
+
+y que falta supply-chain attestation/SLSA. ([DEV Community][2])
+
+Esto debería ser una prioridad absoluta.
+
+## Hay que añadir:
+
+### GitHub
+
+```text
+repo
+commit SHA
+tag
+release
+workflow
+builder
+```
+
+### npm
+
+```text
+package
+version
+tarball SHA256
+package-lock
+dependencies
+publisher
+```
+
+### Docker
+
+```text
+image digest
+registry
+SBOM
+build provenance
+```
+
+### PyPI
+
+```text
+wheel hash
+sdist hash
+publisher
+build provenance
+```
+
+Y después:
+
+```text
+ATC
+  ↳ source_commit
+  ↳ artifact_digest
+  ↳ package_digest
+  ↳ image_digest
+  ↳ provenance
+```
+
+SLSA existe precisamente para proporcionar garantías de procedencia sobre cómo se produjo un artefacto, incluyendo identidad del output y del proceso de build. ([SLSA][3])
+
+---
+
+# 12. Añadir Sigstore/Cosign
+
+Yo no inventaría un sistema de signing propio cuando ya existe infraestructura madura.
+
+Usaría:
+
+**Sigstore / Cosign**
+
+para:
+
+* container images
+* npm artifacts donde aplique
+* releases
+* attestations.
+
+Y UTA puede importar esa evidencia:
+
+```text
+Sigstore
+   ↓
+provenance
+   ↓
+UTS
+   ↓
+ATC
+```
+
+Así UTA no intenta reemplazar todo el ecosistema.
+
+---
+
+# 13. Añadir SPIFFE de verdad
+
+El adapter `spiffe-svid` es una oportunidad enorme.
+
+SPIFFE ya define una arquitectura madura para identidad criptográfica de workloads, con SVIDs y Workload API. ([Spiffe][4])
+
+UTA debería poder hacer:
+
+```text
+SPIFFE SVID
+      ↓
+   UTS identity
+      ↓
+ATC / policy
+```
+
+Pero **no convertir SPIFFE en un simple JSON parser**.
+
+Debe verificar:
+
+* trust domain
+* SVID signature
+* validity
+* workload identity
+* federation
+* bundle.
+
+SPIFFE ya tiene mecanismos para federation entre trust domains. ([Spiffe][5])
+
+Eso es muchísimo más sólido que inventar otra PKI.
+
+---
+
+# 14. W3C VC debería ser un adapter serio
+
+UTS tiene:
+
+```text
+w3c-vc
+```
+
+pero hay que evitar reducir VC a:
+
+```text
+credentialSubject → UTSSubject
+```
+
+W3C VC 2.0 contempla:
+
+* credential status
+* credential subject
+* evidence
+* schemas
+* Data Integrity
+* controlled identifiers.
+
+([W3C][6])
+
+Por tanto UTA debería soportar:
+
+```text
+VC
+ ├── issuer
+ ├── credentialSubject
+ ├── credentialStatus
+ ├── evidence
+ ├── proof
+ └── schema
+```
+
+y mapear cada uno con semántica explícita.
+
+---
+
+# 15. A2A: hay que actualizar el adapter
+
+Esto es urgente porque el estándar ha evolucionado.
+
+La documentación actual de A2A ya está en **1.0.0** y define Agent Cards, extensiones y firma opcional de Agent Cards. ([A2A Protocol][7])
+
+A2A recomienda:
+
+```text
+/.well-known/agent-card.json
+```
+
+y permite firmas JWS de Agent Cards. ([A2A Protocol][7])
+
+Entonces UTA debería soportar:
+
+```text
+A2A AgentCard
+      +
+AgentCardSignature
+      ↓
+      UTS
+      ↓
+ATC
+```
+
+No simplemente:
+
+```text
+name → subject.name
+capabilities → capabilities
+```
+
+---
+
+# 16. MCP está cambiando muy rápido
+
+Esto es **muy importante para MarketNow**.
+
+MCP publicó una especificación **2026-07-28** con cambios importantes:
+
+* protocolo stateless
+* multi-round-trip requests
+* header-based routing
+* cacheable list results
+* authorization hardening
+* extensions
+* Tasks
+* MCP Apps
+* cambios de SDK. ([Model Context Protocol Blog][8])
+
+Por tanto MarketNow/Sentinel no debería diseñarse exclusivamente alrededor de la revisión 2025-06-18.
+
+Hay que tener una:
+
+```text
+MCP compatibility matrix
+```
+
+por versión.
+
+Por ejemplo:
+
+| MCP        | MarketNow    |
+| ---------- | ------------ |
+| 2025-03-26 | supported    |
+| 2025-06-18 | supported    |
+| 2025-11-25 | supported    |
+| 2026-07-28 | target       |
+| draft      | experimental |
+
+---
+
+# 17. Sentinel necesita pasar de “scanner” a “evidence engine”
+
+Ahora mismo MarketNow publica una arquitectura de seguridad bastante interesante:
+
+* metadata
+* Semgrep
+* secrets
+* OSV
+* malware
+* prompt injection
+* sandbox
+* runtime monitoring
+* WAF
+* honeypot
+* threat intelligence.
+
+([GitHub][9])
+
+Eso está bien.
+
+Pero yo cambiaría la filosofía:
+
+### Actualmente:
+
+```text
+scan
+ ↓
+score 7.4
+ ↓
+certificate
+```
+
+### Objetivo:
+
+```text
+scan
+ ↓
+individual findings
+ ↓
+signed evidence
+ ↓
+reproducible report
+ ↓
+risk model
+ ↓
+certificate
+```
+
+Cada finding debería tener:
+
+```json
+{
+  "id": "MN-L1.6-000234",
+  "severity": "high",
+  "rule": "SECRET_AWS_ACCESS_KEY",
+  "file": "src/foo.ts",
+  "line": 42,
+  "commit": "...",
+  "evidence_hash": "...",
+  "scanner_version": "..."
+}
+```
+
+---
+
+# 18. El score debe ser reproducible
+
+Quiero poder descargar:
+
+```text
+certificate.json
+evidence.json
+sbom.json
+provenance.json
+scan-manifest.json
+```
+
+y ejecutar:
+
+```bash
+marketnow verify certificate.json
+```
+
+y obtener:
+
+```text
+Signature:       VALID
+Artifact:        MATCH
+Provenance:      VALID
+SBOM:            VALID
+Sentinel score:  8.4
+Score reproducible: YES
+Revocation:      GOOD
+```
+
+Esto sería **muy poderoso comercialmente**.
+
+---
+
+# 19. El sandbox debe ser más agresivo
+
+El L2/gVisor es una buena dirección.
+
+Pero para MCP yo haría un **adversarial harness**.
+
+Cada servidor debe recibir pruebas de:
+
+### Filesystem
+
+* `/etc/passwd`
+* `/proc`
+* `/sys`
+* home directory
+* SSH keys
+* cloud credentials
+* environment variables.
+
+### Network
+
+* localhost
+* 127.0.0.1
+* metadata endpoints
+* DNS rebinding
+* private IP ranges
+* IPv6 loopback
+* redirects
+* SSRF chains.
+
+### Process
+
+* shell execution
+* subprocess
+* fork bombs
+* signals
+* `/proc/self`
+* child processes.
+
+### Data exfiltration
+
+* HTTP
+* DNS
+* DNS TXT
+* timing
+* redirects
+* base64 encoding.
+
+### Prompt injection
+
+* tool description injection
+* resource injection
+* tool output injection
+* hidden instructions
+* indirect prompt injection.
+
+---
+
+# 20. Añadir DAST específico de MCP
+
+Esto sería una ventaja competitiva real.
+
+No sólo:
+
+```text
+Semgrep
+```
+
+sino:
+
+```text
+MCP Security Fuzzer
+```
+
+que entiende:
+
+```text
+initialize
+tools/list
+tools/call
+resources/list
+resources/read
+prompts/list
+prompts/get
+elicitation
+sampling
+```
+
+y genera inputs maliciosos.
+
+MCP reconoce explícitamente que tools son potencialmente arbitrarias y recomienda controles de consentimiento y seguridad. ([Model Context Protocol][10])
+
+---
+
+# 21. Security score: separar categorías
+
+Yo eliminaría el único:
+
+> 0–10 trust score
+
+como métrica principal.
+
+Y pondría:
+
+```text
+Identity        9.8
+Provenance      9.2
+Supply chain    7.4
+Runtime         8.8
+MCP security    9.1
+Permissions     6.5
+Maintenance     8.7
+Privacy         7.2
+```
+
+Y luego:
+
+```text
+Overall: 8.4
+```
+
+Eso es mucho más defendible.
+
+---
+
+# 22. MarketNow tiene que convertirse en el “control plane”
+
+Aquí veo la oportunidad más grande.
+
+No competiría frontalmente con:
+
+* MCP Registry
+* Smithery
+* Glama
+* PulseMCP
+
+en **número de skills**.
+
+MarketNow debería decir:
+
+> **“No somos el lugar donde encuentras herramientas. Somos el lugar donde decides si puedes confiar en ellas.”**
+
+De hecho, la propia estrategia pública de MarketNow ya va en esa dirección. ([DEV Community][2])
+
+---
+
+# 23. El producto que yo construiría
+
+## MarketNow Trust Gateway
+
+Algo así:
+
+```text
+Agent
+  │
+  ▼
+MarketNow Trust Gateway
+  │
+  ├── identity verification
+  ├── ATC verification
+  ├── UTA translation
+  ├── Sentinel policy
+  ├── artifact verification
+  ├── permission enforcement
+  ├── rate limiting
+  ├── spend limits
+  ├── audit logs
+  └── runtime monitoring
+        │
+        ▼
+      MCP/A2A
+```
+
+Esto sería mucho más valioso que un marketplace.
+
+---
+
+# 24. Y aquí UTA se vuelve fundamental
+
+El Gateway puede recibir:
+
+```text
+ATC
+A2A
+OAuth
+SPIFFE
+VC
+EAT
+ZTA
+```
+
+y convertirlos a:
+
+```text
+UTS
+```
+
+Después el policy engine decide:
+
+```text
+ALLOW
+DENY
+STEP-UP
+HUMAN_APPROVAL
+SANDBOX
+```
+
+Eso es una arquitectura comercialmente muy potente.
+
+---
+
+# 25. El policy engine debe ser independiente
+
+Ahora mismo `bridge()` acepta:
+
+```text
+min_trust_score
+```
+
+Eso es demasiado sencillo.
+
+Necesitas algo como:
+
+```yaml
+policy:
+  require_identity: true
+
+  minimum_trust:
+    overall: 7.5
+    supply_chain: 8
+
+  artifact:
+    require_provenance: true
+    require_signed_release: true
+
+  capabilities:
+    deny:
+      - filesystem.write
+      - shell.unrestricted
+
+  network:
+    allow:
+      - api.github.com
+      - api.openai.com
+
+  financial:
+    max_transaction_usd: 25
+
+  human:
+    required_if:
+      - spend > 10
+      - capability == "write"
+      - trust < 8
+```
+
+Y entonces:
+
+```text
+ATC + UTA + policy
+```
+
+se convierte en un verdadero **authorization decision point**.
+
+---
+
+# 26. Integración con MCP OAuth
+
+Esto es esencial.
+
+MCP actualmente define autorización HTTP basada en OAuth 2.1 y exige validación del audience/resource para evitar que tokens sean utilizados contra recursos incorrectos. ([Model Context Protocol][11])
+
+MarketNow debería verificar:
+
+```text
+ATC
++
+OAuth token
++
+audience
++
+resource
++
+subject
+```
+
+y comprobar que:
+
+> **la identidad del agente que presenta el token coincide con el agente autorizado por ATC.**
+
+Eso sería mucho más potente que un simple certificado.
+
+---
+
+# 27. Agent identity binding
+
+Necesitas resolver:
+
+> ¿Cómo sé que el agente que presenta este ATC es realmente quien posee la identidad?
+
+Solución:
+
+```text
+ATC
+  ↓
+public key
+  ↓
+challenge
+  ↓
+signature
+  ↓
+proof-of-possession
+```
+
+Por ejemplo:
+
+```text
+MarketNow → nonce
+Agent → Ed25519(nonce)
+MarketNow → verify
+```
+
+Sin esto:
+
+> alguien puede copiar el ATC de un agente confiable y presentarlo como suyo.
+
+Esto es un ataque fundamental.
+
+---
+
+# 28. Revocation
+
+El ATC actual menciona OCSP.
+
+Pero yo implementaría **dos mecanismos**:
+
+### Online
+
+```text
+OCSP/API
+```
+
+### Offline
+
+```text
+signed status list
+```
+
+Porque un agente debe poder verificar un credential aunque esté temporalmente offline.
+
+W3C ya tiene un estándar de **Bitstring Status List** dentro del ecosistema VC. ([W3C][6])
+
+Podrían reutilizar ese concepto.
+
+---
+
+# 29. Key management
+
+No quiero que la private key del Sentinel CA viva:
+
+```text
+.env
+```
+
+ni en una variable de Vercel.
+
+Para producción:
+
+```text
+KMS / HSM
+```
+
+por ejemplo:
+
+* AWS KMS
+* GCP Cloud KMS
+* Azure Key Vault
+* Cloudflare Workers + external signing
+* HSM.
+
+Y:
+
+```text
+root CA
+   ↓
+intermediate CA
+   ↓
+issuance key
+```
+
+No:
+
+```text
+one key signs everything
+```
+
+---
+
+# 30. Multi-signature ATC
+
+Aquí sí tiene sentido el “v3 multi-sig” que aparece en el adapter.
+
+Pero hay que hacerlo de verdad.
+
+Yo usaría:
+
+```text
+Issuer signature
++
+Security assessor signature
++
+Artifact signer
+```
+
+Por ejemplo:
+
+```text
+AliceLabs CA
+      +
+GitHub/Sigstore provenance
+      +
+Sentinel
+```
+
+Entonces el trust card podría demostrar:
+
+> **AliceLabs issued it**
+
+y simultáneamente:
+
+> **the artifact build is independently attested**
+
+y:
+
+> **Sentinel scanned this exact artifact.**
+
+Eso es mucho más difícil de falsificar.
+
+---
+
+# 31. Human review también debe ser criptográficamente trazable
+
+Actualmente UTS puede guardar:
+
+```text
+human-review
+```
+
+Pero:
+
+> “human review = pass”
+
+no debería ser un booleano.
+
+Debería tener:
+
+```text
+reviewer_id
+review_timestamp
+review_scope
+review_commit
+review_result
+review_signature
+```
+
+Y nunca permitir:
+
+```text
+human_review: true
+```
+
+sin evidencia.
+
+---
+
+# 32. MarketNow: ratings y reviews
+
+Aquí veo un riesgo.
+
+El marketplace tiene reviews/rating además de Sentinel. ([MarketNow][12])
+
+Hay que separar:
+
+```text
+Security Trust
+```
+
+de:
+
+```text
+Quality / UX rating
+```
+
+Un MCP puede ser:
+
+```text
+Security: 9.5
+Quality: 3.1
+```
+
+o:
+
+```text
+Security: 6.5
+Quality: 9.8
+```
+
+No mezclar.
+
+---
+
+# 33. La licencia es otro punto estratégico
+
+UTA usa:
+
+**AliceLabs Source-Available License AL-1.0**
+
+mientras que UTS está descrito como **MIT**.
+
+Esto es inteligente comercialmente si la intención es:
+
+```text
+UTS = open standard
+UTA = commercial implementation
+```
+
+Pero hay que dejarlo **muchísimo más claro**.
+
+Yo separaría:
+
+### Open
+
+**UTS specification**
+
+### Open SDK
+
+Un:
+
+```text
+@marketnow/uts
+```
+
+MIT/Apache-2.0.
+
+### Commercial
+
+```text
+@alicelabs/uta
+```
+
+enterprise license.
+
+### SaaS
+
+```text
+MarketNow Trust API
+```
+
+subscription/API pricing.
+
+Eso permite crear ecosistema sin regalar el producto comercial.
+
+---
+
+# 34. Lo que NO haría
+
+No añadiría ahora:
+
+❌ 20 nuevos adapters
+
+❌ blockchain para todo
+
+❌ un nuevo DID propio
+
+❌ otra criptomoneda
+
+❌ otro marketplace
+
+❌ 100 capas de Sentinel sin medir efectividad
+
+❌ AI para decidir trust automáticamente
+
+❌ un “trust score” cada vez más complejo.
+
+Primero hay que **hacer verificable lo que ya existe**.
+
+---
+
+# 35. Test suite que yo exigiría
+
+Aquí está la parte práctica.
+
+## P0 — Cryptographic tests
+
+### Test 1
+
+```text
+sign(valid credential)
+→ verify = true
+```
+
+### Test 2
+
+Cambiar:
+
+```text
+score 8 → 9
+```
+
+→ verification **FAIL**
+
+### Test 3
+
+Cambiar:
+
+```text
+subject
+```
+
+→ FAIL
+
+### Test 4
+
+Cambiar:
+
+```text
+public_key
+```
+
+→ FAIL
+
+### Test 5
+
+Cambiar:
+
+```text
+artifact_digest
+```
+
+→ FAIL
+
+### Test 6
+
+Expired credential
+
+→ FAIL
+
+### Test 7
+
+Revoked credential
+
+→ FAIL
+
+### Test 8
+
+Wrong issuer
+
+→ FAIL
+
+### Test 9
+
+Wrong audience
+
+→ FAIL
+
+### Test 10
+
+Wrong signature algorithm
+
+→ FAIL.
+
+---
+
+# 36. Fuzzing
+
+Después:
+
+```text
+JSON fuzz
+CBOR fuzz
+base64 fuzz
+unicode fuzz
+duplicate keys
+nulls
+arrays
+deep nesting
+huge payloads
+prototype pollution
+```
+
+Herramientas:
+
+* **AFL++**
+* **libFuzzer**
+* **Jazzer**
+* **fast-check**
+* **Schemathesis**.
+
+Para TypeScript, yo empezaría con **fast-check** + fuzzing de los parsers.
+
+---
+
+# 37. Property-based testing
+
+UTA es ideal para esto.
+
+Propiedad:
+
+```text
+decode(encode(x)) == normalize(x)
+```
+
+Y:
+
+```text
+verify(sign(x)) == true
+```
+
+Y:
+
+```text
+verify(sign(x_modified)) == false
+```
+
+Y:
+
+```text
+translate(A → B → A)
+```
+
+debe preservar el conjunto de claims definido como:
+
+```text
+lossless_claims(A)
+```
+
+---
+
+# 38. Differential testing
+
+Para cada estándar:
+
+```text
+UTA
+vs
+reference implementation
+```
+
+Ejemplo:
+
+```text
+UTA A2A parser
+vs official A2A parser
+```
+
+```text
+UTA VC
+vs W3C-compatible verifier
+```
+
+```text
+UTA SPIFFE
+vs SPIFFE implementation
+```
+
+Esto es mucho más convincente para inversores/enterprise.
+
+---
+
+# 39. Conformance test suite
+
+Yo crearía:
+
+```text
+UTA Conformance Suite
+```
+
+con:
+
+```text
+ATC v2
+ATC v3
+EAT
+A2A 1.0
+MCP current
+VC 2.0
+SPIFFE
+OAuth
+```
+
+y una tabla:
+
+| Adapter | Parse | Verify | Issue | Roundtrip | Negative | Interop |
+| ------- | ----- | ------ | ----- | --------- | -------- | ------- |
+| ATC     | ✅     | ❌      | ❌     | 🟡        | ❌        | ❌       |
+| A2A     | 🟡    | 🟡     | 🟡    | 🟡        | ❌        | ❌       |
+| VC      | 🟡    | 🟡     | 🟡    | 🟡        | ❌        | ❌       |
+| SPIFFE  | 🟡    | 🟡     | ❌     | 🟡        | ❌        | ❌       |
+
+Eso sería mucho más honesto que simplemente:
+
+> 83 tests passed.
+
+---
+
+# 40. Benchmark de rendimiento
+
+Hay que medir:
+
+```text
+detect
+parse
+verify
+translate
+issue
+bridge
+```
+
+con:
+
+```text
+1KB
+10KB
+100KB
+1MB
+10MB
+```
+
+y:
+
+```text
+1
+10
+100
+1,000
+10,000
+100,000
+```
+
+requests.
+
+Objetivos aproximados:
+
+```text
+parse < 1 ms
+UTS translation < 1 ms
+Ed25519 verification < 2 ms
+policy evaluation < 1 ms
+```
+
+sin red.
+
+La parte de red:
+
+```text
+revocation
+provenance
+OCSP
+```
+
+debe ser opcional/cacheable.
+
+---
+
+# 41. MarketNow necesita un SBOM
+
+Cada skill debería tener:
+
+```text
+SBOM
+├── npm
+├── PyPI
+├── GitHub
+├── Docker
+└── transitive dependencies
+```
+
+Formato:
+
+**CycloneDX** o **SPDX**.
+
+Después Sentinel puede decir:
+
+```text
+dependency:
+lodash 4.x
+CVE...
+```
+
+pero además:
+
+```text
+exact artifact hash
+```
+
+---
+
+# 42. Malware detection
+
+Las 28 firmas de malware están bien como una capa, pero no deben venderse como:
+
+> malware detection complete.
+
+Un atacante nuevo no coincide con una firma.
+
+Añadiría:
+
+* YARA
+* behavioral analysis
+* sandbox telemetry
+* network behavior
+* entropy analysis
+* suspicious process tree
+* package install hooks
+* postinstall scripts
+* obfuscated JS
+* dynamic import analysis.
+
+---
+
+# 43. Prompt injection
+
+Aquí también hay que tener cuidado.
+
+32 reglas de prompt injection no equivalen a:
+
+> “prompt injection solved”.
+
+Lo que hay que medir es:
+
+```text
+attack dataset
+→ detection rate
+→ false positive rate
+```
+
+Crear un benchmark propio:
+
+```text
+MCP-PromptBench
+```
+
+con:
+
+* direct injection
+* indirect injection
+* tool description injection
+* resource poisoning
+* tool-result poisoning
+* cross-tool injection
+* multilingual attacks
+* encoded attacks
+* adversarial paraphrases.
+
+---
+
+# 44. Hay que hacer red-team externo
+
+Antes de afirmar:
+
+> enterprise security
+
+yo pagaría a un equipo externo para intentar:
+
+### Escape sandbox
+
+### SSRF
+
+### credential theft
+
+### signature bypass
+
+### revocation bypass
+
+### artifact substitution
+
+### replay attack
+
+### downgrade attack
+
+### algorithm confusion
+
+### issuer spoofing
+
+### Unicode canonicalization
+
+### JSON duplicate key attack
+
+### DNS rebinding
+
+### malicious MCP tool.
+
+Y publicaría:
+
+```text
+Security Audit Report
+```
+
+con hallazgos.
+
+Eso aumenta muchísimo el valor comercial.
+
+---
+
+# 45. UTA necesita un threat model formal
+
+Crear:
+
+```text
+THREAT_MODEL.md
+```
+
+basado en:
+
+* STRIDE
+* MITRE ATLAS
+* OWASP
+* MCP security model.
+
+Y específicamente definir:
+
+```text
+Attacker
+├── malicious agent
+├── malicious tool
+├── malicious registry entry
+├── compromised maintainer
+├── compromised package
+├── compromised CI
+├── stolen credential
+├── stolen ATC
+├── rogue issuer
+└── replay attacker
+```
+
+---
+
+# 46. Threat model del propio ATC
+
+Este documento debería responder:
+
+> ¿Qué ocurre si roban un ATC?
+
+> ¿Qué ocurre si roban una private key?
+
+> ¿Qué ocurre si Sentinel se compromete?
+
+> ¿Qué ocurre si GitHub es comprometido?
+
+> ¿Qué ocurre si npm es comprometido?
+
+> ¿Qué ocurre si el score está manipulado?
+
+> ¿Qué ocurre si la CA queda comprometida?
+
+Sin esto, el sistema tiene una superficie de confianza demasiado centralizada.
+
+---
+
+# 47. Root of Trust
+
+Yo crearía:
+
+```text
+AliceLabs Root CA
+        │
+        ├── Sentinel Issuer
+        │
+        ├── ATC Issuer
+        │
+        └── Runtime Attestation Issuer
+```
+
+con rotación.
+
+Y publicaría:
+
+```text
+JWKS
+trust bundle
+root fingerprint
+revocation list
+transparency log
+```
+
+---
+
+# 48. Transparency log
+
+Esto podría ser uno de los mayores upgrades de MarketNow.
+
+Cada certificado emitido:
+
+```text
+ATC #123
+ATC #124
+ATC #125
+```
+
+entra en un log append-only.
+
+No necesariamente blockchain.
+
+Puedes usar un diseño tipo:
+
+```text
+Merkle tree
+```
+
+con:
+
+```text
+root hash
+inclusion proof
+consistency proof
+```
+
+Esto permite demostrar:
+
+> “AliceLabs no modificó retrospectivamente este certificado.”
+
+Esto sería **muy fuerte**.
+
+---
+
+# 49. Trust transparency
+
+MarketNow ya tiene una página de transparency. ([GitHub][13])
+
+Yo la convertiría en:
+
+```text
+Sentinel Transparency Center
+```
+
+con:
+
+* número de scans
+* versiones de scanners
+* reglas
+* false positives
+* false negatives conocidos
+* CVEs
+* revocations
+* CA keys
+* incident history
+* uptime
+* reproducibility
+* benchmark.
+
+Eso genera confianza real.
+
+---
+
+# 50. MarketNow debería tener tres productos
+
+## Free
+
+### Verify
+
+```text
+¿Es seguro?
+```
+
+## Developer
+
+### Trust API
+
+```text
+POST /verify
+POST /scan
+GET /certificate
+GET /provenance
+```
+
+## Enterprise
+
+### Trust Gateway
+
+```text
+policy
+identity
+audit
+runtime
+SSO
+SIEM
+RBAC
+private registry
+```
+
+Esto es mucho más monetizable que vender skills de $0.99–$9.99.
+
+---
+
+# 51. Los $0.99–$9.99 son secundarios
+
+Actualmente MarketNow ofrece skills en torno a $0.99–$9.99 y usa x402/USDC para agentes, además de AP2 con human-in-the-loop por defecto. ([MCP.so][14])
+
+Eso es interesante como **demo de agent commerce**.
+
+Pero yo no construiría la valoración de AliceLabs alrededor de eso.
+
+El dinero grande está en:
+
+> **trust infrastructure**
+
+No:
+
+> **selling individual MCP skills.**
+
+---
+
+# 52. x402 y AP2
+
+Aquí sí mantendría la infraestructura.
+
+Pero la uniría a UTS policy:
+
+```text
+ATC
+ ↓
+UTS
+ ↓
+Policy
+ ↓
+AP2 mandate
+ ↓
+x402 payment
+```
+
+Ejemplo:
+
+```text
+Trust >= 8
+AND
+spend <= $25
+AND
+skill permission = approved
+AND
+artifact = verified
+```
+
+→ pago automático.
+
+Si no:
+
+```text
+HUMAN APPROVAL
+```
+
+Esto es muy bueno conceptualmente.
+
+---
+
+# 53. UTA + MarketNow + pagos
+
+Aquí aparece un producto mucho más grande:
+
+## Agent Commerce Trust Stack
+
+```text
+IDENTITY
+   ↓
+AUTHENTICATION
+   ↓
+TRUST
+   ↓
+AUTHORIZATION
+   ↓
+POLICY
+   ↓
+PAYMENT
+   ↓
+AUDIT
+```
+
+Y AliceLabs podría controlar:
+
+```text
+Trust
+Policy
+Commerce
+```
+
+sin necesidad de controlar el LLM.
+
+Eso es estratégicamente atractivo.
+
+---
+
+# 54. Integración con UTA debe ser invisible
+
+El usuario no debería saber que está usando UTA.
+
+Por ejemplo:
+
+```bash
+marketnow verify agent.json
+```
+
+internamente:
+
+```text
+detect
+→ UTA
+→ UTS
+→ crypto verification
+→ policy
+→ result
+```
+
+Y:
+
+```bash
+marketnow bridge credential.json --to a2a
+```
+
+---
+
+# 55. CLI
+
+Crearía:
+
+```bash
+marketnow trust verify credential.json
+
+marketnow trust inspect credential.json
+
+marketnow trust translate credential.json --to atc
+
+marketnow trust bridge credential.json --to a2a
+
+marketnow trust revoke <id>
+
+marketnow trust verify-artifact ./package.tgz
+
+marketnow trust provenance <package>
+
+marketnow trust policy test policy.yaml credential.json
+```
+
+Eso hace el ecosistema mucho más usable.
+
+---
+
+# 56. SDKs
+
+No sólo TypeScript.
+
+Prioridad:
+
+1. TypeScript
+2. Python
+3. Go
+4. Rust
+
+Especialmente:
+
+```text
+Python
+```
+
+porque la mayoría del ecosistema de agentes está ahí.
+
+---
+
+# 57. Gateway integrations
+
+Después:
+
+### MCP
+
+```text
+verify before connect
+```
+
+### A2A
+
+```text
+verify before delegation
+```
+
+### LangChain
+
+```text
+TrustMiddleware
+```
+
+### CrewAI
+
+```text
+verify_security=True
+```
+
+### AutoGen
+
+```text
+verify_security=True
+```
+
+Hay evidencia pública de que AliceLabs ya está proponiendo precisamente integraciones de este tipo a AutoGen y CrewAI. ([GitHub][13])
+
+La siguiente fase debería ser **PRs funcionales**, no sólo issues.
+
+---
+
+# 58. DeepAgents/Cline/Claude/Cursor
+
+También hay una oportunidad clara en los hosts/agentes.
+
+El patrón ideal sería:
+
+```text
+connect MCP
+      ↓
+MarketNow verifier
+      ↓
+ATC / UTA
+      ↓
+policy
+      ↓
+ALLOW / DENY
+```
+
+Esto tiene sentido porque MCP explícitamente coloca al host como responsable de permisos, lifecycle y consentimiento. ([Model Context Protocol][15])
+
+---
+
+# 59. El producto definitivo que veo
+
+No:
+
+> “MarketNow = marketplace de MCP.”
+
+Sino:
+
+# **MarketNow = Trust & Policy Layer for Agentic Infrastructure**
+
+Con:
+
+```text
+             MARKETNOW
+                 │
+       ┌─────────┴─────────┐
+       │                   │
+   Discovery             Trust
+       │                   │
+    Registry           Sentinel
+                           │
+                          ATC
+                           │
+                          UTA
+                           │
+                          UTS
+                           │
+                    ┌──────┴──────┐
+                    │             │
+                 Identity       Policy
+                    │             │
+               SPIFFE/VC      OAuth/AP2
+                    │             │
+                    └──────┬──────┘
+                           │
+                       Commerce
+                           │
+                         x402
+```
+
+Eso es mucho más defendible.
+
+---
+
+# 60. Roadmap que yo seguiría
+
+## 🔴 Fase 0 — 1–2 semanas
+
+**No añadir features.**
+
+Arreglar:
+
+* crypto stubs
+* detection confidence
+* schema validation
+* negative tests
+* exact versioning
+* claim semantics
+* error model.
+
+---
+
+## 🔴 Fase 1 — 2–4 semanas
+
+### UTA Core
+
+Implementar:
+
+* Ed25519 real
+* JCS
+* verification
+* issuance
+* revocation
+* PoP
+* expiration
+* issuer validation
+* artifact binding.
+
+---
+
+## 🔴 Fase 2 — 3–6 semanas
+
+### Conformance
+
+* ATC
+* A2A 1.0
+* VC 2.0
+* SPIFFE
+* OAuth
+* MCP latest.
+
+MCP debe seguir la especificación vigente; la revisión 2026-07-28 introdujo cambios estructurales importantes, así que el adapter debe versionarse explícitamente. ([Model Context Protocol Blog][8])
+
+---
+
+## 🔴 Fase 3 — 3–5 semanas
+
+### Supply chain
+
+* SBOM
+* SLSA provenance
+* Sigstore
+* npm
+* PyPI
+* Docker
+* GitHub Actions
+* artifact binding.
+
+---
+
+## 🟠 Fase 4 — 3–5 semanas
+
+### Sentinel 2.0
+
+* MCP fuzzer
+* SSRF
+* filesystem
+* network
+* prompt injection
+* process behavior
+* exfiltration
+* runtime.
+
+---
+
+## 🟠 Fase 5 — 2–4 semanas
+
+### Trust Gateway
+
+```text
+ATC
+UTA
+UTS
+Policy
+OAuth
+MCP
+A2A
+```
+
+---
+
+## 🟡 Fase 6
+
+### Enterprise
+
+* SSO
+* RBAC
+* private registry
+* audit log
+* SIEM
+* API keys
+* policy engine
+* SLA
+* compliance.
+
+---
+
+# 61. Las pruebas que yo pondría como “gates”
+
+No permitiría llamar a una versión:
+
+### `UTA 1.0`
+
+hasta que pase:
+
+```text
+[ ] 100% cryptographic verification
+[ ] 100% negative mutation tests
+[ ] 100% schema conformance
+[ ] round-trip semantic tests
+[ ] artifact binding
+[ ] revocation tests
+[ ] replay tests
+[ ] downgrade tests
+[ ] algorithm confusion tests
+[ ] fuzzing
+[ ] interoperability tests
+[ ] supply-chain verification
+[ ] external penetration test
+```
+
+---
+
+# 62. El test más importante de todos
+
+Construiría un **Golden Corpus**.
+
+Por ejemplo:
+
+```text
+1,000 ATCs
+1,000 A2A cards
+1,000 MCP manifests
+1,000 VCs
+1,000 SPIFFE credentials
+1,000 malicious variants
+```
+
+y cada commit de UTA ejecuta:
+
+```text
+5,000 valid
+5,000 invalid
+42 translation paths
+```
+
+Eso sería muchísimo más convincente que los actuales:
+
+> 83 passed.
+
+---
+
+# 63. La discrepancia de los “0% loss”
+
+Después de mirar el código, **yo no publicaría todavía “0% loss” sin especificar qué significa**.
+
+El propio UTS admite que algunos campos son intrínsecamente no traducibles y los conserva como `format.raw`.
+
+Por tanto el claim correcto sería algo como:
+
+> **0 semantic loss across the defined invariant claim set**
+
+y publicar la lista de invariantes.
+
+Eso es técnicamente defendible.
+
+---
+
+# 64. Y cambiaría la nomenclatura
+
+Ahora hay:
+
+* ATC
+* UTA
+* UTS
+* Sentinel
+* MarketNow
+* AEP
+* Trust Engine
+* Trust Core.
+
+Puede resultar confuso.
+
+Yo lo simplificaría:
+
+### MarketNow
+
+**Company/product ecosystem**
+
+### Sentinel
+
+**Evidence & security engine**
+
+### UTS
+
+**Open trust data model**
+
+### UTA
+
+**Interoperability engine**
+
+### ATC
+
+**Signed trust credential**
+
+### Trust Gateway
+
+**Runtime enforcement**
+
+Eso es fácil de entender.
+
+---
+
+# 65. Mi valoración técnica actual
+
+Después de ver el código real, no sólo el marketing:
+
+| Componente     |                               Estado |  Potencial |
+| -------------- | -----------------------------------: | ---------: |
+| UTS            |                      🟢 arquitectura |   🔥🔥🔥🔥 |
+| UTA            |                🟡 prototipo avanzado | 🔥🔥🔥🔥🔥 |
+| ATC            | 🟡 concepto + implementación parcial | 🔥🔥🔥🔥🔥 |
+| Sentinel       |              🟢 bastante interesante |   🔥🔥🔥🔥 |
+| MarketNow      |              🟢 producto funcionando |     🔥🔥🔥 |
+| Agent commerce |                      🟡 experimental |   🔥🔥🔥🔥 |
+| Trust Gateway  |                   🔴 falta construir | 🔥🔥🔥🔥🔥 |
+
+---
+
+# 66. Lo que yo considero el “moat”
+
+No es:
+
+> 8.560 MCP skills.
+
+Eso es replicable.
+
+Tampoco:
+
+> 32 prompt-injection rules.
+
+Eso también se replica.
+
+El moat potencial sería:
+
+```text
+UTS
++
+UTA
++
+ATC
++
+Sentinel evidence
++
+artifact provenance
++
+trust registry
++
+policy engine
++
+runtime enforcement
++
+network of issuers
+```
+
+Cuanto más adopten otros agentes la infraestructura, más difícil será sustituirla.
+
+Ese es el verdadero objetivo.
+
+---
+
+# 67. La estrategia que recomendaría a AliceLabs
+
+Si esto fuera mi empresa, **pararía aproximadamente 70% de los proyectos secundarios** durante 6–12 meses.
+
+Y concentraría:
+
+### 80%
+
+**MarketNow / Sentinel / UTA / ATC / UTS**
+
+### 20%
+
+experimentos.
+
+Porque ahí hay una tesis coherente.
+
+Los demás proyectos —GovCon, Scraper, Dropes, etc.— pueden seguir siendo opcionales, pero no deberían consumir la mayor parte del esfuerzo.
+
+---
+
+# 68. Mi prioridad absoluta
+
+Si tuviera que elegir **sólo 10 cosas para hacer mañana**, serían:
+
+1. **Implementar Ed25519 real.**
+2. **Implementar JCS real.**
+3. **Implementar revocation real.**
+4. **Implementar proof-of-possession.**
+5. **Crear artifact/package/container binding.**
+6. **Crear golden corpus + mutation tests.**
+7. **Crear UTA Conformance Suite.**
+8. **Integrar SLSA + Sigstore.**
+9. **Construir Trust Gateway MCP.**
+10. **Hacer auditoría/red-team externo.**
+
+Después de eso, el proyecto cambia de categoría.
+
+---
+
+## Mi conclusión
+
+**UTA me parece ahora el componente técnicamente más estratégico de todo el ecosistema AliceLabs.**
+
+Pero hay una paradoja:
+
+> **Cuantas más cosas intenta hacer UTA, menos convincente se vuelve.**
+
+La mejor versión de UTA no es un monstruo que “entiende todos los formatos”.
+
+Es una pieza pequeña, extremadamente rigurosa:
+
+```text
+credential
+     ↓
+parse
+     ↓
+verify
+     ↓
+normalize
+     ↓
+prove
+     ↓
+authorize
+     ↓
+enforce
+```
+
+Y MarketNow se convierte en la **red de confianza que alimenta esa infraestructura**.
+
+Además, el contexto externo es favorable: MCP está evolucionando rápidamente hacia un modelo más escalable y con autorización más fuerte; A2A ya tiene una especificación 1.0; SPIFFE ofrece identidad de workload madura; W3C VC aporta credenciales verificables; y SLSA aporta provenance de supply chain. ([Model Context Protocol Blog][8])
+
+**No intentaría competir con ninguno de ellos. Los conectaría.**
+
+Y ésa, en mi opinión, es la tesis con más valor de AliceLabs:
+
+> **MarketNow encuentra al agente/herramienta → Sentinel genera evidencia → ATC certifica → UTA traduce → UTS normaliza → Policy decide → Gateway hace cumplir → x402/AP2 permite comerciar.**
+
+Si consiguen hacer **esa cadena completa, criptográficamente verificable y reproducible**, entonces ya no estamos hablando de un pequeño marketplace de MCP. Estamos hablando de una posible **trust/policy infrastructure layer para agentic commerce**.
+
+[1]: https://github.com/cline/cline/issues/12376?utm_source=chatgpt.com "Proposal: Agent Trust Cards (ATC) — SSL certificates for AI agents · Issue #12376 · cline/cline · GitHub"
+[2]: https://dev.to/edison_flores_6d2cd381b13/mcp-server-marketplaces-compared-smithery-vs-glama-vs-pulsemcp-vs-marketnow-2e83?utm_source=chatgpt.com "MCP server marketplaces compared: Smithery vs Glama vs PulseMCP vs MarketNow - DEV Community"
+[3]: https://slsa.dev/spec/v1.1/?utm_source=chatgpt.com "SLSA • SLSA specification"
+[4]: https://spiffe.io/docs/latest/spiffe-specs/?utm_source=chatgpt.com "The SPIFFE Standard | SPIFFE"
+[5]: https://spiffe.io/docs/latest/spiffe-specs/spiffe_federation/?utm_source=chatgpt.com "SPIFFE Federation | SPIFFE"
+[6]: https://www.w3.org/2025/credentials/?utm_source=chatgpt.com "Verifiable credentials — vocabularies, context files, schemas"
+[7]: https://a2a-protocol.org/dev/specification/?utm_source=chatgpt.com "Overview - A2A Protocol"
+[8]: https://blog.modelcontextprotocol.io/posts/2026-07-28/?utm_source=chatgpt.com "The 2026-07-28 Specification | Model Context Protocol Blog"
+[9]: https://github.com/openai/openai-cookbook/issues/2875?utm_source=chatgpt.com "MarketNow: 10-layer MCP security audit + agent trust cards + analytics · Issue #2875 · openai/openai-cookbook · GitHub"
+[10]: https://modelcontextprotocol.io/specification/2025-06-18/server/tools?utm_source=chatgpt.com "Tools - Model Context Protocol"
+[11]: https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization?utm_source=chatgpt.com "Authorization - Model Context Protocol"
+[12]: https://marketnow.site/skill/taskweft-mcp-client?utm_source=chatgpt.com "MarketNow — Agent Skill Marketplace"
+[13]: https://github.com/microsoft/autogen/issues/7924?utm_source=chatgpt.com "Proposal: Security audit for MCP servers used by AutoGen agents · Issue #7924 · microsoft/autogen · GitHub"
+[14]: https://chat.mcp.so/ja/server/marketnow-mcp---aep-agent-exchange-protocol/Edison%20Flores?tab=tools&utm_source=chatgpt.com "- MCP Server"
+[15]: https://modelcontextprotocol.io/specification/2025-06-18/architecture?utm_source=chatgpt.com "Architecture - Model Context Protocol"
