@@ -6,21 +6,21 @@
   "automaticAliases": [
     "aep-marketplace-edisons-projects-b0f771d8.vercel.app"
   ],
-  "bootedAt": 1787174948230,
-  "buildingAt": 1787174949175,
+  "bootedAt": 1787189226740,
+  "buildingAt": 1787189227708,
   "buildSkipped": false,
-  "createdAt": 1787174948230,
+  "createdAt": 1787189226740,
   "creator": {
     "uid": "wdzX8L5okHF4AQO444EPPA8h",
     "username": "eddyflores100-3754"
   },
   "deletedAt": null,
-  "errorCode": "INVALID_VERCEL_CONFIG",
-  "errorLink": "https://vercel.com/docs/concepts/projects/project-configuration#functions",
-  "errorMessage": "Invalid vercel.json - `functions` should NOT have fewer than 1 properties.",
-  "errorStep": "buildStep",
-  "id": "dpl_CYxFBbDmUDXHnb48zRSHkqEyk1qN",
-  "initReadyAt": 1787174952162,
+  "errorCode": "exceeded_serverless_functions_per_deployment",
+  "errorLink": "https://vercel.link/function-count-limit",
+  "errorMessage": "No more than 12 Serverless Functions can be added to a Deployment on the Hobby plan. Create a team (Pro plan) to deploy more.",
+  "errorStep": "patchBuild",
+  "id": "dpl_7ojoikpGGfYve9ZvaEisXU37xLdi",
+  "initReadyAt": 1787189247319,
   "name": "aep-marketplace",
   "meta": {},
   "originCacheRegion": "iad1",
@@ -30,7 +30,7 @@
     "framework": "vite"
   },
   "public": false,
-  "ready": 1787174952162,
+  "ready": 1787189247319,
   "readyState": "ERROR",
   "regions": [
     "iad1"
@@ -43,7 +43,7 @@
     "slug": "edisons-projects-b0f771d8"
   },
   "type": "LAMBDAS",
-  "url": "aep-marketplace-7myayctnj-edisons-projects-b0f771d8.vercel.app",
+  "url": "aep-marketplace-pb1fsz9zg-edisons-projects-b0f771d8.vercel.app",
   "version": 2,
   "previewCommentsEnabled": true,
   "oidcTokenClaims": {
@@ -60,11 +60,11 @@
   },
   "lambdas": [
     {
-      "id": "bld_eziddzyjm",
-      "createdAt": 1787174947922,
+      "id": "bld_qlgjfl88e",
+      "createdAt": 1787189226399,
       "entrypoint": ".",
       "readyState": "READY",
-      "readyStateAt": 1787174947922,
+      "readyStateAt": 1787189226399,
       "output": []
     }
   ],
@@ -99,6 +99,12 @@
       "SENTINEL_CERT_SECRET",
       "MANDATES_GITHUB_TOKEN",
       "MARKETNOW_ATC_CA_PRIVATE_KEY",
+      "ALCHEMY_API_KEY",
+      "SUPABASE_URL",
+      "SUPABASE_ANON_KEY",
+      "SUPABASE_SERVICE_ROLE_KEY",
+      "UPSTASH_REDIS_REST_URL",
+      "UPSTASH_REDIS_REST_TOKEN",
       "VERCEL_DISCOVER_FOLDER_SIZES",
       "VERCEL_LAMBDA_OUTPUTS_AS_MIDDLEWARE",
       "VERCEL_NEXT_BUNDLED_SERVER",
@@ -220,6 +226,12 @@
     "SENTINEL_CERT_SECRET",
     "MANDATES_GITHUB_TOKEN",
     "MARKETNOW_ATC_CA_PRIVATE_KEY",
+    "ALCHEMY_API_KEY",
+    "SUPABASE_URL",
+    "SUPABASE_ANON_KEY",
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "UPSTASH_REDIS_REST_URL",
+    "UPSTASH_REDIS_REST_TOKEN",
     "VERCEL_DISCOVER_FOLDER_SIZES",
     "VERCEL_LAMBDA_OUTPUTS_AS_MIDDLEWARE",
     "VERCEL_NEXT_BUNDLED_SERVER",
@@ -310,7 +322,7 @@
     "VERCEL_ENCRYPTED_ENV_FILENAME"
   ],
   "functions": null,
-  "inspectorUrl": "https://vercel.com/edisons-projects-b0f771d8/aep-marketplace/CYxFBbDmUDXHnb48zRSHkqEyk1qN",
+  "inspectorUrl": "https://vercel.com/edisons-projects-b0f771d8/aep-marketplace/7ojoikpGGfYve9ZvaEisXU37xLdi",
   "isInConcurrentBuildsQueue": false,
   "isInSystemBuildsQueue": false,
   "ownerId": "team_DmoZusxMIKcqJhgRBmQ8B3dK",
