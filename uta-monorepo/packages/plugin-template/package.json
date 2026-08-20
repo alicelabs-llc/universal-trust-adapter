@@ -1,0 +1,22 @@
+{
+  "name": "@your-org/uta-my-adapter",
+  "version": "1.0.0",
+  "description": "UTA plugin template — copy this to create a new adapter",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "README.md", "LICENSE"],
+  "keywords": ["uta", "trust", "adapter", "plugin"],
+  "license": "MIT",
+  "author": "Your Name <you@example.com>",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@marketnow/trust-core": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  }
+}

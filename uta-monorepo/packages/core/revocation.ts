@@ -537,3 +537,256 @@ export function issueCRL(payload: CRLPayload, caPrivateKeyPem: string, caKeyId: 
     },
   };
 }
+
+// ============================================================================
+// 4. OCSP Responder — server-side implementation (P5-1)
+// ============================================================================
+// The OCSPRevocationChecker (above) is the CLIENT side — it queries a
+// responder URL. This module is the SERVER side: it answers those queries.
+//
+// Real-world deployment: stand up an HTTP server (Express, Fastify, plain
+// http.Server) at the responder URL, route POST /ocsp to handleOCSPRequest().
+// The responder signs each response with its private key so that clients
+// can verify non-repudiation.
+//
+// The responder is pluggable: the caller provides a RevocationStore that
+// knows the status of each credential. This decouples the responder from
+// any particular storage backend (in-memory, Supabase, Redis, etc.).
+// ============================================================================
+
+/**
+ * Backend storage for OCSP responses.
+ * Implementations: in-memory (testing), Supabase (production), Redis (cache).
+ */
+export interface RevocationStore {
+  getStatus(credential_id: string): Promise<{ status: RevocationStatus; revoked_at?: string; reason?: string }>;
+}
+
+/**
+ * In-memory RevocationStore — for testing and small deployments.
+ */
+export class InMemoryRevocationStore implements RevocationStore {
+  private statuses = new Map<string, { status: RevocationStatus; revoked_at?: string; reason?: string }>();
+
+  setStatus(credential_id: string, status: RevocationStatus, reason?: string): void {
+    this.statuses.set(credential_id, {
+      status,
+      revoked_at: status === 'revoked' ? new Date().toISOString() : undefined,
+      reason,
+    });
+  }
+
+  async getStatus(credential_id: string) {
+    return this.statuses.get(credential_id) || { status: 'unknown' as RevocationStatus };
+  }
+}
+
+/**
+ * Build a signed OCSP response for a credential.
+ * Used by the OCSPResponder (server-side) AND by test fixtures (client-side).
+ */
+export function issueOCSPResponse(params: {
+  credential_id: string;
+  status: RevocationStatus;
+  issuer_did: string;
+  responder_did: string;
+  responder_private_key_pem: string;
+  responder_key_id: string;
+  nonce: string;
+  revoked_at?: string;
+  reason?: string;
+  next_update_hours?: number;  // default 24
+}): OCSPResponse {
+  const now = new Date();
+  const nextUpdate = new Date(now.getTime() + (params.next_update_hours ?? 24) * 60 * 60 * 1000);
+
+  const payload = {
+    credential_id: params.credential_id,
+    status: params.status,
+    this_update: now.toISOString(),
+    next_update: nextUpdate.toISOString(),
+    revoked_at: params.revoked_at,
+    reason: params.reason,
+    responder: params.responder_did,
+    nonce: params.nonce,
+  };
+
+  // Sign with domain UTA-TRUST-DECISION (same as ActionReceipts — audit trail)
+  const canonical = canonicalize(payload);
+  const signingBytes = Buffer.from(DOMAINS.TRUST_DECISION + ':' + canonical, 'utf-8');
+  const privateKey = crypto.createPrivateKey(params.responder_private_key_pem);
+  const signature = crypto.sign(null, signingBytes, privateKey).toString('hex');
+
+  return {
+    ...payload,
+    signature: {
+      algorithm: 'Ed25519 (RFC 8032)',
+      value: signature,
+      domain: DOMAINS.TRUST_DECISION,
+      key_id: params.responder_key_id,
+    },
+  };
+}
+
+/**
+ * Verify an OCSP response signature (used by the client-side checker when
+ * responderKeyPem is provided, and by other verifiers that need to check
+ * a cached response).
+ */
+export function verifyOCSPResponse(response: OCSPResponse, responderPublicKeyPem: string): boolean {
+  if (!response.signature) return false;
+  const { signature, ...payload } = response;
+  if (signature.domain !== DOMAINS.TRUST_DECISION) return false;
+  const canonical = canonicalize(payload);
+  const signingBytes = Buffer.from(DOMAINS.TRUST_DECISION + ':' + canonical, 'utf-8');
+  const sigBytes = Buffer.from(signature.value, 'hex');
+  if (sigBytes.length !== 64) return false;
+  try {
+    const publicKey = crypto.createPublicKey(responderPublicKeyPem);
+    return crypto.verify(null, signingBytes, publicKey, sigBytes);
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Handle an OCSP request — the server-side entry point.
+ *
+ * Flow:
+ *   1. Parse request body ({ credential_id, issuer_did, nonce })
+ *   2. Validate nonce (32+ bytes hex) — reject if missing or malformed
+ *   3. Look up status in RevocationStore
+ *   4. Build signed OCSPResponse with the responder's private key
+ *   5. Return response (200 OK + JSON body)
+ *
+ * Errors return 400 (bad request) or 500 (internal error).
+ */
+export async function handleOCSPRequest(
+  requestBody: unknown,
+  store: RevocationStore,
+  responderKeys: {
+    did: string;
+    private_key_pem: string;
+    public_key_pem: string;
+    key_id: string;
+  }
+): Promise<{ status: number; body: OCSPResponse | { error: string } }> {
+  // 1. Parse
+  if (!requestBody || typeof requestBody !== 'object') {
+    return { status: 400, body: { error: 'request body must be a JSON object' } };
+  }
+  const req = requestBody as Partial<OCSPRequest>;
+  if (!req.credential_id || typeof req.credential_id !== 'string') {
+    return { status: 400, body: { error: 'missing or invalid credential_id' } };
+  }
+  if (!req.nonce || typeof req.nonce !== 'string' || req.nonce.length < 64 || !/^[0-9a-f]+$/i.test(req.nonce)) {
+    return { status: 400, body: { error: 'missing or malformed nonce (expected 32+ bytes hex)' } };
+  }
+
+  // 2. Lookup
+  let statusInfo: { status: RevocationStatus; revoked_at?: string; reason?: string };
+  try {
+    statusInfo = await store.getStatus(req.credential_id);
+  } catch (e) {
+    return { status: 500, body: { error: `store error: ${e instanceof Error ? e.message : String(e)}` } };
+  }
+
+  // 3. Build signed response
+  const response = issueOCSPResponse({
+    credential_id: req.credential_id,
+    status: statusInfo.status,
+    issuer_did: req.issuer_did || 'unknown',
+    responder_did: responderKeys.did,
+    responder_private_key_pem: responderKeys.private_key_pem,
+    responder_key_id: responderKeys.key_id,
+    nonce: req.nonce,
+    revoked_at: statusInfo.revoked_at,
+    reason: statusInfo.reason,
+  });
+
+  return { status: 200, body: response };
+}
+
+/**
+ * Create a Node.js http.Server that handles OCSP requests at POST /ocsp.
+ *
+ * Usage:
+ *   const server = createOCSPServer({ store, responderKeys, port: 8080 });
+ *   server.listen(8080);
+ *
+ * The server responds to:
+ *   POST /ocsp        — handle OCSP request (body: OCSPRequest JSON)
+ *   GET  /health      — health check
+ *   GET  /responder-key — return responder's public key PEM (for clients to pin)
+ */
+export function createOCSPServer(opts: {
+  store: RevocationStore;
+  responderKeys: {
+    did: string;
+    private_key_pem: string;
+    public_key_pem: string;
+    key_id: string;
+  };
+}): {
+  handler: (req: any, res: any) => Promise<void>;
+  listen: (port: number, host?: string) => Promise<void>;
+} {
+  const { store, responderKeys } = opts;
+
+  async function handler(req: any, res: any): Promise<void> {
+    const url = req.url as string;
+    const method = req.method as string;
+
+    // CORS headers
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+    if (method === 'OPTIONS') {
+      res.writeHead(204);
+      res.end();
+      return;
+    }
+
+    if (method === 'GET' && url === '/health') {
+      res.writeHead(200, { 'content-type': 'application/json' });
+      res.end(JSON.stringify({ ok: true, responder: responderKeys.did, key_id: responderKeys.key_id }));
+      return;
+    }
+
+    if (method === 'GET' && url === '/responder-key') {
+      res.writeHead(200, { 'content-type': 'application/x-pem-file' });
+      res.end(responderKeys.public_key_pem);
+      return;
+    }
+
+    if (method === 'POST' && url === '/ocsp') {
+      const chunks: Buffer[] = [];
+      for await (const chunk of req) chunks.push(chunk as Buffer);
+      let requestBody: unknown;
+      try {
+        requestBody = JSON.parse(Buffer.concat(chunks).toString('utf-8'));
+      } catch {
+        res.writeHead(400, { 'content-type': 'application/json' });
+        res.end(JSON.stringify({ error: 'invalid JSON body' }));
+        return;
+      }
+      const result = await handleOCSPRequest(requestBody, store, responderKeys);
+      res.writeHead(result.status, { 'content-type': 'application/json' });
+      res.end(JSON.stringify(result.body));
+      return;
+    }
+
+    res.writeHead(404, { 'content-type': 'application/json' });
+    res.end(JSON.stringify({ error: 'not found' }));
+  }
+
+  return {
+    handler,
+    listen: async (port: number, host: string = '0.0.0.0') => {
+      const http = await import('node:http');
+      const server = http.createServer(handler);
+      return new Promise<void>((resolve) => server.listen(port, host, resolve));
+    },
+  };
+}

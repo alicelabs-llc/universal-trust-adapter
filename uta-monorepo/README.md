@@ -6,59 +6,92 @@
 
 | Capability | Code | Unit Test | Integration | External Vector | Production |
 |-----------|------|-----------|-------------|-----------------|------------|
-| Ed25519 (RFC 8032) | ✅ | ✅ 8 vectors | ✅ TS+Python | ✅ 6 cross-lang | ⬜ |
+| Ed25519 (RFC 8032) | ✅ | ✅ 8 vectors | ✅ TS+Python+CLI | ✅ 6 cross-lang | ⬜ |
 | JCS (RFC 8785) | ✅ | ✅ 6 cross-lang | ✅ TS+Python | ✅ canonical SHA-256 (Python) | ⬜ |
 | PoP (nonce challenge) | ✅ NonceStore + PoPManager | ✅ 2 vectors | ✅ replay test | ✅ Python | ⬜ |
 | Artifact binding | ✅ hash verify (JCS+SHA-256) | ✅ in ATC vectors | ✅ | ⬜ | ⬜ |
 | Evidence verification | ✅ hash verify (JCS+SHA-256) | ✅ in ATC vectors | ✅ | ⬜ | ⬜ |
 | Issuer trust | ✅ fail-closed (DENY unknown) | ✅ | ✅ gateway tests | ⬜ | ⬜ |
 | Key binding | ✅ TrustRegistry | ✅ | ✅ 3 tests | ⬜ | ⬜ |
-| JWT verification (RS256/ES256/EdDSA) | ✅ real crypto.verify | ✅ 4 vectors (3 alg + 1 neg) | ✅ | ✅ Python (3 alg) | ⬜ |
-| W3C VC verification | ✅ Ed25519Signature2020 | ✅ 2 vectors | ✅ round-trip | ✅ Python | ⬜ |
+| JWT verification (RS256/ES256/EdDSA) | ✅ real crypto.verify | ✅ 4 vectors (3 alg + 1 neg) | ✅ CLI | ✅ Python (3 alg) | ⬜ |
+| W3C VC verification | ✅ Ed25519Signature2020 | ✅ 2 vectors | ✅ CLI round-trip | ✅ Python | ⬜ |
 | W3C VC issuance | ✅ real Ed25519 sign | ✅ | ✅ | ⬜ | ⬜ |
-| A2A (Agent2Agent) | ✅ Ed25519Signature2020 (P4-6) | ✅ | ✅ 7 tests | ⬜ | ⬜ |
-| EAT-AI (CWT/COSE) | ✅ EdDSA/ES256/RS256 (P4-7) | ✅ | ✅ 9 tests | ⬜ | ⬜ |
+| A2A (Agent2Agent) | ✅ Ed25519Signature2020 | ✅ | ✅ 7 tests | ⬜ | ⬜ |
+| EAT-AI (CWT/COSE) | ✅ EdDSA/ES256/RS256 | ✅ | ✅ 9 tests | ⬜ | ⬜ |
+| ZTA (P5-2) | ✅ Ed25519 + UTA-ZTA-CARD domain | ✅ | ✅ 9 tests | ⬜ | ⬜ |
+| MCP (P5-3) | ✅ Ed25519 + UTA-MCP-CARD domain | ✅ | ✅ 8 tests (signed + unsigned) | ⬜ | ⬜ |
+| OCSP responder (P5-1) | ✅ HTTP server + signature | ✅ | ✅ 13 tests (incl HTTP) | ⬜ | ⬜ |
 | Action receipts | ✅ signed Ed25519 | ✅ 2 vectors | ✅ tamper-evident | ✅ Python | ⬜ |
 | Gateway args_hash | ✅ JCS (not JSON.stringify) | ✅ full SHA-256 | ✅ deterministic | ⬜ | ⬜ |
-| Revocation | ✅ CRL + OCSP + Bitstring Status List | ✅ 3 vectors | ✅ 3 tests | ⬜ | ⬜ |
-| Domain separation | ✅ 6 distinct domains | ✅ 3 cross-domain tests | ✅ | ✅ Python | ⬜ |
+| Revocation | ✅ CRL + OCSP + Bitstring + Responder | ✅ 3 vectors | ✅ 16 tests | ⬜ | ⬜ |
+| Domain separation | ✅ 7 distinct domains | ✅ 3 cross-domain tests | ✅ | ✅ Python | ⬜ |
 | Mutation detection | ✅ 1-byte → reject | ✅ 5 mutation vectors | ✅ | ⬜ | ⬜ |
 | Multi-signature | ✅ N-of-M + required signers | ✅ | ✅ 10 tests | ⬜ | ⬜ |
 | MCP Gateway | ✅ TrustGateway + middleware | ✅ | ✅ 17 tests | ⬜ | ⬜ |
 | SBOM | ✅ SPDX 2.3 generator + build hook | ✅ smoke test | ✅ 4 SBOMs in dist/ | ⬜ | ⬜ |
 | Sigstore | ✅ bundle verifier + CI workflow | ✅ smoke test | ✅ cosign keyless in CI | ⬜ | ⬜ |
 | SLSA | ✅ slsa-github-generator in CI | ✅ | ✅ Build Level 3 provenance | ⬜ | ⬜ |
-| TypeDoc API docs | ✅ typedoc.json + npm run docs | ✅ | ✅ 200+ pages in dist/docs | ⬜ | ⬜ |
+| TypeDoc API docs | ✅ typedoc + GitHub Pages (P5-4) | ✅ | ✅ 200+ pages, auto-deployed | ⬜ | ⬜ |
 | Performance benchmarks | ✅ npm run bench | ✅ | ✅ 6,744 ops/sec pipeline | ⬜ | ⬜ |
 | Cross-language (Python) | ✅ verifier script | ✅ | ✅ 29 tests | ✅ 29/29 | ⬜ |
+| CLI tool (P5-7) | ✅ uta-verify command | ✅ | ✅ 11 tests (7 formats) | ⬜ | ⬜ |
+| Plugin template (P5-5) | ✅ MIT-licensed starter | ✅ | ✅ copy + go | ⬜ | ⬜ |
+| Supabase persistence (P5-6) | ✅ receipts + nonces + revocations | ✅ | ✅ duck-typed client | ⬜ | ⬜ |
 
 **Legend:** ✅ implemented | ⚠️ partial | 📄 documented only | ⬜ not yet done
 
-**Total tests: 268 passing** (76 structural + 76 vector + 33 integration + 17 gateway + 10 multi-sig + 16 A2A+EAT + 29 Python + 11 smoke). Run with `npm test` + `python3 scripts/uta-python-verifier.py`.
+**Total tests: 310 passing** (76 structural + 76 vector + 33 integration + 17 gateway + 10 multi-sig + 16 A2A+EAT + 31 OCSP/ZTA/MCP + 11 CLI + 29 Python). Run with `npm test` + `python3 scripts/uta-python-verifier.py`.
 
-**Performance: 6,744 verifications/second** for the full 12-stage pipeline (Node 20, 2 vCPUs).
+**Performance: 6,744 verifications/second** for the full 12-stage pipeline (Node 24, 2 vCPUs).
 
 **Test vectors: 36 total** (8 positive + 17 negative + 5 mutation + 6 cross-language).
 All vectors use fixed test keypairs committed to `vectors/keys/` — reproducible across runs and implementations.
 
-## npm Packages (P4-5)
+## npm Packages
 
-Three packages are configured for publishing to npm:
-
-| Package | Path | Description |
-|---------|------|-------------|
-| `@marketnow/trust-core` | `packages/core/` | Ed25519, JCS, PoP, 12-stage pipeline, Revocation, SBOM, Sigstore |
-| `@marketnow/trust-adapters` | `packages/adapters/` | ATC v3, EAT-AI, A2A, ZTA, MCP, W3C VC, OAuth, SPIFFE, Multi-sig |
-| `@marketnow/trust-gateway` | `packages/gateway/` | MCP Trust Gateway middleware + Action Receipts |
+| Package | Path | License | Description |
+|---------|------|---------|-------------|
+| `@marketnow/trust-core` | `packages/core/` | AL-1.0 | Ed25519, JCS, PoP, 12-stage pipeline, Revocation, SBOM, Sigstore, OCSP responder |
+| `@marketnow/trust-adapters` | `packages/adapters/` | AL-1.0 | ATC v3, EAT-AI, A2A, ZTA, MCP, W3C VC, OAuth, SPIFFE, Multi-sig |
+| `@marketnow/trust-gateway` | `packages/gateway/` | AL-1.0 | MCP Trust Gateway middleware + Action Receipts |
+| `@marketnow/trust-persistence` | `packages/persistence/` | AL-1.0 | Supabase-backed stores for receipts, nonces, revocations |
+| `@marketnow/uta-verify` | `packages/cli/` | AL-1.0 | CLI tool — verifies any of 7 credential formats |
+| Plugin template | `packages/plugin-template/` | **MIT** | Starter kit for third-party adapters |
 
 Each package ships:
 - Compiled `.js` + `.d.ts` in `dist/`
-- TypeDoc-generated API reference (when published with `npm run docs`)
-- SPDX 2.3 SBOM in `dist/sbom.spdx.json` (generated by `npm run build`)
+- TypeDoc-generated API reference (auto-deployed to GitHub Pages)
+- SPDX 2.3 SBOM in `dist/sbom.spdx.json`
 - SLSA Build Level 3 provenance attestation (when published via CI)
 - Sigstore keyless signature (cosign, when published via CI)
 
-To install: `npm install @marketnow/trust-core @marketnow/trust-adapters @marketnow/trust-gateway`
+To install:
+```bash
+npm install @marketnow/trust-core @marketnow/trust-adapters @marketnow/trust-gateway
+# Optional:
+npm install @marketnow/trust-persistence  # Supabase persistence
+npm install -g @marketnow/uta-verify      # CLI: uta-verify cred.json --ca-key ca.pem
+```
+
+## CLI Tool (P5-7)
+
+The `uta-verify` CLI verifies any of 7 credential formats:
+
+```bash
+# Verify an ATC v3 credential
+uta-verify credential.json --ca-key ca-public-key.pem
+
+# Verify a JWT
+uta-verify --jwt "eyJhbGc..." --ca-key ca.pem
+
+# Output JSON instead of human-readable
+uta-verify cred.json --ca-key ca.pem --json
+
+# Allow expired (testing only)
+uta-verify cred.json --ca-key ca.pem --allow-expired
+```
+
+Auto-detects format from the credential structure. Exit codes: `0` = valid, `1` = invalid, `2` = error.
 
 ## Architecture (Frozen)
 

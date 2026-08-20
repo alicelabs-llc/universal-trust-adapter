@@ -1,0 +1,23 @@
+{
+  "name": "@marketnow/trust-persistence",
+  "version": "1.0.0",
+  "description": "UTA Persistence — Supabase-backed storage for receipts, PoP nonces, and revocation status",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "README.md", "LICENSE-AL-1.0"],
+  "keywords": ["supabase", "persistence", "receipts", "nonces", "revocation", "trust"],
+  "author": "AliceLabs LLC <info@alicelabs.site>",
+  "license": "AL-1.0",
+  "engines": { "node": ">=18" },
+  "scripts": { "build": "tsc" },
+  "dependencies": {
+    "@marketnow/trust-core": "1.0.0",
+    "@marketnow/trust-gateway": "1.0.0"
+  },
+  "peerDependencies": {
+    "@supabase/supabase-js": "^2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@supabase/supabase-js": { "optional": true }
+  }
+}
