@@ -14,6 +14,7 @@
  * COMMERCIAL USE REQUIRES A SEPARATE COMMERCIAL LICENSE.
  */
 
+import crypto from 'node:crypto';
 import {
   canonicalize,
   canonicalHash,
@@ -274,8 +275,10 @@ export function issueATCv3(params: IssueParams): ATCv3Credential {
   // 5. Sign with Ed25519 using domain separation
   const signatureValue = ed25519Sign(credential, params.ca_key_pair.privateKeyPem, DOMAINS.ATC_V3_CREDENTIAL);
 
-  // 6. Compute evidence_hash = SHA-256(canonical + signature)
-  const evidenceHash = `sha256:${canonicalHash(canonical + signatureValue)}`;
+  // 6. Compute evidence_hash = SHA-256(canonical_bytes + signature_hex_bytes)
+  // NOT canonicalHash() — that would re-canonicalize the concatenated string
+  // (wrapping it in quotes), producing a different hash.
+  const evidenceHash = `sha256:${crypto.createHash('sha256').update(canonical + signatureValue, 'utf-8').digest('hex')}`;
 
   // 7. Build the complete signature block
   const signature: ATCSignature = {
@@ -369,8 +372,8 @@ export function verifyATCv3(
     issues.push(`verification error: ${e instanceof Error ? e.message : String(e)}`);
   }
 
-  // 7. Verify evidence_hash = SHA-256(canonical + signature)
-  const expectedEvidenceHash = `sha256:${canonicalHash(canonical + sig.value)}`;
+  // 7. Verify evidence_hash = SHA-256(canonical_bytes + signature_hex_bytes)
+  const expectedEvidenceHash = `sha256:${crypto.createHash('sha256').update(canonical + sig.value, 'utf-8').digest('hex')}`;
   const evidenceHashValid = sig.evidence_hash === expectedEvidenceHash;
   if (!evidenceHashValid) {
     issues.push(`evidence_hash mismatch: expected ${expectedEvidenceHash.slice(0, 30)}, got ${sig.evidence_hash?.slice(0, 30) || 'missing'}`);
@@ -582,7 +585,7 @@ export function generateTestVectors(caKeyPair: Ed25519KeyPair): {
   // ── Mutation vectors (change 1 field, expect signature to break) ──
   const mutations: Array<{ field: string; credential: ATCv3Credential; expected_valid: boolean }> = [];
 
-  const mutationFields = [
+  const mutationFields: Array<{ path: Array<string | number>; change: (v: any) => any }> = [
     { path: ['subject', 'agent_id'], change: (v: string) => v + '_mutated' },
     { path: ['subject', 'agent_name'], change: (v: string) => v + ' MUTATED' },
     { path: ['subject', 'public_key'], change: (v: string) => v.slice(0, -4) + 'XXXX' },

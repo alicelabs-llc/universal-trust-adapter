@@ -4,25 +4,25 @@
   "expected_result": "INVALID",
   "public_key_ref": "agent_ed25519",
   "domain": "UTA-ATC-V3-POP",
-  "signature_value": "0673368c83594d354f713779ee7d9011a535fe1d57a3201157132df09a2502bbc04dabc233e3e3783b765b680617fc8c062eae3c00e361476fdf1ed1db4d8b06",
+  "signature_value": "bcef341f5cb24752f0518849d9ea74fbc528ffb25370fefcfae44c6ac5c52109807b90f7bcd498c1ec03da07480b04c10cd79bf6f429a87fd2197f25e6710408",
   "verification_input": null,
   "canonical_sha256": null,
-  "generated_at": "2026-08-20T22:38:12.028Z",
+  "generated_at": "2026-08-20T23:16:11.374Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "input": {
     "challenge": {
-      "nonce": "57a0943bafdc3411d1fd94752db38a73cbee0bcd12d3464cf6831e067193bcd7",
+      "nonce": "6203799b3e72ecf10e3a8731b24d1c9c526126c9d67a05f36fa29c45d1d0bb30",
       "credential_id": "ATC-2026-ABCD123",
       "audience": "marketnow-gateway",
-      "issued_at": "2026-08-20T22:38:12.027Z",
-      "expires_at": "2027-08-20T22:38:12.027Z"
+      "issued_at": "2026-08-20T23:16:11.372Z",
+      "expires_at": "2027-08-20T23:16:11.372Z"
     },
     "response": {
       "nonce": "0000000000000000000000000000000000000000000000000000000000000000",
       "credential_id": "ATC-2026-ABCD123",
       "audience": "marketnow-gateway",
-      "timestamp": "2026-08-20T22:38:12.027Z",
-      "signature": "0673368c83594d354f713779ee7d9011a535fe1d57a3201157132df09a2502bbc04dabc233e3e3783b765b680617fc8c062eae3c00e361476fdf1ed1db4d8b06"
+      "timestamp": "2026-08-20T23:16:11.372Z",
+      "signature": "bcef341f5cb24752f0518849d9ea74fbc528ffb25370fefcfae44c6ac5c52109807b90f7bcd498c1ec03da07480b04c10cd79bf6f429a87fd2197f25e6710408"
     }
   },
   "expected_failure_reason": "nonce"

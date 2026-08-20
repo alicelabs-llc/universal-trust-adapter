@@ -1,0 +1,57 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "SBOM for @marketnow/trust-core",
+  "documentNamespace": "https://marketnow.site/spdx/@marketnow/trust-core/1.0.0/1787266923728",
+  "creationInfo": {
+    "created": "2026-08-20T23:02:03.728Z",
+    "creators": [
+      "Organization: AliceLabs LLC",
+      "Tool: UTA-SBOM-Generator-1.0"
+    ],
+    "licenseListVersion": "3.20"
+  },
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-root",
+      "name": "@marketnow/trust-core",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "supplier": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "2f5e2006004a9e902839f4cdbed0d9fa73fac8bb8ecb836349e24be7976cff77"
+        }
+      ],
+      "description": "Verification Core — 12-stage pipeline, Ed25519, JCS, PoP, Policy"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-types-node",
+      "name": "@types/node",
+      "versionInfo": "^20.0.0",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "checksums": []
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-Package-root",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-types-node"
+    }
+  ],
+  "documentDescribes": [
+    "SPDXRef-Package-root"
+  ],
+  "documentHash": "sha256:2792d4a9e3dd30e0b5e35a55a41ef2483016858d8f52753a3bc0cb6798fb1f07"
+}

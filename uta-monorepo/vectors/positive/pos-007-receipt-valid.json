@@ -4,18 +4,18 @@
   "expected_result": "VALID",
   "public_key_ref": "gateway_ed25519",
   "domain": "UTA-TRUST-DECISION",
-  "signature_value": "592d03fdd246b9ce438d75332e6e05d5652fbb32568f09d1562ca1d7c8717f02a88dafcdc0d418f8d39637ae691ef8a3bbee09e384c1108d8fd784be33e41201",
-  "verification_input": "{\"agent_id\":\"test-agent-001\",\"args_hash\":\"sha256:fcf804f32e1d12a0edfa35d423e737c416aeff60308b2e6fd61e6e1909d0b405\",\"credential_id\":\"ATC-2026-ABCD123\",\"decision\":\"ALLOW\",\"evidence_hash\":\"sha256:9d5063910c716ef01b157444e3aad99a81ef64713436b6dd0d0e0a40fbf12bc4\",\"gateway_version\":\"1.0.0\",\"reason\":\"All stages passed\",\"receipt_id\":\"rcpt_0f887f75f1974ed5\",\"timestamp\":\"2026-08-20T22:38:11.998Z\",\"tool_name\":\"mcp.tools.search\",\"trust_score\":8,\"verification_stages\":[{\"name\":\"PARSE\",\"result\":\"pass\"},{\"name\":\"DETECT\",\"result\":\"pass\"},{\"name\":\"SCHEMA\",\"result\":\"pass\"},{\"name\":\"CRYPTO\",\"result\":\"pass\"},{\"name\":\"ISSUER\",\"result\":\"pass\"},{\"name\":\"KEY_BINDING\",\"result\":\"pass\"},{\"name\":\"POP\",\"result\":\"pass\"},{\"name\":\"DECISION\",\"result\":\"ALLOW\"}]}",
-  "canonical_sha256": "7728fa65dc97d8bdb78dbd87f8128dd4ade0533466e7739b8aebb9cdaadf9fcc",
-  "generated_at": "2026-08-20T22:38:11.999Z",
+  "signature_value": "706269107330d08f9e4a91314ba17c7185489be94269527ab3bb59222db90e14c83c35f959c41faa93791d1277098acf51a0c268b7bb17021b673434b0aaa10b",
+  "verification_input": "{\"agent_id\":\"test-agent-001\",\"args_hash\":\"sha256:338db425bb36266fa8a2a902d03dc29e83b82a4776296048d2774d510924a0ce\",\"credential_id\":\"ATC-2026-ABCD123\",\"decision\":\"ALLOW\",\"evidence_hash\":\"\",\"gateway_version\":\"1.0.0\",\"reason\":\"All stages passed\",\"receipt_id\":\"rcpt_635b435a9e8346b8\",\"timestamp\":\"2026-08-20T23:16:11.343Z\",\"tool_name\":\"mcp.tools.search\",\"trust_score\":8,\"verification_stages\":[{\"name\":\"PARSE\",\"result\":\"pass\"},{\"name\":\"DETECT\",\"result\":\"pass\"},{\"name\":\"SCHEMA\",\"result\":\"pass\"},{\"name\":\"CRYPTO\",\"result\":\"pass\"},{\"name\":\"ISSUER\",\"result\":\"pass\"},{\"name\":\"KEY_BINDING\",\"result\":\"pass\"},{\"name\":\"POP\",\"result\":\"pass\"},{\"name\":\"DECISION\",\"result\":\"ALLOW\"}]}",
+  "canonical_sha256": "66dab358c03626c5d12ec092f9d9a170b8d7fb2bbd31c46550718922fcf0a671",
+  "generated_at": "2026-08-20T23:16:11.343Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "input": {
-    "receipt_id": "rcpt_0f887f75f1974ed5",
+    "receipt_id": "rcpt_635b435a9e8346b8",
     "decision": "ALLOW",
     "agent_id": "test-agent-001",
     "credential_id": "ATC-2026-ABCD123",
     "tool_name": "mcp.tools.search",
-    "args_hash": "sha256:fcf804f32e1d12a0edfa35d423e737c416aeff60308b2e6fd61e6e1909d0b405",
+    "args_hash": "sha256:338db425bb36266fa8a2a902d03dc29e83b82a4776296048d2774d510924a0ce",
     "trust_score": 8,
     "reason": "All stages passed",
     "verification_stages": [
@@ -52,15 +52,15 @@
         "result": "ALLOW"
       }
     ],
-    "timestamp": "2026-08-20T22:38:11.998Z",
+    "timestamp": "2026-08-20T23:16:11.343Z",
     "gateway_version": "1.0.0",
-    "evidence_hash": "sha256:9d5063910c716ef01b157444e3aad99a81ef64713436b6dd0d0e0a40fbf12bc4",
+    "evidence_hash": "sha256:66dab358c03626c5d12ec092f9d9a170b8d7fb2bbd31c46550718922fcf0a671",
     "signature": {
       "algorithm": "Ed25519 (RFC 8032)",
-      "value": "592d03fdd246b9ce438d75332e6e05d5652fbb32568f09d1562ca1d7c8717f02a88dafcdc0d418f8d39637ae691ef8a3bbee09e384c1108d8fd784be33e41201",
+      "value": "706269107330d08f9e4a91314ba17c7185489be94269527ab3bb59222db90e14c83c35f959c41faa93791d1277098acf51a0c268b7bb17021b673434b0aaa10b",
       "domain": "UTA-TRUST-DECISION",
       "key_id": "5ebfcfb9f7b15e5d",
-      "signed_at": "2026-08-20T22:38:11.998Z"
+      "signed_at": "2026-08-20T23:16:11.343Z"
     }
   }
 }

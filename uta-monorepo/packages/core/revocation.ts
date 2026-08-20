@@ -54,6 +54,7 @@ export interface RevocationChecker {
     status_list_index?: number;
     status_list_credential_url?: string;
     ca_public_key_pem?: string;
+    revocation_method?: 'CRL' | 'OCSP' | 'BITSTRING_STATUS_LIST' | 'AUTO';
   }): Promise<RevocationResult>;
 }
 

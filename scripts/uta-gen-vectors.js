@@ -314,7 +314,7 @@ function issueATCv3(params) {
 
   const canonical = canonicalize(credential);
   const signatureValue = ed25519Sign(credential, params.ca_key_pair.private_key_pem, DOMAINS.ATC_V3_CREDENTIAL);
-  const evidenceHash = 'sha256:' + canonicalHash(canonical + signatureValue);
+  const evidenceHash = 'sha256:' + crypto.createHash('sha256').update(canonical + signatureValue, 'utf-8').digest('hex');
 
   const signature = {
     algorithm: 'Ed25519 (RFC 8032)',
@@ -333,8 +333,7 @@ function issueATCv3(params) {
 // Action receipt (mirror of receipts.ts)
 function generateReceipt(params, gatewayKey) {
   const timestamp = new Date().toISOString();
-  const argsCanonical = canonicalize(params.args);
-  const argsHash = 'sha256:' + canonicalHash(argsCanonical);
+  const argsHash = 'sha256:' + canonicalHash(params.args);  // canonicalHash canonicalizes internally
   const receiptId = 'rcpt_' + crypto.randomUUID().replace(/-/g, '').slice(0, 16);
   const receipt = {
     receipt_id: receiptId,
@@ -351,8 +350,8 @@ function generateReceipt(params, gatewayKey) {
     evidence_hash: '',
   };
   const forHash = { ...receipt, evidence_hash: '' };
-  const receiptCanonical = canonicalize(forHash);
-  receipt.evidence_hash = 'sha256:' + canonicalHash(receiptCanonical);
+  // canonicalHash() already canonicalizes internally — pass the OBJECT, not a pre-canonicalized string
+  receipt.evidence_hash = 'sha256:' + canonicalHash(forHash);
   const sigValue = ed25519Sign(receipt, gatewayKey.private_key_pem, DOMAINS.TRUST_DECISION);
   const signed = {
     ...receipt,
@@ -539,8 +538,11 @@ function buildPositive() {
       ],
     }, gwEd);
     const vec = vectorBase('pos-007-receipt-valid', 'Action receipt signed with Ed25519 (gateway audit trail)', 'VALID', 'gateway_ed25519');
-    const { signature, ...rest } = receipt;
-    attachCanonical(vec, rest);
+    // For verification: canonicalize the receipt WITHOUT signature AND with evidence_hash=""
+    // (this is what the signature is computed over)
+    const { signature: _sig, ...receiptNoSig } = receipt;
+    const receiptForCanonical = { ...receiptNoSig, evidence_hash: '' };
+    attachCanonical(vec, receiptForCanonical);
     vec.input = receipt;
     vec.signature_value = receipt.signature.value;
     vec.domain = DOMAINS.TRUST_DECISION;
@@ -561,7 +563,7 @@ function buildPositive() {
     cred.signatures = [{
       ...signatures[0],
       value: sig,
-      evidence_hash: 'sha256:' + canonicalHash(canonical + sig),
+      evidence_hash: 'sha256:' + crypto.createHash('sha256').update(canonical + sig, 'utf-8').digest('hex'),
     }];
     // Empty CRL (no revoked credentials)
     const crlPayload = {
@@ -639,7 +641,7 @@ function buildNegative() {
     cred.signatures = [{
       ...signatures[0],
       value: sig,
-      evidence_hash: 'sha256:' + canonicalHash(canonical + sig),
+      evidence_hash: 'sha256:' + crypto.createHash('sha256').update(canonical + sig, 'utf-8').digest('hex'),
     }];
     const vec = vectorBase('neg-003-atc-expired', 'ATC v3 properly signed but lifecycle.expires_at is in the past', 'INVALID', 'ca_ed25519');
     vec.input = cred;
@@ -658,7 +660,7 @@ function buildNegative() {
     const { signatures, ...payload } = cred;
     const sig = ed25519Sign(payload, caEd.private_key_pem, DOMAINS.ATC_V3_CREDENTIAL);
     const canonical = canonicalize(payload);
-    cred.signatures = [{ ...signatures[0], value: sig, evidence_hash: 'sha256:' + canonicalHash(canonical + sig) }];
+    cred.signatures = [{ ...signatures[0], value: sig, evidence_hash: 'sha256:' + crypto.createHash('sha256').update(canonical + sig, 'utf-8').digest('hex') }];
     const vec = vectorBase('neg-004-atc-revoked', 'ATC v3 properly signed but lifecycle.revoked is true', 'INVALID', 'ca_ed25519');
     vec.input = cred;
     vec.signature_value = sig;
@@ -852,7 +854,7 @@ function buildNegative() {
     cred.signatures = [{
       ...signatures[0],
       value: sig,
-      evidence_hash: 'sha256:' + canonicalHash(canonical + sig),
+      evidence_hash: 'sha256:' + crypto.createHash('sha256').update(canonical + sig, 'utf-8').digest('hex'),
     }];
     // Mark this credential_id as revoked in the CRL
     const cred_id = cred.credential_id;
@@ -900,7 +902,7 @@ function buildNegative() {
     cred.signatures = [{
       ...signatures[0],
       value: sig,
-      evidence_hash: 'sha256:' + canonicalHash(canonical + sig),
+      evidence_hash: 'sha256:' + crypto.createHash('sha256').update(canonical + sig, 'utf-8').digest('hex'),
     }];
     // Build a status list with bit 42 set (revoked)
     const zlib = require('node:zlib');

@@ -37,22 +37,22 @@ export interface NonceStore {
 // ============================================================================
 
 export class MemoryNonceStore implements NonceStore {
-  private store = new Map<string, StoredChallenge>();
+  private entries = new Map<string, StoredChallenge>();
 
   async store(challenge: StoredChallenge): Promise<void> {
-    if (this.store.has(challenge.nonce)) {
+    if (this.entries.has(challenge.nonce)) {
       throw new Error(`Nonce already exists (replay attempt?): ${challenge.nonce.slice(0, 16)}...`);
     }
-    this.store.set(challenge.nonce, { ...challenge, consumed: false });
+    this.entries.set(challenge.nonce, { ...challenge, consumed: false });
   }
 
   async retrieve(nonce: string): Promise<StoredChallenge | null> {
-    const entry = this.store.get(nonce);
+    const entry = this.entries.get(nonce);
     if (!entry) return null;
 
     // Check expiry
     if (new Date(entry.expires_at) < new Date()) {
-      this.store.delete(nonce);
+      this.entries.delete(nonce);
       return null;
     }
 
@@ -60,7 +60,7 @@ export class MemoryNonceStore implements NonceStore {
   }
 
   async consume(nonce: string): Promise<StoredChallenge | null> {
-    const entry = this.store.get(nonce);
+    const entry = this.entries.get(nonce);
     if (!entry) return null;
 
     // Check if already consumed (replay attack)
@@ -70,7 +70,7 @@ export class MemoryNonceStore implements NonceStore {
 
     // Check expiry
     if (new Date(entry.expires_at) < new Date()) {
-      this.store.delete(nonce);
+      this.entries.delete(nonce);
       throw new Error(`Nonce expired at ${entry.expires_at}`);
     }
 
@@ -85,12 +85,12 @@ export class MemoryNonceStore implements NonceStore {
   async cleanup(): Promise<number> {
     const now = Date.now();
     let deleted = 0;
-    for (const [nonce, entry] of this.store) {
+    for (const [nonce, entry] of this.entries) {
       const isExpired = new Date(entry.expires_at).getTime() < now;
       const isConsumedAndOld = entry.consumed && entry.consumed_at &&
         (now - new Date(entry.consumed_at).getTime() > 60 * 60 * 1000); // 1 hour after consumption
       if (isExpired || isConsumedAndOld) {
-        this.store.delete(nonce);
+        this.entries.delete(nonce);
         deleted++;
       }
     }

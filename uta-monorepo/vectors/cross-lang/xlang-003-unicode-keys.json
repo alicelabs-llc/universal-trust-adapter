@@ -12,7 +12,7 @@
   "verification_input": "{\"A\":4,\"a\":5,\"中\":1,\"文\":2,\"🎨\":3}",
   "canonical_sha256": "9874db6b2389971a4c6462dfe56f59c94269d975a28375339a88b9bbc30aa12c",
   "canonical_length_bytes": 38,
-  "generated_at": "2026-08-20T22:38:12.051Z",
+  "generated_at": "2026-08-20T23:16:11.412Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "cross_language_check": "Compute canonicalize(payload) using your local JCS (RFC 8785) implementation. The result MUST byte-for-byte match verification_input. The SHA-256 of those bytes MUST equal canonical_sha256."
 }

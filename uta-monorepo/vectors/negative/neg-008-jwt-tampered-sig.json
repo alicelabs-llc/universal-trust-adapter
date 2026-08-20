@@ -4,13 +4,13 @@
   "expected_result": "INVALID",
   "public_key_ref": "ca_ed25519",
   "domain": "JWT",
-  "signature_value": "No9fqa6r4t-3W1C9PKW9mr_0rGEc8LljthCzrTjVqkDC2CdhIrewaZayQzeMG2V5njqUdyvA0_-8EjTJjh_JDA",
-  "verification_input": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6IjU0ODhlYjdiNzJhN2IxNWMifQ.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhZ2VudC0wMDMiLCJhdWQiOiJtYXJrZXRub3ctZ2F0ZXdheSIsImlhdCI6MTc4NzI2NTQ5MiwiZXhwIjoxNzg3MjY5MDkyLCJzY29wZSI6InRvb2xzOmNhbGwifQ",
+  "signature_value": "UToJxuVxB4NDUjkunM-cJrdpMfxAqa4TqdsghV8BZ3w80TmvBcPf4W-gVo_q_l5HWop6gA_JL6M5koQ2DcpZAw",
+  "verification_input": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6IjU0ODhlYjdiNzJhN2IxNWMifQ.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhZ2VudC0wMDMiLCJhdWQiOiJtYXJrZXRub3ctZ2F0ZXdheSIsImlhdCI6MTc4NzI2Nzc3MSwiZXhwIjoxNzg3MjcxMzcxLCJzY29wZSI6InRvb2xzOmNhbGwifQ",
   "canonical_sha256": null,
-  "generated_at": "2026-08-20T22:38:12.025Z",
+  "generated_at": "2026-08-20T23:16:11.369Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "input": {
-    "jwt": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6IjU0ODhlYjdiNzJhN2IxNWMifQ.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhZ2VudC0wMDMiLCJhdWQiOiJtYXJrZXRub3ctZ2F0ZXdheSIsImlhdCI6MTc4NzI2NTQ5MiwiZXhwIjoxNzg3MjY5MDkyLCJzY29wZSI6InRvb2xzOmNhbGwifQ.yY9fqa6r4t-3W1C9PKW9mr_0rGEc8LljthCzrTjVqkDC2CdhIrewaZayQzeMG2V5njqUdyvA0_-8EjTJjh_JDA"
+    "jwt": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6IjU0ODhlYjdiNzJhN2IxNWMifQ.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhZ2VudC0wMDMiLCJhdWQiOiJtYXJrZXRub3ctZ2F0ZXdheSIsImlhdCI6MTc4NzI2Nzc3MSwiZXhwIjoxNzg3MjcxMzcxLCJzY29wZSI6InRvb2xzOmNhbGwifQ.rjoJxuVxB4NDUjkunM-cJrdpMfxAqa4TqdsghV8BZ3w80TmvBcPf4W-gVo_q_l5HWop6gA_JL6M5koQ2DcpZAw"
   },
   "expected_failure_reason": "signature verification failed"
 }

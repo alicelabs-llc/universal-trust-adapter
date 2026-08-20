@@ -100,8 +100,7 @@ export class ReceiptGenerator {
 
     // P1-6: Use JCS for args_hash (not JSON.stringify)
     // This ensures deterministic hashing regardless of key order
-    const argsCanonical = canonicalize(params.args);
-    const argsHash = `sha256:${canonicalHash(argsCanonical)}`;
+    const argsHash = `sha256:${canonicalHash(params.args)}`;  // canonicalHash canonicalizes internally
 
     const receiptId = `rcpt_${crypto.randomUUID().replace(/-/g, '').slice(0, 16)}`;
 
@@ -121,11 +120,10 @@ export class ReceiptGenerator {
       evidence_hash: '', // computed below
     };
 
-    // Compute evidence_hash = SHA-256(JCS(receipt_without_signature_and_evidence_hash))
+    // Compute evidence_hash = SHA-256(canonicalize(receipt_without_signature_with_evidence_hash_empty))
     const receiptForHash = { ...receipt };
     receiptForHash.evidence_hash = ''; // exclude self-reference
-    const receiptCanonical = canonicalize(receiptForHash);
-    receipt.evidence_hash = `sha256:${canonicalHash(receiptCanonical)}`;
+    receipt.evidence_hash = `sha256:${canonicalHash(receiptForHash)}`;  // canonicalHash canonicalizes internally
 
     // Sign the receipt if we have a gateway key pair
     let signedReceipt: ActionReceipt;
@@ -166,7 +164,7 @@ export class ReceiptGenerator {
     const receiptForHash = { ...receipt };
     receiptForHash.signature = undefined;
     receiptForHash.evidence_hash = '';
-    const expectedHash = `sha256:${canonicalHash(canonicalize(receiptForHash))}`;
+    const expectedHash = `sha256:${canonicalHash(receiptForHash)}`;  // canonicalHash canonicalizes internally
     if (receipt.evidence_hash !== expectedHash) {
       return false;
     }

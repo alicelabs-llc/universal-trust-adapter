@@ -2,7 +2,7 @@
   "name": "universal-trust-adapter",
   "version": "1.0.0",
   "private": true,
-  "description": "Universal Trust Adapter \u2014 The USB-C of agent trust",
+  "description": "Universal Trust Adapter — The USB-C of agent trust",
   "author": "AliceLabs LLC <info@alicelabs.site>",
   "license": "AL-1.0",
   "workspaces": [
@@ -10,10 +10,15 @@
     "services/*"
   ],
   "scripts": {
-    "build": "tsc -b",
+    "build": "tsc -b && node scripts/generate-sbom.js",
     "test:structural": "node packages/conformance/run.js",
     "test:vectors": "node packages/conformance/run-vectors.js",
-    "test": "node packages/conformance/run.js && node packages/conformance/run-vectors.js",
+    "test:integration": "node packages/conformance/run-integration.js",
+    "test:gateway": "node packages/conformance/run-gateway-integration.js",
+    "test": "tsc && node packages/conformance/run.js && node packages/conformance/run-vectors.js && node packages/conformance/run-integration.js && node packages/conformance/run-gateway-integration.js",
     "deploy": "node services/trust-api/deploy.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
   }
 }

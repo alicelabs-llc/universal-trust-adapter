@@ -282,8 +282,8 @@ export class SPIFFEAdapter {
   detect(payload: unknown): boolean {
     if (!payload || typeof payload !== 'object') return false;
     const p = payload as Record<string, unknown>;
-    // SPIFFE SVID has: spiffe_id, or it's a JWT-SVID with spiffe:// in sub
-    return !!(p.spiffe_id || (typeof p === 'string' && p.includes('spiffe://')) ||
+    // SPIFFE SVID has: spiffe_id field, or it's a JWT-SVID with spiffe:// in sub
+    return !!(p.spiffe_id ||
       (p.sub && typeof p.sub === 'string' && p.sub.startsWith('spiffe://')));
   }
 

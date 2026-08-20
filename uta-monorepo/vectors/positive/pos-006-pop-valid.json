@@ -4,25 +4,25 @@
   "expected_result": "VALID",
   "public_key_ref": "agent_ed25519",
   "domain": "UTA-ATC-V3-POP",
-  "signature_value": "7f25106d92ffa5f76279b1d50d58c7047524d035aac2aa46b58dba0a6917db3f1a72e9c53b4d865605db4266d1af301577b414e971339dd2bf2686e976f5f00c",
-  "verification_input": "{\"audience\":\"marketnow-gateway\",\"credential_id\":\"ATC-2026-ABCD123\",\"nonce\":\"7dcc3fc3da638d435ec08512afea7ea79bca3116a39d9eee3bb715f334432cde\",\"timestamp\":\"2026-08-20T22:38:11.998Z\"}",
-  "canonical_sha256": "b010ceca2dde54614a5455b4ae4eeeb45909d4de3e9974816d732b6accff32c7",
-  "generated_at": "2026-08-20T22:38:11.998Z",
+  "signature_value": "1faa927e133da6adc89476f6e8f0c7031b323d1c80b69650f151c5457f5f77d1add4bb24fdc7d0a61b5966c0e22535460f150d461980241e4f116146e1872e01",
+  "verification_input": "{\"audience\":\"marketnow-gateway\",\"credential_id\":\"ATC-2026-ABCD123\",\"nonce\":\"61fbfa34052bc8886fe3d7064848c454c30e97adc697c30a31966591d0b5dd64\",\"timestamp\":\"2026-08-20T23:16:11.342Z\"}",
+  "canonical_sha256": "0ffeb32811933e1c3bc33646222d9fe9867d6eca51ca9e6580e097983d47e5e7",
+  "generated_at": "2026-08-20T23:16:11.343Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "input": {
     "challenge": {
-      "nonce": "7dcc3fc3da638d435ec08512afea7ea79bca3116a39d9eee3bb715f334432cde",
+      "nonce": "61fbfa34052bc8886fe3d7064848c454c30e97adc697c30a31966591d0b5dd64",
       "credential_id": "ATC-2026-ABCD123",
       "audience": "marketnow-gateway",
-      "issued_at": "2026-08-20T22:38:11.998Z",
-      "expires_at": "2027-08-20T22:38:11.998Z"
+      "issued_at": "2026-08-20T23:16:11.342Z",
+      "expires_at": "2027-08-20T23:16:11.342Z"
     },
     "response": {
-      "nonce": "7dcc3fc3da638d435ec08512afea7ea79bca3116a39d9eee3bb715f334432cde",
+      "nonce": "61fbfa34052bc8886fe3d7064848c454c30e97adc697c30a31966591d0b5dd64",
       "credential_id": "ATC-2026-ABCD123",
       "audience": "marketnow-gateway",
-      "timestamp": "2026-08-20T22:38:11.998Z",
-      "signature": "7f25106d92ffa5f76279b1d50d58c7047524d035aac2aa46b58dba0a6917db3f1a72e9c53b4d865605db4266d1af301577b414e971339dd2bf2686e976f5f00c"
+      "timestamp": "2026-08-20T23:16:11.342Z",
+      "signature": "1faa927e133da6adc89476f6e8f0c7031b323d1c80b69650f151c5457f5f77d1add4bb24fdc7d0a61b5966c0e22535460f150d461980241e4f116146e1872e01"
     }
   }
 }

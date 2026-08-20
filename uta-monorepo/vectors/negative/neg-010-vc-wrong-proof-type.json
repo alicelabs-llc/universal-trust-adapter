@@ -7,18 +7,18 @@
   "signature_value": null,
   "verification_input": null,
   "canonical_sha256": null,
-  "generated_at": "2026-08-20T22:38:12.025Z",
+  "generated_at": "2026-08-20T23:16:11.370Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "input": {
     "@context": [
       "https://www.w3.org/2018/credentials/v1"
     ],
-    "id": "urn:uuid:fbafc24a-b8b0-4b01-8c93-30542493e6db",
+    "id": "urn:uuid:25e0e912-a01e-4dae-afb0-56aa2d340e23",
     "type": [
       "VerifiableCredential"
     ],
     "issuer": "did:marketnow:ca",
-    "issuanceDate": "2026-08-20T22:38:12.025Z",
+    "issuanceDate": "2026-08-20T23:16:11.370Z",
     "credentialSubject": {
       "id": "did:marketnow:agent:001"
     },
@@ -26,7 +26,7 @@
       "type": "JsonWebSignature2020",
       "proofValue": "AAA",
       "proofPurpose": "assertionMethod",
-      "created": "2026-08-20T22:38:12.025Z"
+      "created": "2026-08-20T23:16:11.370Z"
     }
   },
   "expected_failure_reason": "unsupported proof type"

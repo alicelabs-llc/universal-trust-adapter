@@ -158,7 +158,7 @@ function verifyATCv3(credential, caPublicKeyPem) {
   }
   // evidence_hash = sha256(canonical + signatureValue)
   const canonical = canonicalize(payload);
-  const expectedEvidenceHash = 'sha256:' + canonicalHash(canonical + sig.value);
+  const expectedEvidenceHash = 'sha256:' + crypto.createHash('sha256').update(canonical + sig.value, 'utf-8').digest('hex');
   const evidenceHashValid = sig.evidence_hash === expectedEvidenceHash;
   if (!evidenceHashValid) issues.push('evidence_hash mismatch');
   if (credential.lifecycle?.expires_at && new Date(credential.lifecycle.expires_at) < new Date()) {
@@ -285,10 +285,10 @@ function verifyPoP(response, publicKeyPem, expectedChallenge) {
 
 function verifyReceipt(receipt, publicKeyPem) {
   if (!receipt.signature) return { valid: false, reason: 'no signature' };
-  // evidence_hash check
+  // evidence_hash check — SHA-256 of canonicalize(receipt_without_signature_with_evidence_hash_empty)
   const { signature: _sig, ...rest } = receipt;
   const forHash = { ...rest, evidence_hash: '' };
-  const expectedHash = 'sha256:' + canonicalHash(canonicalize(forHash));
+  const expectedHash = 'sha256:' + crypto.createHash('sha256').update(canonicalize(forHash), 'utf-8').digest('hex');
   if (receipt.evidence_hash !== expectedHash) {
     return { valid: false, reason: `evidence_hash mismatch: expected ${expectedHash.slice(0, 30)}, got ${receipt.evidence_hash?.slice(0, 30) || 'missing'}` };
   }
@@ -566,9 +566,11 @@ for (const v of loadVecs('positive')) {
           return { valid: false, reason: 'PoP canonical mismatch' };
         }
       } else if (v.input.receipt_id) {
-        // Receipt: canonicalize without signature
+        // Receipt: canonicalize without signature AND with evidence_hash=""
+        // (signature is computed over the receipt with evidence_hash blanked out)
         const { signature, ...rest } = v.input;
-        const recomputed = canonicalize(rest);
+        const receiptForCanonical = { ...rest, evidence_hash: '' };
+        const recomputed = canonicalize(receiptForCanonical);
         if (recomputed !== v.verification_input) {
           return { valid: false, reason: 'Receipt canonical mismatch' };
         }
