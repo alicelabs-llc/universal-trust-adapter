@@ -8,10 +8,16 @@
 |-----------|------|-----------|-------------|-----------------|------------|
 | Ed25519 (RFC 8032) | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
 | JCS (RFC 8785) | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
-| PoP (nonce challenge) | ⚠️ partial | ⬜ | ⬜ | ⬜ | ⬜ |
-| Artifact binding | ⚠️ hash verify only | ⬜ | ⬜ | ⬜ | ⬜ |
-| Evidence verification | ✅ hash verify | ⬜ | ⬜ | ⬜ | ⬜ |
-| Issuer trust | ✅ fail-closed | ⬜ | ⬜ | ⬜ | ⬜ |
+| PoP (nonce challenge) | ✅ NonceStore + PoPManager | ⬜ | ⬜ | ⬜ | ⬜ |
+| Artifact binding | ✅ hash verify (JCS+SHA-256) | ⬜ | ⬜ | ⬜ | ⬜ |
+| Evidence verification | ✅ hash verify (JCS+SHA-256) | ⬜ | ⬜ | ⬜ | ⬜ |
+| Issuer trust | ✅ fail-closed (DENY unknown) | ⬜ | ⬜ | ⬜ | ⬜ |
+| Key binding | ✅ TrustRegistry | ⬜ | ⬜ | ⬜ | ⬜ |
+| JWT verification (RS256/ES256/EdDSA) | ✅ real crypto.verify | ⬜ | ⬜ | ⬜ | ⬜ |
+| W3C VC verification | ✅ Ed25519Signature2020 | ⬜ | ⬜ | ⬜ | ⬜ |
+| W3C VC issuance | ✅ real Ed25519 sign | ⬜ | ⬜ | ⬜ | ⬜ |
+| Action receipts | ✅ signed Ed25519 | ⬜ | ⬜ | ⬜ | ⬜ |
+| Gateway args_hash | ✅ JCS (not JSON.stringify) | ⬜ | ⬜ | ⬜ | ⬜ |
 | Revocation | ⚠️ CRL query only | ⬜ | ⬜ | ⬜ | ⬜ |
 | SLSA | 📄 documented | ⬜ | ⬜ | ⬜ | ⬜ |
 | Sigstore | 📄 documented | ⬜ | ⬜ | ⬜ | ⬜ |
