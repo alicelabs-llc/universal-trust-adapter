@@ -548,9 +548,3 @@ function verifyMCP(payload, caKey) {
   if (!payload.tools) issues.push('MCP: missing tools');
   return { valid: issues.length === 0, format: 'mcp-card', uts, issues, warnings: uts.warnings };
 }
-
-
-// ── Vercel handler wrapper ──
-export default async function handler(req, res) {
-  return handleTrust(req, res);
-}
