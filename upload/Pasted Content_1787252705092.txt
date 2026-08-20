@@ -1,0 +1,2521 @@
+Sí. Esta vez no te voy a dar otra lista incremental de “cambia esto y luego revisamos otra cosa”.
+
+**Tomé el repo unificado que subiste como baseline, ejecuté sus tests, intenté compilar el paquete TypeScript y contrasté la arquitectura con los estándares criptográficos y de supply-chain relevantes.** La conclusión es que ya tenemos suficiente información para fijar una arquitectura definitiva.
+
+La regla a partir de ahora debería ser:
+
+> **No se hacen más cambios arquitectónicos después de este plan. Se implementa este diseño completo, se ejecutan los gates de aceptación y sólo se corrigen bugs/conformance failures.**
+
+---
+
+# UTA — PLAN MAESTRO DEFINITIVO
+
+## 0. Decisión ejecutiva
+
+El proyecto **NO debe seguir creciendo como “un conjunto de adapters”**.
+
+La arquitectura definitiva será:
+
+```text
+                         MARKETNOW TRUST PLATFORM
+                                  │
+                    ┌─────────────┴─────────────┐
+                    │                           │
+              CONTROL PLANE                DATA PLANE
+                    │                           │
+             Trust Gateway              Runtime Enforcement
+                    │                     MCP / A2A / OAuth
+                    │                           │
+          ┌─────────▼─────────┐          ┌──────▼──────┐
+          │ Verification Core │          │   Policy    │
+          └─────────┬─────────┘          │   Engine    │
+                    │                    └──────┬──────┘
+                    ▼                           │
+              Evidence Engine                  │
+                 Sentinel                       │
+                    │                           │
+                    ▼                           ▼
+              UTS Evidence                ALLOW / DENY
+                    │
+          ┌─────────┴──────────┐
+          │                    │
+     Provenance            Attestation
+          │                    │
+   Git/SLSA/Sigstore       Ed25519/EAT/VC
+          │                    │
+          └─────────┬──────────┘
+                    ▼
+                   UTS
+                    │
+                    ▼
+              UTA Adapters
+                    │
+       ┌────────────┼────────────┐
+       ▼            ▼            ▼
+      ATC          EAT       W3C VC
+       │            │            │
+      ZTA          A2A          MCP
+       │
+     OAuth
+       │
+    SPIFFE
+```
+
+### Las responsabilidades quedan congeladas:
+
+| Componente            | Responsabilidad                                                        |
+| --------------------- | ---------------------------------------------------------------------- |
+| **UTS**               | representación canónica de identidad/evidencia/política/provenance     |
+| **UTA**               | interoperabilidad entre formatos                                       |
+| **Verification Core** | verificar criptografía, issuer, lifecycle, provenance, PoP, revocación |
+| **Sentinel**          | producir evidencia                                                     |
+| **Policy Engine**     | convertir evidencia + contexto en decisión                             |
+| **Trust Gateway**     | exponer verification/policy a aplicaciones                             |
+| **Interceptor**       | enforcement en runtime                                                 |
+| **MarketNow**         | producto/comercialización/discovery                                    |
+| **ATC v3**            | credential profile de AliceLabs                                        |
+
+Esto es lo que hay que construir. **No añadiría otra capa conceptual después.**
+
+---
+
+# 1. Lo primero: el estado real del repo
+
+Hay problemas estructurales que no debemos maquillar.
+
+### El test actual no es un conformance test real
+
+`npm test` devuelve:
+
+```text
+9/9 passed
+UTA Conformant: YES
+```
+
+pero el test sólo carga JSON y comprueba que existan campos.
+
+No está haciendo:
+
+```text
+credential
+   ↓
+actual adapter
+   ↓
+schema validation
+   ↓
+signature verification
+   ↓
+policy
+```
+
+Por tanto:
+
+> **“9/9 conformance” debe desaparecer como claim hasta reemplazarlo por pruebas reales.**
+
+---
+
+### El paquete TypeScript tampoco tiene build reproducible
+
+Ejecuté:
+
+```bash
+npm run build
+```
+
+en `adapters/` y actualmente TypeScript no encuentra `tsconfig.json`.
+
+Por tanto el SDK no tiene todavía un pipeline de compilación formal.
+
+Eso debe quedar resuelto en la arquitectura definitiva.
+
+---
+
+### Hay dos implementaciones
+
+Tenemos:
+
+```text
+adapters/*.ts
+adapters/*.mjs
+```
+
+más:
+
+```text
+api/trust.js
+```
+
+que vuelve a implementar adapters inline.
+
+Eso es peligrosísimo.
+
+Tenemos actualmente **tres fuentes de verdad**:
+
+```text
+TypeScript adapters
+      +
+MJS adapters
+      +
+API inline adapters
+```
+
+### Arquitectura definitiva:
+
+```text
+packages/core
+      ↓
+packages/adapters/*
+      ↓
+packages/gateway
+      ↓
+API
+```
+
+**Una sola implementación.**
+
+---
+
+# 2. Monorepo definitivo
+
+Yo reorganizaría el repo una sola vez:
+
+```text
+universal-trust-adapter/
+│
+├── packages/
+│   │
+│   ├── core/
+│   │   ├── verification/
+│   │   ├── crypto/
+│   │   ├── canonicalization/
+│   │   ├── provenance/
+│   │   ├── revocation/
+│   │   ├── policy/
+│   │   ├── detection/
+│   │   └── errors/
+│   │
+│   ├── uts/
+│   │   ├── schema/
+│   │   ├── types/
+│   │   └── validators/
+│   │
+│   ├── adapters/
+│   │   ├── atc/
+│   │   ├── eat/
+│   │   ├── zta/
+│   │   ├── a2a/
+│   │   ├── mcp/
+│   │   ├── vc/
+│   │   ├── oauth/
+│   │   └── spiffe/
+│   │
+│   ├── conformance/
+│   │
+│   └── gateway/
+│
+├── services/
+│   ├── trust-api/
+│   ├── mcp-gateway/
+│   └── evidence-api/
+│
+├── specs/
+│   ├── UTS-v2/
+│   ├── ATC-v3/
+│   └── profiles/
+│
+├── vectors/
+│   ├── crypto/
+│   ├── conformance/
+│   ├── negative/
+│   ├── mutation/
+│   └── interoperability/
+│
+├── threat-model/
+│   ├── THREAT_MODEL.md
+│   ├── STRIDE.md
+│   └── ATLAS.md
+│
+├── supply-chain/
+│   ├── sbom/
+│   ├── provenance/
+│   └── attestations/
+│
+├── docs/
+│
+├── package.json
+├── pnpm-workspace.yaml
+├── tsconfig.base.json
+└── SECURITY.md
+```
+
+No más `.mjs` paralelos.
+
+No más adapter implementations dentro de `api/trust.js`.
+
+---
+
+# 3. UTS v2: ésta es la decisión más importante
+
+No intentaría “parchar” el UTS actual.
+
+El actual mezcla:
+
+```text
+identity
+trust score
+evidence
+policy
+provenance
+lifecycle
+raw format
+```
+
+y trata `score` como si fuese una propiedad primaria.
+
+Eso hay que corregir.
+
+## UTS definitivo
+
+```text
+UTS
+│
+├── version
+│
+├── subject
+│
+├── identity
+│
+│   ├── identifiers
+│   ├── public_keys
+│   ├── key_bindings
+│   └── hardware_attestations
+│
+├── attestations[]
+│
+│   ├── type
+│   ├── issuer
+│   ├── issued_at
+│   ├── expires_at
+│   ├── claims
+│   ├── evidence_ref
+│   └── proof
+│
+├── evidence[]
+│
+│   ├── id
+│   ├── type
+│   ├── issuer
+│   ├── artifact
+│   ├── digest
+│   ├── timestamp
+│   ├── result
+│   └── proof
+│
+├── capabilities[]
+│
+├── policies[]
+│
+├── provenance
+│
+│   ├── source
+│   ├── git
+│   ├── package
+│   ├── container
+│   ├── build
+│   ├── sbom
+│   └── supply_chain
+│
+├── lifecycle
+│
+│   ├── issued_at
+│   ├── expires_at
+│   ├── status
+│   └── revocation
+│
+└── assessment
+    │
+    ├── methodology
+    ├── version
+    ├── inputs
+    ├── calculation
+    └── result
+```
+
+### Y aquí una decisión definitiva:
+
+**El score no es trust.**
+
+Es:
+
+```text
+assessment.result.score
+```
+
+Ejemplo:
+
+```json
+{
+  "assessment": {
+    "methodology": "marketnow-agent-trust-v1",
+    "version": "1.0.0",
+    "inputs": [
+      "evidence:abc123",
+      "evidence:def456"
+    ],
+    "result": {
+      "score": 8.4,
+      "risk": "low"
+    }
+  }
+}
+```
+
+Así podemos reproducir:
+
+```bash
+marketnow verify credential.json
+marketnow assess credential.json
+```
+
+y obtener exactamente el mismo resultado.
+
+---
+
+# 4. Criptografía: P0 absoluto
+
+Aquí no se negocia.
+
+## Ed25519
+
+Implementar realmente:
+
+* RFC 8032
+* key generation
+* sign
+* verify
+* public-key parsing
+* malformed key rejection
+* signature length validation
+* test vectors oficiales
+
+RFC 8032 define Ed25519 y proporciona vectores de prueba y reglas de verificación. ([RFC Editor][1])
+
+### Nunca más:
+
+```text
+Real implementation would verify...
+```
+
+Ni:
+
+```text
+(unsigned — populate via issue())
+```
+
+Ni:
+
+```text
+return { valid: true }
+```
+
+después de solamente parsear.
+
+---
+
+# 5. JCS
+
+JCS será una dependencia central del core criptográfico.
+
+RFC 8785 define precisamente la representación determinista necesaria para que hash/firma sean reproducibles entre implementaciones. ([RFC Editor][2])
+
+Pipeline:
+
+```text
+JSON
+ ↓
+I-JSON validation
+ ↓
+JCS
+ ↓
+UTF-8 bytes
+ ↓
+SHA-256 / Ed25519
+```
+
+Y tendremos vectores:
+
+```text
+Node
+Python
+Rust
+```
+
+que produzcan exactamente:
+
+```text
+same canonical bytes
+same digest
+same signature
+```
+
+---
+
+# 6. Domain separation
+
+Definir formalmente:
+
+```text
+UTA-ATC-V3-CREDENTIAL
+UTA-ATC-V3-POP
+UTA-UTS-EVIDENCE
+UTA-BRIDGE-V1
+UTA-ACTION-RECEIPT
+```
+
+Nunca firmar simplemente:
+
+```text
+JSON.stringify(object)
+```
+
+sin contexto.
+
+---
+
+# 7. ATC v3: congelarlo correctamente
+
+ATC v3 debe ser un **profile criptográfico**, no un contenedor ambiguo de tres credenciales.
+
+El modelo:
+
+```text
+ATC v3
+│
+├── credential payload
+│
+├── artifact binding
+│
+├── attestations
+│
+├── lifecycle
+│
+└── proofs[]
+       ├── Ed25519/JCS
+       ├── EAT/COSE
+       └── VC Data Integrity
+```
+
+Pero:
+
+### No declarar una firma “proporcionada” si no existe.
+
+Actualmente el schema muestra:
+
+```text
+signatures_provided:
+[
+  atc-ed25519,
+  eat-cwt,
+  w3c-vc
+]
+```
+
+mientras las implementaciones no las generan realmente.
+
+Eso debe desaparecer.
+
+---
+
+# 8. Artifact Binding definitivo
+
+No basta con:
+
+```text
+hash(git + npm + docker)
+```
+
+El binding debe conservar **cada referencia individual** y el hash agregado.
+
+```json
+{
+  "artifact_binding": {
+    "source": {
+      "repository": "...",
+      "commit": "..."
+    },
+    "package": {
+      "ecosystem": "npm",
+      "name": "...",
+      "version": "...",
+      "sha256": "..."
+    },
+    "container": {
+      "image": "...",
+      "digest": "sha256:..."
+    },
+    "sbom": {
+      "sha256": "..."
+    },
+    "provenance": {
+      "uri": "...",
+      "sha256": "..."
+    },
+    "binding_digest": "sha256:..."
+  }
+}
+```
+
+El verifier debe poder responder:
+
+```text
+¿Este credential corresponde exactamente
+al artefacto que estoy ejecutando?
+```
+
+---
+
+# 9. SLSA + Sigstore
+
+Esto no debe ser “metadata bonita”.
+
+Tiene que verificarse.
+
+SLSA ya proporciona un modelo explícito de provenance y verificación; la versión 1.2 es la actual, mientras que 1.0 fue la primera versión estable. ([SLSA][3])
+
+Objetivo:
+
+```text
+Git commit
+    ↓
+CI builder
+    ↓
+SLSA provenance
+    ↓
+npm tarball
+    ↓
+OCI image
+    ↓
+Sigstore identity/signature
+    ↓
+UTA provenance verifier
+```
+
+El verifier debe comprobar:
+
+1. issuer/build platform;
+2. source revision;
+3. artifact digest;
+4. build identity;
+5. provenance signature;
+6. expectations del package.
+
+---
+
+# 10. Evidence Engine / Sentinel
+
+Sentinel no debe escribir:
+
+```text
+score = 8.4
+```
+
+y ya.
+
+Debe producir **evidence records firmados**.
+
+```json
+{
+  "evidence_id": "urn:uuid:...",
+  "type": "static-analysis",
+  "subject": "...",
+  "artifact_digest": "sha256:...",
+  "tool": {
+    "name": "sentinel",
+    "version": "..."
+  },
+  "result": "pass",
+  "findings": [],
+  "timestamp": "...",
+  "digest": "sha256:...",
+  "proof": {
+    "algorithm": "Ed25519",
+    "signature": "..."
+  }
+}
+```
+
+Después:
+
+```text
+Evidence
+   ↓
+Assessment engine
+   ↓
+deterministic score
+```
+
+---
+
+# 11. Score reproducible
+
+Definir una metodología versionada:
+
+```text
+marketnow-agent-trust-v1
+```
+
+Ejemplo:
+
+```text
+Identity               20%
+Supply chain           20%
+Security evidence      20%
+Runtime behavior       15%
+Capabilities/policy    10%
+Provenance             10%
+Human review             5%
+```
+
+No importa si esos pesos cambian después.
+
+Lo importante es que:
+
+```text
+methodology version
++
+inputs
++
+evidence hashes
+=
+reproducible result
+```
+
+---
+
+# 12. Verification Pipeline definitivo
+
+Éste queda congelado:
+
+```text
+01 PARSE
+02 DETECT
+03 SCHEMA VALIDATE
+04 CRYPTOGRAPHIC VERIFY
+05 ISSUER TRUST
+06 KEY BINDING
+07 PROOF OF POSSESSION
+08 PROVENANCE / ARTIFACT
+09 LIFECYCLE / REVOCATION
+10 EVIDENCE VALIDATION
+11 POLICY EVALUATION
+12 DECISION
+```
+
+Yo añadiría dos pasos a los diez originales:
+
+### `KEY BINDING`
+
+porque una firma válida no basta si la clave no está correctamente asociada al issuer/subject.
+
+### `EVIDENCE VALIDATION`
+
+porque no debemos confiar ciegamente en una evidencia simplemente porque esté dentro de un JSON firmado.
+
+---
+
+# 13. Resultado de verification
+
+Nunca:
+
+```json
+{
+  "valid": true
+}
+```
+
+Solamente.
+
+Debe ser:
+
+```json
+{
+  "decision": "ALLOW",
+  "verified": true,
+  "format": "atc-v3",
+
+  "stages": {
+    "parse": "PASS",
+    "schema": "PASS",
+    "cryptography": "PASS",
+    "issuer": "PASS",
+    "key_binding": "PASS",
+    "proof_of_possession": "PASS",
+    "provenance": "PASS",
+    "revocation": "PASS",
+    "evidence": "PASS",
+    "policy": "PASS"
+  },
+
+  "credential_id": "...",
+  "issuer": "...",
+  "subject": "...",
+
+  "assessment": {
+    "methodology": "marketnow-agent-trust-v1",
+    "score": 8.4,
+    "risk": "low"
+  },
+
+  "evidence": [
+    "sha256:..."
+  ]
+}
+```
+
+Eso es un producto enterprise.
+
+---
+
+# 14. Proof-of-Possession
+
+Definitivo:
+
+```text
+Gateway
+   │
+   ├── nonce
+   ├── audience
+   ├── credential_id
+   ├── issued_at
+   └── expiry
+        │
+        ▼
+      Agent
+        │
+        ▼
+    sign(PoP context)
+        │
+        ▼
+      Gateway
+        │
+        ▼
+   verify public key
+```
+
+Debe rechazar:
+
+* nonce reutilizado;
+* nonce expirado;
+* audience incorrecta;
+* credential incorrecto;
+* firma incorrecta;
+* timestamp inválido.
+
+El nonce store debe ser externo y distribuido en producción.
+
+---
+
+# 15. Revocación
+
+No mezclar mecanismos arbitrariamente.
+
+El modelo definitivo:
+
+```text
+Credential
+   │
+   ├── status mechanism
+   │
+   ├── status reference
+   │
+   └── freshness policy
+```
+
+Para VC, Bitstring Status List v1.0 ya es una W3C Recommendation desde mayo de 2025 y está diseñado precisamente para status/revocation de forma eficiente y con propiedades de privacidad. ([W3C][4])
+
+Para ATC:
+
+```text
+status list / issuer status endpoint
+```
+
+Para formatos externos:
+
+```text
+native revocation semantics
+```
+
+Y el resultado debe distinguir:
+
+```text
+NOT_REVOKED
+REVOKED
+SUSPENDED
+UNKNOWN
+UNAVAILABLE
+```
+
+**UNKNOWN no es PASS.**
+
+---
+
+# 16. Traducción: cambiar la semántica
+
+La traducción ya no será:
+
+```text
+A → UTS → B
+```
+
+simplemente.
+
+Será:
+
+```text
+A
+ ↓
+parse
+ ↓
+verify
+ ↓
+UTS
+ ↓
+semantic compatibility analysis
+ ↓
+B
+ ↓
+sign B
+```
+
+Y el resultado:
+
+```json
+{
+  "translation": {
+    "status": "LOSSY",
+    "preserved": [...],
+    "dropped": [...],
+    "downgraded": [...],
+    "warnings": [...]
+  }
+}
+```
+
+### Nunca:
+
+```text
+warnings.length === 0
+→ lossless
+```
+
+Eso es demasiado simplista.
+
+---
+
+# 17. `format.raw` no es “lossless”
+
+`format.raw` se conserva para auditoría.
+
+Pero:
+
+```text
+raw preserved
+```
+
+no significa:
+
+```text
+semantic security preserved
+```
+
+Por tanto separar:
+
+```text
+native preservation
+semantic preservation
+security preservation
+```
+
+Tres estados distintos.
+
+---
+
+# 18. Bridge definitivo
+
+El bridge será:
+
+```text
+SOURCE
+ ↓
+VERIFY
+ ↓
+ESTABLISH ISSUER TRUST
+ ↓
+VERIFY PROVENANCE
+ ↓
+VERIFY REVOCATION
+ ↓
+VERIFY PoP if required
+ ↓
+POLICY
+ ↓
+CREATE UTS DERIVATION
+ ↓
+SIGN DERIVED CREDENTIAL
+ ↓
+STORE SOURCE PROVENANCE
+ ↓
+RETURN DECISION
+```
+
+El hash del JSON original no es suficiente.
+
+Debe conservar:
+
+```text
+source credential digest
+source signature digest
+source issuer
+source verification result
+source evidence hashes
+bridge policy
+bridge engine version
+target credential digest
+```
+
+Así tenemos una verdadera derivation record.
+
+---
+
+# 19. Adapters: nueva interfaz
+
+La interfaz definitiva no debe ser solamente:
+
+```typescript
+detect()
+fromNative()
+toNative()
+verify()
+issue()
+```
+
+Debe ser:
+
+```typescript
+interface TrustAdapter {
+
+  formatId: string;
+
+  detect(input): DetectionResult;
+
+  parse(input): ParsedCredential;
+
+  validate(parsed): ValidationResult;
+
+  verify(
+    credential,
+    context
+  ): Promise<VerificationResult>;
+
+  toUTS(
+    verifiedCredential
+  ): Promise<UTS>;
+
+  fromUTS(
+    uts,
+    context
+  ): Promise<NativeCredential>;
+
+  issue(
+    uts,
+    issuerContext
+  ): Promise<NativeCredential>;
+
+  capabilities(): AdapterCapabilities;
+}
+```
+
+Así cada adapter declara qué realmente soporta.
+
+---
+
+# 20. Adapter capability matrix
+
+Cada formato tendrá:
+
+```text
+Detection
+Parsing
+Schema validation
+Crypto verification
+Crypto issuance
+PoP
+Revocation
+Provenance
+Artifact binding
+Round-trip
+```
+
+Ejemplo:
+
+| Format |                    Parse |             Crypto |         Issue |               PoP |        Revocation |
+| ------ | -----------------------: | -----------------: | ------------: | ----------------: | ----------------: |
+| ATC v3 |                        ✅ |                  ✅ |             ✅ |                 ✅ |                 ✅ |
+| EAT    |                        ✅ |                  ✅ |             ✅ | profile-dependent | profile-dependent |
+| VC     |                        ✅ |                  ✅ |             ✅ | profile-dependent |                 ✅ |
+| OAuth  |                        ✅ |                  ✅ |             ✅ | DPoP/mTLS profile |  issuer-dependent |
+| SPIFFE |                        ✅ |                  ✅ |             ✅ | workload identity |  bundle/lifecycle |
+| A2A    |                        ✅ |     native/profile |       profile |           profile |           profile |
+| MCP    |                        ✅ |      metadata only | metadata only |     gateway-level |     gateway-level |
+| ZTA    | only published semantics | only if verifiable |       profile |           profile |           profile |
+
+**No se marca “verified” cuando sólo hubo parsing.**
+
+---
+
+# 21. A2A/MCP no deben recibir un trust score artificial
+
+Actualmente hay cosas como:
+
+```text
+A2A → score 5
+SPIFFE → score 7
+OAuth → score 5
+```
+
+Eso debe eliminarse.
+
+Un formato que no contiene trust:
+
+```text
+trust assessment = NONE
+```
+
+No:
+
+```text
+trust = 5
+```
+
+Porque `5` parece una afirmación.
+
+---
+
+# 22. El MCP Gateway actual debe rehacerse
+
+Este punto es especialmente importante.
+
+Actualmente el gateway:
+
+1. llama a un endpoint ATC;
+2. después llama al bridge;
+3. si bridge falla, **continúa**.
+
+Eso es un **fail-open security design**.
+
+Para un trust gateway:
+
+```text
+verification failure
+      ↓
+DENY
+```
+
+No:
+
+```text
+verification failure
+      ↓
+console.warn()
+      ↓
+ALLOW
+```
+
+### Regla definitiva:
+
+```text
+UNKNOWN = DENY
+ERROR = DENY
+TIMEOUT = policy-controlled, default DENY
+INVALID = DENY
+REVOKED = DENY
+EXPIRED = DENY
+PoP failed = DENY
+```
+
+---
+
+# 23. Gateway no debe depender de URLs legacy
+
+El gateway actual referencia:
+
+```text
+/api/atc
+```
+
+mientras la nueva arquitectura gira alrededor de:
+
+```text
+/api/trust
+```
+
+Eso debe desaparecer.
+
+El Gateway importa directamente el core cuando está dentro del mismo runtime:
+
+```text
+MCP
+ ↓
+TrustGateway
+ ↓
+VerificationCore
+ ↓
+PolicyEngine
+```
+
+No:
+
+```text
+MCP
+ ↓
+HTTP
+ ↓
+MarketNow
+ ↓
+HTTP
+ ↓
+UTA
+```
+
+salvo cuando sea una integración remota explícita.
+
+---
+
+# 24. Policy Engine
+
+Separarlo del verifier.
+
+### Verifier responde:
+
+> “¿Es auténtico y qué evidencia contiene?”
+
+### Policy Engine responde:
+
+> “¿Lo permito para esta acción/contexto?”
+
+Ejemplo:
+
+```json
+{
+  "policy": {
+    "subject_type": "agent",
+    "required_assessment": {
+      "min_score": 8
+    },
+    "required_evidence": [
+      "supply-chain",
+      "static-analysis"
+    ],
+    "actions": {
+      "read": true,
+      "write": false,
+      "execute": false
+    },
+    "max_spend_usd": 50
+  }
+}
+```
+
+---
+
+# 25. MCP enforcement
+
+Flujo definitivo:
+
+```text
+tools/call
+   ↓
+authenticate
+   ↓
+credential verification
+   ↓
+PoP
+   ↓
+capability check
+   ↓
+policy
+   ↓
+argument policy
+   ↓
+ALLOW / DENY
+   ↓
+tool
+```
+
+Y cada decisión produce:
+
+```text
+decision_id
+credential_id
+agent
+tool
+arguments_digest
+policy_version
+evidence_digest
+timestamp
+decision
+```
+
+---
+
+# 26. Action Receipts
+
+Para acciones sensibles:
+
+```text
+Agent
+ ↓
+Gateway
+ ↓
+Tool
+ ↓
+signed receipt
+```
+
+El receipt debería poder demostrar:
+
+```text
+qué agente
+qué credential
+qué clave
+qué herramienta
+qué operación
+qué policy
+qué evidence
+qué timestamp
+qué decisión
+```
+
+Esto convierte al Gateway en audit infrastructure.
+
+---
+
+# 27. Threat Model: rehacerlo con la implementación real
+
+El actual `THREAT_MODEL.md` contiene controles que el repo todavía no demuestra.
+
+Eso es peor que no tenerlos.
+
+La regla:
+
+> **No declarar un control como implemented hasta que exista código + test + evidencia.**
+
+Threat model definitivo:
+
+```text
+STRIDE
++
+MITRE ATLAS
++
+Supply Chain
++
+Credential Security
++
+Agent-specific attacks
+```
+
+Y cada threat:
+
+```text
+Threat
+Asset
+Attack path
+Precondition
+Control
+Test
+Evidence
+Residual risk
+```
+
+---
+
+# 28. Security controls matrix
+
+Crear:
+
+```text
+SECURITY_CONTROLS.md
+```
+
+con:
+
+| Control          | Code | Test | Evidence        | Status |
+| ---------------- | ---- | ---- | --------------- | ------ |
+| Ed25519          | ✓    | ✓    | vector          | PASS   |
+| JCS              | ✓    | ✓    | cross-lang      | PASS   |
+| PoP              | ✓    | ✓    | replay tests    | PASS   |
+| Revocation       | ✓    | ✓    | fixtures        | PASS   |
+| Artifact binding | ✓    | ✓    | digest fixtures | PASS   |
+| SLSA             | ✓    | ✓    | provenance      | PASS   |
+| Sigstore         | ✓    | ✓    | bundle          | PASS   |
+| MCP enforcement  | ✓    | ✓    | integration     | PASS   |
+
+---
+
+# 29. Conformance Suite definitivo
+
+Esto sí será una suite real.
+
+## Nivel 1 — Schema
+
+```text
+valid
+missing required
+wrong type
+unknown version
+duplicate fields
+malformed JSON
+```
+
+## Nivel 2 — Crypto
+
+```text
+valid signature
+tampered payload
+tampered signature
+wrong public key
+wrong algorithm
+wrong issuer
+malformed key
+```
+
+## Nivel 3 — Lifecycle
+
+```text
+expired
+not-yet-valid
+revoked
+suspended
+unknown status
+stale status list
+```
+
+## Nivel 4 — PoP
+
+```text
+valid nonce
+replayed nonce
+expired nonce
+wrong audience
+wrong credential
+wrong key
+```
+
+## Nivel 5 — Provenance
+
+```text
+valid Git binding
+wrong Git SHA
+wrong npm hash
+wrong OCI digest
+wrong SLSA provenance
+```
+
+## Nivel 6 — Translation
+
+```text
+ATC → UTS
+UTS → ATC
+ATC → VC
+VC → UTS
+EAT → UTS
+...
+```
+
+## Nivel 7 — Negative
+
+Cada campo importante mutado.
+
+## Nivel 8 — Interoperability
+
+Credential generado por implementación externa.
+
+---
+
+# 30. Test matrix mínima antes de declarar producción
+
+No 83.
+
+Yo exigiría como mínimo:
+
+```text
+100+ schema cases
+100+ crypto cases
+100+ negative cases
+50+ mutation cases
+50+ lifecycle/revocation cases
+50+ provenance cases
+50+ translation cases
+20+ PoP/replay cases
+```
+
+y además:
+
+```text
+Node
+Python
+Rust
+```
+
+para los vectores criptográficos críticos.
+
+---
+
+# 31. Fuzzing
+
+Añadir:
+
+```text
+property-based testing
+AFL/libFuzzer o equivalente
+JSON fuzzing
+CBOR fuzzing
+JWT fuzzing
+certificate fuzzing
+```
+
+Especialmente:
+
+```text
+parse(untrusted_input)
+```
+
+porque ésa es una superficie de ataque primaria.
+
+---
+
+# 32. Dependencias criptográficas
+
+No implementar Ed25519 desde cero.
+
+Usar primitivas criptográficas maduras.
+
+El equipo debe implementar:
+
+```text
+protocol
+canonicalization
+binding
+verification policy
+```
+
+no reinventar:
+
+```text
+curve arithmetic
+```
+
+Eso reduce riesgo.
+
+---
+
+# 33. W3C VC
+
+La implementación actual está marcada como `stable` aunque el status document dice que VC estaba planned.
+
+Eso se debe resolver.
+
+Además, el `proofValue` actual es:
+
+```text
+(unsigned)
+```
+
+Eso **no es una VC verificable**.
+
+La implementación definitiva debe alinearse con Data Integrity, no simplemente fabricar:
+
+```json
+"proof": {
+  "type": "Ed25519Signature2020"
+}
+```
+
+sin firma.
+
+W3C mantiene actualmente Data Integrity 1.1 como Draft Standard y Bitstring Status List 1.0 como Recommendation. ([W3C][5])
+
+---
+
+# 34. OAuth
+
+No llamar a cualquier JWT:
+
+```text
+trust credential
+```
+
+OAuth/OIDC debe tratarse como:
+
+```text
+identity / authorization signal
+```
+
+y verificar:
+
+```text
+issuer
+audience
+signature
+JWKS
+nonce
+iat
+exp
+nbf
+azp
+scope
+```
+
+según el perfil concreto.
+
+Nunca:
+
+```text
+JWT parse = trusted
+```
+
+---
+
+# 35. SPIFFE
+
+No:
+
+```text
+string startsWith("-----BEGIN CERTIFICATE")
+```
+
+como verificación.
+
+Debe existir:
+
+```text
+X.509 chain
+ ↓
+trust bundle
+ ↓
+validity
+ ↓
+SPIFFE URI SAN
+ ↓
+workload identity
+```
+
+y para JWT-SVID:
+
+```text
+JWT signature
+issuer
+audience
+expiry
+trust bundle
+```
+
+---
+
+# 36. EAT
+
+Separar:
+
+```text
+CBOR parsing
+CWT parsing
+COSE verification
+EAT claim validation
+TEE evidence validation
+```
+
+No:
+
+```text
+first byte looks like CBOR
+→ valid EAT
+```
+
+Y no inferir:
+
+```text
+ueid → SGX
+```
+
+sin evidencia que realmente permita identificar el entorno.
+
+---
+
+# 37. ZTA
+
+Aquí hay que ser disciplinados.
+
+Si la especificación externa no proporciona un mecanismo criptográfico público/verificable suficiente:
+
+```text
+ZTA structural adapter
+```
+
+pero:
+
+```text
+cryptographic verification = unsupported
+```
+
+No:
+
+```text
+valid: true
+```
+
+---
+
+# 38. Detection
+
+El actual:
+
+```text
+match → confidence 1.0
+```
+
+se elimina.
+
+La API será:
+
+```typescript
+{
+  format: "atc-v3",
+  confidence: 0.998,
+  signals: [
+    "atc_version",
+    "AgentTrustCredential",
+    "signatures"
+  ]
+}
+```
+
+Y si hay empate:
+
+```text
+AMBIGUOUS
+```
+
+no escoger arbitrariamente.
+
+---
+
+# 39. Versioning
+
+Definitivo:
+
+```text
+UTS v1 → frozen legacy
+UTS v2 → new canonical security model
+
+ATC 1 → legacy stable
+ATC 2 → legacy
+ATC 3 → active draft until conformance gates pass
+```
+
+No cambiar silenciosamente schemas existentes.
+
+Cada versión debe tener:
+
+```text
+schema
+fixtures
+migration guide
+conformance suite
+security considerations
+```
+
+---
+
+# 40. Licensing
+
+Esto también hay que congelarlo ahora.
+
+El repo actual tiene contradicciones entre:
+
+```text
+AL-1.0
+MIT
+Apache
+```
+
+en diferentes capas.
+
+La arquitectura definitiva que recomiendo:
+
+```text
+UTS specification
+→ CC-BY-4.0
+
+UTA core
+→ Apache-2.0
+
+official adapters
+→ Apache-2.0
+
+conformance vectors
+→ Apache-2.0 / CC0 según corresponda
+
+MarketNow Trust Cloud
+→ proprietary
+
+Enterprise Gateway
+→ proprietary
+```
+
+Si quieren mantener core propietario, entonces no se debe publicar como Apache. Pero **hay que elegir uno**.
+
+Para que UTA tenga posibilidades reales de convertirse en estándar/ecosistema, mi recomendación es **open core protocol + proprietary cloud/enforcement**.
+
+---
+
+# 41. El verdadero moat
+
+No protegería:
+
+```text
+UTS
+adapter interface
+conformance suite
+basic verification library
+```
+
+El moat debe ser:
+
+```text
+Sentinel evidence network
++
+Trust Registry
++
+Policy engine
++
+Gateway
++
+Runtime enforcement
++
+Enterprise audit
++
+continuous evidence
+```
+
+Eso es lo que MarketNow monetiza.
+
+---
+
+# 42. Producto definitivo
+
+No:
+
+> “Marketplace de skills + adapter.”
+
+Sino:
+
+## MarketNow Trust Gateway
+
+```text
+                   MARKETNOW
+                       │
+        ┌──────────────┼──────────────┐
+        ▼              ▼              ▼
+    Discovery       Trust API      Gateway
+                       │              │
+                       ▼              ▼
+                    UTA/UTS        Runtime
+                       │              │
+                    Sentinel       eBPF/MCP
+```
+
+### Free
+
+```text
+marketnow verify
+web verifier
+local CLI
+conformance checker
+```
+
+### Developer
+
+```text
+Trust API
+SDK
+CI verification
+artifact verification
+```
+
+### Enterprise
+
+```text
+Trust Gateway
+policy
+MCP enforcement
+OAuth
+AP2
+supply chain
+Sentinel
+audit
+receipts
+registry
+```
+
+---
+
+# 43. API definitiva
+
+Separar endpoints:
+
+```text
+POST /v2/detect
+POST /v2/parse
+POST /v2/verify
+POST /v2/assess
+POST /v2/translate
+POST /v2/issue
+POST /v2/bridge
+POST /v2/pop/challenge
+POST /v2/pop/verify
+POST /v2/policy/evaluate
+POST /v2/artifact/verify
+
+GET /v2/formats
+GET /v2/issuers
+GET /v2/status
+```
+
+No más:
+
+```text
+/api/trust?action=...
+```
+
+para el API público definitivo.
+
+Ese patrón puede mantenerse como compatibilidad legacy, pero no como arquitectura nueva.
+
+---
+
+# 44. CLI
+
+Crear:
+
+```bash
+marketnow detect credential.json
+
+marketnow verify credential.json
+
+marketnow verify credential.json \
+  --policy enterprise.json
+
+marketnow assess credential.json
+
+marketnow provenance credential.json
+
+marketnow artifact verify package.tgz
+
+marketnow translate credential.json --to atc-v3
+
+marketnow conformance
+
+marketnow pop challenge
+
+marketnow inspect credential.json
+```
+
+Esto es importantísimo para adopción.
+
+---
+
+# 45. Supply-chain del propio UTA
+
+UTA tiene que demostrar la seguridad que predica.
+
+Cada release:
+
+```text
+Git commit
+ ↓
+CI
+ ↓
+tests
+ ↓
+lint
+ ↓
+typecheck
+ ↓
+SAST
+ ↓
+dependency scan
+ ↓
+SBOM
+ ↓
+SLSA provenance
+ ↓
+Sigstore
+ ↓
+npm
+ ↓
+OCI
+```
+
+Y el propio certificado de UTA debe poder verificar todo esto.
+
+---
+
+# 46. CI/CD obligatorio
+
+PR no puede mergear si falla:
+
+```text
+typecheck
+lint
+unit tests
+integration tests
+conformance
+crypto vectors
+mutation tests
+fuzz smoke
+SAST
+dependency audit
+license audit
+SBOM generation
+```
+
+Release no puede publicarse si falla:
+
+```text
+artifact binding
+SLSA provenance
+signature
+container digest
+npm digest
+```
+
+---
+
+# 47. Benchmark
+
+Eliminar el claim genérico:
+
+> `<50ms`
+
+hasta medirlo correctamente.
+
+Publicar:
+
+```text
+payload size
+runtime
+hardware
+p50
+p95
+p99
+crypto enabled
+revocation online/offline
+```
+
+Por ejemplo:
+
+```text
+ATC 4KB
+
+Node:
+p50
+p95
+p99
+
+Cloudflare:
+p50
+p95
+p99
+
+Vercel:
+p50
+p95
+p99
+```
+
+---
+
+# 48. Security release gate
+
+No declarar:
+
+```text
+production
+```
+
+hasta que estén todos:
+
+```text
+[ ] Ed25519
+[ ] JCS
+[ ] domain separation
+[ ] issuer trust
+[ ] PoP
+[ ] replay protection
+[ ] revocation
+[ ] artifact binding
+[ ] SLSA
+[ ] Sigstore
+[ ] evidence signatures
+[ ] deterministic assessment
+[ ] negative tests
+[ ] fuzzing
+[ ] conformance
+[ ] external review
+```
+
+---
+
+# 49. El orden de implementación definitivo
+
+Aunque el diseño es uno solo, la implementación tiene dependencias. Éste es el orden que congelaría:
+
+## BLOQUE A — Foundation
+
+```text
+1. Monorepo
+2. TypeScript build
+3. package boundaries
+4. single source of truth
+5. error model
+6. logging model
+```
+
+## BLOQUE B — Crypto
+
+```text
+7. Ed25519
+8. JCS
+9. domain separation
+10. key management
+11. signature profiles
+```
+
+## BLOQUE C — UTS
+
+```text
+12. UTS v2
+13. evidence model
+14. provenance model
+15. assessment model
+16. lifecycle
+17. revocation
+```
+
+## BLOQUE D — Verification Core
+
+```text
+18. parser
+19. detection
+20. schema validation
+21. crypto
+22. issuer
+23. key binding
+24. PoP
+25. provenance
+26. revocation
+27. evidence
+28. policy
+29. decision
+```
+
+## BLOQUE E — ATC
+
+```text
+30. ATC v3
+31. issuance
+32. verification
+33. vectors
+34. artifact binding
+35. bridge
+```
+
+## BLOQUE F — Adapters
+
+```text
+36. EAT
+37. VC
+38. OAuth
+39. SPIFFE
+40. A2A
+41. MCP
+42. ZTA
+```
+
+En ese orden.
+
+No porque EAT sea menos importante, sino porque **ATC + UTS + Verification Core definen el contrato que los demás deben respetar**.
+
+---
+
+# 50. BLOQUE G — Conformance
+
+```text
+43. schema vectors
+44. crypto vectors
+45. lifecycle vectors
+46. revocation vectors
+47. PoP vectors
+48. provenance vectors
+49. translation vectors
+50. mutation vectors
+51. cross-language vectors
+52. external implementation harness
+```
+
+---
+
+# 51. BLOQUE H — Sentinel
+
+```text
+53. evidence schema
+54. evidence signing
+55. static analysis
+56. dependency analysis
+57. SBOM
+58. sandbox
+59. runtime observation
+60. prompt injection
+61. tool poisoning
+62. differential execution
+63. TEE evidence
+```
+
+No asignar score hasta que exista evidence.
+
+---
+
+# 52. BLOQUE I — Gateway
+
+```text
+64. Trust API v2
+65. PoP API
+66. Policy engine
+67. MCP middleware
+68. action receipts
+69. audit store
+70. rate limiting
+71. authentication
+72. authorization
+```
+
+---
+
+# 53. BLOQUE J — Supply chain
+
+```text
+73. GitHub Actions
+74. SBOM
+75. SLSA provenance
+76. Sigstore
+77. signed npm release
+78. signed OCI image
+79. artifact binding
+80. reproducible release verification
+```
+
+---
+
+# 54. BLOQUE K — External validation
+
+```text
+81. third-party conformance implementation
+82. external security review
+83. penetration test
+84. fuzz campaign
+85. interoperability with real ecosystems
+86. publish security report
+```
+
+---
+
+# 55. BLOQUE L — Product
+
+Sólo después:
+
+```text
+87. CLI
+88. web verifier
+89. developer API
+90. enterprise gateway
+91. trust registry
+92. dashboard
+93. billing
+```
+
+---
+
+# 56. Definition of Done
+
+Ésta es la parte más importante para que **no volvamos a entrar en el ciclo de “ya hice cambios, ¿qué más cambio?”**.
+
+UTA estará **v1 Production Ready** únicamente cuando:
+
+### Cryptography
+
+```text
+✓ Ed25519 real
+✓ JCS interoperable
+✓ domain separation
+✓ official vectors
+✓ mutation tests
+```
+
+### Identity
+
+```text
+✓ issuer verification
+✓ key binding
+✓ rotation
+✓ PoP
+✓ replay protection
+```
+
+### Lifecycle
+
+```text
+✓ expiration
+✓ not-before
+✓ revocation
+✓ suspension
+✓ unknown state
+```
+
+### Supply chain
+
+```text
+✓ Git binding
+✓ npm binding
+✓ OCI binding
+✓ SBOM
+✓ SLSA
+✓ Sigstore
+```
+
+### Evidence
+
+```text
+✓ signed evidence
+✓ content-addressed evidence
+✓ reproducible assessment
+✓ methodology versioning
+```
+
+### Interoperability
+
+```text
+✓ ATC
+✓ EAT
+✓ VC
+✓ OAuth
+✓ SPIFFE
+✓ A2A
+✓ MCP
+✓ ZTA where semantics are actually verifiable
+```
+
+### Runtime
+
+```text
+✓ MCP Gateway
+✓ policy engine
+✓ fail-closed
+✓ action receipts
+✓ audit trail
+```
+
+### Engineering
+
+```text
+✓ reproducible build
+✓ typecheck
+✓ lint
+✓ unit
+✓ integration
+✓ conformance
+✓ mutation
+✓ fuzz
+✓ SAST
+✓ dependency audit
+```
+
+### External
+
+```text
+✓ third-party implementation passes vectors
+✓ external security review
+✓ published security model
+```
+
+**Sólo entonces: `v1.0.0`.**
+
+---
+
+# 57. Lo que explícitamente NO vamos a hacer
+
+Para evitar volver al ciclo anterior:
+
+### No vamos a:
+
+* añadir más formatos antes de estabilizar el core;
+* inventar scores por defecto;
+* llamar “verified” a un payload sólo porque parsea;
+* llamar “lossless” a una traducción sólo porque `raw` existe;
+* poner hashes de evidencia sin verificar su contenido;
+* declarar SLSA/Sigstore sin verificar provenance;
+* declarar PoP sin challenge/replay tests;
+* mantener adapters duplicados en `.mjs` y `.ts`;
+* mantener lógica de adapters dentro de la API;
+* publicar claims de `<50ms` sin benchmark reproducible;
+* declarar “production” por tener tests que sólo cargan fixtures;
+* mezclar MIT/Apache/AL-1.0 en el mismo paquete;
+* poner `valid: true` como fallback;
+* hacer fail-open en el Trust Gateway.
+
+---
+
+# 58. Una corrección importante al propio documento de 68 puntos
+
+Estoy de acuerdo con **la dirección** del documento, pero hay una cosa que yo no convertiría literalmente en requisito:
+
+> “OCSP online + Bitstring Status List offline”
+
+No necesitamos dos mecanismos universalmente.
+
+Necesitamos:
+
+> **una abstracción de revocation/status con perfiles específicos por credential ecosystem.**
+
+La Bitstring Status List es una Recommendation de W3C y es una excelente opción para VC. ([W3C][4])
+
+Pero no debemos imponerla artificialmente sobre formatos que tienen otra semántica.
+
+Lo mismo con:
+
+> “ATC v3 / EAT / W3C VC multi-firma”
+
+Eso debe ser **profile-driven**, no obligatorio en todos los casos.
+
+---
+
+# 59. El resultado final
+
+La arquitectura que yo congelaría es:
+
+```text
+                         ┌─────────────────────┐
+                         │     MARKETNOW       │
+                         │ Trust Gateway/Cloud │
+                         └──────────┬──────────┘
+                                    │
+                         ┌──────────▼──────────┐
+                         │    POLICY ENGINE    │
+                         └──────────┬──────────┘
+                                    │
+                         ┌──────────▼──────────┐
+                         │ VERIFICATION CORE   │
+                         │                     │
+                         │ Parse                │
+                         │ Detect               │
+                         │ Schema               │
+                         │ Crypto               │
+                         │ Issuer               │
+                         │ Key Binding          │
+                         │ PoP                  │
+                         │ Provenance           │
+                         │ Revocation           │
+                         │ Evidence             │
+                         │ Policy               │
+                         └──────────┬──────────┘
+                                    │
+                    ┌───────────────▼────────────────┐
+                    │              UTS               │
+                    │                                │
+                    │ Identity                       │
+                    │ Attestations                   │
+                    │ Evidence                       │
+                    │ Capabilities                   │
+                    │ Policies                       │
+                    │ Provenance                     │
+                    │ Lifecycle                      │
+                    │ Assessment                     │
+                    └───────────────┬────────────────┘
+                                    │
+              ┌─────────────────────┼──────────────────────┐
+              │                     │                      │
+           ATC v3                 EAT                    VC
+              │                     │                      │
+             ZTA                   A2A                   OAuth
+              │                     │                      │
+            MCP                  SPIFFE                  ...
+              │
+              ▼
+        NATIVE ECOSYSTEMS
+```
+
+Y alrededor:
+
+```text
+        SENTINEL
+           │
+           ▼
+       EVIDENCE
+           │
+           ▼
+        UTS
+           │
+           ▼
+     VERIFICATION
+           │
+           ▼
+        POLICY
+           │
+           ▼
+       GATEWAY
+           │
+           ▼
+       RUNTIME
+```
+
+---
+
+# Mi conclusión definitiva
+
+**No creo que debamos seguir haciendo pequeños cambios al repo actual.** Hay demasiadas responsabilidades duplicadas y demasiadas afirmaciones que actualmente están adelantadas respecto de la implementación.
+
+El repo actual ya tiene la **idea correcta**, pero necesita una consolidación arquitectónica única:
+
+> **UTS = canonical trust/evidence model**
+> **UTA = interoperability**
+> **Verification Core = cryptographic truth**
+> **Sentinel = evidence generation**
+> **Policy Engine = authorization decision**
+> **Gateway = enterprise interface**
+> **Interceptor = runtime enforcement**
+> **MarketNow = commercial control plane**
+
+Y el punto central es éste:
+
+**No añadáis otro adapter, otra feature ni otra capa antes de completar el Verification Core.**
+
+La primera versión verdaderamente seria debe ser capaz de tomar **un ATC v3 real**, verificar su firma Ed25519/JCS, comprobar issuer, key binding, expiración, revocación, PoP, artifact binding y provenance, validar sus evidencias, recalcular su assessment y finalmente emitir una decisión `ALLOW/DENY`. Después ese mismo contrato se aplica a los demás formatos.
+
+La criptografía y el modelo de evidencia se apoyan en estándares existentes —Ed25519 en RFC 8032, JCS en RFC 8785, y provenance/SLSA en sus especificaciones correspondientes— en lugar de inventar primitivas propias. ([RFC Editor][1])
+
+**Éste sería mi baseline definitivo.** A partir de aquí, cualquier cambio futuro debería ser una implementación de este diseño, un bugfix o una actualización obligatoria de un estándar externo; **no otro rediseño de arquitectura**.
+
+[1]: https://www.rfc-editor.org/info/rfc8032/?utm_source=chatgpt.com "RFC 8032: Edwards-Curve Digital Signature Algorithm (EdDSA) | RFC Editor"
+[2]: https://www.rfc-editor.org/rfc/rfc8785.html?utm_source=chatgpt.com "RFC 8785: JSON Canonicalization Scheme (JCS)"
+[3]: https://slsa.dev/spec/v1.0/whats-new?utm_source=chatgpt.com "SLSA • What's new in SLSA v1.0"
+[4]: https://www.w3.org/TR/vc-bitstring-status-list/?utm_source=chatgpt.com "Bitstring Status List v1.0"
+[5]: https://www.w3.org/TR/?utm_source=chatgpt.com "W3C standards and drafts | W3C"
