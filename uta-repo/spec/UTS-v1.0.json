@@ -1,237 +1,143 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://universal-trust-adapter.vercel.app/spec/UTS-v1.0.json",
   "title": "Universal Trust Schema (UTS) v1.0",
-  "description": "The canonical internal representation for ALL trust credential formats. Like Unicode for text \u2014 the universal intermediate that all formats translate through.",
+  "description": "Canonical internal representation for normalizing heterogeneous agent identity, capability, authorization and attestation signals into a common trust representation. Like Unicode for text — the universal intermediate that all formats translate through.",
   "type": "object",
-  "required": [
-    "uts_version",
-    "subject",
-    "identity",
-    "trust",
-    "capabilities",
-    "provenance",
-    "lifecycle",
-    "format"
-  ],
+  "required": ["uts_version", "subject", "trust", "provenance", "lifecycle", "format"],
   "properties": {
     "uts_version": {
       "type": "string",
-      "const": "1.0.0"
+      "const": "1.0.0",
+      "description": "UTS schema version. Frozen — any change creates v2.0."
     },
     "subject": {
       "type": "object",
-      "required": [
-        "id",
-        "name",
-        "type"
-      ],
+      "required": ["id", "name", "type"],
+      "description": "WHO is this entity?",
       "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "enum": [
-            "agent",
-            "tool",
-            "service",
-            "human",
-            "organization"
-          ]
-        }
+        "id": {"type": "string", "description": "Unique identifier within the source ecosystem"},
+        "name": {"type": "string", "description": "Human-readable name"},
+        "type": {"enum": ["agent", "tool", "service", "human", "organization"], "description": "Entity type"},
+        "description": {"type": "string", "description": "Optional description"}
       }
     },
     "identity": {
       "type": "object",
+      "description": "HOW do we verify identity? (Optional for metadata-only formats like MCP Card)",
       "properties": {
-        "public_key": {
-          "type": "string"
-        },
-        "key_algorithm": {
-          "enum": [
-            "Ed25519",
-            "ES256",
-            "RS256",
-            "secp256k1"
-          ]
-        },
-        "key_id": {
-          "type": "string"
-        },
+        "public_key": {"type": "string", "description": "Public key in PEM or base64"},
+        "key_algorithm": {"enum": ["Ed25519", "ES256", "RS256", "secp256k1"]},
+        "key_id": {"type": "string", "description": "Key identifier for rotation support"},
         "attestation": {
-          "type": "object"
+          "type": "object",
+          "description": "Hardware attestation (TEE) — only present in EAT-AI format",
+          "properties": {
+            "type": {"enum": ["SGX", "TrustZone", "SEV-SNP", "None"]},
+            "quote": {"type": "string", "description": "Attestation quote from hardware"}
+          }
         },
-        "did": {
-          "type": "string"
-        },
-        "oauth_subject": {
-          "type": "string"
-        }
+        "did": {"type": "string", "description": "W3C DID (decentralized identifier)"},
+        "oauth_subject": {"type": "string", "description": "OAuth 2.0 sub claim"}
       }
     },
     "trust": {
       "type": "object",
-      "required": [
-        "score",
-        "confidence",
-        "evidence",
-        "assessor",
-        "assessed_at"
-      ],
+      "required": ["score", "confidence", "evidence", "assessor", "assessed_at"],
+      "description": "HOW MUCH do we trust? Score 0-10 with evidence chain.",
       "properties": {
-        "score": {
-          "type": "number",
-          "minimum": 0,
-          "maximum": 10
-        },
-        "confidence": {
-          "enum": [
-            "low",
-            "medium",
-            "high"
-          ]
-        },
+        "score": {"type": "number", "minimum": 0, "maximum": 10, "description": "Trust score 0 (untrusted) to 10 (fully trusted). MCP Server Cards default to 0 (no cryptographic trust)."},
+        "confidence": {"enum": ["low", "medium", "high"], "description": "Confidence level of the assessment"},
         "evidence": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "source", "result", "timestamp"],
+            "properties": {
+              "type": {"enum": ["sentinel-audit", "static-analysis", "sandbox-test", "human-review", "on-chain-verification", "tee-attestation"]},
+              "source": {"type": "string", "description": "Who/what produced this evidence"},
+              "result": {"enum": ["pass", "fail", "warn", "info"]},
+              "details": {"type": "string"},
+              "timestamp": {"type": "string", "format": "date-time"},
+              "evidence_hash": {"type": "string", "description": "Content-addressed hash of the evidence"}
+            }
+          }
         },
-        "assessor": {
-          "type": "string"
-        },
-        "assessed_at": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "expires_at": {
-          "type": "string",
-          "format": "date-time"
-        }
+        "assessor": {"type": "string", "description": "Entity that performed the assessment (e.g., 'MarketNow', 'Anthropic', 'self')"},
+        "assessed_at": {"type": "string", "format": "date-time"},
+        "expires_at": {"type": "string", "format": "date-time", "description": "When this trust assessment expires"}
       }
     },
     "capabilities": {
       "type": "object",
-      "required": [
-        "provides",
-        "requires",
-        "protocols"
-      ],
+      "description": "WHAT can it do?",
       "properties": {
-        "provides": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "requires": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "protocols": {
-          "type": "array",
-          "items": {
-            "type": "string"
+        "provides": {"type": "array", "items": {"type": "string"}, "description": "Capabilities provided (e.g., ['search', 'read'])"},
+        "requires": {"type": "array", "items": {"type": "string"}, "description": "Requirements (e.g., ['auth', 'payment'])"},
+        "protocols": {"type": "array", "items": {"type": "string"}, "description": "Supported protocols (e.g., ['mcp', 'a2a', 'jsonrpc'])"},
+        "rate_limits": {
+          "type": "object",
+          "properties": {
+            "requests": {"type": "number"},
+            "window": {"type": "string", "description": "Time window (e.g., '1m', '1h', '1d')"}
           }
         }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "description": "WHAT is allowed? (Optional — only present if the credential includes authorization policy)",
+      "properties": {
+        "max_spend_usd": {"type": "number", "description": "Maximum spending limit in USD"},
+        "allowed_actions": {"type": "array", "items": {"type": "string"}},
+        "denied_actions": {"type": "array", "items": {"type": "string"}},
+        "filesystem_access": {"enum": ["none", "read", "read-write"]},
+        "shell_access": {"enum": ["none", "sandboxed", "unrestricted"]}
       }
     },
     "provenance": {
       "type": "object",
-      "required": [
-        "source"
-      ],
+      "required": ["source"],
+      "description": "WHERE did it come from? Includes attestation chaining for bridge operations.",
       "properties": {
-        "source": {
-          "type": "string"
-        },
-        "source_url": {
-          "type": "string"
-        },
-        "artifact_hash": {
-          "type": "string"
-        },
-        "original_signature_hash": {
-          "type": "string",
-          "description": "Attestation chaining \u2014 hash of original credential's signature when bridged"
-        },
-        "original_format": {
-          "type": "string"
-        },
-        "bridged_at": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "bridged_by": {
-          "type": "string"
-        }
+        "source": {"type": "string", "description": "Source ecosystem (e.g., 'marketnow', 'anthropic', 'google-a2a')"},
+        "source_url": {"type": "string", "format": "uri"},
+        "artifact_hash": {"type": "string", "description": "SHA-256 of the source code/binary"},
+        "commit_sha": {"type": "string"},
+        "registry_id": {"type": "string"},
+        "original_signature_hash": {"type": "string", "description": "Attestation chaining: SHA-256 of the original credential's signature when bridged from another format. This enables end-to-end auditability of cross-ecosystem trust."},
+        "original_format": {"type": "string", "description": "Format the credential was bridged from"},
+        "bridged_at": {"type": "string", "format": "date-time"},
+        "bridged_by": {"type": "string", "description": "Tool that performed the bridge (e.g., 'MarketNow UTA v1.0')"}
       }
     },
     "lifecycle": {
       "type": "object",
-      "required": [
-        "issued_at",
-        "revoked",
-        "version"
-      ],
+      "required": ["issued_at", "revoked", "version"],
+      "description": "WHEN is it valid?",
       "properties": {
-        "issued_at": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "expires_at": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "revoked": {
-          "type": "boolean"
-        },
-        "revocation_url": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        }
+        "issued_at": {"type": "string", "format": "date-time"},
+        "expires_at": {"type": "string", "format": "date-time"},
+        "revoked": {"type": "boolean"},
+        "revocation_url": {"type": "string", "format": "uri"},
+        "version": {"type": "string", "description": "Version of the credential within its source ecosystem"}
       }
     },
     "format": {
       "type": "object",
-      "required": [
-        "type",
-        "version",
-        "raw"
-      ],
+      "required": ["type", "version", "raw"],
+      "description": "WHAT format is this in? (metadata about the credential, not the credential itself)",
       "properties": {
-        "type": {
-          "enum": [
-            "atc-v2",
-            "atc-v3",
-            "eat-ai",
-            "zta",
-            "a2a-card",
-            "mcp-card",
-            "w3c-vc",
-            "oauth-token"
-          ]
-        },
-        "version": {
-          "type": "string"
-        },
-        "raw": {
-          "description": "Original payload in native format \u2014 NEVER destroyed (lossless preservation)"
-        }
+        "type": {"enum": ["atc-v1", "atc-v2", "atc-v3", "eat-ai", "zta", "a2a-card", "mcp-card", "w3c-vc", "oauth-token", "spiffe-svid"]},
+        "version": {"type": "string"},
+        "raw": {"description": "Original payload in its native format — NEVER destroyed (lossless preservation). This ensures that any field that cannot be mapped to UTS is still available for audit."}
       }
     },
     "warnings": {
       "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Translation warnings (lossy fields omitted)"
-    },
-    "policy": {
-      "type": "object"
+      "items": {"type": "string"},
+      "description": "Translation warnings. Populated when translation is lossy (fields that can't be expressed in target format). Empty = lossless translation."
     }
-  }
+  },
+  "$comment": "UTS v1.0 is FROZEN. Any change requires v2.0. This ensures that conformant implementations remain stable. Test vectors at /spec/test-vectors/ validate against this schema."
 }
