@@ -5,11 +5,6 @@
     "size": 4093
   },
   {
-    "file": "api/health.js",
-    "sha": "f3293d501c6b0d422bcfa2fe7efb9519bbfb2780",
-    "size": 378
-  },
-  {
     "file": "api/mcp.js",
     "sha": "4f5a00620c43a7f6d53d01773d4560e47fc9df63",
     "size": 9207
@@ -3043,5 +3038,30 @@
     "file": "vercel.json",
     "sha": "400a62d3502678e0623122bb4ec40b6cd144eaa1",
     "size": 9586
+  },
+  {
+    "file": "public/trust/spec/UTS-v1.0.json",
+    "sha": "f6e21aca6aab34ce4d356ed0cdc56527f5936235",
+    "size": 4887
+  },
+  {
+    "file": "lib/uta/schema.mjs",
+    "sha": "5d5364eb9e1f26fc498f264fa281551ac25a3f08",
+    "size": 848
+  },
+  {
+    "file": "lib/uta/engine.mjs",
+    "sha": "3adca75d2db54d5d592405b263fbc109acedbc3a",
+    "size": 5874
+  },
+  {
+    "file": "lib/uta/adapter-atc.mjs",
+    "sha": "644e4e2b106bdb3eaf2add773b3d212155d97737",
+    "size": 6246
+  },
+  {
+    "file": "api/trust.js",
+    "sha": "c6507d6f293d3a1521602350facbb6cb91983f8f",
+    "size": 7117
   }
 ]
