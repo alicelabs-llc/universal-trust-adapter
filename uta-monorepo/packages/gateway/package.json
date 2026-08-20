@@ -1,7 +1,7 @@
 {
-  "name": "@marketnow/trust-adapters",
+  "name": "@marketnow/trust-gateway",
   "version": "1.0.0",
-  "description": "UTA Trust Adapters — ATC v3, EAT-AI, A2A, ZTA, MCP, W3C VC, OAuth/OIDC, SPIFFE — with REAL cryptographic verification",
+  "description": "UTA Trust Gateway — MCP middleware for enforcing trust decisions on agent tool calls",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -11,25 +11,13 @@
     "NOTICE"
   ],
   "keywords": [
-    "trust",
-    "adapters",
-    "atc",
-    "w3c-vc",
-    "ed25519-signature-2020",
-    "jwt",
-    "oauth",
-    "oidc",
-    "rs256",
-    "es256",
-    "eddsa",
-    "a2a",
-    "agent2agent",
-    "eat",
-    "cwt",
-    "cose",
-    "spiffe",
     "mcp",
-    "multi-signature"
+    "gateway",
+    "trust-gateway",
+    "middleware",
+    "policy-enforcement",
+    "action-receipts",
+    "audit-trail"
   ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
   "license": "AL-1.0",
@@ -37,7 +25,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/eddyflores100-lang/universal-trust-adapter.git",
-    "directory": "packages/adapters"
+    "directory": "packages/gateway"
   },
   "bugs": {
     "url": "https://github.com/eddyflores100-lang/universal-trust-adapter/issues"
@@ -50,6 +38,6 @@
   },
   "dependencies": {
     "@marketnow/trust-core": "1.0.0",
-    "@marketnow/uts": "2.0.0"
+    "@marketnow/trust-adapters": "1.0.0"
   }
 }

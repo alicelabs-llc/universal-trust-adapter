@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "SBOM for @marketnow/uts",
-  "documentNamespace": "https://marketnow.site/spdx/@marketnow/uts/2.0.0/1787266923729",
+  "documentNamespace": "https://marketnow.site/spdx/@marketnow/uts/2.0.0/1787269032240",
   "creationInfo": {
-    "created": "2026-08-20T23:02:03.729Z",
+    "created": "2026-08-20T23:37:12.240Z",
     "creators": [
       "Organization: AliceLabs LLC",
       "Tool: UTA-SBOM-Generator-1.0"
@@ -36,5 +36,5 @@
   "documentDescribes": [
     "SPDXRef-Package-root"
   ],
-  "documentHash": "sha256:731d49b51142a10286678656d00d37752c1a7d9d7ad234eac3be98af424a20bd"
+  "documentHash": "sha256:084ba9dc3fc9a897cadfdd6a3268ca1a08332e9efe71ff71558b8f0993b35e33"
 }

@@ -11,14 +11,18 @@
   ],
   "scripts": {
     "build": "tsc -b && node scripts/generate-sbom.js",
+    "docs": "typedoc",
+    "bench": "node packages/conformance/run-benchmarks.js",
     "test:structural": "node packages/conformance/run.js",
     "test:vectors": "node packages/conformance/run-vectors.js",
     "test:integration": "node packages/conformance/run-integration.js",
     "test:gateway": "node packages/conformance/run-gateway-integration.js",
-    "test": "tsc && node packages/conformance/run.js && node packages/conformance/run-vectors.js && node packages/conformance/run-integration.js && node packages/conformance/run-gateway-integration.js",
+    "test:multisig": "node packages/conformance/run-multisig-integration.js",
+    "test": "tsc && node packages/conformance/run.js && node packages/conformance/run-vectors.js && node packages/conformance/run-integration.js && node packages/conformance/run-gateway-integration.js && node packages/conformance/run-multisig-integration.js && node packages/conformance/run-a2a-eat-integration.js",
     "deploy": "node services/trust-api/deploy.js"
   },
   "devDependencies": {
+    "typedoc": "^0.26.11",
     "typescript": "^5.9.3"
   }
 }
