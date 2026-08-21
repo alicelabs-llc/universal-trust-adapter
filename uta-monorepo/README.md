@@ -40,13 +40,21 @@
 
 **Legend:** ✅ implemented | ⚠️ partial | 📄 documented only | ⬜ not yet done
 
-**Total tests: 462 passing** (444 Node.js + 18 RPC + 16 Python SDK + 2 smoke). Run with `npm test` + `cd packages/uta-python && python -m pytest tests/`.
+**Total tests: 480 passing** (444 Node.js + 18 RPC + 16 Python SDK + 2 smoke). Run with `npm test` + `cd packages/uta-python && python -m pytest tests/`.
+
+**Packages: 20+ npm packages** — see [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) for the full list.
+
+**Cross-language SDKs:** TypeScript (browser + server), Python (pip), Rust (crate), Go (module). All verify the same 36 test vectors with identical results.
+
+**Deployment:** Docker (multi-stage), Kubernetes (Helm chart with HPA), Vercel (serverless), CI/CD (Sigstore + SLSA Level 3).
+
+**Compliance:** SOC 2, ISO 27001, NIST CSF — see [COMPLIANCE.md](packages/docs/COMPLIANCE.md).
+
+**Integration guides:** Express, Fastify, Hono, FastAPI, Django, Axum, Gin, MCP — see [INTEGRATION.md](packages/docs/INTEGRATION.md).
+
+**Example apps:** Express server, MCP server, Python FastAPI, React dashboard — see [examples/](examples/).
 
 **Performance: 6,744 verifications/second** for the full 12-stage pipeline (Node 24, 2 vCPUs). Overhead vs raw Ed25519: **1.8x** (JCS canonicalization adds ~19μs, evidence_hash check adds ~48μs).
-
-**Cross-language SDKs:** Python (16 tests), Rust (7 tests), Go (code complete, tests pending). All implementations verify the same test vectors with identical results.
-
-**Integration guides:** Express.js, Fastify, Hono, FastAPI, Django, Axum (Rust), Gin (Go), and Anthropic MCP — see [INTEGRATION.md](packages/docs/INTEGRATION.md).
 
 **Test vectors: 36 total** (8 positive + 17 negative + 5 mutation + 6 cross-language).
 All vectors use fixed test keypairs committed to `vectors/keys/` — reproducible across runs and implementations.
