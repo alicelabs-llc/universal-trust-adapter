@@ -21,7 +21,12 @@
     "test:a2a-eat": "node packages/conformance/run-a2a-eat-integration.js",
     "test:ocsp-zta-mcp": "node packages/conformance/run-ocsp-zta-mcp-integration.js",
     "test:cli": "node packages/conformance/run-cli-integration.js",
-    "test": "tsc && node packages/conformance/run.js && node packages/conformance/run-vectors.js && node packages/conformance/run-integration.js && node packages/conformance/run-gateway-integration.js && node packages/conformance/run-multisig-integration.js && node packages/conformance/run-a2a-eat-integration.js && node packages/conformance/run-ocsp-zta-mcp-integration.js && node packages/conformance/run-cli-integration.js",
+    "test:server": "node packages/conformance/run-server-integration.js",
+    "test:pq": "node packages/conformance/run-pq-integration.js",
+    "test:mcp-mw": "node packages/conformance/run-mcp-middleware-integration.js",
+    "test:webhooks": "node packages/conformance/run-webhooks-integration.js",
+    "test:python": "cd packages/uta-python && python -m pytest tests/ -v",
+    "test": "tsc && node packages/conformance/run.js && node packages/conformance/run-vectors.js && node packages/conformance/run-integration.js && node packages/conformance/run-gateway-integration.js && node packages/conformance/run-multisig-integration.js && node packages/conformance/run-a2a-eat-integration.js && node packages/conformance/run-ocsp-zta-mcp-integration.js && node packages/conformance/run-cli-integration.js && node packages/conformance/run-server-integration.js && node packages/conformance/run-pq-integration.js && node packages/conformance/run-mcp-middleware-integration.js && node packages/conformance/run-webhooks-integration.js",
     "deploy": "node services/trust-api/deploy.js"
   },
   "devDependencies": {

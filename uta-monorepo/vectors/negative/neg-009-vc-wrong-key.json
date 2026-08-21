@@ -4,23 +4,23 @@
   "expected_result": "INVALID",
   "public_key_ref": "ca_ed25519",
   "domain": "W3C-VC-DATA-INTEGRITY",
-  "signature_value": "-KP8eKIG5fBPgEBvo25yv0U37A2xRQYlecq6AdKPrjwdBFPQdU25BkRrGUkpZD4JhXtXvOjUWSmuTXhewkZBAQ",
+  "signature_value": "I2VaH7v5kFS5XtFWIhIFqm0Kd6I17xnnvkxhZa8ca2unPZBpT5r0NdafU5ic6WfYo56JW5_znxosboNGVuRfCA",
   "verification_input": null,
   "canonical_sha256": null,
-  "generated_at": "2026-08-20T23:16:11.370Z",
+  "generated_at": "2026-08-21T00:24:43.786Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "input": {
     "@context": [
       "https://www.w3.org/2018/credentials/v1",
       "https://w3id.org/security/suites/ed25519-2020/v1"
     ],
-    "id": "urn:uuid:963d99cf-c883-454b-8a03-27919675672f",
+    "id": "urn:uuid:44d97147-18ce-4adf-a313-8dbe317a17b5",
     "type": [
       "VerifiableCredential",
       "AgentTrustCredential"
     ],
     "issuer": "did:marketnow:ca",
-    "issuanceDate": "2026-08-20T23:16:11.369Z",
+    "issuanceDate": "2026-08-21T00:24:43.786Z",
     "credentialSubject": {
       "id": "did:marketnow:agent:001",
       "agent_id": "test-agent-001",
@@ -28,9 +28,9 @@
     },
     "proof": {
       "type": "Ed25519Signature2020",
-      "created": "2026-08-20T23:16:11.370Z",
+      "created": "2026-08-21T00:24:43.786Z",
       "proofPurpose": "assertionMethod",
-      "proofValue": "-KP8eKIG5fBPgEBvo25yv0U37A2xRQYlecq6AdKPrjwdBFPQdU25BkRrGUkpZD4JhXtXvOjUWSmuTXhewkZBAQ",
+      "proofValue": "I2VaH7v5kFS5XtFWIhIFqm0Kd6I17xnnvkxhZa8ca2unPZBpT5r0NdafU5ic6WfYo56JW5_znxosboNGVuRfCA",
       "domain": "W3C-VC-DATA-INTEGRITY"
     }
   },

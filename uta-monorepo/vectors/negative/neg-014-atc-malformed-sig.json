@@ -7,11 +7,11 @@
   "signature_value": "abc",
   "verification_input": null,
   "canonical_sha256": null,
-  "generated_at": "2026-08-20T23:16:11.385Z",
+  "generated_at": "2026-08-21T00:24:43.796Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "input": {
     "atc_version": "3.0.0",
-    "credential_id": "ATC-2026-92AFB86",
+    "credential_id": "ATC-2026-2F12C0C",
     "issuer": {
       "did": "did:marketnow:ca",
       "name": "MarketNow Sentinel CA",
@@ -71,7 +71,7 @@
             "evidence_hash": "68ccaf10121a10f52f5ba7886ad667cb536b67b9aa499470250838980ad27339"
           }
         ],
-        "signed_at": "2026-08-20T23:16:11.380Z",
+        "signed_at": "2026-08-21T00:24:43.792Z",
         "signature_hash": "e8f8aca1b8b015e688e2a455eb4265bcd822688e072b632b92845b2e07ac9637"
       }
     ],
@@ -87,10 +87,10 @@
       ]
     },
     "lifecycle": {
-      "issued_at": "2026-08-20T23:16:11.380Z",
-      "expires_at": "2027-08-20T23:16:11.380Z",
+      "issued_at": "2026-08-21T00:24:43.792Z",
+      "expires_at": "2027-08-21T00:24:43.792Z",
       "revoked": false,
-      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-92AFB86",
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-2F12C0C",
       "version": "3.0.0"
     },
     "assessment": {
@@ -99,7 +99,7 @@
       "score": 8,
       "confidence": "high",
       "risk_level": "low",
-      "computed_at": "2026-08-20T23:16:11.380Z",
+      "computed_at": "2026-08-21T00:24:43.792Z",
       "computed_by": "MarketNow Sentinel CA"
     },
     "signatures": [
@@ -107,11 +107,11 @@
         "algorithm": "Ed25519 (RFC 8032)",
         "value": "abc",
         "signed_by": "MarketNow Sentinel CA",
-        "signed_at": "2026-08-20T23:16:11.380Z",
+        "signed_at": "2026-08-21T00:24:43.792Z",
         "domain": "UTA-ATC-V3-CREDENTIAL",
         "key_id": "5488eb7b72a7b15c",
         "canonicalization": "RFC_8785_JCS",
-        "evidence_hash": "sha256:2e2be83d23d9844fe0ab37a0f5ef7feebf919f9ab4d4c57bf2443f51c6d2dbab"
+        "evidence_hash": "sha256:5eeea71f2d69ddda6cbaedcbd7ec77f5db3ffea75a57cce5def24509ce7f8a60"
       }
     ]
   },

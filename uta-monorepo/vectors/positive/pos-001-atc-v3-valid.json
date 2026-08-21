@@ -4,14 +4,14 @@
   "expected_result": "VALID",
   "public_key_ref": "ca_ed25519",
   "domain": "UTA-ATC-V3-CREDENTIAL",
-  "signature_value": "6b7cfb77a7360e5d6e0c84a194bcba5535e4de52e9fa1cefa14fc7b50fb6217a494d6de67745762f350064ba84301df3d8e4cce7ae0956e7134783c6ba640f05",
-  "verification_input": "{\"artifact_binding\":{\"binding_hash\":\"sha256:6477b7b370518af9b764e622c887c7d58e17fd5976edd21fa9c0b5841bca52d3\",\"git\":{\"commit_sha\":\"abc123def4567890abcdef1234567890abcdef12\",\"repository\":\"https://github.com/test/mcp-server\"},\"npm\":{\"package\":\"universal-trust-adapter\",\"tarball_sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"version\":\"1.0.0\"},\"oci\":{\"digest\":\"sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"image\":\"marketnow/trust-adapter\"}},\"assessment\":{\"computed_at\":\"2026-08-20T23:16:11.332Z\",\"computed_by\":\"MarketNow Sentinel CA\",\"confidence\":\"high\",\"methodology\":\"Sentinel\",\"methodology_version\":\"v2.5\",\"risk_level\":\"low\",\"score\":8},\"atc_version\":\"3.0.0\",\"attestations\":[{\"evidence\":[{\"details\":\"Metadata valid\",\"evidence_hash\":\"c123a123e9e9fceedb17868340d463e44d9e0ebe0c09d5b048358658f0ef226b\",\"layer\":\"L1.5\",\"result\":\"pass\"},{\"details\":\"No secrets found\",\"evidence_hash\":\"7dda56a0e9d8060911ae2a2ff7d1eeddd4873e1ffd4e09462d5d806a52cfab9d\",\"layer\":\"L1.6\",\"result\":\"pass\"},{\"details\":\"No prompt injection\",\"evidence_hash\":\"1bdd8f5f36b4aa762d542f7ebdf21cece93f0132951f47bc7580d9e19731fdb5\",\"layer\":\"L1.9\",\"result\":\"pass\"},{\"details\":\"Sandbox passed\",\"evidence_hash\":\"68ccaf10121a10f52f5ba7886ad667cb536b67b9aa499470250838980ad27339\",\"layer\":\"L2.5\",\"result\":\"pass\"}],\"issuer\":\"MarketNow Sentinel CA\",\"signature_hash\":\"e8f8aca1b8b015e688e2a455eb4265bcd822688e072b632b92845b2e07ac9637\",\"signed_at\":\"2026-08-20T23:16:11.332Z\",\"type\":\"sentinel-audit\"}],\"capabilities\":{\"protocols\":[\"mcp\"],\"provides\":[\"search\",\"read\",\"verify\"],\"requires\":[]},\"credential_id\":\"ATC-2026-B67E258\",\"issuer\":{\"ca_key_id\":\"5488eb7b72a7b15c\",\"did\":\"did:marketnow:ca\",\"name\":\"MarketNow Sentinel CA\",\"url\":\"https://marketnow.site\"},\"lifecycle\":{\"expires_at\":\"2027-08-20T23:16:11.332Z\",\"issued_at\":\"2026-08-20T23:16:11.332Z\",\"revocation_url\":\"https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-B67E258\",\"revoked\":false,\"version\":\"3.0.0\"},\"subject\":{\"agent_id\":\"test-agent-001\",\"agent_name\":\"Test Agent\",\"key_algorithm\":\"Ed25519\",\"public_key\":\"4Z95p6aWjpyrnlrG_4372J5xoCGbmdRhIWoF0HkrzfQ\",\"subject_type\":\"agent\"}}",
-  "canonical_sha256": "03b9b3847bf24e52f0fe0fbb52c4a35ace3f55173d4a312b441024be7a0ada3e",
-  "generated_at": "2026-08-20T23:16:11.340Z",
+  "signature_value": "c7307350e435f3348f8a09b281ff50399aeec9fc4c91e3e7d5470f0399fde4445f871cdf9117e457241f707b598be431d9a313986cee028ba6133fd044fa780a",
+  "verification_input": "{\"artifact_binding\":{\"binding_hash\":\"sha256:6477b7b370518af9b764e622c887c7d58e17fd5976edd21fa9c0b5841bca52d3\",\"git\":{\"commit_sha\":\"abc123def4567890abcdef1234567890abcdef12\",\"repository\":\"https://github.com/test/mcp-server\"},\"npm\":{\"package\":\"universal-trust-adapter\",\"tarball_sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"version\":\"1.0.0\"},\"oci\":{\"digest\":\"sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"image\":\"marketnow/trust-adapter\"}},\"assessment\":{\"computed_at\":\"2026-08-21T00:24:43.752Z\",\"computed_by\":\"MarketNow Sentinel CA\",\"confidence\":\"high\",\"methodology\":\"Sentinel\",\"methodology_version\":\"v2.5\",\"risk_level\":\"low\",\"score\":8},\"atc_version\":\"3.0.0\",\"attestations\":[{\"evidence\":[{\"details\":\"Metadata valid\",\"evidence_hash\":\"c123a123e9e9fceedb17868340d463e44d9e0ebe0c09d5b048358658f0ef226b\",\"layer\":\"L1.5\",\"result\":\"pass\"},{\"details\":\"No secrets found\",\"evidence_hash\":\"7dda56a0e9d8060911ae2a2ff7d1eeddd4873e1ffd4e09462d5d806a52cfab9d\",\"layer\":\"L1.6\",\"result\":\"pass\"},{\"details\":\"No prompt injection\",\"evidence_hash\":\"1bdd8f5f36b4aa762d542f7ebdf21cece93f0132951f47bc7580d9e19731fdb5\",\"layer\":\"L1.9\",\"result\":\"pass\"},{\"details\":\"Sandbox passed\",\"evidence_hash\":\"68ccaf10121a10f52f5ba7886ad667cb536b67b9aa499470250838980ad27339\",\"layer\":\"L2.5\",\"result\":\"pass\"}],\"issuer\":\"MarketNow Sentinel CA\",\"signature_hash\":\"e8f8aca1b8b015e688e2a455eb4265bcd822688e072b632b92845b2e07ac9637\",\"signed_at\":\"2026-08-21T00:24:43.752Z\",\"type\":\"sentinel-audit\"}],\"capabilities\":{\"protocols\":[\"mcp\"],\"provides\":[\"search\",\"read\",\"verify\"],\"requires\":[]},\"credential_id\":\"ATC-2026-2BFBC70\",\"issuer\":{\"ca_key_id\":\"5488eb7b72a7b15c\",\"did\":\"did:marketnow:ca\",\"name\":\"MarketNow Sentinel CA\",\"url\":\"https://marketnow.site\"},\"lifecycle\":{\"expires_at\":\"2027-08-21T00:24:43.752Z\",\"issued_at\":\"2026-08-21T00:24:43.752Z\",\"revocation_url\":\"https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-2BFBC70\",\"revoked\":false,\"version\":\"3.0.0\"},\"subject\":{\"agent_id\":\"test-agent-001\",\"agent_name\":\"Test Agent\",\"key_algorithm\":\"Ed25519\",\"public_key\":\"4Z95p6aWjpyrnlrG_4372J5xoCGbmdRhIWoF0HkrzfQ\",\"subject_type\":\"agent\"}}",
+  "canonical_sha256": "74a44c06c14a14bc89e1faae36cdde0ba0308ce0e2e87ba2d5b394758e7272fb",
+  "generated_at": "2026-08-21T00:24:43.756Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "input": {
     "atc_version": "3.0.0",
-    "credential_id": "ATC-2026-B67E258",
+    "credential_id": "ATC-2026-2BFBC70",
     "issuer": {
       "did": "did:marketnow:ca",
       "name": "MarketNow Sentinel CA",
@@ -71,7 +71,7 @@
             "evidence_hash": "68ccaf10121a10f52f5ba7886ad667cb536b67b9aa499470250838980ad27339"
           }
         ],
-        "signed_at": "2026-08-20T23:16:11.332Z",
+        "signed_at": "2026-08-21T00:24:43.752Z",
         "signature_hash": "e8f8aca1b8b015e688e2a455eb4265bcd822688e072b632b92845b2e07ac9637"
       }
     ],
@@ -87,10 +87,10 @@
       ]
     },
     "lifecycle": {
-      "issued_at": "2026-08-20T23:16:11.332Z",
-      "expires_at": "2027-08-20T23:16:11.332Z",
+      "issued_at": "2026-08-21T00:24:43.752Z",
+      "expires_at": "2027-08-21T00:24:43.752Z",
       "revoked": false,
-      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-B67E258",
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-2BFBC70",
       "version": "3.0.0"
     },
     "assessment": {
@@ -99,19 +99,19 @@
       "score": 8,
       "confidence": "high",
       "risk_level": "low",
-      "computed_at": "2026-08-20T23:16:11.332Z",
+      "computed_at": "2026-08-21T00:24:43.752Z",
       "computed_by": "MarketNow Sentinel CA"
     },
     "signatures": [
       {
         "algorithm": "Ed25519 (RFC 8032)",
-        "value": "6b7cfb77a7360e5d6e0c84a194bcba5535e4de52e9fa1cefa14fc7b50fb6217a494d6de67745762f350064ba84301df3d8e4cce7ae0956e7134783c6ba640f05",
+        "value": "c7307350e435f3348f8a09b281ff50399aeec9fc4c91e3e7d5470f0399fde4445f871cdf9117e457241f707b598be431d9a313986cee028ba6133fd044fa780a",
         "signed_by": "MarketNow Sentinel CA",
-        "signed_at": "2026-08-20T23:16:11.332Z",
+        "signed_at": "2026-08-21T00:24:43.752Z",
         "domain": "UTA-ATC-V3-CREDENTIAL",
         "key_id": "5488eb7b72a7b15c",
         "canonicalization": "RFC_8785_JCS",
-        "evidence_hash": "sha256:482cae3d10a60bd675f4e6ab63a19556c3c050fe59b7cd5837858490bb9016fa"
+        "evidence_hash": "sha256:4a952434209864621f11615c4a1d2c7a580cae8adf774987782f96b8f53e57c5"
       }
     ]
   }

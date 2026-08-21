@@ -440,7 +440,7 @@ function buildPositive() {
   // P2: JWT RS256
   {
     const header = { alg: 'RS256', typ: 'JWT', kid: caRsa.key_id };
-    const claims = { iss: 'https://auth.marketnow.site', sub: 'agent-001', aud: 'marketnow-gateway', iat: Math.floor(Date.now() / 1000), exp: Math.floor(Date.now() / 1000) + 3600, scope: 'tools:call' };
+    const claims = { iss: 'https://auth.marketnow.site', sub: 'agent-001', aud: 'marketnow-gateway', iat: Math.floor(Date.now() / 1000), exp: Math.floor(Date.now() / 1000) + 365 * 24 * 3600, scope: 'tools:call' };
     const jwt = signJWT(header, claims, caRsa.private_key_pem, 'RS256');
     const vec = vectorBase('pos-002-jwt-rs256-valid', 'OAuth JWT signed with RS256 (RSA PKCS#1 v1.5 + SHA-256)', 'VALID', 'ca_rsa');
     const [h, p] = jwt.split('.');
@@ -455,7 +455,7 @@ function buildPositive() {
   // P3: JWT ES256
   {
     const header = { alg: 'ES256', typ: 'JWT', kid: caEc.key_id };
-    const claims = { iss: 'https://auth.marketnow.site', sub: 'agent-002', aud: 'marketnow-gateway', iat: Math.floor(Date.now() / 1000), exp: Math.floor(Date.now() / 1000) + 3600, scope: 'tools:read' };
+    const claims = { iss: 'https://auth.marketnow.site', sub: 'agent-002', aud: 'marketnow-gateway', iat: Math.floor(Date.now() / 1000), exp: Math.floor(Date.now() / 1000) + 365 * 24 * 3600, scope: 'tools:read' };
     const jwt = signJWT(header, claims, caEc.private_key_pem, 'ES256');
     const vec = vectorBase('pos-003-jwt-es256-valid', 'OAuth JWT signed with ES256 (ECDSA P-256 + SHA-256, raw R||S)', 'VALID', 'ca_ecdsa');
     const [h, p] = jwt.split('.');
@@ -470,7 +470,7 @@ function buildPositive() {
   // P4: JWT EdDSA
   {
     const header = { alg: 'EdDSA', typ: 'JWT', kid: caEd.key_id };
-    const claims = { iss: 'https://auth.marketnow.site', sub: 'agent-003', aud: 'marketnow-gateway', iat: Math.floor(Date.now() / 1000), exp: Math.floor(Date.now() / 1000) + 3600, scope: 'tools:call' };
+    const claims = { iss: 'https://auth.marketnow.site', sub: 'agent-003', aud: 'marketnow-gateway', iat: Math.floor(Date.now() / 1000), exp: Math.floor(Date.now() / 1000) + 365 * 24 * 3600, scope: 'tools:call' };
     const jwt = signJWT(header, claims, caEd.private_key_pem, 'EdDSA');
     const vec = vectorBase('pos-004-jwt-eddsa-valid', 'OAuth JWT signed with EdDSA (Ed25519)', 'VALID', 'ca_ed25519');
     const [h, p] = jwt.split('.');
@@ -685,7 +685,7 @@ function buildNegative() {
   // N6: JWT alg=none (must be rejected)
   {
     const header = { alg: 'none', typ: 'JWT' };
-    const claims = { iss: 'https://auth.marketnow.site', sub: 'attacker', aud: 'marketnow-gateway', exp: Math.floor(Date.now() / 1000) + 3600 };
+    const claims = { iss: 'https://auth.marketnow.site', sub: 'attacker', aud: 'marketnow-gateway', exp: Math.floor(Date.now() / 1000) + 365 * 24 * 3600 };
     const h = Buffer.from(JSON.stringify(header)).toString('base64url');
     const p = Buffer.from(JSON.stringify(claims)).toString('base64url');
     const jwt = `${h}.${p}.`; // empty signature
@@ -701,7 +701,7 @@ function buildNegative() {
   // N7: JWT HS256 (must be rejected — symmetric)
   {
     const header = { alg: 'HS256', typ: 'JWT' };
-    const claims = { iss: 'https://auth.marketnow.site', sub: 'attacker', exp: Math.floor(Date.now() / 1000) + 3600 };
+    const claims = { iss: 'https://auth.marketnow.site', sub: 'attacker', exp: Math.floor(Date.now() / 1000) + 365 * 24 * 3600 };
     const h = Buffer.from(JSON.stringify(header)).toString('base64url');
     const p = Buffer.from(JSON.stringify(claims)).toString('base64url');
     const sig = crypto.createHmac('sha256', 'shared-secret').update(`${h}.${p}`).digest('base64url');

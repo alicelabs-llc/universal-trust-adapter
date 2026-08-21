@@ -4,13 +4,13 @@
   "expected_result": "INVALID",
   "public_key_ref": "gateway_ed25519",
   "domain": "UTA-TRUST-DECISION",
-  "signature_value": "01a6db61bf166a92f249eddb76ffddfe6da33bd0a69488ce14d74e34b9d77fc4ae9a651bc793fe955720084afb890d1db3fdc8591a967e72a7cc70fef5e0d805",
+  "signature_value": "13cdb812ac89fc3f499f22f06067d28a4e8e0f2add38f7cac263e551afc75407a85d4da196047dbbfc9bc903b3f21c721f79cf61e58413b03fa8d6ccc66a320e",
   "verification_input": null,
   "canonical_sha256": null,
-  "generated_at": "2026-08-20T23:16:11.380Z",
+  "generated_at": "2026-08-21T00:24:43.792Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "input": {
-    "receipt_id": "rcpt_4c3dd15d3e974c63",
+    "receipt_id": "rcpt_e7e6c6b231d64834",
     "decision": "ALLOW",
     "agent_id": "test-agent-001",
     "credential_id": "ATC-2026-ABCD123",
@@ -52,15 +52,15 @@
         "result": "ALLOW"
       }
     ],
-    "timestamp": "2026-08-20T23:16:11.378Z",
+    "timestamp": "2026-08-21T00:24:43.791Z",
     "gateway_version": "1.0.0",
     "evidence_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
     "signature": {
       "algorithm": "Ed25519 (RFC 8032)",
-      "value": "01a6db61bf166a92f249eddb76ffddfe6da33bd0a69488ce14d74e34b9d77fc4ae9a651bc793fe955720084afb890d1db3fdc8591a967e72a7cc70fef5e0d805",
+      "value": "13cdb812ac89fc3f499f22f06067d28a4e8e0f2add38f7cac263e551afc75407a85d4da196047dbbfc9bc903b3f21c721f79cf61e58413b03fa8d6ccc66a320e",
       "domain": "UTA-TRUST-DECISION",
       "key_id": "5ebfcfb9f7b15e5d",
-      "signed_at": "2026-08-20T23:16:11.378Z"
+      "signed_at": "2026-08-21T00:24:43.791Z"
     }
   },
   "expected_failure_reason": "evidence_hash mismatch"
