@@ -68,7 +68,7 @@ const CONTENT = {
         whatWeFixed: [
           'v1.2.0: description said "8,845+ verified skills" → "8,845 MCP-compatible skills"',
           'v1.3.0: added "trust layer for agent commerce" positioning',
-          'v1.4.0: description now includes "Sentinel L2.5, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
+          'v1.4.0: description now includes "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0: removed "open-source" and "mit" keywords (license is MNNC-1.0, not MIT)',
           'v1.4.0: added "trust-layer" and "aliceLabs" keywords',
           'License field: MIT → MNNC-1.0 (corrected in v1.4.0 source)',
@@ -217,7 +217,7 @@ const CONTENT = {
         whatWeFixed: [
           'v1.2.0: la descripción decía "8,845+ verified skills" → "8,845 MCP-compatible skills"',
           'v1.3.0: se añadió el posicionamiento de "trust layer for agent commerce"',
-          'v1.4.0: la descripción ahora incluye "Sentinel L2.5, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
+          'v1.4.0: la descripción ahora incluye "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0: se eliminaron las keywords "open-source" y "mit" (la licencia es MNNC-1.0, no MIT)',
           'v1.4.0: se añadieron las keywords "trust-layer" y "aliceLabs"',
           'Campo de licencia: MIT → MNNC-1.0 (corregido en el código fuente v1.4.0)',
@@ -366,7 +366,7 @@ const CONTENT = {
         whatWeFixed: [
           'v1.2.0: a descrição dizia "8,845+ verified skills" → "8,845 MCP-compatible skills"',
           'v1.3.0: adicionado o posicionamento de "trust layer for agent commerce"',
-          'v1.4.0: a descrição agora inclui "Sentinel L2.5, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
+          'v1.4.0: a descrição agora inclui "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0: removidas as keywords "open-source" e "mit" (a licença é MNNC-1.0, não MIT)',
           'v1.4.0: adicionadas as keywords "trust-layer" e "aliceLabs"',
           'Campo de licença: MIT → MNNC-1.0 (corrigido no código-fonte v1.4.0)',
@@ -513,7 +513,7 @@ const CONTENT = {
         whatWeFixed: [
           'v1.2.0：描述中曾写为 "8,845+ verified skills" → "8,845 MCP-compatible skills"',
           'v1.3.0：添加了 "trust layer for agent commerce" 的定位',
-          'v1.4.0：描述现已包含 "Sentinel L2.5, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
+          'v1.4.0：描述现已包含 "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0：移除了 "open-source" 与 "mit" 关键词（license 为 MNNC-1.0，不是 MIT）',
           'v1.4.0：添加了 "trust-layer" 与 "aliceLabs" 关键词',
           'License 字段：MIT → MNNC-1.0（已在 v1.4.0 源码中更正）',
@@ -662,7 +662,7 @@ const CONTENT = {
         whatWeFixed: [
           'v1.2.0 : la description disait "8,845+ verified skills" → "8,845 MCP-compatible skills"',
           'v1.3.0 : ajout du positionnement « trust layer for agent commerce »',
-          'v1.4.0 : la description inclut désormais "Sentinel L2.5, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
+          'v1.4.0 : la description inclut désormais "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0 : suppression des mots-clés "open-source" et "mit" (la licence est MNNC-1.0, pas MIT)',
           'v1.4.0 : ajout des mots-clés "trust-layer" et "aliceLabs"',
           'Champ de licence : MIT → MNNC-1.0 (corrigé dans le code source v1.4.0)',
