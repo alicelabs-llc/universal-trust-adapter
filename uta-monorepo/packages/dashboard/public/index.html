@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTA Trust Dashboard</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3a;
+      --text: #e4e6eb;
+      --text-dim: #8b8e98;
+      --accent: #3b82f6;
+      --green: #22c55e;
+      --red: #ef4444;
+      --yellow: #eab308;
+      --mono: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 24px;
+    }
+    .header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 32px;
+    }
+    .logo { font-size: 24px; font-weight: 700; }
+    .logo span { color: var(--accent); }
+    .server-status {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--text-dim);
+      margin-left: auto;
+    }
+    .status-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green);
+    }
+    .status-dot.offline { background: var(--red); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .card h3 {
+      font-size: 13px; font-weight: 500;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    .card .value {
+      font-size: 32px; font-weight: 700;
+      font-family: var(--mono);
+    }
+    .card .delta {
+      font-size: 12px; color: var(--text-dim);
+      margin-top: 4px;
+    }
+    .green { color: var(--green); }
+    .red { color: var(--red); }
+    .yellow { color: var(--yellow); }
+
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 16px;
+    }
+    .section-header h2 {
+      font-size: 16px; font-weight: 600;
+    }
+    .filter-bar {
+      display: flex; gap: 8px; margin-left: auto;
+    }
+    .filter-bar select, .filter-bar input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th {
+      text-align: left;
+      padding: 8px 12px;
+      color: var(--text-dim);
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    td.truncate {
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .badge-allow { background: rgba(34,197,94,0.15); color: var(--green); }
+    .badge-deny { background: rgba(239,68,68,0.15); color: var(--red); }
+    .badge-revoked { background: rgba(239,68,68,0.15); color: var(--red); }
+    .badge-good { background: rgba(34,197,94,0.15); color: var(--green); }
+    .badge-unknown { background: rgba(234,179,8,0.15); color: var(--yellow); }
+
+    .verify-box {
+      display: flex; gap: 8px;
+      margin-bottom: 16px;
+    }
+    .verify-box textarea {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px;
+      border-radius: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      min-height: 80px;
+      resize: vertical;
+    }
+    .verify-box button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+    .verify-box button:hover { opacity: 0.9; }
+    .verify-result {
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 12px;
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+    .verify-result.valid {
+      background: rgba(34,197,94,0.1);
+      border: 1px solid var(--green);
+    }
+    .verify-result.invalid {
+      background: rgba(239,68,68,0.1);
+      border: 1px solid var(--red);
+    }
+    .config-bar {
+      display: flex; gap: 8px; margin-bottom: 24px;
+      align-items: center;
+    }
+    .config-bar input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      width: 300px;
+    }
+    .config-bar label {
+      font-size: 13px; color: var(--text-dim);
+    }
+    .refresh-btn {
+      margin-left: auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .refresh-btn:hover { border-color: var(--accent); }
+    .empty { color: var(--text-dim); text-align: center; padding: 24px; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">UTA <span>Trust Dashboard</span></div>
+    <div class="server-status">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="serverUrl">Not connected</span>
+    </div>
+  </div>
+
+  <div class="config-bar">
+    <label>Server URL:</label>
+    <input type="text" id="serverUrlInput" value="http://localhost:3000" placeholder="http://localhost:3000">
+    <button class="refresh-btn" onclick="connectServer()">Connect</button>
+    <button class="refresh-btn" onclick="refreshAll()">↻ Refresh</button>
+    <label style="margin-left: 16px;">Auto-refresh:</label>
+    <input type="checkbox" id="autoRefresh" onchange="toggleAutoRefresh()">
+  </div>
+
+  <div class="grid" id="metricsGrid">
+    <div class="card">
+      <h3>Total Requests</h3>
+      <div class="value" id="m-requests">—</div>
+      <div class="delta" id="m-uptime">Uptime: —</div>
+    </div>
+    <div class="card">
+      <h3>Verifications</h3>
+      <div class="value green" id="m-verified">—</div>
+      <div class="delta" id="m-denied">Denied: —</div>
+    </div>
+    <div class="card">
+      <h3>Credentials Issued</h3>
+      <div class="value" id="m-issued">—</div>
+    </div>
+    <div class="card">
+      <h3>Receipts Generated</h3>
+      <div class="value" id="m-receipts">—</div>
+    </div>
+    <div class="card">
+      <h3>Revocations</h3>
+      <div class="value red" id="m-revoked">—</div>
+    </div>
+    <div class="card">
+      <h3>OCSP Queries</h3>
+      <div class="value" id="m-ocsp">—</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <h2>🔍 Verify Credential</h2>
+    </div>
+    <div class="verify-box">
+      <textarea id="verifyInput" placeholder='Paste credential JSON here, or use a test vector file...'></textarea>
+      <button onclick="verifyCredential()">Verify</button>
+    </div>
+    <div class="verify-result" id="verifyResult" style="display:none;"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <h2>📋 Action Receipts</h2>
+      <div class="filter-bar">
+        <select id="receiptFilter" onchange="loadReceipts()">
+          <option value="">All decisions</option>
+          <option value="ALLOW">ALLOW only</option>
+          <option value="DENY">DENY only</option>
+        </select>
+        <input type="text" id="receiptAgentFilter" placeholder="Filter by agent_id..." oninput="loadReceipts()">
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Receipt ID</th>
+          <th>Decision</th>
+          <th>Agent ID</th>
+          <th>Tool</th>
+          <th>Trust Score</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody id="receiptsBody">
+        <tr><td colspan="6" class="empty">No receipts yet</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <h2>🚫 Revocation Status</h2>
+      <div class="filter-bar">
+        <input type="text" id="credIdLookup" placeholder="Enter credential_id to look up...">
+        <button class="refresh-btn" onclick="lookupRevocation()">Look Up</button>
+      </div>
+    </div>
+    <div id="revocationResult" class="empty">Enter a credential_id above to check its revocation status.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <h2>📊 Raw Metrics (Prometheus)</h2>
+    </div>
+    <pre id="rawMetrics" style="font-family: var(--mono); font-size: 12px; color: var(--text-dim); white-space: pre-wrap; word-break: break-all;">Loading...</pre>
+  </div>
+
+  <script>
+    let serverUrl = 'http://localhost:3000';
+    let autoRefreshTimer = null;
+
+    async function api(path, method = 'GET', body = null) {
+      const opts = { method, headers: {} };
+      if (body) {
+        opts.headers['Content-Type'] = 'application/json';
+        opts.body = JSON.stringify(body);
+      }
+      const res = await fetch(`${serverUrl}${path}`, opts);
+      if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+      return res;
+    }
+
+    async function apiJson(path, method = 'GET', body = null) {
+      const res = await api(path, method, body);
+      return res.json();
+    }
+
+    async function connectServer() {
+      serverUrl = document.getElementById('serverUrlInput').value;
+      try {
+        const health = await apiJson('/api/health');
+        document.getElementById('statusDot').classList.remove('offline');
+        document.getElementById('serverUrl').textContent = `Connected to ${serverUrl} (uptime: ${Math.floor(health.uptime_seconds / 60)}m)`;
+        refreshAll();
+      } catch (e) {
+        document.getElementById('statusDot').classList.add('offline');
+        document.getElementById('serverUrl').textContent = `Offline: ${e.message}`;
+      }
+    }
+
+    async function refreshAll() {
+      await Promise.all([
+        loadMetrics(),
+        loadReceipts(),
+        loadRawMetrics(),
+      ]);
+    }
+
+    async function loadMetrics() {
+      try {
+        const text = await (await api('/api/metrics')).text();
+        const metrics = {};
+        text.split('\n').forEach(line => {
+          const m = line.match(/^(\w+)\s+(\d+)/);
+          if (m) metrics[m[1]] = parseInt(m[2]);
+        });
+        document.getElementById('m-requests').textContent = metrics['uta_requests_total'] ?? '—';
+        document.getElementById('m-verified').textContent = metrics['uta_verifications_allowed_total'] ?? '—';
+        document.getElementById('m-denied').textContent = `Denied: ${metrics['uta_verifications_denied_total'] ?? '—'}`;
+        document.getElementById('m-issued').textContent = metrics['uta_issues_total'] ?? '—';
+        document.getElementById('m-receipts').textContent = metrics['uta_receipts_generated_total'] ?? '—';
+        document.getElementById('m-revoked').textContent = metrics['uta_revocations_set_total'] ?? '—';
+        document.getElementById('m-ocsp').textContent = metrics['uta_ocsp_queries_total'] ?? '—';
+
+        const uptimeSec = metrics['uta_uptime_seconds'];
+        if (uptimeSec) {
+          const h = Math.floor(uptimeSec / 3600);
+          const m = Math.floor((uptimeSec % 3600) / 60);
+          document.getElementById('m-uptime').textContent = `Uptime: ${h}h ${m}m`;
+        }
+      } catch (e) {
+        console.error('Metrics error:', e);
+      }
+    }
+
+    async function loadRawMetrics() {
+      try {
+        const text = await (await api('/api/metrics')).text();
+        document.getElementById('rawMetrics').textContent = text;
+      } catch (e) {
+        document.getElementById('rawMetrics').textContent = `Error: ${e.message}`;
+      }
+    }
+
+    async function loadReceipts() {
+      const decision = document.getElementById('receiptFilter').value;
+      const agentId = document.getElementById('receiptAgentFilter').value;
+      let path = '/api/receipts?';
+      if (decision) path += `decision=${decision}&`;
+      if (agentId) path += `agent_id=${encodeURIComponent(agentId)}&`;
+
+      try {
+        const data = await apiJson(path);
+        const tbody = document.getElementById('receiptsBody');
+        if (!data.receipts || data.receipts.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" class="empty">No receipts found</td></tr>';
+          return;
+        }
+        tbody.innerHTML = data.receipts.slice(0, 50).map(r => `
+          <tr>
+            <td class="truncate" title="${r.receipt_id}">${r.receipt_id}</td>
+            <td><span class="badge badge-${r.decision.toLowerCase()}">${r.decision}</span></td>
+            <td class="truncate">${r.agent_id}</td>
+            <td>${r.tool_name}</td>
+            <td>${r.trust_score}</td>
+            <td>${new Date(r.timestamp).toLocaleString()}</td>
+          </tr>
+        `).join('');
+      } catch (e) {
+        document.getElementById('receiptsBody').innerHTML = `<tr><td colspan="6" class="empty">Error: ${e.message}</td></tr>`;
+      }
+    }
+
+    async function lookupRevocation() {
+      const credId = document.getElementById('credIdLookup').value.trim();
+      if (!credId) return;
+      try {
+        const data = await apiJson(`/api/trust/${encodeURIComponent(credId)}`);
+        const div = document.getElementById('revocationResult');
+        div.className = '';
+        const badge = data.status === 'good' ? 'badge-good' : data.status === 'revoked' ? 'badge-revoked' : 'badge-unknown';
+        div.innerHTML = `
+          <table>
+            <tr><th>Credential ID</th><td>${data.credential_id}</td></tr>
+            <tr><th>Status</th><td><span class="badge ${badge}">${data.status}</span></td></tr>
+            <tr><th>Revoked At</th><td>${data.revoked_at || '—'}</td></tr>
+            <tr><th>Reason</th><td>${data.reason || '—'}</td></tr>
+          </table>
+        `;
+      } catch (e) {
+        document.getElementById('revocationResult').innerHTML = `Error: ${e.message}`;
+      }
+    }
+
+    async function verifyCredential() {
+      const input = document.getElementById('verifyInput').value.trim();
+      if (!input) return;
+      const resultDiv = document.getElementById('verifyResult');
+      resultDiv.style.display = 'block';
+
+      try {
+        let credential;
+        try {
+          credential = JSON.parse(input);
+          // Unwrap test vector format
+          if (credential.input) credential = credential.input;
+        } catch {
+          resultDiv.className = 'verify-result invalid';
+          resultDiv.textContent = 'Error: Invalid JSON input';
+          return;
+        }
+
+        const result = await apiJson('/api/verify', 'POST', { credential });
+        if (result.valid) {
+          resultDiv.className = 'verify-result valid';
+          resultDiv.innerHTML = `✅ VALID — format: ${result.format}<br>Credential ID: ${result.credential_id || '—'}<br>Issuer: ${result.issuer || '—'}`;
+        } else {
+          resultDiv.className = 'verify-result invalid';
+          resultDiv.innerHTML = `❌ INVALID — format: ${result.format}<br>Issues: ${result.issues?.join('; ') || 'unknown'}`;
+        }
+      } catch (e) {
+        resultDiv.className = 'verify-result invalid';
+        resultDiv.textContent = `Error: ${e.message}`;
+      }
+    }
+
+    function toggleAutoRefresh() {
+      const enabled = document.getElementById('autoRefresh').checked;
+      if (enabled) {
+        autoRefreshTimer = setInterval(refreshAll, 5000);
+      } else {
+        clearInterval(autoRefreshTimer);
+      }
+    }
+
+    // Initial connect
+    connectServer();
+  </script>
+</body>
+</html>

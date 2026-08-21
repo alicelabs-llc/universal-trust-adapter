@@ -1,0 +1,13 @@
+{
+  "name": "@marketnow/trust-dashboard",
+  "version": "1.0.0",
+  "description": "UTA Trust Dashboard — web UI for visualizing receipts, revocations, and metrics",
+  "main": "src/serve.js",
+  "bin": { "uta-dashboard": "src/serve.js" },
+  "files": ["src", "public", "README.md"],
+  "keywords": ["dashboard", "ui", "trust", "monitoring", "receipts", "revocation"],
+  "author": "AliceLabs LLC <info@alicelabs.site>",
+  "license": "AL-1.0",
+  "engines": { "node": ">=18" },
+  "scripts": { "start": "node src/serve.js" }
+}

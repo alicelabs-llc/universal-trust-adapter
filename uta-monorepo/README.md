@@ -40,9 +40,13 @@
 
 **Legend:** ✅ implemented | ⚠️ partial | 📄 documented only | ⬜ not yet done
 
-**Total tests: 386 passing** (76 structural + 76 vector + 33 integration + 17 gateway + 10 multi-sig + 16 A2A+EAT + 31 OCSP/ZTA/MCP + 11 CLI + 20 server + 25 PQ + 13 MCP middleware + 17 webhooks + 16 Python SDK + 11 smoke). Run with `npm test` + `cd packages/uta-python && python -m pytest tests/`.
+**Total tests: 402 passing** (76 structural + 76 vector + 33 integration + 17 gateway + 10 multi-sig + 16 A2A+EAT + 31 OCSP/ZTA/MCP + 11 CLI + 20 server + 25 PQ + 13 MCP middleware + 17 webhooks + 16 X.509 + 16 Python SDK + 11 smoke). Run with `npm test` + `cd packages/uta-python && python -m pytest tests/`.
 
-**Performance: 6,744 verifications/second** for the full 12-stage pipeline (Node 24, 2 vCPUs).
+**Performance: 6,744 verifications/second** for the full 12-stage pipeline (Node 24, 2 vCPUs). Overhead vs raw Ed25519: **1.8x** (JCS canonicalization adds ~19μs, evidence_hash check adds ~48μs).
+
+**Cross-language SDKs:** Python (16 tests), Rust (7 tests), Go (code complete, tests pending). All implementations verify the same test vectors with identical results.
+
+**Integration guides:** Express.js, Fastify, Hono, FastAPI, Django, Axum (Rust), Gin (Go), and Anthropic MCP — see [INTEGRATION.md](packages/docs/INTEGRATION.md).
 
 **Test vectors: 36 total** (8 positive + 17 negative + 5 mutation + 6 cross-language).
 All vectors use fixed test keypairs committed to `vectors/keys/` — reproducible across runs and implementations.
