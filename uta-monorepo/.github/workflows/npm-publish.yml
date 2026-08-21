@@ -1,0 +1,59 @@
+name: Publish to npm
+
+on:
+  workflow_dispatch:
+    inputs:
+      packages:
+        description: 'Packages to publish (all|core|adapters|gateway|uts)'
+        required: false
+        default: 'all'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Build
+        run: |
+          npm ci
+          npx tsc
+          node scripts/generate-sbom.js
+      
+      - name: Copy dist
+        run: |
+          cp -r dist/packages/adapters/* packages/adapters/dist/ 2>/dev/null || true
+          cp -r dist/packages/gateway/* packages/gateway/dist/ 2>/dev/null || true
+          cp -r dist/packages/uts/* packages/uts/dist/ 2>/dev/null || true
+      
+      - name: Publish trust-core
+        if: inputs.packages == 'all' || inputs.packages == 'core'
+        run: cd packages/core && npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+      - name: Publish trust-adapters
+        if: inputs.packages == 'all' || inputs.packages == 'adapters'
+        run: cd packages/adapters && npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+      - name: Publish trust-gateway
+        if: inputs.packages == 'all' || inputs.packages == 'gateway'
+        run: cd packages/gateway && npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+      - name: Publish uts
+        if: inputs.packages == 'all' || inputs.packages == 'uts'
+        run: cd packages/uts && npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
