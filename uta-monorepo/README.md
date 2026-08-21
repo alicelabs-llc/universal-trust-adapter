@@ -40,7 +40,7 @@
 
 **Legend:** ✅ implemented | ⚠️ partial | 📄 documented only | ⬜ not yet done
 
-**Total tests: 402 passing** (76 structural + 76 vector + 33 integration + 17 gateway + 10 multi-sig + 16 A2A+EAT + 31 OCSP/ZTA/MCP + 11 CLI + 20 server + 25 PQ + 13 MCP middleware + 17 webhooks + 16 X.509 + 16 Python SDK + 11 smoke). Run with `npm test` + `cd packages/uta-python && python -m pytest tests/`.
+**Total tests: 444 passing** (76 structural + 76 vector + 33 integration + 17 gateway + 10 multi-sig + 16 A2A+EAT + 31 OCSP/ZTA/MCP + 11 CLI + 20 server + 25 PQ + 13 MCP middleware + 17 webhooks + 16 X.509 + 19 audit log + 400 fuzz + 23 property + 16 Python SDK + 11 smoke). Run with `npm test` + `cd packages/uta-python && python -m pytest tests/`.
 
 **Performance: 6,744 verifications/second** for the full 12-stage pipeline (Node 24, 2 vCPUs). Overhead vs raw Ed25519: **1.8x** (JCS canonicalization adds ~19μs, evidence_hash check adds ~48μs).
 
