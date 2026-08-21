@@ -15,7 +15,7 @@ import { isAuthenticated } from '../api/client';
 // via CONTENT[lang].statuses.
 const STATIC_PROPOSALS = [
   { id: 'MN-001', title: 'Add free tier for open-source contributors', status: 'Active', votes: 142, deadline: '6d 12h' },
-  { id: 'MN-002', title: 'Sentinel L2.5: gVisor sandbox execution checks', status: 'Active', votes: 89, deadline: '9d 4h' },
+  { id: 'MN-002', title: 'UTA v1.0.0: gVisor sandbox execution checks', status: 'Active', votes: 89, deadline: '9d 4h' },
   { id: 'MN-003', title: 'Public status page with real uptime metrics', status: 'Active', votes: 67, deadline: '12d 18h' },
   { id: 'MN-004', title: 'Skill bundles: buy 3+ for 15% discount', status: 'Passed', votes: 312, deadline: 'Completed' },
   { id: 'MN-005', title: 'Open reviews: signed-in users can rate skills', status: 'Passed', votes: 245, deadline: 'Completed' },

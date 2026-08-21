@@ -76,7 +76,7 @@ const CONTENT = {
           'Sentinel is open source — anyone can re-run our audit. Code at /aep-marketplace/api/audit-skill.js',
           'Added disclosure: every skill detail page shows "Sentinel: self-declared"',
           'Sentinel L1.6 implemented: 18 Semgrep rules + Gitleaks + OSV-Scanner. Runs via GitHub Actions.',
-          'Sentinel L2.5 IMPLEMENTED (gVisor sandbox): Docker sandbox with --network none, --read-only, --cap-drop ALL. Multiplicative scoring.',
+          'UTA v1.0.0 IMPLEMENTED (gVisor sandbox): Docker sandbox with --network none, --read-only, --cap-drop ALL. Multiplicative scoring.',
         ],
         stillPending: [
           'Commission an independent third-party audit. Paid audits (Cure53, Trail of Bits) deferred until revenue.',
@@ -90,7 +90,7 @@ const CONTENT = {
           'Added a "permissions" field to the skill schema — skills declare what they need',
           'Skill detail pages show declared permissions in a visible block before the install command',
           'Sentinel L1.5 audit flags skills that request dangerous permissions with a lower score',
-          'Sentinel L2.5 IMPLEMENTED (gVisor sandbox): MCP servers executed in isolated Docker container with --network none, --read-only, --cap-drop ALL, seccomp, 256MB memory limit.',
+          'UTA v1.0.0 IMPLEMENTED (gVisor sandbox): MCP servers executed in isolated Docker container with --network none, --read-only, --cap-drop ALL, seccomp, 256MB memory limit.',
         ],
         stillPending: [
           'Permission manifest signing by skill maintainer',
@@ -197,7 +197,7 @@ const CONTENT = {
           'Sentinel es open source — cualquiera puede re-ejecutar nuestra auditoría. Código en /aep-marketplace/api/audit-skill.js',
           'Añadida divulgación: cada página de skill muestra "Sentinel: auto-declarado"',
           'Sentinel L1.6 implementado: 18 reglas Semgrep + Gitleaks + OSV-Scanner. Corre via GitHub Actions.',
-          'Sentinel L2.5 IMPLEMENTADO (gVisor sandbox): Docker sandbox con --network none, --read-only, --cap-drop ALL. Scoring multiplicativo.',
+          'UTA v1.0.0 IMPLEMENTADO (gVisor sandbox): Docker sandbox con --network none, --read-only, --cap-drop ALL. Scoring multiplicativo.',
         ],
         stillPending: [
           'Comisionar auditoría independiente de terceros. Auditorías pagas (Cure53, Trail of Bits) diferidas hasta tener revenue.',
@@ -211,7 +211,7 @@ const CONTENT = {
           'Añadido campo "permissions" al schema de skills — declaran qué necesitan',
           'Las páginas de skill muestran permisos declarados en un bloque visible antes del comando de instalación',
           'Sentinel L1.5 marca skills que piden permisos peligrosos con menor puntuación',
-          'Sentinel L2.5 IMPLEMENTADO (gVisor sandbox): servidores MCP ejecutados en contenedor Docker aislado con --network none, --read-only, --cap-drop ALL, seccomp, 256MB RAM.',
+          'UTA v1.0.0 IMPLEMENTADO (gVisor sandbox): servidores MCP ejecutados en contenedor Docker aislado con --network none, --read-only, --cap-drop ALL, seccomp, 256MB RAM.',
         ],
         stillPending: [
           'Firma de manifest de permisos por el mantenedor de la skill',
@@ -318,7 +318,7 @@ const CONTENT = {
           'Sentinel é open source — qualquer um pode re-executar nossa auditoria. Código em /aep-marketplace/api/audit-skill.js',
           'Adicionada divulgação: cada página de skill mostra "Sentinel: auto-declarado"',
           'Sentinel L1.6 implementado: 18 regras Semgrep + Gitleaks + OSV-Scanner. Executa via GitHub Actions.',
-          'Sentinel L2.5 IMPLEMENTADO (gVisor sandbox): Docker sandbox com --network none, --read-only, --cap-drop ALL. Scoring multiplicativo.',
+          'UTA v1.0.0 IMPLEMENTADO (gVisor sandbox): Docker sandbox com --network none, --read-only, --cap-drop ALL. Scoring multiplicativo.',
         ],
         stillPending: [
           'Comissionar auditoria independente de terceiros. Auditorias pagas (Cure53, Trail of Bits) adiadas até ter receita.',
@@ -332,7 +332,7 @@ const CONTENT = {
           'Adicionado campo "permissions" ao schema de skills — declaram o que precisam',
           'Páginas de skill mostram permissões declaradas em bloco visível antes do comando de instalação',
           'Sentinel L1.5 sinaliza skills que pedem permissões perigosas com pontuação menor',
-          'Sentinel L2.5 IMPLEMENTADO (gVisor sandbox): servidores MCP executados em contêiner Docker isolado com --network none, --read-only, --cap-drop ALL, seccomp, 256MB RAM.',
+          'UTA v1.0.0 IMPLEMENTADO (gVisor sandbox): servidores MCP executados em contêiner Docker isolado com --network none, --read-only, --cap-drop ALL, seccomp, 256MB RAM.',
         ],
         stillPending: [
           'Assinatura de manifest de permissões pelo mantenedor da skill',
@@ -439,7 +439,7 @@ const CONTENT = {
           'Sentinel 是开源的 — 任何人都可以重新运行我们的审计。代码在 /aep-marketplace/api/audit-skill.js',
           '增加披露：每个技能详情页显示"Sentinel: 自我声明"',
           'Sentinel L1.6 已实施：18 条 Semgrep 规则 + Gitleaks + OSV-Scanner。通过 GitHub Actions 运行。',
-          'Sentinel L2.5 已实施（gVisor 沙盒）：Docker 沙箱，使用 --network none、--read-only、--cap-drop ALL。乘法评分。',
+          'UTA v1.0.0 已实施（gVisor 沙盒）：Docker 沙箱，使用 --network none、--read-only、--cap-drop ALL。乘法评分。',
         ],
         stillPending: [
           '委托独立第三方审计。付费审计（Cure53、Trail of Bits）推迟到有收入后。',
@@ -453,7 +453,7 @@ const CONTENT = {
           '在技能模式中添加了"permissions"字段 — 技能声明它们需要什么',
           '技能详情页在安装命令前显示声明的权限',
           'Sentinel L1.5 审计标记请求危险权限的技能，给予较低分数',
-          'Sentinel L2.5 已实施（gVisor 沙盒）：MCP 服务器在隔离的 Docker 容器中执行，使用 --network none、--read-only、--cap-drop ALL、seccomp、256MB 内存。',
+          'UTA v1.0.0 已实施（gVisor 沙盒）：MCP 服务器在隔离的 Docker 容器中执行，使用 --network none、--read-only、--cap-drop ALL、seccomp、256MB 内存。',
         ],
         stillPending: [
           '技能维护者签署权限清单',
@@ -560,7 +560,7 @@ const CONTENT = {
           'Sentinel est open source — n\'importe qui peut ré-exécuter notre audit. Code sur /aep-marketplace/api/audit-skill.js',
           'Ajoutée divulgation : chaque page de skill montre "Sentinel : auto-déclaré"',
           'Sentinel L1.6 implémenté : 18 règles Semgrep + Gitleaks + OSV-Scanner. Via GitHub Actions.',
-          'Sentinel L2.5 IMPLÉMENTÉ (gVisor sandbox) : Docker sandbox avec --network none, --read-only, --cap-drop ALL. Scoring multiplicatif.',
+          'UTA v1.0.0 IMPLÉMENTÉ (gVisor sandbox) : Docker sandbox avec --network none, --read-only, --cap-drop ALL. Scoring multiplicatif.',
         ],
         stillPending: [
           'Commanditer un audit tiers indépendant. Audits payants (Cure53, Trail of Bits) différés jusqu\'à avoir des revenus.',
@@ -574,7 +574,7 @@ const CONTENT = {
           'Ajouté un champ "permissions" au schéma de skills — les skills déclarent ce dont elles ont besoin',
           'Les pages de skill montrent les permissions déclarées dans un bloc visible avant la commande d\'installation',
           'Sentinel L1.5 signale les skills qui demandent des permissions dangereuses avec un score plus bas',
-          'Sentinel L2.5 IMPLÉMENTÉ (gVisor sandbox) : serveurs MCP exécutés dans un conteneur Docker isolé avec --network none, --read-only, --cap-drop ALL, seccomp, 256MB RAM.',
+          'UTA v1.0.0 IMPLÉMENTÉ (gVisor sandbox) : serveurs MCP exécutés dans un conteneur Docker isolé avec --network none, --read-only, --cap-drop ALL, seccomp, 256MB RAM.',
         ],
         stillPending: [
           'Signature du manifest de permissions par le mainteneur de la skill',
