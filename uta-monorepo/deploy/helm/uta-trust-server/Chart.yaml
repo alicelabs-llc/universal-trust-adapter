@@ -1,0 +1,15 @@
+apiVersion: v2
+name: uta-trust-server
+description: UTA Trust Server — REST API for credential verification, issuance, and revocation
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - trust
+  - security
+  - ed25519
+  - mcp
+  - agent-trust
+maintainers:
+  - name: AliceLabs LLC
+    email: info@alicelabs.site

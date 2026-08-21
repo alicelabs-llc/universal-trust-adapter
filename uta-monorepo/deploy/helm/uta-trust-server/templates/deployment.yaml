@@ -1,0 +1,145 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-trust-server
+  labels:
+    app: uta-trust-server
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: uta-trust-server
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: uta-trust-server
+        release: {{ .Release.Name }}
+    spec:
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: trust-server
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: PORT
+              value: "3000"
+            - name: HOST
+              value: "0.0.0.0"
+            - name: CA_PRIVATE_KEY_PEM
+              value: /keys/{{ .Values.uta.caPrivateKeyKey }}
+            - name: CA_PUBLIC_KEY_PEM
+              value: /keys/{{ .Values.uta.caPublicKeyKey }}
+            - name: GATEWAY_PRIVATE_KEY_PEM
+              value: /keys/{{ .Values.uta.gatewayPrivateKeyKey }}
+            - name: ADMIN_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.uta.adminApiKeySecret }}
+                  key: {{ .Values.uta.adminApiKeyKey }}
+            - name: ENABLE_CORS
+              value: {{ .Values.uta.enableCors | quote }}
+            - name: RATE_LIMIT
+              value: {{ .Values.uta.rateLimitPerMinute | quote }}
+            {{- if .Values.uta.supabaseUrl }}
+            - name: SUPABASE_URL
+              value: {{ .Values.uta.supabaseUrl | quote }}
+            - name: SUPABASE_SERVICE_ROLE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-supabase
+                  key: service-role-key
+            {{- end }}
+            {{- if .Values.redis.enabled }}
+            - name: REDIS_URL
+              value: redis://{{ .Release.Name }}-redis:6379
+            {{- end }}
+          volumeMounts:
+            - name: ca-keys
+              mountPath: /keys
+              readOnly: true
+          {{- if .Values.healthcheck.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.healthcheck.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.healthcheck.initialDelaySeconds }}
+            periodSeconds: {{ .Values.healthcheck.periodSeconds }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.healthcheck.path }}
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: ca-keys
+          secret:
+            secretName: {{ .Values.uta.caPrivateKeySecret }}
+---
+{{- if .Values.redis.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-redis
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: {{ .Values.redis.image }}
+          ports:
+            - containerPort: {{ .Values.redis.port }}
+          args: ["redis-server", "--appendonly", "yes", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+          volumeMounts:
+            - name: redis-data
+              mountPath: /data
+      volumes:
+        - name: redis-data
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-redis
+spec:
+  selector:
+    app: redis
+  ports:
+    - port: {{ .Values.redis.port }}
+      targetPort: {{ .Values.redis.port }}
+{{- end }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-trust-server
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: uta-trust-server
+    release: {{ .Release.Name }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http

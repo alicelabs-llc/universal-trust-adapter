@@ -1,0 +1,101 @@
+# UTA Trust Server Helm Chart
+# Default values — override in values.yaml or --set
+
+replicaCount: 2
+
+image:
+  repository: uta-trust-server
+  tag: "1.0.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: uta.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+
+# UTA-specific configuration
+uta:
+  # CA private key — mount from a Kubernetes secret
+  caPrivateKeySecret: uta-ca-key
+  caPrivateKeyKey: ca-private.pem
+  caPublicKeyKey: ca-public.pem
+
+  # Gateway key for receipt signing
+  gatewayKeySecret: uta-gateway-key
+  gatewayPrivateKeyKey: gateway-private.pem
+
+  # Admin API key
+  adminApiKeySecret: uta-admin
+  adminApiKeyKey: api-key
+
+  # CORS
+  enableCors: true
+
+  # Rate limiting
+  rateLimitPerMinute: 600
+
+  # Supabase (optional — leave empty for in-memory)
+  supabaseUrl: ""
+  supabaseKey: ""
+
+# Redis for distributed rate limiting + nonce store
+redis:
+  enabled: true
+  image: redis:7-alpine
+  port: 6379
+  persistence:
+    enabled: true
+    size: 1Gi
+
+# Dashboard
+dashboard:
+  enabled: true
+  port: 8080
+
+# Health checks
+healthcheck:
+  enabled: true
+  path: /api/health
+  initialDelaySeconds: 10
+  periodSeconds: 30
+
+# Pod security
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1001
+  fsGroup: 1001
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

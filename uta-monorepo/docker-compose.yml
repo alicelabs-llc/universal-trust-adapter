@@ -1,0 +1,84 @@
+# P8-3: Docker Compose for UTA Trust Server + Dashboard + Redis
+#
+# Usage:
+#   docker-compose up -d
+#
+# Then:
+#   - REST API: http://localhost:3000
+#   - Dashboard: http://localhost:8080
+#   - Redis: localhost:6379
+
+version: '3.9'
+
+services:
+  # ── UTA Trust Server (REST API + OCSP + Gateway) ──
+  trust-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+      - CA_PRIVATE_KEY_PEM=/keys/ca-private.pem
+      - CA_PUBLIC_KEY_PEM=/keys/ca-public.pem
+      - GATEWAY_PRIVATE_KEY_PEM=/keys/gateway-private.pem
+      - ADMIN_API_KEY=${ADMIN_API_KEY:-change-me-in-production}
+      - ENABLE_CORS=true
+      - RATE_LIMIT=600
+      - SUPABASE_URL=${SUPABASE_URL:-}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY:-}
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./keys:/keys:ro
+    depends_on:
+      - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/api/health').then(r=>r.ok?process.exit(0):process.exit(1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # ── UTA Dashboard (web UI) ──
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: node packages/dashboard/src/serve.js
+    ports:
+      - "8080:8080"
+    environment:
+      - DASHBOARD_PORT=8080
+    depends_on:
+      - trust-server
+    restart: unless-stopped
+
+  # ── Redis (for distributed rate limiting + nonce store) ──
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+
+  # ── OCSP Responder (optional, separate from main server) ──
+  # Uncomment to run the OCSP responder on a separate port
+  # ocsp-responder:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   command: node -e "const {createOCSPServer, InMemoryRevocationStore} = require('./dist/packages/core/revocation.js'); const s = createOCSPServer({store: new InMemoryRevocationStore(), responderKeys: {did: 'did:marketnow:ocsp', private_key_pem: require('fs').readFileSync('/keys/gateway-private.pem','utf-8'), public_key_pem: require('fs').readFileSync('/keys/gateway-public.pem','utf-8'), key_id: 'ocsp-1'}}); s.listen(8081, '0.0.0.0');"
+  #   ports:
+  #     - "8081:8081"
+  #   volumes:
+  #     - ./keys:/keys:ro
+  #   restart: unless-stopped
+
+volumes:
+  redis-data:
+    driver: local
