@@ -1,0 +1,74 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "SBOM for @marketnow/trust-adapters",
+  "documentNamespace": "https://marketnow.site/spdx/@marketnow/trust-adapters/1.0.0/1787269032236",
+  "creationInfo": {
+    "created": "2026-08-20T23:37:12.235Z",
+    "creators": [
+      "Organization: AliceLabs LLC",
+      "Tool: UTA-SBOM-Generator-1.0"
+    ],
+    "licenseListVersion": "3.20"
+  },
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-root",
+      "name": "@marketnow/trust-adapters",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "https://github.com/eddyflores100-lang/universal-trust-adapter.git",
+      "filesAnalyzed": false,
+      "licenseDeclared": "AL-1.0",
+      "licenseConcluded": "AL-1.0",
+      "copyrightText": "NOASSERTION",
+      "supplier": "Organization: AliceLabs LLC <info@alicelabs.site>",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "0f1b3f05fb07947a0ff6b5d7d218a887daad097447ce662da8f3af80437cb8e6"
+        }
+      ],
+      "homepage": "https://github.com/eddyflores100-lang/universal-trust-adapter",
+      "description": "UTA Trust Adapters — ATC v3, EAT-AI, A2A, ZTA, MCP, W3C VC, OAuth/OIDC, SPIFFE — with REAL cryptographic verification"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-marketnow-trust-core",
+      "name": "@marketnow/trust-core",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "checksums": []
+    },
+    {
+      "SPDXID": "SPDXRef-Package-marketnow-uts",
+      "name": "@marketnow/uts",
+      "versionInfo": "2.0.0",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "checksums": []
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-Package-root",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-marketnow-trust-core"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-root",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-marketnow-uts"
+    }
+  ],
+  "documentDescribes": [
+    "SPDXRef-Package-root"
+  ],
+  "documentHash": "sha256:98b70d9ca166e5fdc2ffaf26b6c19249fe7a6619e8b657b175b6b5c8a0a24a0f"
+}
