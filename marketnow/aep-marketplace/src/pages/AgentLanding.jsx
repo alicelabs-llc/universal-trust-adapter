@@ -44,7 +44,7 @@ export default function AgentLanding() {
   ];
 
   const features = [
-    { icon: '🛡️', title: 'Sentinel 10-layer audit', desc: '1.2M checks, 80 quarantined, 8,288 verified safe' },
+    { icon: '🛡️', title: 'UTA 12-stage trust pipeline', desc: '1.2M checks, 80 quarantined, 8,288 verified safe' },
     { icon: '🔑', title: 'Agent Trust Card (ATC)', desc: 'Ed25519 (RFC 8032) signed identity, RFC 8785 JCS canonical JSON' },
     { icon: '🚦', title: 'Runtime Interceptor', desc: '5 policy rules: blocks .env, rm -rf, process spawns, system writes' },
     { icon: '📋', title: 'OWASP MCP Cheat Sheet', desc: '12 controls mapped (4 live, 8 planned v5.1-v6.0)' },
@@ -62,7 +62,7 @@ export default function AgentLanding() {
   ];
 
   const tweetText = {
-    en: "MarketNow — security infrastructure for AI agents. Sentinel: 10-layer audit pipeline, 1.2M checks, 1,030 threats detected, 80 quarantined. 12 MCP tools (marketnow_* namespace). v1.9.0.",
+    en: "MarketNow — security infrastructure for AI agents. Sentinel: 12-stage verification pipeline, 1.2M checks, 1,030 threats detected, 80 quarantined. 12 MCP tools (marketnow_* namespace). v1.9.0.",
     es: "MarketNow — infraestructura de seguridad para agentes IA. Sentinel: pipeline de auditoría de 10 capas, 1.2M chequeos, 1,030 amenazas detectadas, 80 en cuarentena. 12 herramientas MCP (namespace marketnow_*). v1.9.0.",
     pt: "MarketNow — infraestrutura de segurança para agentes IA. Sentinel: pipeline de auditoria de 10 camadas, 1.2M verificações, 1.030 ameaças detectadas, 80 em quarentena. 12 ferramentas MCP (namespace marketnow_*). v1.9.0.",
     zh: "MarketNow — AI 代理安全基础设施。Sentinel: 10 层审计管道, 120 万次检查, 1,030 个威胁已检测, 80 个已隔离。12 个 MCP 工具 (marketnow_* 命名空间)。v1.9.0。",
@@ -200,7 +200,7 @@ export default function AgentLanding() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }} className="premium-card p-6 md:p-8">
             <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
               <div>
-                <h2 className="text-white text-2xl font-bold mb-1">Try ATC/1.0 — Issue & Verify in your browser</h2>
+                <h2 className="text-white text-2xl font-bold mb-1">Try ATC v3 — Issue & Verify in your browser</h2>
                 <p className="text-zinc-400 text-sm">The Agent Trust Card spec, live. Issue a card in 30 seconds, verify any ATC against the open spec. No signup, no install, no backend.</p>
               </div>
               <a href="/atc/playground" target="_blank" rel="noopener" className="px-4 py-2 bg-[#00F299] text-black font-bold rounded-lg hover:bg-[#00F299]/90 transition-all text-sm whitespace-nowrap">
@@ -338,7 +338,7 @@ export default function AgentLanding() {
               </a>
 
               <a
-                href={`https://news.ycombinator.com/submitlink?u=${encodeURIComponent("https://marketnow.site")}&t=${encodeURIComponent("MarketNow — Security infrastructure for AI agents. Sentinel 10-layer audit pipeline (1.2M checks, 80 quarantined)")}`}
+                href={`https://news.ycombinator.com/submitlink?u=${encodeURIComponent("https://marketnow.site")}&t=${encodeURIComponent("MarketNow — Security infrastructure for AI agents. UTA 12-stage trust pipeline pipeline (1.2M checks, 80 quarantined)")}`}
                 target="_blank"
                 rel="noopener"
                 className="flex items-center gap-3 p-3 rounded-lg bg-black/40 border border-white/5 hover:border-[#00F299]/30 transition-all"
