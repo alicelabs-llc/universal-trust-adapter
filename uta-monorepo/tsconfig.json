@@ -12,5 +12,5 @@
     "rootDir": "."
   },
   "include": ["packages/**/*", "services/**/*"],
-  "exclude": ["node_modules", "dist", "packages/plugin-template", "packages/persistence", "packages/cli"]
+  "exclude": ["node_modules", "dist", "packages/plugin-template", "packages/persistence", "packages/cli", "packages/server", "packages/pq", "packages/mcp-middleware", "packages/webhooks", "packages/audit", "packages/observability", "packages/rpc", "packages/realtime", "packages/multi-tenant", "packages/key-rotation", "packages/cache", "packages/dashboard", "packages/docs", "packages/uta-rust", "packages/uta-go", "packages/uta-python"]
 }

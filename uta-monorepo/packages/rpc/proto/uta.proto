@@ -1,0 +1,186 @@
+// UTA Trust Service — gRPC / ConnectRPC protocol definition
+// P9-1: High-performance RPC for inter-service verification
+//
+// This proto defines the UTA Trust Service that can be called by:
+//   - gRPC clients (any language: Go, Rust, Python, Java, C++)
+//   - ConnectRPC clients (browser-friendly HTTP/JSON)
+//   - Twirp clients (simpler HTTP/JSON transport)
+//
+// Compile with:
+//   protoc --go_out=. --go-grpc_out=. uta.proto          # Go
+//   protoc --rust_out=. --tonic_out=. uta.proto           # Rust
+//   python -m grpc_tools.protoc -I. --python_out=. uta.proto  # Python
+//
+// AliceLabs Source-Available License v1.0 (AL-1.0)
+
+syntax = "proto3";
+
+package uta.trust.v1;
+
+option go_package = "github.com/eddyflores100-lang/universal-trust-adapter/packages/rpc/proto;utav1";
+
+// ============================================================================
+// Service Definition
+// ============================================================================
+
+service TrustService {
+  // Verify any credential format (auto-detect)
+  rpc VerifyCredential(VerifyRequest) returns (VerifyResponse);
+
+  // Issue a new ATC v3 credential
+  rpc IssueATCv3(IssueATCv3Request) returns (IssueATCv3Response);
+
+  // Issue a W3C Verifiable Credential
+  rpc IssueW3CVC(IssueW3CVCRequest) returns (IssueW3CVCResponse);
+
+  // Check trust decision for a credential
+  rpc CheckTrust(CheckTrustRequest) returns (CheckTrustResponse);
+
+  // Check revocation status
+  rpc CheckRevocation(RevocationRequest) returns (RevocationResponse);
+
+  // Revoke a credential (admin only)
+  rpc RevokeCredential(RevokeRequest) returns (RevokeResponse);
+
+  // Get CA public key
+  rpc GetCAKey(CAKeyRequest) returns (CAKeyResponse);
+
+  // Health check
+  rpc Health(HealthRequest) returns (HealthResponse);
+
+  // Stream trust decisions (server-sent events for live monitoring)
+  rpc StreamDecisions(StreamDecisionsRequest) returns (stream TrustDecision);
+}
+
+// ============================================================================
+// Messages
+// ============================================================================
+
+message VerifyRequest {
+  // The credential to verify (JSON object)
+  bytes credential_json = 1;
+  // Optional: CA public key PEM (if not provided, uses server's CA)
+  string ca_public_key_pem = 2;
+  // Skip expiry check (for testing)
+  bool skip_expiry = 3;
+}
+
+message VerifyResponse {
+  bool valid = 1;
+  string format = 2;
+  repeated string issues = 3;
+  string credential_id = 4;
+  string issuer = 5;
+  string subject = 6;
+  string expires_at = 7;
+  int32 trust_score = 8;
+  // Duration in microseconds
+  int64 duration_us = 9;
+}
+
+message IssueATCv3Request {
+  string agent_id = 1;
+  string agent_name = 2;
+  string public_key = 3;
+  string key_algorithm = 4;
+  repeated string provides = 5;
+  int32 trust_score = 6;
+  string confidence = 7;
+  string risk_level = 8;
+  int32 expires_in_days = 9;
+  // Admin API key for authentication
+  string admin_api_key = 10;
+}
+
+message IssueATCv3Response {
+  bytes credential_json = 1;
+  string credential_id = 2;
+}
+
+message IssueW3CVCRequest {
+  bytes credential_json = 1;
+  string admin_api_key = 2;
+}
+
+message IssueW3CVCResponse {
+  bytes credential_json = 1;
+}
+
+message CheckTrustRequest {
+  bytes credential_json = 1;
+  string tool_name = 2;
+  bytes arguments_json = 3;
+  int32 min_trust_score = 4;
+  bool block_secret_reads = 5;
+  bool block_shell_exec = 6;
+  repeated string allowed_issuers = 7;
+}
+
+message CheckTrustResponse {
+  bool allowed = 1;
+  string decision = 2;  // "ALLOW" or "DENY"
+  string reason = 3;
+  int32 trust_score = 4;
+  string agent_id = 5;
+  string args_hash = 6;
+  // Signed receipt (if allowed)
+  bytes receipt_json = 7;
+  int64 duration_us = 8;
+}
+
+message RevocationRequest {
+  string credential_id = 1;
+  string reason = 2;
+  string admin_api_key = 3;
+}
+
+message RevocationResponse {
+  string credential_id = 1;
+  string status = 2;  // "revoked"
+}
+
+message RevokeRequest {
+  string credential_id = 1;
+  string reason = 2;
+  string admin_api_key = 3;
+}
+
+message RevokeResponse {
+  bool success = 1;
+  string credential_id = 2;
+  string status = 3;
+}
+
+message CAKeyRequest {}
+
+message CAKeyResponse {
+  string public_key_pem = 1;
+  string key_id = 2;
+  string algorithm = 3;
+}
+
+message HealthRequest {}
+
+message HealthResponse {
+  bool ok = 1;
+  string version = 2;
+  int64 uptime_seconds = 3;
+  string ca_key_id = 4;
+}
+
+message StreamDecisionsRequest {
+  // Filter by agent_id (empty = all)
+  string agent_id = 1;
+  // Filter by decision ("ALLOW", "DENY", empty = all)
+  string decision = 2;
+}
+
+message TrustDecision {
+  string timestamp = 1;
+  string decision = 2;
+  string agent_id = 3;
+  string credential_id = 4;
+  string tool_name = 5;
+  int32 trust_score = 6;
+  string reason = 7;
+}
