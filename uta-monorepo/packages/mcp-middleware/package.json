@@ -1,0 +1,21 @@
+{
+  "name": "@marketnow/trust-mcp-middleware",
+  "version": "1.0.0",
+  "description": "UTA MCP middleware — wraps Anthropic MCP tools/call with TrustGateway enforcement",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "README.md", "LICENSE-AL-1.0"],
+  "keywords": ["mcp", "middleware", "trust", "gateway", "anthropic", "model-context-protocol"],
+  "author": "AliceLabs LLC <info@alicelabs.site>",
+  "license": "AL-1.0",
+  "engines": { "node": ">=18" },
+  "scripts": { "build": "tsc" },
+  "dependencies": {
+    "@marketnow/trust-core": "1.0.0",
+    "@marketnow/trust-gateway": "1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  }
+}

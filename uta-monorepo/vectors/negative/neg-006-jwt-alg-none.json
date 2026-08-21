@@ -5,12 +5,12 @@
   "public_key_ref": "ca_ed25519",
   "domain": "JWT",
   "signature_value": "",
-  "verification_input": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhdHRhY2tlciIsImF1ZCI6Im1hcmtldG5vdy1nYXRld2F5IiwiZXhwIjoxNzg3MjcxMzcxfQ",
+  "verification_input": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhdHRhY2tlciIsImF1ZCI6Im1hcmtldG5vdy1nYXRld2F5IiwiZXhwIjoxODE4ODA3ODgzfQ",
   "canonical_sha256": null,
-  "generated_at": "2026-08-20T23:16:11.366Z",
+  "generated_at": "2026-08-21T00:24:43.782Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "input": {
-    "jwt": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhdHRhY2tlciIsImF1ZCI6Im1hcmtldG5vdy1nYXRld2F5IiwiZXhwIjoxNzg3MjcxMzcxfQ."
+    "jwt": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhdHRhY2tlciIsImF1ZCI6Im1hcmtldG5vdy1nYXRld2F5IiwiZXhwIjoxODE4ODA3ODgzfQ."
   },
   "expected_failure_reason": "algorithm \"none\" is forbidden"
 }

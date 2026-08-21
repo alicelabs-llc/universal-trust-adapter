@@ -4,13 +4,13 @@
   "expected_result": "INVALID",
   "public_key_ref": "ca_ed25519",
   "domain": "JWT",
-  "signature_value": "_ZUl7ixpxpjBnGMiWa0ZqJ0ynEefpmh4ezmb4GK8KrI",
-  "verification_input": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhdHRhY2tlciIsImV4cCI6MTc4NzI3MTM3MX0",
+  "signature_value": "6SGWNmPk5Usbc6KgKq_B_AG3elZTFdW8cHqACqr3atE",
+  "verification_input": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhdHRhY2tlciIsImV4cCI6MTgxODgwNzg4M30",
   "canonical_sha256": null,
-  "generated_at": "2026-08-20T23:16:11.366Z",
+  "generated_at": "2026-08-21T00:24:43.782Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "input": {
-    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhdHRhY2tlciIsImV4cCI6MTc4NzI3MTM3MX0._ZUl7ixpxpjBnGMiWa0ZqJ0ynEefpmh4ezmb4GK8KrI"
+    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2F1dGgubWFya2V0bm93LnNpdGUiLCJzdWIiOiJhdHRhY2tlciIsImV4cCI6MTgxODgwNzg4M30.6SGWNmPk5Usbc6KgKq_B_AG3elZTFdW8cHqACqr3atE"
   },
   "expected_failure_reason": "HS256\" is not supported"
 }

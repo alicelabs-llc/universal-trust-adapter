@@ -4,24 +4,24 @@
   "expected_result": "VALID",
   "public_key_ref": "ca_ed25519",
   "domain": "W3C-VC-DATA-INTEGRITY",
-  "signature_value": "ftRZKXqiCMrLj5ZYjLGgIGM6_Qpw97t47sUYI_55UWgUqSekbnCj4y3tglt9DHngKEmsb6AkwRH--gYipUr-AA",
-  "verification_input": "{\"@context\":[\"https://www.w3.org/2018/credentials/v1\",\"https://w3id.org/security/suites/ed25519-2020/v1\"],\"credentialSubject\":{\"agent_id\":\"test-agent-001\",\"id\":\"did:marketnow:agent:001\",\"trust_score\":8},\"expirationDate\":\"2027-08-20T23:16:11.342Z\",\"id\":\"urn:uuid:74f40ca0-4d93-4e31-bb27-d76cded96891\",\"issuanceDate\":\"2026-08-20T23:16:11.342Z\",\"issuer\":\"did:marketnow:ca\",\"type\":[\"VerifiableCredential\",\"AgentTrustCredential\"]}",
-  "canonical_sha256": "3990f65df6c6baf7c920db6dceeb060dc62d4ff2f6ef57362c4bb36575c1ce39",
-  "generated_at": "2026-08-20T23:16:11.342Z",
+  "signature_value": "sEi6WlK55NIIpD0ZgMJGdfDYrhkVIPUSFGSuvbpKivJGjhNIRyq0XZTPRRxZXJZ1_iirMYeFqx01hx8STvFNBw",
+  "verification_input": "{\"@context\":[\"https://www.w3.org/2018/credentials/v1\",\"https://w3id.org/security/suites/ed25519-2020/v1\"],\"credentialSubject\":{\"agent_id\":\"test-agent-001\",\"id\":\"did:marketnow:agent:001\",\"trust_score\":8},\"expirationDate\":\"2027-08-21T00:24:43.758Z\",\"id\":\"urn:uuid:f13e34b4-f990-4da3-b063-f1d738022278\",\"issuanceDate\":\"2026-08-21T00:24:43.758Z\",\"issuer\":\"did:marketnow:ca\",\"type\":[\"VerifiableCredential\",\"AgentTrustCredential\"]}",
+  "canonical_sha256": "07904de902c7e461e88d2d8dc0362f820836551dbc397aa0a35b28e79a217afe",
+  "generated_at": "2026-08-21T00:24:43.758Z",
   "spec": "UTA-P2-VECTORS/1.0",
   "input": {
     "@context": [
       "https://www.w3.org/2018/credentials/v1",
       "https://w3id.org/security/suites/ed25519-2020/v1"
     ],
-    "id": "urn:uuid:74f40ca0-4d93-4e31-bb27-d76cded96891",
+    "id": "urn:uuid:f13e34b4-f990-4da3-b063-f1d738022278",
     "type": [
       "VerifiableCredential",
       "AgentTrustCredential"
     ],
     "issuer": "did:marketnow:ca",
-    "issuanceDate": "2026-08-20T23:16:11.342Z",
-    "expirationDate": "2027-08-20T23:16:11.342Z",
+    "issuanceDate": "2026-08-21T00:24:43.758Z",
+    "expirationDate": "2027-08-21T00:24:43.758Z",
     "credentialSubject": {
       "id": "did:marketnow:agent:001",
       "agent_id": "test-agent-001",
@@ -29,9 +29,9 @@
     },
     "proof": {
       "type": "Ed25519Signature2020",
-      "created": "2026-08-20T23:16:11.342Z",
+      "created": "2026-08-21T00:24:43.758Z",
       "proofPurpose": "assertionMethod",
-      "proofValue": "ftRZKXqiCMrLj5ZYjLGgIGM6_Qpw97t47sUYI_55UWgUqSekbnCj4y3tglt9DHngKEmsb6AkwRH--gYipUr-AA",
+      "proofValue": "sEi6WlK55NIIpD0ZgMJGdfDYrhkVIPUSFGSuvbpKivJGjhNIRyq0XZTPRRxZXJZ1_iirMYeFqx01hx8STvFNBw",
       "domain": "W3C-VC-DATA-INTEGRITY"
     }
   }
