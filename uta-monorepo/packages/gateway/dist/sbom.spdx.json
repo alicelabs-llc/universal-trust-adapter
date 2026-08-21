@@ -1,0 +1,74 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "SBOM for @marketnow/trust-gateway",
+  "documentNamespace": "https://marketnow.site/spdx/@marketnow/trust-gateway/1.0.0/1787269032240",
+  "creationInfo": {
+    "created": "2026-08-20T23:37:12.240Z",
+    "creators": [
+      "Organization: AliceLabs LLC",
+      "Tool: UTA-SBOM-Generator-1.0"
+    ],
+    "licenseListVersion": "3.20"
+  },
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-root",
+      "name": "@marketnow/trust-gateway",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "https://github.com/eddyflores100-lang/universal-trust-adapter.git",
+      "filesAnalyzed": false,
+      "licenseDeclared": "AL-1.0",
+      "licenseConcluded": "AL-1.0",
+      "copyrightText": "NOASSERTION",
+      "supplier": "Organization: AliceLabs LLC <info@alicelabs.site>",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "564994cae9447f2fa55ab8bf9cee2d9380f59d5ea0f3216fb557c1092d2d4f24"
+        }
+      ],
+      "homepage": "https://github.com/eddyflores100-lang/universal-trust-adapter",
+      "description": "UTA Trust Gateway — MCP middleware for enforcing trust decisions on agent tool calls"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-marketnow-trust-core",
+      "name": "@marketnow/trust-core",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "checksums": []
+    },
+    {
+      "SPDXID": "SPDXRef-Package-marketnow-trust-adapters",
+      "name": "@marketnow/trust-adapters",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "checksums": []
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-Package-root",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-marketnow-trust-core"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-root",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-marketnow-trust-adapters"
+    }
+  ],
+  "documentDescribes": [
+    "SPDXRef-Package-root"
+  ],
+  "documentHash": "sha256:e8219b71ea23a8cc3b20a3a1e3b63efdf76ad93f569a5dac4e3c816bbe1f28a9"
+}
