@@ -120,3 +120,35 @@ export class TrustRegistry {
     }
   }
 }
+
+// ============================================================================
+// External Reputation Hook — @topstar_ai asked about this
+// ============================================================================
+
+export interface ExternalReputationSource {
+  name: string;
+  fetchScore(subject_id: string): Promise<{ score: number; confidence: 'low' | 'medium' | 'high'; source: string }>;
+}
+
+declare module './trust-registry.js' {
+  interface TrustRegistry {
+    externalSources: ExternalReputationSource[];
+    addExternalSource(source: ExternalReputationSource): void;
+    getExternalScore(subject_id: string): Promise<{ score: number; confidence: string; source: string } | null>;
+  }
+}
+
+// Extend the TrustRegistry class prototype
+TrustRegistry.prototype.externalSources = [];
+TrustRegistry.prototype.addExternalSource = function(source: ExternalReputationSource) {
+  this.externalSources.push(source);
+};
+TrustRegistry.prototype.getExternalScore = async function(subject_id: string) {
+  for (const source of this.externalSources) {
+    try {
+      const result = await source.fetchScore(subject_id);
+      if (result) return result;
+    } catch { /* skip failed source */ }
+  }
+  return null;
+};
