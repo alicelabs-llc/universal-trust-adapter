@@ -1,0 +1,16 @@
+{
+  "schema": "jwks-1.0",
+  "issuer": "AliceLabs LLC",
+  "domain": "marketnow.site",
+  "keys": [
+    {
+      "kid": "alicelabs-ed25519-2026-08",
+      "kty": "OKP",
+      "crv": "Ed25519",
+      "alg": "EdDSA",
+      "use": "sig",
+      "x": "PUBLIC_KEY_PLACEHOLDER_REPLACE_WITH_REAL_ED25519_PUBKEY_BASE64URL"
+    }
+  ],
+  "note": "Replace PUBLIC_KEY_PLACEHOLDER with real Ed25519 public key before deploying to production. Generate with: openssl genpkey -algorithm Ed25519 -out private.pem && openssl pkey -in private.pem -pubout -outform DER | tail -c 32 | base64 | tr '+/' '-_' | tr -d '='"
+}

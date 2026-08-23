@@ -168,6 +168,70 @@
       "destination": "/badges/atc-verified.svg"
     },
     {
+      "source": "/download/uts.tgz",
+      "destination": "/uta-packages/marketnow-uts-2.0.0.tgz"
+    },
+    {
+      "source": "/download/trust-core.tgz",
+      "destination": "/uta-packages/marketnow-trust-core-1.0.0.tgz"
+    },
+    {
+      "source": "/download/trust-adapters.tgz",
+      "destination": "/uta-packages/marketnow-trust-adapters-1.0.0.tgz"
+    },
+    {
+      "source": "/download/trust-gateway.tgz",
+      "destination": "/uta-packages/marketnow-trust-gateway-1.0.0.tgz"
+    },
+    {
+      "source": "/download/:pkg.:ext",
+      "destination": "/uta-packages/:pkg.:ext"
+    },
+    {
+      "source": "/download/uts-:ver.tgz",
+      "destination": "/uta-packages/marketnow-uts-:ver.tgz"
+    },
+    {
+      "source": "/download/trust-core-:ver.tgz",
+      "destination": "/uta-packages/marketnow-trust-core-:ver.tgz"
+    },
+    {
+      "source": "/latest/uts.tgz",
+      "destination": "/uta-packages/marketnow-uts-2.0.0.tgz"
+    },
+    {
+      "source": "/latest/trust-core.tgz",
+      "destination": "/uta-packages/marketnow-trust-core-1.0.0.tgz"
+    },
+    {
+      "source": "/latest/trust-adapters.tgz",
+      "destination": "/uta-packages/marketnow-trust-adapters-1.0.0.tgz"
+    },
+    {
+      "source": "/latest/trust-gateway.tgz",
+      "destination": "/uta-packages/marketnow-trust-gateway-1.0.0.tgz"
+    },
+    {
+      "source": "/releases/latest.json",
+      "destination": "/api/resilience"
+    },
+    {
+      "source": "/releases/latest",
+      "destination": "/releases.html"
+    },
+    {
+      "source": "/trust-card.json",
+      "destination": "/api/trust-card"
+    },
+    {
+      "source": "/resilience.json",
+      "destination": "/api/resilience"
+    },
+    {
+      "source": "/install.sh",
+      "destination": "/install.sh"
+    },
+    {
       "source": "/((?!api/|for-agents|landing-pages/|tools/|acp|atc).*)",
       "destination": "/index.html"
     },
@@ -379,6 +443,74 @@
         {
           "key": "Content-Type",
           "value": "text/plain; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/(uta-packages|download|latest)/(.+\\.tgz)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/gzip"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "attachment"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/(resilience|trust-card)\\.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, s-maxage=600"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/api/(resilience|trust-card)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, s-maxage=600"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/install.sh",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/x-shellscript; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300"
         }
       ]
     }
