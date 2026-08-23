@@ -215,3 +215,39 @@ Stage Summary:
   - Wire the SBOM generator into the CI/CD pipeline so that `npm run build` emits sbom.spdx.json, and bind its documentHash into ATC v3 artifact_binding.sbom_hash.
   - Build the MCP Gateway integration tests (currently ⚠️ partial in README).
   - Implement SLSA provenance generation (currently 📄 documented only in supply-chain/CI-CD.md).
+
+---
+Task ID: anti-ban-resilience-2026-08-24
+Agent: Super Z (main)
+Task: Investigar por qué GitHub está desactualizado, actualizar en todos lados, crear rutas alternativas anti-ban
+
+Work Log:
+- Diagnosticé que GitHub repo `eddyflores100-lang/universal-trust-adapter` está 3 commits detrás del local
+- Verifiqué que NO hay GitHub PAT configurado (git push falla con "could not read Username")
+- Verifiqué que `.npm-token` es placeholder (texto `PAST...HERE`), no un token real
+- Verifiqué que `.vercel-token` no tiene scope válido (error "No teams available")
+- Descubrí que **4 canales de descarga independientes YA funcionan**:
+  1. NPM registry → `https://registry.npmjs.org/@marketnow/uts/-/uts-2.0.0.tgz`
+  2. jsDelivr CDN (mirror gratuito) → `https://cdn.jsdelivr.net/npm/@marketnow/uts@2.0.0/`
+  3. unpkg CDN (mirror gratuito) → `https://unpkg.com/@marketnow/uts@2.0.0/`
+  4. marketnow.site directo → `https://marketnow.site/uta-packages/marketnow-uts-2.0.0.tgz`
+- Confirmé sha256 idéntico entre NPM y marketnow.site (352e90e0...) — código 100% verificado
+- Creé nuevos endpoints para marketnow.site (listos para deploy):
+  - `public/install.sh` (4125 bytes) — instalador multi-fuente que prueba 4 canales en orden
+  - `public/resilience.json` (6520 bytes) — manifiesto machine-readable con 6 packages × 4 channels
+  - `public/.well-known/keys.json` — JWKS placeholder para firma Ed25519
+  - `public/releases.html` — página human-readable que renderiza el manifest
+  - `api/resilience.js` — serverless function que retorna el manifest como JSON
+  - `api/trust-card.js` — serverless function que retorna ATC-format trust card
+  - `vercel.json` actualizado con 16 nuevas rewrite rules (download/, /latest/, /install.sh, /trust-card.json, /resilience.json)
+- Creé git bundle con todos los commits: `/home/z/my-project/download/uta-to-push.bundle` (50 MB)
+- Creé zip con los archivos para deploy: `/home/z/my-project/download/marketnow-update-pkg.zip` (10 KB)
+- Creé plan de deploy: `/home/z/my-project/download/DEPLOY_PLAN.md` (4.8 KB con 3 pasos accionables)
+
+Stage Summary:
+- **Canales anti-ban que YA funcionan**: NPM, jsDelivr, unpkg, marketnow.site directo (4 independientes, sha256 verificado)
+- **GitHub está desactualizado** porque no hay PAT configurado — git bundle listo para push
+- **Endpoints faltantes en marketnow.site** (install.sh, resilience.json, trust-card.json, /download/*.tgz) — archivos listos en local, requieren deploy via Vercel
+- **Tokens a refrescar**: GitHub PAT (no existe), NPM token (placeholder), Vercel token (sin scope)
+- **Credibilidad pública**: ya tenemos 4 canales verificados + el plan de deploy actualizará los pretty URLs
+

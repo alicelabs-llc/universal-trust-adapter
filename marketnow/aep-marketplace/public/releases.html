@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Releases — Universal Trust Adapter</title>
+  <style>
+    body { font-family: -apple-system, system-ui, sans-serif; max-width: 800px; margin: 2rem auto; padding: 1rem; line-height: 1.6; color: #0f172a; }
+    h1 { border-bottom: 2px solid #0ea5e9; padding-bottom: .5rem; }
+    .pkg { background: #f8fafc; padding: 1rem; margin: 1rem 0; border-radius: 8px; border-left: 4px solid #0ea5e9; }
+    .pkg h3 { margin-top: 0; }
+    .channels { display: grid; grid-template-columns: 1fr; gap: 0.5rem; margin-top: 0.5rem; }
+    .channel { font-family: monospace; font-size: 0.875rem; padding: 0.5rem; background: white; border-radius: 4px; word-break: break-all; }
+    .channel strong { color: #0ea5e9; }
+    code { background: #f1f5f9; padding: 0.125rem 0.375rem; border-radius: 3px; font-size: 0.875em; }
+  </style>
+</head>
+<body>
+  <h1>Releases — Universal Trust Adapter (UTA)</h1>
+  <p>This page lists all available download channels. <strong>If any one channel is blocked (e.g., GitHub bans us), the others continue working.</strong></p>
+
+  <div id="manifest" style="margin: 2rem 0; padding: 1rem; background: #fef3c7; border-radius: 8px;">
+    <strong>Machine-readable manifest:</strong><br>
+    <code>curl https://marketnow.site/resilience.json | jq</code>
+  </div>
+
+  <h2>Packages</h2>
+  <div id="packages">Loading manifest...</div>
+
+  <h2>One-line installer</h2>
+  <pre><code>curl -fsSL https://marketnow.site/install.sh | bash</code></pre>
+
+  <script>
+    fetch('/resilience.json').then(r => r.json()).then(manifest => {
+      const html = manifest.packages.map(p => `
+        <div class="pkg">
+          <h3>${p.name} <code>v${p.version}</code></h3>
+          <p>${p.description || ''}</p>
+          <div class="channels">
+            ${p.downloads.map((url, i) => `<div class="channel"><strong>${['NPM','jsDelivr','unpkg','marketnow.site'][i] || 'Channel '+(i+1)}:</strong> ${url}</div>`).join('')}
+          </div>
+        </div>
+      `).join('');
+      document.getElementById('packages').innerHTML = html;
+    }).catch(e => {
+      document.getElementById('packages').innerHTML = '<p>Error loading manifest. Try refreshing.</p>';
+    });
+  </script>
+</body>
+</html>
