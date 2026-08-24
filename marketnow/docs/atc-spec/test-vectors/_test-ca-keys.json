@@ -1,0 +1,11 @@
+{
+  "schema": "atc-test-ca-manifest/v1",
+  "description": "Test CA keypair for ATC/1.0 test vectors. This is a TEST keypair — do not use in production.",
+  "generated_at": "2026-08-24T18:37:02.049Z",
+  "ca_algorithm": "Ed25519 (RFC 8032)",
+  "ca_public_key_spki_base64": "MCowBQYDK2VwAyEADcQ79Ek32y3FYqI5p4UOJNNIjuh51iDAJb3FEsZOjqY=",
+  "ca_private_key_pkcs8_base64": "MC4CAQAwBQYDK2VwBCIEIDZkg/bxJndAFJdsaNdw7Aji3+mZti1mLi/VxDgsp9Qn",
+  "agent_public_key_spki_base64": "MCowBQYDK2VwAyEAIwuahjXj9aToVb56jInv0SXihmAUTY2yuebsy6w0ykI=",
+  "agent_private_key_pkcs8_base64": "MC4CAQAwBQYDK2VwBCIEINQMxVb4IZns9o3SLhoi79fGZBNFd5auo9lRbl4jGPui",
+  "note": "These keys are intentionally published so anyone can re-derive signatures in any language (Python, Go, Rust) and verify the ATC test vectors reproducibly."
+}

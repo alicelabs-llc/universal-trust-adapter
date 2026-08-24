@@ -1,12 +1,12 @@
 {
   "description": "An ATC with expires_at in the past (2026-01-02). Should fail with \"ATC expired\".",
-  "ca_public_key": "MCowBQYDK2VwAyEAEMrdFxjw1vHP4R+2C+FrB/gmuz7BqwvsAtRFJoPkzCU=",
+  "ca_public_key": "MCowBQYDK2VwAyEADcQ79Ek32y3FYqI5p4UOJNNIjuh51iDAJb3FEsZOjqY=",
   "atc": {
     "spec_version": "ATC/1.0",
     "card_id": "ATC-2026-0000001",
     "issuer": {
       "ca_id": "alicelabs-sentinel-ca",
-      "ca_public_key": "MCowBQYDK2VwAyEAEMrdFxjw1vHP4R+2C+FrB/gmuz7BqwvsAtRFJoPkzCU=",
+      "ca_public_key": "MCowBQYDK2VwAyEADcQ79Ek32y3FYqI5p4UOJNNIjuh51iDAJb3FEsZOjqY=",
       "ca_algorithm": "Ed25519",
       "ca_url": "https://marketnow.site/api/atc"
     },
@@ -17,10 +17,10 @@
       "owner_contact": "mailto:test@alicelabs.site"
     },
     "attestation": {
-      "subject_public_key": "MCowBQYDK2VwAyEA3e0fmnVutq/T88PdCFjJDNYdDO8ajyEmeK40nxC6W1M=",
+      "subject_public_key": "MCowBQYDK2VwAyEAIwuahjXj9aToVb56jInv0SXihmAUTY2yuebsy6w0ykI=",
       "subject_algorithm": "Ed25519",
-      "signature": "ZD+35wm/YOOzk24/LLIwdhrSzT/thfJJTH0VaG6z8lbHlCVRbl8GI7GzSQy/q7yQ/6s1Q7aymtNLD7yn5pO+Cg==",
-      "signed_payload_hash": "b056d89b5045c4c5ee0452faaf31aff8e088fc4388e9ceb2cc8c89e386f895b9"
+      "signature": "HjiD0IHMd8rnCF1Es8jpbNb9YSTq7Xrdp3+VpC+9O5Q+Oz2tsx69HexQAAohoT7ZKLWbfjAVrQFLRJAS/HqKCg==",
+      "signed_payload_hash": "85214b4d41e9ddcdba22009293fef133fa4cf7110b3366c5462bf0a02e3b40c8"
     },
     "capabilities": {
       "filesystem": {
@@ -84,9 +84,9 @@
       "revocation_check_required": true
     },
     "validity": {
-      "issued_at": "2026-01-01T00:00:00Z",
+      "issued_at": "2026-08-09T23:30:24.219Z",
       "expires_at": "2026-01-02T00:00:00Z",
-      "max_ttl_days": 1
+      "max_ttl_days": 90
     }
   },
   "expected": {
