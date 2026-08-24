@@ -1,6 +1,6 @@
 {
   "schema": "marketnow.resilience.v1",
-  "generated_at": "2026-08-24T00:00:00Z",
+  "generated_at": "2026-08-25T00:00:00Z",
   "publisher": {
     "name": "AliceLabs LLC",
     "domain": "marketnow.site",
@@ -198,5 +198,6 @@
         }
       ]
     }
-  ]
+  ],
+  "last_updated_reason": "Repointed all GitHub URLs to alicelabs-llc org (account flagged)"
 }

@@ -28,7 +28,7 @@ export default function handler(req, res) {
       npm_packages_total: 7,
       npm_monthly_downloads_total: 2204,
       cdn_mirrors: 4,
-      github_repo: "https://github.com/eddyflores100-lang/universal-trust-adapter",
+      github_repo: "https://github.com/alicelabs-llc/universal-trust-adapter",
       fallback_channels_if_github_banned: [
         "https://registry.npmjs.org/@marketnow/uts",
         "https://cdn.jsdelivr.net/npm/@marketnow/uts@2.0.0/",
