@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marketnow.site/schemas/uts-v1.json",
+  "title": "Universal Trust Schema (UTS) v1.0",
+  "description": "Canonical internal representation that all trust formats (ATC, EAT-AI, ZTA, A2A, MCP, W3C VC, OAuth) translate to and from. Like Unicode is the internal format that all OSes use, UTS is the internal format of trust data.",
+  "type": "object",
+  "required": ["uts_version", "subject", "identity", "trust", "capabilities", "provenance", "lifecycle", "format"],
+  "properties": {
+    "uts_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "subject": {
+      "type": "object",
+      "required": ["id", "name", "type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier: agent ID, MCP server slug, runtime name, etc."
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable name"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["agent", "tool", "service", "human", "organization", "runtime"]
+        },
+        "description": {"type": "string"}
+      }
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "public_key": {"type": "string", "description": "PEM or base64-encoded"},
+        "key_algorithm": {
+          "type": "string",
+          "enum": ["Ed25519", "ECDSA-P256", "RSA-2048", "secp256k1", "ES256", "RS256"]
+        },
+        "key_id": {"type": "string", "description": "Identifier for key rotation"},
+        "attestation": {
+          "type": "object",
+          "properties": {
+            "type": {"type": "string", "enum": ["SGX", "TrustZone", "SEV-SNP", "Nitro", "None"]},
+            "quote": {"type": "string", "description": "TEE attestation quote, base64"}
+          }
+        },
+        "oauth_subject": {"type": "string"},
+        "did": {"type": "string", "pattern": "^did:[a-z0-9]+:.*$"}
+      }
+    },
+    "trust": {
+      "type": "object",
+      "required": ["score", "confidence", "assessor", "assessed_at"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10,
+          "description": "Numeric trust score 0-10 (legacy)"
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["low", "medium", "high"]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/TrustEvidence"}
+        },
+        "assessor": {
+          "type": "string",
+          "description": "Who assessed trust: 'MarketNow' | 'Anthropic' | 'self' | did:key:..."
+        },
+        "assessed_at": {"type": "string", "format": "date-time"},
+        "expires_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "properties": {
+        "provides": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Capabilities provided: ['search', 'read', 'write', ...]"
+        },
+        "requires": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Capabilities required: ['auth', 'payment', ...]"
+        },
+        "protocols": {
+          "type": "array",
+          "items": {"type": "string", "enum": ["mcp", "a2a", "jsonrpc", "rest", "grpc", "websocket"]},
+          "description": "Communication protocols supported"
+        },
+        "rate_limits": {
+          "type": "object",
+          "properties": {
+            "requests": {"type": "integer"},
+            "window": {"type": "string", "description": "e.g. '60s', '1h', '1d'"}
+          }
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "properties": {
+        "max_spend_usd": {"type": "number"},
+        "allowed_actions": {"type": "array", "items": {"type": "string"}},
+        "denied_actions": {"type": "array", "items": {"type": "string"}},
+        "allowed_networks": {"type": "array", "items": {"type": "string"}},
+        "filesystem_access": {"type": "string", "enum": ["none", "read", "read-write"]},
+        "shell_access": {"type": "string", "enum": ["none", "sandboxed", "unrestricted"]}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["source"],
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": ["marketnow", "claude", "mcp-registry", "a2a-network", "self-signed", "external"]
+        },
+        "source_url": {"type": "string", "format": "uri"},
+        "artifact_hash": {"type": "string", "pattern": "^sha256:[0-9a-fA-F]{64}$"},
+        "commit_sha": {"type": "string", "pattern": "^[0-9a-fA-F]{40}$"},
+        "registry_id": {"type": "string"}
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "required": ["issued_at", "revoked", "version"],
+      "properties": {
+        "issued_at": {"type": "string", "format": "date-time"},
+        "expires_at": {"type": "string", "format": "date-time"},
+        "revoked": {"type": "boolean"},
+        "revocation_url": {"type": "string", "format": "uri"},
+        "version": {"type": "string"}
+      }
+    },
+    "format": {
+      "type": "object",
+      "required": ["type", "version"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["atc-v2", "atc-v3", "eat-ai", "zta", "a2a-card", "mcp-card", "w3c-vc", "oauth-token", "spiffe-svid"]
+        },
+        "version": {"type": "string"},
+        "raw": {"description": "Original payload in its native format (any)"}
+      }
+    }
+  },
+  "$defs": {
+    "TrustEvidence": {
+      "type": "object",
+      "required": ["type", "source", "result", "timestamp"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["sentinel-audit", "static-analysis", "sandbox-test", "human-review", "on-chain-verification", "tee-attestation", "owasp-mcp-scan", "runtime-observation"]
+        },
+        "source": {"type": "string"},
+        "result": {"type": "string", "enum": ["pass", "fail", "warn", "info"]},
+        "details": {"type": "string"},
+        "timestamp": {"type": "string", "format": "date-time"},
+        "evidence_hash": {"type": "string"}
+      }
+    }
+  }
+}
