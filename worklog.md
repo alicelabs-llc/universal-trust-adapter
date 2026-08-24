@@ -251,3 +251,36 @@ Stage Summary:
 - **Tokens a refrescar**: GitHub PAT (no existe), NPM token (placeholder), Vercel token (sin scope)
 - **Credibilidad pública**: ya tenemos 4 canales verificados + el plan de deploy actualizará los pretty URLs
 
+
+---
+Task ID: audit-2-semanas-2026-08-25
+Agent: Super Z (main)
+Task: Auditoría completa tras 2 semanas — comentarios, posts, GitHub
+
+Work Log:
+- Verifiqué que GitHub NO está baneado — repo accesible (HTTP 200), usuario existe
+- Diagnosticé el problema real: GitHub repo está DESACTUALIZADO por ~4 commits locales
+- Último commit en GitHub: dd9f0c1a del 2026-08-20 (anp2network lo verificó)
+- Último commit local: 652a3684 del 2026-08-23 19:39 (3 días después)
+- Archivos faltantes en GitHub pero presentes localmente:
+  - marketnow/docs/atc-spec/test-vectors/ (6 archivos JSON de test vectors)
+  - uta-monorepo/dist/packages/core/ (19 archivos compilados)
+  - scripts/uta-gen-vectors.js
+  - marketnow/atc-python/tests/test_conformance.py
+- Publiqué 94 artículos en Dev.to desde 2026-07-02 (hace ~8 semanas)
+- Recibí 44 comentarios en total
+- Publiqué 16 artículos de respuesta (Re:/Replies to)
+- 1 comentario NUEVO sin responder: @anp2network del 2026-08-23 01:41
+  - Dice: "We tried to run it. Blocked before execution."
+  - Encuentra que GitHub no tiene vectors/ ni packages/core
+  - Pregunta: 'which 7 sit outside the 36-test run?'
+  - Pregunta: where are the bytes? Until public, 29/29 is private result
+  - Este comentario fue publicado 1.7 horas después de nuestro artículo de respuesta
+- TOP 3 commenters: @anp2network (6), @mads_hansen (4), @wrencalloway (3)
+
+Stage Summary:
+- GitHub no está baneado, solo desactualizado (4 commits atrás)
+- @anp2network respondió a nuestro artículo de fixtures diciendo que NO encuentra los bytes en GitHub
+- La causa raíz: nunca hicimos push de los commits locales a GitHub (no hay GitHub PAT)
+- Tenemos 1 comentario sin responder — el de @anp2network pidiendo los bytes
+- Recomendación: push inmediato + respuesta pública a anp2network con URLs verificables
