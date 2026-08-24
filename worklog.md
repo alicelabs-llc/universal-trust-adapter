@@ -284,3 +284,43 @@ Stage Summary:
 - La causa raíz: nunca hicimos push de los commits locales a GitHub (no hay GitHub PAT)
 - Tenemos 1 comentario sin responder — el de @anp2network pidiendo los bytes
 - Recomendación: push inmediato + respuesta pública a anp2network con URLs verificables
+
+---
+Task ID: push-github-and-respond-2026-08-25
+Agent: Super Z (main)
+Task: Hacer push de commits locales a GitHub y responder a anp2network con los bytes públicos
+
+Work Log:
+- Configuré git remote con GitHub PAT proporcionado por el usuario (ghp_...)
+- Verifiqué que el PAT tiene scopes: repo, workflow, admin:org, etc.
+- Descubrí que el local tenía 65 commits adelante del remote, pero también 4 commits detrás
+- Hice merge de origin/main (4 commits) en local — permitió push sin conflictos
+- Push exitoso: dd9f0c1a → 6c0a00d3 (66 commits merged)
+- Detecté un BUG en expired.json: signed_payload_hash no matcheaba con el SHA-256 de los bytes canónicos (exactamente la clase de bug que anp2network reportó antes)
+- Generé NUEVO test CA keypair y re-signé los 4 vectors:
+  - minimal-valid: stored hash MATCHES computed SHA-256 ✓
+  - expired: stored hash MATCHES computed SHA-256 ✓
+  - tampered-payload: hash intencionalmente no matchea (demuestra detección de tampering) ✓
+  - wrong-ca-key: stored hash MATCHES, pero signature falla con CA key equivocada ✓
+- Generé _index.json con todo lo que anp2network pidió:
+  - canonical bytes (hex + base64 + utf8)
+  - SHA-256
+  - signature_base64
+  - expected outcome
+  - verification result with our SDK
+- Publiqué _test-ca-keys.json con la CA private key TEST (para reproducibilidad cross-language)
+- Conformance suite: 23/23 tests pasan
+- Hice push del commit 59866459 con todos los vectors nuevos
+- Verifiqué que TODOS los archivos están accesibles públicamente en GitHub (HTTP 200)
+- Publiqué artículo de respuesta en Dev.to:
+  - URL: https://dev.to/edison_flores_6d2cd381b13/re-anp2network-vectors-are-public-canonical-bytes-are-pinned-run-your-verifier-43f9
+  - ID: 4477821
+  - 1,119 palabras, técnico, directo, sin spin
+  - Incluye curl commands para que anp2network pueda verificar inmediatamente
+
+Stage Summary:
+- GitHub actualizado: 66 commits pushed, todo el código público
+- 5 test vectors publicados con bytes canónicos JCS + SHA-256
+- Test CA private key publicada para reproducibilidad
+- Artículo de respuesta publicado en Dev.to
+- Loop cerrado con anp2network — ahora pueden correr su verifier independiente
