@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0.0",
+  "published_at": "2026-08-20T00:00:00Z",
+  "publisher": "AliceLabs LLC",
+  "total_vectors": 9,
+  "vectors": [
+    {
+      "id": "valid-atc",
+      "file": "valid-atc.json",
+      "type": "valid",
+      "format": "atc-v2",
+      "expected_verify": true
+    },
+    {
+      "id": "invalid-signature",
+      "file": "invalid-signature.json",
+      "type": "invalid",
+      "format": "atc-v2",
+      "expected_verify": false,
+      "reason": "tampered signature"
+    },
+    {
+      "id": "expired-atc",
+      "file": "expired-atc.json",
+      "type": "invalid",
+      "format": "atc-v2",
+      "expected_verify": false,
+      "reason": "expired"
+    },
+    {
+      "id": "revoked-atc",
+      "file": "revoked-atc.json",
+      "type": "invalid",
+      "format": "atc-v2",
+      "expected_verify": false,
+      "reason": "revoked"
+    },
+    {
+      "id": "valid-zta",
+      "file": "valid-zta.json",
+      "type": "valid",
+      "format": "zta",
+      "expected_verify": true
+    },
+    {
+      "id": "valid-a2a",
+      "file": "valid-a2a.json",
+      "type": "valid",
+      "format": "a2a-card",
+      "expected_verify": true
+    },
+    {
+      "id": "valid-mcp",
+      "file": "valid-mcp.json",
+      "type": "valid",
+      "format": "mcp-card",
+      "expected_verify": true
+    },
+    {
+      "id": "atc-to-uts",
+      "file": "atc-to-uts.json",
+      "type": "translation",
+      "from": "atc-v2",
+      "to": "uts",
+      "expected_fields": [
+        "subject.name",
+        "trust.score",
+        "format.raw"
+      ]
+    },
+    {
+      "id": "uts-to-zta",
+      "file": "uts-to-zta.json",
+      "type": "translation",
+      "from": "uts",
+      "to": "zta",
+      "expected_fields": [
+        "zta_version",
+        "agent_name",
+        "trust.score"
+      ]
+    }
+  ],
+  "usage": "Any UTA implementation should pass all 9 vectors. Conformance = 9/9 pass.",
+  "license": "CC-BY-4.0 \u2014 open for anyone to use and implement against"
+}

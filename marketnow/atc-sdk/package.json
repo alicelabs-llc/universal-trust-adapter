@@ -1,7 +1,7 @@
 {
   "name": "agent-trust-card",
   "version": "1.1.1",
-  "description": "ATC/1.0 SDK v1.1.0 — issue, verify, and inspect Agent Trust Cards in any JavaScript runtime (Node.js >=18, Deno, Bun, browsers). Now with HTTP revocation list fetch (fetch_revocation option, 5s timeout). Framework-agnostic, zero external deps beyond `canonicalize` (RFC 8785 JCS). Includes CLI (`atc verify card.json`, `atc issue`, `atc inspect`), sync verifyATCSync() for non-async callers, async verifyATC() with optional revocation list fetch. Implements the ATC/1.0 specification (10 controls: ATC-001 Identity through ATC-010 Runtime Trust, 8 required + 2 optional) using Ed25519 (RFC 8032) signatures and RFC 8785 JCS canonical JSON. Maintained by AliceLabs LLC (Wyoming, USA, 2026).",
+  "description": "ATC SDK v1.1.1 \u2014 issue, verify, and inspect Agent Trust Cards. Supports ATC/1.0 (single-sig Ed25519) and ATC v3.0 (multi-format multi-sig: Ed25519/JCS, EAT-CWT/CBOR, W3C VC JSON-LD). Includes CLI (`atc verify card.json`, `atc issue`, `atc inspect`), sync verifyATCSync(), async verifyATC() with optional revocation list fetch. Implements 10 controls (ATC-001 Identity through ATC-010 Runtime Trust, 8 required + 2 optional) using Ed25519 (RFC 8032) signatures and RFC 8785 JCS canonical JSON. Maintained by AliceLabs LLC (Wyoming, USA, 2026).",
   "type": "module",
   "main": "./src/index.mjs",
   "exports": {
@@ -19,34 +19,39 @@
     "dev": "node --watch bin/atc.mjs"
   },
   "keywords": [
-    "atc",
-    "agent-trust-card",
-    "atc-spec",
-    "ai-agents",
-    "agent-identity",
-    "agent-security",
-    "agent-trust",
-    "ed25519",
-    "rfc-8032",
-    "rfc-8785",
-    "jcs",
-    "canonical-json",
     "mcp",
-    "model-context-protocol",
-    "a2a",
-    "cli",
+    "ai-agents",
     "sdk",
+    "rfc8785",
+    "aliceLabs",
     "verifiable-credentials",
+    "cli",
+    "rfc-8785",
+    "atc-spec",
+    "a2a",
+    "atc-v3",
+    "agent-trust-card",
+    "rfc-8032",
+    "agent-security",
+    "eat-cwt",
+    "ed25519",
     "trust-layer",
-    "aliceLabs"
+    "jcs",
+    "w3c-vc",
+    "multi-sig",
+    "agent-trust",
+    "canonical-json",
+    "model-context-protocol",
+    "agent-identity",
+    "atc"
   ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
   "license": "MNNC-1.0",
   "homepage": "https://marketnow.site/atc",
   "repository": {
     "type": "git",
-    "url": "https://marketnow.site/atc",
-    "directory": "atc-sdk"
+    "url": "git+https://github.com/alicelabs-llc/universal-trust-adapter.git",
+    "directory": "marketnow/atc-sdk"
   },
   "bugs": {
     "url": "mailto:support@alicelabs.site"
