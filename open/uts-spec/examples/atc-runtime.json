@@ -1,0 +1,83 @@
+{
+  "atc_version": "2.0.0-rfc-01",
+  "id": "urn:uuid:c3d4e5f6-3456-789a-bcde-f23456789012",
+  "type": ["VerifiableCredential", "AgentTrustCredential"],
+
+  "subject_type": "runtime",
+
+  "issuer": {
+    "did": "did:key:z6MkqXn1E1R684J7yL8pW9yP2G8vN3xQ1z",
+    "name": "AliceLabs Runtime Registrar",
+    "trust_engine_version": "ATC-Issuer-1.0",
+    "trust_registry_entry": "https://atc.alicelabs.site/api/trust-registry#al-ca"
+  },
+
+  "issuance_date": "2026-08-19T00:00:00Z",
+  "expiration_date": "2026-11-19T00:00:00Z",
+
+  "credential_subject": {
+    "runtime_name": "cursor",
+    "runtime_version": "0.42.0",
+    "vendor_did": "did:key:z6Mk_anysphere_vendor_public_key_placeholder",
+    "vendor_org": "Anysphere",
+    "platform": "darwin-arm64"
+  },
+
+  "attestation": {
+    "score": 8.2,
+    "trust_level": "A",
+    "risk": "LOW",
+    "engine_layers": ["L1", "L2"]
+  },
+
+  "trust_claims": {
+    "filesystem_write": false,
+    "network_access": "restricted",
+    "prompt_injection_scan": "passed",
+    "runtime_observed": true,
+    "differential_execution_passed": false,
+    "human_review": true,
+    "provenance_verified": true,
+
+    "owasp_top_10": {
+      "mcp01_tool_poisoning": "passed",
+      "mcp02_excessive_permissions": "passed",
+      "mcp03_data_exfiltration": "passed",
+      "mcp04_prompt_injection": "passed",
+      "mcp05_ssrf": "passed",
+      "mcp06_command_injection": "passed",
+      "mcp07_credential_leak": "passed",
+      "mcp08_supply_chain": "partial",
+      "mcp09_runtime_sandbox": "passed",
+      "mcp10_audit_logging": "passed"
+    },
+
+    "anthropic_zta": {
+      "identity_verification": "passed",
+      "least_privilege": "passed",
+      "continuous_verification": "passed",
+      "explicit_deny_default": "passed",
+      "assume_breach": "passed",
+      "microsegmentation": "passed"
+    },
+
+    "community_reviews": 12,
+    "incident_count_30d": 0
+  },
+
+  "credential_status": {
+    "method": "OCSP",
+    "endpoint": "https://atc.alicelabs.site/api/v2/ocsp",
+    "stapling_supported": true,
+    "last_checked": 1755460000
+  },
+
+  "proof": {
+    "type": "Ed25519Signature2020",
+    "created": "2026-08-19T00:00:00Z",
+    "verification_method": "did:key:z6MkqXn1E1R684J7yL8pW9yP2G8vN3xQ1z#z6MkqXn1E1R684J7yL8pW9yP2G8vN3xQ1z",
+    "proof_purpose": "assertionMethod",
+    "proof_bytes": "z5C0mB4vDeFgHiJkLmNoPqRsTuVwXyZ0123456789abcdefghijklmnopqrstuvwxyzABCDEF",
+    "jcs_canonicalized": true
+  }
+}

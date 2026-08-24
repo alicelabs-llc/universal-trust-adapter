@@ -1,0 +1,73 @@
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC-BY-NC-ND-4.0)
+
+Copyright (c) 2026 AliceLabs LLC. All rights reserved.
+
+This license applies to the Universal Trust Schema (UTS) specification,
+including the markdown specification text, JSON Schema, examples, and any
+derivative documentation found in the `open/uts-spec/` directory.
+
+────────────────────────────────────────────────────────────────────────────────
+SUMMARY (FULL TEXT BELOW)
+────────────────────────────────────────────────────────────────────────────────
+
+You are free to:
+
+  ✅ Share — copy and redistribute the material in any medium or format
+      for non-commercial purposes only.
+
+  ✅ Read — read, study, and reference the specification in academic,
+      educational, and personal contexts.
+
+  ✅ Implement — implement software that conforms to the UTS specification,
+      for non-commercial or commercial purposes (subject to the underlying
+      software licenses of the implementations you use).
+
+Under the following terms:
+
+  ⚠️ Attribution — You must give appropriate credit, provide a link to the
+      license, and indicate if changes were made. You may do so in any
+      reasonable manner, but not in any way that suggests the licensor endorses
+      you or your use.
+
+  ⚠️ NonCommercial — You may not use the material for commercial purposes.
+      Note: implementing software that conforms to the spec is permitted
+      for commercial use; only redistributing/selling the spec text itself
+      is restricted.
+
+  ⚠️ NoDerivatives — If you remix, transform, or build upon the material,
+      you may not distribute the modified material. To propose changes to
+      the specification, submit them via pull request to the official
+      repository; AliceLabs LLC will incorporate accepted changes and
+      republish under this license.
+
+  ⚠️ No additional restrictions — You may not apply legal terms or
+      technological measures that legally restrict others from doing anything
+      the license permits.
+
+────────────────────────────────────────────────────────────────────────────────
+FULL LEGAL TEXT
+────────────────────────────────────────────────────────────────────────────────
+
+By exercising the Licensed Rights (defined below), You accept and agree to be
+bound by the terms and conditions of this Creative Commons Attribution-
+NonCommercial-NoDerivatives 4.0 International Public License ("Public
+License"). To the extent this Public License may be interpreted as a contract,
+You are granted the Licensed Rights in consideration of Your acceptance of
+these terms and conditions, and the Licensor grants You such rights in
+consideration of benefits the Licensor receives from making the Licensed
+Material available under these terms and conditions.
+
+[Full CC-BY-NC-ND-4.0 legal text available at:
+ https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode]
+
+────────────────────────────────────────────────────────────────────────────────
+CONTACT
+────────────────────────────────────────────────────────────────────────────────
+
+AliceLabs LLC
+Wyoming, USA
+Email: legal@alicelabs.site
+Web: https://alicelabs.site
+
+For commercial licensing of the UTS specification or its implementations,
+contact: legal@alicelabs.site
