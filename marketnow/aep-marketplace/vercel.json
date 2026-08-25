@@ -1,9 +1,69 @@
 {
+  "buildCommand": "npm install && npm run build",
   "outputDirectory": "dist",
-  "buildCommand": null,
-  "installCommand": null,
-  "framework": null,
+  "framework": "vite",
   "rewrites": [
-    {"source": "/((?!api/|uta/|trust/|policies/|security/|for-agents|landing-pages/|tools/|acp|atc|\\.well-known/).*)", "destination": "/index.html"}
+    {"source": "/api/trust-score", "destination": "/api/atc?action=trust"},
+    {"source": "/api/execute", "destination": "/api/agent-economy?_mode=execute"},
+    {"source": "/api/stacks", "destination": "/api/agent-economy?_mode=stacks"},
+    {"source": "/api/stream", "destination": "/api/agent-economy?_mode=stream"},
+    {"source": "/api/interceptor", "destination": "/api/agent-economy?_mode=interceptor"},
+    {"source": "/api/skills/:id", "destination": "/api/search?_mode=detail"},
+    {"source": "/api/recommend", "destination": "/api/search?_mode=recommend"},
+    {"source": "/api/submit-skill", "destination": "/api/atc"},
+    {"source": "/api/referrals", "destination": "/api/atc"},
+    {"source": "/api/agent-analytics", "destination": "/api/security?view=analytics"},
+    {"source": "/api/quarantine", "destination": "/api/security?view=quarantine"},
+    {"source": "/api/honeypot", "destination": "/api/security?view=honeypot"},
+    {"source": "/api/threat-intel", "destination": "/api/security?view=threat-intel"},
+    {"source": "/((?!api/|uta/|trust/|policies/|security/|for-agents|landing-pages/|tools/|acp|atc|\\.well-known/).*)", "destination": "/index.html"},
+    {"source": "/for-agents", "destination": "/for-agents.html"},
+    {"source": "/acp", "destination": "/atc"},
+    {"source": "/atc", "destination": "/atc/index.html"},
+    {"source": "/atc/", "destination": "/atc/index.html"},
+    {"source": "/atc/playground", "destination": "/atc/playground.html"},
+    {"source": "/atc/spec", "destination": "/atc/spec/SPEC.md"},
+    {"source": "/atc/conformance", "destination": "/atc/spec/CONFORMANCE.md"},
+    {"source": "/atc/prior-art", "destination": "/atc/spec/PRIOR-ART-TIMELINE.md"},
+    {"source": "/atc/schema", "destination": "/atc/spec/atc-1.0.json"},
+    {"source": "/atc/sdk-readme", "destination": "/atc/spec/SDK-README.md"},
+    {"source": "/atc/mcp-audit", "destination": "/atc/spec/MCP-AUDIT.md"},
+    {"source": "/atc/verification-log", "destination": "/atc/spec/VERIFICATION-LOG.md"},
+    {"source": "/badges/atc-compatible.svg", "destination": "/badges/atc-compatible.svg"},
+    {"source": "/badges/atc-verified.svg", "destination": "/badges/atc-verified.svg"},
+    {"source": "/best-mcp-marketplace", "destination": "/best-mcp-marketplace.html"},
+    {"source": "/guides/how-to-publish-mcp-server", "destination": "/guides/how-to-publish-mcp-server.html"},
+    {"source": "/guides/how-to-monetize-mcp-tools", "destination": "/guides/how-to-monetize-mcp-tools.html"}
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {"key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, max-age=0"},
+        {"key": "Pragma", "value": "no-cache"},
+        {"key": "Expires", "value": "0"},
+        {"key": "X-Content-Type-Options", "value": "nosniff"},
+        {"key": "Referrer-Policy", "value": "no-referrer"},
+        {"key": "X-Frame-Options", "value": "DENY"},
+        {"key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload"}
+      ]
+    },
+    {
+      "source": "/((?!api/).*)",
+      "headers": [
+        {"key": "Cache-Control", "value": "public, max-age=300, s-maxage=600, stale-while-revalidate=86400"},
+        {"key": "X-Frame-Options", "value": "DENY"},
+        {"key": "X-Content-Type-Options", "value": "nosniff"},
+        {"key": "Referrer-Policy", "value": "strict-origin-when-cross-origin"},
+        {"key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()"},
+        {"key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload"}
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}
+      ]
+    }
   ]
 }
