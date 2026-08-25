@@ -44,8 +44,8 @@ export default function AgentLanding() {
   ];
 
   const features = [
-    { icon: '🛡️', title: 'UTA 12-stage trust pipeline', desc: '1.2M checks, 80 quarantined, 8,288 verified safe' },
-    { icon: '🔑', title: 'Agent Trust Card (ATC)', desc: 'Ed25519 (RFC 8032) signed identity, RFC 8785 JCS canonical JSON' },
+    { icon: '🛡️', title: 'UTA 12-stage trust pipeline', desc: '1.2M checks, 80 quarantined, 8,742 auto-scanned, 22 human-reviewed' },
+    { icon: '🔑', title: 'Agent Trust Card (ATC)', desc: 'Ed25519 (RFC 8032) + RFC 8785 JCS. 8 format adapters, 5 test vectors, 23/23 conformance' },
     { icon: '🚦', title: 'Runtime Interceptor', desc: '5 policy rules: blocks .env, rm -rf, process spawns, system writes' },
     { icon: '📋', title: 'OWASP MCP Cheat Sheet', desc: '12 controls mapped (4 live, 8 planned v5.1-v6.0)' },
     { icon: '🤝', title: t('home.feat.humanLoopTitle'), desc: t('home.feat.humanLoopDesc') },
@@ -125,7 +125,7 @@ export default function AgentLanding() {
 
             {/* Install command */}
             <div className="inline-block px-4 py-2 rounded-lg bg-black/40 border border-white/5 mb-2">
-              <code className="text-[#00F299] text-xs font-mono">npx -y @marketnow/install &lt;slug&gt;</code>
+              <code className="text-[#00F299] text-xs font-mono">npx -y marketnow-install-stack</code>
               <span className="text-zinc-600 text-xs ml-2">{t('home.or')}</span>
               <code className="text-[#00d1ff] text-xs font-mono ml-2">npx -y marketnow-mcp</code>
             </div>
@@ -139,7 +139,7 @@ export default function AgentLanding() {
             <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
               <div>
                 <h2 className="text-white text-2xl font-bold mb-1">Sentinel Transparency Report</h2>
-                <p className="text-zinc-400 text-sm">1,211,488 checks · 1,030 threats detected · 80 quarantined · 8,288 verified safe</p>
+                <p className="text-zinc-400 text-sm">1,211,488 checks · 1,030 threats detected · 80 quarantined · 8,742 auto-scanned · 22 human-reviewed · 0 maintainer-verified</p>
               </div>
               <a href="/api/audit-report.json" target="_blank" rel="noopener" className="text-[#00F299] text-sm hover:underline">View full report →</a>
             </div>
@@ -157,8 +157,8 @@ export default function AgentLanding() {
                 <div className="text-zinc-500 text-xs mt-1">quarantined</div>
               </div>
               <div className="p-4 rounded-xl bg-black/40 border border-[#00F299]/20">
-                <div className="text-[#00F299] text-2xl font-bold font-mono">8,288</div>
-                <div className="text-zinc-500 text-xs mt-1">verified safe</div>
+                <div className="text-[#00F299] text-2xl font-bold font-mono">8,742</div>
+                <div className="text-zinc-500 text-xs mt-1">auto-scanned</div>
               </div>
             </div>
             <div className="mt-4 p-3 rounded-lg bg-black/40 border border-white/5">
@@ -195,22 +195,37 @@ export default function AgentLanding() {
           </section>
         )}
 
-        {/* ============ TRY ATC PLAYGROUND ============ */}
+        {/* ============ UTA — UNIVERSAL TRUST ADAPTER ============ */}
         <section className="max-w-5xl mx-auto px-6 pb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }} className="premium-card p-6 md:p-8">
             <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
               <div>
-                <h2 className="text-white text-2xl font-bold mb-1">Try ATC v3 — Issue & Verify in your browser</h2>
-                <p className="text-zinc-400 text-sm">The Agent Trust Card spec, live. Issue a card in 30 seconds, verify any ATC against the open spec. No signup, no install, no backend.</p>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00d1ff]/10 border border-[#00d1ff]/20 mb-3">
+                  <span className="text-[#00d1ff] text-[10px] font-mono tracking-wider">UTA v1.1.0</span>
+                </div>
+                <h2 className="text-white text-2xl font-bold mb-1">Universal Trust Adapter (UTA)</h2>
+                <p className="text-zinc-400 text-sm">The USB-C of agent trust. Translates between 8 trust credential formats via canonical Universal Trust Schema (UTS v2.0.0).</p>
               </div>
-              <a href="/atc/playground" target="_blank" rel="noopener" className="px-4 py-2 bg-[#00F299] text-black font-bold rounded-lg hover:bg-[#00F299]/90 transition-all text-sm whitespace-nowrap">
-                Open Playground →
+              <a href="https://github.com/alicelabs-llc/universal-trust-adapter" target="_blank" rel="noopener" className="px-4 py-2 bg-[#00F299] text-black font-bold rounded-lg hover:bg-[#00F299]/90 transition-all text-sm whitespace-nowrap">
+                View Repo →
               </a>
             </div>
+
+            {/* 8 format adapters */}
+            <div className="mb-4">
+              <div className="text-zinc-500 text-[10px] mb-2">8 FORMAT ADAPTERS</div>
+              <div className="flex flex-wrap gap-2">
+                {['ATC', 'EAT-AI', 'ZTA', 'A2A', 'MCP Card', 'W3C VC', 'OAuth', 'SPIFFE'].map(fmt => (
+                  <span key={fmt} className="px-2 py-1 rounded bg-[#00d1ff]/10 text-[#00d1ff] text-[10px] font-mono font-bold border border-[#00d1ff]/20">{fmt}</span>
+                ))}
+              </div>
+            </div>
+
+            {/* Stats grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
               <div className="p-3 rounded-lg bg-black/40 border border-white/5">
-                <div className="text-[#00F299] text-xl font-bold font-mono">10</div>
-                <div className="text-zinc-500 text-[10px] mt-1">controls in spec</div>
+                <div className="text-[#00F299] text-xl font-bold font-mono">12</div>
+                <div className="text-zinc-500 text-[10px] mt-1">verification stages</div>
               </div>
               <div className="p-3 rounded-lg bg-black/40 border border-white/5">
                 <div className="text-[#00d1ff] text-xl font-bold font-mono">Ed25519</div>
@@ -221,18 +236,45 @@ export default function AgentLanding() {
                 <div className="text-zinc-500 text-[10px] mt-1">JCS canonical JSON</div>
               </div>
               <div className="p-3 rounded-lg bg-black/40 border border-white/5">
-                <div className="text-[#00d1ff] text-xl font-bold font-mono">3 SDKs</div>
-                <div className="text-zinc-500 text-[10px] mt-1">JS / Python / Rust</div>
+                <div className="text-[#00d1ff] text-xl font-bold font-mono">23/23</div>
+                <div className="text-zinc-500 text-[10px] mt-1">conformance tests</div>
               </div>
             </div>
+
+            {/* ATC versions */}
+            <div className="mb-4 p-3 rounded-lg bg-black/40 border border-white/5">
+              <div className="text-zinc-500 text-[10px] mb-2">ATC SPECIFICATIONS</div>
+              <div className="flex flex-wrap gap-3 text-xs">
+                <a href="/uta/docs/atc-spec/SPEC.md" target="_blank" rel="noopener" className="text-[#00F299] hover:underline">ATC/1.0 spec (public, stable) →</a>
+                <a href="/uta/docs/atc-spec/RFC-ATC-v3-Draft-00.md" target="_blank" rel="noopener" className="text-[#00d1ff] hover:underline">ATC v3.0 RFC Draft (multi-sig) →</a>
+                <a href="/uta/docs/atc-spec/test-vectors/_index.json" target="_blank" rel="noopener" className="text-[#00F299] hover:underline">Test vectors (5 frozen) →</a>
+                <a href="/uta/docs/atc-spec/test-vectors/_test-ca-keys.json" target="_blank" rel="noopener" className="text-[#00d1ff] hover:underline">Test CA keys →</a>
+              </div>
+            </div>
+
+            {/* NPM packages */}
+            <div className="mb-4 p-3 rounded-lg bg-black/40 border border-white/5">
+              <div className="text-zinc-500 text-[10px] mb-2">NPM PACKAGES (2,339 downloads/mo)</div>
+              <div className="flex flex-wrap gap-2">
+                <code className="text-[#00F299] text-[10px] font-mono px-2 py-1 rounded bg-[#00F299]/5">marketnow-mcp@1.10.1</code>
+                <code className="text-[#00d1ff] text-[10px] font-mono px-2 py-1 rounded bg-[#00d1ff]/5">agent-trust-card@1.1.2</code>
+                <code className="text-[#00F299] text-[10px] font-mono px-2 py-1 rounded bg-[#00F299]/5">@marketnow/trust-core@1.0.1</code>
+                <code className="text-[#00d1ff] text-[10px] font-mono px-2 py-1 rounded bg-[#00d1ff]/5">@marketnow/uts@2.0.1</code>
+                <code className="text-[#00F299] text-[10px] font-mono px-2 py-1 rounded bg-[#00F299]/5">@marketnow/trust-adapters@1.0.1</code>
+                <code className="text-[#00d1ff] text-[10px] font-mono px-2 py-1 rounded bg-[#00d1ff]/5">@marketnow/trust-gateway@1.0.1</code>
+              </div>
+            </div>
+
+            {/* Links + install */}
             <div className="p-3 rounded-lg bg-black/40 border border-white/5 flex items-center gap-3 flex-wrap">
               <span className="text-zinc-500 text-[10px]">Install:</span>
-              <code className="text-[#00F299] text-xs font-mono">npm install agent-trust-card</code>
+              <code className="text-[#00F299] text-xs font-mono">npm install agent-trust-card@1.1.2</code>
               <span className="text-zinc-700">·</span>
-              <code className="text-[#00d1ff] text-xs font-mono">pip install agent-trust-card</code>
-              <span className="text-zinc-700">·</span>
-              <code className="text-[#00d1ff] text-xs font-mono">cargo add agent-trust-card</code>
-              <a href="/atc/spec" target="_blank" rel="noopener" className="text-[#00F299] text-xs hover:underline ml-auto">Read spec →</a>
+              <code className="text-[#00d1ff] text-xs font-mono">npx -y marketnow-mcp@1.10.1</code>
+              <a href="/uta/README.md" target="_blank" rel="noopener" className="text-[#00F299] text-xs hover:underline ml-auto">README →</a>
+              <a href="/uta/CONTRIBUTING.md" target="_blank" rel="noopener" className="text-[#00d1ff] text-xs hover:underline">CONTRIBUTING →</a>
+              <a href="/uta/SECURITY.md" target="_blank" rel="noopener" className="text-[#00F299] text-xs hover:underline">SECURITY →</a>
+              <a href="/trust/audit-status.json" target="_blank" rel="noopener" className="text-[#00d1ff] text-xs hover:underline">AUDIT (14/14 fixed) →</a>
             </div>
           </motion.div>
         </section>
@@ -262,7 +304,7 @@ export default function AgentLanding() {
                 <div className="text-3xl mb-3">⚡</div>
                 <h3 className="text-white font-bold text-sm mb-2">{t('home.step3Title')}</h3>
                 <p className="text-zinc-400 text-xs leading-relaxed">
-                  <code className="text-[#00F299]">npx -y @marketnow/install &lt;slug&gt;</code>
+                  <code className="text-[#00F299]">npx -y marketnow-install-stack</code>
                   <br />{t('home.step3Desc')}
                 </p>
               </div>
