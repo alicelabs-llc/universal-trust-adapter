@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ATC/1.0 — Agent Trust Card Specification</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ATC/1.0 — the open specification for Agent Trust Cards. SSL certificates for AI agents. Ed25519 + RFC 8785 JCS + SHA-256. 10 controls, 8 required.">
+<style>
+  :root { --bg: #0a0e14; --surface: #11161f; --surface-2: #1a1f2e; --border: #2a3142; --text: #e6edf3; --dim: #8b949e; --green: #00f299; --cyan: #00d1ff; --yellow: #ffd700; --red: #ff5b5b; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.6; font-size: 14px; }
+  a { color: var(--cyan); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .container { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+  header { border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 32px; }
+  header h1 { font-size: 28px; margin: 0 0 8px; }
+  header .meta { color: var(--dim); font-size: 12px; }
+  header .badges { margin-top: 12px; }
+  header .badges a { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 600; margin-right: 4px; }
+  header .badges .green { background: rgba(0,242,153,0.15); color: var(--green); }
+  header .badges .cyan { background: rgba(0,209,255,0.15); color: var(--cyan); }
+  header .badges .yellow { background: rgba(255,215,0,0.15); color: var(--yellow); }
+  .nav { display: flex; gap: 16px; flex-wrap: wrap; padding: 12px 0; border-bottom: 1px solid var(--border); margin-bottom: 24px; font-size: 13px; }
+  .nav a { padding: 6px 12px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
+  .nav a:hover { border-color: var(--cyan); }
+  .nav a.active { background: var(--cyan); color: #000; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .card h2 { margin: 0 0 8px; font-size: 14px; color: var(--cyan); }
+  .card p { margin: 0 0 12px; color: var(--dim); font-size: 13px; }
+  .card .links { font-size: 12px; }
+  .card .links a { display: block; padding: 4px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 12px; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  th { color: var(--dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+  td code { background: var(--surface-2); padding: 2px 6px; border-radius: 3px; font-family: ui-monospace, Menlo, monospace; font-size: 11px; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 10px; font-weight: 600; }
+  .pill.green { background: rgba(0,242,153,0.15); color: var(--green); }
+  .pill.yellow { background: rgba(255,215,0,0.15); color: var(--yellow); }
+  pre { background: var(--surface-2); padding: 12px; border-radius: 4px; overflow-x: auto; font-size: 12px; }
+  code { font-family: ui-monospace, Menlo, monospace; }
+  footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--dim); font-size: 12px; text-align: center; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 16px 0; }
+  .stat { background: var(--surface-2); padding: 12px; border-radius: 4px; text-align: center; }
+  .stat .v { font-size: 18px; font-weight: 700; color: var(--green); }
+  .stat .l { font-size: 10px; color: var(--dim); margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>ATC/1.0 — Agent Trust Card</h1>
+  <div class="meta">Open specification · v1.0.0 · published 2026-08-10 · maintained by AliceLabs LLC</div>
+  <div class="badges">
+    <a class="green" href="/atc/spec/SPEC.md">📖 Spec</a>
+    <a class="cyan" href="/atc/playground">🎮 Playground</a>
+    <a class="yellow" href="/atc/conformance">✓ Conformance</a>
+    <a class="green" href="/atc/prior-art">⏱ Prior Art</a>
+  </div>
+</header>
+
+<div class="nav">
+  <a href="/atc">Overview</a>
+  <a href="/atc/spec/SPEC.md">Spec</a>
+  <a href="/atc/playground">Playground</a>
+  <a href="/atc/conformance">Conformance</a>
+  <a href="/atc/prior-art">Prior Art Timeline</a>
+  <a href="/atc/spec/atc-1.0.json">JSON Schema</a>
+  <a href="/atc/sdk-readme">SDK</a>
+  <a href="/atc/mcp-audit">MCP Audit</a>
+</div>
+
+<p>ATC/1.0 is a formal, versioned, testable specification for <strong>Agent Trust Cards</strong> — cryptographic credentials that let AI agents prove their identity, declare their capabilities, and carry their security audit evidence. Any peer agent can verify them offline without calling home.</p>
+
+<p>Think of it as <strong>SSL certificates for AI agents</strong>.</p>
+
+<div class="stats">
+  <div class="stat"><div class="v">10</div><div class="l">controls</div></div>
+  <div class="stat"><div class="v">8</div><div class="l">required</div></div>
+  <div class="stat"><div class="v">Ed25519</div><div class="l">signatures</div></div>
+  <div class="stat"><div class="v">RFC 8785</div><div class="l">JCS canonical</div></div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>The 8 required controls</h2>
+    <p>ATC/1.0 covers identity, attestation, capabilities, evidence, risk, signature, revocation, and expiration.</p>
+    <table>
+      <thead><tr><th>#</th><th>ID</th><th>What it covers</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><code>ATC-001</code></td><td>Identity</td></tr>
+        <tr><td>2</td><td><code>ATC-002</code></td><td>Attestation (Ed25519 + CA)</td></tr>
+        <tr><td>3</td><td><code>ATC-003</code></td><td>Capabilities (5 categories)</td></tr>
+        <tr><td>4</td><td><code>ATC-004</code></td><td>Evidence (audit pipeline output)</td></tr>
+        <tr><td>5</td><td><code>ATC-005</code></td><td>Risk (trust score 0-10)</td></tr>
+        <tr><td>6</td><td><code>ATC-006</code></td><td>Signature (Ed25519 + RFC 8785 JCS + SHA-256)</td></tr>
+        <tr><td>7</td><td><code>ATC-007</code></td><td>Revocation (ocsp/crl/simple_json)</td></tr>
+        <tr><td>8</td><td><code>ATC-008</code></td><td>Expiration (issued_at, expires_at)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Quick start (5 minutes)</h2>
+    <p>Install the SDK and issue your first ATC:</p>
+    <pre><code>npm install agent-trust-card</code></pre>
+    <pre><code>import {
+  generateKeyPair,
+  issueATC,
+  verifyATC
+} from 'agent-trust-card';
+
+const ca = generateKeyPair();
+const agent = generateKeyPair();
+
+const atc = issueATC(ca, agent, {
+  card_id: 'ATC-2026-0000001',
+  identity: { /* ... */ },
+  capabilities: { /* ... */ },
+  evidence: { /* ... */ },
+  risk: { trust_score: 9, /* ... */ },
+});
+
+const result = await verifyATC(atc, {
+  fetch_revocation: true
+});
+
+console.log(result.valid); // → true</code></pre>
+    <p style="margin-top:12px;">Or try the <a href="/atc/playground">browser playground</a> (zero install, uses WebCrypto).</p>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>3 SDKs available</h2>
+    <p>Same ATC format, same signatures — cross-language compatible.</p>
+    <div class="links">
+      <a href="https://www.npmjs.com/package/agent-trust-card">📦 npm: agent-trust-card@1.1.1 (Node.js)</a>
+      <a href="https://www.npmjs.com/package/marketnow-mcp">📦 npm: marketnow-mcp@1.10.0 (MCP server, 13 tools)</a>
+      <span style="color: var(--dim);">🐍 pip install agent-trust-card (Python — coming soon to PyPI)</span>
+      <span style="color: var(--dim);">🦀 cargo add agent-trust-card (Rust — coming soon to crates.io)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Live resources</h2>
+    <p>Everything you need to verify the implementation works:</p>
+    <div class="links">
+      <a href="/atc/spec/SPEC.md">📖 Full specification</a>
+      <a href="/atc/spec/atc-1.0.json">📋 JSON Schema (draft 2020-12)</a>
+      <a href="/atc/conformance">✓ Conformance tests (23/23 passing)</a>
+      <a href="/atc/prior-art">⏱ Prior art timeline (honest chronology)</a>
+      <a href="/atc/playground">🎮 Browser playground (WebCrypto)</a>
+      <a href="/badges/atc-compatible.svg">🏅 ATC Compatible badge</a>
+      <a href="/api/atc?action=ca-key">🔑 MarketNow CA public key (Ed25519)</a>
+      <a href="/api/atc?action=revocation-list">📋 Live revocation list (CRL)</a>
+      <a href="/api/audit-report.json">📊 Public audit report</a>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Why ATC/1.0 exists</h2>
+  <p>The market is converging on agent trust infrastructure from multiple directions — Microsoft AutoGen, OpenAI Cookbook, A2A Agent Cards, OpenA2A AIP, OATI, and others. ATC/1.0 is the first formal, versioned, testable specification for Agent Trust Cards.</p>
+  <p>See the <a href="/atc/prior-art">prior art timeline</a> for the honest chronology of ATC and adjacent work. We acknowledge prior work (A2A Agent Card, AgentCards, OpenA2A AIP, OATI) and do not claim to have invented "agent identity" — we claim to have shipped the first formal spec.</p>
+  <p><strong>The question is no longer "who thought of agent trust first" — multiple parties did. The question is "who shipped a formal, versioned, testable specification first" — and the answer is ATC/1.0, dated 2026-08-10.</strong></p>
+</div>
+
+<div class="card">
+  <h2>Badges</h2>
+  <p>If your project implements ATC/1.0, add this badge to your README:</p>
+  <pre><code>[![ATC Compatible](https://marketnow.site/badges/atc-compatible.svg)](https://marketnow.site/atc/conformance)</code></pre>
+  <p style="margin-top:8px;"><img src="/badges/atc-compatible.svg" alt="ATC Compatible" style="vertical-align: middle;"> <img src="/badges/atc-verified.svg" alt="ATC Verified" style="vertical-align: middle;"></p>
+</div>
+
+<div class="card">
+  <h2>Conformance</h2>
+  <p>A conformant ATC/1.0 implementation MUST pass all 8 required controls. The conformance test suite has 23 assertions across 8 test cases, all passing:</p>
+  <ul style="color: var(--dim); font-size: 12px; padding-left: 20px;">
+    <li><span class="pill green">PASS</span> Test 1: Valid ATC verifies all 8 controls</li>
+    <li><span class="pill green">PASS</span> Test 2: Tampered payload fails ATC-006</li>
+    <li><span class="pill green">PASS</span> Test 3: Wrong CA key fails ATC-006</li>
+    <li><span class="pill green">PASS</span> Test 4: Invalid card_id format</li>
+    <li><span class="pill green">PASS</span> Test 5: Invalid capability enum</li>
+    <li><span class="pill green">PASS</span> Test 6: Trust score out of range</li>
+    <li><span class="pill green">PASS</span> Test 7: ATC expired</li>
+    <li><span class="pill green">PASS</span> Test 8: Missing required fields</li>
+  </ul>
+  <p><a href="/atc/conformance">View full conformance matrix →</a></p>
+</div>
+
+<div class="card">
+  <h2>Try it now — verify a real ATC against the live MarketNow CA</h2>
+  <p>The MarketNow Sentinel CA has issued 57 real ATCs (3 revoked). You can verify any of them against the open spec:</p>
+  <pre><code>curl https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-7777670</code></pre>
+  <p style="margin-top:8px;">Or use the SDK:</p>
+  <pre><code>import { verifyATC } from 'agent-trust-card';
+
+const res = await fetch('https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-7777670');
+const atc = await res.json();
+const result = await verifyATC(atc, { fetch_revocation: true });
+
+console.log(result.valid);  // → true
+console.log(result.controls_passed.length);  // → 8
+console.log(result.revoked);  // → false</code></pre>
+</div>
+
+<footer>
+  <p>ATC/1.0 — Agent Trust Card Specification · Maintained by <a href="https://marketnow.site">AliceLabs LLC</a> (Wyoming, USA, 2026) · Founder: Edison Flores</p>
+  <p>License: spec is open (W3C CG-FSA terms for contributors), reference implementation is MNNC-1.0 (AliceLabs LLC Proprietary), test vectors are CC0 (public domain)</p>
+  <p style="margin-top: 12px; font-size: 11px; color: var(--dim);">Note: GitHub has flagged our account (`edgarfloresguerra2011-a11y`), so all spec content is mirrored here at <code>marketnow.site/atc/</code>. The GitHub repo remains the source of truth for version control but is currently not publicly visible while we resolve the flag.</p>
+</footer>
+</div>
+</body>
+</html>

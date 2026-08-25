@@ -1,0 +1,116 @@
+{
+  "service": "MarketNow",
+  "page": "Standards Commitment",
+  "version": "1.0.0",
+  "effective_date": "2026-07-02",
+  "url": "https://marketnow.site/standards",
+  "positioning": {
+    "what_we_are": "The trust layer for agent commerce. Not the biggest catalog — the safest place for an agent to spend real money.",
+    "what_we_are_not": "A discovery registry. Use registry.modelcontextprotocol.io, Smithery, Glama, or PulseMCP for discovery.",
+    "wedge": "The official MCP registry solves discovery but has 64.7M entries from 1,691 packages — massive duplication, zero signal, active supply-chain attacks. MarketNow is the trust layer on top of any catalog.",
+    "calibration": "ACP, AP2, x402, and MPP all compete and combine simultaneously. We design for interoperability, not 'pick one and hope.' The real risk in 2026 is being left out of whatever standard wins."
+  },
+  "standards": [
+    {
+      "id": "x402",
+      "name": "x402 — HTTP 402 Payment Required",
+      "status": "implementing",
+      "governance": "Linux Foundation (Coinbase, Cloudflare, Stripe, Google, Visa as founders)",
+      "what": "Revives HTTP status code 402 for native HTTP-level payments. Server returns 402 with payment challenge; client pays on-chain and retries with payment proof. Built on USDC on Base.",
+      "why": "Removes us from 'home-rolled crypto' territory. x402 is a recognized standard with major backers. Any agent that speaks x402 can pay us without custom integration.",
+      "our_plan": [
+        { "phase": "done", "item": "USDC on Base with on-chain verification (current flow)" },
+        { "phase": "in_progress", "item": "Wrap flow in x402 semantics — return HTTP 402 with payment challenge, accept retry with payment proof" },
+        { "phase": "roadmap", "item": "Full x402 protocol compliance, including facilitates protocol for intermediaries" }
+      ],
+      "implemented": {
+        "http_status": 402,
+        "headers": ["WWW-Authenticate: x402", "X-Payment-Amount", "X-Payment-Token", "X-Payment-Chain", "X-Payment-Contract", "X-Payment-To"],
+        "response_body_includes": ["x402.accepts", "x402.retry_instructions"],
+        "endpoint": "POST /api/agent-purchase (when payment required)"
+      },
+      "link": "https://x402.org"
+    },
+    {
+      "id": "ap2",
+      "name": "AP2 — Agent Payments Protocol",
+      "status": "implementing",
+      "governance": "Google (Visa, Mastercard, PayPal, Coinbase, +60 partners)",
+      "what": "Signed declarations that define what an agent can do: spend limits, scope, expiry. Portable across platforms, cryptographically verifiable, instantly revocable.",
+      "why": "AP2 has 60+ partners including major payment networks. An agent with an AP2 mandate from another platform should be able to spend on MarketNow without re-authorization.",
+      "our_plan": [
+        { "phase": "done", "item": "Mandate concept (limit, per-purchase cap, categories, expiry, revocation)" },
+        { "phase": "done", "item": "Human-in-loop by default (notify mode); silent requires explicit opt-in" },
+        { "phase": "in_progress", "item": "Accept ap2_format, ap2_mandate_id, ap2_signature, ap2_issuer fields in mandate creation" },
+        { "phase": "roadmap", "item": "Cross-platform mandate verification (accept AP2 mandates issued elsewhere)" }
+      ],
+      "implemented": {
+        "fields_accepted": ["ap2_format", "ap2_mandate_id", "ap2_signature", "ap2_issuer"],
+        "stored_in_mandate": "ap2: { format, mandate_id, signature, issuer, verified }",
+        "verification_status": "not_yet_verified (we store but do not yet cryptographically verify AP2 signatures)"
+      },
+      "link": "https://developers.google.com/pay/agent-payments"
+    },
+    {
+      "id": "server-cards",
+      "name": "MCP Server Cards",
+      "status": "monitoring",
+      "governance": "MCP / Linux Foundation (roadmap 2026)",
+      "what": "Standardized metadata via .well-known URLs for MCP server discovery. Similar to our agent.json but as a shared standard.",
+      "why": "Server Cards will let registries pull consistent metadata from any MCP server. Our agent.json is a superset today, but we should align to the standard when it stabilizes.",
+      "our_plan": [
+        { "phase": "done", "item": "agent.json with capabilities, schema, trust model, all API endpoints" },
+        { "phase": "done", "item": ".well-known/mcp/server-card.json for Smithery compatibility" },
+        { "phase": "monitoring", "item": "Track MCP working group for Server Cards spec finalization" },
+        { "phase": "roadmap", "item": "Migrate agent.json to be a strict superset of Server Cards once spec stabilizes" }
+      ],
+      "link": "https://modelcontextprotocol.io"
+    },
+    {
+      "id": "namespace",
+      "name": "Official Registry Namespace Verification",
+      "status": "planning",
+      "governance": "Linux Foundation / MCP Registry",
+      "what": "The official MCP registry verifies namespaces via GitHub OAuth or DNS. Gives real identity to skill publishers.",
+      "why": "Today any skill can claim any author. With namespace verification, a skill claiming to be from 'anthropics/mcp-server-foo' must actually come from the anthropics GitHub org.",
+      "our_plan": [
+        { "phase": "planning", "item": "Integrate registry API to verify publisher identity at submission time" },
+        { "phase": "roadmap", "item": "Display verified publisher badge on skill detail pages" },
+        { "phase": "roadmap", "item": "Require namespace verification for 'maintainer-verified' review_status" }
+      ],
+      "link": "https://registry.modelcontextprotocol.io"
+    },
+    {
+      "id": "task-scoped",
+      "name": "Task-Scoped Mandates",
+      "status": "roadmap",
+      "governance": "Industry direction (ACP, AP2, MPP converging)",
+      "what": "Mandates scoped by task, not just $ limit and time. 'This mandate is only valid for completing task X.' More restrictive than $500/90 days.",
+      "why": "Industry is moving toward task-scoped authorization. Being more restrictive on autonomy earns trust.",
+      "our_plan": [
+        { "phase": "roadmap", "item": "Add task_description field to mandates (free text, agent-declared)" },
+        { "phase": "roadmap", "item": "Add task_hash field (deterministic hash of task description + agent ID)" },
+        { "phase": "roadmap", "item": "Surface task scope in notifications so principal knows what the spend was FOR" }
+      ],
+      "implemented": {
+        "fields_accepted": ["task_description", "task_hash"],
+        "stored_in_mandate": "taskScope: { description, hash }",
+        "enforcement": "not_yet_enforced (we store but do not yet verify task scope at spend time)"
+      },
+      "link": "https://github.com/anthropics/agent-communication-protocol"
+    }
+  ],
+  "honest_disclosure": [
+    "We have not yet completed full x402 or AP2 compliance. We are implementing, not done.",
+    "Our current mandate JSON is conceptually identical to AP2 but not wire-compatible yet. Migration in progress.",
+    "Our current USDC flow is functionally similar to x402 (server returns payment challenge, client pays, server verifies) but does not use the HTTP 402 status code yet. Wrapping in progress. UPDATE: HTTP 402 now returned by /api/agent-purchase when payment required.",
+    "Every status on this page is a git commit. When something moves from 'implementing' to 'done,' you will see it here first."
+  ],
+  "commit_history_url": "https://github.com/alicelabs-llc/marketnow/commits/master/aep-marketplace/src/pages/Standards.jsx",
+  "related_pages": {
+    "trust_roadmap": "https://marketnow.site/trust",
+    "about": "https://marketnow.site/about",
+    "mandates": "https://marketnow.site/mandates",
+    "policies_json": "https://marketnow.site/api/policies.json"
+  }
+}

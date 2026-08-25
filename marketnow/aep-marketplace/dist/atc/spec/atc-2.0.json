@@ -1,0 +1,634 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marketnow.site/schemas/atc-2.0.json",
+  "title": "ATC/2.0 — Agent Trust Card",
+  "description": "Schema for ATC/2.0 Agent Trust Cards. Supersedes atc-1.0.json. Breaking changes from v1: multi-signature `signatures` array (replaces single `signature`), `evidence_chain` array with per-item signatures, structured `delegation` block (max depth 5), `algorithm` enum accepts `Ed25519` and `ML-DSA-65`, `pq_migration_path` for post-quantum readiness, content-addressed `card_id` derived from canonical payload hash, `trust_decision` block embedding the trust decision in the card, explicit `spec_version` and `schema_version` fields.",
+  "type": "object",
+  "required": [
+    "spec_version",
+    "schema_version",
+    "card_id",
+    "issuer",
+    "identity",
+    "attestation",
+    "capabilities",
+    "evidence_chain",
+    "risk",
+    "trust_decision",
+    "multi_sig",
+    "signatures",
+    "revocation",
+    "validity"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "spec_version": {
+      "type": "string",
+      "const": "ATC/2.0",
+      "description": "Specification version. MUST be 'ATC/2.0'."
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "2.0.0",
+      "description": "Schema version. MUST be '2.0.0'. Used by verifiers to dispatch to the correct schema."
+    },
+    "card_id": {
+      "type": "string",
+      "pattern": "^ATC-v2-[a-f0-9]{16}$",
+      "description": "Content-addressed card ID. Derived from the first 16 hex chars of the SHA-256 of the canonical payload (RFC 8785 JCS, with card_id, signatures[].value, and attestation.signed_payload_hash blanked). Format: ATC-v2-{16 hex chars}."
+    },
+    "issuer": {
+      "type": "object",
+      "required": ["ca_id", "ca_public_key", "ca_algorithm", "ca_url", "ca_key_id"],
+      "additionalProperties": false,
+      "properties": {
+        "ca_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 64,
+          "description": "CA identifier (e.g. 'alicelabs-sentinel-ca')."
+        },
+        "ca_public_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]{43,}={0,2}$",
+          "description": "Base64 public key of the CA. For Ed25519, 32 raw bytes (43+1 base64 chars) or SPKI (44 base64 chars). For ML-DSA-65, larger."
+        },
+        "ca_algorithm": {
+          "type": "string",
+          "enum": ["Ed25519", "ML-DSA-65"],
+          "description": "Signature algorithm used by this CA. ATC/2.0 supports Ed25519 (RFC 8032) and ML-DSA-65 (FIPS 204)."
+        },
+        "ca_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL where the CA publishes its key + revocation list."
+        },
+        "ca_key_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Opaque identifier for this CA key. Used by verifiers to look up the correct key during rotation. e.g. 'sentinel-ca-2026-q4'."
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "required": ["agent_id", "agent_name", "agent_owner"],
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$",
+          "description": "Globally unique agent identifier. UUID v4 RECOMMENDED."
+        },
+        "agent_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "agent_owner": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "owner_contact": {
+          "type": "string",
+          "format": "uri",
+          "description": "mailto: or https: URL for contacting the owner."
+        }
+      }
+    },
+    "attestation": {
+      "type": "object",
+      "required": ["subject_public_key", "subject_algorithm", "canonicalization", "signed_payload_hash"],
+      "additionalProperties": false,
+      "properties": {
+        "subject_public_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]{43,}={0,2}$",
+          "description": "Base64 public key of the agent. Ed25519: 32 raw bytes. ML-DSA-65: larger."
+        },
+        "subject_algorithm": {
+          "type": "string",
+          "enum": ["Ed25519", "ML-DSA-65"],
+          "description": "Signature algorithm of the subject's keypair."
+        },
+        "pq_migration_path": {
+          "type": "object",
+          "required": ["target_algorithm", "reissue_before", "migration_status"],
+          "additionalProperties": false,
+          "description": "Post-quantum migration path. RECOMMENDED for Ed25519 cards. MAY be omitted for ML-DSA-65 cards (already PQ).",
+          "properties": {
+            "target_algorithm": {
+              "type": "string",
+              "enum": ["ML-DSA-65"],
+              "description": "Target PQ algorithm the card should be re-issued with."
+            },
+            "reissue_before": {
+              "type": "string",
+              "format": "date-time",
+              "description": "ISO 8601 timestamp by which the card MUST be re-issued with the PQ algorithm. Verifiers SHOULD downgrade trust for cards past this date."
+            },
+            "migration_status": {
+              "type": "string",
+              "enum": ["not_started", "in_progress", "complete"],
+              "description": "Current migration status."
+            }
+          }
+        },
+        "canonicalization": {
+          "type": "string",
+          "const": "RFC 8785 JCS",
+          "description": "Canonicalization method. MUST be 'RFC 8785 JCS'."
+        },
+        "signed_payload_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Hex SHA-256 of the RFC 8785 JCS canonical payload (with signatures[].value and this field set to empty string)."
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "required": ["filesystem", "network", "shell", "credentials", "process"],
+      "additionalProperties": false,
+      "properties": {
+        "filesystem": {
+          "type": "object",
+          "required": ["read", "write"],
+          "additionalProperties": false,
+          "properties": {
+            "read": { "type": "string", "enum": ["none", "own_dir", "temp_dir", "home_dir", "system", "all"] },
+            "write": { "type": "string", "enum": ["none", "own_dir", "temp_dir", "home_dir", "system", "all"] }
+          }
+        },
+        "network": {
+          "type": "object",
+          "required": ["egress", "ingress"],
+          "additionalProperties": false,
+          "properties": {
+            "egress": { "type": "string", "enum": ["none", "allowlist", "all"] },
+            "ingress": { "type": "string", "enum": ["none", "bound_ports", "all"] }
+          }
+        },
+        "shell": {
+          "type": "object",
+          "required": ["exec", "spawn"],
+          "additionalProperties": false,
+          "properties": {
+            "exec": { "type": "string", "enum": ["none", "sandboxed", "unrestricted"] },
+            "spawn": { "type": "string", "enum": ["none", "sandboxed", "unrestricted"] }
+          }
+        },
+        "credentials": {
+          "type": "object",
+          "required": ["read_env", "read_files"],
+          "additionalProperties": false,
+          "properties": {
+            "read_env": { "type": "string", "enum": ["none", "allowlist", "all"] },
+            "read_files": { "type": "string", "enum": ["none", "allowlist", "all"] }
+          }
+        },
+        "process": {
+          "type": "object",
+          "required": ["subprocess", "signals"],
+          "additionalProperties": false,
+          "properties": {
+            "subprocess": { "type": "string", "enum": ["none", "sandboxed", "unrestricted"] },
+            "signals": { "type": "string", "enum": ["none", "own", "all"] }
+          }
+        }
+      }
+    },
+    "evidence_chain": {
+      "type": "array",
+      "description": "Ordered list of evidence items (sentinel_score, sandbox_results, malware_scan, prompt_injection_check). Each item is independently signed by its producer.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["evidence_id", "evidence_type", "produced_by", "produced_at", "content_hash", "content", "signature"],
+        "additionalProperties": false,
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "Unique identifier for this evidence item within the card."
+          },
+          "evidence_type": {
+            "type": "string",
+            "enum": ["sentinel_score", "sandbox_results", "malware_scan", "prompt_injection_check"],
+            "description": "Type of evidence. Determines the shape of `content`."
+          },
+          "produced_by": {
+            "type": "object",
+            "required": ["producer_id", "producer_key_id", "producer_public_key", "producer_url"],
+            "additionalProperties": false,
+            "properties": {
+              "producer_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+              "producer_key_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+              "producer_public_key": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9+/]{43,}={0,2}$",
+                "description": "Base64 Ed25519 public key of the evidence producer."
+              },
+              "producer_url": { "type": "string", "format": "uri" }
+            }
+          },
+          "produced_at": { "type": "string", "format": "date-time" },
+          "content_hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "description": "Hex SHA-256 of the RFC 8785 JCS canonical form of the `content` object."
+          },
+          "content": {
+            "type": "object",
+            "description": "Type-specific content. Shape validated by content.json conditional schemas below."
+          },
+          "signature": {
+            "type": "object",
+            "required": ["algorithm", "value", "signed_at", "canonicalization"],
+            "additionalProperties": false,
+            "properties": {
+              "algorithm": { "type": "string", "enum": ["Ed25519", "ML-DSA-65"] },
+              "value": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9+/]{86,}={0,2}$",
+                "description": "Base64 signature over RFC 8785 JCS of `content`."
+              },
+              "signed_at": { "type": "string", "format": "date-time" },
+              "canonicalization": { "type": "string", "const": "RFC 8785 JCS" }
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "description": "Validate sentinel_score content shape",
+          "if": {
+            "type": "object",
+            "properties": {
+              "evidence_type": { "const": "sentinel_score" }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "object",
+                "required": ["score", "risk_level", "layers_passed", "layers_failed", "explanation"],
+                "additionalProperties": false,
+                "properties": {
+                  "score": { "type": "integer", "minimum": 0, "maximum": 10 },
+                  "risk_level": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+                  "layers_passed": { "type": "array", "items": { "type": "string" } },
+                  "layers_failed": { "type": "array", "items": { "type": "string" } },
+                  "explanation": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        {
+          "description": "Validate sandbox_results content shape",
+          "if": {
+            "type": "object",
+            "properties": {
+              "evidence_type": { "const": "sandbox_results" }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "object",
+                "required": ["sandbox_runtime_ms", "sandbox_exit_code", "sandbox_network_blocked", "sandbox_fs_read_only", "sandbox_cap_drop_all", "interceptor_blocks", "interceptor_warns"],
+                "additionalProperties": false,
+                "properties": {
+                  "sandbox_runtime_ms": { "type": "integer", "minimum": 0 },
+                  "sandbox_exit_code": { "type": "integer" },
+                  "sandbox_network_blocked": { "type": "boolean" },
+                  "sandbox_fs_read_only": { "type": "boolean" },
+                  "sandbox_cap_drop_all": { "type": "boolean" },
+                  "interceptor_blocks": { "type": "integer", "minimum": 0 },
+                  "interceptor_warns": { "type": "integer", "minimum": 0 }
+                }
+              }
+            }
+          }
+        },
+        {
+          "description": "Validate malware_scan content shape",
+          "if": {
+            "type": "object",
+            "properties": {
+              "evidence_type": { "const": "malware_scan" }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "object",
+                "required": ["malware_patterns_count", "malware_family_signatures_count", "dependency_scan", "semgrep_rules_count", "secret_patterns_count"],
+                "additionalProperties": false,
+                "properties": {
+                  "malware_patterns_count": { "type": "integer", "minimum": 0 },
+                  "malware_family_signatures_count": { "type": "integer", "minimum": 0 },
+                  "dependency_scan": { "type": "boolean" },
+                  "semgrep_rules_count": { "type": "integer", "minimum": 0 },
+                  "secret_patterns_count": { "type": "integer", "minimum": 0 }
+                }
+              }
+            }
+          }
+        },
+        {
+          "description": "Validate prompt_injection_check content shape",
+          "if": {
+            "type": "object",
+            "properties": {
+              "evidence_type": { "const": "prompt_injection_check" }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "object",
+                "required": ["prompt_injection_rules_count", "injection_attempts_detected", "max_severity"],
+                "additionalProperties": false,
+                "properties": {
+                  "prompt_injection_rules_count": { "type": "integer", "minimum": 0 },
+                  "injection_attempts_detected": { "type": "integer", "minimum": 0 },
+                  "max_severity": { "type": "string", "enum": ["none", "info", "low", "medium", "high", "critical"] }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "risk": {
+      "type": "object",
+      "required": ["trust_score", "risk_level", "decision_authority", "score_explanation", "scored_at"],
+      "additionalProperties": false,
+      "properties": {
+        "trust_score": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "risk_level": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+        "decision_authority": {
+          "type": "string",
+          "enum": ["issuer", "consumer", "joint"],
+          "description": "v2 change: gains 'joint' value. v1 forced 'consumer' via const; v2 lifts that."
+        },
+        "score_explanation": { "type": "string", "minLength": 1 },
+        "scored_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "trust_decision": {
+      "type": "object",
+      "description": "v2 NEW. Embeds the trust decision in the card itself, eliminating the TOCTOU gap of v1's separate /api/trust call.",
+      "required": ["decision_authority", "decision_inputs", "decision_rule_id", "decision_evidence_hash", "decision_outcome", "decision_explanation", "decided_at"],
+      "additionalProperties": false,
+      "properties": {
+        "decision_authority": {
+          "type": "string",
+          "enum": ["issuer", "consumer", "joint"],
+          "description": "MUST match risk.decision_authority."
+        },
+        "decision_inputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "sentinel_score",
+              "sandbox_results",
+              "malware_scan",
+              "prompt_injection_check",
+              "runtime_trust",
+              "delegation_chain",
+              "capabilities",
+              "identity",
+              "validity",
+              "revocation"
+            ]
+          },
+          "description": "Names of inputs consumed by the decision rule."
+        },
+        "decision_rule_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Opaque identifier for the decision rule used."
+        },
+        "decision_evidence_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Hex SHA-256 of the RFC 8785 JCS of the evidence_chain array."
+        },
+        "decision_outcome": {
+          "type": "string",
+          "enum": ["trusted", "untrusted", "conditional"],
+          "description": "The trust decision."
+        },
+        "decision_explanation": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable explanation. MUST document conditions when outcome is 'conditional'."
+        },
+        "decided_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "multi_sig": {
+      "type": "object",
+      "description": "v2 NEW (was implicit single-sig in v1). Documents the multi-signature policy.",
+      "required": ["required_signatures", "distinct_cas_required", "policy"],
+      "additionalProperties": false,
+      "properties": {
+        "required_signatures": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Minimum number of valid signatures required for the card to be valid."
+        },
+        "distinct_cas_required": {
+          "type": "boolean",
+          "description": "If true, signatures must come from distinct signer_ids."
+        },
+        "policy": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable description of the multi-sig policy. e.g. 'MarketNow + Independent Auditor for >$1000 transactions'."
+        }
+      }
+    },
+    "signatures": {
+      "type": "array",
+      "description": "v2 NEW. Replaces v1's single attestation.signature field. Even single-CA cards use this array with one entry.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["signer_id", "ca_key_id", "algorithm", "value", "signed_at", "canonicalization"],
+        "additionalProperties": false,
+        "properties": {
+          "signer_id": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "description": "CA identifier. Should match issuer.ca_id (or that of a co-signer CA)."
+          },
+          "ca_key_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "Opaque identifier for the CA key used. Verifiers use this to look up the correct key during rotation."
+          },
+          "algorithm": {
+            "type": "string",
+            "enum": ["Ed25519", "ML-DSA-65"],
+            "description": "Signature algorithm. v2 supports Ed25519 (RFC 8032) and ML-DSA-65 (FIPS 204)."
+          },
+          "value": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9+/]{86,}={0,2}$",
+            "description": "Base64 signature over RFC 8785 JCS of the canonical payload (all signatures[].value and attestation.signed_payload_hash blanked)."
+          },
+          "signed_at": { "type": "string", "format": "date-time" },
+          "canonicalization": { "type": "string", "const": "RFC 8785 JCS" }
+        }
+      }
+    },
+    "revocation": {
+      "type": "object",
+      "required": ["revocation_check_url", "revocation_check_method", "revocation_check_required"],
+      "additionalProperties": false,
+      "properties": {
+        "revocation_check_url": { "type": "string", "format": "uri" },
+        "revocation_check_method": { "type": "string", "enum": ["ocsp", "crl", "simple_json"] },
+        "revocation_check_required": { "type": "boolean" }
+      }
+    },
+    "validity": {
+      "type": "object",
+      "required": ["issued_at", "expires_at", "max_ttl_days"],
+      "additionalProperties": false,
+      "properties": {
+        "issued_at": { "type": "string", "format": "date-time" },
+        "expires_at": { "type": "string", "format": "date-time" },
+        "max_ttl_days": { "type": "integer", "minimum": 1, "maximum": 365 }
+      }
+    },
+    "delegation": {
+      "type": "object",
+      "description": "v2 restructured from v1's loose parent_card_id/delegated_capabilities/delegation_signature into a structured block with chain depth and scope.",
+      "required": ["delegated_by", "delegation_scope", "delegation_chain_depth", "delegation_signature"],
+      "additionalProperties": false,
+      "properties": {
+        "delegated_by": {
+          "type": "string",
+          "pattern": "^ATC-v2-[a-f0-9]{16}$",
+          "description": "Parent ATC's card_id (v2 content-addressed format)."
+        },
+        "delegation_scope": {
+          "type": "object",
+          "description": "Subset of capabilities being delegated. MUST be a subset of the parent's capabilities.",
+          "required": ["filesystem", "network", "shell", "credentials", "process"],
+          "additionalProperties": false,
+          "properties": {
+            "filesystem": {
+              "type": "object",
+              "required": ["read", "write"],
+              "additionalProperties": false,
+              "properties": {
+                "read": { "type": "string", "enum": ["none", "own_dir", "temp_dir", "home_dir", "system", "all"] },
+                "write": { "type": "string", "enum": ["none", "own_dir", "temp_dir", "home_dir", "system", "all"] }
+              }
+            },
+            "network": {
+              "type": "object",
+              "required": ["egress", "ingress"],
+              "additionalProperties": false,
+              "properties": {
+                "egress": { "type": "string", "enum": ["none", "allowlist", "all"] },
+                "ingress": { "type": "string", "enum": ["none", "bound_ports", "all"] }
+              }
+            },
+            "shell": {
+              "type": "object",
+              "required": ["exec", "spawn"],
+              "additionalProperties": false,
+              "properties": {
+                "exec": { "type": "string", "enum": ["none", "sandboxed", "unrestricted"] },
+                "spawn": { "type": "string", "enum": ["none", "sandboxed", "unrestricted"] }
+              }
+            },
+            "credentials": {
+              "type": "object",
+              "required": ["read_env", "read_files"],
+              "additionalProperties": false,
+              "properties": {
+                "read_env": { "type": "string", "enum": ["none", "allowlist", "all"] },
+                "read_files": { "type": "string", "enum": ["none", "allowlist", "all"] }
+              }
+            },
+            "process": {
+              "type": "object",
+              "required": ["subprocess", "signals"],
+              "additionalProperties": false,
+              "properties": {
+                "subprocess": { "type": "string", "enum": ["none", "sandboxed", "unrestricted"] },
+                "signals": { "type": "string", "enum": ["none", "own", "all"] }
+              }
+            }
+          }
+        },
+        "delegation_chain_depth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5,
+          "description": "v2 NEW. Max 5 (up from v1's 3). Prevents infinite delegation chains."
+        },
+        "delegation_signature": {
+          "type": "object",
+          "required": ["algorithm", "value", "signed_at", "canonicalization"],
+          "additionalProperties": false,
+          "properties": {
+            "algorithm": { "type": "string", "enum": ["Ed25519", "ML-DSA-65"] },
+            "value": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9+/]{86,}={0,2}$",
+              "description": "Base64 signature by the parent agent's private key over RFC 8785 JCS of the delegated payload."
+            },
+            "signed_at": { "type": "string", "format": "date-time" },
+            "canonicalization": { "type": "string", "const": "RFC 8785 JCS" }
+          }
+        }
+      }
+    },
+    "runtime_trust": {
+      "type": "object",
+      "description": "Optional runtime trust signals. Unchanged from v1.",
+      "required": ["observed_behavior", "behavioral_score", "drift_detected", "last_observed_at"],
+      "additionalProperties": false,
+      "properties": {
+        "observed_behavior": {
+          "type": "object",
+          "required": ["calls_blocked", "calls_warned", "calls_allowed", "observation_window_hours"],
+          "additionalProperties": false,
+          "properties": {
+            "calls_blocked": { "type": "integer", "minimum": 0 },
+            "calls_warned": { "type": "integer", "minimum": 0 },
+            "calls_allowed": { "type": "integer", "minimum": 0 },
+            "observation_window_hours": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "behavioral_score": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "drift_detected": { "type": "boolean" },
+        "last_observed_at": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+Contact: mailto:security@alicelabs.site
+Expires: 2027-08-25T00:00:00Z
+Encryption: https://marketnow.site/.well-known/pgp-key.asc
+Acknowledgments: https://marketnow.site/security/acknowledgments
+Policy: https://marketnow.site/security
+Canonical: https://marketnow.site/.well-known/security.txt
+Hiring: https://marketnow.site/about#careers

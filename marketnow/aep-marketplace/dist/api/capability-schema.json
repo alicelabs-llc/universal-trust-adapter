@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MarketNow Skill Capability Schema",
+  "description": "Formal capability ontology for MarketNow skills. Agents use this to discover skills by WHAT THEY CAN DO, not just keywords.",
+  "type": "object",
+  "properties": {
+    "capabilities": {
+      "type": "object",
+      "description": "What this skill can do, described as structured capabilities that agents can programmatically match.",
+      "properties": {
+        "input_types": {
+          "type": "array",
+          "description": "What types of input the skill accepts",
+          "items": {
+            "type": "string",
+            "enum": [
+              "text", "code", "json", "csv", "xml", "html", "markdown",
+              "image", "audio", "video", "pdf", "url", "file", "database",
+              "api_response", "git_repo", "ssh_access", "env_vars",
+              "user_query", "system_state", "logs", "metrics"
+            ]
+          }
+        },
+        "output_types": {
+          "type": "array",
+          "description": "What types of output the skill produces",
+          "items": {
+            "type": "string",
+            "enum": [
+              "text", "code", "json", "csv", "html", "markdown",
+              "image", "audio", "video", "pdf", "file", "api_request",
+              "shell_command", "config_file", "report", "alert", "dashboard"
+            ]
+          }
+        },
+        "actions": {
+          "type": "array",
+          "description": "Verbs describing what the skill does",
+          "items": {
+            "type": "string",
+            "enum": [
+              "scrape", "crawl", "extract", "transform", "validate", "generate",
+              "analyze", "monitor", "deploy", "test", "debug", "optimize",
+              "audit", "translate", "summarize", "classify", "search", "index",
+              "notify", "schedule", "orchestrate", "execute", "query", "mutate",
+              "encrypt", "decrypt", "compress", "parse", "render", "compile",
+              "lint", "format", "refactor", "document", "review", "approve",
+              "rollback", "scale", "backup", "restore", "migrate", "sync"
+            ]
+          }
+        },
+        "integrations": {
+          "type": "array",
+          "description": "External services/tools this skill integrates with",
+          "items": {
+            "type": "string",
+            "examples": ["stripe", "github", "slack", "discord", "aws", "gcp", "azure", "openai", "anthropic", "database", "redis", "kafka", "rabbitmq"]
+          }
+        },
+        "agent_compatibility": {
+          "type": "array",
+          "description": "Which agent runtimes this skill is compatible with",
+          "items": {
+            "type": "string",
+            "enum": ["claude_desktop", "cursor", "cline", "vscode", "autogpt", "babyagi", "crewai", "langchain", "autogen", "any_mcp"]
+          }
+        },
+        "execution_context": {
+          "type": "string",
+          "enum": ["client_side", "server_side", "sandbox", "local_runtime", "cloud"],
+          "description": "Where the skill executes"
+        },
+        "requires_auth": {
+          "type": "boolean",
+          "description": "Whether the skill requires API keys or credentials"
+        },
+        "requires_network": {
+          "type": "boolean",
+          "description": "Whether the skill needs internet access"
+        },
+        "latency_profile": {
+          "type": "string",
+          "enum": ["instant", "fast", "moderate", "slow", "batch"],
+          "description": "Expected execution time"
+        },
+        "cost_profile": {
+          "type": "string",
+          "enum": ["free", "low", "moderate", "high", "variable"],
+          "description": "Operational cost per execution (excluding purchase price)"
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "capabilities": {
+        "input_types": ["url", "html"],
+        "output_types": ["json", "csv"],
+        "actions": ["scrape", "extract", "transform"],
+        "integrations": ["puppeteer", "playwright"],
+        "agent_compatibility": ["any_mcp", "claude_desktop", "cursor"],
+        "execution_context": "server_side",
+        "requires_auth": false,
+        "requires_network": true,
+        "latency_profile": "moderate",
+        "cost_profile": "low"
+      }
+    }
+  ]
+}

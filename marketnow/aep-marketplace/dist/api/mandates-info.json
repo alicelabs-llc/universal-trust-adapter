@@ -1,0 +1,59 @@
+{
+  "service": "MarketNow",
+  "page": "Mandates",
+  "version": "1.1.0",
+  "protocol": "ACP / AP2 (delegated mandates)",
+  "effective_date": "2026-07-02",
+  "url": "https://marketnow.site/mandates",
+  "api_endpoint": "https://marketnow.site/api/mandates",
+  "summary": "Grant an AI agent a pre-approved spending allowance. The agent buys autonomously within the limit. Beyond it, you approve each purchase. You can revoke anytime.",
+  "default_notification_mode": "notify",
+  "notification_modes": {
+    "notify": "DEFAULT — Agent buys autonomously. Human is notified on every purchase (email or webhook alert to the principal).",
+    "notify_and_veto": "Agent buys, principal gets alert + 5-minute veto window before each spend commits (veto flow on roadmap — currently alert is post-hoc).",
+    "silent": "Fully autonomous, no alerts. Requires explicit confirmSilentAutonomy=true field — opt-in only."
+  },
+  "hard_caps": {
+    "max_total_per_mandate_usd": 500,
+    "max_per_purchase_usd": 50,
+    "default_ttl_days": 90
+  },
+  "persistence": "GitHub repo as database. Each mandate is stored as a JSON file at _data/mandates/mand_xxx.json. Every create / spend / revoke is a git commit — fully auditable in the repo history. No external DB service required.",
+  "audit_log_url": "https://github.com/alicelabs-llc/marketnow/commits/master/_data/mandates",
+  "how_it_works": [
+    {
+      "step": 1,
+      "title": "You create a mandate",
+      "description": "Set total limit, per-purchase cap, allowed categories, expiry. Sign with your wallet (recommended). Notification mode defaults to 'notify'."
+    },
+    {
+      "step": 2,
+      "title": "Agent buys autonomously",
+      "description": "Agent calls POST /api/agent-purchase with mandateId + txHash. We verify the USDC payment on Base blockchain, deduct from mandate, return license. Principal receives notification immediately."
+    },
+    {
+      "step": 3,
+      "title": "Beyond limit, you approve",
+      "description": "When mandate is exhausted or expired, agent gets mode=requires_human_approval. You approve via Stripe, or renew the mandate."
+    }
+  ],
+  "api_endpoints": {
+    "create": "POST /api/mandates with {owner, agentId, spendingLimitUsd, perPurchaseCapUsd, categories, expiresAt, notificationMode, notificationEmail|notificationWebhook}",
+    "get": "GET /api/mandates?id=mand_xxx",
+    "list_by_owner": "GET /api/mandates?owner=0x...",
+    "list_by_agent": "GET /api/mandates?agent=agent_xxx",
+    "revoke": "POST /api/mandates?action=revoke&id=mand_xxx",
+    "spend": "POST /api/mandates?action=spend {id, amount, txHash}  (called internally by agent-purchase after a successful on-chain payment)"
+  },
+  "revocation": "Mandates can be revoked instantly from /mandates page — no waiting period.",
+  "guarantees": [
+    "Every paid purchase is verified on-chain via eth_getTransactionReceipt on Base",
+    "Every mandate spend is recorded in a public git commit at _data/mandates/",
+    "Mandates default to 'notify' mode — the principal is alerted on every purchase",
+    "'silent' mode requires explicit confirmSilentAutonomy=true — opt-in only",
+    "Mandates can be revoked instantly by the principal",
+    "Hard caps: max $500 total per mandate, max $50 per single purchase (cannot be raised)",
+    "Default 90-day expiry; mandates auto-expire"
+  ],
+  "human_in_loop_disclosure": "This is the core of Claude's feedback: human-in-the-loop is the DEFAULT, not opt-out. The 'no humans needed' framing has been removed from the site. Mandates notify the principal by default; silent autonomous spending requires explicit opt-in. This is implemented in code (mandates.js enforces notificationMode validation), not just in copy."
+}

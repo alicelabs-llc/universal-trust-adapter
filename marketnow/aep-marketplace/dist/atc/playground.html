@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ATC Playground — Issue and verify Agent Trust Cards in your browser</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ATC/1.0 Playground — issue, verify, and inspect Agent Trust Cards entirely in your browser. No backend, no signup, no data leaves your machine.">
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #11161f;
+    --surface-2: #1a1f2e;
+    --border: #2a3142;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --green: #00f299;
+    --red: #ff5b5b;
+    --yellow: #ffd700;
+    --cyan: #00d1ff;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.5;
+    font-size: 14px;
+  }
+  a { color: var(--cyan); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+  header { border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 24px; }
+  header h1 { margin: 0 0 4px; font-size: 22px; font-weight: 600; }
+  header .subtitle { color: var(--text-dim); font-size: 13px; }
+  header .meta { margin-top: 8px; display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--text-dim); }
+  header .meta a { color: var(--green); }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .card h2 { margin: 0 0 12px; font-size: 14px; font-weight: 600; color: var(--cyan); }
+  .card .row { display: flex; gap: 8px; margin-bottom: 12px; }
+  .card .row > * { flex: 1; }
+  .card .row label { display: block; font-size: 11px; color: var(--text-dim); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  textarea, input, select {
+    width: 100%;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 8px;
+  }
+  textarea { min-height: 200px; resize: vertical; }
+  textarea:focus, input:focus, select:focus { outline: 1px solid var(--cyan); border-color: var(--cyan); }
+
+  button {
+    background: var(--green);
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 14px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  button:hover { opacity: 0.9; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  button.secondary { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+  button.danger { background: var(--red); color: white; }
+
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+
+  .result {
+    background: var(--surface-2);
+    border-radius: 4px;
+    padding: 12px;
+    font-family: var(--mono);
+    font-size: 12px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 400px;
+    overflow: auto;
+  }
+  .result.valid { border-left: 3px solid var(--green); }
+  .result.invalid { border-left: 3px solid var(--red); }
+
+  .controls-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; margin: 8px 0; font-size: 12px; }
+  .controls-grid .ctrl { display: flex; align-items: center; gap: 6px; padding: 4px 8px; background: var(--surface-2); border-radius: 3px; }
+  .controls-grid .ctrl.pass { color: var(--green); }
+  .controls-grid .ctrl.fail { color: var(--red); }
+
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 600; }
+  .badge.green { background: rgba(0, 242, 153, 0.15); color: var(--green); }
+  .badge.red { background: rgba(255, 91, 91, 0.15); color: var(--red); }
+  .badge.yellow { background: rgba(255, 215, 0, 0.15); color: var(--yellow); }
+  .badge.cyan { background: rgba(0, 209, 255, 0.15); color: var(--cyan); }
+
+  footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 12px; text-align: center; }
+  footer a { color: var(--text-dim); }
+
+  .loading { opacity: 0.5; pointer-events: none; }
+
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
+  .tabs button { background: transparent; color: var(--text-dim); border: none; border-bottom: 2px solid transparent; padding: 8px 12px; cursor: pointer; font-size: 12px; border-radius: 0; }
+  .tabs button.active { color: var(--cyan); border-bottom-color: var(--cyan); }
+
+  details { margin-top: 8px; }
+  details summary { cursor: pointer; color: var(--text-dim); font-size: 12px; }
+  details pre { background: var(--surface-2); padding: 8px; border-radius: 4px; font-size: 11px; overflow: auto; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>ATC Playground</h1>
+  <div class="subtitle">Issue and verify Agent Trust Cards (ATC/1.0) entirely in your browser. No backend, no signup, no data leaves your machine.</div>
+  <div class="meta">
+    <span>Spec: <a href="https://marketnow.site/atc/spec/SPEC.md" target="_blank" rel="noopener">ATC/1.0</a></span>
+    <span>·</span>
+    <span>SDK: <a href="https://www.npmjs.com/package/agent-trust-card" target="_blank" rel="noopener">atc-sdk@1.0.0</a></span>
+    <span>·</span>
+    <span>Crypto: Ed25519 (RFC 8032) + RFC 8785 JCS</span>
+    <span>·</span>
+    <span>Source: <a href="https://marketnow.site/atc" target="_blank" rel="noopener">GitHub</a></span>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="active" data-tab="verify">Verify</button>
+  <button data-tab="issue">Issue</button>
+  <button data-tab="init">Generate Keys</button>
+</div>
+
+<!-- ─── VERIFY TAB ──────────────────────────────────────────────────────── -->
+<div id="tab-verify" class="tab-panel">
+  <div class="grid">
+    <div class="card">
+      <h2>Paste an ATC document</h2>
+      <p style="margin:0 0 12px; color:var(--text-dim); font-size:12px;">
+        Paste any ATC/1.0 JSON document — regardless of issuer. The verifier checks all 8 required controls.
+      </p>
+      <textarea id="verify-input" placeholder='{"spec_version":"ATC/1.0","card_id":"ATC-2026-...","identity":{...},...}'></textarea>
+      <div class="actions" style="margin-top:12px;">
+        <button onclick="verifyCard()">Verify ATC</button>
+        <button class="secondary" onclick="loadSample('valid')">Load sample (valid)</button>
+        <button class="secondary" onclick="loadSample('tampered')">Load sample (tampered)</button>
+        <button class="secondary" onclick="loadSample('expired')">Load sample (expired)</button>
+        <button class="secondary" onclick="document.getElementById('verify-input').value=''">Clear</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Verification result</h2>
+      <div id="verify-result" class="result" style="min-height:200px;">No ATC verified yet.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── ISSUE TAB ──────────────────────────────────────────────────────── -->
+<div id="tab-issue" class="tab-panel" style="display:none;">
+  <div class="grid">
+    <div class="card">
+      <h2>Issue a new ATC</h2>
+      <p style="margin:0 0 12px; color:var(--text-dim); font-size:12px;">
+        Generates a fresh CA keypair + agent keypair, signs an ATC with them, and returns the complete card.
+        The keys are ephemeral — they live only in your browser session.
+      </p>
+      <div class="row">
+        <div>
+          <label>card_id</label>
+          <input id="issue-card-id" value="ATC-2026-0000001" />
+        </div>
+        <div>
+          <label>agent_id</label>
+          <input id="issue-agent-id" value="my-bot" />
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>agent_name</label>
+          <input id="issue-agent-name" value="My Bot" />
+        </div>
+        <div>
+          <label>agent_owner</label>
+          <input id="issue-agent-owner" value="My Org" />
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>trust_score (0-10)</label>
+          <input id="issue-trust-score" type="number" min="0" max="10" value="9" />
+        </div>
+        <div>
+          <label>max_ttl_days</label>
+          <input id="issue-ttl" type="number" min="1" max="365" value="90" />
+        </div>
+      </div>
+      <details>
+        <summary>Capabilities (advanced)</summary>
+        <div class="row">
+          <div>
+            <label>filesystem.read</label>
+            <select id="cap-fs-r"><option>none</option><option selected>own_dir</option><option>temp_dir</option><option>home_dir</option><option>system</option><option>all</option></select>
+          </div>
+          <div>
+            <label>filesystem.write</label>
+            <select id="cap-fs-w"><option>none</option><option selected>own_dir</option><option>temp_dir</option><option>home_dir</option><option>system</option><option>all</option></select>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label>network.egress</label>
+            <select id="cap-net-e"><option>none</option><option selected>allowlist</option><option>all</option></select>
+          </div>
+          <div>
+            <label>network.ingress</label>
+            <select id="cap-net-i"><option selected>none</option><option>bound_ports</option><option>all</option></select>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label>shell.exec</label>
+            <select id="cap-sh-e"><option>none</option><option selected>sandboxed</option><option>unrestricted</option></select>
+          </div>
+          <div>
+            <label>shell.spawn</label>
+            <select id="cap-sh-s"><option selected>none</option><option>sandboxed</option><option>unrestricted</option></select>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label>credentials.read_env</label>
+            <select id="cap-cr-e"><option selected>none</option><option>allowlist</option><option>all</option></select>
+          </div>
+          <div>
+            <label>credentials.read_files</label>
+            <select id="cap-cr-f"><option selected>none</option><option>allowlist</option><option>all</option></select>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label>process.subprocess</label>
+            <select id="cap-pr-s"><option selected>none</option><option>sandboxed</option><option>unrestricted</option></select>
+          </div>
+          <div>
+            <label>process.signals</label>
+            <select id="cap-pr-sig"><option>none</option><option selected>own</option><option>all</option></select>
+          </div>
+        </div>
+      </details>
+      <div class="actions" style="margin-top:12px;">
+        <button onclick="issueCard()">Issue & Sign ATC</button>
+        <button class="secondary" onclick="document.getElementById('issue-result').textContent=''">Clear</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Issued ATC</h2>
+      <div id="issue-result" class="result" style="min-height:200px;">No ATC issued yet.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── INIT TAB ──────────────────────────────────────────────────────── -->
+<div id="tab-init" class="tab-panel" style="display:none;">
+  <div class="card">
+    <h2>Generate a keypair</h2>
+    <p style="margin:0 0 12px; color:var(--text-dim); font-size:12px;">
+      Generates a new Ed25519 keypair. Useful if you want to act as your own CA.
+      The keys are generated in your browser — they never leave your machine.
+    </p>
+    <div class="actions">
+      <button onclick="generateKeys()">Generate Keypair</button>
+      <button class="secondary" onclick="copyKeys()">Copy to clipboard</button>
+    </div>
+    <div id="init-result" class="result" style="min-height:200px;">No keys generated yet.</div>
+  </div>
+</div>
+
+<footer>
+  <p>
+    ATC/1.0 Playground — built by <a href="https://marketnow.site">AliceLabs LLC</a> (Wyoming, USA).
+    Spec: <a href="https://marketnow.site/atc/spec/SPEC.md">ATC/1.0</a>.
+    SDK: <a href="https://www.npmjs.com/package/agent-trust-card">atc-sdk</a>.
+    <br>The verifier runs entirely in your browser using WebCrypto. No data is sent to any server.
+  </p>
+</footer>
+
+</div>
+
+<!-- ─── Script: uses WebCrypto for Ed25519 + a JS RFC 8785 JCS impl ──── -->
+<script type="module">
+// We bundle a tiny RFC 8785 JCS implementation here so the playground has zero external deps.
+
+// RFC 8785 JCS canonicalization (simplified — handles the ATC use case)
+function canonicalize(value) {
+  // Per RFC 8785:
+  // 1. Sort object keys lexicographically (using UTF-16 code units, per spec)
+  // 2. Serialize numbers using the shortest representation that round-trips
+  // 3. Escape strings per JSON spec
+  return _canonicalize(value);
+}
+
+function _canonicalize(v) {
+  if (v === null) return 'null';
+  if (v === true) return 'true';
+  if (v === false) return 'false';
+  if (typeof v === 'string') return JSON.stringify(v);
+  if (typeof v === 'number') return _serializeNumber(v);
+  if (Array.isArray(v)) {
+    return '[' + v.map(_canonicalize).join(',') + ']';
+  }
+  if (typeof v === 'object') {
+    const keys = Object.keys(v).sort((a, b) => {
+      // Per RFC 8785: lexicographic sort by UTF-16 code unit
+      const aLen = a.length, bLen = b.length;
+      const min = Math.min(aLen, bLen);
+      for (let i = 0; i < min; i++) {
+        const diff = a.charCodeAt(i) - b.charCodeAt(i);
+        if (diff !== 0) return diff;
+      }
+      return aLen - bLen;
+    });
+    return '{' + keys.filter(k => v[k] !== undefined).map(k => JSON.stringify(k) + ':' + _canonicalize(v[k])).join(',') + '}';
+  }
+  throw new Error('Cannot canonicalize: ' + typeof v);
+}
+
+function _serializeNumber(n) {
+  // Per RFC 8785 §3.2.2: shortest representation that round-trips
+  if (!isFinite(n) || isNaN(n)) throw new Error('Invalid number: ' + n);
+  if (n === 0) return '0';
+  // Use Number.prototype.toString — it's not strictly RFC 8785 but works for our integer use case
+  const s = n.toString();
+  // For integers, ensure no 'e' notation
+  if (s.includes('e') || s.includes('E')) {
+    return n.toExponential().replace('e+', 'e').replace('e-', 'e-');
+  }
+  return s;
+}
+
+// Expose to global scope
+window.__atc = { canonicalize };
+
+// ─── Verify ─────────────────────────────────────────────────────────────
+async function importEd25519PublicKey(base64Spki) {
+  // Decode base64 → ArrayBuffer
+  const binary = atob(base64Spki);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+
+  // The base64 from Node.js is full SPKI. WebCrypto can import this format directly.
+  return crypto.subtle.importKey(
+    'spki',
+    bytes.buffer,
+    { name: 'Ed25519', namedCurve: 'Ed25519' },
+    false,
+    ['verify']
+  );
+}
+
+async function verifyEd25519(publicKey, message, signature) {
+  const enc = new TextEncoder();
+  return crypto.subtle.verify(
+    { name: 'Ed25519' },
+    publicKey,
+    signature,
+    message
+  );
+}
+
+async function sha256(text) {
+  const enc = new TextEncoder();
+  const hash = await crypto.subtle.digest('SHA-256', enc.encode(text));
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function base64ToBytes(base64) {
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return bytes;
+}
+
+// Capability enums (mirror of the SDK)
+const CAPABILITY_ENUMS = {
+  filesystem: {
+    read: ['none', 'own_dir', 'temp_dir', 'home_dir', 'system', 'all'],
+    write: ['none', 'own_dir', 'temp_dir', 'home_dir', 'system', 'all'],
+  },
+  network: {
+    egress: ['none', 'allowlist', 'all'],
+    ingress: ['none', 'bound_ports', 'all'],
+  },
+  shell: {
+    exec: ['none', 'sandboxed', 'unrestricted'],
+    spawn: ['none', 'sandboxed', 'unrestricted'],
+  },
+  credentials: {
+    read_env: ['none', 'allowlist', 'all'],
+    read_files: ['none', 'allowlist', 'all'],
+  },
+  process: {
+    subprocess: ['none', 'sandboxed', 'unrestricted'],
+    signals: ['none', 'own', 'all'],
+  },
+};
+
+window.verifyATC = async function(atc, options = {}) {
+  const errors = [];
+  const warnings = [];
+  const controlsPassed = [];
+  const controlsFailed = [];
+
+  if (typeof atc !== 'object' || atc === null || Array.isArray(atc)) {
+    return { valid: false, spec_version: null, controls_passed: [], controls_failed: ['ATC-001','ATC-002','ATC-003','ATC-004','ATC-005','ATC-006','ATC-007','ATC-008'], errors: ['ATC must be an object'], warnings: [], card_id: null, issuer_ca_id: null, trust_score: null, risk_level: null, expires_at: null };
+  }
+
+  if (atc.spec_version !== 'ATC/1.0') {
+    errors.push(`Invalid spec_version: expected 'ATC/1.0', got '${atc.spec_version}'`);
+    return { valid: false, spec_version: atc.spec_version || null, controls_passed: [], controls_failed: ['ATC-001','ATC-002','ATC-003','ATC-004','ATC-005','ATC-006','ATC-007','ATC-008'], errors, warnings, card_id: atc.card_id || null, issuer_ca_id: atc.issuer?.ca_id || null, trust_score: atc.risk?.trust_score ?? null, risk_level: atc.risk?.risk_level || null, expires_at: atc.validity?.expires_at || null };
+  }
+
+  // card_id pattern
+  if (typeof atc.card_id !== 'string' || !/^ATC-\d{4}-\d{6,}$/.test(atc.card_id)) {
+    errors.push('card_id must match /^ATC-\\d{4}-\\d{6,}$/ (e.g. ATC-2026-7777670)');
+  }
+
+  // ATC-001 Identity
+  const idErrs = [];
+  const id = atc.identity || {};
+  if (typeof id !== 'object' || id === null || Array.isArray(id)) {
+    idErrs.push('ATC-001: identity must be an object');
+  } else {
+    if (!id.agent_id || typeof id.agent_id !== 'string' || id.agent_id.length < 3 || id.agent_id.length > 128 || !/^[a-zA-Z0-9_-]+$/.test(id.agent_id)) idErrs.push('ATC-001: identity.agent_id must be 3-128 alphanumeric chars');
+    if (!id.agent_name || typeof id.agent_name !== 'string' || id.agent_name.length < 1 || id.agent_name.length > 100) idErrs.push('ATC-001: identity.agent_name must be 1-100 chars');
+    if (!id.agent_owner || typeof id.agent_owner !== 'string' || id.agent_owner.length < 1 || id.agent_owner.length > 100) idErrs.push('ATC-001: identity.agent_owner must be 1-100 chars');
+    if (id.owner_contact !== undefined && (!/^(mailto:|https:)/.test(id.owner_contact))) warnings.push('ATC-001: identity.owner_contact should be mailto: or https:');
+  }
+  if (idErrs.length === 0) controlsPassed.push('ATC-001'); else { controlsFailed.push('ATC-001'); errors.push(...idErrs); }
+
+  // ATC-002 Attestation
+  const att = atc.attestation || {};
+  const attErrs = [];
+  if (typeof att !== 'object' || att === null || Array.isArray(att)) {
+    attErrs.push('ATC-002: attestation must be an object');
+  } else {
+    if (!att.subject_public_key) attErrs.push('ATC-002: subject_public_key missing');
+    if (att.subject_algorithm !== 'Ed25519') attErrs.push("ATC-002: subject_algorithm must be 'Ed25519'");
+    if (!att.signature) attErrs.push('ATC-002: signature missing');
+    if (!att.signed_payload_hash) attErrs.push('ATC-002: signed_payload_hash missing');
+  }
+  if (attErrs.length === 0) controlsPassed.push('ATC-002'); else { controlsFailed.push('ATC-002'); errors.push(...attErrs); }
+
+  // ATC-003 Capabilities
+  const caps = atc.capabilities || {};
+  const capErrs = [];
+  if (typeof caps !== 'object' || caps === null || Array.isArray(caps)) {
+    capErrs.push('ATC-003: capabilities must be an object');
+  } else {
+    for (const [category, subFields] of Object.entries(CAPABILITY_ENUMS)) {
+      if (typeof caps[category] !== 'object' || caps[category] === null) { capErrs.push(`ATC-003: capabilities.${category} must be an object`); continue; }
+      for (const [field, allowed] of Object.entries(subFields)) {
+        const v = caps[category][field];
+        if (v === undefined) capErrs.push(`ATC-003: capabilities.${category}.${field} is missing`);
+        else if (!allowed.includes(v)) capErrs.push(`ATC-003: capabilities.${category}.${field} must be one of: ${allowed.join(', ')} (got ${JSON.stringify(v)})`);
+      }
+    }
+  }
+  if (capErrs.length === 0) controlsPassed.push('ATC-003'); else { controlsFailed.push('ATC-003'); errors.push(...capErrs); }
+
+  // ATC-004 Evidence (structural only)
+  const ev = atc.evidence || {};
+  const evErrs = [];
+  if (typeof ev !== 'object' || ev === null) evErrs.push('ATC-004: evidence must be an object');
+  else {
+    for (const f of ['audit_pipeline','audit_completed_at','static_checks','dynamic_checks','runtime_checks','findings']) {
+      if (!(f in ev)) evErrs.push(`ATC-004: evidence.${f} missing`);
+    }
+    if (ev.audit_completed_at && isNaN(Date.parse(ev.audit_completed_at))) evErrs.push('ATC-004: audit_completed_at is not a valid ISO 8601 timestamp');
+  }
+  if (evErrs.length === 0) controlsPassed.push('ATC-004'); else { controlsFailed.push('ATC-004'); errors.push(...evErrs); }
+
+  // ATC-005 Risk
+  const r = atc.risk || {};
+  const rErrs = [];
+  if (typeof r !== 'object' || r === null) rErrs.push('ATC-005: risk must be an object');
+  else {
+    if (typeof r.trust_score !== 'number' || !Number.isInteger(r.trust_score) || r.trust_score < 0 || r.trust_score > 10) rErrs.push('ATC-005: trust_score must be integer 0-10');
+    if (!['low','medium','high','critical'].includes(r.risk_level)) rErrs.push('ATC-005: risk_level must be low/medium/high/critical');
+    if (r.decision_authority && r.decision_authority !== 'consumer') rErrs.push("ATC-005: decision_authority must be 'consumer'");
+    if (!r.score_explanation) rErrs.push('ATC-005: score_explanation missing');
+    if (!r.scored_at || isNaN(Date.parse(r.scored_at))) rErrs.push('ATC-005: scored_at missing or invalid');
+  }
+  if (rErrs.length === 0) controlsPassed.push('ATC-005'); else { controlsFailed.push('ATC-005'); errors.push(...rErrs); }
+
+  // ATC-007 Revocation
+  const rev = atc.revocation || {};
+  const revErrs = [];
+  if (typeof rev !== 'object' || rev === null) revErrs.push('ATC-007: revocation must be an object');
+  else {
+    if (!rev.revocation_check_url) revErrs.push('ATC-007: revocation_check_url missing');
+    if (!['ocsp','crl','simple_json'].includes(rev.revocation_check_method)) revErrs.push('ATC-007: revocation_check_method must be ocsp/crl/simple_json');
+    if (typeof rev.revocation_check_required !== 'boolean') revErrs.push('ATC-007: revocation_check_required must be boolean');
+    if (rev.revocation_check_required === true) warnings.push('ATC-007: revocation_check_required=true — caller must fetch the list separately');
+  }
+  if (revErrs.length === 0) controlsPassed.push('ATC-007'); else { controlsFailed.push('ATC-007'); errors.push(...revErrs); }
+
+  // ATC-008 Expiration
+  const v = atc.validity || {};
+  const vErrs = [];
+  if (typeof v !== 'object' || v === null) vErrs.push('ATC-008: validity must be an object');
+  else {
+    const issued = Date.parse(v.issued_at);
+    const expires = Date.parse(v.expires_at);
+    if (isNaN(issued)) vErrs.push('ATC-008: issued_at invalid');
+    if (isNaN(expires)) vErrs.push('ATC-008: expires_at invalid');
+    if (typeof v.max_ttl_days !== 'number' || v.max_ttl_days < 1 || v.max_ttl_days > 365) vErrs.push('ATC-008: max_ttl_days must be 1-365');
+    const now = Date.now();
+    if (!isNaN(issued) && now < issued - 5 * 60 * 1000) vErrs.push('ATC-008: ATC issued in future');
+    if (!isNaN(expires) && now > expires + 5 * 60 * 1000) vErrs.push('ATC-008: ATC expired');
+  }
+  if (vErrs.length === 0) controlsPassed.push('ATC-008'); else { controlsFailed.push('ATC-008'); errors.push(...vErrs); }
+
+  // ATC-006 Signature (last — only if ATC-002 passed)
+  if (controlsPassed.includes('ATC-002')) {
+    try {
+      // Canonicalize (with signature + signed_payload_hash blanked)
+      const tmp = JSON.parse(JSON.stringify(atc));
+      tmp.attestation.signature = '';
+      tmp.attestation.signed_payload_hash = '';
+      const canonical = canonicalize(tmp);
+      const computedHash = await sha256(canonical);
+      const sigErrs = [];
+      if (computedHash !== atc.attestation.signed_payload_hash) sigErrs.push(`ATC-006: hash mismatch — expected ${computedHash.slice(0,16)}..., got ${atc.attestation.signed_payload_hash.slice(0,16)}...`);
+
+      // Verify Ed25519 signature
+      const caKey = options.ca_public_key || atc.issuer?.ca_public_key;
+      if (!caKey) {
+        sigErrs.push('ATC-006: no CA public key');
+      } else {
+        const pubKey = await importEd25519PublicKey(caKey);
+        const sigBytes = base64ToBytes(atc.attestation.signature);
+        const enc = new TextEncoder();
+        const valid = await crypto.subtle.verify({ name: 'Ed25519' }, pubKey, sigBytes, enc.encode(canonical));
+        if (!valid) sigErrs.push('ATC-006: Ed25519 signature verification failed');
+      }
+      if (sigErrs.length === 0) controlsPassed.push('ATC-006');
+      else { controlsFailed.push('ATC-006'); errors.push(...sigErrs); }
+    } catch (err) {
+      controlsFailed.push('ATC-006');
+      errors.push('ATC-006: ' + err.message);
+    }
+  } else {
+    controlsFailed.push('ATC-006');
+    errors.push('ATC-006: skipped (ATC-002 failed)');
+  }
+
+  if (atc.delegation) warnings.push('ATC-009 (delegation) present but not validated');
+  if (atc.runtime_trust) warnings.push('ATC-010 (runtime_trust) present but not validated');
+
+  controlsPassed.sort();
+  controlsFailed.sort();
+
+  return {
+    valid: errors.length === 0,
+    spec_version: atc.spec_version,
+    controls_passed: controlsPassed,
+    controls_failed: controlsFailed,
+    errors,
+    warnings,
+    card_id: atc.card_id || null,
+    issuer_ca_id: atc.issuer?.ca_id || null,
+    issuer_ca_url: atc.issuer?.ca_url || null,
+    trust_score: atc.risk?.trust_score ?? null,
+    risk_level: atc.risk?.risk_level || null,
+    expires_at: atc.validity?.expires_at || null,
+    agent_id: atc.identity?.agent_id || null,
+    agent_name: atc.identity?.agent_name || null,
+  };
+};
+
+// ─── Issue (browser-side) ─────────────────────────────────────────────────
+window.issueATCBrowser = async function(payload) {
+  // Generate CA + agent keypairs
+  const caKeyPair = await crypto.subtle.generateKey('Ed25519', true, ['sign', 'verify']);
+  const agentKeyPair = await crypto.subtle.generateKey('Ed25519', true, ['sign', 'verify']);
+
+  // Export public keys as SPKI base64
+  const caPubSpki = await crypto.subtle.exportKey('spki', caKeyPair.publicKey);
+  const caPubB64 = btoa(String.fromCharCode(...new Uint8Array(caPubSpki)));
+  const agentPubSpki = await crypto.subtle.exportKey('spki', agentKeyPair.publicKey);
+  const agentPubB64 = btoa(String.fromCharCode(...new Uint8Array(agentPubSpki)));
+
+  const issuedAt = new Date().toISOString();
+  const maxTtlDays = payload.validity?.max_ttl_days || 90;
+  const expiresAt = new Date(Date.parse(issuedAt) + maxTtlDays * 86400000).toISOString();
+
+  const atc = {
+    spec_version: 'ATC/1.0',
+    card_id: payload.card_id,
+    issuer: {
+      ca_id: 'browser-playground-ca',
+      ca_public_key: caPubB64,
+      ca_algorithm: 'Ed25519',
+      ca_url: 'https://marketnow.site/atc/playground',
+    },
+    identity: payload.identity,
+    attestation: {
+      subject_public_key: agentPubB64,
+      subject_algorithm: 'Ed25519',
+      signature: '',
+      signed_payload_hash: '',
+    },
+    capabilities: payload.capabilities,
+    evidence: {
+      audit_pipeline: 'Browser Playground (self-issued)',
+      audit_completed_at: issuedAt,
+      static_checks: { metadata: true, semgrep_rules_count: 0, secret_patterns_count: 0, dependency_scan: false, malware_patterns_count: 0, malware_family_signatures_count: 0, prompt_injection_rules_count: 0 },
+      dynamic_checks: { sandbox_run: false, sandbox_runtime_ms: 0, sandbox_exit_code: 0, sandbox_network_blocked: false, sandbox_fs_read_only: false, sandbox_cap_drop_all: false },
+      runtime_checks: { interceptor_rules_count: 0, interceptor_blocks: 0, interceptor_warns: 0 },
+      findings: [],
+    },
+    risk: {
+      ...payload.risk,
+      decision_authority: 'consumer',
+    },
+    revocation: {
+      revocation_check_url: 'https://marketnow.site/api/atc?action=revocation-list',
+      revocation_check_method: 'simple_json',
+      revocation_check_required: false, // self-issued; no revocation list
+    },
+    validity: { issued_at: issuedAt, expires_at: expiresAt, max_ttl_days: maxTtlDays },
+  };
+
+  // Canonicalize + hash + sign
+  const tmp = JSON.parse(JSON.stringify(atc));
+  tmp.attestation.signature = '';
+  tmp.attestation.signed_payload_hash = '';
+  const canonical = canonicalize(tmp);
+  atc.attestation.signed_payload_hash = await sha256(canonical);
+
+  const enc = new TextEncoder();
+  const sigBuf = await crypto.subtle.sign({ name: 'Ed25519' }, caKeyPair.privateKey, enc.encode(canonical));
+  atc.attestation.signature = btoa(String.fromCharCode(...new Uint8Array(sigBuf)));
+
+  // Also include the CA private key (so the user can re-sign / revoke) — IN BROWSER ONLY
+  const caPrivPkcs8 = await crypto.subtle.exportKey('pkcs8', caKeyPair.privateKey);
+  atc._browser_ca_private_key = btoa(String.fromCharCode(...new Uint8Array(caPrivPkcs8)));
+  atc._browser_note = 'This ATC was self-issued in the browser. The _browser_ca_private_key field lets you re-sign or revoke. Remove these _browser_* fields before sharing the card externally.';
+
+  return atc;
+};
+
+window.generateKeyPairBrowser = async function() {
+  const kp = await crypto.subtle.generateKey('Ed25519', true, ['sign', 'verify']);
+  const pubSpki = await crypto.subtle.exportKey('spki', kp.publicKey);
+  const pubB64 = btoa(String.fromCharCode(...new Uint8Array(pubSpki)));
+  const privPkcs8 = await crypto.subtle.exportKey('pkcs8', kp.privateKey);
+  const privB64 = btoa(String.fromCharCode(...new Uint8Array(privPkcs8)));
+  return { publicKey: pubB64, privateKey: privB64 };
+};
+
+// ─── Tab switching ───────────────────────────────────────────────────────
+document.querySelectorAll('.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+    document.getElementById('tab-' + btn.dataset.tab).style.display = 'block';
+  });
+});
+
+// ─── Wire up buttons ──────────────────────────────────────────────────────
+window.verifyCard = async function() {
+  const input = document.getElementById('verify-input').value.trim();
+  const resultDiv = document.getElementById('verify-result');
+  if (!input) { resultDiv.textContent = 'Paste an ATC JSON document first.'; resultDiv.className = 'result'; return; }
+  let atc;
+  try { atc = JSON.parse(input); }
+  catch (e) { resultDiv.textContent = 'Invalid JSON: ' + e.message; resultDiv.className = 'result invalid'; return; }
+
+  resultDiv.textContent = 'Verifying...';
+  resultDiv.className = 'result';
+
+  try {
+    const result = await window.verifyATC(atc);
+    renderVerifyResult(resultDiv, result);
+  } catch (err) {
+    resultDiv.textContent = 'Verification error: ' + err.message;
+    resultDiv.className = 'result invalid';
+  }
+};
+
+function renderVerifyResult(div, r) {
+  div.className = 'result ' + (r.valid ? 'valid' : 'invalid');
+  let html = '';
+  html += `<div style="margin-bottom:12px;"><span class="badge ${r.valid ? 'green' : 'red'}">${r.valid ? '✓ VALID' : '✗ INVALID'}</span> <span style="color:var(--text-dim);font-size:12px;">${r.controls_passed.length}/8 controls passed</span></div>`;
+  html += `<div style="font-size:12px;color:var(--text-dim);margin-bottom:8px;">`;
+  html += `<strong>card_id:</strong> ${r.card_id || '(none)'}<br>`;
+  html += `<strong>spec_version:</strong> ${r.spec_version || '(none)'}<br>`;
+  html += `<strong>CA ID:</strong> ${r.issuer_ca_id || '(none)'}<br>`;
+  html += `<strong>Agent:</strong> ${r.agent_id || '(none)'} (${r.agent_name || '?'})<br>`;
+  html += `<strong>Trust score:</strong> ${r.trust_score ?? '?'}/10 <span style="color:var(--text-dim);">(${r.risk_level || '?'})</span><br>`;
+  html += `<strong>Expires:</strong> ${r.expires_at || '(none)'}`;
+  html += `</div>`;
+  html += `<div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Controls</div>`;
+  html += `<div class="controls-grid">`;
+  const all = ['ATC-001','ATC-002','ATC-003','ATC-004','ATC-005','ATC-006','ATC-007','ATC-008'];
+  for (const c of all) {
+    const pass = r.controls_passed.includes(c);
+    html += `<div class="ctrl ${pass ? 'pass' : 'fail'}">${pass ? '✓' : '✗'} ${c}</div>`;
+  }
+  html += `</div>`;
+  if (r.errors.length > 0) {
+    html += `<div style="color:var(--red);font-size:11px;margin-top:8px;"><strong>Errors</strong><br>${r.errors.map(e => '− ' + e).join('<br>')}</div>`;
+  }
+  if (r.warnings.length > 0) {
+    html += `<div style="color:var(--yellow);font-size:11px;margin-top:8px;"><strong>Warnings</strong><br>${r.warnings.map(w => '! ' + w).join('<br>')}</div>`;
+  }
+  div.innerHTML = html;
+}
+
+window.loadSample = async function(kind) {
+  // For 'valid', we need to issue one in the browser (since we don't have a fixed CA keypair)
+  if (kind === 'valid') {
+    const atc = await window.issueATCBrowser({
+      card_id: 'ATC-2026-0000999',
+      identity: { agent_id: 'sample-bot', agent_name: 'Sample Bot', agent_owner: 'AliceLabs' },
+      capabilities: {
+        filesystem: { read: 'own_dir', write: 'own_dir' },
+        network: { egress: 'allowlist', ingress: 'none' },
+        shell: { exec: 'sandboxed', spawn: 'none' },
+        credentials: { read_env: 'none', read_files: 'none' },
+        process: { subprocess: 'none', signals: 'own' },
+      },
+      risk: { trust_score: 9, risk_level: 'low', score_explanation: 'Sample valid card', scored_at: new Date().toISOString() },
+    });
+    // Strip browser-only fields for the display
+    delete atc._browser_ca_private_key;
+    delete atc._browser_note;
+    document.getElementById('verify-input').value = JSON.stringify(atc, null, 2);
+  } else if (kind === 'tampered') {
+    // Issue a valid one, then tamper with trust_score
+    const atc = await window.issueATCBrowser({
+      card_id: 'ATC-2026-0000TAMPER',
+      identity: { agent_id: 'tampered-bot', agent_name: 'Tampered', agent_owner: 'Test' },
+      capabilities: {
+        filesystem: { read: 'own_dir', write: 'own_dir' },
+        network: { egress: 'allowlist', ingress: 'none' },
+        shell: { exec: 'sandboxed', spawn: 'none' },
+        credentials: { read_env: 'none', read_files: 'none' },
+        process: { subprocess: 'none', signals: 'own' },
+      },
+      risk: { trust_score: 9, risk_level: 'low', score_explanation: 'Tampered sample', scored_at: new Date().toISOString() },
+    });
+    atc.risk.trust_score = 1; // TAMPER
+    delete atc._browser_ca_private_key;
+    delete atc._browser_note;
+    document.getElementById('verify-input').value = JSON.stringify(atc, null, 2);
+  } else if (kind === 'expired') {
+    const atc = await window.issueATCBrowser({
+      card_id: 'ATC-2026-0000EXPR',
+      identity: { agent_id: 'expired-bot', agent_name: 'Expired', agent_owner: 'Test' },
+      capabilities: {
+        filesystem: { read: 'own_dir', write: 'own_dir' },
+        network: { egress: 'allowlist', ingress: 'none' },
+        shell: { exec: 'sandboxed', spawn: 'none' },
+        credentials: { read_env: 'none', read_files: 'none' },
+        process: { subprocess: 'none', signals: 'own' },
+      },
+      risk: { trust_score: 9, risk_level: 'low', score_explanation: 'Expired sample', scored_at: new Date().toISOString() },
+      validity: { issued_at: '2026-01-01T00:00:00Z', expires_at: '2026-01-02T00:00:00Z', max_ttl_days: 1 },
+    });
+    delete atc._browser_ca_private_key;
+    delete atc._browser_note;
+    document.getElementById('verify-input').value = JSON.stringify(atc, null, 2);
+  }
+};
+
+window.issueCard = async function() {
+  const payload = {
+    card_id: document.getElementById('issue-card-id').value,
+    identity: {
+      agent_id: document.getElementById('issue-agent-id').value,
+      agent_name: document.getElementById('issue-agent-name').value,
+      agent_owner: document.getElementById('issue-agent-owner').value,
+    },
+    capabilities: {
+      filesystem: { read: document.getElementById('cap-fs-r').value, write: document.getElementById('cap-fs-w').value },
+      network: { egress: document.getElementById('cap-net-e').value, ingress: document.getElementById('cap-net-i').value },
+      shell: { exec: document.getElementById('cap-sh-e').value, spawn: document.getElementById('cap-sh-s').value },
+      credentials: { read_env: document.getElementById('cap-cr-e').value, read_files: document.getElementById('cap-cr-f').value },
+      process: { subprocess: document.getElementById('cap-pr-s').value, signals: document.getElementById('cap-pr-sig').value },
+    },
+    risk: {
+      trust_score: parseInt(document.getElementById('issue-trust-score').value, 10),
+      risk_level: 'low',
+      score_explanation: 'Self-issued in browser playground',
+      scored_at: new Date().toISOString(),
+    },
+    validity: { max_ttl_days: parseInt(document.getElementById('issue-ttl').value, 10) },
+  };
+  const resultDiv = document.getElementById('issue-result');
+  resultDiv.textContent = 'Issuing...';
+  resultDiv.className = 'result';
+  try {
+    const atc = await window.issueATCBrowser(payload);
+    resultDiv.textContent = JSON.stringify(atc, null, 2);
+    resultDiv.className = 'result valid';
+  } catch (err) {
+    resultDiv.textContent = 'Issue error: ' + err.message;
+    resultDiv.className = 'result invalid';
+  }
+};
+
+window.generateKeys = async function() {
+  const resultDiv = document.getElementById('init-result');
+  resultDiv.textContent = 'Generating...';
+  try {
+    const kp = await window.generateKeyPairBrowser();
+    window.__lastKeypair = kp;
+    resultDiv.textContent = JSON.stringify(kp, null, 2);
+  } catch (err) {
+    resultDiv.textContent = 'Error: ' + err.message;
+  }
+};
+
+window.copyKeys = function() {
+  if (window.__lastKeypair) {
+    navigator.clipboard.writeText(JSON.stringify(window.__lastKeypair, null, 2));
+    alert('Keypair copied to clipboard. Keep the privateKey secret!');
+  }
+};
+
+// Expose for inline onclick handlers
+window.loadSample = window.loadSample;
+
+</script>
+</body>
+</html>

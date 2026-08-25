@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MarketNow — Interactive Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #050505; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; overflow: hidden; }
+.demo-container { width: 100vw; height: 100vh; display: flex; flex-direction: column; }
+.progress-bar { height: 4px; background: #1a1a1a; width: 100%; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #00F299, #00d1ff); width: 0%; transition: width 0.5s ease; }
+.content { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; position: relative; }
+.slide { max-width: 800px; width: 100%; opacity: 0; transition: opacity 0.5s ease; position: absolute; }
+.slide.active { opacity: 1; position: relative; }
+.slide h1 { font-size: 2.5rem; margin-bottom: 20px; background: linear-gradient(90deg, #00F299, #00d1ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.slide h2 { font-size: 1.5rem; margin-bottom: 15px; color: #00F299; font-family: monospace; }
+.slide p { font-size: 1.1rem; color: #a0a0a0; line-height: 1.6; margin-bottom: 15px; }
+.slide code { background: #1a1a1a; padding: 2px 8px; border-radius: 4px; color: #00F299; font-family: monospace; }
+.slide .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; margin: 15px 0; }
+.slide .stat { display: inline-block; text-align: center; margin: 0 20px; }
+.slide .stat .num { font-size: 2rem; font-weight: bold; color: #00F299; font-family: monospace; }
+.slide .stat .label { font-size: 0.8rem; color: #666; }
+.slide .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-family: monospace; margin: 2px; }
+.badge-green { background: rgba(0,242,153,0.1); color: #00F299; border: 1px solid rgba(0,242,153,0.3); }
+.badge-blue { background: rgba(0,209,255,0.1); color: #00d1ff; border: 1px solid rgba(0,209,255,0.3); }
+.badge-yellow { background: rgba(251,191,36,0.1); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+.badge-red { background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+.controls { position: fixed; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
+.controls button { background: rgba(0,242,153,0.1); border: 1px solid rgba(0,242,153,0.3); color: #00F299; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-family: monospace; font-size: 0.85rem; }
+.controls button:hover { background: rgba(0,242,153,0.2); }
+.terminal { background: #0a0a0a; border: 1px solid #333; border-radius: 8px; padding: 15px; font-family: monospace; font-size: 0.85rem; color: #00F299; margin: 15px 0; white-space: pre-wrap; }
+.terminal .prompt { color: #666; }
+.terminal .output { color: #a0a0a0; }
+.terminal .error { color: #ef4444; }
+.terminal .success { color: #00F299; }
+.slide-number { position: fixed; bottom: 20px; left: 20px; color: #333; font-family: monospace; font-size: 0.85rem; }
+.checkmark { color: #00F299; margin-right: 8px; }
+</style>
+</head>
+<body>
+
+<div class="demo-container">
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+  
+  <div class="content" id="content">
+
+    <!-- Slide 1 -->
+    <div class="slide active" id="slide-1">
+      <h1>MarketNow</h1>
+      <h2>Trust Layer for Agent Commerce</h2>
+      <p>Discovery is solved (MCP registry, Smithery, Glama). <strong style="color:#fff">Trust is not.</strong></p>
+      <p>MarketNow is the trust layer — every skill Sentinel-scanned, every payment verified on-chain, every mandate human-approved by default.</p>
+      <div style="margin-top:30px">
+        <div class="stat"><div class="num">9,248</div><div class="label">SKILLS</div></div>
+        <div class="stat"><div class="num">43</div><div class="label">FREE</div></div>
+        <div class="stat"><div class="num">10</div><div class="label">SECURITY CHECKS</div></div>
+        <div class="stat"><div class="num">5</div><div class="label">LANGUAGES</div></div>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide" id="slide-2">
+      <h1>Sentinel L2 Security</h1>
+      <h2>Real-time audit on every API call</h2>
+      <div class="card">
+        <p><span class="badge badge-green">L1.5 LIVE</span> 6 metadata checks: AUTH, prompt injection, input validation, CORS, OAuth, rate limiting</p>
+      </div>
+      <div class="card">
+        <p><span class="badge badge-blue">L1.6 LIVE</span> Code analysis: 18 secret patterns, 18 MCP prompt injection rules, OSV API dependency check, hygiene</p>
+      </div>
+      <div class="card">
+        <p><span class="badge badge-green">L2 LIVE</span> Behavioral: fetches actual source code from GitHub, analyzes 16 runtime patterns (network, filesystem, process, credential, exfiltration, dynamic imports)</p>
+      </div>
+      <p style="margin-top:15px">All in ONE endpoint, ONE call, real-time. No Docker needed.</p>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide" id="slide-3">
+      <h1>How It Works</h1>
+      <h2>Agent purchase flow (x402)</h2>
+      <div class="terminal">
+<span class="prompt">$</span> curl -X POST https://marketnow.site/api/agent-purchase \
+  -H "Content-Type: application/json" \
+  -d '{"skillId":"mn-gen-00003","mandateId":"mand_xxx"}'
+
+<span class="error">HTTP/2 402 Payment Required</span>
+<span class="success">www-authenticate: x402 realm="marketnow", chain="base", token="USDC"</span>
+<span class="output">x-payment-amount: 1990000
+x-payment-to: 0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee
+x-payment-token: USDC</span>
+
+<span class="prompt">$</span> <span class="output"># Agent sends USDC on Base, retries with txHash</span>
+
+<span class="success">HTTP/2 200 OK</span>
+<span class="output">{"mode":"instant_purchase","verified":true,"license":{"key":"MN-GEN-00003-..."}}</span>
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide" id="slide-4">
+      <h1>AP2 Mandates</h1>
+      <h2>Human-in-the-loop by default</h2>
+      <div class="card">
+        <p><span class="checkmark">✅</span> <strong style="color:#fff">Default: notify</strong> — human gets email/webhook alert on every purchase</p>
+        <p><span class="checkmark">✅</span> <strong style="color:#fff">3 autonomous purchases</strong> — agent can buy without per-purchase approval</p>
+        <p><span class="checkmark">✅</span> After 3: <strong style="color:#fbbf24">requires_reapproval</strong> — human must re-approve</p>
+        <p><span class="checkmark">✅</span> Hard caps: $500 total, $50 per purchase, 90-day expiry</p>
+        <p><span class="checkmark">✅</span> Every spend = public git commit at _data/mandates/</p>
+      </div>
+      <p style="margin-top:15px">Balances agent autonomy with LLM provider safety policies.</p>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide" id="slide-5">
+      <h1>10 AliceLabs Security Tools</h1>
+      <h2>Original, human-reviewed, $2.99-$9.99</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px">
+        <div class="card" style="padding:12px"><span class="badge badge-red">$9.99</span> <strong>PromptArmor Pro</strong><br><small style="color:#666">Prompt injection firewall</small></div>
+        <div class="card" style="padding:12px"><span class="badge badge-red">$9.99</span> <strong>MCP Security Gateway</strong><br><small style="color:#666">MCP server firewall + audit</small></div>
+        <div class="card" style="padding:12px"><span class="badge badge-red">$9.99</span> <strong>RAG Defender</strong><br><small style="color:#666">RAG pipeline security</small></div>
+        <div class="card" style="padding:12px"><span class="badge badge-red">$9.99</span> <strong>AIComply</strong><br><small style="color:#666">GDPR/EU AI Act compliance</small></div>
+        <div class="card" style="padding:12px"><span class="badge badge-yellow">$7.99</span> <strong>Agentic Red Team</strong><br><small style="color:#666">Offensive LLM pentesting</small></div>
+        <div class="card" style="padding:12px"><span class="badge badge-blue">$4.99</span> <strong>AgentMemory Firewall</strong><br><small style="color:#666">Memory poisoning defense</small></div>
+      </div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide" id="slide-6">
+      <h1>Honest Transparency</h1>
+      <h2>What we admit we don't have yet</h2>
+      <div class="card">
+        <p><span class="badge badge-yellow">PARTIAL</span> Third-party audit — paid audits deferred until revenue. Volunteer peer review open.</p>
+      </div>
+      <div class="card">
+        <p><span class="badge badge-green">DONE</span> Catalog transparency — 14 bulk-imported categories disclosed, 0 synthetic skills</p>
+      </div>
+      <div class="card">
+        <p><span class="badge badge-green">DONE</span> Human-in-loop by default — not "no humans needed"</p>
+      </div>
+      <div class="card">
+        <p><span class="badge badge-yellow">PARTIAL</span> Payment reversibility — manual dispute process, on-chain escrow on roadmap Q1 2027</p>
+      </div>
+      <p style="margin-top:15px">Every status is a git commit. See /trust for the full roadmap.</p>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="slide" id="slide-7">
+      <h1>Try It Now</h1>
+      <h2>marketnow.site</h2>
+      <div class="terminal">
+<span class="prompt">$</span> <span class="output"># Install MCP server for Claude Desktop / Cursor / Cline</span>
+<span class="success">npx -y marketnow-mcp</span>
+
+<span class="prompt">$</span> <span class="output"># Browse 9,248 skills</span>
+<span class="output">https://marketnow.site/registry</span>
+
+<span class="prompt">$</span> <span class="output"># 43 free skills — no signup</span>
+<span class="output">https://marketnow.site/registry?filter=free</span>
+
+<span class="prompt">$</span> <span class="output"># Run a security audit</span>
+<span class="prompt">$</span> curl -X POST https://marketnow.site/api/audit-skill \
+  -H "Content-Type: application/json" \
+  -d '{"skillId":"mn-sec-00001"}'
+
+<span class="prompt">$</span> <span class="output"># GitHub (source-available MNNC-1.0)</span>
+<span class="output">https://github.com/alicelabs-llc</span>
+      </div>
+      <p style="margin-top:15px;text-align:center">AliceLabs LLC — Wyoming, USA · 2025<br>Bootstrapped · No investors · Built in public</p>
+    </div>
+
+  </div>
+
+  <div class="slide-number" id="slideNum">1 / 7</div>
+  
+  <div class="controls">
+    <button onclick="prevSlide()">← PREV</button>
+    <button onclick="nextSlide()">NEXT →</button>
+    <button onclick="toggleAuto()" id="autoBtn">▶ AUTO</button>
+  </div>
+</div>
+
+<script>
+let currentSlide = 1;
+const totalSlides = 7;
+let autoPlay = null;
+let autoMode = false;
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  const slide = document.getElementById('slide-' + n);
+  if (slide) slide.classList.add('active');
+  document.getElementById('progress').style.width = (n / totalSlides * 100) + '%';
+  document.getElementById('slideNum').textContent = n + ' / ' + totalSlides;
+  currentSlide = n;
+}
+
+function nextSlide() {
+  if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+  else showSlide(1);
+}
+
+function prevSlide() {
+  if (currentSlide > 1) showSlide(currentSlide - 1);
+}
+
+function toggleAuto() {
+  if (autoMode) {
+    clearInterval(autoPlay);
+    autoMode = false;
+    document.getElementById('autoBtn').textContent = '▶ AUTO';
+  } else {
+    autoMode = true;
+    document.getElementById('autoBtn').textContent = '⏸ STOP';
+    autoPlay = setInterval(nextSlide, 5000);
+  }
+}
+
+// Start auto-play on load
+setTimeout(() => toggleAuto(), 1000);
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') nextSlide();
+  if (e.key === 'ArrowLeft') prevSlide();
+  if (e.key === ' ') { e.preventDefault(); toggleAuto(); }
+});
+</script>
+
+</body>
+</html>

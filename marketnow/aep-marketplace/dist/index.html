@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- CANONICAL — Google needs this. Default to homepage; JS updates per-route -->
+    <link rel="canonical" href="https://marketnow.site/" />
+    <script>
+      // Update canonical URL and title based on current route (SPA fix for SEO)
+      (function() {
+        var path = window.location.pathname;
+        if (path !== '/' && path !== '') {
+          var canonical = document.querySelector('link[rel="canonical"]');
+          if (canonical) {
+            canonical.href = 'https://marketnow.site' + path;
+          }
+          var ogUrl = document.querySelector('meta[property="og:url"]');
+          if (ogUrl) {
+            ogUrl.content = 'https://marketnow.site' + path;
+          }
+        }
+
+        // Dynamic page titles for SEO (prevents duplicate title penalty)
+        var pageTitle = document.title;
+        var routeTitles = {
+          '/registry': 'Browse 9,248 MCP Servers — MarketNow Registry',
+          '/trust': 'Trust Roadmap — Sentinel v3.0 Audit Pipeline — MarketNow',
+          '/security': 'Sentinel v3.0 Security Audit Methodology — MarketNow',
+          '/pricing': 'Pricing — Sentinel PRO $9.99/mo, ENTERPRISE $49.99/mo — MarketNow',
+          '/about': 'About AliceLabs LLC — MarketNow',
+          '/handshake': 'MarketNow — Trust Layer for Agent Commerce',
+          '/verify': 'Verify Sentinel Certificate — MarketNow',
+          '/catalog': 'Catalog Transparency — Where 9,248 MCP Servers Come From — MarketNow',
+          '/policies': 'Terms, Refund, Privacy Policies — MarketNow',
+          '/mandates': 'AP2 Mandates — Human-in-Loop Agent Spending — MarketNow',
+          '/standards': 'Open Standards — MCP, AP2, x402 — MarketNow',
+          '/embed': 'Embed Badges — Powered by MarketNow',
+          '/submit': 'Submit Your MCP Server — MarketNow',
+          '/dashboard': 'Dashboard — MarketNow',
+          '/governance': 'Governance — MarketNow',
+          '/vault': 'Vault — MarketNow',
+          '/compare': 'Compare MCP Marketplaces — MarketNow',
+          '/buyers-guide': 'MCP Server Buyer\'s Guide — MarketNow',
+          '/onboarding': 'Onboarding — MarketNow',
+          '/blog': 'Blog — MarketNow',
+        };
+        if (routeTitles[path]) {
+          document.title = routeTitles[path];
+        }
+      })();
+    </script>
+
+    <!-- BRANDING -->
+    <title>MarketNow — Security Infrastructure for AI Agents · UTA v1.0.0 Trust Pipeline · Ed25519 Trust Cards</title>
+    <meta name="description" content="Trust infrastructure for AI agents. MarketNow lets agents discover, verify, authorize, and transact with external tools. UTA 12-stage trust pipeline, ATC v3 Ed25519 trust cards, Trust Gateway, unified Trust API." />
+    <meta name="application-name" content="MarketNow" />
+    <meta name="theme-color" content="#050505" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="author" content="AliceLabs LLC" />
+    <meta name="keywords" content="trust infrastructure, AI agent trust, agent identity, agent security, ATC, agent trust card, sentinel, MCP security, Trust Gateway, trust API, agent commerce, ed25519, claude desktop, cursor, cline" />
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:title" content="MarketNow — Trust Infrastructure for AI Agents" />
+    <meta property="og:description" content="The trust layer for AI agents: discover, verify, authorize, and transact with external tools. 12-stage UTA trust pipeline, ATC v3 Ed25519 trust cards, Trust Gateway, unified Trust API." />
+    <meta property="og:url" content="https://marketnow.site/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MarketNow" />
+    <meta property="og:image" content="https://marketnow.site/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="MarketNow — Security Infrastructure for AI Agents" />
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MarketNow — Security Infrastructure for AI Agents" />
+    <meta name="twitter:description" content="Trust infrastructure for AI agents: discover, verify, authorize, transact. 12-stage UTA trust pipeline, ATC v3 trust cards, Trust Gateway, Trust API." />
+    <meta name="twitter:image" content="https://marketnow.site/og-image.png" />
+
+    <!-- SITEMAP & STRUCTURED DATA LINKS -->
+    <link rel="alternate" type="application/json" href="/api/skills.json" title="MarketNow Skills API" />
+    <link rel="alternate" type="application/json" href="/api/agent.json" title="MarketNow Agent Instructions" />
+    <link rel="alternate" type="application/yaml" href="/api/openapi.yaml" title="MarketNow OpenAPI Spec" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <!-- JSON-LD Organization + WebSite + ItemList (richer than DataCatalog) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://marketnow.site/#organization",
+          "name": "AliceLabs LLC",
+          "founder": { "@type": "Person", "name": "Edison Flores" },
+          "foundingLocation": { "@type": "Place", "address": "Wyoming, USA" },
+          "url": "https://marketnow.site",
+          "logo": "https://marketnow.site/favicon.svg",
+          "sameAs": [
+            "https://github.com/alicelabs-llc/marketnow",
+            "https://www.npmjs.com/package/marketnow-mcp",
+            "https://smithery.ai/servers/alicelabs/marketnow"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://marketnow.site/#website",
+          "url": "https://marketnow.site/",
+          "name": "MarketNow",
+          "description": "Security infrastructure for AI agents. 9,248 MCP servers, each security-audited by Sentinel v3.0 (12-stage audit incl. gVisor sandbox). AliceLabs LLC.",
+          "publisher": { "@id": "https://marketnow.site/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://marketnow.site/registry?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "ItemList",
+          "name": "Top MCP Server Categories",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "AI/ML", "url": "https://marketnow.site/registry?cat=ai-ml" },
+            { "@type": "ListItem", "position": 2, "name": "Developer Tools", "url": "https://marketnow.site/registry?cat=developer-tools" },
+            { "@type": "ListItem", "position": 3, "name": "Data", "url": "https://marketnow.site/registry?cat=data" },
+            { "@type": "ListItem", "position": 4, "name": "Web/API", "url": "https://marketnow.site/registry?cat=web-api" },
+            { "@type": "ListItem", "position": 5, "name": "Productivity", "url": "https://marketnow.site/registry?cat=productivity" },
+            { "@type": "ListItem", "position": 6, "name": "Finance", "url": "https://marketnow.site/registry?cat=finance" },
+            { "@type": "ListItem", "position": 7, "name": "Communication", "url": "https://marketnow.site/registry?cat=communication" },
+            { "@type": "ListItem", "position": 8, "name": "Security", "url": "https://marketnow.site/registry?cat=security" }
+          ]
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "marketnow-mcp",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",
+          "description": "MarketNow MCP server — search and install MCP skills from any MCP-compatible agent runtime (Claude Desktop, Cursor, Cline).",
+          "installUrl": "https://www.npmjs.com/package/marketnow-mcp",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+      body { background-color: #050505; color: white; margin: 0; }
+    </style>
+    <script type="module" crossorigin src="/assets/index-Cf2spbAz-v25.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CwbLic3y-v25.css">
+  </head>
+  <body>
+    <!--
+      Canonical HTML content — same for humans and crawlers.
+      No cloaking, no display:none SEO tricks.
+      React SPA mounts on #root below and shows the interactive version.
+    -->
+    <div id="seo-content" style="display: block;">
+      <h1>MarketNow — Trust Infrastructure for AI Agents</h1>
+      <p>MarketNow is the trust layer that lets AI agents discover, verify, authorize, and transact with external tools. 9,248 MCP servers indexed, 1.2M security checks performed, 80 malicious tools quarantined. UTA 12-stage trust pipeline, ATC v3 (Agent Trust Card v3) with Ed25519 + JCS + 7 domain separation signatures, Trust Gateway with 8 enforcement rules. Built by AliceLabs LLC (Wyoming, USA).</p>
+
+      <h2>Discover → Verify → Trust → Authorize → Enforce → Audit</h2>
+      <p>MarketNow combines 7 subsystems into a single trust infrastructure: Discovery (9,248 MCP servers), UTA (12-stage trust verification, 8 formats), ATC (agent identity with Ed25519), UTA Gateway (12-stage enforcement with PoP), Revocation (CRL + OCSP + Bitstring Status List), Mandates (delegated authority for agent commerce), and Audit Log (tamper-evident public evidence).</p>
+
+      <h2>Unified Trust API</h2>
+      <p>POST /api/trust — a single endpoint that combines Sentinel security assessment, ATC identity verification, policy evaluation, and runtime enforcement into one decision.</p>
+      <p>curl -X POST https://marketnow.site/api/trust -H "Content-Type: application/json" -d '{"agent_id":"my-bot","skill_id":"mn-gen-00003","action":"execute","policy":{"min_trust_score":7}}'</p>
+
+      <h2>Try the ATC v3 Playground</h2>
+      <p>Issue and verify Agent Trust Cards in your browser. Zero install, zero signup, uses WebCrypto for Ed25519 signatures. <a href="/atc/playground">Open playground →</a></p>
+
+      <h2>Install the MCP Server</h2>
+      <p>npx -y marketnow-mcp — 13 tools including marketnow_verify_atc_spec, marketnow_verify_trust, marketnow_get_owasp_compliance. Works with Claude Desktop, Cursor, Cline, Continue, Aider, and any MCP-compatible runtime.</p>
+
+      <h2>SDKs</h2>
+      <p>npm install agent-trust-card — Node.js SDK with CLI (atc init, atc issue, atc verify, atc inspect)</p>
+      <p>pip install agent-trust-card — Python SDK (coming soon to PyPI)</p>
+      <p>cargo add agent-trust-card — Rust crate (coming soon to crates.io)</p>
+
+      <h2>Popular MCP Server Categories</h2>
+      <ul>
+        <li><a href="/registry?cat=ai-ml">AI/ML</a> — 1,976 skills (LLM wrappers, embeddings, RAG, vision)</li>
+        <li><a href="/registry?cat=developer-tools">Developer Tools</a> — 1,891 skills (code analysis, linting, build tools)</li>
+        <li><a href="/registry?cat=data">Data</a> — 782 skills (databases, ETL, analytics)</li>
+        <li><a href="/registry?cat=web-api">Web/API</a> — 348 skills (HTTP clients, REST, GraphQL)</li>
+        <li><a href="/registry?cat=productivity">Productivity</a> — 328 skills (task management, notes, calendars)</li>
+        <li><a href="/registry?cat=finance">Finance</a> — 292 skills (payments, accounting, crypto)</li>
+        <li><a href="/registry?cat=communication">Communication</a> — 288 skills (Slack, Discord, email)</li>
+        <li><a href="/registry?cat=security">Security</a> — 224 skills (auth, scanning, secrets)</li>
+      </ul>
+
+      <h2>43 Free MCP Skills — No Payment, No Signup</h2>
+      <p>Real value, zero cost. 43 hand-curated skills available for instant download. No credit card, no mandate, no signup required. Just install and use.</p>
+      <p><a href="/registry?filter=free">Browse all 43 free skills</a></p>
+
+      <h2>For AI Agents</h2>
+      <p>Machine-readable everything. Public JSON API. Human-in-the-loop by default.</p>
+      <ul>
+        <li>GET /api/skills.json — Full catalog (9,248 skills, JSON, ~24MB)</li>
+        <li>GET /api/search?q= — Server-side search with relevance scoring</li>
+        <li>GET /api/agent.json — Machine-readable instructions, trust model, schema</li>
+        <li>GET /api/policies.json — Terms, refund, dispute, privacy policies</li>
+        <li>POST /api/agent-purchase — Buy a skill (5 modes: instant_download, instant_purchase, direct_purchase, requires_payment, requires_human_approval)</li>
+        <li>GET /api/mandates — Delegated mandates (ACP/AP2 compliant)</li>
+        <li>GET /api/free-skills.json — 43 free skills</li>
+        <li>GET /api/bundles.json — Discounted skill bundles</li>
+      </ul>
+      <p>MCP server: npx -y marketnow-mcp — works with Claude Desktop, Cursor, Cline. Available on npm and Smithery.</p>
+
+      <h2>Why people recommend us</h2>
+      <ul>
+        <li>AliceLabs Proprietary — Full audit methodology on GitHub. Every change is a public commit. No black box.</li>
+        <li>Sentinel v3.0 — 12-stage MCP security audit on every skill. Methodology published. Re-runnable. See /security/sentinel-v3.0.</li>
+        <li>43 Free Skills — Real value, zero cost. No signup, no credit card, no mandate.</li>
+        <li>Buyers install all skills free — sellers subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) + 20% commission on seller sales. See <a href="/pricing">/pricing</a>.</li>
+        <li>Human-in-Loop Default — Mandates notify the principal on every purchase. Silent mode requires explicit opt-in.</li>
+        <li>Public Audit Log — Every mandate transaction is a git commit at _data/mandates/. Fully auditable.</li>
+        <li>5 Languages — System prompts in EN, ES, ZH, PT, FR. Real translations, not auto-translated.</li>
+        <li>Honest Roadmap — /trust page admits what's done, partial, and pending. No fake "verified" badges.</li>
+      </ul>
+
+      <h2>Trust &amp; Transparency</h2>
+      <ul>
+        <li><a href="/trust">/trust</a> — Public trust roadmap (7 points raised by Claude AI reviewer)</li>
+        <li><a href="/about">/about</a> — Who we are (AliceLabs LLC, Wyoming USA, founder Edison Flores)</li>
+        <li><a href="/catalog">/catalog</a> — Where the 9,248 skills come from (catalog transparency)</li>
+        <li><a href="/policies">/policies</a> — Terms, refund, dispute policy (incl. USDC dispute process)</li>
+        <li><a href="/mandates">/mandates</a> — Manage spending mandates (human-in-loop by default)</li>
+        <li><a href="/embed">/embed</a> — Shareable badges (Powered by MarketNow, Sentinel v3.0)</li>
+        <li><a href="/pricing">/pricing</a> — Pricing tiers for sellers</li>
+        <li><a href="/security">/security</a> — Sentinel v3.0 methodology</li>
+        <li><a href="/handshake">/handshake</a> — Agent trust handshake protocol</li>
+      </ul>
+
+      <h2>Review Status Disclosure</h2>
+      <p>Of 9,248 skills: 8,742 are auto-scanned (Sentinel ran, no human review), 22 are human-reviewed (curated free skills), 0 are maintainer-verified (program not yet launched). We never claim "verified" without earning it.</p>
+
+      <h2>Maintained by AliceLabs LLC</h2>
+      <p>Founded 2024 by Edison Flores (AliceLabs LLC, Wyoming USA). No investors, no employees besides the founder, no marketing budget. Built in public. Every change is a git commit visible at github.com/alicelabs-llc/marketnow.</p>
+
+      <h2>Languages</h2>
+      <p>English, Español, 中文, Português, Français</p>
+
+      <h2>Keywords</h2>
+      <p>MCP servers, Model Context Protocol, MCP marketplace, MCP directory, Claude Desktop skills, Cursor MCP, Cline MCP, agent skills, Sentinel security audit, Smithery, Anthropic MCP, open source MCP, MCP server registry, install MCP server</p>
+    </div>
+
+    <!-- React SPA mounts here — replaces #root content for interactive users -->
+    <div id="root"></div>
+  </body>
+</html>
+

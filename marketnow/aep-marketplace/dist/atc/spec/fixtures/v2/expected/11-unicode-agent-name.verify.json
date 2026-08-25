@@ -1,0 +1,8 @@
+{
+  "fixture_id": "11-unicode-agent-name",
+  "expected_outcome": "valid",
+  "expected_canonical_bytes": "{\"agent_id\":\"test_agent\",\"agent_name\":\"\u6d4b\u8bd5\u4ee3\u7406 \u00b7 Agen\u021bia de Prueba \u00b7 \u30c6\u30b9\u30c8\",\"capabilities\":{\"protocol_language\":\"mcp\",\"provides\":[\"search\",\"read\"],\"translate\":true},\"card_id\":\"ATC-FIXTURE-011\",\"decision_authority\":\"consumer\",\"identity\":{\"key_algorithm\":\"Ed25519\",\"public_key\":\"MCowBQYDK2VwAyEATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\"},\"metadata\":{\"expires_at\":\"2027-08-19T00:00:00Z\",\"issued_at\":\"2026-08-19T00:00:00Z\",\"issuer\":\"MarketNow Sentinel CA\",\"revocation_url\":\"https://marketnow.site/api/atc?action=verify&card_id=ATC-FIXTURE-011\"},\"payment\":{\"method\":\"x402 + USDC on Base L2\",\"wallet_address\":\"0x1234567890abcdef1234567890abcdef12345678\"},\"schema_version\":\"1.1.0\",\"trust\":{\"audit_layers_passed\":{\"L1.5\":true,\"L1.6\":true,\"L1.7\":true,\"L1.8\":true,\"L1.9\":true,\"L2.5\":true},\"certificate_id\":\"mn-cert-atc-fixture-011\",\"composite_trust\":8,\"risk_level\":\"low\",\"sentinel_review_score\":8,\"sentinel_score\":8}}",
+  "expected_digest_sha256": "c1eb969c38f78c1e77e5fcda698f46fc992765d2acdb2ced71fdd7572a003a0e",
+  "expected_verify_result": true,
+  "expected_verify_reason": "Card signature is valid and the card is not revoked or expired"
+}

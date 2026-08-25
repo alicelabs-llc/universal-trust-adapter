@@ -1,0 +1,61 @@
+{
+  "fixture_id": "02-rotated-key",
+  "attack_vector": "rotated_ca_key",
+  "description": "Card signed with an old CA key that has been rotated. The current CA key must NOT verify this card. The ca_key_id field indicates which key was used to sign; verifiers should reject signatures from keys not in their trusted set.",
+  "card": {
+    "card_id": "ATC-FIXTURE-FAIL-02",
+    "schema_version": "1.1.0",
+    "decision_authority": "consumer",
+    "agent_id": "test_agent",
+    "agent_name": "Test Agent",
+    "identity": {
+      "public_key": "MCowBQYDK2VwAyEATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+      "key_algorithm": "Ed25519"
+    },
+    "trust": {
+      "sentinel_review_score": 8,
+      "sentinel_score": 8,
+      "audit_layers_passed": {
+        "L1.5": true,
+        "L1.6": true,
+        "L1.7": true,
+        "L1.8": true,
+        "L1.9": true,
+        "L2.5": true
+      },
+      "composite_trust": 8.0,
+      "risk_level": "low",
+      "certificate_id": "mn-cert-atc-fixture-fail-02"
+    },
+    "capabilities": {
+      "provides": [
+        "search",
+        "read"
+      ],
+      "protocol_language": "mcp",
+      "translate": true
+    },
+    "payment": {
+      "method": "x402 + USDC on Base L2",
+      "wallet_address": "0x1234567890abcdef1234567890abcdef12345678"
+    },
+    "metadata": {
+      "issued_at": "2026-08-19T00:00:00Z",
+      "expires_at": "2027-08-19T00:00:00Z",
+      "issuer": "MarketNow Sentinel CA",
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-FIXTURE-FAIL-02"
+    },
+    "signature": {
+      "algorithm": "Ed25519 (RFC 8032)",
+      "value": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signed_by": "MarketNow Sentinel CA (rotated \u2014 old key)",
+      "signed_at": "2026-07-01T00:00:00Z",
+      "canonical_json": "RFC_8785_JCS",
+      "ca_key_id": "old_ca_key_2026_07",
+      "verify_with": "GET /api/atc?action=ca-key (current key)"
+    }
+  },
+  "original_card": null,
+  "expected_outcome": "invalid",
+  "expected_verify_result": false
+}

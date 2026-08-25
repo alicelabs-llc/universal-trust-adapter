@@ -1,0 +1,112 @@
+{
+  "service": "MarketNow",
+  "page": "External Directory Listings",
+  "version": "2.0.0",
+  "effective_date": "2026-07-04",
+  "url": "https://marketnow.site/listings",
+  "summary": "Tracks the consistency of every external directory that lists MarketNow. An agent that discovers MarketNow via an external directory should see the same honest positioning as on marketnow.site.",
+  "canonical_source_of_truth": {
+    "url": "https://marketnow.site/api/agent.json",
+    "skills_count": 9,248,
+    "payment": "USDC on Base (chainId 8453) only — NOT ETH/BSC/SOL/BTC",
+    "positioning": "Trust layer for agent commerce (NOT 'largest marketplace')",
+    "license": "MNNC-1.0 (source-available, non-commercial) — NOT MIT",
+    "maintainer": "AliceLabs LLC (Wyoming, USA, 2025), founder Edison Flores",
+    "note": "Our agent.json is the canonical source. Any external listing that contradicts it is stale."
+  },
+  "listings": [
+    {
+      "name": "npm (marketnow-mcp)",
+      "url": "https://www.npmjs.com/package/marketnow-mcp",
+      "registry_url": "https://registry.npmjs.org/marketnow-mcp",
+      "status": "updated",
+      "version": "1.4.0",
+      "last_checked": "2026-07-04",
+      "what_we_fixed": [
+        "v1.2.0: description said '9,248+ verified skills' → now says '9,248 MCP-compatible skills'",
+        "v1.3.0: added 'trust layer for agent commerce' positioning",
+        "v1.4.0: description now includes 'Sentinel L2, x402 (USDC on Base), AP2 mandates, AliceLabs LLC'",
+        "v1.4.0: removed 'open-source' and 'mit' keywords (license is MNNC-1.0, not MIT)",
+        "v1.4.0: added 'trust-layer' and 'aliceLabs' keywords",
+        "License field: MIT → MNNC-1.0 (corrected in source, npm registry still shows MIT for v1.3.0 due to caching)"
+      ],
+      "notes": "npm package v1.4.0 published 2026-07-04. Old versions (1.1.0, 1.2.0, 1.3.0) are immutable in the registry — they cannot be changed. v1.4.0 is the canonical version with correct data. Mirrors propagate within 24h."
+    },
+    {
+      "name": "Smithery",
+      "url": "https://smithery.ai/servers/alicelabs/marketnow",
+      "status": "partially-correct",
+      "last_checked": "2026-07-04",
+      "what_we_fixed": [
+        "Smithery pulls from our server-card.json at /.well-known/mcp/server-card.json",
+        "Our server-card.json is up to date with current numbers (9,248 skills, USDC on Base, MNNC-1.0)"
+      ],
+      "known_discrepancies": [
+        "Smithery HTML still shows '9,248' in some cached views (their crawler may not have re-indexed yet)"
+      ],
+      "notes": "Smithery quality score: 84/100. Listing should reflect current data once Smithery re-crawls our server-card.json. Their cache TTL is typically 24-48h."
+    },
+    {
+      "name": "mcp.so",
+      "url": "https://mcp.so/server/marketnow-mcp---aep-agent-exchange-protocol/edgarfloresguerra2011-a11y",
+      "status": "stale",
+      "last_checked": "2026-07-04",
+      "known_discrepancies": [
+        "Listing says '9,248 verified MCP-compatible skills' — should be 9,248",
+        "Listing says 'agent-to-agent crypto payments (ETH/BSC/SOL/BTC)' — we only support USDC on Base, NOT ETH/BSC/SOL/BTC directly",
+        "Listing says 'open registry with no manual approval needed' — we removed this framing; human-in-loop is now the default for mandates",
+        "Listing says 'largest open MCP skill marketplace' — we no longer claim to be the largest; we position as the trust layer",
+        "Listing says 'MIT license' — actual license is MNNC-1.0 (source-available, non-commercial)"
+      ],
+      "actions_taken": [
+        "Opened GitHub issue #2977 on chatmcp/mcpso repo requesting listing update: https://github.com/chatmcp/mcpso/issues/2977",
+        "Created /.well-known/mcp-marketplace.json with canonical metadata any scraper can pull",
+        "Updated GitHub repo README with canonical metadata table for crawlers",
+        "mcp.so is behind Cloudflare anti-bot protection — cannot be updated programmatically",
+        "Listing owner must update manually via mcp.so dashboard (requires login as @edgarfloresguerra2011-a11y)"
+      ],
+      "notes": "mcp.so is operated by chatmcp (GitHub: chatmcp/mcpso). The directory is open source — listings appear to be added/updated via GitHub issues or dashboard edit. We opened issue #2977 requesting the update. The listing owner (Edison Flores) has not yet logged in to mcp.so to edit the listing directly."
+    },
+    {
+      "name": "Glama.ai",
+      "url": "https://glama.ai/mcp/connectors?query=MarketNow+MCP",
+      "status": "listed",
+      "last_checked": "2026-07-04",
+      "what_we_fixed": [
+        "Glama.ai now returns results for 'MarketNow MCP' search",
+        "Glama crawls our server-card.json and GitHub repo for metadata"
+      ],
+      "notes": "Glama.ai appears to have indexed MarketNow. Verify the listing shows current numbers (9,248 skills, USDC on Base, MNNC-1.0). If stale, Glama's crawler should refresh within 7-14 days."
+    },
+    {
+      "name": "PulseMCP",
+      "url": "https://www.pulsemcp.com",
+      "status": "unknown",
+      "last_checked": "2026-07-04",
+      "notes": "PulseMCP returned 403 (anti-bot protection). Cannot verify if we are listed. If listed, the listing should match our current positioning."
+    },
+    {
+      "name": "Official MCP Registry",
+      "url": "https://registry.modelcontextprotocol.io",
+      "status": "not-registered",
+      "last_checked": "2026-07-04",
+      "notes": "We are not yet registered in the official MCP registry. Registration requires namespace verification via GitHub OAuth or DNS — see /standards. Once registered, our listing there will be the canonical source of truth that other directories can pull from."
+    }
+  ],
+  "commitment": [
+    "We will maintain this page as the canonical source of truth for which external listings are current vs stale.",
+    "When we cannot update an external listing directly, we will disclose the discrepancy here rather than pretend it does not exist.",
+    "If you find a listing that contradicts our actual capabilities, email info@alicelabs.site and we will investigate and document it here.",
+    "The official MCP registry (registry.modelcontextprotocol.io) will be our canonical listing once we complete namespace verification."
+  ],
+  "contact": {
+    "email": "info@alicelabs.site",
+    "github": "https://github.com/alicelabs-llc/marketnow",
+    "website": "https://marketnow.site"
+  },
+  "related_pages": {
+    "standards": "https://marketnow.site/standards",
+    "trust_roadmap": "https://marketnow.site/trust",
+    "about": "https://marketnow.site/about"
+  }
+}

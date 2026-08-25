@@ -1,0 +1,1102 @@
+{
+  "generated_at": "2026-08-09T20:30:00Z",
+  "total_skills": 9248,
+  "summary": {
+    "safe": 8238,
+    "caution": 874,
+    "risky": 54,
+    "dangerous": 81,
+    "not_audited": 1
+  },
+  "safe_examples": [
+    {
+      "id": "mn-real-awesomemcpzh",
+      "name": "Awesome-MCP-ZH",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-mcphub",
+      "name": "mcphub",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-inspector",
+      "name": "inspector",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-skybridge",
+      "name": "skybridge",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-minimaxmcp",
+      "name": "MiniMax-MCP",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-mex",
+      "name": "mex",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-mcpgsc",
+      "name": "mcp-gsc",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-12306mcp",
+      "name": "12306-mcp",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-awesomemcpservers",
+      "name": "Awesome-MCP-Servers",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-agentrq",
+      "name": "agentrq",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-yahoofinance2",
+      "name": "yahoo-finance2",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-androidmcp",
+      "name": "Android-MCP",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-idamcprs",
+      "name": "ida-mcp-rs",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-swarmclaw",
+      "name": "swarmclaw",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-marmot",
+      "name": "marmot",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-fantasypremierleague",
+      "name": "FantasyPremierLeague",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-homeassistantvibecod",
+      "name": "home-assistant-vibecode-agent",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-galwaybus",
+      "name": "GalwayBus",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-humanskilltree",
+      "name": "human-skill-tree",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-multimodalagentscour",
+      "name": "multimodal-agents-course",
+      "score": 9,
+      "risk": "red",
+      "quarantined": false
+    }
+  ],
+  "dangerous_all": [
+    {
+      "id": "mn-sys-03883",
+      "name": "fast-filesystem-mcp",
+      "score": 4,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-gen-05400",
+      "name": "MCP-Kali-Server",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-gen-06619",
+      "name": "NoteDiscovery",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-gen-06926",
+      "name": "inspector",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-gen-08251",
+      "name": "whatsapp-mcp",
+      "score": 3,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-data-010",
+      "name": "anonymize-mcp",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-mcp-filesystem",
+      "name": "MCP Filesystem Server (Official)",
+      "score": 4,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-awmcp-authfetchmcp",
+      "name": "auth-fetch-mcp",
+      "score": 4,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-awmcp-mcpserverkubernetes",
+      "name": "mcp-server-kubernetes",
+      "score": 0,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-awmcp-openclaw",
+      "name": "openclaw",
+      "score": 0,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-enigmapython",
+      "name": "enigma-python",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-public",
+      "name": "public",
+      "score": 0,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-romm",
+      "name": "romm",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-knowledgerag",
+      "name": "knowledge-rag",
+      "score": 7,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-neotoma",
+      "name": "neotoma",
+      "score": 4,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-wrgsigmarules",
+      "name": "wrg-sigma-rules",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-postformemcppro",
+      "name": "postforme-mcp-pro",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-hexstrikeai",
+      "name": "hexstrike-ai",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-viper",
+      "name": "Viper",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-awesomehackinglists",
+      "name": "awesome-hacking-lists",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-cvemcpserver",
+      "name": "cve-mcp-server",
+      "score": 7,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-antigravitylinkexten",
+      "name": "antigravity-link-extension",
+      "score": 3,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-darknetmcpserver",
+      "name": "darknet-mcp-server",
+      "score": 2,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-redesignedpancake",
+      "name": "redesigned-pancake",
+      "score": 0,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-n8nmcp",
+      "name": "n8n-mcp",
+      "score": 0,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-mcpsearxng",
+      "name": "mcp-searxng",
+      "score": 4,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-n8n",
+      "name": "n8n",
+      "score": 0,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-agents",
+      "name": "agents",
+      "score": 3,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-metorialindex",
+      "name": "metorial-index",
+      "score": 9,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-onionclaw",
+      "name": "OnionClaw",
+      "score": 9,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-glance",
+      "name": "glance",
+      "score": 1,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-agentsecurityscanner",
+      "name": "agent-security-scanner-mcp",
+      "score": 9,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-zebbernkalimcp",
+      "name": "zebbern-kali-mcp",
+      "score": 9,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-osintmcpserver",
+      "name": "osint-mcp-server",
+      "score": 9,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-mcpecosystem",
+      "name": "mcp-ecosystem",
+      "score": 9,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-metasploitmcp",
+      "name": "MetasploitMCP",
+      "score": 9,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-crowdsentinelsaimcp",
+      "name": "CrowdSentinels-AI-MCP",
+      "score": 9,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-adstrike",
+      "name": "AdStrike",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-repoforensics",
+      "name": "repo-forensics",
+      "score": 9,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-cersei",
+      "name": "cersei",
+      "score": 9,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-autoredteamorchestra",
+      "name": "AutoRedTeam-Orchestrator",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-hexstrikeredteam",
+      "name": "Hexstrike-redteam",
+      "score": 9,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-tapirarchicadmcp",
+      "name": "tapir-archicad-MCP",
+      "score": 9,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-mcplegalar",
+      "name": "mcp-legal-ar",
+      "score": 9,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-kalimcp",
+      "name": "kali_mcp",
+      "score": 9,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-sicry",
+      "name": "Sicry",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-gemmabygoogle",
+      "name": "GEMMA-by-GOOGLE",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-mcpupgrade",
+      "name": "mcp-upgrade",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-solanaagentmcp",
+      "name": "solana-agent-mcp",
+      "score": 4,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-unburden",
+      "name": "Unburden",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-outlookappmcp",
+      "name": "outlook-app-mcp",
+      "score": 4,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-payloadlab",
+      "name": "payloadlab",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-mcpsearxng",
+      "name": "MCP-searxng",
+      "score": 4,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-alldeploy",
+      "name": "all-deploy",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-ravennestmcp",
+      "name": "raven-nest-mcp",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-mcpgodotdesenvolvime",
+      "name": "mcp-godot-desenvolvimento",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-webhooktesterx402",
+      "name": "webhook-tester-x402",
+      "score": 4,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-emailsendx402",
+      "name": "email-send-x402",
+      "score": 0,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-agentmemoryos",
+      "name": "Agent-Memory-OS",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-customersupportticke",
+      "name": "Customer-Support-Ticket-Automation-Using-AI-Agents-and-MCP",
+      "score": 0,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-ainotesmcpserver",
+      "name": "AINotesMCPServer",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-vaultbasemcp",
+      "name": "vaultbase-mcp",
+      "score": 4,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-systemprompttemplate",
+      "name": "systemprompt-template",
+      "score": 2,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-simplemcpserver",
+      "name": "simple_mcp_server",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-pycones2025",
+      "name": "pycones2025",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-agenticawesomeskills",
+      "name": "agentic-awesome-skills",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-repomix",
+      "name": "repomix",
+      "score": 4,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-anthropiccybersecuri",
+      "name": "Anthropic-Cybersecurity-Skills",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-electerm",
+      "name": "electerm",
+      "score": 0,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-apimegalist",
+      "name": "API-mega-list",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-deepchat",
+      "name": "deepchat",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-cyberstrikeai",
+      "name": "CyberStrikeAI",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-nagaagent",
+      "name": "NagaAgent",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-aitreasurebox",
+      "name": "AITreasureBox",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-lisapy",
+      "name": "lisa.py",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-openmcpclient",
+      "name": "openmcp-client",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-uappulse",
+      "name": "uap-pulse",
+      "score": 8,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-steamgamesmcp",
+      "name": "steam-games-mcp",
+      "score": 7,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-wpfvisualtreemcp",
+      "name": "WPFVisualTreeMcp",
+      "score": 7,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-real-gasolinerasmcp",
+      "name": "gasolineras-mcp",
+      "score": 7,
+      "risk": "red",
+      "quarantined": true
+    },
+    {
+      "id": "mn-sub-81212",
+      "name": "inspector",
+      "score": 10,
+      "risk": "red",
+      "quarantined": true
+    }
+  ],
+  "risky_all": [
+    {
+      "id": "mn-gen-01685",
+      "name": "canvas-mcp",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-gen-06583",
+      "name": "DebugMCP",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-gen-12063",
+      "name": "spectrawl",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-amcp-anythingmcp",
+      "name": "anythingmcp",
+      "score": 1,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-sdk",
+      "name": "sdk",
+      "score": 4,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-deepseekmcpserver",
+      "name": "deepseek-mcp-server",
+      "score": 4,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-cortex",
+      "name": "cortex",
+      "score": 4,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-anythingmcp",
+      "name": "anythingmcp",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-fluxmcp",
+      "name": "FluxMCP",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-mcpnanobanana",
+      "name": "MCPNanoBanana",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-seedreammcp",
+      "name": "SeedreamMCP",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-imagegenmcp",
+      "name": "imagegen-mcp",
+      "score": 4,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-studiomcphub",
+      "name": "studiomcphub",
+      "score": 4,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-discogsmcpserver",
+      "name": "discogs-mcp-server",
+      "score": 4,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-aidiagrammakermcp",
+      "name": "ai-diagram-maker-mcp",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-mockitmcp",
+      "name": "mockit-mcp",
+      "score": 4,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-mcpserverbrowserbase",
+      "name": "mcp-server-browserbase",
+      "score": 4,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-mcpplaywright",
+      "name": "mcp-playwright",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-browsercontrolmcp",
+      "name": "browser-control-mcp",
+      "score": 4,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-awmcp-execkit",
+      "name": "execkit",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-evalview",
+      "name": "eval-view",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-systempromptsmcpserv",
+      "name": "system-prompts-mcp-server",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-mcpserverdevutils",
+      "name": "mcp-server-devutils",
+      "score": 4,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-mcpserverboilerplate",
+      "name": "mcp-server-boilerplate",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-systemrpython",
+      "name": "systemr-python",
+      "score": 1,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-shellward",
+      "name": "shellward",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-gitlabmcpserver",
+      "name": "gitlab-mcp-server",
+      "score": 1,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-mcphfspace",
+      "name": "mcp-hfspace",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-fastagent",
+      "name": "fast-agent",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-stealthbrowsermcp",
+      "name": "stealth-browser-mcp",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-spectrawl",
+      "name": "spectrawl",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-linkedinmcp",
+      "name": "linkedin-mcp",
+      "score": 1,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-mcpmiro",
+      "name": "mcp-miro",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-debuggaimcp",
+      "name": "debugg-ai-mcp",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-mcpconnect",
+      "name": "MCP-connect",
+      "score": 1,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-wondersuiteaibugboun",
+      "name": "WonderSuite-Ai-Bug-Bounty",
+      "score": 3,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-webghostingmcp",
+      "name": "WEBGhosting-MCP",
+      "score": 3,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-ruishumcp",
+      "name": "ruishu-mcp",
+      "score": 3,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-davinciresolvestudio",
+      "name": "davinci-resolve-studio-full",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-sharknokari",
+      "name": "Shark-no-Kari",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-debugtestmcp",
+      "name": "debug-test-mcp",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-yandexsearchmcp",
+      "name": "yandex-search-mcp",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-shellmcp",
+      "name": "shell-mcp",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-spectrawl",
+      "name": "spectrawl",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-spectrawl",
+      "name": "spectrawl",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-spectrawl",
+      "name": "spectrawl",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-xcodebazelmcp",
+      "name": "XcodeBazelMCP",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-debugbundle",
+      "name": "debugbundle",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-evalmcp",
+      "name": "Eval_MCP",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-systemmonitormcp",
+      "name": "system-monitor-mcp",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-kryfto",
+      "name": "Kryfto",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-shellfirm",
+      "name": "shellfirm",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-spectrawl",
+      "name": "spectrawl",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    },
+    {
+      "id": "mn-real-spectrawl",
+      "name": "spectrawl",
+      "score": 2,
+      "risk": "red",
+      "quarantined": false
+    }
+  ]
+}

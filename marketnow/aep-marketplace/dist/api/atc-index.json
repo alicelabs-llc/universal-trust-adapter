@@ -1,0 +1,584 @@
+{
+  "version": 1,
+  "updated_at": "2026-08-08T00:50:59.310Z",
+  "total": 57,
+  "cards": [
+    {
+      "card_id": "ATC-2026-1509360",
+      "status": "active",
+      "agent_id": "skill.mn-sub-51326",
+      "agent_name": "awesome-mcp-servers",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-28T23:31:49.360Z",
+      "expires_at": "2026-10-26T23:31:49.360Z"
+    },
+    {
+      "card_id": "ATC-2026-1515757",
+      "status": "active",
+      "agent_id": "skill.mn-sub-58577",
+      "agent_name": "mcp-servers-hub",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-28T23:31:55.757Z",
+      "expires_at": "2026-10-26T23:31:55.757Z"
+    },
+    {
+      "card_id": "ATC-2026-1518802",
+      "status": "active",
+      "agent_id": "skill.mn-sub-72903",
+      "agent_name": "codebase-memory-mcp",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-28T23:31:58.802Z",
+      "expires_at": "2026-10-26T23:31:58.802Z"
+    },
+    {
+      "card_id": "ATC-2026-1696371",
+      "status": "active",
+      "agent_id": "skill.mn-sub-71989",
+      "agent_name": "context7",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T00:21:36.371Z",
+      "expires_at": "2026-10-25T00:21:36.371Z"
+    },
+    {
+      "card_id": "ATC-2026-1700724",
+      "status": "active",
+      "agent_id": "skill.mn-sub-27364",
+      "agent_name": "chrome-devtools-mcp",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T00:21:40.724Z",
+      "expires_at": "2026-10-25T00:21:40.724Z"
+    },
+    {
+      "card_id": "ATC-2026-1771258",
+      "status": "active",
+      "agent_id": "skill.mn-sub-71989",
+      "agent_name": "context7",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T00:22:51.258Z",
+      "expires_at": "2026-10-25T00:22:51.258Z"
+    },
+    {
+      "card_id": "ATC-2026-1774355",
+      "status": "active",
+      "agent_id": "skill.mn-sub-81212",
+      "agent_name": "inspector",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T00:22:54.355Z",
+      "expires_at": "2026-10-25T00:22:54.355Z"
+    },
+    {
+      "card_id": "ATC-2026-1777802",
+      "status": "active",
+      "agent_id": "skill.mn-sub-27364",
+      "agent_name": "chrome-devtools-mcp",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T00:22:57.802Z",
+      "expires_at": "2026-10-25T00:22:57.802Z"
+    },
+    {
+      "card_id": "ATC-2026-3550025",
+      "status": "active",
+      "agent_id": "skill.mn-sub-19264",
+      "agent_name": "n8n",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T00:52:30.025Z",
+      "expires_at": "2026-10-25T00:52:30.025Z"
+    },
+    {
+      "card_id": "ATC-2026-3937340",
+      "status": "active",
+      "agent_id": "skill.mn-sub-76147",
+      "agent_name": "qodo-cover",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:05:37.340Z",
+      "expires_at": "2026-10-28T15:05:37.340Z"
+    },
+    {
+      "card_id": "ATC-2026-3941595",
+      "status": "active",
+      "agent_id": "skill.mn-sub-74070",
+      "agent_name": "awesome-mcp-servers",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:05:41.595Z",
+      "expires_at": "2026-10-28T15:05:41.595Z"
+    },
+    {
+      "card_id": "ATC-2026-3944883",
+      "status": "active",
+      "agent_id": "skill.mn-sub-62799",
+      "agent_name": "inspector",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:05:44.883Z",
+      "expires_at": "2026-10-28T15:05:44.883Z"
+    },
+    {
+      "card_id": "ATC-2026-3947979",
+      "status": "active",
+      "agent_id": "skill.mn-sub-32175",
+      "agent_name": "modelcontextprotocol",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:05:47.979Z",
+      "expires_at": "2026-10-28T15:05:47.979Z"
+    },
+    {
+      "card_id": "ATC-2026-3951137",
+      "status": "active",
+      "agent_id": "skill.mn-sub-04513",
+      "agent_name": "awesome-mcp-clients",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:05:51.137Z",
+      "expires_at": "2026-10-28T15:05:51.137Z"
+    },
+    {
+      "card_id": "ATC-2026-3954888",
+      "status": "active",
+      "agent_id": "skill.mn-sub-58932",
+      "agent_name": "context7",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:05:54.888Z",
+      "expires_at": "2026-10-28T15:05:54.888Z"
+    },
+    {
+      "card_id": "ATC-2026-3958257",
+      "status": "active",
+      "agent_id": "skill.mn-sub-50226",
+      "agent_name": "awesome-mcp-servers",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:05:58.258Z",
+      "expires_at": "2026-10-28T15:05:58.258Z"
+    },
+    {
+      "card_id": "ATC-2026-3961206",
+      "status": "active",
+      "agent_id": "skill.mn-sub-44957",
+      "agent_name": "claude-quickstarts",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:01.206Z",
+      "expires_at": "2026-10-28T15:06:01.206Z"
+    },
+    {
+      "card_id": "ATC-2026-3964835",
+      "status": "active",
+      "agent_id": "skill.mn-sub-49785",
+      "agent_name": "ruflo",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:04.835Z",
+      "expires_at": "2026-10-28T15:06:04.835Z"
+    },
+    {
+      "card_id": "ATC-2026-3968185",
+      "status": "active",
+      "agent_id": "skill.mn-sub-26478",
+      "agent_name": "fastmcp",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:08.185Z",
+      "expires_at": "2026-10-28T15:06:08.185Z"
+    },
+    {
+      "card_id": "ATC-2026-3971212",
+      "status": "active",
+      "agent_id": "skill.mn-sub-06232",
+      "agent_name": "claude-quickstarts",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:11.212Z",
+      "expires_at": "2026-10-28T15:06:11.212Z"
+    },
+    {
+      "card_id": "ATC-2026-3974556",
+      "status": "active",
+      "agent_id": "skill.mn-sub-30739",
+      "agent_name": "typescript-sdk",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:14.556Z",
+      "expires_at": "2026-10-28T15:06:14.556Z"
+    },
+    {
+      "card_id": "ATC-2026-3977736",
+      "status": "active",
+      "agent_id": "skill.mn-sub-02005",
+      "agent_name": "python-sdk",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:17.736Z",
+      "expires_at": "2026-10-28T15:06:17.736Z"
+    },
+    {
+      "card_id": "ATC-2026-3980770",
+      "status": "active",
+      "agent_id": "skill.mn-sub-95378",
+      "agent_name": "typescript-sdk",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:20.770Z",
+      "expires_at": "2026-10-28T15:06:20.770Z"
+    },
+    {
+      "card_id": "ATC-2026-3984620",
+      "status": "active",
+      "agent_id": "skill.mn-sub-32547",
+      "agent_name": "chrome-devtools-mcp",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:24.620Z",
+      "expires_at": "2026-10-28T15:06:24.620Z"
+    },
+    {
+      "card_id": "ATC-2026-3989391",
+      "status": "active",
+      "agent_id": "skill.mn-sub-57794",
+      "agent_name": "Office-PowerPoint-MCP-Server",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:29.391Z",
+      "expires_at": "2026-10-28T15:06:29.391Z"
+    },
+    {
+      "card_id": "ATC-2026-3993085",
+      "status": "active",
+      "agent_id": "skill.mn-sub-40483",
+      "agent_name": "python-sdk",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:33.085Z",
+      "expires_at": "2026-10-28T15:06:33.085Z"
+    },
+    {
+      "card_id": "ATC-2026-3996234",
+      "status": "active",
+      "agent_id": "skill.mn-sub-28304",
+      "agent_name": "codebase-memory-mcp",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:36.234Z",
+      "expires_at": "2026-10-28T15:06:36.234Z"
+    },
+    {
+      "card_id": "ATC-2026-3999783",
+      "status": "active",
+      "agent_id": "skill.mn-sub-01325",
+      "agent_name": "mcp-hub",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:39.783Z",
+      "expires_at": "2026-10-28T15:06:39.783Z"
+    },
+    {
+      "card_id": "ATC-2026-4002682",
+      "status": "active",
+      "agent_id": "skill.mn-sub-03733",
+      "agent_name": "mcp-servers-hub",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:42.682Z",
+      "expires_at": "2026-10-28T15:06:42.682Z"
+    },
+    {
+      "card_id": "ATC-2026-4005730",
+      "status": "active",
+      "agent_id": "skill.mn-sub-84131",
+      "agent_name": "servers",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:45.730Z",
+      "expires_at": "2026-10-28T15:06:45.730Z"
+    },
+    {
+      "card_id": "ATC-2026-4009289",
+      "status": "active",
+      "agent_id": "skill.mn-sub-26838",
+      "agent_name": "fastmcp",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:49.289Z",
+      "expires_at": "2026-10-28T15:06:49.289Z"
+    },
+    {
+      "card_id": "ATC-2026-4012643",
+      "status": "active",
+      "agent_id": "skill.mn-sub-21179",
+      "agent_name": "awesome-mcp-devtools",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:52.643Z",
+      "expires_at": "2026-10-28T15:06:52.643Z"
+    },
+    {
+      "card_id": "ATC-2026-4015637",
+      "status": "active",
+      "agent_id": "skill.mn-sub-26106",
+      "agent_name": "worldmonitor",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:55.637Z",
+      "expires_at": "2026-10-28T15:06:55.637Z"
+    },
+    {
+      "card_id": "ATC-2026-4018808",
+      "status": "active",
+      "agent_id": "skill.mn-sub-92671",
+      "agent_name": "TrendRadar",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:06:58.808Z",
+      "expires_at": "2026-10-28T15:06:58.808Z"
+    },
+    {
+      "card_id": "ATC-2026-4022715",
+      "status": "active",
+      "agent_id": "skill.mn-sub-34799",
+      "agent_name": "UI-TARS-desktop",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:07:02.715Z",
+      "expires_at": "2026-10-28T15:07:02.715Z"
+    },
+    {
+      "card_id": "ATC-2026-4026838",
+      "status": "active",
+      "agent_id": "skill.mn-sub-43233",
+      "agent_name": "Scrapling",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:07:06.838Z",
+      "expires_at": "2026-10-28T15:07:06.838Z"
+    },
+    {
+      "card_id": "ATC-2026-4030337",
+      "status": "active",
+      "agent_id": "skill.mn-sub-73517",
+      "agent_name": "playwright-mcp",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:07:10.337Z",
+      "expires_at": "2026-10-28T15:07:10.337Z"
+    },
+    {
+      "card_id": "ATC-2026-4033179",
+      "status": "active",
+      "agent_id": "skill.mn-sub-81341",
+      "agent_name": "n8n",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:07:13.179Z",
+      "expires_at": "2026-10-28T15:07:13.179Z"
+    },
+    {
+      "card_id": "ATC-2026-4036129",
+      "status": "active",
+      "agent_id": "skill.mn-sub-03094",
+      "agent_name": "mcp-simple-arxiv",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:07:16.129Z",
+      "expires_at": "2026-10-28T15:07:16.129Z"
+    },
+    {
+      "card_id": "ATC-2026-4039037",
+      "status": "active",
+      "agent_id": "skill.mn-sub-08751",
+      "agent_name": "langchain-mcp-adapters",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-30T15:07:19.037Z",
+      "expires_at": "2026-10-28T15:07:19.037Z"
+    },
+    {
+      "card_id": "ATC-2026-4327228",
+      "status": "active",
+      "agent_id": "skill.mn-sub-45998",
+      "agent_name": "context7",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T01:05:27.228Z",
+      "expires_at": "2026-10-25T01:05:27.228Z"
+    },
+    {
+      "card_id": "ATC-2026-4330524",
+      "status": "active",
+      "agent_id": "skill.mn-sub-79641",
+      "agent_name": "ruflo",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T01:05:30.524Z",
+      "expires_at": "2026-10-25T01:05:30.524Z"
+    },
+    {
+      "card_id": "ATC-2026-4334376",
+      "status": "active",
+      "agent_id": "skill.mn-sub-57505",
+      "agent_name": "Scrapling",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T01:05:34.376Z",
+      "expires_at": "2026-10-25T01:05:34.376Z"
+    },
+    {
+      "card_id": "ATC-2026-4992675",
+      "status": "active",
+      "agent_id": "skill.mn-sub-22629",
+      "agent_name": "worldmonitor",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T04:03:12.675Z",
+      "expires_at": "2026-10-25T04:03:12.675Z"
+    },
+    {
+      "card_id": "ATC-2026-4996294",
+      "status": "active",
+      "agent_id": "skill.mn-sub-66889",
+      "agent_name": "fastmcp",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T04:03:16.294Z",
+      "expires_at": "2026-10-25T04:03:16.294Z"
+    },
+    {
+      "card_id": "ATC-2026-4998939",
+      "status": "active",
+      "agent_id": "skill.mn-sub-10093",
+      "agent_name": "mcp-hub",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T04:03:18.939Z",
+      "expires_at": "2026-10-25T04:03:18.939Z"
+    },
+    {
+      "card_id": "ATC-2026-5001534",
+      "status": "active",
+      "agent_id": "skill.mn-sub-86149",
+      "agent_name": "langchain-mcp-adapters",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T04:03:21.534Z",
+      "expires_at": "2026-10-25T04:03:21.534Z"
+    },
+    {
+      "card_id": "ATC-2026-5318998",
+      "status": "active",
+      "agent_id": "skill.mn-sub-98233",
+      "agent_name": "claude-quickstarts",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T01:21:58.999Z",
+      "expires_at": "2026-10-25T01:21:58.999Z"
+    },
+    {
+      "card_id": "ATC-2026-5323453",
+      "status": "active",
+      "agent_id": "skill.mn-sub-63557",
+      "agent_name": "TrendRadar",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T01:22:03.453Z",
+      "expires_at": "2026-10-25T01:22:03.453Z"
+    },
+    {
+      "card_id": "ATC-2026-5326924",
+      "status": "active",
+      "agent_id": "skill.mn-sub-82995",
+      "agent_name": "UI-TARS-desktop",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-27T01:22:06.924Z",
+      "expires_at": "2026-10-25T01:22:06.924Z"
+    },
+    {
+      "card_id": "ATC-2026-5837752",
+      "status": "revoked",
+      "agent_id": "agent.alicelabs.marketnow",
+      "agent_name": "MarketNow Discovery Agent",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-18T03:37:17.752Z",
+      "expires_at": "2026-10-16T03:37:17.752Z"
+    },
+    {
+      "card_id": "ATC-2026-5936297",
+      "status": "revoked",
+      "agent_id": "agent.alicelabs.marketnow",
+      "agent_name": "MarketNow Discovery Agent",
+      "sentinel_review_score": 0,
+      "risk_level": "low",
+      "issued_at": "2026-07-18T03:38:56.297Z",
+      "expires_at": "2026-10-16T03:38:56.297Z"
+    },
+    {
+      "card_id": "ATC-2026-6202714",
+      "status": "active",
+      "agent_id": "skill.mn-sub-46018",
+      "agent_name": "servers",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-26T03:23:22.714Z",
+      "expires_at": "2026-10-24T03:23:22.714Z"
+    },
+    {
+      "card_id": "ATC-2026-6464656",
+      "status": "active",
+      "agent_id": "skill.mn-sub-90927",
+      "agent_name": "vibes-coded-mcp",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-26T22:54:24.656Z",
+      "expires_at": "2026-10-24T22:54:24.656Z"
+    },
+    {
+      "card_id": "ATC-2026-6502989",
+      "status": "active",
+      "agent_id": "skill.mn-sub-96179",
+      "agent_name": "servers",
+      "sentinel_review_score": 0,
+      "risk_level": "not_audited",
+      "issued_at": "2026-07-26T03:28:22.989Z",
+      "expires_at": "2026-10-24T03:28:22.989Z"
+    },
+    {
+      "card_id": "ATC-2026-7777670",
+      "status": "active",
+      "agent_id": "agent.alicelabs.marketnow",
+      "agent_name": "MarketNow Discovery Agent",
+      "sentinel_review_score": 0,
+      "risk_level": "low",
+      "issued_at": "2026-07-23T03:36:17.670Z",
+      "expires_at": "2026-10-21T03:36:17.670Z"
+    },
+    {
+      "card_id": "ATC-2026-9880252",
+      "status": "revoked",
+      "agent_id": "agent.alicelabs.marketnow",
+      "agent_name": "MarketNow Discovery Agent",
+      "sentinel_review_score": 0,
+      "risk_level": "low",
+      "issued_at": "2026-07-22T03:11:20.252Z",
+      "expires_at": "2026-10-20T03:11:20.252Z"
+    }
+  ],
+  "schema_version": "1.2.0",
+  "canonicalization_method": "RFC_8785_JCS",
+  "ca_public_key": "MCowBQYDK2VwAyEATlD16v6Fy/+GM4je2SxwCz7yFEeo9d8LwqZf0yN8oFY=",
+  "ca_public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEATlD16v6Fy/+GM4je2SxwCz7yFEeo9d8LwqZf0yN8oFY=\n-----END PUBLIC KEY-----\n",
+  "resigned_at": "2026-08-13T19:59:59.558Z",
+  "resign_reason": "Aug 13, 2026: fixed forward-slash escaping + removed sentinel_score alias + added ca_key_id",
+  "ca_key_id": "MCowBQYDK2VwAyEA"
+}

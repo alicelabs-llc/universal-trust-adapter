@@ -1,0 +1,203 @@
+{
+  "schema": "marketnow.resilience.v1",
+  "generated_at": "2026-08-25T00:00:00Z",
+  "publisher": {
+    "name": "AliceLabs LLC",
+    "domain": "marketnow.site",
+    "contact": "info@alicelabs.site"
+  },
+  "philosophy": "Code must be downloadable from at least 3 independent channels. No single point of failure.",
+  "channels": [
+    {
+      "name": "npm-registry",
+      "priority": 1,
+      "description": "Official NPM registry \u2014 independent of GitHub",
+      "base_url": "https://registry.npmjs.org/",
+      "tarball_pattern": "https://registry.npmjs.org/{package}/-/{name}-{version}.tgz",
+      "uptime_sla": "99.99%",
+      "rate_limit": "no limit for public packages"
+    },
+    {
+      "name": "jsdelivr-cdn",
+      "priority": 2,
+      "description": "Free global CDN that mirrors NPM packages automatically",
+      "base_url": "https://cdn.jsdelivr.net/npm/",
+      "file_pattern": "https://cdn.jsdelivr.net/npm/{package}@{version}{/path}",
+      "uptime_sla": "99.95%",
+      "rate_limit": "unlimited"
+    },
+    {
+      "name": "unpkg-cdn",
+      "priority": 3,
+      "description": "Alternative CDN that mirrors NPM packages",
+      "base_url": "https://unpkg.com/",
+      "file_pattern": "https://unpkg.com/{package}@{version}{/path}",
+      "uptime_sla": "99.9%"
+    },
+    {
+      "name": "marketnow-site-direct",
+      "priority": 4,
+      "description": "AliceLabs-owned origin server, independent of NPM and GitHub",
+      "base_url": "https://marketnow.site/uta-packages/",
+      "tarball_pattern": "https://marketnow.site/uta-packages/marketnow-{name}-{version}.tgz",
+      "uptime_sla": "best-effort"
+    }
+  ],
+  "packages": [
+    {
+      "name": "@marketnow/uts",
+      "version": "2.0.0",
+      "downloads": [
+        {
+          "channel": "npm-registry",
+          "url": "https://registry.npmjs.org/@marketnow%2futs/-/uts-2.0.0.tgz",
+          "format": "tgz"
+        },
+        {
+          "channel": "jsdelivr-cdn",
+          "url": "https://cdn.jsdelivr.net/npm/@marketnow/uts@2.0.0/",
+          "format": "file-tree"
+        },
+        {
+          "channel": "unpkg-cdn",
+          "url": "https://unpkg.com/@marketnow/uts@2.0.0/",
+          "format": "file-tree"
+        },
+        {
+          "channel": "marketnow-site-direct",
+          "url": "https://marketnow.site/uta-packages/marketnow-uts-2.0.0.tgz",
+          "format": "tgz",
+          "sha256": "352e90e0aef7c5bb07e35533100f9325220c7cd52efadbba1f9b1180096ae923",
+          "verified_at": "2026-08-24T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "name": "@marketnow/trust-core",
+      "version": "1.0.0",
+      "downloads": [
+        {
+          "channel": "npm-registry",
+          "url": "https://registry.npmjs.org/@marketnow%2ftrust-core/-/trust-core-1.0.0.tgz",
+          "format": "tgz"
+        },
+        {
+          "channel": "jsdelivr-cdn",
+          "url": "https://cdn.jsdelivr.net/npm/@marketnow/trust-core@1.0.0/",
+          "format": "file-tree"
+        },
+        {
+          "channel": "unpkg-cdn",
+          "url": "https://unpkg.com/@marketnow/trust-core@1.0.0/",
+          "format": "file-tree"
+        },
+        {
+          "channel": "marketnow-site-direct",
+          "url": "https://marketnow.site/uta-packages/marketnow-trust-core-1.0.0.tgz",
+          "format": "tgz",
+          "sha256": "4c1691225e82a9920e3d121822e210a81a9d96e6a95264ee15421634d660e7e6",
+          "verified_at": "2026-08-24T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "name": "@marketnow/trust-adapters",
+      "version": "1.0.0",
+      "downloads": [
+        {
+          "channel": "npm-registry",
+          "url": "https://registry.npmjs.org/@marketnow%2ftrust-adapters/-/trust-adapters-1.0.0.tgz",
+          "format": "tgz"
+        },
+        {
+          "channel": "jsdelivr-cdn",
+          "url": "https://cdn.jsdelivr.net/npm/@marketnow/trust-adapters@1.0.0/",
+          "format": "file-tree"
+        },
+        {
+          "channel": "unpkg-cdn",
+          "url": "https://unpkg.com/@marketnow/trust-adapters@1.0.0/",
+          "format": "file-tree"
+        },
+        {
+          "channel": "marketnow-site-direct",
+          "url": "https://marketnow.site/uta-packages/marketnow-trust-adapters-1.0.0.tgz",
+          "format": "tgz",
+          "sha256": "7853b7c712489aedbf58cb6a3b55598f362d961e1e1a346c6e1ed5e40c0b37c4",
+          "verified_at": "2026-08-24T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "name": "@marketnow/trust-gateway",
+      "version": "1.0.0",
+      "downloads": [
+        {
+          "channel": "npm-registry",
+          "url": "https://registry.npmjs.org/@marketnow%2ftrust-gateway/-/trust-gateway-1.0.0.tgz",
+          "format": "tgz"
+        },
+        {
+          "channel": "jsdelivr-cdn",
+          "url": "https://cdn.jsdelivr.net/npm/@marketnow/trust-gateway@1.0.0/",
+          "format": "file-tree"
+        },
+        {
+          "channel": "unpkg-cdn",
+          "url": "https://unpkg.com/@marketnow/trust-gateway@1.0.0/",
+          "format": "file-tree"
+        },
+        {
+          "channel": "marketnow-site-direct",
+          "url": "https://marketnow.site/uta-packages/marketnow-trust-gateway-1.0.0.tgz",
+          "format": "tgz",
+          "sha256": "64f8a11f8e4e469b3d57526485f9ccf7607ae37b9213a34a88cf63b62cf7ef1e",
+          "verified_at": "2026-08-24T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "name": "marketnow-mcp",
+      "version": "1.10.0",
+      "downloads": [
+        {
+          "channel": "npm-registry",
+          "url": "https://registry.npmjs.org/marketnow-mcp/-/marketnow-mcp-1.10.0.tgz",
+          "format": "tgz"
+        },
+        {
+          "channel": "jsdelivr-cdn",
+          "url": "https://cdn.jsdelivr.net/npm/marketnow-mcp@1.10.0/",
+          "format": "file-tree"
+        },
+        {
+          "channel": "unpkg-cdn",
+          "url": "https://unpkg.com/marketnow-mcp@1.10.0/",
+          "format": "file-tree"
+        }
+      ]
+    },
+    {
+      "name": "agent-trust-card",
+      "version": "1.1.1",
+      "downloads": [
+        {
+          "channel": "npm-registry",
+          "url": "https://registry.npmjs.org/agent-trust-card/-/agent-trust-card-1.1.1.tgz",
+          "format": "tgz"
+        },
+        {
+          "channel": "jsdelivr-cdn",
+          "url": "https://cdn.jsdelivr.net/npm/agent-trust-card@1.1.1/",
+          "format": "file-tree"
+        },
+        {
+          "channel": "unpkg-cdn",
+          "url": "https://unpkg.com/agent-trust-card@1.1.1/",
+          "format": "file-tree"
+        }
+      ]
+    }
+  ],
+  "last_updated_reason": "Repointed all GitHub URLs to alicelabs-llc org (account flagged)"
+}

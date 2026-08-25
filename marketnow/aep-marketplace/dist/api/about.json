@@ -1,0 +1,65 @@
+{
+  "service": "MarketNow",
+  "page": "About",
+  "version": "1.0.0",
+  "effective_date": "2026-07-02",
+  "url": "https://marketnow.site/about",
+  "company": {
+    "legal_name": "AliceLabs LLC",
+    "founder": "Edison Flores",
+    "country": "Wyoming, USA",
+    "founded": "AliceLabs LLC 2025 \u00b7 MarketNow launched 2026",
+    "email": "info@alicelabs.site",
+    "domain": "marketnow.site"
+  },
+  "public_accounts": [
+    {
+      "platform": "GitHub Organization",
+      "url": "https://github.com/alicelabs-llc",
+      "description": "15 public repos. Real org with 3 members. Wyoming LLC. Source-available, AliceLabs LLC Proprietary."
+    },
+    {
+      "platform": "npm",
+      "url": "https://www.npmjs.com/package/marketnow-mcp",
+      "description": "Our MCP server package. Download counts are public."
+    },
+    {
+      "platform": "Smithery",
+      "url": "https://smithery.ai/servers/alicelabs/marketnow",
+      "description": "Smithery registry listing with quality score (84/100). Verify at https://smithery.ai/servers/alicelabs/marketnow"
+    },
+    {
+      "platform": "Payment wallet (Base L2)",
+      "url": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee",
+      "description": "All USDC payments go here. Auditable on Basescan."
+    }
+  ],
+  "what_we_are_not": [
+    "We are NOT a side project or hobby. AliceLabs LLC is a Wyoming-registered LLC (founded 2025) with a public GitHub organization (github.com/alicelabs-llc), 15 repos, and 3 team members.",
+    "We are NOT VC-backed. We have no Series A, no angel investors. We are bootstrapped \u2014 every dollar comes from product sales.",
+    "We are NOT a security firm. Our Sentinel audit is automated and self-declared \u2014 see /trust for the disclosure. Third-party audit pending until revenue.",
+    "We do NOT have a sustained track record yet. We launched in 2026. Trust is earned over time, not claimed.",
+    "We do NOT have third-party press coverage yet. We are working on it.",
+    "We do NOT have a bug bounty program yet (private one running; public launch when 1,000 active mandates exist)."
+  ],
+  "what_we_are": [
+    "A Wyoming-registered LLC (AliceLabs LLC) with a public GitHub organization \u2014 not an individual developer",
+    "Open source \u2014 AliceLabs LLC proprietary, full code on GitHub, every change is a public commit",
+    "Transparent \u2014 every mandate spend is a git commit visible at _data/mandates/",
+    "Honest \u2014 our /trust roadmap admits what is done, partial, and pending",
+    "Agent-native \u2014 our API and MCP server are designed for AI consumption, not just humans",
+    "Human-first defaults \u2014 mandates notify the principal by default; 'silent' mode requires explicit opt-in"
+  ],
+  "contact": {
+    "legal": "legal@alicelabs.site",
+    "support": "support@alicelabs.site",
+    "general": "info@alicelabs.site"
+  },
+  "disclosure": {
+    "maintainer_identity": "AliceLabs LLC (Wyoming, USA, founded 2025) \u2014 founder Edison Flores (Ecuadorian). Public GitHub org: github.com/alicelabs-llc",
+    "launch_date": "2026",
+    "track_record": "No third-party press coverage yet. No public bug bounty yet. See /trust for the full roadmap.",
+    "security_audit": "Sentinel L1.5 is self-declared (automated 6-point MCP security scan). Third-party audit pending.",
+    "trust_roadmap": "https://marketnow.site/trust"
+  }
+}

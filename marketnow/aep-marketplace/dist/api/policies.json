@@ -1,0 +1,136 @@
+{
+  "service": "MarketNow",
+  "version": "1.0.0",
+  "effective_date": "2026-07-02",
+  "maintainer": "AliceLabs LLC (USA (Wyoming))",
+  "contact": "support@alicelabs.site",
+  "ui": "https://marketnow.site/policies",
+  "policies": {
+    "terms_of_service": {
+      "title": "Terms of Service — For Agents and Humans",
+      "summary": "By accessing or using MarketNow, you agree to these terms. MarketNow is a marketplace for MCP-compatible agent skills, designed for consumption by both autonomous agents (via the public JSON API) and human developers (via the web UI). Every skill is sold individually with a one-time payment — no subscriptions, no credits, no recurring billing. Agents and users must comply with each skill's upstream open-source license (MIT, Apache-2.0, etc.) when using the installed skill.",
+      "key_points": [
+        "One-time payment per skill. No subscriptions, no recurring billing.",
+        "Each skill's upstream open-source license (MIT, Apache-2.0) applies to your usage of the code itself.",
+        "MarketNow's value-add is curation, verification (Sentinel L1.5), and packaging — not the underlying code.",
+        "Skills must not be redistributed or resold without explicit permission.",
+        "MarketNow reserves the right to revoke licenses in cases of abuse, fraud, or violations of these terms."
+      ]
+    },
+    "pricing": {
+      "title": "Pricing — Micro-Transactions, One-Time",
+      "summary": "Every skill has a transparent one-time price in USD. No subscriptions, no credits, no per-call fees, no tiered plans.",
+      "tiers": [
+        { "price_usd": 0.99, "label": "utility", "description": "Single-function MCP servers, simple wrappers" },
+        { "price_usd": 1.99, "label": "standard", "description": "Standard integrations, one API/service" },
+        { "price_usd": 2.99, "label": "multi-feature", "description": "Multi-feature tools, common choice" },
+        { "price_usd": 4.99, "label": "sophisticated", "description": "Multi-endpoint, complex logic" },
+        { "price_usd": 9.99, "label": "enterprise", "description": "Enterprise-grade, specialized" }
+      ],
+      "payment_methods": [
+        { "method": "stripe", "description": "Credit/debit card via Stripe. Full chargeback rights. PCI-compliant." },
+        { "method": "usdc_base", "description": "USDC on Base L2. Irreversible on-chain. See dispute_policy." }
+      ]
+    },
+    "refund_policy": {
+      "title": "Refund & Dispute Policy",
+      "summary": "All skill purchases are eligible for a full refund within 14 days if less than 100 API calls have been made using the license key.",
+      "stripe_refunds": {
+        "window": "14 days",
+        "condition": "Less than 100 API calls on the license key",
+        "process": "Email support@alicelabs.site with your Stripe session ID. Refunds processed back to original payment method within 5-10 business days.",
+        "chargeback_rights": "Full — Stripe purchases retain all standard credit card chargeback rights."
+      },
+      "usdc_refunds": {
+        "disclosure": "USDC payments on Base are IRREVERSIBLE on-chain. There is no automatic on-chain reversal. MarketNow operates a manual dispute process funded from treasury.",
+        "window": "7 days from purchase to file a dispute",
+        "process": "Email support@alicelabs.site with: (1) the txHash, (2) the skillId, (3) a description of the issue. AliceLabs will review and refund from treasury for verified disputes within 5 business days.",
+        "valid_reasons": [
+          "Skill did not work as described on its detail page",
+          "Security vulnerability discovered after purchase",
+          "Sentinel report was inaccurate in a material way",
+          "Skill was removed from the marketplace for cause"
+        ],
+        "invalid_reasons": [
+          "Buyer changed their mind (use Stripe for that case)",
+          "Skill works but buyer doesn't need it anymore",
+          "Buyer didn't read the skill description before paying"
+        ],
+        "escrow_roadmap": "Q1 2027: on-chain escrow smart contract. USDC payment goes to a time-locked contract, released to seller after 24h cooling-off period unless disputed. Until then, manual dispute process applies."
+      }
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "summary": "MarketNow collects minimal data required to operate the marketplace. We do not sell personal data. All data in transit is encrypted with TLS 1.3.",
+      "data_collected": [
+        "Email address (for account login only)",
+        "Payment records (processed by Stripe — we do not store credit card numbers)",
+        "List of skills you have purchased",
+        "Agent API consumption logged by IP and User-Agent for rate limiting (not linked to identity unless signed in)"
+      ],
+      "data_not_collected": [
+        "Credit card numbers (Stripe handles all payment data on PCI-compliant infrastructure)",
+        "Browsing history across other sites",
+        "Personal data sold to third parties"
+      ]
+    },
+    "skill_licensing": {
+      "title": "Skill Licensing",
+      "summary": "Each skill on MarketNow is sourced from a real, public open-source repository. The underlying open-source license (MIT, Apache-2.0, etc.) still applies to your usage of the code itself.",
+      "what_you_get": [
+        "MarketNow license key for verification",
+        "Install command (typically npx -y @marketnow/install <slug>)",
+        "Access to the skill's documentation, system prompt, and Sentinel report"
+      ],
+      "what_you_dont_get": [
+        "Exclusive rights to the code (open-source license still applies)",
+        "Permission to redistribute or resell the skill",
+        "Warranty beyond what the upstream license provides"
+      ]
+    },
+    "agent_api_usage": {
+      "title": "Agent API Usage",
+      "summary": "Autonomous agents are welcome to consume the MarketNow API at /api/*. Read endpoints are public and require no authentication.",
+      "rate_limits": {
+        "anonymous": "60 requests/minute to /api/* endpoints",
+        "authenticated": "600 requests/minute to /api/* endpoints"
+      },
+      "bulk_consumption": "Cache /api/skills.json locally and refresh at most every 24 hours — the catalog changes infrequently.",
+      "documentation": "/api/agent.json provides machine-readable instructions, schema, and workflow examples specifically designed for agent consumption."
+    },
+    "mandates_policy": {
+      "title": "Delegated Mandates Policy (ACP / AP2)",
+      "summary": "Mandates allow an agent to spend autonomously within pre-approved bounds. Human-in-the-loop is the DEFAULT — silent autonomous spending is opt-in only.",
+      "default_mode": "notify — agent buys, principal gets email/webhook alert on every purchase",
+      "modes": {
+        "notify": "DEFAULT. Agent buys autonomously, principal is alerted on every purchase.",
+        "notify_and_veto": "Agent buys, principal gets alert + 5-minute veto window (veto flow on roadmap — currently alert is post-hoc).",
+        "silent": "Fully autonomous, no alerts. Requires explicit confirmSilentAutonomy=true field — opt-in only."
+      },
+      "hard_caps": {
+        "max_total_per_mandate_usd": 500,
+        "max_per_purchase_usd": 50,
+        "default_ttl_days": 90
+      },
+      "revocation": "Mandates can be revoked instantly from /mandates — no waiting period.",
+      "persistence": "Every create / spend / revoke is a git commit on master at _data/mandates/ — fully auditable in the repo history."
+    },
+    "acceptable_use": {
+      "title": "Acceptable Use",
+      "prohibited": [
+        "Using MarketNow skills for illegal activities",
+        "Violating the rights of others",
+        "Building malicious software",
+        "Redistributing or reselling skills without explicit permission",
+        "Scraping the website HTML (use the public JSON API instead, which is designed for programmatic access)"
+      ]
+    }
+  },
+  "disclosure": {
+    "maintainer_identity": "AliceLabs LLC (USA (Wyoming)) — founder Edison Flores",
+    "launch_date": "2026",
+    "track_record": "No third-party press coverage yet. No public bug bounty yet. See /trust for the full roadmap.",
+    "security_audit": "Sentinel L1.5 is self-declared (automated 6-point MCP security scan). Third-party audit pending.",
+    "trust_roadmap": "https://marketnow.site/trust"
+  }
+}

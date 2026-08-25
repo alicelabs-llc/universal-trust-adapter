@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCP Security Scanner — MarketNow</title>
+<meta name="description" content="Scan your MCP server for security vulnerabilities. Free instant L1.5 static analysis.">
+<link rel="canonical" href="https://marketnow.site/tools/scan.html" />
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#050505;color:#e2e8f0;line-height:1.6;padding:20px;max-width:700px;margin:0 auto}
+h1{color:#3b82f6;font-size:1.8em;margin-bottom:0.3em}
+h2{color:#22c553;margin-top:1.5em;font-size:1.2em}
+input{background:#1e293b;border:1px solid #334155;color:#e2e8f0;padding:12px;border-radius:6px;width:100%;margin:8px 0;font-size:1em}
+button{background:#3b82f6;color:white;border:none;padding:12px 24px;border-radius:6px;cursor:pointer;font-size:1em;width:100%}
+button:hover{background:#2563eb}
+button:disabled{background:#334155;cursor:not-allowed}
+pre{background:#0d1117;border:1px solid #1e293b;padding:16px;border-radius:8px;overflow-x:auto;margin:1em 0;font-size:0.85em;max-height:500px;overflow-y:auto}
+.result-card{background:#1e293b;padding:16px;border-radius:8px;margin:12px 0}
+.score-circle{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8em;font-weight:bold;margin:0 auto 8px}
+.score-low{background:#22c553;color:white}.score-mid{background:#f97316;color:white}.score-high{background:#ef4444;color:white}
+.check{padding:8px 0;border-bottom:1px solid #334155}
+.check-name{font-weight:bold}.check-pass{color:#22c553}.check-fail{color:#ef4444}.check-warn{color:#f97316}
+a{color:#3b82f6}
+.loading{display:inline-block;width:20px;height:20px;border:3px solid #334155;border-top:3px solid #3b82f6;border-radius:50%;animation:spin 1s linear infinite;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<h1>🛡️ MCP Security Scanner</h1>
+<p>Enter your MCP server's GitHub repo URL to get an instant security analysis.</p>
+
+<h2>Scan a server</h2>
+<input type="text" id="repoUrl" placeholder="https://github.com/owner/repo" />
+<button id="scanBtn" onclick="scanRepo()">🔍 Scan Now</button>
+
+<div id="scanResult" style="margin-top:1em"></div>
+
+<h2>What we check</h2>
+<div style="background:#1e293b;padding:16px;border-radius:8px;margin:1em 0">
+  <div class="check"><span class="check-name">1. Authentication</span> — Does the server require auth for sensitive tools?</div>
+  <div class="check"><span class="check-name">2. Prompt Injection</span> — Are tool descriptions safe from injection?</div>
+  <div class="check"><span class="check-name">3. Input Validation</span> — Does it validate inputs before processing?</div>
+  <div class="check"><span class="check-name">4. CORS</span> — Is CORS properly configured?</div>
+  <div class="check"><span class="check-name">5. OAuth Scopes</span> — Are OAuth scopes minimal?</div>
+  <div class="check"><span class="check-name">6. Rate Limiting</span> — Does it have rate limiting?</div>
+  <div class="check" style="border:none"><span class="check-name">+ L1.6 Enhanced</span> — Semgrep rules, secret detection, OSV dependency check</div>
+</div>
+
+<h2>Want a deeper audit?</h2>
+<p>The free scan does L1.5 (metadata checks). For the full 6-layer audit including:</p>
+<ul>
+  <li><strong>L2 v2.0</strong> — Active probe with 60+ adversarial inputs</li>
+  <li><strong>L2.5</strong> — gVisor sandbox isolation (userspace kernel)</li>
+  <li><strong>Signed SHA-256 certificate</strong></li>
+</ul>
+<p>Open an issue: <a href="https://github.com/alicelabs-llc/marketnow/issues">github.com/alicelabs-llc/marketnow/issues</a></p>
+
+<h2>Already audited servers</h2>
+<p>Check if a server is already certified: <a href="https://marketnow.site/verify">marketnow.site/verify</a></p>
+
+<script>
+function scanRepo() {
+  const url = document.getElementById('repoUrl').value.trim();
+  const btn = document.getElementById('scanBtn');
+  const result = document.getElementById('scanResult');
+  
+  if (!url || !url.match(/^https?:\/\/github\.com\//)) {
+    result.innerHTML = '<div class="result-card" style="color:#ef4444">⚠ Please enter a valid GitHub URL (e.g., https://github.com/owner/repo)</div>';
+    return;
+  }
+  
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loading"></span> Scanning...';
+  result.innerHTML = '<div class="result-card"><span class="loading"></span> Running Sentinel L1.5 security checks...</div>';
+  
+  // Use the audit-skill API
+  const apiUrl = 'https://marketnow.site/api/audit-skill?repoUrl=' + encodeURIComponent(url) + '&quick=1';
+  
+  fetch(apiUrl)
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(d => {
+      displayResult(d, url);
+    })
+    .catch(e => {
+      // If API fails, show a simulated result with instructions
+      result.innerHTML = `
+        <div class="result-card">
+          <p style="color:#f97316">⚠ The instant scan API is not available for this repo.</p>
+          <p style="margin-top:8px">To get a full 6-layer security audit (L1.5 → L2.5 gVisor sandbox):</p>
+          <ol style="margin:8px 0 8px 20px">
+            <li>Open an issue: <a href="https://github.com/alicelabs-llc/marketnow/issues/new?title=Security%20audit%20request:%20${encodeURIComponent(url)}&body=Please%20audit%20this%20MCP%20server:%20${encodeURIComponent(url)}" target="_blank">Click here to request audit</a></li>
+            <li>The Sentinel pipeline will run: static analysis → active probe → gVisor sandbox</li>
+            <li>Results are published within 24 hours</li>
+          </ol>
+          <p style="margin-top:8px;color:#64748b">The audit is free and results are public.</p>
+        </div>
+      `;
+    })
+    .finally(() => {
+      btn.disabled = false;
+      btn.innerHTML = '🔍 Scan Now';
+    });
+}
+
+function displayResult(data, url) {
+  const score = data.overall_score || data.score || '?';
+  const risk = data.risk_level || 'unknown';
+  const scoreClass = score >= 7 ? 'score-low' : (score >= 4 ? 'score-mid' : 'score-high');
+  
+  let html = `
+    <div class="result-card" style="text-align:center">
+      <div class="score-circle ${scoreClass}">${score}/10</div>
+      <p style="font-size:1.2em;font-weight:bold">Risk: ${risk.toUpperCase()}</p>
+      <p style="color:#64748b;font-size:0.85em">Scanned: ${url}</p>
+    </div>
+  `;
+  
+  if (data.checks) {
+    html += '<div class="result-card"><h3>Detailed Checks</h3>';
+    data.checks.forEach(c => {
+      const icon = c.status === 'pass' ? '✅' : (c.status === 'fail' ? '❌' : '⚠');
+      const cls = c.status === 'pass' ? 'check-pass' : (c.status === 'fail' ? 'check-fail' : 'check-warn');
+      html += `<div class="check">${icon} <span class="check-name">${c.name}</span> <span class="${cls}">(${c.status})</span>${c.detail ? '<br><span style="font-size:0.85em;color:#94a3b8">' + c.detail + '</span>' : ''}</div>`;
+    });
+    html += '</div>';
+  }
+  
+  html += `
+    <div class="result-card">
+      <p><strong>Want the full audit?</strong></p>
+      <p>The free scan does L1.5 only. For L2 + L2.5 (gVisor sandbox, 60+ adversarial inputs, signed certificate):</p>
+      <p><a href="https://github.com/alicelabs-llc/marketnow/issues/new?title=Full%20audit%20request:%20${encodeURIComponent(url)}&body=Requesting%20full%206-layer%20audit%20for:%20${encodeURIComponent(url)}" target="_blank" style="display:inline-block;background:#3b82f6;color:white;padding:8px 16px;border-radius:6px;text-decoration:none;margin-top:8px">Request Full Audit →</a></p>
+    </div>
+  `;
+  
+  document.getElementById('scanResult').innerHTML = html;
+}
+</script>
+</body>
+</html>

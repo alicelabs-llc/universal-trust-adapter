@@ -1,0 +1,161 @@
+/**
+ * MarketNow — Agent API Endpoint
+ * ================================
+ * 
+ * Endpoint optimizado para agentes que quieren:
+ * 1. Buscar skills por capability (no solo keywords)
+ * 2. Comparar skills side-by-side
+ * 3. Comprar programáticamente
+ * 4. Recibir webhooks post-compra
+ * 5. Bulk download del catálogo
+ * 
+ * URL: https://marketnow.site/api/agent-endpoint.json
+ */
+
+{
+  "agent_api_version": "2.0",
+  "endpoints": {
+    "search": {
+      "method": "GET",
+      "path": "/api/skills.json",
+      "params": {
+        "q": "string - search query",
+        "category": "string - filter by category",
+        "max_price": "number - max price in USD",
+        "min_price": "number - min price in USD",
+        "language": "string - filter by language (en, es, zh, pt, fr)",
+        "tags": "string - comma-separated tags",
+        "limit": "number - max results (default 20, max 100)",
+        "sort": "string - name|price|score|category"
+      },
+      "example": "GET /api/skills.json?q=scrape&max_price=3&language=en&sort=price",
+      "returns": "Array of skills with all fields including translations"
+    },
+    "compare": {
+      "method": "GET", 
+      "path": "/api/compare",
+      "params": {
+        "ids": "string - comma-separated skill IDs (max 5)"
+      },
+      "example": "GET /api/compare?ids=mn-prompt-01arquitecto,mn-gen-00003",
+      "returns": "Side-by-side comparison of skills"
+    },
+    "bulk_download": {
+      "method": "GET",
+      "path": "/api/skills.json",
+      "note": "Returns ALL 6,964 skills in one request. ~7MB uncompressed, ~1.5MB gzipped. Cache locally for 24h.",
+      "format": "JSON array"
+    },
+    "categories": {
+      "method": "GET",
+      "path": "/api/categories.json",
+      "returns": "Array of {name, slug, count} for all 26 categories"
+    },
+    "manifest": {
+      "method": "GET", 
+      "path": "/api/manifest.json",
+      "returns": "Marketplace metadata, pricing tiers, commission rates"
+    },
+    "agent_instructions": {
+      "method": "GET",
+      "path": "/api/agent.json",
+      "returns": "Full machine-readable instructions for agents"
+    },
+    "skill_detail": {
+      "method": "GET",
+      "path": "/api/skills.json",
+      "note": "Filter client-side: skills.find(s => s.id === 'mn-gen-00003')",
+      "returns": "Single skill with translations, system_prompt, install command"
+    },
+    "purchase": {
+      "method": "POST",
+      "path": "/api/create-checkout-session",
+      "body": {
+        "skillId": "string - skill ID",
+        "affiliateCode": "string - optional affiliate code"
+      },
+      "auth": "required (Bearer token)",
+      "returns": {
+        "url": "string - Stripe Checkout URL",
+        "sessionId": "string - Stripe session ID"
+      },
+      "note": "Redirect user to the URL. After payment, Stripe redirects back to /vault?success=true"
+    },
+    "verify_purchase": {
+      "method": "GET",
+      "path": "/api/verify-purchase",
+      "params": {
+        "sessionId": "string - Stripe session ID"
+      },
+      "returns": {
+        "verified": "boolean",
+        "skillId": "string",
+        "licenseKey": "string"
+      },
+      "note": "Use this to verify a purchase was completed (for agents that handle payments programmatically)"
+    }
+  },
+  "agent_features": {
+    "multi_language": {
+      "supported": ["en", "es", "zh", "pt", "fr"],
+      "description": "Every skill with a system_prompt has translations in 5 languages. Agents can request skills in their user's language.",
+      "field": "translations.{lang}.system_prompt"
+    },
+    "capability_search": {
+      "description": "Search by what the skill CAN DO, not just keywords. Use the AI Skill Matcher at /registry.",
+      "api": "POST /api/ai-match (coming soon) — for now, use /api/skills.json and filter client-side"
+    },
+    "price_filtering": {
+      "description": "Agents with budget constraints can filter by max_price. Example: skills.filter(s => s.price <= 2.99)",
+      "note": "97% of skills are under $5. Average price: $2.50."
+    },
+    "bulk_operations": {
+      "description": "Download the entire catalog once, cache locally, and filter/search client-side. Refresh every 24h.",
+      "cache_hint": "Cache-Control: public, max-age=3600"
+    },
+    "webhook_notifications": {
+      "description": "Coming soon: register a webhook URL to receive notifications when new skills are added in your categories of interest.",
+      "status": "planned"
+    }
+  },
+  "agent_workflow_examples": {
+    "find_cheapest_skill": {
+      "description": "Find the cheapest skill for a task",
+      "code": "const skills = await (await fetch('/api/skills.json')).json();\nconst cheapest = skills.filter(s => s.category === 'AI/ML').sort((a,b) => a.price - b.price)[0];\nconsole.log(cheapest.name, cheapest.price);"
+    },
+    "find_multilingual_skill": {
+      "description": "Find a skill that supports Chinese",
+      "code": "const skills = await (await fetch('/api/skills.json')).json();\nconst zhSkills = skills.filter(s => s.translations && s.translations.zh);\nconsole.log(`${zhSkills.length} skills support Chinese`);"
+    },
+    "buy_and_install": {
+      "description": "Programmatic purchase flow",
+      "code": "1. POST /api/create-checkout-session {skillId: 'mn-gen-00015'}\n2. Redirect user to response.url\n3. After payment, user returns to /vault?success=true\n4. Skill is saved in localStorage\n5. Run: npx -y @marketnow/install <slug>"
+    },
+    "recommend_for_user": {
+      "description": "Recommend skills based on user's language and needs",
+      "code": "const userLang = navigator.language.slice(0,2); // 'es', 'en', 'zh'...\nconst skills = await (await fetch('/api/skills.json')).json();\nconst localized = skills.filter(s => s.translations && s.translations[userLang]);\n// Show localized skills first, then others"
+    }
+  },
+  "rate_limits": {
+    "anonymous": "60 requests/minute to /api/*",
+    "authenticated": "600 requests/minute to /api/*",
+    "bulk_download": "1 request/hour for /api/skills.json (cache locally!)"
+  },
+  "authentication": {
+    "read_endpoints": "No auth required (public)",
+    "write_endpoints": "Bearer token in Authorization header",
+    "get_token": "Sign up at https://marketnow.site/?login=true"
+  },
+  "mcp_server": {
+    "install": "npx -y marketnow-mcp",
+    "tools": ["search_skills", "get_skill", "list_categories", "get_manifest", "get_install_command"],
+    "config": {
+      "mcpServers": {
+        "marketnow": {
+          "command": "npx",
+          "args": ["-y", "marketnow-mcp"]
+        }
+      }
+    }
+  }
+}

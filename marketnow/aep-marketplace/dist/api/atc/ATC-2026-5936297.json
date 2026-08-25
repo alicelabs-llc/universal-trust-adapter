@@ -1,0 +1,62 @@
+{
+  "card_id": "ATC-2026-5936297",
+  "status": "revoked",
+  "payload": {
+    "card_id": "ATC-2026-5936297",
+    "agent_id": "agent.alicelabs.marketnow",
+    "agent_name": "MarketNow Discovery Agent",
+    "identity": {
+      "public_key": "-----BEGIN PUBLIC KEY-----MCowBQYDK2VwAyEAalg5E/VFKGMV59X7mBhttQHV+tendDZTCSkRrWcuvMA=-----END PUBLIC KEY-----",
+      "key_algorithm": "Ed25519"
+    },
+    "trust": {
+      "audit_layers_passed": {
+        "l15": true,
+        "l16": true,
+        "l17": true,
+        "l18": true,
+        "l2": true,
+        "l2_score": 10,
+        "l2_risk_level": "low"
+      },
+      "composite_trust": 10,
+      "risk_level": "low",
+      "certificate_id": "MN-SC-2026-ATCROOT"
+    },
+    "capabilities": {
+      "provides": [
+        "skill_search",
+        "skill_recommendation",
+        "security_audit",
+        "agent_trust_verification"
+      ],
+      "protocol_language": "mcp",
+      "translate": true
+    },
+    "payment": {
+      "method": "x402 + USDC on Base L2",
+      "wallet_address": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee"
+    },
+    "metadata": {
+      "issued_at": "2026-07-18T03:38:56.297Z",
+      "expires_at": "2026-10-16T03:38:56.297Z",
+      "issuer": "MarketNow Sentinel CA",
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-5936297"
+    }
+  },
+  "signature": {
+    "algorithm": "Ed25519 (RFC 8032)",
+    "value": "0918bfb6d459ff1f48a04c8799a5bb1986a02029bcf58d5eb4ea3e0cb4c40ba3d4125d879e1d8eb10b9f9cee829b84fa8df3cf9faa70177155f0cb6daaba5c0f",
+    "signed_by": "MarketNow Sentinel CA",
+    "signed_at": "2026-07-18T03:38:56.297Z",
+    "canonical_json": "RFC 8785 JCS (JSON Canonicalization Scheme)",
+    "verify_with": "GET /api/atc?action=ca-key",
+    "signed_payload_hash": "9e98a481d01b7da7b2fa686290c2f3563e96b0bb3e6735ce828f303f89d155a5",
+    "resigned_at": "2026-08-13T19:59:59.557Z",
+    "resign_reason": "Aug 13, 2026: fixed forward-slash escaping per RFC 8785 §3.2.2.2, removed sentinel_score alias from signed payload, added ca_key_id. Bug reported by @anp2network.",
+    "canonicalization_method": "RFC_8785_JCS",
+    "ca_key_id": "MCowBQYDK2VwAyEA"
+  },
+  "revoked_at": "2026-07-22T03:11:09.094Z",
+  "revocation_reason": "Signed with buggy canonicalization — re-issuing with fixed recursive sort"
+}

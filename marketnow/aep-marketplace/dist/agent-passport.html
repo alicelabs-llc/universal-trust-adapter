@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Passport — Identity + Trust + Encryption for AI Agents — MarketNow</title>
+<meta name="description" content="Agent Passport: cryptographic identity, trust scores, and end-to-end encryption for AI agents. Like a digital passport for agents.">
+<link rel="canonical" href="https://marketnow.site/agent-passport" />
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#050505;color:#e2e8f0;line-height:1.6;padding:20px;max-width:900px;margin:0 auto}
+h1{color:#3b82f6;font-size:1.8em;margin-bottom:0.3em}
+h2{color:#22c553;margin-top:1.5em;font-size:1.2em;border-bottom:1px solid #1e293b;padding-bottom:0.3em}
+h3{color:#a855f7;margin-top:1em}
+code{background:#1e293b;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:0.9em}
+pre{background:#0d1117;border:1px solid #1e293b;padding:16px;border-radius:8px;overflow-x:auto;margin:1em 0;font-size:0.85em}
+.card{background:#0d1117;border:1px solid #1e293b;border-radius:8px;padding:16px;margin:1em 0}
+.pain{border-left:4px solid #ef4444;padding:12px;margin:8px 0;background:#1e293b;border-radius:0 8px 8px 0}
+.solution{border-left:4px solid #22c553;padding:12px;margin:8px 0;background:#1e293b;border-radius:0 8px 8px 0}
+a{color:#3b82f6}
+.cta{display:inline-block;background:#3b82f6;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;margin:10px 0}
+.stat{display:inline-block;margin:8px 16px;text-align:center}
+.stat-num{font-size:1.5em;color:#3b82f6;font-weight:bold;display:block}
+.stat-label{font-size:0.85em;color:#94a3b8}
+</style>
+</head>
+<body>
+<h1>🛂 Agent Passport</h1>
+<p>Cryptographic identity, trust scores, and end-to-end encryption for AI agents.</p>
+
+<div>
+<div class="stat"><span class="stat-num">Ed25519</span><span class="stat-label">Identity</span></div>
+<div class="stat"><span class="stat-num">X25519</span><span class="stat-label">Encryption</span></div>
+<div class="stat"><span class="stat-num">AES-256</span><span class="stat-label">Cipher</span></div>
+<div class="stat"><span class="stat-num">24h</span><span class="stat-label">Validity</span></div>
+</div>
+
+<h2>The 3 problems we solve</h2>
+<div class="pain">
+<strong>🔴 Problem 1: Identity</strong><br>
+Agents have no verifiable identity. Anyone can impersonate any agent. RSAC 2026 called this "a top-tier security concern." 9 agent identity projects were created in 2026 alone.
+</div>
+<div class="pain">
+<strong>🔴 Problem 2: Trust</strong><br>
+No way to verify an agent is trustworthy before interacting. 492 MCP servers were found without basic authentication. Agents blindly trust each other.
+</div>
+<div class="pain">
+<strong>🔴 Problem 3: Encryption</strong><br>
+Agent-to-agent communication is plaintext. No standard for encrypted messaging between agents. Interceptions and MITM attacks are trivial.
+</div>
+
+<h2>The solution: Agent Passport</h2>
+<div class="solution">
+<strong>✅ Identity</strong> — Each agent generates an Ed25519 keypair. The public key IS the agent's identity. MarketNow issues a signed Passport that binds the identity to a trust score.
+</div>
+<div class="solution">
+<strong>✅ Trust</strong> — The Passport includes a Sentinel trust score (0-10) based on security audits. Agents reject connections from passports with score < 5.
+</div>
+<div class="solution">
+<strong>✅ Encryption</strong> — Agents derive a shared secret via X25519 ECDH. All messages encrypted with AES-256-GCM. Every message is signed with Ed25519.
+</div>
+
+<h2>How it works</h2>
+<h3>Step 1: Agent generates keypair</h3>
+<pre><code># Generate Ed25519 signing keypair (for identity)
+openssl genpkey -algorithm Ed25519 -out agent_private_key.pem
+openssl pkey -in agent_private_key.pem -pubout -out agent_public_key.pem
+
+# Generate X25519 encryption keypair (for messaging)
+openssl genpkey -algorithm X25519 -out agent_enc_private.pem
+openssl pkey -in agent_enc_private.pem -pubout -out agent_enc_public.pem</code></pre>
+
+<h3>Step 2: Request Passport from MarketNow</h3>
+<pre><code>POST https://marketnow.site/api/passport
+Content-Type: application/json
+
+{
+  "agent_id": "agent.yourorg.yourname",
+  "agent_name": "Your Agent",
+  "public_key": "MCowBQYDK2VwAyEA...",
+  "capabilities": ["data_analysis", "report_generation"],
+  "payment_address": "0x..."
+}</code></pre>
+
+<h3>Step 3: Agent-to-agent handshake</h3>
+<pre><code># Agent A sends passport to Agent B
+{ "passport": {...}, "nonce": "random_32_bytes" }
+
+# Agent B verifies with MarketNow
+GET https://marketnow.site/api/passport?verify=AP-2026-00001
+→ { "valid": true, "trust_score": 10, "revoked": false }
+
+# Both agents derive shared secret (X25519 ECDH)
+shared_secret = X25519(my_private_key, their_public_key)
+
+# All messages encrypted with AES-256-GCM
+encrypted = AES_256_GCM(plaintext, shared_secret, random_iv)
+signed = Ed25519_sign(encrypted, my_private_key)
+
+# Message format:
+{
+  "iv": "base64_12_bytes",
+  "ciphertext": "base64_encrypted_data",
+  "tag": "base64_16_bytes",
+  "sender_passport_id": "AP-2026-00001",
+  "sender_signature": "ed25519_signature"
+}</code></pre>
+
+<h3>Step 4: Revocation (if agent goes bad)</h3>
+<pre><code># Check revocation list
+GET https://marketnow.site/api/passport?revoked=1
+→ { "revoked_passports": ["AP-2026-00042"], "total_revoked": 1 }
+
+# Auto-revoke triggers:
+# - Sentinel score drops below 3
+# - 3+ malicious behavior reports
+# - Payment fraud detected
+# - Sandbox violation (ptrace, bpf, etc.)</code></pre>
+
+<h2>Passport format</h2>
+<pre><code>{
+  "passport_id": "AP-2026-00001",
+  "agent_id": "agent.alicelabs.marketnow",
+  "agent_name": "MarketNow Discovery Agent",
+  "public_key": "MCowBQYDK2VwAyEA1a2b3c...",
+  "key_algorithm": "Ed25519",
+  "trust_score": 10,
+  "capabilities": ["skill_search", "security_audit"],
+  "payment_address": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee",
+  "pricing": { "per_call": 0, "per_task": 0.99 },
+  "languages": ["en", "es", "zh", "pt", "fr"],
+  "issued_at": "2026-07-12T22:00:00Z",
+  "expires_at": "2026-07-13T22:00:00Z",
+  "issuer": "MarketNow Sentinel Authority",
+  "issuer_signature": "sig_abc123...",
+  "revocation_url": "https://marketnow.site/api/passport?check=AP-2026-00001",
+  "verification_url": "https://marketnow.site/api/passport?verify=AP-2026-00001"
+}</code></pre>
+
+<h2>Revenue model</h2>
+<table style="width:100%;border-collapse:collapse;margin:1em 0">
+<tr style="background:#1e293b"><th style="padding:8px;border:1px solid #334155">Tier</th><th style="padding:8px;border:1px solid #334155">Price</th><th style="padding:8px;border:1px solid #334155">Features</th></tr>
+<tr><td style="padding:8px;border:1px solid #1e293b">Free</td><td style="padding:8px;border:1px solid #1e293b">$0</td><td style="padding:8px;border:1px solid #1e293b">1 passport, 24h validity, basic trust</td></tr>
+<tr><td style="padding:8px;border:1px solid #1e293b">Pro</td><td style="padding:8px;border:1px solid #1e293b">$29/mo</td><td style="padding:8px;border:1px solid #1e293b">Unlimited passports, 30-day validity, real-time trust</td></tr>
+<tr><td style="padding:8px;border:1px solid #1e293b">Enterprise</td><td style="padding:8px;border:1px solid #1e293b">$499/mo</td><td style="padding:8px;border:1px solid #1e293b">Private CA, custom revocation, SLA</td></tr>
+</table>
+
+<h2>Try it</h2>
+<a href="/api/passport" class="cta">View MarketNow's Passport →</a>
+<a href="/agent-passport-spec.json" class="cta">Full Spec (JSON) →</a>
+
+</body>
+</html>

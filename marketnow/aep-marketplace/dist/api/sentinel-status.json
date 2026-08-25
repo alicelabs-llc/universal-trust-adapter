@@ -1,0 +1,47 @@
+{
+  "service": "MarketNow",
+  "page": "Sentinel Status",
+  "version": "2.0.0",
+  "effective_date": "2026-07-05",
+  "url": "https://marketnow.site/api/sentinel-status.json",
+  "current_production_version": "L1.5 + L1.6 (real-time) + L2 (GitHub Actions)",
+  "production_endpoint": "POST /api/audit-skill",
+  "architecture": {
+    "l15": {
+      "runs_in": "Vercel serverless (real-time)",
+      "checks": 6,
+      "description": "Metadata analysis: AUTH, tool description injection, input validation, CORS, OAuth scopes, rate limiting error leakage"
+    },
+    "l16": {
+      "runs_in": "Vercel serverless (real-time, on every /api/audit-skill call)",
+      "semgrep_rules": 18,
+      "secret_patterns": 18,
+      "osv_check": "Real-time via OSV API (api.osv.dev)",
+      "description": "Enhanced static analysis: 18 MCP-specific Semgrep rules (prompt injection, command injection, secrets, SSRF, path traversal, tool spoofing), 18 secret detection patterns (Stripe, AWS, GitHub, wallets, JWT, etc.), OSV dependency vulnerability check"
+    },
+    "l2": {
+      "runs_in": "GitHub Actions (batch, on submission)",
+      "sandbox": "Docker with --network none, --read-only, --cap-drop ALL, seccomp, 256MB memory",
+      "monitors": "stdout, filesystem changes, network attempts, crashes",
+      "description": "Dynamic behavioral analysis in isolated Docker container. Results committed to catalog as static sentinel scores."
+    }
+  },
+  "honest_assessment": {
+    "summary": "L1.5 + L1.6 run IN REAL-TIME on every /api/audit-skill call. L2 runs via GitHub Actions on submission. All three layers contribute to the final Sentinel score.",
+    "strengths": [
+      "L1.6 runs in REAL-TIME on every API call (18 Semgrep rules + 18 secret patterns + OSV API)",
+      "Weighted scoring: secrets 40%, vulns 30%, static 20%, hygiene 10%",
+      "Critical secret detection = instant score 0",
+      "L2 Docker sandbox available via GitHub Actions (--network none, --read-only, --cap-drop ALL)",
+      "All code is open source and auditable"
+    ],
+    "weaknesses": [
+      "L1.6 analyzes metadata and descriptions, not full source code (L2 handles source code via GitHub Actions)",
+      "L2 does not run on every API call — only on submission via GitHub Actions",
+      "Regex-based detection can be evaded by obfuscation",
+      "No independent third-party audit yet (deferred until revenue)"
+    ]
+  },
+  "l2_design_doc": "https://github.com/alicelabs-llc/marketnow/blob/master/SENTINEL_L2_DESIGN.md",
+  "design_phase": "L3 (red teaming with LLMs) — future"
+}

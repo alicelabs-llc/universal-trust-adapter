@@ -1,0 +1,45 @@
+{
+  "$schema": "https://marketnow.site/api/pricing.schema.json",
+  "version": "1.0.0",
+  "updated_at": "2026-08-25T00:00:00Z",
+  "pricing_source_of_truth": "This file (pricing.json) is the canonical pricing source. Landing page, agent.json, and README must match. MarketNow does NOT sell skills to buyers — buyers install all 9,248 skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
+  "buyer": {
+    "model": "free",
+    "description": "Buyers install all skills for free. No payment, no signup, no credit card.",
+    "free_skills_count": 43,
+    "paid_skills_available": false
+  },
+  "seller": {
+    "description": "Sellers subscribe to Sentinel for security auditing and listing. Commission on sales.",
+    "tiers": [
+      {
+        "name": "PRO",
+        "price_usd": 9.99,
+        "billing": "monthly",
+        "features": [
+          "Sentinel L1.5 security audit on every skill",
+          "Listing in marketplace",
+          "Basic analytics"
+        ]
+      },
+      {
+        "name": "ENTERPRISE",
+        "price_usd": 49.99,
+        "billing": "monthly",
+        "features": [
+          "Sentinel L2.5 gVisor sandbox audit",
+          "Priority listing",
+          "Advanced analytics",
+          "Custom branding",
+          "API access"
+        ]
+      }
+    ],
+    "commission_rate": "0.20",
+    "commission_description": "20% commission on seller sales (referral agents)"
+  },
+  "wallet": {
+    "description": "All payments go through escrow/multisig. See /policies for details.",
+    "policy_url": "https://marketnow.site/policies#comisiones"
+  }
+}

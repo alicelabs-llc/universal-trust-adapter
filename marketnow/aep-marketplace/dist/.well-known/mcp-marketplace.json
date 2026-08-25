@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "MarketNow",
+  "tagline": "Trust layer for agent commerce",
+  "description": "Trust layer for agent commerce. Discovery is solved (MCP registry, Smithery, Glama); trust is not. MarketNow provides Sentinel security audits, AP2-compatible mandates, x402 payments, and human-in-the-loop-by-default agent spending. 9,248 MCP servers, $0.99-$9.99 one-time, 65 free. AliceLabs LLC Proprietary, maintained by AliceLabs LLC.",
+  "url": "https://marketnow.site",
+  "api_base": "https://marketnow.site/api",
+  "version": "2.0.0",
+  "last_updated": "2026-07-02T00:00:00.000Z",
+  "stats": {
+    "total_skills": 9,248,
+    "free_skills": 43,
+    "categories": 58,
+    "languages": [
+      "en",
+      "es",
+      "zh",
+      "pt",
+      "fr"
+    ]
+  },
+  "pricing": {
+    "model": "one-time",
+    "min_usd": 0.99,
+    "max_usd": 9.99,
+    "currency": "USD",
+    "no_subscriptions": true,
+    "no_recurring_billing": true
+  },
+  "payment_methods": [
+    {
+      "method": "usdc_base",
+      "protocol": "x402",
+      "network": "Base (chainId 8453)",
+      "token": "USDC",
+      "contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "wallet": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee",
+      "verification": "on-chain via eth_getTransactionReceipt"
+    },
+    {
+      "method": "stripe",
+      "description": "Credit/debit card via Stripe Checkout. Full chargeback rights. PCI-compliant."
+    }
+  ],
+  "standards": {
+    "payments": "x402 (HTTP 402 Payment Required) \u2014 implementing, governed by Linux Foundation",
+    "mandates": "AP2 (Agent Payments Protocol) \u2014 implementing, by Google",
+    "discovery": "MCP Server Cards \u2014 monitoring",
+    "identity": "MCP Registry namespace verification \u2014 planning"
+  },
+  "review_status": {
+    "auto_scanned": 8517,
+    "human_reviewed": 43,
+    "maintainer_verified": 0,
+    "disclosure": "We never mark a skill 'verified' if it has only been auto-scanned. The legacy 'verified: true' field is deprecated \u2014 use review_status instead."
+  },
+  "trust_model": {
+    "default_notification_mode": "notify",
+    "human_in_loop_by_default": true,
+    "silent_requires_explicit_opt_in": true,
+    "hard_caps": {
+      "max_total_per_mandate_usd": 500,
+      "max_per_purchase_usd": 50,
+      "default_ttl_days": 90
+    }
+  },
+  "maintainer": {
+    "legal_name": "AliceLabs LLC",
+    "founder": "Edison Flores",
+    "country": "Wyoming, USA",
+    "founded": "AliceLabs LLC 2025 \u00b7 MarketNow launched 2026",
+    "email": "info@alicelabs.site",
+    "github": "https://github.com/alicelabs-llc"
+  },
+  "license": "MNNC-1.0 (Non-Commercial)",
+  "open_source": false,
+  "github": "https://github.com/alicelabs-llc/marketnow",
+  "npm": "https://www.npmjs.com/package/marketnow-mcp",
+  "mcp_server": {
+    "install": "npx -y marketnow-mcp",
+    "version": "1.2.0"
+  },
+  "NOT": [
+    "largest MCP marketplace (we are the trust layer, not the largest)",
+    "no humans needed (human-in-loop is default; silent requires opt-in)",
+    "ETH/BSC/SOL/BTC payments (USDC on Base only)",
+    "9,248 skills (current count is 9,248)",
+    "open registry with no manual approval (mandates default to notify mode)"
+  ],
+  "canonical_sources": {
+    "agent_json": "https://marketnow.site/api/agent.json",
+    "policies_json": "https://marketnow.site/api/policies.json",
+    "trust_json": "https://marketnow.site/api/trust.json",
+    "standards_json": "https://marketnow.site/api/standards.json",
+    "listings_json": "https://marketnow.site/api/listings.json"
+  },
+  "source_available": true
+}

@@ -1,0 +1,124 @@
+{
+  "version": "1.0.0",
+  "description": "Structured failure taxonomy for MCP server installations. Agents use this to self-diagnose and recover from install failures.",
+  "source": "Suggested by @alexshev on dev.to — 'the stronger metric is whether users can connect, run a first workflow, and know what failed'",
+  "failure_categories": {
+    "NETWORK": {
+      "code": "NET_001",
+      "description": "Cannot reach MCP server endpoint",
+      "severity": "high",
+      "agent_action": "retry with exponential backoff (3 attempts, 2s/4s/8s)",
+      "user_action": "Check if marketnow.site is up at /api/health"
+    },
+    "NETWORK_TIMEOUT": {
+      "code": "NET_002",
+      "description": "Connection timed out (>10s)",
+      "severity": "medium",
+      "agent_action": "reduce timeout and try alternative endpoint",
+      "user_action": "Check network connectivity"
+    },
+    "AUTH": {
+      "code": "AUTH_001",
+      "description": "Authentication required but not provided",
+      "severity": "high",
+      "agent_action": "request credentials from user or mandate",
+      "user_action": "Provide API key or wallet address"
+    },
+    "PAYMENT": {
+      "code": "PAY_001",
+      "description": "Payment required — skill is not free",
+      "severity": "info",
+      "agent_action": "check mandate balance, request payment approval",
+      "user_action": "Add funds to mandate or choose a free alternative"
+    },
+    "PAYMENT_FAILED": {
+      "code": "PAY_002",
+      "description": "Payment transaction failed on-chain",
+      "severity": "high",
+      "agent_action": "do not retry automatically, notify principal",
+      "user_action": "Check wallet balance and gas fees"
+    },
+    "INSTALL_FAILED": {
+      "code": "INST_001",
+      "description": "npx install failed (package not found or npm error)",
+      "severity": "high",
+      "agent_action": "try alternative install method (pip, direct download)",
+      "user_action": "Check npm registry or GitHub repo"
+    },
+    "INSTALL_VERSION_MISMATCH": {
+      "code": "INST_002",
+      "description": "Installed version differs from audited version",
+      "severity": "critical",
+      "agent_action": "do not use — certificate is invalid for this version",
+      "user_action": "Install the certified version specified in the certificate"
+    },
+    "TRUST_LOW": {
+      "code": "TRUST_001",
+      "description": "Skill trust score is below threshold",
+      "severity": "warning",
+      "agent_action": "warn user, ask for explicit approval before proceeding",
+      "user_action": "Review the skill's audit report at /verify"
+    },
+    "TRUST_UNKNOWN": {
+      "code": "TRUST_002",
+      "description": "Skill has not been audited (no Sentinel certificate)",
+      "severity": "warning",
+      "agent_action": "warn user that skill is unaudited, proceed with caution",
+      "user_action": "Request an audit at github.com/alicelabs-llc/marketnow/issues"
+    },
+    "SANDBOX_VIOLATION": {
+      "code": "SBOX_001",
+      "description": "Skill attempted blocked syscall (ptrace, bpf, mount, etc.)",
+      "severity": "critical",
+      "agent_action": "immediately stop and uninstall the skill",
+      "user_action": "Report this skill to support@alicelabs.site"
+    },
+    "CERTIFICATE_EXPIRED": {
+      "code": "CERT_001",
+      "description": "Security certificate has expired",
+      "severity": "medium",
+      "agent_action": "check for updated certificate, use cached version if available",
+      "user_action": "Wait for weekly re-audit (Sundays 01:00 UTC)"
+    },
+    "CERTIFICATE_INVALID": {
+      "code": "CERT_002",
+      "description": "Certificate signature does not match (tampered)",
+      "severity": "critical",
+      "agent_action": "do not install, report as potentially malicious",
+      "user_action": "Report to support@alicelabs.site immediately"
+    },
+    "DEPENDENCY_MISSING": {
+      "code": "DEP_001",
+      "description": "Required runtime dependency is not installed",
+      "severity": "medium",
+      "agent_action": "install missing dependency (node, python, docker)",
+      "user_action": "Install the required runtime"
+    },
+    "SERVER_CRASHED": {
+      "code": "CRASH_001",
+      "description": "MCP server crashed during initialization",
+      "severity": "high",
+      "agent_action": "check crash log, report to skill author",
+      "user_action": "Check if the skill is compatible with your runtime version"
+    },
+    "RATE_LIMITED": {
+      "code": "RATE_001",
+      "description": "Rate limit exceeded",
+      "severity": "low",
+      "agent_action": "back off and retry after delay specified in headers",
+      "user_action": "Wait before making more requests"
+    }
+  },
+  "agent_decision_tree": {
+    "on_failure": [
+      {"if": "code starts with NET_", "then": "retry 3x with backoff, then notify"},
+      {"if": "code starts with PAY_", "then": "check mandate, notify principal"},
+      {"if": "code starts with TRUST_", "then": "warn user, ask for approval"},
+      {"if": "code starts with SBOX_ or CERT_002", "then": "uninstall immediately, report"},
+      {"if": "code starts with INST_", "then": "try alternative install method"},
+      {"otherwise": "log error, notify user with details"}
+    ]
+  },
+  "endpoint": "https://marketnow.site/failure-taxonomy.json",
+  "updated_at": "2026-07-11T00:00:00Z"
+}

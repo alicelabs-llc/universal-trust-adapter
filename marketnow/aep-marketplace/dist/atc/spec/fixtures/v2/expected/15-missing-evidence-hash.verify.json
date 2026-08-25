@@ -1,0 +1,6 @@
+{
+  "fixture_id": "15-missing-evidence-hash",
+  "expected_outcome": "invalid",
+  "expected_verify_result": false,
+  "expected_verify_reason": "v2.0 requires evidence_hash in every signature block. This card is missing it. Verifiers MUST reject."
+}

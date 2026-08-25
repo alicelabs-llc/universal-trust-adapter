@@ -1,0 +1,167 @@
+{
+  "service": "MarketNow",
+  "page": "Sentinel Roadmap \u2014 From L1.5 to Next-Gen Security",
+  "version": "2.0.0",
+  "effective_date": "2026-07-06",
+  "url": "https://marketnow.site/sentinel-roadmap",
+  "current_state": {
+    "version": "L1.5 + L1.6 + L2 v2.0 + L2.5 gVisor + L2.6 Egress + L4 SBOM + L4.5 Fingerprint",
+    "type": "Multi-layer security audit (SAST + DAST + Active probing)",
+    "layers_implemented": [
+      "L1.5 \u2014 6 metadata checks (real-time on Vercel, ~200ms)",
+      "L1.6 \u2014 18 Semgrep rules + 18 secret patterns + OSV API (real-time + weekly batch)",
+      "L2 v2.0 \u2014 Docker sandbox + active MCP probe with adversarial inputs (async via GitHub Actions)"
+    ],
+    "stats": {
+      "total_skills": 9,248,
+      "certified": 5120,
+      "with_l2": 206,
+      "critical_risk": 16,
+      "high_risk": 125
+    }
+  },
+  "roadmap": [
+    {
+      "level": "L1.5",
+      "name": "Metadata Security Checks",
+      "status": "live",
+      "type": "SAST \u2014 Static Analysis (metadata-based)",
+      "checks": 6,
+      "checks_list": [
+        "AUTH",
+        "Prompt injection detection",
+        "Input validation",
+        "CORS",
+        "OAuth scopes",
+        "Rate limiting + error leakage"
+      ],
+      "runtime": "~200ms on Vercel",
+      "implemented_date": "2026-06-30"
+    },
+    {
+      "level": "L1.6",
+      "name": "Enhanced Static Analysis (Semgrep + Secrets + OSV)",
+      "status": "live",
+      "type": "SAST \u2014 Source code analysis",
+      "checks": [
+        "18 Semgrep rules (prompt injection, command injection, SSRF, path traversal, tool forgery)",
+        "18 secret patterns (Stripe, AWS, GitHub, JWT, private keys, wallet mnemonics)",
+        "OSV API real-time dependency vulnerability check",
+        "Gitleaks secret scanning (weekly batch)"
+      ],
+      "runtime": "~500ms on Vercel (real-time) + weekly batch on GitHub Actions",
+      "implemented_date": "2026-07-02"
+    },
+    {
+      "level": "L2 v2.0",
+      "name": "Docker Sandbox + Active MCP Probe (DAST)",
+      "status": "live",
+      "type": "DAST \u2014 Dynamic Analysis with adversarial testing",
+      "phases": [
+        "Phase 1: Docker sandbox run (--network none, --read-only, --cap-drop ALL) \u2014 passive stdout analysis",
+        "Phase 2: Active MCP probe \u2014 sends initialize, tools/list, tools/call with 60 adversarial inputs (path traversal, SSRF, SQL injection, command injection, prompt injection, credential fishing)",
+        "Phase 3: Filesystem diff \u2014 detects suspicious file changes",
+        "Phase 4: strace syscall monitoring \u2014 open, connect, execve, fork, chmod",
+        "Phase 5: Multi-layer scoring \u2014 combines stdout + strace + probe + filesystem"
+      ],
+      "runtime": "2-5 min per skill via GitHub Actions",
+      "implemented_date": "2026-07-06",
+      "coverage": "206 skills with L2 results (growing weekly)",
+      "scoring": "Per-layer penalties: critical leak -5, strace sensitive access -5, network -3, process exec -3, permission escalation -4"
+    },
+    {
+      "level": "L2.5",
+      "name": "gVisor Sandbox Isolation",
+      "status": "live",
+      "type": "Userspace kernel isolation (gVisor/runsc)",
+      "problem": "Docker --cap-drop ALL + seccomp provides good isolation, but kernel-level attacks (container escapes) are still possible.",
+      "solution": "Replaced Docker runtime with gVisor (runsc). Every syscall goes through a userspace kernel. The MCP server never touches the host kernel. Catches ptrace, bpf, mount, kexec, clone3, unshare attempts. Enhanced seccomp fallback when gVisor unavailable.",
+      "estimated_date": "2026 Q4",
+      "cost": "Free (open source, self-hosted runner required)",
+      "implemented_date": "2026-07-07",
+      "coverage": "206 skills with L2.5 gVisor sandbox results",
+      "stats": {
+        "gvisor_active": true,
+        "seccomp_fallback": true,
+        "suspicious_files_detected": 0,
+        "seccomp_violations": 0
+      }
+    },
+    {
+      "level": "L2.6",
+      "name": "Egress Proxy with Allowlist",
+      "status": "live",
+      "type": "Network-level isolation with domain allowlist (HTTP/HTTPS proxy)",
+      "problem": "Some MCP servers legitimately need outbound network access (API calls, webhooks). --network none blocks ALL traffic, which breaks these servers.",
+      "solution": "Pinned egress proxy with domain allowlist. Servers can only call pre-approved domains. All other traffic is blocked. Agent confirms allowlist before install.",
+      "cost": "Free (self-hosted proxy)",
+      "suggested_by": "@custralis on dev.to",
+      "implemented_date": "2026-07-11",
+      "coverage": "Egress proxy + allowlist implemented. 30 domains + 9 wildcards allowed. All other traffic blocked and logged."
+    },
+    {
+      "level": "L3",
+      "name": "Firecracker microVM",
+      "status": "planned",
+      "type": "Hardware-level isolation (KVM)",
+      "problem": "Even gVisor shares the host kernel. Sophisticated exploits (dirty pipe, eBPF) can escape.",
+      "solution": "Firecracker microVM \u2014 each MCP server runs in its own lightweight VM with KVM hardware isolation. Same technology AWS uses for Lambda.",
+      "estimated_date": "2027 Q1",
+      "cost": "Paid (requires KVM-enabled bare metal runner, ~$50/month)"
+    },
+    {
+      "level": "L3.5",
+      "name": "Automated Red Teaming vs Prompt Injection",
+      "status": "research",
+      "type": "Adversarial AI testing",
+      "problem": "Current L2 probe sends static adversarial inputs. Sophisticated prompt injection adapts to the server's responses.",
+      "solution": "Use an LLM (Claude/GPT) to dynamically generate adversarial prompts based on the server's tool descriptions and responses. Red-team the MCP server's tool descriptions for injection vectors.",
+      "estimated_date": "2027 Q2",
+      "cost": "API costs (~$0.10 per skill audited)"
+    },
+    {
+      "level": "L4",
+      "name": "Continuous Supply Chain Audit",
+      "status": "live",
+      "type": "Dependency monitoring + SBOM",
+      "problem": "A skill can be safe today but become malicious tomorrow when a dependency is updated (supply chain attack).",
+      "solution": "1. Generate SBOM (Software Bill of Materials) for each skill. 2. Monitor dependencies for new CVEs daily via OSV. 3. Alert when a dependency changes. 4. Re-audit automatically when dependencies update.",
+      "cost": "Free (OSV API + GitHub Dependency Graph)",
+      "implemented_date": "2026-07-12",
+      "coverage": "SBOM generator + OSV API vulnerability check. Runs on every L2 audit."
+    },
+    {
+      "level": "L4.5",
+      "name": "Cryptographic Code Signing + Content Fingerprint",
+      "status": "live",
+      "type": "Tamper-proof certificates",
+      "problem": "Current certificates are signed with SHA-256 + secret, but the certificate doesn't include a fingerprint of the audited code. Someone could modify the code after audit and the certificate would still appear valid.",
+      "solution": "1. Generate SHA-256 hash of the repo's HEAD commit. 2. Include commit hash in the certificate. 3. Certificate is only valid if the repo's current HEAD matches the certified commit. 4. Re-audit triggers when HEAD changes.",
+      "cost": "Free",
+      "implemented_date": "2026-07-12",
+      "coverage": "SHA-256 fingerprint of repo HEAD commit. Certificate invalid if code changes post-audit."
+    },
+    {
+      "level": "L5",
+      "name": "Third-Party Security Audit",
+      "status": "deferred",
+      "type": "Independent verification",
+      "problem": "Sentinel is proprietary and closed-source. Users must trust AliceLabs that the audit is correct.",
+      "solution": "Hire an independent security firm (e.g., Trail of Bits, Cure53) to audit the Sentinel engine itself. Publish the audit report.",
+      "estimated_date": "2027 Q3 (after revenue covers cost)",
+      "cost": "$15,000-$50,000"
+    }
+  ],
+  "security_principles": [
+    "Defense in depth: 3+ layers, each independent",
+    "Fail-closed: when in doubt, don't issue license/certificate",
+    "Transparency: all results are public and verifiable at /verify",
+    "Honesty: skills not yet audited show score 0 and status 'not_scanned'",
+    "Weekly automation: no manual intervention required"
+  ],
+  "automated_cron": {
+    "sunday_0030_utc": "auto-discover.yml \u2014 discover + import new MCP servers from GitHub",
+    "sunday_0100_utc": "sentinel-certify-all.yml \u2014 audit + certify ALL skills (L1.5 + L1.6 + L2 fetch)",
+    "sunday_0200_utc": "sentinel-l2-reaudit.yml \u2014 re-run L2 Docker sandbox for all eligible skills"
+  }
+}

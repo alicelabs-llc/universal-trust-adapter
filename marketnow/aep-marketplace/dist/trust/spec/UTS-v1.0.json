@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Universal Trust Schema (UTS) v1.0",
+  "description": "The canonical internal representation for ALL trust credential formats. Like Unicode for text \u2014 the universal intermediate that all formats translate through.",
+  "type": "object",
+  "required": [
+    "uts_version",
+    "subject",
+    "identity",
+    "trust",
+    "capabilities",
+    "provenance",
+    "lifecycle",
+    "format"
+  ],
+  "properties": {
+    "uts_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "subject": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "agent",
+            "tool",
+            "service",
+            "human",
+            "organization"
+          ]
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "public_key": {
+          "type": "string"
+        },
+        "key_algorithm": {
+          "enum": [
+            "Ed25519",
+            "ES256",
+            "RS256",
+            "secp256k1"
+          ]
+        },
+        "key_id": {
+          "type": "string"
+        },
+        "attestation": {
+          "type": "object"
+        },
+        "did": {
+          "type": "string"
+        },
+        "oauth_subject": {
+          "type": "string"
+        }
+      }
+    },
+    "trust": {
+      "type": "object",
+      "required": [
+        "score",
+        "confidence",
+        "evidence",
+        "assessor",
+        "assessed_at"
+      ],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "confidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "evidence": {
+          "type": "array"
+        },
+        "assessor": {
+          "type": "string"
+        },
+        "assessed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "required": [
+        "provides",
+        "requires",
+        "protocols"
+      ],
+      "properties": {
+        "provides": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requires": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "source"
+      ],
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "artifact_hash": {
+          "type": "string"
+        },
+        "original_signature_hash": {
+          "type": "string",
+          "description": "Attestation chaining \u2014 hash of original credential's signature when bridged"
+        },
+        "original_format": {
+          "type": "string"
+        },
+        "bridged_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "bridged_by": {
+          "type": "string"
+        }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "required": [
+        "issued_at",
+        "revoked",
+        "version"
+      ],
+      "properties": {
+        "issued_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "revoked": {
+          "type": "boolean"
+        },
+        "revocation_url": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "format": {
+      "type": "object",
+      "required": [
+        "type",
+        "version",
+        "raw"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "atc-v2",
+            "atc-v3",
+            "eat-ai",
+            "zta",
+            "a2a-card",
+            "mcp-card",
+            "w3c-vc",
+            "oauth-token"
+          ]
+        },
+        "version": {
+          "type": "string"
+        },
+        "raw": {
+          "description": "Original payload in native format \u2014 NEVER destroyed (lossless preservation)"
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Translation warnings (lossy fields omitted)"
+    },
+    "policy": {
+      "type": "object"
+    }
+  }
+}
