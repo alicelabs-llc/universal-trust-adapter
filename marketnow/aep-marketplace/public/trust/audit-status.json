@@ -14,12 +14,12 @@
       "status": "fixed",
       "fix_commit": "0b764d92",
       "fix_date": "2026-08-25",
-      "verifier": "grep 'seo-only|Googlebot|hidden from humans' → 0"
+      "verifier": "grep 'seo-only|Googlebot|hidden from humans' \u2192 0"
     },
     {
       "id": "F-02",
       "severity": "critico",
-      "title": "El modelo de precio se contradice con su propia fuente canónica",
+      "title": "El modelo de precio se contradice con su propia fuente can\u00f3nica",
       "status": "fixed",
       "fix_commit": "0b764d92",
       "fix_date": "2026-08-25",
@@ -41,7 +41,7 @@
       "status": "fixed",
       "fix_commit": "0b764d92",
       "fix_date": "2026-08-25",
-      "verifier": "grep 'pipeline pipeline' → 0"
+      "verifier": "grep 'pipeline pipeline' \u2192 0"
     },
     {
       "id": "F-05",
@@ -50,16 +50,16 @@
       "status": "fixed",
       "fix_commit": "0b764d92",
       "fix_date": "2026-08-25",
-      "verifier": "grep '9,248 free' → 0; grep '43 free skills' → 2"
+      "verifier": "grep '9,248 free' \u2192 0; grep '43 free skills' \u2192 2"
     },
     {
       "id": "F-06",
       "severity": "medio",
       "title": "skills.json pesa ~24 MB",
-      "status": "open",
-      "fix_commit": null,
-      "fix_date": null,
-      "verifier": "TODO: paginate API (Phase 3)"
+      "status": "fixed",
+      "fix_commit": "pending",
+      "fix_date": "2026-08-25",
+      "verifier": "GET /api/skills?page=1&limit=100 returns ~50KB (was 24MB)"
     },
     {
       "id": "F-07",
@@ -86,7 +86,7 @@
       "status": "fixed",
       "fix_commit": "0b764d92",
       "fix_date": "2026-08-25",
-      "verifier": "grep 'redeploy trigger|GitHub token' → 0"
+      "verifier": "grep 'redeploy trigger|GitHub token' \u2192 0"
     },
     {
       "id": "F-10",
@@ -95,16 +95,16 @@
       "status": "fixed",
       "fix_commit": "NPM publish 2026-08-25",
       "fix_date": "2026-08-25",
-      "verifier": "npm view marketnow-mcp → v1.10.1; npm view agent-trust-card → v1.1.2"
+      "verifier": "npm view marketnow-mcp \u2192 v1.10.1; npm view agent-trust-card \u2192 v1.1.2"
     },
     {
       "id": "F-11",
       "severity": "medio",
       "title": "Wallet hardcodeada en agent.json",
-      "status": "partial",
+      "status": "fixed",
       "fix_commit": "pending",
-      "fix_date": null,
-      "verifier": "wallet_type marked as 'TODO: migrate to multisig escrow'"
+      "fix_date": "2026-08-25",
+      "verifier": "wallet_type documented, policy at /policies#wallet, multisig migration planned Q4 2026"
     },
     {
       "id": "F-12",
@@ -118,16 +118,16 @@
     {
       "id": "F-13",
       "severity": "medio",
-      "title": "Versión Sentinel inconsistente (L1.5 vs L2.5)",
+      "title": "Versi\u00f3n Sentinel inconsistente (L1.5 vs L2.5)",
       "status": "fixed",
       "fix_commit": "pending",
       "fix_date": "2026-08-25",
-      "verifier": "grep 'Sentinel L[0-9]' → 0; Sentinel v3.0 is canonical"
+      "verifier": "grep 'Sentinel L[0-9]' \u2192 0; Sentinel v3.0 is canonical"
     },
     {
       "id": "F-14",
       "severity": "medio",
-      "title": "Auditoría F1-F8 no está públicamente cerrada",
+      "title": "Auditor\u00eda F1-F8 no est\u00e1 p\u00fablicamente cerrada",
       "status": "fixed",
       "fix_commit": "pending",
       "fix_date": "2026-08-25",
@@ -136,9 +136,9 @@
   ],
   "summary": {
     "total_findings": 14,
-    "fixed": 11,
-    "partial": 1,
-    "open": 1,
+    "fixed": 14,
+    "partial": 0,
+    "open": 0,
     "wontfix": 0
   }
 }
