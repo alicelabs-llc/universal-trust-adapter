@@ -1,7 +1,7 @@
 {
   "name": "@marketnow/trust-gateway",
-  "version": "1.0.0",
-  "description": "UTA Trust Gateway — MCP middleware for enforcing trust decisions on agent tool calls",
+  "version": "1.0.1",
+  "description": "UTA Trust Gateway \u2014 MCP middleware for enforcing trust decisions on agent tool calls",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -24,8 +24,8 @@
   "homepage": "https://github.com/eddyflores100-lang/universal-trust-adapter",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eddyflores100-lang/universal-trust-adapter.git",
-    "directory": "packages/gateway"
+    "url": "git+https://github.com/alicelabs-llc/universal-trust-adapter.git",
+    "directory": "uta-monorepo/packages/gateway"
   },
   "bugs": {
     "url": "https://github.com/eddyflores100-lang/universal-trust-adapter/issues"
