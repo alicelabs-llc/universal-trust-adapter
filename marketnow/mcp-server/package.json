@@ -1,7 +1,7 @@
 {
   "name": "marketnow-mcp",
-  "version": "1.10.0",
-  "description": "MarketNow MCP Server v1.10.0 — ATC/1.0 Spec Verifier release. Adds marketnow_verify_atc_spec, a self-contained ATC/1.0 conformance verifier that accepts ANY Agent Trust Card (regardless of issuer — MarketNow Sentinel CA, third-party CA, or self-signed test CA) and verifies all 8 required controls (ATC-001 Identity, ATC-002 Attestation, ATC-003 Capabilities, ATC-004 Evidence, ATC-005 Risk, ATC-006 Signature, ATC-007 Revocation, ATC-008 Expiration). Uses node:crypto + RFC 8785 JCS canonical JSON + Ed25519 (RFC 8032). This makes marketnow-mcp the LIVE REFERENCE IMPLEMENTATION of the ATC/1.0 specification. 13 tools total, all under `marketnow_*` namespace (snake_case + deterministic prefix) for unambiguous tool choice by Claude Desktop, Cursor, Cline, LangChain, and LlamaIndex agents. Tools: marketnow_search_skills, marketnow_get_skill, marketnow_list_categories, marketnow_get_manifest, marketnow_get_install_command, marketnow_verify_trust (ATC), marketnow_verify_receipt (rcpt_), marketnow_submit_skill (REAL /api/submit-skill), marketnow_mint_referral, marketnow_lookup_referral, marketnow_recommend_skills, marketnow_get_owasp_compliance (OWASP MCP Cheat Sheet + tool fingerprinting), marketnow_verify_atc_spec (ATC/1.0 spec verifier). Strict JSON-Schema (type+enum+pattern+bounds), intent-oriented descriptions, structured {content, isError} responses, INVALID_ARGUMENT/NOT_FOUND/UNKNOWN_TOOL error taxonomy. ATC/1.0 spec published at github.com/alicelabs-llc/marketnow/tree/master/docs/atc-spec. Maintained by AliceLabs LLC (Wyoming, USA, 2026).",
+  "version": "1.10.1",
+  "description": "MarketNow MCP Server v1.10.0 \u2014 ATC/1.0 Spec Verifier release. Adds marketnow_verify_atc_spec, a self-contained ATC/1.0 conformance verifier that accepts ANY Agent Trust Card (regardless of issuer \u2014 MarketNow Sentinel CA, third-party CA, or self-signed test CA) and verifies all 8 required controls (ATC-001 Identity, ATC-002 Attestation, ATC-003 Capabilities, ATC-004 Evidence, ATC-005 Risk, ATC-006 Signature, ATC-007 Revocation, ATC-008 Expiration). Uses node:crypto + RFC 8785 JCS canonical JSON + Ed25519 (RFC 8032). This makes marketnow-mcp the LIVE REFERENCE IMPLEMENTATION of the ATC/1.0 specification. 13 tools total, all under `marketnow_*` namespace (snake_case + deterministic prefix) for unambiguous tool choice by Claude Desktop, Cursor, Cline, LangChain, and LlamaIndex agents. Tools: marketnow_search_skills, marketnow_get_skill, marketnow_list_categories, marketnow_get_manifest, marketnow_get_install_command, marketnow_verify_trust (ATC), marketnow_verify_receipt (rcpt_), marketnow_submit_skill (REAL /api/submit-skill), marketnow_mint_referral, marketnow_lookup_referral, marketnow_recommend_skills, marketnow_get_owasp_compliance (OWASP MCP Cheat Sheet + tool fingerprinting), marketnow_verify_atc_spec (ATC/1.0 spec verifier). Strict JSON-Schema (type+enum+pattern+bounds), intent-oriented descriptions, structured {content, isError} responses, INVALID_ARGUMENT/NOT_FOUND/UNKNOWN_TOOL error taxonomy. ATC/1.0 spec published at github.com/alicelabs-llc/marketnow/tree/master/docs/atc-spec. Maintained by AliceLabs LLC (Wyoming, USA, 2026).",
   "type": "module",
   "main": "index.js",
   "bin": {
@@ -69,8 +69,8 @@
   "homepage": "https://marketnow.site",
   "repository": {
     "type": "git",
-    "url": "https://marketnow.site/atc",
-    "directory": "mcp-server"
+    "url": "git+https://github.com/alicelabs-llc/universal-trust-adapter.git",
+    "directory": "marketnow/mcp-server"
   },
   "bugs": {
     "url": "mailto:support@alicelabs.site"
