@@ -232,7 +232,7 @@
       "destination": "/install.sh"
     },
     {
-      "source": "/((?!api/|for-agents|landing-pages/|tools/|acp|atc).*)",
+      "source": "/((?!api/|uta/|for-agents|landing-pages/|tools/|acp|atc|\\.well-known/|\\.well-known).*)",
       "destination": "/index.html"
     },
     {
