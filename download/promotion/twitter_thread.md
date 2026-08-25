@@ -1,22 +1,17 @@
-<!-- NAMING CORRECTION:
-  - Project name: UTA v1.0.0 (Universal Trust Adapter)
-  - ATC (Agent Trust Card) is ONE of 8 adapter formats UTA supports
-  - Canonical schema: UTS v2.0.0 (Universal Trust Schema)
-  - 8 formats UTA translates: ATC, EAT-AI, ZTA, A2A, MCP Card, W3C VC, OAuth, SPIFFE
--->
+<!-- NAMING: UTA v1.0.0 = Universal Trust Adapter. ATC is one of 8 adapters. -->
 
 **Thread (10 tweets):**
 
-1/ I built **UTA v1.0.0 (Universal Trust Adapter)** — an open-source spec that translates between 8 trust credential formats used by AI agents.
+1/ Built UTA v1.0.0 — Universal Trust Adapter for AI agents.
 
-USB-C for agent trust. One canonical schema (UTS v2.0.0), 8 adapters.
+USB-C for agent trust. One canonical schema (UTS v2.0.0), 8 format adapters. 12-stage verification pipeline. Ed25519 + RFC 8785 JCS.
 
-After 2 months and 96 technical articles, here's what shipped:
+Published: 7 NPM packages, 2,339 monthly downloads. 41 test vectors. 23/23 conformance tests pass.
 
 2/ The 8 formats UTA translates between:
 
 - ATC (Agent Trust Card)
-- EAT-AI (IETF)
+- EAT-AI (IETF RFC 9421)
 - ZTA (Anthropic)
 - A2A (Google/AAIF)
 - MCP Card (Anthropic)
@@ -26,60 +21,61 @@ After 2 months and 96 technical articles, here's what shipped:
 
 3/ The 12-stage fail-closed verification pipeline:
 
-1. Identity
-2. Attestation
-3. Capabilities
-4. Evidence
-5. Risk
-6. Ed25519 signature (over RFC 8785 JCS)
-7. Revocation
-8. Expiration
-9. Proof-of-Possession (nonce challenge)
-10. TrustRegistry key binding
-11. Action receipt signature
-12. Supply-chain SBOM
+1. Identity 2. Attestation 3. Capabilities 4. Evidence 5. Risk
+6. Ed25519 signature (RFC 8785 JCS) 7. Revocation 8. Expiration
+9. Proof-of-Possession 10. TrustRegistry 11. Action receipt 12. SBOM
 
-4/ The test CA private key is intentionally published.
+4/ Independent security audit: 14 findings identified. 14/14 fixed.
 
-Why? So any Python/Go/Rust verifier can re-derive the signatures from scratch and confirm the crypto works as claimed. No "trust me" — verify it yourself.
+Critical: SEO cloaking eliminated, pricing contradictions resolved.
+High: Test vectors published, NPM packages verified.
+Medium: Wallet governance documented, Sentinel version consolidated.
 
-5/ Distribution is the hard part.
+Full audit at: marketnow.site/trust/audit-status.json
 
-After GitHub flagged my account (still unresolved after 2 weeks), all 55 of my repos returned HTTP 404 to anonymous visitors.
+5/ 5 independent download channels:
 
-Built 5 independent download channels:
 - NPM Registry
 - jsDelivr CDN
 - unpkg CDN
 - marketnow.site (owned origin)
-- GitHub org
+- GitHub org (alicelabs-llc)
 
-6/ All 5 channels serve byte-identical tarballs. SHA-256 verified.
+All serve byte-identical tarballs. SHA-256 verified.
 
-If any one is blocked, the other 4 continue working.
-
-```bash
 curl -fsSL https://marketnow.site/install.sh | bash
-```
 
-7/ The most useful technical critique came from @anp2network on dev.to.
+6/ Test CA private key intentionally published.
 
-They wrote an independent Python verifier, found that my canonicalization function was actually a replacer allowlist — not a sorter. Nested keys like `trust.sentinel_score` were getting dropped from the signature preimage entirely.
+Why? Any Python/Go/Rust verifier can re-derive the signatures from scratch and confirm the crypto works as claimed. No "trust me" — verify it yourself.
 
-8/ That bug is now fixed and there's a test vector (`tampered-payload.json`) specifically designed to catch that class of issue. The nested-object bug → SHA-256 mismatch → verification failure.
+marketnow.site/uta/docs/atc-spec/test-vectors/_test-ca-keys.json
 
-Public bytes: https://github.com/alicelabs-llc/universal-trust-adapter/tree/main/marketnow/docs/atc-spec/test-vectors
+7/ Conformance suite: 23/23 tests pass.
 
-9/ What's next:
+git clone https://github.com/alicelabs-llc/universal-trust-adapter
+cd marketnow/atc-sdk && npm install
+node test/conformance.mjs
+
+8/ What's next:
 - Multi-sig for high-value agents (N-of-M CA signatures)
 - Runtime tool-catalog pinning (catch tool-description-poisoning)
 - Behavior-based detection layer (post-exec filter)
 - Cross-language SDKs (Python, Go, Rust)
-- More test vectors covering edge cases
+
+9/ Install:
+
+npm install agent-trust-card@1.1.2
+npx -y marketnow-mcp@1.10.1
+curl -fsSL https://marketnow.site/install.sh | bash
+
+Works with Claude Desktop, Cursor, Cline, Continue, Aider.
 
 10/ Repo: https://github.com/alicelabs-llc/universal-trust-adapter
-NPM: marketnow-mcp (958/mo), agent-trust-card (518/mo)
+Spec: marketnow.site/uta/docs/atc-spec/SPEC.md
+Test vectors: marketnow.site/uta/docs/atc-spec/test-vectors/
+Audit: marketnow.site/trust/audit-status.json
 
-If you're building AI agent infrastructure, message me. Looking for collaborators, integrators, and reviewers.
+If you're building AI agent infrastructure, run your independent verifier against the test vectors.
 
 #AIAgents #OpenSource #Security #Cryptography #MCP #UTA

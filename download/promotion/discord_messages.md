@@ -22,7 +22,7 @@ The 8 formats UTA translates between:
 Repo: https://github.com/alicelabs-llc/universal-trust-adapter
 Install: `npm install agent-trust-card`
 
-After GitHub flagged my personal account (still unresolved), I built 5 independent download channels — NPM, jsDelivr, unpkg, marketnow.site, GitHub org. All serve byte-identical tarballs.
+After 
 
 Looking for collaborators and reviewers.
 

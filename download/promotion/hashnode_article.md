@@ -78,7 +78,7 @@ The test CA keypair is intentionally published (including private key) so any Py
 
 ## The distribution problem
 
-Two weeks ago, GitHub flagged my personal account (`@edgarfloresguerra2011-a11y`). All 55 public repos instantly returned HTTP 404 to anonymous visitors. The ticket is still open with GitHub Support.
+Two weeks ago, 
 
 The fix was to build 5 independent download channels:
 
