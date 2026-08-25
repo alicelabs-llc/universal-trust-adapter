@@ -158,21 +158,17 @@
 
     <style>
       body { background-color: #050505; color: white; margin: 0; }
-      /* SEO content hidden from humans, visible to Googlebot.
-         Google indexes content with display:none when it's for legitimate
-         accessibility/SEO purposes (not keyword stuffing). */
-      .seo-only { display: none; }
     </style>
   </head>
   <body>
     <!--
-      SEO PRE-RENDERED CONTENT — hidden from humans (display:none via .seo-only class),
-      visible to Googlebot. Google indexes this content for search ranking.
-      React SPA mounts on #root below and shows the interactive version to humans.
+      Canonical HTML content — same for humans and crawlers.
+      No cloaking, no display:none SEO tricks.
+      React SPA mounts on #root below and shows the interactive version.
     -->
-    <div class="seo-only" aria-hidden="true">
+    <div id="seo-content" style="display: block;">
       <h1>MarketNow — Trust Infrastructure for AI Agents</h1>
-      <p>MarketNow is the trust layer that lets AI agents discover, verify, authorize, and transact with external tools. 9,248 MCP servers indexed, 1.2M security checks performed, 80 malicious tools quarantined. UTA 12-stage trust pipeline pipeline, ATC v3 (Agent Trust Card v3) with Ed25519 + JCS + 7 domain separation signatures, Trust Gateway with 8 enforcement rules. Built by AliceLabs LLC (Wyoming, USA).</p>
+      <p>MarketNow is the trust layer that lets AI agents discover, verify, authorize, and transact with external tools. 9,248 MCP servers indexed, 1.2M security checks performed, 80 malicious tools quarantined. UTA 12-stage trust pipeline, ATC v3 (Agent Trust Card v3) with Ed25519 + JCS + 7 domain separation signatures, Trust Gateway with 8 enforcement rules. Built by AliceLabs LLC (Wyoming, USA).</p>
 
       <h2>Discover → Verify → Trust → Authorize → Enforce → Audit</h2>
       <p>MarketNow combines 7 subsystems into a single trust infrastructure: Discovery (9,248 MCP servers), UTA (12-stage trust verification, 8 formats), ATC (agent identity with Ed25519), UTA Gateway (12-stage enforcement with PoP), Revocation (CRL + OCSP + Bitstring Status List), Mandates (delegated authority for agent commerce), and Audit Log (tamper-evident public evidence).</p>
@@ -206,7 +202,7 @@
 
       <h2>43 Free MCP Skills — No Payment, No Signup</h2>
       <p>Real value, zero cost. 43 hand-curated skills available for instant download. No credit card, no mandate, no signup required. Just install and use.</p>
-      <p><a href="/registry?filter=free">Browse all 9,248 free skills</a></p>
+      <p><a href="/registry?filter=free">Browse all 43 free skills</a></p>
 
       <h2>For AI Agents</h2>
       <p>Machine-readable everything. Public JSON API. Human-in-the-loop by default.</p>
@@ -217,7 +213,7 @@
         <li>GET /api/policies.json — Terms, refund, dispute, privacy policies</li>
         <li>POST /api/agent-purchase — Buy a skill (5 modes: instant_download, instant_purchase, direct_purchase, requires_payment, requires_human_approval)</li>
         <li>GET /api/mandates — Delegated mandates (ACP/AP2 compliant)</li>
-        <li>GET /api/free-skills.json — 9,248 free skills</li>
+        <li>GET /api/free-skills.json — 43 free skills</li>
         <li>GET /api/bundles.json — Discounted skill bundles</li>
       </ul>
       <p>MCP server: npx -y marketnow-mcp — works with Claude Desktop, Cursor, Cline. Available on npm and Smithery.</p>
@@ -227,7 +223,7 @@
         <li>AliceLabs Proprietary — Full audit methodology on GitHub. Every change is a public commit. No black box.</li>
         <li>Sentinel L1.5 — 6-point MCP security audit on every skill. Methodology published. Re-runnable.</li>
         <li>43 Free Skills — Real value, zero cost. No signup, no credit card, no mandate.</li>
-        <li>$0.99–$9.99 One-Time — No subscriptions. No per-call fees. No tiered plans. Pay once, own forever.</li>
+        <li>Buyers install all skills free — sellers subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) + 20% commission on seller sales. See <a href="/pricing">/pricing</a>.</li>
         <li>Human-in-Loop Default — Mandates notify the principal on every purchase. Silent mode requires explicit opt-in.</li>
         <li>Public Audit Log — Every mandate transaction is a git commit at _data/mandates/. Fully auditable.</li>
         <li>5 Languages — System prompts in EN, ES, ZH, PT, FR. Real translations, not auto-translated.</li>
@@ -265,5 +261,4 @@
     <script type="module" src="/src/main.jsx?v=27"></script>
   </body>
 </html>
-<!-- trigger 1783459472 -->
-<!-- redeploy trigger: 2026-08-06T03:44:52Z - new GitHub token -->
+
