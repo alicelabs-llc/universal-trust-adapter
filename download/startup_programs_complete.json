@@ -1,0 +1,1200 @@
+[
+  {
+    "name": "Y Combinator W26 batch",
+    "url": "https://www.ycombinator.com/apply",
+    "category": "Aceleradora",
+    "deadline": "Oct 2026 (S27)",
+    "fit": "HIGH \u2014 AI security infrastructure"
+  },
+  {
+    "name": "Techstars Cybersecurity Accelerator",
+    "url": "https://www.techstars.com/programs",
+    "category": "Aceleradora",
+    "deadline": "Rolling",
+    "fit": "HIGH \u2014 cybersecurity focus"
+  },
+  {
+    "name": "500 Global Flagship Accelerator",
+    "url": "https://500.co/programs/",
+    "category": "Aceleradora",
+    "deadline": "Multiple cohorts",
+    "fit": "MEDIUM \u2014 early stage"
+  },
+  {
+    "name": "Plug and Play Cybersecurity",
+    "url": "https://www.plugandplaytechcenter.com/programs/cybersecurity",
+    "category": "Aceleradora",
+    "deadline": "Rolling",
+    "fit": "HIGH \u2014 cybersecurity focus"
+  },
+  {
+    "name": "Alchemist Accelerator",
+    "url": "https://alchemistaccelerator.com/apply/",
+    "category": "Aceleradora",
+    "deadline": "Quarterly",
+    "fit": "MEDIUM \u2014 enterprise focused"
+  },
+  {
+    "name": "SOSV IndieBio / HAX",
+    "url": "https://sosv.com/apply/",
+    "category": "Aceleradora",
+    "deadline": "Rolling",
+    "fit": "LOW \u2014 hardware/bio"
+  },
+  {
+    "name": "Microsoft for Startups Founders Hub",
+    "url": "https://foundershub.startup.microsoft.com/",
+    "category": "Corporate",
+    "deadline": "Rolling",
+    "fit": "HIGH \u2014 free Azure credits, MCP ecosystem"
+  },
+  {
+    "name": "Google for Startups Cloud Program",
+    "url": "https://startup.google.com/programs/cloud/",
+    "category": "Corporate",
+    "deadline": "Rolling",
+    "fit": "HIGH \u2014 $350K GCP credits"
+  },
+  {
+    "name": "AWS Startups / EdStart",
+    "url": "https://aws.amazon.com/startups/",
+    "category": "Corporate",
+    "deadline": "Rolling",
+    "fit": "HIGH \u2014 AWS credits"
+  },
+  {
+    "name": "NVIDIA Inception Program",
+    "url": "https://www.nvidia.com/en-us/startups/",
+    "category": "Corporate",
+    "deadline": "Rolling",
+    "fit": "MEDIUM \u2014 AI compute"
+  },
+  {
+    "name": "Anthropic Builders Program",
+    "url": "https://www.anthropic.com/builders",
+    "category": "Corporate",
+    "deadline": "Rolling",
+    "fit": "HIGH \u2014 Claude API credits"
+  },
+  {
+    "name": "OpenAI for Developers / Converge",
+    "url": "https://openai.com/startup-fund/",
+    "category": "Corporate",
+    "deadline": "Periodic",
+    "fit": "HIGH \u2014 API credits + investment"
+  },
+  {
+    "name": "GitHub for Startups",
+    "url": "https://github.com/enterprise/startups",
+    "category": "Corporate",
+    "deadline": "Rolling",
+    "fit": "MEDIUM \u2014 GitHub Enterprise free"
+  },
+  {
+    "name": "Cloudflare for Startups",
+    "url": "https://www.cloudflare.com/startups/",
+    "category": "Corporate",
+    "deadline": "Rolling",
+    "fit": "HIGH \u2014 CDN + DDoS protection"
+  },
+  {
+    "name": "Stripe Startup Program",
+    "url": "https://stripe.com/startups",
+    "category": "Corporate",
+    "deadline": "Rolling",
+    "fit": "MEDIUM \u2014 payment processing"
+  },
+  {
+    "name": "Vercel for Startups",
+    "url": "https://vercel.com/startups",
+    "category": "Corporate",
+    "deadline": "Rolling",
+    "fit": "HIGH \u2014 hosting credits"
+  },
+  {
+    "name": "MongoDB for Startups",
+    "url": "https://www.mongodb.com/startups",
+    "category": "Corporate",
+    "deadline": "Rolling",
+    "fit": "MEDIUM \u2014 database credits"
+  },
+  {
+    "name": "Supabase Startup Program",
+    "url": "https://supabase.com/startups",
+    "category": "Corporate",
+    "deadline": "Rolling",
+    "fit": "HIGH \u2014 already using Supabase"
+  },
+  {
+    "name": "OpenAI Startup Fund",
+    "url": "https://openai.com/fund/",
+    "category": "Investment",
+    "deadline": "Periodic",
+    "fit": "HIGH \u2014 AI-focused fund"
+  },
+  {
+    "name": "a16z AI Build",
+    "url": "https://a16z.com/ai-build/",
+    "category": "Investment",
+    "deadline": "Rolling",
+    "fit": "HIGH \u2014 AI infrastructure"
+  },
+  {
+    "name": "Sequoia Scout Program",
+    "url": "https://www.sequoiacap.com/scouts/",
+    "category": "Investment",
+    "deadline": "Rolling",
+    "fit": "MEDIUM \u2014 early stage"
+  },
+  {
+    "name": "NSF SBIR/STTR Phase I",
+    "url": "https://seedfund.nsf.gov/",
+    "category": "Grant",
+    "deadline": "Quarterly",
+    "fit": "HIGH \u2014 $300K for cybersecurity research"
+  },
+  {
+    "name": "DARPA AI Cyber Challenge (AIxCC)",
+    "url": "https://aicyberchallenge.com/",
+    "category": "Grant/Competition",
+    "deadline": "Periodic",
+    "fit": "HIGH \u2014 AI security competition"
+  },
+  {
+    "name": "NIST AI Safety Institute",
+    "url": "https://www.nist.gov/it/ai-safety-institute",
+    "category": "Grant",
+    "deadline": "Periodic",
+    "fit": "MEDIUM \u2014 AI safety standards"
+  },
+  {
+    "name": "Wyoming Business Council Grants",
+    "url": "https://wyomingbusiness.org/",
+    "category": "Grant",
+    "deadline": "Rolling",
+    "fit": "HIGH \u2014 Wyoming-based business"
+  },
+  {
+    "name": "America's Seed Fund (SBIR.gov)",
+    "url": "https://www.sbir.gov/",
+    "category": "Grant",
+    "deadline": "Multiple agencies",
+    "fit": "HIGH \u2014 federal R&D grants"
+  },
+  {
+    "name": "SBA Small Business Innovation Research",
+    "url": "https://www.sba.gov/local-assistance",
+    "category": "Grant",
+    "deadline": "Rolling",
+    "fit": "MEDIUM \u2014 small business support"
+  },
+  {
+    "name": "DHS Cybersecurity Innovation Program",
+    "url": "https://www.dhs.gov/cisa-cybersecurity",
+    "category": "Grant",
+    "deadline": "Periodic",
+    "fit": "HIGH \u2014 DHS cybersecurity focus"
+  },
+  {
+    "name": "ARPA-H AI Healthcare Security",
+    "url": "https://arpa-h.gov/",
+    "category": "Grant",
+    "deadline": "Periodic",
+    "fit": "LOW \u2014 healthcare specific"
+  },
+  {
+    "name": "TechCrunch Disrupt Startup Battlefield",
+    "url": "https://techcrunch.com/disrupt/",
+    "category": "Competition",
+    "deadline": "Annual (Spring/Fall)",
+    "fit": "HIGH \u2014 $100K prize, major exposure"
+  },
+  {
+    "name": "Product Hunt Launch",
+    "url": "https://www.producthunt.com/",
+    "category": "Launch",
+    "deadline": "Any day",
+    "fit": "HIGH \u2014 launch visibility"
+  },
+  {
+    "name": "Hacker News Show HN",
+    "url": "https://news.ycombinator.com/submit",
+    "category": "Launch",
+    "deadline": "Any day",
+    "fit": "HIGH \u2014 developer audience"
+  },
+  {
+    "name": "RSA Innovation Sandbox",
+    "url": "https://www.rsaconference.com/usa/innovation-sandbox",
+    "category": "Competition",
+    "deadline": "Annual",
+    "fit": "HIGH \u2014 top cybersecurity contest"
+  },
+  {
+    "name": "Black Hat Arsenal",
+    "url": "https://www.blackhat.com/arsenal.html",
+    "category": "Competition",
+    "deadline": "Annual",
+    "fit": "HIGH \u2014 security tool showcase"
+  },
+  {
+    "name": "DEF CON AI Village CTF",
+    "url": "https://aivillage.org/",
+    "category": "Competition",
+    "deadline": "Annual (Aug)",
+    "fit": "HIGH \u2014 AI security CTF"
+  },
+  {
+    "name": "Pwn2Own AI",
+    "url": "https://www.zerodayinitiative.com/blog",
+    "category": "Competition",
+    "deadline": "Periodic",
+    "fit": "MEDIUM \u2014 AI exploitation"
+  },
+  {
+    "name": "MIT $100K Entrepreneurship Competition",
+    "url": "http://mit100k.org/",
+    "category": "Competition",
+    "deadline": "Annual (Spring)",
+    "fit": "MEDIUM \u2014 $100K prize"
+  },
+  {
+    "name": "TiE Global Startup Competition",
+    "url": "https://tie.org/",
+    "category": "Competition",
+    "deadline": "Annual",
+    "fit": "MEDIUM \u2014 global network"
+  },
+  {
+    "name": "Startup World Cup",
+    "url": "https://www.startupworldcup.io/",
+    "category": "Competition",
+    "deadline": "Annual",
+    "fit": "HIGH \u2014 $1M prize"
+  },
+  {
+    "name": "Slush Pitch Competition (Helsinki)",
+    "url": "https://www.slush.org/",
+    "category": "Competition",
+    "deadline": "Annual (Nov)",
+    "fit": "HIGH \u2014 Europe's biggest"
+  },
+  {
+    "name": "Web Summit PITCH",
+    "url": "https://websummit.com/pitch",
+    "category": "Competition",
+    "deadline": "Annual (Nov)",
+    "fit": "HIGH \u2014 global exposure"
+  },
+  {
+    "name": "Collision Startup Program",
+    "url": "https://collisionconf.com/",
+    "category": "Competition",
+    "deadline": "Annual (Jun)",
+    "fit": "HIGH \u2014 North America"
+  },
+  {
+    "name": "Rise Startup Program (Hong Kong)",
+    "url": "https://rise.co/",
+    "category": "Competition",
+    "deadline": "Annual",
+    "fit": "MEDIUM \u2014 Asia market"
+  },
+  {
+    "name": "South by Southwest (SXSW) Pitch",
+    "url": "https://www.sxsw.com/awards/pitch/",
+    "category": "Competition",
+    "deadline": "Annual (Mar)",
+    "fit": "MEDIUM \u2014 broad audience"
+  },
+  {
+    "name": "Estonia e-Residency",
+    "url": "https://e-resident.gov.ee/",
+    "category": "International",
+    "deadline": "Rolling",
+    "fit": "MEDIUM \u2014 EU market access"
+  },
+  {
+    "name": "Start-Up Chile",
+    "url": "https://startupchile.org/",
+    "category": "International",
+    "deadline": "Periodic",
+    "fit": "LOW \u2014 Latin America"
+  },
+  {
+    "name": "Singapore Startup SG",
+    "url": "https://www.startupsg.gov.sg/",
+    "category": "International",
+    "deadline": "Rolling",
+    "fit": "MEDIUM \u2014 Asia HQ"
+  },
+  {
+    "name": "UK Cyber Security Association",
+    "url": "https://www.ukcybersecurity.co.uk/",
+    "category": "International",
+    "deadline": "Rolling",
+    "fit": "MEDIUM \u2014 UK market"
+  },
+  {
+    "name": "EU Horizon Europe AI",
+    "url": "https://digital-strategy.ec.europa.eu/en/",
+    "category": "International",
+    "deadline": "Periodic",
+    "fit": "MEDIUM \u2014 EU grants"
+  },
+  {
+    "name": "Israel Innovation Authority",
+    "url": "https://innovationisrael.org.il/",
+    "category": "International",
+    "deadline": "Rolling",
+    "fit": "LOW \u2014 Israel R&D"
+  },
+  {
+    "name": "Cyberport Hong Kong",
+    "url": "https://www.cyberport.hk/",
+    "category": "International",
+    "deadline": "Rolling",
+    "fit": "MEDIUM \u2014 Asia market"
+  },
+  {
+    "name": "Station F Paris",
+    "url": "https://stationf.co/",
+    "category": "International",
+    "deadline": "Rolling",
+    "fit": "MEDIUM \u2014 Europe's biggest campus"
+  },
+  {
+    "name": "Startup Chile Generation 27",
+    "url": "https://startupchile.org/apply/",
+    "category": "International",
+    "deadline": "Periodic",
+    "fit": "LOW"
+  },
+  {
+    "name": "Latitude (Estonia)",
+    "url": "https://latitude.ee/",
+    "category": "International",
+    "deadline": "Rolling",
+    "fit": "LOW"
+  },
+  {
+    "name": "Smithery.ai Registry",
+    "url": "https://smithery.ai/server/new",
+    "category": "MCP",
+    "deadline": "Now",
+    "fit": "HIGH \u2014 list marketnow-mcp"
+  },
+  {
+    "name": "Glama.ai MCP Directory",
+    "url": "https://glama.ai/mcp/servers",
+    "category": "MCP",
+    "deadline": "Now",
+    "fit": "HIGH \u2014 list MCP server"
+  },
+  {
+    "name": "PulseMCP",
+    "url": "https://pulsemcp.com/submit",
+    "category": "MCP",
+    "deadline": "Now",
+    "fit": "HIGH \u2014 submit MCP server"
+  },
+  {
+    "name": "mcp.so Registry",
+    "url": "https://mcp.so/submit",
+    "category": "MCP",
+    "deadline": "Now",
+    "fit": "HIGH \u2014 submit MCP server"
+  },
+  {
+    "name": "Awesome MCP Servers List",
+    "url": "https://github.com/punkpeye/awesome-mcp-servers",
+    "category": "MCP",
+    "deadline": "Now (PR)",
+    "fit": "HIGH \u2014 add to list"
+  },
+  {
+    "name": "MCP.run Registry",
+    "url": "https://mcp.run/",
+    "category": "MCP",
+    "deadline": "Now",
+    "fit": "MEDIUM \u2014 another registry"
+  },
+  {
+    "name": "LangChain Hub",
+    "url": "https://smith.langchain.com/hub",
+    "category": "AI",
+    "deadline": "Now",
+    "fit": "MEDIUM \u2014 AI tool ecosystem"
+  },
+  {
+    "name": "HackerOne",
+    "url": "https://www.hackerone.com/",
+    "category": "Security",
+    "deadline": "Rolling",
+    "fit": "MEDIUM \u2014 bug bounty platform"
+  },
+  {
+    "name": "Bugcrowd",
+    "url": "https://www.bugcrowd.com/",
+    "category": "Security",
+    "deadline": "Rolling",
+    "fit": "MEDIUM \u2014 bug bounty"
+  },
+  {
+    "name": "Snyk Launchpad",
+    "url": "https://snyk.io/launchpad/",
+    "category": "Security",
+    "deadline": "Rolling",
+    "fit": "HIGH \u2014 security startup program"
+  },
+  {
+    "name": "CrowdStrike Falcon Fund",
+    "url": "https://www.crowdstrike.com/falcon-fund/",
+    "category": "Security/Investment",
+    "deadline": "Periodic",
+    "fit": "HIGH \u2014 cybersecurity fund"
+  },
+  {
+    "name": "CISA Joint Cyber Defense Collaborative",
+    "url": "https://www.cisa.gov/JCDC",
+    "category": "Security/Gov",
+    "deadline": "By invitation",
+    "fit": "MEDIUM \u2014 government collaboration"
+  },
+  {
+    "name": "F6S Startup Directory",
+    "url": "https://www.f6s.com/",
+    "category": "Directory",
+    "deadline": "Now",
+    "fit": "HIGH \u2014 list startup"
+  },
+  {
+    "name": "AngelList / Wellfound",
+    "url": "https://wellfound.com/",
+    "category": "Directory",
+    "deadline": "Now",
+    "fit": "HIGH \u2014 startup profile"
+  },
+  {
+    "name": "Crunchbase Profile",
+    "url": "https://www.crunchbase.com/",
+    "category": "Directory",
+    "deadline": "Now",
+    "fit": "HIGH \u2014 create profile"
+  },
+  {
+    "name": "Product Hunt (upcoming)",
+    "url": "https://www.producthunt.com/upcoming",
+    "category": "Launch",
+    "deadline": "Now",
+    "fit": "HIGH \u2014 pre-launch page"
+  },
+  {
+    "name": "Built In (US startup community)",
+    "url": "https://builtin.com/",
+    "category": "Directory",
+    "deadline": "Now",
+    "fit": "MEDIUM \u2014 US tech community"
+  },
+  {
+    "name": "G2.com (software reviews)",
+    "url": "https://www.g2.com/products/new",
+    "category": "Directory",
+    "deadline": "Now",
+    "fit": "MEDIUM \u2014 product listing"
+  },
+  {
+    "name": "Capterra (software directory)",
+    "url": "https://www.capterra.com/vendors/new",
+    "category": "Directory",
+    "deadline": "Now",
+    "fit": "MEDIUM \u2014 software directory"
+  },
+  {
+    "name": "Sourcegraph / awesome lists",
+    "url": "https://github.com/sindresorhus/awesome",
+    "category": "Directory",
+    "deadline": "Now (PR)",
+    "fit": "MEDIUM \u2014 GitHub lists"
+  },
+  {
+    "name": "Dev.to (already done \u2014 96 articles)",
+    "url": "https://dev.to/",
+    "category": "Content",
+    "deadline": "Ongoing",
+    "fit": "HIGH \u2014 already active"
+  },
+  {
+    "name": "Hashnode (developer blog)",
+    "url": "https://hashnode.com/",
+    "category": "Content",
+    "deadline": "Now",
+    "fit": "HIGH \u2014 cross-post articles"
+  },
+  {
+    "name": "Medium publication",
+    "url": "https://medium.com/",
+    "category": "Content",
+    "deadline": "Now",
+    "fit": "MEDIUM \u2014 broader audience"
+  },
+  {
+    "name": "Substack newsletter",
+    "url": "https://substack.com/",
+    "category": "Content",
+    "deadline": "Now",
+    "fit": "MEDIUM \u2014 newsletter"
+  },
+  {
+    "name": "GitHub Stars Program",
+    "url": "https://github.com/features/stars",
+    "category": "Directory",
+    "deadline": "Now",
+    "fit": "MEDIUM \u2014 visibility"
+  },
+  {
+    "name": "Open Source Security Foundation (OpenSSF)",
+    "url": "https://openssf.org/",
+    "category": "Community",
+    "deadline": "Now",
+    "fit": "HIGH \u2014 open source security"
+  },
+  {
+    "name": "OWASP Foundation Member",
+    "url": "https://owasp.org/membership/",
+    "category": "Community",
+    "deadline": "Now",
+    "fit": "HIGH \u2014 web security community"
+  },
+  {
+    "name": "Linux Foundation Member",
+    "url": "https://www.linuxfoundation.org/membership/",
+    "category": "Community",
+    "deadline": "Now",
+    "fit": "MEDIUM \u2014 open source"
+  },
+  {
+    "name": "WiCyS AI Security Accelerator Program - Women in Cybersecurity",
+    "url": "https://www.wicys.org/benefits/ai-security-accelerator-program",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "This hands-on program equips mid-career professionals with the specialized skills needed to identify, mitigate, and prev"
+  },
+  {
+    "name": "9 Best AI Accelerators for Startups in 2026 - elev-x",
+    "url": "https://elev-x.com/news-insights/article-best-ai-accelerators-for-startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "May 27, 2026 \u00b7 Compare the 9 best AI accelerators for startups in 2026, including investment terms, compute credits, equ"
+  },
+  {
+    "name": "Apply for the AI Innovation & Security Policy Workshop",
+    "url": "https://horizonpublicservice.org/apply-for-the-ai-innovation-security-policy-workshop",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "May 19, 2026 \u00b7 Apply for the AI Innovation & Security Policy Workshop. Explore careers in AI policy over three days in W"
+  },
+  {
+    "name": "CrowdStrike, AWS, and NVIDIA Select 35 Startups for the 2026",
+    "url": "https://ir.crowdstrike.com/news-releases/news-release-details/crowdstrike-aws-and-nvidia-select-35-startups-2026-cybersecurity",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Jan 5, 2026 \u00b7 The free, eight-week program runs from today through March 3, 2026 , providing startups with mentorship, t"
+  },
+  {
+    "name": "Google for Startups Accelerator",
+    "url": "https://startup.google.com/programs/accelerator",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Google for Startups Accelerators are three-month programs that provides early stage startups with Google products, peopl"
+  },
+  {
+    "name": "Together AI Startup Accelerator",
+    "url": "https://www.together.ai/startup-accelerator",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Build your startup on the AI Native Cloud. Get compute credits, engineering support, and GTM resources from Together AI'"
+  },
+  {
+    "name": "Snowflake Startup Challenge",
+    "url": "https://www.snowflake.com/en/startup-challenge",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "The Snowflake Startup Challenge is a contest for early-stage startups. Meet the 2026 Startup Challenge. Up to $250,000 P"
+  },
+  {
+    "name": "Agents for Humans Hackathon (2026): Apply by 14 Sept",
+    "url": "https://www.startupgrantsindia.com/competitions/agents-for-humans-hackathon",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Aug 10, 2026 \u00b7 To participate, visit the official hackathon page on Devpost at https://agentsforhumans.devpost.com/ and "
+  },
+  {
+    "name": "12 Agentic AI Startups To Watch In 2026 - CRN",
+    "url": "https://www.crn.com/news/security/2026/12-agentic-ai-startups-to-watch-in-2026",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Apr 3, 2026 \u00b7 Agentic AI startups to watch in 2026 include early-stage vendors that showcased tools for agentic identity"
+  },
+  {
+    "name": "Apply for the WMF2027 Startup Competition! - We Make Future",
+    "url": "https://en.wemakefuture.it/call/startup-competition",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "This challenge covers cybersecurity, data privacy, legal tech, and AI ethics ... AI Agents & Generative Learning Technol"
+  },
+  {
+    "name": "Wyoming Business Council SBIR Matching Grant Program",
+    "url": "https://grantedai.com/grants/wyoming-business-council-sbir-matching-grant-program-wyoming-business-council-ed420fac",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "SBIR Matching Grant Program: Up to $100000 for Phase I; up to $200000 for Phase II \u2026 including healthcare technologies. "
+  },
+  {
+    "name": "3 Major U.S. Federal Funding Opportunities for Startups in 2026",
+    "url": "https://www.facebook.com/opportunitiesforyouth/posts/-3-major-us-federal-funding-opportunities-for-startups-in-2026us-startups-and-sm/1512865087537506",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "1 day ago \u00b7 SBIR grant awards range from $125,000 to $225,000 for phase I projects and up to $1.5 million for phase II. "
+  },
+  {
+    "name": "List Of Major Startups Events In Wyoming - Every.io",
+    "url": "https://www.every.io/blog-post/startups-events-wyoming",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Jun 20, 2025 \u00b7 The Wyoming SBIR/STTR Summer Workshop 2025 will help startups learn about federal funding opportunities i"
+  },
+  {
+    "name": "Inception Program for Startups - NVIDIA",
+    "url": "https://www.nvidia.com/en-us/startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "NVIDIA Inception is a free program designed to nurture startups, providing co-marketing support, and opportunities to co"
+  },
+  {
+    "name": "Startup Programs Compared 2026: AWS, Google, Microsoft - Fin",
+    "url": "https://fin.ai/learn/startup-credit-programs",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "6 days ago \u00b7 Every major startup program compared: max credits, eligibility gates, and which ones you can actually get w"
+  },
+  {
+    "name": "Startups | Google Cloud",
+    "url": "https://cloud.google.com/startup",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Build and grow with $200,000 in cloud credits (or up to $350,000 for AI-first startups) through the Google for Startups "
+  },
+  {
+    "name": "NVIDIA for Startups - LinkedIn",
+    "url": "https://www.linkedin.com/showcase/nvidia-for-startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "NVIDIA Inception, a free program that guides AI startups through the NVIDIA platform and ecosystem. Join AWS and NVIDIA "
+  },
+  {
+    "name": "AI Startup NVIDIA Inception Program Guide (2026) | Thunder Compute",
+    "url": "https://www.thundercompute.com/blog/nvidia-inception-program-guide",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Jul 3, 2026 \u00b7 Complete guide to the NVIDIA Inception program for AI startups in 2026: benefits, eligibility, and how to "
+  },
+  {
+    "name": "AI Startup Programs \u2014 NVIDIA Inception, OpenAI, Anthropic",
+    "url": "https://creditforstartups.com/programs/ai",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "The NVIDIA Inception program is free for AI and data-science startups \u2014 discounts on NVIDIA hardware/software, technical"
+  },
+  {
+    "name": "AWS vs Microsoft vs Google Startup Credits Compared, guptadeepak.com",
+    "url": "https://guptadeepak.com/aws-activate-vs-microsoft-for-startups-vs-google-for-startups-2026-who-each-one-is-actually-for",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Jun 17, 2026 \u00b7 The three big startup credit programs look identical on paper. They aren't. Each suits a different stack,"
+  },
+  {
+    "name": "Microsoft for Startups",
+    "url": "https://www.microsoft.com/en-us/startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Build fast, scale smart, and sell more with the cutting-edge AI, global customer experience, and deep enterprise experie"
+  },
+  {
+    "name": "NVIDIA Inception Program 2026: Benefits, Eligibility, Application",
+    "url": "https://klymentiev.com/blog/nvidia-inception-program",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Apr 30, 2026 \u00b7 In 2026 it has become the de-facto first program any GPU-heavy startup applies to before AWS or Google. T"
+  },
+  {
+    "name": "CrowdStrike, AWS, and NVIDIA Select 35 Startups for the 2026",
+    "url": "https://www.crowdstrike.com/en-us/press-releases/crowdstrike-aws-nvidia-2026-cybersecurity-startup-accelerator",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Jan 5, 2026 \u00b7 The free, eight-week program runs from today through March 3, 2026, providing startups with mentorship, te"
+  },
+  {
+    "name": "35 Startups Chosen for AWS & NVIDIA Cybersecurity Accelerator - LinkedIn",
+    "url": "https://www.linkedin.com/posts/crowdstrike_proud-to-announce-the-35-startups-selected-activity-7413956930395811840-H-Bz",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Jan 5, 2026 \u00b7 Proud to announce the 35 startups selected for the 2026 Cybersecurity Startup Accelerator with Amazon Web "
+  },
+  {
+    "name": "Startupbootcamp",
+    "url": "https://startupbootcamp.org",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "We support early-stage tech-founders and rapidly scale their companies. Apply to an accelerator now. Startupbootcamp is "
+  },
+  {
+    "name": "Global Startup Accelerator + Showcase - eMerge Americas",
+    "url": "https://emergeamericas.com/startups/startup-showcase-accelerator",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "This year, we are accepting startups into the program that operate in the following industries: participation fee is $65"
+  },
+  {
+    "name": "Cybersecurity Accelerator Program - The Washington Center",
+    "url": "https://twc.edu/programs/cybersecurity-accelerator",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "The application period for the 2026 Cybersecurity Accelerator Program is now closed. To learn more about next year's sem"
+  },
+  {
+    "name": "Top 43 Cyber Security Accelerators and Incubators (2026) - Failory",
+    "url": "https://www.failory.com/startups/cyber-security-accelerators-incubators",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Dec 8, 2025 \u00b7 Discover the leading Cyber Security accelerators, from established names like EvoNexus to global VCs like "
+  },
+  {
+    "name": "AWS/CTIB Cybersecurity Startup Accelerator - Vestbee",
+    "url": "https://www.vestbee.com/aws-ctib-cybersecurity-startup-accelerator",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Timeline ; Dec 23, 2025. Applications Open ; Feb 15, 2026. Applications Close ; Feb 16-28, 2026. Selection Process ; Mar"
+  },
+  {
+    "name": "The Top 40 Startup Pitch Competitions of 2026 - GrowthMentor",
+    "url": "https://www.growthmentor.com/blog/startup-pitch-competitions",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "A hand-picked, verified list of the 40 best startup pitch competitions of 2026, funded demo booth, high-visibility demo "
+  },
+  {
+    "name": "Best Summer Entrepreneurship Programs for Leadership  - LaunchX",
+    "url": "https://www.launchx.com/command-post/articles/best-summer-entrepreneurship-programs-for-leadership-and-pitching-in-2026",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Aug 3, 2026 \u00b7 LaunchX is a top summer entrepreneurship program for leadership and pitching in 2026. Students pitch to in"
+  },
+  {
+    "name": "San Diego Startup Week 2026 - Innovation Rooted Locally",
+    "url": "https://startupsd.org/san-diego-startup-week",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "San Diego Startup Week 2026 Happening November 2-6, 2026. Startup Week Experiences include networking, pitch competition"
+  },
+  {
+    "name": "Best Startup Events and Pitch Competitions for Founders in",
+    "url": "https://capwave.ai/blog/blog-startup-events-pitch-competitions-spring-2026",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Apr 21, 2026 \u00b7 Pitch by Deel: April 28 application deadline (Round 2: May 5) Y Combinator Summer 2026: May 4 at 8pm PT. "
+  },
+  {
+    "name": "865 Fest Pitch Application - Innov865",
+    "url": "https://www.innov865.com/apply",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Applications for the Startup Pitch Competition close June 26, 2026, at 11:59 p.m. ET; Applications for the Emerging Entr"
+  },
+  {
+    "name": "sTARTUp PITCHING \u2014 sTARTUp Day - Most Startup-Minded Business",
+    "url": "https://www.startupday.ee/program/pitching",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "DATE. EVENT ; October 6. Applications open here ; November 7. Applications close ; November 14. Announcing to the startu"
+  },
+  {
+    "name": "Help shape the technical program for MCP Dev Summit North America",
+    "url": "https://www.facebook.com/TheLinuxFoundation/posts/help-shape-the-technical-program-for-mcp-dev-summit-north-america-2026-happening/1486155343556530",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Dec 22, 2025 \u00b7 Help shape the technical program for MCP Dev Summit North America 2026, happening April 2-3 in New York C"
+  },
+  {
+    "name": "How to Apply to Y Combinator in 2026 (The Complete Guide) - Capwave",
+    "url": "https://capwave.ai/blog/blog-how-to-apply-to-y-combinator",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Apr 14, 2026 \u00b7 On-time application deadline: May 4, 2026 at 8:00 PM PT. Applications submitted after this date are revie"
+  },
+  {
+    "name": "Applications Are Now Open for Techstars' Spring 2026 Accelerator",
+    "url": "https://www.techstars.com/blog/program-news/applications-are-now-open-for-techstars-spring-2026-accelerator-programs",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Aug 25, 2025 \u00b7 Applications opened today for Techstars' Spring 2026 accelerator programs. Programs will kick off in Marc"
+  },
+  {
+    "name": "Techstars Fall 2026 Accelerator Programs Open for Applications",
+    "url": "https://www.linkedin.com/posts/angie-grimm_apply-techstars-activity-7457070304528367616--UX_",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "May 4, 2026 \u00b7 Techstars fall 2026 programs are open! Accelerator backs founders \u2026 for Cybersecurity and AI Services. 8 w"
+  },
+  {
+    "name": "Techstars Accelerator - Credit for Startups",
+    "url": "https://creditforstartups.com/companies/techstars",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Techstars offers eligible startups up to $220,000 in funding and resources, An application is required, and it is open t"
+  },
+  {
+    "name": "30 Best Startup Accelerators in 2026",
+    "url": "https://startupsavant.com/best-startup-accelerators",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "May 20, 2026 \u00b7 Compare the 30 best startup accelerators by funding terms, equity, and industry focus \u2014 including Y Combi"
+  },
+  {
+    "name": "Apply for Techstars Anywhere Accelerator Program - fundsforNGOs",
+    "url": "https://www2.fundsforngos.org/business-industry/apply-for-techstars-anywhere-accelerator-program",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Oct 6, 2021 \u00b7 Deadline: 6-Oct-21 Applications are now open for the Techstars Anywhere Accelerator Program, it follows Te"
+  },
+  {
+    "name": "The best startup communities in 2026 - Product Hunt",
+    "url": "https://www.producthunt.com/categories/startup-communities",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "619 Startup communities connect founders, builders, and backers to launch, hire, fund, and grow\u2014sharing tools, talent ma"
+  },
+  {
+    "name": "Join the startup competition at Web Summit | November 9-12, 2026",
+    "url": "https://websummit.com/startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Apply for our 2026 startup programme and join us next November. raise $715.5M Startups. You'll get three tickets to Web "
+  },
+  {
+    "name": "Startup? Apply for our startup program - May 25-28, 2027",
+    "url": "https://vancouver.websummit.com/startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "You'll get three tickets to Web Summit Vancouver, access to Investor to Startup meetings, and be eligible to apply for P"
+  },
+  {
+    "name": "Startups at Web Summit | November 9-12, 2026",
+    "url": "https://websummit.com/tickets/startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Apply for our 2026 startup programme and join us in Lisbon this November. * Business email address. Apply now. They've e"
+  },
+  {
+    "name": "Road 2 Web Summit - Startup Portugal",
+    "url": "https://startupportugal.com/programs/road-2-web-summit",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Join a community of ambitious founders and get ready for Web Summit 2026, taking place from November 9-12 in Lisbon. App"
+  },
+  {
+    "name": "Your startup journey | Web Summit | November 9-12, 2026",
+    "url": "https://websummit.com/startups/startup-journey",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Apply for our 2026 startup programme and join us this November. eligibility to apply for PITCH, attend masterclasses, Me"
+  },
+  {
+    "name": "Bug Bounty Programs - HackerOne",
+    "url": "https://www.hackerone.com/bug-bounty-programs",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Bug bounty programs reward ethical hackers who identify and responsibly disclose vulnerabilities to the application's de"
+  },
+  {
+    "name": "Planning to start a bug bounty program at my company - Reddit",
+    "url": "https://www.reddit.com/r/bugbounty/comments/1i7cotg/planning_to_start_a_bug_bounty_program_at_my",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Jan 22, 2025 \u00b7 Hey security researchers! I'm an engineer looking to establish our company's first bug bounty program, an"
+  },
+  {
+    "name": "Bug Bounty Program: Scoping, Payouts, and Running a Program",
+    "url": "https://startupfundraising.com/bug-bounty-program",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Aug 16, 2026 \u00b7 A bug bounty program invites external security researchers to find and report vulnerabilities in your pro"
+  },
+  {
+    "name": "US Federal Funding Opportunities for Startups in 2026 - LinkedIn",
+    "url": "https://www.linkedin.com/posts/opportunities-for-youth-organization_sbir-sttr-startupfunding-activity-7492314636713820160-XQlB",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Aug 9, 2026 \u00b7 \u2022 NSF SBIR/STTR: Up to $305,000 for Phase I and $1.25 million for Phase II. \u2022 \ud83d\udee1\ufe0f Defense SBIR/STTR: Fundin"
+  },
+  {
+    "name": "AIxCC - DARPA",
+    "url": "https://www.darpa.mil/research/programs/ai-cyber",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "The AI Cyber Challenge (AIxCC) is a two-year competition that brings together the best and brightest in AI and cybersecu"
+  },
+  {
+    "name": "Anthropic Claude Credits for Startups",
+    "url": "https://creditforstartups.com/companies/anthropic",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Learn how to apply for $25,000 to $100,000+ in Claude API credits through Anthropic's VC partner program in 2026. Novemb"
+  },
+  {
+    "name": "Startups - OpenAI",
+    "url": "https://openai.com/business/why-openai/startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Head over to the sign up page\u2060(opens on the OpenAI site. You can use your Google or Microsoft account, or sign up with a"
+  },
+  {
+    "name": "AI Credits for Startups 2026: OpenAI, Anthropic, Google - Fin",
+    "url": "https://fin.ai/learn/ai-credits-for-startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "5 days ago \u00b7 Anthropic's credit program accepts public applications and its FAQ states VC funding is not required. Publi"
+  },
+  {
+    "name": "Anthropic startup credits (Claude): amounts, eligibility, alternatives",
+    "url": "https://guptadeepak.com/startup-offers/guides/anthropic-for-startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Anthropic's startup program gives Claude API credits, commonly $1,000 to $5,000 at the standard tier and up to $100,000 "
+  },
+  {
+    "name": "Anthropic Startup Program Official Terms",
+    "url": "https://www.anthropic.com/startup-program-official-terms",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "May 22, 2025 \u00b7 Anthropic will consider multiple factors when evaluating applications, including, but not limited to, bus"
+  },
+  {
+    "name": "How to Get Startup Credits: 10 Programs for Free AI Credits",
+    "url": "https://www.everythingstartups.com/article/how-to-get-startup-credits-10-programs-for-free-ai-credits",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Jul 3, 2026 \u00b7 How to apply for Anthropic Startup Program credits. Apply through the Claude for Startups page, where the "
+  },
+  {
+    "name": "How do I get Anthropic Startup credits? : r/ClaudeAI - Reddit",
+    "url": "https://www.reddit.com/r/ClaudeAI/comments/1p8ev2z/how_do_i_get_anthropic_startup_credits",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Nov 27, 2025 \u00b7 Hello everyone, I'm working on a project and looking for some API credits, like at least $5000 Is there a"
+  },
+  {
+    "name": "e-Residency for Startups | e-Residency",
+    "url": "https://www.e-resident.gov.ee/e-residency-for-startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Estonia is Europe's startup powerhouse, and e-Residency offers a vibrant ecosystem to test ideas, build products, and sc"
+  },
+  {
+    "name": "Startup Grind | Global Community for Entrepreneurs",
+    "url": "https://www.startupgrind.com",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Startup Grind is a startup community in 120 countries delivering education, connections, and opportunities to help start"
+  },
+  {
+    "name": "Startup Grind Conference | Apr. 27-28, 2027 | Silicon Valley",
+    "url": "https://www.startupgrind.tech",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Ready to pitch, book investor meetings, acquire customers and gather product feedback? LEARN MORE. 12K. MINs of 1:1 time"
+  },
+  {
+    "name": "Silicon Valley, San Francisco Bay Area - Startup Grind",
+    "url": "https://www.startupgrind.com/silicon-valley-san-francisco-bay-area",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Join the Startup Exhibition at the SG Conference in Silicon Valley on April 27-29, 2026! Apply now as a startup or scale"
+  },
+  {
+    "name": "Startup Mania 2026 - Startup Grind",
+    "url": "https://about.startupgrind.com/startup-mania-2026",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Application Deadline: February 22nd, 2026 Pitch LIVE at the Austin Scottish Rite Theater March 11, All startups from aro"
+  },
+  {
+    "name": "Global Pitch Battle | Startup Grind",
+    "url": "https://about.startupgrind.com/january-2025-global-pitch-battle",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Apply now for the opportunity to compete in your local Chapter Pitch Battle, held between January 13-16, 2025. Applicati"
+  },
+  {
+    "name": "500 Global Accelerator - Credit for Startups",
+    "url": "https://creditforstartups.com/companies/500-global",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "500 Global offers eligible startups up to $150,000 in funding and resources, in exchange for equity. An application is r"
+  },
+  {
+    "name": "Startup Accelerator | Plug and Play - PlugandPlayTechCenter",
+    "url": "https://www.plugandplaytechcenter.com/innovation-services/startups/accelerator-programs",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "These startup accelerator programs provide startups with resources to facilitate growth and enhance interactions with ou"
+  },
+  {
+    "name": "Cyprus Accelerator Program - PlugandPlayTechCenter",
+    "url": "https://www.plugandplaytechcenter.com/innovation-services/our-programs/cyprus-accelerator-program",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Launching in 2026, our three-month acceleration program in Limassol, connects the island's fastest-growing startups with"
+  },
+  {
+    "name": "Cyber Security Academic Startup Accelerator Programme - Year 10",
+    "url": "https://iuk-business-connect.org.uk/opportunities/cyber-security-academic-startup-accelerator-programme-year-10-phase-1",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "UK registered academic institutions can apply for a share of up to \u00a3800,000 to join the Cyber Security Academic Startup "
+  },
+  {
+    "name": "Plug and Play's second Seattle-area accelerator cohort includes six local",
+    "url": "https://www.geekwire.com/2025/plug-and-plays-second-seattle-area-accelerator-cohort-includes-six-local-startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Sep 19, 2025 \u00b7 The selected cohort is made up of early stage companies across enterprise software, biotech, cybersecurit"
+  },
+  {
+    "name": "AWS for Startups - Amazon Web Services (AWS)",
+    "url": "https://aws.amazon.com/startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Apply to receive up to $200,000 in AWS Activate Credits to offset costs on infrastructure, data services, and AI/ML mode"
+  },
+  {
+    "name": "Startups at Microsoft",
+    "url": "https://techcommunity.microsoft.com/category/startupsatmicrosoft",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "What I need help with: - Accessing my existing Founders Hub account - Redeeming the Microsoft 365 Business Premium benef"
+  },
+  {
+    "name": "Microsoft for Startups Portal",
+    "url": "https://learn.microsoft.com/en-us/startups/microsoft-for-startups/mfs-portal",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "May 29, 2026 \u00b7 Microsoft Ignite. November 17\u201320, 2026. Interactive learning, certifications, and direct access to expert"
+  },
+  {
+    "name": "Microsoft Startup Credits & Perks",
+    "url": "https://creditforstartups.com/companies/microsoft",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Microsoft offers eligible startups up to $150,000 in credits and resources, with no equity required. An application is r"
+  },
+  {
+    "name": "Microsoft for Startups: Founders Hub and Azure in 2026 - Stackmatix",
+    "url": "https://www.stackmatix.com/blog/microsoft-for-startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "5 days ago \u00b7 No. The Founders Hub is a direct application and does not require an accelerator or investor nomination. Yo"
+  },
+  {
+    "name": "AWS Credits for Startups 2026: Every Program You Qualify For | Wring Blog",
+    "url": "https://www.wring.co/blog/aws-credits-for-startups",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Mar 7, 2026 \u00b7 The Activate Founders tier gives $1,000 in credits to any pre-Series B startup with no investor requiremen"
+  },
+  {
+    "name": "Azure Credits for Startups: Get $150K Free (2026) | SquareOps",
+    "url": "https://squareops.com/knowledge/why-startups-are-looking-for-azure-credits-in-2026",
+    "category": "Web result",
+    "deadline": "Check site",
+    "fit": "MEDIUM",
+    "snippet": "Jan 8, 2026 \u00b7 Step 1: Create Your Founders Hub Account. Go to the Microsoft for Startups Founders Hub website and sign i"
+  }
+]
