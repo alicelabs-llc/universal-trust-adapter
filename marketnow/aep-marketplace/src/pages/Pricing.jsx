@@ -132,7 +132,7 @@ const CONTENT = {
       },
       VERIFIED_SELLER: {
         name: 'Verified Seller Badge',
-        period: 'one-time',
+        period: 'free',
         description: 'Get a ✓ Verified badge on all your skills. Requires KYC verification.',
       },
       PRIORITY_REVIEW: {

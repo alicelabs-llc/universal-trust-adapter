@@ -77,7 +77,7 @@ const translations = {
     'skill.version': 'Version',
     'skill.sentinel': 'Sentinel Score',
     'skill.license': 'License',
-    'skill.oneTime': 'One-time payment · Lifetime license',
+    'skill.oneTime': 'Free payment · Lifetime license',
     'skill.payCard': 'PAY ${price} WITH CARD →',
     'skill.payCrypto': 'PAY ${price} USDC',
     'skill.secureStripe': 'Secure payment via Stripe · Instant access',

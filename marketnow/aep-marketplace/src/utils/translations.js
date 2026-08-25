@@ -189,7 +189,7 @@ export const TRANSLATIONS = {
     'pricing.title': 'Pricing',
     'pricing.subtitle': 'Simple, transparent pricing for buyers and sellers. No subscriptions, no credits.',
     'pricing.buyers': 'For Buyers',
-    'pricing.buyersDesc': 'One-time payment per skill. Lifetime license. No subscriptions.',
+    'pricing.buyersDesc': 'Free payment per skill. Lifetime license. No subscriptions.',
     'pricing.sellers': 'For Sellers',
     'pricing.sellersDesc': 'Free for first 3 skills. 20% commission on sales. No listing fees.',
     'pricing.free': 'Free',

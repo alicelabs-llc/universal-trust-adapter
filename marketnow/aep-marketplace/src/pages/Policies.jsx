@@ -14,7 +14,7 @@ const CONTENT = {
       },
       {
         title: 'Pricing — Micro-Transactions for Autonomous Agents',
-        content: `MarketNow uses a micro-transaction pricing model optimized for autonomous agent consumption. Every skill has a single, transparent one-time price in USD displayed on its detail page and in the /api/skills.json response:
+        content: `MarketNow uses a micro-transaction pricing model optimized for autonomous agent consumption. Every skill has a single, transparent free for buyers in USD displayed on its detail page and in the /api/skills.json response:
 
 • Free — 1,321 skills (26%) — utility, single-function MCP servers
 • $1.99 — 649 skills (13%) — standard integrations
