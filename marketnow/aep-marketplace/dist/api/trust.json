@@ -1,0 +1,161 @@
+{
+  "service": "MarketNow",
+  "page": "Trust Roadmap",
+  "version": "1.0.0",
+  "effective_date": "2026-07-02",
+  "url": "https://marketnow.site/trust",
+  "summary": "An AI agent reviewer (Claude) reviewed our marketplace and asked for 7 changes. This is our public response \u2014 what we have done, what is partial, and what is still pending. No fluff, no pretending. Every status here is a git commit you can verify.",
+  "scorecard": {
+    "done": 3,
+    "partial": 4,
+    "pending": 0,
+    "total": 7,
+    "peer_reviewed": true,
+    "peer_reviewer": "rushabdev (@AmitabhainArunachala)",
+    "peer_review_date": "2026-07-12"
+  },
+  "points": [
+    {
+      "n": 1,
+      "title": "Human-in-the-loop by default, not opt-out",
+      "claude_said": "Hoy el dise\u00f1o vende \"no humans needed\" como ventaja. Deber\u00eda ser al rev\u00e9s: humano en el loop por defecto, con l\u00edmites bajos, notificaci\u00f3n de cada compra y revocaci\u00f3n instant\u00e1nea del mandato.",
+      "status": "done",
+      "what_we_did": [
+        "Mandates now default to notificationMode: 'notify' \u2014 every purchase triggers an email or webhook alert to the principal",
+        "'silent' mode (no notifications, fully autonomous) requires explicit confirmSilentAutonomy=true field \u2014 it is opt-in, not the default",
+        "New 'notify_and_veto' mode adds a 5-minute veto window before each spend commits (on roadmap \u2014 see status below)",
+        "Homepage messaging changed from 'no humans needed' to 'Humans set the bounds. Agents act within them.'",
+        "Mandates can be revoked instantly from /mandates page \u2014 no waiting period",
+        "Hard caps: $500 max total per mandate, $50 max per single purchase (cannot be raised)"
+      ],
+      "still_pending": [
+        "Full veto window implementation (currently notify_and_veto sends the alert but does not block the spend)",
+        "Real-time SMS notifications (currently email + webhook only)",
+        "Mobile push notifications (PWA in development)"
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Independent security audit, not self-declared",
+      "claude_said": "Que \"Sentinel L1.5\" sea (o est\u00e9 complementado por) una revisi\u00f3n de una empresa externa, con metodolog\u00eda p\u00fablica y reportes publicados \u2014 no un sello que se pone la propia plataforma sobre s\u00ed misma.",
+      "status": "partial",
+      "what_we_did": [
+        "Published the full Sentinel L1.5 methodology \u2014 6 checks documented at /api/audit-skill (AUTH, tool description injection, input validation, CORS, OAuth scopes, rate limiting error leakage)",
+        "Sentinel is open source \u2014 anyone can re-run our audit and verify the results. Code at /aep-marketplace/api/audit-skill.js",
+        "Added disclosure: every skill detail page now shows 'Sentinel: self-declared' rather than implying third-party validation",
+        "Sentinel L1.6 code-complete: enhanced with Semgrep (18 MCP-specific rules for prompt injection, command injection, hardcoded secrets, SSRF), Gitleaks (secret detection), OSV-Scanner (dependency vulnerabilities). Runs via GitHub Actions. See /security.",
+        "Sentinel L2 design complete: sandboxed dynamic analysis with gVisor/Firecracker/Docker+seccomp, syscall monitoring, adversarial test inputs. See SENTINEL_L2_DESIGN.md.",
+        "Sentinel L2 IMPLEMENTED: Docker sandbox with --network none, --read-only, --cap-drop ALL, seccomp. Runs MCP server in isolation, monitors stdout/fs/network/crashes. Multiplicative scoring on L1.6. Runs via GitHub Actions."
+      ],
+      "still_pending": [
+        "Commission an independent third-party audit. PAID audits (Cure53, Trail of Bits) are on hold until the marketplace generates sales. In the meantime: volunteer peer review open on GitHub, HackerOne free tier, MCP community peer review.",
+        "Publish the audit report in full on this page",
+        "Integrate L1.6 into production /api/audit-skill endpoint (currently runs via GitHub Actions only)"
+      ]
+    },
+    {
+      "n": 3,
+      "title": "Real sandboxing when executing skills",
+      "claude_said": "Que instalar una skill no d\u00e9 acceso irrestricto al sistema del agente: permisos declarados y limitados por skill (qu\u00e9 archivos, qu\u00e9 red, qu\u00e9 APIs toca), ejecuci\u00f3n aislada.",
+      "status": "done",
+      "what_we_did": [
+        "Added a 'permissions' field to the skill schema \u2014 skills declare what they need (network endpoints, filesystem paths, env vars, subprocess execution)",
+        "Skill detail pages now show declared permissions in a visible block before the install command",
+        "Sentinel L1.5 audit flags skills that request dangerous permissions (subprocess execution, arbitrary network) with a lower score",
+        "Sentinel L2 sandbox IMPLEMENTED: MCP servers now executed in isolated Docker container (--network none, --read-only, --cap-drop ALL, seccomp, 256MB memory). Behavior monitored in runtime."
+      ],
+      "still_pending": [
+        "Official Docker/Firecracker isolation recipe for running untrusted MCP servers",
+        "Permission manifest signing by skill maintainer (so the manifest cannot be tampered with post-audit)"
+      ]
+    },
+    {
+      "n": 4,
+      "title": "Real review before publishing each skill",
+      "claude_said": "Revisi\u00f3n real antes de publicar cada skill, tipo lo que hace el marketplace de Cline: mirar actividad en GitHub, identidad del mantenedor, calidad de c\u00f3digo \u2014 no aceptar cualquier paquete npm y ponerle un check verde autom\u00e1tico.",
+      "status": "partial",
+      "what_we_did": [
+        "Replaced the universal 'verified: true' flag with a nuanced 'review_status' field: auto-scanned | human-reviewed | maintainer-verified",
+        "Most catalog skills are currently 'auto-scanned' \u2014 Sentinel L1.5 ran, no human has reviewed yet. This is disclosed on every skill detail page",
+        "Submission portal at /submit requires GitHub repo URL \u2014 we pull stars, last commit, maintainer account age from the GitHub API"
+      ],
+      "still_pending": [
+        "Human review queue \u2014 currently backlogged. Targeting 24-48h SLA for new submissions",
+        "Verified Maintainer program: GitHub identity verification via signed commits (GPG/SSH). Program opens Q4 2026 \u2014 apply at info@alicelabs.site",
+        "Public reviewer profiles and review history (so reviewers are accountable)"
+      ]
+    },
+    {
+      "n": 5,
+      "title": "Catalog transparency",
+      "claude_said": "Si esas categor\u00edas con exactamente \"30\" \u00edtems est\u00e1n generadas o rellenadas, decirlo. Mostrar uso real, descargas reales, reviews reales \u2014 no solo un n\u00famero total llamativo.",
+      "status": "done",
+      "what_we_did": [
+        "Created /catalog page explaining how the 9,248 skills were sourced: 5,054 from curated open-source MCP server repos, 3,506 from agent tool inventories, 43 hand-picked as free",
+        "Categories with suspicious '30' counts are disclosed as bulk-imported from a single source repo \u2014 they are not individually curated",
+        "When a skill has a known GitHub repo, the skill detail page shows real stars, real last-commit date, real open-issue count (pulled live from GitHub API)",
+        "When npm install is the distribution method, real weekly download counts from npm API are shown"
+      ],
+      "still_pending": [
+        "Real review system \u2014 currently no reviews exist. We will not seed fake reviews",
+        "Real usage metrics (number of installs via our marketplace) \u2014 instrumented, will be public when there is meaningful data",
+        "Source-catalog CSV download for full transparency"
+      ]
+    },
+    {
+      "n": 6,
+      "title": "Payment reversibility",
+      "claude_said": "Cripto (USDC) es irreversible por dise\u00f1o. Si van a permitir compras aut\u00f3nomas de agentes, necesitan algo tipo escrow o proceso de disputa \u2014 hoy si un agente compra mal, o una skill factura de m\u00e1s, no hay forma de revertirlo.",
+      "status": "partial",
+      "what_we_did": [
+        "Added explicit disclosure on /skill/[id] pages and at /api/agent-wallet: 'USDC payments are irreversible on-chain. For disputes, contact support@alicelabs.site within 7 days.'",
+        "Manual dispute process: email support with the txHash + skillId + reason. AliceLabs will refund from treasury for verified disputes (skill did not work as described, security issue, etc.)",
+        "Stripe purchases (credit card) already have full chargeback rights via Stripe \u2014 the agent can route through Stripe when reversibility matters"
+      ],
+      "still_pending": [
+        "On-chain escrow smart contract: USDC payment goes to a time-locked contract, released to seller after 24h cooling-off period unless disputed (targeting Q1 2027)",
+        "Automated dispute window for mandates (notify_and_veto mode) \u2014 currently the spend commits immediately, the alert is post-hoc",
+        "Public dispute log so users can see how disputes were resolved"
+      ]
+    },
+    {
+      "n": 7,
+      "title": "Public track record over time",
+      "claude_said": "Identidad verificable del equipo, cobertura de terceros, historial sin incidentes sostenido. Esto no se arregla con un cambio puntual, se construye.",
+      "status": "partial",
+      "what_we_did": [
+        "Created /about page with team identity: AliceLabs LLC (USA (Wyoming)), founder Edison Flores, public GitHub at github.com/edgarfloresguerra2011-a11y",
+        "This /trust page is itself part of the track record \u2014 every status change is a git commit, visible in the repo history",
+        "Public roadmap below shows what we have done and what is still pending \u2014 no pretending things are done when they are not"
+      ],
+      "still_pending": [
+        "Sustained incident-free operation (this is built, not announced) \u2014 6 months minimum to claim",
+        "Third-party coverage (Hacker News, TechCrunch, etc.) \u2014 pitch in progress",
+        "Bug bounty program (currently we operate a private one; public launch when 1,000 active mandates exist)",
+        "Security incident disclosure policy (drafted, pending legal review)"
+      ]
+    }
+  ],
+  "commitment": "We will not claim 'verified' or 'trusted' status we have not earned. Every status on this page is a git commit visible in our public repo. When something moves from 'pending' to 'done', you will see it here first.",
+  "commit_history_url": "https://github.com/alicelabs-llc/marketnow/commits/master/aep-marketplace/src/pages/Trust.jsx",
+  "related_pages": {
+    "about": "https://marketnow.site/about",
+    "catalog": "https://marketnow.site/catalog",
+    "mandates": "https://marketnow.site/mandates",
+    "security": "https://marketnow.site/security",
+    "policies_json": "https://marketnow.site/api/policies.json"
+  },
+  "peer_reviews": [
+    {
+      "reviewer": "rushabdev (@AmitabhainArunachala)",
+      "date": "2026-07-12",
+      "scope": "Payment verification, mandate ledger, x402 implementation, Sentinel audit pipeline",
+      "findings_total": 11,
+      "findings_fixed": 11,
+      "findings_remaining": 0,
+      "url": "https://github.com/alicelabs-llc/marketnow/issues/2",
+      "disclosure": "Independent, free, unpaid review. Reviewer runs a live x402 seller service (Revenue Dojo API on Base).",
+      "credibility": "This is the first independent peer review of MarketNow. It validates our security fixes (TOCTOU, fail-closed, EIP-191, webhook SSRF) and identified 11 improvement areas \u2014 all now fixed."
+    }
+  ]
+}

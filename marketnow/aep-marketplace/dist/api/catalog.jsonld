@@ -1,0 +1,55 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "mn": "https://marketnow.site/vocab#"
+  },
+  "@type": "DataCatalog",
+  "name": "MarketNow",
+  "description": "Open marketplace for MCP-compatible agent skills. 7,881 verified skills, micro-priced from $0.99 to $9.99.",
+  "url": "https://marketnow.site",
+  "creator": {
+    "@type": "Organization",
+    "name": "MarketNow",
+    "url": "https://marketnow.site"
+  },
+  "dataset": [
+    {
+      "@type": "Dataset",
+      "name": "MarketNow Skills Catalog",
+      "description": "Complete catalog of 7,881 MCP-compatible agent skills with prices, categories, and system prompts.",
+      "distribution": {
+        "@type": "DataDownload",
+        "encodingFormat": "application/json",
+        "contentUrl": "https://marketnow.site/api/skills.json"
+      },
+      "license": "https://opensource.org/licenses/MIT"
+    }
+  ],
+  "mn:capabilities": {
+    "search": "GET /api/skills.json?q={query}",
+    "filter_by_category": "GET /api/skills.json (filter client-side by category field)",
+    "filter_by_price": "GET /api/skills.json (filter client-side by price field)",
+    "filter_by_language": "GET /api/skills.json (filter client-side by translations field)",
+    "purchase": "POST /api/create-checkout-session",
+    "mcp_server": "npx -y marketnow-mcp",
+    "agent_instructions": "GET /api/agent.json",
+    "openapi_spec": "GET /api/openapi.json",
+    "bundles": "GET /api/bundles.json"
+  },
+  "mn:protocols": ["HTTP/1.1", "HTTPS", "JSON", "MCP v1.0", "Stripe Checkout"],
+  "mn:languages": ["en", "es", "zh", "pt", "fr"],
+  "mn:pricing": {
+    "min_usd": 0.99,
+    "max_usd": 9.99,
+    "avg_usd": 2.50,
+    "model": "one-time",
+    "currency": "USD"
+  },
+  "mn:stats": {
+    "total_skills": 7881,
+    "total_categories": 46,
+    "total_bundles": 6,
+    "mcp_server_tools": 5,
+    "npm_package": "marketnow-mcp"
+  }
+}

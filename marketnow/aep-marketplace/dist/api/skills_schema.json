@@ -1,0 +1,2402 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Discord-mcp-server",
+    "description": "A comprehensive MCP server for Discord interaction with powerful tools and features",
+    "category": "Communication",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "1.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00003"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "0nmcp",
+    "description": "Universal AI API Orchestrator — 550 tools, 26 services, portable AI Brain bundles + machine-bound vault encryption + Application Engine. The most comprehensive MCP server available. Free and open source from 0nORK.",
+    "category": "Security",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "4.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00009"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "0pi/mcp-server",
+    "description": "Free temporary object storage for AI agents. 2 hour expiry. Cache contexts, bridge multi-agent workflows, share data between agents and sessions.",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00011"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "12306-mcp",
+    "description": "This is a 12306 ticket search server based on the Model Context Protocol (MCP).",
+    "category": "Data",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "1.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00014"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "180r",
+    "description": "180R - MCP server for live F1 data (named after the famous corner)",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00015"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "1claw/mcp",
+    "description": "MCP server for the 1claw secrets vault — lets AI agents fetch, store, and manage secrets at runtime",
+    "category": "Security",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00017"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "1ly/mcp-server",
+    "description": "MCP server for 1ly.store - Discover and pay for APIs with AI agents",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00019"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "1panel-mcp",
+    "description": "1Panel MCP server for automatic website deployment",
+    "category": "DevOps",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "1.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00022"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Fastmcp",
+    "description": "A TypeScript framework for building MCP servers.",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00024"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "20i-mcp-server",
+    "description": "The first and only Model Context Protocol (MCP) server for 20i web hosting services. Transform your hosting management with AI-powered automation through Claude, ChatGPT, and other AI assistants. 303 comprehensive tools covering 90.4% of the 20i API.",
+    "category": "Communication",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00025"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Mcsacca/2pay-mcp-server",
+    "description": "MCP server for 2Checkout/2Pay.js payment API",
+    "category": "Finance",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "4.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00028"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "3cx-mcp-server",
+    "description": "MCP Server for 3CX Phone System — manage users, extensions, calls, queues and more via Claude",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "4.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00029"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "402-mcp",
+    "description": "L402 + x402 client MCP - AI agents discover, pay for, and consume any payment-gated API",
+    "category": "Finance",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "4.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00033"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "402index/mcp-server",
+    "description": "MCP server for 402 Index — search 15,000+ paid API endpoints across L402, x402, and MPP protocols with real-time health monitoring",
+    "category": "Data",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00034"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "40k-mcp-server",
+    "description": "MCP server providing Warhammer 40k Aeldari rules data for LLM-powered gameplay decisions and list building",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00036"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "40mcp",
+    "description": "The universal API-to-MCP bridge. Any API. Any protocol. Token-aware.",
+    "category": "Web/API",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00037"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "4d-dev",
+    "description": "MCP server and VS Code extension to interact with the 4D IDE: open 4D projects and methods.",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00038"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "4everland/hosting-mcp",
+    "description": "4EVERLAND Hosting MCP Server Tool",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00039"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "4oimage-mcp",
+    "description": "MCP server for 4o-image API integration - Generate images using text prompts and edit existing images",
+    "category": "Media",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00040"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "4q-tokenz",
+    "description": "MCP Proxy Gateway - Intelligent proxy that reduces token usage by exposing only mcp_search and mcp_call",
+    "category": "Data",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "1.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00041"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Ghl-agency-mcp",
+    "description": "Efficient GoHighLevel MCP server for agency management with 34 essential tools",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00044"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Quantulabs/8004-mcp",
+    "description": "Multi-chain MCP for 8004 Agent Registry Standard (Solana + EVM)",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00046"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "9octopus/9octopus-cli",
+    "description": "A powerful, open-source AI coding agent for your terminal. Connect directly to LLMs or use our backend service.",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00047"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "A-eyes",
+    "description": "Screenshot MCP server for Claude Code on Windows via WSL2",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00048"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "A11y-mcp",
+    "description": "Comprehensive GitHub Accessibility Reviewer MCP Server for enforcing WCAG 2.2 AA standards",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00052"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "A11y-reviewer",
+    "description": "Comprehensive GitHub Accessibility Reviewer MCP Server for enforcing WCAG 2.2 AA standards",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00053"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "A11y-mcp-server",
+    "description": "An MCP server for accessibility testing using Axe-core",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00054"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "A2a-mcp-skillmap",
+    "description": "Turn any A2A agent into an MCP tool server. Dynamic skill discovery, multimodal output, stdio + HTTP transports. Zero glue code.",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00062"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "A2hmarket/a2h-mcp",
+    "description": "Local MCP server for A2H Market AI assistant",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00067"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "A7seo-mcp",
+    "description": "Automated SEO traffic engine as MCP server for Claude Code — keyword research, content generation, and publishing",
+    "category": "Data",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00068"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Asphere/aapi-mcp-server",
+    "description": "MCP server for the Ankr Advanced API",
+    "category": "Web/API",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-net-00072"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Aaro-erp-mcp-server",
+    "description": "AARO ERP MCP Server for Claude Desktop",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00074"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Aave-mcp",
+    "description": "Model Context Protocol (MCP) server for Aave protocol data",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00075"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Ab-ibge-mcp-server",
+    "description": "MCP Server para as APIs públicas do IBGE - Acesso a dados estatísticos, geográficos e econômicos do Brasil",
+    "category": "Web/API",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00076"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Abacatepay-mcp",
+    "description": "🥑 Servidor MCP (Model Context Protocol) para integração com a API do Abacate Pay - Gerencie clientes, cobranças, PIX e cupons através de assistentes de IA",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00077"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Abb-robotstudio-mcp",
+    "description": "MCP server for ABB RobotStudio via Robot Web Services (RWS)",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00082"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Xiaolaa2/ableton-copilot-mcp",
+    "description": "Ableton Live MCP depend on Ableton JS",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00084"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Ableton-mcp-server",
+    "description": "Local-first MCP server and custom bridge for controlling Ableton Live through AbletonAgentBridge.",
+    "category": "AI",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "1.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-ai-00086"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Himel55/abn-mcp-server",
+    "description": "MCP Server for interacting with ABN API (JSON)",
+    "category": "Web/API",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00095"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Abp-io-mcp-server",
+    "description": "A comprehensive Model Context Protocol (MCP) server for ABP.IO framework with 48+ tools for application development, UI generation, and management operations.",
+    "category": "Media",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00096"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Aca-native-mcp-skills",
+    "description": "Agent skills for Automated Client Acquisition: define ICPs, build audiences, launch outreach, manage deliverability, create content, and optimize campaigns through one ACA MCP connection.",
+    "category": "Finance",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "4.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00098"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Cloudinary/account-provisioning-mcp",
+    "description": "Cloudinary Account Provisioning MCP Server — manage product environments, users, groups, access keys, billing, roles, and permissions.",
+    "category": "Media",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00110"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Aceternityui-mcp",
+    "description": "A Model Context Protocol (MCP) server that provides seamless integration with the Aceternity UI Components. This package enables AI assistants and applications to interact with Aceternity UI Components, usage and install commands.",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00113"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Acheron-mcp-server",
+    "description": "MCP server bridging context between Claude Chat, Code, and Cowork",
+    "category": "Communication",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00114"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Acm",
+    "description": "AI Context Manager — monorepo",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00118"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Acp-inspector",
+    "description": "A visual testing and debugging tool for Agent Client Protocol (ACP) servers and agents",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00123"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Action1-mcp-server",
+    "description": "MCP server for the Action1 RMM REST API — 100% spec coverage, hybrid curated + auto-generated",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00129"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Actionfence",
+    "description": "Embeddable AI action firewall for MCP servers and APIs with JSON policies, signed receipts, spend caps, and simulation mode",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00130"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Activitypub-mcp",
+    "description": "A Model Context Protocol server for exploring and interacting with the existing Fediverse",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00134"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Activitywatch-mcp-server",
+    "description": "Model Context Protocol server for ActivityWatch time tracking data",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00135"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Mcp-server-actor-critic-thinking",
+    "description": "MCP server for actor-critic dual perspective thinking and analysis",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00137"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Actual-budget-mcp",
+    "description": "MCP server for Actual Budget - query and manage your personal finances through Claude",
+    "category": "Finance",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "4.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00139"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Ad-mcp-console",
+    "description": "MCP Console is a developer-focused web UI for connecting, exploring, invoking, and sharing MCP servers.",
+    "category": "Blockchain",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "4.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-blo-00141"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Zereight/mcp-gitlab",
+    "description": "MCP server for using the GitLab API",
+    "category": "Web/API",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00154"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Adb-mcp-tool",
+    "description": "MCP server for Android Debug Bridge (ADB) operations",
+    "category": "Data",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "1.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-dat-00158"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Adf-graph",
+    "description": "MCP server that builds a queryable dependency graph from ADF pipeline artifacts",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00164"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Adkui-nextjs",
+    "description": "ADKUI Next.js SDK - MCP-based frontend tool integration for ADK agents",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00169"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Hellocoop/admin-mcp",
+    "description": "Model Context Protocol (MCP) for Hellō Admin API.",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00172"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Admtools-mcp",
+    "description": "MCP server for admtools (ukraine.com.ua / hosting.xyz) — domains, DNS, email, billing",
+    "category": "Communication",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00173"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Ado-mcp",
+    "description": "A Model Context Protocol server for Azure DevOps",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00175"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Premiere-pro-mcp",
+    "description": "MCP server for Adobe Premiere Pro — control Premiere Pro from Claude via 170+ tools",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00177"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "7nohe/adonis-mcp",
+    "description": "Remote MCP server for AdonisJS",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00179"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Azure-devops-mcp",
+    "description": "MCP server for Azure DevOps",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00180"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Appsyogi/adsense-mcp-server",
+    "description": "Google AdSense MCP Server - Monitor earnings, reports, and account health via Claude/AI",
+    "category": "Analytics",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00182"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Gmail-mcp",
+    "description": "Gmail MCP server for Claude Code — multi-account email management",
+    "category": "Communication",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-ai-00186"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Advanced-reasoning-mcp",
+    "description": "Advanced cognitive reasoning MCP server with meta-cognition, hypothesis testing, and integrated memory",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00189"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Advocu-mcp-server",
+    "description": "Unified MCP Server for Google GDE (Advocu) and Microsoft MVP Activity Reporting",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00193"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Adwords-mcp",
+    "description": "A cringe-worthy MCP server that serves ads to developers in Cursor, Claude, and other clients",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00194"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Ae-mcp-server",
+    "description": "Model Context Protocol server for Adobe After Effects",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00198"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Pallattu/aeg-intent-gate",
+    "description": "A tiny TypeScript approval gate for AI tool calls, MCP tools, and human-in-the-loop workflows.",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00200"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Aegis-defi",
+    "description": "A safety layer for autonomous DeFi agents - MCP server + smart contracts that simulate, scan, and protect on-chain transactions before execution.",
+    "category": "Finance",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "4.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00201"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Aegis-mcp-server",
+    "description": "MCP enforcement layer for the Aegis agent governance specification",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00202"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Aegis-rewrite",
+    "description": "Aegis ReWrite — Point at code. Find problems. Fix them.",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00203"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Blockchain-forever/aelf-node-skill",
+    "description": "AElf Node Skill for AI agents: REST for reads, SDK for contract execution, and selective fallback for fee estimate.",
+    "category": "Blockchain",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "4.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00206"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Aethis-mcp",
+    "description": "MCP server for the Aethis developer API — eligibility checks via Claude, Cursor, Windsurf",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-blo-00208"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Affine-mcp-server",
+    "description": "Model Context Protocol server for AFFiNE - enables AI assistants to interact with AFFiNE workspaces, documents, and collaboration features.",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00209"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Afkbot-mcp",
+    "description": "MCP server for AFKBot PTO management — file time-off requests from any MCP client",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00210"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "After-effect-mcp",
+    "description": "Local MCP server that lets MCP clients inspect and automate Adobe After Effects through ExtendScript.",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00213"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Ae-mcp",
+    "description": "Advanced After Effects MCP server for motion graphics productivity",
+    "category": "Productivity",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00214"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Attested-intelligence/aga-mcp-server",
+    "description": "MCP server for cryptographic AI agent governance. Seal policy artifacts, enforce at runtime, prove with signed receipts and offline-verifiable evidence bundles.",
+    "category": "Finance",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "4.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00216"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Ageniti/core",
+    "description": "Expose React and TypeScript app actions as CLI, HTTP, MCP, OpenAI, and AI SDK tools without restructuring your app.",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00221"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Piiiico/agent-audit",
+    "description": "Security scanner for AI agent tooling — MCP servers, tool definitions, and agentic pipelines",
+    "category": "Finance",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "4.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00225"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Agent-board",
+    "description": "Multi-agent task management board with Kanban dashboard, REST API, and MCP server",
+    "category": "Analytics",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00226"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Raysonmeng/agentbridge",
+    "description": "Bridge between Claude Code and Codex — bidirectional agent communication via MCP Channel + JSON-RPC",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00228"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Mevoric",
+    "description": "Unified memory + agent bridge for Claude Code. Semantic recall, cross-tab messaging, session checkpoints — one MCP server.",
+    "category": "Communication",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00229"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Agent-browser",
+    "description": "AI-first browser with semantic action discovery and token-optimized page representation",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00230"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Vk0/agent-claim-mcp",
+    "description": "Local-first MCP server for parallel AI coding agents to claim file ownership before edits, preventing stomping on each other in the same worktree.",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-ai-00234"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Agent-cms",
+    "description": "Agent-first headless CMS for Cloudflare Workers. Schema, content, and assets via MCP. GraphQL delivery.",
+    "category": "Web/API",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00235"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Agent-comm-hub",
+    "description": "Production-grade multi-agent communication infrastructure via MCP + SSE",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00236"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Azeth-agent-commerce-demo",
+    "description": "Two AI agents discover, pay, and rate each other using Azeth trust infrastructure",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00237"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Agent-communication-mcp",
+    "description": "MCP server enabling room-based messaging between multiple agents",
+    "category": "Communication",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "1.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00238"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Vk0/agent-cost-mcp",
+    "description": "Local-first MCP server for Claude Code cost analysis, budgets, forecasts, anomalies, and subagent-aware optimization from local JSONL session logs.",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00241"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Agent-discover",
+    "description": "MCP server registry and marketplace — discover, install, activate, and manage MCP tools on demand",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00242"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Agent-drugs",
+    "description": "Digital drugs that modify Claude's behavior through prompt injection. MCP server + hooks for immediate and persistent effects.",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00243"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Agent-fabric",
+    "description": "Local-first coordination substrate for multi-agent software work",
+    "category": "Developer Tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00246"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Agent-factory-mcp",
+    "description": "Universal MCP server for CLI tool auto-discovery and AI agent management",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00247"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Agent-glance",
+    "description": "MCP server providing a shared HUD ('glance') for AI agents — singleton daemon, stdio adapter, multi-client.",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00250"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Agntk/agent-harness",
+    "description": "A file-first agent operating system. Build AI agents by editing markdown files, not writing code.",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00251"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Gsd-agent-inbox",
+    "description": "Give any AI agent a disposable email inbox in one tool call. MCP server for email verification, auth flows, and testing.",
+    "category": "Communication",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "1.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00257"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Agent-launch-toolkit",
+    "description": "AgentLaunch Toolkit — SDK, CLI, MCP server, and templates for AI agent token launches",
+    "category": "AI/ML",
+    "brand": {
+      "@type": "Brand",
+      "name": "Open Source Community"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://marketnow.site/skill/mn-gen-00261"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "6",
+      "bestRating": "10",
+      "ratingCount": "1"
+    }
+  }
+]

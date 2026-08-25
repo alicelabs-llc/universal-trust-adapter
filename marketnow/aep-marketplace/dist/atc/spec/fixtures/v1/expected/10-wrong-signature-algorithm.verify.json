@@ -1,0 +1,12 @@
+{
+  "fixture_id": "10-wrong-signature-algorithm",
+  "attack_vector": "wrong_signature_algorithm",
+  "expected_outcome": "invalid",
+  "expected_verify_result": false,
+  "expected_verify_reason": "signature.algorithm is RSA-2048 but the CA only issues Ed25519 signatures. Verifier must reject.",
+  "tampered_canonical_bytes": "{\"agent_id\":\"test_agent\",\"agent_name\":\"Test Agent\",\"capabilities\":{\"protocol_language\":\"mcp\",\"provides\":[\"search\",\"read\"],\"translate\":true},\"card_id\":\"ATC-FIXTURE-FAIL-10\",\"decision_authority\":\"consumer\",\"identity\":{\"key_algorithm\":\"Ed25519\",\"public_key\":\"MCowBQYDK2VwAyEATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\"},\"metadata\":{\"expires_at\":\"2027-08-19T00:00:00Z\",\"issued_at\":\"2026-08-19T00:00:00Z\",\"issuer\":\"MarketNow Sentinel CA\",\"revocation_url\":\"https://marketnow.site/api/atc?action=verify&card_id=ATC-FIXTURE-FAIL-10\"},\"payment\":{\"method\":\"x402 + USDC on Base L2\",\"wallet_address\":\"0x1234567890abcdef1234567890abcdef12345678\"},\"schema_version\":\"1.1.0\",\"signature\":{\"algorithm\":\"RSA-2048\",\"ca_key_id\":\"MCowBQYDK2VwAyEA\",\"canonical_json\":\"RFC_8785_JCS\",\"signed_at\":\"2026-08-19T00:00:00Z\",\"signed_by\":\"MarketNow Sentinel CA\",\"value\":\"abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab\"},\"trust\":{\"audit_layers_passed\":{\"L1.5\":true,\"L1.6\":true,\"L1.7\":true,\"L1.8\":true,\"L1.9\":true,\"L2.5\":true},\"certificate_id\":\"mn-cert-atc-fixture-fail-10\",\"composite_trust\":8,\"risk_level\":\"low\",\"sentinel_review_score\":8,\"sentinel_score\":8}}",
+  "tampered_digest_sha256": "1ae235779dd82659b2194717176401d70c927f82bd289542446fc8e3a1627e01",
+  "original_canonical_bytes": null,
+  "original_digest_sha256": null,
+  "key_insight": "The tampered card's canonical bytes differ from the original's, so the signature (which was made over the original) must NOT verify against the tampered bytes. If a verifier returns true here, it has the nested-object canonicalization bug."
+}

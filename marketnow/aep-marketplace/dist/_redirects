@@ -1,0 +1,7 @@
+# MarketNow _redirects
+# GitHub Pages ignores _redirects by default (it's a Cloudflare/Nettle feature).
+# We use 404.html instead for SPA fallback.
+# This file is kept for compatibility with other hosts that may use it.
+
+# SPA fallback — send all non-file requests to index.html
+/*    /index.html   200

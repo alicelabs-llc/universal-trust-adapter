@@ -1,0 +1,10 @@
+{
+  "fixture_id": "13-real-card-ATC-2026-4036129",
+  "type": "must-fail-against-orphaned-ca",
+  "expected_outcome": "invalid_against_new_ca",
+  "expected_verify_result": false,
+  "expected_verify_result_against_original_ca": true,
+  "original_ca_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA8p1XlAnt5QRCGbyDRi8+U9MCvt8Xyzq36Rar45JHszM=\n-----END PUBLIC KEY-----",
+  "new_ca_key_url": "https://marketnow.site/api/atc?action=ca-key",
+  "expected_verify_reason": "Card was signed with the original CA key (deprecated after 2026-08-13 rotation). Must FAIL verification against the current CA key. Must PASS verification against the original key (provided in this expected file)."
+}

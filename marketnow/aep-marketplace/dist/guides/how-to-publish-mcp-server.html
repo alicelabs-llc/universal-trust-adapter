@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Publish an MCP Server — Guide for Developers (2026)</title>
+<meta name="description" content="Complete guide: how to publish your MCP server to a marketplace, get a security audit, and reach AI agents. Step-by-step tutorial with code examples.">
+<link rel="canonical" href="https://marketnow.site/guides/how-to-publish-mcp-server" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Publish an MCP Server to a Marketplace",
+  "description": "Step-by-step guide to publishing your MCP server, getting a security audit, and reaching AI agents.",
+  "step": [
+    {"@type":"HowToStep","position":1,"name":"Build your MCP server","text":"Create a GitHub repo with an MCP server using the Model Context Protocol SDK."},
+    {"@type":"HowToStep","position":2,"name":"Submit to MarketNow","text":"Go to marketnow.site/submit and enter your repo URL. Free, 10-layer audit."},
+    {"@type":"HowToStep","position":3,"name":"Get your Sentinel certificate","text":"Sentinel runs 10 security layers and issues a signed certificate with a 0-10 score."},
+    {"@type":"HowToStep","position":4,"name":"Get discovered by agents","text":"Your skill appears in the marketplace. Agents using marketnow-mcp can search and install it."}
+  ]
+}
+</script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#050505;color:#e2e8f0;line-height:1.7;padding:20px;max-width:900px;margin:0 auto}
+h1{color:#00F299;font-size:2em;margin-bottom:0.3em}
+h2{color:#3b82f6;margin-top:1.5em;font-size:1.3em}
+h3{color:#a855f7;margin-top:1em}
+p{color:#94a3b8;margin:0.8em 0}
+a{color:#3b82f6}
+code{background:#1e293b;padding:2px 6px;border-radius:4px;font-family:monospace;color:#f8fafc}
+pre{background:#0d1117;border:1px solid #1e293b;padding:16px;border-radius:8px;overflow-x:auto;margin:1em 0}
+.cta{display:inline-block;background:#00F299;color:#050505;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;margin:10px 0}
+.step{background:#0d1117;border:1px solid #1e293b;border-radius:8px;padding:16px;margin:1em 0}
+.step-num{display:inline-block;background:#00F299;color:#050505;width:30px;height:30px;border-radius:50%;text-align:center;line-height:30px;font-weight:bold;margin-right:10px}
+</style>
+</head>
+<body>
+<h1>How to Publish an MCP Server — Complete Guide (2026)</h1>
+<p>A step-by-step guide to publishing your MCP (Model Context Protocol) server to a marketplace, getting a security audit, and reaching AI agents.</p>
+
+<h2>Step 1: Build your MCP server</h2>
+<div class="step">
+<span class="step-num">1</span>
+<p>Create a GitHub repo with an MCP server. Node.js example:</p>
+<pre><code>npm install @modelcontextprotocol/sdk
+// server.ts — define tools, connect via stdio</code></pre>
+</div>
+
+<h2>Step 2: Submit to MarketNow (free)</h2>
+<div class="step">
+<span class="step-num">2</span>
+<p>Go to <a href="https://marketnow.site/submit">marketnow.site/submit</a> and enter your repo URL. Or ask your AI agent to submit via MCP.</p>
+</div>
+
+<h2>Step 3: Get your Sentinel certificate</h2>
+<div class="step">
+<span class="step-num">3</span>
+<p>10-layer audit runs automatically (1-5 min). You get a signed certificate with score 0-10.</p>
+</div>
+
+<h2>Step 4: Get discovered by agents</h2>
+<div class="step">
+<span class="step-num">4</span>
+<p>Your server appears in the marketplace. Agents using <code>npx -y marketnow-mcp</code> can search, recommend, and install it.</p>
+</div>
+
+<h2>Step 5: (Optional) Monetize</h2>
+<div class="step">
+<span class="step-num">5</span>
+<p>Seller program: set a price, keep 80%, MarketNow takes 20%. USDC on Base or Stripe.</p>
+</div>
+
+<a href="https://marketnow.site/submit" class="cta">Submit your MCP server →</a>
+</body>
+</html>

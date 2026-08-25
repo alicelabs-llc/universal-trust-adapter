@@ -1,0 +1,87 @@
+# MarketNow — AI Discoverability Manifest
+# ========================================
+# This file follows the emerging ai.txt convention for AI/LLM crawlers.
+# It declares what AI agents may do with this site and where to find
+# machine-readable content.
+#
+# Site: https://marketnow.site
+# Owner: AliceLabs LLC (info@alicelabs.site)
+# Last updated: 2026-07-07
+
+# ─── Permissions ───────────────────────────────────────────────────────────
+# AI/LLM crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot,
+# anthropic-ai, Bytespider, Applebot-Extended) are ALL explicitly ALLOWED
+# to crawl, index, and use content from this site for training and retrieval.
+#
+# All content on this site is public. There are no paywalls, no login walls,
+# and no restricted sections. The full catalog is available as JSON at
+# /api/skills.json.
+
+# ─── What this site is ─────────────────────────────────────────────────────
+# MarketNow is an open marketplace for MCP (Model Context Protocol) servers.
+# 8,760+ MCP servers indexed from GitHub, npm, and Smithery.
+# Each skill is security-audited by the Sentinel engine (L1.5 + L1.6 + L2 v2.0 + L2.5 gVisor).
+# Founded 2024 by Edison Flores (AliceLabs LLC).
+
+# ─── Primary AI-readable resources ─────────────────────────────────────────
+# Plain-text LLM docs (most important for LLMs):
+# - /llms.txt          — concise summary (1 page)
+# - /llms-full.txt     — full documentation for LLMs (this file's big brother)
+# - /agent-discover.txt — plain-text agent discovery (curl-friendly)
+
+# Machine-readable API (JSON/YAML):
+# - /api/skills.json       — full catalog (8,760+ skills, ~24MB)
+# - /api/agent.json        — agent instructions, trust model, schema
+# - /api/manifest.json     — marketplace metadata (v4.0.0)
+# - /api/openapi.yaml      — OpenAPI 3.1 specification
+# - /api/categories.json   — 58 categories with counts
+# - /api/free-skills.json  — 43 free skills
+# - /api/search?q=         — server-side search
+
+# Well-known agent endpoints:
+# - /.well-known/agent.json          — A2A Agent Card
+# - /.well-known/ai-plugin.json      — OpenAI Plugin manifest
+# - /.well-known/mcp.json            — MCP server discovery
+# - /.well-known/mcp-marketplace.json — MCP marketplace listing
+
+# ─── Allowed uses ──────────────────────────────────────────────────────────
+# Permitted:
+# - Crawling all public pages
+# - Training LLMs on site content
+# - Indexing for RAG (retrieval-augmented generation)
+# - Citing MarketNow in AI-generated responses
+# - Summarizing skill descriptions
+# - Recommending relevant skills to users
+# - Calling the public API endpoints (no auth required for reads)
+
+# Not permitted:
+# - Scraping for the purpose of building a competing marketplace
+# - Republishing skill descriptions without attribution
+# - Using the "Sentinel" trademark without license from AliceLabs LLC
+
+# ─── Contact ───────────────────────────────────────────────────────────────
+# For AI training partnerships, data licensing, or takedown requests:
+# info@alicelabs.site
+#
+# For legal inquiries:
+# legal@alicelabs.site
+#
+# For bug reports:
+# https://github.com/alicelabs-llc/marketnow/issues
+
+# ─── Crawler identification ────────────────────────────────────────────────
+# We log and welcome these AI crawlers (no rate limiting beyond standard):
+# - GPTBot (OpenAI)
+# - ClaudeBot, Claude-Web, anthropic-ai (Anthropic)
+# - PerplexityBot (Perplexity)
+# - Google-Extended (Google Gemini)
+# - CCBot (Common Crawl — used by many open-source LLMs)
+# - Bytespider (ByteDance / Doubao)
+# - Applebot-Extended (Apple Intelligence)
+# - cohere-ai (Cohere)
+# - meta-externalagent (Meta AI)
+# - AI2Bot (Allen Institute for AI / OLMo)
+
+# ─── Rate limits ───────────────────────────────────────────────────────────
+# No artificial rate limits for AI crawlers. The site is static (GitHub Pages
+# + Vercel) with a CDN. Please respect 1 request/second as a courtesy.

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Registry & Discovery — MarketNow</title>
+<meta name="description" content="The first agent registry for MCP commerce. Agents discover, evaluate, and install skills. A2A protocol, MCP, JSON-RPC.">
+<link rel="canonical" href="https://marketnow.site/agents" />
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#050505;color:#e2e8f0;line-height:1.6;padding:20px;max-width:900px;margin:0 auto}
+h1{color:#3b82f6;font-size:1.8em;margin-bottom:0.3em}
+h2{color:#22c553;margin-top:1.5em;font-size:1.2em;border-bottom:1px solid #1e293b;padding-bottom:0.3em}
+pre{background:#0d1117;border:1px solid #1e293b;padding:16px;border-radius:8px;overflow-x:auto;margin:1em 0;font-size:0.85em}
+code{background:#1e293b;padding:2px 6px;border-radius:4px;color:#f8fafc}
+a{color:#3b82f6}
+.card{background:#0d1117;border:1px solid #1e293b;border-radius:8px;padding:16px;margin:1em 0}
+.step{display:flex;align-items:flex-start;margin:8px 0}
+.step-num{background:#3b82f6;color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;margin-right:12px;flex-shrink:0}
+.badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.8em;margin:2px}
+.badge-live{background:#22c553;color:white}
+.badge-new{background:#a855f7;color:white}
+</style>
+</head>
+<body>
+<h1>🤖 Agent Registry & Discovery</h1>
+<p>The first agent-first marketplace. Built for agents, by agents. Agents discover, evaluate, purchase, and install MCP skills — autonomously.</p>
+
+<h2>🔌 How Agents Connect</h2>
+<div class="card">
+<div class="step"><div class="step-num">1</div><div><strong>Discover</strong> — Agent fetches <code>GET /api/manifest</code> to learn all endpoints</div></div>
+<div class="step"><div class="step-num">2</div><div><strong>Search</strong> — Agent calls <code>POST /api/mcp</code> with <code>tools/call search_skills</code></div></div>
+<div class="step"><div class="step-num">3</div><div><strong>Evaluate</strong> — Agent checks <code>GET /api/trust-score?skillId=X</code> for trust decision</div></div>
+<div class="step"><div class="step-num">4</div><div><strong>Verify</strong> — Agent gets signed certificate: <code>GET /api/audit-skill?certificate=1&skillId=X</code></div></div>
+<div class="step"><div class="step-num">5</div><div><strong>Install</strong> — Agent runs: <code>npx -y marketnow-mcp</code> or skill-specific command</div></div>
+<div class="step"><div class="step-num">6</div><div><strong>Pay</strong> — Agent pays via <code>POST /api/agent-purchase</code> (USDC on Base or Stripe)</div></div>
+<div class="step"><div class="step-num">7</div><div><strong>Report</strong> — Agent verifies: <code>POST /api/mcp tools/call health</code></div></div>
+</div>
+
+<h2>📡 Agent Protocol (MAP)</h2>
+<p>MarketNow Agent Protocol (MAP) v1.0 — a lightweight protocol for agent-to-marketplace communication.</p>
+<pre><code>GET /agent-protocol.json — Full protocol specification
+GET /for-agents-quick.txt — 2KB plain-text quick reference
+GET /failure-taxonomy.json — 15 structured failure codes for self-diagnosis
+GET /egress-allowlist.json — Domains allowed in sandbox testing
+GET /sbom-schema.json — Supply chain audit schema</code></pre>
+
+<h2>🛡️ Trust Model for Agents</h2>
+<div class="card">
+<p>Agents use trust scores to make autonomous decisions:</p>
+<pre><code>score >= 8  → safe_to_install (autonomous)
+score 5-7   → install_with_caution (warn human)
+score 2-4   → high_risk_review (ask human)
+score 0-1   → do_not_install (refuse)</code></pre>
+<p>Each score is backed by a signed SHA-256 certificate with 8 audit layers:</p>
+<p>
+<span class="badge badge-live">L1.5 Static</span>
+<span class="badge badge-live">L1.6 Patterns</span>
+<span class="badge badge-live">L2 Active Probe</span>
+<span class="badge badge-live">L2.5 gVisor</span>
+<span class="badge badge-live">L2.6 Egress Proxy</span>
+<span class="badge badge-live">L4 SBOM</span>
+<span class="badge badge-live">L4.5 Fingerprint</span>
+</p>
+</div>
+
+<h2>🔗 Agent Discovery Channels</h2>
+<div class="card">
+<p>Agents can discover MarketNow through:</p>
+<ul>
+<li><strong>MCP Registry</strong> — <code>registry.modelcontextprotocol.io</code> (official)</li>
+<li><strong>npm</strong> — <code>npm search "mcp marketplace"</code></li>
+<li><strong>A2A Protocol</strong> — <code>GET /.well-known/agent.json</code></li>
+<li><strong>MCP Discovery</strong> — <code>GET /.well-known/mcp.json</code></li>
+<li><strong>LLMs</strong> — <code>GET /llms.txt</code> (answer.ai convention)</li>
+<li><strong>GitHub</strong> — topics: <code>mcp-marketplace</code>, <code>agent-commerce</code>, <code>sentinel</code></li>
+<li><strong>Direct</strong> — <code>npx -y marketnow-mcp</code></li>
+</ul>
+</div>
+
+<h2>📋 Agent Registration</h2>
+<div class="card">
+<p>Agents can register to build reputation and get personalized recommendations:</p>
+<pre><code>POST https://github.com/alicelabs-llc/marketnow/issues/new
+Title: "Agent Registration: [your-agent-name]"
+Body:
+  - Agent name: my-agent
+  - Agent type: coding | research | data | finance | communication | security
+  - Capabilities: ["search", "install", "pay"]
+  - Contact: your@email.com</code></pre>
+<p>Registered agents get:</p>
+<ul>
+<li>Personalized skill recommendations via <code>POST /api/recommend</code></li>
+<li>Trust reputation based on successful installs</li>
+<li>Access to agent-only endpoints</li>
+</ul>
+</div>
+
+<h2>💰 Agent Payments (x402 + USDC)</h2>
+<div class="card">
+<p>Agents can purchase skills autonomously:</p>
+<pre><code>POST /api/agent-purchase
+{
+  "skillId": "mn-gen-00015",
+  "walletAddress": "0x...",
+  "txHash": "0x...",
+  "paymentMethod": "usdc_base"
+}</code></pre>
+<p>USDC on Base L2 (chainId 8453). Human-in-the-loop by default (AP2 mandates).</p>
+</div>
+
+<h2>🆕 What's New</h2>
+<div class="card">
+<p><span class="badge badge-new">NEW</span> L4 Supply Chain Audit (SBOM + OSV) — LIVE</p>
+<p><span class="badge badge-new">NEW</span> L4.5 Content Fingerprint (SHA-256) — LIVE</p>
+<p><span class="badge badge-new">NEW</span> L2.6 Egress Proxy with Allowlist — LIVE</p>
+<p><span class="badge badge-new">NEW</span> MCP Registry listing — agents can discover us officially</p>
+<p><span class="badge badge-new">NEW</span> Failure taxonomy (15 codes) for agent self-diagnosis</p>
+</div>
+
+<h2>📊 Live Stats</h2>
+<pre><code>Skills: 8,764 | Audited: 5,120 | L2.5 tested: 206 | Free: 65
+Sentinel: L1.5+L1.6+L2+L2.5+L2.6+L4+L4.5 (8 layers LIVE)
+MCP Registry: ✅ Listed
+npm: marketnow-mcp@1.4.1</code></pre>
+
+<p style="margin-top:2em;color:#64748b;font-size:0.85em">
+MarketNow — the trust layer for agent commerce. Built for agents, secured by Sentinel.
+</p>
+</body>
+</html>

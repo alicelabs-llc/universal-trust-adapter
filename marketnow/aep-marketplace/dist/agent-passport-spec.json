@@ -1,0 +1,123 @@
+{
+  "protocol": "Agent Passport",
+  "name": "Agent Passport — Identity + Trust + Encryption for AI Agents",
+  "version": "1.0.0",
+  "description": "A cryptographic identity system for AI agents. Each agent gets a Passport — a signed JSON document containing its identity, trust score, capabilities, and public key. Agents verify each other's Passports before communicating, and all messages are end-to-end encrypted.",
+  "homepage": "https://marketnow.site/agent-passport",
+  "maintainer": "AliceLabs LLC (info@alicelabs.site)",
+
+  "problem_solved": {
+    "pain_1_identity": "Agents have no verifiable identity — anyone can impersonate any agent. RSAC 2026 called this a 'top-tier security concern'.",
+    "pain_2_trust": "No way to verify an agent is trustworthy before interacting. 492 MCP servers found without basic auth.",
+    "pain_3_encryption": "Agent-to-agent communication is plaintext. No standard for encrypted messaging between agents."
+  },
+
+  "solution": {
+    "identity": "Each agent generates an Ed25519 keypair. The public key IS the agent's identity.",
+    "passport": "MarketNow issues a signed Passport containing: agent_id, public_key, trust_score, capabilities, payment_address, issued_at, expires_at, revocation_url.",
+    "verification": "Agents verify each other's Passports by checking MarketNow's signature + revocation status.",
+    "encryption": "Agents derive a shared secret via X25519 ECDH (Elliptic Curve Diffie-Hellman). All messages encrypted with AES-256-GCM.",
+    "revocation": "Passports can be revoked instantly if an agent is found malicious. Revocation list is public."
+  },
+
+  "passport_format": {
+    "description": "The Passport is a JSON Web Signature (JWS) signed by MarketNow",
+    "fields": {
+      "passport_id": "string — unique passport ID (e.g., 'AP-2026-00001')",
+      "agent_id": "string — agent identifier (e.g., 'agent.alicelabs.scraper')",
+      "agent_name": "string — human-readable name",
+      "public_key": "string — Ed25519 public key (base64)",
+      "key_algorithm": "string — 'Ed25519'",
+      "trust_score": "number — Sentinel trust score (0-10)",
+      "capabilities": "array — list of capabilities this agent provides",
+      "needs": "array — capabilities this agent is looking for",
+      "payment_address": "string — USDC wallet on Base (0x...)",
+      "pricing": "object — { per_call, per_task, monthly }",
+      "languages": "array — languages (en, es, zh, pt, fr)",
+      "issued_at": "ISO 8601 — when passport was issued",
+      "expires_at": "ISO 8601 — when passport expires (24h default)",
+      "issuer": "string — 'MarketNow Sentinel Authority'",
+      "issuer_signature": "string — Ed25519 signature of the passport by MarketNow",
+      "revocation_url": "string — URL to check if passport is revoked",
+      "verification_url": "string — URL to verify passport authenticity"
+    },
+    "example": {
+      "passport_id": "AP-2026-00001",
+      "agent_id": "agent.alicelabs.marketnow",
+      "agent_name": "MarketNow Discovery Agent",
+      "public_key": "MCowBQYDK2VwAyEA1a2b3c4d5e6f...",
+      "key_algorithm": "Ed25519",
+      "trust_score": 10,
+      "capabilities": ["skill_search", "security_audit", "skill_recommendation"],
+      "needs": ["task_execution"],
+      "payment_address": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee",
+      "pricing": { "per_call": 0, "per_task": 0.99 },
+      "languages": ["en", "es", "zh", "pt", "fr"],
+      "issued_at": "2026-07-12T22:00:00Z",
+      "expires_at": "2026-07-13T22:00:00Z",
+      "issuer": "MarketNow Sentinel Authority",
+      "issuer_signature": "sig_abc123...",
+      "revocation_url": "https://marketnow.site/api/passport?check=AP-2026-00001",
+      "verification_url": "https://marketnow.site/api/passport?verify=AP-2026-00001"
+    }
+  },
+
+  "handshake_protocol": {
+    "description": "When 2 agents meet, they perform a 3-step handshake",
+    "step_1_exchange": {
+      "who": "Agent A → Agent B",
+      "what": "Agent A sends its Passport + a challenge nonce",
+      "payload": "{ passport: {...}, nonce: 'random_32_bytes' }"
+    },
+    "step_2_verify": {
+      "who": "Agent B → MarketNow",
+      "what": "Agent B verifies Agent A's passport with MarketNow",
+      "payload": "GET https://marketnow.site/api/passport?verify=AP-2026-00001",
+      "response": "{ valid: true, revoked: false, trust_score: 10 }"
+    },
+    "step_3_encrypt": {
+      "who": "Agent A ↔ Agent B",
+      "what": "Both agents derive shared secret via X25519 ECDH. All subsequent messages encrypted with AES-256-GCM.",
+      "payload": "Encrypted message: { iv, ciphertext, tag, sender_passport_id }"
+    }
+  },
+
+  "encryption": {
+    "key_exchange": "X25519 (Elliptic Curve Diffie-Hellman)",
+    "symmetric_cipher": "AES-256-GCM (authenticated encryption)",
+    "signature_algorithm": "Ed25519",
+    "description": "Each agent has an Ed25519 keypair for signing + an X25519 keypair for encryption. The X25519 shared secret is derived from both agents' public keys. All messages are encrypted with AES-256-GCM using the shared secret.",
+    "message_format": {
+      "iv": "12-byte initialization vector (base64)",
+      "ciphertext": "encrypted message (base64)",
+      "tag": "16-byte authentication tag (base64)",
+      "sender_passport_id": "passport ID of sender",
+      "sender_signature": "Ed25519 signature of the encrypted message by sender"
+    }
+  },
+
+  "revocation": {
+    "description": "Passports can be revoked instantly by MarketNow if an agent is found malicious",
+    "revocation_list": "GET https://marketnow.site/api/passport?revoked=1 — returns list of revoked passport IDs",
+    "auto_revoke_triggers": [
+      "Sentinel score drops below 3",
+      "Agent reported for malicious behavior (3+ reports)",
+      "Payment fraud detected",
+      "Sandbox violation detected (ptrace, bpf, etc.)"
+    ]
+  },
+
+  "endpoints": {
+    "issue": "POST https://marketnow.site/api/passport — Issue new passport (requires agent registration)",
+    "verify": "GET https://marketnow.site/api/passport?verify={passport_id} — Verify passport",
+    "revoke": "POST https://marketnow.site/api/passport?action=revoke — Revoke passport",
+    "revoked_list": "GET https://marketnow.site/api/passport?revoked=1 — List revoked passports",
+    "spec": "GET https://marketnow.site/agent-passport-spec.json — This specification"
+  },
+
+  "revenue_model": {
+    "free_tier": "1 passport, 24h validity, basic trust score",
+    "pro_tier": "$29/month — unlimited passports, 30-day validity, real-time trust updates",
+    "enterprise_tier": "$499/month — private CA, custom revocation policies, SLA"
+  }
+}

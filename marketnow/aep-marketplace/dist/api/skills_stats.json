@@ -1,0 +1,27 @@
+{
+  "total": 9248,
+  "free": 9248,
+  "paid": 0,
+  "audited": 9238,
+  "l2_tested": 9229,
+  "categories": {
+    "Developer Tools": 7230,
+    "Search": 405,
+    "AI/ML": 383,
+    "Data": 283,
+    "Finance": 227,
+    "Security": 180,
+    "File System": 112,
+    "Version Control": 98,
+    "Browser Automation": 95,
+    "Cloud Platforms": 70,
+    "Monitoring": 67,
+    "Communication": 42,
+    "Web APIs": 36,
+    "Community Submitted": 18,
+    "Productivity": 1,
+    "Marketing": 1
+  },
+  "all_free": true,
+  "generated_at": "2026-08-09T01:49:49.804762+00:00"
+}

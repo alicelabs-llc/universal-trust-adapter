@@ -1,0 +1,63 @@
+{
+  "fixture_id": "03-revoked-card",
+  "attack_vector": "revoked_card_in_crl",
+  "description": "Card has a valid signature but is in the Certificate Revocation List (CRL). Verifier must check status='revoked' AND consult the live CRL at /api/atc?action=revocation-list. Card ID ATC-FIXTURE-FAIL-03 should be in the must-fail CRL.",
+  "card": {
+    "card_id": "ATC-FIXTURE-FAIL-03",
+    "schema_version": "1.1.0",
+    "decision_authority": "consumer",
+    "agent_id": "test_agent",
+    "agent_name": "Test Agent",
+    "identity": {
+      "public_key": "MCowBQYDK2VwAyEATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+      "key_algorithm": "Ed25519"
+    },
+    "trust": {
+      "sentinel_review_score": 8,
+      "sentinel_score": 8,
+      "audit_layers_passed": {
+        "L1.5": true,
+        "L1.6": true,
+        "L1.7": true,
+        "L1.8": true,
+        "L1.9": true,
+        "L2.5": true
+      },
+      "composite_trust": 8.0,
+      "risk_level": "low",
+      "certificate_id": "mn-cert-atc-fixture-fail-03"
+    },
+    "capabilities": {
+      "provides": [
+        "search",
+        "read"
+      ],
+      "protocol_language": "mcp",
+      "translate": true
+    },
+    "payment": {
+      "method": "x402 + USDC on Base L2",
+      "wallet_address": "0x1234567890abcdef1234567890abcdef12345678"
+    },
+    "metadata": {
+      "issued_at": "2026-08-19T00:00:00Z",
+      "expires_at": "2027-08-19T00:00:00Z",
+      "issuer": "MarketNow Sentinel CA",
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-FIXTURE-FAIL-03"
+    },
+    "status": "revoked",
+    "revocation_reason": "Compromised private key",
+    "revoked_at": "2026-08-15T00:00:00Z",
+    "signature": {
+      "algorithm": "Ed25519 (RFC 8032)",
+      "value": "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab",
+      "signed_by": "MarketNow Sentinel CA",
+      "signed_at": "2026-08-10T00:00:00Z",
+      "canonical_json": "RFC_8785_JCS",
+      "ca_key_id": "MCowBQYDK2VwAyEA"
+    }
+  },
+  "original_card": null,
+  "expected_outcome": "invalid",
+  "expected_verify_result": false
+}

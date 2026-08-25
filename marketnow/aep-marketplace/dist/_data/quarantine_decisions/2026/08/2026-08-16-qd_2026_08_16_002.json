@@ -1,0 +1,51 @@
+{
+  "decision_id": "qd_2026_08_16_002",
+  "decision_date": "2026-08-16T09:15:42Z",
+  "skill_id": "mn-sub-57801",
+  "skill_name": "Crypto Wallet Helper with Hardcoded Mnemonic",
+  "skill_repo": "https://github.com/example/crypto-wallet-helper",
+  "sentinel_score": 0,
+  "sentinel_version": "v2.5",
+  "layers_run": [
+    "L1.5",
+    "L1.6",
+    "L1.7",
+    "L1.8",
+    "L1.9"
+  ],
+  "layer_findings": [
+    {
+      "layer": "L1.5",
+      "result": "pass",
+      "notes": "Metadata valid"
+    },
+    {
+      "layer": "L1.6",
+      "result": "fail",
+      "notes": "Secret detected: hardcoded 12-word mnemonic in src/wallet.js"
+    },
+    {
+      "layer": "L1.7",
+      "result": "pass",
+      "notes": "No malware patterns"
+    },
+    {
+      "layer": "L1.8",
+      "result": "pass",
+      "notes": "No malware families matched"
+    },
+    {
+      "layer": "L1.9",
+      "result": "pass",
+      "notes": "No prompt injection"
+    }
+  ],
+  "decision": "quarantine",
+  "decision_reason": "Hardcoded 12-word mnemonic detected. This is a credential leak in the source code.",
+  "decision_authority": "Sentinel L1.6",
+  "reviewer": "automated",
+  "appealable": true,
+  "appeal_url": "https://marketnow.site/appeals?qd=qd_2026_08_16_002",
+  "sha256_artifact": "def456abc7890123abcdef4567890123abcdef4567890123abcdef4567890123a",
+  "record_sha256": "b58f278f8c35b1737f9cbf853f47a66f4652d6a76493871a887954f9648f4fd0"
+}

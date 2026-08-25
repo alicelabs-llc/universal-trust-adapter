@@ -1,0 +1,62 @@
+{
+  "$schema": "https://marketnow.site/api/stats.schema.json",
+  "version": "1.0.0",
+  "generated_at": "2026-08-25T00:00:00Z",
+  "source_of_truth": "This file (stats.json) is the canonical source for all metrics. Landing page, agent.json, README, and SEO blocks must import from this file. CI fails if any surface diverges.",
+  "discovery": {
+    "total_mcp_servers": 9248,
+    "free_skills": 43,
+    "categories": {
+      "ai-ml": 1976,
+      "developer-tools": 1891,
+      "data": 782,
+      "web-api": 348,
+      "productivity": 328,
+      "finance": 292,
+      "communication": 288,
+      "security": 224
+    }
+  },
+  "security": {
+    "total_scanned": 9248,
+    "pass_rate_pct": 53.3,
+    "auto_scanned": 8742,
+    "human_reviewed": 22,
+    "maintainer_verified": 0,
+    "quarantined": 80,
+    "security_checks_performed": 1211488,
+    "sentinel_version": "v3.0",
+    "sentinel_pipeline_stages": 12,
+    "methodology_url": "https://marketnow.site/security/sentinel-v3.0"
+  },
+  "tools": {
+    "mcp_server_tools_count": 13,
+    "mcp_server_package": "marketnow-mcp",
+    "mcp_server_version": "1.10.1",
+    "atc_sdk_package": "agent-trust-card",
+    "atc_sdk_version": "1.1.2"
+  },
+  "formats": {
+    "supported": ["ATC", "EAT-AI", "ZTA", "A2A", "MCP-Card", "W3C-VC", "OAuth", "SPIFFE"],
+    "count": 8,
+    "canonical_schema": "UTS v2.0.0"
+  },
+  "pipeline": {
+    "stages": 12,
+    "verification_controls": 8,
+    "signature_algorithm": "Ed25519 (RFC 8032)",
+    "canonicalization": "RFC 8785 JCS",
+    "domain_separation": 7
+  },
+  "blockchain": {
+    "network": "Base",
+    "payment_wallet": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee",
+    "wallet_type": "TODO: migrate to multisig escrow",
+    "commission_rate": "0.20"
+  },
+  "i18n": {
+    "languages": ["en", "es", "zh", "pt", "fr"],
+    "count": 5,
+    "method": "human_translated"
+  }
+}

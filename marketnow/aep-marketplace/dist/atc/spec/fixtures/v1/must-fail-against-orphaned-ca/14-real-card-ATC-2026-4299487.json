@@ -1,0 +1,58 @@
+{
+  "fixture_id": "14-real-card-ATC-2026-4299487",
+  "type": "must-fail-against-orphaned-ca",
+  "attack_vector": "orphaned_ca_key_post_rotation",
+  "description": "This card was signed with the original MarketNow Sentinel CA key (local_ca_key_2026_07). On 2026-08-13, MarketNow rotated the CA key per @anp2network's feedback. The original key was deprecated. Verifiers using the NEW CA key (at /api/atc?action=ca-key) MUST reject this signature. Verifiers using the ORIGINAL key (in the fixture's expected file) will see it verify correctly \u2014 but the original key is no longer trusted.",
+  "card": {
+    "card_id": "ATC-2026-4299487",
+    "status": "active",
+    "payload": {
+      "card_id": "ATC-2026-4299487",
+      "schema_version": "1.1.0",
+      "decision_authority": "consumer",
+      "agent_id": "rate_test_2",
+      "agent_name": "rate_test_2",
+      "identity": {
+        "public_key": "AAAA",
+        "key_algorithm": "Ed25519"
+      },
+      "trust": {
+        "sentinel_review_score": 0,
+        "sentinel_score": 0,
+        "audit_layers_passed": {},
+        "composite_trust": 0,
+        "risk_level": "not_audited",
+        "certificate_id": null
+      },
+      "capabilities": {
+        "provides": [],
+        "protocol_language": "mcp",
+        "translate": true
+      },
+      "payment": {
+        "method": "x402 + USDC on Base L2",
+        "wallet_address": null
+      },
+      "metadata": {
+        "issued_at": "2026-08-09T19:38:19.487Z",
+        "expires_at": "2026-11-07T19:38:19.487Z",
+        "issuer": "MarketNow Sentinel CA",
+        "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-4299487"
+      }
+    },
+    "signature": {
+      "algorithm": "Ed25519 (RFC 8032)",
+      "value": "ddfa9b3f3e3988fef2fe0cd9801a295849022943c6e69a3ce0c8df04574adba968b442049ddc66ae3100a49b44370686a430d6e0c95f6cc3fab5b8b804741603",
+      "signed_by": "MarketNow Sentinel CA",
+      "signed_at": "2026-08-09T19:38:19.487Z",
+      "canonical_json": "JSON.stringify(payload, Object.keys(payload).sort())",
+      "verify_with": "GET /api/atc?action=ca-key"
+    }
+  },
+  "original_ca_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA8p1XlAnt5QRCGbyDRi8+U9MCvt8Xyzq36Rar45JHszM=\n-----END PUBLIC KEY-----",
+  "canonicalization_method_used": "JSON.stringify(payload, Object.keys(payload).sort())",
+  "signed_at": "2026-08-09",
+  "expected_outcome": "invalid_against_new_ca",
+  "expected_outcome_against_original_ca": "valid",
+  "rationale": "This tests the CA rotation logic. A verifier that still accepts this card against the new CA key has a bug (it's not respecting the rotation). A verifier that accepts this card against the ORIGINAL key (provided in expected file) is functioning correctly for backwards compatibility, but should warn the user that the card was signed with a deprecated key."
+}

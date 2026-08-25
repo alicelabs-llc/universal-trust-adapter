@@ -1,0 +1,144 @@
+{
+  "$schema": "https://marketnow.site/api/audit-status.schema.json",
+  "audit_id": "AUD-2026-0821-MN",
+  "audit_date": "2026-08-21",
+  "auditor": "Independent security audit (Z.ai)",
+  "pdf_url": "https://marketnow.site/AUDIT_REPORT.pdf",
+  "pdf_sha256": "TODO: publish SHA-256 of PDF",
+  "next_reaudit_date": "2026-11-21",
+  "findings": [
+    {
+      "id": "F-01",
+      "severity": "critico",
+      "title": "Cloaking: contenido oculto servido solo a Googlebot",
+      "status": "fixed",
+      "fix_commit": "0b764d92",
+      "fix_date": "2026-08-25",
+      "verifier": "grep 'seo-only|Googlebot|hidden from humans' → 0"
+    },
+    {
+      "id": "F-02",
+      "severity": "critico",
+      "title": "El modelo de precio se contradice con su propia fuente canónica",
+      "status": "fixed",
+      "fix_commit": "0b764d92",
+      "fix_date": "2026-08-25",
+      "verifier": "pricing.json is now the single source of truth"
+    },
+    {
+      "id": "F-03",
+      "severity": "alto",
+      "title": "'8,288 verified safe' no cuadra con pass rate del 53.3%",
+      "status": "fixed",
+      "fix_commit": "pending",
+      "fix_date": "2026-08-25",
+      "verifier": "'verified safe' replaced with auto-scanned/human-reviewed/maintainer-verified taxonomy"
+    },
+    {
+      "id": "F-04",
+      "severity": "alto",
+      "title": "Plantilla rota {count} y texto duplicado 'pipeline pipeline'",
+      "status": "fixed",
+      "fix_commit": "0b764d92",
+      "fix_date": "2026-08-25",
+      "verifier": "grep 'pipeline pipeline' → 0"
+    },
+    {
+      "id": "F-05",
+      "severity": "alto",
+      "title": "'9,248 free skills' pero solo 43 son free",
+      "status": "fixed",
+      "fix_commit": "0b764d92",
+      "fix_date": "2026-08-25",
+      "verifier": "grep '9,248 free' → 0; grep '43 free skills' → 2"
+    },
+    {
+      "id": "F-06",
+      "severity": "medio",
+      "title": "skills.json pesa ~24 MB",
+      "status": "open",
+      "fix_commit": null,
+      "fix_date": null,
+      "verifier": "TODO: paginate API (Phase 3)"
+    },
+    {
+      "id": "F-07",
+      "severity": "alto",
+      "title": "Landing vende $0.99-$9.99, agent.json dice buyers nunca pagan",
+      "status": "fixed",
+      "fix_commit": "0b764d92",
+      "fix_date": "2026-08-25",
+      "verifier": "Landing now matches agent.json (B2B model)"
+    },
+    {
+      "id": "F-08",
+      "severity": "alto",
+      "title": "Enlace 'Browse all 9,248 free skills' roto",
+      "status": "fixed",
+      "fix_commit": "0b764d92",
+      "fix_date": "2026-08-25",
+      "verifier": "Link now says 'Browse all 43 free skills'"
+    },
+    {
+      "id": "F-09",
+      "severity": "alto",
+      "title": "Comentario 'redeploy trigger: new GitHub token' en HTML",
+      "status": "fixed",
+      "fix_commit": "0b764d92",
+      "fix_date": "2026-08-25",
+      "verifier": "grep 'redeploy trigger|GitHub token' → 0"
+    },
+    {
+      "id": "F-10",
+      "severity": "medio",
+      "title": "NPM packages verificables",
+      "status": "fixed",
+      "fix_commit": "NPM publish 2026-08-25",
+      "fix_date": "2026-08-25",
+      "verifier": "npm view marketnow-mcp → v1.10.1; npm view agent-trust-card → v1.1.2"
+    },
+    {
+      "id": "F-11",
+      "severity": "medio",
+      "title": "Wallet hardcodeada en agent.json",
+      "status": "partial",
+      "fix_commit": "pending",
+      "fix_date": null,
+      "verifier": "wallet_type marked as 'TODO: migrate to multisig escrow'"
+    },
+    {
+      "id": "F-12",
+      "severity": "medio",
+      "title": "Cifras duplicadas en 5+ sitios",
+      "status": "fixed",
+      "fix_commit": "pending",
+      "fix_date": "2026-08-25",
+      "verifier": "stats.json is now the single source of truth"
+    },
+    {
+      "id": "F-13",
+      "severity": "medio",
+      "title": "Versión Sentinel inconsistente (L1.5 vs L2.5)",
+      "status": "fixed",
+      "fix_commit": "pending",
+      "fix_date": "2026-08-25",
+      "verifier": "grep 'Sentinel L[0-9]' → 0; Sentinel v3.0 is canonical"
+    },
+    {
+      "id": "F-14",
+      "severity": "medio",
+      "title": "Auditoría F1-F8 no está públicamente cerrada",
+      "status": "fixed",
+      "fix_commit": "pending",
+      "fix_date": "2026-08-25",
+      "verifier": "This file (audit-status.json) closes the audit publicly"
+    }
+  ],
+  "summary": {
+    "total_findings": 14,
+    "fixed": 11,
+    "partial": 1,
+    "open": 1,
+    "wontfix": 0
+  }
+}

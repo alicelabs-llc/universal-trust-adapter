@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "description": "L4 Supply Chain Audit — SBOM schema for agents. MarketNow generates a Software Bill of Materials for each MCP server and checks dependencies against the OSV vulnerability database.",
+  "schema": {
+    "skill_id": "string — the skill being audited",
+    "generated_at": "ISO 8601 timestamp",
+    "total_dependencies": "number — total dependencies found",
+    "dependencies": [
+      {
+        "name": "package name (e.g., @modelcontextprotocol/sdk)",
+        "version": "version string (e.g., 1.0.0)",
+        "ecosystem": "npm | PyPI | Maven",
+        "type": "runtime | dev"
+      }
+    ],
+    "vulnerabilities": [
+      {
+        "package": "vulnerable package name",
+        "version": "affected version",
+        "vuln_id": "OSV vulnerability ID (e.g., GHSA-xxxx)",
+        "summary": "vulnerability description",
+        "severity": "CRITICAL | HIGH | MEDIUM | LOW",
+        "fixed_in": "version where it was fixed"
+      }
+    ],
+    "total_vulns": "number — total vulnerabilities found",
+    "critical_vulns": "number — critical severity count"
+  },
+  "agent_usage": "Agents should check /api/audit-skill?sbom=1&skillId=X to get the SBOM. Reject skills with critical_vulns > 0.",
+  "osv_api": "https://api.osv.dev/v1/query",
+  "endpoint": "GET /api/audit-skill?sbom=1&skillId={skillId}"
+}

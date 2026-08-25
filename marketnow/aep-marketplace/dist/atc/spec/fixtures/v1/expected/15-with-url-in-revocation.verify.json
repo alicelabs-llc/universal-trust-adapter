@@ -1,0 +1,8 @@
+{
+  "fixture_id": "15-with-url-in-revocation",
+  "expected_outcome": "valid",
+  "expected_canonical_bytes": "{\"agent_id\":\"agent_with_https_id\",\"agent_name\":\"Test Agent\",\"capabilities\":{\"protocol_language\":\"mcp\",\"provides\":[\"search\",\"read\"],\"translate\":true},\"card_id\":\"ATC-FIXTURE-015\",\"decision_authority\":\"consumer\",\"identity\":{\"key_algorithm\":\"Ed25519\",\"public_key\":\"MCowBQYDK2VwAyEATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\"},\"metadata\":{\"expires_at\":\"2027-08-19T00:00:00Z\",\"issued_at\":\"2026-08-19T00:00:00Z\",\"issuer\":\"MarketNow Sentinel CA\",\"revocation_url\":\"https://marketnow.site/api/atc?action=verify&card_id=ATC-FIXTURE-015\"},\"payment\":{\"method\":\"x402 + USDC on Base L2\",\"wallet_address\":\"0x1234567890abcdef1234567890abcdef12345678\"},\"schema_version\":\"1.1.0\",\"trust\":{\"audit_layers_passed\":{\"L1.5\":true,\"L1.6\":true,\"L1.7\":true,\"L1.8\":true,\"L1.9\":true,\"L2.5\":true},\"certificate_id\":\"mn-cert-atc-fixture-015\",\"composite_trust\":8,\"risk_level\":\"low\",\"sentinel_review_score\":8,\"sentinel_score\":8}}",
+  "expected_digest_sha256": "6ffb0f2906a8bdee44aaa7b58310b5d94e8781a2fbc2a3ee95a5de9da87d2e72",
+  "expected_verify_result": true,
+  "expected_verify_reason": "Card signature is valid and the card is not revoked or expired"
+}

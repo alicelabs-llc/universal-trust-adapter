@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Server Sandbox — gVisor Isolation for MCP — MarketNow</title>
+    <meta name="description" content="How to sandbox MCP servers with gVisor. Userspace kernel isolation for MCP server security testing. Docker + gVisor + seccomp profile.">
+    <meta name="keywords" content="mcp server sandbox, gvisor mcp, mcp docker sandbox, mcp isolation, mcp security sandbox">
+    <link rel="canonical" href="https://marketnow.site/landing-pages/mcp-server-sandbox.html" />
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #050505; color: #e2e8f0; line-height: 1.6; }
+        h1 { color: #3b82f6; }
+        h2 { color: #22c553; }
+        code { background: #1e293b; padding: 2px 6px; border-radius: 4px; }
+        pre { background: #1e293b; padding: 12px; border-radius: 8px; overflow-x: auto; }
+        a { color: #3b82f6; }
+        .cta { display: inline-block; background: #3b82f6; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>MCP Server Sandbox with gVisor</h1>
+    <p>How to run MCP (Model Context Protocol) servers in a sandboxed environment using gVisor — the userspace kernel that powers Google Cloud Run.</p>
+
+    <h2>Why sandbox MCP servers?</h2>
+    <p>Every MCP server you install gets access to:</p>
+    <ul>
+        <li>Your filesystem (<code>~/.ssh/id_rsa</code>, <code>~/.aws/credentials</code>)</li>
+        <li>Your network (exfiltrate data, SSRF)</li>
+        <li>Process spawning (run arbitrary commands)</li>
+        <li>Environment variables (API keys, tokens)</li>
+    </ul>
+    <p>There's no sandboxing built into MCP. You're trusting the author.</p>
+
+    <h2>The gVisor sandbox config</h2>
+    <pre>docker run --rm \
+  --runtime=runsc \
+  --network none \
+  --read-only \
+  --cap-drop ALL \
+  --security-opt no-new-privileges \
+  --memory 256m \
+  --memory-swap 0 \
+  --cpus 0.5 \
+  --pids-limit 64 \
+  --tmpfs /tmp:rw,size=64m \
+  mcp-audit-target</pre>
+
+    <h2>What gVisor catches</h2>
+    <ul>
+        <li><code>ptrace()</code> attempts — process inspection</li>
+        <li><code>bpf()</code> attempts — eBPF kernel exploits</li>
+        <li><code>mount()</code> attempts — filesystem escapes</li>
+        <li><code>kexec_load()</code> — kernel replacement</li>
+        <li><code>clone3()</code> — namespace creation</li>
+        <li>Container escapes via kernel vulnerabilities</li>
+    </ul>
+
+    <h2>Enhanced seccomp fallback</h2>
+    <p>When gVisor isn't available, we use a strict seccomp profile that blocks 30+ dangerous syscalls.</p>
+
+    <h2>Try it</h2>
+    <p>We've audited 8,764 MCP servers with this sandbox. Results are public.</p>
+    <a href="https://marketnow.site/security" class="cta">See Full Methodology →</a>
+    <a href="https://marketnow.site/registry" class="cta">Browse Audited Servers →</a>
+</body>
+</html>

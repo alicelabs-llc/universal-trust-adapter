@@ -1,0 +1,293 @@
+{
+  "ca_key_rotation_note": {
+    "new_ca_key_status": "active (deployed at /api/atc?action=ca-key)",
+    "original_ca_key_status": "deprecated (kept for backwards compatibility \u2014 verifiers should still accept signatures from it during the rotation period)",
+    "reason": "Per @anp2network's feedback on article #4381969 \u2014 canonicalization bug required rotation. The original CA key is deprecated.",
+    "rotation_date": "2026-08-13",
+    "status": "in_progress",
+    "verifier_guidance": "During rotation period: accept cards signed with EITHER key. After rotation completes: accept only new key."
+  },
+  "ca_public_key_url": "https://marketnow.site/api/atc?action=ca-key",
+  "canonicalization": "RFC 8785 JCS (JSON Canonicalization Scheme)",
+  "contact": "security@alicelabs.site",
+  "fixtures": [
+    {
+      "attack_vector": "nested_field_tampering",
+      "expected_file": "expected/01-tampered-nested-field.verify.json",
+      "expected_outcome": "invalid",
+      "file": "must-fail/01-tampered-nested-field.json",
+      "id": "01-tampered-nested-field",
+      "source": "synthetic_attack_vector",
+      "type": "must-fail"
+    },
+    {
+      "attack_vector": "rotated_ca_key",
+      "expected_file": "expected/02-rotated-key.verify.json",
+      "expected_outcome": "invalid",
+      "file": "must-fail/02-rotated-key.json",
+      "id": "02-rotated-key",
+      "source": "synthetic_attack_vector",
+      "type": "must-fail"
+    },
+    {
+      "attack_vector": "revoked_card_in_crl",
+      "expected_file": "expected/03-revoked-card.verify.json",
+      "expected_outcome": "invalid",
+      "file": "must-fail/03-revoked-card.json",
+      "id": "03-revoked-card",
+      "source": "synthetic_attack_vector",
+      "type": "must-fail"
+    },
+    {
+      "attack_vector": "canonicalization_method_mismatch",
+      "expected_file": "expected/04-canonicalization-mismatch.verify.json",
+      "expected_outcome": "invalid",
+      "file": "must-fail/04-canonicalization-mismatch.json",
+      "id": "04-canonicalization-mismatch",
+      "source": "synthetic_attack_vector",
+      "type": "must-fail"
+    },
+    {
+      "attack_vector": "expired_card",
+      "expected_file": "expected/05-expired-card.verify.json",
+      "expected_outcome": "invalid",
+      "file": "must-fail/05-expired-card.json",
+      "id": "05-expired-card",
+      "source": "synthetic_attack_vector",
+      "type": "must-fail"
+    },
+    {
+      "attack_vector": "top_level_field_tampering",
+      "expected_file": "expected/06-tampered-agent-id.verify.json",
+      "expected_outcome": "invalid",
+      "file": "must-fail/06-tampered-agent-id.json",
+      "id": "06-tampered-agent-id",
+      "source": "synthetic_attack_vector",
+      "type": "must-fail"
+    },
+    {
+      "attack_vector": "nested_public_key_tampering",
+      "expected_file": "expected/07-tampered-public-key.verify.json",
+      "expected_outcome": "invalid",
+      "file": "must-fail/07-tampered-public-key.json",
+      "id": "07-tampered-public-key",
+      "source": "synthetic_attack_vector",
+      "type": "must-fail"
+    },
+    {
+      "attack_vector": "deeply_nested_field_tampering",
+      "expected_file": "expected/08-tampered-wallet-address.verify.json",
+      "expected_outcome": "invalid",
+      "file": "must-fail/08-tampered-wallet-address.json",
+      "id": "08-tampered-wallet-address",
+      "source": "synthetic_attack_vector",
+      "type": "must-fail"
+    },
+    {
+      "attack_vector": "malformed_signature",
+      "expected_file": "expected/09-invalid-signature-format.verify.json",
+      "expected_outcome": "invalid",
+      "file": "must-fail/09-invalid-signature-format.json",
+      "id": "09-invalid-signature-format",
+      "source": "synthetic_attack_vector",
+      "type": "must-fail"
+    },
+    {
+      "attack_vector": "wrong_signature_algorithm",
+      "expected_file": "expected/10-wrong-signature-algorithm.verify.json",
+      "expected_outcome": "invalid",
+      "file": "must-fail/10-wrong-signature-algorithm.json",
+      "id": "10-wrong-signature-algorithm",
+      "source": "synthetic_attack_vector",
+      "type": "must-fail"
+    },
+    {
+      "attack_vector": "card_id_mismatch",
+      "expected_file": "expected/11-card-id-mismatch.verify.json",
+      "expected_outcome": "invalid",
+      "file": "must-fail/11-card-id-mismatch.json",
+      "id": "11-card-id-mismatch",
+      "source": "synthetic_attack_vector",
+      "type": "must-fail"
+    },
+    {
+      "attack_vector": "future_issued_at",
+      "expected_file": "expected/12-future-issued-at.verify.json",
+      "expected_outcome": "invalid",
+      "file": "must-fail/12-future-issued-at.json",
+      "id": "12-future-issued-at",
+      "source": "synthetic_attack_vector",
+      "type": "must-fail"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/02-real-card-ATC-2026-0589270.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/02-real-card-ATC-2026-0589270.json",
+      "id": "02-real-card-ATC-2026-0589270",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/03-real-card-ATC-2026-0995637.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/03-real-card-ATC-2026-0995637.json",
+      "id": "03-real-card-ATC-2026-0995637",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/04-real-card-ATC-2026-1178769.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/04-real-card-ATC-2026-1178769.json",
+      "id": "04-real-card-ATC-2026-1178769",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/05-real-card-ATC-2026-1361729.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/05-real-card-ATC-2026-1361729.json",
+      "id": "05-real-card-ATC-2026-1361729",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/06-real-card-ATC-2026-1700724.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/06-real-card-ATC-2026-1700724.json",
+      "id": "06-real-card-ATC-2026-1700724",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/07-real-card-ATC-2026-3550025.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/07-real-card-ATC-2026-3550025.json",
+      "id": "07-real-card-ATC-2026-3550025",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/08-real-card-ATC-2026-3951137.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/08-real-card-ATC-2026-3951137.json",
+      "id": "08-real-card-ATC-2026-3951137",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/09-real-card-ATC-2026-3968185.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/09-real-card-ATC-2026-3968185.json",
+      "id": "09-real-card-ATC-2026-3968185",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/10-real-card-ATC-2026-3984620.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/10-real-card-ATC-2026-3984620.json",
+      "id": "10-real-card-ATC-2026-3984620",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/11-real-card-ATC-2026-4002682.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/11-real-card-ATC-2026-4002682.json",
+      "id": "11-real-card-ATC-2026-4002682",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/12-real-card-ATC-2026-4018808.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/12-real-card-ATC-2026-4018808.json",
+      "id": "12-real-card-ATC-2026-4018808",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/13-real-card-ATC-2026-4036129.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/13-real-card-ATC-2026-4036129.json",
+      "id": "13-real-card-ATC-2026-4036129",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/14-real-card-ATC-2026-4299487.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/14-real-card-ATC-2026-4299487.json",
+      "id": "14-real-card-ATC-2026-4299487",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/15-real-card-ATC-2026-4304580.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/15-real-card-ATC-2026-4304580.json",
+      "id": "15-real-card-ATC-2026-4304580",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/16-real-card-ATC-2026-4305564.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/16-real-card-ATC-2026-4305564.json",
+      "id": "16-real-card-ATC-2026-4305564",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    },
+    {
+      "attack_vector": "orphaned_ca_key_post_rotation",
+      "expected_file": "expected/17-real-card-ATC-2026-4327228.verify.json",
+      "expected_outcome": "invalid_against_new_ca",
+      "file": "must-fail-against-orphaned-ca/17-real-card-ATC-2026-4327228.json",
+      "id": "17-real-card-ATC-2026-4327228",
+      "source": "real_orphaned_card",
+      "type": "must-fail-against-orphaned-ca"
+    }
+  ],
+  "immutability": "This manifest is content-addressed. The SHA-256 of this manifest is the canonical version ID. Any change creates a new version.",
+  "license": "MNNC-1.0 \u2014 see https://marketnow.site/LICENSE",
+  "manifest_sha256": "3bfff9b8d15070f684638062505535142692a98db2f7201b280ec9a1b8e37d92",
+  "manifest_version": "v1",
+  "must_fail_against_orphaned_ca_count": 16,
+  "must_fail_count": 12,
+  "must_pass_count": 0,
+  "must_pass_status": "EMPTY \u2014 pending new CA key issuance. The original ATC cards in _data/atc/ were signed with the deprecated CA key. New cards signed with the new production CA key (post-rotation) will be added here once issued. See must-pass/README.md for details.",
+  "published_at": "2026-08-19T18:29:58.021239+00:00",
+  "publisher": "MarketNow Sentinel CA",
+  "publisher_url": "https://marketnow.site",
+  "schema_version": "1.0.2",
+  "signature_algorithm": "Ed25519 (RFC 8032)",
+  "spec_url": "https://marketnow.site/atc/spec/SPEC.md",
+  "total_fixtures": 28,
+  "usage": {
+    "instructions": "To verify an ATC implementation against these fixtures:",
+    "steps": [
+      "1. Download the entire fixtures/v1/ directory",
+      "2. Fetch the CA public key from https://marketnow.site/api/atc?action=ca-key",
+      "3. For each fixture in must-fail/: load the card, canonicalize using RFC 8785 JCS, verify the Ed25519 signature with the CA public key. MUST return false.",
+      "4. For each fixture in must-fail-against-orphaned-ca/: load the card, verify against the new CA key. MUST return false (signature was made with the deprecated original key).",
+      "5. For optional backwards-compat testing: verify each must-fail-against-orphaned-ca fixture against the original_ca_key_pem in its expected file. MUST return true (the original key still works).",
+      "6. Report results: include fixture_id, your canonical bytes (hex), expected canonical bytes (hex), match: true/false."
+    ]
+  }
+}

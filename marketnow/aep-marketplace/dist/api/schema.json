@@ -1,0 +1,35 @@
+{
+  "organization": {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MarketNow",
+    "url": "https://marketnow.site",
+    "logo": "https://marketnow.site/favicon.svg",
+    "description": "Open marketplace for MCP-compatible agent skills. Every skill is verified by Sentinel L1 and priced from $0.99.",
+    "sameAs": [
+      "https://github.com/alicelabs-llc/marketnow"
+    ]
+  },
+  "website": {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "MarketNow",
+    "url": "https://marketnow.site",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://marketnow.site/registry?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  },
+  "marketplace": {
+    "@context": "https://schema.org",
+    "@type": "Marketplace",
+    "name": "MarketNow",
+    "url": "https://marketnow.site",
+    "description": "Marketplace for MCP-compatible agent skills",
+    "numberOfItems": 5054,
+    "priceRange": "$0.99 - $9.99",
+    "paymentAccepted": "USD, USDC",
+    "currenciesAccepted": "USD, USDC"
+  }
+}

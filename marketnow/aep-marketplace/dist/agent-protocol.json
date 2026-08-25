@@ -1,0 +1,110 @@
+{
+  "protocol_name": "MarketNow Agent Protocol (MAP)",
+  "version": "1.0.0",
+  "description": "A lightweight protocol for AI agents to discover, evaluate, purchase, and install MCP skills. Built on top of MCP, A2A, and JSON-RPC.",
+  "homepage": "https://marketnow.site/for-agents",
+  
+  "discovery": {
+    "how_agents_find_us": [
+      "MCP Registry: registry.modelcontextprotocol.io — search 'marketnow'",
+      "npm: npm search 'mcp marketplace' — package 'marketnow-mcp'",
+      "A2A: GET /.well-known/agent.json — Agent Card with capabilities",
+      "MCP: GET /.well-known/mcp.json — MCP server discovery",
+      "llms.txt: GET /llms.txt — LLM-readable summary",
+      "Manifest: GET /api/manifest — all endpoints in one call",
+      "Quick ref: GET /for-agents-quick.txt — plain text, 2KB",
+      "GitHub: topics 'mcp-marketplace', 'agent-commerce', 'sentinel'"
+    ],
+    "well_known_endpoints": {
+      "agent.json": "/.well-known/agent.json",
+      "mcp.json": "/.well-known/mcp.json",
+      "ai-plugin.json": "/.well-known/ai-plugin.json",
+      "mcp-marketplace.json": "/.well-known/mcp-marketplace.json"
+    }
+  },
+  
+  "connection_methods": {
+    "stdio": {
+      "command": "npx -y marketnow-mcp",
+      "description": "Standard MCP stdio transport. Works with Claude Desktop, Cursor, Cline."
+    },
+    "http_sse": {
+      "url": "https://marketnow.site/api/mcp",
+      "transport": "SSE + JSON-RPC 2.0",
+      "protocol_version": "2024-11-05"
+    },
+    "rest_api": {
+      "base_url": "https://marketnow.site/api",
+      "openapi": "https://marketnow.site/api/openapi.yaml"
+    }
+  },
+  
+  "agent_workflow": {
+    "step_1_discover": "GET /api/manifest — learn all endpoints",
+    "step_2_search": "POST /api/mcp {method: 'tools/call', name: 'search_skills', args: {query: 'github'}}",
+    "step_3_evaluate": "GET /api/trust-score?skillId=X — get trust score + recommendation",
+    "step_4_verify": "GET /api/audit-skill?certificate=1&skillId=X — get signed SHA-256 certificate",
+    "step_5_install": "Run the install command from the skill detail",
+    "step_6_pay": "POST /api/agent-purchase — pay with USDC on Base or Stripe",
+    "step_7_report": "POST /api/mcp {method: 'tools/call', name: 'health'} — verify installation"
+  },
+  
+  "trust_model": {
+    "levels": {
+      "safe_to_install": "trust_score >= 8 — agent can install without human approval",
+      "install_with_caution": "trust_score 5-7 — agent should warn human before installing",
+      "high_risk_review_before_install": "trust_score 2-4 — agent should NOT install without explicit human approval",
+      "do_not_install": "trust_score 0-1 — agent should refuse to install"
+    },
+    "certificate_fields": [
+      "certificate_id", "skill_id", "overall_score", "max_score",
+      "risk_level", "signature", "signature_algorithm",
+      "layers_run", "expires_at", "verification_url"
+    ]
+  },
+  
+  "agent_registration": {
+    "description": "Agents can register themselves to build reputation and get personalized recommendations",
+    "endpoint": "POST /api/agent-register (coming soon — GitHub issue based for now)",
+    "github_issue": "https://github.com/alicelabs-llc/marketnow/issues/new?title=Agent+Registration&body=Agent+name,+capabilities,+contact",
+    "fields": {
+      "agent_name": "string — name of the agent",
+      "agent_type": "coding | research | data | finance | communication | security",
+      "capabilities": "array — what the agent can do",
+      "contact": "string — how to reach the agent owner"
+    }
+  },
+  
+  "agent_communication": {
+    "protocol": "JSON-RPC 2.0 over HTTP",
+    "encoding": "UTF-8",
+    "content_type": "application/json",
+    "cors": "Access-Control-Allow-Origin: *",
+    "rate_limit": "100 requests/minute for reads, 10/minute for writes"
+  },
+  
+  "failure_handling": {
+    "taxonomy": "GET /failure-taxonomy.json — 15 structured failure codes",
+    "decision_tree": "agents use failure codes to self-diagnose and recover",
+    "codes": ["NET_001", "NET_002", "AUTH_001", "PAY_001", "PAY_002", "INST_001", "INST_002", "TRUST_001", "TRUST_002", "SBOX_001", "CERT_001", "CERT_002", "DEP_001", "CRASH_001", "RATE_001"]
+  },
+  
+  "payment": {
+    "methods": ["stripe", "usdc_base"],
+    "usdc_contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "wallet": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee",
+    "network": "Base L2 (chainId 8453)",
+    "dispute_window": "7 days",
+    "human_in_loop": "AP2 mandates default to 'notify' mode — agents must opt into 'silent' mode"
+  },
+  
+  "stats": {
+    "total_skills": 9,248,
+    "audited": 5120,
+    "l2_tested": 206,
+    "free_skills": 65,
+    "sentinel_version": "L2.5+L2.6+L4+L4.5",
+    "mcp_registry_listed": true,
+    "npm_package": "marketnow-mcp@1.4.1"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "service": "MarketNow",
+  "page": "Catalog Transparency",
+  "version": "1.0.0",
+  "effective_date": "2026-07-02",
+  "url": "https://marketnow.site/catalog",
+  "total_skills": 9,248,
+  "summary": "Claude noticed that some categories had exactly '30' items \u2014 a sign of bulk import rather than organic curation. This page is our honest disclosure of how the catalog was built, where each skill came from, and what 'verified' actually means.",
+  "catalog_breakdown": [
+    {
+      "count": 5054,
+      "label": "Curated open-source MCP servers",
+      "description": "Sourced from public GitHub repositories tagged with 'mcp-server' or 'model-context-protocol'. Each was scanned by Sentinel L1.5, given a category based on its README, and assigned a price based on complexity (single-function = free, with B2B pricing tiers). These are real, working MCP servers you can verify on GitHub."
+    },
+    {
+      "count": 3506,
+      "label": "Bulk-imported from agent tool inventories",
+      "description": "Imported from community-maintained 'awesome-mcp' lists and agent tool inventories. These have less individual curation \u2014 Sentinel scanned them, but no human has reviewed each one. This is where the '30 items per category' pattern comes from \u2014 several of these source lists had ~30 entries per category, and that count propagated. We disclose this rather than hide it."
+    },
+    {
+      "count": 43,
+      "label": "Hand-picked free skills",
+      "description": "Curated by us as a 'starter pack' for agents \u2014 high-signal prompts, foundational tools, etc. Available at /api/free-skills.json. No payment, no mandate required."
+    },
+    {
+      "count": 0,
+      "label": "Synthetic or fake",
+      "description": "We previously had ~13,000 synthetic skills. They were removed in early 2026 in a cleanup pass. The current catalog of 9,248 skills is real software. You can verify each one by checking its GitHub repo (when source is known) or running its install command."
+    }
+  ],
+  "categories_with_bulk_import_flag": 14,
+  "categories_total": 58,
+  "review_status_distribution": {
+    "auto-scanned": 8517,
+    "human-reviewed": 43,
+    "maintainer-verified": 0,
+    "explanation": "Of 9,248 skills: 8,517 are auto-scanned (Sentinel ran, no human review), 43 are human-reviewed (curated free skills), 0 are maintainer-verified (program not launched). We never mark a skill 'verified' if it has only been auto-scanned."
+  },
+  "what_verified_means": {
+    "auto-scanned": "Sentinel L1.5 ran automated checks. No human has reviewed. Most catalog skills are here.",
+    "human-reviewed": "A human at AliceLabs manually inspected the GitHub repo, code, and Sentinel report.",
+    "maintainer-verified": "The skill's GitHub maintainer signed a claim of authorship (GPG-signed commit). Coming soon."
+  },
+  "disclosure_commitment": [
+    "We will never inflate skill counts by adding synthetic entries.",
+    "We will mark bulk-imported categories as such, not hide them.",
+    "We will not claim 'verified' status we have not earned.",
+    "When a third-party audit happens, the full report goes public here.",
+    "Real download counts and real reviews will appear as we get them. We will not seed fakes."
+  ],
+  "related_pages": {
+    "trust_roadmap": "https://marketnow.site/trust",
+    "about": "https://marketnow.site/about",
+    "registry": "https://marketnow.site/registry",
+    "policies_json": "https://marketnow.site/api/policies.json"
+  }
+}

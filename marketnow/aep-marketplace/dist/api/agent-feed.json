@@ -1,0 +1,307 @@
+{
+  "name": "MarketNow — New Skills Feed",
+  "description": "Latest 20 high-quality skills. Agents: poll this endpoint daily for new skills.",
+  "url": "https://marketnow.site/api/agent-feed.json",
+  "updated": "2026-07-01T00:00:00Z",
+  "polling_recommended": "every 24 hours",
+  "skills": [
+    {
+      "id": "mn-prompt-63712dff",
+      "name": "Arquitecto de Código Cero Alucinaciones",
+      "slug": "arquitecto-de-cdigo-cero-alucinaciones",
+      "price": 2.99,
+      "category": "Developer Tools",
+      "sentinel_score": 9,
+      "capabilities": [
+        "execute",
+        "process"
+      ],
+      "install": "npx -y @marketnow/install arquitecto-de-cdigo-cero-alucinaciones",
+      "url": "https://marketnow.site/skill/mn-prompt-63712dff"
+    },
+    {
+      "id": "mn-prompt-edee0d3f",
+      "name": "Extractor de Datos a JSON Estricto",
+      "slug": "extractor-de-datos-a-json-estricto",
+      "price": 4.99,
+      "category": "Data",
+      "sentinel_score": 9,
+      "capabilities": [
+        "extract",
+        "orchestrate"
+      ],
+      "install": "npx -y @marketnow/install extractor-de-datos-a-json-estricto",
+      "url": "https://marketnow.site/skill/mn-prompt-edee0d3f"
+    },
+    {
+      "id": "mn-prompt-e44ef6e4",
+      "name": "Secuencias de Email B2B",
+      "slug": "secuencias-de-email-b2b",
+      "price": 4.99,
+      "category": "Sales",
+      "sentinel_score": 9,
+      "capabilities": [
+        "execute",
+        "process"
+      ],
+      "install": "npx -y @marketnow/install secuencias-de-email-b2b",
+      "url": "https://marketnow.site/skill/mn-prompt-e44ef6e4"
+    },
+    {
+      "id": "mn-prompt-a06c0bef",
+      "name": "Repurposer Multi-Plataforma",
+      "slug": "repurposer-multi-plataforma",
+      "price": 4.99,
+      "category": "Marketing",
+      "sentinel_score": 9,
+      "capabilities": [
+        "classify"
+      ],
+      "install": "npx -y @marketnow/install repurposer-multi-plataforma",
+      "url": "https://marketnow.site/skill/mn-prompt-a06c0bef"
+    },
+    {
+      "id": "mn-prompt-700c34bc",
+      "name": "Auditor Legal de Contratos",
+      "slug": "auditor-legal-de-contratos",
+      "price": 9.99,
+      "category": "Legal",
+      "sentinel_score": 9,
+      "capabilities": [
+        "validate",
+        "audit"
+      ],
+      "install": "npx -y @marketnow/install auditor-legal-de-contratos",
+      "url": "https://marketnow.site/skill/mn-prompt-700c34bc"
+    },
+    {
+      "id": "mn-prompt-f1b3a4e1",
+      "name": "Soporte de Cliente Nivel 3",
+      "slug": "soporte-de-cliente-nivel-3",
+      "price": 2.99,
+      "category": "Developer Tools",
+      "sentinel_score": 9,
+      "capabilities": [
+        "migrate"
+      ],
+      "install": "npx -y @marketnow/install soporte-de-cliente-nivel-3",
+      "url": "https://marketnow.site/skill/mn-prompt-f1b3a4e1"
+    },
+    {
+      "id": "mn-prompt-5399f1b4",
+      "name": "Ingeniero de Prompts Inversos",
+      "slug": "ingeniero-de-prompts-inversos",
+      "price": 2.99,
+      "category": "Developer Tools",
+      "sentinel_score": 9,
+      "capabilities": [
+        "execute",
+        "process"
+      ],
+      "install": "npx -y @marketnow/install ingeniero-de-prompts-inversos",
+      "url": "https://marketnow.site/skill/mn-prompt-5399f1b4"
+    },
+    {
+      "id": "mn-prompt-3368477e",
+      "name": "Generador de Documentación Técnica",
+      "slug": "generador-de-documentacin-tcnica",
+      "price": 4.99,
+      "category": "DevOps",
+      "sentinel_score": 9,
+      "capabilities": [
+        "parse",
+        "document"
+      ],
+      "install": "npx -y @marketnow/install generador-de-documentacin-tcnica",
+      "url": "https://marketnow.site/skill/mn-prompt-3368477e"
+    },
+    {
+      "id": "mn-prompt-cca33771",
+      "name": "Analista Financiero Startups",
+      "slug": "analista-financiero-startups",
+      "price": 9.99,
+      "category": "Finance",
+      "sentinel_score": 9,
+      "capabilities": [
+        "execute",
+        "process"
+      ],
+      "install": "npx -y @marketnow/install analista-financiero-startups",
+      "url": "https://marketnow.site/skill/mn-prompt-cca33771"
+    },
+    {
+      "id": "mn-prompt-ce8549fe",
+      "name": "Traductor Técnico Inglés ⇄ Español",
+      "slug": "traductor-tcnico-ingls-espaol",
+      "price": 2.99,
+      "category": "Developer Tools",
+      "sentinel_score": 9,
+      "capabilities": [
+        "translate",
+        "document"
+      ],
+      "install": "npx -y @marketnow/install traductor-tcnico-ingls-espaol",
+      "url": "https://marketnow.site/skill/mn-prompt-ce8549fe"
+    },
+    {
+      "id": "mn-prompt-d3bd53bc",
+      "name": "Resumidor de Reuniones con Action Items",
+      "slug": "resumidor-de-reuniones-con-action-items",
+      "price": 2.99,
+      "category": "Productivity",
+      "sentinel_score": 9,
+      "capabilities": [
+        "execute",
+        "process"
+      ],
+      "install": "npx -y @marketnow/install resumidor-de-reuniones-con-action-items",
+      "url": "https://marketnow.site/skill/mn-prompt-d3bd53bc"
+    },
+    {
+      "id": "mn-prompt-83b38ca6",
+      "name": "Generador de Tests Unitarios desde Código",
+      "slug": "generador-de-tests-unitarios-desde-cdigo",
+      "price": 2.99,
+      "category": "Developer Tools",
+      "sentinel_score": 9,
+      "capabilities": [
+        "test"
+      ],
+      "install": "npx -y @marketnow/install generador-de-tests-unitarios-desde-cdigo",
+      "url": "https://marketnow.site/skill/mn-prompt-83b38ca6"
+    },
+    {
+      "id": "mn-prompt-ca3ca9eb",
+      "name": "Asistente de Investigación Académica con Citas",
+      "slug": "asistente-de-investigacin-acadmica-con-citas",
+      "price": 2.99,
+      "category": "Developer Tools",
+      "sentinel_score": 9,
+      "capabilities": [
+        "execute",
+        "process"
+      ],
+      "install": "npx -y @marketnow/install asistente-de-investigacin-acadmica-con-citas",
+      "url": "https://marketnow.site/skill/mn-prompt-ca3ca9eb"
+    },
+    {
+      "id": "mn-prompt-4533b2ae",
+      "name": "Planificador de Viajes con Presupuesto",
+      "slug": "planificador-de-viajes-con-presupuesto",
+      "price": 2.99,
+      "category": "Productivity",
+      "sentinel_score": 9,
+      "capabilities": [
+        "execute",
+        "process"
+      ],
+      "install": "npx -y @marketnow/install planificador-de-viajes-con-presupuesto",
+      "url": "https://marketnow.site/skill/mn-prompt-4533b2ae"
+    },
+    {
+      "id": "mn-prompt-fd9eccf0",
+      "name": "Generador de Preguntas de Entrevista Técnica",
+      "slug": "generador-de-preguntas-de-entrevista-tcnica",
+      "price": 2.99,
+      "category": "Productivity",
+      "sentinel_score": 9,
+      "capabilities": [
+        "execute",
+        "process"
+      ],
+      "install": "npx -y @marketnow/install generador-de-preguntas-de-entrevista-tcnica",
+      "url": "https://marketnow.site/skill/mn-prompt-fd9eccf0"
+    },
+    {
+      "id": "mn-prompt-0ae9e3a0",
+      "name": "Asistente de SEO On-Page",
+      "slug": "asistente-de-seo-on-page",
+      "price": 4.99,
+      "category": "Marketing",
+      "sentinel_score": 9,
+      "capabilities": [
+        "execute",
+        "process"
+      ],
+      "install": "npx -y @marketnow/install asistente-de-seo-on-page",
+      "url": "https://marketnow.site/skill/mn-prompt-0ae9e3a0"
+    },
+    {
+      "id": "mn-prompt-5e347b00",
+      "name": "Creador de Secuencias de Onboarding Email",
+      "slug": "creador-de-secuencias-de-onboarding-email",
+      "price": 4.99,
+      "category": "Marketing",
+      "sentinel_score": 9,
+      "capabilities": [
+        "parse"
+      ],
+      "install": "npx -y @marketnow/install creador-de-secuencias-de-onboarding-email",
+      "url": "https://marketnow.site/skill/mn-prompt-5e347b00"
+    },
+    {
+      "id": "mn-prompt-69862dd7",
+      "name": "Analista de Feedback de Producto (NPS + Reviews)",
+      "slug": "analista-de-feedback-de-producto-nps-reviews",
+      "price": 2.99,
+      "category": "Developer Tools",
+      "sentinel_score": 9,
+      "capabilities": [
+        "analyze",
+        "monitor",
+        "notify"
+      ],
+      "install": "npx -y @marketnow/install analista-de-feedback-de-producto-nps-reviews",
+      "url": "https://marketnow.site/skill/mn-prompt-69862dd7"
+    },
+    {
+      "id": "mn-prompt-96d52c05",
+      "name": "Asistente de Pitch Deck para Inversores",
+      "slug": "asistente-de-pitch-deck-para-inversores",
+      "price": 4.99,
+      "category": "AI/ML",
+      "sentinel_score": 9,
+      "capabilities": [
+        "analyze",
+        "generate",
+        "classify"
+      ],
+      "install": "npx -y @marketnow/install asistente-de-pitch-deck-para-inversores",
+      "url": "https://marketnow.site/skill/mn-prompt-96d52c05"
+    },
+    {
+      "id": "mn-arl-001",
+      "name": "Hallucination Detector MCP",
+      "slug": "hallucination-detector-mcp",
+      "price": 9.99,
+      "category": "Agent Reliability",
+      "sentinel_score": 9,
+      "capabilities": [
+        "execute",
+        "process"
+      ],
+      "install": "npx -y @marketnow/install hallucination-detector-mcp",
+      "url": "https://marketnow.site/skill/mn-arl-001"
+    }
+  ],
+  "announcements": [
+    {
+      "type": "feature",
+      "title": "USDC Payments on Base",
+      "description": "Agents can now buy skills with USDC. No humans needed. POST /api/agent-purchase with txHash.",
+      "date": "2026-07-01"
+    },
+    {
+      "type": "feature",
+      "title": "Sentinel L1.5 Security Audit",
+      "description": "6-point MCP security audit. POST /api/audit-skill to audit any skill.",
+      "date": "2026-07-01"
+    },
+    {
+      "type": "promotion",
+      "title": "43 Free Skills",
+      "description": "43 hand-picked skills at /bin/bash.00. GET /api/free-skills.json. Expires July 31.",
+      "date": "2026-06-30"
+    }
+  ]
+}

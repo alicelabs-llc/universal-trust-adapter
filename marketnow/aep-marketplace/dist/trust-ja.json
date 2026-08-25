@@ -1,0 +1,57 @@
+{
+  "lang": "ja",
+  "title": "トラストロードマップ — Sentinel L2.5 監査パイプライン",
+  "subtitle": "MarketNow — AIエージェントのトラスト層",
+  "what_is_done": {
+    "title": "完了済み（2026年7月）",
+    "security_layers": "10層すべて稼働中",
+    "layers": [
+      "L1.5: メタデータチェック（README、ライセンス、アーカイブ、期限切れ）",
+      "L1.6: 36 Semgrepルール + 18シークレットパターン + OSV依存関係スキャン",
+      "L1.7: 8マルウェアパターン + バイナリ/ランチャー検出",
+      "L1.8: 48マルウェアファミリー署名（Emotet、LockBit、Cobalt Strike等）",
+      "L1.9: 32プロンプトインジェクション防御ルール（10カテゴリ）",
+      "L2: Dockerサンドボックス（gVisor、ネットワークなし、読み取り専用）",
+      "L3: 継続的ランタイム監視（週次再監査、6種類のドリフト検出）",
+      "WAF: 38攻撃署名 + 自動BAN",
+      "ハニーポット: 50+偽パス + 24時間自動BAN",
+      "脅威インテリジェンス: abuse.chフィード（URLhaus + MalwareBazaar + ThreatFox）"
+    ],
+    "trust": "ATC（エージェントトラストカード）— Ed25519署名、RFC 8785 JCS正規化JSON",
+    "marketplace": "9,248監査済みスキル、7言語対応（EN、ES、ZH、JA、FR、DE、KO）",
+    "community": "23 dev.to記事、3無料プログラム（チャレンジ、パートナーシップ、バグバウンティ）"
+  },
+  "what_is_next": {
+    "title": "次のステップ",
+    "q3_2026": [
+      "キャンセルAPI（非同期購入 + ステータス + キャンセル）",
+      "npm パッケージプロビナンス（Sigstore）",
+      "署名付き失効リスト（短TTL）"
+    ],
+    "q4_2026": [
+      "L4: プロセス内ランタイム監視（eBPF）",
+      "マルチシグATC（2+ CA必要）",
+      "100+ GitHub スター",
+      "最初の有料セラー"
+    ],
+    "2027": [
+      "L5: サードパーティセキュリティ監査",
+      "セルフホストSentinel（エンタープライズ）",
+      "50,000+ スキル",
+      "最初の$1,000 MRR"
+    ]
+  },
+  "what_we_will_not_do": [
+    "広告への支払い",
+    "ユーザーデータの販売",
+    "トラスト検証へのペイウォール",
+    "基本監査への課金"
+  ],
+  "links": {
+    "website": "https://marketnow.site",
+    "submit": "https://marketnow.site/submit",
+    "spec": "https://marketnow.site/api/atc?action=spec",
+    "github": "https://github.com/alicelabs-llc/marketnow",
+    "npm": "https://www.npmjs.com/package/marketnow-mcp"
+  }
+}

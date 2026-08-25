@@ -1,0 +1,6 @@
+{
+  "fixture_id": "16-invalid-policy-version",
+  "expected_outcome": "invalid",
+  "expected_verify_result": false,
+  "expected_verify_reason": "v2.0 requires policy_version to be a valid semver. This card has policy_version='invalid'. Verifiers MUST reject."
+}

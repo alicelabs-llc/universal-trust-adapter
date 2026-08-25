@@ -1,0 +1,48 @@
+{
+  "service": "MarketNow",
+  "current_version": "4.0.0",
+  "changelog": [
+    {
+      "version": "4.1.0",
+      "date": "2026-07-12",
+      "changes": [
+        "ATC \u2014 Agent Trust Card launched (replaces ACP)",
+        "L4 Supply Chain Audit (SBOM + OSV) \u2014 LIVE",
+        "L4.5 Content Fingerprint (SHA-256) \u2014 LIVE",
+        "L2.6 Egress Proxy with Allowlist \u2014 LIVE",
+        "Published to MCP Registry official",
+        "npm v1.4.1 with mcpName"
+      ],
+      "breaking": [],
+      "new_endpoints": [
+        "/api/atc",
+        "/atc-spec.json",
+        "/sbom-schema.json",
+        "/egress-allowlist.json"
+      ]
+    },
+    {
+      "version": "4.0.0",
+      "date": "2026-07-10",
+      "changes": [
+        "Added /api/trust-score endpoint",
+        "Added /api/manifest endpoint",
+        "Added /api/health endpoint",
+        "Added /api/skills/{id} dynamic route",
+        "Added /api/changelog endpoint",
+        "Added /api/recommend endpoint",
+        "Added /api/mcp (HTTP transport)",
+        "Sentinel L2.5 gVisor sandbox live"
+      ]
+    },
+    {
+      "version": "3.0.0",
+      "date": "2026-07-06",
+      "changes": [
+        "Sentinel L2 v2.0 + L2.5 gVisor",
+        "llms.txt + ai.txt",
+        "IndexNow"
+      ]
+    }
+  ]
+}

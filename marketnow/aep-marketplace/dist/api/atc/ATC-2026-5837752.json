@@ -1,0 +1,54 @@
+{
+  "card_id": "ATC-2026-5837752",
+  "status": "revoked",
+  "payload": {
+    "card_id": "ATC-2026-5837752",
+    "agent_id": "agent.alicelabs.marketnow",
+    "agent_name": "MarketNow Discovery Agent",
+    "identity": {
+      "public_key": "-----BEGIN PUBLIC KEY-----MCowBQYDK2VwAyEAalg5E/VFKGMV59X7mBhttQHV+tendDZTCSkRrWcuvMA=-----END PUBLIC KEY-----",
+      "key_algorithm": "Ed25519"
+    },
+    "trust": {
+      "audit_layers_passed": {},
+      "composite_trust": 0,
+      "risk_level": "not_audited",
+      "certificate_id": null
+    },
+    "capabilities": {
+      "provides": [
+        "skill_search",
+        "skill_recommendation",
+        "security_audit",
+        "agent_trust_verification"
+      ],
+      "protocol_language": "mcp",
+      "translate": true
+    },
+    "payment": {
+      "method": "x402 + USDC on Base L2",
+      "wallet_address": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee"
+    },
+    "metadata": {
+      "issued_at": "2026-07-18T03:37:17.752Z",
+      "expires_at": "2026-10-16T03:37:17.752Z",
+      "issuer": "MarketNow Sentinel CA",
+      "revocation_url": "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-5837752"
+    }
+  },
+  "signature": {
+    "algorithm": "Ed25519 (RFC 8032)",
+    "value": "fc89de026aba3525ed21904f1470313797301236ee042da41003d2c4ac3e4a2c910b8e4d538ad205e03ff0612e9f46c7b3e9f0263b784d3d92285702e411d90f",
+    "signed_by": "MarketNow Sentinel CA",
+    "signed_at": "2026-07-18T03:37:17.752Z",
+    "canonical_json": "RFC 8785 JCS (JSON Canonicalization Scheme)",
+    "verify_with": "GET /api/atc?action=ca-key",
+    "signed_payload_hash": "b76262a4f2fc2ca1c2193dd83bf102de3e1be23cfe5fc02fe02732a1fcb4adbf",
+    "resigned_at": "2026-08-13T19:59:59.557Z",
+    "resign_reason": "Aug 13, 2026: fixed forward-slash escaping per RFC 8785 §3.2.2.2, removed sentinel_score alias from signed payload, added ca_key_id. Bug reported by @anp2network.",
+    "canonicalization_method": "RFC_8785_JCS",
+    "ca_key_id": "MCowBQYDK2VwAyEA"
+  },
+  "revoked_at": "2026-07-18T03:38:45.419Z",
+  "revocation_reason": "Replaced with new ATC linked to Sentinel certificate (score 10)"
+}
