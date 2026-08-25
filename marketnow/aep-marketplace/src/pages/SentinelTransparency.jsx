@@ -218,7 +218,7 @@ export default function SentinelTransparency() {
             <div className="p-3 rounded bg-orange-500/5 border border-orange-500/10 text-orange-400/80 text-xs leading-relaxed mb-4">
               <strong className="text-orange-400">⚠️ L2 rollout in progress:</strong>{' '}
               {l2.completed_runs || 0} of {certCount.toLocaleString()} skills ({certCount > 0 ? ((l2.completed_runs || 0) / certCount * 100).toFixed(2) : 0}%) have L2 results.
-              The remaining {certCount - (l2.completed_runs || 0)} are certified with L1.5+L1.6 (static analysis only).
+              The remaining {certCount - (l2.completed_runs || 0)} are certified with v3.0+L1.6 (static analysis only).
               L2 coverage grows as more skills get source.url populated.
             </div>
             {l2Summaries.length > 0 && (
@@ -319,7 +319,7 @@ export default function SentinelTransparency() {
           <h2 className="text-white font-semibold mb-4">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
             <div className="p-4 rounded-lg bg-black/30">
-              <div className="text-[#00F299] font-bold text-lg mb-2">L1.5</div>
+              <div className="text-[#00F299] font-bold text-lg mb-2">v3.0</div>
               <div className="text-white text-xs font-semibold mb-1">6 Metadata Checks</div>
               <div className="text-zinc-500 text-xs">AUTH, prompt injection, input validation, CORS, OAuth scopes, rate limiting — runs in Vercel real-time (~200ms)</div>
             </div>

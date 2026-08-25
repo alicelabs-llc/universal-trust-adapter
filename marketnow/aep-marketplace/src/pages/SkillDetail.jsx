@@ -436,7 +436,7 @@ function normalizeSkill(s) {
     tagline: s.tagline || `Real MCP server · ${s.category || 'Developer Tools'} · Open Source`,
     slug: s.slug || s.id,
     sentinel_score: s.sentinel_score ?? 6,
-    install: s.install || `npx -y @marketnow/install ${s.slug || s.id}`,
+    install: s.install || `npx -y marketnow-install-stack ${s.slug || s.id}`,
     verified: s.verified ?? true,
     translations: s.translations || null,
     language: s.language || 'en',
@@ -704,7 +704,7 @@ Issued: ${new Date(certificate.issued_at).toLocaleDateString()}
 Expires: ${new Date(certificate.expires_at).toLocaleDateString()}
 Score: ${certificate.overall_score}/10
 Risk: ${certificate.risk_level}
-Layers: L1.5 ✓  L1.6 ✓  L2 ${certificate.layers_run.l2 ? '✓' : '—'}`}
+Layers: v3.0 ✓  L1.6 ✓  L2 ${certificate.layers_run.l2 ? '✓' : '—'}`}
                       >
                         🛡️ CERTIFIED {certificate.overall_score}/10
                       </span>

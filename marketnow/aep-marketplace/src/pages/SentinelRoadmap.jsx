@@ -7,8 +7,8 @@ import { useLang } from '../context/LanguageContext.jsx';
 // ═══════════════════════════════════════════════════════════════════════════
 const CONTENT = {
   en: {
-    badge: 'SENTINEL ROADMAP — L1.5 TO NEXT-GEN',
-    title: 'From L1.5 to Next-Gen Security',
+    badge: 'SENTINEL ROADMAP — v3.0 TO NEXT-GEN',
+    title: 'From v3.0 to Next-Gen Security',
     subtitle:
       'The path from static analysis (today) to sandboxed dynamic execution, supply chain auditing, adversarial red teaming, and cryptographic code signing.',
     checksLabel: 'CHECKS',
@@ -26,7 +26,7 @@ const CONTENT = {
       'Every status change will be a git commit visible in our public repo. See the machine-readable version at',
     trustLink: '→ Trust roadmap',
     standardsLink: '→ Standards',
-    securityLink: '→ Sentinel L1.5',
+    securityLink: '→ Sentinel v3.0',
     buyersGuideLink: "→ Buyer's guide",
     statusLabels: {
       live: 'LIVE',
@@ -42,7 +42,7 @@ const CONTENT = {
     },
     levels: [
       {
-        level: 'L1.5',
+        level: 'v3.0',
         name: 'Static Analysis (SAST) — CURRENT',
         status: 'live',
         color: '#00F299',
@@ -70,7 +70,7 @@ const CONTENT = {
         timeline: 'Q4 2026 - Q1 2027',
       },
       {
-        level: 'L2.5',
+        level: 'v3.0',
         name: 'Continuous Supply Chain Audit',
         status: 'planning',
         color: '#fbbf24',
@@ -144,8 +144,8 @@ const CONTENT = {
   },
 
   es: {
-    badge: 'ROADMAP DE SENTINEL — L1.5 A NEXT-GEN',
-    title: 'De L1.5 a seguridad de próxima generación',
+    badge: 'ROADMAP DE SENTINEL — v3.0 A NEXT-GEN',
+    title: 'De v3.0 a seguridad de próxima generación',
     subtitle:
       'El camino desde el análisis estático (hoy) hacia la ejecución dinámica en sandbox, auditoría de cadena de suministro, red teaming adversarial y firma criptográfica de código.',
     checksLabel: 'VERIFICACIONES',
@@ -163,7 +163,7 @@ const CONTENT = {
       'Cada cambio de estado será un git commit visible en nuestro repo público. Consulta la versión legible por máquinas en',
     trustLink: '→ Roadmap de confianza',
     standardsLink: '→ Estándares',
-    securityLink: '→ Sentinel L1.5',
+    securityLink: '→ Sentinel v3.0',
     buyersGuideLink: '→ Guía del comprador',
     statusLabels: {
       live: 'EN VIVO',
@@ -179,7 +179,7 @@ const CONTENT = {
     },
     levels: [
       {
-        level: 'L1.5',
+        level: 'v3.0',
         name: 'Análisis Estático (SAST) — ACTUAL',
         status: 'live',
         color: '#00F299',
@@ -207,7 +207,7 @@ const CONTENT = {
         timeline: 'Q4 2026 - Q1 2027',
       },
       {
-        level: 'L2.5',
+        level: 'v3.0',
         name: 'Auditoría continua de cadena de suministro',
         status: 'planning',
         color: '#fbbf24',
@@ -284,8 +284,8 @@ const CONTENT = {
   },
 
   pt: {
-    badge: 'ROADMAP DO SENTINEL — L1.5 A NEXT-GEN',
-    title: 'Do L1.5 à segurança de próxima geração',
+    badge: 'ROADMAP DO SENTINEL — v3.0 A NEXT-GEN',
+    title: 'Do v3.0 à segurança de próxima geração',
     subtitle:
       'O caminho da análise estática (hoje) à execução dinâmica em sandbox, auditoria de cadeia de suprimentos, red teaming adversarial e assinatura criptográfica de código.',
     checksLabel: 'VERIFICAÇÕES',
@@ -303,7 +303,7 @@ const CONTENT = {
       'Cada mudança de status será um git commit visível no nosso repo público. Veja a versão legível por máquina em',
     trustLink: '→ Roadmap de confiança',
     standardsLink: '→ Padrões',
-    securityLink: '→ Sentinel L1.5',
+    securityLink: '→ Sentinel v3.0',
     buyersGuideLink: '→ Guia do comprador',
     statusLabels: {
       live: 'EM PRODUÇÃO',
@@ -319,7 +319,7 @@ const CONTENT = {
     },
     levels: [
       {
-        level: 'L1.5',
+        level: 'v3.0',
         name: 'Análise Estática (SAST) — ATUAL',
         status: 'live',
         color: '#00F299',
@@ -347,7 +347,7 @@ const CONTENT = {
         timeline: 'Q4 2026 - Q1 2027',
       },
       {
-        level: 'L2.5',
+        level: 'v3.0',
         name: 'Auditoria contínua de cadeia de suprimentos',
         status: 'planning',
         color: '#fbbf24',
@@ -424,8 +424,8 @@ const CONTENT = {
   },
 
   zh: {
-    badge: 'SENTINEL 路线图 —— 从 L1.5 到下一代',
-    title: '从 L1.5 到下一代安全',
+    badge: 'SENTINEL 路线图 —— 从 v3.0 到下一代',
+    title: '从 v3.0 到下一代安全',
     subtitle:
       '从静态分析（今日）到沙箱化动态执行、供应链审计、对抗式红队演练与代码加密签名的演进路径。',
     checksLabel: '检查项',
@@ -443,7 +443,7 @@ const CONTENT = {
       '每次状态变更都会是公开仓库中可见的一次 git commit。机器可读版本见',
     trustLink: '→ 信任路线图',
     standardsLink: '→ 标准',
-    securityLink: '→ Sentinel L1.5',
+    securityLink: '→ Sentinel v3.0',
     buyersGuideLink: '→ 买家指南',
     statusLabels: {
       live: '已上线',
@@ -459,7 +459,7 @@ const CONTENT = {
     },
     levels: [
       {
-        level: 'L1.5',
+        level: 'v3.0',
         name: '静态分析（SAST）—— 当前',
         status: 'live',
         color: '#00F299',
@@ -486,7 +486,7 @@ const CONTENT = {
         timeline: 'Q4 2026 - Q1 2027',
       },
       {
-        level: 'L2.5',
+        level: 'v3.0',
         name: '持续供应链审计',
         status: 'planning',
         color: '#fbbf24',
@@ -552,8 +552,8 @@ const CONTENT = {
   },
 
   fr: {
-    badge: 'ROADMAP SENTINEL — L1.5 À NEXT-GEN',
-    title: 'De L1.5 à la sécurité de nouvelle génération',
+    badge: 'ROADMAP SENTINEL — v3.0 À NEXT-GEN',
+    title: 'De v3.0 à la sécurité de nouvelle génération',
     subtitle:
       'Le chemin de l\'analyse statique (aujourd\'hui) vers l\'exécution dynamique en sandbox, l\'audit de chaîne d\'approvisionnement, le red teaming adversarial et la signature cryptographique du code.',
     checksLabel: 'VÉRIFICATIONS',
@@ -571,7 +571,7 @@ const CONTENT = {
       'Chaque changement de statut sera un git commit visible dans notre repo public. Voir la version lisible par machine à',
     trustLink: '→ Roadmap de confiance',
     standardsLink: '→ Standards',
-    securityLink: '→ Sentinel L1.5',
+    securityLink: '→ Sentinel v3.0',
     buyersGuideLink: '→ Guide de l\'acheteur',
     statusLabels: {
       live: 'EN LIGNE',
@@ -587,7 +587,7 @@ const CONTENT = {
     },
     levels: [
       {
-        level: 'L1.5',
+        level: 'v3.0',
         name: 'Analyse statique (SAST) — ACTUEL',
         status: 'live',
         color: '#00F299',
@@ -615,7 +615,7 @@ const CONTENT = {
         timeline: 'Q4 2026 - Q1 2027',
       },
       {
-        level: 'L2.5',
+        level: 'v3.0',
         name: 'Audit continu de chaîne d\'approvisionnement',
         status: 'planning',
         color: '#fbbf24',

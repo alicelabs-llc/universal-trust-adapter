@@ -15,7 +15,7 @@ import { Link, useSearchParams } from 'react-router-dom';
  *   - Certificate validity (signed + not expired)
  *   - Skill name, score, risk level
  *   - Issue/expiry dates
- *   - Layers run (L1.5, L1.6, L2)
+ *   - Layers run (v3.0, L1.6, L2)
  *   - Layer details (findings per layer)
  *   - Direct link to the skill's page
  */
@@ -199,7 +199,7 @@ export default function VerifyCertificate() {
                 <div className="grid grid-cols-3 gap-3">
                   <div className={`bg-black/30 rounded-lg p-3 border ${result.certificate.layers_run.l15 ? 'border-[#00F299]/20' : 'border-zinc-700'}`}>
                     <div className={`text-sm font-bold ${result.certificate.layers_run.l15 ? 'text-[#00F299]' : 'text-zinc-600'}`}>
-                      {result.certificate.layers_run.l15 ? '✓' : '—'} L1.5
+                      {result.certificate.layers_run.l15 ? '✓' : '—'} v3.0
                     </div>
                     <div className="text-zinc-500 text-[10px]">6 metadata checks</div>
                   </div>
@@ -224,7 +224,7 @@ export default function VerifyCertificate() {
                   <div className="text-zinc-500 text-xs uppercase tracking-wider mb-3">Layer Details</div>
                   <div className="bg-black/30 rounded-lg p-4 space-y-2 text-xs font-mono">
                     <div className="flex justify-between">
-                      <span className="text-zinc-500">L1.5 findings:</span>
+                      <span className="text-zinc-500">v3.0 findings:</span>
                       <span className="text-zinc-300">{result.certificate.layer_details.l15_findings}</span>
                     </div>
                     <div className="flex justify-between">
@@ -259,7 +259,7 @@ export default function VerifyCertificate() {
                   <div className="text-zinc-500 text-xs uppercase tracking-wider mb-3">Risk Breakdown</div>
                   <div className="grid grid-cols-3 gap-3 text-center">
                     <div className="bg-black/30 rounded-lg p-3">
-                      <div className="text-zinc-500 text-[10px] uppercase">L1.5+L1.6</div>
+                      <div className="text-zinc-500 text-[10px] uppercase">v3.0+L1.6</div>
                       <div className="text-zinc-300 text-sm font-mono">{result.certificate.risk_breakdown.l15_l16}</div>
                     </div>
                     <div className="bg-black/30 rounded-lg p-3">
@@ -292,7 +292,7 @@ export default function VerifyCertificate() {
               <p>Every skill in the MarketNow catalog is audited by Sentinel, our 3-layer security pipeline:</p>
               <div className="grid grid-cols-1 gap-3">
                 <div className="flex gap-3 p-3 rounded-lg bg-black/30">
-                  <span className="text-[#00F299] font-bold text-lg">L1.5</span>
+                  <span className="text-[#00F299] font-bold text-lg">v3.0</span>
                   <div>
                     <div className="text-white text-xs font-semibold">6 Metadata Checks</div>
                     <div className="text-zinc-500 text-xs">AUTH, prompt injection, input validation, CORS, OAuth scopes, rate limiting</div>

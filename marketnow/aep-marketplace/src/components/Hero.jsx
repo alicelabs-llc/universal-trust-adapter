@@ -60,7 +60,7 @@ export default function Hero({ onSignIn }) {
           {/* Subtitle — for agents */}
           <p className="text-zinc-400 text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
             Discover, evaluate, and install {stats.total.toLocaleString()}+ verified MCP skills
-            through a public JSON API. Micro-priced from $0.99 — designed for autonomous
+            through a public JSON API. Free to install — designed for autonomous
             agents to buy and deploy without human intervention.
           </p>
 
@@ -106,7 +106,7 @@ export default function Hero({ onSignIn }) {
             {[
               { value: stats.total.toLocaleString() + '+', label: 'VERIFIED SKILLS' },
               { value: '$' + stats.avgPrice.toFixed(2), label: 'AVG PRICE (USD)' },
-              { value: '$0.99', label: 'MINIMUM PRICE' },
+              { value: '0', label: 'COST FOR BUYERS' },
               { value: 'MCP v1.0', label: 'PROTOCOL' },
             ].map((stat) => (
               <motion.div

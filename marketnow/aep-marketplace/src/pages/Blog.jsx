@@ -47,9 +47,9 @@ const CONTENT = {
       },
       {
         slug: 'mcp-security-audit-sentinel-l15',
-        title: 'How Sentinel L1.5 audits MCP servers (6-point security scan)',
+        title: 'How Sentinel v3.0 audits MCP servers (6-point security scan)',
         excerpt:
-          'Sentinel L1.5 scans every MCP server for 6 security issues: auth, prompt injection, input validation, CORS, OAuth scopes, and rate limiting. Here\'s the methodology.',
+          'Sentinel v3.0 scans every MCP server for 6 security issues: auth, prompt injection, input validation, CORS, OAuth scopes, and rate limiting. Here\'s the methodology.',
         date: '2026-07-02',
         readTime: 7,
         tags: ['security', 'sentinel', 'mcp'],
@@ -105,9 +105,9 @@ const CONTENT = {
       },
       {
         slug: 'mcp-security-audit-sentinel-l15',
-        title: 'Cómo Sentinel L1.5 audita servidores MCP (escaneo de seguridad de 6 puntos)',
+        title: 'Cómo Sentinel v3.0 audita servidores MCP (escaneo de seguridad de 6 puntos)',
         excerpt:
-          'Sentinel L1.5 escanea cada servidor MCP en busca de 6 problemas de seguridad: autenticación, prompt injection, validación de entrada, CORS, scopes de OAuth y rate limiting. Aquí está la metodología.',
+          'Sentinel v3.0 escanea cada servidor MCP en busca de 6 problemas de seguridad: autenticación, prompt injection, validación de entrada, CORS, scopes de OAuth y rate limiting. Aquí está la metodología.',
         date: '2026-07-02',
         readTime: 7,
         tags: ['seguridad', 'sentinel', 'mcp'],
@@ -163,9 +163,9 @@ const CONTENT = {
       },
       {
         slug: 'mcp-security-audit-sentinel-l15',
-        title: 'Como o Sentinel L1.5 audita servidores MCP (escaneamento de segurança de 6 pontos)',
+        title: 'Como o Sentinel v3.0 audita servidores MCP (escaneamento de segurança de 6 pontos)',
         excerpt:
-          'O Sentinel L1.5 escaneia cada servidor MCP em busca de 6 problemas de segurança: autenticação, prompt injection, validação de entrada, CORS, escopos OAuth e rate limiting. Aqui está a metodologia.',
+          'O Sentinel v3.0 escaneia cada servidor MCP em busca de 6 problemas de segurança: autenticação, prompt injection, validação de entrada, CORS, escopos OAuth e rate limiting. Aqui está a metodologia.',
         date: '2026-07-02',
         readTime: 7,
         tags: ['segurança', 'sentinel', 'mcp'],
@@ -220,9 +220,9 @@ const CONTENT = {
       },
       {
         slug: 'mcp-security-audit-sentinel-l15',
-        title: 'Sentinel L1.5 如何审计 MCP 服务器(6 项安全扫描)',
+        title: 'Sentinel v3.0 如何审计 MCP 服务器(6 项安全扫描)',
         excerpt:
-          'Sentinel L1.5 扫描每个 MCP 服务器的 6 个安全问题:认证、提示词注入、输入验证、CORS、OAuth 作用域和速率限制。以下是方法论。',
+          'Sentinel v3.0 扫描每个 MCP 服务器的 6 个安全问题:认证、提示词注入、输入验证、CORS、OAuth 作用域和速率限制。以下是方法论。',
         date: '2026-07-02',
         readTime: 7,
         tags: ['安全', 'sentinel', 'mcp'],
@@ -278,9 +278,9 @@ const CONTENT = {
       },
       {
         slug: 'mcp-security-audit-sentinel-l15',
-        title: 'Comment Sentinel L1.5 audite les serveurs MCP (scan de sécurité en 6 points)',
+        title: 'Comment Sentinel v3.0 audite les serveurs MCP (scan de sécurité en 6 points)',
         excerpt:
-          'Sentinel L1.5 scanne chaque serveur MCP à la recherche de 6 problèmes de sécurité : authentification, prompt injection, validation des entrées, CORS, scopes OAuth et rate limiting. Voici la méthodologie.',
+          'Sentinel v3.0 scanne chaque serveur MCP à la recherche de 6 problèmes de sécurité : authentification, prompt injection, validation des entrées, CORS, scopes OAuth et rate limiting. Voici la méthodologie.',
         date: '2026-07-02',
         readTime: 7,
         tags: ['sécurité', 'sentinel', 'mcp'],
