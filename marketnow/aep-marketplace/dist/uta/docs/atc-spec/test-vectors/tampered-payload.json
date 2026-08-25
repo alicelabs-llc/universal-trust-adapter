@@ -1,0 +1,96 @@
+{
+  "description": "An ATC where risk.trust_score was modified after signing. The signed_payload_hash and signature should fail to verify.",
+  "ca_public_key": "MCowBQYDK2VwAyEADcQ79Ek32y3FYqI5p4UOJNNIjuh51iDAJb3FEsZOjqY=",
+  "atc": {
+    "spec_version": "ATC/1.0",
+    "card_id": "ATC-2026-0000001",
+    "issuer": {
+      "ca_id": "alicelabs-sentinel-ca",
+      "ca_public_key": "MCowBQYDK2VwAyEADcQ79Ek32y3FYqI5p4UOJNNIjuh51iDAJb3FEsZOjqY=",
+      "ca_algorithm": "Ed25519",
+      "ca_url": "https://marketnow.site/api/atc"
+    },
+    "identity": {
+      "agent_id": "alicelabs-test-agent-001",
+      "agent_name": "Test Agent",
+      "agent_owner": "AliceLabs LLC",
+      "owner_contact": "mailto:test@alicelabs.site"
+    },
+    "attestation": {
+      "subject_public_key": "MCowBQYDK2VwAyEAIwuahjXj9aToVb56jInv0SXihmAUTY2yuebsy6w0ykI=",
+      "subject_algorithm": "Ed25519",
+      "signature": "biA1O8mepy/fkfoZVfHp4ct6hcsZeL9wW+86mrbo6KFDVzwMogMGzeEeZyd0KJUuC6UURMOl3s62MWHwBMD3DA==",
+      "signed_payload_hash": "bf6738b3f7f56d449531481cb93d74d87922843249d26672b55d9b2c67ae4276"
+    },
+    "capabilities": {
+      "filesystem": {
+        "read": "own_dir",
+        "write": "own_dir"
+      },
+      "network": {
+        "egress": "allowlist",
+        "ingress": "none"
+      },
+      "shell": {
+        "exec": "sandboxed",
+        "spawn": "none"
+      },
+      "credentials": {
+        "read_env": "allowlist",
+        "read_files": "none"
+      },
+      "process": {
+        "subprocess": "none",
+        "signals": "own"
+      }
+    },
+    "evidence": {
+      "audit_pipeline": "Sentinel L1.5 → L1.9 → L2.5 → L3",
+      "audit_completed_at": "2026-08-10T12:00:00Z",
+      "static_checks": {
+        "metadata": true,
+        "semgrep_rules_count": 36,
+        "secret_patterns_count": 18,
+        "dependency_scan": true,
+        "malware_patterns_count": 8,
+        "malware_family_signatures_count": 48,
+        "prompt_injection_rules_count": 32
+      },
+      "dynamic_checks": {
+        "sandbox_run": true,
+        "sandbox_runtime_ms": 12453,
+        "sandbox_exit_code": 0,
+        "sandbox_network_blocked": true,
+        "sandbox_fs_read_only": true,
+        "sandbox_cap_drop_all": true
+      },
+      "runtime_checks": {
+        "interceptor_rules_count": 5,
+        "interceptor_blocks": 0,
+        "interceptor_warns": 0
+      },
+      "findings": []
+    },
+    "risk": {
+      "trust_score": 4,
+      "risk_level": "low",
+      "score_explanation": "Clean audit, no findings, sandbox passed",
+      "scored_at": "2026-08-10T12:01:00Z",
+      "decision_authority": "consumer"
+    },
+    "revocation": {
+      "revocation_check_url": "https://marketnow.site/api/atc?action=revocation-list",
+      "revocation_check_method": "simple_json",
+      "revocation_check_required": true
+    },
+    "validity": {
+      "issued_at": "2026-08-09T23:30:24.219Z",
+      "expires_at": "2026-11-07T23:30:24.219Z",
+      "max_ttl_days": 90
+    }
+  },
+  "expected": {
+    "valid": false,
+    "errors_contain": "signed_payload_hash mismatch"
+  }
+}

@@ -227,13 +227,13 @@
       <h2>For AI Agents</h2>
       <p>Machine-readable everything. Public JSON API. Human-in-the-loop by default.</p>
       <ul>
-        <li>GET /api/skills.json — Full catalog (9,248 skills, JSON, ~24MB)</li>
+        <li>GET /api/skills?page=1&limit=100 — Paginated catalog (9,248 skills, ~50KB per page)</li>
         <li>GET /api/search?q= — Server-side search with relevance scoring</li>
         <li>GET /api/agent.json — Machine-readable instructions, trust model, schema</li>
         <li>GET /api/policies.json — Terms, refund, dispute, privacy policies</li>
         <li>POST /api/agent-purchase — Buy a skill (5 modes: instant_download, instant_purchase, direct_purchase, requires_payment, requires_human_approval)</li>
         <li>GET /api/mandates — Delegated mandates (ACP/AP2 compliant)</li>
-        <li>GET /api/free-skills.json — 43 free skills</li>
+        <li>GET /api/skills?filter=free — 43 free skills (paginated)</li>
         <li>GET /api/bundles.json — Discounted skill bundles</li>
       </ul>
       <p>MCP server: npx -y marketnow-mcp — works with Claude Desktop, Cursor, Cline. Available on npm and Smithery.</p>
