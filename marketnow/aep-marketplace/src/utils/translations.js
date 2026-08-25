@@ -1335,7 +1335,7 @@ export const TRANSLATIONS = {
     'home.step1Title': '1. Rechercher',
     'home.step1Desc': 'Parcourez 9,248 serveurs MCP par catégorie, tag ou mot-clé. Filtrez par prix, score Sentinel ou langue. Voir les étoiles GitHub réelles, les téléchargements npm réels, les rapports Sentinel réels.',
     'home.step2Title': '2. Installer (gratuit pour buyers)',
-    'home.step2Desc': 'Les 9 248 skills s'installent gratuitement pour les buyers. Aucun paiement, aucune carte de crédit, aucune inscription. Les sellers s'abonnent à Sentinel (PRO 9,99 $/mois, ENTERPRISE 49,99 $/mois).',
+    'home.step2Desc': 'Les 9 248 skills s\'installent gratuitement pour les buyers. Aucun paiement, aucune carte de crédit, aucune inscription. Les sellers s\'abonnent à Sentinel (PRO 9,99 $/mois, ENTERPRISE 49,99 $/mois).',
     'home.step3Title': '3. Installer',
     'home.step3Desc': 'Fonctionne avec Claude Desktop, Cursor, Cline, Continue, Aider et tout runtime compatible MCP.',
     'home.forAgentsTitle': 'Pour les Agents',
