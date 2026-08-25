@@ -175,6 +175,26 @@
       <h2>Discover → Verify → Trust → Authorize → Enforce → Audit</h2>
       <p>MarketNow combines 7 subsystems into a single trust infrastructure: Discovery (9,248 MCP servers), UTA (12-stage trust verification, 8 formats), ATC (agent identity with Ed25519), UTA Gateway (12-stage enforcement with PoP), Revocation (CRL + OCSP + Bitstring Status List), Mandates (delegated authority for agent commerce), and Audit Log (tamper-evident public evidence).</p>
 
+
+
+      <h2>Universal Trust Adapter (UTA) — The USB-C of Agent Trust</h2>
+      <p><strong>UTA v1.0.0</strong> translates between 8 trust credential formats used by AI agents via a canonical Universal Trust Schema (UTS v2.0.0): ATC, EAT-AI (IETF), ZTA (Anthropic), A2A (Google/AAIF), MCP Server Card (Anthropic), W3C Verifiable Credentials, OAuth/OIDC, and SPIFFE SVID.</p>
+      <ul>
+        <li><strong>Spec (ATC/1.0):</strong> <a href="/uta/docs/atc-spec/SPEC.md">/uta/docs/atc-spec/SPEC.md</a></li>
+        <li><strong>RFC Draft (ATC v3.0 multi-sig):</strong> <a href="/uta/docs/atc-spec/RFC-ATC-v3-Draft-00.md">/uta/docs/atc-spec/RFC-ATC-v3-Draft-00.md</a></li>
+        <li><strong>Test vectors (ATC/1.0):</strong> <a href="/uta/docs/atc-spec/test-vectors/_index.json">/uta/docs/atc-spec/test-vectors/_index.json</a></li>
+        <li><strong>Test CA keys (cross-language):</strong> <a href="/uta/docs/atc-spec/test-vectors/_test-ca-keys.json">/uta/docs/atc-spec/test-vectors/_test-ca-keys.json</a></li>
+        <li><strong>Trust Engine source:</strong> <a href="/uta/packages/core/index.js">/uta/packages/core/index.js</a></li>
+        <li><strong>JCS canonicalization:</strong> <a href="/uta/packages/core/crypto.js">/uta/packages/core/crypto.js</a></li>
+        <li><strong>Conformance runner (23/23 pass):</strong> <a href="/uta/tests/test.mjs">/uta/tests/test.mjs</a></li>
+        <li><strong>Contributing:</strong> <a href="/uta/CONTRIBUTING.md">/uta/CONTRIBUTING.md</a></li>
+        <li><strong>Security policy:</strong> <a href="/uta/SECURITY.md">/uta/SECURITY.md</a></li>
+        <li><strong>README:</strong> <a href="/uta/README.md">/uta/README.md</a></li>
+      </ul>
+      <p><strong>Crypto:</strong> Ed25519 (RFC 8032) signatures over RFC 8785 JCS canonicalization, SHA-256, 7 domain separation contexts, Proof-of-Possession anti-replay.</p>
+      <p><strong>Install:</strong> <code>npm install agent-trust-card@1.1.2</code> · <code>npx -y marketnow-mcp@1.10.1</code> · <code>curl -fsSL https://marketnow.site/install.sh | bash</code></p>
+      <p><strong>Repo:</strong> <a href="https://github.com/alicelabs-llc/universal-trust-adapter">github.com/alicelabs-llc/universal-trust-adapter</a> — 8 format adapters, 12-stage verification pipeline, 41 test vectors (5 ATC/1.0 + 9 ATC v3.0 + 27 internal), 23/23 conformance tests pass.</p>
+
       <h2>Unified Trust API</h2>
       <p>POST /api/trust — a single endpoint that combines Sentinel security assessment, ATC identity verification, policy evaluation, and runtime enforcement into one decision.</p>
       <p>curl -X POST https://marketnow.site/api/trust -H "Content-Type: application/json" -d '{"agent_id":"my-bot","skill_id":"mn-gen-00003","action":"execute","policy":{"min_trust_score":7}}'</p>
