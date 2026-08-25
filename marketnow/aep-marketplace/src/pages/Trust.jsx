@@ -139,7 +139,7 @@ const CONTENT = {
         ],
       },
       { n: 7, status: 'partial', title: 'Public track record over time',
-        claudeSaid: 'Verifiable team identity, third-party coverage, sustained incident-free history. This is not fixed with a one-time change, it is built.',
+        claudeSaid: 'Verifiable team identity, third-party coverage, sustained incident-free history. This is not fixed with a free change, it is built.',
         whatWeDid: [
           'Created /about page with team identity: AliceLabs LLC (Wyoming, USA), founder Edison Flores',
           'This /trust page is itself part of the track record — every status change is a git commit',

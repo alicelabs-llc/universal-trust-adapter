@@ -21,7 +21,7 @@ const CONTENT = {
     skillNotFound: 'Skill not found',
     backToRegistry: '← BACK TO REGISTRY',
     // Sidebar labels
-    oneTimeLifetime: 'One-time payment · Lifetime license',
+    oneTimeLifetime: 'Free payment · Lifetime license',
     version: 'Version',
     sentinelScore: 'Sentinel Score',
     license: 'License',

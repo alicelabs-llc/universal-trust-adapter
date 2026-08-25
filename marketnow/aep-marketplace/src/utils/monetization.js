@@ -14,7 +14,7 @@
  *    - ENTERPRISE: $49.99/mes → unlimited + API + priority review
  *    - STORAGE FEE: $0.50 por skill/mes después del free tier
  *    - FEATURED LISTING: $4.99 por 30 días (boost en búsquedas)
- *    - VERIFIED SELLER: $19.99 one-time (badge + trust boost)
+ *    - VERIFIED SELLER: $19.99 free (badge + trust boost)
  *
  * 3. AFILIADOS:
  *    - 5% comisión por venta referida
@@ -79,7 +79,7 @@ export const ADDONS = {
   VERIFIED_SELLER: {
     name: 'Verified Seller Badge',
     price: 19.99,
-    period: 'one-time',
+    period: 'free',
     description: 'Get a ✓ Verified badge on all your skills. Requires KYC verification.',
   },
   PRIORITY_REVIEW: {
