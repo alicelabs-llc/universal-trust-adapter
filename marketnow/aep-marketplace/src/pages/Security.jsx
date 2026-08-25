@@ -6,14 +6,14 @@ import { useLang } from '../context/LanguageContext.jsx';
 // ═══════════════════════════════════════════════════════════════════════════
 // CONTENT — full Security page in 5 languages
 // Honest architecture (post FINAL-AUDIT-ALL):
-//   L1.5  → 6 metadata checks, runs in Vercel real-time
+//   v3.0  → 6 metadata checks, runs in Vercel real-time
 //   L1.6  → 18 Semgrep rules + 18 secret patterns + OSV API, runs in Vercel real-time
 //   L2    → Docker sandbox (--network none, --read-only, --cap-drop ALL),
 //           runs via GitHub Actions, triggered from Vercel (async)
 // ═══════════════════════════════════════════════════════════════════════════
 const CONTENT = {
   en: {
-    badge: 'SENTINEL L1.5 → L1.6 → L2',
+    badge: 'SENTINEL v3.0 → L1.6 → L2',
     stats: {
       total: 'Total Skills',
       scanned: 'Scanned by Sentinel',
@@ -22,7 +22,7 @@ const CONTENT = {
       critical: 'Critical Issues',
     },
     banner: {
-      l15Label: 'L1.5 LIVE',
+      l15Label: 'v3.0 LIVE',
       l15Desc: '→ 6 metadata checks, runs in Vercel real-time',
       l16Label: 'L1.6 LIVE',
       l16Desc: '→ 18 Semgrep rules + 18 secret patterns + OSV API, runs in Vercel real-time',
@@ -31,11 +31,11 @@ const CONTENT = {
     },
     architecture: {
       title: 'ARCHITECTURE — END-TO-END FLOW',
-      desc: 'Vercel runs L1.5 + L1.6 in real-time on every /api/audit-skill call (~200ms). If the skill has a GitHub repo, Vercel triggers L2 via repository_dispatch. GitHub Actions runs the Docker sandbox (2-5 min), commits results to the repo, and the next audit fetches cached L2 results.',
+      desc: 'Vercel runs v3.0 + L1.6 in real-time on every /api/audit-skill call (~200ms). If the skill has a GitHub repo, Vercel triggers L2 via repository_dispatch. GitHub Actions runs the Docker sandbox (2-5 min), commits results to the repo, and the next audit fetches cached L2 results.',
       diagram: `┌─────────────────────────────────────────────────────────────┐
 │              VERCEL  (real-time, ~200ms per call)            │
 │   POST /api/audit-skill  { skillId }                          │
-│   ├─ L1.5  6 metadata checks (AUTH, injection, validation,   │
+│   ├─ v3.0  6 metadata checks (AUTH, injection, validation,   │
 │   │        CORS, OAuth scopes, rate limiting error leakage)  │
 │   └─ L1.6  18 Semgrep rules + 18 secret patterns + OSV API   │
 │            (api.osv.dev/v1/query — real-time)                 │
@@ -77,11 +77,11 @@ const CONTENT = {
 ┌─────────────────────────────────────────────────────────────┐
 │       NEXT AUDIT  (Vercel fetches cached L2 result)           │
 │   GET raw.githubusercontent.com/.../l2_results/{skillId}.json │
-│   → applies L2 multiplier to (L1.5 + L1.6) score              │
+│   → applies L2 multiplier to (v3.0 + L1.6) score              │
 └─────────────────────────────────────────────────────────────┘`,
     },
     l15: {
-      title: 'SENTINEL L1.5 CHECKS',
+      title: 'SENTINEL v3.0 CHECKS',
       live: 'LIVE IN VERCEL',
       checks: [
         { label: 'AUTH — Does the server require authentication?', category: 'Authentication' },
@@ -91,7 +91,7 @@ const CONTENT = {
         { label: 'OAuth scopes — Are scopes minimal?', category: 'OAuth' },
         { label: 'Rate limiting error leakage — Do errors leak rate limit info?', category: 'Rate Limiting' },
       ],
-      descPre: 'L1.5 runs in',
+      descPre: 'v3.0 runs in',
       descCode: 'Vercel real-time',
       descPost: ' on every /api/audit-skill call. It analyzes metadata (README, package.json, tool descriptions). Skills scoring below 4/10 are blocked.',
     },
@@ -168,12 +168,12 @@ const CONTENT = {
       col3: 'Why',
       rows: [
         { type: 'Free (human-reviewed)', level: 'LOW', why: '43 skills manually inspected by AliceLabs' },
-        { type: 'Auto-scanned, risk_level=green', level: 'MEDIUM', why: 'Prompt-only, no install. Sentinel L1.5+L1.6 ran; no human review.' },
+        { type: 'Auto-scanned, risk_level=green', level: 'MEDIUM', why: 'Prompt-only, no install. Sentinel v3.0+L1.6 ran; no human review.' },
         { type: 'Auto-scanned, risk_level=yellow', level: 'MEDIUM-HIGH', why: 'Network/API access. Sentinel ran; L2 may or may not have results yet.' },
         { type: 'Paid, auto-scanned', level: 'HIGH', why: 'Code execution + money involved. Use mandates with low limits.' },
       ],
       bottomLineLabel: 'Bottom line:',
-      bottomLineBody: 'Sentinel L1.5 + L1.6 run in real-time on every API call. L2 runs async via GitHub Actions and applies on the next audit. This is honest, auditable, and open source — but it is not a substitute for human review of code that executes on your machine.',
+      bottomLineBody: 'Sentinel v3.0 + L1.6 run in real-time on every API call. L2 runs async via GitHub Actions and applies on the next audit. This is honest, auditable, and open source — but it is not a substitute for human review of code that executes on your machine.',
     },
     changelog: {
       title: 'SENTINEL CHANGELOG',
@@ -181,7 +181,7 @@ const CONTENT = {
         {
           date: '2026-07-05',
           strong: 'FINAL-AUDIT-ALL.',
-          body: ' Security.jsx rewritten to reflect the REAL architecture: L1.5 (6 checks, Vercel real-time) + L1.6 (18 Semgrep + 18 secrets + OSV API, Vercel real-time) + L2 (Docker sandbox, GitHub Actions, triggered from Vercel). Honest limitations updated (L2 async, regex-based, no third-party audit).',
+          body: ' Security.jsx rewritten to reflect the REAL architecture: v3.0 (6 checks, Vercel real-time) + L1.6 (18 Semgrep + 18 secrets + OSV API, Vercel real-time) + L2 (Docker sandbox, GitHub Actions, triggered from Vercel). Honest limitations updated (L2 async, regex-based, no third-party audit).',
           code: '→ Code',
         },
         {
@@ -199,12 +199,12 @@ const CONTENT = {
         },
         {
           date: '2026-06-30',
-          strong: 'L1.5 live.',
+          strong: 'v3.0 live.',
           body: ' 6-point metadata-based audit: AUTH, prompt injection patterns, input validation, CORS, OAuth scopes, rate limiting error leakage.',
         },
       ],
       links: [
-        { text: '→ Full roadmap (L1.5 → L3.5)', to: '/sentinel-roadmap' },
+        { text: '→ Full roadmap (v3.0 → L3.5)', to: '/sentinel-roadmap' },
         { text: '→ Trust roadmap', to: '/trust' },
         { text: '→ Buyer\'s guide', to: '/buyers-guide' },
       ],
@@ -229,7 +229,7 @@ const CONTENT = {
       l2None: 'No L2 sandbox results yet — they appear here automatically after the first /api/audit-skill call for a skill with a GitHub repo.',
       l2Dedup: 'Dedup window',
       l2DedupValue: '30 min (per Vercel instance, prevents duplicate dispatches)',
-      l2RolloutNote: 'L2 rollout in progress — currently 17 of 8,845 skills have L2 results. The remaining 8,565 are certified with L1.5+L1.6 (static analysis). L2 coverage grows as more skills get source.url populated.',
+      l2RolloutNote: 'L2 rollout in progress — currently 17 of 8,845 skills have L2 results. The remaining 8,565 are certified with v3.0+L1.6 (static analysis). L2 coverage grows as more skills get source.url populated.',
       viewRaw: '→ View raw JSON in repo',
       refresh: '↻ Refresh',
       loading: 'Loading live audit data…',
@@ -244,7 +244,7 @@ const CONTENT = {
   },
 
   es: {
-    badge: 'SENTINEL L1.5 → L1.6 → L2',
+    badge: 'SENTINEL v3.0 → L1.6 → L2',
     stats: {
       total: 'Skills Totales',
       scanned: 'Escaneadas por Sentinel',
@@ -253,7 +253,7 @@ const CONTENT = {
       critical: 'Problemas Críticos',
     },
     banner: {
-      l15Label: 'L1.5 LIVE',
+      l15Label: 'v3.0 LIVE',
       l15Desc: '→ 6 checks de metadata, corre en Vercel en tiempo real',
       l16Label: 'L1.6 LIVE',
       l16Desc: '→ 18 reglas Semgrep + 18 patrones de secretos + OSV API, corre en Vercel en tiempo real',
@@ -262,11 +262,11 @@ const CONTENT = {
     },
     architecture: {
       title: 'ARQUITECTURA — FLUJO EXTREMO A EXTREMO',
-      desc: 'Vercel corre L1.5 + L1.6 en tiempo real en cada llamada a /api/audit-skill (~200ms). Si la skill tiene un repo de GitHub, Vercel dispara L2 vía repository_dispatch. GitHub Actions corre el sandbox Docker (2-5 min), commitea los resultados al repo, y la próxima auditoría obtiene los resultados L2 cacheados.',
+      desc: 'Vercel corre v3.0 + L1.6 en tiempo real en cada llamada a /api/audit-skill (~200ms). Si la skill tiene un repo de GitHub, Vercel dispara L2 vía repository_dispatch. GitHub Actions corre el sandbox Docker (2-5 min), commitea los resultados al repo, y la próxima auditoría obtiene los resultados L2 cacheados.',
       diagram: `┌─────────────────────────────────────────────────────────────┐
 │              VERCEL  (tiempo real, ~200ms por llamada)        │
 │   POST /api/audit-skill  { skillId }                          │
-│   ├─ L1.5  6 checks de metadata (AUTH, inyección, validación, │
+│   ├─ v3.0  6 checks de metadata (AUTH, inyección, validación, │
 │   │        CORS, OAuth scopes, fuga de rate limiting)         │
 │   └─ L1.6  18 reglas Semgrep + 18 patrones de secretos + OSV │
 │            (api.osv.dev/v1/query — tiempo real)               │
@@ -308,11 +308,11 @@ const CONTENT = {
 ┌─────────────────────────────────────────────────────────────┐
 │       PRÓXIMA AUDITORÍA  (Vercel obtiene L2 cacheado)         │
 │   GET raw.githubusercontent.com/.../l2_results/{skillId}.json │
-│   → aplica multiplicador L2 al puntaje (L1.5 + L1.6)          │
+│   → aplica multiplicador L2 al puntaje (v3.0 + L1.6)          │
 └─────────────────────────────────────────────────────────────┘`,
     },
     l15: {
-      title: 'CHECKS DE SENTINEL L1.5',
+      title: 'CHECKS DE SENTINEL v3.0',
       live: 'LIVE EN VERCEL',
       checks: [
         { label: 'AUTH — ¿El servidor requiere autenticación?', category: 'Autenticación' },
@@ -322,7 +322,7 @@ const CONTENT = {
         { label: 'OAuth scopes — ¿Los scopes son mínimos?', category: 'OAuth' },
         { label: 'Fuga de info en rate limiting — ¿Los errores filtran info de rate limit?', category: 'Rate Limiting' },
       ],
-      descPre: 'L1.5 corre en',
+      descPre: 'v3.0 corre en',
       descCode: 'Vercel en tiempo real',
       descPost: ' en cada llamada a /api/audit-skill. Analiza metadata (README, package.json, descripciones de tools). Las skills con puntaje bajo 4/10 son bloqueadas.',
     },
@@ -399,12 +399,12 @@ const CONTENT = {
       col3: 'Por qué',
       rows: [
         { type: 'Free (human-reviewed)', level: 'BAJO', why: '43 skills inspeccionadas manualmente por AliceLabs' },
-        { type: 'Auto-scanned, risk_level=green', level: 'MEDIO', why: 'Solo prompt, sin install. Sentinel L1.5+L1.6 corrió; sin revisión humana.' },
+        { type: 'Auto-scanned, risk_level=green', level: 'MEDIO', why: 'Solo prompt, sin install. Sentinel v3.0+L1.6 corrió; sin revisión humana.' },
         { type: 'Auto-scanned, risk_level=yellow', level: 'MEDIO-ALTO', why: 'Acceso a red/API. Sentinel corrió; L2 puede o no tener resultados aún.' },
         { type: 'Paid, auto-scanned', level: 'ALTO', why: 'Ejecución de código + dinero involucrado. Usa mandatos con límites bajos.' },
       ],
       bottomLineLabel: 'Conclusión:',
-      bottomLineBody: 'Sentinel L1.5 + L1.6 corren en tiempo real en cada llamada a la API. L2 corre async vía GitHub Actions y aplica en la próxima auditoría. Esto es honesto, auditable y open source — pero no sustituye la revisión humana de código que se ejecuta en tu máquina.',
+      bottomLineBody: 'Sentinel v3.0 + L1.6 corren en tiempo real en cada llamada a la API. L2 corre async vía GitHub Actions y aplica en la próxima auditoría. Esto es honesto, auditable y open source — pero no sustituye la revisión humana de código que se ejecuta en tu máquina.',
     },
     changelog: {
       title: 'CHANGELOG DE SENTINEL',
@@ -412,7 +412,7 @@ const CONTENT = {
         {
           date: '2026-07-05',
           strong: 'FINAL-AUDIT-ALL.',
-          body: ' Security.jsx reescrito para reflejar la arquitectura REAL: L1.5 (6 checks, Vercel tiempo real) + L1.6 (18 Semgrep + 18 secretos + OSV API, Vercel tiempo real) + L2 (Docker sandbox, GitHub Actions, disparado desde Vercel). Limitaciones honestas actualizadas (L2 async, basado en regex, sin auditoría de terceros).',
+          body: ' Security.jsx reescrito para reflejar la arquitectura REAL: v3.0 (6 checks, Vercel tiempo real) + L1.6 (18 Semgrep + 18 secretos + OSV API, Vercel tiempo real) + L2 (Docker sandbox, GitHub Actions, disparado desde Vercel). Limitaciones honestas actualizadas (L2 async, basado en regex, sin auditoría de terceros).',
           code: '→ Código',
         },
         {
@@ -430,12 +430,12 @@ const CONTENT = {
         },
         {
           date: '2026-06-30',
-          strong: 'L1.5 live.',
+          strong: 'v3.0 live.',
           body: ' Auditoría basada en metadata de 6 puntos: AUTH, patrones de prompt injection, validación de inputs, CORS, OAuth scopes, fuga de info en rate limiting.',
         },
       ],
       links: [
-        { text: '→ Roadmap completo (L1.5 → L3.5)', to: '/sentinel-roadmap' },
+        { text: '→ Roadmap completo (v3.0 → L3.5)', to: '/sentinel-roadmap' },
         { text: '→ Hoja de confianza', to: '/trust' },
         { text: '→ Guía del comprador', to: '/buyers-guide' },
       ],
@@ -443,7 +443,7 @@ const CONTENT = {
   },
 
   pt: {
-    badge: 'SENTINEL L1.5 → L1.6 → L2',
+    badge: 'SENTINEL v3.0 → L1.6 → L2',
     stats: {
       total: 'Skills Totais',
       scanned: 'Escaneadas pelo Sentinel',
@@ -452,7 +452,7 @@ const CONTENT = {
       critical: 'Problemas Críticos',
     },
     banner: {
-      l15Label: 'L1.5 LIVE',
+      l15Label: 'v3.0 LIVE',
       l15Desc: '→ 6 checks de metadata, roda em Vercel em tempo real',
       l16Label: 'L1.6 LIVE',
       l16Desc: '→ 18 regras Semgrep + 18 padrões de secretos + OSV API, roda em Vercel em tempo real',
@@ -461,11 +461,11 @@ const CONTENT = {
     },
     architecture: {
       title: 'ARQUITETURA — FLUXO PONTA A PONTA',
-      desc: 'Vercel roda L1.5 + L1.6 em tempo real em cada chamada a /api/audit-skill (~200ms). Se a skill tem um repo GitHub, Vercel dispara L2 via repository_dispatch. GitHub Actions roda o sandbox Docker (2-5 min), commita os resultados ao repo, e a próxima auditoria busca os resultados L2 em cache.',
+      desc: 'Vercel roda v3.0 + L1.6 em tempo real em cada chamada a /api/audit-skill (~200ms). Se a skill tem um repo GitHub, Vercel dispara L2 via repository_dispatch. GitHub Actions roda o sandbox Docker (2-5 min), commita os resultados ao repo, e a próxima auditoria busca os resultados L2 em cache.',
       diagram: `┌─────────────────────────────────────────────────────────────┐
 │              VERCEL  (tempo real, ~200ms por chamada)         │
 │   POST /api/audit-skill  { skillId }                          │
-│   ├─ L1.5  6 checks de metadata (AUTH, injeção, validação,    │
+│   ├─ v3.0  6 checks de metadata (AUTH, injeção, validação,    │
 │   │        CORS, OAuth scopes, vazamento de rate limiting)    │
 │   └─ L1.6  18 regras Semgrep + 18 padrões de secretos + OSV  │
 │            (api.osv.dev/v1/query — tempo real)                │
@@ -507,11 +507,11 @@ const CONTENT = {
 ┌─────────────────────────────────────────────────────────────┐
 │       PRÓXIMA AUDITORIA  (Vercel busca L2 em cache)           │
 │   GET raw.githubusercontent.com/.../l2_results/{skillId}.json │
-│   → aplica multiplicador L2 à pontuação (L1.5 + L1.6)         │
+│   → aplica multiplicador L2 à pontuação (v3.0 + L1.6)         │
 └─────────────────────────────────────────────────────────────┘`,
     },
     l15: {
-      title: 'CHECKS DO SENTINEL L1.5',
+      title: 'CHECKS DO SENTINEL v3.0',
       live: 'LIVE NO VERCEL',
       checks: [
         { label: 'AUTH — O servidor requer autenticação?', category: 'Autenticação' },
@@ -521,7 +521,7 @@ const CONTENT = {
         { label: 'OAuth scopes — Os scopes são mínimos?', category: 'OAuth' },
         { label: 'Vazamento de info em rate limiting — Erros vazam info de rate limit?', category: 'Rate Limiting' },
       ],
-      descPre: 'L1.5 roda em',
+      descPre: 'v3.0 roda em',
       descCode: 'Vercel em tempo real',
       descPost: ' em cada chamada a /api/audit-skill. Analisa metadata (README, package.json, descrições de tools). Skills com pontuação abaixo de 4/10 são bloqueadas.',
     },
@@ -598,12 +598,12 @@ const CONTENT = {
       col3: 'Por quê',
       rows: [
         { type: 'Free (human-reviewed)', level: 'BAIXO', why: '43 skills inspecionadas manualmente pela AliceLabs' },
-        { type: 'Auto-scanned, risk_level=green', level: 'MÉDIO', why: 'Somente prompt, sem install. Sentinel L1.5+L1.6 rodou; sem revisão humana.' },
+        { type: 'Auto-scanned, risk_level=green', level: 'MÉDIO', why: 'Somente prompt, sem install. Sentinel v3.0+L1.6 rodou; sem revisão humana.' },
         { type: 'Auto-scanned, risk_level=yellow', level: 'MÉDIO-ALTO', why: 'Acesso a rede/API. Sentinel rodou; L2 pode ou não ter resultados ainda.' },
         { type: 'Paid, auto-scanned', level: 'ALTO', why: 'Execução de código + dinheiro envolvido. Use mandatos com limites baixos.' },
       ],
       bottomLineLabel: 'Conclusão:',
-      bottomLineBody: 'Sentinel L1.5 + L1.6 rodam em tempo real em cada chamada à API. L2 roda async via GitHub Actions e aplica na próxima auditoria. Isso é honesto, auditável e open source — mas não substitui a revisão humana de código que executa na sua máquina.',
+      bottomLineBody: 'Sentinel v3.0 + L1.6 rodam em tempo real em cada chamada à API. L2 roda async via GitHub Actions e aplica na próxima auditoria. Isso é honesto, auditável e open source — mas não substitui a revisão humana de código que executa na sua máquina.',
     },
     changelog: {
       title: 'CHANGELOG DO SENTINEL',
@@ -611,7 +611,7 @@ const CONTENT = {
         {
           date: '2026-07-05',
           strong: 'FINAL-AUDIT-ALL.',
-          body: ' Security.jsx reescrito para refletir a arquitetura REAL: L1.5 (6 checks, Vercel tempo real) + L1.6 (18 Semgrep + 18 secretos + OSV API, Vercel tempo real) + L2 (Docker sandbox, GitHub Actions, disparado do Vercel). Limitações honestas atualizadas (L2 async, baseado em regex, sem auditoria de terceiros).',
+          body: ' Security.jsx reescrito para refletir a arquitetura REAL: v3.0 (6 checks, Vercel tempo real) + L1.6 (18 Semgrep + 18 secretos + OSV API, Vercel tempo real) + L2 (Docker sandbox, GitHub Actions, disparado do Vercel). Limitações honestas atualizadas (L2 async, baseado em regex, sem auditoria de terceiros).',
           code: '→ Código',
         },
         {
@@ -629,12 +629,12 @@ const CONTENT = {
         },
         {
           date: '2026-06-30',
-          strong: 'L1.5 live.',
+          strong: 'v3.0 live.',
           body: ' Auditoria baseada em metadata de 6 pontos: AUTH, padrões de prompt injection, validação de inputs, CORS, OAuth scopes, vazamento de info em rate limiting.',
         },
       ],
       links: [
-        { text: '→ Roadmap completo (L1.5 → L3.5)', to: '/sentinel-roadmap' },
+        { text: '→ Roadmap completo (v3.0 → L3.5)', to: '/sentinel-roadmap' },
         { text: '→ Roadmap de confiança', to: '/trust' },
         { text: '→ Guia do comprador', to: '/buyers-guide' },
       ],
@@ -642,7 +642,7 @@ const CONTENT = {
   },
 
   zh: {
-    badge: 'SENTINEL L1.5 → L1.6 → L2',
+    badge: 'SENTINEL v3.0 → L1.6 → L2',
     stats: {
       total: '技能总数',
       scanned: 'Sentinel 扫描数',
@@ -651,7 +651,7 @@ const CONTENT = {
       critical: '严重问题',
     },
     banner: {
-      l15Label: 'L1.5 LIVE',
+      l15Label: 'v3.0 LIVE',
       l15Desc: '→ 6 项元数据检查,在 Vercel 实时运行',
       l16Label: 'L1.6 LIVE',
       l16Desc: '→ 18 条 Semgrep 规则 + 18 个密钥模式 + OSV API,在 Vercel 实时运行',
@@ -660,11 +660,11 @@ const CONTENT = {
     },
     architecture: {
       title: '架构 — 端到端流程',
-      desc: 'Vercel 在每次 /api/audit-skill 调用时实时运行 L1.5 + L1.6(约 200ms)。如果技能有 GitHub 仓库,Vercel 通过 repository_dispatch 触发 L2。GitHub Actions 运行 Docker 沙箱(2-5 分钟),将结果提交到仓库,下次审计获取缓存的 L2 结果。',
+      desc: 'Vercel 在每次 /api/audit-skill 调用时实时运行 v3.0 + L1.6(约 200ms)。如果技能有 GitHub 仓库,Vercel 通过 repository_dispatch 触发 L2。GitHub Actions 运行 Docker 沙箱(2-5 分钟),将结果提交到仓库,下次审计获取缓存的 L2 结果。',
       diagram: `┌─────────────────────────────────────────────────────────────┐
 │              VERCEL  (实时,每次调用约 200ms)                  │
 │   POST /api/audit-skill  { skillId }                          │
-│   ├─ L1.5  6 项元数据检查 (AUTH、注入、验证、CORS、          │
+│   ├─ v3.0  6 项元数据检查 (AUTH、注入、验证、CORS、          │
 │   │        OAuth scopes、限流错误泄漏)                        │
 │   └─ L1.6  18 条 Semgrep 规则 + 18 个密钥模式 + OSV API      │
 │            (api.osv.dev/v1/query — 实时)                      │
@@ -706,11 +706,11 @@ const CONTENT = {
 ┌─────────────────────────────────────────────────────────────┐
 │       下次审计  (Vercel 获取缓存的 L2 结果)                   │
 │   GET raw.githubusercontent.com/.../l2_results/{skillId}.json │
-│   → 将 L2 乘数应用到 (L1.5 + L1.6) 分数                      │
+│   → 将 L2 乘数应用到 (v3.0 + L1.6) 分数                      │
 └─────────────────────────────────────────────────────────────┘`,
     },
     l15: {
-      title: 'SENTINEL L1.5 检查项',
+      title: 'SENTINEL v3.0 检查项',
       live: 'VERCEL 实时',
       checks: [
         { label: 'AUTH — 服务器是否要求身份验证?', category: '身份验证' },
@@ -720,7 +720,7 @@ const CONTENT = {
         { label: 'OAuth scopes — scope 是否最小化?', category: 'OAuth' },
         { label: '限流错误泄漏 — 错误是否泄漏限流信息?', category: '限流' },
       ],
-      descPre: 'L1.5 在',
+      descPre: 'v3.0 在',
       descCode: 'Vercel 实时',
       descPost: ' 中运行,每次 /api/audit-skill 调用都执行。它分析元数据(README、package.json、工具描述)。分数低于 4/10 的技能会被屏蔽。',
     },
@@ -797,12 +797,12 @@ const CONTENT = {
       col3: '原因',
       rows: [
         { type: '免费(人工审核)', level: '低', why: '43 个技能由 AliceLabs 人工检查' },
-        { type: '自动扫描,risk_level=green', level: '中', why: '仅提示,无安装。Sentinel L1.5+L1.6 已运行;无人工审核。' },
+        { type: '自动扫描,risk_level=green', level: '中', why: '仅提示,无安装。Sentinel v3.0+L1.6 已运行;无人工审核。' },
         { type: '自动扫描,risk_level=yellow', level: '中高', why: '有网络/API 访问。Sentinel 已运行;L2 可能尚无结果。' },
         { type: '付费,自动扫描', level: '高', why: '涉及代码执行 + 资金。使用低额度的授权。' },
       ],
       bottomLineLabel: '底线:',
-      bottomLineBody: 'Sentinel L1.5 + L1.6 在每次 API 调用时实时运行。L2 通过 GitHub Actions 异步运行,在下次审计时应用。这是诚实、可审计、开源的 — 但不能替代对你机器上执行代码的人工审核。',
+      bottomLineBody: 'Sentinel v3.0 + L1.6 在每次 API 调用时实时运行。L2 通过 GitHub Actions 异步运行,在下次审计时应用。这是诚实、可审计、开源的 — 但不能替代对你机器上执行代码的人工审核。',
     },
     changelog: {
       title: 'SENTINEL 更新日志',
@@ -810,7 +810,7 @@ const CONTENT = {
         {
           date: '2026-07-05',
           strong: 'FINAL-AUDIT-ALL。',
-          body: ' Security.jsx 重写以反映真实架构:L1.5(6 项检查,Vercel 实时)+ L1.6(18 Semgrep + 18 密钥 + OSV API,Vercel 实时)+ L2(Docker 沙箱,GitHub Actions,从 Vercel 触发)。更新诚实局限(L2 异步、基于正则、无第三方审计)。',
+          body: ' Security.jsx 重写以反映真实架构:v3.0(6 项检查,Vercel 实时)+ L1.6(18 Semgrep + 18 密钥 + OSV API,Vercel 实时)+ L2(Docker 沙箱,GitHub Actions,从 Vercel 触发)。更新诚实局限(L2 异步、基于正则、无第三方审计)。',
           code: '→ 代码',
         },
         {
@@ -828,12 +828,12 @@ const CONTENT = {
         },
         {
           date: '2026-06-30',
-          strong: 'L1.5 上线。',
+          strong: 'v3.0 上线。',
           body: ' 6 项基于元数据的审计:AUTH、提示注入模式、输入验证、CORS、OAuth scopes、限流错误泄漏。',
         },
       ],
       links: [
-        { text: '→ 完整路线图 (L1.5 → L3.5)', to: '/sentinel-roadmap' },
+        { text: '→ 完整路线图 (v3.0 → L3.5)', to: '/sentinel-roadmap' },
         { text: '→ 信任路线图', to: '/trust' },
         { text: '→ 买家指南', to: '/buyers-guide' },
       ],
@@ -841,7 +841,7 @@ const CONTENT = {
   },
 
   fr: {
-    badge: 'SENTINEL L1.5 → L1.6 → L2',
+    badge: 'SENTINEL v3.0 → L1.6 → L2',
     stats: {
       total: 'Skills Totales',
       scanned: 'Scannées par Sentinel',
@@ -850,7 +850,7 @@ const CONTENT = {
       critical: 'Problèmes Critiques',
     },
     banner: {
-      l15Label: 'L1.5 LIVE',
+      l15Label: 'v3.0 LIVE',
       l15Desc: '→ 6 checks de metadata, tourne dans Vercel en temps réel',
       l16Label: 'L1.6 LIVE',
       l16Desc: '→ 18 règles Semgrep + 18 patterns de secrets + OSV API, tourne dans Vercel en temps réel',
@@ -859,11 +859,11 @@ const CONTENT = {
     },
     architecture: {
       title: 'ARCHITECTURE — FLUX DE BOUT EN BOUT',
-      desc: 'Vercel exécute L1.5 + L1.6 en temps réel à chaque appel /api/audit-skill (~200ms). Si la skill a un repo GitHub, Vercel déclenche L2 via repository_dispatch. GitHub Actions exécute le sandbox Docker (2-5 min), commite les résultats au repo, et la prochaine audit récupère les résultats L2 en cache.',
+      desc: 'Vercel exécute v3.0 + L1.6 en temps réel à chaque appel /api/audit-skill (~200ms). Si la skill a un repo GitHub, Vercel déclenche L2 via repository_dispatch. GitHub Actions exécute le sandbox Docker (2-5 min), commite les résultats au repo, et la prochaine audit récupère les résultats L2 en cache.',
       diagram: `┌─────────────────────────────────────────────────────────────┐
 │              VERCEL  (temps réel, ~200ms par appel)           │
 │   POST /api/audit-skill  { skillId }                          │
-│   ├─ L1.5  6 checks de metadata (AUTH, injection, validation, │
+│   ├─ v3.0  6 checks de metadata (AUTH, injection, validation, │
 │   │        CORS, OAuth scopes, fuite de rate limiting)        │
 │   └─ L1.6  18 règles Semgrep + 18 patterns de secrets + OSV  │
 │            (api.osv.dev/v1/query — temps réel)                │
@@ -905,11 +905,11 @@ const CONTENT = {
 ┌─────────────────────────────────────────────────────────────┐
 │       PROCHAINE AUDIT  (Vercel récupère L2 en cache)          │
 │   GET raw.githubusercontent.com/.../l2_results/{skillId}.json │
-│   → applique le multiplicateur L2 au score (L1.5 + L1.6)      │
+│   → applique le multiplicateur L2 au score (v3.0 + L1.6)      │
 └─────────────────────────────────────────────────────────────┘`,
     },
     l15: {
-      title: 'CHECKS SENTINEL L1.5',
+      title: 'CHECKS SENTINEL v3.0',
       live: 'LIVE DANS VERCEL',
       checks: [
         { label: 'AUTH — Le serveur requiert-il une authentification ?', category: 'Authentification' },
@@ -919,7 +919,7 @@ const CONTENT = {
         { label: 'OAuth scopes — Les scopes sont-ils minimaux ?', category: 'OAuth' },
         { label: 'Fuite d\'info dans le rate limiting — Les erreurs fuient-elles les infos de rate limit ?', category: 'Rate Limiting' },
       ],
-      descPre: 'L1.5 tourne dans',
+      descPre: 'v3.0 tourne dans',
       descCode: 'Vercel en temps réel',
       descPost: ' à chaque appel /api/audit-skill. Il analyse les metadata (README, package.json, descriptions des tools). Les skills avec un score inférieur à 4/10 sont bloquées.',
     },
@@ -996,12 +996,12 @@ const CONTENT = {
       col3: 'Pourquoi',
       rows: [
         { type: 'Free (human-reviewed)', level: 'BAS', why: '43 skills inspectées manuellement par AliceLabs' },
-        { type: 'Auto-scanned, risk_level=green', level: 'MOYEN', why: 'Prompt uniquement, sans install. Sentinel L1.5+L1.6 a tourné ; sans revue humaine.' },
+        { type: 'Auto-scanned, risk_level=green', level: 'MOYEN', why: 'Prompt uniquement, sans install. Sentinel v3.0+L1.6 a tourné ; sans revue humaine.' },
         { type: 'Auto-scanned, risk_level=yellow', level: 'MOYEN-ÉLEVÉ', why: 'Accès réseau/API. Sentinel a tourné ; L2 peut ou non avoir des résultats encore.' },
         { type: 'Paid, auto-scanned', level: 'ÉLEVÉ', why: 'Exécution de code + argent en jeu. Utilisez des mandats avec des limites basses.' },
       ],
       bottomLineLabel: 'Conclusion :',
-      bottomLineBody: 'Sentinel L1.5 + L1.6 tournent en temps réel à chaque appel API. L2 tourne en async via GitHub Actions et s\'applique à la prochaine audit. C\'est honnête, auditable et open source — mais cela ne remplace pas la revue humaine du code qui s\'exécute sur votre machine.',
+      bottomLineBody: 'Sentinel v3.0 + L1.6 tournent en temps réel à chaque appel API. L2 tourne en async via GitHub Actions et s\'applique à la prochaine audit. C\'est honnête, auditable et open source — mais cela ne remplace pas la revue humaine du code qui s\'exécute sur votre machine.',
     },
     changelog: {
       title: 'CHANGELOG DE SENTINEL',
@@ -1009,7 +1009,7 @@ const CONTENT = {
         {
           date: '2026-07-05',
           strong: 'FINAL-AUDIT-ALL.',
-          body: ' Security.jsx réécrit pour refléter l\'architecture RÉELLE : L1.5 (6 checks, Vercel temps réel) + L1.6 (18 Semgrep + 18 secrets + OSV API, Vercel temps réel) + L2 (Docker sandbox, GitHub Actions, déclenché depuis Vercel). Limites honnêtes mises à jour (L2 async, basé sur regex, pas d\'audit tiers).',
+          body: ' Security.jsx réécrit pour refléter l\'architecture RÉELLE : v3.0 (6 checks, Vercel temps réel) + L1.6 (18 Semgrep + 18 secrets + OSV API, Vercel temps réel) + L2 (Docker sandbox, GitHub Actions, déclenché depuis Vercel). Limites honnêtes mises à jour (L2 async, basé sur regex, pas d\'audit tiers).',
           code: '→ Code',
         },
         {
@@ -1027,12 +1027,12 @@ const CONTENT = {
         },
         {
           date: '2026-06-30',
-          strong: 'L1.5 live.',
+          strong: 'v3.0 live.',
           body: ' Audit basé sur la metadata en 6 points : AUTH, motifs d\'injection de prompt, validation des inputs, CORS, OAuth scopes, fuite d\'info dans le rate limiting.',
         },
       ],
       links: [
-        { text: '→ Roadmap complète (L1.5 → L3.5)', to: '/sentinel-roadmap' },
+        { text: '→ Roadmap complète (v3.0 → L3.5)', to: '/sentinel-roadmap' },
         { text: '→ Roadmap de confiance', to: '/trust' },
         { text: '→ Guide de l\'acheteur', to: '/buyers-guide' },
       ],
@@ -1187,7 +1187,7 @@ export default function Security() {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* L1.5 Checks (LIVE) */}
+          {/* v3.0 Checks (LIVE) */}
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }} className="premium-card p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-white font-semibold">{c.l15.title}</h2>

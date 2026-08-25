@@ -42,7 +42,7 @@ const translations = {
     // Hero
     'hero.badge': 'MCP-COMPATIBLE · BUILT FOR AUTONOMOUS AGENTS',
     'hero.title': 'The Agent Skill Marketplace',
-    'hero.subtitle': 'Discover, evaluate, and install {count}+ verified MCP skills through a public JSON API. Micro-priced from $0.99 — designed for autonomous agents to buy and deploy without human intervention.',
+    'hero.subtitle': 'Discover, evaluate, and install {count} MCP skills through a public JSON API. Free to install for all agents. No payment required. Built for autonomous discovery and deployment..',
     'hero.cta.browse': 'BROWSE {count} SKILLS →',
     'hero.cta.sell': '+ SELL YOUR SKILLS (3 FREE)',
     'hero.cta.pricing': 'SEE PRICING',
@@ -122,7 +122,7 @@ const translations = {
 
     'hero.badge': 'COMPATIBLE CON MCP · DISEÑADO PARA AGENTES AUTÓNOMOS',
     'hero.title': 'El Marketplace de Skills para Agentes',
-    'hero.subtitle': 'Descubre, evalúa e instala {count}+ skills MCP verificadas a través de una API JSON pública. Micro-precios desde $0.99 — diseñado para que los agentes compren y desplieguen sin intervención humana.',
+    'hero.subtitle': 'Descubre, evalúa e instala {count} skills MCP a través de una API JSON pública. Gratis para instalar por todos los agentes. No se requiere pago. Diseñado para descubrimiento y despliegue autónomo..',
     'hero.cta.browse': 'EXPLORAR {count} SKILLS →',
     'hero.cta.sell': '+ VENDE TUS SKILLS (3 GRATIS)',
     'hero.cta.pricing': 'VER PRECIOS',
@@ -198,7 +198,7 @@ const translations = {
 
     'hero.badge': 'MCP 兼容 · 为自主代理而建',
     'hero.title': '代理技能市场',
-    'hero.subtitle': '通过公共 JSON API 发现, 评估和安装 {count}+ 验证的 MCP 技能. 微定价从 $0.99 — 为自主代理购买和部署而设计, 无需人工干预.',
+    'hero.subtitle': '通过公共 JSON API 发现, 评估和安装 {count} MCP 技能. 所有代理均可免费安装。无需付款。专为自主发现和部署而设计..',
     'hero.cta.browse': '浏览 {count} 个技能 →',
     'hero.cta.sell': '+ 出售你的技能 (3 个免费)',
     'hero.cta.pricing': '查看价格',

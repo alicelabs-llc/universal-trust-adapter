@@ -312,7 +312,7 @@ export default function Dashboard() {
               <label className="text-zinc-400 text-sm block mb-2">{c.skillPriceLabel}</label>
               <input
                 type="range"
-                min="0.99"
+                min="0"
                 max="9.99"
                 step="0.01"
                 value={calcPrice}

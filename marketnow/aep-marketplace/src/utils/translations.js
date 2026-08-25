@@ -56,7 +56,7 @@ export const TRANSLATIONS = {
     'hero.ctaFree': 'FREE SKILLS',
     'hero.ctaPublish': '+ PUBLISH YOUR SKILL',
     'hero.or': 'or',
-    'hero.install': 'npx -y @marketnow/install <slug>',
+    'hero.install': 'npx -y marketnow-install-stack <slug>',
 
     // Common UI
     'common.loading': 'Loading...',
@@ -111,8 +111,8 @@ export const TRANSLATIONS = {
 
     // Security page
     'security.title': 'Sentinel Security',
-    'security.subtitle': 'Real-time security audits on every MCP skill. L1.5 metadata → L1.6 code analysis → L2 behavioral sandbox.',
-    'security.l15': 'L1.5 Metadata Audit',
+    'security.subtitle': 'Real-time security audits on every MCP skill. v3.0 metadata → L1.6 code analysis → L2 behavioral sandbox.',
+    'security.l15': 'v3.0 Metadata Audit',
     'security.l15Desc': '6-point MCP security scan: AUTH, tool description injection, input validation, CORS, OAuth scopes, rate limiting.',
     'security.l16': 'L1.6 Code Analysis',
     'security.l16Desc': '18 Semgrep rules for MCP-specific vulnerabilities + OSV dependency check + gitleaks secret scanning.',
@@ -336,7 +336,7 @@ export const TRANSLATIONS = {
     'hero.ctaFree': 'SKILLS GRATIS',
     'hero.ctaPublish': '+ PUBLICA TU SKILL',
     'hero.or': 'o',
-    'hero.install': 'npx -y @marketnow/install <slug>',
+    'hero.install': 'npx -y marketnow-install-stack <slug>',
 
     // Common UI
     'common.loading': 'Cargando...',
@@ -391,8 +391,8 @@ export const TRANSLATIONS = {
 
     // Security page
     'security.title': 'Seguridad Sentinel',
-    'security.subtitle': 'Auditorías de seguridad en tiempo real en cada skill MCP. L1.5 metadata → L1.6 análisis de código → L2 sandbox de comportamiento.',
-    'security.l15': 'Auditoría L1.5 de Metadata',
+    'security.subtitle': 'Auditorías de seguridad en tiempo real en cada skill MCP. v3.0 metadata → L1.6 análisis de código → L2 sandbox de comportamiento.',
+    'security.l15': 'Auditoría v3.0 de Metadata',
     'security.l15Desc': 'Escaneo de seguridad MCP de 6 puntos: AUTH, inyección en descripciones de tools, validación de inputs, CORS, scopes OAuth, rate limiting.',
     'security.l16': 'Análisis L1.6 de Código',
     'security.l16Desc': '18 reglas Semgrep para vulnerabilidades específicas de MCP + check de dependencias OSV + scanning de secretos gitleaks.',
@@ -616,7 +616,7 @@ export const TRANSLATIONS = {
     'hero.ctaFree': 'SKILLS GRÁTIS',
     'hero.ctaPublish': '+ PUBlique SUA SKILL',
     'hero.or': 'ou',
-    'hero.install': 'npx -y @marketnow/install <slug>',
+    'hero.install': 'npx -y marketnow-install-stack <slug>',
 
     // Common UI
     'common.loading': 'Carregando...',
@@ -671,8 +671,8 @@ export const TRANSLATIONS = {
 
     // Security page
     'security.title': 'Segurança Sentinel',
-    'security.subtitle': 'Auditorias de segurança em tempo real em cada skill MCP. L1.5 metadata → L1.6 análise de código → L2 sandbox comportamental.',
-    'security.l15': 'Auditoria L1.5 de Metadata',
+    'security.subtitle': 'Auditorias de segurança em tempo real em cada skill MCP. v3.0 metadata → L1.6 análise de código → L2 sandbox comportamental.',
+    'security.l15': 'Auditoria v3.0 de Metadata',
     'security.l15Desc': 'Scan de segurança MCP de 6 pontos: AUTH, injeção em descrições de tools, validação de inputs, CORS, scopes OAuth, rate limiting.',
     'security.l16': 'Análise L1.6 de Código',
     'security.l16Desc': '18 regras Semgrep para vulnerabilidades específicas de MCP + check de dependências OSV + scanning de segredos gitleaks.',
@@ -896,7 +896,7 @@ export const TRANSLATIONS = {
     'hero.ctaFree': '免费技能',
     'hero.ctaPublish': '+ 发布你的技能',
     'hero.or': '或',
-    'hero.install': 'npx -y @marketnow/install <slug>',
+    'hero.install': 'npx -y marketnow-install-stack <slug>',
 
     // Common UI
     'common.loading': '加载中...',
@@ -951,8 +951,8 @@ export const TRANSLATIONS = {
 
     // Security page
     'security.title': 'Sentinel 安全',
-    'security.subtitle': '对每个 MCP 技能进行实时安全审计。L1.5 元数据 → L1.6 代码分析 → L2 行为沙箱。',
-    'security.l15': 'L1.5 元数据审计',
+    'security.subtitle': '对每个 MCP 技能进行实时安全审计。v3.0 元数据 → L1.6 代码分析 → L2 行为沙箱。',
+    'security.l15': 'v3.0 元数据审计',
     'security.l15Desc': '6 点 MCP 安全扫描：AUTH、工具描述注入、输入验证、CORS、OAuth 范围、速率限制。',
     'security.l16': 'L1.6 代码分析',
     'security.l16Desc': '18 条 MCP 专用 Semgrep 规则 + OSV 依赖检查 + gitleaks 密钥扫描。',
@@ -1176,7 +1176,7 @@ export const TRANSLATIONS = {
     'hero.ctaFree': 'SKILLS GRATUITES',
     'hero.ctaPublish': '+ PUBLIEZ VOTRE SKILL',
     'hero.or': 'ou',
-    'hero.install': 'npx -y @marketnow/install <slug>',
+    'hero.install': 'npx -y marketnow-install-stack <slug>',
 
     // Common UI
     'common.loading': 'Chargement...',
@@ -1231,8 +1231,8 @@ export const TRANSLATIONS = {
 
     // Security page
     'security.title': 'Sécurité Sentinel',
-    'security.subtitle': 'Audits de sécurité en temps réel sur chaque skill MCP. L1.5 métadonnées → L1.6 analyse de code → L2 sandbox comportementale.',
-    'security.l15': 'Audit L1.5 des Métadonnées',
+    'security.subtitle': 'Audits de sécurité en temps réel sur chaque skill MCP. v3.0 métadonnées → L1.6 analyse de code → L2 sandbox comportementale.',
+    'security.l15': 'Audit v3.0 des Métadonnées',
     'security.l15Desc': 'Scan de sécurité MCP en 6 points : AUTH, injection dans les descriptions d\'outils, validation des entrées, CORS, scopes OAuth, rate limiting.',
     'security.l16': 'Analyse L1.6 du Code',
     'security.l16Desc': '18 règles Semgrep pour vulnérabilités spécifiques à MCP + vérification OSV des dépendances + scanning de secrets gitleaks.',

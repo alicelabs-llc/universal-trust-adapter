@@ -37,7 +37,7 @@ const CONTENT = {
       },
       {
         n: 2,
-        title: 'Run Sentinel L1.5 on your server',
+        title: 'Run Sentinel v3.0 on your server',
         what: 'Before submitting, run our open source security scanner. Fix any issues found.',
         command:
           'curl -X POST https://marketnow.site/api/audit-skill \\\n  -H "Content-Type: application/json" \\\n  -d \'{"repo_url": "https://github.com/yourname/your-mcp-server"}\'',
@@ -61,7 +61,7 @@ const CONTENT = {
           'GitHub repo URL (required)',
           'Skill name and description',
           'Category (58 to choose from)',
-          'Price ($0.99–$9.99, or free)',
+          'Price (Free–$9.99, or free)',
           'System prompt (for agents to use your skill)',
           'Setup requirements (env vars, API keys needed)',
         ],
@@ -70,7 +70,7 @@ const CONTENT = {
       {
         n: 4,
         title: 'Wait for review',
-        what: 'Sentinel L1.5 runs automatically. Human review takes 24-48h for paid skills, faster for free.',
+        what: 'Sentinel v3.0 runs automatically. Human review takes 24-48h for paid skills, faster for free.',
         statuses: [
           {
             status: 'auto-scanned',
@@ -133,7 +133,7 @@ const CONTENT = {
       },
       {
         n: 2,
-        title: 'Ejecuta Sentinel L1.5 en tu servidor',
+        title: 'Ejecuta Sentinel v3.0 en tu servidor',
         what: 'Antes de enviar, ejecuta nuestro escáner de seguridad de código abierto. Corrige cualquier problema detectado.',
         command:
           'curl -X POST https://marketnow.site/api/audit-skill \\\n  -H "Content-Type: application/json" \\\n  -d \'{"repo_url": "https://github.com/yourname/your-mcp-server"}\'',
@@ -157,7 +157,7 @@ const CONTENT = {
           'URL del repo de GitHub (obligatorio)',
           'Nombre y descripción de la skill',
           'Categoría (58 para elegir)',
-          'Precio ($0.99–$9.99, o gratis)',
+          'Precio (Free–$9.99, o gratis)',
           'System prompt (para que los agentes usen tu skill)',
           'Requisitos de configuración (env vars, API keys necesarias)',
         ],
@@ -166,7 +166,7 @@ const CONTENT = {
       {
         n: 4,
         title: 'Espera la revisión',
-        what: 'Sentinel L1.5 se ejecuta automáticamente. La revisión humana tarda 24-48h para skills de pago, menos para las gratuitas.',
+        what: 'Sentinel v3.0 se ejecuta automáticamente. La revisión humana tarda 24-48h para skills de pago, menos para las gratuitas.',
         statuses: [
           {
             status: 'auto-scanned',
@@ -229,7 +229,7 @@ const CONTENT = {
       },
       {
         n: 2,
-        title: 'Rode o Sentinel L1.5 no seu servidor',
+        title: 'Rode o Sentinel v3.0 no seu servidor',
         what: 'Antes de enviar, rode nosso scanner de segurança open source. Corrija quaisquer problemas encontrados.',
         command:
           'curl -X POST https://marketnow.site/api/audit-skill \\\n  -H "Content-Type: application/json" \\\n  -d \'{"repo_url": "https://github.com/yourname/your-mcp-server"}\'',
@@ -253,7 +253,7 @@ const CONTENT = {
           'URL do repo do GitHub (obrigatório)',
           'Nome e descrição da skill',
           'Categoria (58 para escolher)',
-          'Preço ($0.99–$9.99, ou grátis)',
+          'Preço (Free–$9.99, ou grátis)',
           'System prompt (para agentes usarem sua skill)',
           'Requisitos de setup (env vars, API keys necessárias)',
         ],
@@ -262,7 +262,7 @@ const CONTENT = {
       {
         n: 4,
         title: 'Aguarde a revisão',
-        what: 'O Sentinel L1.5 roda automaticamente. A revisão humana leva 24-48h para skills pagas, menos para gratuitas.',
+        what: 'O Sentinel v3.0 roda automaticamente. A revisão humana leva 24-48h para skills pagas, menos para gratuitas.',
         statuses: [
           {
             status: 'auto-scanned',
@@ -324,7 +324,7 @@ const CONTENT = {
       },
       {
         n: 2,
-        title: '在你的 server 上运行 Sentinel L1.5',
+        title: '在你的 server 上运行 Sentinel v3.0',
         what: '提交前，运行我们的开源安全扫描器。修复发现的所有问题。',
         command:
           'curl -X POST https://marketnow.site/api/audit-skill \\\n  -H "Content-Type: application/json" \\\n  -d \'{"repo_url": "https://github.com/yourname/your-mcp-server"}\'',
@@ -348,7 +348,7 @@ const CONTENT = {
           'GitHub 仓库 URL（必填）',
           'Skill 名称与描述',
           '分类（58 个可选）',
-          '价格（$0.99–$9.99，或免费）',
+          '价格（Free–$9.99，或免费）',
           'System prompt（供 agents 使用你的 skill）',
           '配置要求（所需 env vars、API keys）',
         ],
@@ -357,7 +357,7 @@ const CONTENT = {
       {
         n: 4,
         title: '等待审核',
-        what: 'Sentinel L1.5 自动运行。付费 skill 人工审核约 24-48 小时，免费 skill 更快。',
+        what: 'Sentinel v3.0 自动运行。付费 skill 人工审核约 24-48 小时，免费 skill 更快。',
         statuses: [
           {
             status: 'auto-scanned',
@@ -420,7 +420,7 @@ const CONTENT = {
       },
       {
         n: 2,
-        title: 'Exécutez Sentinel L1.5 sur votre serveur',
+        title: 'Exécutez Sentinel v3.0 sur votre serveur',
         what: 'Avant de soumettre, lancez notre scanner de sécurité open source. Corrigez tout problème détecté.',
         command:
           'curl -X POST https://marketnow.site/api/audit-skill \\\n  -H "Content-Type: application/json" \\\n  -d \'{"repo_url": "https://github.com/yourname/your-mcp-server"}\'',
@@ -444,7 +444,7 @@ const CONTENT = {
           'URL du repo GitHub (obligatoire)',
           'Nom et description de la skill',
           'Catégorie (58 au choix)',
-          'Prix ($0.99–$9.99, ou gratuit)',
+          'Prix (Free–$9.99, ou gratuit)',
           'System prompt (pour que les agents utilisent votre skill)',
           'Prérequis de configuration (env vars, API keys nécessaires)',
         ],
@@ -453,7 +453,7 @@ const CONTENT = {
       {
         n: 4,
         title: 'Attendez la revue',
-        what: 'Sentinel L1.5 s\'exécute automatiquement. La revue humaine prend 24-48h pour les skills payantes, moins pour les gratuites.',
+        what: 'Sentinel v3.0 s\'exécute automatiquement. La revue humaine prend 24-48h pour les skills payantes, moins pour les gratuites.',
         statuses: [
           {
             status: 'auto-scanned',

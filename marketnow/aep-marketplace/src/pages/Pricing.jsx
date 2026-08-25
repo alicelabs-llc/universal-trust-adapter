@@ -29,7 +29,7 @@ const CONTENT = {
       'FREE tier includes your first {threshold} skills at no cost. After that, a storage fee of ${price} per skill per {period} applies. This covers hosting, Sentinel scanning, and continuous monitoring of your skills. PRO and ENTERPRISE tiers include unlimited storage — no per-skill fees.',
 
     addonsTitle: 'ADD-ONS',
-    addonsSubtitle: 'Boost your skills with one-time purchases',
+    addonsSubtitle: 'Sentinel subscription tiers for sellers',
 
     commissionTitle: 'COMMISSION BREAKDOWN',
     commissionSubtitle: "For every skill sold, here's how the revenue is split",
@@ -70,7 +70,7 @@ const CONTENT = {
       },
       {
         q: 'What is the Verified Seller badge?',
-        a: 'A one-time $19.99 purchase that adds a ✓ Verified badge to all your skills. Requires KYC verification (government ID). Boosts buyer trust and conversion rates significantly.',
+        a: 'Verified badge (requires KYC verification) that adds a ✓ Verified badge to all your skills. Requires KYC verification (government ID). Boosts buyer trust and conversion rates significantly.',
       },
       {
         q: 'How does the affiliate program work?',

@@ -26,7 +26,7 @@ const CONTENT = {
         title: 'Check the review_status',
         what: 'Every skill on MarketNow has a review_status field. Look for it on the skill detail page.',
         values: [
-          { value: 'auto-scanned', desc: 'Sentinel L1.5 ran automated checks. No human reviewed. Most skills are here (8,517). Safe to install, but treat with appropriate caution.', color: '#fbbf24' },
+          { value: 'auto-scanned', desc: 'Sentinel v3.0 ran automated checks. No human reviewed. Most skills are here (8,517). Safe to install, but treat with appropriate caution.', color: '#fbbf24' },
           { value: 'human-reviewed', desc: 'A human at AliceLabs inspected the GitHub repo, code, and Sentinel report. Higher trust. 43 skills today.', color: '#00F299' },
           { value: 'maintainer-verified', desc: 'The GitHub maintainer signed a claim of authorship (GPG). Highest trust. 0 skills today — program opens Q4 2026, apply at info@alicelabs.site.', color: '#00d1ff' },
         ],
@@ -34,7 +34,7 @@ const CONTENT = {
       },
       {
         n: 2,
-        title: 'Read the Sentinel L1.5 report',
+        title: 'Read the Sentinel v3.0 report',
         what: 'Sentinel runs 6 security checks. The report shows what passed, what failed, and the score (0-10).',
         checks: [
           'AUTH — Does the server require authentication?',
@@ -75,7 +75,7 @@ const CONTENT = {
         n: 5,
         title: 'Check the install command',
         what: 'MarketNow install commands use npx. Verify the package name matches the GitHub repo.',
-        good: 'npx -y @marketnow/install <slug> (MarketNow wrapper, verified)',
+        good: 'npx -y marketnow-install-stack <slug> (MarketNow wrapper, verified)',
         caution: 'npx -y some-random-package (check the npm registry — is it the same author as GitHub?)',
         tip: 'If the install command points to a different npm package than the GitHub repo suggests, that\'s a supply chain risk.',
       },
@@ -132,7 +132,7 @@ const CONTENT = {
         title: 'Verifica el review_status',
         what: 'Cada skill en MarketNow tiene un campo review_status. Búscalo en la página de detalle del skill.',
         values: [
-          { value: 'auto-scanned', desc: 'Sentinel L1.5 ejecutó verificaciones automáticas. Sin revisión humana. La mayoría de los skills están aquí (8,517). Seguros para instalar, pero trátalos con la precaución adecuada.', color: '#fbbf24' },
+          { value: 'auto-scanned', desc: 'Sentinel v3.0 ejecutó verificaciones automáticas. Sin revisión humana. La mayoría de los skills están aquí (8,517). Seguros para instalar, pero trátalos con la precaución adecuada.', color: '#fbbf24' },
           { value: 'human-reviewed', desc: 'Un humano en AliceLabs inspeccionó el repo de GitHub, el código y el reporte de Sentinel. Mayor confianza. 43 skills hoy.', color: '#00F299' },
           { value: 'maintainer-verified', desc: 'El maintainer de GitHub firmó una declaración de autoría (GPG). Máxima confianza. 0 skills hoy — el programa abre en Q4 2026, postula en info@alicelabs.site.', color: '#00d1ff' },
         ],
@@ -140,7 +140,7 @@ const CONTENT = {
       },
       {
         n: 2,
-        title: 'Lee el reporte Sentinel L1.5',
+        title: 'Lee el reporte Sentinel v3.0',
         what: 'Sentinel ejecuta 6 verificaciones de seguridad. El reporte muestra qué pasó, qué falló y el puntaje (0-10).',
         checks: [
           'AUTH — ¿El servidor requiere autenticación?',
@@ -181,7 +181,7 @@ const CONTENT = {
         n: 5,
         title: 'Verifica el comando de instalación',
         what: 'Los comandos de instalación de MarketNow usan npx. Verifica que el nombre del paquete coincida con el repo de GitHub.',
-        good: 'npx -y @marketnow/install <slug> (wrapper de MarketNow, verificado)',
+        good: 'npx -y marketnow-install-stack <slug> (wrapper de MarketNow, verificado)',
         caution: 'npx -y some-random-package (revisa el registro npm — ¿es el mismo autor que en GitHub?)',
         tip: 'Si el comando de instalación apunta a un paquete npm distinto al que sugiere el repo de GitHub, es un riesgo de cadena de suministro.',
       },
@@ -238,7 +238,7 @@ const CONTENT = {
         title: 'Verifique o review_status',
         what: 'Cada skill no MarketNow tem um campo review_status. Procure-o na página de detalhes do skill.',
         values: [
-          { value: 'auto-scanned', desc: 'Sentinel L1.5 executou verificações automatizadas. Sem revisão humana. A maioria dos skills está aqui (8.517). Seguro para instalar, mas trate com a cautela apropriada.', color: '#fbbf24' },
+          { value: 'auto-scanned', desc: 'Sentinel v3.0 executou verificações automatizadas. Sem revisão humana. A maioria dos skills está aqui (8.517). Seguro para instalar, mas trate com a cautela apropriada.', color: '#fbbf24' },
           { value: 'human-reviewed', desc: 'Um humano na AliceLabs inspecionou o repo do GitHub, o código e o relatório do Sentinel. Maior confiança. 43 skills hoje.', color: '#00F299' },
           { value: 'maintainer-verified', desc: 'O maintainer do GitHub assinou uma declaração de autoria (GPG). Maior confiança. 0 skills hoje — programa abre em Q4 2026, candidate-se em info@alicelabs.site.', color: '#00d1ff' },
         ],
@@ -246,7 +246,7 @@ const CONTENT = {
       },
       {
         n: 2,
-        title: 'Leia o relatório Sentinel L1.5',
+        title: 'Leia o relatório Sentinel v3.0',
         what: 'Sentinel executa 6 verificações de segurança. O relatório mostra o que passou, o que falhou e a pontuação (0-10).',
         checks: [
           'AUTH — O servidor exige autenticação?',
@@ -287,7 +287,7 @@ const CONTENT = {
         n: 5,
         title: 'Verifique o comando de instalação',
         what: 'Os comandos de instalação do MarketNow usam npx. Verifique se o nome do pacote corresponde ao repo do GitHub.',
-        good: 'npx -y @marketnow/install <slug> (wrapper do MarketNow, verificado)',
+        good: 'npx -y marketnow-install-stack <slug> (wrapper do MarketNow, verificado)',
         caution: 'npx -y some-random-package (verifique o registro npm — é o mesmo autor do GitHub?)',
         tip: 'Se o comando de instalação aponta para um pacote npm diferente do que o repo do GitHub sugere, isso é um risco de cadeia de suprimentos.',
       },
@@ -344,7 +344,7 @@ const CONTENT = {
         title: '查看 review_status',
         what: 'MarketNow 上的每个 skill 都有一个 review_status 字段。请在 skill 详情页中查看它。',
         values: [
-          { value: 'auto-scanned', desc: 'Sentinel L1.5 执行了自动化检查。无人工审核。大多数 skill 在此类别（8,517 个）。可以安装，但请保持适当的谨慎。', color: '#fbbf24' },
+          { value: 'auto-scanned', desc: 'Sentinel v3.0 执行了自动化检查。无人工审核。大多数 skill 在此类别（8,517 个）。可以安装，但请保持适当的谨慎。', color: '#fbbf24' },
           { value: 'human-reviewed', desc: 'AliceLabs 的人工审查了 GitHub 仓库、代码和 Sentinel 报告。信任度更高。目前有 43 个。', color: '#00F299' },
           { value: 'maintainer-verified', desc: 'GitHub 维护者签署了作者身份声明（GPG）。最高信任度。目前为 0 个——计划于 2026 年第四季度开放，请发送申请至 info@alicelabs.site。', color: '#00d1ff' },
         ],
@@ -352,7 +352,7 @@ const CONTENT = {
       },
       {
         n: 2,
-        title: '阅读 Sentinel L1.5 报告',
+        title: '阅读 Sentinel v3.0 报告',
         what: 'Sentinel 运行 6 项安全检查。报告显示通过的内容、失败的内容以及评分（0-10）。',
         checks: [
           'AUTH —— 服务器是否要求身份验证？',
@@ -393,7 +393,7 @@ const CONTENT = {
         n: 5,
         title: '查看安装命令',
         what: 'MarketNow 的安装命令使用 npx。请验证包名是否与 GitHub 仓库匹配。',
-        good: 'npx -y @marketnow/install <slug>（MarketNow 封装，已验证）',
+        good: 'npx -y marketnow-install-stack <slug>（MarketNow 封装，已验证）',
         caution: 'npx -y some-random-package（请检查 npm registry——是否与 GitHub 上的作者是同一人？）',
         tip: '如果安装命令指向与 GitHub 仓库建议不同的 npm 包，这就是供应链风险。',
       },
@@ -450,7 +450,7 @@ const CONTENT = {
         title: 'Vérifiez le review_status',
         what: 'Chaque skill sur MarketNow possède un champ review_status. Cherchez-le sur la page de détail du skill.',
         values: [
-          { value: 'auto-scanned', desc: 'Sentinel L1.5 a exécuté des vérifications automatisées. Aucune révision humaine. La plupart des skills sont ici (8 517). Sûrs à installer, mais à traiter avec la prudence appropriée.', color: '#fbbf24' },
+          { value: 'auto-scanned', desc: 'Sentinel v3.0 a exécuté des vérifications automatisées. Aucune révision humaine. La plupart des skills sont ici (8 517). Sûrs à installer, mais à traiter avec la prudence appropriée.', color: '#fbbf24' },
           { value: 'human-reviewed', desc: 'Un humain chez AliceLabs a inspecté le repo GitHub, le code et le rapport Sentinel. Confiance plus élevée. 43 skills aujourd\'hui.', color: '#00F299' },
           { value: 'maintainer-verified', desc: 'Le maintainer GitHub a signé une déclaration d\'auteur (GPG). Confiance maximale. 0 skill aujourd\'hui — programme ouvert Q4 2026, postulez à info@alicelabs.site.', color: '#00d1ff' },
         ],
@@ -458,7 +458,7 @@ const CONTENT = {
       },
       {
         n: 2,
-        title: 'Lisez le rapport Sentinel L1.5',
+        title: 'Lisez le rapport Sentinel v3.0',
         what: 'Sentinel exécute 6 vérifications de sécurité. Le rapport montre ce qui a réussi, ce qui a échoué et le score (0-10).',
         checks: [
           'AUTH — Le serveur exige-t-il une authentification ?',
@@ -499,7 +499,7 @@ const CONTENT = {
         n: 5,
         title: 'Vérifiez la commande d\'installation',
         what: 'Les commandes d\'installation de MarketNow utilisent npx. Vérifiez que le nom du paquet correspond au repo GitHub.',
-        good: 'npx -y @marketnow/install <slug> (wrapper MarketNow, vérifié)',
+        good: 'npx -y marketnow-install-stack <slug> (wrapper MarketNow, vérifié)',
         caution: 'npx -y some-random-package (vérifiez le registry npm — est-ce le même auteur que sur GitHub ?)',
         tip: 'Si la commande d\'installation pointe vers un paquet npm différent de ce que suggère le repo GitHub, c\'est un risque de chaîne d\'approvisionnement.',
       },

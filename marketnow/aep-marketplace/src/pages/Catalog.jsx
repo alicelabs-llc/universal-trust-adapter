@@ -21,7 +21,7 @@ const CONTENT = {
         colorClass: 'text-[#00F299]',
         title: '5,054 skills — Curated open-source MCP servers',
         bodyPre:
-          'Sourced from public GitHub repositories tagged with "mcp-server" or "model-context-protocol". Each was scanned by Sentinel L1.5, given a category based on its README, and certified by Sentinel with a signed SHA-256 certificate.',
+          'Sourced from public GitHub repositories tagged with "mcp-server" or "model-context-protocol". Each was scanned by Sentinel v3.0, given a category based on its README, and certified by Sentinel with a signed SHA-256 certificate.',
         bodyStrong: 'These are real, working MCP servers you can verify on GitHub.',
         bodyPost: '',
       },
@@ -67,7 +67,7 @@ const CONTENT = {
     verifiedItems: [
       {
         codeClass: 'text-[#00F299]',
-        bodyPre: 'Sentinel L1.5 ran automated checks. No human has reviewed.',
+        bodyPre: 'Sentinel v3.0 ran automated checks. No human has reviewed.',
         bodyStrong: 'Most catalog skills are here.',
       },
       {
@@ -112,7 +112,7 @@ const CONTENT = {
         colorClass: 'text-[#00F299]',
         title: '5,054 skills — Servidores MCP open-source curados',
         bodyPre:
-          'Obtenidos de repositorios públicos de GitHub etiquetados con "mcp-server" o "model-context-protocol". Cada uno fue escaneado por Sentinel L1.5, recibió una categoría basada en su README y certificada por Sentinel con un certificado SHA-256 firmado.',
+          'Obtenidos de repositorios públicos de GitHub etiquetados con "mcp-server" o "model-context-protocol". Cada uno fue escaneado por Sentinel v3.0, recibió una categoría basada en su README y certificada por Sentinel con un certificado SHA-256 firmado.',
         bodyStrong: 'Estos son servidores MCP reales y funcionales que puedes verificar en GitHub.',
         bodyPost: '',
       },
@@ -158,7 +158,7 @@ const CONTENT = {
     verifiedItems: [
       {
         codeClass: 'text-[#00F299]',
-        bodyPre: 'Sentinel L1.5 ejecutó verificaciones automatizadas. Ningún humano ha revisado.',
+        bodyPre: 'Sentinel v3.0 ejecutó verificaciones automatizadas. Ningún humano ha revisado.',
         bodyStrong: 'La mayoría de las skills del catálogo están aquí.',
       },
       {
@@ -203,7 +203,7 @@ const CONTENT = {
         colorClass: 'text-[#00F299]',
         title: '5.054 skills — Servidores MCP open-source curados',
         bodyPre:
-          'Obtidos de repositórios públicos do GitHub marcados com "mcp-server" ou "model-context-protocol". Cada um foi escaneado pelo Sentinel L1.5, recebeu uma categoria com base no seu README e certificada pelo Sentinel com um certificado SHA-256 assinado.',
+          'Obtidos de repositórios públicos do GitHub marcados com "mcp-server" ou "model-context-protocol". Cada um foi escaneado pelo Sentinel v3.0, recebeu uma categoria com base no seu README e certificada pelo Sentinel com um certificado SHA-256 assinado.',
         bodyStrong: 'Estes são servidores MCP reais e funcionais que você pode verificar no GitHub.',
         bodyPost: '',
       },
@@ -249,7 +249,7 @@ const CONTENT = {
     verifiedItems: [
       {
         codeClass: 'text-[#00F299]',
-        bodyPre: 'O Sentinel L1.5 executou verificações automatizadas. Nenhum humano revisou.',
+        bodyPre: 'O Sentinel v3.0 executou verificações automatizadas. Nenhum humano revisou.',
         bodyStrong: 'A maioria das skills do catálogo está aqui.',
       },
       {
@@ -294,7 +294,7 @@ const CONTENT = {
         colorClass: 'text-[#00F299]',
         title: '5,054 个 skill —— 精选的开源 MCP 服务器',
         bodyPre:
-          '来源于 GitHub 上标记为 "mcp-server" 或 "model-context-protocol" 的公开仓库。每个都由 Sentinel L1.5 扫描,根据其 README 分配分类,并由 Sentinel 认证,附带签名的 SHA-256 证书。',
+          '来源于 GitHub 上标记为 "mcp-server" 或 "model-context-protocol" 的公开仓库。每个都由 Sentinel v3.0 扫描,根据其 README 分配分类,并由 Sentinel 认证,附带签名的 SHA-256 证书。',
         bodyStrong: '这些是真实可用的 MCP 服务器,你可以在 GitHub 上验证。',
         bodyPost: '',
       },
@@ -340,7 +340,7 @@ const CONTENT = {
     verifiedItems: [
       {
         codeClass: 'text-[#00F299]',
-        bodyPre: 'Sentinel L1.5 运行了自动化检查。无人工审核。',
+        bodyPre: 'Sentinel v3.0 运行了自动化检查。无人工审核。',
         bodyStrong: '目录中大多数 skill 都属于此类。',
       },
       {
@@ -383,7 +383,7 @@ const CONTENT = {
         colorClass: 'text-[#00F299]',
         title: '5 054 skills — Serveurs MCP open-source curés',
         bodyPre:
-          'Issus de dépôts GitHub publics tagués « mcp-server » ou « model-context-protocol ». Chacun a été scanné par Sentinel L1.5, a reçu une catégorie basée sur son README et s\'est vu attribuer un prix selon sa complexité (fonction unique = $0.99, niveau entreprise = $9.99).',
+          'Issus de dépôts GitHub publics tagués « mcp-server » ou « model-context-protocol ». Chacun a été scanné par Sentinel v3.0, a reçu une catégorie basée sur son README et s\'est vu attribuer un prix selon sa complexité (fonction unique = Free, niveau entreprise = $9.99).',
         bodyStrong: 'Ce sont de vrais serveurs MCP fonctionnels que vous pouvez vérifier sur GitHub.',
         bodyPost: '',
       },
@@ -429,7 +429,7 @@ const CONTENT = {
     verifiedItems: [
       {
         codeClass: 'text-[#00F299]',
-        bodyPre: "Sentinel L1.5 a exécuté des vérifications automatisées. Aucun humain n'a revu.",
+        bodyPre: "Sentinel v3.0 a exécuté des vérifications automatisées. Aucun humain n'a revu.",
         bodyStrong: 'La plupart des skills du catalogue sont ici.',
       },
       {

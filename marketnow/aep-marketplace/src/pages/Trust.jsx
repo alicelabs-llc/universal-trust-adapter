@@ -9,10 +9,10 @@ const COMMUNITY_REVIEWERS = [
   {
     handle: '@rushabdev',
     date: 'July 2026',
-    scope: 'Payment system (USDC on Base + ACP/AP2 mandates) + Sentinel pipeline (L1.5 → L2.5)',
+    scope: 'Payment system (USDC on Base + ACP/AP2 mandates) + Sentinel pipeline (v3.0 → v3.0)',
     findings: { high: 1, medium: 4, low: 6 },
-    note_en: 'Conducted pro bono. All 11 findings reproduced and queued for fix. The HIGH finding (README claiming 10/10 while only L1.5 results were committed) was corrected within 24h. Public reply: dev.to/@edison_flores_6d2cd381b13/thank-you-rushabdev.',
-    note_es: 'Realizado pro bono. Los 11 hallazgos fueron reproducidos y están en cola de corrección. El hallazgo HIGH (README afirmaba 10/10 cuando solo L1.5 estaba commiteado) se corrigió en 24h. Respuesta pública: dev.to/@edison_flores_6d2cd381b13/thank-you-rushabdev.',
+    note_en: 'Conducted pro bono. All 11 findings reproduced and queued for fix. The HIGH finding (README claiming 10/10 while only v3.0 results were committed) was corrected within 24h. Public reply: dev.to/@edison_flores_6d2cd381b13/thank-you-rushabdev.',
+    note_es: 'Realizado pro bono. Los 11 hallazgos fueron reproducidos y están en cola de corrección. El hallazgo HIGH (README afirmaba 10/10 cuando solo v3.0 estaba commiteado) se corrigió en 24h. Respuesta pública: dev.to/@edison_flores_6d2cd381b13/thank-you-rushabdev.',
   },
 ];
 
@@ -70,9 +70,9 @@ const CONTENT = {
         ],
       },
       { n: 2, status: 'partial', title: 'Independent security audit, not self-declared',
-        claudeSaid: '"Sentinel L1.5" should be (or be complemented by) a review by an external company, with public methodology and published reports — not a badge the platform puts on itself.',
+        claudeSaid: '"Sentinel v3.0" should be (or be complemented by) a review by an external company, with public methodology and published reports — not a badge the platform puts on itself.',
         whatWeDid: [
-          'Published the full Sentinel L1.5 methodology — 6 checks documented at /api/audit-skill',
+          'Published the full Sentinel v3.0 methodology — 6 checks documented at /api/audit-skill',
           'Sentinel is open source — anyone can re-run our audit. Code at /aep-marketplace/api/audit-skill.js',
           'Added disclosure: every skill detail page shows "Sentinel: self-declared"',
           'Sentinel L1.6 implemented: 18 Semgrep rules + Gitleaks + OSV-Scanner. Runs via GitHub Actions.',
@@ -89,7 +89,7 @@ const CONTENT = {
         whatWeDid: [
           'Added a "permissions" field to the skill schema — skills declare what they need',
           'Skill detail pages show declared permissions in a visible block before the install command',
-          'Sentinel L1.5 audit flags skills that request dangerous permissions with a lower score',
+          'Sentinel v3.0 audit flags skills that request dangerous permissions with a lower score',
           'UTA v1.0.0 IMPLEMENTED (gVisor sandbox): MCP servers executed in isolated Docker container with --network none, --read-only, --cap-drop ALL, seccomp, 256MB memory limit.',
         ],
         stillPending: [
@@ -191,9 +191,9 @@ const CONTENT = {
         ],
       },
       { n: 2, status: 'partial', title: 'Auditoría de seguridad independiente, no auto-declarada',
-        claudeSaid: 'Que "Sentinel L1.5" sea (o esté complementado por) una revisión de una empresa externa, con metodología pública y reportes publicados — no un sello que se pone la propia plataforma sobre sí misma.',
+        claudeSaid: 'Que "Sentinel v3.0" sea (o esté complementado por) una revisión de una empresa externa, con metodología pública y reportes publicados — no un sello que se pone la propia plataforma sobre sí misma.',
         whatWeDid: [
-          'Publicada la metodología completa de Sentinel L1.5 — 6 checks documentados en /api/audit-skill',
+          'Publicada la metodología completa de Sentinel v3.0 — 6 checks documentados en /api/audit-skill',
           'Sentinel es open source — cualquiera puede re-ejecutar nuestra auditoría. Código en /aep-marketplace/api/audit-skill.js',
           'Añadida divulgación: cada página de skill muestra "Sentinel: auto-declarado"',
           'Sentinel L1.6 implementado: 18 reglas Semgrep + Gitleaks + OSV-Scanner. Corre via GitHub Actions.',
@@ -210,7 +210,7 @@ const CONTENT = {
         whatWeDid: [
           'Añadido campo "permissions" al schema de skills — declaran qué necesitan',
           'Las páginas de skill muestran permisos declarados en un bloque visible antes del comando de instalación',
-          'Sentinel L1.5 marca skills que piden permisos peligrosos con menor puntuación',
+          'Sentinel v3.0 marca skills que piden permisos peligrosos con menor puntuación',
           'UTA v1.0.0 IMPLEMENTADO (gVisor sandbox): servidores MCP ejecutados en contenedor Docker aislado con --network none, --read-only, --cap-drop ALL, seccomp, 256MB RAM.',
         ],
         stillPending: [
@@ -312,9 +312,9 @@ const CONTENT = {
         ],
       },
       { n: 2, status: 'partial', title: 'Auditoria de segurança independente, não auto-declarada',
-        claudeSaid: 'Que "Sentinel L1.5" seja (ou esteja complementado por) uma revisão de uma empresa externa, com metodologia pública e relatórios publicados — não um selo que a própria plataforma coloca em si mesma.',
+        claudeSaid: 'Que "Sentinel v3.0" seja (ou esteja complementado por) uma revisão de uma empresa externa, com metodologia pública e relatórios publicados — não um selo que a própria plataforma coloca em si mesma.',
         whatWeDid: [
-          'Publicada a metodologia completa do Sentinel L1.5 — 6 checks documentados em /api/audit-skill',
+          'Publicada a metodologia completa do Sentinel v3.0 — 6 checks documentados em /api/audit-skill',
           'Sentinel é open source — qualquer um pode re-executar nossa auditoria. Código em /aep-marketplace/api/audit-skill.js',
           'Adicionada divulgação: cada página de skill mostra "Sentinel: auto-declarado"',
           'Sentinel L1.6 implementado: 18 regras Semgrep + Gitleaks + OSV-Scanner. Executa via GitHub Actions.',
@@ -331,7 +331,7 @@ const CONTENT = {
         whatWeDid: [
           'Adicionado campo "permissions" ao schema de skills — declaram o que precisam',
           'Páginas de skill mostram permissões declaradas em bloco visível antes do comando de instalação',
-          'Sentinel L1.5 sinaliza skills que pedem permissões perigosas com pontuação menor',
+          'Sentinel v3.0 sinaliza skills que pedem permissões perigosas com pontuação menor',
           'UTA v1.0.0 IMPLEMENTADO (gVisor sandbox): servidores MCP executados em contêiner Docker isolado com --network none, --read-only, --cap-drop ALL, seccomp, 256MB RAM.',
         ],
         stillPending: [
@@ -433,9 +433,9 @@ const CONTENT = {
         ],
       },
       { n: 2, status: 'partial', title: '独立安全审计，非自我声明',
-        claudeSaid: '"Sentinel L1.5" 应该是（或补充为）外部公司的审查，具有公开方法论和已发布的报告 — 而非平台自己贴的标签。',
+        claudeSaid: '"Sentinel v3.0" 应该是（或补充为）外部公司的审查，具有公开方法论和已发布的报告 — 而非平台自己贴的标签。',
         whatWeDid: [
-          '发布了完整的 Sentinel L1.5 方法论 — 6 项检查记录在 /api/audit-skill',
+          '发布了完整的 Sentinel v3.0 方法论 — 6 项检查记录在 /api/audit-skill',
           'Sentinel 是开源的 — 任何人都可以重新运行我们的审计。代码在 /aep-marketplace/api/audit-skill.js',
           '增加披露：每个技能详情页显示"Sentinel: 自我声明"',
           'Sentinel L1.6 已实施：18 条 Semgrep 规则 + Gitleaks + OSV-Scanner。通过 GitHub Actions 运行。',
@@ -452,7 +452,7 @@ const CONTENT = {
         whatWeDid: [
           '在技能模式中添加了"permissions"字段 — 技能声明它们需要什么',
           '技能详情页在安装命令前显示声明的权限',
-          'Sentinel L1.5 审计标记请求危险权限的技能，给予较低分数',
+          'Sentinel v3.0 审计标记请求危险权限的技能，给予较低分数',
           'UTA v1.0.0 已实施（gVisor 沙盒）：MCP 服务器在隔离的 Docker 容器中执行，使用 --network none、--read-only、--cap-drop ALL、seccomp、256MB 内存。',
         ],
         stillPending: [
@@ -554,9 +554,9 @@ const CONTENT = {
         ],
       },
       { n: 2, status: 'partial', title: 'Audit de sécurité indépendant, pas auto-déclaré',
-        claudeSaid: 'Que "Sentinel L1.5" soit (ou soit complété par) une revue d\'une entreprise externe, avec méthodologie publique et rapports publiés — pas un label que la plateforme s\'attribue à elle-même.',
+        claudeSaid: 'Que "Sentinel v3.0" soit (ou soit complété par) une revue d\'une entreprise externe, avec méthodologie publique et rapports publiés — pas un label que la plateforme s\'attribue à elle-même.',
         whatWeDid: [
-          'Publiée la méthodologie complète de Sentinel L1.5 — 6 vérifications documentées sur /api/audit-skill',
+          'Publiée la méthodologie complète de Sentinel v3.0 — 6 vérifications documentées sur /api/audit-skill',
           'Sentinel est open source — n\'importe qui peut ré-exécuter notre audit. Code sur /aep-marketplace/api/audit-skill.js',
           'Ajoutée divulgation : chaque page de skill montre "Sentinel : auto-déclaré"',
           'Sentinel L1.6 implémenté : 18 règles Semgrep + Gitleaks + OSV-Scanner. Via GitHub Actions.',
@@ -573,7 +573,7 @@ const CONTENT = {
         whatWeDid: [
           'Ajouté un champ "permissions" au schéma de skills — les skills déclarent ce dont elles ont besoin',
           'Les pages de skill montrent les permissions déclarées dans un bloc visible avant la commande d\'installation',
-          'Sentinel L1.5 signale les skills qui demandent des permissions dangereuses avec un score plus bas',
+          'Sentinel v3.0 signale les skills qui demandent des permissions dangereuses avec un score plus bas',
           'UTA v1.0.0 IMPLÉMENTÉ (gVisor sandbox) : serveurs MCP exécutés dans un conteneur Docker isolé avec --network none, --read-only, --cap-drop ALL, seccomp, 256MB RAM.',
         ],
         stillPending: [

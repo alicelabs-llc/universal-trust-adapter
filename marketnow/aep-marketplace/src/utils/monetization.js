@@ -5,7 +5,7 @@
  * Modelo de revenue completo:
  *
  * 1. COMPRADORES (agents + humans):
- *    - Pagan el precio de cada skill ($0.99 - $9.99)
+ *    - Pagan el precio de cada skill (Free - $9.99)
  *    - MarketNow cobra 20% comisión al vendedor
  *
  * 2. VENDEDORES (sellers):

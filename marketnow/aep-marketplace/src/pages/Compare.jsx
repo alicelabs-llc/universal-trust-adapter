@@ -47,7 +47,7 @@ const CONTENT = {
       },
       {
         feature: 'Security audit',
-        marketnow: 'Sentinel L1.5 (6-point scan on every skill)',
+        marketnow: 'Sentinel v3.0 (6-point scan on every skill)',
         smithery: 'Quality score (proprietary)',
         glama: 'Safety score (proprietary)',
         mcpRegistry: 'None (raw registry)',
@@ -147,7 +147,7 @@ const CONTENT = {
     disclosure: [
       'Smithery and Glama have more traffic than us today. We\'re new (launched 2026).',
       'The MCP Registry is the canonical source. We\'re not competing with it — we\'re integrating with it for namespace verification.',
-      'Our Sentinel L1.5 audit is self-declared (we wrote the scanner). Independent audit pending until revenue.',
+      'Our Sentinel v3.0 audit is self-declared (we wrote the scanner). Independent audit pending until revenue.',
       'We have 0 maintainer-verified skills today. The program is designed but not launched.',
       'x402 and AP2 are "implementing" — not fully compliant yet. See /standards.',
     ],
@@ -200,7 +200,7 @@ const CONTENT = {
       },
       {
         feature: 'Auditoría de seguridad',
-        marketnow: 'Sentinel L1.5 (escaneo de 6 puntos en cada skill)',
+        marketnow: 'Sentinel v3.0 (escaneo de 6 puntos en cada skill)',
         smithery: 'Quality score (propietario)',
         glama: 'Safety score (propietario)',
         mcpRegistry: 'Ninguna (registro bruto)',
@@ -300,7 +300,7 @@ const CONTENT = {
     disclosure: [
       'Smithery y Glama tienen más tráfico que nosotros hoy. Somos nuevos (lanzado en 2026).',
       'El MCP Registry es la fuente canónica. No competimos con él — nos estamos integrando para verificación de namespaces.',
-      'Nuestra auditoría Sentinel L1.5 es autodeclarada (escribimos el scanner). Auditoría independiente pendiente hasta tener ingresos.',
+      'Nuestra auditoría Sentinel v3.0 es autodeclarada (escribimos el scanner). Auditoría independiente pendiente hasta tener ingresos.',
       'Tenemos 0 skills maintainer-verified hoy. El programa está diseñado pero no lanzado.',
       'x402 y AP2 están "implementándose" — aún no son totalmente compliant. Ver /standards.',
     ],
@@ -353,7 +353,7 @@ const CONTENT = {
       },
       {
         feature: 'Auditoria de segurança',
-        marketnow: 'Sentinel L1.5 (scan de 6 pontos em cada skill)',
+        marketnow: 'Sentinel v3.0 (scan de 6 pontos em cada skill)',
         smithery: 'Quality score (proprietário)',
         glama: 'Safety score (proprietário)',
         mcpRegistry: 'Nenhuma (registry bruto)',
@@ -453,7 +453,7 @@ const CONTENT = {
     disclosure: [
       'Smithery e Glama têm mais tráfego que nós hoje. Somos novos (lançados em 2026).',
       'O MCP Registry é a fonte canônica. Não estamos competindo com ele — estamos nos integrando para verificação de namespaces.',
-      'Nossa auditoria Sentinel L1.5 é autodeclarada (nós escrevemos o scanner). Auditoria independente pendente até receita.',
+      'Nossa auditoria Sentinel v3.0 é autodeclarada (nós escrevemos o scanner). Auditoria independente pendente até receita.',
       'Temos 0 skills maintainer-verified hoje. O programa foi desenhado mas não lançado.',
       'x402 e AP2 estão "em implementação" — ainda não totalmente compliant. Veja /standards.',
     ],
@@ -506,7 +506,7 @@ const CONTENT = {
       },
       {
         feature: '安全审计',
-        marketnow: 'Sentinel L1.5（每个 skill 6 项扫描）',
+        marketnow: 'Sentinel v3.0（每个 skill 6 项扫描）',
         smithery: 'Quality score（专有）',
         glama: 'Safety score（专有）',
         mcpRegistry: '无（原始 registry）',
@@ -606,7 +606,7 @@ const CONTENT = {
     disclosure: [
       '今天 Smithery 和 Glama 的流量比我们多。我们是新平台（2026 年上线）。',
       'MCP Registry 是规范来源。我们不与它竞争——我们正在与之集成以进行命名空间验证。',
-      '我们的 Sentinel L1.5 审计是自我声明的（我们编写了扫描器）。独立审计在获得收入之前仍待进行。',
+      '我们的 Sentinel v3.0 审计是自我声明的（我们编写了扫描器）。独立审计在获得收入之前仍待进行。',
       '我们今天有 0 个 maintainer-verified 的 skill。该计划已设计但尚未启动。',
       'x402 和 AP2 处于"实现中"状态——尚未完全合规。参见 /standards。',
     ],
@@ -659,7 +659,7 @@ const CONTENT = {
       },
       {
         feature: 'Audit de sécurité',
-        marketnow: 'Sentinel L1.5 (scan 6 points sur chaque skill)',
+        marketnow: 'Sentinel v3.0 (scan 6 points sur chaque skill)',
         smithery: 'Quality score (propriétaire)',
         glama: 'Safety score (propriétaire)',
         mcpRegistry: 'Aucun (registry brut)',
@@ -759,7 +759,7 @@ const CONTENT = {
     disclosure: [
       'Smithery et Glama ont plus de trafic que nous aujourd\'hui. Nous sommes nouveaux (lancés en 2026).',
       'Le MCP Registry est la source canonique. Nous ne concourons pas avec lui — nous nous y intégrons pour la vérification des namespaces.',
-      'Notre audit Sentinel L1.5 est autodéclaré (nous avons écrit le scanner). Audit indépendant en attente jusqu\'à ce que nous ayons des revenus.',
+      'Notre audit Sentinel v3.0 est autodéclaré (nous avons écrit le scanner). Audit indépendant en attente jusqu\'à ce que nous ayons des revenus.',
       'Nous avons 0 skill maintainer-verified aujourd\'hui. Le programme est conçu mais pas lancé.',
       'x402 et AP2 sont « en cours d\'implémentation » — pas encore totalement compliant. Voir /standards.',
     ],

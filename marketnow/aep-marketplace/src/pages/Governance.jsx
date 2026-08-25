@@ -19,7 +19,7 @@ const STATIC_PROPOSALS = [
   { id: 'MN-003', title: 'Public status page with real uptime metrics', status: 'Active', votes: 67, deadline: '12d 18h' },
   { id: 'MN-004', title: 'Skill bundles: buy 3+ for 15% discount', status: 'Passed', votes: 312, deadline: 'Completed' },
   { id: 'MN-005', title: 'Open reviews: signed-in users can rate skills', status: 'Passed', votes: 245, deadline: 'Completed' },
-  { id: 'MN-006', title: 'Deprecate the credits system in favor of one-time payments', status: 'Passed', votes: 421, deadline: 'Completed' },
+  { id: 'MN-006', title: 'Deprecate the credits system in favor of free install for buyerss', status: 'Passed', votes: 421, deadline: 'Completed' },
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════

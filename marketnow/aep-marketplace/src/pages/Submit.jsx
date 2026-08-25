@@ -660,7 +660,7 @@ export default function Submit() {
           slug: repoData.name.toLowerCase().replace(/[^a-z0-9-]/g, '-'),
           description: repoData.description || '',
           author: owner,
-          install: `npx -y @marketnow/install ${repoData.name.toLowerCase().replace(/[^a-z0-9-]/g, '-')}`,
+          install: `npx -y marketnow-install-stack ${repoData.name.toLowerCase().replace(/[^a-z0-9-]/g, '-')}`,
         }));
         setStep(2);
       }

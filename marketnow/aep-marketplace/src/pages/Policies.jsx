@@ -10,13 +10,13 @@ const CONTENT = {
     sections: [
       {
         title: 'Terms of Service — For Agents and Humans',
-        content: `By accessing or using MarketNow, you agree to be bound by these terms. MarketNow is a marketplace for MCP-compatible agent skills, designed for consumption by both autonomous agents (via the public JSON API) and human developers (via the web UI). Every skill is sold individually with a one-time payment — there are no subscriptions, no credits, and no recurring billing. Agents and users must comply with each skill's upstream open-source license (MIT, Apache-2.0, etc.) when using the installed skill.`,
+        content: `By accessing or using MarketNow, you agree to be bound by these terms. MarketNow is a marketplace for MCP-compatible agent skills, designed for consumption by both autonomous agents (via the public JSON API) and human developers (via the web UI). Buyers install all skills free. Sellers subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) plus 20% commission on sales. Agents and users must comply with each skill's upstream open-source license (MIT, Apache-2.0, etc.) when using the installed skill.`,
       },
       {
         title: 'Pricing — Micro-Transactions for Autonomous Agents',
         content: `MarketNow uses a micro-transaction pricing model optimized for autonomous agent consumption. Every skill has a single, transparent one-time price in USD displayed on its detail page and in the /api/skills.json response:
 
-• $0.99 — 1,321 skills (26%) — utility, single-function MCP servers
+• Free — 1,321 skills (26%) — utility, single-function MCP servers
 • $1.99 — 649 skills (13%) — standard integrations
 • $2.99 — 2,742 skills (54%) — multi-feature tools (most common)
 • $4.99 — 312 skills (6%) — sophisticated multi-endpoint tools
@@ -26,7 +26,7 @@ All 8,845 skills are FREE to install and use. MarketNow does not sell skills. Re
       },
       {
         title: 'Refund Policy',
-        content: `All skill purchases are eligible for a full refund within 14 days if less than 100 API calls have been made using the license key. To request a refund, email support@alicelabs.site with your order ID. Refunds are processed back to the original payment method within 5-10 business days. Skills priced at $0.99 are still eligible for refund, but the transaction fee may exceed the refund amount in some cases.`,
+        content: `All skill purchases are eligible for a full refund within 14 days if less than 100 API calls have been made using the license key. To request a refund, email support@alicelabs.site with your order ID. Refunds are processed back to the original payment method within 5-10 business days. Skills priced at Free are still eligible for refund, but the transaction fee may exceed the refund amount in some cases.`,
       },
       {
         title: 'Privacy Policy',
@@ -34,7 +34,7 @@ All 8,845 skills are FREE to install and use. MarketNow does not sell skills. Re
       },
       {
         title: 'Skill Licensing',
-        content: `Each skill on MarketNow is sourced from a real, public open-source repository. When you purchase a skill, you receive: (1) a MarketNow license key for verification, (2) the install command (typically \`npx -y @marketnow/install <slug>\`), and (3) access to the skill's documentation. The underlying open-source license (MIT, Apache-2.0, etc.) of each skill still applies to your usage of the code itself. MarketNow's value-add is curation, verification (Sentinel L1), and packaging — not the underlying code, which remains free under its original license.`,
+        content: `Each skill on MarketNow is sourced from a real, public open-source repository. When you purchase a skill, you receive: (1) a MarketNow license key for verification, (2) the install command (typically \`npx -y marketnow-install-stack\`), and (3) access to the skill's documentation. The underlying open-source license (MIT, Apache-2.0, etc.) of each skill still applies to your usage of the code itself. MarketNow's value-add is curation, verification (Sentinel L1), and packaging — not the underlying code, which remains free under its original license.`,
       },
       {
         title: 'Agent API Usage',
@@ -57,17 +57,17 @@ All 8,845 skills are FREE to install and use. MarketNow does not sell skills. Re
         title: 'Precios — Microtransacciones para Agentes Autónomos',
         content: `MarketNow usa un modelo de precios de microtransacciones optimizado para consumo de agentes autónomos. Cada skill tiene un único precio único transparente en USD mostrado en su página de detalle y en la respuesta de /api/skills.json:
 
-• $0.99 — 1,321 skills (26%) — utilidad, servidores MCP de función única
+• Free — 1,321 skills (26%) — utilidad, servidores MCP de función única
 • $1.99 — 649 skills (13%) — integraciones estándar
 • $2.99 — 2,742 skills (54%) — tools multi-feature (las más comunes)
 • $4.99 — 312 skills (6%) — tools sofisticadas multi-endpoint
 • $9.99 — 30 skills (0.6%) — enterprise-grade, especializadas
 
-Precio promedio: $2.50. Mínimo: $0.99. Máximo: $9.99. Ninguna skill es gratis — cada skill requiere un pago único, lo que mantiene el marketplace sostenible mientras permanece accesible para agentes autónomos. No hay suscripciones, no hay créditos, no hay tarifas por llamada y no hay planes por niveles. Los agentes pueden descubrir, evaluar y comprar skills programáticamente vía la API pública en /api/skills.json.`,
+Precio promedio: $2.50. Mínimo: Free. Máximo: $9.99. Ninguna skill es gratis — cada skill requiere un pago único, lo que mantiene el marketplace sostenible mientras permanece accesible para agentes autónomos. No hay suscripciones, no hay créditos, no hay tarifas por llamada y no hay planes por niveles. Los agentes pueden descubrir, evaluar y comprar skills programáticamente vía la API pública en /api/skills.json.`,
       },
       {
         title: 'Política de Reembolso',
-        content: `Todas las compras de skills son elegibles para reembolso completo dentro de 14 días si se han hecho menos de 100 llamadas a la API usando la license key. Para solicitar un reembolso, escribe a support@alicelabs.site con tu order ID. Los reembolsos se procesan de vuelta al método de pago original dentro de 5-10 días hábiles. Las skills con precio de $0.99 siguen siendo elegibles para reembolso, pero la tarifa de transacción puede exceder el monto del reembolso en algunos casos.`,
+        content: `Todas las compras de skills son elegibles para reembolso completo dentro de 14 días si se han hecho menos de 100 llamadas a la API usando la license key. Para solicitar un reembolso, escribe a support@alicelabs.site con tu order ID. Los reembolsos se procesan de vuelta al método de pago original dentro de 5-10 días hábiles. Las skills con precio de Free siguen siendo elegibles para reembolso, pero la tarifa de transacción puede exceder el monto del reembolso en algunos casos.`,
       },
       {
         title: 'Política de Privacidad',
@@ -75,7 +75,7 @@ Precio promedio: $2.50. Mínimo: $0.99. Máximo: $9.99. Ninguna skill es gratis 
       },
       {
         title: 'Licenciamiento de Skills',
-        content: `Cada skill en MarketNow proviene de un repositorio open-source real y público. Al comprar una skill, recibes: (1) una license key de MarketNow para verificación, (2) el comando de instalación (típicamente \`npx -y @marketnow/install <slug>\`), y (3) acceso a la documentación de la skill. La licencia open-source subyacente (MIT, Apache-2.0, etc.) de cada skill sigue aplicando a tu uso del código en sí. El value-add de MarketNow es curaduría, verificación (Sentinel L1) y empaquetado — no el código subyacente, que permanece gratis bajo su licencia original.`,
+        content: `Cada skill en MarketNow proviene de un repositorio open-source real y público. Al comprar una skill, recibes: (1) una license key de MarketNow para verificación, (2) el comando de instalación (típicamente \`npx -y marketnow-install-stack\`), y (3) acceso a la documentación de la skill. La licencia open-source subyacente (MIT, Apache-2.0, etc.) de cada skill sigue aplicando a tu uso del código en sí. El value-add de MarketNow es curaduría, verificación (Sentinel L1) y empaquetado — no el código subyacente, que permanece gratis bajo su licencia original.`,
       },
       {
         title: 'Uso de la API por Agentes',
@@ -98,17 +98,17 @@ Precio promedio: $2.50. Mínimo: $0.99. Máximo: $9.99. Ninguna skill es gratis 
         title: 'Preços — Microtransações para Agentes Autônomos',
         content: `O MarketNow usa um modelo de preços de microtransações otimizado para consumo por agentes autônomos. Cada skill tem um único preço único transparente em USD exibido em sua página de detalhe e na resposta de /api/skills.json:
 
-• $0.99 — 1.321 skills (26%) — utilidade, servidores MCP de função única
+• Free — 1.321 skills (26%) — utilidade, servidores MCP de função única
 • $1.99 — 649 skills (13%) — integrações padrão
 • $2.99 — 2.742 skills (54%) — tools multi-feature (as mais comuns)
 • $4.99 — 312 skills (6%) — tools sofisticadas multi-endpoint
 • $9.99 — 30 skills (0,6%) — enterprise-grade, especializadas
 
-Preço médio: $2.50. Mínimo: $0.99. Máximo: $9.99. Nenhuma skill é grátis — toda skill exige um pagamento único, o que mantém o marketplace sustentável e ainda acessível para agentes autônomos. Não há assinaturas, não há créditos, não há taxas por chamada e não há planos em níveis. Agentes podem descobrir, avaliar e comprar skills programaticamente via a API pública em /api/skills.json.`,
+Preço médio: $2.50. Mínimo: Free. Máximo: $9.99. Nenhuma skill é grátis — toda skill exige um pagamento único, o que mantém o marketplace sustentável e ainda acessível para agentes autônomos. Não há assinaturas, não há créditos, não há taxas por chamada e não há planos em níveis. Agentes podem descobrir, avaliar e comprar skills programaticamente via a API pública em /api/skills.json.`,
       },
       {
         title: 'Política de Reembolso',
-        content: `Todas as compras de skills são elegíveis para reembolso integral dentro de 14 dias se foram feitas menos de 100 chamadas de API usando a license key. Para solicitar um reembolso, envie um email para support@alicelabs.site com seu order ID. Reembolsos são processados de volta ao método de pagamento original dentro de 5-10 dias úteis. Skills com preço de $0.99 ainda são elegíveis para reembolso, mas a taxa de transação pode exceder o valor do reembolso em alguns casos.`,
+        content: `Todas as compras de skills são elegíveis para reembolso integral dentro de 14 dias se foram feitas menos de 100 chamadas de API usando a license key. Para solicitar um reembolso, envie um email para support@alicelabs.site com seu order ID. Reembolsos são processados de volta ao método de pagamento original dentro de 5-10 dias úteis. Skills com preço de Free ainda são elegíveis para reembolso, mas a taxa de transação pode exceder o valor do reembolso em alguns casos.`,
       },
       {
         title: 'Política de Privacidade',
@@ -116,7 +116,7 @@ Preço médio: $2.50. Mínimo: $0.99. Máximo: $9.99. Nenhuma skill é grátis �
       },
       {
         title: 'Licenciamento de Skills',
-        content: `Cada skill no MarketNow é originada de um repositório open-source real e público. Ao comprar uma skill, você recebe: (1) uma license key do MarketNow para verificação, (2) o comando de instalação (tipicamente \`npx -y @marketnow/install <slug>\`), e (3) acesso à documentação da skill. A licença open-source subjacente (MIT, Apache-2.0, etc.) de cada skill ainda se aplica ao seu uso do código em si. O value-add do MarketNow é curadoria, verificação (Sentinel L1) e empacotamento — não o código subjacente, que permanece grátis sob sua licença original.`,
+        content: `Cada skill no MarketNow é originada de um repositório open-source real e público. Ao comprar uma skill, você recebe: (1) uma license key do MarketNow para verificação, (2) o comando de instalação (tipicamente \`npx -y marketnow-install-stack\`), e (3) acesso à documentação da skill. A licença open-source subjacente (MIT, Apache-2.0, etc.) de cada skill ainda se aplica ao seu uso do código em si. O value-add do MarketNow é curadoria, verificação (Sentinel L1) e empacotamento — não o código subjacente, que permanece grátis sob sua licença original.`,
       },
       {
         title: 'Uso da API por Agentes',
@@ -139,17 +139,17 @@ Preço médio: $2.50. Mínimo: $0.99. Máximo: $9.99. Nenhuma skill é grátis �
         title: '定价 —— 面向自主 Agent 的微交易',
         content: `MarketNow 采用为自主 agent 消费优化的微交易定价模型。每一个 skill 都有一个透明的一次性 USD 价格，显示在其详情页以及 /api/skills.json 响应中：
 
-• $0.99 —— 1,321 个 skill（26%）—— 实用型、单功能 MCP server
+• Free —— 1,321 个 skill（26%）—— 实用型、单功能 MCP server
 • $1.99 —— 649 个 skill（13%）—— 标准集成
 • $2.99 —— 2,742 个 skill（54%）—— 多功能 tool（最常见）
 • $4.99 —— 312 个 skill（6%）—— 复杂的多端点 tool
 • $9.99 —— 30 个 skill（0.6%）—— 企业级、专业化
 
-平均价格：$2.50。最低：$0.99。最高：$9.99。没有免费的 skill —— 每个 skill 都需一次性付款，这让市场保持可持续，同时对自主 agent 保持可及。不设订阅、不设积分、不设按调用计费、不设分级套餐。Agent 可通过公开 API /api/skills.json 以编程方式发现、评估并购买 skill。`,
+平均价格：$2.50。最低：Free。最高：$9.99。没有免费的 skill —— 每个 skill 都需一次性付款，这让市场保持可持续，同时对自主 agent 保持可及。不设订阅、不设积分、不设按调用计费、不设分级套餐。Agent 可通过公开 API /api/skills.json 以编程方式发现、评估并购买 skill。`,
       },
       {
         title: '退款政策',
-        content: `所有 skill 购买在 14 天内均可申请全额退款，前提是使用该 license key 调用 API 的次数少于 100 次。如需申请退款，请发送邮件至 support@alicelabs.site 并附上您的订单 ID。退款将在 5-10 个工作日内退回原支付方式。价格为 $0.99 的 skill 同样可退款，但在某些情况下交易手续费可能超过退款金额。`,
+        content: `所有 skill 购买在 14 天内均可申请全额退款，前提是使用该 license key 调用 API 的次数少于 100 次。如需申请退款，请发送邮件至 support@alicelabs.site 并附上您的订单 ID。退款将在 5-10 个工作日内退回原支付方式。价格为 Free 的 skill 同样可退款，但在某些情况下交易手续费可能超过退款金额。`,
       },
       {
         title: '隐私政策',
@@ -157,7 +157,7 @@ Preço médio: $2.50. Mínimo: $0.99. Máximo: $9.99. Nenhuma skill é grátis �
       },
       {
         title: 'Skill 许可',
-        content: `MarketNow 上的每一个 skill 都来自一个真实、公开的开源仓库。购买 skill 时，您将获得：(1) 一个 MarketNow license key 用于验证，(2) 安装命令（通常是 \`npx -y @marketnow/install <slug>\`），以及 (3) 该 skill 的文档访问权限。每个 skill 的底层开源许可（MIT、Apache-2.0 等）仍然适用于您对代码本身的使用。MarketNow 的增值在于筛选、验证（Sentinel L1）和打包——而非底层代码，代码本身在其原始许可下依然免费。`,
+        content: `MarketNow 上的每一个 skill 都来自一个真实、公开的开源仓库。购买 skill 时，您将获得：(1) 一个 MarketNow license key 用于验证，(2) 安装命令（通常是 \`npx -y marketnow-install-stack\`），以及 (3) 该 skill 的文档访问权限。每个 skill 的底层开源许可（MIT、Apache-2.0 等）仍然适用于您对代码本身的使用。MarketNow 的增值在于筛选、验证（Sentinel L1）和打包——而非底层代码，代码本身在其原始许可下依然免费。`,
       },
       {
         title: 'Agent API 使用',
@@ -180,17 +180,17 @@ Preço médio: $2.50. Mínimo: $0.99. Máximo: $9.99. Nenhuma skill é grátis �
         title: 'Tarification — Micro-transactions pour Agents Autonomes',
         content: `MarketNow utilise un modèle de tarification par micro-transactions optimisé pour la consommation par agents autonomes. Chaque skill a un prix unique transparent en USD affiché sur sa page de détail et dans la réponse /api/skills.json :
 
-• $0.99 — 1 321 skills (26 %) — utilitaires, serveurs MCP à fonction unique
+• Free — 1 321 skills (26 %) — utilitaires, serveurs MCP à fonction unique
 • $1.99 — 649 skills (13 %) — intégrations standard
 • $2.99 — 2 742 skills (54 %) — tools multi-features (les plus courantes)
 • $4.99 — 312 skills (6 %) — tools sophistiquées multi-endpoints
 • $9.99 — 30 skills (0,6 %) — enterprise-grade, spécialisées
 
-Prix moyen : $2.50. Minimum : $0.99. Maximum : $9.99. Aucune skill n'est gratuite — chaque skill nécessite un paiement unique, ce qui maintient le marketplace durable tout en restant accessible aux agents autonomes. Pas d'abonnements, pas de crédits, pas de frais par appel et pas de forfaits à niveaux. Les agents peuvent découvrir, évaluer et acheter des skills par programmation via l'API publique sur /api/skills.json.`,
+Prix moyen : $2.50. Minimum : Free. Maximum : $9.99. Aucune skill n'est gratuite — chaque skill nécessite un paiement unique, ce qui maintient le marketplace durable tout en restant accessible aux agents autonomes. Pas d'abonnements, pas de crédits, pas de frais par appel et pas de forfaits à niveaux. Les agents peuvent découvrir, évaluer et acheter des skills par programmation via l'API publique sur /api/skills.json.`,
       },
       {
         title: 'Politique de Remboursement',
-        content: `Tous les achats de skills sont éligibles à un remboursement intégral sous 14 jours si moins de 100 appels d'API ont été effectués avec la license key. Pour demander un remboursement, écrivez à support@alicelabs.site avec votre order ID. Les remboursements sont traités vers le moyen de paiement d'origine sous 5 à 10 jours ouvrés. Les skills au prix de $0.99 restent éligibles au remboursement, mais les frais de transaction peuvent dépasser le montant du remboursement dans certains cas.`,
+        content: `Tous les achats de skills sont éligibles à un remboursement intégral sous 14 jours si moins de 100 appels d'API ont été effectués avec la license key. Pour demander un remboursement, écrivez à support@alicelabs.site avec votre order ID. Les remboursements sont traités vers le moyen de paiement d'origine sous 5 à 10 jours ouvrés. Les skills au prix de Free restent éligibles au remboursement, mais les frais de transaction peuvent dépasser le montant du remboursement dans certains cas.`,
       },
       {
         title: 'Politique de Confidentialité',
@@ -198,7 +198,7 @@ Prix moyen : $2.50. Minimum : $0.99. Maximum : $9.99. Aucune skill n'est gratuit
       },
       {
         title: 'Licences des Skills',
-        content: `Chaque skill sur MarketNow provient d'un dépôt open-source réel et public. Lorsque vous achetez une skill, vous recevez : (1) une license key MarketNow pour vérification, (2) la commande d'installation (généralement \`npx -y @marketnow/install <slug>\`), et (3) l'accès à la documentation de la skill. La licence open-source sous-jacente (MIT, Apache-2.0, etc.) de chaque skill s'applique toujours à votre usage du code lui-même. La valeur ajoutée de MarketNow est la curation, la vérification (Sentinel L1) et l'empaquetage — pas le code sous-jacent, qui reste gratuit sous sa licence originale.`,
+        content: `Chaque skill sur MarketNow provient d'un dépôt open-source réel et public. Lorsque vous achetez une skill, vous recevez : (1) une license key MarketNow pour vérification, (2) la commande d'installation (généralement \`npx -y marketnow-install-stack\`), et (3) l'accès à la documentation de la skill. La licence open-source sous-jacente (MIT, Apache-2.0, etc.) de chaque skill s'applique toujours à votre usage du code lui-même. La valeur ajoutée de MarketNow est la curation, la vérification (Sentinel L1) et l'empaquetage — pas le code sous-jacent, qui reste gratuit sous sa licence originale.`,
       },
       {
         title: 'Utilisation de l\'API par les Agents',
