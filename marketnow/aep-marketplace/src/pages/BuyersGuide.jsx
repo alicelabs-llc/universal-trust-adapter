@@ -18,7 +18,7 @@ const CONTENT = {
     },
     links: {
       createMandate: 'Create a mandate',
-      browseFree: 'Browse free skills',
+      browseFree: 'Browse all skills (free for buyers)',
     },
     steps: [
       {
@@ -81,7 +81,7 @@ const CONTENT = {
       },
       {
         n: 6,
-        title: 'Start with free skills',
+        title: 'All skills are free for buyers',
         what: '43 skills are free — no payment, no mandate, no signup. Test MarketNow with these first.',
         tip: 'Free skills are human-reviewed. They\'re the safest place to start.',
         link: '/registry?filter=free',

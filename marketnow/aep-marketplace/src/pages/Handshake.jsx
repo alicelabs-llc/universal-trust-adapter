@@ -51,7 +51,7 @@ const CONTENT = {
     npmLink: '📦 npm package →',
     sourceLink: '📄 Source code →',
     pricingTitle: 'PRICING FOR AGENTS',
-    pricingDescPre: 'Every skill has a transparent, free for buyers. Buyers install free. Sellers subscribe to Sentinel. Average price: ',
+    pricingDescPre: 'All skills are free for buyers. Sellers subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo). ',
     pricingDescAccent: '$2.50',
     pricingDescPost: '.',
     pricingTiers: [
