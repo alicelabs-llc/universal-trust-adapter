@@ -1,6 +1,6 @@
 {
-  "name": "@marketnow/install-stack",
-  "version": "1.0.0",
+  "name": "marketnow-install-stack",
+  "version": "1.1.1",
   "description": "One-click multi-skill installation for MarketNow agent stacks",
   "bin": {
     "install-stack": "./index.js"
@@ -15,5 +15,14 @@
     "stack",
     "bundle"
   ],
-  "license": "MNNC-1.0"
+  "license": "MNNC-1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alicelabs-llc/universal-trust-adapter.git",
+    "directory": "marketnow/install-stack-cli"
+  },
+  "homepage": "https://marketnow.site",
+  "bugs": {
+    "url": "https://github.com/alicelabs-llc/universal-trust-adapter/issues"
+  }
 }

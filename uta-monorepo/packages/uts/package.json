@@ -1,7 +1,16 @@
 {
   "name": "@marketnow/uts",
-  "version": "2.0.0",
-  "description": "Universal Trust Schema v2 — canonical trust data model",
+  "version": "2.0.1",
+  "description": "Universal Trust Schema v2 \u2014 canonical trust data model",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alicelabs-llc/universal-trust-adapter.git",
+    "directory": "uta-monorepo/packages/uts"
+  },
+  "homepage": "https://marketnow.site",
+  "bugs": {
+    "url": "https://github.com/alicelabs-llc/universal-trust-adapter/issues"
+  }
 }

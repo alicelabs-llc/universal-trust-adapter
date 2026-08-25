@@ -1,7 +1,7 @@
 {
   "name": "@marketnow/trust-core",
-  "version": "1.0.0",
-  "description": "UTA Verification Core — 12-stage pipeline, Ed25519 (RFC 8032), JCS (RFC 8785), PoP, Revocation (CRL+OCSP+Bitstring), Supply Chain (SBOM+Sigstore)",
+  "version": "1.0.1",
+  "description": "UTA Verification Core \u2014 12-stage pipeline, Ed25519 (RFC 8032), JCS (RFC 8785), PoP, Revocation (CRL+OCSP+Bitstring), Supply Chain (SBOM+Sigstore)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -34,8 +34,8 @@
   "homepage": "https://github.com/eddyflores100-lang/universal-trust-adapter",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eddyflores100-lang/universal-trust-adapter.git",
-    "directory": "packages/core"
+    "url": "git+https://github.com/alicelabs-llc/universal-trust-adapter.git",
+    "directory": "uta-monorepo/packages/core"
   },
   "bugs": {
     "url": "https://github.com/eddyflores100-lang/universal-trust-adapter/issues"
