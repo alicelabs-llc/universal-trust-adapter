@@ -11,7 +11,7 @@ import { useLang } from '../context/LanguageContext.jsx';
 const CONTENT = {
   en: {
     headerExtra:
-      "Start free with the Community plan. Upgrade to Team ($99/mo) when you need monitoring and analytics. Enterprise available for custom deployments.",
+      "Buyers install ALL skills free. Sellers subscribe to Sentinel v3.0 for security auditing: PRO $9.99/mo or ENTERPRISE $49.99/mo. MarketNow earns 20% commission on seller sales.",
     billingMonthly: 'MONTHLY',
     billingYearly: 'YEARLY',
     billingYearlyDiscount: '-20%',
@@ -32,7 +32,7 @@ const CONTENT = {
     addonsSubtitle: 'Sentinel subscription tiers for sellers',
 
     commissionTitle: 'COMMISSION BREAKDOWN',
-    commissionSubtitle: "For every skill sold, here's how the revenue is split",
+    commissionSubtitle: "When a seller sells a skill, here's how the revenue is split",
     commissionSellerLabel: 'Seller',
     commissionSellerDesc: 'Receives the majority of each sale',
     commissionMarketnowLabel: 'MarketNow',
@@ -43,7 +43,7 @@ const CONTENT = {
     affiliateSale:
       "Affiliate sale (5% comes from MarketNow's share): Seller 80% · MarketNow 15% · Affiliate 5% = 100%",
     exampleLine:
-      'Example: A skill sold at $2.99 → Seller gets $2.39 (80%) · MarketNow gets $0.45 (15%) · Affiliate gets $0.15 (5%)',
+      'Example: A seller subscription at $9.99/mo → Seller gets full subscription value. MarketNow earns 20% commission on any skill sales the seller makes.',
 
     affiliateTitle: 'BECOME AN AFFILIATE',
     affiliateBody:
@@ -54,15 +54,15 @@ const CONTENT = {
     faq: [
       {
         q: 'Do buyers need a subscription?',
-        a: 'No. MarketNow uses B2B pricing: Community (Free), Team ($99/mo), Enterprise (Custom). All 8,845 skills are Sentinel-certified and browsable for free.',
+        a: 'No. Buyers install ALL 9,248 skills completely free. No payment, no credit card, no signup. MarketNow earns from seller subscriptions (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on sales.',
       },
       {
         q: 'What happens if I exceed my free tier limit?',
-        a: 'Community plan is free. For team monitoring, upgrade to Team ($99/mo). Enterprise available for custom deployments.',
+        a: 'Buyers are always free. Sellers: PRO ($9.99/mo) includes Sentinel v3.0 audit + listing. ENTERPRISE ($49.99/mo) adds gVisor sandbox + priority listing + API access.',
       },
       {
         q: 'How do I get paid as a seller?',
-        a: "Payouts are processed monthly via Stripe Connect. You'll receive 80% of each sale price. Minimum payout threshold is $50. Sign up for Stripe Connect from your dashboard after your first sale.",
+        a: "Sellers receive 80% of each sale. MarketNow takes 20% commission. Payouts are monthly. Sign up from your dashboard after your first sale.",
       },
       {
         q: 'Can I list my skill for free?',
