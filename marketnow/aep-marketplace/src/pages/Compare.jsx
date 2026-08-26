@@ -103,7 +103,7 @@ const CONTENT = {
       },
       {
         feature: 'Price model',
-        marketnow: 'B2B: Community (Free) / Team ($99/mo) / Enterprise (Custom)',
+        marketnow: 'B2B: Community (Free) / Team ($9.99/mo) / Enterprise (Custom)',
         smithery: 'Free (hosted MCP servers)',
         glama: 'Free (directory)',
         mcpRegistry: 'Free (registry)',
@@ -256,7 +256,7 @@ const CONTENT = {
       },
       {
         feature: 'Modelo de precio',
-        marketnow: 'B2B: Community (Gratis) / Team ($99/mes) / Enterprise (Custom)',
+        marketnow: 'B2B: Community (Gratis) / PRO ($9.99/mes) / Enterprise (Custom)',
         smithery: 'Gratis (servidores MCP alojados)',
         glama: 'Gratis (directorio)',
         mcpRegistry: 'Gratis (registry)',
@@ -409,7 +409,7 @@ const CONTENT = {
       },
       {
         feature: 'Modelo de preço',
-        marketnow: 'B2B: Community (Grátis) / Team ($99/mês) / Enterprise (Custom)',
+        marketnow: 'B2B: Community (Grátis) / PRO ($9.99/mês) / Enterprise (Custom)',
         smithery: 'Grátis (servidores MCP hospedados)',
         glama: 'Grátis (diretório)',
         mcpRegistry: 'Grátis (registry)',
@@ -562,7 +562,7 @@ const CONTENT = {
       },
       {
         feature: '价格模型',
-        marketnow: 'B2B: Community (免费) / Team ($99/月) / Enterprise (定制)',
+        marketnow: 'B2B: Community (免费) / PRO ($9.99/月) / Enterprise (定制)',
         smithery: '免费（托管的 MCP 服务器）',
         glama: '免费（目录）',
         mcpRegistry: '免费（registry）',
@@ -715,7 +715,7 @@ const CONTENT = {
       },
       {
         feature: 'Modèle de prix',
-        marketnow: 'B2B: Community (Gratuit) / Team ($99/mois) / Enterprise (Sur mesure)',
+        marketnow: 'B2B: Community (Gratuit) / Team ($9.99/mois) / Enterprise (Sur mesure)',
         smithery: 'Gratuit (serveurs MCP hébergés)',
         glama: 'Gratuit (annuaire)',
         mcpRegistry: 'Gratuit (registry)',
