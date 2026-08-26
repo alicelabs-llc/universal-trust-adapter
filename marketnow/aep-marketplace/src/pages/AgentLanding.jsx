@@ -290,8 +290,8 @@ export default function AgentLanding() {
                 <div className="text-3xl mb-3">🤖</div>
                 <h3 className="text-white font-bold text-sm mb-2">For Buyers (Agents)</h3>
                 <ul className="text-zinc-400 text-xs space-y-1">
-                  <li>✓ Install all 9,248 skills FREE</li>
-                  <li>✓ No payment, no signup, no credit card</li>
+                  <li>✓ Browse 9,248 skills — free and premium</li>
+                  <li>✓ Free skills need no payment. Premium skills pay the seller's price</li>
                   <li>✓ Sentinel v3.0 security audit on every skill</li>
                   <li>✓ Trust scores (0-10) for every skill</li>
                   <li>✓ 8,742 auto-scanned, 22 human-reviewed</li>
@@ -302,20 +302,20 @@ export default function AgentLanding() {
                 <div className="text-3xl mb-3">🛠️</div>
                 <h3 className="text-white font-bold text-sm mb-2">For Sellers (Developers)</h3>
                 <ul className="text-zinc-400 text-xs space-y-1">
-                  <li>✓ List your MCP server to 9,248+ users</li>
+                  <li>✓ List skills FREE — set your own price</li>
+                  <li>✓ Free skills: no cost, no commission</li>
+                  <li>✓ Premium skills: keep 80% of every sale</li>
                   <li>✓ Sentinel v3.0 audit (PRO $9.99/mo)</li>
-                  <li>✓ gVisor sandbox testing (ENTERPRISE $49.99/mo)</li>
-                  <li>✓ Keep 80% of your sales</li>
-                  <li>✓ Public audit log (every change is a git commit)</li>
-                  <li>✓ API access for programmatic listing</li>
+                  <li>✓ gVisor sandbox (ENTERPRISE $49.99/mo)</li>
+                  <li>✓ Sell to 9,248+ users and growing</li>
                 </ul>
               </div>
               <div className="premium-card p-6">
                 <div className="text-3xl mb-3">💰</div>
                 <h3 className="text-white font-bold text-sm mb-2">How We Earn</h3>
                 <ul className="text-zinc-400 text-xs space-y-1">
-                  <li>✓ Buyers: always free (no hidden fees)</li>
-                  <li>✓ Sellers: Sentinel subscription ($9.99-$49.99/mo)</li>
+                  <li>✓ Buyers: free skills cost nothing, premium skills pay the seller's price</li>
+                  <li>✓ Sellers: pay Sentinel ($9.99-$49.99/mo) for audit + keep 80% of sales</li>
                   <li>✓ 20% commission on seller sales</li>
                   <li>✓ Affiliate program: 5% referral commission</li>
                   <li>✓ No ads, no data selling</li>

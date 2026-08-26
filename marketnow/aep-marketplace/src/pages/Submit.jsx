@@ -32,7 +32,7 @@ const CATEGORIES = [
 // Price tier canonical labels (kept English here); translated at render time
 // via CONTENT[lang].tierLabels / tierDescs.
 const PRICE_TIERS = [
-  { price: 0, label: 'Free', desc: 'All skills install free for buyers' },
+  { price: 0, label: 'Free', desc: 'Free skills install at no cost. Premium skills have a price set by the seller' },
   { price: 1.99, label: 'Standard', desc: 'Standard integrations, one API/service' },
   { price: 2.99, label: 'Multi-feature', desc: 'Multi-feature tools, common choice' },
   { price: 4.99, label: 'Sophisticated', desc: 'Multi-endpoint, complex logic' },

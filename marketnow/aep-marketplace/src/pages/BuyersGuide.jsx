@@ -81,7 +81,7 @@ const CONTENT = {
       },
       {
         n: 6,
-        title: 'All skills are free for buyers',
+        title: 'Free skills install at no cost. Premium skills have a price set by the seller',
         what: '43 skills are free — no payment, no mandate, no signup. Test MarketNow with these first.',
         tip: 'Free skills are human-reviewed. They\'re the safest place to start.',
         link: '/registry?filter=free',
