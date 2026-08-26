@@ -206,9 +206,9 @@ export default function AgentLanding() {
                 <h2 className="text-white text-2xl font-bold mb-1">Universal Trust Adapter (UTA)</h2>
                 <p className="text-zinc-400 text-sm">The USB-C of agent trust. Translates between 8 trust credential formats via canonical Universal Trust Schema (UTS v2.0.0).</p>
               </div>
-              <a href="https://github.com/alicelabs-llc/universal-trust-adapter" target="_blank" rel="noopener" className="px-4 py-2 bg-[#00F299] text-black font-bold rounded-lg hover:bg-[#00F299]/90 transition-all text-sm whitespace-nowrap">
-                View Repo →
-              </a>
+              <Link to="/uta" className="px-4 py-2 bg-[#00F299] text-black font-bold rounded-lg hover:bg-[#00F299]/90 transition-all text-sm whitespace-nowrap">
+                Explore UTA →
+              </Link>
             </div>
 
             {/* 8 format adapters */}
