@@ -149,6 +149,7 @@ function App() {
         <ErrorBoundary>
         <Routes>
           <Route path="/" element={<AgentLanding />} />
+          <Route path="/uta" element={<UTA />} />
           <Route path="/skills" element={<Navigate to="/registry" replace />} />
           <Route path="/registry" element={<Registry />} />
           <Route path="/skill/:id" element={<SkillDetail />} />
