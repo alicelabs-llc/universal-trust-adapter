@@ -857,6 +857,7 @@ export const TRANSLATIONS = {
     // Navbar
     'nav.marketplace': '市场',
     'nav.trust': '信任',
+    'nav.uta': 'UTA — 通用信任适配器',
     'nav.resources': '资源',
     'nav.account': '账户',
     'nav.browse': '浏览技能',
