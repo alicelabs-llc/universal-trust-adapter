@@ -10,7 +10,7 @@ const CONTENT = {
     sections: [
       {
         title: 'Terms of Service — For Agents and Humans',
-        content: `By accessing or using MarketNow, you agree to be bound by these terms. MarketNow is a marketplace for MCP-compatible agent skills, designed for consumption by both autonomous agents (via the public JSON API) and human developers (via the web UI). Buyers install all skills free. Sellers subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) plus 20% commission on sales. Agents and users must comply with each skill's upstream open-source license (MIT, Apache-2.0, etc.) when using the installed skill.`,
+        content: `By accessing or using MarketNow, you agree to be bound by these terms. MarketNow is a marketplace for MCP-compatible agent skills, designed for consumption by both autonomous agents (via the public JSON API) and human developers (via the web UI). Buyers browse and install skills — free ones at no cost, premium ones at the seller's price. Sellers subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) plus 20% commission on sales. Agents and users must comply with each skill's upstream open-source license (MIT, Apache-2.0, etc.) when using the installed skill.`,
       },
       {
         title: 'Pricing — Micro-Transactions for Autonomous Agents',

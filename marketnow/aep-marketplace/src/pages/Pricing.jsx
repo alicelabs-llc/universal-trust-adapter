@@ -11,7 +11,7 @@ import { useLang } from '../context/LanguageContext.jsx';
 const CONTENT = {
   en: {
     headerExtra:
-      "Buyers install ALL skills free. Sellers subscribe to Sentinel v3.0 for security auditing: PRO $9.99/mo or ENTERPRISE $49.99/mo. MarketNow earns 20% commission on seller sales.",
+      "Buyers browse and install skills — free ones at no cost, premium ones at the seller's price. Sellers subscribe to Sentinel v3.0 for security auditing: PRO $9.99/mo or ENTERPRISE $49.99/mo. MarketNow earns 20% commission on seller sales.",
     billingMonthly: 'MONTHLY',
     billingYearly: 'YEARLY',
     billingYearlyDiscount: '-20%',
@@ -54,7 +54,7 @@ const CONTENT = {
     faq: [
       {
         q: 'Do buyers need a subscription?',
-        a: 'No. Buyers install ALL 9,248 skills completely free. No payment, no credit card, no signup. MarketNow earns from seller subscriptions (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on sales.',
+        a: 'Buyers install free skills at no cost. Premium skills have a price set by the seller. MarketNow takes 20% commission on each sale. Sellers pay Sentinel subscription for security auditing.',
       },
       {
         q: 'What happens if I exceed my free tier limit?',
