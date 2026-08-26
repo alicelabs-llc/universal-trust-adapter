@@ -279,6 +279,53 @@ export default function AgentLanding() {
           </motion.div>
         </section>
 
+
+        {/* ============ WHY MARKETNOW ============ */}
+        <section className="max-w-5xl mx-auto px-6 pb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+            <h2 className="text-white text-2xl font-bold text-center mb-2">Why MarketNow?</h2>
+            <p className="text-zinc-500 text-sm text-center mb-8">The trust layer for AI agent commerce. Here's the value for everyone.</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="premium-card p-6">
+                <div className="text-3xl mb-3">🤖</div>
+                <h3 className="text-white font-bold text-sm mb-2">For Buyers (Agents)</h3>
+                <ul className="text-zinc-400 text-xs space-y-1">
+                  <li>✓ Install all 9,248 skills FREE</li>
+                  <li>✓ No payment, no signup, no credit card</li>
+                  <li>✓ Sentinel v3.0 security audit on every skill</li>
+                  <li>✓ Trust scores (0-10) for every skill</li>
+                  <li>✓ 8,742 auto-scanned, 22 human-reviewed</li>
+                  <li>✓ Works with Claude, Cursor, Cline, Continue, Aider</li>
+                </ul>
+              </div>
+              <div className="premium-card p-6">
+                <div className="text-3xl mb-3">🛠️</div>
+                <h3 className="text-white font-bold text-sm mb-2">For Sellers (Developers)</h3>
+                <ul className="text-zinc-400 text-xs space-y-1">
+                  <li>✓ List your MCP server to 9,248+ users</li>
+                  <li>✓ Sentinel v3.0 audit (PRO $9.99/mo)</li>
+                  <li>✓ gVisor sandbox testing (ENTERPRISE $49.99/mo)</li>
+                  <li>✓ Keep 80% of your sales</li>
+                  <li>✓ Public audit log (every change is a git commit)</li>
+                  <li>✓ API access for programmatic listing</li>
+                </ul>
+              </div>
+              <div className="premium-card p-6">
+                <div className="text-3xl mb-3">💰</div>
+                <h3 className="text-white font-bold text-sm mb-2">How We Earn</h3>
+                <ul className="text-zinc-400 text-xs space-y-1">
+                  <li>✓ Buyers: always free (no hidden fees)</li>
+                  <li>✓ Sellers: Sentinel subscription ($9.99-$49.99/mo)</li>
+                  <li>✓ 20% commission on seller sales</li>
+                  <li>✓ Affiliate program: 5% referral commission</li>
+                  <li>✓ No ads, no data selling</li>
+                  <li>✓ Open-source (AL-1.0 license)</li>
+                </ul>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
         {/* ============ FOR DEVS ============ */}
         <section className="max-w-5xl mx-auto px-6 pb-16">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
