@@ -145,7 +145,7 @@ const CONTENT = {
 
   es: {
     headerExtra:
-      'Empieza gratis con el plan Community. Sube a Team ($99/mes) cuando necesites monitoreo y analíticas. Enterprise disponible para despliegues personalizados.',
+      'Empieza gratis con el plan Community. Sube a PRO ($9.99/mes) cuando necesites monitoreo y analíticas. Enterprise disponible para despliegues personalizados.',
     billingMonthly: 'MENSUAL',
     billingYearly: 'ANUAL',
     billingYearlyDiscount: '-20%',
@@ -188,11 +188,11 @@ const CONTENT = {
     faq: [
       {
         q: '¿Los compradores necesitan suscripción?',
-        a: 'No. MarketNow usa precios B2B: Community (Gratis), Team ($99/mes), Enterprise (Custom). Las 8,845 skills están certificadas por Sentinel y son navegables gratis.',
+        a: 'No. MarketNow usa precios B2B: Community (Gratis), PRO ($9.99/mes), Enterprise (Custom). Las 8,845 skills están certificadas por Sentinel y son navegables gratis.',
       },
       {
         q: '¿Qué pasa si excedo el límite del plan free?',
-        a: 'El plan Community es gratis. Para monitoreo de equipo, sube a Team ($99/mes). Enterprise disponible para despliegues personalizados.',
+        a: 'El plan Community es gratis. Para monitoreo de equipo, sube a PRO ($9.99/mes). Enterprise disponible para despliegues personalizados.',
       },
       {
         q: '¿Cómo recibo mis pagos como vendedor?',
@@ -281,7 +281,7 @@ const CONTENT = {
 
   pt: {
     headerExtra:
-      'Comece grátis com o plano Community. Faça upgrade para Team ($99/mês) quando precisar de monitoramento e análises. Enterprise disponível para implantações personalizadas.',
+      'Comece grátis com o plano Community. Faça upgrade para PRO ($9.99/mês) quando precisar de monitoramento e análises. Enterprise disponível para implantações personalizadas.',
     billingMonthly: 'MENSAL',
     billingYearly: 'ANUAL',
     billingYearlyDiscount: '-20%',
@@ -324,11 +324,11 @@ const CONTENT = {
     faq: [
       {
         q: 'Compradores precisam de assinatura?',
-        a: 'Não. O MarketNow usa preços B2B: Community (Grátis), Team ($99/mês), Enterprise (Custom). Todas as 8,845 skills são certificadas pelo Sentinel e navegáveis gratuitamente.',
+        a: 'Não. O MarketNow usa preços B2B: Community (Grátis), PRO ($9.99/mês), Enterprise (Custom). Todas as 8,845 skills são certificadas pelo Sentinel e navegáveis gratuitamente.',
       },
       {
         q: 'O que acontece se eu exceder o limite do plano free?',
-        a: 'O plano Community é gratuito. Para monitoramento de equipe, faça upgrade para Team ($99/mês). Enterprise disponível para implantações personalizadas.',
+        a: 'O plano Community é gratuito. Para monitoramento de equipe, faça upgrade para PRO ($9.99/mês). Enterprise disponível para implantações personalizadas.',
       },
       {
         q: 'Como recebo meus pagamentos como vendedor?',
@@ -549,7 +549,7 @@ const CONTENT = {
 
   fr: {
     headerExtra:
-      "Commencez gratuitement avec le plan Community. Passez à Team ($99/mois) quand vous avez besoin de surveillance et d'analyses. Enterprise disponible pour les déploiements personnalisés.",
+      "Commencez gratuitement avec le plan Community. Passez à Team ($9.99/mois) quand vous avez besoin de surveillance et d'analyses. Enterprise disponible pour les déploiements personnalisés.",
     billingMonthly: 'MENSUEL',
     billingYearly: 'ANNUEL',
     billingYearlyDiscount: '-20%',
@@ -592,11 +592,11 @@ const CONTENT = {
     faq: [
       {
         q: 'Les acheteurs ont-ils besoin d\'un abonnement ?',
-        a: "Non. MarketNow utilise une tarification B2B : Community (Gratuit), Team ($99/mois), Enterprise (Sur mesure). Les 8 582 skills sont certifiées par Sentinel et naviguables gratuitement.",
+        a: "Non. MarketNow utilise une tarification B2B : Community (Gratuit), Team ($9.99/mois), Enterprise (Sur mesure). Les 8 582 skills sont certifiées par Sentinel et naviguables gratuitement.",
       },
       {
         q: 'Que se passe-t-il si je dépasse la limite du plan gratuit ?',
-        a: 'Le plan Community est gratuit. Pour la surveillance d`équipe, passez à Team ($99/mois). Enterprise disponible pour les déploiements personnalisés.',
+        a: 'Le plan Community est gratuit. Pour la surveillance d`équipe, passez à Team ($9.99/mois). Enterprise disponible pour les déploiements personnalisés.',
       },
       {
         q: 'Comment suis-je payé en tant que vendeur ?',
@@ -698,7 +698,7 @@ function fmt(str, vars) {
  *
  * Modelo de monetización completo:
  * - Compradores: B2B pricing (Community/Team/Enterprise)
- * - Planes: Community (Free) / Team ($99/mo) / Enterprise (Custom)
+ * - Planes: Community (Free) / Team ($9.99/mo) / Enterprise (Custom)
  * - Add-ons: Featured listing, Verified Seller badge, Priority Review
  * - Afiliados: 5% comisión por venta referida
  */
