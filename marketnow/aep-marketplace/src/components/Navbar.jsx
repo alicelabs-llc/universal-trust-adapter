@@ -18,6 +18,7 @@ const NAV_GROUPS = [
   {
     labelKey: 'nav.trust',
     items: [
+      { path: '/uta', labelKey: 'nav.uta' },
       { path: '/trust', labelKey: 'nav.trustRoadmap' },
       { path: '/standards', labelKey: 'nav.standards' },
       { path: '/security', labelKey: 'nav.sentinel' },
