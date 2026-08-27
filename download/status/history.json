@@ -1,30 +1,44 @@
 {
   "website": [
     {
-      "date": "2026-08-27T16:43:16.093999+00:00",
+      "date": "2026-08-27T17:13:07.022938+00:00",
       "status": "ok",
-      "latency_ms": 116
+      "latency_ms": 53
+    }
+  ],
+  "uta_root": [
+    {
+      "date": "2026-08-27T17:13:07.273039+00:00",
+      "status": "ok",
+      "latency_ms": 249
+    }
+  ],
+  "uta_formats": [
+    {
+      "date": "2026-08-27T17:13:07.528788+00:00",
+      "status": "ok",
+      "latency_ms": 255
     }
   ],
   "skills_api": [
     {
-      "date": "2026-08-27T16:43:16.747116+00:00",
+      "date": "2026-08-27T17:13:08.285125+00:00",
       "status": "ok",
-      "latency_ms": 423
+      "latency_ms": 327
     }
   ],
-  "categories": [
+  "uta_pipeline": [
     {
-      "date": "2026-08-27T16:43:17.622264+00:00",
+      "date": "2026-08-27T17:13:08.949517+00:00",
       "status": "ok",
-      "latency_ms": 41
+      "latency_ms": 259
     }
   ],
-  "manifest": [
+  "uta_revocation": [
     {
-      "date": "2026-08-27T16:43:17.951884+00:00",
+      "date": "2026-08-27T17:13:09.199121+00:00",
       "status": "ok",
-      "latency_ms": 329
+      "latency_ms": 249
     }
   ]
 }

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MarketNow — Status</title>
-<meta name="description" content="Real-time status and uptime for MarketNow API and website.">
+<title>UTA — Status · Universal Trust Adapter</title>
+<meta name="description" content="Real-time status and uptime for the Universal Trust Adapter (UTA) by MarketNow.">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -26,9 +26,13 @@
     width: 36px; height: 36px; border-radius: 8px;
     background: linear-gradient(135deg, #6366F1, #8B5CF6);
     display: flex; align-items: center; justify-content: center;
-    font-weight: bold; color: white; font-size: 16px;
+    font-weight: bold; color: white; font-size: 14px;
+    letter-spacing: -0.5px;
   }
   h1 { font-size: 20px; font-weight: 600; }
+  .product-tagline {
+    display: block; font-size: 12px; color: #71717A; font-weight: 400; margin-top: 2px;
+  }
   .last-checked { font-size: 12px; color: #71717A; }
 
   .summary {
@@ -42,9 +46,7 @@
   }
   .summary-dot.degraded { background: #F59E0B; box-shadow: 0 0 0 4px rgba(245,158,11,0.15); }
   .summary-dot.down { background: #EF4444; box-shadow: 0 0 0 4px rgba(239,68,68,0.15); }
-  .summary-text {
-    font-size: 17px; font-weight: 500; flex: 1;
-  }
+  .summary-text { font-size: 17px; font-weight: 500; flex: 1; }
   .summary-text small {
     display: block; font-size: 13px; font-weight: 400; color: #71717A; margin-top: 4px;
   }
@@ -74,17 +76,15 @@
   }
   .service-status.degraded { background: rgba(245,158,11,0.1); color: #F59E0B; border-color: rgba(245,158,11,0.2); }
   .service-status.down { background: rgba(239,68,68,0.1); color: #EF4444; border-color: rgba(239,68,68,0.2); }
-  .uptime-label {
-    font-size: 12px; color: #71717A; margin-top: 8px;
-  }
+  .uptime-label { font-size: 12px; color: #71717A; margin-top: 8px; }
 
   .uptime-bar {
     display: flex; gap: 2px; margin-top: 8px; height: 28px;
   }
   .uptime-day {
     flex: 1; border-radius: 2px; background: #10B981;
-    transition: transform 0.1s ease;
     cursor: pointer; position: relative;
+    transition: transform 0.1s ease;
   }
   .uptime-day:hover { transform: scaleY(1.15); transform-origin: bottom; }
   .uptime-day.degraded { background: #F59E0B; }
@@ -131,6 +131,28 @@
   .metric-value { font-size: 24px; font-weight: 700; color: #18181B; }
   .metric-sub { font-size: 12px; color: #71717A; margin-top: 4px; }
 
+  .ph-banner {
+    background: linear-gradient(135deg, #DA552F 0%, #FF6154 100%);
+    color: white; border-radius: 12px; padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .ph-banner-icon {
+    width: 40px; height: 40px; background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: bold;
+  }
+  .ph-banner-text { flex: 1; }
+  .ph-banner-text strong { font-size: 15px; display: block; margin-bottom: 2px; }
+  .ph-banner-text small { font-size: 13px; opacity: 0.9; }
+  .ph-banner a {
+    color: white; text-decoration: none;
+    background: rgba(255,255,255,0.2); padding: 8px 14px; border-radius: 6px;
+    font-size: 13px; font-weight: 500;
+  }
+  .ph-banner a:hover { background: rgba(255,255,255,0.3); }
+
   footer {
     margin-top: 48px; padding-top: 24px; border-top: 1px solid #E4E4E7;
     font-size: 12px; color: #71717A;
@@ -142,6 +164,7 @@
   @media (max-width: 640px) {
     .metrics { grid-template-columns: 1fr; }
     .uptime-bar { height: 20px; }
+    .ph-banner { flex-direction: column; align-items: flex-start; gap: 12px; }
   }
 </style>
 </head>
@@ -149,11 +172,24 @@
 <div class="container">
   <header>
     <div class="brand">
-      <span class="logo">M</span>
-      <h1>MarketNow Status</h1>
+      <span class="logo">UTA</span>
+      <div>
+        <h1>Status
+          <span class="product-tagline">Universal Trust Adapter · by MarketNow</span>
+        </h1>
+      </div>
     </div>
     <div class="last-checked" id="last-checked">Checking…</div>
   </header>
+
+  <div class="ph-banner">
+    <div class="ph-banner-icon">P</div>
+    <div class="ph-banner-text">
+      <strong>Just launched on Product Hunt</strong>
+      <small>UTA — the USB-C of agent trust. Translate between 8 credential formats.</small>
+    </div>
+    <a href="https://www.producthunt.com/products/uta-universal-trust-adapter?launch=uta-universal-trust-adapter" target="_blank" rel="noopener">View launch →</a>
+  </div>
 
   <div class="summary" id="summary">
     <span class="summary-dot" id="summary-dot"></span>
@@ -173,13 +209,15 @@
   <div id="incidents">
     <div class="incident">
       <div class="incident-title">
-        <span>MarketNow launch — initial status page live</span>
+        <span>UTA Product Hunt launch — status page live</span>
         <span class="badge resolved">RESOLVED</span>
       </div>
-      <div class="incident-date">August 27, 2026</div>
+      <div class="incident-date">August 26-27, 2026</div>
       <div class="incident-body">
-        Status page deployed. Historical uptime data will populate as the monitoring script
-        continues to collect samples. API and website have been operational since launch.
+        UTA launched on Product Hunt on August 26, 2026. Status page stood up next day
+        to provide public visibility into API uptime. All 6 monitored endpoints operational
+        since launch. Historical 90-day uptime will populate as the monitoring script
+        continues to collect samples.
       </div>
     </div>
   </div>
@@ -188,24 +226,25 @@
     <div class="metric">
       <div class="metric-label">90-day uptime</div>
       <div class="metric-value" id="metric-uptime">—</div>
-      <div class="metric-sub">across all services</div>
+      <div class="metric-sub">across all 6 services</div>
     </div>
     <div class="metric">
       <div class="metric-label">Avg response time</div>
       <div class="metric-value" id="metric-latency">—</div>
-      <div class="metric-sub">p50 over last 24h</div>
+      <div class="metric-sub">p50 across endpoints</div>
     </div>
     <div class="metric">
-      <div class="metric-label">Skills indexed</div>
-      <div class="metric-value" id="metric-skills">—</div>
-      <div class="metric-sub">live count from API</div>
+      <div class="metric-label">Formats supported</div>
+      <div class="metric-value" id="metric-formats">—</div>
+      <div class="metric-sub">credential formats via UTA</div>
     </div>
   </div>
 
   <footer>
     <div>
       Status page · <a href="https://www.marketnow.site">marketnow.site</a> ·
-      <a href="https://www.marketnow.site/api/manifest.json">API</a>
+      <a href="https://www.marketnow.site/api/trust">UTA API</a> ·
+      <a href="https://www.marketnow.site/api/trust?action=formats">formats</a>
     </div>
     <div>Auto-refresh every 60s</div>
   </footer>
@@ -285,7 +324,7 @@
     const avgLatency = data.services.reduce((a, s) => a + (s.latency_ms || 0), 0) / (data.services.length || 1);
     document.getElementById('metric-uptime').textContent = avgUptime.toFixed(2) + '%';
     document.getElementById('metric-latency').textContent = Math.round(avgLatency) + ' ms';
-    document.getElementById('metric-skills').textContent = (data.skill_count || 0).toLocaleString();
+    document.getElementById('metric-formats').textContent = (data.formats_supported || 0) + ' formats';
   }
 
   function escapeHtml(s) {

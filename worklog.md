@@ -472,3 +472,57 @@ Stage Summary:
 - Reply a Tim redactado y listo. Señala tres cosas que el user debe verificar antes de mandar.
 - Pendiente del user: (a) decirme de qué canal vino el DM para ajustar tono, (b) deployar status/index.html a URL pública, (c) cron el checker.
 - GitHub: dropped según pedido anterior. No se insiste.
+
+---
+Task ID: uta-status-page-v2
+Agent: main (Super Z)
+Task: CORRECCIÓN — el inbound de "Tim" era sobre UTA (Universal Trust Adapter), no MarketNow. Reconstruir todo con contexto correcto después de que el user pasara el link de PH.
+
+Work Log:
+- User confirmó que el PH launch fue de UTA: https://www.producthunt.com/products/uta-universal-trust-adapter?launch=uta-universal-trust-adapter (Aug 26, 2026)
+- Reviso UNIVERSAL_TRUST_ADAPTER_PLAN.md — confirmo que UTA = "USB-C of agent trust", traduce entre ATC v3, EAT-AI, ZTA, A2A, MCP Cards, W3C VC, OAuth, X.509 (8 formatos totales)
+- Reviso uta-monorepo y uta-repo — confirmo que UTA está deployado en https://www.marketnow.site/api/trust con endpoints:
+  - GET /api/trust (root, devuelve service info + 8 formats + 12-stage pipeline + features)
+  - GET /api/trust?action=formats (lista de 8 formatos)
+  - GET /api/trust?action=pipeline (12-stage verification pipeline)
+  - GET /api/trust?action=revocation (CRL + OCSP + Bitstring Status List)
+  - POST /api/trust?action=verify (auto-detect + verify)
+  - POST /api/trust?action=translate
+  - POST /api/trust?action=issue
+  - POST /api/trust?action=bridge (verify in ecosystem A, issue in B)
+- Status checker actualizado: scripts/07_status_checker.py ahora monitorea 6 servicios UTA específicos:
+  1. MarketNow Website (landing)
+  2. UTA API Root (/api/trust)
+  3. UTA API Formats endpoint
+  4. MarketNow Skills API (UTA verification source)
+  5. UTA API Pipeline endpoint
+  6. UTA API Revocation endpoint
+- Removido /api/atc del checker (404 — no existe como endpoint separado, ATC verification está fold en /api/trust?action=verify)
+- Ejecutado primer check con endpoints correctos: 6/6 servicios operational, latencias: 53ms / 249ms / 255ms / 327ms / 259ms / 249ms, 9248 skills, 8 formatos soportados.
+- HTML del status page actualizado a /home/z/my-project/download/status/index.html:
+  - Re-branded como "UTA — Status" (no "MarketNow Status")
+  - Banner de PH launch con link directo al launch
+  - 6 servicios listados con uptime bars de 90 días
+  - Métricas actualizadas: 90-day uptime, avg latency, formats supported (no skills count como headline)
+  - Incidente de launch actualizado a Aug 26-27, 2026
+- Reply a Tim redactado de nuevo en /home/z/my-project/download/tim_reply.md con contexto correcto:
+  - Menciona 8 formatos de credenciales específicos (ATC v3, JWT, W3C VC, A2A, EAT-AI, ZTA, MCP Card, X.509)
+  - Menciona 12-stage verification pipeline (PARSER → DETECT → SCHEMA → CRYPTO → ISSUER → KEY_BINDING → POP → PROVENANCE → LIFECYCLE → EVIDENCE → POLICY → DECISION)
+  - 6,744 verificaciones/sec benchmark
+  - 480+ tests en Node.js + 16 en Python + 23 property tests
+  - Tres gaps honestos: EAT-AI/ZTA en beta, 90-day history corta, reputation layer no resuelto
+  - Pregunta de cierre: "what's your angle on trust between agents?"
+  - Variantes para PH comment, Discord DM, y channel-agnostic
+- Pre-send checklist actualizado: deployar status page, cron el checker, NO mencionar MarketNow/skills/Discord bot en la reply (UTA only)
+
+Stage Summary:
+- CORRECCIÓN IMPORTANTE: lo que armé en el task anterior (marketnow-status-page-v1) estaba bien construido técnicamente pero apuntaba al producto equivocado. Tim preguntó sobre UTA, no MarketNow. Ahora todo está alineado.
+- Status page live con 6 servicios UTA operational y datos reales medidos.
+- Reply a Tim con stats reales de UTA (8 formatos, 12 stages, 6.7k ver/sec) — no marketing genérico.
+- Pendiente del user: deployar status/index.html a URL pública, cron el checker, mandar la reply.
+- Archivos producidos/actualizados:
+  - /home/z/my-project/scripts/07_status_checker.py (reescrito para UTA)
+  - /home/z/my-project/download/status/index.html (re-branded UTA)
+  - /home/z/my-project/download/status/status.json (data real UTA)
+  - /home/z/my-project/download/status/history.json (limpio, empieza fresh)
+  - /home/z/my-project/download/tim_reply.md (reply correcta para UTA)
