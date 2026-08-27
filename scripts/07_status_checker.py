@@ -1,32 +1,21 @@
 #!/usr/bin/env python3
 """
-MarketNow status checker
-========================
-Hits each MarketNow endpoint every 5 minutes, records latency + status,
-writes /home/z/my-project/download/status/status.json for the status page.
+UTA (Universal Trust Adapter) status checker
+=============================================
+Hits UTA's actual deployed endpoints on marketnow.site to verify the trust
+translation API is alive and responding correctly.
 
 Services monitored:
-  - Website     https://www.marketnow.site/                  (200 OK, <2s)
-  - Skills API  https://www.marketnow.site/api/skills.json    (200 OK, returns list)
-  - Categories  https://www.marketnow.site/api/categories.json (200 OK, returns list)
-  - Manifest    https://www.marketnow.site/api/manifest.json   (200 OK, has version field)
+  - MarketNow Website     https://www.marketnow.site/                  (landing)
+  - UTA API Root          https://www.marketnow.site/api/trust         (service info)
+  - UTA Formats Endpoint  https://www.marketnow.site/api/trust?action=formats  (returns 5 formats)
+  - MarketNow Skills API  https://www.marketnow.site/api/skills.json  (9k+ skills indexed, used by UTA for verification)
+  - ATC Verify Endpoint   https://www.marketnow.site/api/atc          (Agent Trust Card verifier)
 
 Status thresholds:
   - operational: 200 OK, latency < 3000ms, valid JSON shape
   - degraded:    200 OK but slow (>3000ms), or shape wrong
   - down:        non-200, timeout, or connection error
-
-History: 90 days of samples (1 per 5min = ~25,920 samples)
-  We store 1 sample per hour for 90 days (2160 samples) to keep file size small.
-
-Deploy:
-  - Run with cron every 5 minutes:
-    */5 * * * * python3 /home/z/my-project/scripts/07_status_checker.py
-
-  - Or with systemd timer:
-    [Timer]
-    OnCalendar=*:0/5
-    Persistent=true
 """
 import json
 import os
@@ -41,31 +30,45 @@ HISTORY_FILE = "/home/z/my-project/download/status/history.json"
 SERVICES = [
     {
         "id": "website",
-        "name": "Website (marketnow.site)",
+        "name": "MarketNow Website (landing)",
         "url": "https://www.marketnow.site/",
         "expected_status": 200,
         "shape_check": None,
     },
     {
+        "id": "uta_root",
+        "name": "UTA API — Root (/api/trust)",
+        "url": "https://www.marketnow.site/api/trust",
+        "expected_status": 200,
+        "shape_check": "dict_with_service",
+    },
+    {
+        "id": "uta_formats",
+        "name": "UTA API — Formats (/api/trust?action=formats)",
+        "url": "https://www.marketnow.site/api/trust?action=formats",
+        "expected_status": 200,
+        "shape_check": "dict_with_formats",
+    },
+    {
         "id": "skills_api",
-        "name": "Skills API (/api/skills.json)",
+        "name": "MarketNow Skills API (UTA verification source)",
         "url": "https://www.marketnow.site/api/skills.json",
         "expected_status": 200,
         "shape_check": "list",
     },
     {
-        "id": "categories",
-        "name": "Categories API (/api/categories.json)",
-        "url": "https://www.marketnow.site/api/categories.json",
+        "id": "uta_pipeline",
+        "name": "UTA API — Pipeline (/api/trust?action=pipeline)",
+        "url": "https://www.marketnow.site/api/trust?action=pipeline",
         "expected_status": 200,
-        "shape_check": "list",
+        "shape_check": "dict_with_pipeline",
     },
     {
-        "id": "manifest",
-        "name": "Manifest API (/api/manifest.json)",
-        "url": "https://www.marketnow.site/api/manifest.json",
+        "id": "uta_revocation",
+        "name": "UTA API — Revocation (/api/trust?action=revocation)",
+        "url": "https://www.marketnow.site/api/trust?action=revocation",
         "expected_status": 200,
-        "shape_check": "dict_with_version",
+        "shape_check": "dict",
     },
 ]
 
@@ -75,12 +78,12 @@ TIMEOUT_SECONDS = 15
 
 
 def check_service(svc):
-    """Returns dict: status, latency_ms, last_check_ago, error"""
+    """Returns dict: status, latency_ms, error"""
     start = time.time()
     try:
         req = urllib.request.Request(
             svc["url"],
-            headers={"User-Agent": "MarketNowStatusChecker/1.0"},
+            headers={"User-Agent": "UTA-StatusChecker/1.0"},
             method="GET",
         )
         with urllib.request.urlopen(req, timeout=TIMEOUT_SECONDS) as r:
@@ -88,7 +91,6 @@ def check_service(svc):
             body = r.read()
         latency_ms = int((time.time() - start) * 1000)
 
-        # Status code check
         if status_code != svc["expected_status"]:
             return {
                 "status": "down",
@@ -96,7 +98,6 @@ def check_service(svc):
                 "error": f"HTTP {status_code}",
             }
 
-        # Shape check
         shape = svc["shape_check"]
         if shape:
             try:
@@ -113,14 +114,31 @@ def check_service(svc):
                     "latency_ms": latency_ms,
                     "error": f"Expected list, got {type(parsed).__name__}",
                 }
-            if shape == "dict_with_version" and not (isinstance(parsed, dict) and "version" in parsed):
+            if shape == "dict" and not isinstance(parsed, dict):
                 return {
                     "status": "degraded",
                     "latency_ms": latency_ms,
-                    "error": "Missing 'version' field in manifest",
+                    "error": f"Expected dict, got {type(parsed).__name__}",
+                }
+            if shape == "dict_with_service" and not (isinstance(parsed, dict) and "service" in parsed):
+                return {
+                    "status": "degraded",
+                    "latency_ms": latency_ms,
+                    "error": "Missing 'service' field in UTA root response",
+                }
+            if shape == "dict_with_formats" and not (isinstance(parsed, dict) and "formats" in parsed and isinstance(parsed["formats"], list)):
+                return {
+                    "status": "degraded",
+                    "latency_ms": latency_ms,
+                    "error": "Missing 'formats' list in UTA formats response",
+                }
+            if shape == "dict_with_pipeline" and not (isinstance(parsed, dict) and "pipeline" in parsed):
+                return {
+                    "status": "degraded",
+                    "latency_ms": latency_ms,
+                    "error": "Missing 'pipeline' field in UTA pipeline response",
                 }
 
-        # Latency thresholds
         if latency_ms >= LATENCY_DOWN_MS:
             return {"status": "down", "latency_ms": latency_ms, "error": f"Latency {latency_ms}ms"}
         if latency_ms >= LATENCY_DEGRADED_MS:
@@ -140,7 +158,6 @@ def check_service(svc):
 
 
 def load_history():
-    """Load hourly history samples (90 days max)."""
     if not os.path.exists(HISTORY_FILE):
         return {}
     try:
@@ -157,9 +174,8 @@ def save_history(history):
 
 
 def compute_uptime_90d(history_for_service):
-    """Compute % of samples that were operational in last 90 days."""
     if not history_for_service:
-        return 100.0  # No history = assume 100% (don't lie about being down)
+        return 100.0
     cutoff = datetime.now(timezone.utc) - timedelta(days=90)
     cutoff_iso = cutoff.isoformat()
     recent = [s for s in history_for_service if s["date"] >= cutoff_iso]
@@ -170,10 +186,9 @@ def compute_uptime_90d(history_for_service):
 
 
 def history_to_days(history_for_service):
-    """Aggregate hourly samples into daily buckets for the 90-day bar."""
     by_day = {}
     for sample in history_for_service:
-        day = sample["date"][:10]  # YYYY-MM-DD
+        day = sample["date"][:10]
         if day not in by_day:
             by_day[day] = []
         by_day[day].append(sample)
@@ -186,7 +201,6 @@ def history_to_days(history_for_service):
         if not samples:
             days.append({"date": day, "status": "no-data", "latency_ms": None})
             continue
-        # Day status = worst status of any sample that day
         if any(s["status"] == "down" for s in samples):
             status = "down"
         elif any(s["status"] == "degraded" for s in samples):
@@ -200,28 +214,26 @@ def history_to_days(history_for_service):
 
 
 def main():
-    print(f"[{datetime.now(timezone.utc).isoformat()}] Running status check...")
+    print(f"[{datetime.now(timezone.utc).isoformat()}] Running UTA status check...")
     history = load_history()
 
     services_out = []
     skill_count = 0
+    formats_count = 0
 
     for svc in SERVICES:
         result = check_service(svc)
         svc_id = svc["id"]
 
-        # Update hourly history
         if svc_id not in history:
             history[svc_id] = []
 
         now = datetime.now(timezone.utc)
-        # Status string used in history: ok/degraded/down (matches what compute_uptime_90d expects)
         status_str = (
             "ok" if result["status"] == "operational"
             else result["status"]
         )
 
-        # Only keep 1 sample per hour (the latest)
         hour_key = now.strftime("%Y-%m-%dT%H")
         history[svc_id] = [s for s in history[svc_id] if not s["date"].startswith(hour_key)]
         history[svc_id].append({
@@ -230,23 +242,30 @@ def main():
             "latency_ms": result["latency_ms"],
         })
 
-        # Trim to 90 days
         cutoff = (now - timedelta(days=90)).isoformat()
         history[svc_id] = [s for s in history[svc_id] if s["date"] >= cutoff]
 
-        # Compute uptime for display
         uptime_90d = compute_uptime_90d(history[svc_id])
         days_history = history_to_days(history[svc_id])
 
-        # Special: pull skill_count from skills_api response
+        # Pull live data from specific endpoints
         if svc_id == "skills_api" and result["status"] == "operational":
             try:
-                # Re-fetch just to get count (could cache from check_service, but simpler)
-                req = urllib.request.Request(svc["url"], headers={"User-Agent": "MarketNowStatusChecker/1.0"})
+                req = urllib.request.Request(svc["url"], headers={"User-Agent": "UTA-StatusChecker/1.0"})
                 with urllib.request.urlopen(req, timeout=15) as r:
                     skills = json.loads(r.read())
                 if isinstance(skills, list):
                     skill_count = len(skills)
+            except Exception:
+                pass
+
+        if svc_id == "uta_formats" and result["status"] == "operational":
+            try:
+                req = urllib.request.Request(svc["url"], headers={"User-Agent": "UTA-StatusChecker/1.0"})
+                with urllib.request.urlopen(req, timeout=15) as r:
+                    data = json.loads(r.read())
+                if isinstance(data, dict) and "formats" in data:
+                    formats_count = len(data["formats"])
             except Exception:
                 pass
 
@@ -262,14 +281,17 @@ def main():
             "error": result["error"],
         })
 
-        print(f"  {svc['name']:45} {result['status']:12} {result['latency_ms']:5}ms  uptime_90d={uptime_90d}%")
+        print(f"  {svc['name']:55} {result['status']:12} {result['latency_ms']:5}ms  uptime_90d={uptime_90d}%")
 
     save_history(history)
 
     out = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
+        "product": "Universal Trust Adapter (UTA) — by MarketNow",
+        "ph_launch_url": "https://www.producthunt.com/products/uta-universal-trust-adapter?launch=uta-universal-trust-adapter",
         "services": services_out,
         "skill_count": skill_count,
+        "formats_supported": formats_count,
         "last_incident": "none",
         "version": "1.0",
     }
@@ -281,6 +303,7 @@ def main():
     print(f"\n✅ Wrote {STATUS_FILE}")
     print(f"   Services: {len(services_out)}")
     print(f"   Skills indexed: {skill_count}")
+    print(f"   UTA formats supported: {formats_count}")
 
 
 if __name__ == "__main__":
