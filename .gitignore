@@ -1,2 +1,12 @@
 skills/
 node_modules/
+
+# Secrets — never commit
+.env
+.env.local
+.env.*.local
+.vercel-token
+.npm-token
+*.pem
+*.key
+secrets/
