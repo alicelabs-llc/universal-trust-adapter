@@ -1,0 +1,30 @@
+{
+  "website": [
+    {
+      "date": "2026-08-27T16:43:16.093999+00:00",
+      "status": "ok",
+      "latency_ms": 116
+    }
+  ],
+  "skills_api": [
+    {
+      "date": "2026-08-27T16:43:16.747116+00:00",
+      "status": "ok",
+      "latency_ms": 423
+    }
+  ],
+  "categories": [
+    {
+      "date": "2026-08-27T16:43:17.622264+00:00",
+      "status": "ok",
+      "latency_ms": 41
+    }
+  ],
+  "manifest": [
+    {
+      "date": "2026-08-27T16:43:17.951884+00:00",
+      "status": "ok",
+      "latency_ms": 329
+    }
+  ]
+}

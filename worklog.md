@@ -435,3 +435,40 @@ Stage Summary:
   kordless, pakvothe, 23cse_132_ritikagaur, custralis)
 - 32/32 comments acknowledged
 - URLs en articles apuntan al canonical repo alicelabs-llc
+
+---
+Task ID: marketnow-status-page-v1
+Agent: main (Super Z)
+Task: Construir status page real para responder a inbound de "Tim" sobre uptime/reliability.
+
+Work Log:
+- Recibido inbound de "Tim" mencionando Product Hunt launch (sin registro en worklog — se flaggeo en reply draft que NO confirmemos el PH launch).
+- Construido status page HTML: /home/z/my-project/download/status/index.html
+  - 4 servicios (website, skills API, categories API, manifest API)
+  - Status badges operational/degraded/down
+  - 90-day uptime bars con tooltips
+  - Past incidents section (1 incidente de launch logged)
+  - Metrics panel: 90-day uptime %, avg latency, skills count live
+  - Auto-refresh cada 60s
+- Construido checker script: /home/z/my-project/scripts/07_status_checker.py
+  - Hits cada endpoint, mide latency real, valida JSON shape
+  - Thresholds: <3s operational, 3-10s degraded, >10s down
+  - History persistence en /home/z/my-project/download/status/history.json (90 días max, 1 sample/hora)
+  - Listo para cron: */5 * * * * python3 07_status_checker.py
+- Ejecutado primer check:
+  - Website: 116ms operational
+  - Skills API: 423ms operational
+  - Categories API: 41ms operational
+  - Manifest API: 329ms operational
+  - Skills count: 9,248
+- Redactado reply para Tim en /home/z/my-project/download/tim_reply.md con:
+  - Reply principal (channel-agnostic)
+  - Variantes para Discord DM / LinkedIn / Email / Product Hunt / Twitter
+  - ⚠️ Tres verificaciones pre-send: (1) NO confirmar PH launch (no hay registro), (2) deployar status page a URL pública, (3) cron el checker
+  - Frame psicológico: responder (b) no (a), honestidad sobre verification depth, cerrar con pregunta para convertir en conversación
+
+Stage Summary:
+- Status page live con data real (no mockup). 4 servicios operational, latencias reales medidas.
+- Reply a Tim redactado y listo. Señala tres cosas que el user debe verificar antes de mandar.
+- Pendiente del user: (a) decirme de qué canal vino el DM para ajustar tono, (b) deployar status/index.html a URL pública, (c) cron el checker.
+- GitHub: dropped según pedido anterior. No se insiste.
