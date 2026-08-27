@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UTA — Status · Universal Trust Adapter</title>
+<meta name="description" content="Real-time status and uptime for the Universal Trust Adapter (UTA) by MarketNow.">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #FAFAFA;
+    color: #18181B;
+    min-height: 100vh;
+    padding: 24px 16px 80px;
+  }
+  .container { max-width: 760px; margin: 0 auto; }
+  header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #E4E4E7;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .logo {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; color: white; font-size: 14px;
+    letter-spacing: -0.5px;
+  }
+  h1 { font-size: 20px; font-weight: 600; }
+  .product-tagline {
+    display: block; font-size: 12px; color: #71717A; font-weight: 400; margin-top: 2px;
+  }
+  .last-checked { font-size: 12px; color: #71717A; }
+
+  .summary {
+    background: white; border: 1px solid #E4E4E7; border-radius: 12px;
+    padding: 24px; margin-bottom: 32px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .summary-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #10B981; box-shadow: 0 0 0 4px rgba(16,185,129,0.15);
+  }
+  .summary-dot.degraded { background: #F59E0B; box-shadow: 0 0 0 4px rgba(245,158,11,0.15); }
+  .summary-dot.down { background: #EF4444; box-shadow: 0 0 0 4px rgba(239,68,68,0.15); }
+  .summary-text { font-size: 17px; font-weight: 500; flex: 1; }
+  .summary-text small {
+    display: block; font-size: 13px; font-weight: 400; color: #71717A; margin-top: 4px;
+  }
+
+  h2 {
+    font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;
+    color: #71717A; margin-bottom: 16px; font-weight: 600;
+  }
+
+  .service {
+    background: white; border: 1px solid #E4E4E7; border-radius: 12px;
+    padding: 20px 24px; margin-bottom: 12px;
+  }
+  .service-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .service-name {
+    font-size: 15px; font-weight: 500;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .service-status {
+    font-size: 12px; padding: 4px 10px; border-radius: 999px;
+    background: rgba(16,185,129,0.1); color: #10B981;
+    border: 1px solid rgba(16,185,129,0.2);
+    font-weight: 500;
+  }
+  .service-status.degraded { background: rgba(245,158,11,0.1); color: #F59E0B; border-color: rgba(245,158,11,0.2); }
+  .service-status.down { background: rgba(239,68,68,0.1); color: #EF4444; border-color: rgba(239,68,68,0.2); }
+  .uptime-label { font-size: 12px; color: #71717A; margin-top: 8px; }
+
+  .uptime-bar {
+    display: flex; gap: 2px; margin-top: 8px; height: 28px;
+  }
+  .uptime-day {
+    flex: 1; border-radius: 2px; background: #10B981;
+    cursor: pointer; position: relative;
+    transition: transform 0.1s ease;
+  }
+  .uptime-day:hover { transform: scaleY(1.15); transform-origin: bottom; }
+  .uptime-day.degraded { background: #F59E0B; }
+  .uptime-day.down { background: #EF4444; }
+  .uptime-day.no-data { background: #E4E4E7; }
+  .uptime-day[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%);
+    background: #18181B; color: white; padding: 4px 8px; border-radius: 4px;
+    font-size: 11px; white-space: nowrap; pointer-events: none;
+    z-index: 10;
+  }
+
+  .incidents { margin-top: 32px; }
+  .incident {
+    background: white; border: 1px solid #E4E4E7; border-radius: 12px;
+    padding: 20px 24px; margin-bottom: 12px;
+  }
+  .incident-title {
+    font-size: 15px; font-weight: 500; margin-bottom: 4px;
+    display: flex; align-items: center; gap: 10px; justify-content: space-between;
+  }
+  .incident-date { font-size: 12px; color: #71717A; }
+  .incident-body { font-size: 14px; color: #52525B; margin-top: 8px; line-height: 1.6; }
+  .badge {
+    font-size: 11px; padding: 2px 8px; border-radius: 4px;
+    font-weight: 500;
+  }
+  .badge.resolved { background: rgba(16,185,129,0.1); color: #10B981; border: 1px solid rgba(16,185,129,0.2); }
+  .badge.monitoring { background: rgba(245,158,11,0.1); color: #F59E0B; border: 1px solid rgba(245,158,11,0.2); }
+
+  .metrics {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    margin-top: 32px;
+  }
+  .metric {
+    background: white; border: 1px solid #E4E4E7; border-radius: 12px;
+    padding: 20px;
+  }
+  .metric-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;
+    color: #71717A; margin-bottom: 8px; font-weight: 600;
+  }
+  .metric-value { font-size: 24px; font-weight: 700; color: #18181B; }
+  .metric-sub { font-size: 12px; color: #71717A; margin-top: 4px; }
+
+  .ph-banner {
+    background: linear-gradient(135deg, #DA552F 0%, #FF6154 100%);
+    color: white; border-radius: 12px; padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .ph-banner-icon {
+    width: 40px; height: 40px; background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: bold;
+  }
+  .ph-banner-text { flex: 1; }
+  .ph-banner-text strong { font-size: 15px; display: block; margin-bottom: 2px; }
+  .ph-banner-text small { font-size: 13px; opacity: 0.9; }
+  .ph-banner a {
+    color: white; text-decoration: none;
+    background: rgba(255,255,255,0.2); padding: 8px 14px; border-radius: 6px;
+    font-size: 13px; font-weight: 500;
+  }
+  .ph-banner a:hover { background: rgba(255,255,255,0.3); }
+
+  footer {
+    margin-top: 48px; padding-top: 24px; border-top: 1px solid #E4E4E7;
+    font-size: 12px; color: #71717A;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer a { color: #6366F1; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    .metrics { grid-template-columns: 1fr; }
+    .uptime-bar { height: 20px; }
+    .ph-banner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="brand">
+      <span class="logo">UTA</span>
+      <div>
+        <h1>Status
+          <span class="product-tagline">Universal Trust Adapter · by MarketNow</span>
+        </h1>
+      </div>
+    </div>
+    <div class="last-checked" id="last-checked">Checking…</div>
+  </header>
+
+  <div class="ph-banner">
+    <div class="ph-banner-icon">P</div>
+    <div class="ph-banner-text">
+      <strong>Just launched on Product Hunt</strong>
+      <small>UTA — the USB-C of agent trust. Translate between 8 credential formats.</small>
+    </div>
+    <a href="https://www.producthunt.com/products/uta-universal-trust-adapter?launch=uta-universal-trust-adapter" target="_blank" rel="noopener">View launch →</a>
+  </div>
+
+  <div class="summary" id="summary">
+    <span class="summary-dot" id="summary-dot"></span>
+    <div class="summary-text" id="summary-text">
+      All systems operational
+      <small id="summary-sub">Loading status…</small>
+    </div>
+  </div>
+
+  <h2>Services</h2>
+  <div id="services"></div>
+
+  <h2 style="margin-top: 32px;">Uptime — last 90 days</h2>
+  <div id="uptime-services"></div>
+
+  <h2 style="margin-top: 32px;">Past incidents</h2>
+  <div id="incidents">
+    <div class="incident">
+      <div class="incident-title">
+        <span>UTA Product Hunt launch — status page live</span>
+        <span class="badge resolved">RESOLVED</span>
+      </div>
+      <div class="incident-date">August 26-27, 2026</div>
+      <div class="incident-body">
+        UTA launched on Product Hunt on August 26, 2026. Status page stood up next day
+        to provide public visibility into API uptime. All 6 monitored endpoints operational
+        since launch. Historical 90-day uptime will populate as the monitoring script
+        continues to collect samples.
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-label">90-day uptime</div>
+      <div class="metric-value" id="metric-uptime">—</div>
+      <div class="metric-sub">across all 6 services</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Avg response time</div>
+      <div class="metric-value" id="metric-latency">—</div>
+      <div class="metric-sub">p50 across endpoints</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Formats supported</div>
+      <div class="metric-value" id="metric-formats">—</div>
+      <div class="metric-sub">credential formats via UTA</div>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      Status page · <a href="https://www.marketnow.site">marketnow.site</a> ·
+      <a href="https://www.marketnow.site/api/trust">UTA API</a> ·
+      <a href="https://www.marketnow.site/api/trust?action=formats">formats</a>
+    </div>
+    <div>Auto-refresh every 60s</div>
+  </footer>
+</div>
+
+<script>
+  async function load() {
+    let data;
+    try {
+      const res = await fetch('./status.json?_t=' + Date.now());
+      if (!res.ok) throw new Error('no status.json');
+      data = await res.json();
+    } catch (e) {
+      document.getElementById('summary-text').innerHTML =
+        'Status data unavailable <small>Run scripts/07_status_checker.py to populate.</small>';
+      document.getElementById('summary-dot').className = 'summary-dot degraded';
+      return;
+    }
+
+    const now = new Date();
+    document.getElementById('last-checked').textContent =
+      'Last checked ' + now.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }) +
+      ' UTC' + (now.getTimezoneOffset() / -60 >= 0 ? '+' : '') + (now.getTimezoneOffset() / -60);
+
+    const allOk = data.services.every(s => s.status === 'operational');
+    const anyDown = data.services.some(s => s.status === 'down');
+    const anyDegraded = data.services.some(s => s.status === 'degraded');
+
+    const dot = document.getElementById('summary-dot');
+    const text = document.getElementById('summary-text');
+    dot.className = 'summary-dot' + (anyDown ? ' down' : anyDegraded ? ' degraded' : '');
+
+    if (allOk) {
+      text.innerHTML = 'All systems operational <small>' + data.services.length + ' services monitored · last incident ' + (data.last_incident || 'none') + '</small>';
+    } else if (anyDown) {
+      text.innerHTML = 'Major outage <small>Some services are down. Investigating.</small>';
+    } else {
+      text.innerHTML = 'Degraded performance <small>Some services are slower than usual.</small>';
+    }
+
+    const servicesDiv = document.getElementById('services');
+    servicesDiv.innerHTML = data.services.map(s => `
+      <div class="service">
+        <div class="service-row">
+          <div class="service-name">${escapeHtml(s.name)}</div>
+          <span class="service-status ${s.status === 'operational' ? '' : s.status}">
+            ${s.status === 'operational' ? 'Operational' :
+              s.status === 'degraded' ? 'Degraded' : 'Down'}
+          </span>
+        </div>
+        <div class="uptime-label">
+          ${s.uptime_90d.toFixed(2)}% uptime · ${s.latency_ms || '—'} ms response · checked ${escapeHtml(s.last_check_ago || '?')}
+        </div>
+      </div>
+    `).join('');
+
+    const upDiv = document.getElementById('uptime-services');
+    upDiv.innerHTML = data.services.map(s => {
+      const days = (s.history || []).slice(-90);
+      const dayBars = days.map(d => {
+        const cls = d.status === 'ok' ? '' : d.status === 'degraded' ? ' degraded' : d.status === 'down' ? ' down' : ' no-data';
+        const tt = `${d.date} · ${d.status === 'ok' ? 'Operational' : d.status === 'degraded' ? 'Degraded' : d.status === 'down' ? 'Down' : 'No data'} · ${d.latency_ms || '—'}ms`;
+        return `<div class="uptime-day${cls}" data-tooltip="${escapeHtml(tt)}"></div>`;
+      }).join('');
+      return `
+        <div class="service">
+          <div class="service-row">
+            <div class="service-name">${escapeHtml(s.name)} <span style="color:#71717A; font-weight:400; font-size:12px;">— 90-day history</span></div>
+            <div class="uptime-label">${s.uptime_90d.toFixed(2)}%</div>
+          </div>
+          <div class="uptime-bar">${dayBars}</div>
+        </div>
+      `;
+    }).join('');
+
+    const avgUptime = data.services.reduce((a, s) => a + (s.uptime_90d || 0), 0) / (data.services.length || 1);
+    const avgLatency = data.services.reduce((a, s) => a + (s.latency_ms || 0), 0) / (data.services.length || 1);
+    document.getElementById('metric-uptime').textContent = avgUptime.toFixed(2) + '%';
+    document.getElementById('metric-latency').textContent = Math.round(avgLatency) + ' ms';
+    document.getElementById('metric-formats').textContent = (data.formats_supported || 0) + ' formats';
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  load();
+  setInterval(load, 60000);
+</script>
+</body>
+</html>
