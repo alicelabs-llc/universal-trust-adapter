@@ -16,7 +16,7 @@
     {"source": "/api/quarantine", "destination": "/api/security?view=quarantine"},
     {"source": "/api/honeypot", "destination": "/api/security?view=honeypot"},
     {"source": "/api/threat-intel", "destination": "/api/security?view=threat-intel"},
-    {"source": "/((?!api/|uta/|trust/|policies/|security/|for-agents|landing-pages/|tools/|acp|atc|\\.well-known/).*)", "destination": "/index.html"},
+    {"source": "/((?!api/|uta/|trust/|policies/|security/|for-agents|landing-pages/|tools/|acp|atc|status|\\.well-known/).*)", "destination": "/index.html"},
     {"source": "/for-agents", "destination": "/for-agents.html"},
     {"source": "/acp", "destination": "/atc"},
     {"source": "/atc", "destination": "/atc/index.html"},

@@ -1,0 +1,2783 @@
+{
+  "generated_at": "2026-08-27T17:13:09.199605+00:00",
+  "product": "Universal Trust Adapter (UTA) \u2014 by MarketNow",
+  "ph_launch_url": "https://www.producthunt.com/products/uta-universal-trust-adapter?launch=uta-universal-trust-adapter",
+  "services": [
+    {
+      "id": "website",
+      "name": "MarketNow Website (landing)",
+      "url": "https://www.marketnow.site/",
+      "status": "operational",
+      "latency_ms": 53,
+      "uptime_90d": 100.0,
+      "history": [
+        {
+          "date": "2026-05-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-05-31",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-27",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-27",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-31",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-27",
+          "status": "ok",
+          "latency_ms": 53
+        }
+      ],
+      "last_check_ago": "just now",
+      "error": null
+    },
+    {
+      "id": "uta_root",
+      "name": "UTA API \u2014 Root (/api/trust)",
+      "url": "https://www.marketnow.site/api/trust",
+      "status": "operational",
+      "latency_ms": 249,
+      "uptime_90d": 100.0,
+      "history": [
+        {
+          "date": "2026-05-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-05-31",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-27",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-27",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-31",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-27",
+          "status": "ok",
+          "latency_ms": 249
+        }
+      ],
+      "last_check_ago": "just now",
+      "error": null
+    },
+    {
+      "id": "uta_formats",
+      "name": "UTA API \u2014 Formats (/api/trust?action=formats)",
+      "url": "https://www.marketnow.site/api/trust?action=formats",
+      "status": "operational",
+      "latency_ms": 255,
+      "uptime_90d": 100.0,
+      "history": [
+        {
+          "date": "2026-05-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-05-31",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-27",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-27",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-31",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-27",
+          "status": "ok",
+          "latency_ms": 255
+        }
+      ],
+      "last_check_ago": "just now",
+      "error": null
+    },
+    {
+      "id": "skills_api",
+      "name": "MarketNow Skills API (UTA verification source)",
+      "url": "https://www.marketnow.site/api/skills.json",
+      "status": "operational",
+      "latency_ms": 327,
+      "uptime_90d": 100.0,
+      "history": [
+        {
+          "date": "2026-05-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-05-31",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-27",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-27",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-31",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-27",
+          "status": "ok",
+          "latency_ms": 327
+        }
+      ],
+      "last_check_ago": "just now",
+      "error": null
+    },
+    {
+      "id": "uta_pipeline",
+      "name": "UTA API \u2014 Pipeline (/api/trust?action=pipeline)",
+      "url": "https://www.marketnow.site/api/trust?action=pipeline",
+      "status": "operational",
+      "latency_ms": 259,
+      "uptime_90d": 100.0,
+      "history": [
+        {
+          "date": "2026-05-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-05-31",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-27",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-27",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-31",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-27",
+          "status": "ok",
+          "latency_ms": 259
+        }
+      ],
+      "last_check_ago": "just now",
+      "error": null
+    },
+    {
+      "id": "uta_revocation",
+      "name": "UTA API \u2014 Revocation (/api/trust?action=revocation)",
+      "url": "https://www.marketnow.site/api/trust?action=revocation",
+      "status": "operational",
+      "latency_ms": 249,
+      "uptime_90d": 100.0,
+      "history": [
+        {
+          "date": "2026-05-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-05-31",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-27",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-06-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-27",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-07-31",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-01",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-02",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-03",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-04",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-05",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-06",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-07",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-08",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-09",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-10",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-11",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-12",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-13",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-14",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-15",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-16",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-17",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-18",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-19",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-20",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-21",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-22",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-23",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-24",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-25",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-26",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-27",
+          "status": "ok",
+          "latency_ms": 249
+        }
+      ],
+      "last_check_ago": "just now",
+      "error": null
+    }
+  ],
+  "skill_count": 9248,
+  "formats_supported": 8,
+  "last_incident": "none",
+  "version": "1.0"
+}
