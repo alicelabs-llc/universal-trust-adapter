@@ -24,8 +24,11 @@ import urllib.request
 import urllib.error
 from datetime import datetime, timedelta, timezone
 
-STATUS_FILE = "/home/z/my-project/download/status/status.json"
-HISTORY_FILE = "/home/z/my-project/download/status/history.json"
+# Allow override via env vars for portability (GitHub Actions, local, etc.)
+_DEFAULT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "download", "status")
+_STATUS_DIR = os.environ.get("STATUS_DIR", _DEFAULT_DIR)
+STATUS_FILE = os.path.join(_STATUS_DIR, "status.json")
+HISTORY_FILE = os.path.join(_STATUS_DIR, "history.json")
 
 SERVICES = [
     {
