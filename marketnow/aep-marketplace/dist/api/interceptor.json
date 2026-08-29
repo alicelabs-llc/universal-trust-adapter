@@ -1,0 +1,12 @@
+{
+  "service": "MCP Interceptor",
+  "rules": [
+    "block .env reads",
+    "block rm -rf / DROP TABLE",
+    "block /etc/passwd / /etc/shadow",
+    "block process spawns",
+    "warn on non-allowlisted network"
+  ],
+  "rules_count": 5,
+  "try_it": "POST /api/interceptor with {\"jsonrpc\":\"2.0\",\"method\":\"tools/call\",\"params\":{\"name\":\"read_file\",\"arguments\":{\"path\":\"/.env\"}}}"
+}
