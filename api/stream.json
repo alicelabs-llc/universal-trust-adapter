@@ -1,0 +1,7 @@
+{
+  "service": "x402 Streaming Payments",
+  "status": "live",
+  "currency": "USDC",
+  "chain": "Base",
+  "free_tier": true
+}
