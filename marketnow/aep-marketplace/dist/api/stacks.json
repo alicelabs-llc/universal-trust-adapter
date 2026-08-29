@@ -1,0 +1,9 @@
+{
+  "stacks": [
+    {"id": "full-stack", "name": "Full Dev Stack", "skills": ["git", "filesystem", "fetch", "code-exec"]},
+    {"id": "security-stack", "name": "Security Stack", "skills": ["sentinel", "audit", "interceptor"]},
+    {"id": "data-stack", "name": "Data Stack", "skills": ["postgres", "redis", "elastic"]},
+    {"id": "ai-stack", "name": "AI Stack", "skills": ["openai", "anthropic", "embedding"]},
+    {"id": "deploy-stack", "name": "Deploy Stack", "skills": ["docker", "k8s", "vercel"]}
+  ]
+}
