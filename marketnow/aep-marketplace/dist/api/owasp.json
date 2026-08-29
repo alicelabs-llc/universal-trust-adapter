@@ -1,0 +1,17 @@
+{
+  "service": "OWASP MCP Top 10 Security Audit",
+  "version": "1.0",
+  "categories": [
+    "MCP01: Prompt Injection",
+    "MCP02: Tool Poisoning",
+    "MCP03: Supply Chain",
+    "MCP04: Credential Exfiltration",
+    "MCP05: Insecure Deserialization",
+    "MCP06: Excessive Permissions",
+    "MCP07: Missing Audit Logging",
+    "MCP08: Insufficient Sandboxing",
+    "MCP09: Data Exfiltration",
+    "MCP10: Broken Authentication"
+  ],
+  "audited_skills": 9248
+}
