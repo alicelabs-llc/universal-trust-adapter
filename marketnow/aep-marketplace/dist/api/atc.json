@@ -1,0 +1,15 @@
+{
+  "service": "Agent Trust Card (ATC) API",
+  "version": "2.0",
+  "cards_issued": 57,
+  "endpoints": {
+    "verify": "GET /api/atc?action=verify&card_id=ATC-XXXX",
+    "issue": "POST /api/atc?action=issue",
+    "trust_score": "GET /api/atc?action=trust&skillId=X",
+    "revocation_list": "GET /api/atc?action=revocation-list",
+    "ca_key": "GET /api/atc?action=ca-key"
+  },
+  "ca_public_key": "MCowBQYDK2VwAyEADcQ79Ek32y3FYqI5p4UOJNNIjuh51iDAJb3FEsZOjqY=",
+  "ca_algorithm": "Ed25519",
+  "ca_url": "https://marketnow.site/api/atc"
+}
