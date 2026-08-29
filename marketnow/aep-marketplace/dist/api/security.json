@@ -1,0 +1,11 @@
+{
+  "service": "MarketNow Security API",
+  "views": ["analytics", "quarantine", "honeypot", "threat-intel"],
+  "stats": {
+    "total_scans": 1211488,
+    "threats_detected": 1030,
+    "quarantined": 80,
+    "risky": 71,
+    "safe": 9097
+  }
+}
