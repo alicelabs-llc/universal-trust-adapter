@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UTA Playground — Universal Trust Adapter</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#050505;--bg2:#0a0a0b;--bdr:#1f1f23;--bdr2:#2a2a30;--txt:#fff;--txt2:#d4d4d8;--mut:#71717b;--dim:#52525b;--grn:#00F299;--grnS:rgba(0,242,153,.1);--grnB:rgba(0,242,153,.25);--cyn:#00d1ff;--red:#fb2c36;--yel:#edb200;--fnt:ui-sans-serif,system-ui,-apple-system,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+body{font-family:var(--fnt);background:var(--bg);color:var(--txt);min-height:100vh;padding:24px;background-image:linear-gradient(#ffffff05 1px,transparent 1px),linear-gradient(90deg,#ffffff05 1px,transparent 1px);background-size:32px 32px}
+.wrap{max-width:1200px;margin:0 auto}
+header{margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:12px}
+.logo{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--grn),var(--cyn));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--bg);font-size:14px;box-shadow:0 0 24px rgba(0,242,153,.3)}
+h1{font-size:20px;font-weight:700}
+.tg{font-size:12px;color:var(--mut)}
+.stats{display:flex;gap:12px;margin-bottom:16px}
+.st{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;flex:1}
+.st-l{font-size:10px;text-transform:uppercase;color:var(--mut);margin-bottom:2px}
+.st-v{font-size:16px;font-weight:700;font-family:var(--mono)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:768px){.grid{grid-template-columns:1fr}}
+.pn{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:16px}
+.ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.pt{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--mut)}
+select,textarea{width:100%;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;color:var(--txt);padding:10px;font-family:var(--mono);font-size:13px}
+select{padding:8px;margin-bottom:8px;cursor:pointer}
+textarea{min-height:180px;resize:vertical;line-height:1.5}
+select:focus,textarea:focus{outline:none;border-color:var(--grn)}
+.btn{background:linear-gradient(135deg,var(--grn),var(--cyn));color:var(--bg);border:none;padding:8px 16px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px}
+.btn:hover{opacity:.9}
+.btn:disabled{opacity:.5;cursor:wait}
+.btn-s{background:var(--bdr);color:var(--txt2);border:1px solid var(--bdr);padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer}
+.btn-s:hover{background:var(--bdr2)}
+.acts{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--dim);border-top-color:var(--grn);border-radius:50%;animation:sp .6s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.res{margin-top:16px}
+.rc{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:14px;margin-bottom:10px}
+.rh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.rf{font-weight:600;color:var(--cyn);font-family:var(--mono);font-size:13px}
+.rs{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:500}
+.rs.ok{background:var(--grnS);color:var(--grn);border:1px solid var(--grnB)}
+.rs.err{background:rgba(251,44,54,.1);color:var(--red);border:1px solid rgba(251,44,54,.25)}
+.rs.src{background:rgba(0,209,255,.1);color:var(--cyn);border:1px solid rgba(0,209,255,.25)}
+.rb{background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:10px;font-family:var(--mono);font-size:11px;overflow-x:auto;max-height:250px;overflow-y:auto;white-space:pre-wrap;word-break:break-all;color:var(--txt2)}
+footer{margin-top:24px;padding-top:12px;border-top:1px solid var(--bdr);font-size:11px;color:var(--mut)}
+footer a{color:var(--cyn);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<span class="logo">UTA</span>
+<div><h1>Playground <span class="tg">— paste any credential, translate to 8 formats</span></h1></div>
+</header>
+<div class="stats">
+<div class="st"><div class="st-l">Formats</div><div class="st-v">8</div></div>
+<div class="st"><div class="st-l">Pipeline</div><div class="st-v">12-stage</div></div>
+<div class="st"><div class="st-l">Tests</div><div class="st-v">460+</div></div>
+<div class="st"><div class="st-l">Speed</div><div class="st-v">6.7k/s</div></div>
+</div>
+<div class="grid">
+<div class="pn">
+<div class="ph"><span class="pt">Input Credential</span><span style="font-size:10px;color:var(--dim)">Auto-detect</span></div>
+<select id="fmt"><option value="auto">Auto-detect</option><option value="atc-v3">ATC v3</option><option value="jwt">JWT</option><option value="w3c-vc">W3C VC</option><option value="a2a-card">A2A Card</option><option value="eat-ai">EAT-AI</option><option value="zta">ZTA</option><option value="mcp-card">MCP Card</option><option value="x509">X.509</option></select>
+<textarea id="inp" placeholder='Paste credential JSON here...'></textarea>
+<div class="acts">
+<button class="btn" id="go" onclick="run()">Translate to all 8 →</button>
+<button class="btn-s" onclick="sample()">Load ATC sample</button>
+<button class="btn-s" onclick="clr()">Clear</button>
+</div>
+</div>
+<div class="pn">
+<div class="ph"><span class="pt">Verification + UTS</span><span id="vs" style="font-size:10px;color:var(--dim)">Not verified</span></div>
+<div id="vr" style="font-family:var(--mono);font-size:12px;min-height:180px;color:var(--mut)">
+Paste a credential and click "Translate" to see verification, UTS translation, and all 8 format outputs.
+</div>
+</div>
+</div>
+<div class="res" id="res" style="display:none">
+<div class="pt" style="margin-bottom:10px">Format Translations (8 formats)</div>
+<div id="cards"></div>
+</div>
+<footer>UTA Playground · <a href="https://www.marketnow.site">marketnow.site</a> · <a href="https://www.marketnow.site/api/trust">API</a> · <a href="https://github.com/alicelabs-llc/universal-trust-adapter">GitHub</a> · <a href="https://status.marketnow.site">Status</a></footer>
+</div>
+<script>
+const API='https://www.marketnow.site/api/trust';
+const FMTS=['atc-v3','jwt','w3c-vc','a2a-card','eat-ai','zta','mcp-card','x509'];
+function sample(){document.getElementById('inp').value=JSON.stringify({spec_version:"ATC/1.0",card_id:"ATC-2026-0000001",issuer:{ca_id:"alicelabs-sentinel-ca",ca_public_key:"MCowBQYDK2VwAyEADcQ79Ek32y3FYqI5p4UOJNNIjuh51iDAJb3FEsZOjqY=",ca_algorithm:"Ed25519"},identity:{agent_id:"alicelabs-test-agent-001",agent_name:"Test Agent",agent_owner:"AliceLabs LLC"},attestation:{subject_public_key:"MCowBQYDK2VwAyEAIwuahjXj9aToVb56jInv0SXihmAUTY2yuebsy6w0ykI=",subject_algorithm:"Ed25519",signature:"biA1O8mepy/fkfoZVfHp4ct6hcsZeL9wW+86mrbo6KFDVzwMogMGzeEeZyd0KJUuC6UURMOl3s62MWHwBMD3DA==",signed_payload_hash:"bf6738b3f7f56d449531481cb93d74d87922843249d26672b55d9b2c67ae4276"},capabilities:{filesystem:{read:"own_dir",write:"own_dir"},network:{egress:"allowlist",ingress:"none"},shell:{exec:"sandboxed",spawn:"none"}},risk:{trust_score:9,risk_level:"low"},validity:{issued_at:"2026-08-09T23:30:24.219Z",expires_at:"2027-08-09T23:30:24.219Z",max_ttl_days:90}},null,2)}
+function clr(){document.getElementById('inp').value='';document.getElementById('res').style.display='none';document.getElementById('vr').innerHTML='Paste a credential and click Translate.';document.getElementById('vs').textContent='Not verified';document.getElementById('vs').style.color='var(--dim)'}
+async function run(){
+const i=document.getElementById('inp').value.trim();if(!i){alert('Paste a credential first');return}
+const b=document.getElementById('go');b.disabled=true;b.innerHTML='<span class="spin"></span> Translating...';
+document.getElementById('vs').textContent='Verifying...';
+try{let p;try{p=JSON.parse(i)}catch{p=i}
+// Verify
+const vr=await fetch(API+'?action=verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({payload:p})});
+const vd=await vr.json();
+const ok=vd.valid||vd.uts;
+const vs=document.getElementById('vs');
+if(ok){vs.textContent='✅ '+(vd.detected_format||vd.verified_via||'verified');vs.style.color='var(--grn)'}
+else{vs.textContent='⚠️ '+(vd.reason||'showing UTS only');vs.style.color='var(--yel)'}
+// Show UTS
+let h='';
+if(vd.uts){h+='<div style="color:var(--cyn);margin-bottom:6px;font-size:11px">Universal Trust Schema:</div>';h+='<div class="rb">'+esc(JSON.stringify(vd.uts,null,2))+'</div>'}
+if(vd.warnings&&vd.warnings.length){h+='<div style="margin-top:6px;color:var(--yel);font-size:11px">⚠ '+vd.warnings.join('; ')+'</div>'}
+document.getElementById('vr').innerHTML=h;
+// Translate to all formats
+document.getElementById('res').style.display='block';
+const cd=document.getElementById('cards');cd.innerHTML='';
+const det=vd.detected_format||vd.verified_via||document.getElementById('fmt').value;
+for(const f of FMTS){
+if(det===f){cd.innerHTML+=card(f,p,'src');continue}
+try{const tr=await fetch(API+'?action=translate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({from:det,to:f,payload:p})});
+const td=await tr.json();
+if(td.payload||td.uts){cd.innerHTML+=card(f,td.payload||td.uts||td,'ok')}
+else{cd.innerHTML+=card(f,td,'err')}}catch(e){cd.innerHTML+=card(f,{error:e.message},'err')}
+}
+}catch(e){document.getElementById('vr').innerHTML='<div style="color:var(--red)">Error: '+e.message+'</div>';document.getElementById('vs').textContent='❌ Error';document.getElementById('vs').style.color='var(--red)'}
+finally{b.disabled=false;b.innerHTML='Translate to all 8 →'}}
+function card(f,d,s){const c=s==='ok'?'ok':s==='err'?'err':'src';const t=s==='ok'?'✅ Translated':s==='err'?'❌ Failed':'📋 Source';let j;try{j=JSON.stringify(d,null,2)}catch{j=String(d)}return'<div class="rc"><div class="rh"><span class="rf">'+f+'</span><span class="rs '+c+'">'+t+'</span></div><div class="rb">'+esc(j)+'</div><div class="acts"><button class="btn-s" onclick="cp(this)">Copy</button></div></div>'}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function cp(b){navigator.clipboard.writeText(b.parentElement.previousElementSibling.textContent).then(()=>{b.textContent='✅';setTimeout(()=>b.textContent='Copy',2e3)})}
+window.addEventListener('load',sample);
+</script>
+</body>
+</html>
