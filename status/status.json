@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T17:38:33.146574+00:00",
+  "generated_at": "2026-08-31T06:00:49.724922+00:00",
   "product": "Universal Trust Adapter (UTA) \u2014 by MarketNow",
   "ph_launch_url": "https://www.producthunt.com/products/uta-universal-trust-adapter?launch=uta-universal-trust-adapter",
   "services": [
@@ -8,29 +8,9 @@
       "name": "MarketNow Website (landing)",
       "url": "https://www.marketnow.site/",
       "status": "operational",
-      "latency_ms": 44,
+      "latency_ms": 212,
       "uptime_90d": 100.0,
       "history": [
-        {
-          "date": "2026-05-30",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-05-31",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-06-01",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-06-02",
-          "status": "no-data",
-          "latency_ms": null
-        },
         {
           "date": "2026-06-03",
           "status": "no-data",
@@ -459,7 +439,27 @@
         {
           "date": "2026-08-27",
           "status": "ok",
-          "latency_ms": 44
+          "latency_ms": 53
+        },
+        {
+          "date": "2026-08-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-31",
+          "status": "ok",
+          "latency_ms": 212
         }
       ],
       "last_check_ago": "just now",
@@ -470,29 +470,9 @@
       "name": "UTA API \u2014 Root (/api/trust)",
       "url": "https://www.marketnow.site/api/trust",
       "status": "operational",
-      "latency_ms": 247,
+      "latency_ms": 633,
       "uptime_90d": 100.0,
       "history": [
-        {
-          "date": "2026-05-30",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-05-31",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-06-01",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-06-02",
-          "status": "no-data",
-          "latency_ms": null
-        },
         {
           "date": "2026-06-03",
           "status": "no-data",
@@ -921,7 +901,27 @@
         {
           "date": "2026-08-27",
           "status": "ok",
-          "latency_ms": 247
+          "latency_ms": 249
+        },
+        {
+          "date": "2026-08-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-31",
+          "status": "ok",
+          "latency_ms": 633
         }
       ],
       "last_check_ago": "just now",
@@ -932,29 +932,9 @@
       "name": "UTA API \u2014 Formats (/api/trust?action=formats)",
       "url": "https://www.marketnow.site/api/trust?action=formats",
       "status": "operational",
-      "latency_ms": 247,
+      "latency_ms": 189,
       "uptime_90d": 100.0,
       "history": [
-        {
-          "date": "2026-05-30",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-05-31",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-06-01",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-06-02",
-          "status": "no-data",
-          "latency_ms": null
-        },
         {
           "date": "2026-06-03",
           "status": "no-data",
@@ -1383,7 +1363,27 @@
         {
           "date": "2026-08-27",
           "status": "ok",
-          "latency_ms": 247
+          "latency_ms": 255
+        },
+        {
+          "date": "2026-08-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-31",
+          "status": "ok",
+          "latency_ms": 189
         }
       ],
       "last_check_ago": "just now",
@@ -1394,29 +1394,9 @@
       "name": "MarketNow Skills API (UTA verification source)",
       "url": "https://www.marketnow.site/api/skills.json",
       "status": "operational",
-      "latency_ms": 311,
+      "latency_ms": 532,
       "uptime_90d": 100.0,
       "history": [
-        {
-          "date": "2026-05-30",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-05-31",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-06-01",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-06-02",
-          "status": "no-data",
-          "latency_ms": null
-        },
         {
           "date": "2026-06-03",
           "status": "no-data",
@@ -1845,7 +1825,27 @@
         {
           "date": "2026-08-27",
           "status": "ok",
-          "latency_ms": 311
+          "latency_ms": 327
+        },
+        {
+          "date": "2026-08-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-31",
+          "status": "ok",
+          "latency_ms": 532
         }
       ],
       "last_check_ago": "just now",
@@ -1856,29 +1856,9 @@
       "name": "UTA API \u2014 Pipeline (/api/trust?action=pipeline)",
       "url": "https://www.marketnow.site/api/trust?action=pipeline",
       "status": "operational",
-      "latency_ms": 254,
+      "latency_ms": 211,
       "uptime_90d": 100.0,
       "history": [
-        {
-          "date": "2026-05-30",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-05-31",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-06-01",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-06-02",
-          "status": "no-data",
-          "latency_ms": null
-        },
         {
           "date": "2026-06-03",
           "status": "no-data",
@@ -2307,7 +2287,27 @@
         {
           "date": "2026-08-27",
           "status": "ok",
-          "latency_ms": 254
+          "latency_ms": 259
+        },
+        {
+          "date": "2026-08-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-31",
+          "status": "ok",
+          "latency_ms": 211
         }
       ],
       "last_check_ago": "just now",
@@ -2318,29 +2318,9 @@
       "name": "UTA API \u2014 Revocation (/api/trust?action=revocation)",
       "url": "https://www.marketnow.site/api/trust?action=revocation",
       "status": "operational",
-      "latency_ms": 264,
+      "latency_ms": 185,
       "uptime_90d": 100.0,
       "history": [
-        {
-          "date": "2026-05-30",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-05-31",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-06-01",
-          "status": "no-data",
-          "latency_ms": null
-        },
-        {
-          "date": "2026-06-02",
-          "status": "no-data",
-          "latency_ms": null
-        },
         {
           "date": "2026-06-03",
           "status": "no-data",
@@ -2769,7 +2749,27 @@
         {
           "date": "2026-08-27",
           "status": "ok",
-          "latency_ms": 264
+          "latency_ms": 249
+        },
+        {
+          "date": "2026-08-28",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-29",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-30",
+          "status": "no-data",
+          "latency_ms": null
+        },
+        {
+          "date": "2026-08-31",
+          "status": "ok",
+          "latency_ms": 185
         }
       ],
       "last_check_ago": "just now",
