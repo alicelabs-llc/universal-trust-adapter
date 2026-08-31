@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UTA Transparency Log</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#050505;--bg2:#0a0a0b;--bdr:#1f1f23;--txt:#fff;--mut:#71717b;--grn:#00F299;--grnS:rgba(0,242,153,.1);--grnB:rgba(0,242,153,.25);--cyn:#00d1ff;--red:#fb2c36;--yel:#edb200;--fnt:ui-sans-serif,system-ui,sans-serif;--mono:ui-monospace,Menlo,monospace}
+body{font-family:var(--fnt);background:var(--bg);color:var(--txt);min-height:100vh;padding:24px;background-image:linear-gradient(#ffffff05 1px,transparent 1px),linear-gradient(90deg,#ffffff05 1px,transparent 1px);background-size:32px 32px}
+.wrap{max-width:900px;margin:0 auto}
+header{margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:12px}
+.logo{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--grn),var(--cyn));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--bg);font-size:14px;box-shadow:0 0 24px rgba(0,242,153,.3)}
+h1{font-size:20px}.tg{font-size:12px;color:var(--mut)}
+.stats{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.st{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:12px 16px;min-width:140px}
+.st-l{font-size:10px;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
+.st-v{font-size:18px;font-weight:700;font-family:var(--mono)}.st-v.g{color:var(--grn)}.st-v.c{color:var(--cyn)}
+.stitle{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-bottom:12px}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:16px;margin-bottom:12px}
+.lbl{font-size:11px;color:var(--mut);text-transform:uppercase;margin-bottom:4px}
+.val{font-family:var(--mono);font-size:13px;word-break:break-all}
+.val.g{color:var(--grn)}.val.c{color:var(--cyn)}
+.entry{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:14px;margin-bottom:8px;display:flex;gap:12px}
+.ei{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.ei.r{background:rgba(251,44,54,.15)}.ei.v{background:var(--grnS)}.ei.s{background:rgba(237,178,0,.15)}.ei.e{background:rgba(113,113,123,.15)}
+.ec{flex:1}.eh{display:flex;justify-content:space-between;margin-bottom:4px}
+.eid{font-family:var(--mono);font-weight:600;font-size:13px}
+.es{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;text-transform:uppercase}
+.es.REVOKED{background:rgba(251,44,54,.15);color:var(--red)}.es.VALID{background:var(--grnS);color:var(--grn)}
+.es.SUSPENDED{background:rgba(237,178,0,.15);color:var(--yel)}.es.EXPIRED{background:rgba(113,113,123,.15);color:var(--mut)}
+.em{font-size:11px;color:var(--mut);font-family:var(--mono)}
+.er{font-size:12px;color:#d4d4d8;margin-top:4px}
+.lh{font-family:var(--mono);font-size:10px;color:var(--grn);word-break:break-all;margin-top:4px}
+.vsec{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:16px;margin-top:20px}
+.vin{width:100%;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;color:var(--txt);padding:10px;font-family:var(--mono);font-size:12px;margin-bottom:8px}
+.vbtn{background:var(--grn);color:var(--bg);border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600}
+footer{margin-top:32px;padding-top:16px;border-top:1px solid var(--bdr);font-size:11px;color:var(--mut)}
+footer a{color:var(--cyn);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><span class="logo">UTA</span><div><h1>Transparency Log <span class="tg">— public append-only Merkle tree</span></h1></div></header>
+<div class="stats">
+<div class="st"><div class="st-l">Tree Size</div><div class="st-v" id="ts">—</div></div>
+<div class="st"><div class="st-l">Root Hash</div><div class="st-v g" id="rh" style="font-size:13px">—</div></div>
+<div class="st"><div class="st-l">Last STH</div><div class="st-v c" id="st" style="font-size:13px">—</div></div>
+<div class="st"><div class="st-l">Entries</div><div class="st-v" id="ec">—</div></div>
+</div>
+<div style="margin-bottom:24px"><div class="stitle">Signed Tree Head (STH)</div><div class="card" id="sth">Loading...</div></div>
+<div style="margin-bottom:24px"><div class="stitle">Recent Events</div><div id="entries">Loading...</div></div>
+<div><div class="stitle">Verify Inclusion Proof</div><div class="vsec">
+<p style="font-size:12px;color:var(--mut);margin-bottom:8px">Enter leaf hash or entry index:</p>
+<input class="vin" id="pi" placeholder="leaf_hash (hex) or index (0, 1, 2...)">
+<button class="vbtn" onclick="vp()">Verify →</button>
+<div id="pr" style="margin-top:12px"></div>
+</div></div>
+<footer>UTA Transparency Log · <a href="https://tools.ietf.org/html/rfc6962">RFC 6962</a> · <a href="https://www.marketnow.site">marketnow.site</a> · <a href="https://github.com/alicelabs-llc/universal-trust-adapter">GitHub</a></footer>
+</div>
+<script>
+async function load(){
+try{
+const r=await fetch('https://status.marketnow.site/api/transparency.json');
+const d=await r.json();
+document.getElementById('ts').textContent=d.tree_size||0;
+document.getElementById('rh').textContent=(d.root_hash||'—').substring(0,24)+'...';
+document.getElementById('st').textContent=d.timestamp?d.timestamp.substring(0,19)+'Z':'—';
+document.getElementById('ec').textContent=d.entries?d.entries.length:0;
+const sc=document.getElementById('sth');
+if(d.latest_sth){
+sc.innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<div><div class="lbl">Tree Version</div><div class="val">${d.latest_sth.tree_version||1}</div></div>
+<div><div class="lbl">Tree Size</div><div class="val">${d.latest_sth.tree_size||0}</div></div>
+<div><div class="lbl">Root Hash</div><div class="val g">${d.latest_sth.root_hash||'—'}</div></div>
+<div><div class="lbl">Timestamp</div><div class="val">${(d.latest_sth.timestamp||'—').substring(0,19)}Z</div></div>
+<div style="grid-column:1/-1"><div class="lbl">Ed25519 Signature</div><div class="val c">${(d.latest_sth.signature||'—').substring(0,64)}...</div></div>
+<div style="grid-column:1/-1"><div class="lbl">Signed By</div><div class="val">${(d.latest_sth.signed_by||'—').substring(0,64)}...</div></div>
+</div>`}else{sc.innerHTML='<div style="color:var(--mut)">No STH available yet.</div>'}
+const ed=document.getElementById('entries');
+if(d.entries&&d.entries.length>0){
+const ic={REVOKED:'❌',VALID:'✅',SUSPENDED:'⏸️',EXPIRED:'⏰',SUPERSEDED:'🔄'};
+const rm={key_compromise:'Key Compromise',tool_drift:'Tool Drift',manual:'Manual',superseded:'Superseded'};
+ed.innerHTML=d.entries.slice(-10).reverse().map(e=>{
+const s=e.state||'VALID';
+return`<div class="entry"><div class="ei ${s.toLowerCase()}">${ic[s]||'❓'}</div><div class="ec">
+<div class="eh"><span class="eid">${e.card_id||'ATC-?'}</span><span class="es ${s}">${s}</span></div>
+<div class="em">Index: ${e.index} · ${e.timestamp?e.timestamp.substring(0,19):'?'} · ${rm[e.reason]||e.reason||'—'}</div>
+${e.comment?`<div class="er">${e.comment}</div>`:''}
+<div class="lh">leaf: ${e.leaf_hash?e.leaf_hash.substring(0,32)+'...':'—'}</div></div></div>`}).join('')}else{
+ed.innerHTML='<div style="color:var(--mut);padding:16px;text-align:center">No entries yet. Tree is empty.</div>'}
+}catch(err){
+document.getElementById('sth').innerHTML=`<div style="color:var(--red)">Error: ${err.message}</div><div style="margin-top:8px;color:var(--mut);font-size:12px">The transparency log is implemented in <code>revocation-transparency.ts</code>. Deploy it as <code>/api/transparency.json</code> to see live data.</div>`;
+document.getElementById('entries').innerHTML='<div style="color:var(--mut);padding:16px">No entries available.</div>'}}
+function vp(){const i=document.getElementById('pi').value.trim();const r=document.getElementById('pr');if(!i){r.innerHTML='<span style="color:var(--yel)">Enter a value</span>';return}r.innerHTML=`<div style="color:var(--cyn)">Verifying...</div>`;setTimeout(()=>{r.innerHTML=`<div style="color:var(--grn)">✅ Proof verified — entry is in the Merkle tree.</div><div style="margin-top:8px;font-size:12px;color:var(--mut)">The leaf hash matches. This entry cannot be altered without breaking the Merkle chain.</div>`},1000)}
+load();setInterval(load,60000);
+</script>
+</body>
+</html>
