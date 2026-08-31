@@ -1,0 +1,92 @@
+{
+  "name": "uta-trust-verify",
+  "displayName": "UTA Trust Verify — MCP Server Trust Badge",
+  "description": "Shows green/red trust badge next to MCP servers. Uses @marketnow/trust-core to verify ATC credentials before execution.",
+  "version": "0.1.0",
+  "publisher": "alicelabs",
+  "license": "AL-1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alicelabs-llc/universal-trust-adapter"
+  },
+  "engines": { "vscode": "^1.80.0" },
+  "categories": ["Other", "Testing", "Security"],
+  "keywords": ["mcp", "ai", "agents", "trust", "security", "claude", "cline", "cursor"],
+  "activationEvents": [
+    "onCommand:uta.verifyTrust",
+    "onLanguage:json",
+    "onView:mcp-servers"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "uta.verifyTrust",
+        "title": "UTA: Verify MCP Server Trust"
+      },
+      {
+        "command": "uta.checkAllServers",
+        "title": "UTA: Check All MCP Servers"
+      },
+      {
+        "command": "uta.showPlayground",
+        "title": "UTA: Open Playground"
+      }
+    ],
+    "configuration": {
+      "title": "UTA Trust Verify",
+      "properties": {
+        "uta.apiBaseUrl": {
+          "type": "string",
+          "default": "https://www.marketnow.site/api/trust",
+          "description": "UTA API base URL"
+        },
+        "uta.minTrustScore": {
+          "type": "number",
+          "default": 5,
+          "description": "Minimum trust score for green badge (0-10)"
+        },
+        "uta.autoVerify": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically verify MCP servers on file open"
+        },
+        "uta.showWarnings": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show warning decorations for untrusted servers"
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "uta.verifyTrust",
+          "when": "resourceLangId == json",
+          "group": "uta@1"
+        }
+      ]
+    },
+    "icons": {
+      "uta-trusted": {
+        "description": "Trusted MCP server",
+        "default": { "fontPath": "icons.woff", "fontCharacter": "\\E001"
+        }
+      },
+      "uta-untrusted": {
+        "description": "Untrusted MCP server",
+        "default": { "fontPath": "icons.woff", "fontCharacter": "\\E002"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "node build.js",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "^20.0.0"
+  },
+  "dependencies": {}
+}
