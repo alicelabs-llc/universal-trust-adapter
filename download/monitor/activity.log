@@ -330,3 +330,24 @@ One thing I'd add to the workflow: **pre-deployment scanning** before policies a
 [2026-09-01 20:32:58 UTC] [INFO] ============================================================
 [2026-09-01 20:32:58 UTC] [INFO] 
 1. Checking 30 external GitHub issues...
+[2026-09-01 21:16:40 UTC] [INFO] ============================================================
+[2026-09-01 21:16:40 UTC] [INFO] UTA Monitor — Run #3
+[2026-09-01 21:16:40 UTC] [INFO] Auto-respond: False
+[2026-09-01 21:16:40 UTC] [INFO] ============================================================
+[2026-09-01 21:16:40 UTC] [INFO] 
+1. Checking 30 external GitHub issues...
+[2026-09-01 21:17:06 UTC] [INFO]   📨 NEW: e2b-dev/E2B#1791 — @mishushakov (2026-09-01T20:55:48)
+[2026-09-01 21:17:06 UTC] [INFO]      Dear contributor, this is an issue tracker for the E2B monorepo, not a discussion board.
+[2026-09-01 21:17:10 UTC] [INFO] 
+2. Checking 2 issues in our repo...
+[2026-09-01 21:17:12 UTC] [INFO] 
+3. Checking Dev.to articles...
+[2026-09-01 21:17:15 UTC] [INFO]   Checking 140 Dev.to articles...
+[2026-09-01 21:17:17 UTC] [INFO] 
+============================================================
+[2026-09-01 21:17:17 UTC] [INFO] SUMMARY: 1 new responses found
+[2026-09-01 21:17:17 UTC] [INFO] Total across all runs: 89
+[2026-09-01 21:17:17 UTC] [INFO] State saved: /home/z/my-project/download/monitor/state.json
+[2026-09-01 21:17:17 UTC] [INFO] Summary saved: /home/z/my-project/download/monitor/latest_summary.json
+[2026-09-01 21:17:17 UTC] [INFO] Log file: /home/z/my-project/download/monitor/activity.log
+[2026-09-01 21:17:17 UTC] [INFO] ============================================================
