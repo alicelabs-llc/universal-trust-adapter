@@ -1,0 +1,326 @@
+[2026-09-01 19:48:10 UTC] [INFO] ============================================================
+[2026-09-01 19:48:10 UTC] [INFO] UTA Monitor — Run #1
+[2026-09-01 19:48:10 UTC] [INFO] Auto-respond: False
+[2026-09-01 19:48:10 UTC] [INFO] ============================================================
+[2026-09-01 19:48:10 UTC] [INFO] 
+1. Checking 30 external GitHub issues...
+[2026-09-01 19:48:25 UTC] [INFO]   📨 NEW: cline/cline#10499 — @founderaideps (2026-05-02T02:48:48)
+[2026-09-01 19:48:25 UTC] [INFO]      This is exactly the kind of failure where approval has to be outside the model’s discretion.
+
+If an MCP tool can post PR comments or modify work items, the approval state should be a workflow gate tie
+[2026-09-01 19:48:25 UTC] [INFO]   📨 NEW: cline/cline#10499 — @m13v (2026-05-02T03:09:41)
+[2026-09-01 19:48:25 UTC] [INFO]      I've hit this exact failure mode and the toggle isn't actually the gate doing the work, it's the client-side approval prompt component. when the prompt fails to render (window focus loss, modal collis
+[2026-09-01 19:48:25 UTC] [INFO]   📨 NEW: cline/cline#10499 — @founderaideps (2026-05-02T03:40:24)
+[2026-09-01 19:48:25 UTC] [INFO]      Good distinction. If `tool_call.approval_required=true` is emitted, then the bug may be the transition from “approval required” to “approved,” not the policy decision itself.
+
+Either way, for write-ca
+[2026-09-01 19:48:25 UTC] [INFO]   📨 NEW: cline/cline#10499 — @founderaideps (2026-05-03T04:46:59)
+[2026-09-01 19:48:25 UTC] [INFO]      This approval-bypass case is a clean Aideps pilot shape: write-capable MCP actions become gated Work Packet steps with requested action, target resource, approval state, and audit result.
+
+If you want
+[2026-09-01 19:48:25 UTC] [INFO]   📨 NEW: cline/cline#10499 — @Ram9199 (2026-06-13T08:57:13)
+[2026-09-01 19:48:25 UTC] [INFO]      I am doing incident discovery around AI agent tool authority and this report is directly relevant.
+
+Did this approval gap lead to any real write/external action in your environment, or was it caught d
+[2026-09-01 19:48:26 UTC] [INFO]   📨 NEW: cline/cline#8273 — @ClineXDiego (2025-12-29T23:56:34)
+[2026-09-01 19:48:26 UTC] [INFO]      Hi @ZizheRuan,
+
+Thanks for reporting! To help diagnose this:
+
+1. **Run `ls -la` in your project** - do you see a `.git_disabled` folder? If yes, just rename it back: `mv .git_disabled .git`
+
+2. **Quic
+[2026-09-01 19:48:26 UTC] [INFO]   📨 NEW: cline/cline#8273 — @rupertbg (2026-01-28T22:05:53)
+[2026-09-01 19:48:26 UTC] [INFO]      WTAF
+[2026-09-01 19:48:26 UTC] [INFO]   📨 NEW: cline/cline#8273 — @ozch-dev (2026-03-16T16:04:05)
+[2026-09-01 19:48:26 UTC] [INFO]      @ClineXDiego  Ran into the same issue I had when setting up MCP servers. The directory I opened had multiple repos in it
+so the .git folders got renamed to .git_disabled.
+
+The structure looked like th
+[2026-09-01 19:48:26 UTC] [INFO]   📨 NEW: cline/cline#8273 — @ClineXDiego (2026-03-17T22:10:40)
+[2026-09-01 19:48:26 UTC] [INFO]      Hey @ozch-dev - that multi-repo setup you described is exactly the kind of thing that can trigger this. The checkpoint system renames nested `.git` dirs to `.git_disabled` during operations, and bounc
+[2026-09-01 19:48:26 UTC] [INFO]   📨 NEW: cline/cline#8273 — @ozch-dev (2026-03-17T22:41:58)
+[2026-09-01 19:48:26 UTC] [INFO]      @ClineXDiego  Just checked, i'm on Cline v3.72.0, i'm using Cursor, (extension identifier is 
+saoudrizwan.claude-dev on cursor extension store.) 
+p.s. Last extension update was on 2026-03-16:03:42:54,
+[2026-09-01 19:48:26 UTC] [INFO]   📨 NEW: cline/cline#8273 — @xxll569 (2026-03-20T06:37:52)
+[2026-09-01 19:48:26 UTC] [INFO]      When Cline participates in multi git repository projects, she will rename git files, which has not been fixed in version 3.74.0 saoudrizwan.claude-dev yet
+[2026-09-01 19:48:26 UTC] [INFO]   📨 NEW: cline/cline#8273 — @ClineXDiego (2026-03-20T19:57:37)
+[2026-09-01 19:48:26 UTC] [INFO]      Thanks for flagging this on v3.74. Quick question: after Cline finishes the task, do the `.git_disabled` folders get renamed back to `.git`, or do they stay stuck as `_disabled`?
+
+The checkpoint syste
+[2026-09-01 19:48:26 UTC] [INFO]   📨 NEW: cline/cline#8273 — @nyonor2 (2026-04-23T12:14:56)
+[2026-09-01 19:48:26 UTC] [INFO]      It deleted my repo a few hours ago during MCP server setup...
+[2026-09-01 19:48:26 UTC] [INFO]   📨 NEW: cline/cline#8273 — @Ram9199 (2026-06-13T08:57:25)
+[2026-09-01 19:48:26 UTC] [INFO]      I am collecting real-world incidents around AI agents with filesystem authority, and this is one of the clearer reports I have seen.
+
+When Cline deleted the .git folder, did you change your workflow a
+[2026-09-01 19:48:26 UTC] [INFO]   📨 NEW: cline/cline#8273 — @BGMLAI (2026-07-13T23:45:53)
+[2026-09-01 19:48:26 UTC] [INFO]      Deleting `.git` is not ordinary project cleanup: it removes history, recovery metadata, remotes, and often the easiest path back from other agent mistakes. It should be a protected path regardless of 
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @KashiwaByte (2024-12-06T17:01:19)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/KashiwaByte/vikingdb-mcp-server
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @CaesarYangs (2024-12-08T03:03:03)
+[2026-09-01 19:48:28 UTC] [INFO]      Here is my MCP server for prometheus, thanks
+https://github.com/CaesarYangs/prometheus_mcp_server
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @jimmyhzhang (2024-12-09T18:43:09)
+[2026-09-01 19:48:28 UTC] [INFO]      Here's our MCP server for data exploration, thank you! :)
+https://github.com/reading-plus-ai/mcp-server-data-exploration
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @alexgoller (2024-12-10T07:00:30)
+[2026-09-01 19:48:28 UTC] [INFO]      Illumio Core MCP server to interface the Illumio Core microsegmentation solution.
+
+https://github.com/alexgoller/illumio-mcp-server
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @alexgoller (2024-12-10T07:01:30)
+[2026-09-01 19:48:28 UTC] [INFO]      And a mcp for interfacing the Agenda note taking software:
+
+https://github.com/alexgoller/mcp-server-agenda
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @ignatov (2024-12-10T14:19:00)
+[2026-09-01 19:48:28 UTC] [INFO]      Hey! Here's a server for JetBrains IDEs https://www.npmjs.com/package/@jetbrains/mcp-proxy
+https://github.com/JetBrains/mcp-jetbrains
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @ecekyn (2024-12-11T23:26:34)
+[2026-09-01 19:48:28 UTC] [INFO]      Metoro MCP Server for monitoring and querying Kubernetes environments: https://github.com/metoro-io/metoro-mcp-server
+
+Thanks! 
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @kiliczsh (2024-12-12T18:39:53)
+[2026-09-01 19:48:28 UTC] [INFO]      <img src="https://cdn.simpleicons.org/mongodb/47A248" width="24" height="24" alt="description"> [mcp-mongo-server](https://github.com/kiliczsh/mcp-mongo-server): A Model Context Protocol Server for qu
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @domdomegg (2024-12-13T17:44:54)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/domdomegg/airtable-mcp-server
+
+A Model Context Protocol server that provides read and write access to Airtable databases. This server enables LLMs to inspect database schemas, the
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @suekou (2024-12-16T07:14:12)
+[2026-09-01 19:48:28 UTC] [INFO]      Here is my MCP server for Notion, thanks
+https://github.com/suekou/mcp-notion-server
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @saury1120 (2024-12-16T09:05:15)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/saury1120/pdf-mcp
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @kamekamek (2024-12-16T14:49:10)
+[2026-09-01 19:48:28 UTC] [INFO]      This is an MCP server where ChatGPT and Claude respond.
+https://t.co/bwmpWxnUkj
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @hekmon8 (2024-12-18T13:24:04)
+[2026-09-01 19:48:28 UTC] [INFO]      This is a mcp server for homeassistant.
+https://github.com/hekmon8/Homeassistant-server-mcp
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @laopo001 (2024-12-22T13:36:23)
+[2026-09-01 19:48:28 UTC] [INFO]      This open-source chat Client supports the MCP protocol
+https://github.com/BigSweetPotatoStudio/HyperChat
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @pskill9 (2024-12-23T23:51:55)
+[2026-09-01 19:48:28 UTC] [INFO]      Website downloader 
+
+> This MCP server provides a tool to download entire websites using wget. It preserves the website structure and converts links to work locally.
+
+https://github.com/pskill9/we
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @apinetwork (2024-12-26T11:47:05)
+[2026-09-01 19:48:28 UTC] [INFO]      [piapi-mcp-server](https://github.com/apinetwork/piapi-mcp-server) 
+PiAPI MCP server makes user able to generate media content with Midjourney/Flux/Kling/Hunyuan/Udio/Trellis directly from Claude or 
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @jsonallen (2024-12-27T13:14:17)
+[2026-09-01 19:48:28 UTC] [INFO]      Here's a MCP server I just built to use Perplexity search with a recency filter. For example "search the web for Anthropic updates from the past week".
+
+https://github.com/jsonallen/perplexity-mcp
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @erithwik (2024-12-29T01:04:10)
+[2026-09-01 19:48:28 UTC] [INFO]      MCP server for 
+- getting hackernews articles (top, new, ask_hn, etc) and comments/discussions
+- searching for articles on hackernews
+- querying posts by user
+
+https://github.com/erithwik/mcp-hn
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @ChanMeng666 (2024-12-30T05:48:33)
+[2026-09-01 19:48:28 UTC] [INFO]      # [server-google-news](https://github.com/ChanMeng666/server-google-news)
+
+Link: https://github.com/ChanMeng666/server-google-news
+
+## Description
+
+Adding a new MCP server that provides Google N
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @btwiuse (2025-01-04T08:01:12)
+[2026-09-01 19:48:28 UTC] [INFO]      [npm-search-mcp-server](https://github.com/btwiuse/npm-search-mcp-server)
+
+I created a MCP server for searching npm packages
+
+![image](https://github.com/user-attachments/assets/fff201db-58a2-4a01
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @dasheck0 (2025-01-05T17:06:55)
+[2026-09-01 19:48:28 UTC] [INFO]      I created an mcp server for generating random profile images utilizing thispersondoesnotexist.com. https://www.npmjs.com/package/@dasheck0/face-generator
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @bmorphism (2025-01-06T05:30:49)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/bmorphism/say-mcp-server
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @Haleshot (2025-01-17T15:37:26)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/marimo-team/codemirror-mcp
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @emzimmer (2025-01-18T22:13:43)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/emzimmer/server-wp-mcp
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @emzimmer (2025-01-18T22:14:19)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/emzimmer/server-anthropic
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @emzimmer (2025-01-18T22:14:30)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/emzimmer/server-moz-readability
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @vincenzopecorella (2025-01-22T20:40:05)
+[2026-09-01 19:48:28 UTC] [INFO]      **Eunomia** is an open-source Python library developed by [What About You](https://whataboutyou.ai/) for data governance in Large Language Model (LLM) applications. It offers precise control over the 
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @FilippTrigub (2025-01-23T10:59:49)
+[2026-09-01 19:48:28 UTC] [INFO]      Linkedin MCP containing
+- 3 legged auth
+- posting (text and media)
+
+https://github.com/FilippTrigub/linkedin-mcp
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @deus-h (2025-01-24T01:07:56)
+[2026-09-01 19:48:28 UTC] [INFO]      Claudeus WordPress MCP was born from our passion for both heavy metal and heavy-duty WordPress development. We believe in the power of open source and the spirit of the developer community. Just as me
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @jirispilka (2025-01-26T09:08:03)
+[2026-09-01 19:48:28 UTC] [INFO]      Implementation of an MCP server for all [Apify Actors](https://apify.com/store). This server enables interaction with one or more Apify Actors that can be defined in the MCP Server configuration.
+
+Whe
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @johnneerdael (2025-01-27T03:08:17)
+[2026-09-01 19:48:28 UTC] [INFO]      MCP server for Netskope's [www.netskope.com](https://www.netskope.com) ZTNA solution with 50 tools available for the entire management of the platform. README contains a broad range of instructions an
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @husniadil (2025-02-10T10:02:36)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/husniadil/mcp-image-placeholder
+A lightweight MCP server for generating placeholder images from multiple providers.
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @leafeye (2025-02-15T12:33:58)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/leafeye/lunchmoney-mcp-server
+An MCP server that lets AI assistants interact with your Lunchmoney data, enabling natural language queries about transactions, budgets, and spending p
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @manusa (2025-02-17T15:01:17)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/manusa/kubernetes-mcp-server
+
+A powerful MCP server for Kubernetes with additional features for OpenShift.
+Future developments will add support for Helm and other Kubernetes tooling
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @hajdul88 (2025-02-19T17:44:12)
+[2026-09-01 19:48:28 UTC] [INFO]      https://mcp.so/server/cognee-mcp-server
+
+This is our mcp server, the link changed, so this should be the correct link: 
+
+https://github.com/topoteretes/cognee/tree/main/cognee-mcp
+
+Thanks in advance!
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @paulgb (2025-02-19T22:07:17)
+[2026-09-01 19:48:28 UTC] [INFO]      We have an MCP server for forevervm.com
+
+Source: https://github.com/jamsocket/forevervm/tree/main/javascript/mcp-server
+
+Thanks!
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @FocusSearch (2025-02-20T09:30:04)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/FocusSearch/focus_mcp_sql
+
+Thank you!
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @FocusSearch (2025-02-20T09:30:31)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/FocusSearch/focus_mcp_data
+
+Thank you!
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @qianniuspace (2025-02-21T11:02:24)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/qianniuspace/mcp-security-audit
+
+Thank you!
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @wysh3 (2025-02-23T23:30:24)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/wysh3/perplexity-mcp-server
+
+it exists but clicking on it shows project not found (https://mcp.so/server/perplexity-mcp-server)
+
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @rahulthedevil (2025-02-25T11:52:09)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/rahulthedevil/Jira-Context-MCP
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @Willyouwonka (2025-03-05T16:12:00)
+[2026-09-01 19:48:28 UTC] [INFO]      please add the Swytchcode MCP server - https://github.com/Swytchcode/swytchcode-mcp-server
+
+Swytchcode is the AI adapter for API integrations, it makes integrations effortless for developers.
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @ikmolbo (2025-03-08T17:27:11)
+[2026-09-01 19:48:28 UTC] [INFO]      Handwriting OCR MCP server: https://github.com/Handwriting-OCR/handwriting-ocr-mcp-server
+
+Convert handwritten and printed documents to text.
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @Cactusinhand (2025-03-16T08:13:36)
+[2026-09-01 19:48:28 UTC] [INFO]      **Send system notification when Agent task is done**：
+https://github.com/Cactusinhand/mcp_server_notify
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @BrcReactor9 (2025-03-16T10:02:00)
+[2026-09-01 19:48:28 UTC] [INFO]      This is an MCP server that allows large language models (LLMs) like Claude to interact with the Solana blockchain. The service provides a set of APIs and WebSocket interfaces that enable AI models to 
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @zcf0508 (2025-03-17T03:02:26)
+[2026-09-01 19:48:28 UTC] [INFO]      https://github.com/zcf0508/vue-hook-optimizer/tree/master/packages/mcp
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @wenhuwang (2025-03-18T06:22:13)
+[2026-09-01 19:48:28 UTC] [INFO]      MCP Server for kubernetes management and analyze workload status: https://github.com/wenhuwang/mcp-k8s-eye
+Thank you!
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @sunhao-java (2025-03-20T03:27:00)
+[2026-09-01 19:48:28 UTC] [INFO]      mcp-gitee is Gitee's Model Context Protocol (MCP) server implementation. It provides a set of tools to interact with Gitee's API, allowing AI assistants to manage repositories, issues, pull requests, 
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @alexei-led (2025-03-20T13:22:30)
+[2026-09-01 19:48:28 UTC] [INFO]      A lightweight service that enables AI assistants to execute AWS CLI commands through the Model Context Protocol (MCP) to control AWS environments.
+
+https://github.com/alexei-led/aws-mcp-server 
+[2026-09-01 19:48:28 UTC] [INFO]   📨 NEW: chatmcp/mcpso#1 — @bystrakowa (2025-03-20T14:18:26)
+[2026-09-01 19:48:28 UTC] [INFO]      Hi guys, I've submitted Refact.ai Agent as an **MCP client** via your website but encountered a couple of issues:
+
+1. It’s currently listed as a server which is incorrect — it has to be a client inste
+[2026-09-01 19:48:29 UTC] [INFO]   📨 NEW: github/github-mcp-server#2136 — @mindburnlabs (2026-03-21T05:25:52)
+[2026-09-01 19:48:29 UTC] [INFO]      Really useful contribution — a policy template with tool categorisation across all 83 tools is the right starting surface for teams.
+
+One dimension worth adding to Intercept's architecture: **tamper-e
+[2026-09-01 19:48:29 UTC] [INFO]   📨 NEW: github/github-mcp-server#2136 — @razashariff (2026-03-28T16:31:41)
+[2026-09-01 19:48:29 UTC] [INFO]      For validating MCP server configurations against security baselines, we open-sourced [cybersecify](https://cybersecify.co.uk) — an MCP security scanner aligned to the OWASP MCP Top 10.
+
+8 tools coveri
+[2026-09-01 19:48:29 UTC] [INFO]   📨 NEW: github/github-mcp-server#2136 — @xlyoung (2026-06-07T12:08:02)
+[2026-09-01 19:48:29 UTC] [INFO]      Great policy template — this is exactly the kind of guardrails-first approach the MCP ecosystem needs.
+
+One thing I'd add to the workflow: **pre-deployment scanning** before policies are even written.
+[2026-09-01 19:48:40 UTC] [INFO] 
+2. Checking 2 issues in our repo...
+[2026-09-01 19:48:42 UTC] [INFO] 
+3. Checking Dev.to articles...
+[2026-09-01 19:48:44 UTC] [INFO]   Checking 140 Dev.to articles...
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @anp2network on "Re: @anp2network — you were right on all three counts. Here's the curr"
+[2026-09-01 19:48:46 UTC] [INFO]      Re-ran the three checks against what is live right now. GET https://marketnow.site/install.sh comes back 200, content-type: application/x-sh , content-disposition: inline; filename="install.sh" , 4125
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @anp2network on "I got banned from GitHub for 2 weeks. Here's what I learned about sing"
+[2026-09-01 19:48:46 UTC] [INFO]      Ran the byte check the post invites, and right now it doesn't pass. Three things, roughly in increasing order of how much they matter. First, the install one-liner. https://marketnow.site/install.sh r
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @topstar_ai on "UTA v1.0.0 — full status report: 96 articles, 2,276 NPM downloads, her"
+[2026-09-01 19:48:46 UTC] [INFO]      Great progress, Edison. I especially like the focus on independent verification, test vectors, and getting more reviewers involved rather than simply adding features. I’m a senior AI/Python developer 
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @anp2network on "Re: @anp2network — fixtures shipped first, evidence-carrying response "
+[2026-09-01 19:48:46 UTC] [INFO]      We tried to run it. Blocked before execution. The article doesn't give a repo URL, so we resolved it from npm metadata. @marketnow/trust-core@1.0.0 points at github.com/eddyflores100-lang/universal-tr
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @anp2network on "MarketNow is now Trust Infrastructure for AI Agents — unified Trust AP"
+[2026-09-01 19:48:46 UTC] [INFO]      One correction on the checklist line, since it names this account. What happened was narrower than "interoperable, independently verifiable." One outside implementation re-derived the signature over o
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @anp2network on "Re: ATC verification failure report — you're right, here's the fix"
+[2026-09-01 19:48:46 UTC] [INFO]      Good to see the envelope endpoint live tonight, ahead of your own timeline. We ran your five steps against it as soon as we found it. Results first, then the verifier and the canonical string you aske
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @anp2network on "Replies to ATC feedback: canonicalization, key rotation, and the verif"
+[2026-09-01 19:48:46 UTC] [INFO]      We took the verifier challenge literally. An ANP2 verifier was written independently in Python using cryptography , with its own RFC 8785 JCS implementation: recursive key sort by UTF-16 code unit, JC
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @wrencalloway on "Replies to security architecture feedback: layered defense, runtime en"
+[2026-09-01 19:48:46 UTC] [INFO]      Great job, keep me updated on your progress. Good luck!!!
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @topstar_ai on "免费MCP安全审计 — 10层审计 + Ed25519信任卡 (中文版)"
+[2026-09-01 19:48:46 UTC] [INFO]      对audit的10层次划分非常有意思，尤其是L2的Docker沙箱使用gVisor，无网络的限制可以有效防止审计过程中的安全风险。同时，使用Semgrep规则和密钥模式检测可以快速发现代码中的潜在安全问题。有一个问题想要讨论一下：在实际使用中，如何平衡审计的严格程度和服务器的性能开销，特别是在大规模的MCP服务器部署中？
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @topstar_ai on "Verify any MCP server trust in 1 command (free, Ed25519, no auth)"
+[2026-09-01 19:48:46 UTC] [INFO]      I found the use of Ed25519 signatures for Agent Trust Cards (ATC) to be particularly interesting, as it provides a robust and compact way to verify the identity and validity of MCP servers. The fact t
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @mads_hansen_27b33ebfee4c9 on "L1.9: I built a prompt injection firewall for AI agents (28 detection "
+[2026-09-01 19:48:46 UTC] [INFO]      This is a useful quarantine layer, but I would be careful calling it a firewall until the detection quality and runtime boundary are measured. Several rules are legitimate language in security/admin t
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @mads_hansen_27b33ebfee4c9 on "L3: I built continuous runtime monitoring because certification is poi"
+[2026-09-01 19:48:46 UTC] [INFO]      This closes an important gap, but I would distinguish periodic re-attestation from runtime monitoring. A weekly sandbox replay can detect artifact, catalog, permission, and observed-behavior drift; it
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @wrencalloway on "Responding to feedback: runtime trust, CA key rotation, and the canoni"
+[2026-09-01 19:48:46 UTC] [INFO]      Well done, thanks!!
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @mads_hansen_27b33ebfee4c9 on "Post-mortem: a trojan slipped into my MCP marketplace. Here's what I b"
+[2026-09-01 19:48:46 UTC] [INFO]      This is a useful post-mortem because it separates metadata trust from artifact trust. MCP marketplaces are going to need both. One layer I'd add to the list: provenance checks before import. For examp
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @anp2network on "ATC is now real: Ed25519-signed agent trust cards with working verify "
+[2026-09-01 19:48:46 UTC] [INFO]      The canonicalization line has a coverage bug: JSON . stringify ( payload , Object . keys ( payload ). sort ()) Enter fullscreen mode Exit fullscreen mode I ran this in Node against an Ed25519 keypair.
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @mads_hansen_27b33ebfee4c9 on "I built 8 security layers for an MCP marketplace. Here's what each one"
+[2026-09-01 19:48:46 UTC] [INFO]      The useful part here is that each layer has a specific failure class instead of one giant “security scan” label. For MCP marketplaces, I’d add one more dimension to the audit: capability classificatio
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @kordless on "I created a protocol for AI agents to talk to each other — ACP (Agent "
+[2026-09-01 19:48:46 UTC] [INFO]      ACP is a spec for agent to agent comms: agentclientprotocol.com/get-starte... . Your stuff is interesting though, but it's more than a protocol.
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @alexshev on "MarketNow 2.0: 5 languages, 63 countries, 675 npm downloads — 2 weeks "
+[2026-09-01 19:48:46 UTC] [INFO]      Marketplace growth gets more interesting when the install path is observable. Downloads are a signal, but the stronger metric is whether users can connect, run a first workflow, and know what failed.
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @23cse_132_ritikagaur_984 on "5 idiomas, 8,560 skills: cómo construimos un marketplace MCP multiling"
+[2026-09-01 19:48:46 UTC] [INFO]      Using a simple context to persist language in localStorage is clever, it keeps the code lean without relying on heavy libraries like react-i18next . I publish quick visual cheatsheets and developer ro
+[2026-09-01 19:48:46 UTC] [INFO]   📨 NEW Dev.to comment: @custralis on "How to sandbox an MCP server with Docker (--network none is your best "
+[2026-09-01 19:48:46 UTC] [INFO]      --network none is the right instinct, but it only closes egress — a tool that reads the filesystem or spawns processes is still dangerous inside the container. Worth pairing it with --read-only rootfs
+[2026-09-01 19:48:46 UTC] [INFO] 
+============================================================
+[2026-09-01 19:48:46 UTC] [INFO] SUMMARY: 88 new responses found
+[2026-09-01 19:48:46 UTC] [INFO] Total across all runs: 88
+[2026-09-01 19:48:46 UTC] [INFO] State saved: /home/z/my-project/download/monitor/state.json
+[2026-09-01 19:48:46 UTC] [INFO] Summary saved: /home/z/my-project/download/monitor/latest_summary.json
+[2026-09-01 19:48:46 UTC] [INFO] Log file: /home/z/my-project/download/monitor/activity.log
+[2026-09-01 19:48:46 UTC] [INFO] ============================================================
+[2026-09-01 19:48:57 UTC] [INFO] ============================================================
+[2026-09-01 19:48:57 UTC] [INFO] UTA Monitor — Run #2
+[2026-09-01 19:48:57 UTC] [INFO] Auto-respond: False
+[2026-09-01 19:48:57 UTC] [INFO] ============================================================
+[2026-09-01 19:48:57 UTC] [INFO] 
+1. Checking 30 external GitHub issues...
+[2026-09-01 19:49:26 UTC] [INFO] 
+2. Checking 2 issues in our repo...
+[2026-09-01 19:49:28 UTC] [INFO] 
+3. Checking Dev.to articles...
+[2026-09-01 19:49:30 UTC] [INFO]   Checking 140 Dev.to articles...
+[2026-09-01 19:49:31 UTC] [INFO] 
+============================================================
+[2026-09-01 19:49:31 UTC] [INFO] SUMMARY: 0 new responses found
+[2026-09-01 19:49:31 UTC] [INFO] Total across all runs: 88
+[2026-09-01 19:49:31 UTC] [INFO] State saved: /home/z/my-project/download/monitor/state.json
+[2026-09-01 19:49:31 UTC] [INFO] Summary saved: /home/z/my-project/download/monitor/latest_summary.json
+[2026-09-01 19:49:31 UTC] [INFO] Log file: /home/z/my-project/download/monitor/activity.log
+[2026-09-01 19:49:31 UTC] [INFO] ============================================================
+[2026-09-01 19:50:00 UTC] [INFO] ============================================================
+[2026-09-01 19:50:00 UTC] [INFO] UTA Monitor — Run #3
+[2026-09-01 19:50:00 UTC] [INFO] Auto-respond: True
+[2026-09-01 19:50:00 UTC] [INFO] ============================================================
+[2026-09-01 19:50:00 UTC] [INFO] 
+1. Checking 30 external GitHub issues...
