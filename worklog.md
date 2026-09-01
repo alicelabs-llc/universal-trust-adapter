@@ -526,3 +526,117 @@ Stage Summary:
   - /home/z/my-project/download/status/status.json (data real UTA)
   - /home/z/my-project/download/status/history.json (limpio, empieza fresh)
   - /home/z/my-project/download/tim_reply.md (reply correcta para UTA)
+
+---
+Task ID: new-channels-global-2026-09-01
+Agent: main (Super Z)
+Task: Buscar NUEVOS canales para publicar/promocionar UTA — no los mismos de siempre. Multi-idioma, multi-país, otros sitios.
+
+Work Log:
+- User pidió explícitamente: NO los canales actuales, buscar otros. Multi-idioma, multi-país.
+- Mapeé 50+ nuevos canales globales por idioma/país.
+- Ejecuté en orden:
+
+1. **12 issues abiertos en NUEVOS repos GitHub** (no Cline, no awesome-mcp-servers, no mcpso, no github-mcp-server que ya estaban hechos):
+   - continuedev/continue #13212
+   - langchain-ai/langchain #40102
+   - run-llama/llama_index #22920
+   - microsoft/autogen #8139
+   - pydantic/pydantic-ai #7981
+   - microsoft/semantic-kernel #14356
+   - google/adk-python #6974
+   - openai/openai-agents-python #4806
+   - anthropics/anthropic-sdk-python #1904
+   - deepset-ai/haystack #12565
+   - BerriAI/litellm #39123
+   - ant-design/x #2043
+   - lobehub/lobe-chat falló (redirect 307)
+   Cada issue es único, referenced su codebase específica, propone un hook no-invasivo, pregunta si está in scope.
+
+2. **8 artículos publicados en Dev.to multi-idioma** (no inglés — ya teníamos):
+   - 3 Español: USB-C de la confianza, Anatomía 12 etapas, 8 formatos con una API
+   - 2 Português: USB-C da confiança, Guia técnico
+   - 2 Français: USB-C de la confiance, Pipeline 12 étapes
+   - 1 Deutsch: USB-C der Vertrauensstellung
+   Rate limit hit en primer intento (2/8 publicados). Esperé 60s entre cada uno en retry, 8/8 publicados.
+
+3. **15 snippets de código en 14 lenguajes** committed al repo (no pude crear Gists — token solo tiene scope 'repo', no 'gist'):
+   - Node.js, Python, Bash, Rust, Go, Ruby, PHP, Java, C#, Elixir, Swift, Kotlin, Lua, Deno
+   - Cada snippet es self-contained, verifica una credencial vía API pública
+   - Carpeta snippets/ con README.md índice
+   - Commit dfcdfcb6 pushed
+
+4. **2 issues abiertos en NUEVAS awesome lists** (no awesome-mcp-servers que ya estaba):
+   - e2b-dev/awesome-ai-agents #1481
+   - kyrolabs/awesome-agents #738
+   - wong2/awesome-mcp-servers falló (issues disabled — 410)
+
+5. **7 READMEs multi-idioma** creados en el repo:
+   - README.es.md (Español)
+   - README.pt.md (Português)
+   - README.fr.md (Français)
+   - README.de.md (Deutsch)
+   - README.ja.md (日本語)
+   - README.zh.md (中文)
+   - README.ru.md (Русский)
+   - Commit 9025ea9c pushed
+
+6. **40 archivos de contenido ready-to-post** generados en /home/z/my-project/download/promotion/platforms/ para:
+   - Reddit: 15 subreddits (r/cursor, r/ClaudeAI, r/OpenAI, r/MachineLearning, r/programming, r/typescript, r/node, r/python, r/SaaS, r/Entrepreneur, r/devops, r/cybersecurity, r/netsec, r/AIAgents, r/IndieDev)
+   - Medium: 5 idiomas (EN, ES, PT, FR, DE)
+   - Menéame (Spanish HN)
+   - Qiita (Japanese)
+   - Habr (Russian)
+   - V2EX (Chinese)
+   - Juejin (Chinese)
+   - iMasters (Brazilian)
+   - LinuxFr (French)
+   - Heise (German)
+   - LinkedIn (long-form)
+   - Indie Hackers
+   - Lobste.rs
+   - Hashnode
+   - Substack
+   - AlternativeTo (listing)
+   - SaaSHub (listing)
+   - libraries.io (submission)
+   - OSS Directory (listing)
+   - Product Hunt (follow-up)
+   - Short-form social (Mastodon, Bluesky, Twitter/X, Threads) en 8 idiomas
+   - README.md índice con schedule sugerido de posting
+
+7. **CHANNELS.md** creado en el repo (commit e357c7ac pushed):
+   - Lista consolidada de TODOS los canales donde UTA está publicado/promocionado
+   - 12+ issues en repos de agent frameworks
+   - 3 awesome lists
+   - 8 multilang articles en Dev.to
+   - 15 snippets en 14 lenguajes
+   - 7 multilang READMEs
+   - 40+ ready-to-post files
+
+Stage Summary:
+- 12 NUEVOS issues en repos de agent frameworks (Continue, LangChain, LlamaIndex, AutoGen, Pydantic AI, Semantic Kernel, Google ADK, OpenAI Agents SDK, Anthropic SDK, Haystack, LiteLLM, Ant Design X)
+- 8 multilang articles publicados en Dev.to (3 ES, 2 PT, 2 FR, 1 DE)
+- 15 code snippets en 14 lenguajes committed al repo
+- 2 NUEVAS awesome lists con issues abiertos
+- 7 multilang READMEs en el repo (ES, PT, FR, DE, JA, ZH, RU)
+- 40 archivos ready-to-post en /download/promotion/platforms/ cubriendo Reddit (15 subs), Medium (5 idiomas), Menéame, Qiita, Habr, V2EX, Juejin, iMasters, LinuxFr, Heise, LinkedIn, IndieHackers, Lobste.rs, Hashnode, Substack, AlternativeTo, SaaSHub, libraries.io, OSS Directory, Product Hunt, Mastodon/Bluesky/Twitter en 8 idiomas
+- CHANNELS.md pushed al repo con lista consolidada
+- Pendiente user: postear manualmente el contenido en Reddit/Medium/Menéame/Qiita/Habr/V2EX/Juejin/iMasters/LinuxFr/Heise (esos no tienen API pública para auto-publicar sin credenciales)
+
+Artefactos producidos:
+- /home/z/my-project/uta-repo/snippets/ (15 files en 14 lenguajes)
+- /home/z/my-project/uta-repo/README.{es,pt,fr,de,ja,zh,ru}.md (7 multilang READMEs)
+- /home/z/my-project/uta-repo/CHANNELS.md (índice consolidado)
+- /home/z/my-project/download/promotion/new_github_issues.json (12 issues abiertos)
+- /home/z/my-project/download/promotion/multilang_devto_articles.json (8 articles publicados)
+- /home/z/my-project/download/promotion/awesome_list_issues.json (2 awesome lists)
+- /home/z/my-project/download/promotion/platforms/ (40 archivos ready-to-post)
+- /home/z/my-project/scripts/new_github_issues.py
+- /home/z/my-project/scripts/multilang_devto_articles.py
+- /home/z/my-project/scripts/multilang_devto_retry.py
+- /home/z/my-project/scripts/create_gists.py (no se pudo usar — token sin scope gist)
+- /home/z/my-project/scripts/generate_snippets.py (alternativa: snippets en repo)
+- /home/z/my-project/scripts/awesome_list_issues.py
+- /home/z/my-project/scripts/create_multilang_readmes.py
+- /home/z/my-project/scripts/generate_platform_content.py

@@ -1,0 +1,50 @@
+[
+  {
+    "lang": "es",
+    "title": "Anatom\u00eda de un pipeline de verificaci\u00f3n de 12 etapas para credenciales de agentes IA",
+    "url": "https://dev.to/edison_flores_6d2cd381b13/anatomia-de-un-pipeline-de-verificacion-de-12-etapas-para-credenciales-de-agentes-ia-2dcp",
+    "id": 4548224
+  },
+  {
+    "lang": "es",
+    "title": "C\u00f3mo verifico 8 formatos de credenciales con una sola API (ATC, JWT, W3C VC, A2A, EAT-AI, ZTA, MCP, X.509)",
+    "url": "https://dev.to/edison_flores_6d2cd381b13/como-verifico-8-formatos-de-credenciales-con-una-sola-api-atc-jwt-w3c-vc-a2a-eat-ai-zta-mcp-1obd",
+    "id": 4548225
+  },
+  {
+    "lang": "es",
+    "title": "Universal Trust Adapter: el USB-C de la confianza entre agentes IA (en espa\u00f1ol)",
+    "url": "https://dev.to/edison_flores_6d2cd381b13/universal-trust-adapter-el-usb-c-de-la-confianza-entre-agentes-ia-en-espanol-1glk",
+    "id": 4548237
+  },
+  {
+    "lang": "pt",
+    "title": "Universal Trust Adapter: o USB-C da confian\u00e7a entre agentes de IA (em portugu\u00eas)",
+    "url": "https://dev.to/edison_flores_6d2cd381b13/universal-trust-adapter-o-usb-c-da-confianca-entre-agentes-de-ia-em-portugues-1hcl",
+    "id": 4548247
+  },
+  {
+    "lang": "pt",
+    "title": "Como verificar credenciais de agentes de IA: um guia t\u00e9cnico em portugu\u00eas",
+    "url": "https://dev.to/edison_flores_6d2cd381b13/como-verificar-credenciais-de-agentes-de-ia-um-guia-tecnico-em-portugues-3clk",
+    "id": 4548252
+  },
+  {
+    "lang": "fr",
+    "title": "Universal Trust Adapter : le USB-C de la confiance entre agents IA (en fran\u00e7ais)",
+    "url": "https://dev.to/edison_flores_6d2cd381b13/universal-trust-adapter-le-usb-c-de-la-confiance-entre-agents-ia-en-francais-3ojk",
+    "id": 4548258
+  },
+  {
+    "lang": "fr",
+    "title": "S\u00e9curiser les agents IA avec un pipeline de v\u00e9rification en 12 \u00e9tapes",
+    "url": "https://dev.to/edison_flores_6d2cd381b13/securiser-les-agents-ia-avec-un-pipeline-de-verification-en-12-etapes-1ahg",
+    "id": 4548264
+  },
+  {
+    "lang": "de",
+    "title": "Universal Trust Adapter: Das USB-C der Vertrauensstellung zwischen KI-Agenten (auf Deutsch)",
+    "url": "https://dev.to/edison_flores_6d2cd381b13/universal-trust-adapter-das-usb-c-der-vertrauensstellung-zwischen-ki-agenten-auf-deutsch-52k5",
+    "id": 4548273
+  }
+]

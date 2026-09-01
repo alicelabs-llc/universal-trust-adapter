@@ -1,0 +1,80 @@
+[
+  {
+    "repo": "continuedev/continue",
+    "title": "Proposal: Universal Trust Adapter as opt-in verification layer for MCP servers loaded by Continue",
+    "url": "https://github.com/continuedev/continue/issues/13212",
+    "number": 13212
+  },
+  {
+    "repo": "langchain-ai/langchain",
+    "title": "RFC: trust-card verification for LangGraph tool nodes (opt-in, non-invasive)",
+    "url": "https://github.com/langchain-ai/langchain/issues/40102",
+    "number": 40102
+  },
+  {
+    "repo": "run-llama/llama_index",
+    "title": "Proposal: trust-card verification for LlamaIndex Tool abstractions",
+    "url": "https://github.com/run-llama/llama_index/issues/22920",
+    "number": 22920
+  },
+  {
+    "repo": "microsoft/autogen",
+    "title": "RFC: trust-card verification hook for Autogen tool calls",
+    "url": "https://github.com/microsoft/autogen/issues/8139",
+    "number": 8139
+  },
+  {
+    "repo": "pydantic/pydantic-ai",
+    "title": "Proposal: trust-card verification hook for Pydantic AI tools",
+    "url": "https://github.com/pydantic/pydantic-ai/issues/7981",
+    "number": 7981
+  },
+  {
+    "repo": "microsoft/semantic-kernel",
+    "title": "RFC: trust-card verification for Semantic Kernel plugins (opt-in)",
+    "url": "https://github.com/microsoft/semantic-kernel/issues/14356",
+    "number": 14356
+  },
+  {
+    "repo": "google/adk-python",
+    "title": "Proposal: trust-card verification hook for ADK tools",
+    "url": "https://github.com/google/adk-python/issues/6974",
+    "number": 6974
+  },
+  {
+    "repo": "openai/openai-agents-python",
+    "title": "RFC: trust-card verification hook for OpenAI Agents SDK tools",
+    "url": "https://github.com/openai/openai-agents-python/issues/4806",
+    "number": 4806
+  },
+  {
+    "repo": "anthropics/anthropic-sdk-python",
+    "title": "Discussion: trust-card verification for tool calls in agentic workflows",
+    "url": "https://github.com/anthropics/anthropic-sdk-python/issues/1904",
+    "number": 1904
+  },
+  {
+    "repo": "deepset-ai/haystack",
+    "title": "Proposal: trust-card verification for Haystack components (opt-in)",
+    "url": "https://github.com/deepset-ai/haystack/issues/12565",
+    "number": 12565
+  },
+  {
+    "repo": "BerriAI/litellm",
+    "title": "Discussion: trust-card verification for MCP servers used through LiteLLM",
+    "url": "https://github.com/BerriAI/litellm/issues/39123",
+    "number": 39123
+  },
+  {
+    "repo": "lobehub/lobe-chat",
+    "title": "Proposal: trust-card verification for MCP servers in LobeChat",
+    "url": "ERROR 307: {\"message\":\"Moved Permanently\",\"url\":\"https://api.github.com/repositories/643445235/issues\",\"documentation_url\":\"https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api#follow-redirects\"}",
+    "number": null
+  },
+  {
+    "repo": "ant-design/x",
+    "title": "Discussion: trust-card UI component for AI agent tool calls",
+    "url": "https://github.com/ant-design/x/issues/2043",
+    "number": 2043
+  }
+]
