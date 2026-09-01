@@ -1,0 +1,21 @@
+{
+  "protocolVersion": "1.0",
+  "serverInfo": {
+    "name": "weather-test-mcp",
+    "version": "1.0.0",
+    "description": "Test weather MCP server"
+  },
+  "tools": [
+    {
+      "name": "get_weather"
+    },
+    {
+      "name": "set_location"
+    }
+  ],
+  "capabilities": {
+    "tools": {
+      "listChanged": true
+    }
+  }
+}

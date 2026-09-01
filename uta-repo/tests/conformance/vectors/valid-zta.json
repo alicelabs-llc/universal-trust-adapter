@@ -1,0 +1,36 @@
+{
+  "zta_version": "1.0",
+  "agent_id": "claude-test-agent",
+  "agent_name": "Claude Test",
+  "identity": {
+    "public_key": "zpk_test",
+    "key_algorithm": "Ed25519"
+  },
+  "trust": {
+    "score": 9,
+    "confidence": "high",
+    "evidence": [
+      {
+        "type": "tee-attestation",
+        "source": "Anthropic",
+        "result": "pass",
+        "timestamp": "2026-08-20T00:00:00Z"
+      }
+    ],
+    "assessor": "Anthropic"
+  },
+  "capabilities": {
+    "provides": [
+      "reasoning",
+      "code-generation"
+    ],
+    "requires": [
+      "auth"
+    ]
+  },
+  "metadata": {
+    "issued_at": "2026-08-20T00:00:00Z",
+    "expires_at": "2027-08-20T00:00:00Z"
+  },
+  "status": "active"
+}

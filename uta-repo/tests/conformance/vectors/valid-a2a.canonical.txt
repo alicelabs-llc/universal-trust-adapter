@@ -1,0 +1,1 @@
+{"capabilities":[{"name":"search"},{"name":"fetch"}],"identity":{"did":"did:example:agent-123"},"metadata":{"created_at":"2026-08-20T00:00:00Z","updated_at":"2026-08-20T00:00:00Z"},"name":"google-test-agent","service_endpoint":{"type":"a2a","url":"https://agent.example.com/search"},"trust":{"score":7},"version":"0.1"}
