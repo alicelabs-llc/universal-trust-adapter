@@ -1,9 +1,20 @@
 {
-  "run_number": 2,
-  "timestamp": "2026-09-01T19:49:31.475192+00:00",
-  "new_responses": 0,
-  "total_new_all_runs": 88,
-  "responses": [],
+  "run_number": 3,
+  "timestamp": "2026-09-01T21:17:17.272122+00:00",
+  "new_responses": 1,
+  "total_new_all_runs": 89,
+  "responses": [
+    {
+      "repo": "e2b-dev/E2B",
+      "issue_num": 1791,
+      "comment_id": "5500314794",
+      "author": "mishushakov",
+      "body": "Dear contributor, this is an issue tracker for the E2B monorepo, not a discussion board.",
+      "created_at": "2026-09-01T20:55:48",
+      "html_url": "https://github.com/e2b-dev/E2B/issues/1791#issuecomment-5500314794",
+      "reactions": 0
+    }
+  ],
   "channels_checked": {
     "github_external_issues": 30,
     "github_own_issues": 2,
