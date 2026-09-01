@@ -1,0 +1,36 @@
+{
+  "release_url": "https://github.com/alicelabs-llc/universal-trust-adapter/releases/tag/v1.1.2-tarballs",
+  "tag": "v1.1.2-tarballs",
+  "tarballs": [
+    {
+      "name": "agent-trust-card-1.1.2.tgz",
+      "sha256": "f1b44ed29eea0ca9eee65c1e0974c5d2b4b512378c6d21edb6344daf9184641a",
+      "size": 26782
+    },
+    {
+      "name": "marketnow-trust-core-1.0.1.tgz",
+      "sha256": "ad9c11e97c83df57346fdc35aa5f41391e9ee2f17cb12274d695db3f12ad7d10",
+      "size": 35942
+    },
+    {
+      "name": "marketnow-trust-adapters-1.0.1.tgz",
+      "sha256": "783900cd807969ad56bbd37f54f444cb2e8f17d463866267248ab03994e1bde2",
+      "size": 37412
+    },
+    {
+      "name": "marketnow-trust-gateway-1.0.1.tgz",
+      "sha256": "02319f29430da0f97d23277d9188fb96354e1e4262ea1887953e77b05043ca04",
+      "size": 5324
+    },
+    {
+      "name": "marketnow-mcp-1.10.1.tgz",
+      "sha256": "0113cf8b6bedf6bea5825304c68532a7aacf33cecdfd96b2616e40861a038025",
+      "size": 28179
+    },
+    {
+      "name": "marketnow-install-stack-1.1.1.tgz",
+      "sha256": "7daa9d4fa5db6871d2448cd389bd4e26a84081ed50c17b632b2fa62b2de85f81",
+      "size": 1900
+    }
+  ]
+}
