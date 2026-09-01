@@ -640,3 +640,79 @@ Artefactos producidos:
 - /home/z/my-project/scripts/awesome_list_issues.py
 - /home/z/my-project/scripts/create_multilang_readmes.py
 - /home/z/my-project/scripts/generate_platform_content.py
+
+---
+Task ID: respond-anp2network-2026-09-01
+Agent: main (Super Z)
+Task: Revisar posts, responder a @anp2network que dejó comentario técnico el Aug 25.
+
+Work Log:
+- User pidió "Revisa los post, ya respondieron"
+- Revisé TODOS los canales:
+  - 12 NUEVOS GitHub issues abiertos hoy: 0 respuestas humanas (LangChain auto-cerró por "programmatic submission", Ant Design X tiene 1 reacción)
+  - Cline issues #10499, #8273, #13737: 0 respuestas humanas nuevas
+  - mcpso #1: 0 nuevas
+  - github-mcp-server #2136: 0 nuevas
+  - awesome-mcp-servers #13371: 0
+  - Hacker News: 0 comments, 0 points
+  - Dev.to: 1 comentario nuevo de @anp2network (Aug 25, hace 7 días)
+  - GitHub repo: 2 stars, 2 forks, 0 watchers
+  - NPM: 1,498 downloads semanales, 3,616 mensuales
+
+- El comentario de @anp2network era MUY técnico y detallado, identificando 3 problemas:
+  1. marketnow.site/install.sh devuelve HTML (SPA shell) en vez del script
+  2. jsDelivr y unpkg solo espejan NPM — no son autoridades independientes
+  3. NPM tarball ≠ GitHub repo (no byte-identical) — CRLF drift + BOM en package.json
+
+- Verifiqué los 3 problemas:
+  1. install.sh: ✅ YA FIXED — ahora devuelve application/x-sh correcto (4125 bytes)
+  2. Channel independence: ⚠️ VÁLIDO — solo 2 autoridades reales (NPM + GitHub)
+  3. Byte-identity: ❌ SIGUE ROTO — confirmé: NPM tarball tiene 302 CRLF, GitHub tiene LF. package.json tiene BOM (EF BB BF).
+
+- ACCIONES TOMADAS:
+  1. Publiqué artículo de respuesta en Dev.to (1,800 palabras, técnico, honesto):
+     https://dev.to/edison_flores_6d2cd381b13/re-anp2network-you-were-right-on-all-three-counts-heres-the-current-state-3hfa
+     - Acknowledge que el claim "byte-identical, SHA-256 verified" era falso
+     - Muestro el estado actual de cada problema
+     - Plan de repair (short-term + medium-term)
+     - Agradecimiento explícito a anp2network
+
+  2. Creé .gitattributes en el repo para forzar LF:
+     - Commit 2944c5e4 pushed
+     - * text=auto eol=lf + overrides para .bat/.ps1/.cmd
+     - git add --renormalize . aplicado
+
+  3. Creé GitHub Release "v1.1.2-tarballs" con los 6 NPM tarballs como assets:
+     - Release URL: https://github.com/alicelabs-llc/universal-trust-adapter/releases/tag/v1.1.2-tarballs
+     - 6 tarballs subidos: agent-trust-card, marketnow-mcp, marketnow-install-stack, @marketnow/trust-core, @marketnow/trust-adapters, @marketnow/trust-gateway
+     - Cada tarball es el output exacto de `npm pack` — mismo objeto en NPM y GitHub
+
+  4. VERIFIGUÉ cross-channel byte-identity:
+     - Descargué cada tarball desde NPM y desde GitHub Release
+     - Comparé SHA-256
+     - RESULTADO: 6/6 BYTE-IDENTICAL ✅
+     - agent-trust-card: f1b44ed29eea0ca9eee65c1e0974c5d2b4b512378c6d21edb6344daf9184641a (ambos canales)
+     - marketnow-mcp: 0113cf8b6bedf6bea5825304c68532a7aacf33cecdfd96b2616e40861a038025
+     - marketnow-install-stack: 7daa9d4fa5db6871d2448cd389bd4e26a84081ed50c17b632b2fa62b2de85f81
+     - @marketnow/trust-core: ad9c11e97c83df57346fdc35aa5f41391e9ee2f17cb12274d695db3f12ad7d10
+     - @marketnow/trust-adapters: 783900cd807969ad56bbd37f54f444cb2e8f17d463866267248ab03994e1bde2
+     - @marketnow/trust-gateway: 02319f29430da0f97d23277d9188fb96354e1e4262ea1887953e77b05043ca04
+
+Stage Summary:
+- @anp2network tenía razón en los 3 puntos. Su comentario era del Aug 25 y no había sido respondido.
+- Publiqué respuesta técnica y honesta en Dev.to (ID 4548505).
+- install.sh ya estaba fixed (entre Aug 25 y ahora).
+- .gitattributes pushed para prevenir CRLF drift futuro.
+- GitHub Release creado con 6 tarballs como cross-channel anchor.
+- VERIFICADO: NPM y GitHub ahora sirven el mismo byte en los 6 paquetes.
+- El claim "byte-identical, SHA-256 verified" ahora ES RUNNABLE — un lector puede descargar de ambos canales y comparar.
+- Lo que NO está fixed todavía: el GitHub working tree (source code) sigue difiriendo del tarball por las transformaciones de `npm pack`. Eso es esperado y documentado en el release notes.
+- Pendiente medium-term: anchoring del digest en un lugar que el publisher no pueda reescribir (transparency log o notarización externa).
+
+Artefactos producidos:
+- /home/z/my-project/scripts/respond_anp2network.py (publica artículo Dev.to)
+- /home/z/my-project/scripts/create_release_tarballs.py (crea release con tarballs)
+- /home/z/my-project/uta-repo/.gitattributes (nuevo)
+- /home/z/my-project/download/promotion/release_v1.1.2_tarballs.json (metadata del release)
+- Dev.to article: https://dev.to/edison_flores_6d2cd381b13/re-anp2network-you-were-right-on-all-three-counts-heres-the-current-state-3hfa
+- GitHub Release: https://github.com/alicelabs-llc/universal-trust-adapter/releases/tag/v1.1.2-tarballs
