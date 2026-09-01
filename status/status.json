@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01T19:38:40.377336+00:00",
+  "generated_at": "2026-09-01T22:01:28.031109+00:00",
   "product": "Universal Trust Adapter (UTA) \u2014 by MarketNow",
   "ph_launch_url": "https://www.producthunt.com/products/uta-universal-trust-adapter?launch=uta-universal-trust-adapter",
   "services": [
@@ -8,7 +8,7 @@
       "name": "MarketNow Website (landing)",
       "url": "https://www.marketnow.site/",
       "status": "operational",
-      "latency_ms": 313,
+      "latency_ms": 151,
       "uptime_90d": 100.0,
       "history": [
         {
@@ -459,7 +459,7 @@
         {
           "date": "2026-09-01",
           "status": "ok",
-          "latency_ms": 313
+          "latency_ms": 151
         }
       ],
       "last_check_ago": "just now",
@@ -470,7 +470,7 @@
       "name": "UTA API \u2014 Root (/api/trust)",
       "url": "https://www.marketnow.site/api/trust",
       "status": "operational",
-      "latency_ms": 206,
+      "latency_ms": 560,
       "uptime_90d": 100.0,
       "history": [
         {
@@ -921,7 +921,7 @@
         {
           "date": "2026-09-01",
           "status": "ok",
-          "latency_ms": 206
+          "latency_ms": 560
         }
       ],
       "last_check_ago": "just now",
@@ -932,7 +932,7 @@
       "name": "UTA API \u2014 Formats (/api/trust?action=formats)",
       "url": "https://www.marketnow.site/api/trust?action=formats",
       "status": "operational",
-      "latency_ms": 139,
+      "latency_ms": 520,
       "uptime_90d": 100.0,
       "history": [
         {
@@ -1383,7 +1383,7 @@
         {
           "date": "2026-09-01",
           "status": "ok",
-          "latency_ms": 139
+          "latency_ms": 520
         }
       ],
       "last_check_ago": "just now",
@@ -1393,9 +1393,9 @@
       "id": "skills_api",
       "name": "MarketNow Skills API (UTA verification source)",
       "url": "https://www.marketnow.site/api/skills.json",
-      "status": "operational",
-      "latency_ms": 291,
-      "uptime_90d": 100.0,
+      "status": "degraded",
+      "latency_ms": 7046,
+      "uptime_90d": 50.0,
       "history": [
         {
           "date": "2026-06-04",
@@ -1844,19 +1844,19 @@
         },
         {
           "date": "2026-09-01",
-          "status": "ok",
-          "latency_ms": 291
+          "status": "degraded",
+          "latency_ms": 7046
         }
       ],
       "last_check_ago": "just now",
-      "error": null
+      "error": "Slow latency 7046ms"
     },
     {
       "id": "uta_pipeline",
       "name": "UTA API \u2014 Pipeline (/api/trust?action=pipeline)",
       "url": "https://www.marketnow.site/api/trust?action=pipeline",
       "status": "operational",
-      "latency_ms": 152,
+      "latency_ms": 99,
       "uptime_90d": 100.0,
       "history": [
         {
@@ -2307,7 +2307,7 @@
         {
           "date": "2026-09-01",
           "status": "ok",
-          "latency_ms": 152
+          "latency_ms": 99
         }
       ],
       "last_check_ago": "just now",
@@ -2318,7 +2318,7 @@
       "name": "UTA API \u2014 Revocation (/api/trust?action=revocation)",
       "url": "https://www.marketnow.site/api/trust?action=revocation",
       "status": "operational",
-      "latency_ms": 182,
+      "latency_ms": 90,
       "uptime_90d": 100.0,
       "history": [
         {
@@ -2769,14 +2769,14 @@
         {
           "date": "2026-09-01",
           "status": "ok",
-          "latency_ms": 182
+          "latency_ms": 90
         }
       ],
       "last_check_ago": "just now",
       "error": null
     }
   ],
-  "skill_count": 9248,
+  "skill_count": 0,
   "formats_supported": 8,
   "last_incident": "none",
   "version": "1.0"
