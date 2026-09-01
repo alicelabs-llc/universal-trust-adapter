@@ -1,0 +1,170 @@
+[
+  {
+    "repo": "humanlayer/humanlayer",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 11359,
+    "lang": "TypeScript",
+    "desc": "The best way to get AI coding agents to solve hard problems in complex codebases"
+  },
+  {
+    "repo": "langchain-ai/langgraph",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 40870,
+    "lang": "Python",
+    "desc": "Build resilient agents."
+  },
+  {
+    "repo": "Aider-AI/aider",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 48652,
+    "lang": "Python",
+    "desc": "aider is AI pair programming in your terminal"
+  },
+  {
+    "repo": "OpenHands/OpenHands",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 85875,
+    "lang": "TypeScript",
+    "desc": "\ud83d\ude4c OpenHands: AI-Driven Development"
+  },
+  {
+    "repo": "block/goose",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 53800,
+    "lang": "Rust",
+    "desc": "an open source, extensible AI agent that goes beyond code suggestions - install,"
+  },
+  {
+    "repo": "sst/opencode",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 203046,
+    "lang": "TypeScript",
+    "desc": "The open source coding agent."
+  },
+  {
+    "repo": "langfuse/langfuse",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 34050,
+    "lang": "TypeScript",
+    "desc": "\ud83e\udea2 Open source AI engineering platform: LLM evals, observability, metrics, prompt"
+  },
+  {
+    "repo": "helicone/helicone",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 6122,
+    "lang": "TypeScript",
+    "desc": "\ud83e\uddca Open source LLM observability platform. One line of code to monitor, evaluate,"
+  },
+  {
+    "repo": "arize-ai/phoenix",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 11282,
+    "lang": "Python",
+    "desc": "AI Observability & Evaluation"
+  },
+  {
+    "repo": "e2b-dev/E2B",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 13634,
+    "lang": "Python",
+    "desc": "Open-source, secure environment with real-world tools for enterprise-grade agent"
+  },
+  {
+    "repo": "daytonaio/daytona",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 71845,
+    "lang": "?",
+    "desc": "Daytona is a Secure and Elastic Infrastructure for Running AI-Generated Code"
+  },
+  {
+    "repo": "vercel/ai",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 26530,
+    "lang": "TypeScript",
+    "desc": "The AI Toolkit for TypeScript. From the creators of Next.js, the AI SDK is a fre"
+  },
+  {
+    "repo": "instructor-ai/instructor",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 13820,
+    "lang": "Python",
+    "desc": "structured outputs for llms "
+  },
+  {
+    "repo": "protectai/modelaudit",
+    "exists": false,
+    "error": 404
+  },
+  {
+    "repo": "promptfoo/promptfoo",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 24733,
+    "lang": "TypeScript",
+    "desc": "Test your prompts, agents, and RAGs. Red teaming/pentesting/vulnerability scanni"
+  },
+  {
+    "repo": "garak-llm/garak",
+    "exists": false,
+    "error": 404
+  },
+  {
+    "repo": "modelcontextprotocol/servers",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 90006,
+    "lang": "TypeScript",
+    "desc": "Model Context Protocol Servers"
+  },
+  {
+    "repo": "glips/claude-code-hooks",
+    "exists": false,
+    "error": 404
+  },
+  {
+    "repo": "spiffe/spiffe",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 1842,
+    "lang": "Shell",
+    "desc": "The SPIFFE Project"
+  },
+  {
+    "repo": "decentralized-identity/did-methods",
+    "exists": true,
+    "has_issues": true,
+    "archived": false,
+    "stars": 18,
+    "lang": "?",
+    "desc": "DID Method Working Group operations repo"
+  }
+]
