@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Integration proposal: gate.cat as exec-boundary layer (L1.9 quarantine \u2192 L3 monitor \u2192 gate.cat veto)",
+    "url": "https://github.com/alicelabs-llc/universal-trust-adapter/issues/12",
+    "number": 12
+  },
+  {
+    "title": "Anchor digests with third-party countersignature + timestamp (response to @anp2network)",
+    "url": "https://github.com/alicelabs-llc/universal-trust-adapter/issues/13",
+    "number": 13
+  }
+]

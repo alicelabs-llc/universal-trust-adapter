@@ -1,0 +1,62 @@
+[
+  {
+    "repo": "humanlayer/humanlayer",
+    "title": "Proposal: pre-approval credential verification for tools that request human approval",
+    "url": "https://github.com/humanlayer/humanlayer/issues/1101",
+    "number": 1101
+  },
+  {
+    "repo": "langchain-ai/langgraph",
+    "title": "RFC: trust-card verification before interrupt() approval",
+    "url": "https://github.com/langchain-ai/langgraph/issues/8791",
+    "number": 8791
+  },
+  {
+    "repo": "Aider-AI/aider",
+    "title": "Discussion: optional trust verification for MCP servers loaded by Aider",
+    "url": "https://github.com/Aider-AI/aider/issues/5665",
+    "number": 5665
+  },
+  {
+    "repo": "OpenHands/OpenHands",
+    "title": "Proposal: trust-card verification for MCP servers used by OpenHands agents",
+    "url": "https://github.com/OpenHands/OpenHands/issues/17084",
+    "number": 17084
+  },
+  {
+    "repo": "langfuse/langfuse",
+    "title": "Discussion: log trust verification receipts alongside LLM traces",
+    "url": "https://github.com/langfuse/langfuse/issues/16920",
+    "number": 16920
+  },
+  {
+    "repo": "e2b-dev/E2B",
+    "title": "Discussion: trust attestation for code running in E2B sandboxes",
+    "url": "https://github.com/e2b-dev/E2B/issues/1791",
+    "number": 1791
+  },
+  {
+    "repo": "vercel/ai",
+    "title": "RFC: trust-card verification hook for tool calls in AI SDK",
+    "url": "https://github.com/vercel/ai/issues/20147",
+    "number": 20147
+  },
+  {
+    "repo": "promptfoo/promptfoo",
+    "title": "Discussion: trust verification as a promptfoo test assertion",
+    "url": "https://github.com/promptfoo/promptfoo/issues/10599",
+    "number": 10599
+  },
+  {
+    "repo": "spiffe/spiffe",
+    "title": "Discussion: UTA adapter for SPIFFE/SPIRE workload identities",
+    "url": "https://github.com/spiffe/spiffe/issues/425",
+    "number": 425
+  },
+  {
+    "repo": "modelcontextprotocol/servers",
+    "title": "Add: MarketNow MCP Server \u2014 trust verification for MCP ecosystems",
+    "url": "https://github.com/modelcontextprotocol/servers/issues/4736",
+    "number": 4736
+  }
+]

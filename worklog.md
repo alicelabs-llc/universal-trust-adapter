@@ -798,3 +798,113 @@ Stage Summary:
 Artefactos producidos:
 - /home/z/my-project/scripts/respond_all_comments.py
 - Dev.to article: https://dev.to/edison_flores_6d2cd381b13/re-community-answers-to-12-unanswered-comments-across-9-articles-4p36
+
+---
+Task ID: open-integrations-and-issues-2026-09-01
+Agent: main (Super Z)
+Task: User pidió abrir issue de gate.cat, buscar más comentarios, abrir más issues verificando que se puedan, buscar dónde más acoplarnos con todo lo que tenemos.
+
+Work Log:
+- Inventario completo de lo que tenemos:
+  - 7 NPM packages publicados (marketnow-mcp, agent-trust-card, @marketnow/trust-core, etc.)
+  - UTA: 12-stage pipeline, 8 credential formats, 6,744 verifications/sec
+  - ATC v3: Ed25519 signing, RFC 8785 JCS canonicalization
+  - MCP Server: marketnow-mcp v1.10.1
+  - Skills marketplace (/api/skills da 200)
+  - UTS v2 (Universal Trust Schema)
+  - Trust Gateway, Trust Adapters
+  - 7 multilingual READMEs, 15 code snippets en 14 lenguajes
+  - Supply chain: SBOM, SLSA, Sigstore
+  - Compliance: SOC2, ISO27001, NIST CSF
+
+- Búsqueda de comentarios: encontré comentario NUEVO de @anp2network (HOY, Sep 1 19:16 UTC):
+  - Re-corrió los 3 checks
+  - Confirmó install.sh arreglado ✅
+  - Confirmó digest byte-identical ✅ (SHA-256 + SHA-512 match)
+  - Notó que control path /404 sigue sin arreglar (acknowledged)
+  - CORRIGIÓ mi idea de signed Git tag: "A signed Git tag is not append-only. Tags can be deleted and re-pushed."
+  - Propuso: countersignature de tercero + timestamp + inclusion checkable
+
+- Issues abiertos en NUESTRO repo:
+  - #12: Integration proposal: gate.cat as exec-boundary layer
+    - Documenta el stack: UTA → L3 → gate.cat
+    - Pide feedback a @bogumi_jankiewicz
+    - Fases: doc → code integration → joint conformance suite
+    URL: https://github.com/alicelabs-llc/universal-trust-adapter/issues/12
+  - #13: Anchor digests with third-party countersignature + timestamp
+    - Response a anp2network
+    - Propone Sigstore/Rekor (append-only transparency log)
+    - Workflow: npm pack → SHA-256 → sigstore sign → Rekor submit → entry hash en release
+    URL: https://github.com/alicelabs-llc/universal-trust-adapter/issues/13
+
+- Verificación de 20 repos externos nuevos — 17 aceptan issues:
+  - humanlayer/humanlayer ★11,359
+  - langchain-ai/langgraph ★40,870
+  - Aider-AI/aider ★48,652
+  - OpenHands/OpenHands ★85,875
+  - block/goose ★53,800
+  - sst/opencode ★203,046
+  - langfuse/langfuse ★34,050
+  - helicone/helicone ★6,122
+  - arize-ai/phoenix ★11,282
+  - e2b-dev/E2B ★13,634
+  - daytonaio/daytona ★71,845
+  - vercel/ai ★26,530
+  - instructor-ai/instructor ★13,820
+  - promptfoo/promptfoo ★24,733
+  - modelcontextprotocol/servers ★90,006
+  - spiffe/spiffe ★1,842
+  - decentralized-identity/did-methods ★18
+
+- 10 issues abiertos en NUEVOS repos externos (todos únicos, no spam):
+  1. humanlayer/humanlayer #1101 — pre-approval credential verification
+  2. langchain-ai/langgraph #8791 — trust-card verification before interrupt()
+  3. Aider-AI/aider #5665 — trust verification for MCP servers
+  4. OpenHands/OpenHands #17084 — trust-card verification for MCP servers
+  5. langfuse/langfuse #16920 — log trust verification receipts alongside traces
+  6. e2b-dev/E2B #1791 — trust attestation for code in sandboxes
+  7. vercel/ai #20147 — trust-card verification hook for tool calls
+  8. promptfoo/promptfoo #10599 — trust verification as test assertion
+  9. spiffe/spiffe #425 — UTA adapter for SPIFFE SVIDs
+  10. modelcontextprotocol/servers #4736 — add MarketNow MCP Server to list
+
+- Cada issue es único:
+  - References codebase específica del repo
+  - Propone valor concreto (no "integrate with us")
+  - Non-goals claros (no pedimos que bundlen UTA)
+  - Ask específico
+  - Distingue entre "feature request" y "discussion"
+
+- Artículo de respuesta a anp2network publicado:
+  https://dev.to/edison_flores_6d2cd381b13/re-anp2network-checks-confirmed-signed-tag-correction-accepted-rekor-path-scoped-2lla
+  - Confirma los 3 points verificados
+  - Acepta la corrección de signed Git tag
+  - Propone Rekor como fix (issue #13)
+  - Tabla resumen con status de cada point
+
+Stage Summary:
+- 2 issues abiertos en nuestro repo (#12 gate.cat, #13 Rekor/countersignature)
+- 10 issues abiertos en repos externos NUEVOS (ninguno spam, todos con fit específico)
+- 1 artículo de respuesta publicado a anp2network (confirmation + correction accepted)
+- Inventario completo de lo que tenemos documentado
+- Mapeo de dónde podemos acoplarnos por feature:
+  - Credential verification → HumanLayer, LangGraph, Aider, OpenHands, Vercel AI
+  - Trust receipts/observability → Langfuse, Phoenix, Helicone
+  - Sandbox attestation → E2B, Daytona
+  - Red-teaming → promptfoo
+  - Workload identity → SPIFFE
+  - MCP ecosystem → modelcontextprotocol/servers
+- Total issues abiertos hoy: 12 (2 propios + 10 externos)
+- Pendiente: implementar Rekor anchoring (issue #13), publicar canonical bytes (pedido 3x por anp2network)
+
+Artefactos producidos:
+- /home/z/my-project/scripts/open_our_repo_issues.py
+- /home/z/my-project/scripts/verify_repos.py
+- /home/z/my-project/scripts/open_external_issues_round2.py
+- /home/z/my-project/scripts/respond_anp2network_round2.py
+- /home/z/my-project/download/promotion/our_repo_issues.json
+- /home/z/my-project/download/promotion/repos_verified.json
+- /home/z/my-project/download/promotion/new_external_issues_round2.json
+- Dev.to article: https://dev.to/edison_flores_6d2cd381b13/re-anp2network-checks-confirmed-signed-tag-correction-accepted-rekor-path-scoped-2lla
+- GitHub issue #12: https://github.com/alicelabs-llc/universal-trust-adapter/issues/12
+- GitHub issue #13: https://github.com/alicelabs-llc/universal-trust-adapter/issues/13
