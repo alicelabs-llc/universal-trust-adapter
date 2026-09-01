@@ -1,0 +1,67 @@
+{
+  "name": "@alicelabs/cline-trust-plugin",
+  "version": "1.0.0",
+  "description": "Trust verification plugin for Cline — wraps MCP servers with pre-exec filter, credential protection, and Merkle tree audit log.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "keywords": ["cline", "mcp", "trust", "security", "interceptor", "sentinel", "atc", "uta"],
+  "author": "AliceLabs LLC",
+  "license": "AL-1.0",
+  "dependencies": {
+    "@marketnow/trust-gateway": "^1.0.1",
+    "@marketnow/trust-core": "^1.0.1"
+  },
+  "cline": {
+    "pluginType": "mcp-server",
+    "displayName": "UTA Trust Gateway",
+    "description": "Wraps all MCP servers with trust verification — blocks .env reads, rm -rf, shell spawns. Logs to Merkle tree.",
+    "tools": [
+      {
+        "name": "verify_trust",
+        "description": "Verify the trust score of any MCP server or credential",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "server_id": { "type": "string", "description": "MCP server ID or URL" },
+            "credential": { "type": "object", "description": "Credential JSON to verify" }
+          }
+        }
+      },
+      {
+        "name": "check_interceptor",
+        "description": "Check if a tool call would be blocked by the interceptor",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "tool_name": { "type": "string" },
+            "arguments": { "type": "object" }
+          }
+        }
+      },
+      {
+        "name": "get_audit_log",
+        "description": "Get the Merkle tree audit log of all intercepted calls",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": { "type": "number", "default": 50 }
+          }
+        }
+      },
+      {
+        "name": "scan_mcp_server",
+        "description": "Scan an MCP server for security threats (9,248 servers scanned)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "url": { "type": "string", "description": "MCP server URL or npm package" }
+          }
+        }
+      }
+    ]
+  }
+}
