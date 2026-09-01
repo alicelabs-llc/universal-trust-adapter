@@ -63,10 +63,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="[%(asctime)s UTC] %(levelname)s %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler("/home/z/my-project/download/telegram/bot.log")
-    ]
+    handlers=[logging.StreamHandler()]
 )
 log = logging.getLogger("uta-bot")
 
@@ -78,7 +75,8 @@ os.makedirs("/home/z/my-project/download/telegram", exist_ok=True)
 
 def uta_verify(card):
     """Call UTA API to verify a credential."""
-    payload = json.dumps({"card": card}).encode()
+    # UTA API expects "payload" field, not "card"
+    payload = json.dumps({"payload": card}).encode()
     req = urllib.request.Request(
         f"{UTA_API_URL}?action=verify",
         data=payload,
@@ -104,8 +102,8 @@ def uta_formats():
 # TELEGRAM API
 # ============================================================
 
-def tg_send_message(chat_id, text, parse_mode="Markdown"):
-    """Send a message via Telegram."""
+def tg_send_message(chat_id, text, parse_mode=None):
+    """Send a message via Telegram. Falls back to plain text if Markdown fails."""
     payload = json.dumps({
         "chat_id": chat_id,
         "text": text,
@@ -123,7 +121,11 @@ def tg_send_message(chat_id, text, parse_mode="Markdown"):
             return json.loads(r.read())
     except urllib.error.HTTPError as e:
         err = e.read().decode()
-        log.error(f"Telegram API error: {err}")
+        log.error(f"Telegram API error with parse_mode={parse_mode}: {err}")
+        # If Markdown failed, retry without parse_mode
+        if parse_mode:
+            log.info("Retrying without parse_mode (plain text)...")
+            return tg_send_message(chat_id, text, parse_mode=None)
         return None
 
 def tg_get_updates(offset=None):
