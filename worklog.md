@@ -908,3 +908,72 @@ Artefactos producidos:
 - Dev.to article: https://dev.to/edison_flores_6d2cd381b13/re-anp2network-checks-confirmed-signed-tag-correction-accepted-rekor-path-scoped-2lla
 - GitHub issue #12: https://github.com/alicelabs-llc/universal-trust-adapter/issues/12
 - GitHub issue #13: https://github.com/alicelabs-llc/universal-trust-adapter/issues/13
+
+---
+Task ID: monitor-cron-setup-2026-09-01
+Agent: main (Super Z)
+Task: User pidió crear script de monitoreo que responda automáticamente o un cron job cada 30 minutos.
+
+Work Log:
+- Inventario de canales a monitorear:
+  - 30 issues externos en GitHub (repos de agent frameworks + awesome lists)
+  - 2 issues en nuestro repo (#12 gate.cat, #13 Rekor)
+  - 140 artículos en Dev.to
+
+- Script creado: /home/z/my-project/scripts/monitor/uta_monitor.py
+  - Monitorea 32 GitHub issues + 140 Dev.to articles
+  - State persistence en state.json (no re-procesa comentarios vistos)
+  - Auto-respond para GitHub issues (template no-spam):
+    - Solo responde si no hemos respondido antes
+    - Template: "Thanks @X — appreciate you taking the time. Will review within 24h."
+    - Link a INTEGRATIONS.md
+    - 2 segundos entre responses (rate limit)
+  - Para Dev.to: solo logge (API no permite POST comments)
+  - Logging detallado a activity.log
+  - Summary JSON a latest_summary.json
+
+- Primera corrida (Run #1): encontró 88 comentarios nuevos
+  - Es la primera vez, así que marca todo como nuevo
+  - GitHub: comentarios viejos de Cline, mcpso, github-mcp-server
+  - Dev.to: comentarios de anp2network (6), topstar_ai (2), mads_hansen (2), bogumi_jankiewicz (1), wrencalloway (1), + otros viejos
+
+- Segunda corrida (Run #2, --no-respond): 0 nuevos
+  - State persistence funciona correctamente
+  - No re-procesa comentarios ya vistos
+
+- Tercera corrida (Run #3, auto-respond): en proceso en background
+  - Auto-respond activado
+  - Si encuentra comentarios nuevos humanos, posteará acknowledgment
+
+- Cron setup:
+  - crontab no disponible en este entorno (command not found)
+  - Alternativa: run_background.sh — loop infinito con sleep 1800 (30 min)
+  - Iniciado con nohup, PID guardado en monitor.pid
+  - Verificado: proceso corriendo
+
+- Archivos producidos:
+  - /home/z/my-project/scripts/monitor/uta_monitor.py — script principal
+  - /home/z/my-project/scripts/monitor/run_background.sh — wrapper para background
+  - /home/z/my-project/scripts/monitor/run_cron.sh — wrapper para cron (si se instala)
+  - /home/z/my-project/download/monitor/state.json — estado persistente
+  - /home/z/my-project/download/monitor/activity.log — log detallado
+  - /home/z/my-project/download/monitor/latest_summary.json — resumen JSON
+  - /home/z/my-project/download/monitor/background.log — log del loop
+  - /home/z/my-project/download/monitor/monitor.pid — PID del proceso
+
+Stage Summary:
+- Monitor configurado y corriendo en background (PID 2738)
+- Revisa cada 30 minutos: 30 GitHub issues + 2 propios + 140 Dev.to articles
+- Auto-respond activado para GitHub (no para Dev.to — API limitation)
+- State persistence funcionando (segunda corrida = 0 nuevos)
+- Template de auto-respond es no-spam: acknowledgment corto + promesa de respuesta sustantiva en 24h
+- Solo responde si no hemos respondido antes (evita spam)
+- Logs en /home/z/my-project/download/monitor/
+- Para detener: kill $(cat monitor.pid) o pkill -f run_background.sh
+- Para reiniciar: nohup run_background.sh > /dev/null 2>&1 &
+
+Limitaciones:
+- crontab no disponible — uso background loop como alternativa
+- Dev.to API no permite POST comments — solo monitoreo, respuesta manual via article
+- Si el proceso muere, no se reinicia solo (necesitaría systemd o supervisor)
+- Rate limit de GitHub: 2s entre auto-responds para evitar ban
