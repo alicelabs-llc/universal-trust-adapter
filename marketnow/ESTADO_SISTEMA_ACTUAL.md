@@ -39,7 +39,7 @@
 
 ### Credenciales Verificadas:
 - **n8n User**: support@alicelabs.site
-- **n8n Pass**: Opencl@w2026
+- **n8n Pass**: REMOVED_FOR_SECURITY_ROTATE_N8N_PASSWORD
 - **GitHub Token**: `[REMOVED_FOR_GITHUB_PUSH]` (seguro para push)
 - **Vercel Token**: Disponible en TOOLS.md
 
