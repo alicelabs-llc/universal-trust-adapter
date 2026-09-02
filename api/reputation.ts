@@ -3,8 +3,9 @@
  * Engine: uta-reputation-v1.1 · Spec: api/reputation-spec.md (canonical)
  *
  * SELF-CONTAINED: the engine (evaluateDomain) is inlined so this single file is
- * deployable anywhere that runs a Web-API request handler — tested on Vercel
- * Edge (drop into `api/`, zero config, zero env vars).
+ * deployable anywhere that runs a Web-API request handler — Node 18+, Deno,
+ * Bun, Cloudflare Workers, or any edge/serverless provider (zero config, zero
+ * env vars). Hosting-neutral by design: no platform-specific imports.
  *
  * PARITY NOTE: ProdIntel (alicelabs-llc/Scraper · services/sourceTrust.ts) runs
  * the same rules client-side for instant badges; this file is the canonical
@@ -17,7 +18,7 @@
  *    the caller's policy (spec §6).
  */
 
-export const REPUTATION_ENGINE_VERSION = 'uta-reputation-v1.1';
+export const REPUTATION_ENGINE_VERSION = 'uta-reputation-v1.2';
 
 export type SourceStatus = 'marketplace' | 'external' | 'caution' | 'risky';
 export type TrustVerdict = 'trusted' | 'unknown' | 'caution' | 'risky';
@@ -96,7 +97,13 @@ export function evaluateDomain(input: string): SourceAssessment {
   }
 
   // Risky: URL shortener hides the real destination
-  if (URL_SHORTENERS.some((s) => host === s || host.endsWith('.' + s) || host.includes(s))) {
+  // v1.2 fix: match by exact host / subdomain (or platform prefix for dotted
+  // patterns). Plain substring matching flagged legit marketplaces whose names
+  // contain "t.co" inside "<name>.com" (walmart.com, target.com, homedepot.com,
+  // flipkart.com) and hosts like blogspot.com — all wrongly scored risky 8.
+  if (URL_SHORTENERS.some((s) =>
+    s.endsWith('.') ? host.startsWith(s) : (host === s || host.endsWith('.' + s))
+  )) {
     return { status: 'risky', verdict: 'risky', score: 8, domain: host, reasons: ['URL shortener (destination hidden)'] };
   }
 
@@ -140,7 +147,7 @@ export function evaluateDomain(input: string): SourceAssessment {
 }
 
 // ---------------------------------------------------------------------------
-// HTTP surface (Vercel Edge / any Web-API runtime)
+// HTTP surface (any Web-API runtime: Request in, Response out)
 // ---------------------------------------------------------------------------
 
 const SPEC_URL = 'https://github.com/alicelabs-llc/universal-trust-adapter/blob/main/api/reputation-spec.md';
@@ -210,5 +217,3 @@ export default async function handler(req: Request): Promise<Response> {
   });
 }
 
-// Vercel Edge runtime marker (ignored by other hosts).
-export const config = { runtime: 'edge' };

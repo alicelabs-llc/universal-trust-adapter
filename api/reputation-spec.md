@@ -1,10 +1,9 @@
 # UTA Domain Reputation API — Specification
 
-**Version:** 1.1 (engine `uta-reputation-v1.1`)
+**Version:** 1.2 (engine `uta-reputation-v1.2`)
 **Status:** Stable · First consumer in production: [ProdIntel](https://github.com/alicelabs-llc/Scraper)
-**Reference implementation:** [`api/reputation.ts`](./reputation.ts) (self-contained, Vercel Edge compatible)
-**Live instance:** `https://uta-reputation.vercel.app/api/reputation` (public, keyless — try `?probe=1`)
-**Live demo (consumer):** https://uta-reputation.vercel.app/ — ProdIntel with server-confirmed source badges
+**Reference implementation:** [`api/reputation.ts`](./reputation.ts) (self-contained: one file, zero dependencies, runs on any Web-API runtime)
+**Live demo (consumer):** [ProdIntel](https://github.com/alicelabs-llc/Scraper) — server-confirmed source badges; see its README for the public demo and endpoint URL
 **Related:** [Universal Trust API](./trust-api-spec.md) (credential verification), ProdIntel Source Safety Gate (client parity)
 
 ---
@@ -53,7 +52,7 @@ OPTIONS /api/reputation                 # CORS preflight
 
 ```json
 {
-  "engine": "uta-reputation-v1.1",
+  "engine": "uta-reputation-v1.2",
   "input": "https://bit.ly/petdeal",
   "domain": "bit.ly",
   "verdict": "risky",
@@ -114,11 +113,15 @@ locally. This gives every consumer a graded degradation path:
 
 ## 7. Deployment
 
-Any host that runs a Web-API request handler works. The reference file is a zero-dependency
-Vercel Edge Function: drop `api/reputation.ts` into a project (or import the repo), deploy,
-and the endpoint is live at `<deploy>/api/reputation`. No environment variables, no keys,
-no egress cost. Self-hosters can adapt the `evaluateDomain(input)` pure function to any
-runtime (it is plain string/URL logic).
+The endpoint is **hosting-neutral by design**: the reference file is a zero-dependency Web-API
+handler (`Request` in, `Response` out), so it runs anywhere that speaks standard fetch
+primitives — Node 18+, Deno, Bun, Cloudflare Workers, or the edge/serverless runtime of any
+provider — plus a one-line wrapper for Express/Fastify if you prefer a classic server. Drop
+`api/reputation.ts` into any project, wire it to a route, and the endpoint is live at
+`<deploy>/api/reputation`. No environment variables, no keys, no egress cost. Self-hosters can
+adapt the `evaluateDomain(input)` pure function to any runtime (it is plain string/URL logic).
+The canonical public deployment maintained by AliceLabs runs inside the ProdIntel demo app —
+see the [ProdIntel repo](https://github.com/alicelabs-llc/Scraper) for the live URL.
 
 ## 8. Honest limitations (v1.1)
 
@@ -135,3 +138,13 @@ runtime (it is plain string/URL logic).
 `engine` never changes semantics silently: any signal, weight, or allowlist change bumps the
 version (`uta-reputation-v1.2`, …) and invalidates caches. Consumers key their caches on
 `engine` + `domain`.
+
+Changelog:
+
+- **v1.2** — fix: shortener hosts match by exact host / subdomain (or platform prefix for
+  dotted patterns). Previously plain substring matching wrongly scored `risky` any host whose
+  name contains `t.co` inside `<name>.com` — walmart.com, target.com, homedepot.com,
+  flipkart.com — plus hosts like blogspot.com. Those now evaluate correctly
+  (`trusted` / `caution`). Consumers MUST invalidate caches keyed on v1.1 verdicts.
+- **v1.1** — initial stable release: score 0–100, typosquat + credential-word heuristics,
+  low-barrier hosts, `myshopify` vs `shopify` distinction, client parity contract.
