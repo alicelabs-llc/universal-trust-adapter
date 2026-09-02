@@ -6,7 +6,7 @@ import sys
 import os
 
 # Connection info from user-provided URL
-# postgresql://postgres:Not%40ria23202500@db.pjhsgiblydnpsnjfbxzw.supabase.co:5432/postgres
+# postgresql://postgres:[REDACTED-ROTATE-SUPABASE-PASSWORD]@db.pjhsgiblydnpsnjfbxzw.supabase.co:5432/postgres
 HOST = 'db.pjhsgiblydnpsnjfbxzw.supabase.co'
 PORT = '5432'
 DBNAME = 'postgres'
