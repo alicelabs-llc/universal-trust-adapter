@@ -10,3 +10,7 @@ node_modules/
 *.pem
 *.key
 secrets/
+
+# Local agent tooling artifacts (never publish)
+tool-results/
+worklog.md
