@@ -6,7 +6,7 @@
 ## PR Title
 
 ```
-Add MarketNow — MCP skill marketplace with 5,054+ skills
+Add MarketNow — MCP skill marketplace with 9,248 skills
 ```
 
 ## PR Body
@@ -18,12 +18,12 @@ Adds [MarketNow](https://marketnow.site) to the awesome-mcp list.
 
 ## Description
 
-MarketNow is the open marketplace for MCP-compatible agent skills. It's an MCP server that exposes 5 tools for searching and discovering 5,054+ verified MCP skills from any agent runtime (Claude Desktop, Cursor, Cline).
+MarketNow is the open marketplace for MCP-compatible agent skills. It's an MCP server that exposes 5 tools for searching and discovering 9,248 verified MCP skills from any agent runtime (Claude Desktop, Cursor, Cline).
 
 ## Why add it?
 
-- Largest curated MCP skill catalog (5,054 skills)
-- Micro-priced for autonomous agent consumption ($0.99-$9.99)
+- Largest curated MCP skill catalog (9,248 skills)
+- Micro-priced for autonomous agent consumption (free)
 - Every skill is Sentinel L1 scanned for security
 - Public JSON API (no auth required)
 - Installable via `npx -y marketnow-mcp`
@@ -52,5 +52,5 @@ MarketNow is the open marketplace for MCP-compatible agent skills. It's an MCP s
 ## Suggested entry
 
 ```markdown
-- [MarketNow](https://marketnow.site) — MCP skill marketplace. 5,054+ verified skills, $0.99-$9.99, one-time payment. `npx -y marketnow-mcp`
+- [MarketNow](https://marketnow.site) — MCP skill marketplace. 9,248 verified skills, all free. `npx -y marketnow-mcp`
 ```

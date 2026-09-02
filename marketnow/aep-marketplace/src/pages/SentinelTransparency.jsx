@@ -301,7 +301,7 @@ export default function SentinelTransparency() {
             </Link>
             <a href="https://github.com/edgarfloresguerra2011-a11y/marketnow/tree/master/_data/sentinel_certificates" target="_blank" rel="noopener" className="block p-3 rounded-lg bg-black/30 hover:bg-black/50 border border-white/5 hover:border-[#00d1ff]/20 transition-all">
               <div className="text-[#00d1ff] text-sm font-semibold">→ All Certificates (GitHub)</div>
-              <div className="text-zinc-500 text-xs mt-1">Browse 8,845 signed certificate JSON files</div>
+              <div className="text-zinc-500 text-xs mt-1">Browse 9,248 signed certificate JSON files</div>
             </a>
             <a href="https://github.com/edgarfloresguerra2011-a11y/marketnow/actions/workflows/sentinel-certify-all.yml" target="_blank" rel="noopener" className="block p-3 rounded-lg bg-black/30 hover:bg-black/50 border border-white/5 hover:border-[#00d1ff]/20 transition-all">
               <div className="text-[#00d1ff] text-sm font-semibold">→ Weekly Audit Workflow</div>

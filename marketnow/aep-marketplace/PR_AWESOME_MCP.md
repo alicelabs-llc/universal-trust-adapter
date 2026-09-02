@@ -32,7 +32,7 @@ Adds [AEP — Agent Exchange Protocol](https://marketnow.site) to the Marketplac
 
 ### Why AEP belongs here
 
-- **13,859 MCP-compatible skills** - Largest open MCP skill registry
+- **9,248 MCP-compatible skills** - Largest open MCP skill registry
 - **Sentinel security scans** - Every skill is automatically scanned for malicious code, hardcoded secrets, license compliance (L1 static analysis)
 - **Working MCP endpoint** - `.well-known/mcp.json` discovery + `/api/mcp` JSON-RPC SSE endpoint with `search_skills`, `get_skill`, `get_categories`, and `health` tools
 - **Badge ecosystem** - Creators can embed `[![Sentinel Verified](https://marketnow.site/badge/{slug}.svg)](https://marketnow.site/skill/{slug})` in their READMEs

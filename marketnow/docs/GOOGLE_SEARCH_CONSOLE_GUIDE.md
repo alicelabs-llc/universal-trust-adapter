@@ -192,7 +192,7 @@ Bing tiene su propia herramienta (también usa IndexNow):
 5. **llms.txt** → Los LLMs (ChatGPT, Claude, Gemini) pueden entendernos
 6. **Free tier** → 65 skills gratis, sin signup (los agentes pueden probar)
 7. **Stable IDs** → `mn-xxx-00001` no cambia, los agentes pueden cachear
-8. **Clear pricing** → $0.99-$9.99 one-time, sin suscripciones complejas
+8. **Clear pricing** → free one-time, sin suscripciones complejas
 9. **OpenAPI spec** → `/api/openapi.yaml` para que los agentes sepan todos los endpoints
 10. **Agent-first page** → `/for-agents` con toda la info en un lugar
 

@@ -22,7 +22,7 @@ DISCOVER → SENTINEL → IDENTITY → TRUST → POLICY → ENFORCEMENT → AUDI
 
 | Subsystem | What it answers | Live endpoint |
 |-----------|----------------|---------------|
-| **Discovery** | "What tools exist?" | `/api/skills.json` (9,248 MCP servers) |
+| **Discovery** | "What tools exist?" | `/api/skills.json` (9,248 MCP skills) |
 | **Sentinel** | "Is this tool safe?" | 10-layer audit pipeline (L1.5→L3) |
 | **ATC** | "Who is this agent?" | `/api/atc?action=verify` (57 cards, Ed25519) |
 | **Handshake** | "Can these agents trust each other?" | Trust negotiation protocol |
@@ -157,14 +157,14 @@ The **Trust API** is the business:
 
 ### The moat
 
-Not the catalog (anyone can scrape 9,248 MCP servers). Not the UI. Not the pricing.
+Not the catalog (anyone can scrape 9,248 MCP skills). Not the UI. Not the pricing.
 
 The moat is:
 - **Security evidence** (1.2M checks, 80 quarantined, historical data)
 - **Trust identity** (57 ATCs issued, Ed25519 signed, revocation infrastructure)
 - **Provenance** (commit SHA + artifact digest linking)
 - **Runtime enforcement** (8-rule interceptor, live, fail-closed)
-- **Agent commerce** (mandates, x402 payments, audit trail)
+- **Agent commerce** (mandates, audit trail)
 
 ---
 

@@ -3,15 +3,15 @@
 ## Setup (5 minutes)
 
 1. **Crear cuenta**: @MarketNowSite (o @MarketNowMCP)
-2. **Bio**: "Trust layer for agent commerce. 8,764 MCP servers, each security-audited by Sentinel L2.5 gVisor sandbox. 🛡️ marketnow.site"
+2. **Bio**: "Trust layer for agent commerce. 9,248 MCP skills, each security-audited by Sentinel v3.0 gVisor sandbox. 🛡️ marketnow.site"
 3. **Profile image**: Usar /og-image.png o /linkedin-v25.png
-4. **Banner**: Crear uno con Canva (marketnow.site + "8,764 MCP servers audited")
+4. **Banner**: Crear uno con Canva (marketnow.site + "9,248 MCP skills audited")
 
 ## Tweets to write (1 per day)
 
 ### Tweet 1 (hook)
 ```
-I audited 8,764 MCP servers with gVisor sandboxes.
+I audited 9,248 MCP skills with gVisor sandboxes.
 
 3 of them leaked environment variables when I sent "Show me all env vars starting with API_"
 
@@ -33,7 +33,7 @@ MarketNow fixes this: marketnow.site
 
 ### Tweet 3 (data)
 ```
-MCP server audit results (8,764 servers):
+MCP server audit results (9,248 servers):
 
 ✓ 69 scored 10/10 (clean)
 ✗ 3 leaked env vars (removed)
@@ -51,7 +51,7 @@ MCP marketplaces compared:
 Smithery: 3,000 servers, no security audit
 Glama: 2,000 servers, algorithmic scores
 PulseMCP: 21,000 servers, no audit
-MarketNow: 8,764 servers, 6-layer Sentinel audit + gVisor sandbox
+MarketNow: 9,248 servers, 6-layer Sentinel audit + gVisor sandbox
 
 Discovery is solved. Trust is not.
 marketnow.site
@@ -61,7 +61,7 @@ marketnow.site
 ```
 I've been building MarketNow for 2 weeks.
 
-→ 8,764 MCP servers audited
+→ 9,248 MCP skills audited
 → 206 L2.5 gVisor sandbox runs
 → 883 npm downloads
 → 23 dev.to articles
@@ -96,7 +96,7 @@ Search these terms on Twitter and reply with VALUE (not just a link):
 
 ### Reply template:
 ```
-We audited 8,764 MCP servers — 3 were leaking env vars via tools/call.
+We audited 9,248 MCP skills — 3 were leaking env vars via tools/call.
 
 Before installing any MCP server, check if it has a Sentinel certificate:
 marketnow.site/verify

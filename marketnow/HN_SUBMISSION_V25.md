@@ -63,7 +63,7 @@ MarketNow adds the security signal.
 
 ### Comment 4 (if someone asks about pricing/business model)
 
-Free for browsing, free for the 43 hand-curated free skills. Paid skills are $0.99-$9.99 one-time (Stripe or USDC on Base L2). No subscriptions.
+Free for browsing, free for the 43 hand-curated free skills. Paid skills are free one-time (Stripe or USDC on Base L2). No subscriptions.
 
 The audit engine is proprietary. The marketplace takes 10% on paid skills.
 

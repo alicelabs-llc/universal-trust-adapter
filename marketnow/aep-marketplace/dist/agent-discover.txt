@@ -42,8 +42,8 @@ https://smithery.ai/servers/eddyflores100/marketnow
 
 STATS:
 - 9,248 skills
-- 58 categories
-- 65 free skills
+- 16 categories
+- 9,248 free skills
 - 15 active sellers
 - 5 languages (EN, ES, ZH, PT, FR)
 - B2B: Community (Free) / Team ($99/mo) / Enterprise (Custom)

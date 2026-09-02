@@ -32,7 +32,7 @@
         "Added /api/changelog endpoint",
         "Added /api/recommend endpoint",
         "Added /api/mcp (HTTP transport)",
-        "Sentinel L2.5 gVisor sandbox live"
+        "Sentinel v3.0 gVisor sandbox live"
       ]
     },
     {

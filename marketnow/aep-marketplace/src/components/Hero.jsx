@@ -70,7 +70,7 @@ export default function Hero({ onSignIn }) {
               to="/registry"
               className="px-8 py-4 bg-[#00F299] text-black font-bold rounded-xl hover:bg-[#00F299]/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg shadow-[#00F299]/20"
             >
-              BROWSE 5,054 SKILLS →
+              BROWSE 9,248 SKILLS →
             </Link>
             <Link
               to="/submit"

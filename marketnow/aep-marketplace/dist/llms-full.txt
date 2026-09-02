@@ -92,8 +92,8 @@ Discussion: https://github.com/PipedreamHQ/awesome-mcp-servers/issues/94
 
 ## Business model
 - All skills: FREE (MarketNow does not sell skills)
-- Sentinel PRO: $9.99/mo (priority audits, analytics dashboard, team mandates)
-- Sentinel Enterprise: $49.99/mo (SOC2 mapping, private catalog, custom signatures, SLA)
+- Sentinel PRO: free (priority audits, analytics dashboard, team mandates)
+- Sentinel Enterprise: free (SOC2 mapping, private catalog, custom signatures, SLA)
 - Seller commission: 20% on seller-set prices (15% if affiliate used)
 - Affiliate: 5% commission on referred sales
 

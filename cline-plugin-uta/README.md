@@ -7,7 +7,7 @@ Trust verification plugin for Cline — wraps MCP servers with pre-exec filter, 
 1. **Blocks dangerous calls** — `.env` reads, `rm -rf`, `DROP TABLE`, shell spawns, credential file access
 2. **Verifies trust** — checks any MCP server's trust score via the UTA API
 3. **Audit log** — tamper-evident Merkle tree of every intercepted call
-4. **Scans servers** — checks against 9,248 MCP servers scanned for threats
+4. **Scans servers** — checks against 9,248 MCP skills scanned for threats
 
 ## Install
 

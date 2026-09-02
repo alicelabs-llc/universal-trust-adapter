@@ -37,7 +37,7 @@
     "evidence": {
       "agent.json_description": "5,023 MCP servers",
       "agent.json_pricing_explanation": "7,063 skills",
-      "landing_html_main": "9,248 MCP servers indexed",
+      "landing_html_main": "9,248 MCP skills indexed",
       "landing_html_categories_sum": "5,831 (1976+1891+782+348+328+292+288+224=5829, +43 hand-curated)",
       "skills_lite_json_actual": "9,248 skills",
       "sitemap": "9,248 skills mentioned in /catalog"
@@ -48,11 +48,11 @@
     "severity": "P0_CRITICAL",
     "issue": "Modelo de negocio incompatible entre landing y agent.json",
     "evidence": {
-      "landing_html": "$0.99-$9.99 One-Time (cobra al comprador)",
+      "landing_html": "free One-Time (cobra al comprador)",
       "agent.json_pricing_model": "MarketNow does NOT sell skills (cobra al vendedor)",
       "agent.json_seller_tiers": "FREE / PRO $9.99/mo / ENTERPRISE $49.99/mo"
     },
-    "fix": "Confirmar modelo B2B (vendedor) y eliminar menci\u00f3n de $0.99-$9.99 en landing"
+    "fix": "Confirmar modelo B2B (vendedor) y eliminar menci\u00f3n de free en landing"
   },
   "F6_VERSION_DRIFT_NPM_VS_DOCS": {
     "severity": "P1_HIGH",

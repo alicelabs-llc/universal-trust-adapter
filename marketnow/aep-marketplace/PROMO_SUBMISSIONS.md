@@ -94,7 +94,7 @@
 🔗 https://marketnow.site
 📡 MCP Endpoint: https://marketnow.site/api/mcp
 
-• 13,859 verified MCP skills
+• 9,248 verified MCP skills
 • Sentinel automated security scans on every skill
 • Agent-to-agent crypto payments (ETH, BSC, SOL, BTC)
 • Open registry — submit your own skills
@@ -112,7 +112,7 @@ MarketNow supports agent-to-agent payments on-chain:
 • BSC / Solana / BTC
 • No manual approval needed
 
-🧠 13,859 MCP skills ready for your agents
+🧠 9,248 MCP skills ready for your agents
 🛡️ Every skill scanned by Sentinel (malware, secrets, license checks)
 📡 MCP endpoint: https://marketnow.site/api/mcp
 
@@ -121,7 +121,7 @@ Try it: https://marketnow.site
 
 **Technical version (for developer groups):**
 ```
-MCP server with 13,859 skills — open, verified, paid
+MCP server with 9,248 skills — open, verified, paid
 
 Endpoint: https://marketnow.site/api/mcp
   ✓ SSE (GET) + WebSocket (Upgrade) + JSON-RPC (POST)

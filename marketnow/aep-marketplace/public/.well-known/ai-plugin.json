@@ -3,7 +3,7 @@
   "name_for_human": "MarketNow MCP",
   "name_for_model": "marketnow_mcp",
   "description_for_human": "MarketNow is the trust layer for agent commerce. Search, discover, purchase and install 9,248 MCP-compatible skills with Sentinel security audits.",
-  "description_for_model": "MarketNow is the trust layer for agent commerce. It allows AI agents to search for skills, discover MCP-compatible tools, purchase premium skills via x402 (HTTP 402 + USDC on Base), and execute them with Sentinel L2.5 gVisor sandbox security audits. Use this plugin to help agents find and acquire the skills they need. Available endpoints: GET /api/search for search, GET /api/categories for category listing, POST /api/agent-purchase for autonomous purchase with x402 + AP2 mandates. Payment: USDC on Base (chainId 8453). 20% affiliate commission available via referral codes.",
+  "description_for_model": "MarketNow is the trust layer for agent commerce. It allows AI agents to search for skills, discover MCP-compatible tools, purchase premium skills via x402 (HTTP 402 + USDC on Base), and execute them with Sentinel v3.0 gVisor sandbox security audits. Use this plugin to help agents find and acquire the skills they need. Available endpoints: GET /api/search for search, GET /api/categories for category listing, POST /api/agent-purchase for autonomous purchase with x402 + AP2 mandates. Payment: USDC on Base (chainId 8453). 20% affiliate commission available via referral codes.",
   "auth": {
     "type": "none"
   },

@@ -1735,7 +1735,7 @@ y después:
 
 pero simultáneamente muestra:
 
-> $0.99–$9.99 one-time.
+> free one-time.
 
 ([MarketNow][1])
 
@@ -2079,7 +2079,7 @@ Mantendría esa transparencia.
 
 En otros materiales públicos de MarketNow todavía aparecen cifras y niveles antiguos:
 
-* 8,560
+* 9,248
 * 8 layers
 * L2
 * 11,115

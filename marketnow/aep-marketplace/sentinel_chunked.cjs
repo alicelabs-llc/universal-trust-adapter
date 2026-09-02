@@ -4,7 +4,7 @@
  * Uso: node sentinel_chunked.cjs [startIndex] [endIndex]
  * Ej:  node sentinel_chunked.cjs 0 4600    # Chunk 1
  *      node sentinel_chunked.cjs 4600 9200  # Chunk 2
- *      node sentinel_chunked.cjs 9200 13859 # Chunk 3
+ *      node sentinel_chunked.cjs 9200 9248 # Chunk 3
  */
 
 const fs = require('fs');
@@ -134,7 +134,7 @@ async function uploadToKV(batch) {
 
 async function main() {
   const startIdx = parseInt(process.argv[2] || '0');
-  const endIdx = parseInt(process.argv[3] || '13859');
+  const endIdx = parseInt(process.argv[3] || '9248');
   
   console.log(`=== SENTINEL CHUNKED SCANNER ===`);
   console.log(`Chunk: ${startIdx} → ${endIdx}`);

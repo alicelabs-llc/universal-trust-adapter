@@ -233,7 +233,7 @@ LLMs-full-txt: https://marketnow.site/llms-full.txt
 # GET /api/skills.json — all 9,248 skills with capabilities and system prompts
 # GET /api/search?q=query — server-side search with relevance scoring
 # GET /api/manifest.json — marketplace metadata (v4.0.0)
-# GET /api/categories.json — 58 categories with counts
+# GET /api/categories.json — 16 categories with counts
 # GET /api/openapi.yaml — OpenAPI 3.1 specification
 # GET /api/verify-purchase?sessionId=X — verify a Stripe purchase
 # GET /api/bundles.json — skill bundles with discounts
