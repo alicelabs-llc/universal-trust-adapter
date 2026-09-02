@@ -3,6 +3,8 @@
 **Version:** 1.1 (engine `uta-reputation-v1.1`)
 **Status:** Stable · First consumer in production: [ProdIntel](https://github.com/alicelabs-llc/Scraper)
 **Reference implementation:** [`api/reputation.ts`](./reputation.ts) (self-contained, Vercel Edge compatible)
+**Live instance:** `https://uta-reputation.vercel.app/api/reputation` (public, keyless — try `?probe=1`)
+**Live demo (consumer):** https://uta-reputation.vercel.app/ — ProdIntel with server-confirmed source badges
 **Related:** [Universal Trust API](./trust-api-spec.md) (credential verification), ProdIntel Source Safety Gate (client parity)
 
 ---
