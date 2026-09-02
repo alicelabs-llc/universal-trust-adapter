@@ -36,9 +36,9 @@
 ### Solución: Ya arreglado con JS dinámico
 
 Añadí un script en `index.html` que actualiza el canonical y el title según la ruta:
-- `/registry` → canonical: `https://marketnow.site/registry`, title: "Browse 8,764 MCP Servers — MarketNow Registry"
-- `/trust` → canonical: `https://marketnow.site/trust`, title: "Trust Roadmap — Sentinel L2.5"
-- `/security` → canonical: `https://marketnow.site/security`, title: "Sentinel L2.5 Security Audit"
+- `/registry` → canonical: `https://marketnow.site/registry`, title: "Browse 9,248 MCP Skills — MarketNow Registry"
+- `/trust` → canonical: `https://marketnow.site/trust`, title: "Trust Roadmap — Sentinel v3.0"
+- `/security` → canonical: `https://marketnow.site/security`, title: "Sentinel v3.0 Security Audit"
 - (y 17 rutas más)
 
 **Esto era el problema #1 de SEO técnico** — Google veía todas las páginas como duplicadas del homepage.
@@ -60,7 +60,7 @@ Jul 7: 10 artículos → 6.1 views/artículo (SUPRIMIDO)
 
 | Fecha | Artículo |
 |-------|----------|
-| Jul 10 | "How I built a 6-layer security audit for 8,764 MCP servers" |
+| Jul 10 | "How I built a 6-layer security audit for 9,248 MCP skills" |
 | Jul 13 | "The MCP security checklist: 10 things to check before installing any MCP server" |
 | Jul 16 | "gVisor vs Docker vs Firecracker: which sandbox for MCP servers?" |
 | Jul 19 | "I found 3 MCP servers leaking environment variables — here's how" |
@@ -89,7 +89,7 @@ I've been building MarketNow (marketnow.site), a marketplace where every MCP ser
 - L2 v2.0: Active probe (60+ adversarial inputs)
 - L2.5: gVisor sandbox (userspace kernel isolation)
 
-8,764 servers audited. 3 were removed for leaking environment variables.
+9,248 servers audited. 3 were removed for leaking environment variables.
 
 Would you be interested in mentioning it in a future article? Happy to provide:
 - An exclusive angle (e.g., "I audited Anthropic's official MCP server")
@@ -121,11 +121,11 @@ marketnow.site
 
 #### Twitter/X (CRÍTICO):
 1. Crear cuenta: @MarketNowSite (o @MarketNow_MCP)
-2. Bio: "Trust layer for agent commerce. 8,764 MCP servers, each security-audited by Sentinel L2.5 gVisor sandbox. 🛡️"
+2. Bio: "Trust layer for agent commerce. 9,248 MCP skills, each security-audited by Sentinel v3.0 gVisor sandbox. 🛡️"
 3. Empezar a responder tweets sobre MCP:
    - Buscar: "MCP server" en Twitter
    - Responder con valor real (no solo "check out marketnow.site")
-   - Ejemplo: "We audited 8,764 MCP servers with gVisor sandboxes — 3 were leaking env vars. Full results: [link]"
+   - Ejemplo: "We audited 9,248 MCP skills with gVisor sandboxes — 3 were leaking env vars. Full results: [link]"
 
 #### LinkedIn Company Page:
 1. Crear: https://www.linkedin.com/company/marketnow
@@ -151,7 +151,7 @@ Pero SÍ podemos competir por long-tail keywords:
 |---------|----------------|-------------|-----------------|
 | "MCP server security audit" | ~500 | Media | Único con gVisor |
 | "gVisor MCP server" | ~100 | Baja | Único |
-| "MCP server vulnerability scanner" | ~300 | Media | 8,764 audited |
+| "MCP server vulnerability scanner" | ~300 | Media | 9,248 audited |
 | "Sentinel MCP audit" | ~50 | Muy baja | Marca propia |
 | "MCP server sandbox" | ~200 | Baja | gVisor L2.5 |
 | "audit MCP server before install" | ~100 | Baja | Único |

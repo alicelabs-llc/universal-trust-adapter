@@ -2,7 +2,7 @@
   "schemaVersion": "v1.0",
   "agent": {
     "name": "MarketNow — Agent Skill Exchange",
-    "description": "The largest MCP skill marketplace for AI agents. Browse 9248+ verified MCP servers, each secured by Sentinel v3.0 gVisor sandbox security audit. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
+    "description": "The largest MCP skill marketplace for AI agents. Browse 9,248 verified MCP servers, each secured by Sentinel v3.0 gVisor sandbox security audit. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
     "url": "https://marketnow.site",
     "version": "4.0.0"
   },
@@ -44,7 +44,7 @@
           {
             "id": "skill-search",
             "name": "MCP Skill Search",
-            "description": "AI agents can search and retrieve MCP server configurations from 9248+ verified skills. Supports natural language queries, category filtering, and security score thresholds.",
+            "description": "AI agents can search and retrieve MCP server configurations from 9,248 verified skills. Supports natural language queries, category filtering, and security score thresholds.",
             "commissionRate": 0.2,
             "referralEndpoints": {
               "register": "https://marketnow.site/api/agent/register",
@@ -87,7 +87,7 @@
   },
   "economy": {
     "model": "Marketplace with commission: sellers list skills (free or premium), buyers install free or pay seller's price",
-    "buyer_pricing": "Free skills cost nothing. Premium skills have a one-time price set by the seller (typically $0.99-$9.99)",
+    "buyer_pricing": "Free skills cost nothing. Premium skills have a one-time price set by the seller (typically free)",
     "seller_pricing": {
       "listing": "Free — list unlimited skills at no cost",
       "SENTINEL_PRO": "$9.99/mo — Sentinel v3.0 audit on every skill",

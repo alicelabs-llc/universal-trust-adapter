@@ -318,8 +318,8 @@
    318→
    319→────────────────────────────────────────────────────────────────────────────────
    320→📅 2026-07-07T13:21:51  💬 @pakvothe  (Franco Ortiz)
-   321→   in: 5 idiomas, 8,560 skills: cómo construimos un marketplace MCP multiling
-   322→   article URL: https://dev.to/edison_flores_6d2cd381b13/5-idiomas-8560-skills-como-construimos-un-marketplace-mcp-multilingue-30j4
+   321→   in: 5 idiomas, 9,248 skills: cómo construimos un marketplace MCP multiling
+   322→   article URL: https://dev.to/edison_flores_6d2cd381b13/5-idiomas-9248-skills-como-construimos-un-marketplace-mcp-multilingue-30j4
    323→   comment id: 3al0i
    324→
    325→   | Muy bueno el desglose, y el dato de que un sitio solo en inglés pierde ~60% del tráfico es el argumento que más cuesta hacerle entender a la gente.
@@ -327,8 +327,8 @@
    327→
    328→────────────────────────────────────────────────────────────────────────────────
    329→📅 2026-07-07T04:50:33  💬 @edison_flores_6d2cd381b13  (Edison Flores)
-   330→   in: 5 idiomas, 8,560 skills: cómo construimos un marketplace MCP multiling
-   331→   article URL: https://dev.to/edison_flores_6d2cd381b13/5-idiomas-8560-skills-como-construimos-un-marketplace-mcp-multilingue-30j4
+   330→   in: 5 idiomas, 9,248 skills: cómo construimos un marketplace MCP multiling
+   331→   article URL: https://dev.to/edison_flores_6d2cd381b13/5-idiomas-9248-skills-como-construimos-un-marketplace-mcp-multilingue-30j4
    332→   comment id: 3ak90
    333→
    334→   | Thanks @23cse_132_ritikagaur! Yeah, we wanted to avoid react-i18next — it's great for apps with hundreds of routes, but for a marketplace that needs to load fast (especially the /registry page with 8,760 skills), every KB counts. localStorage + a simple React context keeps the bundle lean.
@@ -344,8 +344,8 @@
    344→
    345→────────────────────────────────────────────────────────────────────────────────
    346→📅 2026-07-05T02:02:12  💬 @23cse_132_ritikagaur_984  (23cse 132_Ritika gaur)
-   347→   in: 5 idiomas, 8,560 skills: cómo construimos un marketplace MCP multiling
-   348→   article URL: https://dev.to/edison_flores_6d2cd381b13/5-idiomas-8560-skills-como-construimos-un-marketplace-mcp-multilingue-30j4
+   347→   in: 5 idiomas, 9,248 skills: cómo construimos un marketplace MCP multiling
+   348→   article URL: https://dev.to/edison_flores_6d2cd381b13/5-idiomas-9248-skills-como-construimos-un-marketplace-mcp-multilingue-30j4
    349→   comment id: 3ahb2
    350→
    351→   | Using a simple context to persist language in localStorage is clever, it keeps the code lean without relying on heavy libraries like react-i18next. I publish quick visual cheatsheets and developer roadmaps weekly on Instagram: https://instagram.com/rtam.tech/.

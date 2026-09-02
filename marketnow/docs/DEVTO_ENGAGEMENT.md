@@ -9,7 +9,7 @@
 ```
 Great research! 78% having significant issues aligns with what we found at scale.
 
-We audited 8,764 MCP servers with a 6-layer pipeline (Sentinel):
+We audited 9,248 MCP skills with a 6-layer pipeline (Sentinel):
 - L1.5: Static analysis (deps, secrets)
 - L1.6: Behavioral pattern analysis
 - L2 v2.0: Active probe (60+ adversarial inputs)
@@ -57,7 +57,7 @@ Our approach: every MCP server gets a 6-layer security audit (Sentinel) before l
 - Active probe with 60+ adversarial inputs (path traversal, SSRF, SQL injection, command injection, prompt injection, credential access)
 - gVisor sandbox isolation
 
-8,764 servers audited. 3 were removed for leaking environment variables. Each server gets a signed SHA-256 certificate.
+9,248 servers audited. 3 were removed for leaking environment variables. Each server gets a signed SHA-256 certificate.
 
 The agent can verify the certificate before calling the tool — similar to your trust firewall but for external tools rather than memory.
 
@@ -83,7 +83,7 @@ This is exactly right — code review can't catch runtime behavior. That's why w
 
 Plus gVisor sandbox to catch kernel-level escapes.
 
-3 out of 8,764 servers leaked environment variables when probed — something code review would never catch.
+3 out of 9,248 servers leaked environment variables when probed — something code review would never catch.
 
 marketnow.site/security
 ```
@@ -103,7 +103,7 @@ When an agent calls an MCP server, that server gets:
 - Process spawn (run commands)
 - Env var access (API keys)
 
-We built a marketplace (MarketNow) where every MCP server is security-audited with a 6-layer pipeline including gVisor sandbox isolation. 8,764 servers audited, each with a signed certificate.
+We built a marketplace (MarketNow) where every MCP server is security-audited with a 6-layer pipeline including gVisor sandbox isolation. 9,248 servers audited, each with a signed certificate.
 
 The agent can check the certificate score before deciding whether to trust the server's "access."
 

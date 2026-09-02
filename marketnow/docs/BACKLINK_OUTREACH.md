@@ -102,10 +102,10 @@ I've been building MarketNow (marketnow.site), a marketplace where every MCP ser
 - L2 v2.0: Active probe (60+ adversarial inputs: path traversal, SSRF, SQL injection, command injection, prompt injection, credential access)
 - L2.5: gVisor sandbox (userspace kernel isolation — the tech behind Google Cloud Run)
 
-8,764 servers audited. 3 were removed for leaking environment variables via tools/call.
+9,248 servers audited. 3 were removed for leaking environment variables via tools/call.
 
 Would you be interested in a guest post or mention? I can provide:
-- Exclusive data from our audit (what vulnerabilities we found in 8,764 servers)
+- Exclusive data from our audit (what vulnerabilities we found in 9,248 servers)
 - A technical deep-dive into the gVisor sandbox approach
 - A comparison of MCP security tools
 
@@ -124,7 +124,7 @@ Hi @username,
 
 Loved your article on [topic]. I'm building MarketNow — a marketplace where every MCP server gets a 6-layer security audit (including gVisor sandbox).
 
-We've audited 8,764 servers and found [specific finding related to their article]. Thought you might find it interesting for a follow-up post.
+We've audited 9,248 servers and found [specific finding related to their article]. Thought you might find it interesting for a follow-up post.
 
 Full methodology: marketnow.site/security
 Audit results: github.com/alicelabs-llc/marketnow
@@ -137,7 +137,7 @@ Would love to compare notes on scanning methodology if you're open to it.
 ## YouTube comment template
 
 ```
-Great video! We've been running gVisor sandbox audits on 8,764 MCP servers at MarketNow (marketnow.site/security). 
+Great video! We've been running gVisor sandbox audits on 9,248 MCP skills at MarketNow (marketnow.site/security). 
 
 Key finding: 3 servers leaked environment variables when sent credential-access prompts via tools/call. The args were passed to eval() without sanitization.
 

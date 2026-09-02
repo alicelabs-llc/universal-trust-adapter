@@ -13,14 +13,14 @@ Product Hunt puede traer **1,000-5,000 visitors en 24 horas** si el launch va bi
   - Mostrar: búsqueda de MCP server → click → ver certificado → install
   - Herramienta: https://www.loom.com (gratis, fácil)
 - [ ] **Galería de imágenes** (6 imágenes mínimo)
-  - 1. Screenshot del registry con 8,764 skills
+  - 1. Screenshot del registry con 9,248 skills
   - 2. Screenshot del certificado de seguridad (verify page)
   - 3. Diagrama del pipeline Sentinel (L1.5 → L2.5)
   - 4. Screenshot del gVisor sandbox result
   - 5. Logo de MarketNow
   - 6. Screenshot del API response
 - [ ] **Tagline** (60 caracteres): "MCP marketplace with 6-layer security audits"
-- [ ] **Descripción** (260 caracteres): "8,764 MCP servers, each security-audited by Sentinel (L1.5 static → L2.5 gVisor sandbox). 60+ adversarial inputs tested per server. Signed SHA-256 certificates. For Claude Desktop, Cursor, Cline."
+- [ ] **Descripción** (260 caracteres): "9,248 MCP skills, each security-audited by Sentinel (L1.5 static → L2.5 gVisor sandbox). 60+ adversarial inputs tested per server. Signed SHA-256 certificates. For Claude Desktop, Cursor, Cline."
 - [ ] **First comment** (del founder): historia honesta de por qué lo construiste
 
 ### ✅ Hunter y Makers
@@ -49,7 +49,7 @@ Hey Product Hunt! 👋
 
 I'm Edison, solo founder of MarketNow. I built this because the MCP ecosystem has a trust problem — anyone can publish an MCP server, and when you install one, it gets full access to your filesystem, network, and environment variables. No sandboxing. No audit. No security signal.
 
-MarketNow fixes this. Every one of our 8,764 MCP servers goes through a 6-layer security audit (Sentinel):
+MarketNow fixes this. Every one of our 9,248 MCP skills goes through a 6-layer security audit (Sentinel):
 
 🔹 L1.5 — Static analysis (deps, secrets, licenses)
 🔹 L1.6 — Pattern-based behavioral analysis
@@ -58,7 +58,7 @@ MarketNow fixes this. Every one of our 8,764 MCP servers goes through a 6-layer 
 🔸 L3 (Q1 2027) — Firecracker microVM
 🔸 L4 (Q4 2026) — Supply chain attestation (SLSA Level 3)
 
-What I found auditing 8,764 servers:
+What I found auditing 9,248 servers:
 - 3 servers leaked environment variables when sent credential-access prompts (args passed to eval() without sanitization)
 - 12 had hardcoded API keys in source code
 - 1 attempted ptrace() (blocked by gVisor)

@@ -6,7 +6,7 @@
 openapi: 3.1.0
 info:
   title: MarketNow Skills API
-  description: 'The open marketplace for MCP-compatible agent skills. 11,115 verified skills, micro-priced from $0.99 to $9.99.
+  description: 'The open marketplace for MCP-compatible agent skills. 11,115 verified skills, micro-priced from free.
     Designed for autonomous agent consumption.
 
 
@@ -48,9 +48,9 @@ info:
 
     - 11,115 MCP skills indexed
 
-    - 58 categories
+    - 16 categories
 
-    - 65 free skills
+    - 9,248 free skills
 
     - 5 languages: EN, ES, ZH, PT, FR
 
@@ -81,9 +81,9 @@ info:
 
     - 11,115 MCP skills indexed
 
-    - 58 categories
+    - 16 categories
 
-    - 65 free skills
+    - 9,248 free skills
 
     - 5 languages: EN, ES, ZH, PT, FR
 

@@ -2077,13 +2077,13 @@ RBAC
 private registry
 ```
 
-Esto es mucho más monetizable que vender skills de $0.99–$9.99.
+Esto es mucho más monetizable que vender skills de free.
 
 ---
 
-# 51. Los $0.99–$9.99 son secundarios
+# 51. Los free son secundarios
 
-Actualmente MarketNow ofrece skills en torno a $0.99–$9.99 y usa x402/USDC para agentes, además de AP2 con human-in-the-loop por defecto. ([MCP.so][14])
+Actualmente MarketNow ofrece skills en torno a free y usa x402/USDC para agentes, además de AP2 con human-in-the-loop por defecto. ([MCP.so][14])
 
 Eso es interesante como **demo de agent commerce**.
 

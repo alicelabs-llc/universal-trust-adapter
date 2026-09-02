@@ -7,7 +7,7 @@
 ## Overview
 
 Sentinel v3.0 is the canonical security audit methodology for MarketNow.
-All references to "Sentinel L1.5", "Sentinel L2.5", or "6-point audit"
+All references to "Sentinel L1.5", "Sentinel v3.0", or "6-point audit"
 should be replaced with "Sentinel v3.0" and link to this document.
 
 ## Pipeline stages (12)

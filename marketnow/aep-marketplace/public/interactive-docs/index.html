@@ -168,7 +168,7 @@ window.onload = () => {
         get: { summary: 'Get 16 skill categories', tags: ['Skills'], responses: { '200': { description: 'Categories', content: { 'application/json': { schema: { type: 'array' }}}}}}
       },
       '/api/audit-report.json': {
-        get: { summary: 'Get security audit report (9,248 MCP servers scanned)', tags: ['Audit'], responses: { '200': { description: 'Audit report', content: { 'application/json': { schema: { type: 'object' }}}}}}
+        get: { summary: 'Get security audit report (9,248 MCP skills scanned)', tags: ['Audit'], responses: { '200': { description: 'Audit report', content: { 'application/json': { schema: { type: 'object' }}}}}}
       },
       '/api/atc.json': {
         get: { summary: 'Get ATC service info (57 cards issued)', tags: ['ATC'], responses: { '200': { description: 'ATC info', content: { 'application/json': { schema: { type: 'object' }}}}}}

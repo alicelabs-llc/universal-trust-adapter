@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * scan_verify.cjs — Real Sentinel L0 scan for all 13,859 skills
+ * scan_verify.cjs — Real Sentinel L0 scan for all 9,248 skills
  * 
  * What this does:
  *   1. Reads skills_index.json

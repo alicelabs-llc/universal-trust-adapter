@@ -12,7 +12,7 @@ I built a tool for this exact problem. MarketNow (marketnow.site) runs a 6-layer
 - L2 v2.0: Active probe — sends 60+ adversarial inputs (path traversal, SSRF, SQL injection, command injection, prompt injection, credential access)
 - L2.5: gVisor sandbox (userspace kernel isolation)
 
-8,764 servers audited. 3 were removed for leaking environment variables when sent credential-access prompts (they passed tool args to eval() without sanitization).
+9,248 servers audited. 3 were removed for leaking environment variables when sent credential-access prompts (they passed tool args to eval() without sanitization).
 
 Every server gets a signed SHA-256 certificate with a score 0-10. You can verify at marketnow.site/verify.
 
@@ -41,7 +41,7 @@ I've been working on this. Built a 6-layer audit pipeline (Sentinel) that tests 
 
 Plus gVisor sandbox (userspace kernel — the tech behind Google Cloud Run). The server never touches the host kernel.
 
-8,764 servers audited so far. 3 were leaking environment variables. 12 had hardcoded API keys. 1 tried ptrace(), 1 tried bpf() (both blocked by gVisor).
+9,248 servers audited so far. 3 were leaking environment variables. 12 had hardcoded API keys. 1 tried ptrace(), 1 tried bpf() (both blocked by gVisor).
 
 Results are public: github.com/alicelabs-llc/marketnow
 
@@ -55,7 +55,7 @@ The protocol itself isn't the joke — the lack of security tooling around it is
 
 **Reply:**
 ```
-Great research. We did something similar but at larger scale — 8,764 MCP servers audited with a 6-layer pipeline.
+Great research. We did something similar but at larger scale — 9,248 MCP skills audited with a 6-layer pipeline.
 
 Key difference: we don't just do static analysis. We run an active probe that sends real MCP protocol messages (initialize, tools/list, tools/call) with 60+ adversarial inputs:
 
@@ -91,7 +91,7 @@ MarketNow (marketnow.site) is a marketplace where every MCP server gets security
 3. L2 v2.0 — Active probe (60+ adversarial inputs: path traversal, SSRF, SQL injection, command injection, prompt injection, credential access)
 4. L2.5 — gVisor sandbox (userspace kernel isolation)
 
-8,764 servers audited. 3 were removed for leaking environment variables when sent credential-access prompts. Those servers passed arguments to eval() without sanitization — a malicious agent could extract every API key the server has access to.
+9,248 servers audited. 3 were removed for leaking environment variables when sent credential-access prompts. Those servers passed arguments to eval() without sanitization — a malicious agent could extract every API key the server has access to.
 
 Every audited server gets a signed SHA-256 certificate with a score 0-10. You can verify before installing: marketnow.site/verify
 
@@ -115,7 +115,7 @@ The problem: there's no security. When you install an MCP server, it gets:
 
 There's no sandboxing built in. You're trusting the author.
 
-I built MarketNow (marketnow.site) — a marketplace where every MCP server is security-audited with a 6-layer pipeline including gVisor sandbox isolation. 8,764 servers audited. Each gets a signed certificate with a score 0-10.
+I built MarketNow (marketnow.site) — a marketplace where every MCP server is security-audited with a 6-layer pipeline including gVisor sandbox isolation. 9,248 servers audited. Each gets a signed certificate with a score 0-10.
 
 If you're running local LLMs with MCP tools (via llama.cpp, Continue, Aider), check the server's Sentinel score before installing. Free skills available at marketnow.site/api/free-skills.json
 ```
@@ -134,7 +134,7 @@ We built a 6-layer audit pipeline (Sentinel) for this:
 - L2 v2.0: Active probe — sends real MCP protocol messages with 60+ adversarial inputs (path traversal, SSRF, SQL injection, command injection, prompt injection, credential access)
 - L2.5: gVisor sandbox — userspace kernel isolation (the tech behind Google Cloud Run)
 
-8,764 MCP servers audited. Key findings:
+9,248 MCP skills audited. Key findings:
 - 3 servers leaked env vars via tools/call (args to eval() without sanitization)
 - 12 had hardcoded API keys
 - 1 tried ptrace(), 1 tried bpf() (both blocked by gVisor)

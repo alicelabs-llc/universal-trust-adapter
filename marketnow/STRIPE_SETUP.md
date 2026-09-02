@@ -1,3 +1,5 @@
+> **STATUS: RETIRED (2026-09-03).** MarketNow is 100% free — every skill, no payments, no subscriptions. Stripe is not active and will not be. This document is kept only for historical reference.
+
 # MarketNow — Stripe Setup Guide
 
 This guide explains how to activate real payment processing on MarketNow.

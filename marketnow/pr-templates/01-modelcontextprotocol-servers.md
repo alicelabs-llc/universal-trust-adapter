@@ -7,7 +7,7 @@
 ## PR Title
 
 ```
-Add MarketNow — MCP skill marketplace with 5,054+ verified skills
+Add MarketNow — MCP skill marketplace with 9,248 verified skills
 ```
 
 ## PR Body
@@ -15,23 +15,23 @@ Add MarketNow — MCP skill marketplace with 5,054+ verified skills
 ```markdown
 ## What does this PR do?
 
-Adds [MarketNow](https://marketnow.site) to the list of community MCP servers. MarketNow is the open marketplace for MCP-compatible agent skills — it allows any agent (Claude Desktop, Cursor, Cline) to search, discover, and install 5,054+ verified MCP skills via the Model Context Protocol.
+Adds [MarketNow](https://marketnow.site) to the list of community MCP servers. MarketNow is the open marketplace for MCP-compatible agent skills — it allows any agent (Claude Desktop, Cursor, Cline) to search, discover, and install 9,248 verified MCP skills via the Model Context Protocol.
 
 ## Why should this be added?
 
 MarketNow is unique in the MCP ecosystem:
 
-1. **It's a marketplace, not a single tool** — 5,054 verified skills from many authors, all in one MCP server
-2. **Micro-priced for autonomous agents** — $0.99 to $9.99 per skill, one-time payment (no subscriptions)
+1. **It's a marketplace, not a single tool** — 9,248 verified skills from many authors, all in one MCP server
+2. **Free for autonomous agents** — every skill free, no payments, no subscriptions
 3. **Every skill is Sentinel L1 scanned** — automated security audit (repo, README, license, secrets, malicious patterns)
 4. **Public JSON API** — `/api/skills.json` returns the full catalog, no auth required
 5. **MarketNow is itself installable via npx** — `npx -y marketnow-mcp`
 
 ## Stats
 
-- **5,054** verified skills (all sourced from real GitHub repos)
+- **9,248** verified skills (all sourced from real GitHub repos)
 - **25** categories (AI/ML, Data, Security, DevOps, Finance, etc.)
-- **$0.99–$9.99** per skill (average $2.50, one-time payment)
+- **Free** — all 9,248 skills, no payments
 - **100%** open-source skills (MIT, Apache-2.0, etc.)
 - **npm package:** [marketnow-mcp@1.0.1](https://www.npmjs.com/package/marketnow-mcp)
 
@@ -89,7 +89,7 @@ Once connected, you can ask Claude:
 ```markdown
 ### MarketNow
 
-The open marketplace for MCP-compatible agent skills. Search, discover, and install 5,054+ verified MCP skills from any agent runtime.
+The open marketplace for MCP-compatible agent skills. Search, discover, and install 9,248 verified MCP skills from any agent runtime.
 
 - **Install:** `npx -y marketnow-mcp`
 - **npm:** https://www.npmjs.com/package/marketnow-mcp

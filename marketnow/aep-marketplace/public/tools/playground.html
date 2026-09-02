@@ -71,7 +71,7 @@ let activeEndpoint = null;
 // Load stats
 fetch(API_BASE + '/agent-ping.json').then(r=>r.json()).then(d=>{
   const stats = d.stats || {};
-  document.getElementById('statSkills').textContent = stats.total_skills || '8,764';
+  document.getElementById('statSkills').textContent = stats.total_skills || '9,248';
   document.getElementById('statFree').textContent = '65';
   document.getElementById('statCats').textContent = '23';
 }).catch(()=>{});

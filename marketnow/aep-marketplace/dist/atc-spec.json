@@ -99,10 +99,10 @@
 
   "monetization": {
     "free": "Basic ATC with L1.5 audit. Trust score visible. 100 API calls/day.",
-    "pro": "$9.99/month — L2.5 gVisor audited. Higher trust score. 10,000 API calls/day. Encrypted messaging.",
+    "pro": "freenth — L2.5 gVisor audited. Higher trust score. 10,000 API calls/day. Encrypted messaging.",
     "enterprise": "$99/month — L4 supply chain audited. Custom trust policies. Unlimited calls. SLA. Private agent network.",
     "transaction_fee": "5% on every paid task between agents (escrow release)",
-    "verification_fee": "$0.99 for third parties to verify an ATC (like SSL cert checker)"
+    "verification_fee": "Free for third parties to verify an ATC (like SSL cert checker)"
   },
 
   "endpoints": {

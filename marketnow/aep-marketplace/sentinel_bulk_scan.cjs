@@ -1,5 +1,5 @@
 /**
- * Sentinel Bulk Scanner — Escanea las 13,859 skills y sube scores a KV
+ * Sentinel Bulk Scanner — Escanea las 9,248 skills y sube scores a KV
  * 
  * 6 checks por skill:
  * 1. Repo Exists (directorio)

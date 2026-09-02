@@ -22,9 +22,9 @@ test('F-01: no cloaking SEO in index.html', () => {
   assert.ok(!INDEX_HTML.includes('hidden from humans'), 'hidden from humans comment should be removed');
 });
 
-test('F-02: no "$0.99-$9.99 One-Time" in index.html', () => {
+test('F-02: no "free One-Time" in index.html', () => {
   assert.ok(!INDEX_HTML.includes('$0.99'), '$0.99 should be removed (use pricing.json)');
-  assert.ok(!INDEX_HTML.match(/\$0\.99.*\$9\.99/), '$0.99-$9.99 pattern should be removed');
+  assert.ok(!INDEX_HTML.match(/\$0\.99.*\$9\.99/), 'free pattern should be removed');
 });
 
 test('F-04: no "pipeline pipeline" duplication in index.html', () => {
@@ -59,14 +59,14 @@ test('R-06: no "verified safe" in index.html or agent.json', () => {
 
 test('R-07: Sentinel version is v3.0 in index.html', () => {
   assert.ok(!INDEX_HTML.includes('Sentinel L1.5'), 'Sentinel L1.5 should be v3.0');
-  assert.ok(!INDEX_HTML.includes('Sentinel L2.5'), 'Sentinel L2.5 should be v3.0');
+  assert.ok(!INDEX_HTML.includes('Sentinel v3.0'), 'Sentinel v3.0 should be v3.0');
   assert.ok(INDEX_HTML.includes('Sentinel v3.0'), 'Sentinel v3.0 should be present');
 });
 
 test('R-07: Sentinel version is v3.0 in agent.json', () => {
   const agentStr = JSON.stringify(AGENT_JSON);
   assert.ok(!agentStr.includes('Sentinel L1.5'), 'agent.json should not have Sentinel L1.5');
-  assert.ok(!agentStr.includes('Sentinel L2.5'), 'agent.json should not have Sentinel L2.5');
+  assert.ok(!agentStr.includes('Sentinel v3.0'), 'agent.json should not have Sentinel v3.0');
 });
 
 test('R-03: pricing.json exists and has buyer/seller model', () => {

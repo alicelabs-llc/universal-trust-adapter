@@ -15,7 +15,7 @@ Our positioning has fundamentally changed and the listing on mcp.so is now inacc
 
 | Field | Current value |
 |-------|---------------|
-| Tagline | "13,859 verified MCP-compatible skills" |
+| Tagline | "9,248 verified MCP-compatible skills" |
 | Pricing | "Crypto payments (ETH/BSC/SOL/BTC)" |
 | Transport | "SSE/WebSocket/JSON-RPC" |
 | Config | `"url": "https://marketnow.site/api/mcp"` |
