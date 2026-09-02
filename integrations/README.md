@@ -16,5 +16,7 @@ Every adapter here:
 | [`langchain-uta-middleware`](./langchain-uta-middleware/) | LangChain | `Runnable` wrapper around any tool |
 | [`openai-agents-uta-hooks`](./openai-agents-uta-hooks/) | OpenAI Agents SDK | `RunHooks.on_tool_start` |
 | [`e2b-uta-attestation`](./e2b-uta-attestation/) | E2B sandboxes | pre-exec attestation wrapper |
+| [`anthropic-uta-guard`](./anthropic-uta-guard/) | Anthropic SDK | `tool_use` block interception (outside the SDK) |
+| [`vercel-ai-sdk-trust-example`](./vercel-ai-sdk-trust-example/) | Vercel AI SDK | `tool()` `execute` wrapper — tool call → `trustVerifier()` → UTA → ALLOW/DENY (pattern from vercel/ai#20147) |
 
 Status: **POC**. APIs may change. Issues go in THIS repository.
