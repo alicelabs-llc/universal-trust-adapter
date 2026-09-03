@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UTA Verify Playground — Test any credential</title>
+<meta name="description" content="Paste any credential (JWT, W3C VC, MCP Card, ATC, X.509) and see the 12-stage verification result. Free, live.">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+  .container { max-width: 1000px; margin: 0 auto; }
+  .header { text-align: center; margin-bottom: 2rem; }
+  .header h1 {
+    font-size: 2.2rem;
+    background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+  }
+  .header .subtitle { color: #888; }
+  .playground-box {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .input-label {
+    color: #888;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  textarea {
+    width: 100%;
+    min-height: 180px;
+    padding: 1rem;
+    background: #0a0a0a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    resize: vertical;
+    outline: none;
+  }
+  textarea:focus { border-color: #6366f1; }
+  .verify-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .verify-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .examples {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+  }
+  .example-btn {
+    padding: 0.4rem 0.8rem;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #888;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .example-btn:hover { color: #6366f1; border-color: #6366f1; }
+  .result-box {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: none;
+  }
+  .result-box.show { display: block; }
+  .decision-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #2a2a2a;
+  }
+  .decision-badge {
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+  }
+  .decision-PERMIT { background: #064e3b; color: #34d399; }
+  .decision-DENY { background: #450a0a; color: #f87171; }
+  .decision-UNDETERMINED { background: #1e293b; color: #94a3b8; }
+  .stages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .stage-item {
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+  .stage-item.pass { border-color: #34d399; }
+  .stage-item.fail { border-color: #f87171; background: #1a0a0a; }
+  .stage-name { font-weight: 600; color: #ccc; margin-bottom: 0.25rem; }
+  .stage-result { color: #888; }
+  .stage-item.pass .stage-result { color: #34d399; }
+  .stage-item.fail .stage-result { color: #f87171; }
+  pre {
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: #888;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .api-link {
+    text-align: center;
+    margin-top: 2rem;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  .api-link a { color: #6366f1; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>UTA Verify Playground</h1>
+    <div class="subtitle">Paste any credential — see the 12-stage verification result</div>
+  </div>
+
+  <div class="playground-box">
+    <label class="input-label">Credential (JSON, JWT, or raw)</label>
+    <textarea id="credentialInput" placeholder='Paste a JWT, W3C VC, MCP Card, ATC, or X.509 cert here...'></textarea>
+    
+    <div class="examples">
+      <span style="color:#666;font-size:0.85rem;margin-right:0.5rem;">Examples:</span>
+      <button class="example-btn" onclick="loadJWT()">JWT</button>
+      <button class="example-btn" onclick="loadW3CVC()">W3C VC</button>
+      <button class="example-btn" onclick="loadMCPCard()">MCP Card</button>
+      <button class="example-btn" onclick="loadATC()">ATC v3</button>
+    </div>
+    
+    <button class="verify-btn" onclick="verifyCredential()" id="verifyBtn">Verify Credential</button>
+  </div>
+
+  <div id="result" class="result-box"></div>
+
+  <div class="api-link">
+    <p>API: <code>POST /api/trust?action=verify</code></p>
+    <p style="margin-top:0.5rem;">
+      <a href="https://github.com/alicelabs-llc/universal-trust-adapter">GitHub</a> ·
+      <a href="https://www.marketnow.site/api/trust">UTA API</a> ·
+      <a href="https://www.marketnow.site/scam-checker.html">Scam Checker</a> ·
+      <a href="https://www.marketnow.site/translate.html">Translator</a>
+    </p>
+  </div>
+</div>
+
+<script>
+const EXAMPLES = {
+  jwt: 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6ImRpZDp3ZWI6YWxpY2UuZXhhbXBsZSNrZXktMSJ9.eyJpc3MiOiJkaWQ6d2ViOmFsaWNlLmV4YW1wbGUiLCJzdWIiOiJhZ2VudDpib2IiLCJleHAiOjE3MzU2ODk2MDAsInNjb3BlIjoicmVhZDpmaWxlcyJ9.signature_placeholder',
+  w3cvc: JSON.stringify({
+    "@context": ["https://www.w3.org/2018/credentials/v1"],
+    "type": ["VerifiableCredential"],
+    "issuer": "did:web:alice.example",
+    "credentialSubject": {
+      "id": "did:agent:bob",
+      "scope": "read:files"
+    },
+    "proof": {
+      "type": "Ed25519Signature2020",
+      "verificationMethod": "did:web:alice.example#key-1",
+      "proofValue": "placeholder"
+    }
+  }, null, 2),
+  mcp: JSON.stringify({
+    "mcp_server_card_v1": {
+      "issuer": "did:web:alice.example",
+      "server_id": "filesystem-server",
+      "scope": ["read:files"],
+      "expires_at": "2026-12-31T23:59:59Z"
+    }
+  }, null, 2),
+  atc: JSON.stringify({
+    "schema_version": "1.1.0",
+    "card_id": "ATC-EXAMPLE-001",
+    "issuer": "MarketNow Sentinel CA",
+    "identity": {
+      "key_algorithm": "Ed25519",
+      "public_key": "marketnow-skill:example"
+    },
+    "trust": {
+      "risk_level": "not_audited",
+      "sentinel_review_score": 0
+    }
+  }, null, 2)
+};
+
+function loadJWT() { document.getElementById('credentialInput').value = EXAMPLES.jwt; }
+function loadW3CVC() { document.getElementById('credentialInput').value = EXAMPLES.w3cvc; }
+function loadMCPCard() { document.getElementById('credentialInput').value = EXAMPLES.mcp; }
+function loadATC() { document.getElementById('credentialInput').value = EXAMPLES.atc; }
+
+async function verifyCredential() {
+  const input = document.getElementById('credentialInput').value.trim();
+  if (!input) { alert('Paste a credential first'); return; }
+  
+  const btn = document.getElementById('verifyBtn');
+  btn.disabled = true;
+  btn.textContent = 'Verifying...';
+  
+  try {
+    let payload;
+    try { payload = JSON.parse(input); } catch { payload = input; }
+    
+    const resp = await fetch('https://www.marketnow.site/api/trust?action=verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ payload })
+    });
+    
+    const data = await resp.json();
+    displayResult(data);
+  } catch (err) {
+    document.getElementById('result').classList.add('show');
+    document.getElementById('result').innerHTML = '<div class="error">Error: ' + err.message + '</div>';
+  }
+  
+  btn.disabled = false;
+  btn.textContent = 'Verify Credential';
+}
+
+function displayResult(data) {
+  const div = document.getElementById('result');
+  div.classList.add('show');
+  
+  const decision = data.decision || 'UNKNOWN';
+  const format = data.detected_format || '?';
+  const issuer = data.issuer || '?';
+  const failedStage = data.failed_stage;
+  
+  let html = `
+    <div class="decision-row">
+      <div class="decision-badge decision-${decision}">${decision}</div>
+      <div>
+        <div style="color:#888;font-size:0.85rem;">Format: <strong style="color:#fff;">${format}</strong></div>
+        <div style="color:#888;font-size:0.85rem;">Issuer: <strong style="color:#fff;">${issuer}</strong></div>
+        ${failedStage ? `<div style="color:#f87171;font-size:0.85rem;">Failed at: <strong>${failedStage}</strong></div>` : ''}
+      </div>
+    </div>
+  `;
+  
+  if (data.stages) {
+    html += '<div class="stages-grid">';
+    for (const [name, result] of Object.entries(data.stages)) {
+      const isPass = result === 'OK' || result === 'PASS' || result === 'ACTIVE';
+      const cls = isPass ? 'pass' : 'fail';
+      const icon = isPass ? '✅' : '⚠️';
+      html += `
+        <div class="stage-item ${cls}">
+          <div class="stage-name">${icon} ${name}</div>
+          <div class="stage-result">${result}</div>
+        </div>
+      `;
+    }
+    html += '</div>';
+  }
+  
+  html += '<pre>' + escapeHtml(JSON.stringify(data, null, 2)) + '</pre>';
+  
+  div.innerHTML = html;
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+</script>
+</body>
+</html>

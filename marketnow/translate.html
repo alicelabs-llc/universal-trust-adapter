@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UTA Credential Translator — Translate between 8 trust formats</title>
+<meta name="description" content="Translate credentials between JWT, W3C VC, ATC v3, A2A, MCP Card, X.509 and more. Free, live, no registration.">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .header { text-align: center; margin-bottom: 2rem; }
+  .header h1 {
+    font-size: 2.2rem;
+    background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+  }
+  .header .subtitle { color: #888; font-size: 1rem; }
+  .translator-box {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .format-selector {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .format-group label {
+    display: block;
+    color: #888;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.4rem;
+  }
+  select {
+    width: 100%;
+    padding: 0.6rem;
+    background: #0a0a0a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  .arrow {
+    font-size: 1.5rem;
+    color: #6366f1;
+    text-align: center;
+    margin-top: 1.2rem;
+  }
+  textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 1rem;
+    background: #0a0a0a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    resize: vertical;
+    outline: none;
+  }
+  textarea:focus { border-color: #6366f1; }
+  .translate-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .translate-btn:hover { opacity: 0.9; }
+  .translate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .output-box {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: none;
+  }
+  .output-box.show { display: block; }
+  .output-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .output-header h3 { color: #06b6d4; }
+  .copy-btn {
+    padding: 0.4rem 0.8rem;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #888;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .copy-btn:hover { color: #06b6d4; border-color: #06b6d4; }
+  pre {
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: #34d399;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .error {
+    color: #f87171;
+    background: #1a0a0a;
+    border: 1px solid #f87171;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .info-card {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .info-card .num { font-size: 1.8rem; font-weight: 700; color: #6366f1; }
+  .info-card .label { color: #888; font-size: 0.85rem; }
+  .api-link {
+    text-align: center;
+    margin-top: 2rem;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  .api-link a { color: #6366f1; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>UTA Credential Translator</h1>
+    <div class="subtitle">Translate between 8 trust credential formats — live, free, no registration</div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card"><div class="num">8</div><div class="label">Formats supported</div></div>
+    <div class="info-card"><div class="num">56</div><div class="label">Translation pairs</div></div>
+    <div class="info-card"><div class="num">12</div><div class="label">Stage pipeline</div></div>
+    <div class="info-card"><div class="num">0</div><div class="label">API keys needed</div></div>
+  </div>
+
+  <div class="translator-box">
+    <div class="format-selector">
+      <div class="format-group">
+        <label>From</label>
+        <select id="fromFormat">
+          <option value="jwt">JWT (OAuth/OIDC)</option>
+          <option value="w3c-vc">W3C Verifiable Credential</option>
+          <option value="atc-v3">ATC v3 (Agent Trust Card)</option>
+          <option value="a2a-card">A2A (Google Agent Card)</option>
+          <option value="mcp-card">MCP Server Card</option>
+          <option value="x509">X.509 Certificate</option>
+        </select>
+      </div>
+      <div class="arrow">→</div>
+      <div class="format-group">
+        <label>To</label>
+        <select id="toFormat">
+          <option value="w3c-vc">W3C Verifiable Credential</option>
+          <option value="jwt">JWT (OAuth/OIDC)</option>
+          <option value="atc-v3">ATC v3 (Agent Trust Card)</option>
+          <option value="a2a-card">A2A (Google Agent Card)</option>
+          <option value="mcp-card">MCP Server Card</option>
+          <option value="x509">X.509 Certificate</option>
+        </select>
+      </div>
+    </div>
+    
+    <label style="display:block;color:#888;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.4rem;">Paste credential (JSON or JWT)</label>
+    <textarea id="inputCredential" placeholder='{"iss":"did:web:alice.example","sub":"agent:bob","exp":1735689600,"scope":"read:files"}'></textarea>
+    
+    <button class="translate-btn" onclick="translateCredential()" id="translateBtn">Translate Credential</button>
+  </div>
+
+  <div id="output" class="output-box">
+    <div class="output-header">
+      <h3 id="outputTitle">Translated Credential</h3>
+      <button class="copy-btn" onclick="copyOutput()">Copy</button>
+    </div>
+    <pre id="outputPre"></pre>
+  </div>
+
+  <div class="api-link">
+    <p>API: <code>POST /api/trust?action=translate</code></p>
+    <p style="margin-top:0.5rem;">
+      <a href="https://github.com/alicelabs-llc/universal-trust-adapter">GitHub</a> ·
+      <a href="https://www.marketnow.site/api/trust">UTA API</a> ·
+      <a href="https://www.marketnow.site/scam-checker.html">Scam Checker</a> ·
+      <a href="https://www.marketnow.site/playground.html">Verify Playground</a>
+    </p>
+  </div>
+</div>
+
+<script>
+async function translateCredential() {
+  const input = document.getElementById('inputCredential').value.trim();
+  const from = document.getElementById('fromFormat').value;
+  const to = document.getElementById('toFormat').value;
+  
+  if (!input) {
+    alert('Paste a credential first');
+    return;
+  }
+  
+  const btn = document.getElementById('translateBtn');
+  btn.disabled = true;
+  btn.textContent = 'Translating...';
+  
+  try {
+    let payload;
+    try {
+      payload = JSON.parse(input);
+    } catch {
+      payload = input; // treat as raw JWT string
+    }
+    
+    const resp = await fetch('https://www.marketnow.site/api/trust?action=translate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from, to, payload })
+    });
+    
+    const data = await resp.json();
+    
+    document.getElementById('output').classList.add('show');
+    document.getElementById('outputTitle').textContent = 'Translated: ' + from + ' → ' + to;
+    
+    if (data.error) {
+      document.getElementById('outputPre').textContent = 'Error: ' + data.error;
+      document.getElementById('outputPre').style.color = '#f87171';
+    } else {
+      document.getElementById('outputPre').textContent = JSON.stringify(data, null, 2);
+      document.getElementById('outputPre').style.color = '#34d399';
+    }
+  } catch (err) {
+    document.getElementById('output').classList.add('show');
+    document.getElementById('outputPre').textContent = 'Error: ' + err.message;
+    document.getElementById('outputPre').style.color = '#f87171';
+  }
+  
+  btn.disabled = false;
+  btn.textContent = 'Translate Credential';
+}
+
+function copyOutput() {
+  const text = document.getElementById('outputPre').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+</script>
+</body>
+</html>
