@@ -114,7 +114,7 @@ const CONTENT = {
       { n: 5, status: 'done', title: 'Catalog transparency',
         claudeSaid: 'If categories with exactly "30" items are generated or filled, say so. Show real usage, real downloads, real reviews — not just a catchy total number.',
         whatWeDid: [
-          'Created /catalog page explaining how the 8,845 skills were sourced',
+          'Created /catalog page explaining how the 9,248 skills were sourced',
           'Categories with suspicious "30" counts are disclosed as bulk-imported — not individually curated',
           'When a skill has a known GitHub repo, the detail page shows real stars, last-commit date, open issues',
           'When npm install is the distribution method, real weekly download counts from npm API are shown',
@@ -235,7 +235,7 @@ const CONTENT = {
       { n: 5, status: 'done', title: 'Transparencia del catálogo',
         claudeSaid: 'Si las categorías con exactamente "30" ítems están generadas o rellenadas, decirlo. Mostrar uso real, descargas reales, reviews reales — no solo un número total llamativo.',
         whatWeDid: [
-          'Creada página /catalog explicando cómo se obtuvieron las 8,845 skills',
+          'Creada página /catalog explicando cómo se obtuvieron las 9,248 skills',
           'Categorías con conteos sospechosos de "30" se divulgan como bulk-imported — no curadas individualmente',
           'Cuando una skill tiene repo GitHub conocido, la página muestra stars reales, fecha de último commit, issues abiertos',
           'Cuando npm install es el método de distribución, se muestran descargas semanales reales de npm API',
@@ -356,7 +356,7 @@ const CONTENT = {
       { n: 5, status: 'done', title: 'Transparência do catálogo',
         claudeSaid: 'Se categorias com exatamente "30" itens são geradas ou preenchidas, diga. Mostre uso real, downloads reais, reviews reais — não apenas um número total chamativo.',
         whatWeDid: [
-          'Criada página /catalog explicando como as 8,845 skills foram obtidas',
+          'Criada página /catalog explicando como as 9,248 skills foram obtidas',
           'Categorias com contagens suspeitas de "30" são divulgadas como bulk-imported — não curadas individualmente',
           'Quando uma skill tem repo GitHub conhecido, a página mostra stars reais, data do último commit, issues abertos',
           'Quando npm install é o método de distribuição, downloads semanais reais da npm API são mostrados',
@@ -477,7 +477,7 @@ const CONTENT = {
       { n: 5, status: 'done', title: '目录透明度',
         claudeSaid: '如果正好有"30"个项目的类别是生成或填充的，请说明。显示真实使用量、真实下载量、真实评论 — 而非仅一个吸引人的总数。',
         whatWeDid: [
-          '创建了 /catalog 页面，解释 8,845 个技能的来源',
+          '创建了 /catalog 页面，解释 9,248 个技能的来源',
           '可疑的"30"计数类别被披露为批量导入 — 非单独策划',
           '当技能有已知的 GitHub 仓库时，详情页显示真实星标、最后提交日期、未解决问题',
           '当 npm install 是分发方法时，显示来自 npm API 的真实每周下载量',
@@ -598,7 +598,7 @@ const CONTENT = {
       { n: 5, status: 'done', title: 'Transparence du catalogue',
         claudeSaid: 'Si les catégories avec exactement "30" éléments sont générées ou remplies, le dire. Montrer l\'usage réel, les téléchargements réels, les vraies reviews — pas juste un nombre total accrocheur.',
         whatWeDid: [
-          'Créée page /catalog expliquant comment les 8,845 skills ont été obtenues',
+          'Créée page /catalog expliquant comment les 9,248 skills ont été obtenues',
           'Les catégories avec des comptes suspects de "30" sont divulguées comme bulk-imported — pas curatées individuellement',
           'Quand une skill a un repo GitHub connu, la page montre les vraies stars, date du dernier commit, issues ouverts',
           'Quand npm install est la méthode de distribution, les vrais comptes de téléchargements hebdomadaires de npm API sont montrés',

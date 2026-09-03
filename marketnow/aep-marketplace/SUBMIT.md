@@ -22,7 +22,7 @@
     "command": "",
     "url": "https://marketnow.site/mcp/sse",
     "type": "sse",
-    "description": "13,859 MCP skills with Sentinel verification"
+    "description": "9,248 MCP skills with Sentinel verification"
   }
 }
 ```
@@ -34,7 +34,7 @@
 2. Click "Submit" en la nav (requiere login)
 3. Datos:
    - Name: `MarketNow Skills Marketplace`
-   - Description: `Search and discover 13,859 MCP-compatible skills with Sentinel security verification`
+   - Description: `Search and discover 9,248 MCP-compatible skills with Sentinel security verification`
    - Endpoint: `https://marketnow.site/mcp/sse`
    - Website: `https://marketnow.site`
 

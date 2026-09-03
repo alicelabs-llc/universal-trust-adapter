@@ -40,7 +40,7 @@ const CONTENT = {
     rows: [
       {
         feature: 'Catalog size',
-        marketnow: '8,845 skills',
+        marketnow: '9,248 skills',
         smithery: '~3,000 servers',
         glama: '~5,000 servers',
         mcpRegistry: '~64.7M entries (1,691 unique)',
@@ -103,7 +103,7 @@ const CONTENT = {
       },
       {
         feature: 'Price model',
-        marketnow: 'B2B: Community (Free) / Team ($9.99/mo) / Enterprise (Custom)',
+        marketnow: 'B2B: Everything free — no tiers, no enterprise fees',
         smithery: 'Free (hosted MCP servers)',
         glama: 'Free (directory)',
         mcpRegistry: 'Free (registry)',
@@ -193,7 +193,7 @@ const CONTENT = {
     rows: [
       {
         feature: 'Tamaño del catálogo',
-        marketnow: '8,845 skills',
+        marketnow: '9,248 skills',
         smithery: '~3,000 servers',
         glama: '~5,000 servers',
         mcpRegistry: '~64.7M entradas (1,691 únicos)',
@@ -256,7 +256,7 @@ const CONTENT = {
       },
       {
         feature: 'Modelo de precio',
-        marketnow: 'B2B: Community (Gratis) / PRO ($9.99/mes) / Enterprise (Custom)',
+        marketnow: 'B2B: Todo gratis — sin niveles ni tarifas',
         smithery: 'Gratis (servidores MCP alojados)',
         glama: 'Gratis (directorio)',
         mcpRegistry: 'Gratis (registry)',
@@ -346,7 +346,7 @@ const CONTENT = {
     rows: [
       {
         feature: 'Tamanho do catálogo',
-        marketnow: '8,845 skills',
+        marketnow: '9,248 skills',
         smithery: '~3,000 servers',
         glama: '~5,000 servers',
         mcpRegistry: '~64.7M entradas (1.691 únicos)',
@@ -409,7 +409,7 @@ const CONTENT = {
       },
       {
         feature: 'Modelo de preço',
-        marketnow: 'B2B: Community (Grátis) / PRO ($9.99/mês) / Enterprise (Custom)',
+        marketnow: 'B2B: Tudo grátis — sem níveis nem tarifas',
         smithery: 'Grátis (servidores MCP hospedados)',
         glama: 'Grátis (diretório)',
         mcpRegistry: 'Grátis (registry)',
@@ -499,7 +499,7 @@ const CONTENT = {
     rows: [
       {
         feature: '目录大小',
-        marketnow: '8,845 skills',
+        marketnow: '9,248 skills',
         smithery: '~3,000 servers',
         glama: '~5,000 servers',
         mcpRegistry: '~64.7M 条目（1,691 个唯一）',
@@ -562,7 +562,7 @@ const CONTENT = {
       },
       {
         feature: '价格模型',
-        marketnow: 'B2B: Community (免费) / PRO ($9.99/月) / Enterprise (定制)',
+        marketnow: 'B2B: 全部免费 — 无分级、无费用',
         smithery: '免费（托管的 MCP 服务器）',
         glama: '免费（目录）',
         mcpRegistry: '免费（registry）',
@@ -715,7 +715,7 @@ const CONTENT = {
       },
       {
         feature: 'Modèle de prix',
-        marketnow: 'B2B: Community (Gratuit) / Team ($9.99/mois) / Enterprise (Sur mesure)',
+        marketnow: 'B2B : Tout gratuit — sans paliers ni frais',
         smithery: 'Gratuit (serveurs MCP hébergés)',
         glama: 'Gratuit (annuaire)',
         mcpRegistry: 'Gratuit (registry)',

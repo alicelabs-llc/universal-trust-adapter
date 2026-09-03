@@ -148,8 +148,8 @@ The current listing (https://mcp.so/server/marketnow-mcp---aep-agent-exchange-pr
 
 | Field | Current (WRONG) | Should be |
 |-------|-----------------|-----------|
-| Tagline | "13,859 verified MCP-compatible skills" | "Security infrastructure for AI agents — 12 MCP tools backed by Sentinel" |
-| Stats | "13,859 skills" | 9,248 skills analyzed, 1,211,488 checks, 80 quarantined |
+| Tagline | "9,248 verified MCP-compatible skills" | "Security infrastructure for AI agents — 12 MCP tools backed by Sentinel" |
+| Stats | "9,248 skills" | 9,248 skills analyzed, 1,211,488 checks, 80 quarantined |
 | Pricing | "Crypto payments (ETH/BSC/SOL/BTC)" | "Free / $49-99 / $199-499 / $99-499/mo / $5k-50k+/yr" |
 | Tools | "Transport: SSE/WebSocket/JSON-RPC" | "Transport: stdio only (via `npx marketnow-mcp`)" |
 | Config | `"url": "https://marketnow.site/api/mcp"` | `{"mcpServers":{"marketnow":{"command":"npx","args":["-y","marketnow-mcp"]}}}` |

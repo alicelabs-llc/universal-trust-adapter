@@ -43,7 +43,7 @@ npx -y marketnow-mcp
 - submit_skill, recommend_skills
 
 ## Key facts
-- 9,248 MCP servers (all from GitHub repos, 0 synthetic)
+- 9,248 MCP skills (all from GitHub repos, 0 synthetic)
 - 10-layer security audit (Sentinel): L1.5 metadata → L1.9 prompt injection → L2 sandbox → L3 continuous monitoring
 - 28 malware family signatures (Emotet, LockBit, Cobalt Strike, etc.)
 - 32 prompt injection defense rules (the #1 attack against AI agents)
@@ -58,7 +58,7 @@ npx -y marketnow-mcp
 - SOC2 mapping: 32 controls mapped to Sentinel layers
 - A2A Agent Card support (Google's protocol)
 - 9 MCP tools (v1.6.0): added verify_receipt for action-receipt verification
-- All skills are FREE. Revenue: PRO $9.99/mo, Enterprise $49.99/mo, 20% seller commission
+- All skills are FREE. Revenue: PRO free, Enterprise free, 20% seller commission
 - Languages: English, Español, Português, 中文, Français
 - Founded: AliceLabs LLC, Wyoming, USA (2025)
 - Founder: Edison Flores

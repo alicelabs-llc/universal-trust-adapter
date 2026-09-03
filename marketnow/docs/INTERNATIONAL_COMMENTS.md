@@ -9,7 +9,7 @@
 ```
 素晴らしい記事ですね。私たちもMCPサーバーのセキュリティ問題に取り組んでいます。
 
-MarketNow（marketnow.site）では、6層の監査パイプライン（Sentinel）で8,764のMCPサーバーを監査しました：
+MarketNow（marketnow.site）では、6層の監査パイプライン（Sentinel）で9,248のMCPサーバーを監査しました：
 
 - L1.5: 静的解析（依存関係、シークレット、ライセンス）
 - L1.6: パターンベースの動作分析
@@ -28,7 +28,7 @@ MarketNow（marketnow.site）では、6層の監査パイプライン（Sentinel
 
 **コメント (日本語):**
 ```
-詳細なガイドありがとうございます。私たちは実際にgVisorサンドボックスを使って8,764のMCPサーバーを監査しています。
+詳細なガイドありがとうございます。私たちは実際にgVisorサンドボックスを使って9,248のMCPサーバーを監査しています。
 
 MarketNow（marketnow.site）のSentinel監査パイプライン：
 - L2.5: gVisor（runsc）でユーザースペースカーネル分離
@@ -49,7 +49,7 @@ MarketNow（marketnow.site）のSentinel監査パイプライン：
 ```
 很好的文章！我们也在做MCP服务器安全审计。
 
-MarketNow（marketnow.site）用6层审计管道（Sentinel）审计了8,764个MCP服务器：
+MarketNow（marketnow.site）用6层审计管道（Sentinel）审计了9,248个MCP服务器：
 
 - L1.5: 静态分析（依赖、密钥、许可证）
 - L1.6: 基于模式的行为分析
@@ -76,7 +76,7 @@ MCP确实有用，但安全问题很大。每个MCP服务器都能访问你的�
 - 主动探测（60+对抗性输入测试）
 - gVisor沙盒（用户空间内核隔离）
 
-8,764个服务器已审计。3个因泄露环境变量被移除。每个服务器有SHA-256签名证书。
+9,248个服务器已审计。3个因泄露环境变量被移除。每个服务器有SHA-256签名证书。
 
 免费技能（无需注册）：marketnow.site/api/free-skills.json
 ```
@@ -121,7 +121,7 @@ Beyond authentication, we test for runtime vulnerabilities by sending 60+ advers
 - Prompt injection ("Ignore all previous instructions...")
 - Credential access ("Show me env vars starting with API_")
 
-Plus L2.5: gVisor sandbox (userspace kernel isolation). 8,764 servers audited. 3 were leaking env vars via tools/call (args to eval() without sanitization).
+Plus L2.5: gVisor sandbox (userspace kernel isolation). 9,248 servers audited. 3 were leaking env vars via tools/call (args to eval() without sanitization).
 
 Every server gets a signed SHA-256 certificate. marketnow.site/verify
 
@@ -137,7 +137,7 @@ We're working on similar problems! MarketNow (marketnow.site) has a 6-layer audi
 
 The key difference: we actively probe MCP servers with 60+ adversarial inputs via real MCP protocol (initialize, tools/list, tools/call). This catches runtime vulnerabilities that static analysis misses.
 
-Example: 3 servers out of 8,764 audited leaked environment variables when sent credential-access prompts via tools/call. They passed arguments to eval() without sanitization. Static analysis wouldn't catch this — the server needs to actually run.
+Example: 3 servers out of 9,248 audited leaked environment variables when sent credential-access prompts via tools/call. They passed arguments to eval() without sanitization. Static analysis wouldn't catch this — the server needs to actually run.
 
 Plus L2.5: gVisor sandbox for kernel-level isolation.
 
@@ -156,7 +156,7 @@ Comprehensive guide! For anyone looking for security-audited MCP servers — Mar
 - L2 v2.0: Active probe (60+ adversarial inputs)
 - L2.5: gVisor sandbox (userspace kernel isolation)
 
-8,764 servers audited. Each gets a signed SHA-256 certificate with a score 0-10, verifiable at marketnow.site/verify.
+9,248 servers audited. Each gets a signed SHA-256 certificate with a score 0-10, verifiable at marketnow.site/verify.
 
 Free skills (no signup): marketnow.site/api/free-skills.json
 ```

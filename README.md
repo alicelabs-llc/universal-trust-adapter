@@ -17,6 +17,28 @@ Built by **Edison Flores** & **Alejandro Flores** at **AliceLabs LLC** (Wyoming,
 
 ---
 
+## 🆕 What's new — v1.2.0
+
+**Domain Reputation Endpoint** (`/api/reputation`) — UTA now answers a second class of trust
+question. The Universal Trust API verifies *credentials*; this endpoint answers
+*"can I trust this domain before I show it to a human or act on it?"*
+
+- **Spec:** [`api/reputation-spec.md`](./api/reputation-spec.md) · v1.2 engine, stable
+- **Reference implementation:** [`api/reputation.ts`](./api/reputation.ts) — one file, zero
+  dependencies, hosting-neutral (Node 18+, Deno, Bun, Cloudflare Workers, any edge runtime)
+- **Verdicts:** `trusted` (95) · `unknown` (55) · `caution` (35) · `risky` (8) — deterministic,
+  transparent reasons, free & keyless, CDN-cacheable 24h
+- **Client parity:** identical engine runs in the browser ([ProdIntel](https://github.com/alicelabs-llc/Scraper)
+  `services/sourceTrust.ts`) — badges render instantly offline, get server-confirmed when reachable
+- **First consumer in production:** ProdIntel source safety gate
+- **v1.2 engine fix:** shortener matching is now exact-host/subdomain — v1.1 substring
+  matching wrongly scored `risky` marketplaces containing `t.co` inside `<name>.com`
+  (walmart.com, target.com, homedepot.com, flipkart.com). Cache consumers should key on v1.2.
+
+Code lives in this repo (GitHub is the single source of truth). Deployment is bring-your-own-host.
+
+---
+
 ## ATC Versions in this repo
 
 UTA supports **TWO versions of ATC** (Agent Trust Card):
@@ -109,6 +131,8 @@ The test CA keypair is intentionally published (including private key) for cross
 
 - **ATC/1.0 Spec:** [`marketnow/docs/atc-spec/SPEC.md`](./marketnow/docs/atc-spec/SPEC.md)
 - **ATC v3.0 RFC Draft:** [`marketnow/docs/atc-spec/RFC-ATC-v3-Draft-00.md`](./marketnow/docs/atc-spec/RFC-ATC-v3-Draft-00.md)
+- **Domain Reputation API spec:** [`api/reputation-spec.md`](./api/reputation-spec.md)
+- **Universal Trust API spec:** [`api/trust-api-spec.md`](./api/trust-api-spec.md)
 - **Architecture:** [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md)
 - **Threat model:** [`uta-repo/THREAT_MODEL.md`](./uta-repo/THREAT_MODEL.md)
 - **Contributing:** [`CONTRIBUTING.md`](./CONTRIBUTING.md)

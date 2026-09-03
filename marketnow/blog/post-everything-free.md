@@ -24,7 +24,7 @@ We charge $0 for everything. Here's why and how.
 ## How we survive without charging
 
 **Sentinel subscriptions** (the business model):
-- FREE: 3 skills, basic audit, community listing
+- Everything is free: unlimited listings, full Sentinel audits, community support. No paid tiers exist.
 - PRO $9.99/mo: 25 skills, priority audits, analytics dashboard
 - ENTERPRISE $49.99/mo: unlimited, SOC2 mapping, private catalog, custom signatures, SLA
 

@@ -157,8 +157,8 @@ async function run() {
         fs.writeFileSync(SKILLS_PATH, JSON.stringify(skills, null, 2));
         queryImported += batchImported;
         
-        if (skills.length >= 8560) {
-          console.log(`  Reached 8,560! (total: ${skills.length})`);
+        if (skills.length >= 9248) {
+          console.log(`  Reached 9,248! (total: ${skills.length})`);
           console.log(`\n✅ FINAL: ${skills.length} skills`);
           fs.writeFileSync(SKILLS_PATH, JSON.stringify(skills, null, 2));
           process.exit(0);

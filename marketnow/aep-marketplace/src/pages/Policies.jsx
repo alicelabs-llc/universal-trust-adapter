@@ -10,19 +10,15 @@ const CONTENT = {
     sections: [
       {
         title: 'Terms of Service — For Agents and Humans',
-        content: `By accessing or using MarketNow, you agree to be bound by these terms. MarketNow is a marketplace for MCP-compatible agent skills, designed for consumption by both autonomous agents (via the public JSON API) and human developers (via the web UI). Buyers browse and install skills — free ones at no cost, premium ones at the seller's price. Sellers subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) plus 20% commission on sales. Agents and users must comply with each skill's upstream open-source license (MIT, Apache-2.0, etc.) when using the installed skill.`,
+        content: `By accessing or using MarketNow, you agree to be bound by these terms. MarketNow is a marketplace for MCP-compatible agent skills, designed for consumption by both autonomous agents (via the public JSON API) and human developers (via the web UI). Everything on MarketNow is free — buyers install free and sellers list free. MarketNow does not charge anyone. Agents and users must comply with each skill's upstream open-source license (MIT, Apache-2.0, etc.) when using the installed skill.`,
       },
       {
         title: 'Pricing — Micro-Transactions for Autonomous Agents',
         content: `MarketNow uses a micro-transaction pricing model optimized for autonomous agent consumption. Every skill has a single, transparent free for buyers in USD displayed on its detail page and in the /api/skills.json response:
 
 • Free — 1,321 skills (26%) — utility, single-function MCP servers
-• $1.99 — 649 skills (13%) — standard integrations
-• $2.99 — 2,742 skills (54%) — multi-feature tools (most common)
-• $4.99 — 312 skills (6%) — sophisticated multi-endpoint tools
-• $9.99 — 30 skills (0.6%) — enterprise-grade, specialized
 
-All 8,845 skills are FREE to install and use. MarketNow does not sell skills. Revenue comes from Sentinel subscriptions (PRO $9.99/mo, Enterprise $49.99/mo) and 20% commission on seller-set prices..`,
+All 9,248 skills are FREE to install and use. MarketNow does not sell skills and does not charge anyone — no subscriptions, no commissions, no fees.`,
       },
       {
         title: 'Refund Policy',
@@ -58,12 +54,8 @@ All 8,845 skills are FREE to install and use. MarketNow does not sell skills. Re
         content: `MarketNow usa un modelo de precios de microtransacciones optimizado para consumo de agentes autónomos. Cada skill tiene un único precio único transparente en USD mostrado en su página de detalle y en la respuesta de /api/skills.json:
 
 • Free — 1,321 skills (26%) — utilidad, servidores MCP de función única
-• $1.99 — 649 skills (13%) — integraciones estándar
-• $2.99 — 2,742 skills (54%) — tools multi-feature (las más comunes)
-• $4.99 — 312 skills (6%) — tools sofisticadas multi-endpoint
-• $9.99 — 30 skills (0.6%) — enterprise-grade, especializadas
 
-Precio promedio: $2.50. Mínimo: Free. Máximo: $9.99. Ninguna skill es gratis — cada skill requiere un pago único, lo que mantiene el marketplace sostenible mientras permanece accesible para agentes autónomos. No hay suscripciones, no hay créditos, no hay tarifas por llamada y no hay planes por niveles. Los agentes pueden descubrir, evaluar y comprar skills programáticamente vía la API pública en /api/skills.json.`,
+Todas las 9,248 skills son gratuitas: no hay precio mínimo ni máximo, no hay pagos. Los agentes pueden descubrir, evaluar e instalar skills programáticamente vía la API pública en /api/skills.json.`,
       },
       {
         title: 'Política de Reembolso',
@@ -99,12 +91,8 @@ Precio promedio: $2.50. Mínimo: Free. Máximo: $9.99. Ninguna skill es gratis �
         content: `O MarketNow usa um modelo de preços de microtransações otimizado para consumo por agentes autônomos. Cada skill tem um único preço único transparente em USD exibido em sua página de detalhe e na resposta de /api/skills.json:
 
 • Free — 1.321 skills (26%) — utilidade, servidores MCP de função única
-• $1.99 — 649 skills (13%) — integrações padrão
-• $2.99 — 2.742 skills (54%) — tools multi-feature (as mais comuns)
-• $4.99 — 312 skills (6%) — tools sofisticadas multi-endpoint
-• $9.99 — 30 skills (0,6%) — enterprise-grade, especializadas
 
-Preço médio: $2.50. Mínimo: Free. Máximo: $9.99. Nenhuma skill é grátis — toda skill exige um pagamento único, o que mantém o marketplace sustentável e ainda acessível para agentes autônomos. Não há assinaturas, não há créditos, não há taxas por chamada e não há planos em níveis. Agentes podem descobrir, avaliar e comprar skills programaticamente via a API pública em /api/skills.json.`,
+As 9,248 skills são gratuitas: não há preço mínimo nem máximo, não há pagamentos. Agentes podem descobrir, avaliar e instalar skills programaticamente via a API pública em /api/skills.json.`,
       },
       {
         title: 'Política de Reembolso',
@@ -140,53 +128,8 @@ Preço médio: $2.50. Mínimo: Free. Máximo: $9.99. Nenhuma skill é grátis �
         content: `MarketNow 采用为自主 agent 消费优化的微交易定价模型。每一个 skill 都有一个透明的一次性 USD 价格，显示在其详情页以及 /api/skills.json 响应中：
 
 • Free —— 1,321 个 skill（26%）—— 实用型、单功能 MCP server
-• $1.99 —— 649 个 skill（13%）—— 标准集成
-• $2.99 —— 2,742 个 skill（54%）—— 多功能 tool（最常见）
-• $4.99 —— 312 个 skill（6%）—— 复杂的多端点 tool
-• $9.99 —— 30 个 skill（0.6%）—— 企业级、专业化
 
-平均价格：$2.50。最低：Free。最高：$9.99。没有免费的 skill —— 每个 skill 都需一次性付款，这让市场保持可持续，同时对自主 agent 保持可及。不设订阅、不设积分、不设按调用计费、不设分级套餐。Agent 可通过公开 API /api/skills.json 以编程方式发现、评估并购买 skill。`,
-      },
-      {
-        title: '退款政策',
-        content: `所有 skill 购买在 14 天内均可申请全额退款，前提是使用该 license key 调用 API 的次数少于 100 次。如需申请退款，请发送邮件至 support@alicelabs.site 并附上您的订单 ID。退款将在 5-10 个工作日内退回原支付方式。价格为 Free 的 skill 同样可退款，但在某些情况下交易手续费可能超过退款金额。`,
-      },
-      {
-        title: '隐私政策',
-        content: `MarketNow 仅收集运营市场所需的最少数据：邮箱地址（用于账户登录）、支付记录（由 Stripe 处理）以及您已购买的 skill 列表。我们不出售个人数据。所有传输中的数据均使用 TLS 1.3 加密。我们不存储信用卡号——所有支付数据均由 Stripe 在其 PCI 合规的基础设施上处理。Agent 的 API 调用以 IP 和 User-Agent 记录，用于限流和防滥用，但除非您登录，否则不会关联到个人身份。`,
-      },
-      {
-        title: 'Skill 许可',
-        content: `MarketNow 上的每一个 skill 都来自一个真实、公开的开源仓库。购买 skill 时，您将获得：(1) 一个 MarketNow license key 用于验证，(2) 安装命令（通常是 \`npx -y marketnow-install-stack\`），以及 (3) 该 skill 的文档访问权限。每个 skill 的底层开源许可（MIT、Apache-2.0 等）仍然适用于您对代码本身的使用。MarketNow 的增值在于筛选、验证（Sentinel L1）和打包——而非底层代码，代码本身在其原始许可下依然免费。`,
-      },
-      {
-        title: 'Agent API 使用',
-        content: `欢迎自主 agent 消费 MarketNow 位于 /api/* 的 API。读端点（skills.json、categories.json、manifest.json、agent.json）均为公开，无需认证。速率限制：匿名 60 次/分钟，已认证 600 次/分钟。如需批量消费，请在本地缓存 /api/skills.json，最多每 24 小时刷新一次——目录变动频率较低。/api/agent.json 端点提供面向 agent 消费的机器可读说明、schema 和 workflow 示例。`,
-      },
-      {
-        title: '可接受使用',
-        content: `您同意不将 MarketNow 的 skill 用于非法活动、不侵犯他人权利、不构建恶意软件。未经明确许可，skill 不得被再分发或转售。在出现滥用、欺诈或违反这些条款的情况时，MarketNow 保留撤销 license 的权利。禁止抓取网站 HTML——请改用公开的 JSON API，该 API 专为编程式访问而设计。`,
-      },
-    ],
-  },
-
-  fr: {
-    sections: [
-      {
-        title: 'Conditions d\'Utilisation — Pour Agents et Humains',
-        content: `En accédant ou en utilisant MarketNow, vous acceptez d'être lié par ces conditions. MarketNow est un marketplace de skills d'agents compatibles MCP, conçu pour la consommation à la fois par des agents autonomes (via l'API JSON publique) et par des développeurs humains (via l'UI web). Chaque skill est vendue individuellement avec un paiement unique — il n'y a pas d'abonnements, pas de crédits et pas de facturation récurrente. Les agents et utilisateurs doivent se conformer à la licence open-source amont de chaque skill (MIT, Apache-2.0, etc.) lors de l'utilisation de la skill installée.`,
-      },
-      {
-        title: 'Tarification — Micro-transactions pour Agents Autonomes',
-        content: `MarketNow utilise un modèle de tarification par micro-transactions optimisé pour la consommation par agents autonomes. Chaque skill a un prix unique transparent en USD affiché sur sa page de détail et dans la réponse /api/skills.json :
-
-• Free — 1 321 skills (26 %) — utilitaires, serveurs MCP à fonction unique
-• $1.99 — 649 skills (13 %) — intégrations standard
-• $2.99 — 2 742 skills (54 %) — tools multi-features (les plus courantes)
-• $4.99 — 312 skills (6 %) — tools sophistiquées multi-endpoints
-• $9.99 — 30 skills (0,6 %) — enterprise-grade, spécialisées
-
-Prix moyen : $2.50. Minimum : Free. Maximum : $9.99. Aucune skill n'est gratuite — chaque skill nécessite un paiement unique, ce qui maintient le marketplace durable tout en restant accessible aux agents autonomes. Pas d'abonnements, pas de crédits, pas de frais par appel et pas de forfaits à niveaux. Les agents peuvent découvrir, évaluer et acheter des skills par programmation via l'API publique sur /api/skills.json.`,
+所有 9,248 个技能都免费：没有最低或最高价格，不存在付款。Agent 可通过公开 API /api/skills.json 以编程方式发现、评估并安装 skill。`,
       },
       {
         title: 'Politique de Remboursement',

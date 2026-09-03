@@ -25,7 +25,7 @@ Stars help other developers discover the project. It's free for you and means a 
 ```
 I've been building MarketNow for 2 weeks.
 
-→ 8,764 MCP servers audited
+→ 9,248 MCP skills audited
 → 206 L2 sandbox audits completed
 → 883 npm downloads
 → 15 dev.to articles
@@ -56,7 +56,7 @@ https://github.com/alicelabs-llc/marketnow
 ## Plantilla 4 — Post corto para Reddit (r/MCP, r/ClaudeAI)
 
 ```
-Title: MarketNow has 8,764 MCP servers audited but only 1 GitHub star. Can you help?
+Title: MarketNow has 9,248 MCP skills audited but only 1 GitHub star. Can you help?
 
 I built an MCP marketplace with gVisor sandbox security audits. 206 servers audited with 60+ adversarial inputs each. 883 npm downloads. 15 dev.to articles.
 

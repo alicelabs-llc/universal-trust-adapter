@@ -1,7 +1,7 @@
 # MarketNow — Trust Infrastructure for AI Agents
 
 > The trust layer that lets AI agents discover, verify, authorize, and transact
-> with external tools. **9,248 MCP servers indexed, 1.2M security checks
+> with external tools. **9,248 MCP skills indexed, 1.2M security checks
 > performed, 80 malicious tools quarantined.** Maintained by AliceLabs LLC
 > (Wyoming, USA, founded 2025). Founder: Edison Flores.
 
@@ -18,7 +18,7 @@ MarketNow combines **7 subsystems** into a single trust infrastructure:
 
 | # | Subsystem | Purpose | Status |
 |---|-----------|---------|--------|
-| 1 | **Discovery** | 9,248 MCP servers indexed from the public ecosystem | ✅ Live |
+| 1 | **Discovery** | 9,248 MCP skills indexed from the public ecosystem | ✅ Live |
 | 2 | **Sentinel** | 10-layer security audit pipeline (L1.5–L2.5 active, L3–L10 on roadmap) | ✅ L1.5–L2.5 |
 | 3 | **ATC/1.0** | Agent Trust Card with Ed25519 signatures (RFC 8032, RFC 8785 JCS) | ✅ Live |
 | 4 | **Handshake** | Cross-agent trust negotiation protocol | 🚧 Beta |
@@ -75,15 +75,12 @@ install. Revenue comes from sellers who want to list and sell skills.
 
 | Seller Tier | Price | Max Skills | Includes |
 |-------------|-------|------------|----------|
-| **FREE** | $0 / forever | 3 | Basic Sentinel L1 scan, 24–48h review queue, community support |
-| **PRO** | $9.99 / month | 25 | Priority Sentinel scan (<6h), featured badge, analytics dashboard, custom slugs, email support |
-| **ENTERPRISE** | $49.99 / month | unlimited | Instant Sentinel scan (<1h), premium placement, advanced analytics, API access, dedicated account manager, priority Slack support |
 
 **Commission**: 20% on seller sales (15% if affiliate is used; 5% to affiliate).
 
-**Storage fee** (FREE tier only): first 3 skills free, then $0.50/skill/month.
+**Storage fee**: none — unlimited free listings.
 
-> ⚠️ The landing page previously said "$0.99–$9.99 One-Time" (charging buyers).
+> ⚠️ The landing page previously said "free One-Time" (charging buyers).
 > This was incorrect — MarketNow charges sellers, not buyers. The landing page
 > is scheduled to be updated. See `REPORT.pdf` finding F5.
 
@@ -94,7 +91,7 @@ Three purchase modes designed for both human oversight and agent autonomy:
 | Mode | Applies to | Human action |
 |------|-----------|--------------|
 | `instant_download` | Free skills (price = 0) | None required |
-| `instant_purchase` | Paid skills with valid mandate (price ≤ $50, ≤ cap, ≤ remaining) | Receives notification immediately after |
+| `instant_purchase` | Moot: all skills are free, nothing is purchased | Not used |
 | `requires_human_approval` | Paid skills when no mandate or mandate exhausted | Approves via Stripe Checkout or creates mandate |
 
 **Hard caps (cannot be raised):**
@@ -142,7 +139,7 @@ in this branch as `*.fixed` files and `patches/*.patch`.
 | F2 | P0 | GitHub URL dual & both 404 (edgarfloresguerra2011-a11y repo doesn't exist) |
 | F3 | P1 | Founding date triple (2024 vs 2025 vs 2026-03-30) |
 | F4 | P1 | Skill count inconsistency (5,023 vs 7,063 vs 9,248) |
-| F5 | P0 | Pricing model triple ($0.99–$9.99 buyer-side vs B2B seller-side) |
+| F5 | P0 | Pricing model triple (free buyer-side vs B2B seller-side) |
 | F6 | P1 | Version drift (npm 1.10.0 vs agent.json mcp_server.version 1.6.0) |
 | F7 | P2 | /api/manifest.json returns 404 but is in robots.txt |
 | F8 | P2 | Track record disclosure inconsistent with landing page |

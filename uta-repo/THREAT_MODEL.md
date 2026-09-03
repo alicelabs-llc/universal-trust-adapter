@@ -103,7 +103,7 @@
 
 | Threat | Mitigation |
 |--------|------------|
-| Attacker obfuscates malicious code in an MCP server | Sentinel L2.5 gVisor sandbox runs the server in isolation. Network is disabled. Filesystem is read-only. Obfuscated code is detected by L1.6 Semgrep + L1.7 malware patterns. |
+| Attacker obfuscates malicious code in an MCP server | Sentinel v3.0 gVisor sandbox runs the server in isolation. Network is disabled. Filesystem is read-only. Obfuscated code is detected by L1.6 Semgrep + L1.7 malware patterns. |
 | Attacker uses prompt injection to bypass Sentinel | Sentinel L1.9 has 32 prompt injection detection rules. The interceptor blocks reads of .env, .ssh, .aws, etc. |
 
 ### Discovery

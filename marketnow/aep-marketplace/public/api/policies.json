@@ -1,6 +1,6 @@
 {
   "service": "MarketNow",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "effective_date": "2026-07-02",
   "maintainer": "AliceLabs LLC (USA (Wyoming))",
   "contact": "support@alicelabs.site",
@@ -8,7 +8,7 @@
   "policies": {
     "terms_of_service": {
       "title": "Terms of Service — For Agents and Humans",
-      "summary": "By accessing or using MarketNow, you agree to these terms. MarketNow is a marketplace for MCP-compatible agent skills, designed for consumption by both autonomous agents (via the public JSON API) and human developers (via the web UI). Every skill is sold individually with a one-time payment — no subscriptions, no credits, no recurring billing. Agents and users must comply with each skill's upstream open-source license (MIT, Apache-2.0, etc.) when using the installed skill.",
+      "summary": "By accessing or using MarketNow, you agree to these terms. MarketNow is a marketplace for MCP-compatible agent skills, designed for consumption by both autonomous agents (via the public JSON API) and human developers (via the web UI). Every skill is free to install — no payments, no subscriptions, no credits, no recurring billing. Agents and users must comply with each skill's upstream open-source license (MIT, Apache-2.0, etc.) when using the installed skill.",
       "key_points": [
         "One-time payment per skill. No subscriptions, no recurring billing.",
         "Each skill's upstream open-source license (MIT, Apache-2.0) applies to your usage of the code itself.",
@@ -18,19 +18,10 @@
       ]
     },
     "pricing": {
-      "title": "Pricing — Micro-Transactions, One-Time",
-      "summary": "Every skill has a transparent one-time price in USD. No subscriptions, no credits, no per-call fees, no tiered plans.",
-      "tiers": [
-        { "price_usd": 0.99, "label": "utility", "description": "Single-function MCP servers, simple wrappers" },
-        { "price_usd": 1.99, "label": "standard", "description": "Standard integrations, one API/service" },
-        { "price_usd": 2.99, "label": "multi-feature", "description": "Multi-feature tools, common choice" },
-        { "price_usd": 4.99, "label": "sophisticated", "description": "Multi-endpoint, complex logic" },
-        { "price_usd": 9.99, "label": "enterprise", "description": "Enterprise-grade, specialized" }
-      ],
-      "payment_methods": [
-        { "method": "stripe", "description": "Credit/debit card via Stripe. Full chargeback rights. PCI-compliant." },
-        { "method": "usdc_base", "description": "USDC on Base L2. Irreversible on-chain. See dispute_policy." }
-      ]
+      "model": "free",
+      "note": "All 9,248 skills are free to install. MarketNow does not charge anyone. No tiers, no payments, no subscriptions.",
+      "tiers": [],
+      "payment_methods": []
     },
     "refund_policy": {
       "title": "Refund & Dispute Policy",
@@ -41,23 +32,7 @@
         "process": "Email support@alicelabs.site with your Stripe session ID. Refunds processed back to original payment method within 5-10 business days.",
         "chargeback_rights": "Full — Stripe purchases retain all standard credit card chargeback rights."
       },
-      "usdc_refunds": {
-        "disclosure": "USDC payments on Base are IRREVERSIBLE on-chain. There is no automatic on-chain reversal. MarketNow operates a manual dispute process funded from treasury.",
-        "window": "7 days from purchase to file a dispute",
-        "process": "Email support@alicelabs.site with: (1) the txHash, (2) the skillId, (3) a description of the issue. AliceLabs will review and refund from treasury for verified disputes within 5 business days.",
-        "valid_reasons": [
-          "Skill did not work as described on its detail page",
-          "Security vulnerability discovered after purchase",
-          "Sentinel report was inaccurate in a material way",
-          "Skill was removed from the marketplace for cause"
-        ],
-        "invalid_reasons": [
-          "Buyer changed their mind (use Stripe for that case)",
-          "Skill works but buyer doesn't need it anymore",
-          "Buyer didn't read the skill description before paying"
-        ],
-        "escrow_roadmap": "Q1 2027: on-chain escrow smart contract. USDC payment goes to a time-locked contract, released to seller after 24h cooling-off period unless disputed. Until then, manual dispute process applies."
-      }
+      "policy": "No payments exist, so no refunds are ever needed. If anything breaks, contact support@alicelabs.site."
     },
     "privacy": {
       "title": "Privacy Policy",
@@ -109,8 +84,9 @@
       },
       "hard_caps": {
         "max_total_per_mandate_usd": 500,
-        "max_per_purchase_usd": 50,
-        "default_ttl_days": 90
+        "max_per_purchase_usd": 0,
+        "default_ttl_days": 90,
+        "note": "Moot: nothing is ever purchased (all skills free)."
       },
       "revocation": "Mandates can be revoked instantly from /mandates — no waiting period.",
       "persistence": "Every create / spend / revoke is a git commit on master at _data/mandates/ — fully auditable in the repo history."

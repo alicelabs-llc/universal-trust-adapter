@@ -8,7 +8,7 @@ MarketNow (https://marketnow.site) is an MCP skills marketplace with a **3-layer
 
 MarketNow is the **first marketplace to offer security certification for MCP servers**. This is directly relevant to developers looking for trustworthy MCP servers:
 
-- **8,582 MCP servers indexed** (including all 7 official Anthropic MCP servers from modelcontextprotocol/servers)
+- **8,582 MCP skills indexed** (including all 7 official Anthropic MCP servers from modelcontextprotocol/servers)
 - **Sentinel 3-layer audit**: L1.5 (6 metadata checks) + L1.6 (18 Semgrep rules + 18 secret patterns + OSV API) + L2 (Docker sandbox with `--network none`, `--read-only`, `--cap-drop ALL`)
 - **Signed certificates**: each skill has a SHA-256-signed JSON certificate, verifiable at https://marketnow.site/verify
 - **Markdown badges**: `[![Sentinel Certified](https://marketnow.site/badges/sentinel-certified-{skillId}.svg)](https://marketnow.site/skill/{skillId})`
@@ -19,7 +19,7 @@ MarketNow is the **first marketplace to offer security certification for MCP ser
 Add to the **Marketplaces** section (or create one):
 
 ```markdown
-- [MarketNow](https://marketnow.site) - MCP skills marketplace with 3-layer Sentinel security audit. Every skill has a signed SHA-256 certificate (verifiable at /verify). 8,582+ MCP servers indexed, including all official Anthropic MCP servers.
+- [MarketNow](https://marketnow.site) - MCP skills marketplace with 3-layer Sentinel security audit. Every skill has a signed SHA-256 certificate (verifiable at /verify). 8,582+ MCP skills indexed, including all official Anthropic MCP servers.
 ```
 
 ## Key differentiators

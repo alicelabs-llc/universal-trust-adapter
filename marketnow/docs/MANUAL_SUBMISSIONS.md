@@ -15,7 +15,7 @@ MarketNow
 
 **Tagline / Short Description (máx 100 chars):**
 ```
-MCP skill marketplace with 8,760+ security-audited servers. Sentinel L2.5 gVisor sandbox.
+MCP skill marketplace with 8,760+ security-audited servers. Sentinel v3.0 gVisor sandbox.
 ```
 
 **Full Description:**
@@ -31,9 +31,9 @@ Audit layers:
 - L4 (Q4 2026): Supply chain attestation (SLSA Level 3)
 - L5 (Q3 2027): Third-party audit (Trail of Bits, Cure53)
 
-8,760+ MCP servers indexed from GitHub, npm, and Smithery. Each skill has a signed SHA-256 certificate verifiable at /verify.
+8,760+ MCP skills indexed from GitHub, npm, and Smithery. Each skill has a signed SHA-256 certificate verifiable at /verify.
 
-43 free skills (no signup). Paid skills $0.99-$9.99 one-time (Stripe or USDC on Base L2).
+43 free skills (no signup). Paid skills free one-time (Stripe or USDC on Base L2).
 
 Install: npx -y marketnow-mcp
 Works with Claude Desktop, Cursor, Cline, Continue, Aider.

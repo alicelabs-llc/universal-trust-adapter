@@ -1,6 +1,6 @@
 name: marketnow-mcp
 displayName: MarketNow — Trust Layer for Agent Commerce
-description: "Trust layer for agent commerce. 8,560 MCP-compatible skills with Sentinel L2 security audits, x402 payments (HTTP 402 + USDC on Base), and AP2 delegated mandates. Human-in-the-loop by default."
+description: "Trust layer for agent commerce. 9,248 MCP-compatible skills with Sentinel L2 security audits, x402 payments (HTTP 402 + USDC on Base), and AP2 delegated mandates. Human-in-the-loop by default."
 version: "1.3.0"
 license: MNNC-1.0
 homepage: https://marketnow.site
@@ -13,7 +13,7 @@ server:
 
 tools:
   - name: search_skills
-    description: Search 8,560 MCP skills by name, category, price, language, or sentinel score
+    description: Search 9,248 MCP skills by name, category, price, language, or sentinel score
   - name: get_skill
     description: Get full details (system prompt, sentinel report, setup, install command) for a specific skill
   - name: list_categories

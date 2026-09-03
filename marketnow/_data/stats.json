@@ -1,0 +1,20 @@
+{
+  "last_updated": "September 02, 2026",
+  "last_updated_iso": "2026-09-02T20:57:59Z",
+  "source": "aep-marketplace/public/api/search-index.json",
+  "indexed_mcp_skills": 9248,
+  "free_to_install": 9248,
+  "paid_skills": 0,
+  "pricing_model": "free",
+  "categories": 16,
+  "sentinel_scanned": 9238,
+  "sentinel_certificates": 16367,
+  "l2_sandbox_results": 257,
+  "l3_results": 207,
+  "human_reviewed": 0,
+  "maintainer_verified": 0,
+  "npm_downloads": null,
+  "active_installations": null,
+  "paying_customers": 0,
+  "note": "Single source of truth. Regenerate with: python3 marketnow/scripts/gen_stats.py"
+}

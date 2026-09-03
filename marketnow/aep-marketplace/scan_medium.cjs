@@ -3,7 +3,7 @@
  * ============================
  * Lee 3 archivos por repo (smithery.yaml, package.json/pyproject.toml, README.md l??nea 1-5)
  * Genera skills_index.json con shortDesc, tags y lang reales.
- * ~10-30 segundos para 13,859 repos.
+ * ~10-30 segundos para 9,248 repos.
  *
  * Uso: node scan_medium.cjs
  * Desde: D:\marketnow-repo-v2\

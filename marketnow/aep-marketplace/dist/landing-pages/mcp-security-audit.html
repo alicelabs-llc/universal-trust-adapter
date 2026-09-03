@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCP Server Security Audit — Sentinel L2.5 gVisor Sandbox — MarketNow</title>
-    <meta name="description" content="Security audit for MCP servers. 6-layer pipeline: static analysis, behavioral patterns, active probe with 60+ adversarial inputs, gVisor sandbox. 8,764 servers audited.">
+    <title>MCP Server Security Audit — Sentinel v3.0 gVisor Sandbox — MarketNow</title>
+    <meta name="description" content="Security audit for MCP servers. 6-layer pipeline: static analysis, behavioral patterns, active probe with 60+ adversarial inputs, gVisor sandbox. 9,248 servers audited.">
     <meta name="keywords" content="mcp server security audit, mcp security scanner, mcp vulnerability scan, mcp sandbox, gvisor mcp">
     <link rel="canonical" href="https://marketnow.site/landing-pages/mcp-security-audit.html" />
-    <meta property="og:title" content="MCP Server Security Audit — Sentinel L2.5" />
-    <meta property="og:description" content="6-layer security audit for MCP servers. 8,764 servers audited. gVisor sandbox isolation." />
+    <meta property="og:title" content="MCP Server Security Audit — Sentinel v3.0" />
+    <meta property="og:description" content="6-layer security audit for MCP servers. 9,248 servers audited. gVisor sandbox isolation." />
     <meta property="og:url" content="https://marketnow.site/landing-pages/mcp-security-audit.html" />
     <meta property="og:type" content="website" />
     <style>
@@ -26,10 +26,10 @@
 </head>
 <body>
     <h1>MCP Server Security Audit</h1>
-    <p><strong>Sentinel L2.5</strong> — the only 6-layer security audit pipeline for MCP (Model Context Protocol) servers. 8,764 servers audited and counting.</p>
+    <p><strong>Sentinel v3.0</strong> — the only 6-layer security audit pipeline for MCP (Model Context Protocol) servers. 9,248 servers audited and counting.</p>
 
     <div>
-        <div class="stat"><span class="stat-num">8,764</span><span class="stat-label">Servers Audited</span></div>
+        <div class="stat"><span class="stat-num">9,248</span><span class="stat-label">Skills Audited</span></div>
         <div class="stat"><span class="stat-num">206</span><span class="stat-label">L2.5 Sandbox Runs</span></div>
         <div class="stat"><span class="stat-num">60+</span><span class="stat-label">Adversarial Inputs</span></div>
         <div class="stat"><span class="stat-num">3</span><span class="stat-label">Servers Removed</span></div>
@@ -56,7 +56,7 @@
     </ul>
 
     <h2>What we found</h2>
-    <p>Of 8,764 MCP servers audited:</p>
+    <p>Of 9,248 MCP skills audited:</p>
     <ul>
         <li><strong>3 servers leaked environment variables</strong> when sent credential-access prompts (they passed tool arguments to <code>eval()</code> without sanitization)</li>
         <li><strong>12 had hardcoded API keys</strong> in source code</li>
@@ -80,7 +80,7 @@
     <pre>https://github.com/alicelabs-llc/marketnow/issues</pre>
     <p>The audit runs via GitHub Actions and results are public.</p>
 
-    <a href="https://marketnow.site/registry" class="cta">Browse 8,764 Audited MCP Servers →</a>
+    <a href="https://marketnow.site/registry" class="cta">Browse 9,248 Audited MCP Skills →</a>
     <a href="https://marketnow.site/security" class="cta">Full Methodology →</a>
 </body>
 </html>

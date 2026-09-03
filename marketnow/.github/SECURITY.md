@@ -61,7 +61,7 @@ Expires:     2027-08-19
 
 ### Out of scope
 
-- Third-party MCP servers indexed in the catalog (report to their respective
+- Third-party MCP skills indexed in the catalog (report to their respective
   maintainers)
 - Vulnerabilities in dependencies (report upstream; we'll upgrade once a fix
   is released)

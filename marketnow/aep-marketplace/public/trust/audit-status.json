@@ -64,7 +64,7 @@
     {
       "id": "F-07",
       "severity": "alto",
-      "title": "Landing vende $0.99-$9.99, agent.json dice buyers nunca pagan",
+      "title": "Landing vende free, agent.json dice buyers nunca pagan",
       "status": "fixed",
       "fix_commit": "0b764d92",
       "fix_date": "2026-08-25",
