@@ -27,7 +27,7 @@
         "price_usd": 49.99,
         "billing": "monthly",
         "features": [
-          "Sentinel L2.5 gVisor sandbox audit",
+          "Sentinel v3.0 gVisor sandbox audit",
           "Priority listing",
           "Advanced analytics",
           "Custom branding",

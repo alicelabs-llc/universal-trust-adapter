@@ -171,6 +171,6 @@ Every server gets a score 0-10 and a signed SHA-256 certificate. Public verifica
 - The Sentinel audit engine (proprietary, AliceLabs LLC)
 - The marketplace API (Vercel-hosted)
 
-43 free skills, no signup. Paid skills $0.99-$9.99 one-time (Stripe or USDC on Base L2).
+43 free skills, no signup. Paid skills free one-time (Stripe or USDC on Base L2).
 
 If you want your MCP server audited, open an issue: https://github.com/alicelabs-llc/marketnow/issues

@@ -229,7 +229,7 @@ const CONTENT = {
       l2None: 'No L2 sandbox results yet — they appear here automatically after the first /api/audit-skill call for a skill with a GitHub repo.',
       l2Dedup: 'Dedup window',
       l2DedupValue: '30 min (per Vercel instance, prevents duplicate dispatches)',
-      l2RolloutNote: 'L2 rollout in progress — currently 17 of 8,845 skills have L2 results. The remaining 8,565 are certified with v3.0+L1.6 (static analysis). L2 coverage grows as more skills get source.url populated.',
+      l2RolloutNote: 'L2 rollout in progress — currently 257 of 9,248 skills have L2 results. The remaining 8,991 are certified with v3.0+L1.6 (static analysis). L2 coverage grows as more skills get source.url populated.',
       viewRaw: '→ View raw JSON in repo',
       refresh: '↻ Refresh',
       loading: 'Loading live audit data…',

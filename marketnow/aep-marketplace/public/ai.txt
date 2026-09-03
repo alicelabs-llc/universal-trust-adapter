@@ -19,7 +19,7 @@
 
 # ─── What this site is ─────────────────────────────────────────────────────
 # MarketNow is an open marketplace for MCP (Model Context Protocol) servers.
-# 8,760+ MCP servers indexed from GitHub, npm, and Smithery.
+# 8,760+ MCP skills indexed from GitHub, npm, and Smithery.
 # Each skill is security-audited by the Sentinel engine (L1.5 + L1.6 + L2 v2.0 + L2.5 gVisor).
 # Founded 2024 by Edison Flores (AliceLabs LLC).
 
@@ -34,7 +34,7 @@
 # - /api/agent.json        — agent instructions, trust model, schema
 # - /api/manifest.json     — marketplace metadata (v4.0.0)
 # - /api/openapi.yaml      — OpenAPI 3.1 specification
-# - /api/categories.json   — 58 categories with counts
+# - /api/categories.json   — 16 categories with counts
 # - /api/free-skills.json  — 43 free skills
 # - /api/search?q=         — server-side search
 

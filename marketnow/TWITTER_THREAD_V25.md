@@ -89,7 +89,7 @@ MarketNow adds the security signal: marketnow.site
 ### Tweet C (stats)
 MarketNow v2.5 stats:
 
-• 8,760+ MCP servers indexed (all real — we deleted 6,092 synthetic entries)
+• 8,760+ MCP skills indexed (all real — we deleted 6,092 synthetic entries)
 • 883 npm downloads last week
 • 5 dev.to articles published
 • 90 GitHub issues opened across repos

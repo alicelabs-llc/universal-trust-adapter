@@ -3,7 +3,7 @@
 #
 # Runs the full 10-layer Sentinel audit on every single skill, one by one.
 # Fetches READMEs from GitHub, scans for malware, prompt injection, secrets.
-# Takes as long as it takes — could be 2-4 hours for 8,845 skills.
+# Takes as long as it takes — could be 2-4 hours for 9,248 skills.
 #
 # Schedule: Daily at 04:00 UTC (after L1.6 batch at 00:00 and L2 at 02:00)
 # Manual: workflow_dispatch with optional --max and --start args
@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
     inputs:
       max_skills:
-        description: 'Max skills to audit (0 = all 8,845)'
+        description: 'Max skills to audit (0 = all 9,248)'
         required: false
         default: '0'
       start_from:

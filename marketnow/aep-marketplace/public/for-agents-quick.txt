@@ -1,7 +1,7 @@
 MarketNow Agent Quick Reference
 ================================
 Base: https://marketnow.site
-Skills: 8,764 | Audited: 5,120 | Free: 65 | Sentinel: L2.5
+Skills: 9,248 | Audited: 5,120 | Free: 9,248 | Sentinel: L2.5
 
 ENDPOINTS (all return JSON, no auth unless noted):
 
@@ -9,7 +9,7 @@ GET  /api/health                    → {ok:true} (34 bytes, ultra-fast)
 GET  /api/manifest                  → All endpoints + stats in one call
 GET  /api/agent.json                → Agent instructions + trust model
 GET  /api/agent-ping.json           → Live stats
-GET  /api/free-skills.json          → 65 free skills (no signup)
+GET  /api/free-skills.json          → 9,248 free skills (no signup)
 GET  /api/skills/{id}               → Full skill detail
 GET  /api/trust-score?skillId=X     → {trust_score, recommendation, certificate_url}
 GET  /api/audit-skill?certificate=1&skillId=X → Signed SHA-256 certificate
@@ -36,7 +36,7 @@ TRUST DECISIONS:
 
 PAYMENT:
   Free: $0 (65 skills)
-  Paid: $0.99-$9.99 one-time (Stripe or USDC on Base)
+  Paid: free one-time (Stripe or USDC on Base)
   USDC contract: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
   Wallet: 0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee
 

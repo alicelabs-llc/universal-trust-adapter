@@ -18,7 +18,7 @@ const CONTENT = {
     saysLabel: 'mcp.so says:',
     realityLabel: 'reality:',
     problems: [
-      { claim: '"8,845 verified MCP-compatible skills"', reality: '8,845' },
+      { claim: '"9,248 verified MCP-compatible skills"', reality: '9,248' },
       {
         claim: '"agent-to-agent crypto payments (ETH/BSC/SOL/BTC)"',
         reality: 'USDC on Base only',
@@ -66,7 +66,7 @@ const CONTENT = {
         version: '1.4.0',
         lastChecked: '2026-07-04',
         whatWeFixed: [
-          'v1.2.0: description said "8,845+ verified skills" → "8,845 MCP-compatible skills"',
+          'v1.2.0: description said "9,248+ verified skills" → "9,248 MCP-compatible skills"',
           'v1.3.0: added "trust layer for agent commerce" positioning',
           'v1.4.0: description now includes "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0: removed "open-source" and "mit" keywords (license is MNNC-1.0, not MIT)',
@@ -84,10 +84,10 @@ const CONTENT = {
         lastChecked: '2026-07-04',
         whatWeFixed: [
           'Smithery pulls from our server-card.json at /.well-known/mcp/server-card.json',
-          'Our server-card.json is up to date with current numbers (8,845 skills, USDC on Base, MNNC-1.0)',
+          'Our server-card.json is up to date with current numbers (9,248 skills, USDC on Base, MNNC-1.0)',
         ],
         knownDiscrepancies: [
-          'Smithery HTML still shows "8,845" in some cached views (their crawler may not have re-indexed yet)',
+          'Smithery HTML still shows "9,248" in some cached views (their crawler may not have re-indexed yet)',
         ],
         notes:
           'Smithery quality score: 84/100. Listing should reflect current data once Smithery re-crawls our server-card.json. Their cache TTL is typically 24-48h.',
@@ -106,7 +106,7 @@ const CONTENT = {
           'Listing owner must update manually via mcp.so dashboard (requires login as @edgarfloresguerra2011-a11y)',
         ],
         knownDiscrepancies: [
-          'Listing says "8,845 verified MCP-compatible skills" — should be 8,845',
+          'Listing says "9,248 verified MCP-compatible skills" — should be 9,248',
           'Listing says "agent-to-agent crypto payments (ETH/BSC/SOL/BTC)" — we only support USDC on Base, NOT ETH/BSC/SOL/BTC directly',
           'Listing says "open registry with no manual approval needed" — we removed this framing; human-in-loop is now the default for mandates',
           'Listing says "largest open MCP skill marketplace" — we no longer claim to be the largest; we position as the trust layer',
@@ -126,7 +126,7 @@ const CONTENT = {
           'Glama crawls our server-card.json and GitHub repo for metadata',
         ],
         notes:
-          'Glama.ai appears to have indexed MarketNow. Verify the listing shows current numbers (8,845 skills, USDC on Base, MNNC-1.0). If stale, Glama\'s crawler should refresh within 7-14 days.',
+          'Glama.ai appears to have indexed MarketNow. Verify the listing shows current numbers (9,248 skills, USDC on Base, MNNC-1.0). If stale, Glama\'s crawler should refresh within 7-14 days.',
       },
       {
         name: 'PulseMCP',
@@ -167,7 +167,7 @@ const CONTENT = {
     saysLabel: 'mcp.so dice:',
     realityLabel: 'realidad:',
     problems: [
-      { claim: '"8,845 verified MCP-compatible skills"', reality: '8,845' },
+      { claim: '"9,248 verified MCP-compatible skills"', reality: '9,248' },
       {
         claim: '"agent-to-agent crypto payments (ETH/BSC/SOL/BTC)"',
         reality: 'solo USDC on Base',
@@ -215,7 +215,7 @@ const CONTENT = {
         version: '1.4.0',
         lastChecked: '2026-07-04',
         whatWeFixed: [
-          'v1.2.0: la descripción decía "8,845+ verified skills" → "8,845 MCP-compatible skills"',
+          'v1.2.0: la descripción decía "9,248+ verified skills" → "9,248 MCP-compatible skills"',
           'v1.3.0: se añadió el posicionamiento de "trust layer for agent commerce"',
           'v1.4.0: la descripción ahora incluye "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0: se eliminaron las keywords "open-source" y "mit" (la licencia es MNNC-1.0, no MIT)',
@@ -233,10 +233,10 @@ const CONTENT = {
         lastChecked: '2026-07-04',
         whatWeFixed: [
           'Smithery toma datos de nuestro server-card.json en /.well-known/mcp/server-card.json',
-          'Nuestro server-card.json está actualizado con los números actuales (8,845 skills, USDC on Base, MNNC-1.0)',
+          'Nuestro server-card.json está actualizado con los números actuales (9,248 skills, USDC on Base, MNNC-1.0)',
         ],
         knownDiscrepancies: [
-          'El HTML de Smithery todavía muestra "8,845" en algunas vistas cacheadas (su crawler puede no haber re-indexado aún)',
+          'El HTML de Smithery todavía muestra "9,248" en algunas vistas cacheadas (su crawler puede no haber re-indexado aún)',
         ],
         notes:
           'Puntaje de calidad de Smithery: 84/100. El listado debería reflejar los datos actuales una vez que Smithery vuelva a crawlear nuestro server-card.json. Su TTL de caché suele ser 24-48h.',
@@ -255,7 +255,7 @@ const CONTENT = {
           'El dueño del listado debe actualizar manualmente vía el dashboard de mcp.so (requiere login como @edgarfloresguerra2011-a11y)',
         ],
         knownDiscrepancies: [
-          'El listado dice "8,845 verified MCP-compatible skills" — debería ser 8,845',
+          'El listado dice "9,248 verified MCP-compatible skills" — debería ser 9,248',
           'El listado dice "agent-to-agent crypto payments (ETH/BSC/SOL/BTC)" — solo soportamos USDC on Base, NO ETH/BSC/SOL/BTC directamente',
           'El listado dice "open registry with no manual approval needed" — eliminamos este framing; human-in-loop es ahora el comportamiento por defecto para mandates',
           'El listado dice "largest open MCP skill marketplace" — ya no afirmamos ser los más grandes; nos posicionamos como la capa de confianza',
@@ -275,7 +275,7 @@ const CONTENT = {
           'Glama hace crawl de nuestro server-card.json y repo de GitHub para metadatos',
         ],
         notes:
-          'Glama.ai parece haber indexado MarketNow. Verifica que el listado muestre los números actuales (8,845 skills, USDC on Base, MNNC-1.0). Si está desactualizado, el crawler de Glama debería refrescar en 7-14 días.',
+          'Glama.ai parece haber indexado MarketNow. Verifica que el listado muestre los números actuales (9,248 skills, USDC on Base, MNNC-1.0). Si está desactualizado, el crawler de Glama debería refrescar en 7-14 días.',
       },
       {
         name: 'PulseMCP',
@@ -316,7 +316,7 @@ const CONTENT = {
     saysLabel: 'mcp.so diz:',
     realityLabel: 'realidade:',
     problems: [
-      { claim: '"8,845 verified MCP-compatible skills"', reality: '8,845' },
+      { claim: '"9,248 verified MCP-compatible skills"', reality: '9,248' },
       {
         claim: '"agent-to-agent crypto payments (ETH/BSC/SOL/BTC)"',
         reality: 'apenas USDC on Base',
@@ -364,7 +364,7 @@ const CONTENT = {
         version: '1.4.0',
         lastChecked: '2026-07-04',
         whatWeFixed: [
-          'v1.2.0: a descrição dizia "8,845+ verified skills" → "8,845 MCP-compatible skills"',
+          'v1.2.0: a descrição dizia "9,248+ verified skills" → "9,248 MCP-compatible skills"',
           'v1.3.0: adicionado o posicionamento de "trust layer for agent commerce"',
           'v1.4.0: a descrição agora inclui "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0: removidas as keywords "open-source" e "mit" (a licença é MNNC-1.0, não MIT)',
@@ -382,10 +382,10 @@ const CONTENT = {
         lastChecked: '2026-07-04',
         whatWeFixed: [
           'Smithery puxa do nosso server-card.json em /.well-known/mcp/server-card.json',
-          'Nosso server-card.json está atualizado com os números atuais (8,845 skills, USDC on Base, MNNC-1.0)',
+          'Nosso server-card.json está atualizado com os números atuais (9,248 skills, USDC on Base, MNNC-1.0)',
         ],
         knownDiscrepancies: [
-          'O HTML do Smithery ainda mostra "8,845" em algumas views em cache (o crawler pode não ter re-indexado ainda)',
+          'O HTML do Smithery ainda mostra "9,248" em algumas views em cache (o crawler pode não ter re-indexado ainda)',
         ],
         notes:
           'Pontuação de qualidade do Smithery: 84/100. A listagem deve refletir os dados atuais assim que o Smithery re-crawlear nosso server-card.json. O TTL de cache deles costuma ser 24-48h.',
@@ -404,7 +404,7 @@ const CONTENT = {
           'O dono da listagem precisa atualizar manualmente via o dashboard do mcp.so (requer login como @edgarfloresguerra2011-a11y)',
         ],
         knownDiscrepancies: [
-          'A listagem diz "8,845 verified MCP-compatible skills" — deveria ser 8,845',
+          'A listagem diz "9,248 verified MCP-compatible skills" — deveria ser 9,248',
           'A listagem diz "agent-to-agent crypto payments (ETH/BSC/SOL/BTC)" — só suportamos USDC on Base, NÃO ETH/BSC/SOL/BTC diretamente',
           'A listagem diz "open registry with no manual approval needed" — removemos esse framing; human-in-loop agora é o padrão para mandates',
           'A listagem diz "largest open MCP skill marketplace" — não afirmamos mais ser os maiores; nos posicionamos como a camada de confiança',
@@ -424,7 +424,7 @@ const CONTENT = {
           'Glama faz crawl do nosso server-card.json e do repo no GitHub para metadados',
         ],
         notes:
-          'Glama.ai parece ter indexado o MarketNow. Verifique se a listagem mostra os números atuais (8,845 skills, USDC on Base, MNNC-1.0). Se desatualizada, o crawler da Glama deve atualizar em 7-14 dias.',
+          'Glama.ai parece ter indexado o MarketNow. Verifique se a listagem mostra os números atuais (9,248 skills, USDC on Base, MNNC-1.0). Se desatualizada, o crawler da Glama deve atualizar em 7-14 dias.',
       },
       {
         name: 'PulseMCP',
@@ -465,7 +465,7 @@ const CONTENT = {
     saysLabel: 'mcp.so 写的是：',
     realityLabel: '实际情况：',
     problems: [
-      { claim: '"8,845 verified MCP-compatible skills"', reality: '8,845' },
+      { claim: '"9,248 verified MCP-compatible skills"', reality: '9,248' },
       {
         claim: '"agent-to-agent crypto payments (ETH/BSC/SOL/BTC)"',
         reality: '仅支持 USDC on Base',
@@ -511,7 +511,7 @@ const CONTENT = {
         version: '1.4.0',
         lastChecked: '2026-07-04',
         whatWeFixed: [
-          'v1.2.0：描述中曾写为 "8,845+ verified skills" → "8,845 MCP-compatible skills"',
+          'v1.2.0：描述中曾写为 "9,248+ verified skills" → "9,248 MCP-compatible skills"',
           'v1.3.0：添加了 "trust layer for agent commerce" 的定位',
           'v1.4.0：描述现已包含 "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0：移除了 "open-source" 与 "mit" 关键词（license 为 MNNC-1.0，不是 MIT）',
@@ -529,10 +529,10 @@ const CONTENT = {
         lastChecked: '2026-07-04',
         whatWeFixed: [
           'Smithery 从我们的 /.well-known/mcp/server-card.json 拉取数据',
-          '我们的 server-card.json 已更新为当前数据（8,845 skills，USDC on Base，MNNC-1.0）',
+          '我们的 server-card.json 已更新为当前数据（9,248 skills，USDC on Base，MNNC-1.0）',
         ],
         knownDiscrepancies: [
-          'Smithery 的 HTML 在某些缓存视图中仍显示 "8,845"（其爬虫可能尚未重新索引）',
+          'Smithery 的 HTML 在某些缓存视图中仍显示 "9,248"（其爬虫可能尚未重新索引）',
         ],
         notes:
           'Smithery 质量分：84/100。一旦 Smithery 重新爬取我们的 server-card.json，列表应反映当前数据。其缓存 TTL 通常为 24-48 小时。',
@@ -551,7 +551,7 @@ const CONTENT = {
           '列表所有者必须通过 mcp.so dashboard 手动更新（需以 @edgarfloresguerra2011-a11y 身份登录）',
         ],
         knownDiscrepancies: [
-          '列表写的是 "8,845 verified MCP-compatible skills" —— 应为 8,845',
+          '列表写的是 "9,248 verified MCP-compatible skills" —— 应为 9,248',
           '列表写的是 "agent-to-agent crypto payments (ETH/BSC/SOL/BTC)" —— 我们只支持 USDC on Base，不直接支持 ETH/BSC/SOL/BTC',
           '列表写的是 "open registry with no manual approval needed" —— 我们已移除该表述；human-in-loop 现为 mandates 的默认行为',
           '列表写的是 "largest open MCP skill marketplace" —— 我们不再声称是最大的；我们定位为信任层',
@@ -571,7 +571,7 @@ const CONTENT = {
           'Glama 会爬取我们的 server-card.json 与 GitHub 仓库获取元数据',
         ],
         notes:
-          'Glama.ai 似乎已索引 MarketNow。请核实列表显示的是当前数据（8,845 skills，USDC on Base，MNNC-1.0）。如已过时，Glama 的爬虫应在 7-14 天内刷新。',
+          'Glama.ai 似乎已索引 MarketNow。请核实列表显示的是当前数据（9,248 skills，USDC on Base，MNNC-1.0）。如已过时，Glama 的爬虫应在 7-14 天内刷新。',
       },
       {
         name: 'PulseMCP',
@@ -612,7 +612,7 @@ const CONTENT = {
     saysLabel: 'mcp.so dit :',
     realityLabel: 'réalité :',
     problems: [
-      { claim: '"8,845 verified MCP-compatible skills"', reality: '8,845' },
+      { claim: '"9,248 verified MCP-compatible skills"', reality: '9,248' },
       {
         claim: '"agent-to-agent crypto payments (ETH/BSC/SOL/BTC)"',
         reality: 'USDC on Base uniquement',
@@ -660,7 +660,7 @@ const CONTENT = {
         version: '1.4.0',
         lastChecked: '2026-07-04',
         whatWeFixed: [
-          'v1.2.0 : la description disait "8,845+ verified skills" → "8,845 MCP-compatible skills"',
+          'v1.2.0 : la description disait "9,248+ verified skills" → "9,248 MCP-compatible skills"',
           'v1.3.0 : ajout du positionnement « trust layer for agent commerce »',
           'v1.4.0 : la description inclut désormais "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0 : suppression des mots-clés "open-source" et "mit" (la licence est MNNC-1.0, pas MIT)',
@@ -678,10 +678,10 @@ const CONTENT = {
         lastChecked: '2026-07-04',
         whatWeFixed: [
           'Smithery récupère depuis notre server-card.json à /.well-known/mcp/server-card.json',
-          'Notre server-card.json est à jour avec les chiffres actuels (8,845 skills, USDC on Base, MNNC-1.0)',
+          'Notre server-card.json est à jour avec les chiffres actuels (9,248 skills, USDC on Base, MNNC-1.0)',
         ],
         knownDiscrepancies: [
-          'Le HTML de Smithery affiche encore "8,845" dans certaines vues en cache (leur crawler n\'a peut-être pas encore ré-indexé)',
+          'Le HTML de Smithery affiche encore "9,248" dans certaines vues en cache (leur crawler n\'a peut-être pas encore ré-indexé)',
         ],
         notes:
           "Score de qualité Smithery : 84/100. Le listing devrait refléter les données actuelles une fois que Smithery recrawl notre server-card.json. Leur TTL de cache est généralement de 24-48h.",
@@ -700,7 +700,7 @@ const CONTENT = {
           "Le propriétaire du listing doit le mettre à jour manuellement via le dashboard mcp.so (connexion requise en tant que @edgarfloresguerra2011-a11y)",
         ],
         knownDiscrepancies: [
-          'Le listing dit "8,845 verified MCP-compatible skills" — devrait être 8,845',
+          'Le listing dit "9,248 verified MCP-compatible skills" — devrait être 9,248',
           'Le listing dit "agent-to-agent crypto payments (ETH/BSC/SOL/BTC)" — nous ne supportons que USDC on Base, PAS ETH/BSC/SOL/BTC directement',
           'Le listing dit "open registry with no manual approval needed" — nous avons retiré ce framing ; human-in-loop est désormais le défaut pour les mandates',
           'Le listing dit "largest open MCP skill marketplace" — nous ne prétendons plus être les plus grands ; nous nous positionnons comme la couche de confiance',
@@ -720,7 +720,7 @@ const CONTENT = {
           'Glama crawle notre server-card.json et notre repo GitHub pour les métadonnées',
         ],
         notes:
-          'Glama.ai semble avoir indexé MarketNow. Vérifiez que le listing affiche les chiffres actuels (8,845 skills, USDC on Base, MNNC-1.0). Si obsolète, le crawler de Glama devrait se rafraîchir en 7-14 jours.',
+          'Glama.ai semble avoir indexé MarketNow. Vérifiez que le listing affiche les chiffres actuels (9,248 skills, USDC on Base, MNNC-1.0). Si obsolète, le crawler de Glama devrait se rafraîchir en 7-14 jours.',
       },
       {
         name: 'PulseMCP',

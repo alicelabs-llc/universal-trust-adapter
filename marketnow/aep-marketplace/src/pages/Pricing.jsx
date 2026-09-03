@@ -11,7 +11,7 @@ import { useLang } from '../context/LanguageContext.jsx';
 const CONTENT = {
   en: {
     headerExtra:
-      "Buyers browse and install skills — free ones at no cost, premium ones at the seller's price. Sellers subscribe to Sentinel v3.0 for security auditing: PRO $9.99/mo or ENTERPRISE $49.99/mo. MarketNow earns 20% commission on seller sales.",
+      "MarketNow is 100% free. Buyers install free. Sellers list free. Sentinel v3.0 audits are free. MarketNow does not charge anyone.",
     billingMonthly: 'MONTHLY',
     billingYearly: 'YEARLY',
     billingYearlyDiscount: '-20%',
@@ -43,11 +43,11 @@ const CONTENT = {
     affiliateSale:
       "Affiliate sale (5% comes from MarketNow's share): Seller 80% · MarketNow 15% · Affiliate 5% = 100%",
     exampleLine:
-      'Example: A seller subscription at $9.99/mo → Seller gets full subscription value. MarketNow earns 20% commission on any skill sales the seller makes.',
+      'Example: everything is free — there are no subscriptions and no commissions. MarketNow does not charge anyone.',
 
     affiliateTitle: 'BECOME AN AFFILIATE',
     affiliateBody:
-      'Earn 5% commission on every sale you refer. Share your affiliate link, and when someone buys via your link, you get paid. Monthly payouts via Stripe Connect (minimum $50 threshold).',
+      'There is no affiliate program — there is nothing to buy. Every skill is free.',
     affiliateButton: 'GET YOUR AFFILIATE LINK →',
 
     faqTitle: 'FREQUENTLY ASKED QUESTIONS',
@@ -58,7 +58,7 @@ const CONTENT = {
       },
       {
         q: 'What happens if I exceed my free tier limit?',
-        a: 'Buyers are always free. Sellers: PRO ($9.99/mo) includes Sentinel v3.0 audit + listing. ENTERPRISE ($49.99/mo) adds gVisor sandbox + priority listing + API access.',
+        a: 'Everything is free for everyone: buyers, sellers, Sentinel v3.0 audits, gVisor sandbox and API access included — no paid tiers exist.',
       },
       {
         q: 'How do I get paid as a seller?',
@@ -74,7 +74,7 @@ const CONTENT = {
       },
       {
         q: 'How does the affiliate program work?',
-        a: 'Generate your unique affiliate code from /dashboard. Share links with your code (?ref=aff_xxxxx). When someone buys via your link, you earn 5% of the sale price. Payouts are monthly via Stripe Connect (min $50).',
+        a: 'There is no affiliate program — there is nothing to buy. Every skill is free.',
       },
       {
         q: 'Can agents buy skills programmatically?',
@@ -145,7 +145,7 @@ const CONTENT = {
 
   es: {
     headerExtra:
-      'Empieza gratis con el plan Community. Sube a PRO ($9.99/mes) cuando necesites monitoreo y analíticas. Enterprise disponible para despliegues personalizados.',
+      'Todo es gratis: publicación, instalación, auditorías Sentinel y API. No hay planes pagos ni Enterprise de pago.',
     billingMonthly: 'MENSUAL',
     billingYearly: 'ANUAL',
     billingYearlyDiscount: '-20%',
@@ -177,26 +177,26 @@ const CONTENT = {
     affiliateSale:
       'Venta con afiliado (el 5% sale de la parte de MarketNow): Vendedor 80% · MarketNow 15% · Afiliado 5% = 100%',
     exampleLine:
-      'Ejemplo: Una skill vendida a $2.99 → Vendedor recibe $2.39 (80%) · MarketNow recibe $0.45 (15%) · Afiliado recibe $0.15 (5%)',
+      'Ejemplo: todo es gratis — no hay ventas, no hay comisiones. MarketNow no cobra a nadie.',
 
     affiliateTitle: 'CONVIÉRTETE EN AFILIADO',
     affiliateBody:
-      'Gana 5% de comisión por cada venta que refieras. Comparte tu link de afiliado y cuando alguien compra vía tu link, te pagan. Pagos mensuales vía Stripe Connect (umbral mínimo $50).',
+      'No existe programa de afiliados: no hay nada que comprar. Todas las skills son gratis.',
     affiliateButton: 'OBTENER TU LINK DE AFILIADO →',
 
     faqTitle: 'PREGUNTAS FRECUENTES',
     faq: [
       {
         q: '¿Los compradores necesitan suscripción?',
-        a: 'No. MarketNow usa precios B2B: Community (Gratis), PRO ($9.99/mes), Enterprise (Custom). Las 8,845 skills están certificadas por Sentinel y son navegables gratis.',
+        a: 'Correcto: todo es gratis. Las 9,248 skills están certificadas por Sentinel y son navegables e instalables gratis.',
       },
       {
         q: '¿Qué pasa si excedo el límite del plan free?',
-        a: 'El plan Community es gratis. Para monitoreo de equipo, sube a PRO ($9.99/mes). Enterprise disponible para despliegues personalizados.',
+        a: 'Todo es gratis, incluyendo monitoreo de equipo. No hay planes pagos.',
       },
       {
         q: '¿Cómo recibo mis pagos como vendedor?',
-        a: 'Los pagos se procesan mensualmente vía Stripe Connect. Recibirás 80% del precio de cada venta. El umbral mínimo de pago es $50. Regístrate en Stripe Connect desde tu dashboard después de tu primera venta.',
+        a: 'No hay pagos: MarketNow no cobra a nadie. No existen payouts ni Stripe Connect.',
       },
       {
         q: '¿Puedo publicar mi skill gratis?',
@@ -204,11 +204,11 @@ const CONTENT = {
       },
       {
         q: '¿Qué es el badge Verified Seller?',
-        a: 'Una compra única de $19.99 que añade un badge ✓ Verified a todas tus skills. Requiere verificación KYC (identificación oficial). Aumenta la confianza del comprador y las tasas de conversión significativamente.',
+        a: 'El badge ✓ Verified es gratis. Requiere verificación KYC (identificación oficial). Aumenta la confianza del comprador y las tasas de conversión significativamente.',
       },
       {
         q: '¿Cómo funciona el programa de afiliados?',
-        a: 'Genera tu código de afiliado único desde /dashboard. Comparte links con tu código (?ref=aff_xxxxx). Cuando alguien compra vía tu link, ganas 5% del precio de venta. Los pagos son mensuales vía Stripe Connect (mín $50).',
+        a: 'No existe programa de afiliados: no hay nada que comprar. Todas las skills son gratis.',
       },
       {
         q: '¿Los agentes pueden comprar skills programáticamente?',
@@ -281,7 +281,7 @@ const CONTENT = {
 
   pt: {
     headerExtra:
-      'Comece grátis com o plano Community. Faça upgrade para PRO ($9.99/mês) quando precisar de monitoramento e análises. Enterprise disponível para implantações personalizadas.',
+      'Tudo é grátis: publicação, instalação, auditorias Sentinel e API. Não há planos pagos.',
     billingMonthly: 'MENSAL',
     billingYearly: 'ANUAL',
     billingYearlyDiscount: '-20%',
@@ -313,26 +313,26 @@ const CONTENT = {
     affiliateSale:
       'Venda com afiliado (os 5% vêm da parte do MarketNow): Vendedor 80% · MarketNow 15% · Afiliado 5% = 100%',
     exampleLine:
-      'Exemplo: Uma skill vendida por $2.99 → Vendedor recebe $2.39 (80%) · MarketNow recebe $0.45 (15%) · Afiliado recebe $0.15 (5%)',
+      'Exemplo: tudo é grátis — não há vendas nem comissões. O MarketNow não cobra ninguém.',
 
     affiliateTitle: 'TORNE-SE UM AFILIADO',
     affiliateBody:
-      'Ganhe 5% de comissão em cada venda que você indicar. Compartilhe seu link de afiliado e quando alguém compra via seu link, você recebe. Pagamentos mensais via Stripe Connect (limite mínimo $50).',
+      'Não existe programa de afiliados: não há nada para comprar. Todas as skills são gratuitas.',
     affiliateButton: 'OBTER SEU LINK DE AFILIADO →',
 
     faqTitle: 'PERGUNTAS FREQUENTES',
     faq: [
       {
         q: 'Compradores precisam de assinatura?',
-        a: 'Não. O MarketNow usa preços B2B: Community (Grátis), PRO ($9.99/mês), Enterprise (Custom). Todas as 8,845 skills são certificadas pelo Sentinel e navegáveis gratuitamente.',
+        a: 'Correto: tudo é grátis. As 9,248 skills são certificadas pelo Sentinel e navegáveis/instaláveis gratuitamente.',
       },
       {
         q: 'O que acontece se eu exceder o limite do plano free?',
-        a: 'O plano Community é gratuito. Para monitoramento de equipe, faça upgrade para PRO ($9.99/mês). Enterprise disponível para implantações personalizadas.',
+        a: 'Tudo é grátis, incluindo monitoramento de equipe. Não há planos pagos.',
       },
       {
         q: 'Como recebo meus pagamentos como vendedor?',
-        a: 'Pagamentos são processados mensalmente via Stripe Connect. Você recebe 80% do preço de cada venda. Limite mínimo de pagamento é $50. Cadastre-se no Stripe Connect pelo seu dashboard após a primeira venda.',
+        a: 'Não há pagamentos: o MarketNow não cobra ninguém. Não existem payouts nem Stripe Connect.',
       },
       {
         q: 'Posso listar minha skill gratuitamente?',
@@ -340,11 +340,11 @@ const CONTENT = {
       },
       {
         q: 'O que é o badge Verified Seller?',
-        a: 'Uma compra única de $19.99 que adiciona um badge ✓ Verified a todas as suas skills. Requer verificação KYC (documento de identidade). Aumenta significativamente a confiança do comprador e as taxas de conversão.',
+        a: 'O badge ✓ Verified é gratuito. Requer verificação KYC (documento de identidade). Aumenta significativamente a confiança do comprador e as taxas de conversão.',
       },
       {
         q: 'Como funciona o programa de afiliados?',
-        a: 'Gere seu código de afiliado único em /dashboard. Compartilhe links com seu código (?ref=aff_xxxxx). Quando alguém compra via seu link, você ganha 5% do preço da venda. Pagamentos mensais via Stripe Connect (mín $50).',
+        a: 'Não existe programa de afiliados: não há nada para comprar. Todas as skills são gratuitas.',
       },
       {
         q: 'Agentes podem comprar skills programaticamente?',
@@ -417,7 +417,7 @@ const CONTENT = {
 
   zh: {
     headerExtra:
-      '从 Community 免费计划开始。需要团队监控和分析时升级到 Team（$99/月）。Enterprise 可用于定制部署。',
+      '一切免费：发布、安装、Sentinel 审计和 API 都免费。不存在付费计划。',
     billingMonthly: '月付',
     billingYearly: '年付',
     billingYearlyDiscount: '-20%',
@@ -448,26 +448,26 @@ const CONTENT = {
     standardSale: '标准销售（无推广者）：卖家 80% · MarketNow 20% = 100%',
     affiliateSale: '推广销售（5% 来自 MarketNow 的份额）：卖家 80% · MarketNow 15% · 推广者 5% = 100%',
     exampleLine:
-      '示例：一个 skill 以 $2.99 售出 → 卖家获得 $2.39（80%）· MarketNow 获得 $0.45（15%）· 推广者获得 $0.15（5%）',
+      '示例：一切免费 —— 没有销售，没有佣金。MarketNow 不向任何人收费。',
 
     affiliateTitle: '成为推广者',
     affiliateBody:
-      '每笔你推荐的销售可获得 5% 佣金。分享你的推广链接，当有人通过你的链接购买时，你就能获得报酬。每月通过 Stripe Connect 付款（最低起付 $50）。',
+      '没有推广计划：没有可购买的东西。所有技能都免费。',
     affiliateButton: '获取你的推广链接 →',
 
     faqTitle: '常见问题',
     faq: [
       {
         q: '买家需要订阅吗？',
-        a: '不需要。MarketNow 使用 B2B 定价：Community（免费）、Team（$99/月）、Enterprise（定制）。所有 8,845 个技能都通过 Sentinel 认证，可免费浏览。',
+        a: '正确：一切免费。所有 9,248 个技能都通过 Sentinel 认证，可免费浏览和安装。',
       },
       {
         q: '如果超出免费套餐限额会怎样？',
-        a: 'Community 计划免费。如需团队监控，请升级到 Team（$99/月）。Enterprise 可用于定制部署。',
+        a: '一切免费，包括团队监控。不存在付费计划。',
       },
       {
         q: '作为卖家如何收款？',
-        a: '通过 Stripe Connect 按月处理付款。你将获得每笔售价的 80%。最低起付金额为 $50。首次销售后可在 dashboard 注册 Stripe Connect。',
+        a: '没有付款：MarketNow 不向任何人收费。不存在 payouts 或 Stripe Connect。',
       },
       {
         q: '可以免费上架 skill 吗？',
@@ -475,11 +475,11 @@ const CONTENT = {
       },
       {
         q: 'Verified Seller 徽章是什么？',
-        a: '一次性支付 $19.99，为你的所有 skill 添加 ✓ Verified 徽章。需通过 KYC 验证（政府签发 ID）。可显著提升买家信任和转化率。',
+        a: '✓ Verified 徽章免费。需通过 KYC 验证（政府签发 ID）。可显著提升买家信任和转化率。',
       },
       {
         q: '推广者计划如何运作？',
-        a: '在 /dashboard 生成你专属的推广码。分享带推广码的链接（?ref=aff_xxxxx）。有人通过你的链接购买时，你获得售价的 5%。每月通过 Stripe Connect 付款（最低 $50）。',
+        a: '没有推广计划：没有可购买的东西。所有技能都免费。',
       },
       {
         q: 'agent 可以通过 API 程序化购买 skill 吗？',
@@ -549,7 +549,7 @@ const CONTENT = {
 
   fr: {
     headerExtra:
-      "Commencez gratuitement avec le plan Community. Passez à Team ($9.99/mois) quand vous avez besoin de surveillance et d'analyses. Enterprise disponible pour les déploiements personnalisés.",
+      "Tout est gratuit : publication, installation, audits Sentinel et API. Il n'existe aucun plan payant.",
     billingMonthly: 'MENSUEL',
     billingYearly: 'ANNUEL',
     billingYearlyDiscount: '-20%',
@@ -581,26 +581,26 @@ const CONTENT = {
     affiliateSale:
       "Vente avec affilié (les 5% viennent de la part de MarketNow) : Vendeur 80% · MarketNow 15% · Affilié 5% = 100%",
     exampleLine:
-      'Exemple : Une skill vendue $2.99 → Vendeur reçoit $2.39 (80%) · MarketNow reçoit $0.45 (15%) · Affilié reçoit $0.15 (5%)',
+      'Exemple : tout est gratuit — pas de ventes, pas de commissions. MarketNow ne facture personne.',
 
     affiliateTitle: 'DEVENEZ AFFILIÉ',
     affiliateBody:
-      "Gagnez 5% de commission sur chaque vente que vous référez. Partagez votre lien d'affiliation, et quand quelqu'un achète via votre lien, vous êtes payé. Paiements mensuels via Stripe Connect (seuil minimum $50).",
+      "Il n'y a pas de programme d'affiliation — il n'y a rien à acheter. Chaque skill est gratuite.",
     affiliateButton: 'OBTENIR VOTRE LIEN AFFILIÉ →',
 
     faqTitle: 'QUESTIONS FRÉQUENTES',
     faq: [
       {
         q: 'Les acheteurs ont-ils besoin d\'un abonnement ?',
-        a: "Non. MarketNow utilise une tarification B2B : Community (Gratuit), Team ($9.99/mois), Enterprise (Sur mesure). Les 8 582 skills sont certifiées par Sentinel et naviguables gratuitement.",
+        a: "Exact : tout est gratuit. Les 9 248 skills sont certifiées par Sentinel et navigables/installables gratuitement.",
       },
       {
         q: 'Que se passe-t-il si je dépasse la limite du plan gratuit ?',
-        a: 'Le plan Community est gratuit. Pour la surveillance d`équipe, passez à Team ($9.99/mois). Enterprise disponible pour les déploiements personnalisés.',
+        a: 'Tout est gratuit, y compris la surveillance d`équipe. Il n`existe aucun plan payant.',
       },
       {
         q: 'Comment suis-je payé en tant que vendeur ?',
-        a: "Les paiements sont traités mensuellement via Stripe Connect. Vous recevez 80% du prix de chaque vente. Le seuil minimum de paiement est $50. Inscrivez-vous à Stripe Connect depuis votre dashboard après votre première vente.",
+        a: "Il n'y a aucun paiement : MarketNow ne facture personne. Pas de payouts, pas de Stripe Connect.",
       },
       {
         q: 'Puis-je lister ma skill gratuitement ?',
@@ -608,11 +608,11 @@ const CONTENT = {
       },
       {
         q: "Qu'est-ce que le badge Verified Seller ?",
-        a: 'Un achat unique de $19.99 qui ajoute un badge ✓ Verified à toutes vos skills. Nécessite une vérification KYC (pièce d\'identité officielle). Augmente significativement la confiance des acheteurs et les taux de conversion.',
+        a: 'Le badge ✓ Verified est gratuit. Nécessite une vérification KYC (pièce d\'identité officielle). Augmente significativement la confiance des acheteurs et les taux de conversion.',
       },
       {
         q: 'Comment fonctionne le programme d\'affiliation ?',
-        a: "Générez votre code d'affiliation unique depuis /dashboard. Partagez des liens avec votre code (?ref=aff_xxxxx). Quand quelqu'un achète via votre lien, vous gagnez 5% du prix de vente. Les paiements sont mensuels via Stripe Connect (min $50).",
+        a: "Il n'y a pas de programme d'affiliation — il n'y a rien à acheter. Chaque skill est gratuite.",
       },
       {
         q: 'Les agents peuvent-ils acheter des skills programmatiquement ?',
@@ -698,7 +698,7 @@ function fmt(str, vars) {
  *
  * Modelo de monetización completo:
  * - Compradores: B2B pricing (Community/Team/Enterprise)
- * - Planes: Community (Free) / Team ($9.99/mo) / Enterprise (Custom)
+ * - Planes: todo es gratis (no hay planes pagos)
  * - Add-ons: Featured listing, Verified Seller badge, Priority Review
  * - Afiliados: 5% comisión por venta referida
  */

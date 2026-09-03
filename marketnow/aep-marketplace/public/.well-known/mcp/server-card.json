@@ -2,7 +2,7 @@
   "$schema": "https://smithery.ai/schema/server-card.json",
   "name": "marketnow",
   "displayName": "MarketNow — Agent Skill Marketplace",
-  "description": "The open marketplace for MCP-compatible agent skills. 9,248 verified skills across 58 categories. Micro-priced from $0.99 to $9.99. Every skill includes a Sentinel security report, ready-to-use system prompt, and auto-configured install. 5 languages: EN, ES, ZH, PT, FR.",
+  "description": "The open marketplace for MCP-compatible agent skills. 9,248 verified skills across 16 categories. Micro-priced from free. Every skill includes a Sentinel security report, ready-to-use system prompt, and auto-configured install. 5 languages: EN, ES, ZH, PT, FR.",
   "version": "1.0.1",
   "type": "stdio",
   "command": "npx",
@@ -35,7 +35,7 @@
     },
     {
       "name": "list_categories",
-      "description": "List all 58 categories with skill counts",
+      "description": "List all 16 categories with skill counts",
       "inputSchema": {"type": "object", "properties": {}}
     },
     {

@@ -52,7 +52,7 @@ const CONTENT = {
     rowCommission: 'MarketNow commission (20%)',
     rowAffiliate: 'Affiliate earns (5%)',
     tipLabel: 'Tip:',
-    tipBody: ' Payouts are processed monthly via Stripe Connect. Minimum payout threshold: $50.',
+    tipBody: ' Payouts are procNo payments are processed — everything is free. There are no payouts.',
     quickLinks: [
       { to: '/submit', icon: '➕', title: 'Submit a Skill', desc: 'Sell your MCP server to 5,000+ agents' },
       { to: '/vault', icon: '📦', title: 'My Vault', desc: 'Manage your purchased skills' },
@@ -82,7 +82,7 @@ const CONTENT = {
     rowCommission: 'Comisión de MarketNow (20%)',
     rowAffiliate: 'Afiliado gana (5%)',
     tipLabel: 'Consejo:',
-    tipBody: ' Los pagos se procesan mensualmente vía Stripe Connect. Umbral mínimo de pago: $50.',
+    tipBody: ' Los pagos se procesanNo hay pagos — todo es gratis. No existen pagos mínimos.',
     quickLinks: [
       { to: '/submit', icon: '➕', title: 'Enviar una Skill', desc: 'Vende tu MCP server a más de 5,000 agentes' },
       { to: '/vault', icon: '📦', title: 'Mi Vault', desc: 'Administra tus skills compradas' },
@@ -112,7 +112,7 @@ const CONTENT = {
     rowCommission: 'Comissão do MarketNow (20%)',
     rowAffiliate: 'Afiliado ganha (5%)',
     tipLabel: 'Dica:',
-    tipBody: ' Pagamentos são processados mensalmente via Stripe Connect. Limite mínimo de saque: $50.',
+    tipBody: ' Pagamentos são processaNão há pagamentos — tudo é grátis. Não existem saques.',
     quickLinks: [
       { to: '/submit', icon: '➕', title: 'Enviar uma Skill', desc: 'Venda seu MCP server para mais de 5.000 agentes' },
       { to: '/vault', icon: '📦', title: 'Meu Vault', desc: 'Gerencie suas skills compradas' },
@@ -142,7 +142,7 @@ const CONTENT = {
     rowCommission: 'MarketNow 佣金 (20%)',
     rowAffiliate: '分销商赚 (5%)',
     tipLabel: '提示：',
-    tipBody: ' 通过 Stripe Connect 每月处理付款。最低付款门槛：$50。',
+    tipBody: ' 没有付款处理 —— 一切免费。不存在提现。',
     quickLinks: [
       { to: '/submit', icon: '➕', title: '提交 Skill', desc: '把你的 MCP server 卖给 5,000+ agents' },
       { to: '/vault', icon: '📦', title: '我的 Vault', desc: '管理你购买的 skills' },

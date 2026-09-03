@@ -1,7 +1,7 @@
 {
   "$schema": "https://marketnow.site/.well-known/mcp.schema.json",
   "name": "marketnow",
-  "description": "MarketNow \u2014 Trust layer for agent commerce. 9,248 MCP-compatible skills with Sentinel L2.5 gVisor sandbox security audits, x402 payments (HTTP 402 + USDC on Base), and AP2 delegated mandates. AliceLabs LLC Proprietary. Maintained by AliceLabs LLC (Wyoming, USA, 2025).",
+  "description": "MarketNow \u2014 Trust layer for agent commerce. 9,248 MCP-compatible skills with Sentinel v3.0 gVisor sandbox security audits, x402 payments (HTTP 402 + USDC on Base), and AP2 delegated mandates. AliceLabs LLC Proprietary. Maintained by AliceLabs LLC (Wyoming, USA, 2025).",
   "version": "1.4.0",
   "homepage": "https://marketnow.site",
   "repository": "https://github.com/alicelabs-llc/marketnow",
@@ -26,7 +26,7 @@
     },
     {
       "name": "list_categories",
-      "description": "List all 58 categories with counts"
+      "description": "List all 16 categories with counts"
     },
     {
       "name": "get_manifest",

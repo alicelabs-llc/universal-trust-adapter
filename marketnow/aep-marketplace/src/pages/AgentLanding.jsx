@@ -305,8 +305,8 @@ export default function AgentLanding() {
                   <li>✓ List skills FREE — set your own price</li>
                   <li>✓ Free skills: no cost, no commission</li>
                   <li>✓ Premium skills: keep 80% of every sale</li>
-                  <li>✓ Sentinel v3.0 audit (PRO $9.99/mo)</li>
-                  <li>✓ gVisor sandbox (ENTERPRISE $49.99/mo)</li>
+                  <li>✓ Sentinel v3.0 audit (free)</li>
+                  <li>✓ gVisor sandbox (free)</li>
                   <li>✓ Sell to 9,248+ users and growing</li>
                 </ul>
               </div>
@@ -315,7 +315,7 @@ export default function AgentLanding() {
                 <h3 className="text-white font-bold text-sm mb-2">How We Earn</h3>
                 <ul className="text-zinc-400 text-xs space-y-1">
                   <li>✓ Buyers: free skills cost nothing, premium skills pay the seller's price</li>
-                  <li>✓ Sellers: pay Sentinel ($9.99-$49.99/mo) for audit + keep 80% of sales</li>
+                  <li>✓ Sellers: free listing + free Sentinel v3.0 audits</li>
                   <li>✓ 20% commission on seller sales</li>
                   <li>✓ Affiliate program: 5% referral commission</li>
                   <li>✓ No ads, no data selling</li>
