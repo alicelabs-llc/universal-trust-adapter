@@ -106,10 +106,13 @@ async function handleRequest(method, params, id) {
           const cred = args.credential;
           let payload;
           try { payload = JSON.parse(cred); } catch { payload = cred; }
+          // FIX 2026-09-08: forward optional ca_public_key so callers can verify
+          // credentials issued by their OWN CA (trust anchor semantics, fail-closed
+          // otherwise — see /api/trust verifyATCv3).
           const resp = await fetch(`${TRUST_API}?action=verify`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ payload })
+            body: JSON.stringify({ payload, ca_public_key: args.ca_public_key || undefined })
           });
           const data = await resp.json();
           return {
