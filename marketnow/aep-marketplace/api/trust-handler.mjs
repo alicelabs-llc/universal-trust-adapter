@@ -4,7 +4,60 @@
 // 
 // UPDATED: 2026-08-21 — Reflects UTA v1.0.0 with 8 adapters, 12-stage
 // pipeline, real cryptographic verification, and all P0-P10 features.
+// UPDATED: 2026-09-08 — verifyATCv3 now performs REAL Ed25519 signature
+//   verification (was structure-only: schema/domain/lifecycle). Found via the
+//   multichannel evidence harness requested by CodePass.dev — a tampered ATC
+//   signed by an unknown CA was being accepted as valid, violating the
+//   documented golden rule (UNKNOWN = DENY). Trust anchor semantics:
+//   callers may supply body.ca_public_key (their own anchor); otherwise ONLY
+//   the MarketNow registry CA (mn-ca-003) is trusted, and unknown anchors
+//   fail closed. Same canonicalization as api/atc.js (RFC 8785 JCS, inline).
 // ============================================================================
+
+import { createPublicKey, verify as edVerify } from 'node:crypto';
+
+// MarketNow registry CA (mn-ca-003, active since 2026-09-08; see /api/atc?action=ca-key)
+const MARKETNOW_CA = {
+  key_id: 'mn-ca-003',
+  spki_b64: 'MCowBQYDK2VwAyEAUWJgyMWp9oKIGwN9EG8ayz/mYYp1lcQBI58rtpOs8CM=',
+  active_since: '2026-09-08',
+};
+
+// RFC 8785 JCS (JSON Canonicalization Scheme) — inline, no dependencies.
+// Identical to api/atc.js (kept in sync deliberately).
+function jcs(o) {
+  if (o === null) return 'null';
+  switch (typeof o) {
+    case 'boolean': return o ? 'true' : 'false';
+    case 'number': return Number.isFinite(o) ? String(o) : 'null';
+    case 'string': return JSON.stringify(o);
+  }
+  if (Array.isArray(o)) return '[' + o.map(jcs).join(',') + ']';
+  const keys = Object.keys(o).filter((k) => o[k] !== undefined).sort();
+  return '{' + keys.map((k) => JSON.stringify(k) + ':' + jcs(o[k])).join(',') + '}';
+}
+
+// Real Ed25519 verification of an ATC v3 credential.
+// Signed payload = credential WITHOUT the signatures array; signing bytes =
+// 'UTA-ATC-V3-CREDENTIAL:' + JCS(payload) — identical to @marketnow/trust-core.
+function verifyAtcV3Signature(cred, trustAnchorPem) {
+  try {
+    const { signatures, ...payload } = cred;
+    const sig = cred.signatures?.[0];
+    if (!sig?.value) return { ok: false, err: 'signature value missing' };
+    const sigBuf = Buffer.from(String(sig.value), 'hex');
+    if (sigBuf.length !== 64) return { ok: false, err: 'signature is not 64 bytes (128 hex chars)' };
+    const signingBytes = Buffer.from('UTA-ATC-V3-CREDENTIAL:' + jcs(payload), 'utf-8');
+    const pub = createPublicKey({ key: trustAnchorPem, format: 'pem' });
+    return { ok: edVerify(null, signingBytes, pub, sigBuf) };
+  } catch (e) {
+    return { ok: false, err: String(e && e.message ? e.message : e) };
+  }
+}
+
+function spkiToPem(spkiB64) {
+  return '-----BEGIN PUBLIC KEY-----\n' + spkiB64 + '\n-----END PUBLIC KEY-----';
+}
 
 export async function handleTrust(req, res) {
   if (req.method === 'GET') {
@@ -446,10 +499,29 @@ function verifyATCv3(cred, caKey) {
   if (sig.domain !== 'UTA-ATC-V3-CREDENTIAL') issues.push(`wrong domain: ${sig.domain}`);
   if (cred.lifecycle?.expires_at && new Date(cred.lifecycle.expires_at) < new Date()) issues.push('expired');
   if (cred.lifecycle?.revoked) issues.push('revoked');
-  // Note: real Ed25519 verification requires the CA private key + crypto module
-  // The UTA package (@marketnow/trust-core) provides full crypto verification
+
+  // FIX 2026-09-08: REAL Ed25519 signature verification (was structure-only).
+  // Trust anchor: explicit body.ca_public_key (caller-supplied), else the
+  // MarketNow registry CA. Unknown anchors fail closed (UNKNOWN = DENY).
+  let trustAnchorPem = null;
+  let trustAnchorId = null;
+  if (caKey && typeof caKey === 'string' && caKey.includes('BEGIN')) {
+    trustAnchorPem = caKey;
+    trustAnchorId = 'caller-supplied';
+  } else {
+    trustAnchorPem = spkiToPem(MARKETNOW_CA.spki_b64);
+    trustAnchorId = MARKETNOW_CA.key_id;
+    if (sig.key_id && !String(sig.key_id).includes(MARKETNOW_CA.key_id)) {
+      issues.push(`unknown CA trust anchor: signature key_id "${sig.key_id}" is not the MarketNow registry CA (${MARKETNOW_CA.key_id}). To verify a credential from your own CA, pass ca_public_key (PEM) in the request body.`);
+    }
+  }
+  const sigCheck = verifyAtcV3Signature(cred, trustAnchorPem);
+  if (!sigCheck.ok) {
+    issues.push(`Ed25519 signature verification failed against ${trustAnchorId}${sigCheck.err ? ' (' + sigCheck.err + ')' : ''}`);
+  }
+
   if (sig.value === '00'.repeat(64)) warnings.push('signature is placeholder — use @marketnow/trust-core for real verification');
-  return { valid: issues.length === 0, format: 'atc-v3', uts: atcV3ToUTS(cred), issues, warnings };
+  return { valid: issues.length === 0, format: 'atc-v3', uts: atcV3ToUTS(cred), issues, warnings, verified_by: { algorithm: 'Ed25519 (RFC 8032)', trust_anchor: trustAnchorId, canonicalization: 'RFC 8785 JCS' } };
 }
 
 // ============================================================================
