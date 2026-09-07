@@ -1,52 +1,52 @@
 {
+ "card_id": "ATC-TEST-REVOKED",
+ "status": "revoked",
+ "payload": {
   "card_id": "ATC-TEST-REVOKED",
-  "status": "revoked",
-  "payload": {
-    "card_id": "ATC-TEST-REVOKED",
-    "schema_version": "2.0.0",
-    "agent_id": "test-agent-valid",
-    "agent_name": "Valid Test Agent",
-    "identity": {
-      "public_key": "MCowBQYDK2VwAyEA",
-      "key_algorithm": "Ed25519"
-    },
-    "trust": {
-      "sentinel_review_score": 8,
-      "sentinel_score": 8,
-      "audit_layers_passed": {
-        "L1.5": true,
-        "L2.5": true
-      },
-      "composite_trust": 8,
-      "risk_level": "low"
-    },
-    "capabilities": {
-      "provides": [
-        "search",
-        "read"
-      ],
-      "protocol_language": "mcp",
-      "translate": true
-    },
-    "payment": {
-      "method": "none",
-      "wallet_address": null
-    },
-    "metadata": {
-      "issued_at": "2026-08-20T00:00:00Z",
-      "expires_at": "2027-08-20T00:00:00Z",
-      "issuer": "MarketNow Sentinel CA"
-    }
+  "schema_version": "2.0.0",
+  "agent_id": "test-agent-valid",
+  "agent_name": "Valid Test Agent",
+  "identity": {
+   "public_key": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+   "key_algorithm": "Ed25519"
   },
-  "signature": {
-    "algorithm": "Ed25519 (RFC 8032)",
-    "value": "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab",
-    "signed_by": "MarketNow",
-    "signed_at": "2026-08-20T00:00:00Z",
-    "canonical_json": "RFC_8785_JCS",
-    "ca_key_id": "MCowBQYDK2VwAyEA",
-    "evidence_hash": "sha256:valid_test",
-    "policy_version": "2.0.0"
+  "trust": {
+   "sentinel_review_score": 8,
+   "sentinel_score": 8,
+   "audit_layers_passed": {
+    "L1.5": true,
+    "L2.5": true
+   },
+   "composite_trust": 8,
+   "risk_level": "low"
   },
-  "revocation_reason": "Compromised key"
+  "capabilities": {
+   "provides": [
+    "search",
+    "read"
+   ],
+   "protocol_language": "mcp",
+   "translate": true
+  },
+  "payment": {
+   "method": "none",
+   "wallet_address": null
+  },
+  "metadata": {
+   "issued_at": "2026-08-20T00:00:00Z",
+   "expires_at": "2027-08-20T00:00:00Z",
+   "issuer": "MarketNow Sentinel CA"
+  }
+ },
+ "signature": {
+  "algorithm": "Ed25519 (RFC 8032)",
+  "value": "150dbb7af22050c6d20e2136144bc45e65e396f658f976428bb4d395d75252608ff1aed23cfeea2056d72808fe4507cf7b6a0ca394c882007e50dfe759f37707",
+  "signed_by": "MarketNow Sentinel Test CA (throwaway, vectors-only)",
+  "signed_at": "2026-09-08T00:00:00Z",
+  "canonical_json": "RFC_8785_JCS",
+  "ca_key_id": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+  "evidence_hash": "sha256:valid_test",
+  "policy_version": "2.0.0"
+ },
+ "revocation_reason": "Compromised key"
 }

@@ -72,3 +72,58 @@ shasum -a 256 valid-atc.canonical.txt
 ## Attribution
 
 Published in response to @anp2network's feedback (asked 3 times across 3 comments).
+
+---
+
+## v1.1.0 — Real signatures (2026-09-08)
+
+Responds to @anp2network (dev.to comment 3e1j6, 2026-09-02): *"Sign the vectors with a throwaway CA keypair, publish the 32 bytes of public key beside them, and add one wrong-key vector so a runner that skips verification fails instead of passing."*
+
+### What changed
+
+- **All 4 ATC vectors are now signed with a real throwaway Ed25519 CA** (`ca-test-1`). Placeholder signatures (`0xab` bytes) and the truncated 12-byte SPKI header are gone.
+- **The test CA public key is published in this directory**:
+  - `ca-test-1.pub.spki.b64` — full SPKI (44 bytes, base64) — this is what `identity.public_key` / `ca_key_id` in each card equals
+  - `ca-test-1.pub.raw32.hex` — the raw 32-byte public key
+  - `ca-test-1.pub.raw32.b64` — the raw 32-byte public key, base64
+- **New anti-shortcut vector `wrong-ca`**: a card whose metadata is fully valid (active, unexpired) but is signed by a **second** throwaway CA (`ca-wrong-1`, published for reference only) while claiming `ca-test-1`. A conformance runner that deletes Ed25519 verification cannot fail this card. Every expected verdict now requires either doing the cryptographic work or reading `expected_verify` from the manifest.
+- **The signed subtree is now stated, not discovered**: the signature covers the JCS-canonicalized document **with its top-level `signature` key removed** (whole card minus signature). `identity.public_key` is *inside* the signed subtree and must equal `ca-test-1` for `verify=true`. This rule is recorded per-vector in `_index.json` (`signed_subtree`) and globally in `signed_subtree_rule`.
+
+### Signature-layer expectations
+
+| Vector | Ed25519 signature | Final verdict | Why |
+|--------|------------------|---------------|-----|
+| `valid-atc` | valid | `true` | signature verifies against `ca-test-1` |
+| `expired-atc` | valid | `false` | fails the expiry stage (expires 2020-01-01) |
+| `revoked-atc` | valid | `false` | fails the revocation stage (status: revoked) |
+| `invalid-signature` | **invalid** (one flipped byte) | `false` | real signature with byte 10 xor 0x5a |
+| `wrong-ca` | **invalid vs claimed CA** | `false` | real signature by `ca-wrong-1`, claims `ca-test-1` |
+
+A runner that skips verification passes `valid-atc` trivially but must also pass `expired-atc`/`revoked-atc`/`invalid-signature`/`wrong-ca` — and without crypto it has no way to fail the last two.
+
+### Verify in Node.js (no dependencies)
+
+```js
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+
+const ca = fs.readFileSync('ca-test-1.pub.spki.b64', 'utf8').trim(); // claimed CA
+const card = JSON.parse(fs.readFileSync('valid-atc.json', 'utf8'));
+const { signature, ...signed } = card;                              // whole card minus signature
+const canonical = JSON.stringify(signed, replacer);                 // JCS: recursive key sort
+const keyObj = crypto.createPublicKey({ key: Buffer.from(ca, 'base64'), format: 'der', type: 'spki' });
+const ok = crypto.verify(null, Buffer.from(canonical, 'utf8'), keyObj, Buffer.from(signature.value, 'hex'));
+console.log(ok); // true
+```
+
+(JCS replacer: recursively sort object keys; these documents contain no exotic numbers, so `JSON.stringify` with sorted keys is RFC 8785-conformant here.)
+
+### Verify the SHA-256 chain
+
+```bash
+sha256sum valid-atc.canonical.txt   # matches valid-atc.sha256 and _index.json
+```
+
+### Scope of `ca-test-1`
+
+`ca-test-1` is a **throwaway, vectors-only keypair**. It has never signed a production credential, is not in any key registry, and is published so third parties can independently verify these fixtures. Production CA keys are separate and governed by the rotation policy discussed in the key-registry thread.
