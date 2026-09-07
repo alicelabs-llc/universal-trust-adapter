@@ -148,7 +148,10 @@ async function handleRequest(method, params, id) {
         }
 
         case "marketnow_check_domain": {
-          const resp = await fetch(`${TRUST_API}?action=scam-check&domain=${encodeURIComponent(args.domain)}`);
+          // FIX 2026-09-08: /api/trust?action=scam-check ignores the action param (returns service info).
+          // The real scam checker lives at /api/scam-check. Found while building the CodePass
+          // multichannel evidence harness (https://code-pass.dev/blog/mcp-interceptor-block-dangerous-commands).
+          const resp = await fetch(`https://www.marketnow.site/api/scam-check?domain=${encodeURIComponent(args.domain)}`);
           const data = await resp.json();
           return {
             content: [{ type: "text", text: JSON.stringify(data, null, 2) }]
