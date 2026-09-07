@@ -1,0 +1,52 @@
+{
+ "card_id": "ATC-TEST-SELF-SIGNED-001",
+ "status": "active",
+ "payload": {
+  "card_id": "ATC-TEST-SELF-SIGNED-001",
+  "schema_version": "2.0.0",
+  "agent_id": "test-agent-self-signed",
+  "agent_name": "Self Signed Test Agent",
+  "identity": {
+   "public_key": "MCowBQYDK2VwAyEAQXK5aLmUiJqQ1Tkc87DfXn+k+j44a0AWlitxiiBO/uo=",
+   "key_algorithm": "Ed25519"
+  },
+  "trust": {
+   "sentinel_review_score": 8,
+   "sentinel_score": 8,
+   "audit_layers_passed": {
+    "L1.5": true,
+    "L2.5": true
+   },
+   "composite_trust": 8,
+   "risk_level": "low"
+  },
+  "capabilities": {
+   "provides": [
+    "search",
+    "read"
+   ],
+   "protocol_language": "mcp",
+   "translate": true
+  },
+  "payment": {
+   "method": "none",
+   "wallet_address": null
+  },
+  "metadata": {
+   "issued_at": "2026-08-20T00:00:00Z",
+   "expires_at": "2027-08-20T00:00:00Z",
+   "issuer": "MarketNow Sentinel CA"
+  }
+ },
+ "signature": {
+  "algorithm": "Ed25519 (RFC 8032)",
+  "value": "d7fff83847713817bef883bd223d919bfa8b3e33f4fb8fd2047d84a44da19eefa6c412c2dfbb09d83a42f749acc230d7ac97843b73ed9b3ab496695df8ce420f",
+  "signed_by": "MarketNow Sentinel Test CA (throwaway, vectors-only)",
+  "signed_at": "2026-09-08T00:00:00Z",
+  "canonical_json": "RFC_8785_JCS",
+  "ca_key_id": "MCowBQYDK2VwAyEAQXK5aLmUiJqQ1Tkc87DfXn+k+j44a0AWlitxiiBO/uo=",
+  "evidence_hash": "sha256:valid_test",
+  "policy_version": "2.0.0",
+  "note": "Self-signed: the declared identity.public_key IS the key that signed this card. Cryptographically self-consistent, metadata clean (active, unexpired, well-formed). No signature check can fail it — only the pinned trust-anchor comparison (declared key == ca-test-1) can. Companion of wrong-ca: wrong-ca fails at signature verification (claims ca-test-1, signed by ca-wrong-1); self-signed fails at key selection (claims its own key, signed with it). The pair separates a pinned trust anchor from trust-on-first-use."
+ }
+}
