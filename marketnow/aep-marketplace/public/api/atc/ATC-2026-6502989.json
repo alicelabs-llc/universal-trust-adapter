@@ -38,15 +38,16 @@
   },
   "signature": {
     "algorithm": "Ed25519 (RFC 8032)",
-    "value": "076cc2d4c3d844ef6babf43458fb27736732c4571afc76344e7580d7f518666050d934d27242fb07f7e6b0e235b98764e3058c719623e43852572a22ff1c9301",
+    "value": "3a56b56bd106d53ce71a75eb6b134921b1f8e7adb91e39c90e6b019d121476967be99439d6b9f429889cb5c5a5ea8065e86f276240fd138aaa999132b4306f0f",
     "signed_by": "MarketNow Sentinel CA",
     "signed_at": "2026-07-26T03:28:22.989Z",
     "canonical_json": "RFC 8785 JCS (JSON Canonicalization Scheme)",
     "verify_with": "GET /api/atc?action=ca-key",
     "signed_payload_hash": "f623b9111b7d5d94598a072d5263bf97b75197e1a013a646b07e4975130c2dba",
-    "resigned_at": "2026-08-13T19:59:59.557Z",
-    "resign_reason": "Aug 13, 2026: fixed forward-slash escaping per RFC 8785 §3.2.2.2, removed sentinel_score alias from signed payload, added ca_key_id. Bug reported by @anp2network.",
+    "resigned_at": "2026-09-08T00:00:00Z",
+    "resign_reason": "CA rotation 2026-09-08: mn-ca-002 retired (private key material was found committed to a public repository). Re-signed under mn-ca-003. Canonicalization unchanged: RFC 8785 JCS over payload.",
     "canonicalization_method": "RFC_8785_JCS",
-    "ca_key_id": "MCowBQYDK2VwAyEA"
+    "ca_key_id": "mn-ca-003",
+    "ca_key_fingerprint_sha256": "f2c8d4a885a70da9"
   }
 }

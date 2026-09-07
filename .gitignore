@@ -14,3 +14,7 @@ secrets/
 # Local agent tooling artifacts (never publish)
 tool-results/
 worklog.md
+
+# CA private key material — never commit (rotated 2026-09-08 after exposure)
+marketnow/_data/atc/ca-keypair*.json
+marketnow/_data/atc/ca-legacy-keypair*.json
