@@ -1,15 +1,35 @@
 {
-  "version": 1,
-  "description": "CA Key Registry — lists all CA keys used to sign ATCs. Verifiers check this to reject ATCs signed by retired keys.",
-  "updated_at": "2026-07-23T00:00:00Z",
+  "version": 3,
+  "description": "CA Key Registry — lists all CA keys used to sign ATCs. Verifiers check this to reject ATCs signed by retired or compromised keys. The authoritative source for the active key is GET /api/atc?action=ca-key.",
+  "updated_at": "2026-09-08T00:00:00Z",
   "keys": [
     {
       "key_id": "ca-key-001",
-      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA8p1XlAnt5QRCGbyDRi8+U9MCvt8Xyzq36Rar45JHszM=\n-----END PUBLIC KEY-----",
+      "public_key_spki_base64": "MCowBQYDK2VwAyEA8p1XlAnt5QRCGbyDRi8+U9MCvt8Xyzq36Rar45JHszM=",
       "algorithm": "Ed25519",
-      "status": "active",
+      "status": "retired",
       "created_at": "2026-07-16T00:00:00Z",
-      "note": "Initial CA keypair generated when ATC was first implemented."
+      "retired_at": "2026-08-12T00:00:00Z",
+      "note": "Initial CA key. Retired during the RFC 8785 JCS migration."
+    },
+    {
+      "key_id": "mn-ca-002",
+      "public_key_spki_base64": "MCowBQYDK2VwAyEATlD16v6Fy/+GM4je2SxwCz7yFEeo9d8LwqZf0yN8oFY=",
+      "algorithm": "Ed25519",
+      "status": "retired-compromised",
+      "created_at": "2026-08-12T00:00:00Z",
+      "retired_at": "2026-09-08T00:00:00Z",
+      "note": "RETIRED — DO NOT VERIFY AGAINST THIS KEY. Private key material was inadvertently committed to a public repository (universal-trust-adapter, since removed from tracking). Any signature that only verifies under this key must be treated as untrusted. Cards in the ledger were re-signed under mn-ca-003 on 2026-09-08."
+    },
+    {
+      "key_id": "mn-ca-003",
+      "public_key_spki_base64": "MCowBQYDK2VwAyEAUWJgyMWp9oKIGwN9EG8ayz/mYYp1lcQBI58rtpOs8CM=",
+      "public_key_raw_hex": "516260c8c5a9f682881b037d106f1acb3fe6618a7595c401239f2bb693acf023",
+      "fingerprint_sha256_prefix": "f2c8d4a885a70da9",
+      "algorithm": "Ed25519 (RFC 8032)",
+      "status": "active",
+      "created_at": "2026-09-08T00:00:00Z",
+      "note": "Current CA key. Authoritative publication: GET /api/atc?action=ca-key."
     }
   ]
 }
