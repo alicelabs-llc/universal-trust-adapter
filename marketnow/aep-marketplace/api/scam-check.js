@@ -157,7 +157,7 @@ function checkSsl(domain) {
   return { triggered: false, detail: 'SSL not checked server-side. Verify in browser.' };
 }
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -253,4 +253,5 @@ module.exports = async (req, res) => {
     api: 'https://www.marketnow.site/api/scam-check',
     timestamp: new Date().toISOString()
   });
-};
+
+}
