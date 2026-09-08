@@ -195,7 +195,7 @@ export default function Navbar() {
 
           {/* Auth + Language section */}
           <div className="flex items-center gap-2">
-            {/* Language dropdown — 5 languages */}
+            {/* Language dropdown — 13 languages, 2-column scrollable */}
             <div className="relative" ref={langRef}>
               <button
                 onClick={() => setLangOpen(!langOpen)}
@@ -212,7 +212,7 @@ export default function Navbar() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute top-full right-0 mt-1 min-w-[140px] bg-black/95 border border-white/10 rounded-xl shadow-2xl py-1 backdrop-blur-xl z-50"
+                  className="absolute top-full right-0 mt-1 w-[300px] max-h-[420px] overflow-y-auto bg-black/95 border border-white/10 rounded-xl shadow-2xl py-1 backdrop-blur-xl z-50 grid grid-cols-2 gap-x-1"
                 >
                   {languages.map((l) => (
                     <button
@@ -225,7 +225,7 @@ export default function Navbar() {
                         lang === l.code
                           ? 'text-[#00F299] bg-[#00F299]/5'
                           : 'text-zinc-400 hover:text-white hover:bg-white/5'
-                      }`}
+                      } ${l.rtl ? 'font-medium' : ''}`}
                     >
                       <span className="text-sm">{l.flag}</span>
                       <span>{l.name}</span>

@@ -7,7 +7,7 @@
  */
 
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { TRANSLATIONS, DEFAULT_LANG, LANGUAGES } from '../utils/translations.js';
+import { TRANSLATIONS, DEFAULT_LANG, LANGUAGES, RTL_LANGS } from '../utils/translations.js';
 
 const LanguageContext = createContext(null);
 
@@ -28,6 +28,7 @@ export function LanguageProvider({ children }) {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, lang);
     document.documentElement.lang = lang;
+    document.documentElement.dir = RTL_LANGS.includes(lang) ? 'rtl' : 'ltr';
   }, [lang]);
 
   const t = useCallback(

@@ -160,48 +160,50 @@
   footer a { color: var(--cyan); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
 </style>
+<script src="/i18n-tools.js"></script>
 </head>
 <body>
 <nav class="topbar">
   <div class="topbar-in">
-    <a class="brand" href="/uta"><span class="logo">M</span> MarketNow · UTA Tools</a>
+    <a class="brand" href="/uta"><span class="logo">M</span> <span data-i18n="c.tools">MarketNow · UTA Tools</span></a>
     <div class="top-links">
-      <a href="/scam-checker.html">Scam Checker</a>
-      <a href="/translate.html">Translator</a>
-      <a class="active" href="/playground.html">Playground</a>
+      <a href="/scam-checker.html"><span data-i18n="c.nav.checker">Scam Checker</span></a>
+      <a href="/translate.html"><span data-i18n="c.nav.translator">Translator</span></a>
+      <a class="active" href="/playground.html"><span data-i18n="c.nav.playground">Playground</span></a>
       <a href="/uta">← UTA</a>
     </div>
+    <span id="langSwitcher"></span>
   </div>
 </nav>
 
 <div class="wrap">
   <header class="hero">
-    <span class="pill"><span class="dot"></span> Live 12-stage pipeline · No key · No signup</span>
-    <h1>UTA <span class="grad">Verify Playground</span></h1>
-    <p class="sub">Paste any credential — JWT, W3C VC, ATC v3, A2A card, MCP card, X.509 — and run it through the full 12-stage fail-closed verification pipeline. Every stage, every failure, nothing hidden.</p>
-    <div class="rule">golden rule: <b>UNKNOWN = DENY</b> · <b>ERROR = DENY</b> · <b>EXPIRED = DENY</b> · <b>REVOKED = DENY</b></div>
+    <span class="pill"><span class="dot"></span> <span data-i18n="pg.badge">Live 12-stage pipeline · No key · No signup</span></span>
+    <h1>UTA <span class="grad" data-i18n="pg.title">Verify Playground</span></h1>
+    <p class="sub" data-i18n="pg.sub">Paste any credential — JWT, W3C VC, ATC v3, A2A card, MCP card, X.509 — and run it through the full 12-stage fail-closed verification pipeline. Every stage, every failure, nothing hidden.</p>
+    <div class="rule"><span data-i18n="pg.golden">golden rule:</span> <b>UNKNOWN = DENY</b> · <b>ERROR = DENY</b> · <b>EXPIRED = DENY</b> · <b>REVOKED = DENY</b></div>
   </header>
 
   <div class="card playcard">
-    <div class="inlbl">Credential (JSON object, JSON string, JWT, or PEM)</div>
-    <textarea id="credentialInput" spellcheck="false" placeholder='Paste a credential, or click an example below…'></textarea>
+    <div class="inlbl" data-i18n="pg.inputLabel">Credential (JSON object, JSON string, JWT, or PEM)</div>
+    <textarea id="credentialInput" spellcheck="false" data-i18n-ph="pg.inputPh" placeholder="Paste a credential"></textarea>
 
     <div class="examples">
-      <span class="lbl">Examples:</span>
-      <button class="chip" onclick="loadEx('jwt')">JWT</button>
-      <button class="chip" onclick="loadEx('w3cvc')">W3C VC ✅ valid</button>
-      <button class="chip" onclick="loadEx('mcp')">MCP Card</button>
-      <button class="chip" onclick="loadEx('atc')">ATC v3</button>
-      <button class="chip bad" onclick="loadEx('atcTampered')">ATC v3 · tampered 🔥</button>
-      <button class="chip bad" onclick="loadEx('expired')">Expired W3C VC</button>
-      <button class="chip bad" onclick="loadEx('garbage')">Random JSON</button>
+      <span class="lbl" data-i18n="pg.examples">Examples:</span>
+      <button class="chip" onclick="loadEx('jwt')" data-i18n="pg.ex1">JWT</button>
+      <button class="chip" onclick="loadEx('w3cvc')" data-i18n="pg.ex2">W3C VC ✅ valid</button>
+      <button class="chip" onclick="loadEx('mcp')" data-i18n="pg.ex3">MCP Card</button>
+      <button class="chip" onclick="loadEx('atc')" data-i18n="pg.ex4">ATC v3</button>
+      <button class="chip bad" onclick="loadEx('atcTampered')" data-i18n="pg.ex5">ATC v3 · tampered 🔥</button>
+      <button class="chip bad" onclick="loadEx('expired')" data-i18n="pg.ex6">Expired W3C VC</button>
+      <button class="chip bad" onclick="loadEx('garbage')" data-i18n="pg.ex7">Random JSON</button>
     </div>
 
     <div class="btnrow">
-      <button class="btn-verify" onclick="verifyCredential()" id="verifyBtn">Verify Credential →</button>
-      <button class="btn-tamper" onclick="tamperAndVerify()" id="tamperBtn" title="Corrupt the current credential and re-verify — watch the pipeline fail closed">🔥 Tamper &amp; re-verify</button>
+      <button class="btn-verify" onclick="verifyCredential()" id="verifyBtn" data-i18n="pg.verify">Verify Credential →</button>
+      <button class="btn-tamper" onclick="tamperAndVerify()" id="tamperBtn" data-i18n-title="pg.tamperTitle" title="Corrupt the current credential and re-verify — watch the pipeline fail closed" data-i18n="pg.tamper">🔥 Tamper &amp; re-verify</button>
     </div>
-    <div class="loading" id="loading"><div class="spin"></div><span>Detecting format… running 12 stages…</span></div>
+    <div class="loading" id="loading"><div class="spin"></div><span data-i18n="pg.running">Detecting format… running 12 stages…</span></div>
     <div id="err" class="err"></div>
     <div class="tamper-note" id="tamperNote"></div>
   </div>
@@ -210,33 +212,37 @@
 
   <div class="howgrid">
     <div class="how">
-      <h4>🧪 What actually runs</h4>
-      <p>This is the production verifier at <code>POST /api/trust?action=verify</code> — the same one agents call. ATC v3 credentials get <b>real Ed25519 (RFC 8032)</b> signature verification over RFC 8785 JCS canonical bytes.</p>
+      <h4 data-i18n="pg.runsTitle">🧪 What actually runs</h4>
+      <p data-i18n="pg.runsBody">This is the production verifier — the same one agents call. ATC v3 credentials get real Ed25519 (RFC 8032) signature verification over RFC 8785 JCS canonical bytes.</p>
     </div>
     <div class="how">
-      <h4>🔒 Fail-closed, for real</h4>
-      <p>Try the tampered ATC: an unknown signature value fails CRYPTO and the whole credential is DENIED. A random JSON gets DENIED at DETECT. Missing expiration is a WARN, never a silent pass.</p>
+      <h4 data-i18n="pg.failTitle">🔒 Fail-closed, for real</h4>
+      <p data-i18n="pg.failBody">Try the tampered ATC: an unknown signature value fails CRYPTO and the whole credential is DENIED. A random JSON gets DENIED at DETECT. Missing expiration is a WARN, never a silent pass.</p>
     </div>
     <div class="how">
-      <h4>🤖 For AI agents</h4>
-      <p>Identical call for agents: <code>POST /api/trust?action=verify</code> with <code>{"payload": …}</code>. Format is auto-detected. Add <code>ca_public_key</code> (PEM) to verify against your own trust anchor.</p>
+      <h4 data-i18n="pg.agentsTitle">🤖 For AI agents</h4>
+      <p><span data-i18n="pg.agentsBody">Identical call for agents:</span> <code>POST /api/trust?action=verify</code> with <code>{"payload": …}</code>.</p>
     </div>
   </div>
 
   <footer>
-    <p>API: <code class="mono">POST /api/trust?action=verify</code></p>
+    <p><span data-i18n="c.apiLabel">API:</span> <code class="mono">POST /api/trust?action=verify</code></p>
     <p>
-      <a href="https://github.com/alicelabs-llc/universal-trust-adapter" target="_blank" rel="noopener">GitHub</a> ·
-      <a href="/api/trust" target="_blank" rel="noopener">UTA API</a> ·
-      <a href="/scam-checker.html">Scam Checker</a> ·
-      <a href="/translate.html">Credential Translator</a> ·
-      <a href="/uta">Universal Trust Adapter</a>
+      <a href="https://github.com/alicelabs-llc/universal-trust-adapter" target="_blank" rel="noopener"><span data-i18n="c.github">GitHub</span></a> ·
+      <a href="/api/trust" target="_blank" rel="noopener"><span data-i18n="c.utaApi">UTA API</span></a> ·
+      <a href="/scam-checker.html"><span data-i18n="c.nav.checker">Scam Checker</span></a> ·
+      <a href="/translate.html"><span data-i18n="c.translatorFull">Credential Translator</span></a> ·
+      <a href="/uta"><span data-i18n="c.utaFull">Universal Trust Adapter</span></a>
     </p>
-    <p style="color:#4a4a55">MarketNow · AliceLabs LLC — trust infrastructure for AI agents</p>
+    <p style="color:#4a4a55" data-i18n="c.footer">MarketNow · AliceLabs LLC — trust infrastructure for AI agents</p>
   </footer>
 </div>
 
 <script>
+const T = (k, v) => window.ToolsI18n.t(k, v);
+let lastMs = 0;
+window.__onLangChange = function () { if (lastData) displayResult(lastData, lastMs); };
+
 const API = '/api/trust?action=verify';
 
 const EXAMPLES = {
@@ -306,10 +312,10 @@ async function verifyCredential() {
   const input = document.getElementById('credentialInput').value.trim();
   const errBox = document.getElementById('err');
   errBox.style.display = 'none';
-  if (!input) { errBox.style.display = 'block'; errBox.textContent = 'Paste a credential first — or click an example.'; return; }
+  if (!input) { errBox.style.display = 'block'; errBox.textContent = T('pg.pasteFirst'); return; }
 
   const btn = document.getElementById('verifyBtn');
-  btn.disabled = true; btn.textContent = 'Verifying…';
+  btn.disabled = true; btn.textContent = T('pg.verifying');
   document.getElementById('loading').classList.add('on');
   document.getElementById('result').classList.remove('show');
 
@@ -322,13 +328,13 @@ async function verifyCredential() {
     });
     const data = await resp.json();
     document.getElementById('loading').classList.remove('on');
-    displayResult(data, Math.round(performance.now() - t0));
+    lastMs = Math.round(performance.now() - t0); displayResult(data, lastMs);
   } catch (err) {
     document.getElementById('loading').classList.remove('on');
     errBox.style.display = 'block';
-    errBox.textContent = 'Could not reach the verification API: ' + err.message + ' — retry in a few seconds.';
+    errBox.textContent = T('pg.apiErr', { err: err.message });
   }
-  btn.disabled = false; btn.textContent = 'Verify Credential →';
+  btn.disabled = false; btn.textContent = T('pg.verify');
 }
 
 /* ── Tamper demo: corrupt the pasted credential and re-verify ── */
@@ -340,7 +346,7 @@ async function tamperAndVerify() {
   let obj;
   try { obj = JSON.parse(input); } catch {
     note.classList.add('show');
-    note.innerHTML = '<b>Tamper skipped:</b> input is not JSON — load one of the JSON examples first, then tamper.';
+    note.innerHTML = '<b>' + T('pg.tamperSkipped') + '</b> ' + T('pg.tamperNotJson');
     return;
   }
 
@@ -367,7 +373,7 @@ async function tamperAndVerify() {
 
   document.getElementById('credentialInput').value = JSON.stringify(obj, null, 2);
   note.classList.add('show');
-  note.innerHTML = `<b>🔥 Tampered:</b> ${mutation}. Re-running the pipeline — watch it <b>fail closed</b>.`;
+  note.innerHTML = `<b>${T('pg.tampered')}</b> ${T('pg.tamperedRun', { mutation: mutation })}`;
   await verifyCredential();
 }
 
@@ -393,11 +399,11 @@ function displayResult(data, ms) {
     <div class="bmain">
       <div class="btitle">${decision}</div>
       <div class="bmeta">
-        Format <b>${escapeHtml(String(fmt))}</b> · issuer <b>${escapeHtml(String(issuer))}</b>${data.failed_stage ? ` · failed at <b>${escapeHtml(String(data.failed_stage))}</b>` : ''} · verified in ${ms}ms
-        ${decision === 'DENY' ? '<br>Golden rule: <b>UNKNOWN = DENY, ERROR = DENY, EXPIRED = DENY, REVOKED = DENY</b> — the pipeline never guesses.' : ''}
+        ${T('pg.formatK')} <b>${escapeHtml(String(fmt))}</b> · ${T('pg.issuerK')} <b>${escapeHtml(String(issuer))}</b>${data.failed_stage ? ` · ${T('pg.failedAtK')} <b>${escapeHtml(String(data.failed_stage))}</b>` : ''} · ${T('pg.verifiedIn', { ms: ms })}
+        ${decision === 'DENY' ? `<br>${T('pg.goldenRule')}` : ''}
       </div>
     </div>
-    <span class="stageline ${decision === 'PERMIT' ? 'ok' : 'bad'}">${stages.filter(s => s.status === 'PASS').length}/${stages.length || 12} stages passed</span>`;
+    <span class="stageline ${decision === 'PERMIT' ? 'ok' : 'bad'}">${T('pg.stagesPassed', { n: stages.filter(s => s.status === 'PASS').length, m: stages.length || 12 })}</span>`;
   div.appendChild(banner);
 
   // Summary grid
@@ -405,18 +411,18 @@ function displayResult(data, ms) {
   sum.className = 'sumgrid';
   const trustClass = score === undefined ? '' : score >= 7 ? 'mint' : score >= 4 ? 'cyan' : 'red';
   sum.innerHTML = `
-    <div class="sitem"><div class="k">Format</div><div class="v cyan">${escapeHtml(String(fmt))}</div></div>
-    <div class="sitem"><div class="k">Issuer / Assessor</div><div class="v">${escapeHtml(String(issuer))}</div></div>
-    <div class="sitem"><div class="k">Trust score</div><div class="v ${trustClass}">${score !== undefined ? escapeHtml(String(score)) + ' / 10' : 'not declared'}</div></div>
-    <div class="sitem"><div class="k">Validity</div><div class="v ${data.valid ? 'mint' : 'red'}">${data.valid ? 'VALID' : 'INVALID'}</div></div>
-    <div class="sitem"><div class="k">Expires</div><div class="v">${escapeHtml(String(data.uts?.lifecycle?.expires_at || 'not declared'))}</div></div>`;
+    <div class="sitem"><div class="k">${T('pg.kFormat')}</div><div class="v cyan">${escapeHtml(String(fmt))}</div></div>
+    <div class="sitem"><div class="k">${T('pg.kIssuer')}</div><div class="v">${escapeHtml(String(issuer))}</div></div>
+    <div class="sitem"><div class="k">${T('pg.kScore')}</div><div class="v ${trustClass}">${score !== undefined ? escapeHtml(String(score)) + ' / 10' : 'not declared'}</div></div>
+    <div class="sitem"><div class="k">${T('pg.kValidity')}</div><div class="v ${data.valid ? 'mint' : 'red'}">${data.valid ? T('pg.valid') : T('pg.invalid')}</div></div>
+    <div class="sitem"><div class="k">${T('pg.kExpires')}</div><div class="v">${escapeHtml(String(data.uts?.lifecycle?.expires_at || T('pg.notDeclared')))}</div></div>`;
   div.appendChild(sum);
 
   // Issues
   if (data.issues && data.issues.length) {
     const ib = document.createElement('div');
     ib.className = 'issues';
-    ib.innerHTML = `<h3>⛔ Issues (${data.issues.length})</h3>` +
+    ib.innerHTML = `<h3>⛔ ${T('pg.issues', { n: data.issues.length })}</h3>` +
       data.issues.map(i => `<div class="iitem"><span>✕</span><span>${escapeHtml(String(i))}</span></div>`).join('');
     div.appendChild(ib);
   }
@@ -425,7 +431,7 @@ function displayResult(data, ms) {
   if (data.warnings && data.warnings.length) {
     const wb = document.createElement('div');
     wb.className = 'wbox';
-    wb.innerHTML = `<h3>⚠️ Warnings (${data.warnings.length}) — honest limits of this check</h3>` +
+    wb.innerHTML = `<h3>⚠️ ${T('pg.warnings', { n: data.warnings.length })}</h3>` +
       data.warnings.map(w => `<div class="witem"><span>⚠</span><span>${escapeHtml(String(w))}</span></div>`).join('');
     div.appendChild(wb);
   }
@@ -438,12 +444,12 @@ function displayResult(data, ms) {
     stages.forEach(s => { counts[s.status[0] === 'P' && s.status === 'PASS' ? 'P' : s.status === 'FAIL' ? 'F' : s.status === 'WARN' ? 'W' : 'S']++; });
     pl.innerHTML = `
       <div class="pl-head">
-        <h3>12-Stage Pipeline</h3>
+        <h3>${T('pg.pipelineTitle')}</h3>
         <div class="cnt">
-          <span class="pc p">${counts.P} pass</span>
-          <span class="pc f">${counts.F} fail</span>
-          <span class="pc w">${counts.W} warn</span>
-          <span class="pc s">${counts.S} skip</span>
+          <span class="pc p">${counts.P} ${T('pg.pass')}</span>
+          <span class="pc f">${counts.F} ${T('pg.fail')}</span>
+          <span class="pc w">${counts.W} ${T('pg.warn')}</span>
+          <span class="pc s">${counts.S} ${T('pg.skip')}</span>
         </div>
       </div>
       <div id="stageList"></div>`;
@@ -472,7 +478,7 @@ function displayResult(data, ms) {
   // Raw JSON
   const det = document.createElement('details');
   det.className = 'raw';
-  det.innerHTML = `<summary>Raw API response (JSON)</summary><pre>${escapeHtml(JSON.stringify(data, null, 2))}</pre>`;
+  det.innerHTML = `<summary>${T('pg.rawJson')}</summary><pre>${escapeHtml(JSON.stringify(data, null, 2))}</pre>`;
   div.appendChild(det);
 }
 

@@ -150,35 +150,37 @@
     .verdict { gap: 1rem; }
   }
 </style>
+<script src="/i18n-tools.js"></script>
 </head>
 <body>
 <nav class="topbar">
   <div class="topbar-in">
-    <a class="brand" href="/uta"><span class="logo">M</span> MarketNow · UTA Tools</a>
+    <a class="brand" href="/uta"><span class="logo">M</span> <span data-i18n="c.tools">MarketNow · UTA Tools</span></a>
     <div class="top-links">
-      <a class="active" href="/scam-checker.html">Scam Checker</a>
-      <a href="/translate.html">Translator</a>
-      <a href="/playground.html">Playground</a>
+      <a class="active" href="/scam-checker.html"><span data-i18n="c.nav.checker">Scam Checker</span></a>
+      <a href="/translate.html"><span data-i18n="c.nav.translator">Translator</span></a>
+      <a href="/playground.html"><span data-i18n="c.nav.playground">Playground</span></a>
       <a href="/uta">← UTA</a>
     </div>
+    <span id="langSwitcher"></span>
   </div>
 </nav>
 
 <div class="wrap">
   <header class="hero">
-    <span class="pill"><span class="dot"></span> Live API · No key · No signup</span>
-    <h1>UTA <span class="grad">Scam Checker</span></h1>
-    <p class="sub">Your AI agent recommended a store, a tool or a download link. Before it touches your files or your wallet — check the domain against 8 transparent heuristics.</p>
-    <p class="tag">Type a domain. Get a verdict in ~1 second.</p>
+    <span class="pill"><span class="dot"></span> <span data-i18n="sc.badge">Live API · No key · No signup</span></span>
+    <h1>UTA <span class="grad" data-i18n="sc.title">Scam Checker</span></h1>
+    <p class="sub" data-i18n="sc.sub">Your AI agent recommended a store, a tool or a download link. Before it touches your files or your wallet — check the domain against 8 transparent heuristics.</p>
+    <p class="tag" data-i18n="sc.tag">Type a domain. Get a verdict in ~1 second.</p>
   </header>
 
   <div class="card checker">
     <div class="input-row">
-      <input type="text" id="domainInput" placeholder="example.com or https://suspicious-site.xyz" onkeypress="if(event.key==='Enter')checkDomain()" autocomplete="off" spellcheck="false">
-      <button class="btn-check" onclick="checkDomain()" id="checkBtn">Check →</button>
+      <input type="text" id="domainInput" data-i18n-ph="sc.placeholder" placeholder="example.com" onkeypress="if(event.key==='Enter')checkDomain()" autocomplete="off" spellcheck="false">
+      <button class="btn-check" onclick="checkDomain()" id="checkBtn" data-i18n="sc.check">Check →</button>
     </div>
     <div class="examples">
-      <span class="lbl">Try:</span>
+      <span class="lbl" data-i18n="sc.try">Try:</span>
       <button class="chip" onclick="loadExample('google.com')">google.com</button>
       <button class="chip" onclick="loadExample('bit.ly/abc')">bit.ly/abc</button>
       <button class="chip danger" onclick="loadExample('amaz0n-login.xyz')">amaz0n-login.xyz</button>
@@ -188,7 +190,7 @@
 
     <div id="scanning" class="scanning">
       <div class="scanline"><div class="bar"></div></div>
-      <div class="scansteps"><span>resolving domain</span><span>checking TLD reputation</span><span>parsing IDN/punycode</span><span>matching typosquat patterns</span></div>
+      <div class="scansteps"><span data-i18n="sc.scan1">resolving domain</span><span data-i18n="sc.scan2">checking TLD reputation</span><span data-i18n="sc.scan3">parsing IDN/punycode</span><span data-i18n="sc.scan4">matching typosquat patterns</span></div>
     </div>
   </div>
 
@@ -197,43 +199,47 @@
 
   <div class="history card" id="historyCard" style="display:none">
     <div style="display:flex;align-items:center;margin-bottom:.6rem">
-      <h3 style="margin:0;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.09em">Recent checks</h3>
-      <button class="hclear" onclick="clearHistory()" style="margin-left:auto">clear</button>
+      <h3 style="margin:0;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.09em" data-i18n="sc.recent" data-i18n="sc.recent" data-i18n="sc.recent" data-i18n="sc.recent" data-i18n="sc.recent" data-i18n="sc.recent" data-i18n="sc.recent">Recent checks</h3>
+      <button class="hclear" onclick="clearHistory()" style="margin-left:auto" data-i18n="sc.clear">clear</button>
     </div>
     <div class="hrow" id="historyRow"></div>
   </div>
 
   <div class="howgrid">
     <div class="how">
-      <h4>⚙️ How it works</h4>
-      <p>8 transparent heuristics run on every domain: URL shortener, suspicious TLD, punycode/IDN homoglyphs, typosquatting, subdomain abuse, suspicious tokens, domain age, SSL. Every check's reasoning is shown — no black-box score.</p>
+      <h4 data-i18n="sc.howTitle">⚙️ How it works</h4>
+      <p data-i18n="sc.howBody">8 transparent heuristics run on every domain: URL shortener, suspicious TLD, punycode/IDN homoglyphs, typosquatting, subdomain abuse, suspicious tokens, domain age, SSL. Every check's reasoning is shown — no black-box score.</p>
     </div>
     <div class="how">
-      <h4>🤖 For AI agents</h4>
-      <p>Call it from any agent before a purchase or download: <code>GET /api/scam-check?domain=…</code> — same engine, JSON response. Works great as an MCP tool pre-check.</p>
+      <h4 data-i18n="sc.agentsTitle">🤖 For AI agents</h4>
+      <p><span data-i18n="sc.agentsBody">Call it from any agent before a purchase or download:</span> <code>GET /api/scam-check?domain=…</code> <span data-i18n="sc.agentsBody2">— same engine, JSON response. Works great as an MCP tool pre-check.</span></p>
     </div>
     <div class="how">
-      <h4>🔬 Fail-closed philosophy</h4>
-      <p>A <em>new clean</em> scam domain returns <code>UNKNOWN</code>, never <code>TRUSTED</code>. No data = no trust. That's the MarketNow golden rule applied to domains.</p>
+      <h4 data-i18n="sc.failTitle">🔬 Fail-closed philosophy</h4>
+      <p data-i18n="sc.failBody">A new clean scam domain returns UNKNOWN, never TRUSTED. No data = no trust. That’s the MarketNow golden rule applied to domains.</p>
     </div>
   </div>
 
   <div class="disclaimer" id="disclaimerBox" style="display:none"></div>
 
   <footer>
-    <p>API: <code class="mono">GET /api/scam-check?domain=example.com</code></p>
+    <p><span data-i18n="c.apiLabel">API:</span> <code class="mono">GET /api/scam-check?domain=example.com</code></p>
     <p>
       <a href="https://github.com/alicelabs-llc/universal-trust-adapter" target="_blank" rel="noopener">GitHub</a> ·
       <a href="/api/trust" target="_blank" rel="noopener">UTA API</a> ·
-      <a href="/translate.html">Credential Translator</a> ·
-      <a href="/playground.html">Verify Playground</a> ·
-      <a href="/uta">Universal Trust Adapter</a>
+      <a href="/translate.html"><span data-i18n="c.translatorFull">Credential Translator</span></a> ·
+      <a href="/playground.html"><span data-i18n="c.playgroundFull">Verify Playground</span></a> ·
+      <a href="/uta"><span data-i18n="c.utaFull">Universal Trust Adapter</span></a>
     </p>
-    <p style="color:#4a4a55">MarketNow · AliceLabs LLC — trust infrastructure for AI agents</p>
+    <p style="color:#4a4a55" data-i18n="c.footer">MarketNow · AliceLabs LLC — trust infrastructure for AI agents</p>
   </footer>
 </div>
 
 <script>
+const T = (k, v) => window.ToolsI18n.t(k, v);
+let lastMs = 0;
+window.__onLangChange = function () { renderHistory(); if (lastData) displayResult(lastData, lastMs); };
+
 const API = '/api/scam-check?domain=';
 let lastData = null;
 
@@ -244,7 +250,7 @@ async function checkDomain() {
   if (!input) { document.getElementById('domainInput').focus(); return; }
 
   const btn = document.getElementById('checkBtn');
-  btn.disabled = true; btn.textContent = 'Checking…';
+  btn.disabled = true; btn.textContent = T('sc.checking');
   document.getElementById('scanning').classList.add('on');
   document.getElementById('result').classList.remove('show');
   document.getElementById('disclaimerBox').style.display = 'none';
@@ -254,16 +260,16 @@ async function checkDomain() {
     const resp = await fetch(API + encodeURIComponent(input));
     if (!resp.ok) throw new Error('API returned HTTP ' + resp.status);
     const data = await resp.json();
-    const ms = Math.round(performance.now() - started);
+    const ms = Math.round(performance.now() - started); lastMs = ms; lastMs = ms; lastMs = ms; lastMs = ms; lastMs = ms; lastMs = ms; lastMs = ms;
     document.getElementById('scanning').classList.remove('on');
     displayResult(data, ms);
     saveHistory(input, data);
   } catch (err) {
     document.getElementById('scanning').classList.remove('on');
     errBox.style.display = 'block';
-    errBox.textContent = 'Could not reach the scam-check API: ' + err.message + ' — retry in a few seconds.';
+    errBox.textContent = T('sc.apiErr', { err: err.message });
   }
-  btn.disabled = false; btn.textContent = 'Check →';
+  btn.disabled = false; btn.textContent = T('sc.check');
 }
 
 function loadExample(domain) {
@@ -272,27 +278,16 @@ function loadExample(domain) {
 }
 
 const DECISION_COLORS = { TRUSTED: 'var(--mint)', CAUTION: 'var(--amber)', SUSPICIOUS: 'var(--red)', UNKNOWN: 'var(--gray)' };
-const ADVICE = {
-  TRUSTED: { title: '✅ Domain is in the trusted popular-domains list', items: [
-    'Still verify the exact URL in the address bar — popular domains get spoofed via subdomains and paths.',
-    'Use the Credential Translator or Verify Playground if the site hands your agent a credential or token.'
-  ]},
-  CAUTION: { title: '⚠️ Proceed with caution', items: [
-    'Do not enter passwords or card details until you have independently verified the site.',
-    'Check the domain age manually (WHOIS) — the heuristic layer has no WHOIS feed.',
-    'If an AI agent recommended it, ask the agent for its evidence before trusting it.'
-  ]},
-  SUSPICIOUS: { title: '⛔ Do not proceed', items: [
-    'Heuristics matched active scam patterns (typosquatting, punycode homoglyphs or suspicious TLD).',
-    'Do not enter credentials, payment data or personal information.',
-    'Report it to your security team or Google Safe Browsing if it reached you via an agent.'
-  ]},
-  UNKNOWN: { title: '❓ Not enough signal', items: [
-    'No heuristics triggered, but the domain is also not in the trusted list — a brand-new scam domain would look exactly like this.',
-    'Verify WHOIS age, SSL certificate issuer and search the domain independently before proceeding.',
-    'Fail-closed by design: no evidence = no trust.'
-  ]},
+const ADVICE_KEYS = {
+  TRUSTED: ['sc.adv.trusted.title', ['sc.adv.trusted.1', 'sc.adv.trusted.2']],
+  CAUTION: ['sc.adv.caution.title', ['sc.adv.caution.1', 'sc.adv.caution.2', 'sc.adv.caution.3']],
+  SUSPICIOUS: ['sc.adv.suspicious.title', ['sc.adv.suspicious.1', 'sc.adv.suspicious.2', 'sc.adv.suspicious.3']],
+  UNKNOWN: ['sc.adv.unknown.title', ['sc.adv.unknown.1', 'sc.adv.unknown.2', 'sc.adv.unknown.3']],
 };
+function adviceFor(decision) {
+  const [titleKey, itemKeys] = ADVICE_KEYS[decision] || ADVICE_KEYS.UNKNOWN;
+  return { title: T(titleKey), items: itemKeys.map(k => T(k)) };
+}
 
 function displayResult(data, ms) {
   const div = document.getElementById('result');
@@ -320,29 +315,29 @@ function displayResult(data, ms) {
       </div>
       <div class="verdict-info">
         <span class="badge b-${data.decision}">${data.decision}</span>
-        <div class="domain">Checked: <strong>${escapeHtml(data.domain || '')}</strong> · ${triggered}/${total} heuristics triggered</div>
-        <div class="when">Analyzed ${new Date().toLocaleTimeString()} · engine v1 (transparent heuristics)</div>
+        <div class="domain">${T('sc.checked')} <strong>${escapeHtml(data.domain || '')}</strong> · ${triggered}/${total} ${T('sc.heur')}</div>
+        <div class="when">${T('sc.analyzed', { time: new Date().toLocaleTimeString() })} · ${T('sc.engine')}</div>
       </div>
     </div>`;
 
   // Reasons
   if (data.reasons && data.reasons.length) {
-    html += '<div class="reasons"><h3>Why</h3>';
+    html += '<div class="reasons"><h3>' + T('sc.why') + '</h3>';
     data.reasons.forEach(r => { html += '<div class="reason"><span class="ico">⚠️</span><span>' + escapeHtml(r) + '</span></div>'; });
     html += '</div>';
   } else if (data.decision === 'TRUSTED') {
-    html += '<div class="reasons"><h3>Why</h3><div class="reason ok"><span class="ico">✅</span><span>Domain is in the trusted popular-domains allowlist.</span></div></div>';
+    html += '<div class="reasons"><h3>' + T('sc.why') + '</h3><div class="reason ok"><span class="ico">✅</span><span>' + T('sc.reason.allowlist') + '</span></div></div>';
   } else {
-    html += '<div class="reasons"><h3>Why</h3><div class="reason neutral"><span class="ico">❓</span><span>No heuristics triggered, but the domain is not in the trusted allowlist either — verdict UNKNOWN, not TRUSTED.</span></div></div>';
+    html += '<div class="reasons"><h3>' + T('sc.why') + '</h3><div class="reason neutral"><span class="ico">❓</span><span>' + T('sc.reason.none') + '</span></div></div>';
   }
 
   // Checks grid
   if (data.checks) {
-    html += '<div class="checks"><h3>All checks — transparent</h3><div class="checks-grid">';
+    html += '<div class="checks"><h3>' + T('sc.allChecks') + '</h3><div class="checks-grid">';
     for (const [name, check] of Object.entries(data.checks)) {
       const cls = check.triggered ? 'triggered' : 'passed';
       const icon = check.triggered ? '⚠️' : '✅';
-      const stTxt = check.triggered ? 'TRIGGERED' : 'CLEAR';
+      const stTxt = check.triggered ? T('sc.status.triggered') : T('sc.status.clear');
       html += `
         <div class="chk ${cls}">
           <div class="hd">${icon} ${escapeHtml(name.replace(/_/g, ' '))}<span class="st">${stTxt}</span></div>
@@ -353,16 +348,16 @@ function displayResult(data, ms) {
   }
 
   // Advice
-  const adv = ADVICE[data.decision] || ADVICE.UNKNOWN;
-  html += `<div class="advice"><h3>What to do next</h3><div class="advice-box adv-${data.decision}">
+  const adv = adviceFor(data.decision);
+  html += `<div class="advice"><h3>${T('sc.next')}</h3><div class="advice-box adv-${data.decision}">
     <strong>${adv.title}</strong><ul>${adv.items.map(i => '<li>' + i + '</li>').join('')}</ul>
   </div></div>`;
 
   // Actions
   html += `<div class="actions">
-    <button class="abtn" onclick="copyReport()">📋 Copy report (JSON)</button>
-    <a class="abtn" style="text-decoration:none" href="/playground.html">🧪 Verify a credential instead →</a>
-    <a class="abtn" style="text-decoration:none" href="/translate.html">🔄 Translate a credential →</a>
+    <button class="abtn" onclick="copyReport()">${T('sc.copy')}</button>
+    <a class="abtn" style="text-decoration:none" href="/playground.html">${T('sc.verifyInstead')}</a>
+    <a class="abtn" style="text-decoration:none" href="/translate.html">${T('sc.translateInstead')}</a>
   </div>`;
 
   div.innerHTML = html;
@@ -377,8 +372,8 @@ function displayResult(data, ms) {
   // Disclaimer
   const d = document.getElementById('disclaimerBox');
   d.style.display = 'block';
-  d.innerHTML = `<strong>⚠️ Honest disclaimer:</strong> ${escapeHtml(data.honest_disclaimer || 'Heuristic v1. No threat feeds.')}
-    &nbsp;·&nbsp; <strong>Spec:</strong> <a href="${escapeHtml(data.spec || '#')}" target="_blank" rel="noopener" style="color:var(--cyan)">GitHub repo</a>`;
+  d.innerHTML = `<strong>${T('sc.disclaimer')}</strong> ${escapeHtml(data.honest_disclaimer || T('sc.disclaimerDefault'))}
+    &nbsp;·&nbsp; <strong>${T('sc.spec')}</strong> <a href="${escapeHtml(data.spec || '#')}" target="_blank" rel="noopener" style="color:var(--cyan)">${T('sc.repo')}</a>`;
 }
 
 function copyReport() {
@@ -386,7 +381,7 @@ function copyReport() {
   const text = JSON.stringify(lastData, null, 2);
   navigator.clipboard.writeText(text).then(() => {
     const b = event.target; const old = b.textContent;
-    b.textContent = '✅ Copied!'; b.classList.add('ok');
+    b.textContent = T('c.copied'); b.classList.add('ok');
     setTimeout(() => { b.textContent = old; b.classList.remove('ok'); }, 1800);
   });
 }

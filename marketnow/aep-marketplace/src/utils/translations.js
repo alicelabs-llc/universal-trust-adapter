@@ -1,15 +1,27 @@
 /**
- * MarketNow — Translation Dictionary (5 languages)
+ * MarketNow — Translation Dictionary (13 languages)
  * ================================================
  *
- * Languages: English (en), Español (es), Português (pt), 中文 (zh), Français (fr)
+ * Base languages (inline): English (en), Español (es), Português (pt), 中文 (zh), Français (fr)
+ * Extended languages (./i18n/): Deutsch (de), Italiano (it), Русский (ru), Türkçe (tr),
+ *   日本語 (ja), 한국어 (ko), हिन्दी (hi), العربية (ar)
  *
  * All UI strings for navbar, hero, and all major pages are translated.
- * Deep content (long-form articles) may still be English-only on some pages,
- * but the page headers, CTAs, and navigation are fully translated.
+ * uta.* keys (UTA page) live in ./i18n/uta.js for the base languages and are
+ * included inline in each extended language file.
  */
 
-export const TRANSLATIONS = {
+import { UTA_KEYS } from './i18n/uta.js';
+import de from './i18n/de.js';
+import it from './i18n/it.js';
+import ru from './i18n/ru.js';
+import tr from './i18n/tr.js';
+import ja from './i18n/ja.js';
+import ko from './i18n/ko.js';
+import hi from './i18n/hi.js';
+import ar from './i18n/ar.js';
+
+const TRANSLATIONS_BASE = {
   // ═══════════════════════════════════════════════════════════════════════════
   // ENGLISH
   // ═══════════════════════════════════════════════════════════════════════════
@@ -244,8 +256,8 @@ export const TRANSLATIONS = {
     'home.feat.humanLoopDesc': 'Mandates notify the principal on every purchase. Silent mode requires explicit opt-in.',
     'home.feat.auditLogTitle': 'Public Audit Log',
     'home.feat.auditLogDesc': 'Every mandate transaction is a git commit at _data/mandates/. Fully auditable.',
-    'home.feat.langsTitle': '5 Languages',
-    'home.feat.langsDesc': 'System prompts in EN, ES, ZH, PT, FR. Real translations, not auto-translated.',
+    'home.feat.langsTitle': '13 Languages',
+    'home.feat.langsDesc': 'UI and system prompts in EN, ES, PT, FR, DE, IT, RU, TR, ZH, JA, KO, HI, AR. Real translations, not auto-translated.',
     'home.feat.roadmapTitle': 'Honest Roadmap',
     'home.feat.roadmapDesc': '/trust page admits what\'s done, partial, and pending. No fake "verified" badges.',
     'home.shareTitle': '📢 Share MarketNow',
@@ -525,8 +537,8 @@ export const TRANSLATIONS = {
     'home.feat.humanLoopDesc': 'Los mandatos notifican al principal en cada compra. El modo silencioso requiere opt-in explícito.',
     'home.feat.auditLogTitle': 'Audit Log Público',
     'home.feat.auditLogDesc': 'Cada transacción de mandato es un git commit en _data/mandates/. Totalmente auditable.',
-    'home.feat.langsTitle': '5 Idiomas',
-    'home.feat.langsDesc': 'System prompts en EN, ES, ZH, PT, FR. Traducciones reales, no auto-traducidas.',
+    'home.feat.langsTitle': '13 Idiomas',
+    'home.feat.langsDesc': 'Interfaz y system prompts en EN, ES, PT, FR, DE, IT, RU, TR, ZH, JA, KO, HI, AR. Traducciones reales, no auto-traducidas.',
     'home.feat.roadmapTitle': 'Hoja de Ruta Honesta',
     'home.feat.roadmapDesc': 'La página /trust admite qué está hecho, parcial y pendiente. Sin falsos badges "verificado".',
     'home.shareTitle': '📢 Comparte MarketNow',
@@ -806,8 +818,8 @@ export const TRANSLATIONS = {
     'home.feat.humanLoopDesc': 'Mandatos notificam o principal a cada compra. Modo silencioso requer opt-in explícito.',
     'home.feat.auditLogTitle': 'Audit Log Público',
     'home.feat.auditLogDesc': 'Cada transação de mandato é um git commit em _data/mandates/. Totalmente auditável.',
-    'home.feat.langsTitle': '5 Idiomas',
-    'home.feat.langsDesc': 'System prompts em EN, ES, ZH, PT, FR. Traduções reais, não auto-traduzidas.',
+    'home.feat.langsTitle': '13 Idiomas',
+    'home.feat.langsDesc': 'Interface e system prompts em EN, ES, PT, FR, DE, IT, RU, TR, ZH, JA, KO, HI, AR. Traduções reais, não auto-traduzidas.',
     'home.feat.roadmapTitle': 'Roadmap Honesto',
     'home.feat.roadmapDesc': 'A página /trust admite o que está feito, parcial e pendente. Sem falsos badges "verificado".',
     'home.shareTitle': '📢 Compartilhe o MarketNow',
@@ -1087,8 +1099,8 @@ export const TRANSLATIONS = {
     'home.feat.humanLoopDesc': '授权在每次购买时通知委托人。静默模式需要明确选择加入。',
     'home.feat.auditLogTitle': '公共审计日志',
     'home.feat.auditLogDesc': '每个授权交易都是 _data/mandates/ 中的一个 git commit。完全可审计。',
-    'home.feat.langsTitle': '5 种语言',
-    'home.feat.langsDesc': 'EN、ES、ZH、PT、FR 的系统提示。真实翻译，非自动翻译。',
+    'home.feat.langsTitle': '13 种语言',
+    'home.feat.langsDesc': '界面与 system prompts 支持 EN、ES、PT、FR、DE、IT、RU、TR、ZH、JA、KO、HI、AR。真实翻译，非自动翻译。',
     'home.feat.roadmapTitle': '诚实的路线图',
     'home.feat.roadmapDesc': '/trust 页面承认已完成、部分完成和待处理的内容。没有虚假的"已验证"徽章。',
     'home.shareTitle': '📢 分享 MarketNow',
@@ -1368,8 +1380,8 @@ export const TRANSLATIONS = {
     'home.feat.humanLoopDesc': 'Les mandats informent le principal à chaque achat. Le mode silencieux nécessite un opt-in explicite.',
     'home.feat.auditLogTitle': 'Journal d\'Audit Public',
     'home.feat.auditLogDesc': 'Chaque transaction de mandat est un git commit dans _data/mandates/. Entièrement auditable.',
-    'home.feat.langsTitle': '5 Langues',
-    'home.feat.langsDesc': 'System prompts en EN, ES, ZH, PT, FR. Traductions réelles, non auto-traduites.',
+    'home.feat.langsTitle': '13 Langues',
+    'home.feat.langsDesc': 'Interface et system prompts en EN, ES, PT, FR, DE, IT, RU, TR, ZH, JA, KO, HI, AR. Traductions réelles, non auto-traduites.',
     'home.feat.roadmapTitle': 'Roadmap Honnête',
     'home.feat.roadmapDesc': 'La page /trust admet ce qui est fait, partiel et en attente. Pas de faux badges "vérifié".',
     'home.shareTitle': '📢 Partagez MarketNow',
@@ -1416,12 +1428,37 @@ export const TRANSLATIONS = {
   },
 };
 
+// ═══════════════════════════════════════════════════════════════════════════
+// MERGE — uta.* keys into base languages + extended languages
+// ═══════════════════════════════════════════════════════════════════════════
+const TRANSLATIONS = {
+  en: { ...TRANSLATIONS_BASE.en, ...UTA_KEYS.en },
+  es: { ...TRANSLATIONS_BASE.es, ...UTA_KEYS.es },
+  pt: { ...TRANSLATIONS_BASE.pt, ...UTA_KEYS.pt },
+  zh: { ...TRANSLATIONS_BASE.zh, ...UTA_KEYS.zh },
+  fr: { ...TRANSLATIONS_BASE.fr, ...UTA_KEYS.fr },
+  de, it, ru, tr, ja, ko, hi, ar,
+};
+
+export { TRANSLATIONS };
+
 export const LANGUAGES = [
   { code: 'en', label: 'EN', name: 'English', flag: '🇺🇸' },
   { code: 'es', label: 'ES', name: 'Español', flag: '🇪🇸' },
   { code: 'pt', label: 'PT', name: 'Português', flag: '🇧🇷' },
-  { code: 'zh', label: '中', name: '中文', flag: '🇨🇳' },
   { code: 'fr', label: 'FR', name: 'Français', flag: '🇫🇷' },
+  { code: 'de', label: 'DE', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'it', label: 'IT', name: 'Italiano', flag: '🇮🇹' },
+  { code: 'ru', label: 'RU', name: 'Русский', flag: '🇷🇺' },
+  { code: 'tr', label: 'TR', name: 'Türkçe', flag: '🇹🇷' },
+  { code: 'zh', label: '中', name: '中文', flag: '🇨🇳' },
+  { code: 'ja', label: '日', name: '日本語', flag: '🇯🇵' },
+  { code: 'ko', label: '한', name: '한국어', flag: '🇰🇷' },
+  { code: 'hi', label: 'हि', name: 'हिन्दी', flag: '🇮🇳' },
+  { code: 'ar', label: 'ع', name: 'العربية', flag: '🇸🇦', rtl: true },
 ];
+
+// Languages that render right-to-left
+export const RTL_LANGS = ['ar'];
 
 export const DEFAULT_LANG = 'en';
