@@ -17,6 +17,17 @@ Built by **Edison Flores** & **Alejandro Flores** at **AliceLabs LLC** (Wyoming,
 
 ---
 
+## 🌍 Global Trust Series (multi-language, 2026-09-08)
+
+The 2026 gray-market quota trust crisis, documented — plus the receipts-based fix:
+
+- [English](https://telegra.ph/You-Paid-an-AI-Reseller--Then-the-Rules-Changed-Mid-Cycle-09-08) — You Paid an AI Reseller — Then the Rules Changed Mid-Cycle
+- [中文](https://telegra.ph/你买的-AI-合租中转被改规则或跑路开发者自保清单附密码学验证思路-09-08) — 你买的 AI 合租/中转被改规则或跑路？开发者自保清单
+- [Русский](https://telegra.ph/Oplatili-AI-podpisku-cherez-posrednika--a-pravila-izmenilis-posredi-cikla-09-08) — Оплатили AI-подписку через посредника — а правила изменились посреди цикла?
+- [Español](https://telegra.ph/Pagaste-por-Claude-o-Cursor-a-un-revendedor-y-las-reglas-cambiaron-a-mitad-del-ciclo-09-08) — Pagaste por Claude o Cursor a un revendedor ¿y las reglas cambiaron a mitad del ciclo?
+- [Sourced timeline (EN)](https://rentry.co/y26cps92) — The 2026 AI Quota Gray-Market Trust Crisis — A Sourced Timeline
+- [Series index](https://telegra.ph/MarketNow-Global-Trust-Series-2026-09-08) · Verify a trust card: https://marketnow.site/verify
+
 ## 🆕 What's new — v1.2.0
 
 **Domain Reputation Endpoint** (`/api/reputation`) — UTA now answers a second class of trust
