@@ -1,0 +1,52 @@
+{
+  "card_id": "ATC-TEST-VALID-002",
+  "status": "active",
+  "payload": {
+    "card_id": "ATC-TEST-VALID-002",
+    "schema_version": "2.0.0",
+    "agent_id": "test-agent-portfolio",
+    "agent_name": "Second Accept Card Agent",
+    "identity": {
+      "public_key": "MCowBQYDK2VwAyEAvtRhFInVXf939xGvD9i6dhBWAAMFjUAA66Qn2KzEWsg=",
+      "key_algorithm": "Ed25519"
+    },
+    "trust": {
+      "sentinel_review_score": 9,
+      "sentinel_score": 9,
+      "audit_layers_passed": {
+        "L1.5": true,
+        "L2.5": true
+      },
+      "composite_trust": 9,
+      "risk_level": "low"
+    },
+    "capabilities": {
+      "provides": [
+        "search",
+        "read",
+        "translate"
+      ],
+      "protocol_language": "a2a",
+      "translate": true
+    },
+    "payment": {
+      "method": "none",
+      "wallet_address": null
+    },
+    "metadata": {
+      "issued_at": "2026-09-09T00:00:00Z",
+      "expires_at": "2028-06-30T00:00:00Z",
+      "issuer": "MarketNow Sentinel CA"
+    }
+  },
+  "signature": {
+    "algorithm": "Ed25519 (RFC 8032)",
+    "value": "c900a0c2ec74aac8e4e067236177e13f6cbb7d9cbac6e22b635dfa1c0f404fb07cd02df763b90cdbd348806cd9cbed92a03bb4ad057c6bb357ed7cbf3b5d4708",
+    "signed_by": "MarketNow Sentinel Test CA 2 (throwaway, vectors-only, private key PUBLISHED)",
+    "signed_at": "2026-09-09T00:00:00Z",
+    "canonical_json": "RFC_8785_JCS",
+    "ca_key_id": "MCowBQYDK2VwAyEAvtRhFInVXf939xGvD9i6dhBWAAMFjUAA66Qn2KzEWsg=",
+    "evidence_hash": "sha256:valid_test",
+    "policy_version": "2.0.0"
+  }
+}
