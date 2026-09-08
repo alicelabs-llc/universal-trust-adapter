@@ -1,8 +1,12 @@
 // /api/scam-check.js
-// UTA Scam Checker — Domain reputation heuristic engine
-// 
+// UTA Scam Checker v2 — Domain reputation heuristic engine
+//
 // GET /api/scam-check?domain=example.com
-// 
+//
+// v2 (2026-09-08): two previously "not checked" gaps are now LIVE server-side
+//   - domain_age: free RDAP registry lookup (rdap.org — no API key, no signup)
+//   - ssl: real TLS handshake on :443 with certificate validation (issuer, expiry, SAN)
+//
 // Returns:
 //   {
 //     "domain": "example.com",
@@ -11,15 +15,17 @@
 //     "reasons": ["URL shortener: destination hidden", ...],
 //     "checks": {
 //       "url_shortener": { "triggered": false, "detail": "..." },
-//       "domain_age": { "triggered": false, "detail": "..." },
-//       "ssl": { "triggered": false, "detail": "..." },
+//       "domain_age": { "triggered": false, "detail": "Domain registered 5.2 years ago (2019-03-27, verified live via RDAP)" },
+//       "ssl": { "triggered": false, "detail": "SSL certificate valid (issuer: Let's Encrypt, expires in 60 days)" },
 //       "suspicious_tld": { "triggered": false, "detail": "..." },
 //       "punycode": { "triggered": false, "detail": "..." },
 //       "typosquatting": { "triggered": false, "detail": "..." }
 //     },
-//     "honest_disclaimer": "Heuristic v1. No threat feeds. A new clean scam returns UNKNOWN, not TRUSTED.",
-//     "timestamp": "2026-09-03T..."
+//     "honest_disclaimer": "...",
+//     "timestamp": "2026-09-08T..."
 //   }
+
+import tls from 'tls';
 
 const URL_SHORTENER_DOMAINS = new Set([
   'bit.ly', 'tinyurl.com', 't.co', 'goo.gl', 'ow.ly', 'is.gd', 'buff.ly',
@@ -66,6 +72,10 @@ const TYPOSQUATTING_PATTERNS = [
   { target: 'netflix', patterns: ['netfl1x', 'netfllix', 'netfix'] }
 ];
 
+// ── v2: live lookup timeouts (keep total latency ≈1-2s, both run in parallel) ──
+const RDAP_TIMEOUT_MS = 3500;
+const TLS_TIMEOUT_MS = 3000;
+
 function levenshtein(a, b) {
   const m = a.length, n = b.length;
   const d = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
@@ -86,29 +96,29 @@ function levenshtein(a, b) {
 function checkUrlShortener(domain) {
   const bare = domain.replace(/^www\./, '');
   if (URL_SHORTENER_DOMAINS.has(bare)) {
-    return { triggered: true, detail: 'URL shortener (' + bare + '): destination hidden, cannot inspect final URL without following redirect' };
+    return { triggered: true, weight: 30, detail: 'URL shortener (' + bare + '): destination hidden, cannot inspect final URL without following redirect' };
   }
-  return { triggered: false, detail: 'Not a known URL shortener' };
+  return { triggered: false, weight: 0, detail: 'Not a known URL shortener' };
 }
 
 function checkSuspiciousTld(domain) {
   const lower = domain.toLowerCase();
   for (const tld of SUSPICIOUS_TLDS) {
     if (lower.endsWith(tld)) {
-      return { triggered: true, detail: 'TLD .' + tld.slice(1) + ' is commonly abused for spam/scams' };
+      return { triggered: true, weight: 25, detail: 'TLD .' + tld.slice(1) + ' is commonly abused for spam/scams' };
     }
   }
-  return { triggered: false, detail: 'TLD not in suspicious list' };
+  return { triggered: false, weight: 0, detail: 'TLD not in suspicious list' };
 }
 
 function checkPunycode(domain) {
   if (domain.includes('xn--')) {
-    return { triggered: true, detail: 'Internationalized domain (punycode): display may differ from ASCII. Common in phishing.' };
+    return { triggered: true, weight: 35, detail: 'Internationalized domain (punycode): display may differ from ASCII. Common in phishing.' };
   }
   if (/[^\x00-\x7F]/.test(domain)) {
-    return { triggered: true, detail: 'Non-ASCII characters in domain: possible homograph attack' };
+    return { triggered: true, weight: 35, detail: 'Non-ASCII characters in domain: possible homograph attack' };
   }
-  return { triggered: false, detail: 'No IDN/punycode detected' };
+  return { triggered: false, weight: 0, detail: 'No IDN/punycode detected' };
 }
 
 function checkTyposquatting(domain) {
@@ -120,40 +130,165 @@ function checkTyposquatting(domain) {
   for (const item of TYPOSQUATTING_PATTERNS) {
     for (const tok of tokens) {
       if (item.patterns.includes(tok)) {
-        return { triggered: true, detail: 'Typosquatting detected: "' + tok + '" in "' + bare + '" mimics "' + item.target + '" — possible brand impersonation' };
+        return { triggered: true, weight: 40, detail: 'Typosquatting detected: "' + tok + '" in "' + bare + '" mimics "' + item.target + '" — possible brand impersonation' };
       }
       if (Math.abs(tok.length - item.target.length) <= 1 && levenshtein(tok, item.target) === 1) {
-        return { triggered: true, detail: 'Typosquatting: "' + tok + '" in "' + bare + '" is 1 character from "' + item.target + '"' };
+        return { triggered: true, weight: 40, detail: 'Typosquatting: "' + tok + '" in "' + bare + '" is 1 character from "' + item.target + '"' };
       }
     }
   }
-  return { triggered: false, detail: 'No typosquatting pattern matched' };
+  return { triggered: false, weight: 0, detail: 'No typosquatting pattern matched' };
 }
 
-function checkDomainAge(domain) {
+// ── v2: live RDAP domain-age lookup (free, no API key) ──────────────────────
+// rdap.org is the IANA RDAP bootstrap redirector: it 302s to the registry's
+// RDAP server (.com/.net/.site/.xyz/.shop… all gTLDs; many ccTLDs too).
+async function rdapLookup(domain) {
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), RDAP_TIMEOUT_MS);
+    const resp = await fetch('https://rdap.org/domain/' + encodeURIComponent(domain), {
+      headers: {
+        'Accept': 'application/rdap+json',
+        // rdap.org 403s the default undici UA — identify ourselves honestly
+        'User-Agent': 'MarketNow-ScamChecker/2.0 (+https://www.marketnow.site)'
+      },
+      redirect: 'follow',
+      signal: ctrl.signal
+    });
+    clearTimeout(timer);
+    if (resp.status === 404) return { notFound: true }; // registry says: no such domain
+    if (!resp.ok) return null; // other error → honest "unavailable"
+    const data = await resp.json();
+    const reg = (data.events || []).find(e => e.eventAction === 'registration');
+    if (!reg || !reg.eventDate) return null;
+    const registeredAt = new Date(reg.eventDate);
+    if (isNaN(registeredAt.getTime())) return null;
+    return { registeredAt };
+  } catch {
+    return null; // timeout / network / parse error → honest "unavailable"
+  }
+}
+
+function buildDomainAgeCheck(domain, rdap) {
   const bare = domain.replace(/^www\./, '');
   if (OPERATED_DOMAINS.has(bare)) {
-    return { triggered: false, detail: 'First-party domain — operated by AliceLabs LLC (MarketNow)' };
+    return { triggered: false, weight: 0, detail: 'First-party domain — operated by AliceLabs LLC (MarketNow)' };
   }
   if (POPULAR_DOMAINS.has(bare)) {
-    return { triggered: false, detail: 'Domain is in known-popular list (established)' };
+    return { triggered: false, weight: 0, detail: 'Domain is in known-popular list (established)' };
   }
-  return { triggered: false, detail: 'WHOIS age not checked (no API key) — verify manually if suspicious' };
+  if (!rdap) {
+    return { triggered: false, weight: 0, detail: 'RDAP registry lookup unavailable (timeout or TLD without RDAP) — age not verified, verify manually if suspicious' };
+  }
+  if (rdap.notFound) {
+    return { triggered: true, weight: 15, detail: 'Domain NOT FOUND in the registry (RDAP 404) — likely unregistered. Any link using it is broken, fake or a typo' };
+  }
+  const days = Math.floor((Date.now() - rdap.registeredAt.getTime()) / 86400000);
+  const iso = rdap.registeredAt.toISOString().slice(0, 10);
+  if (days < 0) {
+    return { triggered: true, weight: 12, detail: 'RDAP registration date is in the future (' + iso + ') — registry data anomaly, treat as unverified' };
+  }
+  if (days < 30) {
+    return { triggered: true, weight: 25, detail: 'Domain registered ' + days + ' day(s) ago (' + iso + ', live RDAP lookup) — very young, classic fresh-scam pattern' };
+  }
+  if (days < 90) {
+    return { triggered: true, weight: 12, detail: 'Domain registered ' + days + ' days ago (' + iso + ', live RDAP lookup) — young domain, low history' };
+  }
+  const years = (days / 365.25).toFixed(1);
+  return { triggered: false, weight: 0, detail: 'Domain registered ' + years + ' years ago (' + iso + ') — verified live via RDAP' };
+}
+
+// ── v2: real TLS handshake with certificate inspection (server-side) ─────────
+function tlsLookup(domain) {
+  return new Promise(resolve => {
+    let settled = false;
+    let sock;
+    const done = (v) => {
+      if (settled) return;
+      settled = true;
+      try { if (sock) sock.destroy(); } catch {}
+      resolve(v);
+    };
+    try {
+      sock = tls.connect({
+        host: domain,
+        port: 443,
+        servername: domain,
+        rejectUnauthorized: false, // we inspect the cert ourselves (expiry/issuer/SAN)
+        timeout: TLS_TIMEOUT_MS
+      }, () => {
+        try {
+          const cert = sock.getPeerCertificate();
+          if (!cert || !cert.valid_to) return done({ ok: false, reason: 'no-cert' });
+          done({
+            ok: true,
+            validFrom: new Date(cert.valid_from),
+            validTo: new Date(cert.valid_to),
+            issuer: (cert.issuer && (cert.issuer.O || cert.issuer.CN)) || 'unknown issuer',
+            subjectCN: (cert.subject && cert.subject.CN) || '',
+            san: String(cert.subjectaltname || '').toLowerCase()
+          });
+        } catch {
+          done({ ok: false, reason: 'cert-parse' });
+        }
+      });
+      sock.on('error', () => done({ ok: false, reason: 'conn' }));
+      sock.on('timeout', () => done({ ok: false, reason: 'timeout' }));
+    } catch {
+      done({ ok: false, reason: 'conn' });
+    }
+  });
+}
+
+function buildSslCheck(domain, info) {
+  const bare = domain.replace(/^www\./, '');
+  if (OPERATED_DOMAINS.has(bare)) {
+    return { triggered: false, weight: 0, detail: 'First-party domain — SSL verified by this service' };
+  }
+  if (POPULAR_DOMAINS.has(bare)) {
+    return { triggered: false, weight: 0, detail: 'Popular domain — SSL assumed valid' };
+  }
+  if (!info || !info.ok) {
+    const reason = info && info.reason;
+    if (reason === 'no-cert') {
+      return { triggered: true, weight: 15, detail: 'TLS reachable but no certificate presented — highly abnormal' };
+    }
+    return { triggered: false, weight: 0, detail: 'TLS not reachable on port 443 — domain may not serve HTTPS (or blocks datacenter IPs). Verify in browser.' };
+  }
+  const now = Date.now();
+  const daysLeft = Math.floor((info.validTo.getTime() - now) / 86400000);
+  // SAN coverage: the root domain should appear in SAN/CN (wildcards count)
+  const root = bare.split('.').slice(-2).join('.');
+  const covers = info.san.includes(root) || String(info.subjectCN).toLowerCase().includes(root);
+  if (info.validTo.getTime() < now) {
+    return { triggered: true, weight: 20, detail: 'SSL certificate EXPIRED on ' + info.validTo.toISOString().slice(0, 10) + ' (issuer: ' + info.issuer + ') — verified live server-side' };
+  }
+  if (info.validFrom.getTime() > now) {
+    return { triggered: true, weight: 15, detail: 'SSL certificate not valid yet (starts ' + info.validFrom.toISOString().slice(0, 10) + ', issuer: ' + info.issuer + ')' };
+  }
+  if (!covers) {
+    return { triggered: true, weight: 15, detail: 'SSL certificate does not cover "' + bare + '" (CN/SAN mismatch) — possible misconfiguration or MITM' };
+  }
+  if (daysLeft < 7) {
+    return { triggered: true, weight: 10, detail: 'SSL valid but expires in ' + daysLeft + ' day(s) (issuer: ' + info.issuer + ') — verified live server-side' };
+  }
+  return { triggered: false, weight: 0, detail: 'SSL certificate valid (issuer: ' + info.issuer + ', expires in ' + daysLeft + ' days) — verified live server-side via TLS' };
 }
 
 function checkSubdomainAbuse(domain) {
   const parts = domain.split('.');
   if (parts.length > 4) {
-    return { triggered: true, detail: 'Deep subdomain chain (' + parts.length + ' levels): common in phishing' };
+    return { triggered: true, weight: 30, detail: 'Deep subdomain chain (' + parts.length + ' levels): common in phishing' };
   }
   const lower = domain.toLowerCase();
   for (const popular of POPULAR_DOMAINS) {
     const brand = popular.split('.')[0];
     if (lower.includes(brand + '.') && !lower.endsWith(popular) && !lower.endsWith('.' + popular)) {
-      return { triggered: true, detail: 'Brand "' + brand + '" appears in subdomain but root domain is different' };
+      return { triggered: true, weight: 30, detail: 'Brand "' + brand + '" appears in subdomain but root domain is different' };
     }
   }
-  return { triggered: false, detail: 'Subdomain structure normal' };
+  return { triggered: false, weight: 0, detail: 'Subdomain structure normal' };
 }
 
 function checkHttpTokens(domain) {
@@ -162,22 +297,11 @@ function checkHttpTokens(domain) {
   if (lower.includes('@')) issues.push('Contains @ character');
   if (lower.includes('//')) issues.push('Contains // (URL-within-URL)');
   if (lower.match(/\d{4,}/)) issues.push('Long numeric sequence');
-  
-  if (issues.length) {
-    return { triggered: true, detail: issues.join('; ') };
-  }
-  return { triggered: false, detail: 'No suspicious tokens' };
-}
 
-function checkSsl(domain) {
-  const bare = domain.replace(/^www\./, '');
-  if (OPERATED_DOMAINS.has(bare)) {
-    return { triggered: false, detail: 'First-party domain — SSL verified by this service' };
+  if (issues.length) {
+    return { triggered: true, weight: 20, detail: issues.join('; ') };
   }
-  if (POPULAR_DOMAINS.has(bare)) {
-    return { triggered: false, detail: 'Popular domain — SSL assumed valid' };
-  }
-  return { triggered: false, detail: 'SSL not checked server-side. Verify in browser.' };
+  return { triggered: false, weight: 0, detail: 'No suspicious tokens' };
 }
 
 export default async function handler(req, res) {
@@ -185,27 +309,27 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Cache-Control', 'public, max-age=300');
-  
+
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
-  
+
   const domain = (req.query.domain || '').toLowerCase().trim();
-  
+
   if (!domain) {
     return res.status(200).json({
       service: 'UTA Scam Checker',
-      version: '1.0.0',
-      description: 'Free domain reputation heuristic. No API key, no registration, CORS open, cacheable.',
+      version: '2.0.0',
+      description: 'Free domain reputation heuristic with LIVE server-side RDAP registry age check and TLS certificate inspection. No API key, no registration, CORS open, cacheable.',
       usage: 'GET /api/scam-check?domain=example.com',
-      honest_disclaimer: 'Heuristic v1. No threat feeds. A new clean scam returns UNKNOWN, not TRUSTED.',
+      honest_disclaimer: 'Engine v2: 6 static heuristics + 2 live checks (RDAP domain age, TLS certificate). No threat feeds. A new clean scam returns UNKNOWN, not TRUSTED.',
       checks_available: [
         'url_shortener', 'suspicious_tld', 'punycode', 'typosquatting',
-        'domain_age', 'subdomain_abuse', 'http_tokens', 'ssl'
+        'domain_age (live RDAP)', 'subdomain_abuse', 'http_tokens', 'ssl (live TLS)'
       ]
     });
   }
-  
+
   let cleanDomain = domain
     .replace(/^https?:\/\//, '')
     .replace(/^www\./, '')
@@ -213,7 +337,7 @@ export default async function handler(req, res) {
     .split('?')[0]
     .split('#')[0]
     .trim();
-  
+
   if (!cleanDomain || !cleanDomain.includes('.')) {
     return res.status(400).json({
       error: 'Invalid domain',
@@ -221,33 +345,39 @@ export default async function handler(req, res) {
       hint: 'Use format: example.com'
     });
   }
-  
+
+  // v2: run the two live checks (in parallel) only when they can add signal —
+  // first-party and popular domains short-circuit with known-good answers.
+  const knownGood = OPERATED_DOMAINS.has(cleanDomain) || POPULAR_DOMAINS.has(cleanDomain);
+  let rdapResult = null, tlsResult = { ok: false, reason: 'skipped' };
+  if (!knownGood) {
+    [rdapResult, tlsResult] = await Promise.all([
+      rdapLookup(cleanDomain),
+      tlsLookup(cleanDomain)
+    ]);
+  }
+
   const checks = {
     url_shortener: checkUrlShortener(cleanDomain),
     suspicious_tld: checkSuspiciousTld(cleanDomain),
     punycode: checkPunycode(cleanDomain),
     typosquatting: checkTyposquatting(cleanDomain),
-    domain_age: checkDomainAge(cleanDomain),
+    domain_age: buildDomainAgeCheck(cleanDomain, rdapResult),
     subdomain_abuse: checkSubdomainAbuse(cleanDomain),
     http_tokens: checkHttpTokens(cleanDomain),
-    ssl: checkSsl(cleanDomain),
+    ssl: buildSslCheck(cleanDomain, tlsResult),
   };
-  
+
   let riskScore = 0;
   const reasons = [];
-  
-  const weights = {
-    url_shortener: 30, typosquatting: 40, punycode: 35, suspicious_tld: 25,
-    subdomain_abuse: 30, http_tokens: 20, domain_age: 0, ssl: 0
-  };
-  
+
   for (const name of Object.keys(checks)) {
     if (checks[name].triggered) {
-      riskScore += weights[name] || 15;
+      riskScore += checks[name].weight || 15;
       reasons.push(checks[name].detail);
     }
   }
-  
+
   if (POPULAR_DOMAINS.has(cleanDomain)) {
     riskScore = 0;
   }
@@ -271,7 +401,7 @@ export default async function handler(req, res) {
   } else {
     decision = 'UNKNOWN';
   }
-  
+
   return res.status(200).json({
     domain: cleanDomain,
     decision,
@@ -279,7 +409,7 @@ export default async function handler(req, res) {
     first_party: isOperated,
     reasons,
     checks,
-    honest_disclaimer: 'Heuristic v1. No threat feeds. A new clean scam returns UNKNOWN, not TRUSTED. First-party domains (marketnow.site, alicelabs.site) are vouched directly by the operator — stated in the reason. Not a substitute for commercial threat intelligence.',
+    honest_disclaimer: 'Engine v2: heuristics + LIVE RDAP registry age and TLS certificate checks (server-side, no API key). Still no threat feeds — a new clean scam returns UNKNOWN, not TRUSTED. First-party domains (marketnow.site, alicelabs.site) are vouched directly by the operator — stated in the reason. Not a substitute for commercial threat intelligence.',
     spec: 'https://github.com/alicelabs-llc/universal-trust-adapter',
     api: 'https://www.marketnow.site/api/scam-check',
     timestamp: new Date().toISOString()
