@@ -138,55 +138,57 @@
     .fgrid { grid-template-columns: 1fr 1fr; }
   }
 </style>
+<script src="/i18n-tools.js"></script>
 </head>
 <body>
 <nav class="topbar">
   <div class="topbar-in">
-    <a class="brand" href="/uta"><span class="logo">M</span> MarketNow · UTA Tools</a>
+    <a class="brand" href="/uta"><span class="logo">M</span> <span data-i18n="c.tools">MarketNow · UTA Tools</span></a>
     <div class="top-links">
-      <a href="/scam-checker.html">Scam Checker</a>
-      <a class="active" href="/translate.html">Translator</a>
-      <a href="/playground.html">Playground</a>
+      <a href="/scam-checker.html"><span data-i18n="c.nav.checker">Scam Checker</span></a>
+      <a class="active" href="/translate.html"><span data-i18n="c.nav.translator">Translator</span></a>
+      <a href="/playground.html"><span data-i18n="c.nav.playground">Playground</span></a>
       <a href="/uta">← UTA</a>
     </div>
+    <span id="langSwitcher"></span>
   </div>
 </nav>
 
 <div class="wrap">
   <header class="hero">
-    <span class="pill"><span class="dot"></span> Live round-trip · No key · No signup</span>
-    <h1>UTA <span class="grad">Credential Translator</span></h1>
-    <p class="sub">Pick a source and target format, paste a credential, and watch it go through the canonical Universal Trust Schema (UTS v2) — the intermediate representation that connects all 8 trust ecosystems.</p>
+    <span class="pill"><span class="dot"></span> <span data-i18n="tl.badge">Live round-trip · No key · No signup</span></span>
+    <h1>UTA <span class="grad" data-i18n="tl.title">Credential Translator</span></h1>
+    <p class="sub" data-i18n="tl.sub">Pick a source and target format, paste a credential, and watch it go through the canonical Universal Trust Schema (UTS v2) — the intermediate representation that connects all 8 trust ecosystems.</p>
   </header>
 
   <div class="stats">
-    <div class="stat"><div class="n">6</div><div class="l">translatable formats</div></div>
-    <div class="stat"><div class="n">UTS 2.0</div><div class="l">canonical schema (IR)</div></div>
-    <div class="stat"><div class="n">2-step</div><div class="l">from → UTS → to</div></div>
-    <div class="stat"><div class="n">0</div><div class="l">keys needed</div></div>
+    <div class="stat"><div class="n">6</div><div class="l" data-i18n="tl.stat1">translatable formats</div></div>
+    <div class="stat"><div class="n">UTS 2.0</div><div class="l" data-i18n="tl.stat2">canonical schema (IR)</div></div>
+    <div class="stat"><div class="n">2-step</div><div class="l" data-i18n="tl.stat3">from → UTS → to</div></div>
+    <div class="stat"><div class="n">0</div><div class="l" data-i18n="tl.stat4">keys needed</div></div>
   </div>
 
   <div class="card translator">
     <div class="flow">
       <div class="fgroup">
-        <div class="flabel">From format</div>
+        <div class="flabel" data-i18n="tl.from">From format</div>
         <div class="fgrid" id="fromGrid"></div>
       </div>
-      <div class="swapwrap"><button class="swap" onclick="swapFormats()" title="Swap formats">⇄</button></div>
+      <div class="swapwrap"><button class="swap" onclick="swapFormats()" data-i18n-title="tl.swapTitle" title="Swap formats">⇄</button></div>
       <div class="fgroup">
-        <div class="flabel">To format</div>
+        <div class="flabel" data-i18n="tl.to">To format</div>
         <div class="fgrid" id="toGrid"></div>
       </div>
     </div>
 
     <div class="inlbl">
-      <span>Paste credential</span>
-      <span class="sample">📝 <a href="javascript:void(0)" onclick="loadSample()" style="color:var(--cyan);text-decoration:none">Load a sample of the source format</a></span>
+      <span data-i18n="tl.paste">Paste credential</span>
+      <span class="sample">📝 <a href="javascript:void(0)" onclick="loadSample()" style="color:var(--cyan);text-decoration:none" data-i18n="tl.sample">Load a sample of the source format</a></span>
     </div>
-    <textarea id="inputCredential" spellcheck="false" placeholder='{"iss":"did:web:alice.example","sub":"agent:bob","exp":1735689600,"scope":"read:files"}  — or click "Load a sample"'></textarea>
+    <textarea id="inputCredential" spellcheck="false" data-i18n-ph="tl.pasteFirst"></textarea>
 
-    <button class="btn-translate" onclick="translateCredential()" id="translateBtn">Translate Credential →</button>
-    <div class="loading" id="loading"><div class="spin"></div><span>Converting to UTS v2… mapping to target format…</span></div>
+    <button class="btn-translate" onclick="translateCredential()" id="translateBtn" data-i18n="tl.go">Translate Credential →</button>
+    <div class="loading" id="loading"><div class="spin"></div><span data-i18n="tl.converting">Converting to UTS v2… mapping to target format…</span></div>
   </div>
 
   <div id="err" class="err" style="display:none"></div>
@@ -194,10 +196,10 @@
   <div id="output" class="output">
     <div class="result-top" id="resultTop"></div>
     <div class="tabs">
-      <div class="tab on" data-tab="result" onclick="showTab('result')">Result</div>
-      <div class="tab" data-tab="uts" onclick="showTab('uts')">UTS (intermediate)</div>
-      <div class="tab" data-tab="warnings" onclick="showTab('warnings')">Warnings</div>
-      <div class="tab" data-tab="raw" onclick="showTab('raw')">Raw JSON</div>
+      <div class="tab on" data-tab="result" onclick="showTab('result')" data-i18n="tl.tabResult">Result</div>
+      <div class="tab" data-tab="uts" onclick="showTab('uts')" data-i18n="tl.tabUts">UTS (intermediate)</div>
+      <div class="tab" data-tab="warnings" onclick="showTab('warnings')" data-i18n="tl.tabWarn">Warnings</div>
+      <div class="tab" data-tab="raw" onclick="showTab('raw')" data-i18n="tl.tabRaw">Raw JSON</div>
     </div>
     <div class="tabbody">
       <div class="tabpane on" id="pane-result"><pre id="preResult"></pre></div>
@@ -207,41 +209,45 @@
     </div>
     <div class="summary" id="summaryGrid" style="display:none"></div>
     <div class="actions" id="outActions" style="display:none">
-      <button class="abtn" onclick="copyOutput()">📋 Copy result</button>
-      <button class="abtn" onclick="downloadOutput()">⬇️ Download .json</button>
-      <a class="abtn primary" href="javascript:void(0)" onclick="sendToPlayground()">🧪 Verify in Playground →</a>
+      <button class="abtn" onclick="copyOutput()" data-i18n="tl.copy">📋 Copy result</button>
+      <button class="abtn" onclick="downloadOutput()" data-i18n="tl.download">⬇️ Download .json</button>
+      <a class="abtn primary" href="javascript:void(0)" onclick="sendToPlayground()" data-i18n="tl.verify">🧪 Verify in Playground →</a>
     </div>
   </div>
 
   <div class="howgrid">
     <div class="how">
-      <h4>🔄 How the translation works</h4>
-      <p>Every credential is parsed into the Universal Trust Schema (UTS v2.0.0) — a canonical intermediate representation. The target adapter then renders it back in the destination format. <code>from → UTS → to</code>.</p>
+      <h4 data-i18n="tl.howTitle">🔄 How the translation works</h4>
+      <p data-i18n="tl.howBody">Every credential is parsed into the Universal Trust Schema (UTS v2.0.0) — a canonical intermediate representation. The target adapter then renders it back in the destination format.</p>
     </div>
     <div class="how">
-      <h4>⚠️ Signature semantics</h4>
-      <p>Translations re-shape the credential structure. Signatures are structural placeholders in this playground — production signing uses Ed25519 over RFC 8785 JCS canonical bytes via <code>@marketnow/trust-core</code>.</p>
+      <h4 data-i18n="tl.sigTitle">⚠️ Signature semantics</h4>
+      <p data-i18n="tl.sigBody">Translations re-shape the credential structure. Signatures are structural placeholders in this playground — production signing uses Ed25519 over RFC 8785 JCS canonical bytes.</p>
     </div>
     <div class="how">
-      <h4>🤖 For AI agents</h4>
-      <p>Same call, JSON in/out: <code>POST /api/trust?action=translate</code> with <code>{"from","to","payload"}</code>. Detects the source format automatically when <code>from</code> is omitted.</p>
+      <h4 data-i18n="tl.agentsTitle">🤖 For AI agents</h4>
+      <p><span data-i18n="tl.agentsBody">Same call, JSON in/out:</span> <code>POST /api/trust?action=translate</code> with <code>{"from","to","payload"}</code>.</p>
     </div>
   </div>
 
   <footer>
-    <p>API: <code class="mono">POST /api/trust?action=translate</code></p>
+    <p><span data-i18n="c.apiLabel">API:</span> <code class="mono">POST /api/trust?action=translate</code></p>
     <p>
-      <a href="https://github.com/alicelabs-llc/universal-trust-adapter" target="_blank" rel="noopener">GitHub</a> ·
-      <a href="/api/trust" target="_blank" rel="noopener">UTA API</a> ·
-      <a href="/scam-checker.html">Scam Checker</a> ·
+      <a href="https://github.com/alicelabs-llc/universal-trust-adapter" target="_blank" rel="noopener"><span data-i18n="c.github">GitHub</span></a> ·
+      <a href="/api/trust" target="_blank" rel="noopener"><span data-i18n="c.utaApi">UTA API</span></a> ·
+      <a href="/scam-checker.html"><span data-i18n="c.nav.checker">Scam Checker</span></a> ·
       <a href="/playground.html">Verify Playground</a> ·
-      <a href="/uta">Universal Trust Adapter</a>
+      <a href="/uta"><span data-i18n="c.utaFull">Universal Trust Adapter</span></a>
     </p>
-    <p style="color:#4a4a55">MarketNow · AliceLabs LLC — trust infrastructure for AI agents</p>
+    <p style="color:#4a4a55" data-i18n="c.footer">MarketNow · AliceLabs LLC — trust infrastructure for AI agents</p>
   </footer>
 </div>
 
 <script>
+const T = (k, v) => window.ToolsI18n.t(k, v);
+let lastMs = 0;
+window.__onLangChange = function () { if (lastData) showResult(lastData, lastMs); };
+
 const API = '/api/trust?action=translate';
 
 const FORMATS = [
@@ -273,10 +279,10 @@ async function translateCredential() {
   const input = document.getElementById('inputCredential').value.trim();
   const errBox = document.getElementById('err');
   errBox.style.display = 'none';
-  if (!input) { document.getElementById('inputCredential').focus(); errBox.style.display = 'block'; errBox.textContent = 'Paste a credential first — or click "Load a sample".'; return; }
+  if (!input) { document.getElementById('inputCredential').focus(); errBox.style.display = 'block'; errBox.textContent = T('tl.pasteFirst'); return; }
 
   const btn = document.getElementById('translateBtn');
-  btn.disabled = true; btn.textContent = 'Translating…';
+  btn.disabled = true; btn.textContent = T('tl.translating');
   document.getElementById('loading').classList.add('on');
   document.getElementById('output').classList.remove('show');
 
@@ -292,13 +298,13 @@ async function translateCredential() {
     });
     const data = await resp.json();
     document.getElementById('loading').classList.remove('on');
-    displayResult(data, Math.round(performance.now() - t0));
+    lastMs = Math.round(performance.now() - t0); displayResult(data, lastMs);
   } catch (err) {
     document.getElementById('loading').classList.remove('on');
     errBox.style.display = 'block';
-    errBox.textContent = 'Could not reach the translation API: ' + err.message + ' — retry in a few seconds.';
+    errBox.textContent = T('tl.apiErr', { err: err.message });
   }
-  btn.disabled = false; btn.textContent = 'Translate Credential →';
+  btn.disabled = false; btn.textContent = T('tl.go');
 }
 
 function fmtName(id) { const f = FORMATS.find(x => x.id === id); return f ? f.name : id; }
@@ -315,8 +321,8 @@ function displayResult(data, ms) {
   if (data.error || !data.success) {
     top.className = 'result-top err';
     top.innerHTML = `<span class="rt-ico">⛔</span><div class="rt-main">
-      <div class="route">Translation failed</div>
-      <div class="meta">${escapeHtml(data.error || 'Unknown error')}</div></div>`;
+      <div class="route">${T('tl.fail')}</div>
+      <div class="meta">${escapeHtml(data.error || T('tl.unknownError'))}</div></div>`;
     document.getElementById('preResult').textContent = JSON.stringify(data, null, 2);
     document.getElementById('preUts').textContent = '';
     document.getElementById('warnList').innerHTML = '<div class="nowarn">—</div>';
@@ -332,9 +338,9 @@ function displayResult(data, ms) {
     <span class="rt-ico">✅</span>
     <div class="rt-main">
       <div class="route"><span class="mono">${fmtName(data.from)}</span> → UTS v2 → <span class="mono">${fmtName(data.to)}</span></div>
-      <div class="meta">Translated in ${ms}ms · payload rendered to target format · ${warnings.length} warning${warnings.length === 1 ? '' : 's'}</div>
+      <div class="meta">${warnings.length === 1 ? T('tl.meta1', { ms: ms }) : T('tl.meta', { ms: ms, n: warnings.length })}</div>
     </div>
-    <span class="lossless ${data.lossless ? 'yes' : 'no'}">${data.lossless ? '100% lossless' : warnings.length + ' field warning' + (warnings.length === 1 ? '' : 's')}</span>`;
+    <span class="lossless ${data.lossless ? 'yes' : 'no'}">${data.lossless ? T('tl.lossless') : (warnings.length === 1 ? T('tl.warningsBadge1') : T('tl.warningsBadge', { n: warnings.length }))}</span>`;
 
   document.getElementById('preResult').textContent = JSON.stringify(data.payload, null, 2);
   document.getElementById('preUts').textContent = JSON.stringify(stripRaw(data.uts), null, 2);
@@ -342,20 +348,20 @@ function displayResult(data, ms) {
 
   const wl = document.getElementById('warnList');
   if (!warnings.length) {
-    wl.innerHTML = '<div class="nowarn">No warnings — every field of the source credential carried over to the target format without loss.</div>';
+    wl.innerHTML = '<div class="nowarn">' + T('tl.noWarn') + '</div>';
   } else {
     wl.innerHTML = warnings.map(w => `<div class="witem"><span>⚠️</span><span>${escapeHtml(w)}</span></div>`).join('') +
-      '<div class="witem info"><span>ℹ️</span><span>Signatures are structural placeholders in this playground. Production signing = Ed25519 over RFC 8785 JCS canonical bytes (@marketnow/trust-core).</span></div>';
+      '<div class="witem info"><span>ℹ️</span><span>' + T('tl.sigNote') + '</span></div>';
   }
 
   // Summary chips
   const uts = data.uts || {};
   const chips = [
-    ['Subject', uts.subject?.id || uts.subject?.name || '—'],
-    ['Issuer / Assessor', uts.trust?.assessor || '—'],
-    ['Trust score', uts.trust?.score !== undefined ? uts.trust?.score + ' / 10' : '—'],
-    ['Expires', uts.lifecycle?.expires_at || 'not declared'],
-    ['Capabilities', (uts.capabilities?.provides || []).slice(0, 4).join(', ') || '—'],
+    [T('tl.chipSubject'), uts.subject?.id || uts.subject?.name || '—'],
+    [T('tl.chipIssuer'), uts.trust?.assessor || '—'],
+    [T('tl.chipScore'), uts.trust?.score !== undefined ? uts.trust?.score + ' / 10' : '—'],
+    [T('tl.chipExpires'), uts.lifecycle?.expires_at || T('tl.notDeclared')],
+    [T('tl.chipCaps'), (uts.capabilities?.provides || []).slice(0, 4).join(', ') || '—'],
   ];
   summary.style.display = 'grid';
   summary.innerHTML = chips.map(c => `<div class="sitem"><div class="k">${c[0]}</div><div class="v">${escapeHtml(String(c[1]))}</div></div>`).join('');
@@ -379,7 +385,7 @@ function copyOutput() {
   const text = document.getElementById('preResult').textContent;
   navigator.clipboard.writeText(text).then(() => {
     const b = event.target; const old = b.textContent;
-    b.textContent = '✅ Copied!'; b.classList.add('ok');
+    b.textContent = T('c.copied'); b.classList.add('ok');
     setTimeout(() => { b.textContent = old; b.classList.remove('ok'); }, 1800);
   });
 }
