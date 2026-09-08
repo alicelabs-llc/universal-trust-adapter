@@ -1,0 +1,67 @@
+{
+  "schema": "uta-tarball-rule/1.0",
+  "subject": {
+    "package": "agent-trust-card",
+    "version": "1.1.2",
+    "tarball": "agent-trust-card-1.1.2.tgz",
+    "tarball_sha256": "f1b44ed29eea0ca9eee65c1e0974c5d2b4b512378c6d21edb6344daf9184641a",
+    "tarball_bytes": 26782,
+    "served_from": [
+      "https://registry.npmjs.org/agent-trust-card/-/agent-trust-card-1.1.2.tgz",
+      "https://www.marketnow.site/uta/conformance/repro/agent-trust-card-1.1.2.tgz"
+    ],
+    "source_tree": "github.com/alicelabs-llc/universal-trust-adapter:marketnow/atc-sdk",
+    "commit": "215ccab0443932f96b2fb19f6051c114617ad67b"
+  },
+  "claim": "The source tree, transformed by this rule, rebuilds the published tarball's uncompressed tar layer byte-for-byte (sha256 519d406adba1e8199ca0c91a8f47195a81e42745aac05e599c9b3de87359b990, 122880 bytes). The .tgz bytes themselves are pinned by digest (anchored in Rekor) — its gzip layer depends on the publisher's zlib build and is NOT part of the rebuild claim.",
+  "rebuild_target": {
+    "layer": "uncompressed tar",
+    "sha256": "519d406adba1e8199ca0c91a8f47195a81e42745aac05e599c9b3de87359b990",
+    "bytes": 122880,
+    "structure": "12 file entries (no directory entries), fixed order, two trailing zero blocks, no trailing bytes"
+  },
+  "tar_entry_metadata": {
+    "typeflag": "0",
+    "mode": "000644 (6 octal digits + space + NUL)",
+    "mtime": 499162500,
+    "uid_gid": "8 NUL bytes each (empty fields)",
+    "uname_gname": "empty",
+    "magic": "ustar\\0",
+    "version": "00",
+    "devmajor_devminor": "000000 (6 octal digits + space + NUL)",
+    "prefix": "empty",
+    "checksum": "sum of header bytes with checksum field as 8 ASCII spaces, stored as 6 octal digits + space + NUL",
+    "size_mtime_format": "10 octal digits + space + NUL"
+  },
+  "entries": [
+    { "tar_path": "package/LICENSE", "source_path": "LICENSE", "transform": "lf-to-crlf" },
+    { "tar_path": "package/src/v3/atc-v3.js", "source_path": "src/v3/atc-v3.js", "transform": "lf-to-crlf" },
+    { "tar_path": "package/package.json", "source_path": "package.json", "transform": "publisher-json-serialization" },
+    { "tar_path": "package/CONFORMANCE.md", "source_path": "CONFORMANCE.md", "transform": "lf-to-crlf" },
+    { "tar_path": "package/README.md", "source_path": "README.md", "transform": "lf-to-crlf" },
+    { "tar_path": "package/bin/atc.mjs", "source_path": "bin/atc.mjs", "transform": "lf-to-crlf" },
+    { "tar_path": "package/src/index.mjs", "source_path": "src/index.mjs", "transform": "lf-to-crlf" },
+    { "tar_path": "package/src/issue.mjs", "source_path": "src/issue.mjs", "transform": "lf-to-crlf" },
+    { "tar_path": "package/src/keys.mjs", "source_path": "src/keys.mjs", "transform": "lf-to-crlf" },
+    { "tar_path": "package/src/verify.mjs", "source_path": "src/verify.mjs", "transform": "lf-to-crlf" },
+    { "tar_path": "package/src/v3/atc-v3.d.ts", "source_path": "src/v3/atc-v3.d.ts", "transform": "lf-to-crlf" },
+    { "tar_path": "package/src/v3/atc-v3.ts", "source_path": "src/v3/atc-v3.ts", "transform": "lf-to-crlf" }
+  ],
+  "transforms": {
+    "lf-to-crlf": "Every LF (0x0A) in the source bytes is converted to CRLF (0x0D 0x0A). All other bytes are copied verbatim.",
+    "publisher-json-serialization": "The source package.json is parsed as JSON and re-serialized in the publisher's format: UTF-8 BOM (EF BB BF), CRLF line endings, 4-space base indent, two spaces after each colon, nested object/array openers aligned at column (childIndent + keyLen + 5) with children at opener+4 and closers at opener, `<` and `>` escaped as \\u003c and \\u003e (plus `\"`, backslash, control chars), non-ASCII as raw UTF-8, file ends with `}` + CRLF. Key order is preserved from the source JSON."
+  },
+  "gzip_layer_observed": {
+    "note": "informational fingerprint of the published .tgz; not part of the rebuild claim",
+    "header": { "FLG": 0, "MTIME": 1927134700, "XFL": 219, "OS": 72 },
+    "trailer_crc32_hex": "4fa74fc5",
+    "isize": 122880,
+    "deflate_stream_bytes": 26764
+  },
+  "manifest": {
+    "file": "source-manifest.json",
+    "sha256": "5665c19bbfef0212c99ad1a5e156e8b265f3c5a9df05317f21775c34188e20e0"
+  },
+  "shortcut_killed": "The verification rebuilds the full 122880-byte tar from the source files and compares every byte. A digest table cannot pass: modify any source file and the rebuild diverges at that byte. The comparison target (the registry tarball) is fetched from npm, not from this repo.",
+  "verify_command": "node verify-rebuild.mjs --src <repo>/marketnow/atc-sdk --manifest source-manifest.json"
+}
