@@ -328,6 +328,36 @@ export default function UTA() {
           </motion.div>
         </section>
 
+        {/* ═══ TRY UTA LIVE ═══ */}
+        <section className="max-w-5xl mx-auto px-6 pb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }} className="premium-card p-6 md:p-8">
+            <h2 className="text-white text-2xl font-bold mb-4">Try UTA Live — Free Interactive Tools</h2>
+            <p className="text-zinc-400 text-sm mb-6">
+              Test the trust pipeline yourself. No API key, no registration, no auth. These are live tools running against the production <span className="text-[#00d1ff]">/api/trust</span> and <span className="text-[#00d1ff]">/api/scam-check</span> endpoints.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <a href="/scam-checker.html" target="_blank" rel="noopener" className="block p-5 rounded-xl bg-black/40 border border-[#00d1ff]/20 hover:border-[#00d1ff]/60 hover:bg-[#00d1ff]/5 transition-all group">
+                <div className="text-[#00d1ff] text-2xl mb-2">🛡️</div>
+                <div className="text-white font-bold text-sm mb-1 group-hover:text-[#00d1ff] transition-colors">Scam Checker</div>
+                <div className="text-zinc-500 text-xs leading-relaxed">Your AI recommended a store — is it a scam? Free domain reputation check with transparent heuristics.</div>
+                <div className="text-[#00F299] text-xs mt-3 font-medium">Open tool →</div>
+              </a>
+              <a href="/translate.html" target="_blank" rel="noopener" className="block p-5 rounded-xl bg-black/40 border border-[#00d1ff]/20 hover:border-[#00d1ff]/60 hover:bg-[#00d1ff]/5 transition-all group">
+                <div className="text-[#00d1ff] text-2xl mb-2">🔄</div>
+                <div className="text-white font-bold text-sm mb-1 group-hover:text-[#00d1ff] transition-colors">Credential Translator</div>
+                <div className="text-zinc-500 text-xs leading-relaxed">Translate credentials between the 8 trust formats — ATC, JWT, W3C VC, A2A, X.509 and more. Live round-trip.</div>
+                <div className="text-[#00F299] text-xs mt-3 font-medium">Open tool →</div>
+              </a>
+              <a href="/playground.html" target="_blank" rel="noopener" className="block p-5 rounded-xl bg-black/40 border border-[#00d1ff]/20 hover:border-[#00d1ff]/60 hover:bg-[#00d1ff]/5 transition-all group">
+                <div className="text-[#00d1ff] text-2xl mb-2">🧪</div>
+                <div className="text-white font-bold text-sm mb-1 group-hover:text-[#00d1ff] transition-colors">Verify Playground</div>
+                <div className="text-zinc-500 text-xs leading-relaxed">Paste any credential and run it through the full 12-stage fail-closed verification pipeline. See every stage.</div>
+                <div className="text-[#00F299] text-xs mt-3 font-medium">Open tool →</div>
+              </a>
+            </div>
+          </motion.div>
+        </section>
+
         {/* ═══ FORMAT ADAPTERS DETAIL ═══ */}
         <section className="max-w-5xl mx-auto px-6 pb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="premium-card p-6 md:p-8">
