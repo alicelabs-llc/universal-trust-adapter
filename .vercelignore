@@ -1,0 +1,21 @@
+# Deploy ONLY the site root directory (project Root Directory = marketnow/aep-marketplace)
+/*
+!/.vercelignore
+!/marketnow
+/marketnow/*
+!/marketnow/aep-marketplace
+
+# ── inside the site: keep the upload lean ──
+/marketnow/aep-marketplace/marketnow-source
+/marketnow/aep-marketplace/docs
+/marketnow/aep-marketplace/scripts
+/marketnow/aep-marketplace/tests
+/marketnow/aep-marketplace/mcp-server
+/marketnow/aep-marketplace/db
+/marketnow/aep-marketplace/sentinel-rules
+/marketnow/aep-marketplace/landing
+/marketnow/aep-marketplace/landing-pages
+/marketnow/aep-marketplace/dist
+/marketnow/aep-marketplace/node_modules
+/marketnow/aep-marketplace/.vercel
+/marketnow/aep-marketplace/.env.local

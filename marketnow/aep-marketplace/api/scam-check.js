@@ -141,13 +141,59 @@ function checkTyposquatting(domain) {
 }
 
 // ── v2: live RDAP domain-age lookup (free, no API key) ──────────────────────
-// rdap.org is the IANA RDAP bootstrap redirector: it 302s to the registry's
-// RDAP server (.com/.net/.site/.xyz/.shop… all gTLDs; many ccTLDs too).
-async function rdapLookup(domain) {
+// Strategy: query the TLD's registry RDAP server DIRECTLY (from the IANA
+// bootstrap table, data.iana.org/rdap/dns.json) — rdap.org (a Cloudflare-fronted
+// redirector) silently throttles datacenter/Lambda IPs into timeouts, so it is
+// only used as fallback for TLDs missing from the table below.
+const REGISTRY_RDAP = {
+  com: 'https://rdap.verisign.com/com/v1/',
+  net: 'https://rdap.verisign.com/net/v1/',
+  cc: 'https://tld-rdap.verisign.com/cc/v1/',
+  tv: 'https://rdap.nic.tv/',
+  org: 'https://rdap.publicinterestregistry.org/rdap/',
+  xyz: 'https://rdap.centralnic.com/xyz/',
+  site: 'https://rdap.radix.host/rdap/',
+  space: 'https://rdap.radix.host/rdap/',
+  store: 'https://rdap.radix.host/rdap/',
+  tech: 'https://rdap.radix.host/rdap/',
+  website: 'https://rdap.radix.host/rdap/',
+  online: 'https://rdap.radix.host/rdap/',
+  icu: 'https://rdap.centralnic.com/icu/',
+  cyou: 'https://rdap.centralnic.com/cyou/',
+  sbs: 'https://rdap.centralnic.com/sbs/',
+  lol: 'https://rdap.centralnic.com/lol/',
+  monster: 'https://rdap.centralnic.com/monster/',
+  quest: 'https://rdap.centralnic.com/quest/',
+  bond: 'https://rdap.centralnic.com/bond/',
+  hair: 'https://rdap.centralnic.com/hair/',
+  skin: 'https://rdap.centralnic.com/skin/',
+  makeup: 'https://rdap.centralnic.com/makeup/',
+  beauty: 'https://rdap.centralnic.com/beauty/',
+  click: 'https://rdap.registry.click/rdap/',
+  link: 'https://rdap.uniregistry.net/rdap/',
+  zip: 'https://pubapi.registry.google/rdap/',
+  mov: 'https://pubapi.registry.google/rdap/',
+  app: 'https://pubapi.registry.google/rdap/',
+  dev: 'https://pubapi.registry.google/rdap/',
+  ai: 'https://rdap.identitydigital.services/rdap/',
+  shop: 'https://rdap.gmoregistry.net/rdap/',
+  top: 'https://rdap.zdnsgtld.com/top/',
+  rest: 'https://rdap.registry.bar/rdap/',
+  buzz: 'https://rdap.nic.buzz/',
+  fit: 'https://rdap.nic.fit/',
+  in: 'https://rdap.nixiregistry.in/rdap/',
+  nl: 'https://rdap.sidn.nl/',
+  fr: 'https://rdap.nic.fr/',
+  br: 'https://rdap.registro.br/',
+  pl: 'https://rdap.dns.pl/',
+  ar: 'https://rdap.nic.ar/'
+};
+
+async function rdapFetchJson(url, timeoutMs) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), RDAP_TIMEOUT_MS);
-    const resp = await fetch('https://rdap.org/domain/' + encodeURIComponent(domain), {
+    const resp = await fetch(url, {
       headers: {
         'Accept': 'application/rdap+json',
         // rdap.org 403s the default undici UA — identify ourselves honestly
@@ -156,18 +202,35 @@ async function rdapLookup(domain) {
       redirect: 'follow',
       signal: ctrl.signal
     });
-    clearTimeout(timer);
     if (resp.status === 404) return { notFound: true }; // registry says: no such domain
-    if (!resp.ok) return null; // other error → honest "unavailable"
+    if (!resp.ok) return { error: 'HTTP ' + resp.status };
     const data = await resp.json();
     const reg = (data.events || []).find(e => e.eventAction === 'registration');
-    if (!reg || !reg.eventDate) return null;
+    if (!reg || !reg.eventDate) return { error: 'no-registration-event' };
     const registeredAt = new Date(reg.eventDate);
-    if (isNaN(registeredAt.getTime())) return null;
+    if (isNaN(registeredAt.getTime())) return { error: 'bad-date' };
     return { registeredAt };
-  } catch {
-    return null; // timeout / network / parse error → honest "unavailable"
+  } catch (e) {
+    // transparent failure reason — helps users (and us) see WHY it failed
+    const why = e && e.name === 'AbortError' ? 'timeout' : ((e && e.message) || 'network').slice(0, 60);
+    return { error: why };
+  } finally {
+    clearTimeout(timer);
   }
+}
+
+async function rdapLookup(domain) {
+  const tld = domain.split('.').pop().toLowerCase();
+  const candidates = [];
+  if (REGISTRY_RDAP[tld]) candidates.push(REGISTRY_RDAP[tld] + 'domain/' + encodeURIComponent(domain));
+  candidates.push('https://rdap.org/domain/' + encodeURIComponent(domain)); // fallback redirector
+  let last = null;
+  for (const url of candidates) {
+    const r = await rdapFetchJson(url, url.includes('rdap.org') ? 3000 : 2500);
+    if (r.registeredAt || r.notFound) return r; // definitive answer
+    last = r; // remember the failure, try the next source
+  }
+  return last || { error: 'unavailable' };
 }
 
 function buildDomainAgeCheck(domain, rdap) {
@@ -178,8 +241,9 @@ function buildDomainAgeCheck(domain, rdap) {
   if (POPULAR_DOMAINS.has(bare)) {
     return { triggered: false, weight: 0, detail: 'Domain is in known-popular list (established)' };
   }
-  if (!rdap) {
-    return { triggered: false, weight: 0, detail: 'RDAP registry lookup unavailable (timeout or TLD without RDAP) — age not verified, verify manually if suspicious' };
+  if (!rdap || rdap.error) {
+    const why = rdap && rdap.error ? rdap.error : 'unavailable';
+    return { triggered: false, weight: 0, detail: 'RDAP registry lookup failed (' + why + ') — age not verified, verify manually if suspicious' };
   }
   if (rdap.notFound) {
     return { triggered: true, weight: 15, detail: 'Domain NOT FOUND in the registry (RDAP 404) — likely unregistered. Any link using it is broken, fake or a typo' };
