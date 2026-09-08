@@ -1,8 +1,0 @@
-{
-  "service": "A2A Remote Execution",
-  "status": "live",
-  "endpoints": {
-    "execute": "POST /api/execute",
-    "stacks": "GET /api/stacks"
-  }
-}

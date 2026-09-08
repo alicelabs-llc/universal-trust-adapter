@@ -244,10 +244,18 @@ const API = '/api/scam-check?domain=';
 let lastData = null;
 
 async function checkDomain() {
-  const input = document.getElementById('domainInput').value.trim();
+  const raw = document.getElementById('domainInput').value.trim();
   const errBox = document.getElementById('err');
   errBox.style.display = 'none';
-  if (!input) { document.getElementById('domainInput').focus(); return; }
+  if (!raw) { document.getElementById('domainInput').focus(); return; }
+
+  // limpieza client-side — mismas reglas que el servidor (protocolo/ruta/www fuera)
+  const input = raw.replace(/^https?:\/\//i, '').replace(/^www\./i, '').split(/[/?#\s]/)[0].trim();
+  if (!input || !input.includes('.')) {
+    errBox.style.display = 'block';
+    errBox.textContent = T('sc.err.invalid', { input: raw.slice(0, 60) });
+    return;
+  }
 
   const btn = document.getElementById('checkBtn');
   btn.disabled = true; btn.textContent = T('sc.checking');
@@ -258,16 +266,23 @@ async function checkDomain() {
   const started = performance.now();
   try {
     const resp = await fetch(API + encodeURIComponent(input));
-    if (!resp.ok) throw new Error('API returned HTTP ' + resp.status);
-    const data = await resp.json();
-    const ms = Math.round(performance.now() - started); lastMs = ms; lastMs = ms; lastMs = ms; lastMs = ms; lastMs = ms; lastMs = ms; lastMs = ms;
+    const data = await resp.json().catch(() => null);
+    if (!resp.ok) {
+      if (data && data.error === 'Invalid domain') {
+        throw Object.assign(new Error('invalid'), { invalidInput: true });
+      }
+      throw new Error('API returned HTTP ' + resp.status);
+    }
+    const ms = Math.round(performance.now() - started); lastMs = ms;
     document.getElementById('scanning').classList.remove('on');
     displayResult(data, ms);
     saveHistory(input, data);
   } catch (err) {
     document.getElementById('scanning').classList.remove('on');
     errBox.style.display = 'block';
-    errBox.textContent = T('sc.apiErr', { err: err.message });
+    errBox.textContent = err.invalidInput
+      ? T('sc.err.invalid', { input: input.slice(0, 60) })
+      : T('sc.apiErr', { err: err.message });
   }
   btn.disabled = false; btn.textContent = T('sc.check');
 }
