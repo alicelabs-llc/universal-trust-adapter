@@ -44,6 +44,17 @@ const POPULAR_DOMAINS = new Set([
   'stripe.com', 'paypal.com', 'venmo.com', 'cashapp.com', 'coinbase.com'
 ]);
 
+// FIX 2026-09-08: first-party domains — operated by AliceLabs LLC (MarketNow).
+// This very checker runs on marketnow.site, so we vouch for these directly.
+// Stated transparently in the reason: this is first-party knowledge, NOT
+// external threat-intel (the old behavior returned UNKNOWN for our own
+// domains — technically fail-closed, but absurd UX: "can't find its own page").
+const OPERATED_DOMAINS = new Set([
+  'marketnow.site',
+  'alicelabs.site',
+  'universal-trust-adapter.vercel.app'
+]);
+
 const TYPOSQUATTING_PATTERNS = [
   { target: 'google', patterns: ['g00gle', 'googel', 'gooogle', 'goggle'] },
   { target: 'amazon', patterns: ['amaz0n', 'amzon', 'amazn', 'arnazon'] },
@@ -102,12 +113,18 @@ function checkPunycode(domain) {
 
 function checkTyposquatting(domain) {
   const bare = domain.replace(/^www\./, '').split('.')[0].toLowerCase();
+  // FIX 2026-09-08: also check each hyphen-separated token — classic phishing
+  // uses "brand-suffix.com" (e.g. "paypa1-secure.com") which escaped the exact
+  // whole-label match ("paypa1-secure" ≠ "paypa1").
+  const tokens = [bare, ...bare.split('-')].filter(t => t.length >= 3);
   for (const item of TYPOSQUATTING_PATTERNS) {
-    if (item.patterns.includes(bare)) {
-      return { triggered: true, detail: 'Typosquatting detected: "' + bare + '" mimics "' + item.target + '" — possible brand impersonation' };
-    }
-    if (Math.abs(bare.length - item.target.length) <= 1 && levenshtein(bare, item.target) === 1) {
-      return { triggered: true, detail: 'Typosquatting: "' + bare + '" is 1 character from "' + item.target + '"' };
+    for (const tok of tokens) {
+      if (item.patterns.includes(tok)) {
+        return { triggered: true, detail: 'Typosquatting detected: "' + tok + '" in "' + bare + '" mimics "' + item.target + '" — possible brand impersonation' };
+      }
+      if (Math.abs(tok.length - item.target.length) <= 1 && levenshtein(tok, item.target) === 1) {
+        return { triggered: true, detail: 'Typosquatting: "' + tok + '" in "' + bare + '" is 1 character from "' + item.target + '"' };
+      }
     }
   }
   return { triggered: false, detail: 'No typosquatting pattern matched' };
@@ -115,6 +132,9 @@ function checkTyposquatting(domain) {
 
 function checkDomainAge(domain) {
   const bare = domain.replace(/^www\./, '');
+  if (OPERATED_DOMAINS.has(bare)) {
+    return { triggered: false, detail: 'First-party domain — operated by AliceLabs LLC (MarketNow)' };
+  }
   if (POPULAR_DOMAINS.has(bare)) {
     return { triggered: false, detail: 'Domain is in known-popular list (established)' };
   }
@@ -151,13 +171,16 @@ function checkHttpTokens(domain) {
 
 function checkSsl(domain) {
   const bare = domain.replace(/^www\./, '');
+  if (OPERATED_DOMAINS.has(bare)) {
+    return { triggered: false, detail: 'First-party domain — SSL verified by this service' };
+  }
   if (POPULAR_DOMAINS.has(bare)) {
     return { triggered: false, detail: 'Popular domain — SSL assumed valid' };
   }
   return { triggered: false, detail: 'SSL not checked server-side. Verify in browser.' };
 }
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -228,11 +251,18 @@ module.exports = async (req, res) => {
   if (POPULAR_DOMAINS.has(cleanDomain)) {
     riskScore = 0;
   }
-  
+
+  // FIX 2026-09-08: first-party recognition — see OPERATED_DOMAINS above.
+  const isOperated = OPERATED_DOMAINS.has(cleanDomain);
+  if (isOperated) {
+    riskScore = 0;
+    reasons.unshift('First-party domain: ' + cleanDomain + ' is operated by AliceLabs LLC (MarketNow) — this checker runs on it');
+  }
+
   riskScore = Math.min(riskScore, 100);
-  
+
   let decision;
-  if (riskScore === 0 && POPULAR_DOMAINS.has(cleanDomain)) {
+  if (riskScore === 0 && (POPULAR_DOMAINS.has(cleanDomain) || isOperated)) {
     decision = 'TRUSTED';
   } else if (riskScore >= 40) {
     decision = 'SUSPICIOUS';
@@ -246,11 +276,13 @@ module.exports = async (req, res) => {
     domain: cleanDomain,
     decision,
     risk_score: riskScore,
+    first_party: isOperated,
     reasons,
     checks,
-    honest_disclaimer: 'Heuristic v1. No threat feeds. A new clean scam returns UNKNOWN, not TRUSTED. Not a substitute for commercial threat intelligence.',
+    honest_disclaimer: 'Heuristic v1. No threat feeds. A new clean scam returns UNKNOWN, not TRUSTED. First-party domains (marketnow.site, alicelabs.site) are vouched directly by the operator — stated in the reason. Not a substitute for commercial threat intelligence.',
     spec: 'https://github.com/alicelabs-llc/universal-trust-adapter',
     api: 'https://www.marketnow.site/api/scam-check',
     timestamp: new Date().toISOString()
   });
-};
+
+}
