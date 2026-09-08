@@ -181,6 +181,7 @@
     </div>
     <div class="examples">
       <span class="lbl" data-i18n="sc.try">Try:</span>
+      <button class="chip" onclick="loadExample('marketnow.site')">marketnow.site 🏠</button>
       <button class="chip" onclick="loadExample('google.com')">google.com</button>
       <button class="chip" onclick="loadExample('bit.ly/abc')">bit.ly/abc</button>
       <button class="chip danger" onclick="loadExample('amaz0n-login.xyz')">amaz0n-login.xyz</button>
@@ -299,7 +300,10 @@ const ADVICE_KEYS = {
   SUSPICIOUS: ['sc.adv.suspicious.title', ['sc.adv.suspicious.1', 'sc.adv.suspicious.2', 'sc.adv.suspicious.3']],
   UNKNOWN: ['sc.adv.unknown.title', ['sc.adv.unknown.1', 'sc.adv.unknown.2', 'sc.adv.unknown.3']],
 };
-function adviceFor(decision) {
+function adviceFor(decision, firstParty) {
+  if (firstParty) {
+    return { title: T('sc.adv.firstparty.title'), items: [T('sc.adv.firstparty.1'), T('sc.adv.firstparty.2')] };
+  }
   const [titleKey, itemKeys] = ADVICE_KEYS[decision] || ADVICE_KEYS.UNKNOWN;
   return { title: T(titleKey), items: itemKeys.map(k => T(k)) };
 }
@@ -335,8 +339,14 @@ function displayResult(data, ms) {
       </div>
     </div>`;
 
-  // Reasons
-  if (data.reasons && data.reasons.length) {
+  // Reasons — first-party banner (translated) takes precedence over the English server reason
+  const srvReasons = (data.reasons || []).filter(r => !String(r).startsWith('First-party domain:'));
+  if (data.first_party) {
+    html += '<div class="reasons"><h3>' + T('sc.why') + '</h3><div class="reason ok"><span class="ico">🏠</span><span>' + T('sc.reason.firstparty', { d: escapeHtml(data.domain || '') }) + '</span></div></div>';
+    if (srvReasons.length) {
+      html += '<div class="reasons">' + srvReasons.map(r => '<div class="reason"><span class="ico">⚠️</span><span>' + escapeHtml(r) + '</span></div>').join('') + '</div>';
+    }
+  } else if (data.reasons && data.reasons.length) {
     html += '<div class="reasons"><h3>' + T('sc.why') + '</h3>';
     data.reasons.forEach(r => { html += '<div class="reason"><span class="ico">⚠️</span><span>' + escapeHtml(r) + '</span></div>'; });
     html += '</div>';
@@ -363,7 +373,7 @@ function displayResult(data, ms) {
   }
 
   // Advice
-  const adv = adviceFor(data.decision);
+  const adv = adviceFor(data.decision, data.first_party);
   html += `<div class="advice"><h3>${T('sc.next')}</h3><div class="advice-box adv-${data.decision}">
     <strong>${adv.title}</strong><ul>${adv.items.map(i => '<li>' + i + '</li>').join('')}</ul>
   </div></div>`;
