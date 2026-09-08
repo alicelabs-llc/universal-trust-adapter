@@ -167,11 +167,11 @@
       ]
     },
     {
-      "source": "/((?!api/).*)",
+      "source": "/((?!api/|assets/).*)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=300, s-maxage=600, stale-while-revalidate=86400"
+          "value": "public, no-cache, must-revalidate"
         },
         {
           "key": "X-Frame-Options",
