@@ -1,0 +1,51 @@
+{
+ "card_id": "ATC-TEST-EXPIRED",
+ "status": "active",
+ "payload": {
+  "card_id": "ATC-TEST-EXPIRED",
+  "schema_version": "2.0.0",
+  "agent_id": "test-agent-valid",
+  "agent_name": "Valid Test Agent",
+  "identity": {
+   "public_key": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+   "key_algorithm": "Ed25519"
+  },
+  "trust": {
+   "sentinel_review_score": 8,
+   "sentinel_score": 8,
+   "audit_layers_passed": {
+    "L1.5": true,
+    "L2.5": true
+   },
+   "composite_trust": 8,
+   "risk_level": "low"
+  },
+  "capabilities": {
+   "provides": [
+    "search",
+    "read"
+   ],
+   "protocol_language": "mcp",
+   "translate": true
+  },
+  "payment": {
+   "method": "none",
+   "wallet_address": null
+  },
+  "metadata": {
+   "issued_at": "2026-08-20T00:00:00Z",
+   "expires_at": "2020-01-01T00:00:00Z",
+   "issuer": "MarketNow Sentinel CA"
+  }
+ },
+ "signature": {
+  "algorithm": "Ed25519 (RFC 8032)",
+  "value": "8311f1b028c1d91360740d6e6d2f5c28ca514971226109b152aeb85867abe196c1d7f6882f18cb5408dbeaa379656090d079e18b5709ff59c26461f4c1939502",
+  "signed_by": "MarketNow Sentinel Test CA (throwaway, vectors-only)",
+  "signed_at": "2026-09-08T00:00:00Z",
+  "canonical_json": "RFC_8785_JCS",
+  "ca_key_id": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+  "evidence_hash": "sha256:valid_test",
+  "policy_version": "2.0.0"
+ }
+}

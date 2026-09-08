@@ -1,0 +1,34 @@
+{
+  "created": "2026-09-08T21:03:32Z",
+  "digests": {
+    "agent_trust_card_tgz": {
+      "sha256": "f1b44ed29eea0ca9eee65c1e0974c5d2b4b512378c6d21edb6344daf9184641a",
+      "bytes": 26782,
+      "served_from": [
+        "https://registry.npmjs.org/agent-trust-card/-/agent-trust-card-1.1.2.tgz"
+      ],
+      "npm_integrity": "sha512-zvvKQHjrxioYY1hfszq2RueA6KHJqAsDb53BjBNlsqc/6iTMWSiwRL9d3syQVnj9eaj7M7qIFtrx+4Haxa/Yeg=="
+    },
+    "agent_trust_card_tar_layer": {
+      "sha256": "519d406adba1e8199ca0c91a8f47195a81e42745aac05e599c9b3de87359b990",
+      "bytes": 122880,
+      "note": "rebuild target: source tree + rule rebuild these bytes exactly"
+    },
+    "agent_trust_card_source_manifest": {
+      "sha256": "5665c19bbfef0212c99ad1a5e156e8b265f3c5a9df05317f21775c34188e20e0",
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/repro/source-manifest.json"
+      ]
+    },
+    "conformance_vectors_index_v1_3_0": {
+      "sha256": "358a18d58aaef16c3c64a2622404d88d8af67e1cb6c31ea76dac12626eab7597",
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/vectors/_index.json"
+      ]
+    }
+  },
+  "subject": "universal-trust-adapter: npm artifact identity, source-tree rebuild rule, conformance vectors v1.3.0",
+  "publisher": "AliceLabs LLC",
+  "repo": "github.com/alicelabs-llc/universal-trust-adapter",
+  "commit": "215ccab0443932f96b2fb19f6051c114617ad67b"
+}
