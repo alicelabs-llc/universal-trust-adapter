@@ -23,7 +23,7 @@
 //      clean JSON 500s instead of opaque FUNCTION_INVOCATION_FAILED.
 // ============================================================================
 
-import { createPublicKey, verify as edVerify } from 'node:crypto';
+import { createPrivateKey, createPublicKey, sign as edSign, verify as edVerify } from 'node:crypto';
 
 // MarketNow registry CA (mn-ca-003, active since 2026-09-08; see /api/atc?action=ca-key)
 const MARKETNOW_CA = {
@@ -31,6 +31,17 @@ const MARKETNOW_CA = {
   spki_b64: 'MCowBQYDK2VwAyEAUWJgyMWp9oKIGwN9EG8ayz/mYYp1lcQBI58rtpOs8CM=',
   active_since: '2026-09-08',
 };
+
+// OPTIONAL server-side signing key for translate→atc-v3 (env var, never committed).
+// When CA_PRIVATE_KEY_PEM (PEM, Ed25519) is present, translated ATC v3 cards are
+// issued with a REAL signature that verifies against mn-ca-003 — so the
+// "Translate → Verify in Playground" handoff ends in PERMIT. Without the env
+// var the placeholder signature is kept (and verification fails honestly).
+let CA_SIGNING_KEY = null;
+try {
+  const pem = process.env.CA_PRIVATE_KEY_PEM || '';
+  if (pem.includes('BEGIN PRIVATE KEY')) CA_SIGNING_KEY = createPrivateKey(pem);
+} catch { CA_SIGNING_KEY = null; }
 
 // RFC 8785 JCS (JSON Canonicalization Scheme) — inline, no dependencies.
 // Identical to api/atc.js (kept in sync deliberately).
@@ -525,17 +536,26 @@ function atcV3ToUTS(cred) {
 
 function utsToATCv3(uts) {
   const id = `ATC-${new Date().getFullYear()}-${Math.random().toString(36).slice(2, 9).toUpperCase()}`;
-  return {
+  const card = {
     atc_version: '3.0.0',
     credential_id: id,
-    issuer: { did: 'did:marketnow:ca', name: uts.trust.assessor || 'MarketNow', url: 'https://marketnow.site', ca_key_id: uts.identity?.key_id || '' },
+    issuer: { did: 'did:marketnow:ca', name: uts.trust.assessor || 'MarketNow', url: 'https://marketnow.site', ca_key_id: MARKETNOW_CA.key_id },
     subject: { agent_id: uts.subject.id, agent_name: uts.subject.name, public_key: uts.identity?.public_key || '', key_algorithm: uts.identity?.key_algorithm || 'Ed25519', subject_type: 'agent' },
     attestations: [],
     capabilities: { provides: uts.capabilities?.provides || [], requires: uts.capabilities?.requires || [], protocols: uts.capabilities?.protocols || ['mcp'] },
     lifecycle: { issued_at: uts.lifecycle.issued_at || new Date().toISOString(), expires_at: uts.lifecycle.expires_at, revoked: false, revocation_url: `https://marketnow.site/api/atc?action=verify&card_id=${id}`, version: '3.0.0' },
     assessment: { methodology: 'Sentinel', methodology_version: 'v2.5', score: uts.trust.score, confidence: uts.trust.confidence, risk_level: uts.trust.confidence === 'high' ? 'low' : 'medium', computed_at: new Date().toISOString(), computed_by: uts.trust.assessor || 'MarketNow' },
-    signatures: [{ algorithm: 'Ed25519 (RFC 8032)', value: '00'.repeat(64), signed_by: uts.trust.assessor || 'MarketNow', signed_at: new Date().toISOString(), domain: 'UTA-ATC-V3-CREDENTIAL', key_id: uts.identity?.key_id || '', canonicalization: 'RFC_8785_JCS', evidence_hash: 'sha256:pending' }],
   };
+  // Real signature when the server holds the CA key (env CA_PRIVATE_KEY_PEM).
+  // Same scheme the verifier uses: 'UTA-ATC-V3-CREDENTIAL:' + JCS(card).
+  let sigValue = '00'.repeat(64);
+  if (CA_SIGNING_KEY) {
+    try {
+      sigValue = edSign(null, Buffer.from('UTA-ATC-V3-CREDENTIAL:' + jcs(card), 'utf-8'), CA_SIGNING_KEY).toString('hex');
+    } catch { sigValue = '00'.repeat(64); }
+  }
+  card.signatures = [{ algorithm: 'Ed25519 (RFC 8032)', value: sigValue, signed_by: MARKETNOW_CA.key_id, signed_at: new Date().toISOString(), domain: 'UTA-ATC-V3-CREDENTIAL', key_id: MARKETNOW_CA.key_id, canonicalization: 'RFC_8785_JCS', evidence_hash: CA_SIGNING_KEY ? 'sha256:' + sigValue.slice(0, 16) : 'sha256:pending' }];
+  return card;
 }
 
 function verifyATCv3(cred, caKey) {

@@ -269,7 +269,7 @@ const EXAMPLES = {
     capabilities: { provides: ['read:files', 'write:reports'], requires: [], protocols: ['mcp'] },
     lifecycle: { issued_at: '2026-01-15T10:00:00Z', expires_at: '2026-12-31T10:00:00Z', revoked: false },
     assessment: { score: 8.5, confidence: 'high', methodology: 'Sentinel', methodology_version: 'v2.5' },
-    signatures: [{ algorithm: 'Ed25519 (RFC 8032)', value: '00'.repeat(64), domain: 'UTA-ATC-V3-CREDENTIAL', key_id: 'mn-ca-003', canonicalization: 'RFC_8785_JCS' }]
+    signatures: [{ algorithm: 'Ed25519 (RFC 8032)', value: '89b1f1156e02dad56edc33b4fef26fc943ab3d7687fddaab78334f1dde05945ca91c47599ada631c0d7190cecf38a67693c4266a0e28eb1559a2f02dc3d94403', domain: 'UTA-ATC-V3-CREDENTIAL', key_id: 'mn-ca-003', canonicalization: 'RFC_8785_JCS' }]
   }, null, 2),
   atcTampered: JSON.stringify({
     atc_version: '3.0.0', credential_id: 'ATC-2026-TAMPERED',
@@ -294,7 +294,7 @@ const EXAMPLES = {
 
 const EX_LABELS = {
   jwt: 'JWT token', w3cvc: 'valid W3C VC', mcp: 'MCP server card',
-  atc: 'ATC v3 (placeholder signature)', atcTampered: 'TAMPERED ATC v3 (unknown CA)',
+  atc: 'ATC v3 · real signature mn-ca-003 ✓', atcTampered: 'TAMPERED ATC v3 (unknown CA)',
   expired: 'EXPIRED W3C VC', garbage: 'random JSON',
 };
 
