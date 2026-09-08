@@ -171,7 +171,7 @@
     <span class="pill"><span class="dot"></span> <span data-i18n="sc.badge">Live API · No key · No signup</span></span>
     <h1>UTA <span class="grad" data-i18n="sc.title">Scam Checker</span></h1>
     <p class="sub" data-i18n="sc.sub">Your AI agent recommended a store, a tool or a download link. Before it touches your files or your wallet — check the domain against 8 transparent heuristics.</p>
-    <p class="tag" data-i18n="sc.tag">Type a domain. Get a verdict in ~1 second.</p>
+    <p class="tag" data-i18n="sc.tag">Type a domain. Get a verdict in ~1–2 seconds (live registry + TLS checks).</p>
   </header>
 
   <div class="card checker">
@@ -191,7 +191,7 @@
 
     <div id="scanning" class="scanning">
       <div class="scanline"><div class="bar"></div></div>
-      <div class="scansteps"><span data-i18n="sc.scan1">resolving domain</span><span data-i18n="sc.scan2">checking TLD reputation</span><span data-i18n="sc.scan3">parsing IDN/punycode</span><span data-i18n="sc.scan4">matching typosquat patterns</span></div>
+      <div class="scansteps"><span data-i18n="sc.scan1">resolving domain</span><span data-i18n="sc.scan2">checking TLD reputation</span><span data-i18n="sc.scan3">parsing IDN/punycode</span><span data-i18n="sc.scan4">matching typosquat patterns</span><span data-i18n="sc.scan5">querying RDAP registry</span><span data-i18n="sc.scan6">inspecting TLS certificate</span></div>
     </div>
   </div>
 
@@ -209,7 +209,7 @@
   <div class="howgrid">
     <div class="how">
       <h4 data-i18n="sc.howTitle">⚙️ How it works</h4>
-      <p data-i18n="sc.howBody">8 transparent heuristics run on every domain: URL shortener, suspicious TLD, punycode/IDN homoglyphs, typosquatting, subdomain abuse, suspicious tokens, domain age, SSL. Every check's reasoning is shown — no black-box score.</p>
+      <p data-i18n="sc.howBody">8 transparent heuristics run on every domain: URL shortener, suspicious TLD, punycode/IDN homoglyphs, typosquatting, subdomain abuse, suspicious tokens, domain age, SSL. Domain age and SSL are now verified LIVE server-side (RDAP registry data + TLS certificate) — no API key. Every check's reasoning is shown — no black-box score.</p>
     </div>
     <div class="how">
       <h4 data-i18n="sc.agentsTitle">🤖 For AI agents</h4>
