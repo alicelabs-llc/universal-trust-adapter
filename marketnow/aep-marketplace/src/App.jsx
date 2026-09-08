@@ -69,6 +69,7 @@ import Dashboard from './pages/Dashboard';
 import Pricing from './pages/Pricing';
 import AgentLanding from "./pages/AgentLanding";
 import Mandates from "./pages/Mandates";
+import UTA from "./pages/UTA";
 import Trust from "./pages/Trust";
 import About from "./pages/About";
 import Catalog from "./pages/Catalog";
