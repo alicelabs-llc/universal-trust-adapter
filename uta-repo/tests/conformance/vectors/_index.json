@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.2.0",
-  "published_at": "2026-09-08T00:00:00Z",
+  "schema_version": "1.3.0",
+  "published_at": "2026-09-09T00:00:00Z",
   "publisher": "AliceLabs LLC",
   "description": "Canonical bytes for UTA conformance test vectors. Each vector has its JCS-canonicalized bytes published as hex, base64, and UTF-8 text, alongside the SHA-256. An external verifier can use these to reproduce signature verification without guessing the preimage.",
   "canonicalization_method": "RFC 8785 JCS (JSON Canonicalization Scheme)",
@@ -29,6 +29,58 @@
         "status_check": "pass"
       },
       "expected_stages_doc": "Per-stage expected outcomes. signature_verification: does the signature verify against the key the card DECLARES (self-consistency of the crypto). trust_anchor_key_selection: does the declared identity.public_key equal the pinned trust anchor ca-test-1. wrong-ca fails the first; self-signed-atc fails the second. A runner that skips the trust_anchor_key_selection comparison (trust-on-first-use) passes self-signed-atc and scores 10/11."
+    },
+    {
+      "id": "valid-atc-2",
+      "type": "valid",
+      "format": "atc-v2",
+      "expected_verify": true,
+      "reason": "",
+      "canonical_bytes_length": 717,
+      "sha256": "0f48777e3efa65ca0bb5366dc7a9d088f1a21685be6deb7fbc00205bf36992e3",
+      "sha512": "efc267fc39441cd31714a6aa8aa04ea8d67346ca1665c6d188ceefd404ffff1aeb7624d851b86f19ad236233a09f711b37bae7e7e2a4b95730fed0204a1dd27c",
+      "bytes_hex_file": "valid-atc-2.bytes.hex",
+      "bytes_base64_file": "valid-atc-2.bytes.base64",
+      "canonical_text_file": "valid-atc-2.canonical.txt",
+      "original_vector_file": "valid-atc-2.json",
+      "signed_at": "2026-09-09T00:00:00Z",
+      "signed_subtree": "whole-document-minus-signature",
+      "signature_algorithm": "Ed25519 (RFC 8032) over JCS(RFC 8785) canonical bytes",
+      "ca_public_key_spki_b64": "MCowBQYDK2VwAyEAvtRhFInVXf939xGvD9i6dhBWAAMFjUAA66Qn2KzEWsg=",
+      "expected_stages": {
+        "signature_verification": "pass",
+        "trust_anchor_key_selection": "pass",
+        "expiry_check": "pass",
+        "status_check": "pass"
+      },
+      "expected_stages_doc": "Per-stage expected outcomes. signature_verification: does the signature verify against the key the card DECLARES (self-consistency of the crypto). trust_anchor_key_selection: does the declared identity.public_key belong to the pinned trust anchor set. wrong-ca fails the first; self-signed-atc fails the second. expiry_check / status_check are policy stages. Stage mismatches count as vector failures per stage_scoring_rule — a runner that fires the wrong stage scores the vector wrong even when its boolean matches.",
+      "anti_shortcut": "Second accept card with different agent_id, capabilities, protocol_language, scores, issued_at and expires_at than valid-atc. Both the canonical bytes and the digest move, so a runner that memorizes the single v1.2.0 accept card (hash 25b46086...) cannot recognize this one: acceptance must come from the rule, not from recognition."
+    },
+    {
+      "id": "valid-unknown-field",
+      "type": "valid",
+      "format": "atc-v2",
+      "expected_verify": true,
+      "reason": "",
+      "canonical_bytes_length": 881,
+      "sha256": "3f9f9d66fcad436517439b7494019a0dbe1f2f52b96a2aaff88e653b6698592b",
+      "sha512": "2c5ea7d6daa70995a8297eb15e24e5db76d670467e1c4f1a6128080bc1ea615a371180c4774383806edaea1bc2c0a3e62c55fb4f74a9c1e62b4c79213791233f",
+      "bytes_hex_file": "valid-unknown-field.bytes.hex",
+      "bytes_base64_file": "valid-unknown-field.bytes.base64",
+      "canonical_text_file": "valid-unknown-field.canonical.txt",
+      "original_vector_file": "valid-unknown-field.json",
+      "signed_at": "2026-09-09T00:00:00Z",
+      "signed_subtree": "whole-document-minus-signature",
+      "signature_algorithm": "Ed25519 (RFC 8032) over JCS(RFC 8785) canonical bytes",
+      "ca_public_key_spki_b64": "MCowBQYDK2VwAyEAvtRhFInVXf939xGvD9i6dhBWAAMFjUAA66Qn2KzEWsg=",
+      "expected_stages": {
+        "signature_verification": "pass",
+        "trust_anchor_key_selection": "pass",
+        "expiry_check": "pass",
+        "status_check": "pass"
+      },
+      "expected_stages_doc": "Per-stage expected outcomes. signature_verification: does the signature verify against the key the card DECLARES (self-consistency of the crypto). trust_anchor_key_selection: does the declared identity.public_key belong to the pinned trust anchor set. wrong-ca fails the first; self-signed-atc fails the second. expiry_check / status_check are policy stages. Stage mismatches count as vector failures per stage_scoring_rule — a runner that fires the wrong stage scores the vector wrong even when its boolean matches.",
+      "anti_shortcut": "Accept card carrying a permitted x_uta_extension field inside the signed subtree. A runner that over-rejects (rejects cards for unknown-but-permitted fields) fails this vector with a false rejection. Unknown x_* fields are inside the JCS-canonicalized signed document; tolerance is required, not optional."
     },
     {
       "id": "invalid-signature",
@@ -233,7 +285,8 @@
   ],
   "updates": [
     "v1.1.0 — Signed all ATC vectors with a real throwaway Ed25519 CA (ca-test-1). Public key published beside the vectors (SPKI base64 + raw 32 bytes). Added wrong-ca anti-shortcut vector (real signature from a second CA). Added per-vector signed_subtree field. Previously the vectors carried placeholder signatures (0xab bytes) and a truncated 12-byte SPKI header, so no verifier could actually verify. Response to anp2network (dev.to comment 3e1j6, 2026-09-02).",
-    "v1.2.0 — Added self-signed-atc (attacker key declared in identity.public_key AND used to sign; metadata clean). Separates pinned-CA runners from embedded-key/trust-on-first-use runners, which both scored 10/10 on v1.1.0. Added machine-readable expected_stages per signed vector (signature_verification / trust_anchor_key_selection / expiry_check / status_check): expected_verify alone folded signature validity with policy validity. Existing 10 vectors are UNCHANGED byte-for-byte. Response to anp2network (dev.to, 2026-09-08): \"The shortcut you killed at signature verification came back one level up, at key selection.\""
+    "v1.2.0 — Added self-signed-atc (attacker key declared in identity.public_key AND used to sign; metadata clean). Separates pinned-CA runners from embedded-key/trust-on-first-use runners, which both scored 10/10 on v1.1.0. Added machine-readable expected_stages per signed vector (signature_verification / trust_anchor_key_selection / expiry_check / status_check): expected_verify alone folded signature validity with policy validity. Existing 10 vectors are UNCHANGED byte-for-byte. Response to anp2network (dev.to, 2026-09-08): \"The shortcut you killed at signature verification came back one level up, at key selection.\"",
+    "v1.3.0 — Response to anp2network (dev.to, 2026-09-08): \"the accept side is one card\" + over-rejection unpunished + expected_stages not actually scored. (1) Added valid-atc-2, a second handwritten accept card with different agent_id, capabilities, scores, protocol_language, issued_at, expires_at — canonical bytes and digest both move, so acceptance comes from the rule, not recognition. (2) Added valid-unknown-field, an accept card carrying a permitted x_uta_extension field — punishes over-rejecting runners (false rejections read as healthy on a reject-heavy suite). (3) Added the generator: ca-test-2 with its PRIVATE KEY PUBLISHED in _test-ca-keys.json, plus generate-accept-vectors.mjs producing unlimited fresh accept/self-signed/wrong-ca cards with random x_gen_* fields. Any fixed set is memorizable; a generator is not. ca-test-1 was frozen (its throwaway private key was discarded at generation time, so no second ca-test-1-signed card can ever exist — which is exactly why the generator CA had to be a new key), and the pinned anchor set is now {ca-test-1, ca-test-2}. (4) Added stage_scoring_rule + the reference scorer tests/conformance/score-runner.mjs: stage mismatches count as vector failures, killing the stage-liar runner that fails everything at signature_verification. The 11 v1.2.0 vectors are UNCHANGED byte-for-byte — all previously published verification results still hold."
   ],
   "signed_subtree_rule": "The signature covers the JCS-canonicalized document with its top-level \"signature\" key removed. The identity.public_key inside payload is part of the signed subtree and MUST equal ca-test-1 for verify=true.",
   "test_ca": {
@@ -249,5 +302,26 @@
     "wrong_ca_note": "ca-wrong-1.pub.spki.b64 is the key that signs the wrong-ca vector. Verifiers must use ca-test-1 and will fail wrong-ca by design.",
     "self_signed_note": "ca-self-1.pub.spki.b64 is the attacker key of the self-signed-atc vector (declared AND signing). ca-wrong-1.pub.spki.b64 signs the wrong-ca vector while it claims ca-test-1. Both fail under a ca-test-1-pinned verifier, at different stages."
   },
-  "key_selection_rule": "verify=true REQUIRES payload.identity.public_key == ca-test-1 (the pinned trust anchor). The signature covers the JCS-canonicalized document minus its top-level signature key, and MUST be produced by ca-test-1. A card that declares and signs with its own key (self-signed-atc) is self-consistent cryptography with an untrusted anchor: verify=false. Skipping this comparison is trust-on-first-use and fails self-signed-atc."
+  "key_selection_rule": "verify=true REQUIRES payload.identity.public_key to be a member of the pinned trust anchor set (see pinned_trust_anchors.anchors) and the signature to be produced by that same member key. A card that declares and signs with its own key (self-signed-atc) is self-consistent cryptography with an untrusted anchor: verify=false. A card that claims a pinned anchor but is signed by someone else (wrong-ca) fails signature verification: verify=false. Skipping the membership comparison is trust-on-first-use and fails self-signed-atc.",
+  "pinned_trust_anchors": {
+    "rule": "verify=true REQUIRES payload.identity.public_key to be a member of the pinned set AND the signature to be produced by that member key.",
+    "anchors": [
+      "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+      "MCowBQYDK2VwAyEAvtRhFInVXf939xGvD9i6dhBWAAMFjUAA66Qn2KzEWsg="
+    ],
+    "anchor_notes": {
+      "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=": "ca-test-1 — frozen v1.2.0 anchor. Private key was discarded at generation time (single-session throwaway). No new card can ever be signed by it: the six v1.2.0 signed vectors are its complete output.",
+      "MCowBQYDK2VwAyEAvtRhFInVXf939xGvD9i6dhBWAAMFjUAA66Qn2KzEWsg=": "ca-test-2 — generator CA, private key PUBLISHED in _test-ca-keys.json. Produces valid-atc-2, valid-unknown-field, and unlimited fresh cards via generate-accept-vectors.mjs."
+    },
+    "why_two": "The pinned set grew by exactly one key, and the reason is the accept-side hole: ca-test-1 cannot sign a second accept card ever again (its private key no longer exists), so the second card and the generator required a second anchor. Membership semantics are unchanged: self-signed and wrong-ca still fail key selection or signature verification against the set."
+  },
+  "stage_scoring_rule": "Per-stage scoring is part of the suite, not a note. For every vector carrying expected_stages, a runner must report its per-stage outcomes, and the runner vector is compared stage by stage: any stage mismatch marks the vector FAILED even when the runner boolean matches expected_verify. This kills the stage-liar runner (fails everything at signature_verification): it still reports the right boolean for expired-atc and revoked-atc, but its stage vector is wrong on 3 of 4 stages for both, so both score as failures. See tests/conformance/score-runner.mjs for the reference implementation.",
+  "unknown_field_rule": "Cards MAY carry extension fields (keys prefixed x_ inside payload). Extension fields are inside the signed subtree — JCS canonicalizes them, the signature covers them. A runner MUST tolerate unknown x_* fields: rejecting a card because of an unknown-but-permitted field is a false rejection. valid-unknown-field and every generator card with x_gen_* fields test this. Rationale: over-rejection reads as healthy on a reject-heavy suite (10/11 while choking on a permitted field) and is the mirror failure of always-true.",
+  "generator": {
+    "file": "generate-accept-vectors.mjs",
+    "run": "node generate-accept-vectors.mjs --count 20 [--seed 42] [--mode accept|self-signed|wrong-ca] [--out DIR]",
+    "ca": "ca-test-2 (private key in _test-ca-keys.json)",
+    "purpose": "Unlimited fresh signed cards. Accept mode: random agent_id, agent_name, capabilities, scores, expiry, and random x_gen_* extension fields, all signed by ca-test-2 — acceptance must come from the rule, not recognition, and no fixed set can be memorized. self-signed / wrong-ca modes produce unlimited REJECT challenges the same way.",
+    "determinism": "--seed makes generation reproducible (seeded PRNG); without it, crypto-random."
+  }
 }
