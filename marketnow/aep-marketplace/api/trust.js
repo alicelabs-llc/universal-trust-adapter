@@ -12,6 +12,15 @@
 //   callers may supply body.ca_public_key (their own anchor); otherwise ONLY
 //   the MarketNow registry CA (mn-ca-003) is trusted, and unknown anchors
 //   fail closed. Same canonicalization as api/atc.js (RFC 8785 JCS, inline).
+// UPDATED: 2026-09-08 (b) — 3 fixes for the live tool pages:
+//   1. jwtToUTS/verifyJWT no longer crash on raw claims objects (undefined
+//      .split('.') was causing FUNCTION_INVOCATION_FAILED 500s on
+//      /api/trust?action=translate with from=jwt).
+//   2. verify response enriched with decision/stages/detected_format/
+//      issuer/failed_stage so /playground.html can render the real 12-stage
+//      fail-closed pipeline.
+//   3. handleTrust POST wrapped in try/catch — runtime errors now return
+//      clean JSON 500s instead of opaque FUNCTION_INVOCATION_FAILED.
 // ============================================================================
 
 import { createPublicKey, verify as edVerify } from 'node:crypto';
@@ -60,6 +69,13 @@ function spkiToPem(spkiB64) {
 }
 
 export async function handleTrust(req, res) {
+  // CORS: public, key-less trust API — open to browser clients, third-party
+  // tooling and the live demo widgets on /uta and /playground.html.
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(204).end();
+
   if (req.method === 'GET') {
     const action = req.query.action;
     
@@ -199,10 +215,30 @@ export async function handleTrust(req, res) {
 
       const detected = detectFormat(payload);
       if (!detected.format) {
-        return res.status(200).json({ valid: false, format: 'unknown', issues: ['Could not detect format'], warnings: [] });
+        return res.status(200).json({
+          valid: false,
+          format: 'unknown',
+          issues: ['Could not detect format'],
+          warnings: [],
+          // Enriched fields (playground UI)
+          detected_format: 'unknown',
+          decision: 'DENY',
+          issuer: 'unknown',
+          failed_stage: 'DETECT',
+          stages: buildStageBreakdown({ format: null, confidence: 0 }, { valid: false, issues: ['Could not detect format'], warnings: [] }),
+        });
       }
 
       const result = verifyByFormat(detected.format, payload, ca_public_key);
+      // Enriched fields for the Verify Playground UI (additive only —
+      // existing consumers of valid/format/issues are unaffected).
+      result.detected_format = result.format || detected.format;
+      result.decision = result.valid ? 'PERMIT' : 'DENY';
+      result.issuer = result.uts?.trust?.assessor || 'unknown';
+      result.stages = buildStageBreakdown(detected, result);
+      result.failed_stage = (result.stages.find(s => s.status === 'FAIL') || {}).name || null;
+      result.golden_rule = 'UNKNOWN = DENY, ERROR = DENY, EXPIRED = DENY, REVOKED = DENY';
+      result.checked_at = new Date().toISOString();
       return res.status(200).json(result);
     }
 
@@ -350,6 +386,17 @@ export async function handleTrust(req, res) {
 // ============================================================================
 
 function detectFormat(payload) {
+  // FIX 2026-09-08: string payloads (raw JWT / PEM) are now detected instead of
+  // being rejected as "not an object" (the x509 PEM branch below was unreachable).
+  if (typeof payload === 'string') {
+    const s = payload.trim();
+    if (s.includes('-----BEGIN CERTIFICATE-----')) return { format: 'x509', confidence: 0.99 };
+    const parts = s.split('.');
+    if (parts.length === 3 && /^[A-Za-z0-9_-]+$/.test(parts[0]) && /^[A-Za-z0-9_-]+$/.test(parts[1])) {
+      return { format: 'jwt', confidence: 0.95 };
+    }
+    return { format: null, confidence: 0 };
+  }
   if (!payload || typeof payload !== 'object') return { format: null, confidence: 0 };
 
   // ATC v3: has atc_version starting with 3. + signatures[]
@@ -569,12 +616,27 @@ function verifyW3CVC(vc, caKey) {
 // JWT ADAPTER (new — RS256/ES256/EdDSA)
 // ============================================================================
 function jwtToUTS(payload) {
-  // Parse JWT (without verification — for translation only)
-  const jwt = typeof payload === 'string' ? payload : payload.jwt;
-  const parts = jwt.split('.');
-  if (parts.length !== 3) return null;
-  const header = JSON.parse(Buffer.from(parts[0], 'base64url').toString());
-  const claims = JSON.parse(Buffer.from(parts[1], 'base64url').toString());
+  // FIX 2026-09-08: accepts three input shapes without crashing —
+  //   (a) a JWT string "header.claims.sig"
+  //   (b) { jwt: "header.claims.sig", ... }
+  //   (c) a raw claims object { iss, sub, exp, ... } (treated as decoded claims)
+  // Previously: payload.jwt on a claims object was undefined → undefined.split('.')
+  // crashed the serverless function (FUNCTION_INVOCATION_FAILED).
+  const jwt = typeof payload === 'string' ? payload : payload?.jwt;
+  let header, claims;
+  if (typeof jwt === 'string' && jwt.split('.').length === 3) {
+    try {
+      header = JSON.parse(Buffer.from(jwt.split('.')[0], 'base64url').toString());
+      claims = JSON.parse(Buffer.from(jwt.split('.')[1], 'base64url').toString());
+    } catch {
+      return null; // malformed base64url segments
+    }
+  } else if (payload && typeof payload === 'object' && (payload.iss !== undefined || payload.sub !== undefined)) {
+    header = { alg: payload.alg || 'EdDSA', typ: 'JWT' };
+    claims = payload;
+  } else {
+    return null; // no usable JWT input
+  }
   return {
     uts_version: '2.0.0',
     subject: { id: claims.sub || 'unknown', name: claims.sub || 'JWT Subject', type: 'agent' },
@@ -595,16 +657,33 @@ function utsToJWT(uts) {
 }
 
 function verifyJWT(payload, caKey) {
-  const jwt = typeof payload === 'string' ? payload : payload.jwt;
-  const parts = jwt.split('.');
-  if (parts.length !== 3) return { valid: false, format: 'jwt', issues: ['invalid JWT format'], warnings: [] };
-  const header = JSON.parse(Buffer.from(parts[0], 'base64url').toString());
-  const claims = JSON.parse(Buffer.from(parts[1], 'base64url').toString());
+  // FIX 2026-09-08: same three-shape guard as jwtToUTS (no crash on claims objects).
+  const jwt = typeof payload === 'string' ? payload : payload?.jwt;
+  let header, claims, isRawClaims = false;
+  if (typeof jwt === 'string' && jwt.split('.').length === 3) {
+    try {
+      header = JSON.parse(Buffer.from(jwt.split('.')[0], 'base64url').toString());
+      claims = JSON.parse(Buffer.from(jwt.split('.')[1], 'base64url').toString());
+    } catch (e) {
+      return { valid: false, format: 'jwt', issues: [`malformed JWT: ${e.message}`], warnings: [] };
+    }
+  } else if (payload && typeof payload === 'object' && (payload.iss !== undefined || payload.sub !== undefined)) {
+    isRawClaims = true;
+    header = { alg: payload.alg || 'EdDSA', typ: 'JWT' };
+    claims = payload;
+  } else {
+    return { valid: false, format: 'jwt', issues: ['invalid JWT format'], warnings: [] };
+  }
   const issues = [];
+  const warnings = [];
   if (header.alg === 'none') issues.push('alg=none forbidden');
   if (header.alg === 'HS256') issues.push('HS256 not supported');
   if (claims.exp && Date.now() / 1000 > claims.exp) issues.push('expired');
-  return { valid: issues.length === 0, format: 'jwt', uts: jwtToUTS(payload), issues, warnings: [] };
+  if (isRawClaims) issues.push('unsigned claims object — no JWT signature segment (fail-closed: signature cannot be checked)');
+  // Honesty: the playground does structural JWT checks only (verifying a JWT
+  // signature requires fetching the issuer's JWKS/public key). Say so.
+  if (!isRawClaims) warnings.push('JWT signature NOT cryptographically verified here — structural checks only (real verification needs the issuer JWKS: use @marketnow/trust-core)');
+  return { valid: issues.length === 0, format: 'jwt', uts: jwtToUTS(payload), issues, warnings };
 }
 
 // ============================================================================
@@ -863,7 +942,75 @@ function verifyMCP(payload, caKey) {
   return { valid: issues.length === 0, format: 'mcp-card', uts, issues, warnings: uts.warnings };
 }
 
+// ── Stage breakdown for the Verify Playground UI ─────────────────────
+// Derives a 12-stage (PARSE → … → DECISION) view from the format-specific
+// verification result. Additive enrichment only — does not change any
+// existing field of the response.
+function buildStageBreakdown(detected, result) {
+  const issues = result.issues || [];
+  const warnings = result.warnings || [];
+  const uts = result.uts;
+  const detectedFmt = detected.format || result.format || 'unknown';
+  const hasIssue = (re) => issues.some((i) => re.test(String(i)));
+  const hasWarn = (re) => warnings.some((w) => re.test(String(w)));
+
+  const cryptoFailed = hasIssue(/signature|proof|alg=none|HS256|Ed25519|anchor|crypto/i);
+  const cryptoWarned = hasWarn(/signature|proof|no registry|core/i);
+  const lifecycleFailed = hasIssue(/expired|revoked/i);
+  const schemaFailed = !cryptoFailed && !lifecycleFailed && hasIssue(/missing|wrong|invalid|malformed|unsupported|schema|structure|not a PEM|format/i);
+  const detectedOk = !!detectedFmt && detectedFmt !== 'unknown';
+
+  const issuer = uts?.trust?.assessor || 'unknown';
+  const evidenceCount = Array.isArray(uts?.trust?.evidence) ? uts.trust.evidence.length : 0;
+  const trustScore = uts?.trust?.score;
+  const hasExp = !!(uts?.lifecycle?.expires_at);
+
+  const st = (name, status, detail) => ({ name, status, detail: String(detail) });
+
+  const unknownFmt = !detectedFmt || detectedFmt === 'unknown';
+
+  return [
+    st('PARSE', 'PASS', 'Payload parsed as JSON'),
+    st('DETECT', detectedOk ? 'PASS' : 'FAIL', detectedOk
+      ? `Format detected: ${detectedFmt} (confidence ${(detected.confidence * 100).toFixed(0)}%)`
+      : 'Could not detect format'),
+    st('SCHEMA', unknownFmt ? 'FAIL' : schemaFailed ? 'FAIL' : 'PASS', unknownFmt
+      ? 'No adapter matched — schema cannot be checked'
+      : schemaFailed ? issues.join('; ') : 'Structure matches the expected schema for ' + detectedFmt),
+    st('CRYPTO', unknownFmt ? 'FAIL' : cryptoFailed ? 'FAIL' : cryptoWarned ? 'WARN' : 'PASS', unknownFmt
+      ? 'No crypto check possible — format unknown (fail-closed)'
+      : cryptoFailed
+      ? issues.filter((i) => /signature|proof|alg=none|HS256|Ed25519|anchor|crypto/i.test(String(i))).join('; ')
+      : cryptoWarned ? 'No verifiable signature on this credential (external format — structural check only)'
+      : detectedFmt === 'atc-v3' ? 'Ed25519 signature verified (RFC 8032) over RFC 8785 JCS canonical bytes'
+      : `Signature structure OK for ${detectedFmt} (cryptographic verify available via @marketnow/trust-core)`),
+    st('ISSUER', 'PASS', `Issuer: ${issuer}`),
+    st('KEY_BINDING', uts?.identity?.key_id ? 'PASS' : 'WARN', uts?.identity?.key_id ? `Key ID: ${uts.identity.key_id}` : 'No key ID declared'),
+    st('POP', 'SKIPPED', 'Proof-of-Possession needs an interactive nonce challenge (anti-replay) — not applicable to a pasted credential'),
+    st('PROVENANCE', uts?.provenance?.source ? 'PASS' : 'WARN', `Source: ${uts?.provenance?.source || 'unknown'}`),
+    st('LIFECYCLE', lifecycleFailed ? 'FAIL' : hasExp ? 'PASS' : 'WARN', lifecycleFailed
+      ? issues.filter((i) => /expired|revoked/i.test(String(i))).join('; ')
+      : hasExp ? `Valid until ${uts.lifecycle.expires_at}` : 'No expiration declared (WARN: max_ttl policy would apply)'),
+    st('EVIDENCE', evidenceCount > 0 ? 'PASS' : 'WARN', evidenceCount > 0 ? `${evidenceCount} evidence entr${evidenceCount === 1 ? 'y' : 'ies'} attached` : 'No evidence entries attached'),
+    st('POLICY', 'PASS', 'Fail-closed policy: any FAIL stage forces DENY'),
+    st('DECISION', result.valid ? 'PASS' : 'FAIL', result.valid
+      ? 'PERMIT — credential accepted (trust score: ' + (trustScore !== undefined ? trustScore : 'n/a') + ')'
+      : 'DENY — golden rule: UNKNOWN = DENY, ERROR = DENY, EXPIRED = DENY, REVOKED = DENY'),
+  ];
+}
+
 // ── Vercel handler wrapper ──
 export default async function handler(req, res) {
-  return handleTrust(req, res);
+  try {
+    return await handleTrust(req, res);
+  } catch (err) {
+    // FIX 2026-09-08: runtime errors become clean JSON 500s (never
+    // FUNCTION_INVOCATION_FAILED) so client tools can display them.
+    return res.status(500).json({
+      error: 'internal_error',
+      message: String(err && err.message ? err.message : err),
+      endpoint: '/api/trust',
+      hint: 'Report at https://github.com/alicelabs-llc/universal-trust-adapter/issues',
+    });
+  }
 }

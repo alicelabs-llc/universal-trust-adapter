@@ -102,12 +102,18 @@ function checkPunycode(domain) {
 
 function checkTyposquatting(domain) {
   const bare = domain.replace(/^www\./, '').split('.')[0].toLowerCase();
+  // FIX 2026-09-08: also check each hyphen-separated token — classic phishing
+  // uses "brand-suffix.com" (e.g. "paypa1-secure.com") which escaped the exact
+  // whole-label match ("paypa1-secure" ≠ "paypa1").
+  const tokens = [bare, ...bare.split('-')].filter(t => t.length >= 3);
   for (const item of TYPOSQUATTING_PATTERNS) {
-    if (item.patterns.includes(bare)) {
-      return { triggered: true, detail: 'Typosquatting detected: "' + bare + '" mimics "' + item.target + '" — possible brand impersonation' };
-    }
-    if (Math.abs(bare.length - item.target.length) <= 1 && levenshtein(bare, item.target) === 1) {
-      return { triggered: true, detail: 'Typosquatting: "' + bare + '" is 1 character from "' + item.target + '"' };
+    for (const tok of tokens) {
+      if (item.patterns.includes(tok)) {
+        return { triggered: true, detail: 'Typosquatting detected: "' + tok + '" in "' + bare + '" mimics "' + item.target + '" — possible brand impersonation' };
+      }
+      if (Math.abs(tok.length - item.target.length) <= 1 && levenshtein(tok, item.target) === 1) {
+        return { triggered: true, detail: 'Typosquatting: "' + tok + '" in "' + bare + '" is 1 character from "' + item.target + '"' };
+      }
     }
   }
   return { triggered: false, detail: 'No typosquatting pattern matched' };
