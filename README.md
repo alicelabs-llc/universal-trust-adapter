@@ -86,7 +86,7 @@ The 2026 gray-market quota trust crisis, documented — plus the receipts-based 
 - **ATC Revocation + Transparency Log (MNR-CRL-1.0)** — a signed, append-only revocation registry for Agent Trust Cards and CA keys. The `/api/trust?action=revocation` page used to *promise* an OCSP responder that returned 404; now `GET /api/ocsp?card_id=…` / `?kid=…` answers for real: VALID / EXPIRED / REVOKED / SUPERSEDED / UNKNOWN, with PERMIT/DENY recommendation, fail-closed semantics, and the CRL signature embedded so any client can verify the signed layer independently (`/uta/revocations/`). Seeded with real events — 3 superseded ATCs + the `mn-ca-002` key compromise (2026-09-08).
 - **Cryptographic Tool Fingerprinting (TFP-1.0)** — the OWASP MCP Cheat Sheet control "verify tool descriptions haven't changed", as an MCP tool: SHA-256 over the RFC 8785 JCS canonical form of each tool + a manifest fingerprint for the whole `tools/list` surface + drift reports (added / removed / changed) against pinned manifests. The core defense against tool poisoning and rug-pull redefinitions.
 - **MCP endpoint v1.11.0** (8 tools) and **npm `marketnow-mcp@1.10.2`** (15 tools) — both new tools exposed; the npm package also fixes the broken `repository.directory` link (npm "Code" button 404 since 1.10.0).
-- **Interceptor v1.1.0** (`@alicelabs/cline-trust-plugin`) — revocation gate (fail-closed, 5-min TTL) + per-server tool-surface pinning/verification.
+- **Interceptor v1.1.0** (`@marketnow/cline-trust-plugin`, [npm](https://www.npmjs.com/package/@marketnow/cline-trust-plugin)) — revocation gate (fail-closed, 5-min TTL) + per-server tool-surface pinning/verification.
 - **Sentinel semgrep rules v2** — 29 rules: +tool-poisoning (MCP-TP), +exfiltration chains (MCP-EX), +multi-step attack chains (MCP-AC, roadmap v5.4 preview), +stale-trust caching (MCP-RR).
 - **Rekor anchor #4** (logIndex 2771735480) — the revocation registry itself is anchored in Sigstore's public log; the revocation history is third-party-checkable end-to-end.
 
@@ -168,13 +168,14 @@ npm install -g marketnow-mcp       # MCP server (13 trust tools)
 
 | Package | Version | Description | Downloads (last week) |
 |---|---|---|---|
-| [`marketnow-mcp`](https://www.npmjs.com/package/marketnow-mcp) | 1.10.1 | MCP server with 13 trust tools | 76/wk |
+| [`marketnow-mcp`](https://www.npmjs.com/package/marketnow-mcp) | 1.10.2 | MCP server with 15 trust tools (+revocation, +fingerprinting) | 76/wk |
 | [`agent-trust-card`](https://www.npmjs.com/package/agent-trust-card) | 1.1.2 | ATC/1.0 SDK (issue, verify, inspect) | 27/wk |
 | [`marketnow-install-stack`](https://www.npmjs.com/package/marketnow-install-stack) | 1.1.1 | Multi-source installer | 15/wk |
 | [`@marketnow/uts`](https://www.npmjs.com/package/@marketnow/uts) | 2.0.1 | Universal Trust Schema | 36/wk |
 | [`@marketnow/trust-core`](https://www.npmjs.com/package/@marketnow/trust-core) | 1.0.1 | Trust Engine core | 28/wk |
 | [`@marketnow/trust-adapters`](https://www.npmjs.com/package/@marketnow/trust-adapters) | 1.0.1 | 8 format adapters | 25/wk |
 | [`@marketnow/trust-gateway`](https://www.npmjs.com/package/@marketnow/trust-gateway) | 1.0.1 | Gateway + post-exec filter | 19/wk |
+| [`@marketnow/cline-trust-plugin`](https://www.npmjs.com/package/@marketnow/cline-trust-plugin) | 1.1.0 | Cline interceptor: revocation gate + TFP tool-surface pinning (NEW) | 0/wk |
 
 ## 🛡️ 5 Anti-ban download channels
 
