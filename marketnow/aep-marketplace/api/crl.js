@@ -2,7 +2,7 @@
 // Serves the signed CRL (MNR-CRL-1.0) + everything a stranger needs to verify it.
 // Roadmap v5.1 item 5 — revocation + transparency, now real.
 
-import { CRL, REGISTRY_KEY } from './revocations-data.mjs';
+import { CRL, REGISTRY_KEY } from '../lib/revocations-data.mjs';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');

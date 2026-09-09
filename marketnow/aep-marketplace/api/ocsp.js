@@ -5,7 +5,7 @@
 // Fail-closed: anything we cannot positively resolve answers UNKNOWN + recommendation DENY.
 //
 // Resolution order:
-//   1. Signed CRL (api/revocations-data.mjs — Ed25519/MNR-CRL-1.0, verifiable by anyone)
+//   1. Signed CRL (lib/revocations-data.mjs — Ed25519/MNR-CRL-1.0, verifiable by anyone)
 //   2. Live ledger  (/api/atc-index.json — freshness: expiry computed at response time)
 //
 // What is signed vs live:
@@ -19,7 +19,7 @@
 //   GET  /api/ocsp?kid=mn-ca-002
 //   POST /api/ocsp  {"card_id":"ATC-2026-1509360","nonce":"random-client-nonce"}
 
-import { CRL, REGISTRY_KEY } from './revocations-data.mjs';
+import { CRL, REGISTRY_KEY } from '../lib/revocations-data.mjs';
 
 const LEDGER_URL = 'https://www.marketnow.site/api/atc-index.json';
 
