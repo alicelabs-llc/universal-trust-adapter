@@ -6,6 +6,7 @@ on:
     paths:
       - 'marketnow/aep-marketplace/public/manifesto/**'
       - 'marketnow/aep-marketplace/public/uta/conformance/**'
+      - 'marketnow/aep-marketplace/public/uta/revocations/**'
       - '.github/workflows/manifesto-pages.yml'
   workflow_dispatch:
 
@@ -60,6 +61,9 @@ jobs:
           import shutil
           if os.path.isdir("marketnow/aep-marketplace/public/uta/conformance"):
               shutil.copytree("marketnow/aep-marketplace/public/uta/conformance", "site/conformance", dirs_exist_ok=True)
+          # revocations: signed CRL (MNR-CRL-1.0) + registry key + README - static, stranger-verifiable
+          if os.path.isdir("marketnow/aep-marketplace/public/uta/revocations"):
+              shutil.copytree("marketnow/aep-marketplace/public/uta/revocations", "site/revocations", dirs_exist_ok=True)
           print("site assembled")
           EOF
           if [ ! -f site/index.html ]; then
