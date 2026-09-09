@@ -8,153 +8,144 @@ Sentinel is the engine. Trust Card is the identity. Interceptor is the enforceme
 
 The marketplace (9,248 skills) is distribution and dataset — not the product.
 
-## Current State — v5.1 (September 2026)
+## How we build
 
-| Feature | Status | Evidence |
-|---------|--------|----------|
-| Sentinel 10-layer audit | ✅ Live | 1,211,488 checks performed |
-| 9,248 MCP skills analyzed | ✅ Live | All in skills-lite.json |
-| 1,030 threats detected | ✅ Live | 80 quarantined, 71 risky |
-| Agent Trust Card (ATC) | ✅ Live | 57 Ed25519-signed cards (54 active, 3 revoked) |
-| Runtime MCP Interceptor | ✅ Live v1.1.0 | 5 policy rules + revocation gate + TFP pinning (cline-plugin-uta) |
-| Trust API | ✅ Live | /api/trust, /api/atc, /api/trust-score |
-| **ATC Revocation + Transparency Log (v5.1.5)** | ✅ Live 2026-09-09 | Signed MNR-CRL-1.0 registry + /api/ocsp + /api/crl + marketnow_check_revocation |
-| **Cryptographic Tool Fingerprinting (v5.1.1)** | ✅ Live 2026-09-09 | TFP-1.0 (JCS+sha256, drift reports) — MCP tool + npm 1.10.2 + interceptor |
-| Sentinel semgrep rules v2 | ✅ 29 rules | +tool poisoning, exfiltration chains, attack chains (MCP-TP/EX/AC/RR) |
-| x402 Streaming payments | ✅ Live | /api/stream (USDC on Base) |
-| A2A Remote Execution | ✅ Live | /api/execute |
-| Skill Stacks | ✅ Live | 5 predefined kits |
-| npm packages | ✅ Live | marketnow-mcp v1.10.2 (15 tools) + 6 more |
-| Public audit report | ✅ Live | /api/audit-report.json |
-| Ed25519 certificates | ✅ Live | RFC 8032 + RFC 8785 JCS |
-| Rekor transparency anchors | ✅ 3 entries | logIndex 2762061972, 2764017355, 2764479676 (sigstore.dev) |
-| Reproducible build | ✅ Live | tar-layer sha256 519d406a… (agent-trust-card@1.1.2) |
+MarketNow is developed in capability phases, and each phase has a hard gate before it
+is listed here as available:
 
----
+1. **Verified in production** — the feature answers on the live deployment
+   (`marketnow.site`), exercised over HTTP the same way a stranger would.
+2. **Verified from the registry** — published npm packages are installed from the
+   public registry into a clean directory and exercised there (smoke suites, clean
+   `require`/`import`, `npm audit` clean, CLI bins runnable).
+3. **Honest status labels** — `Production` (live endpoint), `Library` (published npm
+   module, runtime integration in progress), `Planned` (design work, nothing shipped).
 
-## v5.1 — VERIFICATION (Q4 2026) — ✅ COMPLETE
+Anything that does not pass its gate is not listed as available — regardless of how
+far along the code is. Fail-closed applies to documentation too.
 
-**Goal: Move from "scanner" to "verification engine"**
+## Current state — verified capabilities
 
-### 1. Cryptographic Tool Fingerprinting — ✅ DONE (2026-09-09, TFP-1.0)
-- Hash the exact tool definitions (tools/list response) at audit time
-- Store: server_hash, tools_hash, schema_hash, description_hash, dependency_hash, commit_hash
-- Alert when any hash changes post-audit → auto-revoke Trust Card
-- **Shipped**: `marketnow_fingerprint_tool` (MCP live endpoint + npm 1.10.2) — JCS+sha256 per tool + manifest fingerprint + drift reports (added/removed/changed) for pinned manifests. Interceptor (`cline-plugin-uta` v1.1.0) pins/verifies tool surfaces per server.
+| Capability | Status | Evidence (reproducible) |
+|---|---|---|
+| Trust API | Production | `GET /api/trust` (formats / pipeline / revocation actions) |
+| Agent Trust Card verification | Production | `GET /api/atc?action=verify&card_id=…` — verifies served bytes, JCS + Ed25519 |
+| CA key disclosure | Production | `GET /api/atc?action=ca-key` |
+| Revocation status (OCSP-style) | Production | `GET /api/ocsp?card_id=…` / `?kid=…` — KEY_COMPROMISE returns DENY |
+| Signed revocation registry (CRL) | Production | `GET /api/crl` — MNR-CRL-1.0, Ed25519-signed, append-only |
+| Scam / reputation checks | Production | `GET /api/scam-check?domain=…` — decision, risk score, reasons |
+| Skills catalog | Production | `GET /api/skills?category=…` — 9,248 skills, category counts live |
+| MCP server (streamable HTTP) | Production | `GET /api/mcp` — 8 tools, incl. check_revocation + fingerprint_tool |
+| Public audit report | Production | `GET /api/audit-report.json` |
+| npm packages | Production | 11 packages on the public registry, clean install, 0 vulnerabilities |
+| Sentinel static rules | Production | 29 MCP security rules (npm `@marketnow/sentinel-rules`, `npx sentinel-scan`) |
+| Rekor transparency anchors | Production | sigstore.dev logIndex 2762061972, 2764017355, 2764479676 |
+| Agent Trust Cards issued | Production | Ed25519-signed cards; revocations seeded with real events (superseded ATCs, CA key compromise) |
+| Reproducible build | Production | tar-layer sha256 519d406a… (agent-trust-card@1.1.2) |
 
-### 2. Provenance / SLSA-style — 🚧 Partial
-- Trust Card includes: source repo, commit SHA, build hash, npm package hash, container hash
-- Full chain of custody from source → package → audit → Trust Card
+**Retired / not in the current deployment** (listed for honesty, not advertised):
+`/api/stacks` (replaced by the `marketnow-install-stack` CLI over the live catalog),
+`/api/health`, `/api/trust-score`. Payment streaming (x402) and remote execution (A2A)
+explorations are not part of the production deployment and are treated as future work
+until they pass the gate.
 
-### 3. Evidence-First Findings — 🚧 Partial
-- Each finding: Finding ID, Severity, **Confidence %**, Evidence, Location, Reproduction
-- Two scores: Risk Score (how dangerous) + Confidence Score (how sure)
-- Third metric: Evidence Coverage (% of tool surface verified)
+## Capability phases
 
-### 4. Reproducible Audits — 🚧 Partial
-- Audit ID + Scanner version + Ruleset version + Sandbox image + Timestamp
-- Two audits of same version = identical results (or explain difference)
+### Phase 1 — Foundation (complete)
 
-### 5. ATC Revocation + Transparency Log — ✅ DONE (2026-09-09, MNR-CRL-1.0)
-- States: VALID, EXPIRED, REVOKED, SUSPENDED, SUPERSEDED
-- Public append-only log (Certificate Transparency for agents)
-- **Shipped**: signed revocation registry (`/uta/revocations/crl.json`, Ed25519/RFC 8785, delegated key mn-revoc-001) + live status resolution (`/api/ocsp` — was a 404 promise before) + CRL endpoint (`/api/crl`) + `marketnow_check_revocation` MCP tool. Seeded with REAL events: 3 superseded ATCs + mn-ca-002 KEY_COMPROMISE (2026-09-08). Fail-closed semantics throughout.
+The trust primitives the rest of the system is built on:
 
----
+- Ed25519 signing / verification (RFC 8032) over JCS-canonicalized payloads (RFC 8785)
+- Agent Trust Card (ATC) format, CA keys, ledger
+- 12-stage verification pipeline (`verifyCredential` in `@marketnow/trust-core`)
+- 9 credential formats via adapters (ATC, EAT, A2A card, W3C-VC, OAuth, SPIFFE, X.509, MCP, ZTA)
 
-## v5.2 — BEHAVIOR (was Q1 2027) — ✅ SHIPPED 2026-09-10 (roadmap leapfrog)
+### Phase 2 — Verification (production)
 
-**Goal: Don't just scan code — verify runtime behavior**
+Move from "scanner" to "verification engine":
 
-> Shipped as library modules in `@marketnow/trust-core@2.0.0` (npm): `behavioral-baseline.ts`, `drift-detection.ts`, `behavior-analysis.ts`. Smoke-tested 19/19 (7 drift signal classes, critical auto-revoke severity). Runtime wiring into the interceptor/L2 sandbox = next step.
+- **Tool Fingerprinting (TFP-1.0)** — Production: `marketnow_fingerprint_tool` MCP tool;
+  JCS+sha256 per tool, manifest fingerprint, drift reports (added/removed/changed).
+  The Cline interceptor pins and verifies tool surfaces per server.
+- **Revocation + transparency log (MNR-CRL-1.0)** — Production: signed append-only
+  registry, live status resolution (`/api/ocsp`), CRL endpoint, `marketnow_check_revocation`.
+  Fail-closed semantics throughout; unknown state never counts as valid.
+- **Evidence-first findings** — Library: every finding carries severity, confidence %,
+  evidence, location; risk score and confidence score are computed separately
+  (`computeConfidence`, `summarizeFindings`).
+- **Provenance (SLSA-style)** — Partial: Trust Card binds source repo, commit SHA,
+  build hash, package hash. Full chain-of-custody automation is future work.
 
-### 1. Behavioral Baseline — ✅ LIBRARY DONE
-- Record: API endpoints, request frequency, file access, network calls, process spawns
-- Store as baseline profile per tool version
+### Phase 3 — Behavior (library; runtime integration in progress)
 
-### 2. Drift Detection — ✅ LIBRARY DONE
-- Compare runtime vs baseline → auto-degrade score → auto-revoke on critical
+Don't just scan code — verify runtime behavior.
 
-### 3. Network/Filesystem/Process Behavior Analysis — ✅ LIBRARY DONE
-- Map all outbound connections, file reads/writes, process spawns during sandbox
-- Flag: cloud metadata, .env, .aws, .ssh, /etc/passwd (PATTERNS in behavior-analysis.ts)
-- Classify: read-only, write-capable, credential-accessing
+- Behavioral baselines per tool version (`computeBaseline`, `hasEnoughObservations`)
+- Drift detection: 7 signal classes, auto-escalation to critical
+  (new egress hosts, credential env reads, process spawns, volume/latency anomalies)
+- Network / filesystem / process behavior classification (read-only, write-capable,
+  credential-accessing; flags cloud metadata, `.env`, `.aws`, `.ssh`)
 
----
+Published and verified from the registry in `@marketnow/trust-core` (smoke 21/21).
+**Next:** wire baselines and drift into the runtime interceptor and the sandbox so
+live sessions are scored, not just library calls.
 
-## v5.3 — POLICY (was Q2 2027) — ✅ SHIPPED 2026-09-10 (roadmap leapfrog)
+### Phase 4 — Policy (library; runtime integration in progress)
 
-**Goal: Move from score → decision engine**
+Move from score to decision engine.
 
-> Shipped in `@marketnow/trust-core@2.0.0`: `capability-graph.ts` (CapabilityManifest, MINIMAL_SAFE/FULL_ACCESS presets, check* functions), `org-policy.ts` (evaluatePolicy with ALLOW/REQUIRE_APPROVAL/BLOCK, 3 preset policies, full approval workflow with TTL).
+- Capability graph: machine-readable manifests per tool
+  (`filesystem.read`, `network.<host>`, `shell.execute`), MINIMAL_SAFE / FULL_ACCESS presets
+- Organization policies: evaluate → ALLOW / REQUIRE_APPROVAL / BLOCK, three presets,
+  per-org risk context
+- Approval workflow with TTL (`createApprovalRequest`, `approveRequest`, `denyRequest`)
 
-### 1. Capability Graph — ✅ LIBRARY DONE
-- Trust Card declares: filesystem.read, network.discord.com, shell.execute=NO
-- Machine-readable capability manifest per tool
+Published and verified from the registry. **Next:** agent identity + task identity on
+every execution (agent_id, task_id, session_id) so policy decisions become a full
+audit trail.
 
-### 2. Organization Policies — ✅ LIBRARY DONE
-- Enterprise: "score ≥ 8 AND no filesystem AND no shell"
-- Per-org risk context (same tool = safe for A, blocked for B)
+### Phase 5 — Trajectory (library; runtime integration in progress)
 
-### 3. Agent Identity + Task Identity — 🚧 needs runtime wiring
-- Every execution: agent_id, task_id, session_id → full audit trail
+Detect multi-step attack chains — each action individually allowed, the chain blocked.
 
-### 4. Approval Workflow — ✅ LIBRARY DONE
-- Score 5-7 → REQUIRE_APPROVAL | Score < 5 → BLOCK | No Trust Card → REQUIRE_APPROVAL
+- Attack-chain patterns AC-001…AC-007 (`detectAttackChains`; verified on a
+  search→read→exfiltrate→execute sequence)
+- Data-flow graphs with exfiltration paths (`buildDataFlowGraph`)
+- Trajectory risk scoring with blocking recommendation (`scoreTrajectory`)
 
----
+Published and verified from the registry. **Next:** session-level enforcement in the
+interceptor (block call #N because calls 1..N-1 were suspicious).
 
-## v5.4 — TRAJECTORY (was Q3 2027) — ✅ SHIPPED 2026-09-10 (roadmap leapfrog)
+### Phase 6 — Platform (partial)
 
-**Goal: Detect multi-step attack chains**
+Cross-agent and ecosystem-scale trust:
 
-> Shipped in `@marketnow/trust-core@2.0.0`: `trajectory-analysis.ts` (AC-001..AC-007 chain patterns, data-flow graphs with exfiltration paths, trajectory risk scoring with should_block_call). Smoke: AC-001 + AC-002 + AC-007 detected on a 4-step exfiltration sequence.
+- **Cross-agent delegation** — Library: `evaluateDelegation` with trust gates, chain
+  depth, revocation checks.
+- **Memory poisoning detection** — Library: `scanMemoryForPoisoning` (instruction
+  injection, taint, sensitivity anomalies).
+- **AgentBOM** — Planned: identity + software + capabilities + AI + security + trust
+  in one bill of materials.
+- **Typosquatting detection** — Planned: Levenshtein distance, package age, publisher.
+- **Supply-chain graph** — Planned: MCP → npm → GitHub → dependencies → CVEs.
+- **Continuous verification** — Planned: every commit / CVE / dependency change
+  triggers re-audit.
+- **External adversarial red-team** — Planned.
 
-### 1. Multi-Tool Attack Chain Analysis — ✅ LIBRARY DONE
-- Track sequences: search → read → extract URL → download → execute → exfiltrate
-- Each action individually ALLOW, but chain = BLOCK
+## OWASP MCP cheat-sheet alignment
 
-### 2. Cross-Tool Privilege Escalation — ✅ (data-flow graph)
-- Tool A (low) + Tool B (high) = CRITICAL (attack graph)
-
-### 3. Data Flow Tracking — ✅ LIBRARY DONE
-- Track: untrusted_input → LLM → MCP → tool → database → external API
-- Flag: USER_SECRET → external-domain (exfiltration)
-
-### 4. Trajectory Risk Scoring — ✅ LIBRARY DONE
-- Score entire session trajectory → block call #8 because 1-7 suspicious
-
----
-
-## v6.0 — AGENT SECURITY PLATFORM (was Q4 2027) — 🚧 PREVIEW SHIPPED 2026-09-10
-
-> Cross-agent trust + memory poisoning detection shipped as library modules in `@marketnow/trust-core@2.0.0` (`cross-agent-trust.ts`). The rest of v6.0 remains future work.
-
-### Multi-Protocol: MCP + A2A + OpenAI tools + Plugins + APIs — ✅ (9 formats in @marketnow/trust-adapters)
-### AgentBOM: Identity + Software + Capabilities + AI + Security + Trust — 🚧
-### Cross-Agent Trust: Agent A delegates to Agent B — ✅ LIBRARY DONE (evaluateDelegation with trust gates, chain depth, revocation checks)
-### Memory Poisoning Detection — ✅ LIBRARY DONE (scanMemoryForPoisoning: injection, taint, sensitivity)
-### Typosquatting Detection: Levenshtein distance, package age, publisher — 🚧
-### Supply Chain Graph: MCP → npm → GitHub → dependencies → CVEs — 🚧
-### Continuous Verification: Every commit/CVE/dependency change triggers re-audit — 🚧
-### External Adversarial Red-Team — 🚧
-
----
-
-## OWASP MCP Cheat Sheet Alignment
-
-| OWASP Recommendation | MarketNow Implementation | Version |
-|---------------------|------------------------|---------|
-| Verify tool descriptions haven't changed | TFP-1.0 fingerprinting + drift reports | v5.1 ✅ |
-| Validate input/output schemas | Schema hash in Trust Card | v5.1 ✅ |
-| Monitor for tool poisoning | Sentinel rules MCP-TP-001..004 + TFP drift | v5.1 ✅ |
-| Implement least privilege | Capability graph + policies | v5.3 ✅ (library) |
-| Log all tool invocations | Agent identity + audit trail | v5.3 🚧 runtime wiring |
-| Isolate tool execution | gVisor sandbox (already live) | v5.0 ✅ |
-| Scan for prompt injection | L1.9 (32 rules) + memory poisoning scan | v5.0/v6.0 ✅ |
-| Monitor runtime behavior | Behavioral baseline + drift | v5.2 ✅ (library) |
-| Verify supply chain integrity | Provenance + SLSA + Rekor anchors | v5.1 🚧 |
-| Implement revocation | MNR-CRL-1.0 registry + /api/ocsp + /api/crl | v5.1 ✅ |
+| OWASP recommendation | MarketNow implementation | Status |
+|---|---|---|
+| Verify tool descriptions haven't changed | TFP-1.0 fingerprinting + drift reports | Production |
+| Validate input/output schemas | Schema hash in Trust Card | Production |
+| Monitor for tool poisoning | Sentinel rules MCP-TP-001..004 + TFP drift | Production |
+| Implement least privilege | Capability graph + org policies | Library |
+| Log all tool invocations | Agent identity + audit trail | Runtime wiring next |
+| Isolate tool execution | Sandbox isolation (Sentinel pipeline) | Production |
+| Scan for prompt injection | L1.9 rules (32) + memory poisoning scan | Production / library |
+| Monitor runtime behavior | Behavioral baseline + drift | Library |
+| Verify supply-chain integrity | Provenance + SLSA + Rekor anchors | Partial |
+| Implement revocation | MNR-CRL-1.0 registry + /api/ocsp + /api/crl | Production |
 
 ## North Star
 

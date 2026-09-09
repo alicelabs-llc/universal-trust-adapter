@@ -1,12 +1,12 @@
 # @marketnow/trust-core
 
-**UTA Verification Core v2.0.0 — ROADMAP LEAPFROG** — the full agent-trust stack in one zero-dependency package: **v5.2 behavior, v5.3 policy, v5.4 trajectory, v6.0 cross-agent preview**, on top of the 12-stage verification pipeline. 19/19 smoke tests passing.
+**UTA Verification Core v2** — the full agent-trust stack in one zero-dependency package: behavior analysis (baselines + drift), policy engine (capability graph + org policies + approval workflow), trajectory analysis (attack chains + data flow), and cross-agent trust, on top of the 12-stage verification pipeline. Every module ships typed end-to-end and is exercised by a registry-installed smoke suite (21/21) before release.
 
 ```bash
 npm install @marketnow/trust-core
 ```
 
-## v5.2 — Behavior (baselines + drift)
+## Behavior — baselines + drift
 
 ```js
 import { computeBaseline, detectDrift } from '@marketnow/trust-core';
@@ -17,7 +17,7 @@ const drift = detectDrift(baseline, baselineObs, currentObs, currentWindow);
 // credential env reads, process spawns, latency/data-volume anomalies
 ```
 
-## v5.3 — Capability graph + org policies
+## Capability graph + org policies
 
 ```js
 import { matchCapabilities, MINIMAL_SAFE, evaluatePolicy, DEFAULT_STRICT_POLICY } from '@marketnow/trust-core';
@@ -29,7 +29,7 @@ const decision = evaluatePolicy(trustScore, manifest, DEFAULT_STRICT_POLICY);
 
 Three preset policies (STRICT / ENTERPRISE / PERMISSIVE) + full approval workflow (`createApprovalRequest`, `approveRequest`, `denyRequest`, TTL, pending caps).
 
-## v5.4 — Trajectory (attack chains + data flow)
+## Trajectory — attack chains + data flow
 
 ```js
 import { detectAttackChains, scoreTrajectory, buildDataFlowGraph } from '@marketnow/trust-core';
@@ -41,7 +41,7 @@ const flow = buildDataFlowGraph(calls);     // nodes/edges + exfiltration_paths
 
 Each step individually allowed — the **chain** is what gets blocked (each action alone = ALLOW, chain = BLOCK).
 
-## v6.0 preview — Cross-agent trust + memory poisoning
+## Cross-agent trust + memory poisoning
 
 ```js
 import { evaluateDelegation, scanMemoryForPoisoning } from '@marketnow/trust-core';
