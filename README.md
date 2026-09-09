@@ -17,6 +17,37 @@ Built by **Edison Flores** & **Alejandro Flores** at **AliceLabs LLC** (Wyoming,
 
 ---
 
+## 🌐 The Stranger Manifesto — 13 languages
+
+> **Trust that requires membership is not trust. It's a guest list.**
+
+Ten build rules for stranger-verifiable agent trust — read it in your language
+(every version anchored to the same live receipts):
+
+[English](https://www.marketnow.site/manifesto/) · [Español](https://www.marketnow.site/manifesto/es/) · [Português](https://www.marketnow.site/manifesto/pt/) · [Français](https://www.marketnow.site/manifesto/fr/) · [Deutsch](https://www.marketnow.site/manifesto/de/) · [Italiano](https://www.marketnow.site/manifesto/it/) · [Русский](https://www.marketnow.site/manifesto/ru/) · [日本語](https://www.marketnow.site/manifesto/ja/) · [中文](https://www.marketnow.site/manifesto/zh/) · [한국어](https://www.marketnow.site/manifesto/ko/) · [हिन्दी](https://www.marketnow.site/manifesto/hi/) · [العربية](https://www.marketnow.site/manifesto/ar/) · [Türkçe](https://www.marketnow.site/manifesto/tr/)
+
+Markdown sources: [`manifesto/`](./manifesto/) — one file per language, same content, same receipts.
+
+## 🌍 Visa & Mastercard article — 14 languages
+
+*"Visa has a Trusted Agent Protocol. Mastercard has Verifiable Intent. Here's the layer neither one gives you."*
+
+- **[English — canonical, full version](https://dev.to/edison_flores_6d2cd381b13/visa-has-a-trusted-agent-protocol-mastercard-has-verifiable-intent-heres-the-layer-neither-one-5g41)**
+- [العربية](https://dev.to/edison_flores_6d2cd381b13/fyz-ldyh-brwtwkwl-llwkl-lmwthwqyn-wmstrkrd-ldyh-verifiable-intent-whdhh-hy-ltbq-lty-l-51kl)
+- [Deutsch](https://dev.to/edison_flores_6d2cd381b13/visa-hat-ein-trusted-agent-protokoll-mastercard-hat-verifiable-intent-hier-ist-die-schicht-die-1072)
+- [Español](https://dev.to/edison_flores_6d2cd381b13/visa-tiene-un-protocolo-de-agentes-de-confianza-mastercard-tiene-verifiable-intent-esta-es-la-2blc)
+- [Français](https://dev.to/edison_flores_6d2cd381b13/visa-a-un-protocole-dagents-de-confiance-mastercard-a-la-verifiable-intent-voici-la-couche-4g19)
+- [हिन्दी](https://dev.to/edison_flores_6d2cd381b13/visa-ke-paas-trusted-agent-protocol-hai-aur-mastercard-ke-paas-verifiable-intent-vh-leyr-jo-donon-men-4ofd)
+- [Bahasa Indonesia](https://dev.to/edison_flores_6d2cd381b13/visa-punya-trusted-agent-protocol-mastercard-punya-verifiable-intent-inilah-lapisan-yang-tidak-7bd)
+- [Italiano](https://dev.to/edison_flores_6d2cd381b13/visa-ha-un-protocollo-per-agenti-affidabili-mastercard-ha-la-verifiable-intent-ecco-il-layer-che-21f5)
+- [日本語](https://dev.to/edison_flores_6d2cd381b13/visahatrusted-agent-protocolwo-mastercardhaverifiable-intentwochi-tuteiru-dotiramokurenaireiyagakokoniaruri-ben-yu-ban--3bnc)
+- [한국어](https://dev.to/edison_flores_6d2cd381b13/visaneun-trusted-agent-protocoli-issgo-mastercardneun-verifiable-intentga-issda-dul-da-juji-anhneun-reieoga-yeogi-issda-hangugeo-om5)
+- [Português](https://dev.to/edison_flores_6d2cd381b13/a-visa-tem-um-protocolo-de-agentes-confiaveis-a-mastercard-tem-verifiable-intent-aqui-esta-a-3g8d)
+- [Русский](https://dev.to/edison_flores_6d2cd381b13/u-visa-iest-protokol-dovieriennykh-aghientov-u-mastercard-verifiable-intent-vot-sloi-kotorogho-nie-hed)
+- [Türkçe](https://dev.to/edison_flores_6d2cd381b13/visanin-bir-trusted-agent-protocolu-mastercardin-verifiable-intenti-var-ikisinin-de-size-2o27)
+- [Tiếng Việt](https://dev.to/edison_flores_6d2cd381b13/visa-co-trusted-agent-protocol-mastercard-co-verifiable-intent-day-la-lop-ma-khong-ben-nao-cung-16kg)
+- [中文](https://dev.to/edison_flores_6d2cd381b13/visa-you-liao-ke-xin-dai-li-xie-yi-mastercard-you-liao-ke-yan-zheng-yi-tu-dan-ta-men-du-mei-gei-ni-de-na-ceng-zhong-wen-ban--n4g)
+
 ## 🌍 Global Trust Series (multi-language, 2026-09-08)
 
 The 2026 gray-market quota trust crisis, documented — plus the receipts-based fix:
