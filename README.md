@@ -147,7 +147,9 @@ curl -fsSL https://marketnow.site/install.sh | bash
 
 # Or install individual packages
 npm install agent-trust-card        # ATC/1.0 SDK
-npm install -g marketnow-mcp       # MCP server (13 trust tools)
+npm install -g marketnow-mcp       # MCP server (15 trust tools)
+npx @marketnow/uta-conformance    # run the 14-vector conformance suite
+npx @marketnow/sentinel-rules --path .  # 29 MCP security rules, zero-dep scan
 ```
 
 ## 📊 Project stats (Sep 9, 2026)
@@ -173,9 +175,11 @@ npm install -g marketnow-mcp       # MCP server (13 trust tools)
 | [`marketnow-install-stack`](https://www.npmjs.com/package/marketnow-install-stack) | 1.1.1 | Multi-source installer | 15/wk |
 | [`@marketnow/uts`](https://www.npmjs.com/package/@marketnow/uts) | 2.0.1 | Universal Trust Schema | 36/wk |
 | [`@marketnow/trust-core`](https://www.npmjs.com/package/@marketnow/trust-core) | 1.0.1 | Trust Engine core | 28/wk |
-| [`@marketnow/trust-adapters`](https://www.npmjs.com/package/@marketnow/trust-adapters) | 1.0.1 | 8 format adapters | 25/wk |
-| [`@marketnow/trust-gateway`](https://www.npmjs.com/package/@marketnow/trust-gateway) | 1.0.1 | Gateway + post-exec filter | 19/wk |
+| [`@marketnow/trust-adapters`](https://www.npmjs.com/package/@marketnow/trust-adapters) | 1.0.2 | 9 format adapters (X509 exported; self-contained, zero deps) | 25/wk |
+| [`@marketnow/trust-gateway`](https://www.npmjs.com/package/@marketnow/trust-gateway) | 1.0.2 | MCP middleware gateway (self-contained, zero deps) | 19/wk |
 | [`@marketnow/cline-trust-plugin`](https://www.npmjs.com/package/@marketnow/cline-trust-plugin) | 1.1.0 | Cline interceptor: revocation gate + TFP tool-surface pinning (NEW) | 0/wk |
+| [`@marketnow/uta-conformance`](https://www.npmjs.com/package/@marketnow/uta-conformance) | 1.3.3 | 14 signed vectors + reference scorer + card generator — `npx @marketnow/uta-conformance` (NEW) | 0/wk |
+| [`@marketnow/sentinel-rules`](https://www.npmjs.com/package/@marketnow/sentinel-rules) | 1.0.0 | 29 MCP security rules: semgrep config + zero-dep lite scanner — `npx @marketnow/sentinel-rules --path .` (NEW) | 0/wk |
 
 ## 🛡️ 5 Anti-ban download channels
 
