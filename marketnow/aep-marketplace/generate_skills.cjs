@@ -197,6 +197,9 @@ for (const s of skills) {
     // mn-prompt-* skills are SYNTHETIC — they should have been removed already.
     // If any remain, mark them as curated (not from GitHub).
     s.source = { type: 'curated', url: null, note: 'Hand-curated by AliceLabs — usually a system prompt, not a code package.' };
+  } else if (s.id && s.id.startsWith('mn-npm-')) {
+    // mn-npm-* skills are indexed from the PUBLIC NPM REGISTRY (catalog expansion).
+    s.source = { type: 'npm-registry', url: `https://www.npmjs.com/package/${s.name}`, note: 'Indexed from the public npm registry with Sentinel Index Heuristics (age, weekly downloads, typosquat distance, injection markers).' };
   } else if (s.id && s.id.startsWith('mn-gen-')) {
     // mn-gen-* skills ARE from GitHub repos (imported by massive-indexer.cjs).
     // PRESERVE their source.url — don't overwrite with null.
@@ -274,6 +277,11 @@ const liteSkills = skills.map(s => {
     sentinel_score: s.sentinel_score, review_status: s.review_status,
     risk_level: s.risk_level, install: s.install,
     author: s.author, version: s.version, tags: (s.tags || []).slice(0, 5),
+    // Task 44: catalog expansion fields (npm registry crawl)
+    ...(s.source ? { source: s.source } : {}),
+    ...(s.indexed_at ? { indexed_at: s.indexed_at } : {}),
+    ...(Number.isFinite(s.npm_downloads_wk) ? { npm_downloads_wk: s.npm_downloads_wk } : {}),
+    ...(Number.isFinite(s.trust_score_100) ? { trust_score_100: s.trust_score_100 } : {}),
   };
   // FIX: include translations (language codes only, not full content)
   if (s.translations && typeof s.translations === 'object') {
