@@ -8,10 +8,13 @@
 
 const TRUST_API = "https://www.marketnow.site/api/trust";
 
+import { createHash } from "node:crypto";
+import ocspHandler from "./ocsp.js";
+
 // MCP Server info
 const SERVER_INFO = {
   name: "marketnow-mcp",
-  version: "1.10.1",
+  version: "1.11.0",
 };
 
 const SERVER_CAPABILITIES = {
@@ -78,8 +81,122 @@ const TOOLS = [
         category: { type: "string", description: "Filter by category" }
       }
     }
+  },
+  {
+    name: "marketnow_check_revocation",
+    description: "Check the revocation status of an Agent Trust Card (card_id) or CA key (kid) against the signed MarketNow Revocation Registry (MNR-CRL-1.0) + live ledger. Returns VALID/EXPIRED/REVOKED/SUPERSEDED/UNKNOWN with PERMIT/DENY recommendation. Fail-closed: unknown subjects answer UNKNOWN+DENY. The signed CRL layer is independently verifiable via Ed25519 (RFC 8785 JCS).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        card_id: { type: "string", description: "Agent Trust Card ID (e.g. ATC-2026-1509360)" },
+        kid: { type: "string", description: "CA key ID (e.g. mn-ca-002, mn-ca-003)" },
+        nonce: { type: "string", description: "Optional client nonce — echoed in the response (anti-replay)" }
+      }
+    }
+  },
+  {
+    name: "marketnow_fingerprint_tool",
+    description: "Cryptographically fingerprint MCP tool definitions (OWASP MCP Cheat Sheet: 'verify tool descriptions haven't changed'). Computes RFC 8785 JCS + sha256 per tool plus a manifest fingerprint for the whole tools/list surface. Pass a previous manifest in 'pinned' to get a drift report (added/removed/changed) — the core defense against tool poisoning and rug-pull redefinitions.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        tools: {
+          type: "array",
+          description: "Tool definitions from tools/list: [{name, description, inputSchema}]",
+          items: { type: "object" }
+        },
+        pinned: {
+          type: "object",
+          description: "Optional: previous manifest {tools:[{name, fingerprint_sha256}]} from an earlier fingerprint run — enables drift detection"
+        }
+      },
+      required: ["tools"]
+    }
   }
 ];
+
+// RFC 8785 JCS — inline (identical to api/trust.js)
+function jcs(o) {
+  if (o === null) return "null";
+  switch (typeof o) {
+    case "boolean": return o ? "true" : "false";
+    case "number": return Number.isFinite(o) ? String(o) : "null";
+    case "string": return JSON.stringify(o);
+  }
+  if (Array.isArray(o)) return "[" + o.map(jcs).join(",") + "]";
+  const keys = Object.keys(o).filter((k) => o[k] !== undefined).sort();
+  return "{" + keys.map((k) => JSON.stringify(k) + ":" + jcs(o[k])).join(",") + "}";
+}
+
+// Invoke the OCSP handler in-process and capture its JSON response.
+async function callOcsp(query) {
+  return new Promise((resolve, reject) => {
+    const mockRes = {
+      _code: 0,
+      status(c) { mockRes._code = c; return mockRes; },
+      json(o) { resolve(o); return mockRes; },
+      end() { resolve(null); return mockRes; },
+      setHeader() {},
+    };
+    Promise.resolve(ocspHandler({ method: "GET", query }, mockRes)).catch(reject);
+  });
+}
+
+// Tool fingerprinting (TFP-1.0) — roadmap v5.1 item 1 + OWASP MCP Cheat Sheet
+// 'verify tool descriptions haven't changed'. JCS over the tool definition + sha256.
+function fingerprintTools(tools, pinned) {
+  if (!Array.isArray(tools) || tools.length === 0) {
+    return { error: "INVALID_ARGUMENT", message: "tools must be a non-empty array of tool definitions" };
+  }
+  const seen = new Set();
+  for (const t of tools) {
+    if (!t || typeof t.name !== "string" || !t.name) {
+      return { error: "INVALID_ARGUMENT", message: "each tool needs a 'name' string" };
+    }
+    if (seen.has(t.name)) {
+      return { error: "INVALID_ARGUMENT", message: `duplicate tool name: ${t.name}` };
+    }
+    seen.add(t.name);
+  }
+  const fp = (t) => createHash("sha256").update(Buffer.from(jcs(t), "utf-8")).digest("hex");
+  const perTool = tools
+    .map((t) => ({ name: t.name, fingerprint_sha256: fp(t) }))
+    .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+  const manifestPairs = perTool.map((p) => [p.name, p.fingerprint_sha256]);
+  const manifestFingerprint = createHash("sha256")
+    .update(Buffer.from(jcs(manifestPairs), "utf-8"))
+    .digest("hex");
+
+  const result = {
+    format: "TFP-1.0",
+    algorithm: "sha256 over RFC 8785 JCS canonical tool definition",
+    computed_at: new Date().toISOString(),
+    tool_count: perTool.length,
+    tools: perTool,
+    manifest_fingerprint_sha256: manifestFingerprint,
+    pinning: {
+      how: "Store the 'tools' array + manifest_fingerprint_sha256. On every subsequent tools/list, re-run this tool with 'pinned' to detect drift.",
+      owasp: "MCP Cheat Sheet — Verify tool descriptions haven't changed (tool poisoning / rug-pull detection)",
+    },
+  };
+
+  if (pinned && Array.isArray(pinned.tools)) {
+    const current = new Map(perTool.map((p) => [p.name, p.fingerprint_sha256]));
+    const before = new Map(pinned.tools.map((p) => [p.name, p.fingerprint_sha256]));
+    const drift = {
+      added: [...current.keys()].filter((n) => !before.has(n)),
+      removed: [...before.keys()].filter((n) => !current.has(n)),
+      changed: [...current.keys()].filter((n) => before.has(n) && before.get(n) !== current.get(n)),
+    };
+    drift.unchanged_count = [...current.keys()].filter((n) => before.has(n) && before.get(n) === current.get(n)).length;
+    drift.verdict = drift.changed.length || drift.removed.length || drift.added.length ? "DRIFT_DETECTED" : "MATCH";
+    if (pinned.manifest_fingerprint_sha256) {
+      drift.pinned_manifest_matches = pinned.manifest_fingerprint_sha256 === manifestFingerprint;
+    }
+    result.drift = drift;
+  }
+  return result;
+}
 
 // Handle JSON-RPC requests
 async function handleRequest(method, params, id) {
@@ -170,6 +287,32 @@ async function handleRequest(method, params, id) {
           };
         }
 
+        case "marketnow_check_revocation": {
+          const params = {};
+          if (args.card_id) params.card_id = args.card_id;
+          if (args.kid) params.kid = args.kid;
+          if (args.nonce) params.nonce = args.nonce;
+          if (!args.card_id && !args.kid) {
+            return {
+              content: [{ type: "text", text: JSON.stringify({ error: "INVALID_ARGUMENT", message: "Provide card_id or kid" }) }],
+              isError: true
+            };
+          }
+          // Call the OCSP handler directly (no self-fetch round-trip —
+          // faster, no double cold-start, identical resolution logic).
+          const data = await callOcsp(params);
+          return {
+            content: [{ type: "text", text: JSON.stringify(data, null, 2) }]
+          };
+        }
+
+        case "marketnow_fingerprint_tool": {
+          const out = fingerprintTools(args.tools, args.pinned);
+          return {
+            content: [{ type: "text", text: JSON.stringify(out, null, 2) }]
+          };
+        }
+
         default:
           return { error: { code: -32601, message: `Unknown tool: ${toolName}` } };
       }
@@ -207,7 +350,9 @@ export default async function handler(req, res) {
         verify: "/api/trust?action=verify",
         translate: "/api/trust?action=translate",
         formats: "/api/trust?action=formats",
-        pipeline: "/api/trust?action=pipeline"
+        pipeline: "/api/trust?action=pipeline",
+        ocsp: "/api/ocsp?card_id=… | ?kid=…",
+        crl: "/api/crl"
       }
     });
   }
@@ -246,7 +391,7 @@ export default async function handler(req, res) {
       return res.status(200).json({
         jsonrpc: "2.0",
         error: { code: -32603, message: error.message },
-        id: body?.id || null
+        id: req.body?.id || null
       });
     }
   }
