@@ -1,15 +1,36 @@
 {
   "service": "MarketNow",
-  "current_version": "4.0.0",
+  "current_version": "5.2.0",
   "changelog": [
+    {
+      "version": "5.2.0",
+      "date": "2026-09-10",
+      "changes": [
+        "Catalog expansion: +5,269 MCP servers indexed from the public npm registry (9,248 -> 14,517 skills)",
+        "Two-level risk model, kept separate on purpose: risk_level is INSTALL risk (npx/npm install runs arbitrary code -> red), trust_score_100 (0-100) is the adoption + security heuristic: package age, weekly downloads, typosquat distance vs popular packages, injection markers in descriptions — not popularity alone",
+        "Every new entry: sentinel_score 0-10, trust_score_100, npm_downloads_wk, source provenance (npm-registry + package URL), indexed_at",
+        "API: new params sort=recent|downloads|trust|name, q=<search>, risk=red|yellow|green — try GET /api/skills?sort=recent",
+        "Source transparency: response includes per-source counts (github / npm-registry / curated)"
+      ],
+      "breaking": [],
+      "new_endpoints": [],
+      "new_params": [
+        "sort=recent",
+        "sort=downloads",
+        "sort=trust",
+        "sort=name",
+        "q=<search>",
+        "risk=red|yellow|green"
+      ]
+    },
     {
       "version": "4.1.0",
       "date": "2026-07-12",
       "changes": [
-        "ATC \u2014 Agent Trust Card launched (replaces ACP)",
-        "L4 Supply Chain Audit (SBOM + OSV) \u2014 LIVE",
-        "L4.5 Content Fingerprint (SHA-256) \u2014 LIVE",
-        "L2.6 Egress Proxy with Allowlist \u2014 LIVE",
+        "ATC — Agent Trust Card launched (replaces ACP)",
+        "L4 Supply Chain Audit (SBOM + OSV) — LIVE",
+        "L4.5 Content Fingerprint (SHA-256) — LIVE",
+        "L2.6 Egress Proxy with Allowlist — LIVE",
         "Published to MCP Registry official",
         "npm v1.4.1 with mcpName"
       ],

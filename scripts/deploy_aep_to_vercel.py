@@ -29,7 +29,7 @@ TEAM_ID = "team_DmoZusxMIKcqJhgRBmQ8B3dK"
 PROJ_ID = "prj_Sof4OHAGytb75zBacYSrIFNXNnKy"  # aep-marketplace, owns marketnow.site
 PROJ_NAME = "aep-marketplace"
 
-REPO = Path('/home/z/my-project/marketnow/aep-marketplace')
+REPO = Path('/home/z/my-project/uta-repo/marketnow/aep-marketplace')
 
 # Files to deploy (relative to aep-marketplace/):
 # - dist/ (built static assets)

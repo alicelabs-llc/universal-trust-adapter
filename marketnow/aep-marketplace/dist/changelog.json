@@ -1,15 +1,35 @@
 {
   "service": "MarketNow",
-  "current_version": "4.0.0",
+  "current_version": "5.2.0",
   "changelog": [
+    {
+      "version": "5.2.0",
+      "date": "2026-09-10",
+      "changes": [
+        "Catalog expansion: +5,269 MCP servers indexed from the npm registry (9,248 -> 14,517 skills)",
+        "Every new entry auto-scored with Sentinel Index Heuristics: risk level (green/yellow/red), sentinel_score 0-10, trust_score_100 — security signals (typosquat distance, package age, weekly downloads, injection markers), not popularity alone",
+        "API: new sort=recent|downloads|trust, search q=, risk filter — GET /api/skills?sort=recent",
+        "Source transparency: response now includes per-source counts (original catalog + npm)"
+      ],
+      "breaking": [],
+      "new_endpoints": [],
+      "new_params": [
+        "sort=recent",
+        "sort=downloads",
+        "sort=trust",
+        "sort=name",
+        "q=<search>",
+        "risk=red|yellow|green"
+      ]
+    },
     {
       "version": "4.1.0",
       "date": "2026-07-12",
       "changes": [
-        "ATC \u2014 Agent Trust Card launched (replaces ACP)",
-        "L4 Supply Chain Audit (SBOM + OSV) \u2014 LIVE",
-        "L4.5 Content Fingerprint (SHA-256) \u2014 LIVE",
-        "L2.6 Egress Proxy with Allowlist \u2014 LIVE",
+        "ATC — Agent Trust Card launched (replaces ACP)",
+        "L4 Supply Chain Audit (SBOM + OSV) — LIVE",
+        "L4.5 Content Fingerprint (SHA-256) — LIVE",
+        "L2.6 Egress Proxy with Allowlist — LIVE",
         "Published to MCP Registry official",
         "npm v1.4.1 with mcpName"
       ],
