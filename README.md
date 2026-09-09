@@ -24,9 +24,10 @@ Built by **Edison Flores** & **Alejandro Flores** at **AliceLabs LLC** (Wyoming,
 Ten build rules for stranger-verifiable agent trust — read it in your language
 (every version anchored to the same live receipts):
 
-[English](https://www.marketnow.site/manifesto/) · [Español](https://www.marketnow.site/manifesto/es/) · [Português](https://www.marketnow.site/manifesto/pt/) · [Français](https://www.marketnow.site/manifesto/fr/) · [Deutsch](https://www.marketnow.site/manifesto/de/) · [Italiano](https://www.marketnow.site/manifesto/it/) · [Русский](https://www.marketnow.site/manifesto/ru/) · [日本語](https://www.marketnow.site/manifesto/ja/) · [中文](https://www.marketnow.site/manifesto/zh/) · [한국어](https://www.marketnow.site/manifesto/ko/) · [हिन्दी](https://www.marketnow.site/manifesto/hi/) · [العربية](https://www.marketnow.site/manifesto/ar/) · [Türkçe](https://www.marketnow.site/manifesto/tr/)
+[English](https://alicelabs-llc.github.io/universal-trust-adapter/manifesto/) · [Español](https://alicelabs-llc.github.io/universal-trust-adapter/manifesto/es/) · [Português](https://alicelabs-llc.github.io/universal-trust-adapter/manifesto/pt/) · [Français](https://alicelabs-llc.github.io/universal-trust-adapter/manifesto/fr/) · [Deutsch](https://alicelabs-llc.github.io/universal-trust-adapter/manifesto/de/) · [Italiano](https://alicelabs-llc.github.io/universal-trust-adapter/manifesto/it/) · [Русский](https://alicelabs-llc.github.io/universal-trust-adapter/manifesto/ru/) · [日本語](https://alicelabs-llc.github.io/universal-trust-adapter/manifesto/ja/) · [中文](https://alicelabs-llc.github.io/universal-trust-adapter/manifesto/zh/) · [한국어](https://alicelabs-llc.github.io/universal-trust-adapter/manifesto/ko/) · [हिन्दी](https://alicelabs-llc.github.io/universal-trust-adapter/manifesto/hi/) · [العربية](https://alicelabs-llc.github.io/universal-trust-adapter/manifesto/ar/) · [Türkçe](https://alicelabs-llc.github.io/universal-trust-adapter/manifesto/tr/)
 
 Markdown sources: [`manifesto/`](./manifesto/) — one file per language, same content, same receipts.
+Hosted on GitHub Pages (indexable mirror); the marketnow.site/manifesto/ mirror ships with the next site deploy.
 
 ## 🌍 Visa & Mastercard article — 14 languages
 
