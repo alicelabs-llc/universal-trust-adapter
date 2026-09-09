@@ -1,6 +1,16 @@
 #!/usr/bin/env node
 // ============================================================================
-// UTA conformance — REFERENCE SCORER (v1.3.0)
+// UTA conformance — REFERENCE SCORER (v1.3.3)
+// ============================================================================
+// v1.3.3 fixes (anp2 bug report, dev.to comment 3ec7d, 2026-09-08T21:35Z):
+//   1. The validity window is TWO-SIDED: issued_at <= NOW < expires_at.
+//      Previously the reference runner checked only the upper bound, so a
+//      stricter runner rejecting a not-yet-valid card was scored WRONG.
+//   2. Generated-card ground truth is DERIVED from the card bytes and the
+//      pinned anchors — never from a default. The _generated-index.json
+//      sidecar is demoted to a cross-check: if present it must AGREE with
+//      the derived truth (mismatch = hard FATAL); if absent, scoring still
+//      works and a true-by-default inversion is impossible.
 // ============================================================================
 // Implements stage_scoring_rule from _index.json:
 //   - the runner's boolean must match expected_verify
@@ -16,7 +26,8 @@
 //   node score-runner.mjs --generated DIR --matrix  → both
 //
 // The reference runner: pinned anchors {ca-test-1, ca-test-2} + policy
-// (expiry, status) + tolerance for unknown x_* fields. Node ≥ 18, zero deps.
+// (TWO-SIDED validity window, status) + tolerance for unknown x_* fields.
+// Node ≥ 18, zero deps.
 // ============================================================================
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
@@ -59,16 +70,18 @@ const stagesOf = (sigOk, anchorOk, notExpired, statusOk) => ({
   status_check: statusOk ? 'pass' : 'fail',
 });
 
-// THE REFERENCE RUNNER — pinned anchors + policy + tolerance
+// THE REFERENCE RUNNER — pinned anchors + two-sided policy + tolerance
 const reference = (card, digest) => {
   if (!card.signature) return { verify: true, stages: null }; // translation family
   const { signature, ...subtree } = card;
   const buf = Buffer.from(jcs(subtree), 'utf8');
   const sigOk = cryptoVerify(null, buf, createPublicKey({ key: Buffer.from(card.payload.identity.public_key, 'base64'), format: 'der', type: 'spki' }), Buffer.from(signature.value, 'hex'));
   const anchorOk = anchors.includes(card.payload.identity.public_key);
-  const notExpired = card.payload.metadata.expires_at > NOW;
+  // v1.3.3: BOTH bounds — a card is in-window only if issued_at <= NOW < expires_at.
+  // expired-atc closes the upper bound; premature-atc closes the lower bound.
+  const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;
   const statusOk = card.status === 'active';
-  return { verify: sigOk && anchorOk && notExpired && statusOk, stages: stagesOf(sigOk, anchorOk, notExpired, statusOk) };
+  return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, statusOk) };
 };
 
 // CHEAT RUNNERS
@@ -76,9 +89,9 @@ const alwaysTrue = (card) => ({ verify: true, stages: null });
 
 const policyOnly = (card) => { // Ed25519 deleted from the runner
   if (!card.signature) return { verify: true, stages: null };
-  const notExpired = card.payload.metadata.expires_at > NOW;
+  const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;
   const statusOk = card.status === 'active';
-  return { verify: notExpired && statusOk, stages: null };
+  return { verify: inWindow && statusOk, stages: null };
 };
 
 const cryptoOnly = (card) => { // no expiry/status checks
@@ -95,9 +108,9 @@ const tofu = (card) => { // embedded-key (trust-on-first-use) + policy
   const { signature, ...subtree } = card;
   const buf = Buffer.from(jcs(subtree), 'utf8');
   const sigOk = cryptoVerify(null, buf, createPublicKey({ key: Buffer.from(card.payload.identity.public_key, 'base64'), format: 'der', type: 'spki' }), Buffer.from(signature.value, 'hex'));
-  const notExpired = card.payload.metadata.expires_at > NOW;
+  const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;
   const statusOk = card.status === 'active';
-  return { verify: sigOk && notExpired && statusOk, stages: null };
+  return { verify: sigOk && inWindow && statusOk, stages: null };
 };
 
 // THE MEMORIZER (anp2network's construct): true for unsigned, true for THE
@@ -122,9 +135,9 @@ const stageLiar = (card) => {
   const buf = Buffer.from(jcs(subtree), 'utf8');
   const sigOk = cryptoVerify(null, buf, createPublicKey({ key: Buffer.from(card.payload.identity.public_key, 'base64'), format: 'der', type: 'spki' }), Buffer.from(signature.value, 'hex'));
   const anchorOk = anchors.includes(card.payload.identity.public_key);
-  const notExpired = card.payload.metadata.expires_at > NOW;
+  const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;
   const statusOk = card.status === 'active';
-  const truth = { verify: sigOk && anchorOk && notExpired && statusOk, stages: stagesOf(sigOk, anchorOk, notExpired, statusOk) };
+  const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, statusOk) };
   return { verify: truth.verify, stages: { ...truth.stages, signature_verification: 'fail' } }; // ← the lie
 };
 
@@ -176,14 +189,46 @@ const loadGenerated = (dir) => {
     : null;
   for (const f of readdirSync(dir).filter(f => f.endsWith('.json') && f !== '_generated-index.json' && !f.startsWith('_'))) {
     const card = JSON.parse(readFileSync(join(dir, f), 'utf8'));
-    const meta = genIndex?.find(m => m.card_id === card.card_id);
+    // v1.3.3 (anp2 bug 2): ground truth is DERIVED from the card bytes and
+    // the pinned anchors — the sidecar is a cross-check, never the source of
+    // truth. A missing sidecar can no longer flip expectations, and a sidecar
+    // that disagrees with the derived truth is a hard FATAL (fail closed).
+    if (!card.signature?.value || !card.payload?.identity?.public_key ||
+        !card.payload?.metadata?.issued_at || !card.payload?.metadata?.expires_at || !card.status) {
+      console.error(`FATAL: ${f} is not a scoreable ATC card — cannot derive ground truth (missing signature / identity / metadata / status). Fail closed.`);
+      process.exit(1);
+    }
     const { signature, ...subtree } = card;
+    const buf = Buffer.from(jcs(subtree), 'utf8');
+    const digest = sha256hex(buf);
+    // derived expectations — same pinned-anchor + two-sided-window semantics
+    const sigOk = cryptoVerify(null, buf, createPublicKey({ key: Buffer.from(card.payload.identity.public_key, 'base64'), format: 'der', type: 'spki' }), Buffer.from(signature.value, 'hex'));
+    const anchorOk = anchors.includes(card.payload.identity.public_key);
+    const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;
+    const statusOk = card.status === 'active';
+    const expected_verify = sigOk && anchorOk && inWindow && statusOk;
+    const expected_stages = stagesOf(sigOk, anchorOk, inWindow, statusOk);
+    const meta = genIndex?.find(m => m.card_id === card.card_id);
+    if (meta) {
+      if (meta.expected_verify !== expected_verify) {
+        console.error(`FATAL: ${card.card_id} — sidecar expected_verify=${meta.expected_verify} but derived truth is ${expected_verify}. The sidecar and the card bytes disagree; refusing to score.`);
+        process.exit(1);
+      }
+      if (meta.expected_stages) {
+        for (const [stage, expected] of Object.entries(meta.expected_stages)) {
+          if (expected_stages[stage] !== expected) {
+            console.error(`FATAL: ${card.card_id} — sidecar stage ${stage}=${expected} but derived truth is ${expected_stages[stage]}. The sidecar and the card bytes disagree; refusing to score.`);
+            process.exit(1);
+          }
+        }
+      }
+    }
     cards.push({
       id: `generated:${card.card_id}`,
       card,
-      expected_verify: meta ? meta.expected_verify : true, // accept mode default
-      expected_stages: meta ? meta.expected_stages : null,
-      digest: sha256hex(Buffer.from(jcs(subtree), 'utf8')),
+      expected_verify,
+      expected_stages,
+      digest,
     });
   }
   return cards;
@@ -234,5 +279,11 @@ console.log('  - memorizer passed 11/11 on v1.2.0; on v1.3.0 it fails valid-atc-
 console.log('    and it scores 0 against generated cards — recognition cannot survive a generator.');
 console.log('  - over-rejector fails valid-unknown-field (and every generated card with x_gen_* fields):');
 console.log('    false rejections no longer read as healthy.');
-console.log('  - stage-liar returns correct booleans but fails 6 vectors under stage scoring:');
+console.log('  - stage-liar returns correct booleans but fails vectors under stage scoring:');
 console.log('    the stage vector is compared, not just the boolean.');
+console.log('  - premature-atc (v1.3.3): a properly-signed, anchored, active card whose only');
+console.log('    defect is a FUTURE issued_at. crypto-only and always-true accept it — the');
+console.log('    lower bound of the validity window has teeth now.');
+console.log('  - generated expectations are DERIVED from card bytes + pinned anchors (v1.3.3):');
+console.log('    deleting _generated-index.json cannot invert the scoring anymore, and a');
+console.log('    sidecar that disagrees with the derived truth aborts the run (FATAL).');

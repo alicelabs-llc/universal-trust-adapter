@@ -108,18 +108,24 @@ const parseReference = (stdout) => {
   };
 };
 
-// ---------- validity window: earliest future expiry among signed vectors ----------
+// ---------- validity window: earliest future expiry AND earliest future ----------
+// ---------- issued_at among signed vectors (v1.3.3: the window is two-sided) ------
 const today = new Date().toISOString().slice(0, 10);
+const nowStamp = new Date().toISOString().slice(0, 10) + 'T00:00:00Z'; // same NOW the runner truncates to
 const idx = JSON.parse(readFileSync(join(VECTORS, '_index.json'), 'utf8'));
-let minExp = null; // earliest FUTURE expiry among signed vectors (past ones are frozen dead)
+let minExp = null;   // earliest FUTURE expires_at (a true verdict flips to false here)
+let minIssued = null; // earliest FUTURE issued_at (a premature verdict flips to true here — v1.3.3)
 for (const v of idx.vectors) {
   if (!v.signed_subtree) continue; // translation family: no expiry dependency
   const card = JSON.parse(readFileSync(join(VECTORS, v.original_vector_file), 'utf8'));
   const exp = card?.payload?.metadata?.expires_at;
-  if (exp && exp > today && (!minExp || exp < minExp)) minExp = exp;
+  if (exp && exp > nowStamp && (!minExp || exp < minExp)) minExp = exp;
+  const iss = card?.payload?.metadata?.issued_at;
+  if (iss && iss > nowStamp && (!minIssued || iss < minIssued)) minIssued = iss;
 }
 if (!minExp) { console.error('✗ no signed vectors with future expires_at found — cannot compute validity window'); process.exit(2); }
-const validUntil = new Date(new Date(minExp).getTime() - 86400000).toISOString().slice(0, 10);
+const earliestFlip = (minIssued && minIssued < minExp) ? minIssued : minExp;
+const validUntil = new Date(new Date(earliestFlip).getTime() - 86400000).toISOString().slice(0, 10);
 
 // ---------- pristine observations ----------
 const matrixRun = runRunner(RUNNER, ['--matrix']);
@@ -190,6 +196,7 @@ if (RECORD) {
     as_of: today,
     valid_until: validUntil,
     earliest_future_expiry: minExp,
+    earliest_future_issued_at: minIssued,
     runner: { file: '../score-runner.mjs', sha256: runnerSha, bytes: Buffer.byteLength(runnerSrc, 'utf8') },
     matrix: pristineMatrix,
     reference: { ...pristineRef, exit_code: refRun.status },
@@ -219,7 +226,7 @@ check('runner bytes match the answer key (bytes oracle #1: sha256 pinned, key it
 // 2. validity window (fail closed)
 check(`date within validity window (fail-closed: today ${today} ≤ ${key.valid_until})`,
   today <= key.valid_until,
-  today > key.valid_until ? 'EXPIRED — re-issue vectors, re-record, re-anchor' : `earliest future vector expiry: ${key.earliest_future_expiry}`);
+  today > key.valid_until ? 'EXPIRED — re-issue vectors, re-record, re-anchor' : `earliest verdict flip: ${key.earliest_future_issued_at && key.earliest_future_issued_at < key.earliest_future_expiry ? `premature-atc becomes valid at ${key.earliest_future_issued_at}` : `earliest future vector expiry: ${key.earliest_future_expiry}`}`);
 
 // 3. golden: matrix
 console.log('--- golden: the runner reproduces the answer key ---');

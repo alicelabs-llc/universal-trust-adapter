@@ -3,32 +3,33 @@
   "as_of": "2026-09-09",
   "valid_until": "2027-08-19",
   "earliest_future_expiry": "2027-08-20T00:00:00Z",
+  "earliest_future_issued_at": "2030-01-01T00:00:00Z",
   "runner": {
     "file": "../score-runner.mjs",
-    "sha256": "ef5fd5fbc003e27caef523f8b0395953190e9fc6ac88009c2131ea6cc33a23b8",
-    "bytes": 12258
+    "sha256": "deec4cf670bed7b30eae0995b15c1c08970c29e3e72087329e0544aaf85aa972",
+    "bytes": 15881
   },
   "matrix": {
     "header": {
-      "version": "1.3.2",
-      "fixed": 13
+      "version": "1.3.3",
+      "fixed": 14
     },
     "rows": [
       {
         "name": "always-true",
         "ok": 8,
-        "total": 13,
+        "total": 14,
         "failed": [
           "invalid-signature",
           "expired-atc",
-          "revoked-atc"
+          "premature-atc"
         ],
         "generated": "n/a"
       },
       {
         "name": "policy-only (Ed25519 deleted)",
-        "ok": 10,
-        "total": 13,
+        "ok": 11,
+        "total": 14,
         "failed": [
           "invalid-signature",
           "wrong-ca",
@@ -39,17 +40,18 @@
       {
         "name": "crypto-only (no expiry/status)",
         "ok": 11,
-        "total": 13,
+        "total": 14,
         "failed": [
           "expired-atc",
+          "premature-atc",
           "revoked-atc"
         ],
         "generated": "n/a"
       },
       {
         "name": "embedded-key + policy (TOFU)",
-        "ok": 12,
-        "total": 13,
+        "ok": 13,
+        "total": 14,
         "failed": [
           "self-signed-atc"
         ],
@@ -57,8 +59,8 @@
       },
       {
         "name": "memorizer (hardcodes valid-atc digest)",
-        "ok": 11,
-        "total": 13,
+        "ok": 12,
+        "total": 14,
         "failed": [
           "valid-atc-2",
           "valid-unknown-field"
@@ -67,8 +69,8 @@
       },
       {
         "name": "over-rejector (chokes on x_* fields)",
-        "ok": 12,
-        "total": 13,
+        "ok": 13,
+        "total": 14,
         "failed": [
           "valid-unknown-field"
         ],
@@ -77,7 +79,7 @@
       {
         "name": "stage-liar (all fire at sig-verification)",
         "ok": 7,
-        "total": 13,
+        "total": 14,
         "failed": [
           "valid-atc",
           "valid-atc-2",
@@ -87,15 +89,15 @@
       },
       {
         "name": "reference (pinned + policy + tolerance)",
-        "ok": 13,
-        "total": 13,
+        "ok": 14,
+        "total": 14,
         "failed": [],
         "generated": "n/a"
       }
     ]
   },
   "reference": {
-    "score": "13/13",
+    "score": "14/14",
     "passed": true,
     "failed_listed": false,
     "exit_code": 0
@@ -103,21 +105,21 @@
   "mutant_count": 10,
   "mutants": {
     "stage-blind": {
-      "sha256": "ab497fc9297415335557ad3c964606cc7c2fa5121f6ec0d7937e95828f4cd26a",
+      "sha256": "005b06bb7a0c5092ab6846fc213ec13d1d817511e424fd334a541db4101473c0",
       "diverges": true,
       "where": [
         "matrix"
       ]
     },
     "memorizer-promote": {
-      "sha256": "44c40f00f160d174a03736eeefab3907d47b4c89b4bc04da144809742296d9a7",
+      "sha256": "37e84be27cf4b711aae553fa929e30b2901b4f56ee60e5ed314cb429bcd9c247",
       "diverges": true,
       "where": [
         "matrix"
       ]
     },
     "score-inflate": {
-      "sha256": "b62b2464dfbfc2d60a2f4d103b50988230bea49f5834fe346d68194ab9b6cb13",
+      "sha256": "2df0f18bb10f0ab6e019c2a931f1c6eff8b08152b5007340e05f6d3134ad0232",
       "diverges": true,
       "where": [
         "matrix",
@@ -125,7 +127,7 @@
       ]
     },
     "anchor-narrow": {
-      "sha256": "e451a6f540bdf264259d1f01ca3eaa07528a8d047fb1acf64d9fd8b184b5828c",
+      "sha256": "c7334525890696b9addc9379ae412a5c6569126d361409b3f462a9043990deeb",
       "diverges": true,
       "where": [
         "matrix",
@@ -133,7 +135,7 @@
       ]
     },
     "expiry-blind": {
-      "sha256": "4eec94787a380740699c56329c20a51dc885a2b984aa67ef31aa09630df89809",
+      "sha256": "df238612e924943fbeade991e725b5c891a0fb5e5215e6f352e875348bd1523d",
       "diverges": true,
       "where": [
         "matrix",
@@ -141,7 +143,7 @@
       ]
     },
     "status-blind": {
-      "sha256": "3718f6aecdcc0da8a310bbf1137aeb94059db11225b56b6af8cf0c171fa8bc8f",
+      "sha256": "c871eec2f1524dc700d4a49698c20f47307429339e380b09881156727ffa6076",
       "diverges": true,
       "where": [
         "matrix",
@@ -149,7 +151,7 @@
       ]
     },
     "sig-accept-all": {
-      "sha256": "d679ddac90c38b0153f4912ac76b2aece176e3cb3c8b85fd82a13fb20015798c",
+      "sha256": "c9b8b173b7059308f27ab8a016dd2f488b827e7d4e96b1f14c6a97a778ec3bac",
       "diverges": true,
       "where": [
         "matrix",
@@ -157,7 +159,7 @@
       ]
     },
     "translation-flip": {
-      "sha256": "3fdfe68503b6c6801a383ebfb36b0b802dbd4a15afd7e4b0c4a22c4f369f1254",
+      "sha256": "82b71c4c2e3083e4db7649fd4155409a2cafde247e71b790883c1009fb11b986",
       "diverges": true,
       "where": [
         "matrix",
@@ -165,14 +167,14 @@
       ]
     },
     "stage-liar-cured": {
-      "sha256": "48d968f208b87d4149112507ca648372d601d6dc58c1c4ed62d82390a89a67c5",
+      "sha256": "53da985b4ab0ed5dd5341e93bca8a92cdaf768fd81c1e5c6a5c5250cc2b5224d",
       "diverges": true,
       "where": [
         "matrix"
       ]
     },
     "over-rejector-cured": {
-      "sha256": "82eb6f4cfddd52223fd7f4bcf64e21a7c1d32374b912a6736e79cdcc8f6afcf6",
+      "sha256": "e3a375a82433dd38ae884c2c0662eb65bbc0428b61d2bf9e7df55fcc933c04a5",
       "diverges": true,
       "where": [
         "matrix"
