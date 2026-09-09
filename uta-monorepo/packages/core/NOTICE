@@ -1,0 +1,15 @@
+MarketNow
+Copyright (c) 2025–2026 AliceLabs LLC (Wyoming, USA)
+
+This product includes software and audit methodology licensed under the
+MNNC-1.0 (AliceLabs Modified Non-Commercial License). See LICENSE for details.
+
+Third-party components:
+  - @modelcontextprotocol/sdk (MIT) — Model Context Protocol SDK
+  - canonicalize (Apache-2.0) — JSON Canonicalization Scheme (RFC 8785)
+
+Trademarks:
+  "AliceLabs", "AliceLabs LLC", "MarketNow", "Sentinel", "ATC",
+  "Agent Trust Card", and "MNNC" are trademarks of AliceLabs LLC.
+
+For inquiries: info@alicelabs.site

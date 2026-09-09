@@ -1,24 +1,54 @@
 {
   "name": "marketnow-audit",
   "version": "1.0.0",
-  "description": "Free MCP security audit CLI — 10-layer audit, signed ATC, catalog listing",
+  "description": "Free security intelligence CLI for the agent economy, powered by LIVE MarketNow endpoints. Audit any domain (scam-check: URL shorteners, suspicious TLDs, typosquatting, punycode, RDAP registry age + TLS server-side), verify any Agent Trust Card (ATC) cryptographically (Ed25519 + RFC 8785 JCS over served bytes, signature + hash + expiry), check OCSP-style revocation status for cards and CA keys (MNR-OCSP-1.0: VALID/EXPIRED/REVOKED/SUPERSEDED/UNKNOWN with PERMIT/DENY recommendation, fail-closed on unknown), and browse the 9,000+ skill catalog with Sentinel scores and risk levels. Proper exit codes for CI/agent pipelines: 0 = PERMIT/verified, 2 = CAUTION/UNKNOWN, 1 = DENY/revoked. Zero dependencies.",
   "type": "module",
   "main": "audit.mjs",
   "bin": {
     "marketnow-audit": "audit.mjs"
   },
   "scripts": {
-    "audit": "node audit.mjs"
+    "start": "node audit.mjs --help"
   },
   "keywords": [
     "mcp",
     "security",
     "audit",
-    "free",
+    "scam",
+    "scam-check",
+    "domain-check",
     "cli",
-    "marketnow"
+    "free",
+    "marketnow",
+    "agent-trust",
+    "atc",
+    "agent-trust-card",
+    "ocsp",
+    "revocation",
+    "crl",
+    "ed25519",
+    "rfc-8785",
+    "agent-economy",
+    "ai-agents",
+    "due-diligence"
   ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
   "license": "MNNC-1.0",
-  "homepage": "https://marketnow.site"
+  "homepage": "https://marketnow.site",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alicelabs-llc/universal-trust-adapter.git",
+    "directory": "marketnow/marketnow-cli"
+  },
+  "bugs": {
+    "url": "mailto:support@alicelabs.site"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "audit.mjs",
+    "README.md",
+    "LICENSE"
+  ]
 }
