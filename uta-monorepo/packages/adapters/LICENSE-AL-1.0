@@ -1,0 +1,171 @@
+AliceLabs Source-Available License v1.0 (AL-1.0)
+
+Copyright (c) 2026 AliceLabs LLC
+Copyright (c) 2026 Edison Flores
+Copyright (c) 2026 Alejandro Flores
+All rights reserved.
+
+"MarketNow", "AliceLabs", "Universal Trust Adapter", "UTA", "ATC", "Agent Trust
+Credential", "UTS" and "Universal Trust Schema" are trademarks of AliceLabs LLC.
+
+This license governs use, modification, and redistribution of the software,
+specifications, schemas, adapters, and documentation in this repository. By
+using, copying, modifying, or distributing any part of this work, you accept
+the terms and conditions below.
+
+────────────────────────────────────────────────────────────────────────────────
+1. DEFINITIONS
+────────────────────────────────────────────────────────────────────────────────
+
+1.1 "Software" means all code, specifications, JSON schemas, type definitions,
+adapters, examples, documentation, and any other work in this repository,
+whether in source, object, or any other form.
+
+1.2 "Licensor" means AliceLabs LLC, a Wyoming limited liability company.
+
+1.3 "Licensee" means any person or entity that uses, copies, modifies, or
+distributes the Software under this license.
+
+1.4 "Commercial Use" means any use of the Software, in whole or in part, for
+or in connection with a commercial purpose, including without limitation:
+  (a) use within a commercial product, service, or platform offered to third
+      parties for revenue;
+  (b) use internally within a for-profit organization to deliver goods or
+      services to its customers;
+  (c) use by a contractor, consultant, or agent of a for-profit organization
+      in the course of providing services to that organization;
+  (d) redistribution, sublicensing, or relicensing of the Software, modified
+      or unmodified, to any third party in exchange for monetary or other
+      consideration;
+  (e) integration of the Software, modified or unmodified, into a product,
+      service, or platform that is sold, licensed, or otherwise monetized.
+
+1.5 "Non-Commercial Use" means any use of the Software that is not Commercial
+Use, including without limitation:
+  (a) personal learning, study, or evaluation;
+  (b) academic research at a degree-granting institution;
+  (c) contribution back to the Software via pull request or merge request
+      to the official repository maintained by the Licensor;
+  (d) security review, audit, or vulnerability research disclosed responsibly
+      to the Licensor.
+
+────────────────────────────────────────────────────────────────────────────────
+2. GRANT OF RIGHTS
+────────────────────────────────────────────────────────────────────────────────
+
+2.1 Source code access. The Licensor grants the Licensee a worldwide,
+non-exclusive, non-transferable, non-sublicensable, royalty-free right to:
+  (a) read, inspect, and review the source code of the Software;
+  (b) compile, build, and run the Software for the Licensee's own
+      Non-Commercial Use;
+  (c) modify the Software for the Licensee's own Non-Commercial Use or for
+      contribution back to the Licensor's official repository.
+
+2.2 Contribution. The Licensee may submit modifications, bug fixes, or
+extensions to the Software via pull request to the official repository. If
+accepted by the Licensor, the Licensee agrees to assign all right, title, and
+interest in the contributed modifications to the Licensor, who may license
+them under this or any other license at its sole discretion.
+
+────────────────────────────────────────────────────────────────────────────────
+3. RESTRICTIONS
+────────────────────────────────────────────────────────────────────────────────
+
+3.1 No Commercial Use. The Licensee shall not use the Software, in whole or
+in part, for any Commercial Use without prior written authorization from
+the Licensor. To request Commercial Use authorization, contact
+legal@alicelabs.site.
+
+3.2 No Redistribution. The Licensee shall not redistribute, sublicense,
+relicense, sell, resell, rent, lease, lend, or otherwise transfer the
+Software, modified or unmodified, to any third party, except:
+  (a) as an integral part of a contribution back to the Licensor's official
+      repository; or
+  (b) as explicitly authorized in writing by the Licensor.
+
+3.3 No Forking. The Licensee shall not create, publish, or maintain a fork of
+the Software in any public or private repository, except:
+  (a) a private fork for the Licensee's own Non-Commercial Use that is not
+      published or distributed to any third party; or
+  (b) a fork whose sole purpose is to submit a contribution back to the
+      Licensor's official repository via pull request.
+
+3.4 No Trademark Use. The Licensee shall not use the names "AliceLabs",
+"MarketNow", "Universal Trust Adapter", "UTA", "ATC", "Agent Trust Credential",
+"UTS", "Universal Trust Schema", or any other trademark of the Licensor, in
+any form, without prior written authorization from the Licensor, except to
+refer to the Software for the purpose of describing its origin or for the
+purpose of contribution back to the Licensor's official repository.
+
+3.5 No Removal of Notices. The Licensee shall not remove, alter, or obscure
+any copyright, trademark, or other proprietary notices on or in the Software.
+
+3.6 No Misrepresentation. The Licensee shall not represent or imply that the
+Software, modified or unmodified, is an official product of AliceLabs LLC or
+any of its affiliates without prior written authorization.
+
+────────────────────────────────────────────────────────────────────────────────
+4. COMMERCIAL LICENSING
+────────────────────────────────────────────────────────────────────────────────
+
+4.1 Commercial licenses are available from the Licensor. Commercial Use
+without a commercial license is a material breach of this license.
+
+4.2 To request a commercial license, contact legal@alicelabs.site with a
+description of the intended use case. The Licensor will respond within
+5 business days with licensing terms.
+
+────────────────────────────────────────────────────────────────────────────────
+5. WARRANTY DISCLAIMER
+────────────────────────────────────────────────────────────────────────────────
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+LICENSOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+────────────────────────────────────────────────────────────────────────────────
+6. TERMINATION
+────────────────────────────────────────────────────────────────────────────────
+
+6.1 This license terminates automatically if the Licensee breaches any of
+its terms. Upon termination, the Licensee shall cease all use of the Software
+and destroy all copies in their possession or control.
+
+6.2 The Licensor may terminate this license at any time, for any reason, with
+30 days' written notice to the Licensee.
+
+────────────────────────────────────────────────────────────────────────────────
+7. GOVERNING LAW
+────────────────────────────────────────────────────────────────────────────────
+
+This license shall be governed by and construed in accordance with the laws
+of the State of Wyoming, United States of America, without regard to its
+conflict of law provisions. The Licensee submits to the exclusive jurisdiction
+of the state and federal courts located in Wyoming for any dispute arising
+under this license.
+
+────────────────────────────────────────────────────────────────────────────────
+8. ENTIRE AGREEMENT
+────────────────────────────────────────────────────────────────────────────────
+
+This license constitutes the entire agreement between the Licensor and the
+Licensee with respect to the Software. Any modification must be in writing
+and signed by an authorized representative of the Licensor.
+
+────────────────────────────────────────────────────────────────────────────────
+CONTACT
+────────────────────────────────────────────────────────────────────────────────
+
+AliceLabs LLC
+Wyoming, USA
+Email: legal@alicelabs.site
+Web: https://alicelabs.site
+
+For commercial licensing inquiries: legal@alicelabs.site
+For security disclosures: legal@alicelabs.site
+For general questions: info@alicelabs.site
+
+— AliceLabs Source-Available License v1.0, August 2026

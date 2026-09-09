@@ -1,0 +1,56 @@
+{
+  "card_id": "ATC-TEST-UNKNOWN-FIELD-001",
+  "status": "active",
+  "payload": {
+    "card_id": "ATC-TEST-UNKNOWN-FIELD-001",
+    "schema_version": "2.0.0",
+    "agent_id": "test-agent-extension",
+    "agent_name": "Extension Tolerant Agent",
+    "identity": {
+      "public_key": "MCowBQYDK2VwAyEAvtRhFInVXf939xGvD9i6dhBWAAMFjUAA66Qn2KzEWsg=",
+      "key_algorithm": "Ed25519"
+    },
+    "trust": {
+      "sentinel_review_score": 8,
+      "sentinel_score": 8,
+      "audit_layers_passed": {
+        "L1.5": true,
+        "L2.5": true
+      },
+      "composite_trust": 8,
+      "risk_level": "low"
+    },
+    "capabilities": {
+      "provides": [
+        "fetch"
+      ],
+      "protocol_language": "mcp",
+      "translate": false
+    },
+    "payment": {
+      "method": "none",
+      "wallet_address": null
+    },
+    "metadata": {
+      "issued_at": "2026-09-09T00:00:00Z",
+      "expires_at": "2027-12-31T00:00:00Z",
+      "issuer": "MarketNow Sentinel CA"
+    },
+    "x_uta_extension": {
+      "vendor": "example-corp",
+      "extension_name": "quota-hint",
+      "priority": 3,
+      "note": "Permitted extension field — runners MUST tolerate unknown x_* fields"
+    }
+  },
+  "signature": {
+    "algorithm": "Ed25519 (RFC 8032)",
+    "value": "04eec83d6e83e2d4385a983776554a15232483159de10f5dd32bd40af459a7cd0364429e71b66c01a57bd3f2d4406717785d37e545e9a93820ce48b327567e08",
+    "signed_by": "MarketNow Sentinel Test CA 2 (throwaway, vectors-only, private key PUBLISHED)",
+    "signed_at": "2026-09-09T00:00:00Z",
+    "canonical_json": "RFC_8785_JCS",
+    "ca_key_id": "MCowBQYDK2VwAyEAvtRhFInVXf939xGvD9i6dhBWAAMFjUAA66Qn2KzEWsg=",
+    "evidence_hash": "sha256:unknown_field_test",
+    "policy_version": "2.0.0"
+  }
+}
