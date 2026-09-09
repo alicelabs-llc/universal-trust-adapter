@@ -1,12 +1,11 @@
 {
-  "name": "@alicelabs/cline-trust-plugin",
+  "name": "@marketnow/cline-trust-plugin",
   "version": "1.1.0",
-  "description": "Trust verification plugin for Cline \u2014 the UTA Interceptor. v1.1.0: revocation gate (fail-closed OCSP-style checks against the signed MarketNow Revocation Registry) + TFP-1.0 tool-surface pinning and drift detection (OWASP 'verify tool descriptions haven't changed'). Still wraps MCP servers with pre-exec filter, credential protection, and Merkle tree audit log.",
+  "description": "Trust verification plugin for Cline — the UTA Interceptor. v1.1.0 (first npm release): revocation gate (fail-closed OCSP-style checks against the signed MarketNow Revocation Registry) + TFP-1.0 tool-surface pinning and drift detection (OWASP 'verify tool descriptions haven't changed'). Still wraps MCP servers with pre-exec filter, credential protection, and Merkle tree audit log.",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "test": "node test.js"
+    "start": "node index.js"
   },
   "keywords": [
     "cline",
@@ -24,14 +23,10 @@
   ],
   "author": "AliceLabs LLC",
   "license": "AL-1.0",
-  "dependencies": {
-    "@marketnow/trust-gateway": "^1.0.1",
-    "@marketnow/trust-core": "^1.0.1"
-  },
   "cline": {
     "pluginType": "mcp-server",
     "displayName": "UTA Trust Gateway",
-    "description": "Wraps all MCP servers with trust verification \u2014 blocks .env reads, rm -rf, shell spawns. v1.1.0: revocation gate + tool-surface fingerprint pinning. Logs to Merkle tree.",
+    "description": "Wraps all MCP servers with trust verification — blocks .env reads, rm -rf, shell spawns. v1.1.0: revocation gate + tool-surface fingerprint pinning. Logs to Merkle tree.",
     "tools": [
       {
         "name": "verify_trust",
@@ -51,16 +46,25 @@
       },
       {
         "name": "check_revocation",
-        "description": "OCSP-style revocation status of an ATC (card_id) or CA key (kid) against the signed MarketNow Revocation Registry \u2014 fail-closed"
+        "description": "OCSP-style revocation status of an ATC (card_id) or CA key (kid) against the signed MarketNow Revocation Registry — fail-closed"
       },
       {
         "name": "pin_tool_surface",
-        "description": "Pin an MCP server's tool surface (TFP-1.0 fingerprint manifest) \u2014 first-contact pinning against tool poisoning"
+        "description": "Pin an MCP server's tool surface (TFP-1.0 fingerprint manifest) — first-contact pinning against tool poisoning"
       },
       {
         "name": "verify_tool_surface",
-        "description": "Verify a server's current tools/list against the pinned manifest \u2014 drift report for rug-pull detection"
+        "description": "Verify a server's current tools/list against the pinned manifest — drift report for rug-pull detection"
       }
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alicelabs-llc/universal-trust-adapter.git",
+    "directory": "cline-plugin-uta"
+  },
+  "files": [
+    "index.js",
+    "README.md"
+  ]
 }

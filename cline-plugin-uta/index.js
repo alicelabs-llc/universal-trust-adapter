@@ -1,5 +1,5 @@
 /**
- * @alicelabs/cline-trust-plugin v1.1.0
+ * @marketnow/cline-trust-plugin v1.1.0
  * Trust verification plugin for Cline — the UTA Interceptor
  *
  * Wraps MCP servers with @marketnow/trust-gateway
@@ -18,21 +18,55 @@
  * AliceLabs Source-Available License v1.0 (AL-1.0)
  */
 
-import { createPreExecFilter } from '@marketnow/trust-gateway';
 import { createHash } from 'node:crypto';
 
-const filter = createPreExecFilter({
+const auditLog = [];
+
+// v1.1.0: the pre-exec filter is INLINE and self-contained (no external deps —
+// the previous @marketnow/trust-gateway import pointed at an API that was never
+// published; every rule below is enforced here, fail-closed, testable offline).
+const filter = {
   allowHosts: ['api.github.com', 'registry.npmjs.org'],
   denyActions: ['shell_exec', 'rm_rf', 'DROP_TABLE', 'DELETE_FROM'],
   blockedPaths: ['.env', '.aws/credentials', '.ssh/id_rsa', '.npmrc', '.git-credentials'],
   requireApprovalAbove: { spend_usd: 1 },
-  logSink: (event) => {
-    auditLog.push(event);
-    console.error(`[UTA] ${event.decision}: ${event.tool_name} — ${event.reason || 'allowed'}`);
-  },
-});
 
-const auditLog = [];
+  async check(toolName, args) {
+    return checkInterceptor(toolName, args);
+  },
+
+  // Wrap an external MCP server: every tools/call passes the pre-exec filter
+  // and (when configured) the fail-closed revocation gate before reaching the
+  // wrapped server. Vetoed calls return a receipt and never execute downstream.
+  wrap(externalServer) {
+    const self = this;
+    return {
+      name: (externalServer && externalServer.name) || 'wrapped-mcp-server',
+      async handleRequest(method, params) {
+        if (method !== 'tools/call') {
+          return externalServer.handleRequest(method, params);
+        }
+        const { name, arguments: args } = params || {};
+        const veto = await self.check(name || '', args);
+        if (!veto.allowed) {
+          const receipt_id = `UTA-${Date.now()}`;
+          auditLog.push({ decision: 'DENY', tool_name: name, rule: veto.rule, reason: veto.reason, receipt_id, at: new Date().toISOString() });
+          console.error(`[UTA] DENY: ${name} — ${veto.reason}`);
+          return { error: 'pre_exec_veto', reason: veto.reason, rule: veto.rule, receipt_id };
+        }
+        const gate = await revocationGate();
+        if (gate.gated && gate.recommendation !== 'PERMIT') {
+          const receipt_id = `UTA-${Date.now()}`;
+          auditLog.push({ decision: 'DENY', tool_name: name, rule: 'revocation_gate', reason: `status=${gate.status}`, receipt_id, at: new Date().toISOString() });
+          console.error(`[UTA] DENY: ${name} — revocation gate status=${gate.status}`);
+          return { error: 'pre_exec_veto', reason: `revocation gate: status=${gate.status}`, rule: 'revocation_gate', produced_at: gate.produced_at || gate.at, receipt_id };
+        }
+        auditLog.push({ decision: 'ALLOW', tool_name: name, rule: 'pass', at: new Date().toISOString() });
+        return externalServer.handleRequest(method, params);
+      },
+    };
+  },
+};
 
 // ─── v1.1.0: revocation gate (fail-closed, 5-min TTL cache) ────────────────
 const OCSP_URL = 'https://www.marketnow.site/api/ocsp';
@@ -360,7 +394,7 @@ export default {
     }
   },
 
-  // Wrap an external MCP server with trust verification
+  // Wrap an external MCP server with trust verification (inline, fail-closed)
   wrap(externalServer) {
     return filter.wrap(externalServer);
   },
