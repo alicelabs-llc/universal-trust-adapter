@@ -1,0 +1,80 @@
+{
+  "created": "2026-09-09T02:26:30Z",
+  "digests": {
+    "score_runner_v1_3_3": {
+      "sha256": "deec4cf670bed7b30eae0995b15c1c08970c29e3e72087329e0544aaf85aa972",
+      "bytes": 15881,
+      "served_from": [
+        "https://raw.githubusercontent.com/alicelabs-llc/universal-trust-adapter/5a5f76bda0e845e94068be1d3935dc4e997f6f2d/uta-repo/tests/conformance/score-runner.mjs",
+        "https://www.marketnow.site/uta/conformance/score-runner.mjs"
+      ],
+      "note": "the tested thing: reference scorer with the TWO-SIDED validity window (issued_at <= NOW < expires_at) and derived generated-card ground truth — fixes anp2 bugs 1 and 2 (comment 3ec7d)"
+    },
+    "generator_v1_3_3": {
+      "sha256": "5688cf90c83aa833d636ac169664ebd6031ea7a26e965b99248cf649128313c6",
+      "bytes": 11666,
+      "served_from": [
+        "https://raw.githubusercontent.com/alicelabs-llc/universal-trust-adapter/5a5f76bda0e845e94068be1d3935dc4e997f6f2d/uta-repo/tests/conformance/vectors/generate-accept-vectors.mjs",
+        "https://www.marketnow.site/uta/conformance/vectors/generate-accept-vectors.mjs"
+      ],
+      "note": "issue dates derived from the wall clock (1..729 days back, +3y), never the PRNG; fail-closes at generation on window violation. Rerun of the reported command (--count 60 --seed 7): 0/60 future-dated (was 32/60)"
+    },
+    "premature_atc_vector": {
+      "sha256": "68e6fc56102776e8e9ba35f86d6ca7144e664b2a90f9be51de82d94ce72fab96",
+      "bytes": 1392,
+      "served_from": [
+        "https://raw.githubusercontent.com/alicelabs-llc/universal-trust-adapter/5a5f76bda0e845e94068be1d3935dc4e997f6f2d/uta-repo/tests/conformance/vectors/premature-atc.json",
+        "https://www.marketnow.site/uta/conformance/vectors/premature-atc.json"
+      ],
+      "note": "NEW fixed vector #14: properly signed by ca-test-2 (pinned anchor, published private key), active, issued 2030-01-01 / expires 2032-01-01 — the ONLY defect is the lower bound. The exact mirror of expired-atc. canonical bytes sha256: e86b08901dcf94c836bdfa1107d92a5564c1e6059b89be18a622bc1131b011b4"
+    },
+    "runner_answer_key_v1_3_3": {
+      "sha256": "4063919bd4e3b118973cc2694d8c069ef24f8fa24d4cf9b0c77f4267e983c738",
+      "bytes": 4670,
+      "served_from": [
+        "https://raw.githubusercontent.com/alicelabs-llc/universal-trust-adapter/5a5f76bda0e845e94068be1d3935dc4e997f6f2d/uta-repo/tests/conformance/runner-tests/answer-key.json",
+        "https://www.marketnow.site/uta/conformance/runner-tests/answer-key.json"
+      ],
+      "note": "behavioral oracle re-recorded 2026-09-09 after the fixes: 14 fixed vectors (premature-atc included), 8-runner matrix, 10/10 mutants caught, valid through 2027-08-19 (fail-closed after)"
+    },
+    "runner_test_suite_v1_3_3": {
+      "sha256": "e8454eb5b2c0323ef0678058b27d9607282376cdb6f79a7bd73a637db1c6502e",
+      "bytes": 14777,
+      "served_from": [
+        "https://raw.githubusercontent.com/alicelabs-llc/universal-trust-adapter/5a5f76bda0e845e94068be1d3935dc4e997f6f2d/uta-repo/tests/conformance/runner-tests/runner-tests.mjs",
+        "https://www.marketnow.site/uta/conformance/runner-tests/runner-tests.mjs"
+      ],
+      "note": "24 checks; window scan now tracks earliest future issued_at as well as earliest future expires_at"
+    },
+    "runner_mutant_definitions_v1_3_3": {
+      "sha256": "9f082e251920b477407c6f299f7fc941e20e026dcafcb88dde2db27621f0cc46",
+      "bytes": 4570,
+      "served_from": [
+        "https://raw.githubusercontent.com/alicelabs-llc/universal-trust-adapter/5a5f76bda0e845e94068be1d3935dc4e997f6f2d/uta-repo/tests/conformance/runner-tests/mutants.json",
+        "https://www.marketnow.site/uta/conformance/runner-tests/mutants.json"
+      ],
+      "note": "10 deterministic byte patches; occurrence counts updated for the derived-expectation code paths (anchor-narrow 4, expiry-blind 5, status-blind 5, sig-accept-all 5) — the mutants now also corrupt the oracle derivation and are still caught"
+    },
+    "runner_tests_readme_v1_3_3": {
+      "sha256": "066f189fb9425d0386428255be303ccda31d27af82290f6d18862c1811e4a0c9",
+      "bytes": 6175,
+      "served_from": [
+        "https://raw.githubusercontent.com/alicelabs-llc/universal-trust-adapter/5a5f76bda0e845e94068be1d3935dc4e997f6f2d/uta-repo/tests/conformance/runner-tests/README.md",
+        "https://www.marketnow.site/uta/conformance/runner-tests/README.md"
+      ],
+      "note": "documents the v1.3.3 fixes and the rerun evidence with anp2network exact commands"
+    },
+    "conformance_vectors_index_v1_3_2": {
+      "sha256": "bb5329e560dadc5b9ac9e5d77de7982ca17f11bc49879fc1eeb26f1dc556141f",
+      "bytes": 33464,
+      "served_from": [
+        "https://raw.githubusercontent.com/alicelabs-llc/universal-trust-adapter/3e3fdbb707d797ffa1ea093048e8e8f3fd2b65d4/uta-repo/tests/conformance/vectors/_index.json"
+      ],
+      "note": "index state at signing time (pre-v1.3.3, the runner-under-test release); the v1.3.3 index references this entry"
+    }
+  },
+  "subject": "universal-trust-adapter: two-sided validity window + derived generated-card ground truth + premature-atc — fixes anp2network bug report 3ec7d (conformance suite v1.3.3)",
+  "publisher": "AliceLabs LLC",
+  "repo": "github.com/alicelabs-llc/universal-trust-adapter",
+  "commit": "5a5f76bda0e845e94068be1d3935dc4e997f6f2d"
+}

@@ -384,7 +384,7 @@
    "source manifest (12 files)": "5665c19bbfef0212c99ad1a5e156e8b265f3c5a9df05317f21775c34188e20e0",
    "conformance vectors _index.json v1.3.0": "358a18d58aaef16c3c64a2622404d88d8af67e1cb6c31ea76dac12626eab7597"
   },
-  "verify_command": "node verify-rekor.mjs",
+  "verify_command": "node verify-rekor.mjs --record anchor-record.json --statement anchor-statement.json (entry #1) | --record anchor-record-v2.json --statement anchor-statement-v2.json (entry #2, runner under test) | --record anchor-record-v3.json --statement anchor-statement-v3.json (entry #3, two-sided window + derived ground truth)",
   "live": [
    "https://www.marketnow.site/uta/conformance/anchors/anchor-statement.json",
    "https://www.marketnow.site/uta/conformance/anchors/anchor-record.json",
@@ -408,6 +408,27 @@
    "runner-tests/mutants.json": "a23b19fbef01d8664d4b14e0b4dc993138a83b5bda9b785e6915f083ee92d929",
    "runner-tests/README.md": "c1880604aa932202d0e7e9ea741520b9bea7a7dca217e5cf4fa90ad49cd6f436",
    "_index.json (v1.3.1, pre-release state)": "ee9de8535b9498624b60e578496c5970291ff20ad1e9bae20f9f3496c6303da1"
+  },
+  "rekor_v3": {
+   "log": "https://rekor.sigstore.dev",
+   "entry_uuid": "108e9186e8c5677afa82e19ae0b973f8534ef7af35ee1e346ed149ce4b0342367eee31912d996850",
+   "log_index": 2764479676,
+   "integrated_time": "2026-09-09T02:26:31.000Z",
+   "entry_url": "https://rekor.sigstore.dev/api/v1/log/entries?logIndex=2764479676",
+   "countersignature": "ECDSA P-256 over sha256(anchor statement), throwaway key, private key discarded after signing",
+   "statement_sha256": "0b1913c6b30311333357f3d9629ae69ea7d10b7cbd19ac64833889a3c20e0f60",
+   "subject": "two-sided validity window + derived generated-card ground truth + premature-atc (v1.3.3) — fixes anp2network bug report 3ec7d"
+  },
+  "anchored_v3": {
+   "score-runner.mjs (v1.3.3, two-sided window + derived expectations)": "deec4cf670bed7b30eae0995b15c1c08970c29e3e72087329e0544aaf85aa972",
+   "generate-accept-vectors.mjs (v1.3.3, clock-derived issue dates)": "5688cf90c83aa833d636ac169664ebd6031ea7a26e965b99248cf649128313c6",
+   "premature-atc.json (fixed vector #14, issued 2030-01-01)": "68e6fc56102776e8e9ba35f86d6ca7144e664b2a90f9be51de82d94ce72fab96",
+   "premature-atc canonical bytes": "e86b08901dcf94c836bdfa1107d92a5564c1e6059b89be18a622bc1131b011b4",
+   "runner-tests/answer-key.json (re-recorded 2026-09-09, 14 vectors)": "4063919bd4e3b118973cc2694d8c069ef24f8fa24d4cf9b0c77f4267e983c738",
+   "runner-tests/runner-tests.mjs (24 checks)": "e8454eb5b2c0323ef0678058b27d9607282376cdb6f79a7bd73a637db1c6502e",
+   "runner-tests/mutants.json (10 mutants, updated occurrences)": "9f082e251920b477407c6f299f7fc941e20e026dcafcb88dde2db27621f0cc46",
+   "runner-tests/README.md (v1.3.3)": "066f189fb9425d0386428255be303ccda31d27af82290f6d18862c1811e4a0c9",
+   "conformance vectors _index.json v1.3.2 (pre-release state)": "pinned inside the Rekor statement, served from raw.githubusercontent @3e3fdbb7"
   }
  },
  "runner_under_test": {
