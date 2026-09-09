@@ -6,14 +6,33 @@
 [![npm version](https://img.shields.io/npm/v/agent-trust-card.svg)](https://www.npmjs.com/package/agent-trust-card)
 [![GitHub release](https://img.shields.io/github/v/release/alicelabs-llc/universal-trust-adapter)](https://github.com/alicelabs-llc/universal-trust-adapter/releases)
 [![license](https://img.shields.io/badge/license-AL--1.0-blue.svg)](./LICENSE-AL-1.0)
-[![conformance tests](https://img.shields.io/badge/conformance-23%2F23-brightgreen.svg)](./tests/test.mjs)
-[![test vectors](https://img.shields.io/badge/test%20vectors-41%20total-blue.svg)](./marketnow/docs/atc-spec/test-vectors/)
+[![conformance](https://img.shields.io/badge/conformance-v1.3.3-brightgreen.svg)](https://www.marketnow.site/uta/conformance/)
+[![Rekor anchored](https://img.shields.io/badge/Sigstore%20Rekor-anchored-blue.svg)](https://www.marketnow.site/uta/conformance/anchors/)
 
 UTA translates between ALL trust credential formats used by AI agents via a canonical Universal Trust Schema (UTS).
 
 Like Zapier connects applications, **UTA connects trust standards**.
 
 Built by **Edison Flores** & **Alejandro Flores** at **AliceLabs LLC** (Wyoming, USA).
+
+---
+
+## ⚡ Verify our claims — the stranger test (30 seconds)
+
+Every trust claim in this repo is re-derivable by a stranger, from live public URLs, with no account and no trust in our endpoints:
+
+```bash
+# 9 checks against Sigstore Rekor's LIVE transparency-log data:
+# entry exists · content hash · countersignature · signed tree head ·
+# Merkle inclusion proof · C2SP checkpoint — all verified locally.
+curl -sL https://www.marketnow.site/uta/conformance/anchors/verify-rekor.mjs -o verify-rekor.mjs
+node verify-rekor.mjs
+
+# Full conformance suite (14 vectors, stage scoring, curl + node only):
+# https://www.marketnow.site/uta/conformance/
+```
+
+**Exercised in production, receipts public:** we rotated our CA key `mn-ca-002` → `mn-ca-003` on 2026-09-08 under suspected compromise (no confirmed leak). Revocation published same-day. Three Rekor log entries (logIndex `2762061972`, `2764017355`, `2764479676`) anchor the digests, and the published npm tarball's tar layer rebuilds byte-exact from source (sha256 `519d406a…`).
 
 ---
 
@@ -60,7 +79,17 @@ The 2026 gray-market quota trust crisis, documented — plus the receipts-based 
 - [Sourced timeline (EN)](https://rentry.co/y26cps92) — The 2026 AI Quota Gray-Market Trust Crisis — A Sourced Timeline
 - [Series index](https://telegra.ph/MarketNow-Global-Trust-Series-2026-09-08) · Verify a trust card: https://marketnow.site/verify
 
-## 🆕 What's new — v1.2.0
+## 🆕 What's new — v1.3.3 (the receipts release)
+
+**Stranger-verifiable trust evidence:**
+
+- **Rekor transparency anchors** — result digests committed to Sigstore's public append-only log; 9 local checks against live third-party data (run the stranger test above)
+- **Exercised CA key rotation** — `mn-ca-002` → `mn-ca-003` under suspected compromise, revocation published same-day, verifiers fail-safe inside the window
+- **Reproducible build** — `agent-trust-card@1.1.2`'s tar layer rebuilds byte-exact from source (the `.tgz` is anchored by digest; the tar layer by rebuild)
+- **New failure vectors** — `premature-atc` (credential accepted before verification completes), `expired-atc` (key no longer valid at verify time), stage scoring, published generator CA
+- **Conformance v1.3.3** — 14 public vectors · 24 checks + 10 mutants (runner-under-test) · versioned digests
+
+### v1.2.0 — Domain Reputation Endpoint (previous)
 
 **Domain Reputation Endpoint** (`/api/reputation`) — UTA now answers a second class of trust
 question. The Universal Trust API verifies *credentials*; this endpoint answers
@@ -88,7 +117,7 @@ UTA supports **TWO versions of ATC** (Agent Trust Card):
 
 | Version | Status | Multi-sig | Spec file | Description |
 |---|---|---|---|---|
-| **ATC/1.0** | Public, stable | Single-sig (Ed25519) | [`SPEC.md`](./marketnow/docs/atc-spec/SPEC.md) | Simple, single-CA credential. SDK at `agent-trust-card@1.1.1` on NPM. |
+| **ATC/1.0** | Public, stable | Single-sig (Ed25519) | [`SPEC.md`](./marketnow/docs/atc-spec/SPEC.md) | Simple, single-CA credential. SDK at `agent-trust-card@1.1.2` on NPM. |
 | **ATC v3.0** | Draft 00, pre-public review | Multi-format (Ed25519 + EAT-CWT + W3C VC) | [`RFC-ATC-v3-Draft-00.md`](./marketnow/docs/atc-spec/RFC-ATC-v3-Draft-00.md) | Multi-sig (N-of-M), multi-format. Backward-compatible with v2.0. Used internally by UTA. |
 
 ATC v3.0 supersedes ATC v2.0 (which itself was the basis for the simpler ATC/1.0 SDK). A v2.0 ATC remains valid; v3.0 verifiers accept v2.0 credentials and treat them as having a single signature.
@@ -106,30 +135,31 @@ npm install agent-trust-card        # ATC/1.0 SDK
 npm install -g marketnow-mcp       # MCP server (13 trust tools)
 ```
 
-## 📊 Project stats (Aug 25, 2026)
+## 📊 Project stats (Sep 9, 2026)
 
 | Metric | Value |
 |---|---|
-| NPM packages | 7 |
-| NPM monthly downloads | 2,276 |
+| NPM packages | 7 (combined last-week downloads: 226) |
+| Conformance (live) | 14 public vectors · 24 checks + 10 mutants · v1.3.3 |
+| Transparency anchors | 3 Rekor log entries (verify-rekor.mjs, 9 checks) |
+| CA key rotation | exercised 2026-09-08 (`mn-ca-002` → `mn-ca-003`) |
 | Test vectors (ATC/1.0) | 5 frozen + manifest |
 | Test vectors (ATC v3.0) | 36 (8 positive + 17 negative + 5 mutation + 6 cross-language) |
-| Conformance tests | 23/23 pass |
 | Format adapters | 8 (ATC, EAT-AI, ZTA, A2A, MCP Card, W3C VC, OAuth, SPIFFE) |
-| Dev.to articles | 96 |
+| Dev.to articles | 100 (EN + 15 languages) |
 | Download channels | 5 (NPM, jsDelivr, unpkg, marketnow.site, GitHub) |
 
 ## 📦 Packages
 
-| Package | Version | Description | Monthly downloads |
+| Package | Version | Description | Downloads (last week) |
 |---|---|---|---|
-| [`marketnow-mcp`](https://www.npmjs.com/package/marketnow-mcp) | 1.10.0 | MCP server with 13 trust tools | 958 |
-| [`agent-trust-card`](https://www.npmjs.com/package/agent-trust-card) | 1.1.1 | ATC/1.0 SDK (issue, verify, inspect) | 518 |
-| [`marketnow-install-stack`](https://www.npmjs.com/package/marketnow-install-stack) | 1.1.0 | Multi-source installer | 345 |
-| [`@marketnow/uts`](https://www.npmjs.com/package/@marketnow/uts) | 2.0.0 | Universal Trust Schema | 125 |
-| [`@marketnow/trust-core`](https://www.npmjs.com/package/@marketnow/trust-core) | 1.0.0 | Trust Engine core | 122 |
-| [`@marketnow/trust-adapters`](https://www.npmjs.com/package/@marketnow/trust-adapters) | 1.0.0 | 8 format adapters | 106 |
-| [`@marketnow/trust-gateway`](https://www.npmjs.com/package/@marketnow/trust-gateway) | 1.0.0 | Gateway + post-exec filter | 102 |
+| [`marketnow-mcp`](https://www.npmjs.com/package/marketnow-mcp) | 1.10.1 | MCP server with 13 trust tools | 76/wk |
+| [`agent-trust-card`](https://www.npmjs.com/package/agent-trust-card) | 1.1.2 | ATC/1.0 SDK (issue, verify, inspect) | 27/wk |
+| [`marketnow-install-stack`](https://www.npmjs.com/package/marketnow-install-stack) | 1.1.1 | Multi-source installer | 15/wk |
+| [`@marketnow/uts`](https://www.npmjs.com/package/@marketnow/uts) | 2.0.1 | Universal Trust Schema | 36/wk |
+| [`@marketnow/trust-core`](https://www.npmjs.com/package/@marketnow/trust-core) | 1.0.1 | Trust Engine core | 28/wk |
+| [`@marketnow/trust-adapters`](https://www.npmjs.com/package/@marketnow/trust-adapters) | 1.0.1 | 8 format adapters | 25/wk |
+| [`@marketnow/trust-gateway`](https://www.npmjs.com/package/@marketnow/trust-gateway) | 1.0.1 | Gateway + post-exec filter | 19/wk |
 
 ## 🛡️ 5 Anti-ban download channels
 
