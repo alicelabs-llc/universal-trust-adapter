@@ -94,10 +94,17 @@ const EXT_NAMES = ['x_gen_priority', 'x_gen_region', 'x_gen_quota', 'x_gen_lane'
 const randomCard = () => {
   const nCaps = 1 + Math.floor(rand() * 3);
   const caps = [...CAPS].sort(() => rand() - 0.5).slice(0, nCaps).sort();
-  const year = 2026 + Math.floor(rand() * 2);
-  const month = 1 + Math.floor(rand() * 12);
-  const day = 1 + Math.floor(rand() * 28);
-  const expYear = year + 2;
+  // v1.3.3 fix (anp2 bug 1): issued_at is DERIVED FROM THE CLOCK and clamped
+  // to the past — 1..729 days back — so a generated card is never "not yet
+  // valid". expires_at = issued_at + 3 years, always inside the future.
+  // The old code drew the issue year as 2026|2027 and randomized month/day,
+  // so ~half the cards were dated ahead of the clock while the sidecar still
+  // declared expiry_check: pass. Dates now follow the wall clock, never the PRNG.
+  const backDays = 1 + Math.floor(rand() * 729);
+  const issuedOn = new Date(Date.now() - backDays * 86400000);
+  const expiresOn = new Date(issuedOn.getTime() + 1095 * 86400000); // +3y ≥ now+366d
+  const issuedAt = issuedOn.toISOString().slice(0, 10) + 'T00:00:00Z';
+  const expiresAt = expiresOn.toISOString().slice(0, 10) + 'T00:00:00Z';
   const score = 6 + Math.floor(rand() * 5);
   const card = {
     card_id: `ATC-GEN-${hex(4).toUpperCase()}`,
@@ -118,8 +125,8 @@ const randomCard = () => {
       capabilities: { provides: caps, protocol_language: pick(PROTOCOLS), translate: rand() > 0.5 },
       payment: { method: 'none', wallet_address: null },
       metadata: {
-        issued_at: `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T00:00:00Z`,
-        expires_at: `${expYear}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T00:00:00Z`,
+        issued_at: issuedAt,
+        expires_at: expiresAt,
         issuer: 'MarketNow Sentinel Generator CA',
       },
     },
@@ -174,9 +181,17 @@ for (let i = 0; i < count; i++) {
   //   accept:      signature verifies under declared ca-test-2, declared key IS the anchor
   //   self-signed: signature verifies under the declared (attacker) key, declared key is NOT the anchor
   //   wrong-ca:    signature does NOT verify under declared ca-test-2 (signed by someone else)
+  //   window:      issued_at <= NOW < expires_at — BOTH bounds, enforced at generation
   const declaredPub = createPublicKey({ key: Buffer.from(card.payload.identity.public_key, 'base64'), format: 'der', type: 'spki' });
   const sigOk = cryptoVerify(null, buf, declaredPub, Buffer.from(card.signature.value, 'hex'));
   const isAnchor = card.payload.identity.public_key === ca2Spki;
+  const nowStamp = new Date().toISOString().slice(0, 10) + 'T00:00:00Z';
+  const notBeforeOk = card.payload.metadata.issued_at <= nowStamp;
+  const notAfterOk = card.payload.metadata.expires_at > nowStamp;
+  if (!notBeforeOk || !notAfterOk) {
+    console.error(`FATAL: ${mode}-mode card ${card.card_id} violates the validity window (issued_at ${card.payload.metadata.issued_at} vs NOW ${nowStamp}, expires_at ${card.payload.metadata.expires_at}) — the clock-derived date clamp failed`);
+    process.exit(1);
+  }
   const expectations = {
     accept: { sigOk: true, isAnchor: true },
     'self-signed': { sigOk: true, isAnchor: false },
@@ -200,7 +215,7 @@ for (let i = 0; i < count; i++) {
     expected_stages: {
       signature_verification: sigOk ? 'pass' : 'fail',
       trust_anchor_key_selection: isAnchor ? 'pass' : 'fail',
-      expiry_check: 'pass', // expires 2 years after a 2026-2027 issue date
+      expiry_check: 'pass', // v1.3.3: enforced by the self-check above — BOTH bounds hold
       status_check: 'pass',
     },
     sha256: sha256hex(buf),
