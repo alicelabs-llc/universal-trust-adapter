@@ -1,28 +1,54 @@
 {
   "name": "marketnow-install-stack",
-  "version": "1.1.1",
-  "description": "One-click multi-skill installation for MarketNow agent stacks",
+  "version": "1.2.0",
+  "description": "One-command curated skill-stack installs for Claude Desktop, Cursor and Cline. Resolves stacks against the LIVE MarketNow catalog (9,000+ MCP skills; /api/skills?category=...&filter=free) with an embedded offline fallback, follows HTTP redirects, honors each skill's real install command (npx / uvx), merges into your existing agent config with automatic backup, and supports --help / --list. Stacks: financial-auditor (Finance), security-analyst (Security), data-pipeline (Data), dev-productivity (Developer Tools), growth-hacking (AI/ML). v1.2.0 reliability release — fixes the broken apex-domain fetch and the removed /api/stacks endpoint from v1.1.x.",
+  "type": "commonjs",
+  "main": "index.js",
   "bin": {
-    "install-stack": "./index.js"
+    "marketnow-install-stack": "index.js",
+    "install-stack": "index.js"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js --help"
   },
   "keywords": [
     "mcp",
-    "marketnow",
-    "agent",
-    "stack",
-    "bundle"
+    "model-context-protocol",
+    "mcp-server",
+    "mcp-marketplace",
+    "mcp-catalog",
+    "mcp-skills",
+    "claude",
+    "claude-desktop",
+    "cursor",
+    "cline",
+    "ai-agents",
+    "agent-skills",
+    "skill-stack",
+    "install",
+    "installer",
+    "cli",
+    "npx",
+    "uvx",
+    "marketnow"
   ],
+  "author": "AliceLabs LLC <info@alicelabs.site>",
   "license": "MNNC-1.0",
+  "homepage": "https://marketnow.site",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alicelabs-llc/universal-trust-adapter.git",
     "directory": "marketnow/install-stack-cli"
   },
-  "homepage": "https://marketnow.site",
   "bugs": {
-    "url": "https://github.com/alicelabs-llc/universal-trust-adapter/issues"
-  }
+    "url": "mailto:support@alicelabs.site"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ]
 }

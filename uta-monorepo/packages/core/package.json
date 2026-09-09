@@ -1,7 +1,7 @@
 {
   "name": "@marketnow/trust-core",
-  "version": "1.0.1",
-  "description": "UTA Verification Core \u2014 12-stage pipeline, Ed25519 (RFC 8032), JCS (RFC 8785), PoP, Revocation (CRL+OCSP+Bitstring), Supply Chain (SBOM+Sigstore)",
+  "version": "1.0.2",
+  "description": "UTA Verification Core — 12-stage pipeline, Ed25519 (RFC 8032), JCS (RFC 8785), PoP, Revocation (CRL+OCSP+Bitstring), Supply Chain (SBOM+Sigstore)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [

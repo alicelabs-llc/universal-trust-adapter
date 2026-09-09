@@ -25,6 +25,12 @@
  *  14. marketnow_check_revocation      — OCSP-style revocation status (card_id | kid) (NEW)
  *  15. marketnow_fingerprint_tool      — TFP-1.0 tool fingerprinting + drift detection (NEW)
  *
+ * v1.10.3 (September 2026) — Security Hardening
+ *   - @modelcontextprotocol/sdk upgraded 0.5.0 -> 1.30.0, resolving advisory
+ *     GHSA-w48q-cv73-mx4w (DNS rebinding protection). npm audit: 0
+ *     vulnerabilities. The low-level Server API is unchanged — fully
+ *     backwards compatible, same 15 tools, same protocol behavior.
+ *
  * v1.10.2 (September 2026) — Revocation + Tool Fingerprinting (roadmap v5.1)
  *   - New tool: marketnow_check_revocation — per-subject revocation status
  *     against the signed MarketNow Revocation Registry (MNR-CRL-1.0) + live
@@ -524,7 +530,7 @@ async function recommendSkills(args) {
 const server = new Server(
   {
     name: 'marketnow',
-    version: '1.10.2',
+    version: '1.10.3',
   },
   {
     capabilities: {
@@ -1002,4 +1008,4 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 // ─── Start server ───────────────────────────────────────────────────────────
 const transport = new StdioServerTransport();
 await server.connect(transport);
-console.error('MarketNow MCP Server v1.10.2 running on stdio (15 tools, marketnow_* namespace, revocation + TFP-1.0 fingerprinting)');
+console.error('MarketNow MCP Server v1.10.3 running on stdio (15 tools, marketnow_* namespace, revocation + TFP-1.0 fingerprinting, SDK 1.30.0)');
