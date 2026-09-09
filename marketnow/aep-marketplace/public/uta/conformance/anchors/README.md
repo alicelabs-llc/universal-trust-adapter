@@ -100,3 +100,57 @@ cd ../conformance/runner-tests && node runner-tests.mjs
 ```
 
 24 checks: runner bytes match the anchored key, the separation matrix and reference verdict reproduce it row by row, and all 10 mutants are caught. The behavioral oracle is the answer key; the bytes oracle is this entry. Between them, the runner is neither trusted nor untested.
+
+
+---
+
+# Entry #4 — the revocation registry is anchored (MNR-CRL-1.0)
+
+Roadmap v5.1 item 5 shipped: the MarketNow Revocation Registry — a signed,
+append-only CRL for Agent Trust Cards and CA keys. Entry #4 anchors it in Rekor,
+so the revocation history itself is third-party-checkable ("Certificate
+Transparency for agents").
+
+| Subject | value |
+|---|---|
+| `crl.json` full file (sha256) | `205f72695f74ff43abcb15f1d6dec8de79506ce40f83ab2802051c10412afb34` |
+| CRL signed payload (MNR-CRL-1.0 domain, RFC 8785 JCS) | `978dd807c6d2c95b…` (full value in the statement) |
+| registry key | `mn-revoc-001` (Ed25519, delegated — the CA key never signs revocations) |
+
+Seeded with REAL events:
+
+| Subject | Status | Since |
+|---|---|---|
+| ATC-2026-5837752 | REVOKED (SUPERSEDED) | 2026-07-18 |
+| ATC-2026-5936297 | REVOKED (SUPERSEDED) | 2026-07-22 |
+| ATC-2026-9880252 | REVOKED (SUPERSEDED) | 2026-07-23 |
+| mn-ca-002 | REVOKED (KEY_COMPROMISE) | 2026-09-08 |
+
+## The Rekor entry #4
+
+- **Log:** https://rekor.sigstore.dev
+- **Entry UUID:** `108e9186e8c5677a90923bac85a524d43989b8475f02ef7cabac69594c884e1caf18bc7e8a559368`
+- **Log index:** `2771735480` (tree-local index `2649831218`)
+- **Integrated time:** `2026-09-09T17:24:25Z`
+- **Countersignature:** ECDSA P-256 over sha256(statement v4); fresh throwaway key, private key discarded after signing.
+
+## Verify it yourself
+
+```bash
+node verify-rekor.mjs --record anchor-record-v4.json --statement anchor-statement-v4.json
+```
+
+Same nine independent checks (existence, logID, content hash, countersignature,
+key match, signedEntryTimestamp, Merkle inclusion fold, checkpoint signature,
+tree coverage) — all local cryptography against live third-party data.
+
+Then verify the CRL's own Ed25519 signature (registry key in `registry-key.json`):
+
+```bash
+node -e "…see /uta/revocations/README.md — sha256 + Ed25519 over MNR-CRL-1.0 domain…"
+```
+
+The signed CRL lives at `/uta/revocations/crl.json`; live status resolution at
+`/api/ocsp?card_id=…` and `/api/ocsp?kid=…` (fail-closed); the MCP tool is
+`marketnow_check_revocation`. The npm package `marketnow-mcp@1.10.2` exposes
+both `marketnow_check_revocation` and `marketnow_fingerprint_tool` (TFP-1.0).

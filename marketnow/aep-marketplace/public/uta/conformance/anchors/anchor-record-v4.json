@@ -1,0 +1,51 @@
+{
+  "schema": "uta-rekor-anchor/1.0",
+  "log": {
+    "url": "https://rekor.sigstore.dev",
+    "operator": "Sigstore (public good instance)",
+    "log_index": 2771735480,
+    "uuid": "108e9186e8c5677a90923bac85a524d43989b8475f02ef7cabac69594c884e1caf18bc7e8a559368",
+    "integrated_time": 1788974665,
+    "integrated_time_iso": "2026-09-09T17:24:25.000Z",
+    "log_id": "c0d23d6ad406973f9559f3ba2d1ca01f84147d8ffc5b8445c224f98b9591801d"
+  },
+  "statement": {
+    "file": "anchor-statement-v4.json",
+    "canonical_sha256": "954649a60531f7d1270ce386b7dcef05048814b87fa38010684327ad5283ea91",
+    "canonical_bytes": 2380,
+    "note": "RFC 8785-style serialization: recursive sorted keys, no whitespace, UTF-8; content is ASCII-only"
+  },
+  "countersignature": {
+    "algorithm": "ECDSA P-256 over SHA-256 (DER)",
+    "public_key_spki_pem": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAERV0hqQ5aDjg+kLkKetGEQq5cNBzN\n5p+xe0QDQpZpaZVkWQ16MtBs3zqy0AeiOOz7qn5XsZe3O9kXuXBsKmXE9Q==\n-----END PUBLIC KEY-----\n",
+    "private_key": "discarded after signing — this key can never sign again (same policy as ca-test-1)",
+    "signature_der_b64": "MEUCIQCXEjEO3u9PSNtb359iavTkTrwc8a3pBPO1vs6Ex7FLWwIgThLvt6dpc+XBi6EsGWwg5tT+acQm9dtMnC4ILM6xuZ0="
+  },
+  "inclusion": {
+    "checkpoint": "rekor.sigstore.dev - 1193050959916656506\n2649841015\n/MOpFK/ycFFHzg12SweOXROLNo/BshOWQaul3LmGecA=\n\n— rekor.sigstore.dev wNI9ajBGAiEAwvH+sGajP1GAt9Tddf7ehAAlAa6opwEvmsJUaVgUANsCIQDi9YWGc7eBgjDzBYaXiakNrKRN2M6r41kCmr5vzMKGbw==\n",
+    "tree_size": 2649841015,
+    "root_hash": "fcc3a914aff2705147ce0d764b078e5d138b368fc1b2139641aba5dcb98679c0",
+    "proof_hashes_count": 25,
+    "log_index": 2771735480
+  },
+  "verify": {
+    "entry_url": "https://rekor.sigstore.dev/api/v1/log/entries?logIndex=2771735480",
+    "rekor_public_key_url": "https://rekor.sigstore.dev/api/v1/log/publicKey",
+    "local_script": "verify-rekor.mjs --record anchor-record-v4.json --statement anchor-statement-v4.json"
+  },
+  "anchor_of": {
+    "format": "MNR-CRL-1.0",
+    "subject": "marketnow: revocation registry MNR-CRL-1.0 — ATC revocation + CA key compromise transparency (roadmap v5.1.5)",
+    "crl_full_file_sha256": "205f72695f74ff43abcb15f1d6dec8de79506ce40f83ab2802051c10412afb34",
+    "crl_signed_payload_hash": "978dd807c6d2c95b8037da7fdf207724fe0b3e33193f6f29665645e006da7365",
+    "registry_key_id": "mn-revoc-001",
+    "entries": [
+      "ATC-2026-5837752 (SUPERSEDED, 2026-07-18T03:38:45.419Z)",
+      "ATC-2026-5936297 (REVOKED, 2026-07-22T03:11:09.094Z)",
+      "ATC-2026-9880252 (REVOKED, 2026-07-23T03:36:06.758Z)",
+      "mn-ca-002 (KEY_COMPROMISE, 2026-09-08T00:00:00Z)"
+    ],
+    "gh_commit": "7fb7db6a (org main)",
+    "roadmap": "v5.1 item 5 — ATC Revocation + Transparency Log"
+  }
+}
