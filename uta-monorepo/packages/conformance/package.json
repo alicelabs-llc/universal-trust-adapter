@@ -1,0 +1,42 @@
+{
+  "name": "@marketnow/uta-conformance",
+  "version": "1.3.3",
+  "description": "UTA conformance suite for agent-trust runners — 14 signed test vectors (v1.3.3) + reference scorer + card generator. Separates real verifiers from memorizers, stage-liars and over-rejectors. Zero deps.",
+  "main": "score-runner.mjs",
+  "bin": {
+    "uta-conformance": "score-runner.mjs"
+  },
+  "files": [
+    "score-runner.mjs",
+    "vectors",
+    "README.md",
+    "LICENSE-AL-1.0",
+    "NOTICE"
+  ],
+  "keywords": [
+    "conformance",
+    "test-vectors",
+    "agent",
+    "trust",
+    "mcp",
+    "a2a",
+    "security",
+    "ed25519",
+    "agent-trust-card",
+    "verification"
+  ],
+  "author": "AliceLabs LLC <info@alicelabs.site>",
+  "license": "AL-1.0",
+  "homepage": "https://www.marketnow.site/uta/conformance/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alicelabs-llc/universal-trust-adapter.git",
+    "directory": "uta-monorepo/packages/conformance"
+  },
+  "bugs": {
+    "url": "https://github.com/alicelabs-llc/universal-trust-adapter/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

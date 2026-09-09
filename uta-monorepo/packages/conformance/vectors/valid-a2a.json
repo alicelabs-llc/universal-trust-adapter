@@ -1,0 +1,26 @@
+{
+  "name": "google-test-agent",
+  "version": "0.1",
+  "capabilities": [
+    {
+      "name": "search"
+    },
+    {
+      "name": "fetch"
+    }
+  ],
+  "service_endpoint": {
+    "url": "https://agent.example.com/search",
+    "type": "a2a"
+  },
+  "identity": {
+    "did": "did:example:agent-123"
+  },
+  "trust": {
+    "score": 7
+  },
+  "metadata": {
+    "created_at": "2026-08-20T00:00:00Z",
+    "updated_at": "2026-08-20T00:00:00Z"
+  }
+}

@@ -31,6 +31,11 @@ Object.defineProperty(exports, "VCAdapter", { enumerable: true, get: function ()
 var oauth_adapter_1 = require("./oauth-adapter");
 Object.defineProperty(exports, "OAuthAdapter", { enumerable: true, get: function () { return oauth_adapter_1.OAuthAdapter; } });
 var spiffe_adapter_1 = require("./spiffe-adapter");
+var x509_adapter_1 = require("./x509-adapter");
+Object.defineProperty(exports, "X509Adapter", { enumerable: true, get: function () { return x509_adapter_1.X509Adapter; } });
+Object.defineProperty(exports, "parseX509", { enumerable: true, get: function () { return x509_adapter_1.parseX509; } });
+Object.defineProperty(exports, "verifyX509Chain", { enumerable: true, get: function () { return x509_adapter_1.verifyX509Chain; } });
+Object.defineProperty(exports, "verifySelfSigned", { enumerable: true, get: function () { return x509_adapter_1.verifySelfSigned; } });
 Object.defineProperty(exports, "SPIFFEAdapter", { enumerable: true, get: function () { return spiffe_adapter_1.SPIFFEAdapter; } });
 // Convenience: register all adapters at once
 const trust_engine_js_2 = require("../core/trust-engine.js");
@@ -42,6 +47,7 @@ const mcp_adapter_2 = require("./mcp-adapter");
 const vc_adapter_2 = require("./vc-adapter");
 const oauth_adapter_2 = require("./oauth-adapter");
 const spiffe_adapter_2 = require("./spiffe-adapter");
+const x509_adapter_2 = require("./x509-adapter");
 function createEngineWithAllAdapters(config) {
     return new trust_engine_js_2.TrustEngine({
         adapters: [
@@ -53,6 +59,7 @@ function createEngineWithAllAdapters(config) {
             new vc_adapter_2.VCAdapter(),
             new oauth_adapter_2.OAuthAdapter(),
             new spiffe_adapter_2.SPIFFEAdapter(),
+            new x509_adapter_2.X509Adapter(),
         ],
         issuer_keys: config?.issuer_keys,
     });

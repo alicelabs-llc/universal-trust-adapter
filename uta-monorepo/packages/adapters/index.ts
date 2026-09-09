@@ -51,6 +51,7 @@ export { MCPAdapter } from './mcp-adapter';
 export { VCAdapter } from './vc-adapter';
 export { OAuthAdapter } from './oauth-adapter';
 export { SPIFFEAdapter } from './spiffe-adapter';
+export { X509Adapter, parseX509, verifyX509Chain, verifySelfSigned } from './x509-adapter';
 
 // Convenience: register all adapters at once
 import { TrustEngine } from '../core/trust-engine.js';
@@ -62,6 +63,7 @@ import { MCPAdapter } from './mcp-adapter';
 import { VCAdapter } from './vc-adapter';
 import { OAuthAdapter } from './oauth-adapter';
 import { SPIFFEAdapter } from './spiffe-adapter';
+import { X509Adapter } from './x509-adapter';
 
 export function createEngineWithAllAdapters(config?: { issuer_keys?: any }): TrustEngine {
   return new TrustEngine({
@@ -74,6 +76,7 @@ export function createEngineWithAllAdapters(config?: { issuer_keys?: any }): Tru
       new VCAdapter(),
       new OAuthAdapter(),
       new SPIFFEAdapter(),
+      new X509Adapter(),
     ],
     issuer_keys: config?.issuer_keys,
   });

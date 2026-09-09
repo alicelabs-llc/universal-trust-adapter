@@ -1,0 +1,350 @@
+{
+  "version": 2,
+  "generated": "2026-09-10",
+  "source": "semgrep-mcp-rules.yml (29 rules, v2)",
+  "rules": [
+    {
+      "id": "MCP-PI-001",
+      "message": "Prompt injection: 'ignore previous instructions' detected",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "ignore\\s+(?:all\\s+)?(?:previous|prior)\\s+instructions",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-PI-002",
+      "message": "Prompt injection: 'disregard the above' detected",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "disregard\\s+(?:the\\s+)?(?:above|previous)",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-PI-003",
+      "message": "Prompt injection: 'you are now' role override detected",
+      "severity": "WARNING",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "you\\s+are\\s+now\\s+(?:a|an)\\s+(?:different|new|admin|root)",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-PI-004",
+      "message": "Prompt injection: 'forget everything' detected",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "forget\\s+(?:everything|all|your\\s+instructions)",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-PI-005",
+      "message": "Prompt injection: exfiltration instructions detected",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "(?:exfiltrate|steal|send).*(?:to|via).*(?:email|webhook|discord|telegram|api)",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-PI-006",
+      "message": "Prompt injection: system override command detected",
+      "severity": "WARNING",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "(?:/system|/admin|/debug|/exec|/eval|/shell)",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-CI-001",
+      "message": "Command injection: exec() with user input",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "regex": "\\b(exec|execSync)\\s*\\(\\s*[A-Za-z_$][\\w$.\\[\\]\\'\"]*\\s*[\\),]",
+      "mode": "lite-approximation",
+      "note": "approximation of semgrep AST pattern — run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
+    },
+    {
+      "id": "MCP-CI-002",
+      "message": "Command injection: os.system with user input",
+      "severity": "ERROR",
+      "languages": [
+        "python"
+      ],
+      "regex": "\\bos\\.system\\s*\\(|\\bsubprocess\\.call\\s*\\([^)]*shell\\s*=\\s*True",
+      "mode": "lite-approximation",
+      "note": "approximation of semgrep AST pattern — run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
+    },
+    {
+      "id": "MCP-CI-003",
+      "message": "Dangerous: eval() with dynamic input",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "regex": "\\beval\\s*\\(",
+      "mode": "lite-approximation",
+      "note": "approximation of semgrep AST pattern — run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
+    },
+    {
+      "id": "MCP-CI-004",
+      "message": "Dangerous: child_process with string concatenation",
+      "severity": "WARNING",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "regex": "child_process\\.exec\\s*\\([^)]*\\+",
+      "mode": "lite-approximation",
+      "note": "approximation of semgrep AST pattern — run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
+    },
+    {
+      "id": "MCP-SL-001",
+      "message": "Hardcoded API key detected",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "(?:api[_-]?key|api[_-]?secret)\\s*[:=]\\s*['\"][a-zA-Z0-9]{20,}['\"]",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-SL-002",
+      "message": "Wallet mnemonic detected",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "(?:mnemonic|seed[_-]?phrase|private[_-]?key)\\s*[:=]\\s*['\"][a-z\\s]{20,}['\"]",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-SS-001",
+      "message": "SSRF: fetch with user-controlled URL",
+      "severity": "WARNING",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "regex": "\\b(fetch|axios\\.get)\\s*\\(\\s*[A-Za-z_$][\\w$.\\[\\]\\'\"]*\\.(?:url|URL)\\b",
+      "mode": "lite-approximation",
+      "note": "approximation of semgrep AST pattern — run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
+    },
+    {
+      "id": "MCP-SS-002",
+      "message": "SSRF: internal IP access detected",
+      "severity": "WARNING",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "(?:169\\.254\\.169\\.254|localhost|127\\.0\\.0\\.1)",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-PT-001",
+      "message": "Path traversal: readFile with user input",
+      "severity": "WARNING",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "regex": "\\bfs\\.readFile(?:Sync)?\\s*\\(\\s*[A-Za-z_$][\\w$.]*\\s*[\\),]",
+      "mode": "lite-approximation",
+      "note": "approximation of semgrep AST pattern — run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
+    },
+    {
+      "id": "MCP-PT-002",
+      "message": "Path traversal: directory traversal pattern detected",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "\\.\\./(?:\\.\\.\\/)*(?:etc|var|root|home|proc)",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-TS-001",
+      "message": "Tool name spoofing: impersonating system tool",
+      "severity": "WARNING",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "regex": "(?:name|toolName)\\s*[:=]\\s*['\"](?:read_file|write_file|system|exec|shell|admin)['\"]",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-IS-001",
+      "message": "Missing inputSchema on tool registration",
+      "severity": "INFO",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "regex": "\\bregisterTool\\s*\\(\\s*[^,()]+\\s*,\\s*[^,()]+\\s*\\)",
+      "mode": "lite-approximation",
+      "note": "approximation of semgrep AST pattern — run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
+    },
+    {
+      "id": "MCP-TP-001",
+      "message": "Tool poisoning: tool description contains agent-directed instructions (description injection)",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "description[\\s\\S]{0,40}(?:IMPORTANT[:!]|NOTE TO (?:THE )?(?:AGENT|LLM)|do not tell|don't tell|secretly|without (?:the )?user(?:'s)? (?:knowledge|consent))",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-TP-002",
+      "message": "Tool poisoning: hidden/invisible unicode (zero-width, bidi override, tag chars) in tool description or name",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "(?:\\u200b|\\u200c|\\u200d|\\u202a|\\u202b|\\u202c|\\u202d|\\u202e|\\u2066|\\u2067|\\u2068|\\u2069|\\ufeff)",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-TP-003",
+      "message": "Tool poisoning: description mutated after registration (dynamic description override — fingerprint drift at source level)",
+      "severity": "WARNING",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "regex": "(?:tool|tools?)\\[[^\\]]*\\]\\s*[.]\\s*(?:description|inputSchema)\\s*=",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-TP-004",
+      "message": "Tool poisoning: conditional tool behavior based on caller/context (tool behaves differently when audited)",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "(?:isAudited|is_audit|isTest|is_test|auditMode|sandbox_mode)\\s*(?:===?|==)\\s*(?:true|false)",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-EX-001",
+      "message": "Exfiltration chain: process.env serialized then sent over network",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "regex": "(?:JSON[.]stringify|util[.]inspect)\\s*\\(\\s*(?:process[.]env|env)\\s*\\)",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-EX-002",
+      "message": "Credential exfiltration: agent-runtime credential paths accessed (~/.claude, ~/.openclaw, ~/.cursor, MCP auth stores)",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "(?:~|\\$HOME|%USERPROFILE%|os[.]homedir\\(\\))[/\\\\.]{0,2}\\.(?:claude|openclaw|cursor|continue|config|local/share|mcp)",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-EX-003",
+      "message": "Exfiltration chain: env/mnemonic + outbound webhook in same file",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "(?:process[.]env|os[.]environ)[\\s\\S]{0,400}(?:webhook|discord(?:app)?[.]com/api|hooks[.]slack|api[.]telegram[.]org|pastebin[.]com)",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-AC-001",
+      "message": "Attack chain markers: download + execute primitives in the same module",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "(?:download|fetch|http[s]?[.]get|requests?[.]get)[\\s\\S]{0,300}(?:child_process|spawn|exec(?:Sync)?|subprocess|os[.]system|eval\\()",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-AC-002",
+      "message": "Attack chain markers: base64/hex decode feeding eval/exec",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "(?:atob|base64|b64decode|Buffer[.]from\\([^)]*['\"](?:base64|hex)['\"]\\))[\\s\\S]{0,200}(?:eval\\(|new Function\\(|exec(?:Sync)?|child_process)",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-AC-003",
+      "message": "Attack chain markers: secret-file read + archive/encode + network send primitives",
+      "severity": "ERROR",
+      "languages": [
+        "javascript",
+        "typescript",
+        "python"
+      ],
+      "regex": "(?:\\.(?:env|ssh|aws|npmrc|git-credentials))[\\s\\S]{0,400}(?:readFile|read)[\\s\\S]{0,400}(?:fetch|axios|http[s]?[.]request|requests?[.]post)",
+      "mode": "exact"
+    },
+    {
+      "id": "MCP-RR-001",
+      "message": "Stale trust: trust/verification verdict cached without re-check or TTL — revoked credentials keep passing",
+      "severity": "WARNING",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "regex": "(?:trustCache|verifyCache|cache)\\[[^\\]]*\\]\\s*=\\s*(?:true|\\{[^}]*(?:valid|trusted)[^}]*\\})",
+      "mode": "exact"
+    }
+  ]
+}

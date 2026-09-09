@@ -524,7 +524,7 @@ async function recommendSkills(args) {
 const server = new Server(
   {
     name: 'marketnow',
-    version: '1.10.0',
+    version: '1.10.2',
   },
   {
     capabilities: {
