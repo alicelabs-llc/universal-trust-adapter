@@ -8,22 +8,27 @@ Sentinel is the engine. Trust Card is the identity. Interceptor is the enforceme
 
 The marketplace (9,248 skills) is distribution and dataset — not the product.
 
-## Current State — v5.0.0 (August 2026)
+## Current State — v5.1 (September 2026)
 
 | Feature | Status | Evidence |
 |---------|--------|----------|
 | Sentinel 10-layer audit | ✅ Live | 1,211,488 checks performed |
 | 9,248 MCP skills analyzed | ✅ Live | All in skills-lite.json |
 | 1,030 threats detected | ✅ Live | 80 quarantined, 71 risky |
-| Agent Trust Card (ATC) | ✅ Live | 57 Ed25519-signed cards |
-| Runtime MCP Interceptor | ✅ Live | 5 policy rules, blocks .env/rm-rf |
-| Trust API | ✅ Live | /api/trust-score?skillId=X |
+| Agent Trust Card (ATC) | ✅ Live | 57 Ed25519-signed cards (54 active, 3 revoked) |
+| Runtime MCP Interceptor | ✅ Live v1.1.0 | 5 policy rules + revocation gate + TFP pinning (cline-plugin-uta) |
+| Trust API | ✅ Live | /api/trust, /api/atc, /api/trust-score |
+| **ATC Revocation + Transparency Log (v5.1.5)** | ✅ Live 2026-09-09 | Signed MNR-CRL-1.0 registry + /api/ocsp + /api/crl + marketnow_check_revocation |
+| **Cryptographic Tool Fingerprinting (v5.1.1)** | ✅ Live 2026-09-09 | TFP-1.0 (JCS+sha256, drift reports) — MCP tool + npm 1.10.2 + interceptor |
+| Sentinel semgrep rules v2 | ✅ 29 rules | +tool poisoning, exfiltration chains, attack chains (MCP-TP/EX/AC/RR) |
 | x402 Streaming payments | ✅ Live | /api/stream (USDC on Base) |
 | A2A Remote Execution | ✅ Live | /api/execute |
 | Skill Stacks | ✅ Live | 5 predefined kits |
-| npm packages | ✅ Live | marketnow-mcp v1.8.0 + install-stack v1.1.0 |
+| npm packages | ✅ Live | marketnow-mcp v1.10.2 (15 tools) + 6 more |
 | Public audit report | ✅ Live | /api/audit-report.json |
 | Ed25519 certificates | ✅ Live | RFC 8032 + RFC 8785 JCS |
+| Rekor transparency anchors | ✅ 3 entries | logIndex 2762061972, 2764017355, 2764479676 (sigstore.dev) |
+| Reproducible build | ✅ Live | tar-layer sha256 519d406a… (agent-trust-card@1.1.2) |
 
 ---
 
@@ -31,27 +36,29 @@ The marketplace (9,248 skills) is distribution and dataset — not the product.
 
 **Goal: Move from "scanner" to "verification engine"**
 
-### 1. Cryptographic Tool Fingerprinting
+### 1. Cryptographic Tool Fingerprinting — ✅ DONE (2026-09-09, TFP-1.0)
 - Hash the exact tool definitions (tools/list response) at audit time
 - Store: server_hash, tools_hash, schema_hash, description_hash, dependency_hash, commit_hash
 - Alert when any hash changes post-audit → auto-revoke Trust Card
+- **Shipped**: `marketnow_fingerprint_tool` (MCP live endpoint + npm 1.10.2) — JCS+sha256 per tool + manifest fingerprint + drift reports (added/removed/changed) for pinned manifests. Interceptor (`cline-plugin-uta` v1.1.0) pins/verifies tool surfaces per server.
 
-### 2. Provenance / SLSA-style
+### 2. Provenance / SLSA-style — 🚧 Partial
 - Trust Card includes: source repo, commit SHA, build hash, npm package hash, container hash
 - Full chain of custody from source → package → audit → Trust Card
 
-### 3. Evidence-First Findings
+### 3. Evidence-First Findings — 🚧 Partial
 - Each finding: Finding ID, Severity, **Confidence %**, Evidence, Location, Reproduction
 - Two scores: Risk Score (how dangerous) + Confidence Score (how sure)
 - Third metric: Evidence Coverage (% of tool surface verified)
 
-### 4. Reproducible Audits
+### 4. Reproducible Audits — 🚧 Partial
 - Audit ID + Scanner version + Ruleset version + Sandbox image + Timestamp
 - Two audits of same version = identical results (or explain difference)
 
-### 5. ATC Revocation + Transparency Log
+### 5. ATC Revocation + Transparency Log — ✅ DONE (2026-09-09, MNR-CRL-1.0)
 - States: VALID, EXPIRED, REVOKED, SUSPENDED, SUPERSEDED
 - Public append-only log (Certificate Transparency for agents)
+- **Shipped**: signed revocation registry (`/uta/revocations/crl.json`, Ed25519/RFC 8785, delegated key mn-revoc-001) + live status resolution (`/api/ocsp` — was a 404 promise before) + CRL endpoint (`/api/crl`) + `marketnow_check_revocation` MCP tool. Seeded with REAL events: 3 superseded ATCs + mn-ca-002 KEY_COMPROMISE (2026-09-08). Fail-closed semantics throughout.
 
 ---
 
@@ -130,16 +137,16 @@ The marketplace (9,248 skills) is distribution and dataset — not the product.
 
 | OWASP Recommendation | MarketNow Implementation | Version |
 |---------------------|------------------------|---------|
-| Verify tool descriptions haven't changed | Cryptographic fingerprinting | v5.1 |
+| Verify tool descriptions haven't changed | TFP-1.0 fingerprinting + drift reports | v5.1 ✅ |
 | Validate input/output schemas | Schema hash in Trust Card | v5.1 |
-| Monitor for tool poisoning | Runtime drift detection | v5.2 |
+| Monitor for tool poisoning | Sentinel rules MCP-TP-001..004 + TFP drift | v5.1 ✅ |
 | Implement least privilege | Capability graph + policies | v5.3 |
 | Log all tool invocations | Agent identity + audit trail | v5.3 |
 | Isolate tool execution | gVisor sandbox (already live) | v5.0 |
 | Scan for prompt injection | L1.9 (32 rules, already live) | v5.0 |
 | Monitor runtime behavior | Behavioral baseline + drift | v5.2 |
-| Verify supply chain integrity | Provenance + SLSA | v5.1 |
-| Implement revocation | ATC revocation + transparency log | v5.1 |
+| Verify supply chain integrity | Provenance + SLSA + Rekor anchors | v5.1 🚧 |
+| Implement revocation | MNR-CRL-1.0 registry + /api/ocsp + /api/crl | v5.1 ✅ |
 
 ## North Star
 

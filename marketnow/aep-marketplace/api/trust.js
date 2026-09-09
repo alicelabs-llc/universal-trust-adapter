@@ -135,12 +135,15 @@ export async function handleTrust(req, res) {
     if (action === 'revocation') {
       return res.status(200).json({
         methods: [
-          { id: 'CRL', name: 'Certificate Revocation List', description: 'Signed list of revoked credential IDs. Ed25519 signature verification. TTL cache.' },
-          { id: 'OCSP', name: 'Online Certificate Status Protocol', description: 'Real-time HTTP responder. Nonce anti-replay. Signed responses. Fail-closed on timeout.' },
-          { id: 'BITSTRING', name: 'Bitstring Status List (W3C 2021)', description: 'Compressed bitstring (gzip+base64url). 1 bit per credential. Scales to millions in ~30KB.' },
+          { id: 'CRL', name: 'Certificate Revocation List', status: 'LIVE', description: 'Signed list of revoked ATCs and CA keys (MNR-CRL-1.0). Ed25519 signature over RFC 8785 JCS. Delegated registry key mn-revoc-001.', endpoint: 'GET /api/crl', artifact: '/uta/revocations/crl.json' },
+          { id: 'OCSP', name: 'Online Certificate Status Protocol', status: 'LIVE', description: 'Real-time per-subject status resolution (card_id or kid). Nonce anti-replay. Fail-closed on unknown subjects and responder errors.', endpoint: 'GET/POST /api/ocsp?card_id=… | ?kid=…' },
+          { id: 'BITSTRING', name: 'Bitstring Status List (W3C 2021)', status: 'PLANNED', description: 'Compressed bitstring (gzip+base64url). 1 bit per credential. Scales to millions in ~30KB. Planned once card count justifies it.' },
         ],
-        ocsp_responder: 'POST /api/ocsp — Real-time revocation status with signed response',
+        ocsp_responder: 'GET/POST /api/ocsp?card_id=ATC-… or ?kid=mn-ca-… — real-time revocation status (MNR-OCSP-1.0)',
+        registry: { format: 'MNR-CRL-1.0', signed: true, algorithm: 'Ed25519 (RFC 8032) + RFC 8785 JCS', registry_key: '/uta/revocations/registry-key.json', authoritative_crl: '/uta/revocations/crl.json' },
+        semantics: ['VALID', 'EXPIRED', 'REVOKED', 'SUSPENDED', 'SUPERSEDED', 'UNKNOWN'],
         fail_closed: true,
+        mcp_tool: 'marketnow_check_revocation (via /api/mcp)',
       });
     }
     

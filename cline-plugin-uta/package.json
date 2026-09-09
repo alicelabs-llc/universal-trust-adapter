@@ -1,14 +1,27 @@
 {
   "name": "@alicelabs/cline-trust-plugin",
-  "version": "1.0.0",
-  "description": "Trust verification plugin for Cline — wraps MCP servers with pre-exec filter, credential protection, and Merkle tree audit log.",
+  "version": "1.1.0",
+  "description": "Trust verification plugin for Cline \u2014 the UTA Interceptor. v1.1.0: revocation gate (fail-closed OCSP-style checks against the signed MarketNow Revocation Registry) + TFP-1.0 tool-surface pinning and drift detection (OWASP 'verify tool descriptions haven't changed'). Still wraps MCP servers with pre-exec filter, credential protection, and Merkle tree audit log.",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node index.js",
     "test": "node test.js"
   },
-  "keywords": ["cline", "mcp", "trust", "security", "interceptor", "sentinel", "atc", "uta"],
+  "keywords": [
+    "cline",
+    "mcp",
+    "trust",
+    "security",
+    "interceptor",
+    "sentinel",
+    "atc",
+    "uta",
+    "revocation",
+    "ocsp",
+    "fingerprinting",
+    "tool-poisoning"
+  ],
   "author": "AliceLabs LLC",
   "license": "AL-1.0",
   "dependencies": {
@@ -18,49 +31,35 @@
   "cline": {
     "pluginType": "mcp-server",
     "displayName": "UTA Trust Gateway",
-    "description": "Wraps all MCP servers with trust verification — blocks .env reads, rm -rf, shell spawns. Logs to Merkle tree.",
+    "description": "Wraps all MCP servers with trust verification \u2014 blocks .env reads, rm -rf, shell spawns. v1.1.0: revocation gate + tool-surface fingerprint pinning. Logs to Merkle tree.",
     "tools": [
       {
         "name": "verify_trust",
-        "description": "Verify the trust score of any MCP server or credential",
-        "inputSchema": {
-          "type": "object",
-          "properties": {
-            "server_id": { "type": "string", "description": "MCP server ID or URL" },
-            "credential": { "type": "object", "description": "Credential JSON to verify" }
-          }
-        }
+        "description": "Verify the trust score of any MCP server or credential"
       },
       {
         "name": "check_interceptor",
-        "description": "Check if a tool call would be blocked by the interceptor",
-        "inputSchema": {
-          "type": "object",
-          "properties": {
-            "tool_name": { "type": "string" },
-            "arguments": { "type": "object" }
-          }
-        }
+        "description": "Check if a tool call would be blocked by the interceptor (includes the v1.1.0 revocation gate when configured)"
       },
       {
         "name": "get_audit_log",
-        "description": "Get the Merkle tree audit log of all intercepted calls",
-        "inputSchema": {
-          "type": "object",
-          "properties": {
-            "limit": { "type": "number", "default": 50 }
-          }
-        }
+        "description": "Get the Merkle tree audit log of all intercepted calls"
       },
       {
         "name": "scan_mcp_server",
-        "description": "Scan an MCP server for security threats (9,248 servers scanned)",
-        "inputSchema": {
-          "type": "object",
-          "properties": {
-            "url": { "type": "string", "description": "MCP server URL or npm package" }
-          }
-        }
+        "description": "Scan an MCP server for security threats (9,248 servers scanned)"
+      },
+      {
+        "name": "check_revocation",
+        "description": "OCSP-style revocation status of an ATC (card_id) or CA key (kid) against the signed MarketNow Revocation Registry \u2014 fail-closed"
+      },
+      {
+        "name": "pin_tool_surface",
+        "description": "Pin an MCP server's tool surface (TFP-1.0 fingerprint manifest) \u2014 first-contact pinning against tool poisoning"
+      },
+      {
+        "name": "verify_tool_surface",
+        "description": "Verify a server's current tools/list against the pinned manifest \u2014 drift report for rug-pull detection"
       }
     ]
   }
