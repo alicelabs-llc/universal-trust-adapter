@@ -294,7 +294,7 @@ export function computeFingerprintSet(params: {
  * - npm_tarball_changed = package re-published → critical (could be republished with malice)
  * - container_changed = image rebuilt → warn (could be normal, could be drift)
  */
-const SEVERITY_MAP: Record<keyof Omit<FingerprintDiff, 'severity' | 'should_auto_revoke' | 'summary'>, 'info' | 'warn' | 'critical'> = {
+const SEVERITY_MAP: Record<keyof Omit<FingerprintDiff, 'severity' | 'should_auto_revoke' | 'summary' | 'tool_descriptions_changed'>, 'info' | 'warn' | 'critical'> = {
   server_changed: 'critical',
   tools_set_changed: 'warn',
   // tool_descriptions_changed is an array, handled specially

@@ -30,7 +30,8 @@
     "deploy": "node services/trust-api/deploy.js"
   },
   "devDependencies": {
+    "@types/node": "^20.19.43",
     "typedoc": "^0.26.11",
-    "typescript": "^5.9.3"
+    "typescript": "5.9"
   }
 }

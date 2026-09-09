@@ -111,6 +111,25 @@ export interface CapabilityMatchResult {
   }>;
 }
 
+/**
+ * Deep-partial capability requirements — only the fields you specify are
+ * enforced (used by org policies: "filesystem read only, no shell", etc.).
+ * Unlike Partial<CapabilityManifest>, nested groups may also be partial.
+ */
+export interface CapabilityRequirements {
+  tool_id?: string;
+  tool_name?: string;
+  tool_version?: string;
+  filesystem?: Partial<CapabilityManifest['filesystem']>;
+  network?: Partial<CapabilityManifest['network']>;
+  shell?: Partial<CapabilityManifest['shell']>;
+  credentials?: Partial<CapabilityManifest['credentials']>;
+  process?: Partial<CapabilityManifest['process']>;
+  payment?: Partial<CapabilityManifest['payment']>;
+  data?: Partial<CapabilityManifest['data']>;
+  manifest_version?: '1.0.0';
+}
+
 // ============================================================================
 // Predefined capability levels
 // ============================================================================
@@ -417,7 +436,7 @@ export function checkPaymentAccess(
  */
 export function matchCapabilities(
   manifest: CapabilityManifest,
-  requirements: Partial<CapabilityManifest>
+  requirements: CapabilityRequirements
 ): CapabilityMatchResult {
   const satisfied: string[] = [];
   const unsatisfied: Array<{ capability: string; required: string; actual: string; reason: string }> = [];

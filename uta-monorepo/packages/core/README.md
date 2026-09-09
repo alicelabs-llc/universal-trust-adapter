@@ -1,57 +1,83 @@
 # @marketnow/trust-core
 
-**UTA Verification Core** — the cryptographic heart of the Universal Trust Adapter. 12-stage verification pipeline, Ed25519 (RFC 8032), canonical JSON (RFC 8785 JCS), Proof of Possession, revocation (CRL + OCSP + Bitstring Status List) and supply-chain verification (SBOM + SPDX + Sigstore). Zero runtime dependencies.
+**UTA Verification Core v2.0.0 — ROADMAP LEAPFROG** — the full agent-trust stack in one zero-dependency package: **v5.2 behavior, v5.3 policy, v5.4 trajectory, v6.0 cross-agent preview**, on top of the 12-stage verification pipeline. 19/19 smoke tests passing.
 
 ```bash
 npm install @marketnow/trust-core
 ```
 
-## Exports
+## v5.2 — Behavior (baselines + drift)
+
+```js
+import { computeBaseline, detectDrift } from '@marketnow/trust-core';
+
+const baseline = computeBaseline(observations, { server_id, server_version, tool_fingerprint_hash, window_start, window_end });
+const drift = detectDrift(baseline, baselineObs, currentObs, currentWindow);
+// drift.signals — 7 signal classes; drift.severity 'critical' on new egress hosts,
+// credential env reads, process spawns, latency/data-volume anomalies
+```
+
+## v5.3 — Capability graph + org policies
+
+```js
+import { matchCapabilities, MINIMAL_SAFE, evaluatePolicy, DEFAULT_STRICT_POLICY } from '@marketnow/trust-core';
+
+const match = matchCapabilities(manifest, MINIMAL_SAFE);     // matches: boolean + satisfied/unsatisfied
+const decision = evaluatePolicy(trustScore, manifest, DEFAULT_STRICT_POLICY);
+// → { action: 'ALLOW' | 'REQUIRE_APPROVAL' | 'BLOCK', reason, rules_triggered }
+```
+
+Three preset policies (STRICT / ENTERPRISE / PERMISSIVE) + full approval workflow (`createApprovalRequest`, `approveRequest`, `denyRequest`, TTL, pending caps).
+
+## v5.4 — Trajectory (attack chains + data flow)
+
+```js
+import { detectAttackChains, scoreTrajectory, buildDataFlowGraph } from '@marketnow/trust-core';
+
+const chains = detectAttackChains(calls);   // AC-001 search→read→download→execute, AC-002 read .env→exfiltrate, …
+const traj = scoreTrajectory(calls);        // risk 0–10 + should_block_call index
+const flow = buildDataFlowGraph(calls);     // nodes/edges + exfiltration_paths
+```
+
+Each step individually allowed — the **chain** is what gets blocked (each action alone = ALLOW, chain = BLOCK).
+
+## v6.0 preview — Cross-agent trust + memory poisoning
+
+```js
+import { evaluateDelegation, scanMemoryForPoisoning } from '@marketnow/trust-core';
+
+const delegation = evaluateDelegation(request, { from_trust_score, to_trust_score, to_capabilities, to_revoked, to_suspicious_flags, delegation_chain_depth });
+const scan = scanMemoryForPoisoning(memoryEntries); // instruction injection, taint, sensitivity anomalies
+```
+
+## Core (v1 line)
 
 | Export | What it does |
 |---|---|
-| `verifyCredential(credential, context)` | Runs the **12-stage verification pipeline** and returns a structured `VerificationResult` with per-stage results |
+| `verifyCredential(credential, context)` | **12-stage verification pipeline**, structured `VerificationResult` |
 | `TrustEngine` | Composable trust-decision engine over the pipeline |
-| `sign` / `verify` | Ed25519 (RFC 8032) signatures over JCS-canonicalized payloads |
-| `canonicalize` / `canonicalHash` | RFC 8785 JCS canonicalization + SHA-256 canonical hashing |
-| `generateEd25519KeyPair` | Keypair generation for issuing and verifying |
-| `generatePoPChallenge` / `createPoPResponse` / `verifyPoP` | **Proof of Possession** flows (bind a key to an artifact) |
-| `computeArtifactBinding` / `DOMAINS` | Domain-separated artifact binding (signature domains) |
-| `verify` (credential form) | Stage-level checks including revocation (CRL, OCSP, bitstring status list) and supply chain (SBOM/SPDX, Sigstore) |
-
-## Quick start
-
-```js
-import { verifyCredential, canonicalize } from '@marketnow/trust-core';
-
-const result = await verifyCredential(card, {
-  now: new Date(),
-  fetchCrl: async (url) => /* fetch + parse CRL */,
-});
-
-if (result.valid) {
-  console.log('all 12 stages passed');
-} else {
-  for (const stage of result.stages) {
-    if (!stage.passed) console.error(stage.stage, stage.reason);
-  }
-}
-```
+| `sign` / `verify` | Ed25519 (RFC 8032) over JCS-canonicalized payloads |
+| `canonicalize` / `canonicalHash` | RFC 8785 JCS + SHA-256 |
+| `generatePoPChallenge` / `verifyPoP` | **Proof of Possession** |
+| `RevocationTransparencyLog` | RFC 6962-style Merkle log, signed tree heads, inclusion/consistency proofs |
+| `computeToolFingerprint` / `diffFingerprints` | TFP-1.0 tool fingerprinting + drift reports |
+| `computeConfidence` / `summarizeFindings` | Evidence-first findings: risk score + confidence score + coverage |
 
 ## Design principles
 
 - **Fail-closed**: unknown revocation state or unreachable evidence never counts as "valid".
-- **Deterministic**: RFC 8785 JCS canonicalization before every hash/signature — no parser-differential ambiguity.
-- **Zero dependencies**: only Node's built-in `node:crypto`.
-- **Typed end-to-end**: full TypeScript types ship in `dist/*.d.ts`.
+- **Deterministic**: RFC 8785 JCS before every hash/signature.
+- **Zero dependencies**: only `node:crypto`.
+- **Typed end-to-end**: full `.d.ts` for every module.
 
 ## Related packages
 
-- `@marketnow/trust-adapters` — protocol adapters (A2A, ATC, EAT, MCP, OAuth, SPIFFE)
+- `@marketnow/trust-adapters` — 9 credential formats (ATC, EAT, A2A, W3C-VC, OAuth, SPIFFE, X.509, MCP, ZTA)
 - `@marketnow/trust-gateway` — runtime gateway (`TrustGateway`, `withTrustGateway`)
-- `marketnow-mcp` — MCP server exposing the live trust tools
+- `marketnow-mcp` — MCP server exposing the live trust tools (15 tools)
 - `agent-trust-card` — ATC/1.0 SDK and CLI
 
 ## License
 
 AL-1.0 (Apache-style, attribution required). See `LICENSE-AL-1.0` and `NOTICE`. © 2025–2026 AliceLabs LLC (Wyoming, USA).
+
