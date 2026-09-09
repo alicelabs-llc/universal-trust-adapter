@@ -5,6 +5,8 @@
 
 This closes [issue #13](https://github.com/alicelabs-llc/universal-trust-adapter/issues/13): the digests are countersigned and timestamped by **rekor.sigstore.dev** — Sigstore's public, append-only, inclusion-checkable transparency log. The publisher cannot rewrite an entry once it is in the log.
 
+**Entry #2 (2026-09-09)** anchors the *runner-under-test* artifacts of conformance suite v1.3.2 — see the second half of this README.
+
 ## What was anchored
 
 The anchor statement (`anchor-statement.json`) carries four digests:
@@ -54,3 +56,47 @@ The retracted "signed Git tag" wording. A tag is rewritable and authenticates th
 | `anchor-statement.json` | The signed statement (what the digests are). |
 | `anchor-record.json` | Entry coordinates (UUID, indexes, time), the published countersignature key, the inclusion proof snapshot, and verification pointers. |
 | `verify-rekor.mjs` | The stranger flow: 6 local checks against live third-party data. |
+| `anchor-statement-v2.json` | Entry #2's statement — the runner-under-test digests. |
+| `anchor-record-v2.json` | Entry #2's coordinates, key, proof snapshot. |
+
+---
+
+# Entry #2 — the runner is the tested thing (v1.3.2)
+
+The follow-up gap named in the thread was *"making the runner the tested thing, not just the cards"*: the reference scorer is our code, and until v1.3.2 a stranger had to trust it. Entry #2 anchors the artifacts that remove that trust:
+
+| Subject | sha256 |
+|---|---|
+| `score-runner.mjs` (the tested thing, 12258 bytes) | `ef5fd5fbc003e27caef523f8b0395953190e9fc6ac88009c2131ea6cc33a23b8` |
+| `runner-tests/answer-key.json` (the behavioral oracle) | `9ccd874428e6db85…` (full value in the statement) |
+| `runner-tests/runner-tests.mjs` (golden + mutation suite) | `6960d4070c2ac2c4…` (full value in the statement) |
+| `runner-tests/mutants.json` (10 known-bad runner variants) | `a23b19fbef01d866…` (full value in the statement) |
+| `runner-tests/README.md` | `c1880604aa932202…` (full value in the statement) |
+| conformance `_index.json` v1.3.1 (pre-release state) | `ee9de8535b9498624b60e578496c5970291ff20ad1e9bae20f9f3496c6303da1` |
+
+The statement's canonical sha256 (what lives inside the Rekor entry):
+`dfda2410a2f9a8283730b31c1d5201f3fb1baae3f346a15ce1c149e28380f750` (3015 bytes).
+
+## The Rekor entry #2
+
+- **Log:** https://rekor.sigstore.dev
+- **Entry UUID:** `108e9186e8c5677ae6e6afcebd3785524b9b2702b100b3b38b1e2a2f10a7c7d4056023cd4dd1e53a`
+- **Log index:** `2764017355` (tree-local index `2642113093`)
+- **Integrated time:** `2026-09-09T01:14:24Z`
+- **Countersignature:** ECDSA P-256 over sha256(statement v2); fresh throwaway key, private key discarded after signing.
+
+## Verify it yourself
+
+```bash
+node verify-rekor.mjs --record anchor-record-v2.json --statement anchor-statement-v2.json
+```
+
+Same six independent checks as entry #1 (existence, content hash, countersignature, timestamp, Merkle inclusion fold, checkpoint signature) — all local cryptography against live third-party data.
+
+Then verify the runner itself is the tested thing:
+
+```bash
+cd ../conformance/runner-tests && node runner-tests.mjs
+```
+
+24 checks: runner bytes match the anchored key, the separation matrix and reference verdict reproduce it row by row, and all 10 mutants are caught. The behavioral oracle is the answer key; the bytes oracle is this entry. Between them, the runner is neither trusted nor untested.
