@@ -10,7 +10,7 @@
  * AliceLabs Source-Available License v1.0 (AL-1.0)
  */
 
-import type { CapabilityManifest } from './capability-graph.js';
+import type { CapabilityManifest, CapabilityRequirements } from './capability-graph.js';
 import { matchCapabilities } from './capability-graph.js';
 
 // ============================================================================
@@ -25,7 +25,7 @@ export interface OrgPolicy {
   org_name: string;
   min_trust_score: number;
   max_trust_score: number;
-  required_capabilities: Partial<CapabilityManifest>;
+  required_capabilities: CapabilityRequirements;
   denied_capabilities: string[];
   approval_threshold: {
     score_range: [number, number];
@@ -68,8 +68,6 @@ export interface ApprovalRequest {
 // ============================================================================
 // Decision engine
 // ============================================================================
-
-const DEFAULT_THRESHOLDS: ApprovalRequest['approval_threshold'] = undefined as any;
 
 /**
  * Evaluate a tool against an organization's policy.

@@ -98,3 +98,19 @@ class TrustRegistry {
     }
 }
 exports.TrustRegistry = TrustRegistry;
+// Extend the TrustRegistry class prototype
+TrustRegistry.prototype.externalSources = [];
+TrustRegistry.prototype.addExternalSource = function (source) {
+    this.externalSources.push(source);
+};
+TrustRegistry.prototype.getExternalScore = async function (subject_id) {
+    for (const source of this.externalSources) {
+        try {
+            const result = await source.fetchScore(subject_id);
+            if (result)
+                return result;
+        }
+        catch { /* skip failed source */ }
+    }
+    return null;
+};

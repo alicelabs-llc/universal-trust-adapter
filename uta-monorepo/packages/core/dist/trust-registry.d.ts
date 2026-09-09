@@ -55,3 +55,22 @@ export declare class TrustRegistry {
      */
     revokeKey(keyId: string, reason: string): void;
 }
+export interface ExternalReputationSource {
+    name: string;
+    fetchScore(subject_id: string): Promise<{
+        score: number;
+        confidence: 'low' | 'medium' | 'high';
+        source: string;
+    }>;
+}
+declare module './trust-registry.js' {
+    interface TrustRegistry {
+        externalSources: ExternalReputationSource[];
+        addExternalSource(source: ExternalReputationSource): void;
+        getExternalScore(subject_id: string): Promise<{
+            score: number;
+            confidence: string;
+            source: string;
+        } | null>;
+    }
+}

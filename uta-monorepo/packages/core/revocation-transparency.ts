@@ -409,6 +409,21 @@ export class RevocationTransparencyLog {
   }
 
   /**
+   * Resolve the operator private key into a crypto KeyObject.
+   * Accepts PKCS8 PEM (as Buffer) or raw PKCS8 DER bytes.
+   */
+  private resolveOperatorKey(): ReturnType<typeof createPrivateKey> {
+    if (!this.operatorPrivateKey) {
+      throw new Error('RevocationTransparencyLog: no operator private key configured');
+    }
+    const buf = this.operatorPrivateKey;
+    if (buf.includes('PRIVATE KEY')) {
+      return createPrivateKey(buf.toString('utf8'));
+    }
+    return createPrivateKey({ key: buf, format: 'der', type: 'pkcs8' });
+  }
+
+  /**
    * Append a revocation entry to the log.
    * Returns the entry (with leaf_hash computed).
    */
@@ -470,10 +485,11 @@ export class RevocationTransparencyLog {
       timestamp,
     });
 
-    const signature = sign(null, Buffer.from(signedData, 'utf8'), {
-      key: this.operatorPrivateKey,
-      algorithm: 'Ed25519',
-    }).toString('base64');
+    const signature = sign(
+      null,
+      Buffer.from(signedData, 'utf8'),
+      this.resolveOperatorKey(),
+    ).toString('base64');
 
     const sth: SignedTreeHead = {
       tree_version: 1,
