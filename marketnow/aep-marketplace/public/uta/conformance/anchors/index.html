@@ -165,7 +165,7 @@ footer{border-top:1px solid var(--border);margin-top:32px;padding:40px 24px;text
   <h1>Third-party <span class="accent">Rekor anchors</span></h1>
   <p class="tagline">The publisher cannot rewrite what the log already holds</p>
   <p class="desc">Suite digests countersigned and timestamped by Sigstore's public transparency log. Inclusion is checkable by anyone, after the fact — the timestamps are not ours.</p>
-  <div class="stats"><div class="stat"><div class="v">3</div><div class="l">ENTRIES</div></div><div class="stat"><div class="v">8</div><div class="l">DIGESTS ANCHORED</div></div><div class="stat"><div class="v">9</div><div class="l">VERIFY CHECKS</div></div><div class="stat"><div class="v">2</div><div class="l">BUG→FIX HISTORY</div></div><div class="stat"><div class="v">#2</div><div class="l">ENTRY 2764017355</div></div><div class="stat"><div class="v">#3</div><div class="l">ENTRY 2764479676</div></div></div>
+  <div class="stats"><div class="stat"><div class="v">4</div><div class="l">ENTRIES</div></div><div class="stat"><div class="v">8</div><div class="l">DIGESTS ANCHORED</div></div><div class="stat"><div class="v">9</div><div class="l">VERIFY CHECKS</div></div><div class="stat"><div class="v">2</div><div class="l">BUG→FIX HISTORY</div></div><div class="stat"><div class="v">#2</div><div class="l">ENTRY 2764017355</div></div><div class="stat"><div class="v">#3</div><div class="l">ENTRY 2764479676</div></div><div class="stat"><div class="v">#4</div><div class="l">ENTRY 2771735480</div></div></div>
   <div class="btn-row"><a class="btn btn-mint" href="#run">Verify entry #3</a><a class="btn btn-blue" href="https://rekor.sigstore.dev" target="_blank" rel="noopener">rekor.sigstore.dev</a><a class="btn btn-white" href="../">← Suite root</a></div>
   <div class="chip"><code>node anchors/verify-rekor.mjs</code><span class="sep">·</span><code class="blue">9/9 live checks</code></div>
 </header>
@@ -200,12 +200,19 @@ footer{border-top:1px solid var(--border);margin-top:32px;padding:40px 24px;text
 <td data-th='anchors'>v1.3.3 — two-sided window + derived ground truth: runner, generator, premature-atc card+canonical, answer key, suite, mutants, README, index (8 digests)</td>
 <td data-th='sha256'><span class="hash" title="0b1913c6b30311333357f3d9629ae69ea7d10b7cbd19ac64833889a3c20e0f60">0b1913c6b303113333…</span></td>
 </tr>
+  <tr>
+<td data-th='entry'><b>#4</b></td>
+<td data-th='logIndex' class="mono"><a href="https://rekor.sigstore.dev">2771735480</a></td>
+<td data-th='integrated (UTC)' class="mono">2026-09-09 17:24:25</td>
+<td data-th='anchors'>revocation registry MNR-CRL-1.0 — CRL full file, signed payload hash, registry key (3 digests; roadmap v5.1.5)</td>
+<td data-th='sha256'><span class="hash" title="954649a60531f7d1270ce386b7dcef05048814b87fa38010684327ad5283ea91">954649a60531f7d1…</span></td>
+</tr>
   </table></div>
   <pre><span class="c"># 9 checks against the live log: existence, content hash, countersignature,</span>
 <span class="c"># signedEntryTimestamp, RFC 6962 Merkle fold, C2SP checkpoint…</span>
 <span class="cmd">node anchors/verify-rekor.mjs --record anchors/anchor-record-v3.json \</span>
 <span class="cmd">                                   --statement anchors/anchor-statement-v3.json</span></pre>
-  <p class="note">With no arguments, <code class="mono">verify-rekor.mjs</code> verifies all three records.</p>
+  <p class="note">With no arguments, <code class="mono">verify-rekor.mjs</code> verifies all four records.</p>
 </div></section>
 
 <section class="blk"><div class="premium">
