@@ -79,7 +79,22 @@ The 2026 gray-market quota trust crisis, documented — plus the receipts-based 
 - [Sourced timeline (EN)](https://rentry.co/y26cps92) — The 2026 AI Quota Gray-Market Trust Crisis — A Sourced Timeline
 - [Series index](https://telegra.ph/MarketNow-Global-Trust-Series-2026-09-08) · Verify a trust card: https://marketnow.site/verify
 
-## 🆕 What's new — v1.3.3 (the receipts release)
+## 🆕 What's new — v5.1 (revocation that answers + tool fingerprinting)
+
+**Roadmap v5.1 items 1 & 5, shipped 2026-09-09 (commit 7fb7db6a, Rekor anchor #4):**
+
+- **ATC Revocation + Transparency Log (MNR-CRL-1.0)** — a signed, append-only revocation registry for Agent Trust Cards and CA keys. The `/api/trust?action=revocation` page used to *promise* an OCSP responder that returned 404; now `GET /api/ocsp?card_id=…` / `?kid=…` answers for real: VALID / EXPIRED / REVOKED / SUPERSEDED / UNKNOWN, with PERMIT/DENY recommendation, fail-closed semantics, and the CRL signature embedded so any client can verify the signed layer independently (`/uta/revocations/`). Seeded with real events — 3 superseded ATCs + the `mn-ca-002` key compromise (2026-09-08).
+- **Cryptographic Tool Fingerprinting (TFP-1.0)** — the OWASP MCP Cheat Sheet control "verify tool descriptions haven't changed", as an MCP tool: SHA-256 over the RFC 8785 JCS canonical form of each tool + a manifest fingerprint for the whole `tools/list` surface + drift reports (added / removed / changed) against pinned manifests. The core defense against tool poisoning and rug-pull redefinitions.
+- **MCP endpoint v1.11.0** (8 tools) and **npm `marketnow-mcp@1.10.2`** (15 tools) — both new tools exposed; the npm package also fixes the broken `repository.directory` link (npm "Code" button 404 since 1.10.0).
+- **Interceptor v1.1.0** (`@alicelabs/cline-trust-plugin`) — revocation gate (fail-closed, 5-min TTL) + per-server tool-surface pinning/verification.
+- **Sentinel semgrep rules v2** — 29 rules: +tool-poisoning (MCP-TP), +exfiltration chains (MCP-EX), +multi-step attack chains (MCP-AC, roadmap v5.4 preview), +stale-trust caching (MCP-RR).
+- **Rekor anchor #4** (logIndex 2771735480) — the revocation registry itself is anchored in Sigstore's public log; the revocation history is third-party-checkable end-to-end.
+
+### v1.3.3 — the receipts release (previous)
+
+**Stranger-verifiable trust evidence:**
+
+- **Rekor transparency anchors (entries #1–#3)** — result digests committed to Sigstore's public append-only log; 9 local checks against live third-party data (run the stranger test above)
 
 **Stranger-verifiable trust evidence:**
 
