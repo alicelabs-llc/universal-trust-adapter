@@ -1,0 +1,73 @@
+name: Deploy manifesto + conformance to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'marketnow/aep-marketplace/public/manifesto/**'
+      - 'marketnow/aep-marketplace/public/uta/conformance/**'
+      - '.github/workflows/manifesto-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch existing gh-pages content
+        run: |
+          git fetch origin gh-pages --depth=1 || true
+          mkdir -p site
+          if git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then
+            git worktree add /tmp/ghpages origin/gh-pages --detach || true
+            cp -r /tmp/ghpages/* site/ 2>/dev/null || true
+            cp -r /tmp/ghpages/.nojekyll site/ 2>/dev/null || true
+          fi
+      - name: Transform pages for Pages hosting
+        run: |
+          python3 - << 'EOF'
+          import os, re
+          SITE = "https://www.marketnow.site"
+          def transform(html, relprefix, self_url):
+              html = re.sub(r'<link rel="canonical" href="[^"]*">', f'<link rel="canonical" href="{self_url}">', html)
+              html = html.replace('href="/manifesto/', f'href="{relprefix}')
+              html = html.replace('href="/manifesto"', f'href="{relprefix}"' if relprefix else 'href="."')
+              html = re.sub(r'href="/(?!/)', f'href="{SITE}/', html)
+              return html
+          SRC = "marketnow/aep-marketplace/public/manifesto"
+          DST = "site/manifesto"
+          PAGES = "https://alicelabs-llc.github.io/universal-trust-adapter/manifesto"
+          os.makedirs(DST, exist_ok=True)
+          open(f"{DST}/index.html", "w", encoding="utf-8").write(
+              transform(open(f"{SRC}/index.html", encoding="utf-8").read(), "", f"{PAGES}/"))
+          for l in ["es","pt","fr","de","it","ru","ja","zh","ko","hi","ar","tr"]:
+              os.makedirs(f"{DST}/{l}", exist_ok=True)
+              open(f"{DST}/{l}/index.html", "w", encoding="utf-8").write(
+                  transform(open(f"{SRC}/{l}/index.html", encoding="utf-8").read(), "../", f"{PAGES}/{l}/"))
+          # conformance: links absolutos al sitio (ya son correctos) — copia directa con canonical propio
+          import shutil
+          if os.path.isdir("marketnow/aep-marketplace/public/uta/conformance"):
+              shutil.copytree("marketnow/aep-marketplace/public/uta/conformance", "site/conformance", dirs_exist_ok=True)
+          print("site assembled")
+          EOF
+          if [ ! -f site/index.html ]; then
+            printf '<!doctype html><html lang="en"><head><meta charset="utf-8"><title>UTA — stranger-verifiable receipts</title><meta http-equiv="refresh" content="0;url=/universal-trust-adapter/manifesto/"></head><body><a href="/universal-trust-adapter/manifesto/">The Stranger Manifesto (13 languages)</a></body></html>' > site/index.html
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4
