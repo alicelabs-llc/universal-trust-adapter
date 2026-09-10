@@ -4,6 +4,18 @@
   "framework": "vite",
   "rewrites": [
     {
+      "source": "/api/community",
+      "destination": "/api/certification?_mode=community"
+    },
+    {
+      "source": "/api/badge",
+      "destination": "/api/skill?_mode=badge"
+    },
+    {
+      "source": "/mcps",
+      "destination": "/mcps.html"
+    },
+    {
       "source": "/(.*\\.sh)",
       "destination": "/api/not-found"
     },
@@ -41,7 +53,7 @@
     },
     {
       "source": "/api/badge/:slug",
-      "destination": "/api/badge?slug=:slug"
+      "destination": "/api/skill?slug=:slug&_mode=badge"
     },
     {
       "source": "/api/submit-skill",

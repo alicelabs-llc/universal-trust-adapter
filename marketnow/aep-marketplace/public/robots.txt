@@ -8,6 +8,12 @@
 User-agent: *
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 # Block only heavy API endpoints to preserve crawl budget
 Disallow: /api/skills.json
 Disallow: /api/skills_index.json
@@ -42,181 +48,493 @@ Allow: /api/mandates-info.json
 User-agent: Googlebot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: Googlebot-Image
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: Google-Extended
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # ─── Bing / Microsoft ───────────────────────────────────────────
 User-agent: Bingbot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: MSNBot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: bingbot
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # ─── Baidu (China — 百度) ───────────────────────────────────────
 User-agent: Baiduspider
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: Baiduspider-image
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 User-agent: Baiduspider-news
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: Baiduspider-video
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: Baidu
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # ─── Sogou (China — 搜狗) ───────────────────────────────────────
 User-agent: Sogou web spider
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: Sogou inst spider
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 User-agent: Sogou spider2
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: Sogou blog
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 User-agent: Sogou News Spider
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: sogou spider
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # ─── 360 Search (China — 360搜索) ───────────────────────────────
 User-agent: 360Spider
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: 360Spider-Image
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 User-agent: 360Spider-Video
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: HaoSouSpider
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # ─── Shenma (China — 神马搜索, mobile) ──────────────────────────
 User-agent: YisouSpider
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 # ─── Yandex (Russia — Яндекс) ───────────────────────────────────
 User-agent: YandexBot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: YandexImages
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 User-agent: YandexMetrika
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: Yandex
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # ─── DuckDuckGo ─────────────────────────────────────────────────
 User-agent: DuckDuckBot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: DuckDuckGo-Favicons-Bot
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # ─── Naver (Korea — 네이버) ─────────────────────────────────────
 User-agent: NaverBot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: Naverbot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: Yeti
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # ─── Seznam (Czech) ─────────────────────────────────────────────
 User-agent: SeznamBot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 # ─── Exalead ────────────────────────────────────────────────────
 User-agent: Exabot
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # ─── AI / LLM Crawlers ──────────────────────────────────────────
 # OpenAI / ChatGPT
 User-agent: GPTBot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: OAI-SearchBot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: ChatGPT-User
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # Anthropic / Claude
 User-agent: Claude-Web
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: ClaudeBot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: anthropic-ai
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # Perplexity
 User-agent: PerplexityBot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: Perplexity-User
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # Google AI
 User-agent: Google-Extended
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 # Meta AI / Facebook
 User-agent: meta-externalagent
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: FacebookBot
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # Amazon / AWS
 User-agent: Amazonbot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 # ByteDance / TikTok (China — 字节跳动)
 User-agent: Bytespider
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # Common Crawl
 User-agent: CCBot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 # Cohere
 User-agent: cohere-ai
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # Diffbot
 User-agent: Diffbot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 # Apple
 User-agent: AppleBot
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # ─── Archive.org ────────────────────────────────────────────────
 User-agent: archive.org_bot
 Allow: /
 
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
+
 User-agent: ia_archiver
 Allow: /
+
+# MCP directory + certification: crawl-friendly
+Allow: /mcps
+Allow: /api/certification
+Disallow: /api/community
+Disallow: /api/certification-scans.json
 
 # ─── Crawl-delay ────────────────────────────────────────────────
 Crawl-delay: 1

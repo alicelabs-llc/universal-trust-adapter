@@ -83,9 +83,9 @@
         "javascript",
         "typescript"
       ],
-      "regex": "\\b(exec|execSync)\\s*\\(\\s*[A-Za-z_$][\\w$.\\[\\]\\'\"]*\\s*[\\),]",
+      "regex": "\\b(execSync|execFileSync)\\s*\\(|\\bchild_process\\s*\\.\\s*(exec|execSync)\\s*\\(",
       "mode": "lite-approximation",
-      "note": "approximation of semgrep AST pattern — run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
+      "note": "lite-approximation (high-precision): only execSync/execFileSync calls and explicit child_process.exec usages \u2014 RegExp.prototype.exec() method calls are excluded to avoid false positives. Run semgrep with rules/semgrep-mcp-rules.yml for full AST matching"
     },
     {
       "id": "MCP-CI-002",
@@ -96,7 +96,7 @@
       ],
       "regex": "\\bos\\.system\\s*\\(|\\bsubprocess\\.call\\s*\\([^)]*shell\\s*=\\s*True",
       "mode": "lite-approximation",
-      "note": "approximation of semgrep AST pattern — run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
+      "note": "approximation of semgrep AST pattern \u2014 run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
     },
     {
       "id": "MCP-CI-003",
@@ -108,7 +108,7 @@
       ],
       "regex": "\\beval\\s*\\(",
       "mode": "lite-approximation",
-      "note": "approximation of semgrep AST pattern — run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
+      "note": "approximation of semgrep AST pattern \u2014 run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
     },
     {
       "id": "MCP-CI-004",
@@ -120,7 +120,7 @@
       ],
       "regex": "child_process\\.exec\\s*\\([^)]*\\+",
       "mode": "lite-approximation",
-      "note": "approximation of semgrep AST pattern — run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
+      "note": "approximation of semgrep AST pattern \u2014 run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
     },
     {
       "id": "MCP-SL-001",
@@ -156,7 +156,7 @@
       ],
       "regex": "\\b(fetch|axios\\.get)\\s*\\(\\s*[A-Za-z_$][\\w$.\\[\\]\\'\"]*\\.(?:url|URL)\\b",
       "mode": "lite-approximation",
-      "note": "approximation of semgrep AST pattern — run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
+      "note": "approximation of semgrep AST pattern \u2014 run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
     },
     {
       "id": "MCP-SS-002",
@@ -180,7 +180,7 @@
       ],
       "regex": "\\bfs\\.readFile(?:Sync)?\\s*\\(\\s*[A-Za-z_$][\\w$.]*\\s*[\\),]",
       "mode": "lite-approximation",
-      "note": "approximation of semgrep AST pattern — run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
+      "note": "approximation of semgrep AST pattern \u2014 run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
     },
     {
       "id": "MCP-PT-002",
@@ -215,7 +215,7 @@
       ],
       "regex": "\\bregisterTool\\s*\\(\\s*[^,()]+\\s*,\\s*[^,()]+\\s*\\)",
       "mode": "lite-approximation",
-      "note": "approximation of semgrep AST pattern — run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
+      "note": "approximation of semgrep AST pattern \u2014 run semgrep with rules/semgrep-mcp-rules.yml for exact matching"
     },
     {
       "id": "MCP-TP-001",
@@ -243,7 +243,7 @@
     },
     {
       "id": "MCP-TP-003",
-      "message": "Tool poisoning: description mutated after registration (dynamic description override — fingerprint drift at source level)",
+      "message": "Tool poisoning: description mutated after registration (dynamic description override \u2014 fingerprint drift at source level)",
       "severity": "WARNING",
       "languages": [
         "javascript",
@@ -337,7 +337,7 @@
     },
     {
       "id": "MCP-RR-001",
-      "message": "Stale trust: trust/verification verdict cached without re-check or TTL — revoked credentials keep passing",
+      "message": "Stale trust: trust/verification verdict cached without re-check or TTL \u2014 revoked credentials keep passing",
       "severity": "WARNING",
       "languages": [
         "javascript",

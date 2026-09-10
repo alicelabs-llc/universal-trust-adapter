@@ -28,6 +28,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const SEV_ORDER = { ERROR: 3, WARNING: 2, INFO: 1 };
 const SCANNABLE = new Set(['.js', '.mjs', '.cjs', '.ts', '.tsx', '.py', '.json']);
 const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'build', '.venv', '__pycache__', '.cache']);
+// --no-skip: scan shipped artifacts too (dist/, build/) — required when the
+// scan target is an extracted REGISTRY TARBALL (npm/PyPI), where dist/ IS the
+// code that runs on the user's machine. Default skip stays for source-repo scanning.
+let SCAN_ARTIFACTS = false;
 
 function usage() {
   console.log(`Usage: sentinel-scan [options]
@@ -35,6 +39,7 @@ function usage() {
   --path <file|dir>   target to scan (default: current directory)
   --list              list all rules and exit
   --json              emit findings as JSON
+  --no-skip           scan dist/ and build/ too (registry-tarball mode)
   --rules <file>      custom rules file (lite JSON format)
   --soft              exit 0 even with findings
   --semgrep           print the semgrep command for full AST matching
@@ -47,6 +52,7 @@ function parseArgs(argv) {
     const a = argv[i];
     if (a === '--list') out.list = true;
     else if (a === '--json') out.json = true;
+    else if (a === '--no-skip') SCAN_ARTIFACTS = true;
     else if (a === '--soft') out.soft = true;
     else if (a === '--semgrep') out.semgrep = true;
     else if (a === '--help' || a === '-h') out.help = true;
@@ -68,7 +74,7 @@ function walk(target, acc = []) {
   const st = statSync(target);
   if (st.isFile()) { acc.push(target); return acc; }
   for (const name of readdirSync(target)) {
-    if (SKIP_DIRS.has(name)) continue;
+    if (SKIP_DIRS.has(name) && !SCAN_ARTIFACTS) continue;
     const full = join(target, name);
     const s = statSync(full);
     if (s.isDirectory()) walk(full, acc);

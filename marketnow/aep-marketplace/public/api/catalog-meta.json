@@ -1,0 +1,1 @@
+{"schema": "marketnow-catalog-meta/1.0", "generated_at": "2026-09-10", "total_all": 130845, "core_certified": 57366, "community_indexed": 9130, "aggregate_tracked": 64349, "sources": {"github": 11197, "curated": 1, "community-submitted": 18, "npm-registry": 24623, "pypi": 14311, "smithery": 6195, "official-registry": 9076, "crates": 584, "docker": 491}}

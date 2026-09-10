@@ -9,6 +9,7 @@
 //       GET /api/skills?risk=red|yellow|green
 
 import skillsData from '../public/api/skills-lite.json' with { type: 'json' };
+import catalogMeta from '../public/api/catalog-meta.json' with { type: 'json' };
 
 const SITE = 'https://www.marketnow.site';
 
@@ -24,8 +25,14 @@ export default function handler(req, res) {
   const sort = (req.query.sort || '').toLowerCase();
   const q = (req.query.q || '').toLowerCase().trim();
   const risk = (req.query.risk || '').toLowerCase().trim();
+  const tier = (req.query.tier || '').toLowerCase().trim();
 
   let skills = skillsData.skills || skillsData || [];
+
+  // Filter by tier (core = evidence-gated | community = indexed, low signal)
+  if (tier && ['core', 'community'].includes(tier)) {
+    skills = skills.filter(s => (s.tier || 'core') === tier);
+  }
 
   // Filter by category
   if (category) {
@@ -85,6 +92,7 @@ export default function handler(req, res) {
     if (sort) params.set('sort', sort);
     if (q) params.set('q', q);
     if (risk) params.set('risk', risk);
+    if (tier) params.set('tier', tier);
     for (const [k, v] of Object.entries(extra || {})) params.set(k, v);
     return `/api/skills?${params.toString()}`;
   };
@@ -101,6 +109,14 @@ export default function handler(req, res) {
     limit,
     total,
     total_catalog: (skillsData.skills || skillsData || []).length,
+    // Full ecosystem scale (deduplicated): certified + community + aggregate tracking
+    catalog_meta: {
+      core_certified: catalogMeta.core_certified,
+      community_indexed: catalogMeta.community_indexed,
+      aggregate_tracked: catalogMeta.aggregate_tracked,
+      total_all: catalogMeta.total_all,
+      tiers_doc: 'core = evidence-gated (adoption/verification/age) | community = indexed with weak signal, trust<=55 | aggregate = tracking-only inventory (see /api/community)',
+    },
     total_pages: totalPages,
     has_next: page < totalPages,
     has_prev: page > 1,

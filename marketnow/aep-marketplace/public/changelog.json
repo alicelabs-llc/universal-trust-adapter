@@ -1,18 +1,44 @@
 {
  "service": "MarketNow",
- "current_version": "5.3.0",
+ "current_version": "5.5.0",
  "changelog": [
+  {
+   "version": "5.5.0",
+   "date": "2026-09-10",
+   "changes": [
+    "CATALOG: 40,718 -> 66,496 certified entries (+25,778): npm registry deep wave +19,354 (26 new search queries, real weekly downloads via bulk API, typosquat piggyback detection), Smithery full registry +6,195 (q-slice enumeration with useCount/verified evidence), Docker Hub +491 (docker pull, stars/pulls, install-risk yellow)",
+    "ECOSYSTEM TRACKER: 56,212 -> 64,349 aggregate (+8,137 from MCPServers.org public sitemaps, deduplicated against core) at /api/community",
+    "TOTAL: 130,845 deduplicated MCP servers tracked (core 57,366 / community 9,130 / aggregate 64,349) — largest security-certified MCP index",
+    "L1 INDEX CERTIFICATION re-run on the full 66,496: 10/10 checks pass (unique ids/slugs, provenance, risk model, bounds, price consistency); 2,103 descriptions backfilled, 3 risk misclassifications repaired",
+    "All certifications re-verified live: 14/14 endpoints, 21/21 trust-core registry smoke, 9/9 Rekor anchor, 3/3 byte-for-byte rebuild, 0 npm vulnerabilities"
+   ]
+  },
+  {
+   "version": "5.4.0",
+   "date": "2026-09-10",
+   "changes": [
+    "CATALOG: 23,206 -> 40,718 certified entries (+17,512): official MCP registry 9,076 (publisher-verified remotes), PyPI community tier 7,590 (trust<=55, clearly labeled), crates.io 584, Smithery 262",
+    "ECOSYSTEM TRACKER: new aggregate index (56,212 servers observed in public Glama directory sitemaps, deduplicated against our core) served at /api/community — tracking-only, NO trust claims",
+    "TOTAL: 96,930 deduplicated servers tracked across tiers (core 33,128 / community 7,590 / aggregate 56,212)",
+    "CERTIFICATION L1: 10 documented checks pass on 100% of the catalog (unique id/slug — fixed 833 id + 1,206 slug collisions, provenance resolvable, consistent install-risk model, scoring bounds) — report at /api/certification",
+    "CERTIFICATION L2: deep-scan of 358 shipped npm tarballs (top by adoption + own packages) with the 29 Sentinel rules in tarball mode (--no-skip: dist/ scanned); shasum-verified; raw findings published at /api/certification-scans.json; covers 1.87M downloads/week",
+    "RISK MODEL: single documented install-risk model — npx/uvx/pip=red (registry exec), source/cargo/go/docker/remote=yellow, verified chain=green; generator no longer overrides certified risk with permission heuristics",
+    "TIERS: tier field on every entry (core evidence-gated vs community weak-signal); /api/skills?tier= filter; trust=100 reserved for verified adoption",
+    "NEW PAGES/ENDPOINTS: /mcps directory page (live search, tier tabs, risk filter); /api/certification (+?package=, ?summary=1); /api/community",
+    "sentinel-scan CLI: new --no-skip flag for registry-tarball scanning (shipped artifacts)"
+   ]
+  },
   {
    "version": "5.3.0",
    "date": "2026-09-10",
    "changes": [
-    "Catalog expansion v2: +8,689 MCP servers indexed from three new sources \u2014 GitHub Search (1,968 repos with verified stars/age/activity), PyPI (6,721 Python packages, uvx-installable, gated on age + repo link + trust), and awesome-mcp-servers curation (curated flag). Total: 23,206 skills (github 11,216 / npm-registry 5,269 / pypi 6,721).",
-    "Backfill: all 9,248 pre-existing github entries now carry trust_score_100 derived from their already-indexed GitHub evidence (stars, last push, sentinel scan, risk caps) \u2014 sort=trust is now meaningful across the entire catalog, not just the npm wave.",
+    "Catalog expansion v2: +8,689 MCP servers indexed from three new sources — GitHub Search (1,968 repos with verified stars/age/activity), PyPI (6,721 Python packages, uvx-installable, gated on age + repo link + trust), and awesome-mcp-servers curation (curated flag). Total: 23,206 skills (github 11,216 / npm-registry 5,269 / pypi 6,721).",
+    "Backfill: all 9,248 pre-existing github entries now carry trust_score_100 derived from their already-indexed GitHub evidence (stars, last push, sentinel scan, risk caps) — sort=trust is now meaningful across the entire catalog, not just the npm wave.",
     "Trust Badge program (growth loop): GET /api/badge/<slug>.svg returns an embeddable shield with the trust score, colored by install risk. /api/skills responses now include badge_url and page_url per entry so MCP maintainers can surface their MarketNow score in their READMEs.",
     "Per-skill public pages: every skill now has an indexable page at /s/<slug> with schema.org JSON-LD (SoftwareApplication + FAQPage), OG tags, install command, trust/risk explanation and adoption evidence.",
-    "MCP-ness quality filter on the GitHub wave: repos that only mention MCP without shipping an MCP server (e.g. generic apps) were excluded \u2014 signal required in repo name, owner-declared topics, or an explicit MCP server/tools declaration in the description.",
-    "Quality gate on PyPI: kept only packages with verified downloads, curated listing, or an established repo (age + GitHub link + trust >= 70) \u2014 dropped ~7,600 unvetted low-signal candidates from the 16.9k raw expansion.",
-    "risk_level semantics extended: uvx (PyPI) is treated exactly like npx \u2014 registry code execution at install = red. git clone stays green/yellow. Same two-level model as 5.2.0: install risk vs trust heuristic, kept separate on purpose.",
+    "MCP-ness quality filter on the GitHub wave: repos that only mention MCP without shipping an MCP server (e.g. generic apps) were excluded — signal required in repo name, owner-declared topics, or an explicit MCP server/tools declaration in the description.",
+    "Quality gate on PyPI: kept only packages with verified downloads, curated listing, or an established repo (age + GitHub link + trust >= 70) — dropped ~7,600 unvetted low-signal candidates from the 16.9k raw expansion.",
+    "risk_level semantics extended: uvx (PyPI) is treated exactly like npx — registry code execution at install = red. git clone stays green/yellow. Same two-level model as 5.2.0: install risk vs trust heuristic, kept separate on purpose.",
     "SEO: sitemap-skills.xml (top 2,000 skill pages by trust), robots.txt updated to crawl /s/ pages, llms.txt updated with new catalog endpoints."
    ]
   },
@@ -21,9 +47,9 @@
    "date": "2026-09-10",
    "changes": [
     "Catalog expansion: +5,269 MCP servers indexed from the public npm registry (9,248 -> 14,517 skills)",
-    "Two-level risk model, kept separate on purpose: risk_level is INSTALL risk (npx/npm install runs arbitrary code -> red), trust_score_100 (0-100) is the adoption + security heuristic: package age, weekly downloads, typosquat distance vs popular packages, injection markers in descriptions \u2014 not popularity alone",
+    "Two-level risk model, kept separate on purpose: risk_level is INSTALL risk (npx/npm install runs arbitrary code -> red), trust_score_100 (0-100) is the adoption + security heuristic: package age, weekly downloads, typosquat distance vs popular packages, injection markers in descriptions — not popularity alone",
     "Every new entry: sentinel_score 0-10, trust_score_100, npm_downloads_wk, source provenance (npm-registry + package URL), indexed_at",
-    "API: new params sort=recent|downloads|trust|name, q=<search>, risk=red|yellow|green \u2014 try GET /api/skills?sort=recent",
+    "API: new params sort=recent|downloads|trust|name, q=<search>, risk=red|yellow|green — try GET /api/skills?sort=recent",
     "Source transparency: response includes per-source counts (github / npm-registry / curated)"
    ],
    "breaking": [],
@@ -41,10 +67,10 @@
    "version": "4.1.0",
    "date": "2026-07-12",
    "changes": [
-    "ATC \u2014 Agent Trust Card launched (replaces ACP)",
-    "L4 Supply Chain Audit (SBOM + OSV) \u2014 LIVE",
-    "L4.5 Content Fingerprint (SHA-256) \u2014 LIVE",
-    "L2.6 Egress Proxy with Allowlist \u2014 LIVE",
+    "ATC — Agent Trust Card launched (replaces ACP)",
+    "L4 Supply Chain Audit (SBOM + OSV) — LIVE",
+    "L4.5 Content Fingerprint (SHA-256) — LIVE",
+    "L2.6 Egress Proxy with Allowlist — LIVE",
     "Published to MCP Registry official",
     "npm v1.4.1 with mcpName"
    ],
