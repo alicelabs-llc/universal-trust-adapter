@@ -5,7 +5,7 @@ import { useLang } from '../context/LanguageContext.jsx';
 
 export default function AgentLanding() {
   const { t, lang } = useLang();
-  const [stats, setStats] = useState({ total: 9248, audited: 5662, checks: 1211488, quarantined: 80 });
+  const [stats, setStats] = useState({ total: 66496, l2: 688, flagged: 409 });
   const [topPaid, setTopPaid] = useState([]);
 
   useEffect(() => {
@@ -13,14 +13,13 @@ export default function AgentLanding() {
       .then(r => r.json())
       .then(d => setStats(s => ({
         ...s,
-        total: d.stats?.total_skills || 9248,
-        audited: d.stats?.audited || 5662,
-        checks: d.stats?.security_checks_performed || 1211488,
-        quarantined: d.stats?.critical_blocked || 80,
+        total: d.stats?.total_skills || 66496,
+        l2: d.stats?.l2_sentinel_scanned || 688,
+        flagged: d.stats?.l2_flagged_error || 409,
       })))
       .catch(() => {});
 
-    fetch('/api/skills.json')
+    fetch('/api/skills-lite.json')
       .then(r => r.json())
       .then(d => {
         const trending = d
@@ -44,7 +43,7 @@ export default function AgentLanding() {
   ];
 
   const features = [
-    { icon: '🛡️', title: 'UTA 12-stage trust pipeline', desc: '1.2M checks, 80 quarantined, 8,742 auto-scanned, 22 human-reviewed' },
+    { icon: '🛡️', title: 'UTA 12-stage trust pipeline', desc: 'L1: 66,496 index-certified (10/10 checks) · L2: 688 npm tarballs deep-scanned (29 Sentinel rules) · L3: trust-chain (ATC)' },
     { icon: '🔑', title: 'Agent Trust Card (ATC)', desc: 'Ed25519 (RFC 8032) + RFC 8785 JCS. 8 format adapters, 5 test vectors, 23/23 conformance' },
     { icon: '🚦', title: 'Runtime Interceptor', desc: '5 policy rules: blocks .env, rm -rf, process spawns, system writes' },
     { icon: '📋', title: 'OWASP MCP Cheat Sheet', desc: '12 controls mapped (4 live, 8 planned v5.1-v6.0)' },
@@ -55,18 +54,18 @@ export default function AgentLanding() {
   ];
 
   const statItems = [
-    { v: stats.total.toLocaleString()+'+', l: 'MCP skills analyzed' },
-    { v: (stats.checks/1_000_000).toFixed(2)+'M', l: 'Security checks performed' },
-    { v: stats.quarantined.toString(), l: 'Quarantined (critical)' },
-    { v: '12', l: 'MCP tools (marketnow_*)' },
+    { v: stats.total.toLocaleString()+'+', l: 'MCP skills index-certified' },
+    { v: stats.l2.toString(), l: 'L2 tarballs deep-scanned' },
+    { v: stats.flagged.toString(), l: 'L2 flagged for review' },
+    { v: '15', l: 'MCP tools (marketnow_*)' },
   ];
 
   const tweetText = {
-    en: "MarketNow — security infrastructure for AI agents. Sentinel: 12-stage verification pipeline, 1.2M checks, 1,030 threats detected, 80 quarantined. 12 MCP tools (marketnow_* namespace). v1.9.0.",
-    es: "MarketNow — infraestructura de seguridad para agentes IA. Sentinel: pipeline de auditoría de 10 capas, 1.2M chequeos, 1,030 amenazas detectadas, 80 en cuarentena. 12 herramientas MCP (namespace marketnow_*). v1.9.0.",
-    pt: "MarketNow — infraestrutura de segurança para agentes IA. Sentinel: pipeline de auditoria de 10 camadas, 1.2M verificações, 1.030 ameaças detectadas, 80 em quarentena. 12 ferramentas MCP (namespace marketnow_*). v1.9.0.",
-    zh: "MarketNow — AI 代理安全基础设施。Sentinel: 10 层审计管道, 120 万次检查, 1,030 个威胁已检测, 80 个已隔离。12 个 MCP 工具 (marketnow_* 命名空间)。v1.9.0。",
-    fr: "MarketNow — infrastructure de sécurité pour agents IA. Sentinel: pipeline d'audit 10 couches, 1.2M vérifications, 1.030 menaces détectées, 80 en quarantaine. 12 outils MCP (namespace marketnow_*). v1.9.0.",
+    en: "MarketNow — security infrastructure for AI agents. Sentinel two-level certification: 66,496 skills index-certified (10/10 checks), 688 top npm tarballs deep-scanned with 29 rules. 15 MCP tools (marketnow_* namespace). v1.10.3.",
+    es: "MarketNow — infraestructura de seguridad para agentes IA. Certificación Sentinel de dos niveles: 66,496 skills index-certified (10/10 checks), 688 tarballs npm deep-scanned con 29 reglas. 15 herramientas MCP (namespace marketnow_*). v1.10.3.",
+    pt: "MarketNow — infraestrutura de segurança para agentes IA. Certificação Sentinel em dois níveis: 66,496 skills index-certified (10/10 checks), 688 tarballs npm deep-scanned com 29 regras. 15 ferramentas MCP (namespace marketnow_*). v1.10.3.",
+    zh: "MarketNow — AI 代理安全基础设施。Sentinel 两级认证：66,496 个技能通过索引认证（10/10 检查），688 个热门 npm 包经 29 条规则深度扫描。15 个 MCP 工具（marketnow_* 命名空间）。v1.10.3。",
+    fr: "MarketNow — infrastructure de sécurité pour agents IA. Certification Sentinel à deux niveaux : 66,496 skills index-certified (10/10 checks), 688 tarballs npm deep-scanned avec 29 règles. 15 outils MCP (namespace marketnow_*). v1.10.3.",
   };
 
   return (
@@ -139,35 +138,35 @@ export default function AgentLanding() {
             <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
               <div>
                 <h2 className="text-white text-2xl font-bold mb-1">Sentinel Transparency Report</h2>
-                <p className="text-zinc-400 text-sm">1,211,488 checks · 1,030 threats detected · 80 quarantined · 8,742 auto-scanned · 22 human-reviewed · 0 maintainer-verified</p>
+                <p className="text-zinc-400 text-sm">66,496 index-certified (L1, 10/10 checks) · 688 L2 tarballs scanned (96.8% of 711 targets) · 116 clean · 160 flagged-warning · 409 flagged-error · 0 npm vulns (own packages)</p>
               </div>
-              <a href="/api/audit-report.json" target="_blank" rel="noopener" className="text-[#00F299] text-sm hover:underline">View full report →</a>
+              <a href="/api/certification.json" target="_blank" rel="noopener" className="text-[#00F299] text-sm hover:underline">View certification →</a>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               <div className="p-4 rounded-xl bg-black/40 border border-white/5">
-                <div className="text-[#00F299] text-2xl font-bold font-mono">1.2M</div>
-                <div className="text-zinc-500 text-xs mt-1">checks performed</div>
+                <div className="text-[#00F299] text-2xl font-bold font-mono">66,496</div>
+                <div className="text-zinc-500 text-xs mt-1">index-certified (L1)</div>
               </div>
               <div className="p-4 rounded-xl bg-black/40 border border-white/5">
-                <div className="text-[#00d1ff] text-2xl font-bold font-mono">1,030</div>
-                <div className="text-zinc-500 text-xs mt-1">threats detected</div>
+                <div className="text-[#00d1ff] text-2xl font-bold font-mono">688</div>
+                <div className="text-zinc-500 text-xs mt-1">L2 tarballs scanned</div>
               </div>
               <div className="p-4 rounded-xl bg-black/40 border border-red-500/20">
-                <div className="text-red-400 text-2xl font-bold font-mono">80</div>
-                <div className="text-zinc-500 text-xs mt-1">quarantined</div>
+                <div className="text-red-400 text-2xl font-bold font-mono">409</div>
+                <div className="text-zinc-500 text-xs mt-1">flagged-error (install risk)</div>
               </div>
               <div className="p-4 rounded-xl bg-black/40 border border-[#00F299]/20">
-                <div className="text-[#00F299] text-2xl font-bold font-mono">8,742</div>
-                <div className="text-zinc-500 text-xs mt-1">auto-scanned</div>
+                <div className="text-[#00F299] text-2xl font-bold font-mono">116</div>
+                <div className="text-zinc-500 text-xs mt-1">clean (L2)</div>
               </div>
             </div>
             <div className="mt-4 p-3 rounded-lg bg-black/40 border border-white/5">
-              <div className="text-zinc-500 text-[10px] mb-1">Public audit report</div>
-              <code className="text-[#00F299] text-xs font-mono">GET /api/audit-report.json</code>
+              <div className="text-zinc-500 text-[10px] mb-1">Public certification reports</div>
+              <code className="text-[#00F299] text-xs font-mono">GET /api/certification.json</code>
               <span className="text-zinc-700 text-[10px] mx-2">·</span>
-              <code className="text-[#00d1ff] text-xs font-mono">GET /api/owasp</code>
+              <code className="text-[#00d1ff] text-xs font-mono">GET /api/certification-scans.json</code>
               <span className="text-zinc-700 text-[10px] mx-2">·</span>
-              <code className="text-[#00d1ff] text-xs font-mono">POST /api/interceptor</code>
+              <code className="text-[#00d1ff] text-xs font-mono">POST /api/audit-skill</code>
             </div>
           </motion.div>
         </section>
@@ -254,9 +253,9 @@ export default function AgentLanding() {
 
             {/* NPM packages */}
             <div className="mb-4 p-3 rounded-lg bg-black/40 border border-white/5">
-              <div className="text-zinc-500 text-[10px] mb-2">NPM PACKAGES (2,339 downloads/mo)</div>
+              <div className="text-zinc-500 text-[10px] mb-2">NPM PACKAGES (1,169 downloads/mo)</div>
               <div className="flex flex-wrap gap-2">
-                <code className="text-[#00F299] text-[10px] font-mono px-2 py-1 rounded bg-[#00F299]/5">marketnow-mcp@1.10.1</code>
+                <code className="text-[#00F299] text-[10px] font-mono px-2 py-1 rounded bg-[#00F299]/5">marketnow-mcp@1.10.3</code>
                 <code className="text-[#00d1ff] text-[10px] font-mono px-2 py-1 rounded bg-[#00d1ff]/5">agent-trust-card@1.1.2</code>
                 <code className="text-[#00F299] text-[10px] font-mono px-2 py-1 rounded bg-[#00F299]/5">@marketnow/trust-core@1.0.1</code>
                 <code className="text-[#00d1ff] text-[10px] font-mono px-2 py-1 rounded bg-[#00d1ff]/5">@marketnow/uts@2.0.1</code>
@@ -270,7 +269,7 @@ export default function AgentLanding() {
               <span className="text-zinc-500 text-[10px]">Install:</span>
               <code className="text-[#00F299] text-xs font-mono">npm install agent-trust-card@1.1.2</code>
               <span className="text-zinc-700">·</span>
-              <code className="text-[#00d1ff] text-xs font-mono">npx -y marketnow-mcp@1.10.1</code>
+              <code className="text-[#00d1ff] text-xs font-mono">npx -y marketnow-mcp@1.10.3</code>
               <a href="/uta/README.md" target="_blank" rel="noopener" className="text-[#00F299] text-xs hover:underline ml-auto">README →</a>
               <a href="/uta/CONTRIBUTING.md" target="_blank" rel="noopener" className="text-[#00d1ff] text-xs hover:underline">CONTRIBUTING →</a>
               <a href="/uta/SECURITY.md" target="_blank" rel="noopener" className="text-[#00F299] text-xs hover:underline">SECURITY →</a>
@@ -292,9 +291,9 @@ export default function AgentLanding() {
                 <ul className="text-zinc-400 text-xs space-y-1">
                   <li>✓ Browse 66,496 skills — free and premium</li>
                   <li>✓ Free skills need no payment. Premium skills pay the seller's price</li>
-                  <li>✓ Sentinel v3.0 security audit on every skill</li>
+                  <li>✓ L1 index certification + install-risk tier on every skill</li>
                   <li>✓ Trust scores (0-10) for every skill</li>
-                  <li>✓ 8,742 auto-scanned, 22 human-reviewed</li>
+                  <li>✓ L2 deep-scan on the 688 highest-download tarballs</li>
                   <li>✓ Works with Claude, Cursor, Cline, Continue, Aider</li>
                 </ul>
               </div>
@@ -307,7 +306,7 @@ export default function AgentLanding() {
                   <li>✓ Premium skills: keep 80% of every sale</li>
                   <li>✓ Sentinel v3.0 audit (free)</li>
                   <li>✓ gVisor sandbox (free)</li>
-                  <li>✓ Sell to 66,496+ users and growing</li>
+                  <li>✓ Listed alongside 66,496 indexed skills</li>
                 </ul>
               </div>
               <div className="premium-card p-6">
@@ -427,7 +426,7 @@ export default function AgentLanding() {
               </a>
 
               <a
-                href={`https://news.ycombinator.com/submitlink?u=${encodeURIComponent("https://marketnow.site")}&t=${encodeURIComponent("MarketNow — Security infrastructure for AI agents. UTA 12-stage trust pipeline (1.2M checks, 80 quarantined)")}`}
+                href={`https://news.ycombinator.com/submitlink?u=${encodeURIComponent("https://marketnow.site")}&t=${encodeURIComponent("MarketNow — Security infrastructure for AI agents. Sentinel two-level certification (66,496 index-certified, 688 L2 deep-scanned)")}`}
                 target="_blank"
                 rel="noopener"
                 className="flex items-center gap-3 p-3 rounded-lg bg-black/40 border border-white/5 hover:border-[#00F299]/30 transition-all"

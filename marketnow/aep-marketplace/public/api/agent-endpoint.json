@@ -1,17 +1,3 @@
-/**
- * MarketNow — Agent API Endpoint
- * ================================
- * 
- * Endpoint optimizado para agentes que quieren:
- * 1. Buscar skills por capability (no solo keywords)
- * 2. Comparar skills side-by-side
- * 3. Comprar programáticamente
- * 4. Recibir webhooks post-compra
- * 5. Bulk download del catálogo
- * 
- * URL: https://marketnow.site/api/agent-endpoint.json
- */
-
 {
   "agent_api_version": "2.0",
   "endpoints": {
@@ -23,7 +9,7 @@
         "category": "string - filter by category",
         "max_price": "number - max price in USD",
         "min_price": "number - min price in USD",
-        "language": "string - filter by language (en, es, zh, pt, fr)",
+        "language": "string - filter by language (UI: 14 locales; skill metadata is English-primary)",
         "tags": "string - comma-separated tags",
         "limit": "number - max results (default 20, max 100)",
         "sort": "string - name|price|score|category"
@@ -32,7 +18,7 @@
       "returns": "Array of skills with all fields including translations"
     },
     "compare": {
-      "method": "GET", 
+      "method": "GET",
       "path": "/api/compare",
       "params": {
         "ids": "string - comma-separated skill IDs (max 5)"
@@ -43,16 +29,16 @@
     "bulk_download": {
       "method": "GET",
       "path": "/api/skills.json",
-      "note": "Returns ALL 6,964 skills in one request. ~7MB uncompressed, ~1.5MB gzipped. Cache locally for 24h.",
+      "note": "Returns ALL 66,496 skills in one request. ~94MB uncompressed (~8MB gzipped transfer). Prefer /api/skills-lite.json or the paginated /api/skills endpoint. Cache locally for 24h.",
       "format": "JSON array"
     },
     "categories": {
       "method": "GET",
       "path": "/api/categories.json",
-      "returns": "Array of {name, slug, count} for all 26 categories"
+      "returns": "Array of {name, slug, count} for all 16 categories"
     },
     "manifest": {
-      "method": "GET", 
+      "method": "GET",
       "path": "/api/manifest.json",
       "returns": "Marketplace metadata, pricing tiers, commission rates"
     },
@@ -97,17 +83,31 @@
   },
   "agent_features": {
     "multi_language": {
-      "supported": ["en", "es", "zh", "pt", "fr"],
-      "description": "Every skill with a system_prompt has translations in 5 languages. Agents can request skills in their user's language.",
-      "field": "translations.{lang}.system_prompt"
+      "supported": [
+        "en",
+        "es",
+        "pt",
+        "zh",
+        "fr",
+        "de",
+        "it",
+        "ru",
+        "tr",
+        "ja",
+        "ko",
+        "ar",
+        "hi"
+      ],
+      "description": "The site UI and docs are available in 13 languages. Skill metadata is English-primary; the legacy translations field is not populated in the current catalog.",
+      "field": "description (English-primary)"
     },
     "capability_search": {
       "description": "Search by what the skill CAN DO, not just keywords. Use the AI Skill Matcher at /registry.",
       "api": "POST /api/ai-match (coming soon) — for now, use /api/skills.json and filter client-side"
     },
     "price_filtering": {
-      "description": "Agents with budget constraints can filter by max_price. Example: skills.filter(s => s.price <= 2.99)",
-      "note": "97% of skills are under $5. Average price: $2.50."
+      "description": "All 66,496 indexed skills are open-source MCP servers — price $0, free to install.",
+      "note": "Price filters exist for future premium listings; today every indexed entry is $0."
     },
     "bulk_operations": {
       "description": "Download the entire catalog once, cache locally, and filter/search client-side. Refresh every 24h.",
@@ -148,12 +148,31 @@
   },
   "mcp_server": {
     "install": "npx -y marketnow-mcp",
-    "tools": ["search_skills", "get_skill", "list_categories", "get_manifest", "get_install_command"],
+    "tools": [
+      "marketnow_search_skills",
+      "marketnow_get_skill",
+      "marketnow_list_categories",
+      "marketnow_get_manifest",
+      "marketnow_get_install_command",
+      "marketnow_verify_trust",
+      "marketnow_verify_receipt",
+      "marketnow_submit_skill",
+      "marketnow_mint_referral",
+      "marketnow_lookup_referral",
+      "marketnow_recommend_skills",
+      "marketnow_get_owasp_compliance",
+      "marketnow_verify_atc_spec",
+      "marketnow_check_revocation",
+      "marketnow_fingerprint_tool"
+    ],
     "config": {
       "mcpServers": {
         "marketnow": {
           "command": "npx",
-          "args": ["-y", "marketnow-mcp"]
+          "args": [
+            "-y",
+            "marketnow-mcp"
+          ]
         }
       }
     }

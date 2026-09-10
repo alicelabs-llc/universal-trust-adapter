@@ -1,7 +1,7 @@
 MarketNow Agent Quick Reference
 ================================
 Base: https://marketnow.site
-Skills: 9,248 | Audited: 5,120 | Free: 9,248 | Sentinel: L2.5
+Skills: 66,496 | L1: 66,496 | L2 tarballs: 688 | Free: 66,496 | Sentinel: L2 (29 rules)
 
 ENDPOINTS (all return JSON, no auth unless noted):
 
@@ -9,7 +9,7 @@ GET  /api/health                    → {ok:true} (34 bytes, ultra-fast)
 GET  /api/manifest                  → All endpoints + stats in one call
 GET  /api/agent.json                → Agent instructions + trust model
 GET  /api/agent-ping.json           → Live stats
-GET  /api/free-skills.json          → 9,248 free skills (no signup)
+GET  /api/free-skills.json          → 66,496 free skills (no signup)
 GET  /api/skills/{id}               → Full skill detail
 GET  /api/trust-score?skillId=X     → {trust_score, recommendation, certificate_url}
 GET  /api/audit-skill?certificate=1&skillId=X → Signed SHA-256 certificate

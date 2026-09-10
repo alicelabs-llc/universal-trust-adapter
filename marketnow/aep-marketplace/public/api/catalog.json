@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "effective_date": "2026-07-02",
   "url": "https://marketnow.site/catalog",
-  "total_skills": 9,248,
-  "summary": "Claude noticed that some categories had exactly '30' items \u2014 a sign of bulk import rather than organic curation. This page is our honest disclosure of how the catalog was built, where each skill came from, and what 'verified' actually means.",
+  "total_skills": 9248,
+  "summary": "Claude noticed that some categories had exactly '30' items — a sign of bulk import rather than organic curation. This page is our honest disclosure of how the catalog was built, where each skill came from, and what 'verified' actually means.",
   "catalog_breakdown": [
     {
       "count": 5054,
@@ -15,12 +15,12 @@
     {
       "count": 3506,
       "label": "Bulk-imported from agent tool inventories",
-      "description": "Imported from community-maintained 'awesome-mcp' lists and agent tool inventories. These have less individual curation \u2014 Sentinel scanned them, but no human has reviewed each one. This is where the '30 items per category' pattern comes from \u2014 several of these source lists had ~30 entries per category, and that count propagated. We disclose this rather than hide it."
+      "description": "Imported from community-maintained 'awesome-mcp' lists and agent tool inventories. These have less individual curation — Sentinel scanned them, but no human has reviewed each one. This is where the '30 items per category' pattern comes from — several of these source lists had ~30 entries per category, and that count propagated. We disclose this rather than hide it."
     },
     {
       "count": 43,
       "label": "Hand-picked free skills",
-      "description": "Curated by us as a 'starter pack' for agents \u2014 high-signal prompts, foundational tools, etc. Available at /api/free-skills.json. No payment, no mandate required."
+      "description": "Curated by us as a 'starter pack' for agents — high-signal prompts, foundational tools, etc. Available at /api/free-skills.json. No payment, no mandate required."
     },
     {
       "count": 0,
@@ -53,5 +53,16 @@
     "about": "https://marketnow.site/about",
     "registry": "https://marketnow.site/registry",
     "policies_json": "https://marketnow.site/api/policies.json"
+  },
+  "current_state": {
+    "note": "This document is a frozen disclosure of the legacy 9,248-skill catalog (effective 2026-07-02), preserved as a historical record of how that catalog was built.",
+    "total_skills_now": 66496,
+    "total_tracked_all_sources": 130845,
+    "l2_tarballs_deep_scanned": 688,
+    "canonical_sources": [
+      "/api/certification.json",
+      "/api/catalog-meta.json",
+      "/api/manifest.json"
+    ]
   }
 }

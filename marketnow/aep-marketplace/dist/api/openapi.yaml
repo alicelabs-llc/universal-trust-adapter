@@ -6,7 +6,7 @@
 openapi: 3.1.0
 info:
   title: MarketNow Skills API
-  description: 'The open marketplace for MCP-compatible agent skills. 11,115 verified skills, micro-priced from free.
+  description: 'The open marketplace for MCP-compatible agent skills. 66,496 index-certified skills, free to install.
     Designed for autonomous agent consumption.
 
 
@@ -46,13 +46,13 @@ info:
 
     ## Stats (live)
 
-    - 11,115 MCP skills indexed
+    - 66,496 MCP skills indexed
 
     - 16 categories
 
-    - 9,248 free skills
+    - 66,496 free skills
 
-    - 5 languages: EN, ES, ZH, PT, FR
+    - 14 languages: EN, ES, PT, ZH, FR, DE, IT, RU, TR, JA, KO, AR, HI, UTA
 
     - Pricing: $B2B pricing one-time, no subscriptions
 
@@ -79,13 +79,13 @@ info:
 
     ## Stats (live)
 
-    - 11,115 MCP skills indexed
+    - 66,496 MCP skills indexed
 
     - 16 categories
 
-    - 9,248 free skills
+    - 66,496 free skills
 
-    - 5 languages: EN, ES, ZH, PT, FR
+    - 14 languages: EN, ES, PT, ZH, FR, DE, IT, RU, TR, JA, KO, AR, HI, UTA
 
     - Pricing: $B2B pricing one-time, no subscriptions
 
@@ -109,7 +109,7 @@ paths:
   /api/skills.json:
     get:
       summary: List all skills
-      description: 'Returns the complete catalog of 11,115 skills. Each skill includes id, name, slug, description, category,
+      description: 'Returns the complete catalog of 66,496 skills. Each skill includes id, name, slug, description, category,
         tags, price, currency, install command, translations (if available), and system_prompt (if available).
 
 

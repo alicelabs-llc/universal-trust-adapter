@@ -2,13 +2,13 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "MarketNow",
   "tagline": "Trust layer for agent commerce",
-  "description": "Trust layer for agent commerce. Discovery is solved (MCP registry, Smithery, Glama); trust is not. MarketNow provides Sentinel security audits, AP2-compatible mandates, x402 payments, and human-in-the-loop-by-default agent spending. 9,248 MCP skills, free one-time, 9,248 free. AliceLabs LLC Proprietary, maintained by AliceLabs LLC.",
+  "description": "Trust layer for agent commerce. Discovery is solved (MCP registry, Smithery, Glama); trust is not. MarketNow provides Sentinel security certification, AP2-compatible mandates, x402 payments, and human-in-the-loop-by-default agent spending. 66,496 index-certified MCP skills (130,845 total tracked), all free to install. AliceLabs LLC Proprietary, maintained by AliceLabs LLC.",
   "url": "https://marketnow.site",
   "api_base": "https://marketnow.site/api",
   "version": "2.0.0",
   "last_updated": "2026-07-02T00:00:00.000Z",
   "stats": {
-    "total_skills": 9,248,
+    "total_skills": 66496,
     "free_skills": 43,
     "categories": 58,
     "languages": [
@@ -43,16 +43,16 @@
     }
   ],
   "standards": {
-    "payments": "x402 (HTTP 402 Payment Required) \u2014 implementing, governed by Linux Foundation",
-    "mandates": "AP2 (Agent Payments Protocol) \u2014 implementing, by Google",
-    "discovery": "MCP Server Cards \u2014 monitoring",
-    "identity": "MCP Registry namespace verification \u2014 planning"
+    "payments": "x402 (HTTP 402 Payment Required) — implementing, governed by Linux Foundation",
+    "mandates": "AP2 (Agent Payments Protocol) — implementing, by Google",
+    "discovery": "MCP Server Cards — monitoring",
+    "identity": "MCP Registry namespace verification — planning"
   },
   "review_status": {
     "auto_scanned": 8517,
     "human_reviewed": 43,
     "maintainer_verified": 0,
-    "disclosure": "We never mark a skill 'verified' if it has only been auto-scanned. The legacy 'verified: true' field is deprecated \u2014 use review_status instead."
+    "disclosure": "We never mark a skill 'verified' if it has only been auto-scanned. The legacy 'verified: true' field is deprecated — use review_status instead."
   },
   "trust_model": {
     "default_notification_mode": "notify",
@@ -68,7 +68,7 @@
     "legal_name": "AliceLabs LLC",
     "founder": "Edison Flores",
     "country": "Wyoming, USA",
-    "founded": "AliceLabs LLC 2025 \u00b7 MarketNow launched 2026",
+    "founded": "AliceLabs LLC 2025 · MarketNow launched 2026",
     "email": "info@alicelabs.site",
     "github": "https://github.com/alicelabs-llc"
   },
@@ -84,7 +84,7 @@
     "largest MCP marketplace (we are the trust layer, not the largest)",
     "no humans needed (human-in-loop is default; silent requires opt-in)",
     "ETH/BSC/SOL/BTC payments (USDC on Base only)",
-    "9,248 skills (current count is 9,248)",
+    "9,248 skills (stale count — today: 66,496 index-certified / 130,845 tracked; canonical: /api/agent.json skills_indexed)",
     "open registry with no manual approval (mandates default to notify mode)"
   ],
   "canonical_sources": {

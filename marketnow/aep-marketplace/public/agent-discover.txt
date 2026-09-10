@@ -1,7 +1,7 @@
 MarketNow — Agent Skill Marketplace
 ====================================
 
-9,248 verified MCP skills. 65 are FREE.
+66,496 index-certified MCP skills. All are FREE to install.
 Pay with USDC on Base. No humans needed.
 
 INSTALL MCP SERVER:
@@ -41,9 +41,9 @@ SAliceLabs LLC ProprietaryHERY:
 https://smithery.ai/servers/eddyflores100/marketnow
 
 STATS:
-- 9,248 skills
+- 66,496 skills
 - 16 categories
-- 9,248 free skills
+- 66,496 free skills
 - 15 active sellers
 - 5 languages (EN, ES, ZH, PT, FR)
 - B2B: Community (Free) / Team ($99/mo) / Enterprise (Custom)
