@@ -10,6 +10,8 @@
 
 import skillsData from '../public/api/skills-lite.json' with { type: 'json' };
 
+const SITE = 'https://www.marketnow.site';
+
 export default function handler(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=600');
@@ -53,9 +55,13 @@ export default function handler(req, res) {
   if (sort === 'recent') {
     skills = [...skills].sort((a, b) => String(b.indexed_at || '').localeCompare(String(a.indexed_at || '')) || (b.npm_downloads_wk || 0) - (a.npm_downloads_wk || 0));
   } else if (sort === 'downloads') {
-    skills = [...skills].sort((a, b) => (b.npm_downloads_wk || 0) - (a.npm_downloads_wk || 0));
+    const dl = (s) => (s.npm_downloads_wk || 0) || ((s.source && typeof s.source === 'object' && s.source.pypi_downloads_wk) || 0);
+    skills = [...skills].sort((a, b) => dl(b) - dl(a));
   } else if (sort === 'trust') {
-    skills = [...skills].sort((a, b) => (b.trust_score_100 ?? (b.sentinel_score || 0) * 10) - (a.trust_score_100 ?? (a.sentinel_score || 0) * 10));
+    // trust desc con tiebreak por evidencia de adopción (dl/semana o stars)
+    const ev = (s) => (s.npm_downloads_wk || 0) || ((s.source && typeof s.source === 'object' && s.source.pypi_downloads_wk) || 0) || ((s.source && typeof s.source === 'object' && s.source.stars) || 0);
+    skills = [...skills].sort((a, b) =>
+      ((b.trust_score_100 ?? (b.sentinel_score || 0) * 10) - (a.trust_score_100 ?? (a.sentinel_score || 0) * 10)) || ev(b) - ev(a));
   } else if (sort === 'name') {
     skills = [...skills].sort((a, b) => String(a.name || '').localeCompare(String(b.name || '')));
   }
@@ -63,7 +69,12 @@ export default function handler(req, res) {
   const total = skills.length;
   const totalPages = Math.ceil(total / limit);
   const offset = (page - 1) * limit;
-  const pageSkills = skills.slice(offset, offset + limit);
+  // Growth loop: cada skill devuelve su badge y página pública — los owners
+  // las embeben en sus READMEs → backlinks → visibilidad para MarketNow.
+  const pageSkills = skills.slice(offset, offset + limit).map(s => {
+    const key = encodeURIComponent(s.slug || s.name || '');
+    return { ...s, badge_url: `${SITE}/api/badge/${key}.svg`, page_url: `${SITE}/s/${key}` };
+  });
 
   const qs = (extra) => {
     const params = new URLSearchParams();

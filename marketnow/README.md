@@ -10,7 +10,7 @@
 
 MarketNow is **security infrastructure for AI agents**. Not a marketplace.
 
-The marketplace (9,248 MCP skills, all free) is distribution. The product is **Sentinel** — a 10-layer security audit pipeline that determines whether AI agents should be allowed to trust and execute tools.
+The marketplace (23,206 MCP servers, all free) is distribution. The product is **Sentinel** — a 10-layer security audit pipeline that determines whether AI agents should be allowed to trust and execute tools.
 
 ## Products
 
@@ -62,7 +62,7 @@ curl https://marketnow.site/api/trust-score?skillId=mn-gen-00003
 | Metric | Value |
 |--------|-------|
 | Security checks performed | **1,211,488** |
-| MCP skills analyzed | 9,248 |
+| MCP servers indexed | 23,206 |
 | Threats detected | **1,030** |
 | Skills quarantined (critical) | **80** |
 | Skills flagged risky | 71 |
@@ -140,7 +140,7 @@ The 12 tools:
 
 ## Pricing
 
-> **Pricing coherence note (v5.0.0):** MarketNow is **security infrastructure**, not a marketplace. The marketplace (9,248 MCP skills, all free to install) is **distribution**. The paid product is **Sentinel** — the security audit pipeline. The MCP server itself is free to install and use; paid actions kick in when you need a signed Trust Card, runtime testing, or continuous monitoring.
+> **Pricing coherence note (v5.0.0):** MarketNow is **security infrastructure**, not a marketplace. The marketplace (23,206 MCP servers, all free to install) is **distribution**. The paid product is **Sentinel** — the security audit pipeline. The MCP server itself is free to install and use; paid actions kick in when you need a signed Trust Card, runtime testing, or continuous monitoring.
 
 | Tier | Price | Features |
 |------|-------|----------|

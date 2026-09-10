@@ -2,7 +2,7 @@
   "schemaVersion": "v1.0",
   "agent": {
     "name": "MarketNow — Agent Skill Exchange",
-    "description": "The largest MCP skill marketplace for AI agents. Browse 9,248 verified MCP servers, each secured by Sentinel v3.0 gVisor sandbox security audit. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
+    "description": "The largest MCP skill marketplace for AI agents. Browse 23,206 verified MCP servers, each secured by Sentinel v3.0 gVisor sandbox security audit. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
     "url": "https://marketnow.site",
     "version": "4.0.0"
   },
@@ -44,7 +44,7 @@
           {
             "id": "skill-search",
             "name": "MCP Skill Search",
-            "description": "AI agents can search and retrieve MCP server configurations from 9,248 verified skills. Supports natural language queries, category filtering, and security score thresholds.",
+            "description": "AI agents can search and retrieve MCP server configurations from 23,206 verified skills. Supports natural language queries, category filtering, and security score thresholds.",
             "commissionRate": 0.2,
             "referralEndpoints": {
               "register": "https://marketnow.site/api/agent/register",
@@ -80,7 +80,7 @@
         "No Malicious Code"
       ],
       "scoreRange": "0-6",
-      "totalScanned": 9248,
+      "totalScanned": 23206,
       "averageScore": 4.3,
       "passRate": "53.3%"
     }
@@ -101,7 +101,7 @@
       "Affiliate program (5% from MarketNow's share)"
     ],
     "buyer_value": "Free skills install instantly. Premium skills are one-time purchases with full chargeback rights via Stripe or USDC.",
-    "seller_value": "Sell skills to 9,248+ users. Keep 80% of sales. Get Sentinel v3.0 security audit to boost trust and conversion.",
+    "seller_value": "Sell skills to 23,206+ users. Keep 80% of sales. Get Sentinel v3.0 security audit to boost trust and conversion.",
     "commissionPolicy": "https://marketnow.site/policies#comisiones",
     "wallet_type": "single-sig (migration to 2-of-3 multisig pending Q4 2026)",
     "wallet_governance": "https://marketnow.site/policies#wallet"
@@ -135,7 +135,7 @@
     "audit_scope": "Documented inconsistencies across agent.json, npm package.json, LICENSE files, README, and landing HTML."
   },
   "metrics": {
-    "skills_indexed": 9248,
+    "skills_indexed": 23206,
     "security_checks_performed": 1200000,
     "malicious_tools_quarantined": 80,
     "npm_versions_published": 15,
@@ -146,14 +146,14 @@
     "as_of": "2026-08-19T00:00:00Z",
     "source": "live API: https://marketnow.site/api/skills-lite.json + npm registry"
   },
-  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 9,248 skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
+  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 23,206 skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
   "buyer_pricing": {
     "model": "free",
     "per_skill_fee": 0,
     "subscription_fee": 0,
-    "explanation": "Buyers never pay MarketNow. All 9,248 skills are free to install."
+    "explanation": "Buyers never pay MarketNow. All 23,206 skills are free to install."
   },
-  "generated_at": "2026-09-09T22:42:30.623Z",
+  "generated_at": "2026-09-10T00:16:37.275Z",
   "metadata": {
     "stats_source": "https://marketnow.site/api/stats.json",
     "sentinel_methodology": "https://marketnow.site/security/sentinel-v3.0",

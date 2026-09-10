@@ -36,6 +36,14 @@
       "destination": "/api/search?_mode=recommend"
     },
     {
+      "source": "/s/:slug",
+      "destination": "/api/skill?slug=:slug"
+    },
+    {
+      "source": "/api/badge/:slug",
+      "destination": "/api/badge?slug=:slug"
+    },
+    {
       "source": "/api/submit-skill",
       "destination": "/api/atc"
     },

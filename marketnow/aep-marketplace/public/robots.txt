@@ -14,6 +14,9 @@ Disallow: /api/skills_index.json
 Disallow: /api/all_skills.json
 Disallow: /api/skills.min.json
 
+# Per-skill public pages (SEO + schema.org)
+Allow: /s/
+
 # Allow lightweight API endpoints
 Allow: /api/skills-lite.json
 Allow: /api/agent.json
@@ -220,6 +223,7 @@ Crawl-delay: 1
 
 # ─── Sitemaps ───────────────────────────────────────────────────
 Sitemap: https://marketnow.site/sitemap.xml
+Sitemap: https://marketnow.site/sitemap-skills.xml
 Sitemap: https://marketnow.site/api/skills-lite.json
 
 # LLM discoverability (llms.txt convention by answer.ai)
