@@ -1098,5 +1098,8 @@
       "risk": "red",
       "quarantined": false
     }
-  ]
+  ],
+  "superseded": true,
+  "superseded_by": "https://marketnow.site/api/certification.json",
+  "supersession_note": "Frozen audit snapshot of the legacy 9,248-skill catalog (generated 2026-08-09). Preserved as historical record; current certification is served at /api/certification.json (L1) and /api/certification-scans.json (L2)."
 }

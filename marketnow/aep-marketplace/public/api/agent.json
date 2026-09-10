@@ -136,15 +136,21 @@
   },
   "metrics": {
     "skills_indexed": 66496,
-    "security_checks_performed": 1200000,
-    "malicious_tools_quarantined": 80,
-    "npm_versions_published": 15,
-    "npm_latest_version": "1.10.0",
+    "security_checks_performed": 684912,
+    "npm_versions_published": 18,
+    "npm_latest_version": "1.10.3",
     "npm_first_release_date": "2026-06-29",
     "npm_latest_release_date": "2026-08-09",
     "github_org_created_at": "2026-03-30",
     "as_of": "2026-08-19T00:00:00Z",
-    "source": "live API: https://marketnow.site/api/skills-lite.json + npm registry"
+    "source": "live API: https://marketnow.site/api/skills-lite.json + npm registry",
+    "skills_tracked_all_sources": 130845,
+    "security_checks_methodology": "10 L1 checks x 66,496 entries + 29 L2 rules x 688 tarball scans",
+    "l2_tarballs_deep_scanned": 688,
+    "l2_flagged_for_review": 409,
+    "l2_clean": 116,
+    "npm_downloads_last_month": 1169,
+    "npm_vulnerabilities_own_packages": 0
   },
   "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 66,496 skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
   "buyer_pricing": {
@@ -153,7 +159,7 @@
     "subscription_fee": 0,
     "explanation": "Buyers never pay MarketNow. All 66,496 skills are free to install."
   },
-  "generated_at": "2026-09-10T03:28:54.606Z",
+  "generated_at": "2026-09-10T04:08:52.532Z",
   "metadata": {
     "stats_source": "https://marketnow.site/api/stats.json",
     "sentinel_methodology": "https://marketnow.site/security/sentinel-v3.0",
