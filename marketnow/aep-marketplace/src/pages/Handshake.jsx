@@ -20,7 +20,7 @@ const CONTENT = {
     subtitle: 'Everything an autonomous agent needs to discover, evaluate, and install skills from MarketNow. All endpoints are public, JSON-formatted, and CORS-enabled. No API key required for reads.',
     endpointsTitle: 'PUBLIC ENDPOINTS',
     endpoints: [
-      { method: 'GET', path: '/api/skills.json', desc: 'List all 9,248 skills with prices, categories, install commands', size: '~7 MB' },
+      { method: 'GET', path: '/api/skills.json', desc: 'List all 66,496 skills with prices, categories, install commands', size: '~7 MB' },
       { method: 'GET', path: '/api/categories.json', desc: 'List all 16 categories with skill counts', size: '~2 KB' },
       { method: 'GET', path: '/api/manifest.json', desc: 'API metadata, total skill count, version', size: '~1 KB' },
       { method: 'GET', path: '/api/agent.json', desc: 'Machine-readable agent instructions, schema, workflow', size: '~3 KB' },
@@ -68,7 +68,7 @@ const CONTENT = {
     subtitle: 'Todo lo que un agente autónomo necesita para descubrir, evaluar e instalar skills de MarketNow. Todos los endpoints son públicos, en formato JSON y con CORS habilitado. No se requiere API key para lecturas.',
     endpointsTitle: 'ENDPOINTS PÚBLICOS',
     endpoints: [
-      { method: 'GET', path: '/api/skills.json', desc: 'Lista las 9,248 skills con precios, categorías y comandos de instalación', size: '~7 MB' },
+      { method: 'GET', path: '/api/skills.json', desc: 'Lista las 66,496 skills con precios, categorías y comandos de instalación', size: '~7 MB' },
       { method: 'GET', path: '/api/categories.json', desc: 'Lista las 25 categorías con conteo de skills', size: '~2 KB' },
       { method: 'GET', path: '/api/manifest.json', desc: 'Metadatos de la API, conteo total de skills, versión', size: '~1 KB' },
       { method: 'GET', path: '/api/agent.json', desc: 'Instrucciones para agentes legibles por máquina, schema, workflow', size: '~3 KB' },
@@ -116,7 +116,7 @@ const CONTENT = {
     subtitle: 'Tudo o que um agente autônomo precisa para descobrir, avaliar e instalar skills do MarketNow. Todos os endpoints são públicos, em formato JSON e com CORS habilitado. Não precisa de API key para leituras.',
     endpointsTitle: 'ENDPOINTS PÚBLICOS',
     endpoints: [
-      { method: 'GET', path: '/api/skills.json', desc: 'Lista as 9.248 skills com preços, categorias e comandos de instalação', size: '~7 MB' },
+      { method: 'GET', path: '/api/skills.json', desc: 'Lista as 66.496 skills com preços, categorias e comandos de instalação', size: '~7 MB' },
       { method: 'GET', path: '/api/categories.json', desc: 'Lista as 16 categorias com contagem de skills', size: '~2 KB' },
       { method: 'GET', path: '/api/manifest.json', desc: 'Metadados da API, contagem total de skills, versão', size: '~1 KB' },
       { method: 'GET', path: '/api/agent.json', desc: 'Instruções de agente legíveis por máquina, schema, workflow', size: '~3 KB' },
@@ -164,7 +164,7 @@ const CONTENT = {
     subtitle: '自主 agent 从 MarketNow 发现、评估和安装 skills 所需的一切。所有 endpoints 都是公开的、JSON 格式且启用 CORS。读取无需 API key。',
     endpointsTitle: '公开 ENDPOINTS',
     endpoints: [
-      { method: 'GET', path: '/api/skills.json', desc: '列出全部 9,248 个 skills，含价格、分类和安装命令', size: '~7 MB' },
+      { method: 'GET', path: '/api/skills.json', desc: '列出全部 66,496 个 skills，含价格、分类和安装命令', size: '~7 MB' },
       { method: 'GET', path: '/api/categories.json', desc: '列出全部 16 个分类及其 skill 数量', size: '~2 KB' },
       { method: 'GET', path: '/api/manifest.json', desc: 'API 元数据、skill 总数、版本', size: '~1 KB' },
       { method: 'GET', path: '/api/agent.json', desc: '机器可读的 agent 指令、schema、workflow', size: '~3 KB' },

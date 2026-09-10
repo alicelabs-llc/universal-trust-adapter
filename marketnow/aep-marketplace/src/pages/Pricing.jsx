@@ -188,7 +188,7 @@ const CONTENT = {
     faq: [
       {
         q: '¿Los compradores necesitan suscripción?',
-        a: 'Correcto: todo es gratis. Las 9,248 skills están certificadas por Sentinel y son navegables e instalables gratis.',
+        a: 'Correcto: todo es gratis. Las 66,496 skills están certificadas por Sentinel y son navegables e instalables gratis.',
       },
       {
         q: '¿Qué pasa si excedo el límite del plan free?',
@@ -324,7 +324,7 @@ const CONTENT = {
     faq: [
       {
         q: 'Compradores precisam de assinatura?',
-        a: 'Correto: tudo é grátis. As 9,248 skills são certificadas pelo Sentinel e navegáveis/instaláveis gratuitamente.',
+        a: 'Correto: tudo é grátis. As 66,496 skills são certificadas pelo Sentinel e navegáveis/instaláveis gratuitamente.',
       },
       {
         q: 'O que acontece se eu exceder o limite do plano free?',
@@ -459,7 +459,7 @@ const CONTENT = {
     faq: [
       {
         q: '买家需要订阅吗？',
-        a: '正确：一切免费。所有 9,248 个技能都通过 Sentinel 认证，可免费浏览和安装。',
+        a: '正确：一切免费。所有 66,496 个技能都通过 Sentinel 认证，可免费浏览和安装。',
       },
       {
         q: '如果超出免费套餐限额会怎样？',
@@ -592,7 +592,7 @@ const CONTENT = {
     faq: [
       {
         q: 'Les acheteurs ont-ils besoin d\'un abonnement ?',
-        a: "Exact : tout est gratuit. Les 9 248 skills sont certifiées par Sentinel et navigables/installables gratuitement.",
+        a: "Exact : tout est gratuit. Les 66 496 skills sont certifiées par Sentinel et navigables/installables gratuitement.",
       },
       {
         q: 'Que se passe-t-il si je dépasse la limite du plan gratuit ?',

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 export default function Hero({ onSignIn }) {
-  const [stats, setStats] = useState({ total: 5054, categories: 25, avgPrice: 2.50 });
+  const [stats, setStats] = useState({ total: 66496, categories: 16, avgPrice: 2.50 });
 
   useEffect(() => {
     fetch('/api/manifest.json')
@@ -59,8 +59,9 @@ export default function Hero({ onSignIn }) {
 
           {/* Subtitle — for agents */}
           <p className="text-zinc-400 text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
-            Discover, evaluate, and install {stats.total.toLocaleString()}+ verified MCP skills
-            through a public JSON API. Free to install — designed for autonomous
+            Discover, evaluate, and install {stats.total.toLocaleString()}+ indexed MCP servers
+            through a public JSON API — install-risk and evidence-based trust scores on every entry.
+            Free to install — designed for autonomous
             agents to buy and deploy without human intervention.
           </p>
 
@@ -70,7 +71,7 @@ export default function Hero({ onSignIn }) {
               to="/registry"
               className="px-8 py-4 bg-[#00F299] text-black font-bold rounded-xl hover:bg-[#00F299]/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg shadow-[#00F299]/20"
             >
-              BROWSE 9,248 SKILLS →
+              BROWSE {stats.total.toLocaleString()} SKILLS →
             </Link>
             <Link
               to="/submit"

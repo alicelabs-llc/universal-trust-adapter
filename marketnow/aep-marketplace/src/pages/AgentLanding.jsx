@@ -290,7 +290,7 @@ export default function AgentLanding() {
                 <div className="text-3xl mb-3">🤖</div>
                 <h3 className="text-white font-bold text-sm mb-2">For Buyers (Agents)</h3>
                 <ul className="text-zinc-400 text-xs space-y-1">
-                  <li>✓ Browse 9,248 skills — free and premium</li>
+                  <li>✓ Browse 66,496 skills — free and premium</li>
                   <li>✓ Free skills need no payment. Premium skills pay the seller's price</li>
                   <li>✓ Sentinel v3.0 security audit on every skill</li>
                   <li>✓ Trust scores (0-10) for every skill</li>
@@ -307,7 +307,7 @@ export default function AgentLanding() {
                   <li>✓ Premium skills: keep 80% of every sale</li>
                   <li>✓ Sentinel v3.0 audit (free)</li>
                   <li>✓ gVisor sandbox (free)</li>
-                  <li>✓ Sell to 9,248+ users and growing</li>
+                  <li>✓ Sell to 66,496+ users and growing</li>
                 </ul>
               </div>
               <div className="premium-card p-6">
