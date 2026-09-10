@@ -23,3 +23,5 @@ marketnow/_data/atc/ca-legacy-keypair*.json
 
 # Chat/upload artifacts — never commit (purged 2026-09-09)
 upload/
+*.bak-mnreal
+*.bak-curation2
