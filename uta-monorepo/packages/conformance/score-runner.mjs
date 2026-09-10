@@ -20,7 +20,7 @@
 //     stage is wrong, not "healthy with a note".
 //
 // Modes:
-//   node score-runner.mjs                       → reference runner vs the 13 fixed vectors
+//   node score-runner.mjs                       → reference runner vs the 14 fixed vectors
 //   node score-runner.mjs --matrix              → simulate the cheat runners, print the table
 //   node score-runner.mjs --generated DIR       → also score generated cards (all must pass)
 //   node score-runner.mjs --generated DIR --matrix  → both
