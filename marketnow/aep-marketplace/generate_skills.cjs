@@ -170,18 +170,17 @@ for (const s of skills) {
     disclosure: 'Declarative — inferred from skill metadata. Not enforced at runtime. See /trust for roadmap.',
   };
 
-  // risk_level — Green/Yellow/Red based on permissions
-  // Green: pure prompts, no install command, no network, no subprocess
-  // Yellow: network access or env vars, but no arbitrary code execution
-  // Red: subprocess execution (npx/npm/bash/curl runs arbitrary code)
+  // risk_level — modelo documentado (changelog 5.2.0 + certificación L1):
+  // riesgo de INSTALACIÓN por mecánica (npx/uvx=red | source/remote=yellow | chain=green).
+  // El índice certificado ya asigna risk_level consistente — se PRESERVA.
+  // El fallback por permisos solo aplica a entradas sin risk_level (no debería haber).
   const isPromptOnly = s.id && s.id.startsWith('mn-prompt-');
   const installCmd = s.install || '';
-  // Only count as subprocess if install runs something beyond our wrapper
-  // @marketnow/install is our wrapper — the actual risk is what it installs
-  // uvx (PyPI) runs registry code just like npx — same red semantics (catalog v5.3)
-  const hasExternalExec = /npx -y [^@]|uvx |npm install|curl |bash |pip install|python |node /.test(installCmd);
-  
-  if (isPromptOnly && !hasExternalExec) {
+  const hasExternalExec = /npx -y |uvx |npm install|curl |bash |pip install|python |node /.test(installCmd);
+
+  if (s.risk_level && ['red', 'yellow', 'green'].includes(s.risk_level)) {
+    // certified value — keep (consistency with /api/certification and badges)
+  } else if (isPromptOnly && !hasExternalExec) {
     s.risk_level = 'green';
   } else if (hasExternalExec || (subprocess && !installCmd.includes('@marketnow/install'))) {
     s.risk_level = 'red';
@@ -198,8 +197,8 @@ for (const s of skills) {
     // mn-prompt-* skills are SYNTHETIC — they should have been removed already.
     // If any remain, mark them as curated (not from GitHub).
     s.source = { type: 'curated', url: null, note: 'Hand-curated by AliceLabs — usually a system prompt, not a code package.' };
-  } else if (s.id && s.id.startsWith('mn-npm-')) {
-    // mn-npm-* skills are indexed from the PUBLIC NPM REGISTRY (catalog expansion).
+  } else if (s.id && (s.id.startsWith('mn-npm-') || s.id.startsWith('mn-npm2-'))) {
+    // mn-npm-* / mn-npm2-* skills are indexed from the PUBLIC NPM REGISTRY (catalog expansion v1/v4).
     s.source = { type: 'npm-registry', url: `https://www.npmjs.com/package/${s.name}`, note: 'Indexed from the public npm registry with Sentinel Index Heuristics (age, weekly downloads, typosquat distance, injection markers).' };
   } else if (s.id && s.id.startsWith('mn-py2-')) {
     // mn-py2-* are indexed from PYPI (catalog expansion v2) — preserve provenance.
@@ -210,6 +209,22 @@ for (const s of skills) {
       ...(s.source?.pypi_downloads_wk != null ? { pypi_downloads_wk: s.source.pypi_downloads_wk } : {}),
       ...(s.source?.repo_url ? { repo_url: s.source.repo_url } : {}),
       ...(s.source?.curated ? { curated: true } : {}),
+    };
+  } else if (s.id && (s.id.startsWith('mn-sm-') || s.id.startsWith('mn-ofr-') || s.id.startsWith('mn-cr-') || s.id.startsWith('mn-pyc-') || s.id.startsWith('mn-sm2-') || s.id.startsWith('mn-dh-'))) {
+    // v3/v4 expansion sources — PRESERVE the merged source object as-is:
+    //   mn-sm-* / mn-sm2-*  smithery registry (use_count/verified)
+    //   mn-ofr-* official MCP registry (publisher-verified remotes)
+    //   mn-cr-*  crates.io (downloads)
+    //   mn-pyc-* PyPI community tier (low adoption signal, trust capped 55)
+    //   mn-dh-*  Docker Hub (stars/pulls — docker pull = riesgo amarillo, aislado)
+    s.source = {
+      ...s.source,
+      url: existingUrl || s.source?.url,
+      ...(s.source?.use_count != null ? { use_count: s.source.use_count } : {}),
+      ...(s.source?.verified != null ? { verified: s.source.verified } : {}),
+      ...(s.source?.downloads != null ? { downloads: s.source.downloads } : {}),
+      ...(s.source?.repo_url ? { repo_url: s.source.repo_url } : {}),
+      ...(s.source?.pypi_downloads_wk != null ? { pypi_downloads_wk: s.source.pypi_downloads_wk } : {}),
     };
   } else if (s.id && s.id.startsWith('mn-gh2-')) {
     // mn-gh2-* are from GitHub Search + awesome-mcp-servers curation (expansion v2).
@@ -242,16 +257,19 @@ for (const s of skills) {
   s.usdc_disclaimer = USDC_DISCLAIMER;
 }
 
-// SPA data
+// SPA data — compacto (sin pretty-print: 66k entradas * ~1.7KB ahorrados)
 fs.writeFileSync(
   path.join(__dirname, 'src', 'data', 'all_skills.json'),
-  JSON.stringify(skills, null, 2)
+  JSON.stringify(skills)
 );
 
 // Public API — accesible por agentes via HTTP GET
+// COMPACTO (v5.5): el dump pretty-printado a 66,496 entradas superaba el limite
+// de 100MB por archivo de Vercel; compacto queda en ~75MB. La paginacion
+// humana vive en /api/skills (endpoint), no en este dump para agentes.
 fs.writeFileSync(
   path.join(__dirname, 'public', 'api', 'skills.json'),
-  JSON.stringify(skills, null, 2)
+  JSON.stringify(skills)
 );
 
 fs.writeFileSync(
@@ -269,13 +287,16 @@ const agentJsonPath = path.join(__dirname, 'public', 'api', 'agent.json');
 if (fs.existsSync(agentJsonPath)) {
   // Update total_skills in agent.json to match current count
   const agentJson = JSON.parse(fs.readFileSync(agentJsonPath, 'utf8'));
-  // sync counts in description strings and metrics (Task 45: catalog growth)
+  // sync counts in description strings and metrics (catalog growth)
+  // v5.5: cubre TODOS los conteos historicos del catalogo (9,248 -> 14,517 -> 23,206
+  // -> 40,718 -> 66,496 -> ...) para que el sync no se quede corto nunca mas.
+  const HISTORICAL = [9248, 14517, 23206, 40718, 59846, 57366];
   const totalStr = skills.length.toLocaleString('en-US');
   const syncCounts = (o) => {
     if (o && typeof o === 'object' && !Array.isArray(o)) {
       const out = {};
       for (const [k, v] of Object.entries(o)) {
-        if (typeof v === 'number' && [9248, 14517].includes(v)) out[k] = skills.length;
+        if (typeof v === 'number' && HISTORICAL.includes(v)) out[k] = skills.length;
         else out[k] = syncCounts(v);
       }
       return out;
@@ -284,7 +305,11 @@ if (fs.existsSync(agentJsonPath)) {
     if (typeof o === 'string') return v_safeReplace(o);
     return o;
   };
-  const v_safeReplace = (s) => s.replace(/\b(9,248|14,517)\b/g, totalStr).replace(/\b(9248|14517)\b/g, String(skills.length));
+  const v_safeReplace = (s) => {
+    for (const h of HISTORICAL) s = s.replace(new RegExp('\\b' + h.toLocaleString('en-US') + '\\b', 'g'), totalStr);
+    for (const h of HISTORICAL) s = s.replace(new RegExp('\\b' + h + '\\b', 'g'), String(skills.length));
+    return s;
+  };
   const synced = syncCounts(agentJson);
   Object.assign(agentJson, synced); // sync de TODO el objeto (descripciones, métricas, stats)
   if (agentJson.pricing) {
@@ -320,6 +345,7 @@ const liteSkills = skills.map(s => {
     // Task 44: catalog expansion fields (npm registry crawl)
     ...(s.source ? { source: s.source } : {}),
     ...(s.indexed_at ? { indexed_at: s.indexed_at } : {}),
+    ...(s.tier ? { tier: s.tier } : {}),
     ...(Number.isFinite(s.npm_downloads_wk) ? { npm_downloads_wk: s.npm_downloads_wk } : {}),
     ...(Number.isFinite(s.trust_score_100) ? { trust_score_100: s.trust_score_100 } : {}),
   };
