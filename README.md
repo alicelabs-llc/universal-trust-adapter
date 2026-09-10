@@ -177,10 +177,13 @@ npx marketnow-audit bit.ly        # domain scam-check + ATC + OCSP, CI exit code
 | [`@marketnow/uts`](https://www.npmjs.com/package/@marketnow/uts) | 2.0.1 | Universal Trust Schema | 36/wk |
 | [`@marketnow/trust-core`](https://www.npmjs.com/package/@marketnow/trust-core) | 2.0.0 | Trust Engine core: verification pipeline + behavior/drift + policy + trajectory + cross-agent (92 exports, zero deps) | 28/wk |
 | [`@marketnow/trust-adapters`](https://www.npmjs.com/package/@marketnow/trust-adapters) | 1.0.2 | 9 format adapters (X509 exported; self-contained, zero deps) | 25/wk |
-| [`@marketnow/trust-gateway`](https://www.npmjs.com/package/@marketnow/trust-gateway) | 1.0.2 | MCP middleware gateway (self-contained, zero deps) | 19/wk |
+| [`@marketnow/trust-gateway`](https://www.npmjs.com/package/@marketnow/trust-gateway) | 1.0.3 | MCP middleware gateway + ReceiptStore/ReceiptGenerator exported (self-contained, zero deps) | 19/wk |
 | [`@marketnow/cline-trust-plugin`](https://www.npmjs.com/package/@marketnow/cline-trust-plugin) | 1.1.0 | Cline interceptor: revocation gate + TFP tool-surface pinning | 0/wk |
 | [`@marketnow/uta-conformance`](https://www.npmjs.com/package/@marketnow/uta-conformance) | 1.3.3 | 14 signed vectors + reference scorer + card generator — `npx @marketnow/uta-conformance` | 0/wk |
 | [`@marketnow/sentinel-rules`](https://www.npmjs.com/package/@marketnow/sentinel-rules) | 1.0.0 | 29 MCP security rules: semgrep config + zero-dep lite scanner — `npx @marketnow/sentinel-rules --path .` | 0/wk |
+| [`@marketnow/trust-mcp-middleware`](https://www.npmjs.com/package/@marketnow/trust-mcp-middleware) | 1.0.0 | MCP `tools/call` wrapper: credential enforcement + signed audit receipts | new |
+| [`@marketnow/trust-observability`](https://www.npmjs.com/package/@marketnow/trust-observability) | 1.0.0 | Zero-dep observability: structured logging, tracing, Prometheus metrics | new |
+| [`@marketnow/uta-verify`](https://www.npmjs.com/package/@marketnow/uta-verify) | 1.0.0 | CLI credential verifier: ATC v3, JWT, VC, A2A, EAT, ZTA, MCP — CI exit codes | new |
 | [`marketnow-audit`](https://www.npmjs.com/package/marketnow-audit) | 1.0.0 | Security audit CLI: domain scam-check, ATC verify, OCSP status, catalog — exit codes for CI (`0` PERMIT / `1` DENY / `2` CAUTION) | new |
 
 ## 🛡️ 5 Anti-ban download channels

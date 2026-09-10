@@ -1,21 +1,41 @@
 {
   "name": "@marketnow/trust-mcp-middleware",
   "version": "1.0.0",
-  "description": "UTA MCP middleware — wraps Anthropic MCP tools/call with TrustGateway enforcement",
+  "description": "UTA MCP middleware \u2014 wraps Anthropic MCP tools/call with TrustGateway enforcement",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist", "README.md", "LICENSE-AL-1.0"],
-  "keywords": ["mcp", "middleware", "trust", "gateway", "anthropic", "model-context-protocol"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE-AL-1.0"
+  ],
+  "keywords": [
+    "mcp",
+    "middleware",
+    "trust",
+    "gateway",
+    "anthropic",
+    "model-context-protocol"
+  ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
   "license": "AL-1.0",
-  "engines": { "node": ">=18" },
-  "scripts": { "build": "tsc" },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
-    "@marketnow/trust-core": "1.0.0",
-    "@marketnow/trust-gateway": "1.0.0"
+    "@marketnow/trust-core": "^2.0.1",
+    "@marketnow/trust-gateway": "^1.0.3"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
     "@types/node": "^20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alicelabs-llc/universal-trust-adapter.git",
+    "directory": "uta-monorepo/packages/mcp-middleware"
   }
 }
