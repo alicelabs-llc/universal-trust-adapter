@@ -18,7 +18,7 @@ const CONTENT = {
 
 • Free — 1,321 skills (26%) — utility, single-function MCP servers
 
-All 9,248 skills are FREE to install and use. MarketNow does not sell skills and does not charge anyone — no subscriptions, no commissions, no fees.`,
+All 66,496 skills are FREE to install and use. MarketNow does not sell skills and does not charge anyone — no subscriptions, no commissions, no fees.`,
       },
       {
         title: 'Refund Policy',
@@ -55,7 +55,7 @@ All 9,248 skills are FREE to install and use. MarketNow does not sell skills and
 
 • Free — 1,321 skills (26%) — utilidad, servidores MCP de función única
 
-Todas las 9,248 skills son gratuitas: no hay precio mínimo ni máximo, no hay pagos. Los agentes pueden descubrir, evaluar e instalar skills programáticamente vía la API pública en /api/skills.json.`,
+Todas las 66,496 skills son gratuitas: no hay precio mínimo ni máximo, no hay pagos. Los agentes pueden descubrir, evaluar e instalar skills programáticamente vía la API pública en /api/skills.json.`,
       },
       {
         title: 'Política de Reembolso',
@@ -92,7 +92,7 @@ Todas las 9,248 skills son gratuitas: no hay precio mínimo ni máximo, no hay p
 
 • Free — 1.321 skills (26%) — utilidade, servidores MCP de função única
 
-As 9,248 skills são gratuitas: não há preço mínimo nem máximo, não há pagamentos. Agentes podem descobrir, avaliar e instalar skills programaticamente via a API pública em /api/skills.json.`,
+As 66,496 skills são gratuitas: não há preço mínimo nem máximo, não há pagamentos. Agentes podem descobrir, avaliar e instalar skills programaticamente via a API pública em /api/skills.json.`,
       },
       {
         title: 'Política de Reembolso',
@@ -129,7 +129,7 @@ As 9,248 skills são gratuitas: não há preço mínimo nem máximo, não há pa
 
 • Free —— 1,321 个 skill（26%）—— 实用型、单功能 MCP server
 
-所有 9,248 个技能都免费：没有最低或最高价格，不存在付款。Agent 可通过公开 API /api/skills.json 以编程方式发现、评估并安装 skill。`,
+所有 66,496 个技能都免费：没有最低或最高价格，不存在付款。Agent 可通过公开 API /api/skills.json 以编程方式发现、评估并安装 skill。`,
       },
       {
         title: 'Politique de Remboursement',
