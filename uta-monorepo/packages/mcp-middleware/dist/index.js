@@ -11,9 +11,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MCPServerWrapper = exports.MCPTrustMiddleware = void 0;
 exports.withUTATrust = withUTATrust;
 exports.attachCredential = attachCredential;
-const index_js_1 = require("../../gateway/index.js");
-const receipts_js_1 = require("../../gateway/receipts.js");
-const crypto_js_1 = require("../../core/crypto.js");
+const index_js_1 = require("@marketnow/trust-gateway");
+const receipts_js_1 = require("@marketnow/trust-gateway");
+const crypto_js_1 = require("@marketnow/trust-core");
 class MCPTrustMiddleware {
     gateway;
     receiptGen;

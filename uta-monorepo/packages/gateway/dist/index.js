@@ -13,6 +13,9 @@ exports.TrustGateway = exports.DEFAULT_CONFIG = void 0;
 exports.withTrustGateway = withTrustGateway;
 const verification_pipeline_js_1 = require("../core/verification-pipeline.js");
 const crypto_js_1 = require("../core/crypto.js");
+const receipts_js_1 = require("./receipts.js");
+exports.ReceiptStore = receipts_js_1.ReceiptStore;
+exports.ReceiptGenerator = receipts_js_1.ReceiptGenerator;
 exports.DEFAULT_CONFIG = {
     min_trust_score: 5,
     require_pop: false,

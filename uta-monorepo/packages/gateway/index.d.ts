@@ -55,3 +55,5 @@ export declare class TrustGateway {
     private deny;
 }
 export declare function withTrustGateway(handler: (args: Record<string, unknown>) => Promise<unknown>, gateway: TrustGateway): (agentCredential: unknown, toolName: string, args: Record<string, unknown>) => Promise<unknown>;
+
+export { ReceiptStore, ReceiptGenerator } from "./receipts.js";

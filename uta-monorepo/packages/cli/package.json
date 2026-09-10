@@ -1,17 +1,40 @@
 {
   "name": "@marketnow/uta-verify",
   "version": "1.0.0",
-  "description": "UTA Verify CLI — command-line credential verifier (ATC v3, JWT, VC, A2A, EAT, ZTA, MCP)",
+  "description": "UTA Verify CLI \u2014 command-line credential verifier (ATC v3, JWT, VC, A2A, EAT, ZTA, MCP)",
   "main": "dist/uta-verify.js",
-  "bin": { "uta-verify": "dist/uta-verify.js" },
-  "files": ["dist", "README.md", "LICENSE-AL-1.0"],
-  "keywords": ["cli", "verify", "trust", "ed25519", "jwt", "w3c-vc", "atc"],
+  "bin": {
+    "uta-verify": "dist/uta-verify.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE-AL-1.0"
+  ],
+  "keywords": [
+    "cli",
+    "verify",
+    "trust",
+    "ed25519",
+    "jwt",
+    "w3c-vc",
+    "atc"
+  ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
   "license": "AL-1.0",
-  "engines": { "node": ">=18" },
-  "scripts": { "build": "tsc" },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
     "typescript": "^5.0.0",
     "@types/node": "^20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alicelabs-llc/universal-trust-adapter.git",
+    "directory": "uta-monorepo/packages/cli"
   }
 }

@@ -1,16 +1,29 @@
 {
   "name": "@marketnow/trust-observability",
   "version": "1.0.0",
-  "description": "UTA Observability — structured logging, OpenTelemetry tracing, Prometheus metrics",
+  "description": "UTA Observability \u2014 structured logging, OpenTelemetry tracing, Prometheus metrics",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist", "README.md", "LICENSE-AL-1.0"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE-AL-1.0"
+  ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
   "license": "AL-1.0",
-  "engines": { "node": ">=18" },
-  "scripts": { "build": "tsc" },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
     "typescript": "^5.0.0",
     "@types/node": "^20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alicelabs-llc/universal-trust-adapter.git",
+    "directory": "uta-monorepo/packages/observability"
   }
 }
