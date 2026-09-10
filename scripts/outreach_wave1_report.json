@@ -1,0 +1,222 @@
+[
+ {
+  "repo": "ChromeDevTools/chrome-devtools-mcp",
+  "issue": "https://github.com/ChromeDevTools/chrome-devtools-mcp/issues/2711",
+  "ok": true
+ },
+ {
+  "repo": "github/github-mcp-server",
+  "issue": "https://github.com/github/github-mcp-server/issues/3258",
+  "ok": true
+ },
+ {
+  "repo": "PrefectHQ/fastmcp",
+  "issue": "https://github.com/PrefectHQ/fastmcp/issues/5054",
+  "ok": true
+ },
+ {
+  "repo": "DeusData/codebase-memory-mcp",
+  "issue": "https://github.com/DeusData/codebase-memory-mcp/issues/2141",
+  "ok": true
+ },
+ {
+  "repo": "czlonkowski/n8n-mcp",
+  "issue": "https://github.com/czlonkowski/n8n-mcp/issues/1090",
+  "ok": true
+ },
+ {
+  "repo": "microsoft/mcp-for-beginners",
+  "issue": "https://github.com/microsoft/mcp-for-beginners/issues/1082",
+  "ok": true
+ },
+ {
+  "repo": "googleapis/mcp-toolbox",
+  "issue": "https://github.com/googleapis/mcp-toolbox/issues/3998",
+  "ok": true
+ },
+ {
+  "repo": "GLips/Figma-Context-MCP",
+  "issue": "https://github.com/GLips/Figma-Context-MCP/issues/426",
+  "ok": true
+ },
+ {
+  "repo": "xpzouying/xiaohongshu-mcp",
+  "issue": "https://github.com/xpzouying/xiaohongshu-mcp/issues/844",
+  "ok": true
+ },
+ {
+  "repo": "hangwin/mcp-chrome",
+  "issue": "https://github.com/hangwin/mcp-chrome/issues/386",
+  "ok": true
+ },
+ {
+  "repo": "CoplayDev/unity-mcp",
+  "issue": "https://github.com/CoplayDev/unity-mcp/issues/1395",
+  "ok": true
+ },
+ {
+  "repo": "tadata-org/fastapi_mcp",
+  "issue": "https://github.com/tadata-org/fastapi_mcp/issues/348",
+  "ok": true
+ },
+ {
+  "repo": "BeehiveInnovations/pal-mcp-server",
+  "issue": "https://github.com/BeehiveInnovations/pal-mcp-server/issues/480",
+  "ok": true
+ },
+ {
+  "repo": "mcp-use/mcp-use",
+  "issue": "https://github.com/mcp-use/mcp-use/issues/2503",
+  "ok": true
+ },
+ {
+  "repo": "mrexodia/ida-pro-mcp",
+  "issue": "https://github.com/mrexodia/ida-pro-mcp/issues/520",
+  "ok": true
+ },
+ {
+  "repo": "awslabs/mcp",
+  "issue": "https://github.com/awslabs/mcp/issues/4614",
+  "ok": true
+ },
+ {
+  "repo": "mark3labs/mcp-go",
+  "issue": "https://github.com/mark3labs/mcp-go/issues/975",
+  "ok": true
+ },
+ {
+  "repo": "lastmile-ai/mcp-agent",
+  "issue": "https://github.com/lastmile-ai/mcp-agent/issues/754",
+  "ok": true
+ },
+ {
+  "repo": "idosal/git-mcp",
+  "issue": "https://github.com/idosal/git-mcp/issues/264",
+  "ok": true
+ },
+ {
+  "repo": "AgentDeskAI/browser-tools-mcp",
+  "issue": "https://github.com/AgentDeskAI/browser-tools-mcp/issues/242",
+  "ok": true
+ },
+ {
+  "repo": "grab/cursor-talk-to-figma-mcp",
+  "issue": "https://github.com/grab/cursor-talk-to-figma-mcp/issues/190",
+  "ok": true
+ },
+ {
+  "repo": "firecrawl/firecrawl-mcp-server",
+  "issue": "https://github.com/firecrawl/firecrawl-mcp-server/issues/403",
+  "ok": true
+ },
+ {
+  "repo": "CursorTouch/Windows-MCP",
+  "issue": "https://github.com/CursorTouch/Windows-MCP/issues/409",
+  "ok": true
+ },
+ {
+  "repo": "getsentry/XcodeBuildMCP",
+  "issue": "https://github.com/getsentry/XcodeBuildMCP/issues/529",
+  "ok": true
+ },
+ {
+  "repo": "jacob-bd/gemini-notebook-mcp-cli",
+  "issue": "https://github.com/jacob-bd/gemini-notebook-mcp-cli/issues/326",
+  "ok": true
+ },
+ {
+  "repo": "sooperset/mcp-atlassian",
+  "issue": "https://github.com/sooperset/mcp-atlassian/issues/1663",
+  "ok": true
+ },
+ {
+  "repo": "mobile-next/mobile-mcp",
+  "issue": "https://github.com/mobile-next/mobile-mcp/issues/437",
+  "ok": true
+ },
+ {
+  "repo": "21st-dev/magic-mcp",
+  "issue": "https://github.com/21st-dev/magic-mcp/issues/80",
+  "ok": true
+ },
+ {
+  "repo": "MCP-UI-Org/mcp-ui",
+  "issue": "https://github.com/MCP-UI-Org/mcp-ui/issues/221",
+  "ok": true
+ },
+ {
+  "repo": "excalidraw/excalidraw-mcp",
+  "issue": "https://github.com/excalidraw/excalidraw-mcp/issues/94",
+  "ok": true
+ },
+ {
+  "repo": "openclaw/mcporter",
+  "issue": "https://github.com/openclaw/mcporter/issues/355",
+  "ok": true
+ },
+ {
+  "repo": "exa-labs/exa-mcp-server",
+  "issue": "https://github.com/exa-labs/exa-mcp-server/issues/437",
+  "ok": true
+ },
+ {
+  "repo": "Coding-Solo/godot-mcp",
+  "issue": "https://github.com/Coding-Solo/godot-mcp/issues/139",
+  "ok": true
+ },
+ {
+  "repo": "makenotion/notion-mcp-server",
+  "issue": "https://github.com/makenotion/notion-mcp-server/issues/354",
+  "ok": true
+ },
+ {
+  "repo": "open-webui/mcpo",
+  "issue": "https://github.com/open-webui/mcpo/issues/311",
+  "ok": true
+ },
+ {
+  "repo": "Pimzino/spec-workflow-mcp",
+  "issue": "https://github.com/Pimzino/spec-workflow-mcp/issues/238",
+  "ok": true
+ },
+ {
+  "repo": "antvis/mcp-server-chart",
+  "issue": "https://github.com/antvis/mcp-server-chart/issues/325",
+  "ok": true
+ },
+ {
+  "repo": "tradesdontlie/tradingview-mcp",
+  "issue": "https://github.com/tradesdontlie/tradingview-mcp/issues/515",
+  "ok": true
+ },
+ {
+  "repo": "54yyyu/zotero-mcp",
+  "issue": "https://github.com/54yyyu/zotero-mcp/issues/535",
+  "ok": true
+ },
+ {
+  "repo": "MarkusPfundstein/mcp-obsidian",
+  "issue": "https://github.com/MarkusPfundstein/mcp-obsidian/issues/164",
+  "ok": true
+ },
+ {
+  "repo": "IBM/mcp-context-forge",
+  "issue": "https://github.com/IBM/mcp-context-forge/issues/6752",
+  "ok": true
+ },
+ {
+  "repo": "haris-musa/excel-mcp-server",
+  "issue": "https://github.com/haris-musa/excel-mcp-server/issues/160",
+  "ok": true
+ },
+ {
+  "repo": "homeassistant-ai/ha-mcp",
+  "issue": "https://github.com/homeassistant-ai/ha-mcp/issues/2420",
+  "ok": true
+ },
+ {
+  "repo": "Minidoracat/mcp-feedback-enhanced",
+  "issue": "https://github.com/Minidoracat/mcp-feedback-enhanced/issues/262",
+  "ok": true
+ }
+]
