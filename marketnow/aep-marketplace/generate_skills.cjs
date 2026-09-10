@@ -161,7 +161,7 @@ for (const s of skills) {
     if (/(EXEC|SHELL|RUN|COMMAND)/.test(u)) subprocess = true;
   }
   const install = s.install || '';
-  if (/npx|npm |curl|bash/.test(install)) subprocess = true;
+  if (/npx|npm |uvx|pip |curl|bash/.test(install)) subprocess = true;
   s.permissions = {
     network: [...new Set(network)].slice(0, 10),
     filesystem: [...new Set(filesystem)].slice(0, 10),
@@ -178,7 +178,8 @@ for (const s of skills) {
   const installCmd = s.install || '';
   // Only count as subprocess if install runs something beyond our wrapper
   // @marketnow/install is our wrapper — the actual risk is what it installs
-  const hasExternalExec = /npx -y [^@]|npm install|curl |bash |pip install|python |node /.test(installCmd);
+  // uvx (PyPI) runs registry code just like npx — same red semantics (catalog v5.3)
+  const hasExternalExec = /npx -y [^@]|uvx |npm install|curl |bash |pip install|python |node /.test(installCmd);
   
   if (isPromptOnly && !hasExternalExec) {
     s.risk_level = 'green';
@@ -200,6 +201,27 @@ for (const s of skills) {
   } else if (s.id && s.id.startsWith('mn-npm-')) {
     // mn-npm-* skills are indexed from the PUBLIC NPM REGISTRY (catalog expansion).
     s.source = { type: 'npm-registry', url: `https://www.npmjs.com/package/${s.name}`, note: 'Indexed from the public npm registry with Sentinel Index Heuristics (age, weekly downloads, typosquat distance, injection markers).' };
+  } else if (s.id && s.id.startsWith('mn-py2-')) {
+    // mn-py2-* are indexed from PYPI (catalog expansion v2) — preserve provenance.
+    s.source = {
+      type: 'pypi',
+      url: existingUrl,
+      note: 'Indexed from PyPI with Sentinel Index Heuristics (package age, GitHub repo link, curated lists, injection markers). Downloads from pypistats when available.',
+      ...(s.source?.pypi_downloads_wk != null ? { pypi_downloads_wk: s.source.pypi_downloads_wk } : {}),
+      ...(s.source?.repo_url ? { repo_url: s.source.repo_url } : {}),
+      ...(s.source?.curated ? { curated: true } : {}),
+    };
+  } else if (s.id && s.id.startsWith('mn-gh2-')) {
+    // mn-gh2-* are from GitHub Search + awesome-mcp-servers curation (expansion v2).
+    s.source = {
+      type: 'github',
+      url: existingUrl,
+      note: 'Indexed via GitHub search + awesome-mcp-servers curation. Sentinel Index Heuristics applied (stars, age, activity, typosquat, injection).',
+      stars: s.source?.stars ?? null,
+      language: s.source?.language ?? null,
+      last_push: s.source?.last_push ?? null,
+      ...(s.source?.curated ? { curated: true } : {}),
+    };
   } else if (s.id && s.id.startsWith('mn-gen-')) {
     // mn-gen-* skills ARE from GitHub repos (imported by massive-indexer.cjs).
     // PRESERVE their source.url — don't overwrite with null.
@@ -247,6 +269,24 @@ const agentJsonPath = path.join(__dirname, 'public', 'api', 'agent.json');
 if (fs.existsSync(agentJsonPath)) {
   // Update total_skills in agent.json to match current count
   const agentJson = JSON.parse(fs.readFileSync(agentJsonPath, 'utf8'));
+  // sync counts in description strings and metrics (Task 45: catalog growth)
+  const totalStr = skills.length.toLocaleString('en-US');
+  const syncCounts = (o) => {
+    if (o && typeof o === 'object' && !Array.isArray(o)) {
+      const out = {};
+      for (const [k, v] of Object.entries(o)) {
+        if (typeof v === 'number' && [9248, 14517].includes(v)) out[k] = skills.length;
+        else out[k] = syncCounts(v);
+      }
+      return out;
+    }
+    if (Array.isArray(o)) return o.map(syncCounts);
+    if (typeof o === 'string') return v_safeReplace(o);
+    return o;
+  };
+  const v_safeReplace = (s) => s.replace(/\b(9,248|14,517)\b/g, totalStr).replace(/\b(9248|14517)\b/g, String(skills.length));
+  const synced = syncCounts(agentJson);
+  Object.assign(agentJson, synced); // sync de TODO el objeto (descripciones, métricas, stats)
   if (agentJson.pricing) {
     // Recompute average from current skills
     const prices = skills.map(s => s.price).filter(p => typeof p === 'number');

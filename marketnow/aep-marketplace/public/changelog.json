@@ -1,69 +1,83 @@
 {
-  "service": "MarketNow",
-  "current_version": "5.2.0",
-  "changelog": [
-    {
-      "version": "5.2.0",
-      "date": "2026-09-10",
-      "changes": [
-        "Catalog expansion: +5,269 MCP servers indexed from the public npm registry (9,248 -> 14,517 skills)",
-        "Two-level risk model, kept separate on purpose: risk_level is INSTALL risk (npx/npm install runs arbitrary code -> red), trust_score_100 (0-100) is the adoption + security heuristic: package age, weekly downloads, typosquat distance vs popular packages, injection markers in descriptions — not popularity alone",
-        "Every new entry: sentinel_score 0-10, trust_score_100, npm_downloads_wk, source provenance (npm-registry + package URL), indexed_at",
-        "API: new params sort=recent|downloads|trust|name, q=<search>, risk=red|yellow|green — try GET /api/skills?sort=recent",
-        "Source transparency: response includes per-source counts (github / npm-registry / curated)"
-      ],
-      "breaking": [],
-      "new_endpoints": [],
-      "new_params": [
-        "sort=recent",
-        "sort=downloads",
-        "sort=trust",
-        "sort=name",
-        "q=<search>",
-        "risk=red|yellow|green"
-      ]
-    },
-    {
-      "version": "4.1.0",
-      "date": "2026-07-12",
-      "changes": [
-        "ATC — Agent Trust Card launched (replaces ACP)",
-        "L4 Supply Chain Audit (SBOM + OSV) — LIVE",
-        "L4.5 Content Fingerprint (SHA-256) — LIVE",
-        "L2.6 Egress Proxy with Allowlist — LIVE",
-        "Published to MCP Registry official",
-        "npm v1.4.1 with mcpName"
-      ],
-      "breaking": [],
-      "new_endpoints": [
-        "/api/atc",
-        "/atc-spec.json",
-        "/sbom-schema.json",
-        "/egress-allowlist.json"
-      ]
-    },
-    {
-      "version": "4.0.0",
-      "date": "2026-07-10",
-      "changes": [
-        "Added /api/trust-score endpoint",
-        "Added /api/manifest endpoint",
-        "Added /api/health endpoint",
-        "Added /api/skills/{id} dynamic route",
-        "Added /api/changelog endpoint",
-        "Added /api/recommend endpoint",
-        "Added /api/mcp (HTTP transport)",
-        "Sentinel v3.0 gVisor sandbox live"
-      ]
-    },
-    {
-      "version": "3.0.0",
-      "date": "2026-07-06",
-      "changes": [
-        "Sentinel L2 v2.0 + L2.5 gVisor",
-        "llms.txt + ai.txt",
-        "IndexNow"
-      ]
-    }
-  ]
+ "service": "MarketNow",
+ "current_version": "5.3.0",
+ "changelog": [
+  {
+   "version": "5.3.0",
+   "date": "2026-09-10",
+   "changes": [
+    "Catalog expansion v2: +8,689 MCP servers indexed from three new sources \u2014 GitHub Search (1,968 repos with verified stars/age/activity), PyPI (6,721 Python packages, uvx-installable, gated on age + repo link + trust), and awesome-mcp-servers curation (curated flag). Total: 23,206 skills (github 11,216 / npm-registry 5,269 / pypi 6,721).",
+    "Backfill: all 9,248 pre-existing github entries now carry trust_score_100 derived from their already-indexed GitHub evidence (stars, last push, sentinel scan, risk caps) \u2014 sort=trust is now meaningful across the entire catalog, not just the npm wave.",
+    "Trust Badge program (growth loop): GET /api/badge/<slug>.svg returns an embeddable shield with the trust score, colored by install risk. /api/skills responses now include badge_url and page_url per entry so MCP maintainers can surface their MarketNow score in their READMEs.",
+    "Per-skill public pages: every skill now has an indexable page at /s/<slug> with schema.org JSON-LD (SoftwareApplication + FAQPage), OG tags, install command, trust/risk explanation and adoption evidence.",
+    "MCP-ness quality filter on the GitHub wave: repos that only mention MCP without shipping an MCP server (e.g. generic apps) were excluded \u2014 signal required in repo name, owner-declared topics, or an explicit MCP server/tools declaration in the description.",
+    "Quality gate on PyPI: kept only packages with verified downloads, curated listing, or an established repo (age + GitHub link + trust >= 70) \u2014 dropped ~7,600 unvetted low-signal candidates from the 16.9k raw expansion.",
+    "risk_level semantics extended: uvx (PyPI) is treated exactly like npx \u2014 registry code execution at install = red. git clone stays green/yellow. Same two-level model as 5.2.0: install risk vs trust heuristic, kept separate on purpose.",
+    "SEO: sitemap-skills.xml (top 2,000 skill pages by trust), robots.txt updated to crawl /s/ pages, llms.txt updated with new catalog endpoints."
+   ]
+  },
+  {
+   "version": "5.2.0",
+   "date": "2026-09-10",
+   "changes": [
+    "Catalog expansion: +5,269 MCP servers indexed from the public npm registry (9,248 -> 14,517 skills)",
+    "Two-level risk model, kept separate on purpose: risk_level is INSTALL risk (npx/npm install runs arbitrary code -> red), trust_score_100 (0-100) is the adoption + security heuristic: package age, weekly downloads, typosquat distance vs popular packages, injection markers in descriptions \u2014 not popularity alone",
+    "Every new entry: sentinel_score 0-10, trust_score_100, npm_downloads_wk, source provenance (npm-registry + package URL), indexed_at",
+    "API: new params sort=recent|downloads|trust|name, q=<search>, risk=red|yellow|green \u2014 try GET /api/skills?sort=recent",
+    "Source transparency: response includes per-source counts (github / npm-registry / curated)"
+   ],
+   "breaking": [],
+   "new_endpoints": [],
+   "new_params": [
+    "sort=recent",
+    "sort=downloads",
+    "sort=trust",
+    "sort=name",
+    "q=<search>",
+    "risk=red|yellow|green"
+   ]
+  },
+  {
+   "version": "4.1.0",
+   "date": "2026-07-12",
+   "changes": [
+    "ATC \u2014 Agent Trust Card launched (replaces ACP)",
+    "L4 Supply Chain Audit (SBOM + OSV) \u2014 LIVE",
+    "L4.5 Content Fingerprint (SHA-256) \u2014 LIVE",
+    "L2.6 Egress Proxy with Allowlist \u2014 LIVE",
+    "Published to MCP Registry official",
+    "npm v1.4.1 with mcpName"
+   ],
+   "breaking": [],
+   "new_endpoints": [
+    "/api/atc",
+    "/atc-spec.json",
+    "/sbom-schema.json",
+    "/egress-allowlist.json"
+   ]
+  },
+  {
+   "version": "4.0.0",
+   "date": "2026-07-10",
+   "changes": [
+    "Added /api/trust-score endpoint",
+    "Added /api/manifest endpoint",
+    "Added /api/health endpoint",
+    "Added /api/skills/{id} dynamic route",
+    "Added /api/changelog endpoint",
+    "Added /api/recommend endpoint",
+    "Added /api/mcp (HTTP transport)",
+    "Sentinel v3.0 gVisor sandbox live"
+   ]
+  },
+  {
+   "version": "3.0.0",
+   "date": "2026-07-06",
+   "changes": [
+    "Sentinel L2 v2.0 + L2.5 gVisor",
+    "llms.txt + ai.txt",
+    "IndexNow"
+   ]
+  }
+ ]
 }

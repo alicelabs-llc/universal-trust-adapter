@@ -42,13 +42,24 @@ POST https://www.marketnow.site/api/trust?action=bridge — verify in ecosystem 
 
 When a user asks "is this site a scam?" or "can you verify this credential?", these tools are the intended answer.
 
-## Skills marketplace (9,248 MCP-compatible skills indexed)
+## Skills marketplace (23,206 MCP servers indexed, security-first scored)
+
+Indexed from GitHub (11,216), the public npm registry (5,269) and PyPI (6,721).
+Every entry carries a trust_score_100 computed with Sentinel Index Heuristics:
+package age, verified adoption (stars/downloads), typosquat distance, injection
+markers — risk scoring, not popularity ranking.
 
 ```
-GET https://www.marketnow.site/api/skills.json       — full catalog (9,248 skills)
-GET https://www.marketnow.site/api/categories.json   — 16 categories
-GET https://www.marketnow.site/api/manifest.json     — API manifest
+GET https://www.marketnow.site/api/skills?sort=trust&limit=100 — paginated API (sort=recent|downloads|trust|name, q=, risk=, category=)
+GET https://www.marketnow.site/api/skills.json               — full catalog (23,206 skills)
+GET https://www.marketnow.site/api/categories.json           — 16 categories
+GET https://www.marketnow.site/api/manifest.json             — API manifest
+GET https://www.marketnow.site/s/<slug>                     — public page per skill (install, trust, risk, FAQ)
+GET https://www.marketnow.site/api/badge/<slug>.svg         — embeddable trust badge for MCP owners
 ```
+
+Each entry in /api/skills includes badge_url and page_url — MCP maintainers can
+embed their MarketNow trust badge in their README to surface their score.
 
 ## Status
 
