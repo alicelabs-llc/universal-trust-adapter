@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agent Passport — Identity + Trust + Encryption for AI Agents — MarketNow</title>
 <meta name="description" content="Agent Passport: cryptographic identity, trust scores, and end-to-end encryption for AI agents. Like a digital passport for agents.">
-<link rel="canonical" href="https://marketnow.site/agent-passport" />
+<link rel="canonical" href="https://www.marketnow.site/agent-passport" />
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -119,7 +119,7 @@ openssl genpkey -algorithm X25519 -out agent_enc_private.pem
 openssl pkey -in agent_enc_private.pem -pubout -out agent_enc_public.pem</code></pre>
 
 <h3>Step 2: Request Passport from MarketNow</h3>
-<pre><code>POST https://marketnow.site/api/passport
+<pre><code>POST https://www.marketnow.site/api/passport
 Content-Type: application/json
 
 {
@@ -135,7 +135,7 @@ Content-Type: application/json
 { "passport": {...}, "nonce": "random_32_bytes" }
 
 # Agent B verifies with MarketNow
-GET https://marketnow.site/api/passport?verify=AP-2026-00001
+GET https://www.marketnow.site/api/passport?verify=AP-2026-00001
 → { "valid": true, "trust_score": 10, "revoked": false }
 
 # Both agents derive shared secret (X25519 ECDH)
@@ -156,7 +156,7 @@ signed = Ed25519_sign(encrypted, my_private_key)
 
 <h3>Step 4: Revocation (if agent goes bad)</h3>
 <pre><code># Check revocation list
-GET https://marketnow.site/api/passport?revoked=1
+GET https://www.marketnow.site/api/passport?revoked=1
 → { "revoked_passports": ["AP-2026-00042"], "total_revoked": 1 }
 
 # Auto-revoke triggers:
@@ -181,8 +181,8 @@ GET https://marketnow.site/api/passport?revoked=1
   "expires_at": "2026-07-13T22:00:00Z",
   "issuer": "MarketNow Sentinel Authority",
   "issuer_signature": "sig_abc123...",
-  "revocation_url": "https://marketnow.site/api/passport?check=AP-2026-00001",
-  "verification_url": "https://marketnow.site/api/passport?verify=AP-2026-00001"
+  "revocation_url": "https://www.marketnow.site/api/passport?check=AP-2026-00001",
+  "verification_url": "https://www.marketnow.site/api/passport?verify=AP-2026-00001"
 }</code></pre>
 
 <h2>Revenue model</h2>

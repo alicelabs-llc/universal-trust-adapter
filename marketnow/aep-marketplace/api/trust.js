@@ -542,11 +542,11 @@ function utsToATCv3(uts) {
   const card = {
     atc_version: '3.0.0',
     credential_id: id,
-    issuer: { did: 'did:marketnow:ca', name: uts.trust.assessor || 'MarketNow', url: 'https://marketnow.site', ca_key_id: MARKETNOW_CA.key_id },
+    issuer: { did: 'did:marketnow:ca', name: uts.trust.assessor || 'MarketNow', url: 'https://www.marketnow.site', ca_key_id: MARKETNOW_CA.key_id },
     subject: { agent_id: uts.subject.id, agent_name: uts.subject.name, public_key: uts.identity?.public_key || '', key_algorithm: uts.identity?.key_algorithm || 'Ed25519', subject_type: 'agent' },
     attestations: [],
     capabilities: { provides: uts.capabilities?.provides || [], requires: uts.capabilities?.requires || [], protocols: uts.capabilities?.protocols || ['mcp'] },
-    lifecycle: { issued_at: uts.lifecycle.issued_at || new Date().toISOString(), expires_at: uts.lifecycle.expires_at, revoked: false, revocation_url: `https://marketnow.site/api/atc?action=verify&card_id=${id}`, version: '3.0.0' },
+    lifecycle: { issued_at: uts.lifecycle.issued_at || new Date().toISOString(), expires_at: uts.lifecycle.expires_at, revoked: false, revocation_url: `https://www.marketnow.site/api/atc?action=verify&card_id=${id}`, version: '3.0.0' },
     assessment: { methodology: 'Sentinel', methodology_version: 'v2.5', score: uts.trust.score, confidence: uts.trust.confidence, risk_level: uts.trust.confidence === 'high' ? 'low' : 'medium', computed_at: new Date().toISOString(), computed_by: uts.trust.assessor || 'MarketNow' },
   };
   // Real signature when the server holds the CA key (env CA_PRIVATE_KEY_PEM).
@@ -773,7 +773,7 @@ function utsToATC(uts) {
       trust: { sentinel_review_score: uts.trust.score, sentinel_score: uts.trust.score, audit_layers_passed: {}, composite_trust: uts.trust.score, risk_level: uts.trust.confidence === 'high' ? 'low' : 'medium' },
       capabilities: { provides: uts.capabilities.provides, protocol_language: uts.capabilities.protocols[0] || 'mcp', translate: true },
       payment: { method: 'none', wallet_address: null },
-      metadata: { issued_at: uts.lifecycle.issued_at, expires_at: uts.lifecycle.expires_at, issuer: uts.trust.assessor, revocation_url: `https://marketnow.site/api/atc?action=verify&card_id=${id}` },
+      metadata: { issued_at: uts.lifecycle.issued_at, expires_at: uts.lifecycle.expires_at, issuer: uts.trust.assessor, revocation_url: `https://www.marketnow.site/api/atc?action=verify&card_id=${id}` },
     },
     signature: { algorithm: 'Ed25519 (RFC 8032)', value: '00'.repeat(64), signed_by: uts.trust.assessor, signed_at: uts.lifecycle.issued_at, canonical_json: 'RFC_8785_JCS', ca_key_id: uts.identity.key_id || 'MCowBQYDK2VwAyEA', evidence_hash: uts.provenance.original_signature_hash || 'sha256:pending', policy_version: uts.lifecycle.version || '2.0.0' },
   };

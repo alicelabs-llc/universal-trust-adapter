@@ -1,7 +1,7 @@
 # MarketNow Skills API - OpenAPI 3.1
 # Auto-generated from openapi.json by sync-openapi.py
-# Live at: https://marketnow.site/api/openapi.yaml
-# Also available as JSON: https://marketnow.site/api/openapi.json
+# Live at: https://www.marketnow.site/api/openapi.yaml
+# Also available as JSON: https://www.marketnow.site/api/openapi.json
 
 openapi: 3.1.0
 info:
@@ -97,13 +97,13 @@ info:
   version: 4.1.0
   contact:
     name: MarketNow
-    url: https://marketnow.site
+    url: https://www.marketnow.site
     email: info@alicelabs.site
   license:
     name: AliceLabs LLC Proprietary
-    url: https://marketnow.site/policies
+    url: https://www.marketnow.site/policies
 servers:
-- url: https://marketnow.site
+- url: https://www.marketnow.site
   description: Production
 paths:
   /api/skills.json:

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MCP Security Scanner — MarketNow</title>
 <meta name="description" content="Scan your MCP server for security vulnerabilities. Free instant L1.5 static analysis.">
-<link rel="canonical" href="https://marketnow.site/tools/scan.html" />
+<link rel="canonical" href="https://www.marketnow.site/tools/scan.html" />
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#050505;color:#e2e8f0;line-height:1.6;padding:20px;max-width:700px;margin:0 auto}
@@ -57,7 +57,7 @@ a{color:#3b82f6}
 <p>Open an issue: <a href="https://github.com/alicelabs-llc/marketnow/issues">github.com/alicelabs-llc/marketnow/issues</a></p>
 
 <h2>Already audited servers</h2>
-<p>Check if a server is already certified: <a href="https://marketnow.site/verify">marketnow.site/verify</a></p>
+<p>Check if a server is already certified: <a href="https://www.marketnow.site/verify">marketnow.site/verify</a></p>
 
 <script>
 function scanRepo() {
@@ -75,7 +75,7 @@ function scanRepo() {
   result.innerHTML = '<div class="result-card"><span class="loading"></span> Running Sentinel L1.5 security checks...</div>';
   
   // Use the audit-skill API
-  const apiUrl = 'https://marketnow.site/api/audit-skill?repoUrl=' + encodeURIComponent(url) + '&quick=1';
+  const apiUrl = 'https://www.marketnow.site/api/audit-skill?repoUrl=' + encodeURIComponent(url) + '&quick=1';
   
   fetch(apiUrl)
     .then(r => {

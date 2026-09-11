@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ATC — Agent Trust Card — SSL for AI Agents — MarketNow</title>
 <meta name="description" content="ATC: Cryptographic identity cards for AI agents. Like SSL for websites, ATC gives agents verifiable identity, trust scores, encryption, and payments.">
-<link rel="canonical" href="https://marketnow.site/atc" />
+<link rel="canonical" href="https://www.marketnow.site/atc" />
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -126,7 +126,7 @@ openssl genpkey -algorithm Ed25519 -out agent_private.pem
 openssl pkey -in agent_private.pem -pubout -out agent_public.pem
 
 # 2. Agent requests an ATC from MarketNow
-POST https://marketnow.site/api/atc
+POST https://www.marketnow.site/api/atc
 {
   "action": "issue",
   "agent_id": "agent.yourorg.yourname",
@@ -191,7 +191,7 @@ POST https://marketnow.site/api/atc
 
 <h2>Verify an ATC</h2>
 <pre><code># Verify a card is valid
-curl "https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-00001"
+curl "https://www.marketnow.site/api/atc?action=verify&card_id=ATC-2026-00001"
 
 # Response:
 {

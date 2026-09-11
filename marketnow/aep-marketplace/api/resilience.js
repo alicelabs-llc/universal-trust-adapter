@@ -37,7 +37,7 @@ const manifest = {
       name: "marketnow-site-direct",
       priority: 4,
       description: "AliceLabs-owned origin server — independent of NPM and GitHub",
-      base_url: "https://marketnow.site/uta-packages/",
+      base_url: "https://www.marketnow.site/uta-packages/",
       uptime_sla: "best-effort"
     }
   ],
@@ -50,7 +50,7 @@ const manifest = {
         "https://registry.npmjs.org/@marketnow/uts/-/uts-2.0.0.tgz",
         "https://cdn.jsdelivr.net/npm/@marketnow/uts@2.0.0/",
         "https://unpkg.com/@marketnow/uts@2.0.0/",
-        "https://marketnow.site/uta-packages/marketnow-uts-2.0.0.tgz"
+        "https://www.marketnow.site/uta-packages/marketnow-uts-2.0.0.tgz"
       ]
     },
     {
@@ -61,7 +61,7 @@ const manifest = {
         "https://registry.npmjs.org/@marketnow/trust-core/-/trust-core-1.0.0.tgz",
         "https://cdn.jsdelivr.net/npm/@marketnow/trust-core@1.0.0/",
         "https://unpkg.com/@marketnow/trust-core@1.0.0/",
-        "https://marketnow.site/uta-packages/marketnow-trust-core-1.0.0.tgz"
+        "https://www.marketnow.site/uta-packages/marketnow-trust-core-1.0.0.tgz"
       ]
     },
     {
@@ -71,7 +71,7 @@ const manifest = {
         "https://registry.npmjs.org/@marketnow/trust-adapters/-/trust-adapters-1.0.0.tgz",
         "https://cdn.jsdelivr.net/npm/@marketnow/trust-adapters@1.0.0/",
         "https://unpkg.com/@marketnow/trust-adapters@1.0.0/",
-        "https://marketnow.site/uta-packages/marketnow-trust-adapters-1.0.0.tgz"
+        "https://www.marketnow.site/uta-packages/marketnow-trust-adapters-1.0.0.tgz"
       ]
     },
     {
@@ -81,7 +81,7 @@ const manifest = {
         "https://registry.npmjs.org/@marketnow/trust-gateway/-/trust-gateway-1.0.0.tgz",
         "https://cdn.jsdelivr.net/npm/@marketnow/trust-gateway@1.0.0/",
         "https://unpkg.com/@marketnow/trust-gateway@1.0.0/",
-        "https://marketnow.site/uta-packages/marketnow-trust-gateway-1.0.0.tgz"
+        "https://www.marketnow.site/uta-packages/marketnow-trust-gateway-1.0.0.tgz"
       ]
     },
     {

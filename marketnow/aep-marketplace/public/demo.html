@@ -80,7 +80,7 @@ body { background: #050505; color: #fff; font-family: -apple-system, BlinkMacSys
       <h1>How It Works</h1>
       <h2>Agent purchase flow (x402)</h2>
       <div class="terminal">
-<span class="prompt">$</span> curl -X POST https://marketnow.site/api/agent-purchase \
+<span class="prompt">$</span> curl -X POST https://www.marketnow.site/api/agent-purchase \
   -H "Content-Type: application/json" \
   -d '{"skillId":"mn-gen-00003","mandateId":"mand_xxx"}'
 
@@ -153,13 +153,13 @@ x-payment-token: USDC</span>
 <span class="success">npx -y marketnow-mcp</span>
 
 <span class="prompt">$</span> <span class="output"># Browse 66,496 skills</span>
-<span class="output">https://marketnow.site/registry</span>
+<span class="output">https://www.marketnow.site/registry</span>
 
 <span class="prompt">$</span> <span class="output"># 43 free skills — no signup</span>
-<span class="output">https://marketnow.site/registry?filter=free</span>
+<span class="output">https://www.marketnow.site/registry?filter=free</span>
 
 <span class="prompt">$</span> <span class="output"># Run a security audit</span>
-<span class="prompt">$</span> curl -X POST https://marketnow.site/api/audit-skill \
+<span class="prompt">$</span> curl -X POST https://www.marketnow.site/api/audit-skill \
   -H "Content-Type: application/json" \
   -d '{"skillId":"mn-sec-00001"}'
 

@@ -137,7 +137,7 @@ function generateSBOM(opts) {
         dataLicense: 'CC0-1.0',
         SPDXID: 'SPDXRef-DOCUMENT',
         name: `SBOM for ${rootPkg.name || node_path_1.default.basename(rootDir)}`,
-        documentNamespace: `https://marketnow.site/spdx/${rootPkg.name || node_path_1.default.basename(rootDir)}/${rootPkg.version || '0.0.0'}/${Date.now()}`,
+        documentNamespace: `https://www.marketnow.site/spdx/${rootPkg.name || node_path_1.default.basename(rootDir)}/${rootPkg.version || '0.0.0'}/${Date.now()}`,
         creationInfo: {
             created,
             creators: [opts.creator || 'Organization: AliceLabs LLC', 'Tool: UTA-SBOM-Generator-1.0'],
