@@ -208,3 +208,52 @@ anchor (the `2dbaa429` doc-nit changed runner bytes without re-recording; the
 suite's bytes oracle flagged it fail-closed). v1.4.0 re-records and re-anchors.
 That drift — and its catching — is exactly what entry #5 exists to make
 non-repeatable silently.
+
+# Entry #6 — the round-4 anchor: the release chain (v1.5.0, rollback resistance)
+
+anp2network's round-4 comment (3ehp6): "inclusion proves a record exists in
+the log. It says nothing about that record being the current authorized state
+for score-runner... Serve an older, legitimately anchored runner together
+with the artifact that matched it at the time, and every step you listed
+passes... Rollback, fully signed." Entry #6 anchors the answer: a
+**persistent release identity** (Ed25519) and the monotone **release
+statement r1** (counter 1, suite v1.5.0, 17 artifact digests).
+
+| | |
+|---|---|
+| Log | https://rekor.sigstore.dev |
+| Entry UUID | `108e9186e8c5677a6eb2af77b82ec2bdff4ccef2170bc7f482a0bf7cec5b2e9752f22f9b8cac002b` |
+| Log index | `2795106183` |
+| Integrated | `2026-09-11T15:38:34Z` |
+| Countersignature | ECDSA P-256 over sha256(statement v6); fresh throwaway, private key discarded — it can never sign again |
+| Bootstrap floor | `2787622029` (entry #5) — release anchors at or below this are refused at first contact |
+
+## Verify it yourself — now with rollback resistance
+
+```bash
+# the round-3 flow still works (any artifact, any origin):
+node verify-artifact.mjs https://www.marketnow.site/uta/conformance/score-runner.mjs
+
+# the round-4 flow — the release chain with local state:
+node verify-artifact.mjs --release
+node verify-artifact.mjs --release --artifact https://www.marketnow.site/uta/conformance/score-runner.mjs
+```
+
+The release identity is the first key in the project that is neither a
+throwaway nor published: its private half is held offline by the publisher,
+because a monotone counter is only meaningful if nobody else can sign one.
+The verifier keeps local state (highest accepted counter + checkpoint),
+refuses lower counters (rollback), same-counter conflicts (fork), and
+below-floor anchors (history restart). The residual — what a FRESH verifier
+cannot know — is bounded by the floor and by the identity only existing in
+entry #6+ statements; from the first accepted release onward, monotonicity
+is total. See `../releases/README.md` for the full contract and the
+publisher's release procedure.
+
+## Files (entry #6)
+
+| File | Role |
+|---|---|
+| `anchor-statement-v6.json` | The signed statement: release identity + release statement r1 digest + the v1.5.0 digest set. |
+| `anchor-record-v6.json` | Untrusted locator (UUID, logIndex, integrated time, countersignature key). Everything that matters is re-verified live. |
+| `verify-artifact.mjs` | v1.5.0: round-3 single-artifact flow + `--release` rollback-resistant chain verification. |

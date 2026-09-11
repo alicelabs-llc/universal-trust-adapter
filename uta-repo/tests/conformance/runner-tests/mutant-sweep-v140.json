@@ -1,11 +1,11 @@
 {
  "schema": "uta-runner-mutation-sweep/1.0",
- "as_of": "2026-09-11",
+ "as_of": "2026-09-10",
  "target": "score-runner.mjs",
- "target_sha256": "c0bd20e6987d94d75f63e3756d49d1d0d89ea0c4c80175cee0e18db1062dba25",
- "target_bytes": 20966,
+ "target_sha256": "5802cc35c076c3e45dbca9200b483b1606302fe0a8cf93afb9d4775ffa28565b",
+ "target_bytes": 18641,
  "oracle": {
-  "answer_key_sha256": "79a5c5936be9ba9fb56fecc0370618f48fecc467b46f200601191224c8ba4d0c",
+  "answer_key_sha256": "4063919bd4e3b118973cc2694d8c069ef24f8fa24d4cf9b0c77f4267e983c738",
   "surfaces": [
    "--matrix separation table (8 rows, failure lists included)",
    "reference-mode verdict + exit code",
@@ -20,9 +20,9 @@
    "id": "eq-flip",
    "label": "=== \u2192 !==",
    "description": "flip strict equality to strict inequality",
-   "sites": 12,
-   "valid": 12,
-   "caught": 12,
+   "sites": 11,
+   "valid": 11,
+   "caught": 11,
    "survivors": 0,
    "invalid_syntax": 0
   },
@@ -30,39 +30,39 @@
    "id": "neq-flip",
    "label": "!== \u2192 ===",
    "description": "flip strict inequality to strict equality",
-   "sites": 9,
-   "valid": 9,
+   "sites": 8,
+   "valid": 8,
    "caught": 8,
-   "survivors": 1,
+   "survivors": 0,
    "invalid_syntax": 0
   },
   {
    "id": "and-or",
    "label": "&& \u2192 ||",
    "description": "replace logical AND with logical OR",
-   "sites": 29,
-   "valid": 29,
-   "caught": 25,
-   "survivors": 4,
+   "sites": 27,
+   "valid": 27,
+   "caught": 24,
+   "survivors": 3,
    "invalid_syntax": 0
   },
   {
    "id": "or-and",
    "label": "|| \u2192 &&",
    "description": "replace logical OR with logical AND",
-   "sites": 7,
-   "valid": 7,
-   "caught": 2,
-   "survivors": 5,
+   "sites": 6,
+   "valid": 6,
+   "caught": 3,
+   "survivors": 3,
    "invalid_syntax": 0
   },
   {
    "id": "not-drop",
    "label": "unary ! removed",
    "description": "delete a unary negation",
-   "sites": 19,
-   "valid": 18,
-   "caught": 17,
+   "sites": 18,
+   "valid": 17,
+   "caught": 16,
    "survivors": 1,
    "invalid_syntax": 1
   },
@@ -130,21 +130,21 @@
    "id": "int-bump",
    "label": "integer n \u2192 n+1",
    "description": "off-by-one an integer literal",
-   "sites": 28,
-   "valid": 28,
-   "caught": 13,
-   "survivors": 15,
+   "sites": 21,
+   "valid": 21,
+   "caught": 12,
+   "survivors": 9,
    "invalid_syntax": 0
   }
  ],
  "totals": {
   "operators": 12,
-  "sites": 127,
-  "valid_mutants": 126,
-  "caught": 95,
-  "survivors": 31,
+  "sites": 114,
+  "valid_mutants": 113,
+  "caught": 92,
+  "survivors": 21,
   "invalid_syntax": 1,
-  "survivor_rate": 24.6
+  "survivor_rate": 18.6
  },
  "mutants": [
   {
@@ -165,12 +165,12 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "240450606293b6d9e911beab4dba512d179f35a7e4643e1c82c3229c29ab75f6"
+   "sha256": "053693e26236a6f1c0195f8ce5fb4adbde481d07619a7d1db3cbbc72ec27279f"
   },
   {
-   "id": "eq-flip@L127:c32",
+   "id": "eq-flip@L107:c32",
    "op": "eq-flip",
-   "line": 127,
+   "line": 107,
    "col": 32,
    "original": " const statusOk = card.status === 'active';\u23ce  return { verify: ",
    "token": "===",
@@ -182,12 +182,12 @@
     "reference",
     "adversarial"
    ],
-   "sha256": "45493300f3e97b6f8a34a24d6322ced975b84934dbf6b7e77e993c6de03e6fe5"
+   "sha256": "5926220e149c7ffb1d8dcf912b92b37966fdd0ba0d5a4acaeb12ca86fe84807c"
   },
   {
-   "id": "eq-flip@L137:c32",
+   "id": "eq-flip@L117:c32",
    "op": "eq-flip",
-   "line": 137,
+   "line": 117,
    "col": 32,
    "original": " const statusOk = card.status === 'active';\u23ce  return { verify: ",
    "token": "===",
@@ -197,12 +197,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "3aaaaa8cebf09248515b188ed658e1307e069d72df5f4de7bb9f885c6c9ed89c"
+   "sha256": "12f91e10409114b0fb5d235445a4a2ef3b63b5bbba0eb0d33ecc11743a0837ac"
   },
   {
-   "id": "eq-flip@L156:c32",
+   "id": "eq-flip@L136:c32",
    "op": "eq-flip",
-   "line": 156,
+   "line": 136,
    "col": 32,
    "original": " const statusOk = card.status === 'active';\u23ce  return { verify: ",
    "token": "===",
@@ -212,12 +212,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "7bfa9bda931373dc962297229831ee8c89fc32acf4fdd5edb823c7c7ba3b12c1"
+   "sha256": "f3e3caee9235dfe2706b7b8c3fffb14139e7ede17ebe70edea5d7338a61d23b4"
   },
   {
-   "id": "eq-flip@L164:c27",
+   "id": "eq-flip@L144:c27",
    "op": "eq-flip",
-   "line": 164,
+   "line": 144,
    "col": 27,
    "original": " };\u23ce  return { verify: digest === validAtcSha, stages: null };\u23ce",
    "token": "===",
@@ -227,12 +227,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "c915d38fab1f8529f130374636bf52c1c2804d2a247206d050a63385833876c0"
+   "sha256": "2eab8f468d0f5b29187dbc22a67110a6084e5c34790bed3ebacb44d2375566bc"
   },
   {
-   "id": "eq-flip@L183:c32",
+   "id": "eq-flip@L163:c32",
    "op": "eq-flip",
-   "line": 183,
+   "line": 163,
    "col": 32,
    "original": " const statusOk = card.status === 'active';\u23ce  const truth = { v",
    "token": "===",
@@ -242,12 +242,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "de13ecfc78979778132f0800a316daaa40ec3028a2573841816e274b39b02bf1"
+   "sha256": "57d53038b2416103992f093a472eca534c9fde59c8e5da70661f880d3ecd2fa6"
   },
   {
-   "id": "eq-flip@L196:c28",
+   "id": "eq-flip@L176:c28",
    "op": "eq-flip",
-   "line": 196,
+   "line": 176,
    "col": 28,
    "original": ");\u23ce    let correct = r.verify === expected_verify;\u23ce    if (corr",
    "token": "===",
@@ -259,12 +259,12 @@
     "reference",
     "adversarial"
    ],
-   "sha256": "d739ff79456c57234ee7335a8839628756a53f406ea82cd306e29a22c9f8ea4f"
+   "sha256": "8d124515d36e9c90c2d5d4a7560d82b78b936cda5c39538f5f696420ccc0a43f"
   },
   {
-   "id": "eq-flip@L252:c34",
+   "id": "eq-flip@L232:c34",
    "op": "eq-flip",
-   "line": 252,
+   "line": 232,
    "col": 34,
    "original": " const statusOk = card.status === 'active';\u23ce    const expected_",
    "token": "===",
@@ -276,12 +276,12 @@
     "adversarial",
     "exit-1"
    ],
-   "sha256": "06b65c253280f787bdee859d5d665b7fd28944781a084fec0bdd31bdc889c9d7"
+   "sha256": "ae20a41121e9f72b7c365c02dae85cfeb0d0e28d05608c57bcd3ef41ad859eb1"
   },
   {
-   "id": "eq-flip@L255:c48",
+   "id": "eq-flip@L235:c48",
    "op": "eq-flip",
-   "line": 255,
+   "line": 235,
    "col": 48,
    "original": "genIndex?.find(m => m.card_id === card.card_id);\u23ce    if (meta) ",
    "token": "===",
@@ -293,52 +293,38 @@
     "adversarial",
     "exit-1"
    ],
-   "sha256": "959b456e3c6658abf4f2c4f33015225078e0838d148e3c6573301943b02ca482"
+   "sha256": "e9895eebe00886413d6650552b9de6dbf326f3f4a88c92686f4e77547f5704ed"
   },
   {
-   "id": "eq-flip@L299:c25",
+   "id": "eq-flip@L277:c23",
    "op": "eq-flip",
-   "line": 299,
-   "col": 25,
-   "original": ")}`);\u23ce    const allOk = s1.ok === s1.total && s2.ok === s2.tota",
+   "line": 277,
+   "col": 23,
+   "original": "`);\u23ce  }\u23ce  const allOk = s1.ok === s1.total && (!generated.lengt",
    "token": "===",
    "replacement": "!==",
-   "context": "const allOk = s1.ok === s1.total && s2.ok === s2.total;",
+   "context": "const allOk = s1.ok === s1.total && (!generated.length || score(reference, generated).ok === generated.length);",
+   "status": "caught",
+   "diverges_at": [
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "19d4dde59251ef2528accf190f0e7501366f44b6151e61212876e5082348b750"
+  },
+  {
+   "id": "eq-flip@L277:c92",
+   "op": "eq-flip",
+   "line": 277,
+   "col": 92,
+   "original": "core(reference, generated).ok === generated.length);\u23ce  console.",
+   "token": "===",
+   "replacement": "!==",
+   "context": "const allOk = s1.ok === s1.total && (!generated.length || score(reference, generated).ok === generated.length);",
    "status": "caught",
    "diverges_at": [
     "adversarial"
    ],
-   "sha256": "4c42bc1a34ac7a987a48e2adef7a86fcb0ca2cdb1d3f3aea6169d76fbda11e62"
-  },
-  {
-   "id": "eq-flip@L299:c47",
-   "op": "eq-flip",
-   "line": 299,
-   "col": 47,
-   "original": "= s1.ok === s1.total && s2.ok === s2.total;\u23ce    console.log(all",
-   "token": "===",
-   "replacement": "!==",
-   "context": "const allOk = s1.ok === s1.total && s2.ok === s2.total;",
-   "status": "caught",
-   "diverges_at": [
-    "adversarial"
-   ],
-   "sha256": "9cd51c540a6ad3d7427461dcd7bd2e340d7a63e65b49bf67b83448adc841237e"
-  },
-  {
-   "id": "eq-flip@L303:c24",
-   "op": "eq-flip",
-   "line": 303,
-   "col": 24,
-   "original": ");\u23ce  }\u23ce  const allOk1 = s1.ok === s1.total;\u23ce  console.log(allOk",
-   "token": "===",
-   "replacement": "!==",
-   "context": "const allOk1 = s1.ok === s1.total;",
-   "status": "caught",
-   "diverges_at": [
-    "reference"
-   ],
-   "sha256": "54e058fb18fa9bb33fb46fc79a1158dac63abbe6c72002b0b1dd9c78c78395c8"
+   "sha256": "7b8b412d6bc7bed578c9133045d9aebbb4f46cbf3c918f0b3bc426d4ea3714b1"
   },
   {
    "id": "neq-flip@L67:c6",
@@ -358,7 +344,7 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "d4162b98fdcfb65b9e7e6c58a238b40c578f268d4826a97f109a37c8861df989"
+   "sha256": "79f47290ef972d294ac56ab6114066ef23738fbed4189731736eeb3cc52c3d88"
   },
   {
    "id": "neq-flip@L77:c23",
@@ -376,25 +362,12 @@
     "failclosed-malformed",
     "failclosed-poisoned"
    ],
-   "sha256": "6873bbca013e286032787cedf07e6ec351de5d5064c8c13c481b3455284c1097"
+   "sha256": "556c319e84911a98118b9b28be356be70b226766b6e490ae176513d84d2a18b0"
   },
   {
-   "id": "neq-flip@L99:c30",
+   "id": "neq-flip@L179:c29",
    "op": "neq-flip",
-   "line": 99,
-   "col": 30,
-   "original": "\u23ceconst clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] &",
-   "token": "!==",
-   "replacement": "===",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "status": "SURVIVOR",
-   "diverges_at": [],
-   "sha256": "7da2ed633b4e12565ca8f8d2ecc45789d8f95712a82b2c89ab2949fce27138a1"
-  },
-  {
-   "id": "neq-flip@L199:c29",
-   "op": "neq-flip",
-   "line": 199,
+   "line": 179,
    "col": 29,
    "original": "{\u23ce        if (r.stages[stage] !== expected) { correct = false; ",
    "token": "!==",
@@ -406,12 +379,12 @@
     "reference",
     "adversarial"
    ],
-   "sha256": "483a88661db573b61a08611f4ca745832d7d9532eabfaca3aee97c7540031dad"
+   "sha256": "62b975b2b89d1f4866745b622bc687c7c3529d43982597d4b40bac4b4b2d89f7"
   },
   {
-   "id": "neq-flip@L221:c21",
+   "id": "neq-flip@L201:c21",
    "op": "neq-flip",
-   "line": 221,
+   "line": 201,
    "col": 21,
    "original": "subtree);\u23ce      if (rederived !== published) { console.error(`F",
    "token": "!==",
@@ -426,12 +399,12 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "44005b6179e3054aecf48445ccb4104693fec332b65edd4df34722da701b1369"
+   "sha256": "6a33172e33730dccb3696de78308aa573ebed14f321f7d464bcb94652f91e76e"
   },
   {
-   "id": "neq-flip@L222:c18",
+   "id": "neq-flip@L202:c18",
    "op": "neq-flip",
-   "line": 222,
+   "line": 202,
    "col": 18,
    "original": "s.exit(1); }\u23ce      if (digest !== v.sha256) { console.error(`FA",
    "token": "!==",
@@ -446,12 +419,12 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "0764525175a4a5dbb9ccd9ea0bcb08f59ef8cff28ddd0cf1cfb04136201d1951"
+   "sha256": "f9586e4d817dcc73a9aa84bf155216347fcbf15dcc9044db5a2cc0c9d7974e7b"
   },
   {
-   "id": "neq-flip@L234:c73",
+   "id": "neq-flip@L214:c73",
    "op": "neq-flip",
-   "line": 234,
+   "line": 214,
    "col": 73,
    "original": "f => f.endsWith('.json') && f !== '_generated-index.json' && !f",
    "token": "!==",
@@ -464,12 +437,12 @@
     "failclosed-malformed",
     "failclosed-poisoned"
    ],
-   "sha256": "60f4527f7f38bdc920e2a0c38a77ba18f6e0c3bae52a4935579f0aeaa1915da6"
+   "sha256": "ee8850aa73d1babdf402613157712d81d1a4cf53bbe4626dc3c0a7070b5b9782"
   },
   {
-   "id": "neq-flip@L257:c32",
+   "id": "neq-flip@L237:c32",
    "op": "neq-flip",
-   "line": 257,
+   "line": 237,
    "col": 32,
    "original": "     if (meta.expected_verify !== expected_verify) {\u23ce        co",
    "token": "!==",
@@ -481,12 +454,12 @@
     "adversarial",
     "exit-1"
    ],
-   "sha256": "db8bf041ab3b752ae3e6f73c370061b5521d3d12bad95f9faf3ef5bbaf52d3ff"
+   "sha256": "9281916a7e029492744b131ae2c92f9abe5dab2131f8f9672c0986eb20ffb562"
   },
   {
-   "id": "neq-flip@L263:c38",
+   "id": "neq-flip@L243:c38",
    "op": "neq-flip",
-   "line": 263,
+   "line": 243,
    "col": 38,
    "original": "   if (expected_stages[stage] !== expected) {\u23ce            conso",
    "token": "!==",
@@ -498,7 +471,7 @@
     "adversarial",
     "exit-1"
    ],
-   "sha256": "9b74593bdfa807ff870066fc26e6773bf267c33583577c101c1d0e863cff5368"
+   "sha256": "21b0092e5ba9bd681beae47779e72463c167f66e8ce4d4b2c76165dd8bc20a7f"
   },
   {
    "id": "and-or@L67:c15",
@@ -518,7 +491,7 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "c0a3f957a5d4ecf260bdf0da15b2c066bda29fbdf0c8f1b38ffb6589f9026c73"
+   "sha256": "bf1cb0f3092361958619b855374e626ccc59e490d5a95e9ea086e216685d01f9"
   },
   {
    "id": "and-or@L67:c40",
@@ -538,7 +511,7 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "2ff9ad8fe37ff39344727185af6c23749ecd78b737023cfb167982ecffd92c95"
+   "sha256": "7b0784c5f7031aa0315a6d508d07845e4f7034ff627153cbb4b1ab3d6a659a42"
   },
   {
    "id": "and-or@L77:c30",
@@ -551,7 +524,7 @@
    "context": "const genDir = genIdx !== -1 && args[genIdx + 1] && !args[genIdx + 1].startsWith('--') ? args[genIdx + 1] : null;",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "70cd6d6db03b6be6398929c028f960c9762751b16560e57ec113a467691a5677"
+   "sha256": "32bd94372a60a89cc82728bdf4dab5ae54b9110229e70d272ae279e65aea6356"
   },
   {
    "id": "and-or@L77:c50",
@@ -566,40 +539,12 @@
    "diverges_at": [
     "reference"
    ],
-   "sha256": "1aeea4261a75e849c3332301815c89a28ba5a6a0ce91e39eca549e63b4cd3934"
+   "sha256": "fd809e8522950e57a0c16e4327c087101fcc079d42358e51a05c4f19d35fffd0"
   },
   {
-   "id": "and-or@L99:c37",
+   "id": "and-or@L106:c59",
    "op": "and-or",
-   "line": 99,
-   "col": 37,
-   "original": "clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !arg",
-   "token": "&&",
-   "replacement": "||",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "status": "SURVIVOR",
-   "diverges_at": [],
-   "sha256": "38ae92619623fb4dcc7d498e69dbd4c7a45d0b2b30c3d1af88e9470171359182"
-  },
-  {
-   "id": "and-or@L99:c62",
-   "op": "and-or",
-   "line": 99,
-   "col": 62,
-   "original": "= -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].starts",
-   "token": "&&",
-   "replacement": "||",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "status": "caught",
-   "diverges_at": [
-    "reference"
-   ],
-   "sha256": "528db33ed7e4c14fd14f97505415284cc2e205bc6bdd6069954e2fcc3fa3cc97"
-  },
-  {
-   "id": "and-or@L126:c59",
-   "op": "and-or",
-   "line": 126,
+   "line": 106,
    "col": 59,
    "original": "oad.metadata.expires_at > NOW && card.payload.metadata.issued_",
    "token": "&&",
@@ -611,12 +556,12 @@
     "reference",
     "adversarial"
    ],
-   "sha256": "a91aaaeb946ce00c4691a98a4f7b5d5c71b0386f85c6794f1f1a398733ea07c8"
+   "sha256": "3722a52dde5cfe484ffe63674fd13a9cedb55e80889fc545047c889d61c0d1a3"
   },
   {
-   "id": "and-or@L128:c26",
+   "id": "and-or@L108:c26",
    "op": "and-or",
-   "line": 128,
+   "line": 108,
    "col": 26,
    "original": "ve';\u23ce  return { verify: sigOk && anchorOk && inWindow && statu",
    "token": "&&",
@@ -628,12 +573,12 @@
     "reference",
     "adversarial"
    ],
-   "sha256": "a593036ac78224acc6ba48c90fe06146c03b7bedf571c504502d4aebee369c08"
+   "sha256": "51b41c08e0f9a174cf69bc6a152cd2ea79bfa59e929f2f83c4c35be72f501fbd"
   },
   {
-   "id": "and-or@L128:c38",
+   "id": "and-or@L108:c38",
    "op": "and-or",
-   "line": 128,
+   "line": 108,
    "col": 38,
    "original": "n { verify: sigOk && anchorOk && inWindow && statusOk, stages:",
    "token": "&&",
@@ -645,12 +590,12 @@
     "reference",
     "adversarial"
    ],
-   "sha256": "4630075b1363eda1d5c2b3b8744f3587a0fd63e40af148285a3c7276edf8f0f3"
+   "sha256": "a94a1ac8e2f31e71815f5862aae4cd9e4dfdebaf74d7e0cc8039fc973fe63acb"
   },
   {
-   "id": "and-or@L128:c50",
+   "id": "and-or@L108:c50",
    "op": "and-or",
-   "line": 128,
+   "line": 108,
    "col": 50,
    "original": "sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(si",
    "token": "&&",
@@ -662,12 +607,12 @@
     "reference",
     "adversarial"
    ],
-   "sha256": "b69b2d25ce7de0a0e011ffd3fea3ded680cf9e3cbd233687da91f4856ee46e89"
+   "sha256": "90c886f93f4e038570da3ffede5fc8890050c67e75c05a4fc25170582e691f29"
   },
   {
-   "id": "and-or@L136:c59",
+   "id": "and-or@L116:c59",
    "op": "and-or",
-   "line": 136,
+   "line": 116,
    "col": 59,
    "original": "oad.metadata.expires_at > NOW && card.payload.metadata.issued_",
    "token": "&&",
@@ -677,12 +622,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "fc2efa4abaa7755db74566858444182b8b7c5feaf16fe68a9ed8eeb4146d1c6c"
+   "sha256": "a250f79cbdd842bfb199915964d3930e7866dd8da6f758e150e009eb89853523"
   },
   {
-   "id": "and-or@L138:c29",
+   "id": "and-or@L118:c29",
    "op": "and-or",
-   "line": 138,
+   "line": 118,
    "col": 29,
    "original": ";\u23ce  return { verify: inWindow && statusOk, stages: null };\u23ce};\u23ce",
    "token": "&&",
@@ -692,12 +637,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "069397231eee7d3de7a31f334a89e26c3a3f3f4be9a37d2fb3551696001731d5"
+   "sha256": "c953cbb99435e7c578818090dbf5ab283b46b3bd2e77f6699c939e19475be532"
   },
   {
-   "id": "and-or@L147:c26",
+   "id": "and-or@L127:c26",
    "op": "and-or",
-   "line": 147,
+   "line": 127,
    "col": 26,
    "original": "ey);\u23ce  return { verify: sigOk && anchorOk, stages: null };\u23ce};\u23ce",
    "token": "&&",
@@ -707,12 +652,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "59cf586cb26fa9bc28688abbd85ecff3aadd069cada8cd4cc2628ad250b2c4cc"
+   "sha256": "8e1bec7b5e4253d20cf31e9c2dc5987848fa56573249a5c632a1a3da99b6b191"
   },
   {
-   "id": "and-or@L155:c59",
+   "id": "and-or@L135:c59",
    "op": "and-or",
-   "line": 155,
+   "line": 135,
    "col": 59,
    "original": "oad.metadata.expires_at > NOW && card.payload.metadata.issued_",
    "token": "&&",
@@ -722,12 +667,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "e7c31143b1257c725e93f5ddb36e24de0a4e664650f96b07ebe03e37c581c918"
+   "sha256": "1f6ebf03aa57368a187693ba71d112dff4bd68553ddeb88c38ccb24b799695c8"
   },
   {
-   "id": "and-or@L157:c26",
+   "id": "and-or@L137:c26",
    "op": "and-or",
-   "line": 157,
+   "line": 137,
    "col": 26,
    "original": "ve';\u23ce  return { verify: sigOk && inWindow && statusOk, stages:",
    "token": "&&",
@@ -737,12 +682,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "2163496e8bfe8b189d20ccd7ffe972df817f730309964af3011233a58744bc29"
+   "sha256": "4ed66306a18904d4b3096d3077d6ffc21e57c62fed33f5aca15e7ac20c38fda7"
   },
   {
-   "id": "and-or@L157:c38",
+   "id": "and-or@L137:c38",
    "op": "and-or",
-   "line": 157,
+   "line": 137,
    "col": 38,
    "original": "n { verify: sigOk && inWindow && statusOk, stages: null };\u23ce};\u23ce",
    "token": "&&",
@@ -752,12 +697,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "fd87c470925fe733ab30727ccf46559103c003d0156ac12855970d9beed4e463"
+   "sha256": "297d9d993e59adcd591d369f8885a9106dc7049a0f81feb11d0e3e84c82dfd0b"
   },
   {
-   "id": "and-or@L182:c59",
+   "id": "and-or@L162:c59",
    "op": "and-or",
-   "line": 182,
+   "line": 162,
    "col": 59,
    "original": "oad.metadata.expires_at > NOW && card.payload.metadata.issued_",
    "token": "&&",
@@ -765,12 +710,12 @@
    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "685e9f983df198a24ebb77bf5c2822262b77d28a2ff993a4c4f7d5f33ae47d0b"
+   "sha256": "31c1c60f1e4277f53564e68d808bedae7f602d20790f034903bdb7da14d6ad41"
   },
   {
-   "id": "and-or@L184:c33",
+   "id": "and-or@L164:c33",
    "op": "and-or",
-   "line": 184,
+   "line": 164,
    "col": 33,
    "original": "const truth = { verify: sigOk && anchorOk && inWindow && statu",
    "token": "&&",
@@ -780,12 +725,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "c9294b23906fe8b7d011f0da4bf6a412c191ea24e1a3e81f31c22041654042ce"
+   "sha256": "1ceb95b1f66a4bea1093c2058c0bd78516e0c539792e1e41314de88ee55d17c7"
   },
   {
-   "id": "and-or@L184:c45",
+   "id": "and-or@L164:c45",
    "op": "and-or",
-   "line": 184,
+   "line": 164,
    "col": 45,
    "original": "= { verify: sigOk && anchorOk && inWindow && statusOk, stages:",
    "token": "&&",
@@ -795,12 +740,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "750d9cab792a20f1dbd503cce22c9fbcc872da2b73abc6ddcb7c46d60989fd92"
+   "sha256": "79d52d1509564ee44b7e594c88762a85176b85ec60e7270a0f5bc0855f16625e"
   },
   {
-   "id": "and-or@L184:c57",
+   "id": "and-or@L164:c57",
    "op": "and-or",
-   "line": 184,
+   "line": 164,
    "col": 57,
    "original": "sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(si",
    "token": "&&",
@@ -810,12 +755,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "b6b2bad3bafead440ada527e224ac1d012a03890fb564695d69f851c0215dc9e"
+   "sha256": "4b2cbc3f2be4f67d2eeeff0997a1b3cb89cd1c01173958ca3571d1ef365d32dc"
   },
   {
-   "id": "and-or@L197:c17",
+   "id": "and-or@L177:c17",
    "op": "and-or",
-   "line": 197,
+   "line": 177,
    "col": 17,
    "original": "ected_verify;\u23ce    if (correct && expected_stages && r.stages) ",
    "token": "&&",
@@ -828,12 +773,12 @@
     "adversarial",
     "exit-1"
    ],
-   "sha256": "f63a1ac21d294f7fe2f07c60b88089866638d40454a71aa97b0b50215c00353b"
+   "sha256": "5d0cb2c78cfff3940a61852865c46f6ffe1b1fc577023fa65f0c0e0e4b2e2cb8"
   },
   {
-   "id": "and-or@L197:c36",
+   "id": "and-or@L177:c36",
    "op": "and-or",
-   "line": 197,
+   "line": 177,
    "col": 36,
    "original": "f (correct && expected_stages && r.stages) {\u23ce      for (const ",
    "token": "&&",
@@ -844,12 +789,12 @@
     "matrix",
     "exit-1"
    ],
-   "sha256": "ed1560d353b0490439f93a6c1cf1bd9c6b69208a96255e29297bb3ca63a908e1"
+   "sha256": "1ad56c1027e4364bdaa82d3260a1c4a01dc36a1dd044f2b073168abc34b96d60"
   },
   {
-   "id": "and-or@L234:c68",
+   "id": "and-or@L214:c68",
    "op": "and-or",
-   "line": 234,
+   "line": 214,
    "col": 68,
    "original": "lter(f => f.endsWith('.json') && f !== '_generated-index.json'",
    "token": "&&",
@@ -862,12 +807,12 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "919651b627cad637fbe759bba12b3245be33ad824134f3ceafc4d529a0f751db"
+   "sha256": "d65765b6cd35474f8879ac871ba826f28a2f6ac13803ea75a84ca37e15c28fdd"
   },
   {
-   "id": "and-or@L234:c101",
+   "id": "and-or@L214:c101",
    "op": "and-or",
-   "line": 234,
+   "line": 214,
    "col": 101,
    "original": "f !== '_generated-index.json' && !f.startsWith('_'))) {\u23ce    co",
    "token": "&&",
@@ -880,12 +825,12 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "bb4231914830214d05b6fd8e63b02cfce75f63619fe4d9d4c576c5aadac420a7"
+   "sha256": "fc8437005459eb24bd1b51add5bcb31b66d62b067d5d5fe90b4250dcd5bcb329"
   },
   {
-   "id": "and-or@L251:c61",
+   "id": "and-or@L231:c61",
    "op": "and-or",
-   "line": 251,
+   "line": 231,
    "col": 61,
    "original": "oad.metadata.expires_at > NOW && card.payload.metadata.issued_",
    "token": "&&",
@@ -897,12 +842,12 @@
     "adversarial",
     "exit-1"
    ],
-   "sha256": "0b674d425846ddde40ce98e44eb076b72be7da6645032ad3be34b0e43f7d3661"
+   "sha256": "0b832fcdee33a2105d753b55dd94e3933312fc6f47dc94303d591da1a17d4106"
   },
   {
-   "id": "and-or@L253:c35",
+   "id": "and-or@L233:c35",
    "op": "and-or",
-   "line": 253,
+   "line": 233,
    "col": 35,
    "original": "const expected_verify = sigOk && anchorOk && inWindow && statu",
    "token": "&&",
@@ -914,12 +859,12 @@
     "adversarial",
     "exit-1"
    ],
-   "sha256": "91fdf0d0a910b1f4c08f26af966f6b25c92bb1f16bd0bf217832b9dd49a459ab"
+   "sha256": "2bbf7f091c3387c1f7023cb408820d039a21f6c7edda371567fe1f2d7f679814"
   },
   {
-   "id": "and-or@L253:c47",
+   "id": "and-or@L233:c47",
    "op": "and-or",
-   "line": 253,
+   "line": 233,
    "col": 47,
    "original": "ed_verify = sigOk && anchorOk && inWindow && statusOk;\u23ce    con",
    "token": "&&",
@@ -931,12 +876,12 @@
     "adversarial",
     "exit-1"
    ],
-   "sha256": "b63fd2164ebefd2a5d1d2c9ab942445037845a277d6736edb833df0dc6c2aabf"
+   "sha256": "3b5b11d9d78088398d752122d4d56466edf675ebcda0d848946ff5a3c28431c1"
   },
   {
-   "id": "and-or@L253:c59",
+   "id": "and-or@L233:c59",
    "op": "and-or",
-   "line": 253,
+   "line": 233,
    "col": 59,
    "original": "sigOk && anchorOk && inWindow && statusOk;\u23ce    const expected_",
    "token": "&&",
@@ -948,51 +893,25 @@
     "adversarial",
     "exit-1"
    ],
-   "sha256": "c82c519cea4bb94e06721bf2e34eca85b28f59bb5781d1a8d050a774118102b2"
+   "sha256": "324961bb8d1482ba3bb7aaac9e14d13b85e1b0de75f774b819c896b41905915b"
   },
   {
-   "id": "and-or@L299:c38",
+   "id": "and-or@L277:c36",
    "op": "and-or",
-   "line": 299,
-   "col": 38,
-   "original": "st allOk = s1.ok === s1.total && s2.ok === s2.total;\u23ce    conso",
+   "line": 277,
+   "col": 36,
+   "original": "st allOk = s1.ok === s1.total && (!generated.length || score(r",
    "token": "&&",
    "replacement": "||",
-   "context": "const allOk = s1.ok === s1.total && s2.ok === s2.total;",
+   "context": "const allOk = s1.ok === s1.total && (!generated.length || score(reference, generated).ok === generated.length);",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "91d7532b09a8e80f3b1299296815b8593680bb0d204f53f074d4dfe11e47b6d4"
+   "sha256": "0572518714bed7e726275ba7a58b3a95e11a73461d4805d84d25ce23de35c7c5"
   },
   {
-   "id": "or-and@L100:c28",
+   "id": "or-and@L204:c105",
    "op": "or-and",
-   "line": 100,
-   "col": 28,
-   "original": "l;\u23ceconst FIXED_NOW = clockArg || index.evaluation_clock || WAL",
-   "token": "||",
-   "replacement": "&&",
-   "context": "const FIXED_NOW = clockArg || index.evaluation_clock || WALL_NOW;",
-   "status": "SURVIVOR",
-   "diverges_at": [],
-   "sha256": "29c64ea534ee83a0b46dc8e6228d522f601923adba152cc574a0e4e133979c43"
-  },
-  {
-   "id": "or-and@L100:c54",
-   "op": "or-and",
-   "line": 100,
-   "col": 54,
-   "original": "Arg || index.evaluation_clock || WALL_NOW;\u23ceif (!/^\\d{4}-\\d{2}-",
-   "token": "||",
-   "replacement": "&&",
-   "context": "const FIXED_NOW = clockArg || index.evaluation_clock || WALL_NOW;",
-   "status": "SURVIVOR",
-   "diverges_at": [],
-   "sha256": "9ee28173be0e201106c4cc55bfbc125a3d51fe1eb675f21b9dde64ca0576fb7b"
-  },
-  {
-   "id": "or-and@L224:c105",
-   "op": "or-and",
-   "line": 224,
+   "line": 204,
    "col": 105,
    "original": "ted_stages: v.expected_stages || null, digest });\u23ce  }\u23ce  return",
    "token": "||",
@@ -1002,12 +921,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "315f82feebda65a8f5757d2d54fb856b403a4f0399a359e1bd26ff99aca942be"
+   "sha256": "2d25b489e827fb8fed4ffbf972c4de4fe6064fdf50333b8432bd6c2c9057106d"
   },
   {
-   "id": "or-and@L240:c32",
+   "id": "or-and@L220:c32",
    "op": "or-and",
-   "line": 240,
+   "line": 220,
    "col": 32,
    "original": "   if (!card.signature?.value || !card.payload?.identity?.publ",
    "token": "||",
@@ -1017,12 +936,12 @@
    "diverges_at": [
     "failclosed-malformed"
    ],
-   "sha256": "03501126b824f911a6678de17ca241a31634553eccf656af927766a194d8ce0e"
+   "sha256": "82c1c77d8f3f96d88b1c55e75e6b47cabe8f52c80c0fd62aa89841599f6d5aab"
   },
   {
-   "id": "or-and@L240:c71",
+   "id": "or-and@L220:c71",
    "op": "or-and",
-   "line": 240,
+   "line": 220,
    "col": 71,
    "original": "payload?.identity?.public_key ||\u23ce        !card.payload?.metada",
    "token": "||",
@@ -1030,12 +949,12 @@
    "context": "if (!card.signature?.value || !card.payload?.identity?.public_key ||",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "e806241a48b8a5784335fe10b7d9de4b5c0bea69ef4d6dccbc6ec0733ed63586"
+   "sha256": "fa0b8b3586c52c1122f3bbfce8e9b5b3bada2d0f794a99175abd8867dff7bd23"
   },
   {
-   "id": "or-and@L241:c44",
+   "id": "or-and@L221:c44",
    "op": "or-and",
-   "line": 241,
+   "line": 221,
    "col": 44,
    "original": ".payload?.metadata?.issued_at || !card.payload?.metadata?.expi",
    "token": "||",
@@ -1043,12 +962,12 @@
    "context": "!card.payload?.metadata?.issued_at || !card.payload?.metadata?.expires_at || !card.status) {",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "bd6676963577d8c4624bb7d9714788e22b9cc295c69583c8f599bc214856b105"
+   "sha256": "7c81abf354f109861b41d8c0f928b359c93e18ade465b465a179976374f32140"
   },
   {
-   "id": "or-and@L241:c83",
+   "id": "or-and@L221:c83",
    "op": "or-and",
-   "line": 241,
+   "line": 221,
    "col": 83,
    "original": "payload?.metadata?.expires_at || !card.status) {\u23ce      console",
    "token": "||",
@@ -1056,7 +975,22 @@
    "context": "!card.payload?.metadata?.issued_at || !card.payload?.metadata?.expires_at || !card.status) {",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "81b8625ecafb4326b35ddc33b2de000141966aea982c5c2f29501b7b4d85a05e"
+   "sha256": "ac8a98a6ce1876da6d39dce8456efe56028d12c440634aa9ff0ffd2efd804ae4"
+  },
+  {
+   "id": "or-and@L277:c58",
+   "op": "or-and",
+   "line": 277,
+   "col": 58,
+   "original": "1.total && (!generated.length || score(reference, generated).o",
+   "token": "||",
+   "replacement": "&&",
+   "context": "const allOk = s1.ok === s1.total && (!generated.length || score(reference, generated).ok === generated.length);",
+   "status": "caught",
+   "diverges_at": [
+    "adversarial"
+   ],
+   "sha256": "a78531d0672eaf862014f44e47a0c2a9417d4f8b429d49094c03322c9097a476"
   },
   {
    "id": "not-drop@L1:c2",
@@ -1088,7 +1022,7 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "df1e9fb442372acdedea04c7b5b56ac81544778f7402a889f26ec2ff73b59f6b"
+   "sha256": "f9176a6917de521f44fa26f07c882ba6687b9f40a08136caae120d31a0bf7b5f"
   },
   {
    "id": "not-drop@L77:c53",
@@ -1106,45 +1040,12 @@
     "failclosed-malformed",
     "failclosed-poisoned"
    ],
-   "sha256": "89b29d1276236b25c242c283271f8df93711bc9ac1f54d2c2e8af6257a3953ec"
+   "sha256": "fd5c4db614519e49290f4447ebcb8b22c69eea9955cbd76591ba6e8f72a921e3"
   },
   {
-   "id": "not-drop@L99:c65",
+   "id": "not-drop@L99:c7",
    "op": "not-drop",
    "line": 99,
-   "col": 65,
-   "original": "1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWi",
-   "token": "!",
-   "replacement": "(removed)",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "status": "SURVIVOR",
-   "diverges_at": [],
-   "sha256": "a9ea255173f8452d0f24adc6a6f93a46a7ff0da0dba160343c7333b65c1dc2f5"
-  },
-  {
-   "id": "not-drop@L101:c5",
-   "op": "not-drop",
-   "line": 101,
-   "col": 5,
-   "original": "uation_clock || WALL_NOW;\u23ceif (!/^\\d{4}-\\d{2}-\\d{2}T00:00:00Z$",
-   "token": "!",
-   "replacement": "(removed)",
-   "context": "if (!/^\\d{4}-\\d{2}-\\d{2}T00:00:00Z$/.test(FIXED_NOW)) { console.error(`FATAL: evaluation clock must be YYYY-MM-DDT00:00:",
-   "status": "caught",
-   "diverges_at": [
-    "matrix",
-    "reference",
-    "adversarial",
-    "failclosed-malformed",
-    "failclosed-poisoned",
-    "exit-1"
-   ],
-   "sha256": "343ee6df5f75f63595d2eacddec46b2110d10671f5ac5b8f2a2c36c87671ba1e"
-  },
-  {
-   "id": "not-drop@L119:c7",
-   "op": "not-drop",
-   "line": 119,
    "col": 7,
    "original": "e = (card, digest) => {\u23ce  if (!card.signature) return { verif",
    "token": "!",
@@ -1157,12 +1058,12 @@
     "adversarial",
     "exit-1"
    ],
-   "sha256": "8899a794766110473f3a82b528629386cdc17b165114064b2a671c51b4dbd992"
+   "sha256": "b39778f1c7aabcead3eb43479df4e150c588a8e85ef29433b7de9767f00d7f71"
   },
   {
-   "id": "not-drop@L135:c7",
+   "id": "not-drop@L115:c7",
    "op": "not-drop",
-   "line": 135,
+   "line": 115,
    "col": 7,
    "original": "deleted from the runner\u23ce  if (!card.signature) return { verif",
    "token": "!",
@@ -1173,12 +1074,12 @@
     "matrix",
     "exit-1"
    ],
-   "sha256": "fb171a4fd053982961c7e2653d9f084b30cd2582a788e05c106b266dfcac308a"
+   "sha256": "922207591993cb07ab71414e1c77cec12078d8fed7ead9b6361e195499036eca"
   },
   {
-   "id": "not-drop@L142:c7",
+   "id": "not-drop@L122:c7",
    "op": "not-drop",
-   "line": 142,
+   "line": 122,
    "col": 7,
    "original": "no expiry/status checks\u23ce  if (!card.signature) return { verif",
    "token": "!",
@@ -1189,12 +1090,12 @@
     "matrix",
     "exit-1"
    ],
-   "sha256": "2f2d3961b8c3b54ca1a12351cac2808047b567cd85987cf60e6d81ac93c167ae"
+   "sha256": "54944fe379e2f2f331498acdc7ee2be97c75904a45ff570e794f06a94ffd7cc8"
   },
   {
-   "id": "not-drop@L151:c7",
+   "id": "not-drop@L131:c7",
    "op": "not-drop",
-   "line": 151,
+   "line": 131,
    "col": 7,
    "original": "-on-first-use) + policy\u23ce  if (!card.signature) return { verif",
    "token": "!",
@@ -1205,12 +1106,12 @@
     "matrix",
     "exit-1"
    ],
-   "sha256": "914406d7618a3e5e931dc4ca93cc0fd548bca60db5271d1117546729db09df95"
+   "sha256": "d91e9011e598f31f37ebf2458e264a6ac731dc321172fae694ea963bdf08f3d7"
   },
   {
-   "id": "not-drop@L163:c7",
+   "id": "not-drop@L143:c7",
    "op": "not-drop",
-   "line": 163,
+   "line": 143,
    "col": 7,
    "original": "r = (card, digest) => {\u23ce  if (!card.signature) return { verif",
    "token": "!",
@@ -1220,12 +1121,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "3899e3bdb80e02cae96741c270f478cc89bf2707d67f336caa34a819b64c09e8"
+   "sha256": "1fb55803e6f154693ec7323538f174c539aebabdc12ada272dd7cb97f2ad7003"
   },
   {
-   "id": "not-drop@L169:c7",
+   "id": "not-drop@L149:c7",
    "op": "not-drop",
-   "line": 169,
+   "line": 149,
    "col": 7,
    "original": "r = (card, digest) => {\u23ce  if (!card.signature) return { verif",
    "token": "!",
@@ -1236,12 +1137,12 @@
     "matrix",
     "exit-1"
    ],
-   "sha256": "ac1edcb2722a90aaeffee9999a9a8f5898b42accb01beec991d4473c71341a2b"
+   "sha256": "1406319500da41c630634c343b19d81e1c5ea132e859d5b29861150d381c923c"
   },
   {
-   "id": "not-drop@L177:c7",
+   "id": "not-drop@L157:c7",
    "op": "not-drop",
-   "line": 177,
+   "line": 157,
    "col": 7,
    "original": "stageLiar = (card) => {\u23ce  if (!card.signature) return { verif",
    "token": "!",
@@ -1252,12 +1153,12 @@
     "matrix",
     "exit-1"
    ],
-   "sha256": "2da414f0456d8ea1bcf4412db61ee579675b4a6cd46f4827718ec104d0b547b8"
+   "sha256": "726c51e3b22ca11d631017bb25d398652a2ce867f1ff701e19b3dac5d9e1f07b"
   },
   {
-   "id": "not-drop@L234:c104",
+   "id": "not-drop@L214:c104",
    "op": "not-drop",
-   "line": 234,
+   "line": 214,
    "col": 104,
    "original": "== '_generated-index.json' && !f.startsWith('_'))) {\u23ce    cons",
    "token": "!",
@@ -1270,12 +1171,12 @@
     "failclosed-malformed",
     "failclosed-poisoned"
    ],
-   "sha256": "f8a83084414aa0389f1ecf691a5df56c081747606c264fdd0322c2c1ccc489e1"
+   "sha256": "f407cf2d915ae8cd1d29b6548960839b47575571fa29d7643c9ba78197efb18c"
   },
   {
-   "id": "not-drop@L240:c9",
+   "id": "not-drop@L220:c9",
    "op": "not-drop",
-   "line": 240,
+   "line": 220,
    "col": 9,
    "original": " FATAL (fail closed).\u23ce    if (!card.signature?.value || !card",
    "token": "!",
@@ -1289,12 +1190,12 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "6b40ee81cefac3f6c630b53f63725446d407085486432bf1d50abcd584d5d90b"
+   "sha256": "52739592eccc5d13aa46fb07251dbf2162ffa1299812958371dbd3fadd30712d"
   },
   {
-   "id": "not-drop@L240:c35",
+   "id": "not-drop@L220:c35",
    "op": "not-drop",
-   "line": 240,
+   "line": 220,
    "col": 35,
    "original": "if (!card.signature?.value || !card.payload?.identity?.public",
    "token": "!",
@@ -1307,12 +1208,12 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "ddbe767f7f9eb0453a7d4fb59c96b6f924e27c45a5172ddf5ac689bb7120d843"
+   "sha256": "5d917e7c4419289b3d2699fc976f8e850f834cb9fe9be12d464b1a33899bff6d"
   },
   {
-   "id": "not-drop@L241:c9",
+   "id": "not-drop@L221:c9",
    "op": "not-drop",
-   "line": 241,
+   "line": 221,
    "col": 9,
    "original": "entity?.public_key ||\u23ce        !card.payload?.metadata?.issued",
    "token": "!",
@@ -1325,12 +1226,12 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "d53cd5d6b49434af13d780088630b612bc4b11219d4fee4e388d2641f2654375"
+   "sha256": "a8dcd1f372ae5784676be9706cc4808330834aff99aedae8b9d3a697b1447f8b"
   },
   {
-   "id": "not-drop@L241:c47",
+   "id": "not-drop@L221:c47",
    "op": "not-drop",
-   "line": 241,
+   "line": 221,
    "col": 47,
    "original": "yload?.metadata?.issued_at || !card.payload?.metadata?.expire",
    "token": "!",
@@ -1343,12 +1244,12 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "6a99a4f891e66e3ee168540ebb8007cf3b9c304d3cedf67bdb2224f2a6515ed1"
+   "sha256": "f38cd1f269b8ca54b2503bbca624fc2657af6c6ce3465262a5755dab247de5de"
   },
   {
-   "id": "not-drop@L241:c86",
+   "id": "not-drop@L221:c86",
    "op": "not-drop",
-   "line": 241,
+   "line": 221,
    "col": 86,
    "original": "load?.metadata?.expires_at || !card.status) {\u23ce      console.e",
    "token": "!",
@@ -1361,12 +1262,12 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "d580a5641f85e2def01dc13b4555c931b7663c7f52974eeb77c3f24454f02a97"
+   "sha256": "8e9a8490934042504defd3e1c907626651062b67589fc07bf682903cb4822311"
   },
   {
-   "id": "not-drop@L288:c5",
+   "id": "not-drop@L267:c5",
    "op": "not-drop",
-   "line": 288,
+   "line": 267,
    "col": 5,
    "original": "dGenerated(genDir) : [];\u23ce\u23ceif (!wantMatrix) {\u23ce  // reference r",
    "token": "!",
@@ -1378,12 +1279,25 @@
     "reference",
     "adversarial"
    ],
-   "sha256": "266fdf99854e775ee2686b57e414d8c70b6281728275236f66e3cf5138a51dd2"
+   "sha256": "40390fc660ad6c279e7489581229c2086e30488f07ca1577c2257764259d9eed"
   },
   {
-   "id": "true-false@L119:c41",
+   "id": "not-drop@L277:c40",
+   "op": "not-drop",
+   "line": 277,
+   "col": 40,
+   "original": "llOk = s1.ok === s1.total && (!generated.length || score(refe",
+   "token": "!",
+   "replacement": "(removed)",
+   "context": "const allOk = s1.ok === s1.total && (!generated.length || score(reference, generated).ok === generated.length);",
+   "status": "SURVIVOR",
+   "diverges_at": [],
+   "sha256": "d9ac66eb74d687f0bb60b24be8459116ce81e1a7b4c9a6fa2c78b419e16c5fd7"
+  },
+  {
+   "id": "true-false@L99:c41",
    "op": "true-false",
-   "line": 119,
+   "line": 99,
    "col": 41,
    "original": "d.signature) return { verify: true, stages: null }; // translati",
    "token": "true",
@@ -1395,12 +1309,12 @@
     "reference",
     "adversarial"
    ],
-   "sha256": "ddb6c99ef9eeb7409a6359153a6bd1cdfe3b61a0f2fac7dd4ce3f0fdeccdfe2c"
+   "sha256": "4a5e0005ae8a1dbe20068fd6896c9cb456f651e31647eabeb657d9aa37a6e153"
   },
   {
-   "id": "true-false@L132:c41",
+   "id": "true-false@L112:c41",
    "op": "true-false",
-   "line": 132,
+   "line": 112,
    "col": 41,
    "original": "ysTrue = (card) => ({ verify: true, stages: null });\u23ce\u23ceconst poli",
    "token": "true",
@@ -1410,12 +1324,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "a29ee1a131fc6e815ef24e6330e0c58944911d3b4c2e35514ea9dc32686f637e"
+   "sha256": "0c327598eb3befd6d76c160b9e0c9dfafabfb14c7c8925c961379fe118825270"
   },
   {
-   "id": "true-false@L135:c41",
+   "id": "true-false@L115:c41",
    "op": "true-false",
-   "line": 135,
+   "line": 115,
    "col": 41,
    "original": "d.signature) return { verify: true, stages: null };\u23ce  const inWi",
    "token": "true",
@@ -1425,12 +1339,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "303de433ea67b13e5bbc83275d0dbfd668f106ea08b194e0d91a034dcbe035c2"
+   "sha256": "063e279cd209f18cc7a8c7645a47e6c865b3d5287d0b9a6a188812e6d5a12912"
   },
   {
-   "id": "true-false@L142:c41",
+   "id": "true-false@L122:c41",
    "op": "true-false",
-   "line": 142,
+   "line": 122,
    "col": 41,
    "original": "d.signature) return { verify: true, stages: null };\u23ce  const { si",
    "token": "true",
@@ -1440,12 +1354,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "96baeec38d0ac90fdd02c410e9a6477a2f27b4f05eb797479551580b2dc3b96f"
+   "sha256": "2c4ed43fb7e0b76c28c2d736f31b469526feeede55a66dabe00d26208939bea6"
   },
   {
-   "id": "true-false@L151:c41",
+   "id": "true-false@L131:c41",
    "op": "true-false",
-   "line": 151,
+   "line": 131,
    "col": 41,
    "original": "d.signature) return { verify: true, stages: null };\u23ce  const { si",
    "token": "true",
@@ -1455,12 +1369,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "79ce6ad964ceeb327331dec8e009e3bf6d64e07fd08a524ccd09113f24ae6e5c"
+   "sha256": "ea79f5d0e6887646afb6c65a34d978af6a66c7be500e88f2a5994b32d21315dd"
   },
   {
-   "id": "true-false@L163:c41",
+   "id": "true-false@L143:c41",
    "op": "true-false",
-   "line": 163,
+   "line": 143,
    "col": 41,
    "original": "d.signature) return { verify: true, stages: null };\u23ce  return { v",
    "token": "true",
@@ -1470,12 +1384,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "b0d3ffaa3e4587fd22b48e5bb6b1d43933546596ce331d0f486a801e0520465d"
+   "sha256": "d1baf9ec874782fb6fa20f85c01e114377ef0641f475edf776004ebb8789d84f"
   },
   {
-   "id": "true-false@L169:c41",
+   "id": "true-false@L149:c41",
    "op": "true-false",
-   "line": 169,
+   "line": 149,
    "col": 41,
    "original": "d.signature) return { verify: true, stages: null };\u23ce  const hasU",
    "token": "true",
@@ -1485,12 +1399,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "4d0e0000d1726fd1b76edf1d20d32e4b7bd61460c0ad748843e776776cd885cc"
+   "sha256": "bd6810cd6d0f7854fec9c0b198737358b3cb60d5f3de92c42750ac0286091a76"
   },
   {
-   "id": "true-false@L177:c41",
+   "id": "true-false@L157:c41",
    "op": "true-false",
-   "line": 177,
+   "line": 157,
    "col": 41,
    "original": "d.signature) return { verify: true, stages: null };\u23ce  const { si",
    "token": "true",
@@ -1500,12 +1414,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "dbf795e2000bf631df97eccf6cde5be3a76c1d68398aef0b9f0aaf7e5ed8efc9"
+   "sha256": "6bd2ba2dc905c04095b8d9b17e11b2dd6a153dee97f3142239c6fbf7d7a44142"
   },
   {
-   "id": "false-true@L171:c36",
+   "id": "false-true@L151:c36",
    "op": "false-true",
-   "line": 171,
+   "line": 151,
    "col": 36,
    "original": "(hasUnknown) return { verify: false, stages: null };\u23ce  return ref",
    "token": "false",
@@ -1515,12 +1429,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "bb664714c1ab861ab1424909b4619d42190f86915da3e7ec8f91f7378ca0ba72"
+   "sha256": "19f586e1c801f10910916f1bb7333b28de3332fa6d4c62382ad79b1339a5d1da"
   },
   {
-   "id": "false-true@L199:c55",
+   "id": "false-true@L179:c55",
    "op": "false-true",
-   "line": 199,
+   "line": 179,
    "col": 55,
    "original": "ge] !== expected) { correct = false; break; }\u23ce      }\u23ce    }\u23ce    i",
    "token": "false",
@@ -1530,7 +1444,7 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "4b83e1d33db8fd1bc8f9b4702e29f246ba134bf6af8bbb140aa086e64a286a78"
+   "sha256": "732dd1cb12cc869474666d97e22a4881faed3d0388efb831940465cf0ac4b439"
   },
   {
    "id": "lt-widen@L68:c66",
@@ -1543,7 +1457,7 @@
    "context": "? Object.fromEntries(Object.entries(x).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "cb68193bd0379c785ea5f1ba483aa21a72b5c605e6d481f35218fb4bc65cd089"
+   "sha256": "525f65b215962df08779a4247aaef317c1ceabe7c7370ecc0801577d3cc0cf71"
   },
   {
    "id": "gt-widen@L68:c79",
@@ -1556,12 +1470,12 @@
    "context": "? Object.fromEntries(Object.entries(x).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "2dae8534888a9d0c2f23fe655490fcd7069e73a4a1aa69604b7a2af03b65bd17"
+   "sha256": "92eb3ed61dfbd109bb21c998a42fce969954eb6962214624f5a98ff31e3b8015"
   },
   {
-   "id": "gt-widen@L126:c53",
+   "id": "gt-widen@L106:c53",
    "op": "gt-widen",
-   "line": 126,
+   "line": 106,
    "col": 53,
    "original": "d.payload.metadata.expires_at > NOW && card.payload.metadata.",
    "token": ">",
@@ -1572,12 +1486,12 @@
     "matrix",
     "adversarial"
    ],
-   "sha256": "274de44d7bea9cfece34c2452a90321e8666651313ff63f693e8c6264a9a9b33"
+   "sha256": "7ece13945eb23867ae41156c5a5cf2ded56689abc9757ded2ef6599b65d8aa02"
   },
   {
-   "id": "gt-widen@L136:c53",
+   "id": "gt-widen@L116:c53",
    "op": "gt-widen",
-   "line": 136,
+   "line": 116,
    "col": 53,
    "original": "d.payload.metadata.expires_at > NOW && card.payload.metadata.",
    "token": ">",
@@ -1587,12 +1501,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "2b7440b5d692e1a7c613556b0f06b193b216d3bd6f9671104b24a2c776869a8e"
+   "sha256": "585b2e0531fa10d3bf9a14ad0fcecc83973096a3434f606a6680e4aab11d4e42"
   },
   {
-   "id": "gt-widen@L155:c53",
+   "id": "gt-widen@L135:c53",
    "op": "gt-widen",
-   "line": 155,
+   "line": 135,
    "col": 53,
    "original": "d.payload.metadata.expires_at > NOW && card.payload.metadata.",
    "token": ">",
@@ -1602,12 +1516,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "5a6450f5d43b11a1f6ee4ca251953da59b9e22270c8845fb508766002411d8ec"
+   "sha256": "75408c00e399df83bccc91400fab4d0a035470f8395cf8dd8672c38988a7d14b"
   },
   {
-   "id": "gt-widen@L182:c53",
+   "id": "gt-widen@L162:c53",
    "op": "gt-widen",
-   "line": 182,
+   "line": 162,
    "col": 53,
    "original": "d.payload.metadata.expires_at > NOW && card.payload.metadata.",
    "token": ">",
@@ -1615,12 +1529,12 @@
    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "aff037b8ec4edb39cf52a264b9d4b3abee1276f897be4cf0081254f7ad50c220"
+   "sha256": "914833a3adf802ceb390403abfa7d3142ebe425809c5d0661fe4690d46c8fe48"
   },
   {
-   "id": "gt-widen@L251:c55",
+   "id": "gt-widen@L231:c55",
    "op": "gt-widen",
-   "line": 251,
+   "line": 231,
    "col": 55,
    "original": "d.payload.metadata.expires_at > NOW && card.payload.metadata.",
    "token": ">",
@@ -1632,12 +1546,12 @@
     "adversarial",
     "exit-1"
    ],
-   "sha256": "6cf6c90267bfb384064bc6b652fcbde86b502f5c151ef1dd5254ab5e968fce0e"
+   "sha256": "d512c0a379a4f3c7c32abc601b6492860d09fa57dee36f7344d289356e97080b"
   },
   {
-   "id": "gt-widen@L327:c133",
+   "id": "gt-widen@L299:c133",
    "op": "gt-widen",
-   "line": 327,
+   "line": 299,
    "col": 133,
    "original": "join(', ')}${sf.failed.length > 3 ? '\u2026' : ''}` : ''} | ${sg ?",
    "token": ">",
@@ -1645,12 +1559,12 @@
    "context": "console.log(`| ${name} | ${sf.ok}/${sf.total} ${sf.failed.length ? `\u2190 fails ${sf.failed.slice(0, 3).join(', ')}${sf.fail",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "715a3472f5ab17eaf78c9c60adc8ffb921587bb22d759cf9aee0bf5cee21c67d"
+   "sha256": "5c9305c0234c4d8f36f0e21fcd8741c468dbe6aa52383da364c5e4a406edfac9"
   },
   {
-   "id": "le-narrow@L126:c94",
+   "id": "le-narrow@L106:c94",
    "op": "le-narrow",
-   "line": 126,
+   "line": 106,
    "col": 94,
    "original": "rd.payload.metadata.issued_at <= NOW;\u23ce  const statusOk = card.",
    "token": "<=",
@@ -1661,12 +1575,12 @@
     "matrix",
     "adversarial"
    ],
-   "sha256": "65a0833a33596f9457bf161b8dd35dc8a720886119107a24b53b84ebfe387005"
+   "sha256": "604fb4ad0824015dd9c957e1c55c447c04005dfd52b2563f117b12341d342789"
   },
   {
-   "id": "le-narrow@L136:c94",
+   "id": "le-narrow@L116:c94",
    "op": "le-narrow",
-   "line": 136,
+   "line": 116,
    "col": 94,
    "original": "rd.payload.metadata.issued_at <= NOW;\u23ce  const statusOk = card.",
    "token": "<=",
@@ -1676,12 +1590,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "56f06fe3f03135edb7ba57649d675d692ca73b64888165406e74f0fc32687c96"
+   "sha256": "3dffd62ad59eaad63040f8464f60dbeff54c5c52d26014b77e5c8c7f0c2670cb"
   },
   {
-   "id": "le-narrow@L155:c94",
+   "id": "le-narrow@L135:c94",
    "op": "le-narrow",
-   "line": 155,
+   "line": 135,
    "col": 94,
    "original": "rd.payload.metadata.issued_at <= NOW;\u23ce  const statusOk = card.",
    "token": "<=",
@@ -1691,12 +1605,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "8319dbe077f6d6d146a8fc8f179d3b2d3127f08b69f728d9d91f694e863794b1"
+   "sha256": "09744f8e459a21f92ed62f2cce9d1c88a3a554dac052c723e0ad7b30065cd301"
   },
   {
-   "id": "le-narrow@L182:c94",
+   "id": "le-narrow@L162:c94",
    "op": "le-narrow",
-   "line": 182,
+   "line": 162,
    "col": 94,
    "original": "rd.payload.metadata.issued_at <= NOW;\u23ce  const statusOk = card.",
    "token": "<=",
@@ -1704,12 +1618,12 @@
    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "5e1ba46c54b8b1ea30b7bb3c09560b640cf51daaff70872cea7dd4196efc313d"
+   "sha256": "a5dcb0f68578e89a069d63699b98691b03ae6f4b425cc54821a9dd7e143c39d9"
   },
   {
-   "id": "le-narrow@L251:c96",
+   "id": "le-narrow@L231:c96",
    "op": "le-narrow",
-   "line": 251,
+   "line": 231,
    "col": 96,
    "original": "rd.payload.metadata.issued_at <= NOW;\u23ce    const statusOk = car",
    "token": "<=",
@@ -1721,41 +1635,42 @@
     "adversarial",
     "exit-1"
    ],
-   "sha256": "96f84f7df7fcfbcf87648d0582c9faa39d291076e981dd86efe16f58fce5bc5e"
+   "sha256": "9bc531ceb6adfdd60fa280c5c9402fba2a30e598ee040193ec325a6fdea583de"
   },
   {
-   "id": "int-bump@L64:c49",
+   "id": "int-bump@L64:c44",
    "op": "int-bump",
    "line": 64,
-   "col": 49,
+   "col": 44,
    "original": "ew Date().toISOString().slice(0, 10) + 'T00:00:00Z';\u23ce\u23ceconst j",
    "token": "0",
    "replacement": "1",
-   "context": "const WALL_NOW = new Date().toISOString().slice(0, 10) + 'T00:00:00Z';",
+   "context": "const NOW = new Date().toISOString().slice(0, 10) + 'T00:00:00Z';",
    "status": "caught",
    "diverges_at": [
     "matrix",
+    "reference",
     "adversarial",
     "exit-1"
    ],
-   "sha256": "efe7bba50e364c29af85717ed22a1c7fcc8155c31a624e6da08f68c0902d05a6"
+   "sha256": "720fa4f60e83323316b6f119adf972f8f077ec26eba497d3e4d163368cb7064a"
   },
   {
-   "id": "int-bump@L64:c52",
+   "id": "int-bump@L64:c47",
    "op": "int-bump",
    "line": 64,
-   "col": 52,
+   "col": 47,
    "original": "Date().toISOString().slice(0, 10) + 'T00:00:00Z';\u23ce\u23ceconst jcs =",
    "token": "10",
    "replacement": "11",
-   "context": "const WALL_NOW = new Date().toISOString().slice(0, 10) + 'T00:00:00Z';",
+   "context": "const NOW = new Date().toISOString().slice(0, 10) + 'T00:00:00Z';",
    "status": "caught",
    "diverges_at": [
     "matrix",
     "adversarial",
     "exit-1"
    ],
-   "sha256": "ab8e4960494e062676a7fe14f68cc54935afdd255ebcdefe9e73e413a291b226"
+   "sha256": "48aee91e6bf74c4f2415e0e2f871345f21fd0193ca2a9b7aca27f613e030df69"
   },
   {
    "id": "int-bump@L68:c73",
@@ -1768,7 +1683,7 @@
    "context": "? Object.fromEntries(Object.entries(x).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "b3d9c5ac31f21d76c36abfa46c71146a70bfc5f41083656d057fc88b7c01f449"
+   "sha256": "9d1e6fbdec5e1b37bf54c6888c4c78bab90dbe1428b642425e423650ee16aafe"
   },
   {
    "id": "int-bump@L68:c85",
@@ -1781,7 +1696,7 @@
    "context": "? Object.fromEntries(Object.entries(x).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "a7b1e02d8bdac9b164909d01d2eb1e994e4a22bfc2807cdac3d567563e215a53"
+   "sha256": "3dee9424b856fc8f7d3009ff704f00a2b46dfbe9da6f933f5bce52c86523f3f7"
   },
   {
    "id": "int-bump@L68:c89",
@@ -1794,7 +1709,7 @@
    "context": "? Object.fromEntries(Object.entries(x).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "4c4131a460296666285dfe2467d4d1b8ae3ff58bbfe1be5d26eb2ae223caa97f"
+   "sha256": "c5effd454d219f596046c6074f35ef1fc152bb06ee36f550a1e8aeee5fd65c74"
   },
   {
    "id": "int-bump@L74:c33",
@@ -1812,7 +1727,7 @@
     "failclosed-malformed",
     "failclosed-poisoned"
    ],
-   "sha256": "6c16e6efb518cf87b53fa89936cf5fe9c40f0749458b47ede568b35d194d55ba"
+   "sha256": "2ba9861d04024ff873b5bd71a72186accaf5a34a4d637984ecae43818b991577"
   },
   {
    "id": "int-bump@L77:c28",
@@ -1825,7 +1740,7 @@
    "context": "const genDir = genIdx !== -1 && args[genIdx + 1] && !args[genIdx + 1].startsWith('--') ? args[genIdx + 1] : null;",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "a3d0e6960939f564e2722870da734bfc254c7f6894aa43bbb26221aad63598f8"
+   "sha256": "2a4ceacd24ce25dfcd2ceeaf6b2bd5187a71d78de6c7ca945488311366a58b48"
   },
   {
    "id": "int-bump@L77:c47",
@@ -1843,7 +1758,7 @@
     "failclosed-malformed",
     "failclosed-poisoned"
    ],
-   "sha256": "c9de9a139cae0cc753fd456b804a6f668c9f0e92c5ded445bda3519dfe34c4a5"
+   "sha256": "199f64aaf6e971b78ae5ecf13fba637868b68760e9c4f459ea227ea4419e1ec7"
   },
   {
    "id": "int-bump@L77:c68",
@@ -1862,7 +1777,7 @@
     "failclosed-poisoned",
     "exit-1"
    ],
-   "sha256": "3a35a56b0e534d8b9e20d0614623a0645ad5464f4c054590fd2f3a5d9ea876f1"
+   "sha256": "b7ef52787932a3808bc42c547616d48e5aab65a5026c1d2d24491236854a5d32"
   },
   {
    "id": "int-bump@L77:c104",
@@ -1880,77 +1795,12 @@
     "failclosed-malformed",
     "failclosed-poisoned"
    ],
-   "sha256": "ae041ca60a5a6c45a2791d0efeebcc5a2e3ea3c7f91a02e5a0bea308fb7cf1af"
+   "sha256": "0ffbb952ad1a94a00e97fa407d65a8fa0415d220b1ed81b1b00761f8419c175c"
   },
   {
-   "id": "int-bump@L99:c35",
+   "id": "int-bump@L172:c12",
    "op": "int-bump",
-   "line": 99,
-   "col": 35,
-   "original": "t clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !",
-   "token": "1",
-   "replacement": "2",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "status": "SURVIVOR",
-   "diverges_at": [],
-   "sha256": "18be0461df0da2cdb5dd51481bfa56a52bc7a772ca3e2e306b5fbcabcacd7090"
-  },
-  {
-   "id": "int-bump@L99:c59",
-   "op": "int-bump",
-   "line": 99,
-   "col": 59,
-   "original": " !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].st",
-   "token": "1",
-   "replacement": "2",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "status": "SURVIVOR",
-   "diverges_at": [],
-   "sha256": "c81dae81a2e8f0684b593950dc6bad342f28790f6cbfc6bdd73d9470c68f27b2"
-  },
-  {
-   "id": "int-bump@L99:c85",
-   "op": "int-bump",
-   "line": 99,
-   "col": 85,
-   "original": "x + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[cloc",
-   "token": "1",
-   "replacement": "2",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "status": "SURVIVOR",
-   "diverges_at": [],
-   "sha256": "2099e7d2cf22ad18f624647f650b58c6b070d1b97e8d6af78cf1114478b65317"
-  },
-  {
-   "id": "int-bump@L99:c126",
-   "op": "int-bump",
-   "line": 99,
-   "col": 126,
-   "original": "th('--') ? args[clockArgIdx + 1] : null;\u23ceconst FIXED_NOW = cl",
-   "token": "1",
-   "replacement": "2",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "status": "SURVIVOR",
-   "diverges_at": [],
-   "sha256": "e4c3439c0d2e8ca378a625cd8ea187ad75c2d14aeb41f1e95007c7cf01baf959"
-  },
-  {
-   "id": "int-bump@L101:c159",
-   "op": "int-bump",
-   "line": 101,
-   "col": 159,
-   "original": " ${FIXED_NOW}`); process.exit(1); }\u23celet NOW = FIXED_NOW;\u23ce\u23ce// ",
-   "token": "1",
-   "replacement": "2",
-   "context": "if (!/^\\d{4}-\\d{2}-\\d{2}T00:00:00Z$/.test(FIXED_NOW)) { console.error(`FATAL: evaluation clock must be YYYY-MM-DDT00:00:",
-   "status": "SURVIVOR",
-   "diverges_at": [],
-   "sha256": "4f06064d175c6ad0f0a0c3c76ed9e838ced386bd23213f9efa12f1dc415f111d"
-  },
-  {
-   "id": "int-bump@L192:c12",
-   "op": "int-bump",
-   "line": 192,
+   "line": 172,
    "col": 12,
    "original": "unner, cards) => {\u23ce  let ok = 0;\u23ce  const failed = [];\u23ce  for (",
    "token": "0",
@@ -1962,12 +1812,12 @@
     "reference",
     "adversarial"
    ],
-   "sha256": "0fe893fd20f292fd2a41e65137b7dc3de4455a82971a998561c7cea8ce9a7513"
+   "sha256": "b83ff962cdc1253bfc5eb304d735b14c4ea5a2ed41993ed23f0bb48ccbeebae1"
   },
   {
-   "id": "int-bump@L221:c107",
+   "id": "int-bump@L201:c107",
    "op": "int-bump",
-   "line": 221,
+   "line": 201,
    "col": 107,
    "original": "tion mismatch`); process.exit(1); }\u23ce      if (digest !== v.sh",
    "token": "1",
@@ -1975,12 +1825,12 @@
    "context": "if (rederived !== published) { console.error(`FATAL: ${v.id} re-derivation mismatch`); process.exit(1); }",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "f57c8e4419e09a049ec00b6a7db99db11eec81f4a63b9fe2157ad2d3fa0dc5d6"
+   "sha256": "9a017fb1fac484fdf461b531a8179c047fd1d6de7af62d0f314295a38ecb7df7"
   },
   {
-   "id": "int-bump@L222:c111",
+   "id": "int-bump@L202:c111",
    "op": "int-bump",
-   "line": 222,
+   "line": 202,
    "col": 111,
    "original": "s _index.json`); process.exit(1); }\u23ce    }\u23ce    cards.push({ id",
    "token": "1",
@@ -1988,12 +1838,12 @@
    "context": "if (digest !== v.sha256) { console.error(`FATAL: ${v.id} digest mismatch vs _index.json`); process.exit(1); }",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "5b6424fac40d4f867b1d6318f3ee12f637722f6fd06320ed0b1735c1c2c36a19"
+   "sha256": "5cbfa130e5ff955bf440dda3df55f15c18802d63f15c014018455a23dec2d66c"
   },
   {
-   "id": "int-bump@L243:c20",
+   "id": "int-bump@L223:c20",
    "op": "int-bump",
-   "line": 243,
+   "line": 223,
    "col": 20,
    "original": "closed.`);\u23ce      process.exit(1);\u23ce    }\u23ce    const { signature",
    "token": "1",
@@ -2003,12 +1853,12 @@
    "diverges_at": [
     "failclosed-malformed"
    ],
-   "sha256": "930abe3ebdd53a47f79a512ae3aa1238b3f3b7ef40c9a2a15be2d66f2694f6cc"
+   "sha256": "456e993e12b0895ac91aa152bcb0add011ce5de273a4ea2e05f9f0cc2fed0874"
   },
   {
-   "id": "int-bump@L259:c22",
+   "id": "int-bump@L239:c22",
    "op": "int-bump",
-   "line": 259,
+   "line": 239,
    "col": 22,
    "original": "core.`);\u23ce        process.exit(1);\u23ce      }\u23ce      if (meta.expe",
    "token": "1",
@@ -2018,12 +1868,12 @@
    "diverges_at": [
     "failclosed-poisoned"
    ],
-   "sha256": "c3c16b84beee2f22cc21eb14558ee6029a6f2b8a25e70f10b951bca9a6ed51dd"
+   "sha256": "e40e8260f9257c4197750cfd7557437cb6a5d09cda9df9c1381d122c1e295936"
   },
   {
-   "id": "int-bump@L265:c26",
+   "id": "int-bump@L245:c26",
    "op": "int-bump",
-   "line": 265,
+   "line": 245,
    "col": 26,
    "original": ".`);\u23ce            process.exit(1);\u23ce          }\u23ce        }\u23ce     ",
    "token": "1",
@@ -2031,68 +1881,41 @@
    "context": "process.exit(1);",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "9de0f7b96cc879d166432e08a4921d06fd67553ee1973bd611fcf5b23d2d879b"
+   "sha256": "c89143618d0f294762782ae20572b4f66ec27fb443e145a893d30b6801dad16d"
   },
   {
-   "id": "int-bump@L301:c26",
+   "id": "int-bump@L279:c24",
    "op": "int-bump",
-   "line": 301,
-   "col": 26,
-   "original": "\u274c');\u23ce    process.exit(allOk ? 0 : 1);\u23ce  }\u23ce  const allOk1 = s1",
+   "line": 279,
+   "col": 24,
+   "original": "D \u274c');\u23ce  process.exit(allOk ? 0 : 1);\u23ce}\u23ce\u23ce// --matrix: the sep",
    "token": "0",
    "replacement": "1",
    "context": "process.exit(allOk ? 0 : 1);",
    "status": "caught",
    "diverges_at": [
+    "reference",
     "adversarial"
    ],
-   "sha256": "9b45e7d4ed2612392a248cf51dea3ac022a2d3a3fd75677bd030359f3ea1f13d"
+   "sha256": "d2379959c198d1412441e7360c12fd0f6d9c765a5df9d2528080e415672ff7e1"
   },
   {
-   "id": "int-bump@L301:c30",
+   "id": "int-bump@L279:c28",
    "op": "int-bump",
-   "line": 301,
-   "col": 30,
-   "original": "\u23ce    process.exit(allOk ? 0 : 1);\u23ce  }\u23ce  const allOk1 = s1.ok ",
+   "line": 279,
+   "col": 28,
+   "original": ");\u23ce  process.exit(allOk ? 0 : 1);\u23ce}\u23ce\u23ce// --matrix: the separat",
    "token": "1",
    "replacement": "2",
    "context": "process.exit(allOk ? 0 : 1);",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "61837214b5830ce988aadeec290849de1dce67219690fe0b84ac0bc8708314d2"
+   "sha256": "3b3d19c89f03078d27d947deacd9cee9e8408287c88e60e0f15cfa9f499c79d5"
   },
   {
-   "id": "int-bump@L305:c25",
+   "id": "int-bump@L299:c97",
    "op": "int-bump",
-   "line": 305,
-   "col": 25,
-   "original": " \u274c');\u23ce  process.exit(allOk1 ? 0 : 1);\u23ce}\u23ce\u23ce// --matrix: the sep",
-   "token": "0",
-   "replacement": "1",
-   "context": "process.exit(allOk1 ? 0 : 1);",
-   "status": "caught",
-   "diverges_at": [
-    "reference"
-   ],
-   "sha256": "85ee9145f053a2e41445ee2c7fc7cebc9816cb8fd0c65801ad91545452157e64"
-  },
-  {
-   "id": "int-bump@L305:c29",
-   "op": "int-bump",
-   "line": 305,
-   "col": 29,
-   "original": ";\u23ce  process.exit(allOk1 ? 0 : 1);\u23ce}\u23ce\u23ce// --matrix: the separat",
-   "token": "1",
-   "replacement": "2",
-   "context": "process.exit(allOk1 ? 0 : 1);",
-   "status": "SURVIVOR",
-   "diverges_at": [],
-   "sha256": "28e3c27b6b8df5ed07aa792c2fb5afa21d47b04bc906f51774a93d058ed0d5b5"
-  },
-  {
-   "id": "int-bump@L327:c97",
-   "op": "int-bump",
-   "line": 327,
+   "line": 299,
    "col": 97,
    "original": " ? `\u2190 fails ${sf.failed.slice(0, 3).join(', ')}${sf.failed.le",
    "token": "0",
@@ -2102,12 +1925,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "865fecd6cd3e542e71095d1dabeac1cc50604a544aa4cba6712fc05fb8cd5386"
+   "sha256": "853bdf14017b58b97472dc5dd9382bdaab0c8b5e9babe4d4903ed2ff667a216c"
   },
   {
-   "id": "int-bump@L327:c100",
+   "id": "int-bump@L299:c100",
    "op": "int-bump",
-   "line": 327,
+   "line": 299,
    "col": 100,
    "original": "`\u2190 fails ${sf.failed.slice(0, 3).join(', ')}${sf.failed.lengt",
    "token": "3",
@@ -2117,12 +1940,12 @@
    "diverges_at": [
     "matrix"
    ],
-   "sha256": "a0108f78293d2c3ca03586bb05c37a2015c516ecbb7eb6933f217c60833a03f8"
+   "sha256": "58cd8b9ca5ede62c0fd802dcf15e90dbe5eba7e857f93228a4227a25ed106f17"
   },
   {
-   "id": "int-bump@L327:c135",
+   "id": "int-bump@L299:c135",
    "op": "int-bump",
-   "line": 327,
+   "line": 299,
    "col": 135,
    "original": "in(', ')}${sf.failed.length > 3 ? '\u2026' : ''}` : ''} | ${sg ? `",
    "token": "3",
@@ -2130,20 +1953,10 @@
    "context": "console.log(`| ${name} | ${sf.ok}/${sf.total} ${sf.failed.length ? `\u2190 fails ${sf.failed.slice(0, 3).join(', ')}${sf.fail",
    "status": "SURVIVOR",
    "diverges_at": [],
-   "sha256": "5746250bed6b426b3d4623e694153b6b217f0da8f50fc5c61b6d8f827a1a35ae"
+   "sha256": "fb1c608517db1fe4ab7c8796c954afa428dcca1067abb85800aacbff2eea9c90"
   }
  ],
  "survivors": [
-  {
-   "id": "neq-flip@L99:c30",
-   "op": "neq-flip",
-   "line": 99,
-   "col": 30,
-   "original": "\u23ceconst clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] &",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "classification": "equivalent",
-   "justification": "CLI arg-parsing plumbing for --clock (v1.5.0): flipping !== -1 to === -1 makes --clock look absent, so FIXED_NOW falls back to index.evaluation_clock \u2014 which equals the value the suite pins anyway. The five oracle surfaces do not observe the --clock code path (no flag is passed by the oracle), so the mutant is invisible: equivalent, same observable behavior with no arguments."
-  },
   {
    "id": "and-or@L77:c30",
    "op": "and-or",
@@ -2152,62 +1965,32 @@
    "original": "\u23ceconst genDir = genIdx !== -1 && args[genIdx + 1] && !args[gen",
    "context": "const genDir = genIdx !== -1 && args[genIdx + 1] && !args[genIdx + 1].startsWith('--') ? args[genIdx + 1] : null;",
    "classification": "equivalent-under-oracle",
-   "justification": "-1 \u2192 -2: genIdx is never -2, and for every invocation shape the oracle issues the fallback still resolves to a falsy genDir (no directory read)"
+   "justification": "diverges only for degenerate CLI shapes (`--generated` with no value, or a value starting with `--`); the oracle always passes a well-formed directory argument"
   },
   {
-   "id": "and-or@L99:c37",
+   "id": "and-or@L162:c59",
    "op": "and-or",
-   "line": 99,
-   "col": 37,
-   "original": "clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !arg",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "classification": "equivalent",
-   "justification": "Arg plumbing for --clock: short-circuit changes which branch computes clockArg, but the oracle never passes --clock, so clockArg is null either way. Unobservable through the pinned surfaces."
-  },
-  {
-   "id": "and-or@L182:c59",
-   "op": "and-or",
-   "line": 182,
+   "line": 162,
    "col": 59,
    "original": "oad.metadata.expires_at > NOW && card.payload.metadata.issued_",
    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;",
    "classification": "equivalent-by-masking",
-   "justification": "same masking: stage-liar is already failing every staged card through its lie"
+   "justification": "stage-liar's own lie fails every staged card at signature_verification, so its boolean channel \u2014 the only place the window feeds \u2014 is pre-failed; the mutated window cannot move a row that is already failing. Only an oracle comparing booleans independently of stages could observe it"
   },
   {
-   "id": "and-or@L299:c38",
+   "id": "and-or@L277:c36",
    "op": "and-or",
-   "line": 299,
-   "col": 38,
-   "original": "st allOk = s1.ok === s1.total && s2.ok === s2.total;\u23ce    conso",
-   "context": "const allOk = s1.ok === s1.total && s2.ok === s2.total;",
-   "classification": "equivalent",
-   "justification": "De Morgan pair of the v1.4.0 allOk survivor (s1.ok===total && s2.ok===total both hold in the pristine run, so && vs || computes the same true). Equivalent while both subexpressions are true \u2014 the suite passes; a failing suite distinguishes it (exit code surface)."
+   "line": 277,
+   "col": 36,
+   "original": "st allOk = s1.ok === s1.total && (!generated.length || score(r",
+   "context": "const allOk = s1.ok === s1.total && (!generated.length || score(reference, generated).ok === generated.length);",
+   "classification": "real",
+   "justification": "verdict aggregation: `allOk`'s first `&&` \u2192 `||` is indistinguishable while the pristine runner passes everything; only a failing pristine (which the oracle never produces) would expose the formula change"
   },
   {
-   "id": "or-and@L100:c28",
+   "id": "or-and@L220:c71",
    "op": "or-and",
-   "line": 100,
-   "col": 28,
-   "original": "l;\u23ceconst FIXED_NOW = clockArg || index.evaluation_clock || WAL",
-   "context": "const FIXED_NOW = clockArg || index.evaluation_clock || WALL_NOW;",
-   "classification": "equivalent",
-   "justification": "FIXED_NOW fallback chain (clockArg || evaluation_clock || WALL_NOW): with no --clock flag, clockArg is null, so || vs && differ only if evaluation_clock were absent \u2014 it is present in the v1.5.0 manifest. Same computed clock, unobservable."
-  },
-  {
-   "id": "or-and@L100:c54",
-   "op": "or-and",
-   "line": 100,
-   "col": 54,
-   "original": "Arg || index.evaluation_clock || WALL_NOW;\u23ceif (!/^\\d{4}-\\d{2}-",
-   "context": "const FIXED_NOW = clockArg || index.evaluation_clock || WALL_NOW;",
-   "classification": "equivalent",
-   "justification": "Same fallback chain, second operator: index.evaluation_clock is present, so both || and && select it. Equivalent given the manifest carries evaluation_clock."
-  },
-  {
-   "id": "or-and@L240:c71",
-   "op": "or-and",
-   "line": 240,
+   "line": 220,
    "col": 71,
    "original": "payload?.identity?.public_key ||\u23ce        !card.payload?.metada",
    "context": "if (!card.signature?.value || !card.payload?.identity?.public_key ||",
@@ -2215,19 +1998,19 @@
    "justification": "short-circuit masking in the fail-closed shape check: the malformed probe removes the signature, so the FIRST disjunct fires and the mutated `||` is never the deciding operator. A probe removing ONLY a later field (identity.public_key) would kill it"
   },
   {
-   "id": "or-and@L241:c44",
+   "id": "or-and@L221:c44",
    "op": "or-and",
-   "line": 241,
+   "line": 221,
    "col": 44,
    "original": ".payload?.metadata?.issued_at || !card.payload?.metadata?.expi",
    "context": "!card.payload?.metadata?.issued_at || !card.payload?.metadata?.expires_at || !card.status) {",
    "classification": "real",
-   "justification": "same as or-and@L221:c44 \u2014 the status-missing disjunct of the shape check is never exercised"
+   "justification": "the fail-closed shape check's metadata disjuncts are unprobed: no challenge card lacks issued_at / expires_at / status, so those rejections are not pinned by the oracle"
   },
   {
-   "id": "or-and@L241:c83",
+   "id": "or-and@L221:c83",
    "op": "or-and",
-   "line": 241,
+   "line": 221,
    "col": 83,
    "original": "payload?.metadata?.expires_at || !card.status) {\u23ce      console",
    "context": "!card.payload?.metadata?.issued_at || !card.payload?.metadata?.expires_at || !card.status) {",
@@ -2235,14 +2018,14 @@
    "justification": "same as or-and@L221:c44 \u2014 the status-missing disjunct of the shape check is never exercised"
   },
   {
-   "id": "not-drop@L99:c65",
+   "id": "not-drop@L277:c40",
    "op": "not-drop",
-   "line": 99,
-   "col": 65,
-   "original": "1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWi",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "classification": "equivalent",
-   "justification": "Duplicate entry of the L99 plumbing site (not-drop listed twice by operator id collision in context match) \u2014 same justification: --clock is never passed by the oracle."
+   "line": 277,
+   "col": 40,
+   "original": "llOk = s1.ok === s1.total && (!generated.length || score(refe",
+   "context": "const allOk = s1.ok === s1.total && (!generated.length || score(reference, generated).ok === generated.length);",
+   "classification": "real",
+   "justification": "same aggregation family: `!generated.length` is short-circuited past when cards are present and the runner passes \u2014 the branch is unevaluated"
   },
   {
    "id": "lt-widen@L68:c66",
@@ -2252,7 +2035,7 @@
    "original": "ries(x).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))\u23ce   ",
    "context": "? Object.fromEntries(Object.entries(x).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))",
    "classification": "equivalent",
-   "justification": "0 \u2192 1 fires only when two keys compare equal \u2014 impossible with unique object keys"
+   "justification": "comparator: JCS sorts object keys, which are unique by construction \u2014 `a < b` and `a <= b` order distinct keys identically; equality never occurs"
   },
   {
    "id": "gt-widen@L68:c79",
@@ -2262,32 +2045,32 @@
    "original": "([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))\u23ce    : x);\u23ce\u23ceconst",
    "context": "? Object.fromEntries(Object.entries(x).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))",
    "classification": "equivalent",
-   "justification": "0 \u2192 1 fires only when two keys compare equal \u2014 impossible with unique object keys"
+   "justification": "same: `a > b` vs `a >= b` is indistinguishable when two keys are never equal"
   },
   {
-   "id": "gt-widen@L182:c53",
+   "id": "gt-widen@L162:c53",
    "op": "gt-widen",
-   "line": 182,
+   "line": 162,
    "col": 53,
    "original": "d.payload.metadata.expires_at > NOW && card.payload.metadata.",
    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;",
    "classification": "equivalent-by-masking",
-   "justification": "same masking: stage-liar is already failing every staged card through its lie"
+   "justification": "same masking as and-or@L162:c59: the stage lie dominates the window mutation in stage-liar's rows"
   },
   {
-   "id": "gt-widen@L327:c133",
+   "id": "gt-widen@L299:c133",
    "op": "gt-widen",
-   "line": 327,
+   "line": 299,
    "col": 133,
    "original": "join(', ')}${sf.failed.length > 3 ? '\u2026' : ''}` : ''} | ${sg ?",
    "context": "console.log(`| ${name} | ${sf.ok}/${sf.total} ${sf.failed.length ? `\u2190 fails ${sf.failed.slice(0, 3).join(', ')}${sf.fail",
    "classification": "real",
-   "justification": "same observability gap: slice(0,3) truncation vs slice(0,4) changes raw output on rows with \u22654 failures, but the parser normalizes the difference away"
+   "justification": "observability gap: the failure-list ellipsis is display-only \u2014 the oracle's parser strips a trailing `\u2026`, so `> 3` vs `>= 3` never reaches the pinned surface; how many failure names are disclosed is not pinned"
   },
   {
-   "id": "le-narrow@L182:c94",
+   "id": "le-narrow@L162:c94",
    "op": "le-narrow",
-   "line": 182,
+   "line": 162,
    "col": 94,
    "original": "rd.payload.metadata.issued_at <= NOW;\u23ce  const statusOk = card.",
    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;",
@@ -2302,7 +2085,7 @@
    "original": ".sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))\u23ce    : x);\u23ce",
    "context": "? Object.fromEntries(Object.entries(x).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))",
    "classification": "equivalent",
-   "justification": "0 \u2192 1 fires only when two keys compare equal \u2014 impossible with unique object keys"
+   "justification": "Array.sort only distinguishes the comparator's SIGN: returning 0 instead of -1 for a<b still leaves the pair unswapped; returning 2 instead of 1 (the next site) still swaps"
   },
   {
    "id": "int-bump@L68:c85",
@@ -2312,7 +2095,7 @@
    "original": "[b]) => (a < b ? -1 : a > b ? 1 : 0)))\u23ce    : x);\u23ce\u23ceconst sha25",
    "context": "? Object.fromEntries(Object.entries(x).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))",
    "classification": "equivalent",
-   "justification": "0 \u2192 1 fires only when two keys compare equal \u2014 impossible with unique object keys"
+   "justification": "comparator sign again: 1 \u2192 2 stays positive, swap decision unchanged"
   },
   {
    "id": "int-bump@L68:c89",
@@ -2335,59 +2118,9 @@
    "justification": "-1 \u2192 -2: genIdx is never -2, and for every invocation shape the oracle issues the fallback still resolves to a falsy genDir (no directory read)"
   },
   {
-   "id": "int-bump@L99:c35",
+   "id": "int-bump@L201:c107",
    "op": "int-bump",
-   "line": 99,
-   "col": 35,
-   "original": "t clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "classification": "equivalent",
-   "justification": "Integer bump inside --clock arg parsing (-1 \u2192 0): changes which index is inspected for the flag, but the oracle passes no --clock, so the branch never selects anything. Unobservable."
-  },
-  {
-   "id": "int-bump@L99:c59",
-   "op": "int-bump",
-   "line": 99,
-   "col": 59,
-   "original": " !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].st",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "classification": "equivalent",
-   "justification": "Same plumbing line: args[clockArgIdx + 1] \u2192 args[clockArgIdx + 2] with no --clock present \u2014 no observable difference."
-  },
-  {
-   "id": "int-bump@L99:c85",
-   "op": "int-bump",
-   "line": 99,
-   "col": 85,
-   "original": "x + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[cloc",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "classification": "equivalent",
-   "justification": "Same plumbing line, third integer: no --clock argument exists in the oracle runs."
-  },
-  {
-   "id": "int-bump@L99:c126",
-   "op": "int-bump",
-   "line": 99,
-   "col": 126,
-   "original": "th('--') ? args[clockArgIdx + 1] : null;\u23ceconst FIXED_NOW = cl",
-   "context": "const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgI",
-   "classification": "equivalent",
-   "justification": "Same plumbing line, fourth integer: same reasoning \u2014 the oracle never exercises the --clock path."
-  },
-  {
-   "id": "int-bump@L101:c159",
-   "op": "int-bump",
-   "line": 101,
-   "col": 159,
-   "original": " ${FIXED_NOW}`); process.exit(1); }\u23celet NOW = FIXED_NOW;\u23ce\u23ce// ",
-   "context": "if (!/^\\d{4}-\\d{2}-\\d{2}T00:00:00Z$/.test(FIXED_NOW)) { console.error(`FATAL: evaluation clock must be YYYY-MM-DDT00:00:",
-   "classification": "equivalent (regex literal)",
-   "justification": "The FATAL clock-format guard regex: int-bump lands on a digit INSIDE the regex literal? No \u2014 the lexer excludes regex literals; this site is the .test() call integer? Actually the reported column is inside the regex source text \u2014 classified by the lexer as code due to the slash-vs-division heuristic at that position. The mutation changes a digit in the pattern (\\d{4} \u2192 \\d{5}), which still matches the pinned 2026-09-11T00:00:00Z shape. Equivalent for all clocks the suite will see; would misfire only on malformed --clock input, which the oracle never passes."
-  },
-  {
-   "id": "int-bump@L221:c107",
-   "op": "int-bump",
-   "line": 221,
+   "line": 201,
    "col": 107,
    "original": "tion mismatch`); process.exit(1); }\u23ce      if (digest !== v.sh",
    "context": "if (rederived !== published) { console.error(`FATAL: ${v.id} re-derivation mismatch`); process.exit(1); }",
@@ -2395,9 +2128,9 @@
    "justification": "exit code of the canonical-bytes FATAL (loadCards re-derivation mismatch): the fixed vectors never mismatch, so the path is never taken under the oracle and its exit value is unpinned"
   },
   {
-   "id": "int-bump@L222:c111",
+   "id": "int-bump@L202:c111",
    "op": "int-bump",
-   "line": 222,
+   "line": 202,
    "col": 111,
    "original": "s _index.json`); process.exit(1); }\u23ce    }\u23ce    cards.push({ id",
    "context": "if (digest !== v.sha256) { console.error(`FATAL: ${v.id} digest mismatch vs _index.json`); process.exit(1); }",
@@ -2405,9 +2138,9 @@
    "justification": "exit code of the digest-vs-_index.json FATAL \u2014 never taken on valid vectors, unpinned"
   },
   {
-   "id": "int-bump@L265:c26",
+   "id": "int-bump@L245:c26",
    "op": "int-bump",
-   "line": 265,
+   "line": 245,
    "col": 26,
    "original": ".`);\u23ce            process.exit(1);\u23ce          }\u23ce        }\u23ce     ",
    "context": "process.exit(1);",
@@ -2415,29 +2148,19 @@
    "justification": "exit code of the sidecar STAGE-mismatch FATAL: the poisoned probe flips expected_verify, not expected_stages, so this specific refusal path stays unprobed"
   },
   {
-   "id": "int-bump@L301:c30",
+   "id": "int-bump@L279:c28",
    "op": "int-bump",
-   "line": 301,
-   "col": 30,
-   "original": "\u23ce    process.exit(allOk ? 0 : 1);\u23ce  }\u23ce  const allOk1 = s1.ok ",
+   "line": 279,
+   "col": 28,
+   "original": ");\u23ce  process.exit(allOk ? 0 : 1);\u23ce}\u23ce\u23ce// --matrix: the separat",
    "context": "process.exit(allOk ? 0 : 1);",
    "classification": "real",
    "justification": "the failure exit code (1 \u2192 2) of the final verdict: pristine never fails, so the value the suite would emit on failure is unpinned"
   },
   {
-   "id": "int-bump@L305:c29",
+   "id": "int-bump@L299:c135",
    "op": "int-bump",
-   "line": 305,
-   "col": 29,
-   "original": ";\u23ce  process.exit(allOk1 ? 0 : 1);\u23ce}\u23ce\u23ce// --matrix: the separat",
-   "context": "process.exit(allOk1 ? 0 : 1);",
-   "classification": "equivalent (failure-path exit value)",
-   "justification": "The mutation bumps the FAILURE exit code (1 \u2192 2) in the fixed-only path. The pristine suite passes and exits 0 on that path, so the mutated value is never read: the oracle observes a passing run, and a passing run exits 0 regardless. Distinguishable only on a day the suite itself fails \u2014 the failure exit value is not pinned by the answer key surfaces."
-  },
-  {
-   "id": "int-bump@L327:c135",
-   "op": "int-bump",
-   "line": 327,
+   "line": 299,
    "col": 135,
    "original": "in(', ')}${sf.failed.length > 3 ? '\u2026' : ''}` : ''} | ${sg ? `",
    "context": "console.log(`| ${name} | ${sf.ok}/${sf.total} ${sf.failed.length ? `\u2190 fails ${sf.failed.slice(0, 3).join(', ')}${sf.fail",
@@ -2450,5 +2173,39 @@
   "deterministic": true,
   "note": "Operator set + site scan are pure functions of the target bytes; observation re-runs the same two surfaces the answer key pins. Classifications and justifications are editorial and pinned here, not re-derived by --check."
  },
- "note": "Generated mutation sweep (anp2network round 3, comment 3ehcp): a declared set of syntax-level operators applied at every applicable site in score-runner.mjs, each mutant observed through the answer-key oracle. Survivors are the point: each one names a check the suite does not enforce. Equivalents are separated from real blind spots by the per-survivor classification."
+ "note": "Generated mutation sweep (anp2network round 3, comment 3ehcp): a declared set of syntax-level operators applied at every applicable site in score-runner.mjs, each mutant observed through the answer-key oracle. Survivors are the point: each one names a check the suite does not enforce. Equivalents are separated from real blind spots by the per-survivor classification.",
+ "survivor_summary": {
+  "total": 21,
+  "equivalent": 5,
+  "equivalent_under_oracle": 2,
+  "equivalent_by_masking": 3,
+  "real_blind_spots": 11,
+  "note": "Separated per anp2network's round-3 ask. Equivalents carry no information; real survivors each name a check the suite does not enforce (unprobed fail-closed disjuncts, unpinned exit codes of never-taken FATAL paths, verdict aggregation only observable on a failing runner, and display normalization gaps in the parser). Classifications are editorial and pinned here; --check re-verifies the caught/survivor identity sets, not the prose."
+ },
+ "sweep_history": [
+  {
+   "iteration": 1,
+   "oracle": "matrix + reference (2 surfaces)",
+   "valid_mutants": 113,
+   "caught": 56,
+   "survivors": 57
+  },
+  {
+   "iteration": 2,
+   "oracle": "+ adversarial challenge, malformed + poisoned-sidecar probes (5 surfaces)",
+   "valid_mutants": 113,
+   "caught": 88,
+   "survivors": 25
+  },
+  {
+   "iteration": 3,
+   "oracle": "+ matrix scored over the generated challenge (generated column pinned)",
+   "valid_mutants": 113,
+   "caught": 92,
+   "survivors": 21
+  },
+  {
+   "note": "Each iteration closed a class of survivors the previous sweep named \u2014 the loop anp2network asked for: survivors identify checks the suite does not enforce; the cheap ones get enforced, the rest are published here."
+  }
+ ]
 }

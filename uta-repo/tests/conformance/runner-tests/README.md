@@ -1,4 +1,4 @@
-# The runner is the tested thing (conformance suite v1.4.0)
+# The runner is the tested thing (conformance suite v1.5.0)
 
 Until v1.3.2 the reference scorer (`../score-runner.mjs`) was **our** code: a
 stranger could run it, but had to *trust* it — the same asymmetry this thread
@@ -7,7 +7,7 @@ the runner from a trusted component into a **tested component**:
 
 | Oracle | What it pins | Where it lives |
 |---|---|---|
-| **Bytes** | `sha256(score-runner.mjs)` — the exact runner bytes | `answer-key.json`, anchored in [Rekor](https://rekor.sigstore.dev) (entry #5 for v1.4.0); `--rekor` re-roots the digest chain at the live entry before any local check |
+| **Bytes** | `sha256(score-runner.mjs)` — the exact runner bytes | `answer-key.json`, anchored in [Rekor](https://rekor.sigstore.dev) (entry #6 for v1.5.0); `--rekor` re-roots the digest chain at the live entry before any local check |
 | **Behavior** | FIVE surfaces: the 8-runner separation matrix (scored over the generated challenge too), the reference-mode verdict, the seeded adversarial challenge, and two fail-closed probes | `answer-key.json` (recorded `2026-09-10`, valid through `2027-08-19`) |
 | **Teeth** | 10 known-bad runner variants — each must DIVERGE on at least one surface | `mutants.json` (deterministic byte patches, digests pinned in the key) |
 | **Measurement** | the GENERATED mutation sweep: 12 declared operators at every code site — 113 mutants, 92 caught, 21 survivors published and classified | `generate-mutants.mjs` + `mutant-sweep.json` |
@@ -177,3 +177,13 @@ current key is anchored in Rekor entry #5; see `tests/anchors/`
 `node ../anchors/verify-rekor.mjs --record ../anchors/anchor-record-v5.json --statement ../anchors/anchor-statement-v5.json`,
 or put the log in the actual verification path:
 `node runner-tests.mjs --rekor`.
+
+## v1.5.0 — round 4: a separate column, and the fixture clock
+
+> "A cheap probe: add a small family of coordinated two-site mutations around one shared invariant, score them in a separate column, and leave the existing number untouched so it stays comparable across releases."
+
+**Two-site coordinated sweep** (`generate-mutants-twosite.mjs` → `mutant-sweep-twosite.json`): pairs of same-operator edits inside one DECLARED invariant family (two-sided window / pinned anchors / signature verify / fail-closed aborts), applied together — the fault class single-site sweeps cannot express: a corruption that moves the check AND the derived-truth oracle coherently. Result on the v1.5.0 runner: **157 coordinated pairs, 156 caught, 1 survivor** — and the survivor names a real gap: the fail-closed guard is only probed with the whole metadata block missing, never with a single field missing. The single-site number is a time series now, not a frozen count: v1.4.0 bytes → 92/113 (archived in `mutant-sweep-v140.json`); v1.5.0 bytes (adds the two-clock plumbing) → **95/126** with 31 survivors, each classified. The two columns are never summed.
+
+**Fixture clock**: the answer key and sweeps score the fixed suite against `evaluation_clock` from `_index.json` (`2026-09-11T00:00:00Z`) — premature-atc does not decay, the suite's verdicts are time-invariant, and same-day determinism is preserved for the generated half.
+
+**Release chain (rollback resistance)**: `../releases/` carries a persistent Ed25519 release identity (public half anchored in Rekor entry #6 — the first key in the project that is neither a throwaway nor published, precisely so counters cannot be forged) and signed monotone release statements binding the current artifact digests. `../anchors/verify-artifact.mjs --release` keeps local highest-accepted state and refuses lower counters (rollback), same-counter conflicts (fork), and below-floor anchors (history restart). See `releases/README.md`.

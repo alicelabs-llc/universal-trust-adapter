@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ============================================================================
-// UTA conformance — RUNNER TEST SUITE (v1.4.0)
+// UTA conformance — RUNNER TEST SUITE (v1.5.0)
 // "Making the runner the tested thing, not just the cards."
 // ============================================================================
 // The reference scorer (score-runner.mjs) is code WE wrote. Until v1.3.2 a
@@ -9,7 +9,7 @@
 //
 //   1. BYTES:   sha256(score-runner.mjs) must equal the digest pinned in the
 //               answer key — and the answer key is anchored in Sigstore's
-//               public Rekor log (entry #5 for v1.4.0), so it cannot be
+//               public Rekor log (entry #6 for v1.5.0), so it cannot be
 //               rewritten. `--rekor` puts the log in the actual verification
 //               path: the digest chain is re-rooted at the live entry before
 //               any local check runs (anp2network round 3: "the log stays
@@ -36,7 +36,7 @@
 // Modes:
 //   node runner-tests.mjs           → verify (fail-closed; exit 0 = passed)
 //   node runner-tests.mjs --rekor   → verify, but first re-root the digest
-//                                      chain at the live Rekor entry #5
+//                                      chain at the live Rekor entry #6
 //   node runner-tests.mjs --record  → regenerate answer-key.json from the
 //                                      runner's live behavior. One-shot by
 //                                      policy: a new key must be re-anchored
@@ -75,20 +75,20 @@ const ADV_DIR = join(CONF, 'adv-challenge.tmp');
 const MAL_DIR = join(CONF, 'failclosed-malformed.tmp');
 const POI_DIR = join(CONF, 'failclosed-poisoned.tmp');
 
-// v1.4.0 — entry #5 locator (untrusted metadata: everything that matters is
+// v1.5.0 — entry #6 locator (untrusted metadata: everything that matters is
 // re-verified against the live entry; a wrong locator simply fails closed)
 const HUB = 'https://www.marketnow.site/uta/conformance';
 const RECORD_CANDIDATES = [
-  join(__dirname, '..', 'anchors', 'anchor-record-v5.json'),       // hub layout
-  join(__dirname, '..', '..', 'anchors', 'anchor-record-v5.json'), // repo layout
-  'anchor-record-v5.json',
-  `${HUB}/anchors/anchor-record-v5.json`,
+  join(__dirname, '..', 'anchors', 'anchor-record-v6.json'),       // hub layout
+  join(__dirname, '..', '..', 'anchors', 'anchor-record-v6.json'), // repo layout
+  'anchor-record-v6.json',
+  `${HUB}/anchors/anchor-record-v6.json`,
 ];
 const STATEMENT_CANDIDATES = [
-  join(__dirname, '..', 'anchors', 'anchor-statement-v5.json'),
-  join(__dirname, '..', '..', 'anchors', 'anchor-statement-v5.json'),
-  'anchor-statement-v5.json',
-  `${HUB}/anchors/anchor-statement-v5.json`,
+  join(__dirname, '..', 'anchors', 'anchor-statement-v6.json'),
+  join(__dirname, '..', '..', 'anchors', 'anchor-statement-v6.json'),
+  'anchor-statement-v6.json',
+  `${HUB}/anchors/anchor-statement-v6.json`,
 ];
 
 const sha256hex = (b) => createHash('sha256').update(b).digest('hex');
@@ -331,7 +331,7 @@ if (RECORD) {
     },
     mutant_count: mutantDefs.length,
     mutants,
-    note: 'Behavioral oracle for score-runner.mjs, recorded from live behavior across five surfaces (matrix, reference, adversarial challenge, two fail-closed probes). The key is a derived artifact: every value here is observed, none asserted by hand. Anchored in Sigstore Rekor (entry #5 — anchor-record-v5.json; verify the chain in-loop with --rekor or anchors/verify-artifact.mjs); a re-anchored successor supersedes this key. After valid_until the suite fails closed: re-issue vectors, re-record, re-anchor.',
+    note: 'Behavioral oracle for score-runner.mjs, recorded from live behavior across five surfaces (matrix, reference, adversarial challenge, two fail-closed probes). The key is a derived artifact: every value here is observed, none asserted by hand. Anchored in Sigstore Rekor (entry #5 — anchor-record-v6.json; verify the chain in-loop with --rekor or anchors/verify-artifact.mjs); a re-anchored successor supersedes this key. After valid_until the suite fails closed: re-issue vectors, re-record, re-anchor.',
   };
   writeFileSync(KEY_PATH, JSON.stringify(key, null, 2) + '\n');
   console.log(`\nanswer-key.json written — runner sha256 ${runnerSha.slice(0, 16)}…, ${pristineMatrix.rows.length} matrix rows, adversarial ${pristineAdv.score}, 2 fail-closed probes, ${mutantDefs.length} mutants, valid ${today} → ${validUntil}`);
@@ -355,7 +355,7 @@ const key = JSON.parse(readFileSync(KEY_PATH, 'utf8'));
 // actual verification path (anp2network round 3: "the log stays decorative in
 // the actual verification path. One line fixes it." — this is that line).
 if (REKOR) {
-  console.log('--- rekor: the digest chain re-rooted at the live entry #5 ---');
+  console.log('--- rekor: the digest chain re-rooted at the live entry #6 ---');
   const fetchJson = async (url) => {
     const r = await fetch(url, { headers: { Accept: 'application/json' } });
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -373,13 +373,13 @@ if (REKOR) {
   };
   const rec = await loadCandidate(RECORD_CANDIDATES);
   if (rec.error) {
-    check('entry #5 locator found (anchor-record-v5.json — untrusted locator, everything else is verified live)', false, rec.error.slice(0, 200));
+    check('entry #6 locator found (anchor-record-v6.json — untrusted locator, everything else is verified live)', false, rec.error.slice(0, 200));
   } else {
     const logIndex = rec.json?.log?.log_index;
     const entries = await fetchJson(`https://rekor.sigstore.dev/api/v1/log/entries?logIndex=${logIndex}`);
     const uuid = Object.keys(entries)[0];
     const entry = entries[uuid];
-    check('entry #5 fetched live from rekor.sigstore.dev', uuid === rec.json?.log?.uuid, `logIndex ${logIndex}, integrated ${new Date((entry.integratedTime || 0) * 1000).toISOString()}`);
+    check('entry #6 fetched live from rekor.sigstore.dev', uuid === rec.json?.log?.uuid, `logIndex ${logIndex}, integrated ${new Date((entry.integratedTime || 0) * 1000).toISOString()}`);
     // Rekor's own signature over the entry (signedEntryTimestamp)
     const rekorPubPem = await (await fetch('https://rekor.sigstore.dev/api/v1/log/publicKey', { headers: { Accept: 'application/x-pem-file' } })).text();
     const rekorKey = createPublicKey(rekorPubPem);
