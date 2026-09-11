@@ -80,7 +80,7 @@
         "No Malicious Code"
       ],
       "scoreRange": "0-6",
-      "totalScanned": 69076,
+      "totalScanned": 69077,
       "averageScore": 4.3,
       "passRate": "53.3%"
     }
@@ -135,7 +135,7 @@
     "audit_scope": "Documented inconsistencies across agent.json, npm package.json, LICENSE files, README, and landing HTML."
   },
   "metrics": {
-    "skills_indexed": 69076,
+    "skills_indexed": 69077,
     "security_checks_performed": 684912,
     "npm_versions_published": 18,
     "npm_latest_version": "1.10.3",
