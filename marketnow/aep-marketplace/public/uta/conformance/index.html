@@ -179,14 +179,17 @@ footer{border-top:1px solid var(--border);margin-top:32px;padding:40px 24px;text
   <pre><span class="c"># 1. Score the reference runner against the 14 fixed vectors</span>
 <span class="cmd">node score-runner.mjs</span>
 
-<span class="c"># 2. Prove the runner itself is the tested thing (24 checks + 10 mutants)</span>
+<span class="c"># 2. Prove the runner itself is the tested thing (27 checks + 10 mutants)</span>
 <span class="cmd">node runner-tests/runner-tests.mjs</span>
 
 <span class="c"># 3. Verify the third-party Rekor anchors (9 checks, live log)</span>
-<span class="cmd">node anchors/verify-rekor.mjs --record anchors/anchor-record-v3.json \</span>
-<span class="cmd">                                   --statement anchors/anchor-statement-v3.json</span>
+<span class="cmd">node anchors/verify-rekor.mjs --record anchors/anchor-record-v6.json \</span>
+<span class="cmd">                                   --statement anchors/anchor-statement-v6.json</span>
 
-<span class="c"># 4. Rebuild the published npm tarball, byte-for-byte</span>
+<span class="c"># 4. Rollback resistance: the release chain vs previously-valid releases</span>
+<span class="cmd">node anchors/verify-artifact.mjs --release --artifact score-runner.mjs</span>
+
+<span class="c"># 5. Rebuild the published npm tarball, byte-for-byte</span>
 <span class="cmd">node repro/verify-rebuild.mjs --manifest repro/source-manifest.json</span></pre>
   <p class="note">Nothing to install beyond Node. No accounts, no API keys, no trust in the publisher.</p>
 </div></section>
@@ -197,10 +200,11 @@ footer{border-top:1px solid var(--border);margin-top:32px;padding:40px 24px;text
   
 <div class="icards">
   <div class="icard"><span class="path">/vectors/</span><h3><a href="vectors/">Test vectors</a></h3><p>14 complete card artifacts with known verdicts. JCS-canonical bytes as hex, base64 and UTF-8 + SHA-256 — verify signatures without guessing the preimage.</p><a class="go" href="vectors/">Browse the 14 vectors →</a></div>
-  <div class="icard"><span class="path">/runner-tests/</span><h3><a href="runner-tests/">The runner is the tested thing</a></h3><p>24 behavioral checks against a recorded answer key, plus 10 mutant runners that must all be caught. The scorer stops being a trusted component.</p><a class="go" href="runner-tests/">See the oracles →</a></div>
-  <div class="icard"><span class="path">/anchors/</span><h3><a href="anchors/">Rekor anchors</a></h3><p>3 immutable entries in Sigstore's public append-only log. Countersigned, timestamped, inclusion-checkable — the publisher cannot rewrite what the log holds.</p><a class="go" href="anchors/">Inspect the entries →</a></div>
+  <div class="icard"><span class="path">/runner-tests/</span><h3><a href="runner-tests/">The runner is the tested thing</a></h3><p>27 behavioral checks against a recorded answer key, 10 mutant runners that must all be caught, a generated single-site sweep (126 mutants) and a two-site coordinated sweep (157 pairs) — the scorer stops being a trusted component.</p><a class="go" href="runner-tests/">See the oracles →</a></div>
+  <div class="icard"><span class="path">/anchors/</span><h3><a href="anchors/">Rekor anchors</a></h3><p>6 immutable entries in Sigstore's public append-only log. Countersigned, timestamped, inclusion-checkable — the publisher cannot rewrite what the log holds. Entry #6 anchors the release chain.</p><a class="go" href="anchors/">Inspect the entries →</a></div>
 </div>
 <div class="icards" style="margin-top:16px">
+  <div class="icard"><span class="path">/releases/</span><h3><a href="releases/">The release chain</a></h3><p>A persistent Ed25519 identity signs monotone release statements: the current authorized state. The verifier keeps local highest-accepted state and refuses rollbacks, forks and below-floor anchors.</p><a class="go" href="releases/">Verify the chain →</a></div>
   <div class="icard"><span class="path">/repro/</span><h3><a href="repro/">Reproducible build</a></h3><p>The published npm tarball's inner tar layer rebuilds byte-for-byte from public source under a stated rule. Target downloads from registry.npmjs.org.</p><a class="go" href="repro/">Run the rebuild →</a></div>
   <div class="icard"><span class="path">/score-runner.mjs</span><h3><a href="score-runner.mjs">Reference scorer</a></h3><p>Two-sided validity window (issued_at ≤ NOW &lt; expires_at), ground truth derived from card bytes, fail-closed sidecar policy.</p><a class="go" href="score-runner.mjs">Read the source →</a></div>
   <div class="icard"><span class="path">/vectors/_index.json</span><h3><a href="vectors/_index.json">Machine index</a></h3><p>Every vector, verdict and digest in one JSON file — the artifact a verifier downloads first.</p><a class="go" href="vectors/_index.json">Fetch the JSON →</a></div>
@@ -214,6 +218,7 @@ footer{border-top:1px solid var(--border);margin-top:32px;padding:40px 24px;text
     <li><b class="ok" style="color:var(--mint)">Verification without the publisher.</b> Each vector ships its exact canonical preimage, so signature verification is reproduced — not guessed.</li>
     <li><b>A runner with teeth.</b> The answer key pins the runner's bytes (SHA-256), its behavior row by row, and 10 known-bad mutants — every one of which is caught.</li>
     <li><b>Immutability via a third party.</b> Suite digests are countersigned and timestamped by Sigstore's Rekor log; inclusion is publicly checkable after the fact.</li>
+    <li><b>Rollback resistance.</b> A monotone release chain under a persistent identity: the hub cannot serve a previously-valid release as current — lower counters, forks and below-floor anchors are refused.</li>
     <li><b>Builds that don't drift.</b> The npm artifact is pinned by digest in three places (registry, repo, Rekor) and the tar layer is fully determined by content + stated rule.</li>
   </ul>
 </div></section>

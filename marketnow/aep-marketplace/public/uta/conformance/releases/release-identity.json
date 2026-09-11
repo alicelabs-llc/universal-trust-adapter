@@ -1,0 +1,9 @@
+{
+  "schema": "uta-release-identity/1",
+  "identity": "uta-release-identity/1",
+  "public_key_spki_b64": "MCowBQYDK2VwAyEAZqMOhrvHv2WVqjlEmcu9yk4pbqszcHSeyFzYLkjbEaI=",
+  "key_algorithm": "Ed25519 (RFC 8032)",
+  "created_at": "2026-09-11T15:36:35Z",
+  "policy": "PERSISTENT signing identity for monotone release statements (v1.5.0, anp2network round 4, dev.to 3ehp6). The first key in this project that is neither a throwaway (ca-test-1 style: discarded after signing) nor published-with-its-private-half (ca-test-2 style: generator CA). It exists precisely so that release counters CANNOT be forged by third parties. Private half held offline by the publisher, never committed or deployed. Every release statement must verify under this key; the public half is anchored in Rekor entry #6.",
+  "publisher": "AliceLabs LLC"
+}
