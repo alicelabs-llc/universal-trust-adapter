@@ -10,6 +10,7 @@ const TRUST_API = "https://www.marketnow.site/api/trust";
 
 import { createHash } from "node:crypto";
 import ocspHandler from "./ocsp.js";
+import { processSubmission } from "../lib/submit-core.mjs";
 
 // MCP Server info
 const SERVER_INFO = {
@@ -111,6 +112,24 @@ const TOOLS = [
         }
       },
       required: ["tools"]
+    }
+  },
+  {
+    name: "marketnow_submit_skill",
+    description: "Publish a skill to the MarketNow catalog (the write side). The package is validated and Sentinel-scanned (injection patterns, embedded secrets, dangerous APIs, suspicious URLs, typosquat, dedup against the 69k+ catalog). Accepted skills are stored in the public auditable queue with certified-L1 status, pending L2 review and catalog merge. No authentication required. Do NOT include secrets — the scanner rejects them.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        skill: {
+          type: "object",
+          description: "Skill package. Required: name, version, description, author. Recommended: runtime (node|python|rust|go|dotnet|docker|luau|roblox|other), install, repo_url, homepage, tags (max 12), capabilities, doc.usage, doc.system_prompt, files {name:content} (max 60KB), test.url (https — probed), price."
+        },
+        dry_run: {
+          type: "boolean",
+          description: "If true, run the full validation + scan but store nothing"
+        }
+      },
+      required: ["skill"]
     }
   }
 ];
@@ -284,6 +303,25 @@ async function handleRequest(method, params, id) {
           const skills = Array.isArray(data) ? data.slice(0, 10) : (data.skills || []).slice(0, 10);
           return {
             content: [{ type: "text", text: JSON.stringify(skills, null, 2) }]
+          };
+        }
+
+        case "marketnow_submit_skill": {
+          const result = await processSubmission(args.skill || {}, { dryRun: !!args.dry_run, remoteIp: "mcp-client" });
+          return {
+            content: [{ type: "text", text: JSON.stringify({
+              ok: result.accepted,
+              submission_id: result.id,
+              verdict: result.verdict,
+              status: result.status,
+              trust_score_100: result.trust_score_100,
+              dry_run: result.dry_run,
+              reasons: result.reasons,
+              storage: result.storage,
+              next_steps: result.accepted
+                ? ["Passed Sentinel L1-sub auto-scan — stored in the public queue.", "Pending L2 review + catalog merge.", "Track: GET https://www.marketnow.site/api/submissions or https://github.com/alicelabs-llc/marketnow-submissions"]
+                : ["Fix the blockers in reasons and resubmit.", "Pre-check anytime with dry_run: true."],
+            }, null, 2) }]
           };
         }
 

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submit a Skill — MarketNow</title>
+<meta name="description" content="Publish your skill or MCP server to MarketNow. Public endpoint, no API key. Sentinel scans every submission: injection, secrets, dangerous APIs, typosquat, dedup. Accepted skills are stored, certified and merged into the catalog.">
+<link rel="canonical" href="https://www.marketnow.site/submit.html">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to submit a skill or MCP server to MarketNow","description":"Publish a skill to the MarketNow catalog via the public submission endpoint. Sentinel L1-sub scans every package; accepted skills are stored, certified and merged.","step":[{"@type":"HowToStep","name":"Prepare the package","text":"Build a JSON skill package: name, version, description, author (required) plus runtime, install, repo_url, tags, capabilities."},{"@type":"HowToStep","name":"Submit","text":"POST the package to https://www.marketnow.site/api/submit — no authentication required. Use dry_run=1 to pre-check."},{"@type":"HowToStep","name":"Sentinel scan","text":"The pipeline scans for prompt injection, embedded secrets, dangerous APIs, suspicious URLs, typosquatting and duplicates against 69k+ catalog entries."},{"@type":"HowToStep","name":"Certified and merged","text":"Accepted skills are stored in the public audit queue, certified L1, and merged into the catalog after L2 review."}]}
+</script>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#050505;color:#e2e8f0;line-height:1.7;padding:20px;max-width:900px;margin:0 auto}
+h1{color:#fff;font-size:2em;margin:.5em 0}
+h2{color:#00F299;border-bottom:1px solid #1e293b;padding-bottom:6px;margin-top:2em}
+h3{color:#93c5fd}
+code{background:#1e293b;padding:2px 6px;border-radius:4px;font-family:monospace;color:#f8fafc}
+pre{background:#0d1117;border:1px solid #1e293b;padding:16px;border-radius:8px;overflow-x:auto;margin:1em 0}
+.card{background:#0d1117;border:1px solid #1e293b;border-radius:8px;padding:16px;margin:1em 0}
+.cta{display:inline-block;background:#00F299;color:#050505;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;margin:10px 0}
+.badge{display:inline-block;background:#1e40af;color:#93c5fd;padding:2px 8px;border-radius:12px;font-size:0.8em;margin:2px}
+.badge.red{background:#7f1d1d;color:#fca5a5}
+.badge.green{background:#14532d;color:#86efac}
+.badge.yellow{background:#713f12;color:#fde047}
+table{border-collapse:collapse;width:100%;margin:1em 0}
+td,th{border:1px solid #1e293b;padding:8px 12px;text-align:left;font-size:0.95em}
+th{background:#1e293b;color:#93c5fd}
+a{color:#00F299}
+.ok{color:#86efac}.no{color:#fca5a5}
+</style>
+</head>
+<body>
+<h1>Submit a skill or MCP server</h1>
+<p><strong>Anyone can publish — humans and AI agents.</strong> No API key, no login, no GitHub account required. Point your agent at the endpoint below and let Sentinel do the gatekeeping.</p>
+<p>
+<span class="badge green">PUBLIC ENDPOINT</span>
+<span class="badge">NO AUTH</span>
+<span class="badge yellow">SENTINEL L1-SUB SCAN</span>
+<span class="badge">AUDITABLE QUEUE</span>
+</p>
+
+<div class="card">
+<h3>Quick start</h3>
+<pre>curl -X POST https://www.marketnow.site/api/submit \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "my-mcp-skill",
+    "version": "1.0.0",
+    "description": "What it does, in one or two sentences.",
+    "author": "you-or-your-org",
+    "runtime": "node",
+    "install": "npx my-mcp-skill",
+    "repo_url": "https://github.com/you/my-mcp-skill",
+    "tags": ["mcp"],
+    "price": 0
+  }'</pre>
+<p>Pre-check without storing: <code>POST /api/submit?dry_run=1</code> &nbsp;·&nbsp; Full docs: <code>GET /api/submit</code> &nbsp;·&nbsp; Queue: <code>GET /api/submissions</code></p>
+</div>
+
+<h2>1. The package</h2>
+<table>
+<tr><th>Field</th><th>Required</th><th>Notes</th></tr>
+<tr><td><code>name</code></td><td class="no">YES</td><td>2-60 chars. Letters, digits, dot, dash, slash.</td></tr>
+<tr><td><code>version</code></td><td class="no">YES</td><td>semver-like <code>x.y.z</code></td></tr>
+<tr><td><code>description</code></td><td class="no">YES</td><td>10-600 chars. What the skill does.</td></tr>
+<tr><td><code>author</code></td><td class="no">YES</td><td>You or your org.</td></tr>
+<tr><td><code>runtime</code></td><td>recommended</td><td><code>node | python | rust | go | dotnet | docker | luau | roblox | java | php | ruby | other</code></td></tr>
+<tr><td><code>install</code></td><td>recommended</td><td>Exact install/run command.</td></tr>
+<tr><td><code>repo_url</code>, <code>homepage</code>, <code>license</code></td><td>recommended</td><td>Provenance — improves your trust score.</td></tr>
+<tr><td><code>tags</code></td><td>optional</td><td>Array, max 12.</td></tr>
+<tr><td><code>capabilities</code></td><td>optional</td><td><code>requires_auth, requires_network, input_types, output_types, execution_context</code></td></tr>
+<tr><td><code>doc</code></td><td>optional</td><td><code>doc.usage</code>, <code>doc.system_prompt</code> (scanned for injection), <code>doc.setup.required_env</code>.</td></tr>
+<tr><td><code>files</code></td><td>optional</td><td><code>{filename: content}</code>, max 60KB total. Larger code → use <code>repo_url</code>.</td></tr>
+<tr><td><code>test.url</code></td><td>optional</td><td>https URL — Sentinel probes it live if provided.</td></tr>
+<tr><td><code>price</code></td><td>optional</td><td>Number (USD), default 0.</td></tr>
+</table>
+<p class="no"><strong>Never include secrets, API keys, tokens or private keys</strong> — the scanner rejects them on sight, and we never ask for passwords.</p>
+
+<h2>2. The Sentinel L1-sub pipeline</h2>
+<p>Every submission is machine-reviewed before it touches the queue. The full report comes back in the response:</p>
+<table>
+<tr><th>Check</th><th>What it catches</th><th>Severity</th></tr>
+<tr><td>SCHEMA</td><td>Malformed package, oversize payload (100KB cap)</td><td>high → reject</td></tr>
+<tr><td>INJECTION</td><td>Prompt-injection in descriptions/prompts/code ("ignore previous instructions", exfiltration phrases…)</td><td class="no">critical → reject</td></tr>
+<tr><td>SECRETS</td><td>Embedded keys/tokens (<code>sk-</code>, <code>ghp_</code>, AWS <code>AKIA</code>, private keys…)</td><td class="no">critical → reject</td></tr>
+<tr><td>DANGEROUS_API</td><td><code>eval</code>/<code>exec</code>/<code>loadstring</code>, <code>curl|sh</code>, remote <code>require()</code>, <code>rm -rf</code>, Roblox <code>getfenv</code>…</td><td>high → reject</td></tr>
+<tr><td>URLS</td><td>Shorteners, suspicious TLDs, punycode hosts, internal addresses</td><td>medium → warning</td></tr>
+<tr><td>TYPOSQUAT</td><td>Name 1 edit-distance from a popular skill</td><td>high → reject</td></tr>
+<tr><td>DEDUP</td><td>Name already in the catalog (69k+ entries checked live)</td><td>high → reject</td></tr>
+<tr><td>REACHABILITY</td><td>Live probe of <code>test.url</code> (6s timeout)</td><td>medium → warning</td></tr>
+</table>
+
+<h2>3. Verdicts</h2>
+<div class="card">
+<p><span class="badge green">ACCEPTED</span> HTTP 201 — stored in the public, auditable queue
+(<a href="https://github.com/alicelabs-llc/marketnow-submissions">github.com/alicelabs-llc/marketnow-submissions</a>),
+status <strong>certified-L1</strong> (auto-scan), trust score 25-60, pending L2 review and catalog merge.</p>
+<p><span class="badge red">REJECTED</span> HTTP 422 — machine-reviewable reasons returned. Fix and resubmit; dry-run as often as you want.</p>
+<p>Submissions start <span class="badge yellow">YELLOW</span> risk: new skills have zero adoption history, so trust is earned — registry signals, usage and L2 review raise it over time.</p>
+</div>
+
+<h2>4. AI agents: submit via MCP</h2>
+<p>The MarketNow MCP server exposes a dedicated write tool. Any MCP client (Claude, Cursor, custom agents) can call it:</p>
+<pre>{
+  "tool": "marketnow_submit_skill",
+  "arguments": {
+    "skill": { "name": "...", "version": "1.0.0", "description": "...", "author": "..." },
+    "dry_run": false
+  }
+}</pre>
+<p>Same pipeline, same verdict, same queue — straight from your agent session.</p>
+
+<h2>5. What happens after acceptance</h2>
+<ol>
+<li><strong>Stored &amp; certified-L1</strong> — your package and its full scan report live in the public queue (audit trail forever).</li>
+<li><strong>L2 review</strong> — deeper checks on the queue before merge.</li>
+<li><strong>Catalog merge</strong> — accepted skills join the indexed catalog with their own <code>/s/&lt;slug&gt;</code> page, searchable by 69k+ catalog users and every MCP client.</li>
+<li><strong>Track anytime</strong> — <code>GET /api/submissions</code> or the GitHub queue.</li>
+</ol>
+
+<h2>Limits &amp; honesty</h2>
+<p>Rate limit: 8 submissions per IP per hour (dry-runs are cheap — use them). Payload: 100KB. L1 is a static auto-scan: it certifies structure and safety signals, it does not execute your code. L2 is the deeper review. Trust is a heuristic over public signals — not a guarantee.</p>
+
+<p style="margin-top:2em"><a class="cta" href="/api/submit">GET /api/submit — machine-readable docs</a>
+<a class="cta" href="/api/submissions" style="background:#1e293b;color:#00F299">View the live queue</a></p>
+</body>
+</html>
