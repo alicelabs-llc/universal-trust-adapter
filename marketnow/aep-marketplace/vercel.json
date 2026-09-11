@@ -57,7 +57,7 @@
     },
     {
       "source": "/api/submit-skill",
-      "destination": "/api/atc"
+      "destination": "/api/skills?_mode=submit"
     },
     {
       "source": "/api/referrals",
@@ -150,6 +150,14 @@
     {
       "source": "/guides/how-to-monetize-mcp-tools",
       "destination": "/guides/how-to-monetize-mcp-tools.html"
+    },
+    {
+      "source": "/api/submit",
+      "destination": "/api/skills?_mode=submit"
+    },
+    {
+      "source": "/api/submissions",
+      "destination": "/api/skills?_mode=queue"
     }
   ],
   "headers": [

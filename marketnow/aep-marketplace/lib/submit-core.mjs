@@ -268,21 +268,45 @@ export async function processSubmission(payload, { dryRun = false, remoteIp = 'u
       record.status = 'accepted (scan passed) — STORAGE DEGRADED';
     } else {
       try {
-        const body = {
-          message: `submission: ${skill.name} v${skill.version} — ${accepted ? 'certified-L1' : 'rejected'} (${id})`,
-          content: Buffer.from(JSON.stringify(record, null, 1)).toString('base64'),
-          branch: 'main',
+        const put = async (path, message, content, sha) => {
+          const body = { message, content: Buffer.from(content).toString('base64'), branch: 'main' };
+          if (sha) body.sha = sha;
+          const r = await fetch(`${GH_API}/repos/${SUBMIT_REPO}/contents/${path}`, {
+            method: 'PUT',
+            headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'marketnow-submit', 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+            signal: AbortSignal.timeout(20000),
+          });
+          return { ok: r.ok, json: await r.json().catch(() => ({})) };
         };
-        const r = await fetch(`${GH_API}/repos/${SUBMIT_REPO}/contents/${path}`, {
-          method: 'PUT',
-          headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'marketnow-submit', 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-          signal: AbortSignal.timeout(20000),
-        });
-        const j = await r.json().catch(() => ({}));
-        storage = r.ok
-          ? { ok: true, repo: SUBMIT_REPO, path, commit: (j.commit || {}).sha, url: (j.content || {}).html_url }
-          : { ok: false, reason: `github ${r.status}: ${String(j.message || '').slice(0, 120)}` };
+        // 1. PUT del registro individual
+        const r1 = await put(path, `submission: ${skill.name} v${skill.version} — certified-L1 (${id})`,
+                             JSON.stringify(record, null, 1));
+        storage = r1.ok
+          ? { ok: true, repo: SUBMIT_REPO, path, commit: (r1.json.commit || {}).sha, url: (r1.json.content || {}).html_url }
+          : { ok: false, reason: `github ${String((r1.json.message) || 'put failed').slice(0, 120)}` };
+        // 2. actualizar el índice (read-modify-write; el listing lee el índice, no el árbol)
+        if (r1.ok) {
+          try {
+            const idxRaw = await fetch(`${GH_RAW}/${SUBMIT_REPO}/main/submissions/index.json`,
+              { signal: AbortSignal.timeout(10000), headers: { 'Cache-Control': 'no-cache' } });
+            let index = { updated_at: null, entries: [] };
+            let sha = null;
+            if (idxRaw.ok) {
+              index = await idxRaw.json();
+              // sha actual del índice para el update no-forzado
+              const meta = await fetch(`${GH_API}/repos/${SUBMIT_REPO}/contents/submissions/index.json`,
+                { headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'marketnow-submit' }, signal: AbortSignal.timeout(10000) });
+              if (meta.ok) sha = (await meta.json()).sha;
+            }
+            index.entries = (index.entries || []).slice(-499);
+            index.entries.push({ id, name: skill.name, version: skill.version, verdict: record.verdict,
+              status: record.status, trust: accepted ? trust : null, submitted_at: record.submitted_at, path });
+            index.updated_at = new Date().toISOString();
+            await put('submissions/index.json', `index: +${skill.name} (${id})`,
+                      JSON.stringify(index, null, 1), sha);
+          } catch { /* el registro individual ya está guardado; el índice se regenera */ }
+        }
         if (!storage.ok) record.status = 'accepted (scan passed) — STORAGE FAILED';
       } catch (e) {
         storage = { ok: false, reason: `network: ${String(e.cause || e).slice(0, 120)}` };
@@ -299,26 +323,37 @@ export async function processSubmission(payload, { dryRun = false, remoteIp = 'u
   };
 }
 
-// ─── lectura de la cola ─────────────────────────────────────────────────────
+const GH_RAW = 'https://raw.githubusercontent.com';
+
+// ─── lectura de la cola (1 fetch del índice, sin token) ────────────────────────
 export async function listSubmissions(limit = 100) {
-  const token = process.env.MN_SUBMIT_TOKEN;
-  const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'marketnow-submit' };
-  if (token) headers.Authorization = `Bearer ${token}`;
-  const r = await fetch(`${GH_API}/repos/${SUBMIT_REPO}/git/trees/main?recursive=1`, { headers, signal: AbortSignal.timeout(15000) });
-  if (!r.ok) return { ok: false, reason: `github ${r.status}` };
-  const j = await r.json();
-  const entries = (j.tree || []).filter(t => t.type === 'blob' && t.path.startsWith('submissions/') && t.path.endsWith('.json'));
-  const recent = entries.slice(-limit).reverse();
-  const items = await Promise.all(recent.slice(0, 50).map(async t => {
-    try {
-      const c = await fetch(`${GH_API}/repos/${SUBMIT_REPO}/contents/${t.path}`, { headers, signal: AbortSignal.timeout(10000) });
-      if (!c.ok) return null;
-      const cj = await c.json();
-      const rec = JSON.parse(Buffer.from(cj.content, 'base64').toString('utf-8'));
-      return { id: rec.id, name: rec.skill?.name, version: rec.skill?.version, verdict: rec.verdict,
-               status: rec.status, trust: rec.sentinel?.trust_score_100, submitted_at: rec.submitted_at,
-               path: t.path, url: cj.html_url };
-    } catch { return null; }
-  }));
-  return { ok: true, total: entries.length, items: items.filter(Boolean), note: 'Full queue (auditable): https://github.com/alicelabs-llc/marketnow-submissions' };
+  try {
+    const r = await fetch(`${GH_RAW}/${SUBMIT_REPO}/main/submissions/index.json`,
+      { signal: AbortSignal.timeout(12000), headers: { 'Cache-Control': 'no-cache' } });
+    if (r.status === 404) return { ok: true, total: 0, items: [], note: QUEUE_NOTE };
+    if (!r.ok) return { ok: false, reason: `raw ${r.status}` };
+    const index = await r.json();
+    const items = (index.entries || []).slice(-limit).reverse();
+    return { ok: true, total: (index.entries || []).length, items, note: QUEUE_NOTE };
+  } catch (e) {
+    return { ok: false, reason: `network: ${String(e.cause || e).slice(0, 100)}` };
+  }
+}
+
+const QUEUE_NOTE = 'Full queue (auditable): https://github.com/' + SUBMIT_REPO + ' — records under submissions/';
+
+// ─── lectura de un registro individual (raw, sin token) ──────────────────────
+export async function getSubmission(id) {
+  try {
+    const idx = await listSubmissions(500);
+    if (!idx.ok) return { ok: false, reason: idx.reason };
+    const entry = (idx.items || []).find(e => e.id === id);
+    if (!entry) return { ok: false, reason: 'submission not found' };
+    const r = await fetch(`${GH_RAW}/${SUBMIT_REPO}/main/${entry.path}`,
+      { signal: AbortSignal.timeout(12000), headers: { 'Cache-Control': 'no-cache' } });
+    if (!r.ok) return { ok: false, reason: `raw ${r.status}` };
+    return { ok: true, submission: await r.json() };
+  } catch (e) {
+    return { ok: false, reason: `network: ${String(e.cause || e).slice(0, 100)}` };
+  }
 }
