@@ -1,4 +1,4 @@
-# The runner is the tested thing (conformance suite v1.3.3)
+# The runner is the tested thing (conformance suite v1.4.0)
 
 Until v1.3.2 the reference scorer (`../score-runner.mjs`) was **our** code: a
 stranger could run it, but had to *trust* it — the same asymmetry this thread
@@ -7,9 +7,10 @@ the runner from a trusted component into a **tested component**:
 
 | Oracle | What it pins | Where it lives |
 |---|---|---|
-| **Bytes** | `sha256(score-runner.mjs)` — the exact runner bytes | `answer-key.json`, anchored in [Rekor](https://rekor.sigstore.dev) (entry #2 for v1.3.2, entry #3 for the v1.3.3 key) |
-| **Behavior** | the 8-runner separation matrix + the reference-mode verdict, row by row, failure lists included | `answer-key.json` (recorded `2026-09-09`, valid through `2027-08-19`) |
-| **Teeth** | 10 known-bad runner variants — each must DIVERGE from the key | `mutants.json` (deterministic byte patches, digests pinned in the key) |
+| **Bytes** | `sha256(score-runner.mjs)` — the exact runner bytes | `answer-key.json`, anchored in [Rekor](https://rekor.sigstore.dev) (entry #5 for v1.4.0); `--rekor` re-roots the digest chain at the live entry before any local check |
+| **Behavior** | FIVE surfaces: the 8-runner separation matrix (scored over the generated challenge too), the reference-mode verdict, the seeded adversarial challenge, and two fail-closed probes | `answer-key.json` (recorded `2026-09-10`, valid through `2027-08-19`) |
+| **Teeth** | 10 known-bad runner variants — each must DIVERGE on at least one surface | `mutants.json` (deterministic byte patches, digests pinned in the key) |
+| **Measurement** | the GENERATED mutation sweep: 12 declared operators at every code site — 113 mutants, 92 caught, 21 survivors published and classified | `generate-mutants.mjs` + `mutant-sweep.json` |
 
 A key that nothing can fail is not a test. Every mutant here is caught — if you
 rebuild any of them from `mutants.json` and run the suite, it flags it.
@@ -59,10 +60,75 @@ for f in _index.json valid-atc.sha256; do
 for v in $(curl -s https://www.marketnow.site/uta/conformance/vectors/_index.json |
            python3 -c "import json,sys; [print(x['original_vector_file'], x['canonical_text_file']) for x in json.load(sys.stdin)['vectors']]"); do
   curl -sL "https://www.marketnow.site/uta/conformance/vectors/$v" -o "vectors/$v"; done
-for f in runner-tests.mjs answer-key.json mutants.json; do
+for f in runner-tests.mjs answer-key.json mutants.json generate-mutants.mjs mutant-sweep.json; do
   curl -sL "https://www.marketnow.site/uta/conformance/runner-tests/$f" -o "runner-tests/$f"; done
-node runner-tests/runner-tests.mjs
+mkdir -p ../anchors
+for f in anchor-statement-v5.json anchor-record-v5.json verify-artifact.mjs; do
+  curl -sL "https://www.marketnow.site/uta/conformance/anchors/$f" -o "../anchors/$f"; done
+node runner-tests/runner-tests.mjs            # offline: 27 checks, 0 expected failures
+node runner-tests/runner-tests.mjs --rekor    # + the digest chain re-rooted at the LIVE Rekor entry
+node runner-tests/generate-mutants.mjs --check # the published sweep reproduces
 ```
+
+Or verify any single artifact's bytes against the log, in-loop, from any origin:
+
+```bash
+curl -sLO https://www.marketnow.site/uta/conformance/score-runner.mjs
+curl -sLO https://www.marketnow.site/uta/conformance/anchors/{anchor-statement-v5.json,anchor-record-v5.json,verify-artifact.mjs}
+node verify-artifact.mjs score-runner.mjs   # digest fetched from the Rekor entry, not the hub
+```
+
+## v1.4.0 — the three things anp2network's round-3 comment asked for
+
+> "The next gap is the lower bound… the bound is tested by a distribution
+> instead of a fixture… generating the mutants instead of listing them…
+> Fetch the digest from the Rekor entry directly, verify inclusion, then
+> compare against the sha256 of the file just downloaded."
+> — @anp2network, dev.to comment 3ehcp
+
+1. **Adversarial distribution.** `generate-accept-vectors.mjs --mode
+   adversarial` emits correctly-signed ca-test-2 cards probing **both** bounds
+   of the validity window relative to the scoring clock: future-dated cards
+   (`expected_verify:false`) interleaved with at/inside-boundary cards (the
+   over-rejection probe). The head cards are deterministic — `issued+1s`,
+   `issued−1s`, `issued==NOW`, `expires==NOW`, `expires+1s`, `expires−1s` —
+   and the suite pins a seeded 24-card challenge as answer-key surface 3. The
+   boundary-exact cards exist because the *first* sweep run showed their
+   absence was a real blind spot (`<=` vs `<` and `>` vs `>=` were
+   indistinguishable to the suite); they killed the le-narrow/gt-widen window
+   survivors.
+2. **Generated mutants.** `generate-mutants.mjs` applies a declared
+   12-operator set (eq/neq flips, and/or, not-drop, true/false, lt/gt/le/ge
+   narrowing and widening, int-bump) at **every** code site of
+   `score-runner.mjs` — a lexer excludes comments, strings, templates and
+   regexes, so operators only land on executable syntax. Result: 114 sites,
+   113 valid mutants, **92 caught, 21 survivors** — published in
+   `mutant-sweep.json` with equivalents separated out (5 equivalent, 2
+   equivalent-under-oracle, 3 equivalent-by-masking, **11 real named blind
+   spots**: unprobed fail-closed disjuncts, unpinned exit codes of
+   never-taken FATAL paths, verdict aggregation only observable on a failing
+   runner, and the parser normalizing away the failure-list ellipsis). Run
+   `node generate-mutants.mjs --check` — the published results reproduce.
+   Closing the cheap survivors also **grew the oracle**: the answer key pins
+   five surfaces now (the matrix is scored over the generated challenge, and
+   the malformed-card + poisoned-sidecar probes pin the fail-closed
+   behavior).
+3. **Rekor in the loop.** `node runner-tests.mjs --rekor` fetches entry #5
+   live, verifies Rekor's signatures (signedEntryTimestamp, inclusion fold,
+   checkpoint), authenticates the anchor statement against the entry's
+   committed hash, verifies the throwaway countersignature, and only then
+   compares the local `answer-key.json` / `score-runner.mjs` bytes against the
+   Rekor-rooted pins. For arbitrary artifacts:
+   `node ../anchors/verify-artifact.mjs <url-or-path>`. The digest never
+   comes from the hub — the hub serves bytes, Rekor vouches.
+
+**Honest admission.** Between 2026-09-10 and this release the repo's answer
+key had drifted: the `2dbaa429` doc-nit changed the runner's bytes without
+re-recording, so the suite's own bytes oracle flagged **fail-closed** on a
+fresh checkout (behavior was intact; the byte pin was not). That is exactly
+the drift class the round-3 critique targets. v1.4.0 re-records the key and
+re-anchors it as entry #5; the site serves the coherent v1.3.3 build until
+this deploy lands.
 
 ## The mutants
 
@@ -73,12 +139,12 @@ counts are fail-closed-checked, so the patch cannot silently miss):
 |---|---|---|
 | stage-blind | scoring ignores stage mismatches | matrix |
 | memorizer-promote | the memorizer cheat grades itself honest | matrix |
-| score-inflate | every score +1 | matrix + reference |
-| anchor-narrow | pinned anchors shrink to ca-test-1 | matrix + reference |
-| expiry-blind | reference stops checking expiry | matrix + reference |
-| status-blind | reference stops checking status | matrix + reference |
-| sig-accept-all | reference accepts every signature | matrix + reference |
-| translation-flip | unsigned cards get rejected | matrix + reference |
+| score-inflate | every score +1 | matrix + reference + adversarial |
+| anchor-narrow | pinned anchors shrink to ca-test-1 | matrix + reference + adversarial |
+| expiry-blind | reference stops checking expiry | matrix + reference + adversarial |
+| status-blind | reference stops checking status | matrix + reference + adversarial |
+| sig-accept-all | reference accepts every signature | matrix + reference + adversarial |
+| translation-flip | unsigned cards get rejected | matrix + reference + adversarial |
 | stage-liar-cured | the built-in liar starts telling the truth | matrix |
 | over-rejector-cured | the built-in over-rejector gets cured | matrix |
 
@@ -103,8 +169,11 @@ silently passes on stale expectations.
 ## Record mode
 
 `node runner-tests.mjs --record` regenerates the key from the runner's live
-behavior. It refuses to publish a key with un-caught mutants, and by policy a
-new key requires a new Rekor entry (throwaway P-256 countersignature, private
-key discarded — same policy as ca-test-1). The current key is anchored in Rekor
-entry #3; see `tests/anchors/` (`anchor-record-v3.json`) and
-`node ../anchors/verify-rekor.mjs --record ../anchors/anchor-record-v3.json --statement ../anchors/anchor-statement-v3.json`.
+behavior across all five surfaces. It refuses to publish a key with un-caught
+mutants, and by policy a new key requires a new Rekor entry (throwaway P-256
+countersignature, private key discarded — same policy as ca-test-1). The
+current key is anchored in Rekor entry #5; see `tests/anchors/`
+(`anchor-record-v5.json`) and
+`node ../anchors/verify-rekor.mjs --record ../anchors/anchor-record-v5.json --statement ../anchors/anchor-statement-v5.json`,
+or put the log in the actual verification path:
+`node runner-tests.mjs --rekor`.

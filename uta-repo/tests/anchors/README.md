@@ -154,3 +154,57 @@ The signed CRL lives at `/uta/revocations/crl.json`; live status resolution at
 `/api/ocsp?card_id=…` and `/api/ocsp?kid=…` (fail-closed); the MCP tool is
 `marketnow_check_revocation`. The npm package `marketnow-mcp@1.10.2` exposes
 both `marketnow_check_revocation` and `marketnow_fingerprint_tool` (TFP-1.0).
+
+# Entry #5 — the round-3 anchor: adversarial distribution, generated mutants, Rekor-in-the-loop (v1.4.0)
+
+anp2network's round-3 comment (3ehcp) named three gaps; entry #5 anchors the
+artifacts that close them. The digests below are what the log committed to at
+`2026-09-10T21:52:48Z` — the publisher cannot rewrite them.
+
+| Subject | sha256 |
+|---|---|
+| `score-runner.mjs` v1.4.0 (the tested thing) | `5802cc35c076c3e45dbca9200b483b1606302fe0a8cf93afb9d4775ffa28565b` |
+| `generate-accept-vectors.mjs` v1.4.0 (adversarial mode) | `60d064943057b5b3…` (full value in the statement) |
+| `vectors/_index.json` v1.4.0 | `edfa37d3ca380d4b…` |
+| `runner-tests/answer-key.json` (5-surface oracle) | `79a5c5936be9ba9f…` |
+| `runner-tests/runner-tests.mjs` (27 checks, `--rekor`) | `e5f60fb66a8dfb6e…` |
+| `runner-tests/mutants.json` (10 curated) | `9f082e251920b477…` |
+| `runner-tests/generate-mutants.mjs` (the sweep) | `e22907d3338e1463…` |
+| `runner-tests/mutant-sweep.json` (113 mutants, 92 caught, 21 survivors classified) | `e3fa9a4fc808c76f…` |
+| `verify-artifact.mjs` (Rekor-in-the-loop) | `eb2262924772304f…` |
+| runner-tests + vectors READMEs | `762b39e8c335b9f2…` / `c0a41953ef39c075…` |
+
+## The Rekor entry #5
+
+- **Log:** https://rekor.sigstore.dev
+- **Entry UUID:** `108e9186e8c5677a8f6b0956695beefc19bcd6790a6285469c39a0b2096bcedcec8b44753c8025bf`
+- **Log index:** `2787622029`
+- **Integrated time:** `2026-09-10T21:52:48Z`
+- **Countersignature:** ECDSA P-256 over sha256(statement v5); fresh throwaway
+  key, private key discarded after signing — it can never sign again.
+
+## Verify it yourself — the log in the actual verification path
+
+```bash
+# the anchor itself (9 checks)
+node verify-rekor.mjs --record anchor-record-v5.json --statement anchor-statement-v5.json
+
+# ANY artifact, from ANY origin — the digest comes from Rekor, not the hub:
+node verify-artifact.mjs https://www.marketnow.site/uta/conformance/score-runner.mjs
+
+# or the whole suite, digest chain re-rooted at the live entry first:
+node ../runner-tests/runner-tests.mjs --rekor
+```
+
+`verify-artifact.mjs` is the "one line" from the round-3 comment, made
+executable: download the artifact, fetch the entry live, authenticate the
+statement against the entry's committed hash, verify Rekor's signatures
+(signedEntryTimestamp, inclusion fold, checkpoint) and the throwaway
+countersignature, then compare the sha256 of the downloaded bytes against the
+Rekor-rooted pins. The comparison never stays inside the hub's origin.
+
+**Honest note.** The repo's answer key had drifted between 2026-09-10 and this
+anchor (the `2dbaa429` doc-nit changed runner bytes without re-recording; the
+suite's bytes oracle flagged it fail-closed). v1.4.0 re-records and re-anchors.
+That drift — and its catching — is exactly what entry #5 exists to make
+non-repeatable silently.

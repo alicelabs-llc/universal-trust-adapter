@@ -1,7 +1,28 @@
 #!/usr/bin/env node
 // ============================================================================
-// UTA conformance — REFERENCE SCORER (v1.3.3)
+// UTA conformance — REFERENCE SCORER (v1.4.0)
 // ============================================================================
+// v1.4.0 (anp2network round 3, dev.to comment 3ehcp):
+//   1. ADVERSARIAL DISTRIBUTION — the lower bound of the validity window is
+//      now exercised by a distribution, not a fixture:
+//      `generate-accept-vectors.mjs --mode adversarial` emits correctly-
+//      signed ca-test-2 cards whose only defect is a future issued_at
+//      (expected_verify:false), interleaved with cards dated seconds INSIDE
+//      the boundary (over-rejection probe). Offsets are sampled relative to
+//      the scoring clock (this runner's NOW) and include values a few
+//      seconds past the boundary. Score them: `--generated <dir>`.
+//   2. GENERATED MUTANTS — the 10-mutant catalogue in runner-tests/mutants.json
+//      is now complemented by a GENERATED sweep (runner-tests/generate-mutants.mjs):
+//      a declared set of syntax-level operators applied at EVERY site in
+//      this file; survivors are published (runner-tests/mutant-sweep.json),
+//      equivalent mutants separated out. Survivor identities name checks the
+//      suite does not enforce.
+//   3. REKOR-IN-THE-LOOP — artifact verification no longer trusts the hub for
+//      the digest: anchors/verify-artifact.mjs downloads the file, fetches
+//      the Rekor entry live, authenticates the anchor statement against the
+//      entry's committed hash, and compares the sha256 of the downloaded
+//      bytes against the Rekor-rooted pins. The log is no longer decorative
+//      in the verification path.
 // v1.3.3 fixes (anp2 bug report, dev.to comment 3ec7d, 2026-09-08T21:35Z):
 //   1. The validity window is TWO-SIDED: issued_at <= NOW < expires_at.
 //      Previously the reference runner checked only the upper bound, so a
@@ -22,7 +43,10 @@
 // Modes:
 //   node score-runner.mjs                       → reference runner vs the 14 fixed vectors
 //   node score-runner.mjs --matrix              → simulate the cheat runners, print the table
-//   node score-runner.mjs --generated DIR       → also score generated cards (all must pass)
+//   node score-runner.mjs --generated DIR       → also score generated cards (all must pass;
+//                                                  DIR may contain accept/self-signed/wrong-ca
+//                                                  or ADVERSARIAL cards — expectations are
+//                                                  always DERIVED, the sidecar only cross-checks)
 //   node score-runner.mjs --generated DIR --matrix  → both
 //
 // The reference runner: pinned anchors {ca-test-1, ca-test-2} + policy
@@ -287,3 +311,13 @@ console.log('    lower bound of the validity window has teeth now.');
 console.log('  - generated expectations are DERIVED from card bytes + pinned anchors (v1.3.3):');
 console.log('    deleting _generated-index.json cannot invert the scoring anymore, and a');
 console.log('    sidecar that disagrees with the derived truth aborts the run (FATAL).');
+console.log('  - adversarial mode (v1.4.0): generate-accept-vectors.mjs --mode adversarial straddles');
+console.log('    the lower bound with a clock-relative offset distribution (+1s … +4y premature,');
+console.log('    −1s … −23h in-window) — the bound is tested by a distribution, not one fixture,');
+console.log('    and over-rejection at the boundary is caught by the same run (--generated DIR).');
+console.log('  - generated mutants (v1.4.0): runner-tests/generate-mutants.mjs applies a declared set of');
+console.log('    syntax-level operators at EVERY site in this file and publishes the survivors');
+console.log('    (runner-tests/mutant-sweep.json) with equivalent mutants separated out.');
+console.log('  - rekor-in-the-loop (v1.4.0): anchors/verify-artifact.mjs compares the sha256 of the');
+console.log('    downloaded artifact against Rekor-committed digests — the log is in the actual');
+console.log('    verification path, not decorative (anp2network, round 3).');
