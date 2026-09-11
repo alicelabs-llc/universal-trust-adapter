@@ -29,7 +29,7 @@
     "bulk_download": {
       "method": "GET",
       "path": "/api/skills.json",
-      "note": "Returns ALL 67,593 skills in one request. ~94MB uncompressed (~8MB gzipped transfer). Prefer /api/skills-lite.json or the paginated /api/skills endpoint. Cache locally for 24h.",
+      "note": "Returns ALL 67,759 skills in one request. ~94MB uncompressed (~8MB gzipped transfer). Prefer /api/skills-lite.json or the paginated /api/skills endpoint. Cache locally for 24h.",
       "format": "JSON array"
     },
     "categories": {
@@ -106,7 +106,7 @@
       "api": "POST /api/ai-match (coming soon) — for now, use /api/skills.json and filter client-side"
     },
     "price_filtering": {
-      "description": "All 67,593 indexed skills are open-source MCP servers — price $0, free to install.",
+      "description": "All 67,759 indexed skills are open-source MCP servers — price $0, free to install.",
       "note": "Price filters exist for future premium listings; today every indexed entry is $0."
     },
     "bulk_operations": {

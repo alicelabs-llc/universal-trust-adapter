@@ -1,7 +1,17 @@
 {
   "service": "MarketNow",
-  "current_version": "5.6.0",
+  "current_version": "5.7.0",
   "changelog": [
+    {
+      "version": "5.7.0",
+      "date": "2026-09-12",
+      "changes": [
+        "CATALOG EXPANSION: +166 MCP servers from the Rust ecosystem (crates.io) \u2014 67,759 total indexed, 132,108 tracked. Crates.io source coverage now 750 entries. Every entry re-verified live against the crates.io API (stable version, full description, repository link).",
+        "Relevance gate: crates are only indexed when the name or full description references MCP / Model Context Protocol. Hardware false positives (MCP2221 USB-UART, MCP2515 CAN controller, MCP230xx I2C expander are Microchip part numbers, not protocol servers) are excluded by name and description pattern.",
+        "Dedup: multi-crate projects collapse to one entry per repository (highest-downloads crate); entries with repository URLs already in the index are skipped; npm-published look-alikes were already handled in batch 2.",
+        "Install honesty: crates shipping binaries get \"cargo install <name> --locked\"; library-only crates (SDKs, codecs, proc-macros) get \"cargo add <name>\". All yellow risk (source-compile install). Trust = index heuristic (base 40 + log10 total downloads, capped 88, review_status=auto-scanned). No L2 deep-scan certificates were issued for this batch."
+      ]
+    },
     {
       "version": "5.6.0",
       "date": "2026-09-12",

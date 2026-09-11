@@ -130,3 +130,5 @@ export default function handler(req, res) {
     }
   });
 }
+
+// batch3: catalog 67,759 (2026-09-12) — touch forces skills-lite.json re-bundle
