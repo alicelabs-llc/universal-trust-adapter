@@ -226,6 +226,15 @@ for (const s of skills) {
       ...(s.source?.repo_url ? { repo_url: s.source.repo_url } : {}),
       ...(s.source?.pypi_downloads_wk != null ? { pypi_downloads_wk: s.source.pypi_downloads_wk } : {}),
     };
+  } else if (s.id && (s.id.startsWith('mn-gh3-') || s.id.startsWith('mn-aw2-'))) {
+    // mn-gh3-* / mn-aw2-* — batch 2 (2026-09-12): GitHub topic search + awesome-mcp-servers
+    // reconciliation. PRESERVE the merged source object (stars, language, last_push,
+    // verification notes, npm downloads) — only guarantee url is set.
+    s.source = { ...s.source, url: existingUrl || s.source?.url };
+  } else if (s.id && s.id.startsWith('mn-np3-')) {
+    // mn-np3-* — batch 2 (2026-09-12): npm registry (search + 27 vendor packages).
+    // npm-registry provenance, preserve repo_url/downloads from the ingest.
+    s.source = { ...s.source, type: 'npm-registry', url: existingUrl || `https://www.npmjs.com/package/${s.name}` };
   } else if (s.id && s.id.startsWith('mn-gh2-')) {
     // mn-gh2-* are from GitHub Search + awesome-mcp-servers curation (expansion v2).
     s.source = {

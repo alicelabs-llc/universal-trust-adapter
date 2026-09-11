@@ -2,7 +2,7 @@
   {
     "name": "Developer Tools",
     "slug": "developer-tools",
-    "count": 31366,
+    "count": 32129,
     "url": "https://www.marketnow.site/registry?cat=developer-tools",
     "bulk_imported": false,
     "disclosure": null
@@ -10,7 +10,7 @@
   {
     "name": "Version Control",
     "slug": "version-control",
-    "count": 7434,
+    "count": 7442,
     "url": "https://www.marketnow.site/registry?cat=version-control",
     "bulk_imported": false,
     "disclosure": null
@@ -18,7 +18,7 @@
   {
     "name": "AI/ML",
     "slug": "ai-ml",
-    "count": 7119,
+    "count": 7271,
     "url": "https://www.marketnow.site/registry?cat=ai-ml",
     "bulk_imported": false,
     "disclosure": null
@@ -26,7 +26,7 @@
   {
     "name": "Search",
     "slug": "search",
-    "count": 4846,
+    "count": 4878,
     "url": "https://www.marketnow.site/registry?cat=search",
     "bulk_imported": false,
     "disclosure": null
@@ -34,7 +34,7 @@
   {
     "name": "Finance",
     "slug": "finance",
-    "count": 3676,
+    "count": 3679,
     "url": "https://www.marketnow.site/registry?cat=finance",
     "bulk_imported": false,
     "disclosure": null
@@ -42,7 +42,7 @@
   {
     "name": "Security",
     "slug": "security",
-    "count": 2533,
+    "count": 2549,
     "url": "https://www.marketnow.site/registry?cat=security",
     "bulk_imported": false,
     "disclosure": null
@@ -50,7 +50,7 @@
   {
     "name": "Monitoring",
     "slug": "monitoring",
-    "count": 2036,
+    "count": 2050,
     "url": "https://www.marketnow.site/registry?cat=monitoring",
     "bulk_imported": false,
     "disclosure": null
@@ -58,7 +58,7 @@
   {
     "name": "Data",
     "slug": "data",
-    "count": 2012,
+    "count": 2035,
     "url": "https://www.marketnow.site/registry?cat=data",
     "bulk_imported": false,
     "disclosure": null
@@ -66,7 +66,7 @@
   {
     "name": "Communication",
     "slug": "communication",
-    "count": 1892,
+    "count": 1906,
     "url": "https://www.marketnow.site/registry?cat=communication",
     "bulk_imported": false,
     "disclosure": null
@@ -74,7 +74,7 @@
   {
     "name": "Browser Automation",
     "slug": "browser-automation",
-    "count": 1585,
+    "count": 1604,
     "url": "https://www.marketnow.site/registry?cat=browser-automation",
     "bulk_imported": false,
     "disclosure": null
@@ -82,7 +82,7 @@
   {
     "name": "Cloud Platforms",
     "slug": "cloud-platforms",
-    "count": 1414,
+    "count": 1446,
     "url": "https://www.marketnow.site/registry?cat=cloud-platforms",
     "bulk_imported": false,
     "disclosure": null
@@ -90,7 +90,7 @@
   {
     "name": "File System",
     "slug": "file-system",
-    "count": 527,
+    "count": 534,
     "url": "https://www.marketnow.site/registry?cat=file-system",
     "bulk_imported": false,
     "disclosure": null
@@ -98,7 +98,7 @@
   {
     "name": "Web APIs",
     "slug": "web-apis",
-    "count": 36,
+    "count": 50,
     "url": "https://www.marketnow.site/registry?cat=web-apis",
     "bulk_imported": false,
     "disclosure": null
