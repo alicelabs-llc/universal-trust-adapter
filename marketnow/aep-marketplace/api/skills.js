@@ -8,13 +8,23 @@
 //       GET /api/skills?sort=trust      (trust_score_100 desc)
 //       GET /api/skills?q=weather       (search in name/description/tags)
 //       GET /api/skills?risk=red|yellow|green
+//
+// ── Submission endpoints (mounted here via _mode — Hobby 12-function cap) ───
+// POST /api/submit  → rewrite → /api/skills?_mode=submit  (public, no auth)
+// GET  /api/submit  → docs schema
+// GET  /api/submissions → rewrite → /api/skills?_mode=queue (public queue)
 
 import skillsData from '../public/api/skills-lite.json' with { type: 'json' };
 import catalogMeta from '../public/api/catalog-meta.json' with { type: 'json' };
+import { mountSubmission } from '../lib/submit-http.mjs';
 
 const SITE = 'https://www.marketnow.site';
 
 export default function handler(req, res) {
+  // submission endpoints (POST/GET /api/submit, GET /api/submissions)
+  if (req.query._mode === 'submit' || req.query._mode === 'queue') {
+    return mountSubmission(req, res);
+  }
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=600');
   res.setHeader('Access-Control-Allow-Origin', '*');
