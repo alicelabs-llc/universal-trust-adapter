@@ -2,7 +2,7 @@
   "$schema": "https://smithery.ai/schema/server-card.json",
   "name": "marketnow",
   "displayName": "MarketNow — Agent Skill Marketplace",
-  "description": "The open catalog of MCP-compatible agent skills. 66,496 index-certified skills across 16 categories (130,845 total tracked). All are open-source and free to install. L1 index certification on every entry; top 688 npm tarballs deep-scanned by Sentinel L2 (29 rules). 14 languages.",
+  "description": "The open catalog of MCP-compatible agent skills. 67,593 index-certified skills across 16 categories (131,942 total tracked). All are open-source and free to install. L1 index certification on every entry; top 688 npm tarballs deep-scanned by Sentinel L2 (29 rules). 14 languages.",
   "version": "1.0.2",
   "type": "stdio",
   "command": "npx",
@@ -13,7 +13,7 @@
   "tools": [
     {
       "name": "search_skills",
-      "description": "Search 66,496 MCP skills by query, category, price, or language",
+      "description": "Search 67,593 MCP skills by query, category, price, or language",
       "inputSchema": {
         "type": "object",
         "properties": {
