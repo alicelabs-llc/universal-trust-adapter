@@ -1,5 +1,5 @@
 // Paginated skills API — replaces the 24MB skills.json blob
-// catalog-version 2026-09-12: 67,593 entries (batch 2 ingest) — touch forces lambda re-bundle
+// catalog-version 2026-09-12: 67,759 entries (batch 2 + batch 3 crates.io) — touch forces lambda re-bundle
 // Usage: GET /api/skills?page=1&limit=100
 //       GET /api/skills?page=1&limit=100&category=Security
 //       GET /api/skills?page=1&limit=100&filter=free
