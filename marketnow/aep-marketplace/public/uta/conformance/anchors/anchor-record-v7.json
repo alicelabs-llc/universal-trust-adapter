@@ -1,0 +1,29 @@
+{
+  "schema": "uta-rekor-anchor/1.0",
+  "log": {
+    "url": "https://rekor.sigstore.dev",
+    "operator": "Sigstore (public good instance)",
+    "log_index": 2795233758,
+    "uuid": "108e9186e8c5677a490780924f8c8c8c7ccbc0901876c3fe743301f42435be1c61b1dde191bd5319",
+    "integrated_time": 1789141783,
+    "integrated_time_iso": "2026-09-11T15:49:43.000Z",
+    "log_id": "c0d23d6ad406973f9559f3ba2d1ca01f84147d8ffc5b8445c224f98b9591801d"
+  },
+  "statement": {
+    "file": "anchor-statement-v7.json",
+    "canonical_sha256": "4d5f5db5c40ed0997440fa0e0cf7d06895966232bfcf4a19192b999e12339ef4",
+    "canonical_bytes": 4210,
+    "note": "RFC 8785-style serialization: recursive sorted keys, no whitespace, UTF-8. Entry #7: the release chain ADVANCE — r2 (counter 2) chained to r1 (entry #6)."
+  },
+  "countersignature": {
+    "algorithm": "ECDSA P-256 over SHA-256 (DER)",
+    "public_key_spki_pem": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEG+to4YQjBl9qgvFdyBN0iUPOCWJh\nvpZ6CYBFAMrzmURxNVA7DYbBXA4GSU5UawBsEyc2dJd/uD5xNspuypfFYQ==\n-----END PUBLIC KEY-----\n",
+    "note": "Fresh throwaway key; private half discarded after signing — it can never sign again. The ANCHOR policy stays throwaway; only the RELEASE identity (in the statement, Ed25519) is persistent.",
+    "verification": "verify-artifact.mjs --release  |  verify-rekor.mjs --record anchor-record-v7.json --statement anchor-statement-v7.json"
+  },
+  "release_chain": {
+    "identity": "uta-release-identity/1 (Ed25519, persistent)",
+    "release_statement": "release-statement-r2.json (counter 2, chained to r1@entry #6)",
+    "bootstrap_floor": 2787622029
+  }
+}

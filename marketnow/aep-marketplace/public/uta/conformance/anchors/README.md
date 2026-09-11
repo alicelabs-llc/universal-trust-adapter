@@ -257,3 +257,30 @@ publisher's release procedure.
 | `anchor-statement-v6.json` | The signed statement: release identity + release statement r1 digest + the v1.5.0 digest set. |
 | `anchor-record-v6.json` | Untrusted locator (UUID, logIndex, integrated time, countersignature key). Everything that matters is re-verified live. |
 | `verify-artifact.mjs` | v1.5.0: round-3 single-artifact flow + `--release` rollback-resistant chain verification. |
+
+# Entry #7 — the r1 → r2 advance (2026-09-11, hours after #6)
+
+Minutes after r1 was anchored, the stranger-flow test caught a bug in
+`verify-artifact.mjs` itself (the release-mode `--artifact` comparison
+compared a pin object against the sha string). r1 was already log-committed;
+re-signing a counter is what the policy forbids — so the fix shipped as
+**r2**: the same authorized artifacts, one fixed verifier, chained via
+`previous_release`, anchored here at a higher log index.
+
+| | |
+|---|---|
+| Log index | `2795233758` |
+| Integrated | `2026-09-11T15:49:43Z` |
+| Releases | r2 (counter 2) chained to r1 (counter 1, entry #6, logIndex 2795106183) |
+| Countersignature | ECDSA P-256 throwaway over sha256(statement v7); discarded |
+
+A verifier holding r1 accepts r2 only through the advance rules — chain
+linkage, higher log index, grown checkpoint tree. A fresh verifier takes r2
+directly (verify-artifact.mjs defaults here). Entry #6 remains in the log as
+valid history: the append-only property is what makes a supersession
+provable instead of silent. (An intermediate submission at logIndex
+2795221503 carries an r2 draft pinning a superseded runner-tests note —
+log debris from the same hour, harmless and honest to leave in place.)
+
+Files: `anchor-statement-v7.json` (signed), `anchor-record-v7.json`
+(untrusted locator). Verify: `node verify-artifact.mjs --release`.

@@ -221,6 +221,13 @@ footer{border-top:1px solid var(--border);margin-top:32px;padding:40px 24px;text
 <td data-th='anchors'>The release chain: persistent Ed25519 release identity + release statement r1 (counter 1, v1.5.0) — rollback resistance. Verify: <span class="hash">verify-artifact.mjs --release</span></td>
 <td data-th='sha' class="mono">ac565b1cd30678b6e7e71fda693e69ec…</td>
 </tr>
+<tr>
+<td data-th='entry'><b>#7</b></td>
+<td data-th='logIndex' class="mono"><a href="https://rekor.sigstore.dev">2795233758</a></td>
+<td data-th='integrated' class="mono">2026-09-11T15:49:43Z</td>
+<td data-th='anchors'>The r1→r2 ADVANCE: release 2 chained to release 1 (higher log index, grown tree) — a supersession you can prove, not a rewrite. Verify: <span class="hash">verify-artifact.mjs --release</span></td>
+<td data-th='sha' class="mono">4d5f5db5c40ed0997440…</td>
+</tr>
   </table></div>
   <pre><span class="c"># the log in the ACTUAL verification path — digest from Rekor, not the hub:</span>
 <span class="cmd">node anchors/verify-artifact.mjs https://www.marketnow.site/uta/conformance/score-runner.mjs</span>
