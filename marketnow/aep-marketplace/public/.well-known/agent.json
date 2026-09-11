@@ -2,7 +2,7 @@
   "schemaVersion": "v1.0",
   "agent": {
     "name": "MarketNow — Agent Skill Exchange",
-    "description": "The trust layer for agent commerce. Browse 69,076 index-certified MCP servers (133,425 total tracked), each with an install-risk tier and trust score; top 688 tarballs deep-scanned by Sentinel. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
+    "description": "The trust layer for agent commerce. Browse 69,077 index-certified MCP servers (133,426 total tracked), each with an install-risk tier and trust score; top 688 tarballs deep-scanned by Sentinel. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
     "url": "https://marketnow.site",
     "version": "4.0.0"
   },
@@ -44,7 +44,7 @@
           {
             "id": "skill-search",
             "name": "MCP Skill Search",
-            "description": "AI agents can search and retrieve MCP server configurations from 69,076 index-certified skills (install-risk tier + trust score on every entry; 688 top tarballs deep-scanned). Supports natural language queries, category filtering, and security score thresholds.",
+            "description": "AI agents can search and retrieve MCP server configurations from 69,077 index-certified skills (install-risk tier + trust score on every entry; 688 top tarballs deep-scanned). Supports natural language queries, category filtering, and security score thresholds.",
             "commissionRate": 0.2,
             "referralEndpoints": {
               "register": "https://marketnow.site/api/agent/register",
@@ -82,7 +82,7 @@
       "scoreRange": "0-6",
       "totalScanned": 69076,
       "averageScore": 6.8,
-      "note": "L1 index certification covers all 69,076 entries. Average sentinel_score across the catalog: 6.8/10 (computed live from /api/skills-lite.json). L2 deep-scan: 688 tarballs."
+      "note": "L1 index certification covers all 69,077 entries. Average sentinel_score across the catalog: 6.8/10 (computed live from /api/skills-lite.json). L2 deep-scan: 688 tarballs."
     }
   },
   "economy": {
@@ -136,11 +136,11 @@
     "skills_tracked_all_sources": 133425,
     "l2_tarballs_deep_scanned": 688
   },
-  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 69,076 indexed skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
+  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 69,077 indexed skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
   "buyer_pricing": {
     "model": "free",
     "per_skill_fee": 0,
     "subscription_fee": 0,
-    "explanation": "Buyers never pay MarketNow. All 69,076 indexed skills are free to install."
+    "explanation": "Buyers never pay MarketNow. All 69,077 indexed skills are free to install."
   }
 }

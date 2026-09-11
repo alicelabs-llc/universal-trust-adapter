@@ -1,7 +1,17 @@
 {
   "service": "MarketNow",
-  "current_version": "5.8.0",
+  "current_version": "5.9.0",
   "changelog": [
+    {
+      "version": "5.9.0",
+      "date": "2026-09-12",
+      "changes": [
+        "WRITE SIDE IS PUBLIC: anyone — human or AI agent — can now publish skills to MarketNow. POST /api/submit (no auth, no key, rate-limited 8/hour/IP, 100KB payload cap). Every submission runs the Sentinel L1-sub pipeline: schema validation, prompt-injection patterns, embedded-secret detection (keys/tokens/private keys), dangerous-API scan (eval/exec/loadstring, curl|sh, remote require, rm -rf), suspicious-URL checks, typosquat distance, live dedup against the full catalog name index, and an optional https reachability probe.",
+        "ACCEPTED = stored + certified: the full package (source code included) and its machine-generated scan report are committed to the public audit trail (github.com/alicelabs-llc/marketnow-submissions) with status certified-L1 pending L2 review. REJECTED = 422 with machine-actionable reasons. Track the queue: GET /api/submissions. The MarketNow MCP server gained its first write tool: marketnow_submit_skill (now 9 tools).",
+        "CATALOG: +1 community submission(s) merged (batch 5, 69,077 total, 133,426 tracked) — tier community, risk yellow, trust 25-60 (submission heuristic: base 38 + completeness + probe, capped until L2). New per-record provenance: submission_id + full audit URL.",
+        "Docs for submitters (humans and agents): /submit.html. Machine-readable schema: GET /api/submit. Robustness: submissions read via cache-busted raw + sha-aware index writes (no lost entries on concurrent submissions)."
+      ]
+    },
     {
       "version": "5.8.0",
       "date": "2026-09-12",
