@@ -1,19 +1,20 @@
 {
- "schema": "marketnow-catalog-meta/1.0",
- "generated_at": "2026-09-12",
- "total_all": 132108,
- "core_certified": 58629,
- "community_indexed": 9130,
- "aggregate_tracked": 64349,
- "sources": {
-  "github": 12129,
-  "curated": 1,
-  "community-submitted": 18,
-  "npm-registry": 24788,
-  "pypi": 14311,
-  "smithery": 6195,
-  "official-registry": 9076,
-  "crates": 750,
-  "docker": 491
- }
+  "schema": "marketnow-catalog-meta/1.0",
+  "generated_at": "2026-09-12",
+  "total_all": 133425,
+  "core_certified": 59946,
+  "community_indexed": 9130,
+  "aggregate_tracked": 64349,
+  "sources": {
+    "github": 12129,
+    "curated": 1,
+    "community-submitted": 18,
+    "npm": 5269,
+    "pypi": 14311,
+    "smithery": 6195,
+    "official-registry": 9076,
+    "crates": 1933,
+    "docker": 625,
+    "npm-registry": 19519
+  }
 }
