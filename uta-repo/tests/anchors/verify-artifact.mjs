@@ -70,9 +70,9 @@ import { createHash, createVerify, createPublicKey, verify } from 'node:crypto';
 
 const REKOR = 'https://rekor.sigstore.dev';
 const HUB = 'https://www.marketnow.site/uta/conformance';
-const DEFAULT_RECORD = `${HUB}/anchors/anchor-record-v6.json`;
-const DEFAULT_STATEMENT = [`${HUB}/anchors/anchor-statement-v6.json`, 'anchor-statement-v6.json'];
-const DEFAULT_RELEASE = [`${HUB}/releases/release-statement-r1.json`, 'release-statement-r1.json'];
+const DEFAULT_RECORD = `${HUB}/anchors/anchor-record-v7.json`;
+const DEFAULT_STATEMENT = [`${HUB}/anchors/anchor-statement-v7.json`, 'anchor-statement-v7.json'];
+const DEFAULT_RELEASE = [`${HUB}/releases/release-statement-r2.json`, 'release-statement-r2.json'];
 const DEFAULT_STATE = './.uta-verify-state.json';
 // v1.5.0 — first-contact floor: the last pre-release-chain anchor (entry #5).
 // A release anchor at or below this index is a restart of history, refused.
@@ -318,7 +318,7 @@ if (RELEASE_MODE) {
       if (artifactBytes) {
         const aSha = sha256hex(artifactBytes);
         const arts = release.json.artifacts || {};
-        const hit = Object.entries(arts).find(([name, sha]) => sha === aSha);
+        const hit = Object.entries(arts).find(([name, a]) => (typeof a === 'string' ? a : a?.sha256) === aSha);
         check('the downloaded artifact IS the current release\'s pinned bytes', !!hit,
           hit ? `${hit[0]} (${aSha.slice(0, 16)}…, ${Object.keys(arts).length} artifacts pinned)` : `no pin in release ${counter} matches ${aSha.slice(0, 16)}… — the origin is serving bytes the current release never authorized`);
       }

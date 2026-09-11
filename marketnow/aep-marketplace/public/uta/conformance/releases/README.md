@@ -73,3 +73,19 @@ MUST advance the counter and re-anchor to stay verifiable as current.
    countersignature, key discarded — the anchor policy stays throwaway; only
    the RELEASE identity is persistent).
 5. Publish the statement + updated record locator on the hub.
+
+## r1 → r2: the advance, exercised for real (2026-09-11)
+
+Minutes after r1 was anchored (entry #6, logIndex 2795106183), the
+stranger-flow test caught a bug in `verify-artifact.mjs` itself: the
+release-mode `--artifact` comparison compared a pin OBJECT against the
+artifact's sha STRING and could never match. r1 was already log-committed —
+re-signing a counter is exactly what the policy forbids — so the fix shipped
+as **r2**: same authorized artifact set (the runner and every conformance
+artifact unchanged), one fixed verifier, chained via
+`previous_release: { counter: 1, sha256: <r1> }`, anchored at a HIGHER log
+index (entry #7). A verifier holding r1 accepts r2 only through the advance
+rules (chain linkage + log monotonicity + grown tree); a fresh verifier
+takes r2 directly. The append-only log keeps both: r1 as history, r2 as
+current. This is the designed procedure working — including its
+inconvenience, which is the point.
