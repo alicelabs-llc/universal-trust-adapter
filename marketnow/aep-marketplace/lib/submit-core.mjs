@@ -288,16 +288,15 @@ export async function processSubmission(payload, { dryRun = false, remoteIp = 'u
         // 2. actualizar el índice (read-modify-write; el listing lee el índice, no el árbol)
         if (r1.ok) {
           try {
-            const idxRaw = await fetch(`${GH_RAW}/${SUBMIT_REPO}/main/submissions/index.json`,
-              { signal: AbortSignal.timeout(10000), headers: { 'Cache-Control': 'no-cache' } });
+            // leer el índice vía Contents API (fresco, con sha — evita perder entries si el CDN raw está stale)
             let index = { updated_at: null, entries: [] };
             let sha = null;
-            if (idxRaw.ok) {
-              index = await idxRaw.json();
-              // sha actual del índice para el update no-forzado
-              const meta = await fetch(`${GH_API}/repos/${SUBMIT_REPO}/contents/submissions/index.json`,
-                { headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'marketnow-submit' }, signal: AbortSignal.timeout(10000) });
-              if (meta.ok) sha = (await meta.json()).sha;
+            const idxApi = await fetch(`${GH_API}/repos/${SUBMIT_REPO}/contents/submissions/index.json`,
+              { headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'marketnow-submit' }, signal: AbortSignal.timeout(10000) });
+            if (idxApi.ok) {
+              const idxJ = await idxApi.json();
+              sha = idxJ.sha;
+              try { index = JSON.parse(Buffer.from(idxJ.content, 'base64').toString('utf-8')); } catch { index = { entries: [] }; }
             }
             index.entries = (index.entries || []).slice(-499);
             index.entries.push({ id, name: skill.name, version: skill.version, verdict: record.verdict,
@@ -328,8 +327,8 @@ const GH_RAW = 'https://raw.githubusercontent.com';
 // ─── lectura de la cola (1 fetch del índice, sin token) ────────────────────────
 export async function listSubmissions(limit = 100) {
   try {
-    const r = await fetch(`${GH_RAW}/${SUBMIT_REPO}/main/submissions/index.json`,
-      { signal: AbortSignal.timeout(12000), headers: { 'Cache-Control': 'no-cache' } });
+    const r = await fetch(`${GH_RAW}/${SUBMIT_REPO}/main/submissions/index.json?v=${Date.now()}`,  // ?v= burla el cache del CDN raw (TTL 300s)
+      { signal: AbortSignal.timeout(12000) });
     if (r.status === 404) return { ok: true, total: 0, items: [], note: QUEUE_NOTE };
     if (!r.ok) return { ok: false, reason: `raw ${r.status}` };
     const index = await r.json();
@@ -349,8 +348,8 @@ export async function getSubmission(id) {
     if (!idx.ok) return { ok: false, reason: idx.reason };
     const entry = (idx.items || []).find(e => e.id === id);
     if (!entry) return { ok: false, reason: 'submission not found' };
-    const r = await fetch(`${GH_RAW}/${SUBMIT_REPO}/main/${entry.path}`,
-      { signal: AbortSignal.timeout(12000), headers: { 'Cache-Control': 'no-cache' } });
+    const r = await fetch(`${GH_RAW}/${SUBMIT_REPO}/main/${entry.path}?v=${Date.now()}`,
+      { signal: AbortSignal.timeout(12000) });
     if (!r.ok) return { ok: false, reason: `raw ${r.status}` };
     return { ok: true, submission: await r.json() };
   } catch (e) {
