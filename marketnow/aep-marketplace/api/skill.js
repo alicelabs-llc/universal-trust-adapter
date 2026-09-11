@@ -1,5 +1,5 @@
 // MarketNow per-skill public page — SEO + schema.org (Lulu parity)
-// catalog-version 2026-09-12: 67,593 entries (batch 2 ingest) — touch forces lambda re-bundle
+// catalog-version 2026-09-12: 67,759 entries (batch 2 + batch 3 crates.io) — touch forces lambda re-bundle
 // =================================================================
 // GET /api/skill?slug=<slug>   (rewrite: /s/:slug -> here)
 //
