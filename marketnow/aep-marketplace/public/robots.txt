@@ -542,6 +542,10 @@ Crawl-delay: 1
 # ─── Sitemaps ───────────────────────────────────────────────────
 Sitemap: https://marketnow.site/sitemap.xml
 Sitemap: https://marketnow.site/sitemap-skills.xml
+Sitemap: https://marketnow.site/sitemap-skills-index.xml
+Sitemap: https://marketnow.site/sitemap-skills-b2.xml
+Sitemap: https://marketnow.site/sitemap-skills-b3.xml
+
 Sitemap: https://marketnow.site/api/skills-lite.json
 
 # LLM discoverability (llms.txt convention by answer.ai)
