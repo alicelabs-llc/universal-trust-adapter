@@ -2,7 +2,7 @@
   {
     "name": "Developer Tools",
     "slug": "developer-tools",
-    "count": 32129,
+    "count": 32198,
     "url": "https://www.marketnow.site/registry?cat=developer-tools",
     "bulk_imported": false,
     "disclosure": null
@@ -18,7 +18,7 @@
   {
     "name": "AI/ML",
     "slug": "ai-ml",
-    "count": 7271,
+    "count": 7331,
     "url": "https://www.marketnow.site/registry?cat=ai-ml",
     "bulk_imported": false,
     "disclosure": null
@@ -26,7 +26,7 @@
   {
     "name": "Search",
     "slug": "search",
-    "count": 4878,
+    "count": 4885,
     "url": "https://www.marketnow.site/registry?cat=search",
     "bulk_imported": false,
     "disclosure": null
@@ -34,7 +34,7 @@
   {
     "name": "Finance",
     "slug": "finance",
-    "count": 3679,
+    "count": 3681,
     "url": "https://www.marketnow.site/registry?cat=finance",
     "bulk_imported": false,
     "disclosure": null
@@ -42,7 +42,7 @@
   {
     "name": "Security",
     "slug": "security",
-    "count": 2549,
+    "count": 2552,
     "url": "https://www.marketnow.site/registry?cat=security",
     "bulk_imported": false,
     "disclosure": null
@@ -50,7 +50,7 @@
   {
     "name": "Monitoring",
     "slug": "monitoring",
-    "count": 2050,
+    "count": 2052,
     "url": "https://www.marketnow.site/registry?cat=monitoring",
     "bulk_imported": false,
     "disclosure": null
@@ -58,7 +58,7 @@
   {
     "name": "Data",
     "slug": "data",
-    "count": 2035,
+    "count": 2038,
     "url": "https://www.marketnow.site/registry?cat=data",
     "bulk_imported": false,
     "disclosure": null
@@ -66,7 +66,7 @@
   {
     "name": "Communication",
     "slug": "communication",
-    "count": 1906,
+    "count": 1909,
     "url": "https://www.marketnow.site/registry?cat=communication",
     "bulk_imported": false,
     "disclosure": null
@@ -74,7 +74,7 @@
   {
     "name": "Browser Automation",
     "slug": "browser-automation",
-    "count": 1604,
+    "count": 1607,
     "url": "https://www.marketnow.site/registry?cat=browser-automation",
     "bulk_imported": false,
     "disclosure": null
@@ -90,7 +90,7 @@
   {
     "name": "File System",
     "slug": "file-system",
-    "count": 534,
+    "count": 543,
     "url": "https://www.marketnow.site/registry?cat=file-system",
     "bulk_imported": false,
     "disclosure": null
@@ -98,7 +98,7 @@
   {
     "name": "Web APIs",
     "slug": "web-apis",
-    "count": 50,
+    "count": 55,
     "url": "https://www.marketnow.site/registry?cat=web-apis",
     "bulk_imported": false,
     "disclosure": null

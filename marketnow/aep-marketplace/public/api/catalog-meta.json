@@ -1,8 +1,8 @@
 {
  "schema": "marketnow-catalog-meta/1.0",
  "generated_at": "2026-09-12",
- "total_all": 131942,
- "core_certified": 58463,
+ "total_all": 132108,
+ "core_certified": 58629,
  "community_indexed": 9130,
  "aggregate_tracked": 64349,
  "sources": {
@@ -13,7 +13,7 @@
   "pypi": 14311,
   "smithery": 6195,
   "official-registry": 9076,
-  "crates": 584,
+  "crates": 750,
   "docker": 491
  }
 }
