@@ -4,12 +4,12 @@
   "generated_at": "2026-09-12T00:00:00Z",
   "source_of_truth": "certification.json (L1) + certification-scans.json (L2) + catalog-meta.json (aggregate tracking). CI fails if any surface diverges.",
   "discovery": {
-    "total_mcp_servers": 69076,
-    "total_tracked_all_sources": 133425,
+    "total_mcp_servers": 69077,
+    "total_tracked_all_sources": 133426,
     "core_certified": 59946,
     "community_indexed": 9130,
     "aggregate_tracked": 64349,
-    "free_to_install": 69076,
+    "free_to_install": 69077,
     "paid": 0,
     "categories": {
       "communication": 1936,
@@ -28,11 +28,12 @@
       "productivity": 1,
       "marketing": 1,
       "community-submitted": 18
-    }
+    },
+    "community_submissions": 1
   },
   "security": {
     "model": "two-level: L1 index-certified (all entries) + L2 sentinel-scanned (shipped npm tarballs)",
-    "l1_index_certified": 69076,
+    "l1_index_certified": 69077,
     "l1_checks": 10,
     "l1_checks_passed": 10,
     "l2_targets": 2868,
@@ -43,8 +44,8 @@
     "l2_flagged_error": 1156,
     "l2_own_packages": 13,
     "npm_vulnerabilities_own_packages": 0,
-    "security_checks_performed": 690760,
-    "security_checks_methodology": "10 L1 checks x 69,076 entries + 29 L2 rules x 2,720 tarball scans",
+    "security_checks_performed": 690770,
+    "security_checks_methodology": "10 L1 checks x 69,077 entries + 29 L2 rules x 2,720 tarball scans",
     "sentinel_version": "v3.0",
     "sentinel_pipeline_stages": 12,
     "methodology_url": "https://marketnow.site/api/certification.json"

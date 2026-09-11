@@ -27547,6 +27547,7 @@ donhuffines
 donotact
 donovanh/lightning-tools
 donsetch
+dont-touch-shutdown-guard
 doodleworks-mcp
 dooi-mcp
 doom-mcp
