@@ -1,0 +1,97 @@
+{
+  "created": "2026-09-11T15:38:34Z",
+  "release_identity": {
+    "identity": "uta-release-identity/1",
+    "public_key_spki_b64": "MCowBQYDK2VwAyEAZqMOhrvHv2WVqjlEmcu9yk4pbqszcHSeyFzYLkjbEaI=",
+    "key_algorithm": "Ed25519 (RFC 8032)",
+    "policy": "PERSISTENT release identity — the first non-throwaway, non-published key in the project: counters must not be forgeable. Private half held offline by the publisher; public half anchored HERE (this entry) and pinned in release-statement-r1.json."
+  },
+  "release_statement": {
+    "counter": 1,
+    "suite_version": "1.5.0",
+    "sha256": "79db4fac8895323fcb6e81049f4cf784fd4dbb4b992193877d379a1fef4e4232",
+    "canonical_bytes": 6135,
+    "note": "the current authorized state: 17 pinned artifacts (scorer, generator, index, answer key, runner-tests, both mutation sweeps, verify-artifact with release-chain mode, the identity itself). Verify with anchors/verify-artifact.mjs --release."
+  },
+  "digests": {
+    "score_runner_v1_5_0": {
+      "sha256": "c0bd20e6987d94d75f63e3756d49d1d0d89ea0c4c80175cee0e18db1062dba25",
+      "bytes": 20966,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/score-runner.mjs"
+      ],
+      "note": "the tested thing: reference scorer v1.5.0 — two clocks (evaluation_clock for fixtures, wall clock for generated), everything from v1.4.0 intact"
+    },
+    "generator_v1_5_0": {
+      "sha256": "60d064943057b5b3caa017ebc64e113e7083589d643e69ebb97e014702a7f1ac",
+      "bytes": 20390,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/vectors/generate-accept-vectors.mjs"
+      ],
+      "note": "accept/self-signed/wrong-ca/adversarial generator, clock-derived dating, --clock pinning — unchanged from v1.4.0"
+    },
+    "conformance_vectors_index_v1_5_0": {
+      "sha256": "bd53f084d3b9eedbc027e2a61a37bd1f11974389def25173d69264b01a055929",
+      "bytes": 49964,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/vectors/_index.json"
+      ],
+      "note": "schema v1.5.0: fixture_clock_rule + evaluation_clock; adversarial_window_rule + artifact_verification_rule retained; 14 fixed vectors unchanged byte-for-byte"
+    },
+    "runner_answer_key_v1_5_0": {
+      "sha256": "57542b358b7391a86469fcb973ac6ca3e487421c12f405bb9b7569e0389fa4c0",
+      "bytes": 5623,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/runner-tests/answer-key.json"
+      ],
+      "note": "behavioral oracle re-recorded against the v1.5.0 runner bytes (27 checks green, 10/10 mutants caught)"
+    },
+    "runner_tests_v1_5_0": {
+      "sha256": "31e3e9e2ecabf53b57584ca5bcfda3ac07ace79ddd88b5cc65e6afebb278b5bf",
+      "bytes": 30773,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/runner-tests/runner-tests.mjs"
+      ],
+      "note": "runner-under-test suite, locator re-pointed at entry #6"
+    },
+    "mutant_sweep_v1_5_0": {
+      "sha256": "d1f2f2ac77a3e9c14311ebe9152d51994464100373507c5bb7372b7c3a19f10b",
+      "bytes": 80697,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/runner-tests/mutant-sweep.json"
+      ],
+      "note": "single-site sweep on v1.5.0 bytes: 126 mutants, 95 caught, 31 survivors all classified — time series with the archived v1.4.0 run"
+    },
+    "mutant_sweep_twosite_v1_5_0": {
+      "sha256": "f9920f2703fd36d7bc7ee46eb38e3e5ce7bd51e5d71d74d0202afec7598278bd",
+      "bytes": 110251,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/runner-tests/mutant-sweep-twosite.json"
+      ],
+      "note": "coordinated two-site results: 157 pairs, 156 caught, 1 survivor (real, classified) — SEPARATE column, never summed with single-site"
+    },
+    "verify_artifact_v1_5_0": {
+      "sha256": "1ffc8c78c09d62aed9cf68db5bc2687517c72172a0545e31f962db09f989e3a3",
+      "bytes": 22022,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/anchors/verify-artifact.mjs"
+      ],
+      "note": "Rekor-in-the-loop artifact verification + RELEASE CHAIN mode with rollback resistance (local state, floor, monotone counters)"
+    },
+    "release_identity_v1": {
+      "sha256": "7e3875396b39b52075e7b4f799793aeab1b39118610ef6cdc0468b80737fc9e5",
+      "bytes": 825,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/releases/release-identity.json"
+      ],
+      "note": "the persistent release identity itself — pinned so its bytes cannot silently change either"
+    }
+  },
+  "rollback_resistance": {
+    "bootstrap_floor": 2787622029,
+    "note": "Release anchors below the bootstrap floor (entry #5) are refused at first contact. Lower counters than a verifier has accepted are refused forever after. This entry (#6) anchors the chain head: the release identity + release statement r1."
+  },
+  "subject": "universal-trust-adapter conformance v1.5.0: release chain head (rollback resistance, anp2network round 4, dev.to 3ehp6)",
+  "publisher": "AliceLabs LLC",
+  "repo": "github.com/alicelabs-llc/universal-trust-adapter"
+}

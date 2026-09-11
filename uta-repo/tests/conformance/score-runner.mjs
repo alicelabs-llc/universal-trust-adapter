@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ============================================================================
-// UTA conformance — REFERENCE SCORER (v1.4.0)
+// UTA conformance — REFERENCE SCORER (v1.5.0)
 // ============================================================================
 // v1.4.0 (anp2network round 3, dev.to comment 3ehcp):
 //   1. ADVERSARIAL DISTRIBUTION — the lower bound of the validity window is
@@ -61,7 +61,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const VECTORS = join(__dirname, 'vectors');
-const NOW = new Date().toISOString().slice(0, 10) + 'T00:00:00Z';
+const WALL_NOW = new Date().toISOString().slice(0, 10) + 'T00:00:00Z';
 
 const jcs = (v) => JSON.stringify(v, (k, x) =>
   (x !== null && typeof x === 'object' && !Array.isArray(x))
@@ -80,6 +80,26 @@ const genDir = genIdx !== -1 && args[genIdx + 1] && !args[genIdx + 1].startsWith
 const index = JSON.parse(readFileSync(join(VECTORS, '_index.json'), 'utf8'));
 const anchors = index.pinned_trust_anchors.anchors;
 const validAtcSha = readFileSync(join(VECTORS, 'valid-atc.sha256'), 'utf8').trim(); // the memorized digest
+
+// v1.5.0 — TWO CLOCKS (anp2network round 4, comment 3ehp6: "the fourteen
+// fixed vectors stayed byte-identical while the generated boundary moved to
+// the scoring clock. premature-atc is pinned at 2030-01-01, so its
+// discriminating power decays as the wall clock walks toward it, and after
+// that date it stops being premature at all. Either evaluate the frozen
+// fixture against a pinned clock recorded next to the result, or derive the
+// premature case per run" — we do the first, and the adversarial mode
+// already does the second). FIXED_NOW evaluates the frozen fixtures against
+// the clock RECORDED in _index.json (evaluation_clock): the fixed suite is a
+// fixture and stops aging — premature-atc stays premature forever at its
+// recorded clock and the accept vectors never lapse. Generated cards are
+// still scored against the live wall clock (the generator's clock domain).
+// --clock pins BOTH for byte-reproducible runs. NOW is `let`: it switches
+// to WALL_NOW whenever generated cards are loaded or scored.
+const clockArgIdx = args.indexOf('--clock');
+const clockArg = clockArgIdx !== -1 && args[clockArgIdx + 1] && !args[clockArgIdx + 1].startsWith('--') ? args[clockArgIdx + 1] : null;
+const FIXED_NOW = clockArg || index.evaluation_clock || WALL_NOW;
+if (!/^\d{4}-\d{2}-\d{2}T00:00:00Z$/.test(FIXED_NOW)) { console.error(`FATAL: evaluation clock must be YYYY-MM-DDT00:00:00Z, got ${FIXED_NOW}`); process.exit(1); }
+let NOW = FIXED_NOW;
 
 // ============================================================================
 // RUNNERS — each takes a card object and returns
@@ -262,21 +282,27 @@ const loadGenerated = (dir) => {
 // MAIN
 // ============================================================================
 const fixed = loadCards();
+NOW = WALL_NOW;                       // v1.5.0: generated cards live in the wall-clock domain
 const generated = genDir ? loadGenerated(genDir) : [];
 
 if (!wantMatrix) {
-  // reference runner vs everything
+  // reference runner vs everything (fixed at the pinned fixture clock)
+  NOW = FIXED_NOW;
   const s1 = score(reference, fixed);
   console.log(`reference runner vs fixed vectors:   ${s1.ok}/${s1.total}`);
   if (s1.failed.length) console.log(`  failures: ${s1.failed.join(', ')}`);
   if (generated.length) {
+    NOW = WALL_NOW;
     const s2 = score(reference, generated);
     console.log(`reference runner vs generated cards:  ${s2.ok}/${s2.total}`);
     if (s2.failed.length) console.log(`  failures: ${s2.failed.join(', ')}`);
+    const allOk = s1.ok === s1.total && s2.ok === s2.total;
+    console.log(allOk ? '\nUTA CONFORMANCE: PASSED ✅' : '\nUTA CONFORMANCE: FAILED ❌');
+    process.exit(allOk ? 0 : 1);
   }
-  const allOk = s1.ok === s1.total && (!generated.length || score(reference, generated).ok === generated.length);
-  console.log(allOk ? '\nUTA CONFORMANCE: PASSED ✅' : '\nUTA CONFORMANCE: FAILED ❌');
-  process.exit(allOk ? 0 : 1);
+  const allOk1 = s1.ok === s1.total;
+  console.log(allOk1 ? '\nUTA CONFORMANCE: PASSED ✅' : '\nUTA CONFORMANCE: FAILED ❌');
+  process.exit(allOk1 ? 0 : 1);
 }
 
 // --matrix: the separation table, reproducible
@@ -294,7 +320,9 @@ const rows = [
 console.log('| Runner | fixed vectors | generated |');
 console.log('|---|---|---|');
 for (const [name, runner] of rows) {
+  NOW = FIXED_NOW;                                    // fixtures at the pinned clock
   const sf = score(runner, fixed);
+  NOW = WALL_NOW;                                     // generated at the wall clock
   const sg = generated.length ? score(runner, generated) : null;
   console.log(`| ${name} | ${sf.ok}/${sf.total} ${sf.failed.length ? `← fails ${sf.failed.slice(0, 3).join(', ')}${sf.failed.length > 3 ? '…' : ''}` : ''} | ${sg ? `${sg.ok}/${sg.total}` : 'n/a'} |`);
 }
@@ -321,3 +349,7 @@ console.log('    (runner-tests/mutant-sweep.json) with equivalent mutants separa
 console.log('  - rekor-in-the-loop (v1.4.0): anchors/verify-artifact.mjs compares the sha256 of the');
 console.log('    downloaded artifact against Rekor-committed digests — the log is in the actual');
 console.log('    verification path, not decorative (anp2network, round 3).');
+console.log('  - two clocks (v1.5.0): the fixed suite is evaluated against evaluation_clock from');
+console.log('    _index.json (a pinned clock recorded next to the result) — premature-atc never');
+console.log('    decays and the accept vectors never lapse. Generated cards stay on the wall clock.');
+console.log('    Pass --clock YYYY-MM-DDT00:00:00Z to pin both for byte-reproducible runs.');

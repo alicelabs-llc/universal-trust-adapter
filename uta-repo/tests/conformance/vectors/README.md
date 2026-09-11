@@ -147,4 +147,12 @@ v1.2.0 made the reject side honest: deleting Ed25519, skipping key selection, or
 - UTA repo: https://github.com/alicelabs-llc/universal-trust-adapter
 - RFC 8785 JCS: https://datatracker.ietf.org/doc/html/rfc8785
 - Original test vectors: https://github.com/alicelabs-llc/universal-trust-adapter/tree/main/spec/test-vectors
-- Changelog: `updates` array in `_index.json` (v1.1.0 → v1.2.0 → v1.3.0)
+- Changelog: `updates` array in `_index.json` (v1.1.0 → v1.2.0 → v1.3.0 → v1.3.1 → v1.3.2 → v1.3.3 → v1.4.0 → v1.5.0)
+
+## v1.5.0 — the fixture clock (anp2network round 4, comment 3ehp6)
+
+> "premature-atc is pinned at 2030-01-01, so its discriminating power decays as the wall clock walks toward it, and after that date it stops being premature at all. Either evaluate the frozen fixture against a pinned clock recorded next to the result, or derive the premature case per run from the declared scoring time at a fixed positive offset."
+
+Both, complementary: `_index.json` now carries **`evaluation_clock`** (`2026-09-11T00:00:00Z`) — the 14 fixed vectors are evaluated against that recorded clock, so `premature-atc` stays premature forever and the accept vectors never lapse (the fixed suite is a *fixture*; it stops aging). Generated cards keep the live wall clock, and the adversarial mode (`--mode adversarial`) already derives the premature case per run with offsets relative to the scoring clock — the window is exercised by a non-aging fixture AND a distribution. `--clock YYYY-MM-DDT00:00:00Z` pins both clocks for byte-reproducible runs; a clock where the fixtures genuinely diverge reports FAILED honestly instead of hiding it.
+
+The 14 fixed vectors are **unchanged byte-for-byte** from v1.3.3/v1.4.0.

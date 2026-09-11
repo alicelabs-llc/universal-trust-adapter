@@ -1,17 +1,17 @@
 {
   "schema": "uta-runner-answer-key/1.1",
-  "as_of": "2026-09-10",
+  "as_of": "2026-09-11",
   "valid_until": "2027-08-19",
   "earliest_future_expiry": "2027-08-20T00:00:00Z",
   "earliest_future_issued_at": "2030-01-01T00:00:00Z",
   "runner": {
     "file": "../score-runner.mjs",
-    "sha256": "5802cc35c076c3e45dbca9200b483b1606302fe0a8cf93afb9d4775ffa28565b",
-    "bytes": 18641
+    "sha256": "c0bd20e6987d94d75f63e3756d49d1d0d89ea0c4c80175cee0e18db1062dba25",
+    "bytes": 20966
   },
   "matrix": {
     "header": {
-      "version": "1.4.0",
+      "version": "1.5.0",
       "fixed": 14
     },
     "rows": [
@@ -124,21 +124,21 @@
   "mutant_count": 10,
   "mutants": {
     "stage-blind": {
-      "sha256": "51d7272f4fdb065b11450ce11bc0c1b812d7f925d6983441088e8ffd48119621",
+      "sha256": "b591163e53baed0e0a1d3b6fef127c6fcfcfff5dfab4faed0d8daac720cb9fca",
       "diverges": true,
       "where": [
         "matrix"
       ]
     },
     "memorizer-promote": {
-      "sha256": "5b6d95a17135e73d9026ee2a53333481979da2d887abc7243c33c8308a306b5a",
+      "sha256": "5cfb59ddc336f8a94f4ddfc12cfd9e9e3cd04481be8a60f0caed07f2f7bee990",
       "diverges": true,
       "where": [
         "matrix"
       ]
     },
     "score-inflate": {
-      "sha256": "6ac7b6b85329ad0303ed5d4b7a5fce851ca25673b9743c8832b1be781eb4160a",
+      "sha256": "503434ac7c21edde06006bc8f9027d28535416326d0180a1b42f0fff05bf9229",
       "diverges": true,
       "where": [
         "matrix",
@@ -147,7 +147,7 @@
       ]
     },
     "anchor-narrow": {
-      "sha256": "feda7bfff52444196d6b8bacf120314eab2070cf472acf52249eef4da174de8a",
+      "sha256": "47d7525729b96c8f270ad3eafcc9a423a1831c841bc509295c8e72df13359a0c",
       "diverges": true,
       "where": [
         "matrix",
@@ -156,7 +156,7 @@
       ]
     },
     "expiry-blind": {
-      "sha256": "77fe6d7699caeaf5fd97883424a8ae075120ebc53e7e34a82e24be7aae5e0c83",
+      "sha256": "261fe4ca5c9c9fbcae191319b079ea8590a20329ee7a6f3ebb797bcb9c43ff72",
       "diverges": true,
       "where": [
         "matrix",
@@ -165,7 +165,7 @@
       ]
     },
     "status-blind": {
-      "sha256": "86a4ce324c005d8ed76388eb6602cd8f532f3de084649d2992ce1bc74a64d8fb",
+      "sha256": "7d66c422e989092ab687bcd9fabdd0e228e9491e92bb86fc30291d514e9ad0a3",
       "diverges": true,
       "where": [
         "matrix",
@@ -174,7 +174,7 @@
       ]
     },
     "sig-accept-all": {
-      "sha256": "8f7614ac5896516c5859ab5566212e4b211db270f03740a0eaceb6ea42e25b3c",
+      "sha256": "0f62e71a21fff62a3b468e5e819ed52dafbbaebdb736857b33002ec6718d7635",
       "diverges": true,
       "where": [
         "matrix",
@@ -183,7 +183,7 @@
       ]
     },
     "translation-flip": {
-      "sha256": "4a5e0005ae8a1dbe20068fd6896c9cb456f651e31647eabeb657d9aa37a6e153",
+      "sha256": "ddb6c99ef9eeb7409a6359153a6bd1cdfe3b61a0f2fac7dd4ce3f0fdeccdfe2c",
       "diverges": true,
       "where": [
         "matrix",
@@ -192,19 +192,19 @@
       ]
     },
     "stage-liar-cured": {
-      "sha256": "2a314e5f58fc333b59c89a1573878a578ac5c9a44243963a80b370f7bcf1e472",
+      "sha256": "3aff8e361694c9808e6860a62d1a786b8af804fdc3133bd4934023a1d9fbf58e",
       "diverges": true,
       "where": [
         "matrix"
       ]
     },
     "over-rejector-cured": {
-      "sha256": "c07a41e19ac8c4a55542feb659e1eba2fd4794c440dd6ee850e8bd90e699a208",
+      "sha256": "bc5ece8fbb4c21ef89a4a99a118fe2783af9ca54851a96c6a079abb0295c019a",
       "diverges": true,
       "where": [
         "matrix"
       ]
     }
   },
-  "note": "Behavioral oracle for score-runner.mjs, recorded from live behavior across five surfaces (matrix, reference, adversarial challenge, two fail-closed probes). The key is a derived artifact: every value here is observed, none asserted by hand. Anchored in Sigstore Rekor (entry #5 — anchor-record-v5.json; verify the chain in-loop with --rekor or anchors/verify-artifact.mjs); a re-anchored successor supersedes this key. After valid_until the suite fails closed: re-issue vectors, re-record, re-anchor."
+  "note": "Behavioral oracle for score-runner.mjs, recorded from live behavior across five surfaces (matrix, reference, adversarial challenge, two fail-closed probes). The key is a derived artifact: every value here is observed, none asserted by hand. Anchored in Sigstore Rekor (entry #5 — anchor-record-v6.json; verify the chain in-loop with --rekor or anchors/verify-artifact.mjs); a re-anchored successor supersedes this key. After valid_until the suite fails closed: re-issue vectors, re-record, re-anchor."
 }
