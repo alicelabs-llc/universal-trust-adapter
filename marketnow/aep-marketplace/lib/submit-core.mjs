@@ -245,6 +245,12 @@ export async function processSubmission(payload, { dryRun = false, remoteIp = 'u
       install: skill.install || '(not provided)', homepage: skill.homepage || null,
       repo_url: skill.repo_url || null, license: skill.license || null,
       price: typeof skill.price === 'number' ? skill.price : 0,
+      // payload completo para L2 review + catalog merge (ya capped: files ≤60KB, payload ≤100KB)
+      doc: skill.doc || null,
+      capabilities: skill.capabilities || null,
+      test: skill.test || null,
+      files: skill.files || null,
+      code: skill.code || null,
     },
     sentinel: {
       scan_version: 'L1-sub/1.0', scanned_at: new Date().toISOString(),
