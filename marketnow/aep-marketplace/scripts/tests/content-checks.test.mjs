@@ -47,15 +47,15 @@ test('F-09: no GitHub token comment in index.html', () => {
 });
 
 test('R-05: stats.json exists and has correct structure (v5.5 catalog)', () => {
-  assert.ok(STATS_JSON.discovery.total_mcp_servers === 66496, 'total_mcp_servers should be 66496 (L1 index-certified)');
-  assert.ok(STATS_JSON.security.l1_index_certified === 66496, 'l1_index_certified should be 66496');
-  assert.ok(STATS_JSON.security.l2_sentinel_scanned === 688, 'l2_sentinel_scanned should be 688');
+  assert.ok(STATS_JSON.discovery.total_mcp_servers === 69076, 'total_mcp_servers should be 69076 (L1 index-certified)');
+  assert.ok(STATS_JSON.security.l1_index_certified === 69076, 'l1_index_certified should be 69076');
+  assert.ok(STATS_JSON.security.l2_sentinel_scanned === 2839, 'l2_sentinel_scanned should be 2839');
   assert.ok(STATS_JSON.security.npm_vulnerabilities_own_packages === 0, 'own npm packages: 0 vulnerabilities');
 });
 
 test('R-10: data layer has no stale 9,248 counts (agent-ping feeds the homepage)', () => {
   const PING_JSON = JSON.parse(readFileSync(`${ROOT}/marketnow/aep-marketplace/public/api/agent-ping.json`, 'utf-8'));
-  assert.ok(PING_JSON.stats.total_skills === 66496, 'agent-ping total_skills should be 66496');
+  assert.ok(PING_JSON.stats.total_skills === 69076, 'agent-ping total_skills should be 69076');
   assert.equal(PING_JSON.stats.mcp_tools_count, PING_JSON.mcp_tools.length, 'mcp_tools_count should match the tools list');
   const CARD_JSON = JSON.parse(readFileSync(`${ROOT}/marketnow/aep-marketplace/public/.well-known/mcp/server-card.json`, 'utf-8'));
   assert.ok(!CARD_JSON.description.includes('9,248'), 'server-card (Smithery source) must not say 9,248');
