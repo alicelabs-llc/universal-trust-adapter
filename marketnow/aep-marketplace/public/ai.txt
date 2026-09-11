@@ -4,7 +4,7 @@
 # It declares what AI agents may do with this site and where to find
 # machine-readable content.
 #
-# Site: https://marketnow.site
+# Site: https://www.marketnow.site
 # Owner: AliceLabs LLC (info@alicelabs.site)
 # Last updated: 2026-07-07
 

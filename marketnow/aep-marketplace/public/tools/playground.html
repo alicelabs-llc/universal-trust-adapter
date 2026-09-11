@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>API Playground — MarketNow</title>
 <meta name="description" content="Try MarketNow's API live. Search skills, get certificates, test MCP endpoint.">
-<link rel="canonical" href="https://marketnow.site/tools/playground.html" />
+<link rel="canonical" href="https://www.marketnow.site/tools/playground.html" />
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#050505;color:#e2e8f0;line-height:1.6;padding:20px;max-width:1000px;margin:0 auto}
@@ -55,7 +55,7 @@ a{color:#3b82f6}
 <pre id="mcpResponse" style="margin-top:1em"><code>MCP responses will appear here.</code></pre>
 
 <script>
-const API_BASE = 'https://marketnow.site/api';
+const API_BASE = 'https://www.marketnow.site/api';
 const endpoints = [
   { method:'GET', path:'/search', label:'Search skills', params:[{name:'q',placeholder:'filesystem',required:true},{name:'max_price',placeholder:'5',required:false},{name:'limit',placeholder:'10',required:false}] },
   { method:'GET', path:'/free-skills.json', label:'List free skills', params:[] },
@@ -144,7 +144,7 @@ function sendRequest() {
 }
 
 function testMCP(method) {
-  const mcpUrl = 'https://marketnow.site/api/mcp';
+  const mcpUrl = 'https://www.marketnow.site/api/mcp';
   let body;
   
   if (method === 'initialize') {

@@ -1,6 +1,6 @@
 MarketNow Agent Quick Reference
 ================================
-Base: https://marketnow.site
+Base: https://www.marketnow.site
 Skills: 66,496 | L1: 66,496 | L2 tarballs: 688 | Free: 66,496 | Sentinel: L2 (29 rules)
 
 ENDPOINTS (all return JSON, no auth unless noted):

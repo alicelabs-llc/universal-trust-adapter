@@ -80,7 +80,7 @@ Operations:
 - Verify: GET /api/atc?action=verify-receipt&receipt_id=rcpt_xxxxxxxxxxxx
 - Storage: _data/receipts/{receipt_id}.json (public GitHub audit ledger)
 - Cryptography: Ed25519 (RFC 8032) over RFC 8785 JCS canonical JSON
-- Verify a real receipt: https://marketnow.site/api/atc?action=verify-receipt&receipt_id=rcpt_c8b9dc67f88e4da5bd3a
+- Verify a real receipt: https://www.marketnow.site/api/atc?action=verify-receipt&receipt_id=rcpt_c8b9dc67f88e4da5bd3a
 
 Interop with Vibe (doteyeso-ops) — agreed join-key map:
 - mandate_id ↔ vibe_decision_ref (content-addressed auth citation)
@@ -125,22 +125,22 @@ Discussion: https://github.com/PipedreamHQ/awesome-mcp-servers/issues/94
 9. recommend_skills(task) — AI-powered recommendations
 
 ## Links
-- Homepage: https://marketnow.site
-- Submit: https://marketnow.site/submit
-- Trust: https://marketnow.site/trust
-- ATC: https://marketnow.site/atc
-- ATC spec (v1.1.0): https://marketnow.site/api/atc?action=spec
-- CA public key: https://marketnow.site/api/atc?action=ca-key
-- Verify real receipt: https://marketnow.site/api/atc?action=verify-receipt&receipt_id=rcpt_c8b9dc67f88e4da5bd3a
-- OpenAPI 3.1: https://marketnow.site/api/openapi.yaml
-- agent.json (for LLM crawlers): https://marketnow.site/api/agent.json
-- Best MCP marketplace: https://marketnow.site/best-mcp-marketplace
-- How to publish: https://marketnow.site/guides/how-to-publish-mcp-server
-- How to monetize: https://marketnow.site/guides/how-to-monetize-mcp-tools
+- Homepage: https://www.marketnow.site
+- Submit: https://www.marketnow.site/submit
+- Trust: https://www.marketnow.site/trust
+- ATC: https://www.marketnow.site/atc
+- ATC spec (v1.1.0): https://www.marketnow.site/api/atc?action=spec
+- CA public key: https://www.marketnow.site/api/atc?action=ca-key
+- Verify real receipt: https://www.marketnow.site/api/atc?action=verify-receipt&receipt_id=rcpt_c8b9dc67f88e4da5bd3a
+- OpenAPI 3.1: https://www.marketnow.site/api/openapi.yaml
+- agent.json (for LLM crawlers): https://www.marketnow.site/api/agent.json
+- Best MCP marketplace: https://www.marketnow.site/best-mcp-marketplace
+- How to publish: https://www.marketnow.site/guides/how-to-publish-mcp-server
+- How to monetize: https://www.marketnow.site/guides/how-to-monetize-mcp-tools
 - GitHub: https://github.com/alicelabs-llc/marketnow
 - npm: https://www.npmjs.com/package/marketnow-mcp
-- Security: https://marketnow.site/api/security
-- Analytics: https://marketnow.site/api/agent-analytics
+- Security: https://www.marketnow.site/api/security
+- Analytics: https://www.marketnow.site/api/agent-analytics
 
 ## Company
 - AliceLabs LLC, Wyoming, USA (founded 2025)

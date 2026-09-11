@@ -21,14 +21,14 @@
 
   <div id="manifest" style="margin: 2rem 0; padding: 1rem; background: #fef3c7; border-radius: 8px;">
     <strong>Machine-readable manifest:</strong><br>
-    <code>curl https://marketnow.site/resilience.json | jq</code>
+    <code>curl https://www.marketnow.site/resilience.json | jq</code>
   </div>
 
   <h2>Packages</h2>
   <div id="packages">Loading manifest...</div>
 
   <h2>One-line installer</h2>
-  <pre><code>curl -fsSL https://marketnow.site/install.sh | bash</code></pre>
+  <pre><code>curl -fsSL https://www.marketnow.site/install.sh | bash</code></pre>
 
   <script>
     fetch('/resilience.json').then(r => r.json()).then(manifest => {

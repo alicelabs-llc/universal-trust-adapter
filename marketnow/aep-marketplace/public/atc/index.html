@@ -170,7 +170,7 @@ console.log(result.valid); // → true</code></pre>
 <div class="card">
   <h2>Badges</h2>
   <p>If your project implements ATC/1.0, add this badge to your README:</p>
-  <pre><code>[![ATC Compatible](https://marketnow.site/badges/atc-compatible.svg)](https://marketnow.site/atc/conformance)</code></pre>
+  <pre><code>[![ATC Compatible](https://www.marketnow.site/badges/atc-compatible.svg)](https://www.marketnow.site/atc/conformance)</code></pre>
   <p style="margin-top:8px;"><img src="/badges/atc-compatible.svg" alt="ATC Compatible" style="vertical-align: middle;"> <img src="/badges/atc-verified.svg" alt="ATC Verified" style="vertical-align: middle;"></p>
 </div>
 
@@ -193,11 +193,11 @@ console.log(result.valid); // → true</code></pre>
 <div class="card">
   <h2>Try it now — verify a real ATC against the live MarketNow CA</h2>
   <p>The MarketNow Sentinel CA has issued 57 real ATCs (3 revoked). You can verify any of them against the open spec:</p>
-  <pre><code>curl https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-7777670</code></pre>
+  <pre><code>curl https://www.marketnow.site/api/atc?action=verify&card_id=ATC-2026-7777670</code></pre>
   <p style="margin-top:8px;">Or use the SDK:</p>
   <pre><code>import { verifyATC } from 'agent-trust-card';
 
-const res = await fetch('https://marketnow.site/api/atc?action=verify&card_id=ATC-2026-7777670');
+const res = await fetch('https://www.marketnow.site/api/atc?action=verify&card_id=ATC-2026-7777670');
 const atc = await res.json();
 const result = await verifyATC(atc, { fetch_revocation: true });
 
@@ -207,7 +207,7 @@ console.log(result.revoked);  // → false</code></pre>
 </div>
 
 <footer>
-  <p>ATC/1.0 — Agent Trust Card Specification · Maintained by <a href="https://marketnow.site">AliceLabs LLC</a> (Wyoming, USA, 2026) · Founder: Edison Flores</p>
+  <p>ATC/1.0 — Agent Trust Card Specification · Maintained by <a href="https://www.marketnow.site">AliceLabs LLC</a> (Wyoming, USA, 2026) · Founder: Edison Flores</p>
   <p>License: spec is open (W3C CG-FSA terms for contributors), reference implementation is MNNC-1.0 (AliceLabs LLC Proprietary), test vectors are CC0 (public domain)</p>
   <p style="margin-top: 12px; font-size: 11px; color: var(--dim);">Note: GitHub has flagged our account (`edgarfloresguerra2011-a11y`), so all spec content is mirrored here at <code>marketnow.site/atc/</code>. The GitHub repo remains the source of truth for version control but is currently not publicly visible while we resolve the flag.</p>
 </footer>

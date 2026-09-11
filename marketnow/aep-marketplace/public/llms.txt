@@ -85,7 +85,7 @@ Auto-updates every 5 min via GitHub Actions
 
 ```bash
 # Universal installer (verified, Sigstore-signed)
-curl -fsSL https://marketnow.site/install.sh | bash
+curl -fsSL https://www.marketnow.site/install.sh | bash
 
 # Or via npm
 npm install -g @marketnow/trust-core @marketnow/trust-adapters @marketnow/trust-gateway

@@ -540,19 +540,17 @@ Disallow: /api/certification-scans.json
 Crawl-delay: 1
 
 # ─── Sitemaps ───────────────────────────────────────────────────
-Sitemap: https://marketnow.site/sitemap.xml
-Sitemap: https://marketnow.site/sitemap-skills.xml
-Sitemap: https://marketnow.site/sitemap-skills-index.xml
-Sitemap: https://marketnow.site/sitemap-skills-b2.xml
-Sitemap: https://marketnow.site/sitemap-skills-b3.xml
+# Canonical sitemaps (host = www, unico host vivo del sitio)
+Sitemap: https://www.marketnow.site/sitemap-skills-index.xml
+Sitemap: https://www.marketnow.site/sitemap.xml
+Sitemap: https://www.marketnow.site/sitemap-agents.xml
 
-Sitemap: https://marketnow.site/api/skills-lite.json
 
 # LLM discoverability (llms.txt convention by answer.ai)
 # Tells LLMs (GPT, Claude, Gemini) what this site is about
 # https://llmstxt.org
-LLMs-txt: https://marketnow.site/llms.txt
-LLMs-full-txt: https://marketnow.site/llms-full.txt
+LLMs-txt: https://www.marketnow.site/llms.txt
+LLMs-full-txt: https://www.marketnow.site/llms-full.txt
 
 # Agent-readable API endpoints
 # GET /api/agent.json — full machine-readable agent instructions (66,496 skills)
@@ -574,4 +572,3 @@ LLMs-full-txt: https://marketnow.site/llms-full.txt
 # Search: GET /api/search?q=your_query
 
 # Agent-specific sitemap (machine-readable endpoints)
-Sitemap: https://marketnow.site/sitemap-agents.xml

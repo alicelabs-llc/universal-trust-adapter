@@ -6,7 +6,7 @@
     "version": "4.1.0",
     "contact": {
       "name": "MarketNow",
-      "url": "https://marketnow.site",
+      "url": "https://www.marketnow.site",
       "email": "info@alicelabs.site"
     },
     "license": {
@@ -16,7 +16,7 @@
   },
   "servers": [
     {
-      "url": "https://marketnow.site",
+      "url": "https://www.marketnow.site",
       "description": "Production"
     }
   ],

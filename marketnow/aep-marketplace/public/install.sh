@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # MarketNow Universal Trust Adapter (UTA) — Installer
-# Usage: curl -fsSL https://marketnow.site/install.sh | bash
+# Usage: curl -fsSL https://www.marketnow.site/install.sh | bash
 #
 # What it does:
 #   1. Detects OS (macOS / Linux) and architecture (x64 / arm64)
@@ -226,7 +226,7 @@ install_binary() {
     warn "/usr/local/bin is not writable — retrying with sudo"
     if ! sudo mv "$BINARY_PATH" "$INSTALL_PATH"; then
       err "Permission denied. Try running this installer with sudo:"
-      err "  curl -fsSL https://marketnow.site/install.sh | sudo bash"
+      err "  curl -fsSL https://www.marketnow.site/install.sh | sudo bash"
       exit 6
     fi
   fi
@@ -249,7 +249,7 @@ verify_install() {
   echo "  uta-verify <card.json>         Verify an ATC card"
   echo "  uta-verify --auto <payload>     Auto-detect format and verify"
   echo
-  echo -e "${BOLD}Documentation:${NC} https://marketnow.site/uta/docs"
+  echo -e "${BOLD}Documentation:${NC} https://www.marketnow.site/uta/docs"
   echo -e "${BOLD}Repository:${NC}    https://github.com/${REPO}"
   echo -e "${BOLD}Status:${NC}       https://status.marketnow.site"
 }

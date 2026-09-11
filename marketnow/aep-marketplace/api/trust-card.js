@@ -33,7 +33,7 @@ export default function handler(req, res) {
         "https://registry.npmjs.org/@marketnow/uts",
         "https://cdn.jsdelivr.net/npm/@marketnow/uts@2.0.0/",
         "https://unpkg.com/@marketnow/uts@2.0.0/",
-        "https://marketnow.site/uta-packages/marketnow-uts-2.0.0.tgz"
+        "https://www.marketnow.site/uta-packages/marketnow-uts-2.0.0.tgz"
       ],
       devto_articles_published: 4,
       devto_engagement: "active_community_response"
@@ -50,7 +50,7 @@ export default function handler(req, res) {
     ],
     signature: {
       algorithm: "Ed25519",
-      note: "Signature can be verified with AliceLabs public key at https://marketnow.site/.well-known/keys.json"
+      note: "Signature can be verified with AliceLabs public key at https://www.marketnow.site/.well-known/keys.json"
     }
   });
 }
