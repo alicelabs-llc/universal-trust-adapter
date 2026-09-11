@@ -154,3 +154,106 @@ The signed CRL lives at `/uta/revocations/crl.json`; live status resolution at
 `/api/ocsp?card_id=…` and `/api/ocsp?kid=…` (fail-closed); the MCP tool is
 `marketnow_check_revocation`. The npm package `marketnow-mcp@1.10.2` exposes
 both `marketnow_check_revocation` and `marketnow_fingerprint_tool` (TFP-1.0).
+
+# Entry #5 — the round-3 anchor: adversarial distribution, generated mutants, Rekor-in-the-loop (v1.4.0)
+
+anp2network's round-3 comment (3ehcp) named three gaps; entry #5 anchors the
+artifacts that close them. The digests below are what the log committed to at
+`2026-09-10T21:52:48Z` — the publisher cannot rewrite them.
+
+| Subject | sha256 |
+|---|---|
+| `score-runner.mjs` v1.4.0 (the tested thing) | `5802cc35c076c3e45dbca9200b483b1606302fe0a8cf93afb9d4775ffa28565b` |
+| `generate-accept-vectors.mjs` v1.4.0 (adversarial mode) | `60d064943057b5b3…` (full value in the statement) |
+| `vectors/_index.json` v1.4.0 | `edfa37d3ca380d4b…` |
+| `runner-tests/answer-key.json` (5-surface oracle) | `79a5c5936be9ba9f…` |
+| `runner-tests/runner-tests.mjs` (27 checks, `--rekor`) | `e5f60fb66a8dfb6e…` |
+| `runner-tests/mutants.json` (10 curated) | `9f082e251920b477…` |
+| `runner-tests/generate-mutants.mjs` (the sweep) | `e22907d3338e1463…` |
+| `runner-tests/mutant-sweep.json` (113 mutants, 92 caught, 21 survivors classified) | `e3fa9a4fc808c76f…` |
+| `verify-artifact.mjs` (Rekor-in-the-loop) | `eb2262924772304f…` |
+| runner-tests + vectors READMEs | `762b39e8c335b9f2…` / `c0a41953ef39c075…` |
+
+## The Rekor entry #5
+
+- **Log:** https://rekor.sigstore.dev
+- **Entry UUID:** `108e9186e8c5677a8f6b0956695beefc19bcd6790a6285469c39a0b2096bcedcec8b44753c8025bf`
+- **Log index:** `2787622029`
+- **Integrated time:** `2026-09-10T21:52:48Z`
+- **Countersignature:** ECDSA P-256 over sha256(statement v5); fresh throwaway
+  key, private key discarded after signing — it can never sign again.
+
+## Verify it yourself — the log in the actual verification path
+
+```bash
+# the anchor itself (9 checks)
+node verify-rekor.mjs --record anchor-record-v5.json --statement anchor-statement-v5.json
+
+# ANY artifact, from ANY origin — the digest comes from Rekor, not the hub:
+node verify-artifact.mjs https://www.marketnow.site/uta/conformance/score-runner.mjs
+
+# or the whole suite, digest chain re-rooted at the live entry first:
+node ../runner-tests/runner-tests.mjs --rekor
+```
+
+`verify-artifact.mjs` is the "one line" from the round-3 comment, made
+executable: download the artifact, fetch the entry live, authenticate the
+statement against the entry's committed hash, verify Rekor's signatures
+(signedEntryTimestamp, inclusion fold, checkpoint) and the throwaway
+countersignature, then compare the sha256 of the downloaded bytes against the
+Rekor-rooted pins. The comparison never stays inside the hub's origin.
+
+**Honest note.** The repo's answer key had drifted between 2026-09-10 and this
+anchor (the `2dbaa429` doc-nit changed runner bytes without re-recording; the
+suite's bytes oracle flagged it fail-closed). v1.4.0 re-records and re-anchors.
+That drift — and its catching — is exactly what entry #5 exists to make
+non-repeatable silently.
+
+# Entry #6 — the round-4 anchor: the release chain (v1.5.0, rollback resistance)
+
+anp2network's round-4 comment (3ehp6): "inclusion proves a record exists in
+the log. It says nothing about that record being the current authorized state
+for score-runner... Serve an older, legitimately anchored runner together
+with the artifact that matched it at the time, and every step you listed
+passes... Rollback, fully signed." Entry #6 anchors the answer: a
+**persistent release identity** (Ed25519) and the monotone **release
+statement r1** (counter 1, suite v1.5.0, 17 artifact digests).
+
+| | |
+|---|---|
+| Log | https://rekor.sigstore.dev |
+| Entry UUID | `108e9186e8c5677a6eb2af77b82ec2bdff4ccef2170bc7f482a0bf7cec5b2e9752f22f9b8cac002b` |
+| Log index | `2795106183` |
+| Integrated | `2026-09-11T15:38:34Z` |
+| Countersignature | ECDSA P-256 over sha256(statement v6); fresh throwaway, private key discarded — it can never sign again |
+| Bootstrap floor | `2787622029` (entry #5) — release anchors at or below this are refused at first contact |
+
+## Verify it yourself — now with rollback resistance
+
+```bash
+# the round-3 flow still works (any artifact, any origin):
+node verify-artifact.mjs https://www.marketnow.site/uta/conformance/score-runner.mjs
+
+# the round-4 flow — the release chain with local state:
+node verify-artifact.mjs --release
+node verify-artifact.mjs --release --artifact https://www.marketnow.site/uta/conformance/score-runner.mjs
+```
+
+The release identity is the first key in the project that is neither a
+throwaway nor published: its private half is held offline by the publisher,
+because a monotone counter is only meaningful if nobody else can sign one.
+The verifier keeps local state (highest accepted counter + checkpoint),
+refuses lower counters (rollback), same-counter conflicts (fork), and
+below-floor anchors (history restart). The residual — what a FRESH verifier
+cannot know — is bounded by the floor and by the identity only existing in
+entry #6+ statements; from the first accepted release onward, monotonicity
+is total. See `../releases/README.md` for the full contract and the
+publisher's release procedure.
+
+## Files (entry #6)
+
+| File | Role |
+|---|---|
+| `anchor-statement-v6.json` | The signed statement: release identity + release statement r1 digest + the v1.5.0 digest set. |
+| `anchor-record-v6.json` | Untrusted locator (UUID, logIndex, integrated time, countersignature key). Everything that matters is re-verified live. |
+| `verify-artifact.mjs` | v1.5.0: round-3 single-artifact flow + `--release` rollback-resistant chain verification. |

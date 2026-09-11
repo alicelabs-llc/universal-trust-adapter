@@ -1,17 +1,17 @@
 {
-  "schema": "uta-runner-answer-key/1.0",
-  "as_of": "2026-09-09",
+  "schema": "uta-runner-answer-key/1.1",
+  "as_of": "2026-09-11",
   "valid_until": "2027-08-19",
   "earliest_future_expiry": "2027-08-20T00:00:00Z",
   "earliest_future_issued_at": "2030-01-01T00:00:00Z",
   "runner": {
     "file": "../score-runner.mjs",
-    "sha256": "deec4cf670bed7b30eae0995b15c1c08970c29e3e72087329e0544aaf85aa972",
-    "bytes": 15881
+    "sha256": "c0bd20e6987d94d75f63e3756d49d1d0d89ea0c4c80175cee0e18db1062dba25",
+    "bytes": 20966
   },
   "matrix": {
     "header": {
-      "version": "1.3.3",
+      "version": "1.5.0",
       "fixed": 14
     },
     "rows": [
@@ -24,7 +24,7 @@
           "expired-atc",
           "premature-atc"
         ],
-        "generated": "n/a"
+        "generated": "14/24"
       },
       {
         "name": "policy-only (Ed25519 deleted)",
@@ -35,7 +35,7 @@
           "wrong-ca",
           "self-signed-atc"
         ],
-        "generated": "n/a"
+        "generated": "24/24"
       },
       {
         "name": "crypto-only (no expiry/status)",
@@ -46,7 +46,7 @@
           "premature-atc",
           "revoked-atc"
         ],
-        "generated": "n/a"
+        "generated": "14/24"
       },
       {
         "name": "embedded-key + policy (TOFU)",
@@ -55,7 +55,7 @@
         "failed": [
           "self-signed-atc"
         ],
-        "generated": "n/a"
+        "generated": "24/24"
       },
       {
         "name": "memorizer (hardcodes valid-atc digest)",
@@ -65,7 +65,7 @@
           "valid-atc-2",
           "valid-unknown-field"
         ],
-        "generated": "n/a"
+        "generated": "10/24"
       },
       {
         "name": "over-rejector (chokes on x_* fields)",
@@ -74,7 +74,7 @@
         "failed": [
           "valid-unknown-field"
         ],
-        "generated": "n/a"
+        "generated": "10/24"
       },
       {
         "name": "stage-liar (all fire at sig-verification)",
@@ -85,14 +85,14 @@
           "valid-atc-2",
           "valid-unknown-field"
         ],
-        "generated": "n/a"
+        "generated": "0/24"
       },
       {
         "name": "reference (pinned + policy + tolerance)",
         "ok": 14,
         "total": 14,
         "failed": [],
-        "generated": "n/a"
+        "generated": "24/24"
       }
     ]
   },
@@ -102,84 +102,109 @@
     "failed_listed": false,
     "exit_code": 0
   },
+  "adversarial": {
+    "seed": 3,
+    "count": 24,
+    "generated": "24/24",
+    "passed": true,
+    "exit": 0,
+    "note": "the seeded two-bound boundary distribution (offsets relative to the scoring clock, incl. issued_at===NOW and expires_at===NOW), regenerated fresh each run and scored through --generated"
+  },
+  "failclosed": {
+    "malformed_card": {
+      "exit": 1,
+      "stderr_marker": "unscoreable"
+    },
+    "poisoned_sidecar": {
+      "exit": 1,
+      "stderr_marker": "sidecar-disagrees"
+    },
+    "note": "a malformed card and a sidecar that disagrees with derived truth must both abort (exit 1) — never silently score"
+  },
   "mutant_count": 10,
   "mutants": {
     "stage-blind": {
-      "sha256": "005b06bb7a0c5092ab6846fc213ec13d1d817511e424fd334a541db4101473c0",
+      "sha256": "b591163e53baed0e0a1d3b6fef127c6fcfcfff5dfab4faed0d8daac720cb9fca",
       "diverges": true,
       "where": [
         "matrix"
       ]
     },
     "memorizer-promote": {
-      "sha256": "37e84be27cf4b711aae553fa929e30b2901b4f56ee60e5ed314cb429bcd9c247",
+      "sha256": "5cfb59ddc336f8a94f4ddfc12cfd9e9e3cd04481be8a60f0caed07f2f7bee990",
       "diverges": true,
       "where": [
         "matrix"
       ]
     },
     "score-inflate": {
-      "sha256": "2df0f18bb10f0ab6e019c2a931f1c6eff8b08152b5007340e05f6d3134ad0232",
+      "sha256": "503434ac7c21edde06006bc8f9027d28535416326d0180a1b42f0fff05bf9229",
       "diverges": true,
       "where": [
         "matrix",
-        "reference"
+        "reference",
+        "adversarial"
       ]
     },
     "anchor-narrow": {
-      "sha256": "c7334525890696b9addc9379ae412a5c6569126d361409b3f462a9043990deeb",
+      "sha256": "47d7525729b96c8f270ad3eafcc9a423a1831c841bc509295c8e72df13359a0c",
       "diverges": true,
       "where": [
         "matrix",
-        "reference"
+        "reference",
+        "adversarial"
       ]
     },
     "expiry-blind": {
-      "sha256": "df238612e924943fbeade991e725b5c891a0fb5e5215e6f352e875348bd1523d",
+      "sha256": "261fe4ca5c9c9fbcae191319b079ea8590a20329ee7a6f3ebb797bcb9c43ff72",
       "diverges": true,
       "where": [
         "matrix",
-        "reference"
+        "reference",
+        "adversarial"
       ]
     },
     "status-blind": {
-      "sha256": "c871eec2f1524dc700d4a49698c20f47307429339e380b09881156727ffa6076",
+      "sha256": "7d66c422e989092ab687bcd9fabdd0e228e9491e92bb86fc30291d514e9ad0a3",
       "diverges": true,
       "where": [
         "matrix",
-        "reference"
+        "reference",
+        "adversarial"
       ]
     },
     "sig-accept-all": {
-      "sha256": "c9b8b173b7059308f27ab8a016dd2f488b827e7d4e96b1f14c6a97a778ec3bac",
+      "sha256": "0f62e71a21fff62a3b468e5e819ed52dafbbaebdb736857b33002ec6718d7635",
       "diverges": true,
       "where": [
         "matrix",
-        "reference"
+        "reference",
+        "adversarial"
       ]
     },
     "translation-flip": {
-      "sha256": "82b71c4c2e3083e4db7649fd4155409a2cafde247e71b790883c1009fb11b986",
+      "sha256": "ddb6c99ef9eeb7409a6359153a6bd1cdfe3b61a0f2fac7dd4ce3f0fdeccdfe2c",
       "diverges": true,
       "where": [
         "matrix",
-        "reference"
+        "reference",
+        "adversarial"
       ]
     },
     "stage-liar-cured": {
-      "sha256": "53da985b4ab0ed5dd5341e93bca8a92cdaf768fd81c1e5c6a5c5250cc2b5224d",
+      "sha256": "3aff8e361694c9808e6860a62d1a786b8af804fdc3133bd4934023a1d9fbf58e",
       "diverges": true,
       "where": [
         "matrix"
       ]
     },
     "over-rejector-cured": {
-      "sha256": "e3a375a82433dd38ae884c2c0662eb65bbc0428b61d2bf9e7df55fcc933c04a5",
+      "sha256": "bc5ece8fbb4c21ef89a4a99a118fe2783af9ca54851a96c6a079abb0295c019a",
       "diverges": true,
       "where": [
         "matrix"
       ]
     }
   },
-  "note": "Behavioral oracle for score-runner.mjs, recorded from live behavior. The key is a derived artifact: every value here is observed, none asserted by hand. Anchored in Sigstore Rekor (see tests/anchors/anchor-record-v2.json); a re-anchored successor supersedes this key. After valid_until the suite fails closed: re-issue vectors, re-record, re-anchor."
+  "note": "Behavioral oracle for score-runner.mjs, recorded from live behavior across five surfaces (matrix, reference, adversarial challenge, two fail-closed probes). The key is a derived artifact: every value here is observed, none asserted by hand. Anchored in Sigstore Rekor (entry #5 — anchor-record-v6.json; verify the chain in-loop with --rekor or anchors/verify-artifact.mjs); a re-anchored successor supersedes this key. After valid_until the suite fails closed: re-issue vectors, re-record, re-anchor."
 }
