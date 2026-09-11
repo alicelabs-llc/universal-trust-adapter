@@ -80,15 +80,22 @@ console.log("signature:", ok, "| pinned-key match:", keyOk, "| verify:", ok && k
 # 20 fresh accept cards, signed by ca-test-2, random content + random x_gen_* fields
 node generate-accept-vectors.mjs --count 20 --seed 42 --out ./challenge
 
-# unlimited reject challenges too
+# unlimited REJECT challenges: self-signed (TOFU) and wrong-ca (anchor spoof)
 node generate-accept-vectors.mjs --mode self-signed --count 10 --out ./challenge-tofu
 node generate-accept-vectors.mjs --mode wrong-ca     --count 10 --out ./challenge-anchor
 
+# v1.4.0 ADVERSARIAL: the two bounds of the validity window as a clock-relative
+# distribution — future-dated cards (must-reject) interleaved with at/inside-
+# boundary cards (must-accept), head cards at exactly ±1s and at the boundary
+# points (issued_at === NOW, expires_at === NOW)
+node generate-accept-vectors.mjs --mode adversarial --count 24 --seed 3 --out ./adv-challenge
+
 # then score any runner against them
 node ../score-runner.mjs --generated ./challenge
+node ../score-runner.mjs --generated ./adv-challenge   # same UTC day: 24/24
 ```
 
-Every generated card self-verifies before it is emitted (fail-closed). `--seed` makes a run reproducible; without it, crypto-random. The scorer treats generated accept cards as must-accept and self-signed/wrong-ca cards as must-reject.
+Every generated card self-verifies before it is emitted (fail-closed). `--seed` makes a run reproducible; without it, crypto-random. The scorer treats generated accept cards as must-accept, self-signed/wrong-ca cards as must-reject, and adversarial cards by their DERIVED side (future/premature → reject, at/inside-boundary → accept — never by the sidecar's say-so).
 
 ## The scorer (v1.3.0 — stage mismatches count as failures)
 
