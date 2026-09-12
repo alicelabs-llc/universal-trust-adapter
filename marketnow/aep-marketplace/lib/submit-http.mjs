@@ -44,8 +44,14 @@ const DOCS = {
     'doc.usage': 'string', 'doc.system_prompt': 'string (scanned for injection)',
     files: '{filename: content} max 60KB', 'test.url': 'https (probed live)', price: 'number USD',
   },
-  pipeline: ['SCHEMA', 'INJECTION', 'SECRETS', 'DANGEROUS_API', 'URLS', 'TYPOSQUAT', 'DEDUP (live vs 67k+ catalog names)', 'REACHABILITY'],
-  verdicts: { accepted: '201 — stored, certified-L1, pending L2 + catalog merge (trust 25-60)', rejected: '422 — reasons returned' },
+  pipeline: ['SCHEMA', 'INJECTION', 'SECRETS', 'DANGEROUS_API', 'URLS', 'TYPOSQUAT', 'DEDUP (live vs 69k+ catalog names)', 'CLAIMS_VERIFIED (repo + install package probed live)', 'REACHABILITY', 'DURABLE_RATE_LIMIT (queue-backed, 8/h, anti-flood 25/10min)'],
+  verdicts: {
+    accepted: '201 — stored, certified-L1.5 (claims verified), pending L2 + catalog merge (trust 25-60)',
+    accepted_description_only: '201 — stored as pending-L2 (description-only): attach files, code or a verifiable repo_url to become merge-eligible',
+    rejected: '422 — reasons returned (includes false claims: repo 404, install package 404)',
+    rate_limited: '429 — durable limit exceeded',
+  },
+  honesty: 'Claims are verified live: if your repo_url 404s or your install references a package that does not exist on npm/PyPI/crates/Docker Hub, the submission is REJECTED. Description-only submissions never reach the catalog.',
   warning: 'Never include secrets — the scanner rejects them. We never ask for passwords or private keys.',
   example_curl: `curl -X POST https://www.marketnow.site/api/submit -H 'Content-Type: application/json' -d '{"name":"my-skill","version":"1.0.0","description":"what it does","author":"you","runtime":"node","install":"npx my-skill"}'`,
 };
@@ -105,11 +111,16 @@ export async function mountSubmission(req, res) {
         reasons: result.reasons,
         storage: result.storage,
         next_steps: result.accepted
-          ? ['Passed Sentinel L1-sub auto-scan — stored in the public queue.',
+          ? [String(result.status).startsWith('pending-L2')
+              ? 'Stored, but description-only: attach files, code, or a verifiable repo_url to become merge-eligible.'
+              : 'Passed Sentinel L1.5 (scan + claims verified) — stored in the public queue.',
              'Pending L2 review + catalog merge.',
              'Track: GET /api/submissions or https://github.com/alicelabs-llc/marketnow-submissions']
-          : ['Fix the blockers listed in reasons and resubmit.',
-             'Pre-check anytime: POST /api/submit?dry_run=1'],
+          : result.verdict === 'rate_limited'
+            ? ['Wait for the rate window to reset (8/hour per source, anti-flood 25/10min).', 'Pre-check anytime: POST /api/submit?dry_run=1']
+            : ['Fix the blockers listed in reasons and resubmit.',
+               'Claims are verified live: repo_url must exist and install must reference a real registry package.',
+               'Pre-check anytime: POST /api/submit?dry_run=1'],
       });
     } catch (e) {
       res.status(500).json({ ok: false, error: `pipeline error: ${String(e && e.message || e).slice(0, 200)}` });

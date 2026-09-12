@@ -7,9 +7,19 @@
  *   - api/submissions.js (public queue listing)
  *
  * Pipeline: schema validation → Sentinel L1-sub scan → catalog dedup
+ *           → L1.5 CLAIMS VERIFICATION (repo exists? install package exists?
+ *           substance attached?) → durable rate limit (queue-backed)
  *           → verdict → (accepted) durable storage in the public
  *           alicelabs-llc/marketnow-submissions repo (audit trail),
  *           ready for L2 review + catalog merge.
+ *
+ * L1.5 = "verify it serves": every verifiable claim a skill makes about
+ * itself (repo_url, install package on its registry) is probed LIVE.
+ * A submission whose claims are false (repo 404, package 404) is rejected
+ * with actionable reasons. A submission with no substance (no files, no
+ * code, no verifiable repo, no working test url) is accepted to the queue
+ * but flagged NOT merge-eligible ("description-only") until real code is
+ * attached.
  *
  * Storage auth: process.env.MN_SUBMIT_TOKEN (GitHub PAT, org-scoped).
  * The token NEVER appears in source or in responses.
@@ -21,6 +31,9 @@ const SUBMIT_REPO = process.env.MN_SUBMIT_REPO || 'alicelabs-llc/marketnow-submi
 const GH_API = 'https://api.github.com';
 const CATALOG_NAMES_URL = 'https://www.marketnow.site/api/catalog-names.txt';
 const MAX_PAYLOAD_BYTES = 100 * 1024; // 100 KB
+const PROBE_TIMEOUT_MS = 6000;
+const PER_IP_HOUR = 8;        // durable: same submitter hash, per rolling hour
+const GLOBAL_10MIN = 25;      // anti-flood: total submissions per 10 min (all IPs)
 
 // ─── catalog names cache (dedup) ────────────────────────────────────────────
 let namesCache = { at: 0, names: null };
@@ -153,12 +166,120 @@ function scanText(blob, patterns, findings, source) {
 async function reachabilityProbe(url) {
   if (!/^https:\/\//i.test(url)) return { check: 'REACHABILITY', severity: 'medium', source: 'test.url', reason: 'test url must be https' };
   try {
-    const r = await fetch(url, { method: 'GET', signal: AbortSignal.timeout(6000), redirect: 'follow' });
+    const r = await fetch(url, { method: 'GET', signal: AbortSignal.timeout(PROBE_TIMEOUT_MS), redirect: 'follow' });
     if (r.status >= 200 && r.status < 500) return { ok: true, status: r.status };
     return { check: 'REACHABILITY', severity: 'medium', source: 'test.url', reason: `probe returned HTTP ${r.status}` };
   } catch (e) {
     return { check: 'REACHABILITY', severity: 'medium', source: 'test.url', reason: `probe failed: ${String(e.cause || e).slice(0, 80)}` };
   }
+}
+
+// ─── L1.5: claim verification ("verify it serves") ────────────────────────
+async function probeClaim(url, accept) {
+  try {
+    const r = await fetch(url, {
+      method: 'GET', redirect: 'follow', signal: AbortSignal.timeout(PROBE_TIMEOUT_MS),
+      headers: { 'User-Agent': 'marketnow-claims-verify/1.0', ...(accept ? { Accept: accept } : {}) },
+    });
+    return { ok: r.ok, status: r.status };
+  } catch (e) {
+    return { ok: false, status: 0, err: String((e && e.cause) || e || '').slice(0, 80) };
+  }
+}
+
+// install command → { registry, package } | null (no parseable package claim)
+// NOTA: el paquete es el PRIMER token que no es flag — los flags cortos (-y) NUNCA
+// consumen el token siguiente (bug corregido: "npx -y @scope/pkg cmd" → @scope/pkg)
+function parseInstallPackage(install) {
+  const s = String(install || '').trim();
+  let m;
+  // npx [-flags] [@scope/]pkg …  |  pnpm dlx/exec [-flags] pkg …
+  if ((m = /^(?:npx|pnpm)\s+(?:(?:dlx|exec)\s+)?/i.exec(s))) {
+    for (const t of s.slice(m[0].length).trim().split(/\s+/)) {
+      if (!t || t === '--' || t.startsWith('-')) continue;
+      return { registry: 'npm', package: t };
+    }
+  }
+  // npm|pnpm|yarn|bun i|install|add [-flags] pkg
+  if ((m = /^(?:npm|pnpm|yarn|bun)\s+(?:i|install|add)\s+/i.exec(s))) {
+    for (const t of s.slice(m[0].length).trim().split(/\s+/)) {
+      if (!t || t === '--' || t.startsWith('-')) continue;
+      return { registry: 'npm', package: t };
+    }
+  }
+  if ((m = /(?:^|\s)(?:pip3?|python3?\s+-m\s+pip|uv\s+pip)\s+install\s+(?:-[A-Za-z]\s+|--[a-z-]+\s+)*([A-Za-z0-9._-]+)/i.exec(s)))
+    return { registry: 'pypi', package: m[1] };
+  if ((m = /(?:^|\s)cargo\s+(?:install|add)\s+(?:--[\w-]+\s+)*([a-zA-Z0-9_-]+)/i.exec(s)))
+    return { registry: 'crates', package: m[1] };
+  if ((m = /(?:^|\s)docker\s+pull\s+([A-Za-z0-9._\/:-]+)/i.exec(s)))
+    return { registry: 'docker', package: m[1].replace(/:[^:\/]+$/, '') };
+  if ((m = /(?:^|\s)go\s+install\s+([A-Za-z0-9._\/-]+)@/i.exec(s)))
+    return { registry: 'url', package: 'https://' + m[1] };
+  return null;
+}
+
+const REGISTRY_PROBE = {
+  npm: (p) => 'https://registry.npmjs.org/' + (p.startsWith('@') ? p.replace('/', '%2F') : p),
+  pypi: (p) => `https://pypi.org/pypi/${p}/json`,
+  crates: (p) => `https://crates.io/api/v1/crates/${p}`,
+  docker: (p) => `https://hub.docker.com/v2/repositories/${p}`,
+  url: (p) => p,
+};
+
+async function verifyClaims(skill) {
+  const claims = { repo_url: null, install: null, homepage: null, findings: [] };
+
+  if (skill.repo_url && /^https?:\/\//i.test(String(skill.repo_url))) {
+    const p = await probeClaim(String(skill.repo_url));
+    claims.repo_url = { url: String(skill.repo_url).slice(0, 120), ...p };
+    if (p.status === 404 || p.status === 410) {
+      claims.findings.push({ check: 'CLAIMS', severity: 'high', source: 'repo_url', reason: `claimed repo does not exist (HTTP ${p.status}) — fix the URL or remove the field`, match: String(skill.repo_url).slice(0, 60) });
+    } else if (p.status === 0) {
+      claims.findings.push({ check: 'CLAIMS', severity: 'medium', source: 'repo_url', reason: `repo unreachable from scanner${p.err ? ' (' + p.err + ')' : ''}` });
+    } else if (p.status === 403 || p.status === 429) {
+      claims.findings.push({ check: 'CLAIMS', severity: 'low', source: 'repo_url', reason: `repo probe blocked (HTTP ${p.status}) — claim not verified` });
+    }
+  }
+
+  if (skill.install) {
+    const pkg = parseInstallPackage(skill.install);
+    if (pkg && REGISTRY_PROBE[pkg.registry]) {
+      const p = await probeClaim(REGISTRY_PROBE[pkg.registry](pkg.package), 'application/json');
+      claims.install = { command: String(skill.install).slice(0, 100), registry: pkg.registry, package: pkg.package, ...p };
+      if (p.status === 404) {
+        claims.findings.push({ check: 'CLAIMS', severity: 'high', source: 'install', reason: `install references "${pkg.package}" which does not exist on ${pkg.registry} (HTTP 404) — use a real package or remove the field`, match: String(skill.install).slice(0, 60) });
+      } else if (p.status === 0 || p.status >= 500) {
+        claims.findings.push({ check: 'CLAIMS', severity: 'low', source: 'install', reason: `registry ${pkg.registry} unreachable (${p.status || 'network'}) — claim not verified` });
+      }
+    }
+  }
+
+  if (skill.homepage && /^https?:\/\//i.test(String(skill.homepage))) {
+    const p = await probeClaim(String(skill.homepage));
+    claims.homepage = { url: String(skill.homepage).slice(0, 120), ok: p.ok, status: p.status };
+    if (p.status === 404 || p.status === 410) {
+      claims.findings.push({ check: 'CLAIMS', severity: 'medium', source: 'homepage', reason: 'homepage does not resolve (HTTP 404) — warning only' });
+    }
+  }
+  return claims;
+}
+
+// durable rate limit: la propia cola GitHub es el estado compartido
+// (el Map en memoria NO persiste entre invocaciones serverless)
+async function durableRateCheck(ipHash) {
+  try {
+    const q = await listSubmissions(500);
+    if (!q.ok) return null; // cola ilegible → no bloquear por un fallo de infra
+    const now = Date.now();
+    const items = q.items || [];
+    const globalRecent = items.filter(e => now - Date.parse(e.submitted_at || 0) < 10 * 60 * 1000).length;
+    if (globalRecent >= GLOBAL_10MIN) return { blocked: true, reason: `anti-flood: ${globalRecent} submissions in the last 10 minutes (limit ${GLOBAL_10MIN}) — retry later` };
+    if (ipHash) {
+      const mine = items.filter(e => e.from === ipHash && now - Date.parse(e.submitted_at || 0) < 3600 * 1000).length;
+      if (mine >= PER_IP_HOUR) return { blocked: true, reason: `rate limit: ${mine} submissions from this source in the last hour (max ${PER_IP_HOUR}) — use dry_run while you wait` };
+    }
+    return { blocked: false };
+  } catch { return null; }
 }
 
 // ─── veredicto ──────────────────────────────────────────────────────────────
@@ -176,6 +297,15 @@ export async function processSubmission(payload, { dryRun = false, remoteIp = 'u
   const findings = validateSchema(skill);
   if (findings.some(f => f.severity === 'high' && f.check === 'SCHEMA')) {
     return { accepted: false, http: 422, verdict: 'rejected', reasons: findings };
+  }
+
+  // 1.5 durable rate limit (queue-backed: sobrevive invocaciones serverless)
+  const ipHash = remoteIp === 'unknown' ? null : `ip:${createHash('sha256').update(String(remoteIp) + 'mn').digest('hex').slice(0, 12)}`;
+  if (!dryRun && ipHash) {
+    const rc = await durableRateCheck(ipHash);
+    if (rc && rc.blocked) {
+      return { accepted: false, http: 429, verdict: 'rate_limited', reasons: [{ check: 'RATE_LIMIT', severity: 'high', reason: rc.reason }] };
+    }
   }
 
   // 2. texto escaneable = todo lo que el skill dice de sí mismo
@@ -213,6 +343,17 @@ export async function processSubmission(payload, { dryRun = false, remoteIp = 'u
   let probe = null;
   if (skill.test?.url) { probe = await reachabilityProbe(skill.test.url); if (probe && !probe.ok) findings.push(probe); }
 
+  // 5.5 L1.5 — claim verification: "verify it serves" (repo, install, homepage)
+  const claims = await verifyClaims(skill);
+  for (const f of claims.findings) findings.push(f);
+
+  // 5.6 sustancia: sin código verificable no hay merge al catálogo
+  const hasSubstance = !!(
+    skill.files || skill.code ||
+    (claims.repo_url && claims.repo_url.ok) ||
+    (probe && probe.ok)
+  );
+
   // 6. veredicto
   const blockers = findings.filter(f => f.severity === 'critical' || f.severity === 'high');
   const warnings = findings.filter(f => f.severity === 'medium' || f.severity === 'low');
@@ -220,8 +361,9 @@ export async function processSubmission(payload, { dryRun = false, remoteIp = 'u
 
   // trust: heurística de submission (sin señales de adopción aún)
   let trust = 38;
-  if (skill.repo_url) trust += 4;
-  if (skill.homepage) trust += 2;
+  if (claims.repo_url?.ok) trust += 5;          // repo reclamado Y verificado en vivo
+  if (claims.install?.ok) trust += 4;            // paquete reclamado Y existe en su registry
+  if (skill.homepage) trust += 1;
   if (skill.doc?.usage) trust += 3;
   if (skill.capabilities) trust += 3;
   if (skill.files || skill.code) trust += 3;
@@ -229,15 +371,22 @@ export async function processSubmission(payload, { dryRun = false, remoteIp = 'u
   if (skill.test?.url && probe?.ok) trust += 8;
   trust -= warnings.length * 2;
   trust = Math.max(25, Math.min(60, trust));
+  if (!hasSubstance) trust = Math.min(trust, 45); // description-only: techo 45
 
   const id = 'mn-sub-' + new Date().toISOString().slice(2, 10).replace(/-/g, '') + '-' +
     createHash('sha256').update(raw).digest('hex').slice(0, 6);
   const yyyymm = new Date().toISOString().slice(0, 7).replace('-', '');
   const path = `submissions/${yyyymm}/${id}.json`;
 
+  const status = accepted
+    ? (hasSubstance
+        ? 'certified-L1.5 (auto-scan + claims verified) — pending L2 review'
+        : 'pending-L2: description-only (attach files, code, or a verifiable repo_url to become merge-eligible)')
+    : 'rejected';
+
   const record = {
     id, verdict: accepted ? 'accepted' : 'rejected',
-    status: accepted ? 'certified-L1 (auto-scan) — pending L2 review' : 'rejected',
+    status,
     skill: {
       name: skill.name, version: skill.version, description: skill.description,
       author: skill.author, category: skill.category || 'Developer Tools',
@@ -253,17 +402,23 @@ export async function processSubmission(payload, { dryRun = false, remoteIp = 'u
       code: skill.code || null,
     },
     sentinel: {
-      scan_version: 'L1-sub/1.0', scanned_at: new Date().toISOString(),
+      scan_version: 'L1.5-sub/1.1', scanned_at: new Date().toISOString(),
       duration_ms: Date.now() - started, findings: { blockers, warnings },
       trust_score_100: accepted ? trust : null,
       // toda submission de comunidad arranca yellow: sin señales de adopción aún
       risk_level: accepted ? 'yellow' : 'red',
     },
+    // L1.5: resultado en vivo de la verificación de claims ("verify it serves")
+    claims_verified: { checked_at: new Date().toISOString(), repo_url: claims.repo_url, install: claims.install, homepage: claims.homepage, substance: hasSubstance ? 'attached (files/code/repo/test)' : 'none (description-only)' },
     // IP solo se guarda hasheada (privacidad + trazabilidad anti-abuso)
-    submitted_from: remoteIp === 'unknown' ? null : `ip:${createHash('sha256').update(String(remoteIp) + 'mn').digest('hex').slice(0, 12)}`,
+    submitted_from: ipHash,
     submitted_at: new Date().toISOString(),
     submitted_by: 'public-api',
-    merge: { eligible: accepted, catalog_slug: lname.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || id },
+    merge: {
+      eligible: accepted && hasSubstance,
+      ...(hasSubstance ? {} : { why_not: 'description-only: no files, no code, no verifiable repo_url, no working test url' }),
+      catalog_slug: lname.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || id,
+    },
   };
 
   let storage = null;
@@ -306,7 +461,8 @@ export async function processSubmission(payload, { dryRun = false, remoteIp = 'u
             }
             index.entries = (index.entries || []).slice(-499);
             index.entries.push({ id, name: skill.name, version: skill.version, verdict: record.verdict,
-              status: record.status, trust: accepted ? trust : null, submitted_at: record.submitted_at, path });
+              status: record.status, trust: accepted ? trust : null, submitted_at: record.submitted_at,
+              from: record.submitted_from, eligible: record.merge.eligible, path });
             index.updated_at = new Date().toISOString();
             await put('submissions/index.json', `index: +${skill.name} (${id})`,
                       JSON.stringify(index, null, 1), sha);
