@@ -74,7 +74,7 @@ const TOOLS = [
   },
   {
     name: "marketnow_search_skills",
-    description: "Search the MarketNow registry of indexed MCP servers (23k+ across GitHub, npm and PyPI, security-first scored).",
+    description: "Search the MarketNow registry of indexed MCP servers (69k+ across GitHub, npm and PyPI, security-first scored).",
     inputSchema: {
       type: "object",
       properties: {
