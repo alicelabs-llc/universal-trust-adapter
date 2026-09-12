@@ -116,7 +116,7 @@ const TOOLS = [
   },
   {
     name: "marketnow_submit_skill",
-    description: "Publish a skill to the MarketNow catalog (the write side). The package is validated and Sentinel-scanned (injection patterns, embedded secrets, dangerous APIs, suspicious URLs, typosquat, dedup against the 69k+ catalog). Accepted skills are stored in the public auditable queue with certified-L1 status, pending L2 review and catalog merge. No authentication required. Do NOT include secrets — the scanner rejects them.",
+    description: "Publish a skill to the MarketNow catalog (the write side). The package is validated and Sentinel-scanned (injection patterns, embedded secrets, dangerous APIs, suspicious URLs, typosquat, dedup against the 69k+ catalog) AND its claims are verified live: repo_url must exist (HTTP 200), install must reference a real package on npm/PyPI/crates/Docker Hub. False claims are rejected (422). Accepted skills with real substance (files/code/verifiable repo) are stored in the public auditable queue as certified-L1.5, pending L2 review and catalog merge. Description-only submissions are accepted but never merged. No authentication required. Do NOT include secrets — the scanner rejects them.",
     inputSchema: {
       type: "object",
       properties: {
@@ -319,8 +319,14 @@ async function handleRequest(method, params, id) {
               reasons: result.reasons,
               storage: result.storage,
               next_steps: result.accepted
-                ? ["Passed Sentinel L1-sub auto-scan — stored in the public queue.", "Pending L2 review + catalog merge.", "Track: GET https://www.marketnow.site/api/submissions or https://github.com/alicelabs-llc/marketnow-submissions"]
-                : ["Fix the blockers in reasons and resubmit.", "Pre-check anytime with dry_run: true."],
+                ? [String(result.status).startsWith('pending-L2')
+                    ? "Stored, but description-only: attach files, code, or a verifiable repo_url to become merge-eligible."
+                    : "Passed Sentinel L1.5 (scan + claims verified) — stored in the public queue.",
+                   "Pending L2 review + catalog merge.",
+                   "Track: GET https://www.marketnow.site/api/submissions or https://github.com/alicelabs-llc/marketnow-submissions"]
+                : result.verdict === 'rate_limited'
+                  ? ["Wait for the rate window to reset (8/hour per source, anti-flood 25/10min).", "Pre-check anytime with dry_run: true."]
+                  : ["Fix the blockers in reasons and resubmit.", "Claims are verified live: repo_url must exist and install must reference a real registry package.", "Pre-check anytime with dry_run: true."],
             }, null, 2) }]
           };
         }

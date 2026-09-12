@@ -7,7 +7,7 @@
 <meta name="description" content="Publish your skill or MCP server to MarketNow. Public endpoint, no API key. Sentinel scans every submission: injection, secrets, dangerous APIs, typosquat, dedup. Accepted skills are stored, certified and merged into the catalog.">
 <link rel="canonical" href="https://www.marketnow.site/submit.html">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"HowTo","name":"How to submit a skill or MCP server to MarketNow","description":"Publish a skill to the MarketNow catalog via the public submission endpoint. Sentinel L1-sub scans every package; accepted skills are stored, certified and merged.","step":[{"@type":"HowToStep","name":"Prepare the package","text":"Build a JSON skill package: name, version, description, author (required) plus runtime, install, repo_url, tags, capabilities."},{"@type":"HowToStep","name":"Submit","text":"POST the package to https://www.marketnow.site/api/submit — no authentication required. Use dry_run=1 to pre-check."},{"@type":"HowToStep","name":"Sentinel scan","text":"The pipeline scans for prompt injection, embedded secrets, dangerous APIs, suspicious URLs, typosquatting and duplicates against 69k+ catalog entries."},{"@type":"HowToStep","name":"Certified and merged","text":"Accepted skills are stored in the public audit queue, certified L1, and merged into the catalog after L2 review."}]}
+{"@context":"https://schema.org","@type":"HowTo","name":"How to submit a skill or MCP server to MarketNow","description":"Publish a skill to the MarketNow catalog via the public submission endpoint. Sentinel L1.5 scans every package and verifies its claims live; accepted skills with real substance are stored, certified and merged.","step":[{"@type":"HowToStep","name":"Prepare the package","text":"Build a JSON skill package: name, version, description, author (required) plus runtime, install, repo_url, tags, capabilities, and real files or code."},{"@type":"HowToStep","name":"Submit","text":"POST the package to https://www.marketnow.site/api/submit — no authentication required. Use dry_run=1 to pre-check."},{"@type":"HowToStep","name":"Sentinel scan + claims verification","text":"The pipeline scans for prompt injection, embedded secrets, dangerous APIs, suspicious URLs, typosquatting and duplicates against 69k+ catalog entries, and probes claims live: repo_url must exist, install must reference a real registry package."},{"@type":"HowToStep","name":"Certified and merged","text":"Accepted skills with substance (files/code/verifiable repo) are stored in the public audit queue, certified L1.5, and merged into the catalog after L2 review. Description-only submissions never merge."}]}
 </script>
 <style>
 body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#050505;color:#e2e8f0;line-height:1.7;padding:20px;max-width:900px;margin:0 auto}
@@ -87,20 +87,25 @@ a{color:#00F299}
 <tr><td>URLS</td><td>Shorteners, suspicious TLDs, punycode hosts, internal addresses</td><td>medium → warning</td></tr>
 <tr><td>TYPOSQUAT</td><td>Name 1 edit-distance from a popular skill</td><td>high → reject</td></tr>
 <tr><td>DEDUP</td><td>Name already in the catalog (69k+ entries checked live)</td><td>high → reject</td></tr>
+<tr><td>CLAIMS_VERIFIED</td><td><strong>Claims are probed live:</strong> <code>repo_url</code> must return HTTP 200 (404 = reject); <code>install</code> must reference a real package on npm / PyPI / crates.io / Docker Hub (404 = reject)</td><td>high → reject</td></tr>
 <tr><td>REACHABILITY</td><td>Live probe of <code>test.url</code> (6s timeout)</td><td>medium → warning</td></tr>
 </table>
 
-<h2>3. Verdicts</h2>
+<h2>3. Substance rule — "verify it serves"</h2>
+<p>A submission must carry something real: <code>files</code>, <code>code</code>, a <em>verifiable</em> <code>repo_url</code>, or a working <code>test.url</code>. Description-only submissions (vaporware: no code, dead links) are <strong>never merged</strong> into the catalog — they stay in the queue as <code>pending-L2: description-only</code> with trust capped at 45. If your claims are false (repo 404, package 404) the submission is <strong>rejected at the door</strong> with actionable reasons.</p>
+
+<h2>4. Verdicts</h2>
 <div class="card">
 <p><span class="badge green">ACCEPTED</span> HTTP 201 — stored in the public, auditable queue
 (<a href="https://github.com/alicelabs-llc/marketnow-submissions">github.com/alicelabs-llc/marketnow-submissions</a>),
-status <strong>certified-L1</strong> (auto-scan), trust score 25-60, pending L2 review and catalog merge.</p>
-<p><span class="badge red">REJECTED</span> HTTP 422 — machine-reviewable reasons returned. Fix and resubmit; dry-run as often as you want.</p>
+status <strong>certified-L1.5</strong> (auto-scan + claims verified), trust score 25-60, pending L2 review and catalog merge.</p>
+<p><span class="badge yellow">ACCEPTED (description-only)</span> HTTP 201 — stored as <code>pending-L2</code>: attach files, code or a verifiable repo to become merge-eligible. Trust capped at 45.</p>
+<p><span class="badge red">REJECTED</span> HTTP 422 — machine-reviewable reasons returned, including <strong>false claims</strong> (repo 404, install package 404). Fix and resubmit; dry-run as often as you want.</p>
 <p>Submissions start <span class="badge yellow">YELLOW</span> risk: new skills have zero adoption history, so trust is earned — registry signals, usage and L2 review raise it over time.</p>
 </div>
 
-<h2>4. AI agents: submit via MCP</h2>
-<p>The MarketNow MCP server exposes a dedicated write tool. Any MCP client (Claude, Cursor, custom agents) can call it:</p>
+<h2>5. AI agents: submit via MCP</h2>
+<p>The MarketNow MCP server exposes a dedicated write tool. Any MCP client (Claude, Cursor, custom agents, ChatGPT via a custom MCP connector) can call it:</p>
 <pre>{
   "tool": "marketnow_submit_skill",
   "arguments": {
@@ -110,16 +115,16 @@ status <strong>certified-L1</strong> (auto-scan), trust score 25-60, pending L2 
 }</pre>
 <p>Same pipeline, same verdict, same queue — straight from your agent session.</p>
 
-<h2>5. What happens after acceptance</h2>
+<h2>6. What happens after acceptance</h2>
 <ol>
-<li><strong>Stored &amp; certified-L1</strong> — your package and its full scan report live in the public queue (audit trail forever).</li>
-<li><strong>L2 review</strong> — deeper checks on the queue before merge.</li>
-<li><strong>Catalog merge</strong> — accepted skills join the indexed catalog with their own <code>/s/&lt;slug&gt;</code> page, searchable by 69k+ catalog users and every MCP client.</li>
+<li><strong>Stored &amp; certified-L1.5</strong> — your package and its full scan report live in the public queue (audit trail forever).</li>
+<li><strong>L2 review</strong> — claims re-verified (repo, install), substance checked. False claims discovered later → <code>quarantined-L2</code> in the queue, never merged.</li>
+<li><strong>Catalog merge</strong> — accepted skills with real substance join the indexed catalog with their own <code>/s/&lt;slug&gt;</code> page, searchable by 69k+ catalog users and every MCP client.</li>
 <li><strong>Track anytime</strong> — <code>GET /api/submissions</code> or the GitHub queue.</li>
 </ol>
 
 <h2>Limits &amp; honesty</h2>
-<p>Rate limit: 8 submissions per IP per hour (dry-runs are cheap — use them). Payload: 100KB. L1 is a static auto-scan: it certifies structure and safety signals, it does not execute your code. L2 is the deeper review. Trust is a heuristic over public signals — not a guarantee.</p>
+<p>Rate limit: 8 submissions per source per hour (queue-backed, durable) + anti-flood protection. Payload: 100KB. L1.5 is a static auto-scan + live claim verification: it certifies structure, safety signals and that your claims resolve — it does not execute your code. L2 is the deeper review. Trust is a heuristic over public signals — not a guarantee. <strong>Vaporware is not a product:</strong> if the repo is 404 or the install package does not exist, you get a 422, not a catalog page.</p>
 
 <p style="margin-top:2em"><a class="cta" href="/api/submit">GET /api/submit — machine-readable docs</a>
 <a class="cta" href="/api/submissions" style="background:#1e293b;color:#00F299">View the live queue</a></p>
