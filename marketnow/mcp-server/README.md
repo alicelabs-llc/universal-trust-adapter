@@ -139,7 +139,7 @@ The server fetches `https://marketnow.site/api/skills.json` (cached 1 hour) and 
 
 ## Pricing
 
-MarketNow is **security infrastructure**, not a marketplace. The marketplace (9,248 MCP skills, all free to install) is distribution. The product is Sentinel — a 10-layer security audit pipeline.
+MarketNow is **security infrastructure**, not a marketplace. The marketplace (68,387 MCP servers indexed — catalog 5.9.2; vendor-priced listings like x402 per-call are billed 100% vendor-side) is distribution. The product is Sentinel — a 10-layer security audit pipeline.
 
 | Tier | Price | What you get |
 |------|-------|--------------|
