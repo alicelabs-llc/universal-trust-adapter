@@ -74,7 +74,7 @@ const TOOLS = [
   },
   {
     name: "marketnow_search_skills",
-    description: "Search the MarketNow registry of indexed MCP servers (69k+ across GitHub, npm and PyPI, security-first scored).",
+    description: "Search the MarketNow registry of indexed MCP servers (68k+ across GitHub, npm and PyPI, security-first scored).",
     inputSchema: {
       type: "object",
       properties: {
@@ -116,7 +116,7 @@ const TOOLS = [
   },
   {
     name: "marketnow_submit_skill",
-    description: "Publish a skill to the MarketNow catalog (the write side). The package is validated and Sentinel-scanned (injection patterns, embedded secrets, dangerous APIs, suspicious URLs, typosquat, dedup against the 69k+ catalog) AND its claims are verified live: repo_url must exist (HTTP 200), install must reference a real package on npm/PyPI/crates/Docker Hub. False claims are rejected (422). Accepted skills with real substance (files/code/verifiable repo) are stored in the public auditable queue as certified-L1.5, pending L2 review and catalog merge. Description-only submissions are accepted but never merged. Any pricing model is accepted — free, per-call (x402), subscription or custom: the vendor sets the price, MarketNow verifies the security. No authentication required. Do NOT include secrets — the scanner rejects them.",
+    description: "Publish a skill to the MarketNow catalog (the write side). The package is validated and Sentinel-scanned (injection patterns, embedded secrets, dangerous APIs, suspicious URLs, typosquat, dedup against the 68k+ catalog) AND its claims are verified live: repo_url must exist (HTTP 200), install must reference a real package on npm/PyPI/crates/Docker Hub. False claims are rejected (422). Accepted skills with real substance (files/code/verifiable repo) are stored in the public auditable queue as certified-L1.5, pending L2 review and catalog merge. Description-only submissions are accepted but never merged. Any pricing model is accepted — free, per-call (x402), subscription or custom: the vendor sets the price, MarketNow verifies the security. No authentication required. Do NOT include secrets — the scanner rejects them.",
     inputSchema: {
       type: "object",
       properties: {

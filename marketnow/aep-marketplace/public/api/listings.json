@@ -7,12 +7,12 @@
   "summary": "Tracks the consistency of every external directory that lists MarketNow. An agent that discovers MarketNow via an external directory should see the same honest positioning as on marketnow.site.",
   "canonical_source_of_truth": {
     "url": "https://marketnow.site/api/agent.json",
-    "skills_count": 69077,
+    "skills_count": 68386,
     "payment": "USDC on Base (chainId 8453) only — NOT ETH/BSC/SOL/BTC",
     "positioning": "Trust layer for agent commerce (NOT 'largest marketplace')",
     "license": "MNNC-1.0 (source-available, non-commercial) — NOT MIT",
     "maintainer": "AliceLabs LLC (Wyoming, USA, 2025), founder Edison Flores",
-    "note": "Our agent.json is the canonical source (skills_indexed = 69,077, tracked_all_sources = 133,426). Any external listing that contradicts it is stale."
+    "note": "Our agent.json is the canonical source (skills_indexed = 68,386, tracked_all_sources = 132,735). Any external listing that contradicts it is stale."
   },
   "listings": [
     {

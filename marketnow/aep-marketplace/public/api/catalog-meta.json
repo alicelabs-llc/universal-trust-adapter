@@ -1,12 +1,12 @@
 {
   "schema": "marketnow-catalog-meta/1.0",
-  "generated_at": "2026-09-12",
-  "total_all": 133426,
-  "core_certified": 59946,
-  "community_indexed": 9131,
+  "generated_at": "2026-09-16",
+  "total_all": 132735,
+  "core_certified": 59256,
+  "community_indexed": 9130,
   "aggregate_tracked": 64349,
   "sources": {
-    "github": 12129,
+    "github": 11438,
     "curated": 5270,
     "community-submitted": 18,
     "pypi": 14311,
