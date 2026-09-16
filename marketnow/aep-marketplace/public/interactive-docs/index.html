@@ -162,13 +162,13 @@ window.onload = () => {
         }
       },
       '/api/skills.json': {
-        get: { summary: 'Get all 69,077 MCP skills', tags: ['Skills'], responses: { '200': { description: 'Skills array', content: { 'application/json': { schema: { type: 'array' }}}}}}
+        get: { summary: 'Get all 68,386 MCP skills', tags: ['Skills'], responses: { '200': { description: 'Skills array', content: { 'application/json': { schema: { type: 'array' }}}}}}
       },
       '/api/categories.json': {
         get: { summary: 'Get 16 skill categories', tags: ['Skills'], responses: { '200': { description: 'Categories', content: { 'application/json': { schema: { type: 'array' }}}}}}
       },
       '/api/audit-report.json': {
-        get: { summary: 'Get certification report (69,077 MCP skills index-certified)', tags: ['Audit'], responses: { '200': { description: 'Audit report', content: { 'application/json': { schema: { type: 'object' }}}}}}
+        get: { summary: 'Get certification report (68,386 MCP skills index-certified)', tags: ['Audit'], responses: { '200': { description: 'Audit report', content: { 'application/json': { schema: { type: 'object' }}}}}}
       },
       '/api/atc.json': {
         get: { summary: 'Get ATC service info (57 cards issued)', tags: ['ATC'], responses: { '200': { description: 'ATC info', content: { 'application/json': { schema: { type: 'object' }}}}}}
@@ -192,7 +192,7 @@ window.onload = () => {
       { name: 'ATC', description: 'Agent Trust Card endpoints' },
       { name: 'Interceptor', description: 'MCP Interceptor (5 policy rules)' },
       { name: 'Security', description: 'Security audit stats' },
-      { name: 'Skills', description: '69,077 MCP skills catalog' },
+      { name: 'Skills', description: '68,386 MCP skills catalog' },
       { name: 'Audit', description: 'Security audit report' }
     ]
   };

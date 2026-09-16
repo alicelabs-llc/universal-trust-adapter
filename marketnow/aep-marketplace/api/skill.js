@@ -1,5 +1,5 @@
 // MarketNow per-skill public page — SEO + schema.org (Lulu parity)
-// catalog-version 2026-09-12: 67,759 entries (batch 2 + batch 3 crates.io) — touch forces lambda re-bundle
+// catalog-version 2026-09-12: 68,386 entries (5.9.1: L2 dedup — 691 re-ingestion ghosts purged)
 // =================================================================
 // GET /api/skill?slug=<slug>   (rewrite: /s/:slug -> here)
 //
@@ -285,6 +285,6 @@ export default function handler(req, res) {
 
 // batch3: catalog 67,759 (2026-09-12) — touch forces skills-lite.json re-bundle
 
-// batch4: catalog 69,077 (2026-09-12) — touch forces skills-lite.json re-bundle
+// batch4: catalog 68,386 (2026-09-12) — touch forces skills-lite.json re-bundle
 
-// batch5: catalog 69,077 (2026-09-12) — public submit endpoint live — touch forces re-bundle
+// batch5: catalog 68,386 (2026-09-12) — public submit endpoint live — touch forces re-bundle

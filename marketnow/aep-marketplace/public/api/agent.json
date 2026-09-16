@@ -2,7 +2,7 @@
   "schemaVersion": "v1.0",
   "agent": {
     "name": "MarketNow — Agent Skill Exchange",
-    "description": "The largest MCP skill marketplace for AI agents. Browse 69,077 indexed MCP servers with documented install-risk and evidence-based trust scores (top packages deep-scanned with the 29 Sentinel rules); 133,426 tracked across the ecosystem. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
+    "description": "The largest MCP skill marketplace for AI agents. Browse 68,386 indexed MCP servers with documented install-risk and evidence-based trust scores (top packages deep-scanned with the 29 Sentinel rules); 132,735 tracked across the ecosystem. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
     "url": "https://marketnow.site",
     "version": "4.0.0"
   },
@@ -44,7 +44,7 @@
           {
             "id": "skill-search",
             "name": "MCP Skill Search",
-            "description": "AI agents can search and retrieve MCP server configurations from 69,077 verified skills. Supports natural language queries, category filtering, and security score thresholds.",
+            "description": "AI agents can search and retrieve MCP server configurations from 68,386 verified skills. Supports natural language queries, category filtering, and security score thresholds.",
             "commissionRate": 0.2,
             "referralEndpoints": {
               "register": "https://marketnow.site/api/agent/register",
@@ -80,7 +80,7 @@
         "No Malicious Code"
       ],
       "scoreRange": "0-6",
-      "totalScanned": 69077,
+      "totalScanned": 68386,
       "averageScore": 4.3,
       "passRate": "53.3%"
     }
@@ -101,7 +101,7 @@
       "Affiliate program (5% from MarketNow's share)"
     ],
     "buyer_value": "Free skills install instantly. Premium skills are one-time purchases with full chargeback rights via Stripe or USDC.",
-    "seller_value": "Sell skills to 69,077+ users. Keep 80% of sales. Get Sentinel v3.0 security audit to boost trust and conversion.",
+    "seller_value": "Sell skills to 68,386+ users. Keep 80% of sales. Get Sentinel v3.0 security audit to boost trust and conversion.",
     "commissionPolicy": "https://marketnow.site/policies#comisiones",
     "wallet_type": "single-sig (migration to 2-of-3 multisig pending Q4 2026)",
     "wallet_governance": "https://marketnow.site/policies#wallet"
@@ -135,7 +135,7 @@
     "audit_scope": "Documented inconsistencies across agent.json, npm package.json, LICENSE files, README, and landing HTML."
   },
   "metrics": {
-    "skills_indexed": 69077,
+    "skills_indexed": 68386,
     "security_checks_performed": 684912,
     "npm_versions_published": 18,
     "npm_latest_version": "1.10.3",
@@ -145,19 +145,19 @@
     "as_of": "2026-08-19T00:00:00Z",
     "source": "live API: https://marketnow.site/api/skills-lite.json + npm registry",
     "skills_tracked_all_sources": 133425,
-    "security_checks_methodology": "10 L1 checks x 69,077 entries + 29 L2 rules x 2,720 tarball scans",
+    "security_checks_methodology": "10 L1 checks x 68,386 entries + 29 L2 rules x 2,720 tarball scans",
     "l2_tarballs_deep_scanned": 688,
     "l2_flagged_for_review": 409,
     "l2_clean": 885,
     "npm_downloads_last_month": 1169,
     "npm_vulnerabilities_own_packages": 0
   },
-  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 69,077 skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
+  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 68,386 skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
   "buyer_pricing": {
     "model": "free",
     "per_skill_fee": 0,
     "subscription_fee": 0,
-    "explanation": "Buyers never pay MarketNow. All 69,077 skills are free to install."
+    "explanation": "Buyers never pay MarketNow. All 68,386 skills are free to install."
   },
   "generated_at": "2026-09-11T23:47:28.813Z",
   "metadata": {
