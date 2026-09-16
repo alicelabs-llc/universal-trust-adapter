@@ -51,8 +51,10 @@ export default function handler(req, res) {
   }
 
   // Filter by free
+  // 5.9.2: vendor-priced usage (payment set, e.g. per-call x402) is not "free"
+  // even though the listing price is 0 — the vendor bills usage directly.
   if (filter === 'free') {
-    skills = skills.filter(s => s.is_free === true || s.free === true || s.price === 0);
+    skills = skills.filter(s => s.is_free === true || s.free === true || (s.price === 0 && !s.payment));
   }
 
   // Filter by risk level (Sentinel)
