@@ -1,8 +1,8 @@
 {
   "schemaVersion": "v1.0",
   "agent": {
-    "name": "MarketNow — Agent Skill Exchange",
-    "description": "The largest MCP skill marketplace for AI agents. Browse 68,386 indexed MCP servers with documented install-risk and evidence-based trust scores (top packages deep-scanned with the 29 Sentinel rules); 132,735 tracked across the ecosystem. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
+    "name": "MarketNow \u2014 Agent Skill Exchange",
+    "description": "The largest MCP skill marketplace for AI agents. Browse 68,387 indexed MCP servers with documented install-risk and evidence-based trust scores (top packages deep-scanned with the 29 Sentinel rules); 132,736 tracked across the ecosystem. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
     "url": "https://marketnow.site",
     "version": "4.0.0"
   },
@@ -44,7 +44,7 @@
           {
             "id": "skill-search",
             "name": "MCP Skill Search",
-            "description": "AI agents can search and retrieve MCP server configurations from 68,386 verified skills. Supports natural language queries, category filtering, and security score thresholds.",
+            "description": "AI agents can search and retrieve MCP server configurations from 68,387 verified skills. Supports natural language queries, category filtering, and security score thresholds.",
             "commissionRate": 0.2,
             "referralEndpoints": {
               "register": "https://marketnow.site/api/agent/register",
@@ -66,7 +66,7 @@
       "version": "1.0.0",
       "endpoint": "https://marketnow.site/api/atc",
       "spec": "https://marketnow.site/atc-spec.json",
-      "description": "Agent Trust Card — identity, trust score, and payment for AI agents. The trust layer for A2A + MCP."
+      "description": "Agent Trust Card \u2014 identity, trust score, and payment for AI agents. The trust layer for A2A + MCP."
     }
   },
   "security": {
@@ -80,7 +80,7 @@
         "No Malicious Code"
       ],
       "scoreRange": "0-6",
-      "totalScanned": 68386,
+      "totalScanned": 68387,
       "averageScore": 4.3,
       "passRate": "53.3%"
     }
@@ -89,9 +89,9 @@
     "model": "Marketplace with commission: sellers list skills (free or premium), buyers install free or pay seller's price",
     "buyer_pricing": "Free skills cost nothing. Premium skills have a one-time price set by the seller (typically free)",
     "seller_pricing": {
-      "listing": "Free — list unlimited skills at no cost",
-      "SENTINEL_PRO": "$9.99/mo — Sentinel v3.0 audit on every skill",
-      "SENTINEL_ENTERPRISE": "$49.99/mo — gVisor sandbox + priority listing + API access"
+      "listing": "Free \u2014 list unlimited skills at no cost",
+      "SENTINEL_PRO": "$9.99/mo \u2014 Sentinel v3.0 audit on every skill",
+      "SENTINEL_ENTERPRISE": "$49.99/mo \u2014 gVisor sandbox + priority listing + API access"
     },
     "seller_revenue": "Sellers keep 80% of every premium skill sale. MarketNow takes 20% commission.",
     "commission_rate": "0.20 (20% on premium skill sales)",
@@ -101,7 +101,7 @@
       "Affiliate program (5% from MarketNow's share)"
     ],
     "buyer_value": "Free skills install instantly. Premium skills are one-time purchases with full chargeback rights via Stripe or USDC.",
-    "seller_value": "Sell skills to 68,386+ users. Keep 80% of sales. Get Sentinel v3.0 security audit to boost trust and conversion.",
+    "seller_value": "Sell skills to 68,387+ users. Keep 80% of sales. Get Sentinel v3.0 security audit to boost trust and conversion.",
     "commissionPolicy": "https://marketnow.site/policies#comisiones",
     "wallet_type": "single-sig (migration to 2-of-3 multisig pending Q4 2026)",
     "wallet_governance": "https://marketnow.site/policies#wallet"
@@ -135,29 +135,29 @@
     "audit_scope": "Documented inconsistencies across agent.json, npm package.json, LICENSE files, README, and landing HTML."
   },
   "metrics": {
-    "skills_indexed": 68386,
-    "security_checks_performed": 684912,
+    "skills_indexed": 68387,
+    "security_checks_performed": 683870,
     "npm_versions_published": 18,
     "npm_latest_version": "1.10.3",
     "npm_first_release_date": "2026-06-29",
     "npm_latest_release_date": "2026-08-09",
     "github_org_created_at": "2026-03-30",
-    "as_of": "2026-08-19T00:00:00Z",
+    "as_of": "2026-09-16T00:00:00Z",
     "source": "live API: https://marketnow.site/api/skills-lite.json + npm registry",
-    "skills_tracked_all_sources": 133425,
-    "security_checks_methodology": "10 L1 checks x 68,386 entries + 29 L2 rules x 2,720 tarball scans",
+    "skills_tracked_all_sources": 132736,
+    "security_checks_methodology": "10 L1 checks x 68,387 entries + 29 L2 rules x 2,720 tarball scans",
     "l2_tarballs_deep_scanned": 688,
     "l2_flagged_for_review": 409,
     "l2_clean": 885,
     "npm_downloads_last_month": 1169,
     "npm_vulnerabilities_own_packages": 0
   },
-  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 68,386 skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
+  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers \u2014 buyers install all 68,387 skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
   "buyer_pricing": {
     "model": "free",
     "per_skill_fee": 0,
     "subscription_fee": 0,
-    "explanation": "Buyers never pay MarketNow. All 68,386 skills are free to install."
+    "explanation": "Buyers never pay MarketNow. All 68,387 skills are free to install."
   },
   "generated_at": "2026-09-11T23:47:28.813Z",
   "metadata": {
@@ -166,6 +166,6 @@
     "pricing_source": "https://marketnow.site/api/pricing.json"
   },
   "api_notes": {
-    "skills_pagination": "The /api/skills endpoint is paginated (default 100 per page, max 500). The old /api/skills.json (24MB) is deprecated — use /api/skills?page=1&limit=100 instead."
+    "skills_pagination": "The /api/skills endpoint is paginated (default 100 per page, max 500). The old /api/skills.json (24MB) is deprecated \u2014 use /api/skills?page=1&limit=100 instead."
   }
 }

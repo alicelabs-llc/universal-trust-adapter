@@ -1,5 +1,5 @@
 // Paginated skills API — replaces the 24MB skills.json blob
-// catalog-version 2026-09-12: 68,386 entries (5.9.1: L2 dedup — 691 re-ingestion ghosts purged)
+// catalog-version 2026-09-12: 68,387 entries (5.9.2: +humanmirror-x402-catalog (first vendor-priced x402 listing, L2-reviewed))
 // Usage: GET /api/skills?page=1&limit=100
 //       GET /api/skills?page=1&limit=100&category=Security
 //       GET /api/skills?page=1&limit=100&filter=free
@@ -143,6 +143,6 @@ export default function handler(req, res) {
 
 // batch3: catalog 67,759 (2026-09-12) — touch forces skills-lite.json re-bundle
 
-// batch4: catalog 68,386 (2026-09-12) — touch forces skills-lite.json re-bundle
+// batch4: catalog 68,387 (2026-09-12) — touch forces skills-lite.json re-bundle
 
-// batch5: catalog 68,386 (2026-09-12) — public submit endpoint live — touch forces re-bundle
+// batch5: catalog 68,387 (2026-09-12) — public submit endpoint live — touch forces re-bundle

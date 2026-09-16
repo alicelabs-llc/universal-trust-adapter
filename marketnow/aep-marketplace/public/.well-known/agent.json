@@ -2,7 +2,7 @@
   "schemaVersion": "v1.0",
   "agent": {
     "name": "MarketNow \u2014 Agent Skill Exchange",
-    "description": "The trust layer for agent commerce. Browse 68,386 index-certified MCP servers (132,735 total tracked), each with an install-risk tier and trust score; top 688 tarballs deep-scanned by Sentinel. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
+    "description": "The trust layer for agent commerce. Browse 68,387 index-certified MCP servers (132,736 total tracked), each with an install-risk tier and trust score; top 688 tarballs deep-scanned by Sentinel. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
     "url": "https://marketnow.site",
     "version": "4.0.0"
   },
@@ -44,7 +44,7 @@
           {
             "id": "skill-search",
             "name": "MCP Skill Search",
-            "description": "AI agents can search and retrieve MCP server configurations from 68,386 index-certified skills (install-risk tier + trust score on every entry; 688 top tarballs deep-scanned). Supports natural language queries, category filtering, and security score thresholds.",
+            "description": "AI agents can search and retrieve MCP server configurations from 68,387 index-certified skills (install-risk tier + trust score on every entry; 688 top tarballs deep-scanned). Supports natural language queries, category filtering, and security score thresholds.",
             "commissionRate": 0.2,
             "referralEndpoints": {
               "register": "https://marketnow.site/api/agent/register",
@@ -80,9 +80,9 @@
         "No Malicious Code"
       ],
       "scoreRange": "0-6",
-      "totalScanned": 68386,
+      "totalScanned": 68387,
       "averageScore": 6.8,
-      "note": "L1 index certification covers all 68,386 entries. Average sentinel_score across the catalog: 6.8/10 (computed live from /api/skills-lite.json). L2 deep-scan: 688 tarballs."
+      "note": "L1 index certification covers all 68,387 entries. Average sentinel_score across the catalog: 6.8/10 (computed live from /api/skills-lite.json). L2 deep-scan: 688 tarballs."
     }
   },
   "economy": {
@@ -124,8 +124,8 @@
     "audit_scope": "Documented inconsistencies across agent.json, npm package.json, LICENSE files, README, and landing HTML."
   },
   "metrics": {
-    "skills_indexed": 68386,
-    "security_checks_performed": 683860,
+    "skills_indexed": 68387,
+    "security_checks_performed": 683870,
     "npm_versions_published": 18,
     "npm_latest_version": "1.10.3",
     "npm_first_release_date": "2026-06-29",
@@ -133,14 +133,14 @@
     "github_org_created_at": "2026-03-30",
     "as_of": "2026-09-16T00:00:00Z",
     "source": "live API: https://marketnow.site/api/skills-lite.json + npm registry",
-    "skills_tracked_all_sources": 132735,
+    "skills_tracked_all_sources": 132736,
     "l2_tarballs_deep_scanned": 688
   },
-  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers \u2014 buyers install all 68,386 indexed skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
+  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers \u2014 buyers install all 68,387 indexed skills free. Vendor-priced usage (e.g. per-call x402) is billed by the vendor, never by MarketNow. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
   "buyer_pricing": {
     "model": "free",
     "per_skill_fee": 0,
     "subscription_fee": 0,
-    "explanation": "Buyers never pay MarketNow. All 68,386 indexed skills are free to install."
+    "explanation": "Buyers never pay MarketNow. All 68,387 indexed skills are free to install. Vendor-priced usage (e.g. per-call x402 on Base) is billed by the vendor, never by MarketNow."
   }
 }
