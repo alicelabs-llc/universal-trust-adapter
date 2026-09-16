@@ -33679,6 +33679,7 @@ humanize-mcp
 humanizer-mcp
 humanizer-ru
 humanlayer-justin
+humanmirror-x402-catalog
 humanoid-robots
 humanpages
 humanpen-mcp

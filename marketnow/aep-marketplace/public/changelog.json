@@ -1,7 +1,16 @@
 {
   "service": "MarketNow",
-  "current_version": "5.9.1",
+  "current_version": "5.9.2",
   "changelog": [
+    {
+      "version": "5.9.2",
+      "date": "2026-09-16",
+      "changes": [
+        "FIRST VENDOR-PRICED MCP LISTING \u2014 HumanMirror x402 catalog merged (68,386 to 68,387), submission mn-sub-260916-0358c0. MarketNow is the trust layer, not the pricing layer: vendors price their own service however they want. HumanMirror declares per-call x402 payments in USDC on Base mainnet (0.001-0.05 USDC per call); listing and installation remain free and the entry is explicitly marked vendor-priced (free: false, payment: per-call-x402).",
+        "L2 REVIEW (first l2-reviewed community submission): performed live on 2026-09-16 \u2014 homepage humanmirror.fr HTTP 200; MCP initialize returns humanmirror-x402-catalog v1.3.0 (protocol 2026-09-02-agent-first-v1); tools/list returns 3 discovery tools; .well-known/x402.json is a valid x402 V2 manifest in production-mainnet mode (Base eip155:8453, USDC). The evidence is recorded in the entry source note; the full submission record (Sentinel L1.5 scan, claims verification, declared pricing) is publicly auditable in the submissions queue repo.",
+        "Consistency sweep shipped with this release: free-skills.json regenerated from the live catalog (was stale at the v5.5 count of 66,496; now 68,386 free entries, vendor-priced listings excluded); UI strings in all supported languages updated to the real catalog size; agent.json stale metrics (69077/133425 era) aligned; pricing.json now documents vendor-priced usage explicitly (paid_skills_available: true, billing 100% vendor-side)."
+      ]
+    },
     {
       "version": "5.9.1",
       "date": "2026-09-16",

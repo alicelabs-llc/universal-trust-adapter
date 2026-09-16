@@ -1,9 +1,9 @@
 {
   "schema": "marketnow-catalog-meta/1.0",
   "generated_at": "2026-09-16",
-  "total_all": 132735,
+  "total_all": 132736,
   "core_certified": 59256,
-  "community_indexed": 9130,
+  "community_indexed": 9131,
   "aggregate_tracked": 64349,
   "sources": {
     "github": 11438,
@@ -15,6 +15,6 @@
     "crates": 1933,
     "docker": 625,
     "npm-registry": 19519,
-    "community-submission": 1
+    "community-submission": 2
   }
 }

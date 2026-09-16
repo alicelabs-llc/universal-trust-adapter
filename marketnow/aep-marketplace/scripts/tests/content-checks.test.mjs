@@ -37,7 +37,7 @@ test('F-05: no "9,248 free" in index.html', () => {
 
 test('F-08: free-skills surface is consistent with the v5.5 catalog', () => {
   const FREE_JSON = JSON.parse(readFileSync(`${ROOT}/marketnow/aep-marketplace/public/api/free-skills.json`, 'utf-8'));
-  assert.equal(FREE_JSON.length, 66496, 'free-skills.json should list all 66,496 catalog entries');
+  assert.equal(FREE_JSON.length, 68386, 'free-skills.json should list all 68,386 free catalog entries (excludes vendor-priced)');
   assert.ok(!INDEX_HTML.match(/\b\d[\d,.]*\s+free skills\b/), 'index.html should not hardcode a free-skills count');
 });
 
@@ -47,15 +47,15 @@ test('F-09: no GitHub token comment in index.html', () => {
 });
 
 test('R-05: stats.json exists and has correct structure (v5.5 catalog)', () => {
-  assert.ok(STATS_JSON.discovery.total_mcp_servers === 68386, 'total_mcp_servers should be 68386 (L1 index-certified)');
-  assert.ok(STATS_JSON.security.l1_index_certified === 68386, 'l1_index_certified should be 68386');
+  assert.ok(STATS_JSON.discovery.total_mcp_servers === 68387, 'total_mcp_servers should be 68387 (L1 index-certified)');
+  assert.ok(STATS_JSON.security.l1_index_certified === 68387, 'l1_index_certified should be 68387');
   assert.ok(STATS_JSON.security.l2_sentinel_scanned === 2839, 'l2_sentinel_scanned should be 2839');
   assert.ok(STATS_JSON.security.npm_vulnerabilities_own_packages === 0, 'own npm packages: 0 vulnerabilities');
 });
 
 test('R-10: data layer has no stale 9,248 counts (agent-ping feeds the homepage)', () => {
   const PING_JSON = JSON.parse(readFileSync(`${ROOT}/marketnow/aep-marketplace/public/api/agent-ping.json`, 'utf-8'));
-  assert.ok(PING_JSON.stats.total_skills === 68386, 'agent-ping total_skills should be 68386');
+  assert.ok(PING_JSON.stats.total_skills === 68387, 'agent-ping total_skills should be 68387');
   assert.equal(PING_JSON.stats.mcp_tools_count, PING_JSON.mcp_tools.length, 'mcp_tools_count should match the tools list');
   const CARD_JSON = JSON.parse(readFileSync(`${ROOT}/marketnow/aep-marketplace/public/.well-known/mcp/server-card.json`, 'utf-8'));
   assert.ok(!CARD_JSON.description.includes('9,248'), 'server-card (Smithery source) must not say 9,248');
