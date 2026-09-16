@@ -25,6 +25,11 @@
  *  14. marketnow_check_revocation      — OCSP-style revocation status (card_id | kid) (NEW)
  *  15. marketnow_fingerprint_tool      — TFP-1.0 tool fingerprinting + drift detection (NEW)
  *
+ * v1.11.1 (September 2026) — Version Self-Report Fix
+ *   - serverInfo.version now read dynamically from package.json (never drifts
+ *     from the published version again; 1.11.0 shipped reporting 1.10.3).
+ * v1.11.0 (September 2026) — Registry Stats Refresh
+ *   - catalog 5.9.2: 68,387 verified MCP servers (README + descriptions).
  * v1.10.3 (September 2026) — Security Hardening
  *   - @modelcontextprotocol/sdk upgraded 0.5.0 -> 1.30.0, resolving advisory
  *     GHSA-w48q-cv73-mx4w (DNS rebinding protection). npm audit: 0
@@ -527,10 +532,13 @@ async function recommendSkills(args) {
 }
 
 // ─── MCP Server setup ───────────────────────────────────────────────────────
+import { createRequire } from 'node:module';
+const require_ = createRequire(import.meta.url);
+const PKG_VERSION = require_('./package.json').version;
 const server = new Server(
   {
     name: 'marketnow',
-    version: '1.10.3',
+    version: PKG_VERSION,
   },
   {
     capabilities: {
@@ -1008,4 +1016,4 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 // ─── Start server ───────────────────────────────────────────────────────────
 const transport = new StdioServerTransport();
 await server.connect(transport);
-console.error('MarketNow MCP Server v1.10.3 running on stdio (15 tools, marketnow_* namespace, revocation + TFP-1.0 fingerprinting, SDK 1.30.0)');
+console.error(`MarketNow MCP Server v${PKG_VERSION} running on stdio (15 tools, marketnow_* namespace, revocation + TFP-1.0 fingerprinting, SDK 1.30.0)`);
