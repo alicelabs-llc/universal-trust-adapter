@@ -116,13 +116,13 @@ const TOOLS = [
   },
   {
     name: "marketnow_submit_skill",
-    description: "Publish a skill to the MarketNow catalog (the write side). The package is validated and Sentinel-scanned (injection patterns, embedded secrets, dangerous APIs, suspicious URLs, typosquat, dedup against the 69k+ catalog) AND its claims are verified live: repo_url must exist (HTTP 200), install must reference a real package on npm/PyPI/crates/Docker Hub. False claims are rejected (422). Accepted skills with real substance (files/code/verifiable repo) are stored in the public auditable queue as certified-L1.5, pending L2 review and catalog merge. Description-only submissions are accepted but never merged. No authentication required. Do NOT include secrets — the scanner rejects them.",
+    description: "Publish a skill to the MarketNow catalog (the write side). The package is validated and Sentinel-scanned (injection patterns, embedded secrets, dangerous APIs, suspicious URLs, typosquat, dedup against the 69k+ catalog) AND its claims are verified live: repo_url must exist (HTTP 200), install must reference a real package on npm/PyPI/crates/Docker Hub. False claims are rejected (422). Accepted skills with real substance (files/code/verifiable repo) are stored in the public auditable queue as certified-L1.5, pending L2 review and catalog merge. Description-only submissions are accepted but never merged. Any pricing model is accepted — free, per-call (x402), subscription or custom: the vendor sets the price, MarketNow verifies the security. No authentication required. Do NOT include secrets — the scanner rejects them.",
     inputSchema: {
       type: "object",
       properties: {
         skill: {
           type: "object",
-          description: "Skill package. Required: name, version, description, author. Recommended: runtime (node|python|rust|go|dotnet|docker|luau|roblox|other), install, repo_url, homepage, tags (max 12), capabilities, doc.usage, doc.system_prompt, files {name:content} (max 60KB), test.url (https — probed), price."
+          description: "Skill package. Required: name, version, description, author. Recommended: runtime (node|python|rust|go|dotnet|docker|luau|roblox|other), install, repo_url, homepage, tags (max 12), capabilities, doc.usage, doc.system_prompt, files {name:content} (max 60KB), test.url (https — probed), pricing {model: free|per-call|per-call-x402|subscription|one-time|freemium|revenue-share|custom, price, currency, details max 300} — the vendor sets any price; we verify security, not pricing."
         },
         dry_run: {
           type: "boolean",

@@ -52,6 +52,8 @@ async function getCatalogNames() {
 
 // ─── schema ─────────────────────────────────────────────────────────────────
 const RUNTIMES = new Set(['node', 'python', 'rust', 'go', 'dotnet', 'docker', 'luau', 'roblox', 'java', 'php', 'ruby', 'other']);
+// Pricing: el VENDOR fija su propio modelo de precio. MarketNow verifica seguridad — no curamos precios.
+const PRICING_MODELS = new Set(['free', 'per-call', 'per-call-x402', 'subscription', 'one-time', 'freemium', 'revenue-share', 'custom']);
 
 const REQUIRED = [
   ['name', 'string', 2, 60],
@@ -83,6 +85,37 @@ function validateSchema(skill) {
   if (skill.tags && (!Array.isArray(skill.tags) || skill.tags.length > 12)) {
     errors.push({ check: 'SCHEMA', severity: 'medium', field: 'tags', reason: 'array, max 12 items' });
   }
+  // pricing — any model the vendor wants (lenient: unknown model degrades to "custom" with a low warning,
+  // never a rejection; only SAFETY findings in pricing text reject)
+  const pr = skill.pricing;
+  if (pr !== undefined && pr !== null) {
+    if (typeof pr !== 'object' || Array.isArray(pr)) {
+      errors.push({ check: 'SCHEMA', severity: 'medium', field: 'pricing', reason: 'object {model, price, currency, details}' });
+    } else {
+      if (pr.model !== undefined && !PRICING_MODELS.has(String(pr.model).toLowerCase())) {
+        errors.push({ check: 'SCHEMA', severity: 'low', field: 'pricing.model', reason: `unknown model — kept as "custom" (known: ${[...PRICING_MODELS].join(', ')})` });
+      }
+      if (pr.price !== undefined && pr.price !== null) {
+        if (typeof pr.price === 'number') {
+          if (!Number.isFinite(pr.price) || pr.price < 0) {
+            errors.push({ check: 'SCHEMA', severity: 'medium', field: 'pricing.price', reason: 'number >= 0 (in pricing.currency, default USD)' });
+          }
+        } else if (typeof pr.price === 'string') {
+          if (pr.price.trim().length < 1 || pr.price.length > 60) {
+            errors.push({ check: 'SCHEMA', severity: 'medium', field: 'pricing.price', reason: 'string 1-60 chars (e.g. "0.01 USDC per call")' });
+          }
+        } else {
+          errors.push({ check: 'SCHEMA', severity: 'medium', field: 'pricing.price', reason: 'number >= 0 or short string (max 60)' });
+        }
+      }
+      if (pr.currency !== undefined && (typeof pr.currency !== 'string' || pr.currency.length > 10)) {
+        errors.push({ check: 'SCHEMA', severity: 'low', field: 'pricing.currency', reason: 'short string (USD, USDC, EUR…)' });
+      }
+      if (pr.details !== undefined && (typeof pr.details !== 'string' || pr.details.length > 300)) {
+        errors.push({ check: 'SCHEMA', severity: 'medium', field: 'pricing.details', reason: 'string, max 300 chars (shown on the listing)' });
+      }
+    }
+  }
   if (skill.files && typeof skill.files !== 'object') {
     errors.push({ check: 'SCHEMA', severity: 'medium', field: 'files', reason: 'object {filename: content}' });
   }
@@ -91,6 +124,30 @@ function validateSchema(skill) {
     errors.push({ check: 'SCHEMA', severity: 'high', field: 'files|code', reason: 'source code exceeds 60KB — submit a repo URL instead' });
   }
   return errors;
+}
+
+// ─── pricing normalization (vendor freedom: any model, any price) ───────────
+function normalizePricing(skill) {
+  const pr = skill.pricing;
+  if (!pr || typeof pr !== 'object' || Array.isArray(pr)) {
+    if (typeof skill.price === 'number') {
+      return { model: skill.price === 0 ? 'free' : 'custom', price: skill.price, currency: 'USD', details: null };
+    }
+    return null;
+  }
+  let model = String(pr.model || '').toLowerCase();
+  if (!PRICING_MODELS.has(model)) model = 'custom';
+  if (model === 'free' && (pr.price === undefined || pr.price === null || pr.price === 0)) {
+    return { model: 'free', price: 0, currency: null, details: typeof pr.details === 'string' ? pr.details.trim().slice(0, 300) : null };
+  }
+  let price = pr.price === undefined || pr.price === null ? null : pr.price;
+  if (typeof price === 'string') price = price.trim().slice(0, 60) || null;
+  return {
+    model,
+    price,
+    currency: typeof pr.currency === 'string' && pr.currency.trim() ? pr.currency.trim().slice(0, 10) : (typeof price === 'number' ? 'USD' : null),
+    details: typeof pr.details === 'string' ? pr.details.trim().slice(0, 300) : null,
+  };
 }
 
 // ─── Sentinel L1-sub: scan de seguridad ─────────────────────────────────────
@@ -187,28 +244,48 @@ async function probeClaim(url, accept) {
   }
 }
 
+// npm/pypi: quita el sufijo de version de un token de paquete para que el probe
+// al registro use el nombre correcto — registry.npmjs.org/pkg@latest devuelve 404
+// aunque pkg exista (bug real: "npx marketnow-mcp@latest" era rechazado en falso).
+// Preserva scopes: "@scope/pkg@1.2.3" -> "@scope/pkg"; "pkg@latest" -> "pkg".
+function stripVersionTag(t) {
+  if (t.startsWith('@')) {
+    const slash = t.indexOf('/', 1);
+    if (slash === -1) return t; // solo scope, malformado — dejar intacto
+    const at = t.indexOf('@', slash + 1);
+    return at === -1 ? t : t.slice(0, at);
+  }
+  const at = t.indexOf('@');
+  return at === -1 ? t : t.slice(0, at);
+}
+
 // install command → { registry, package } | null (no parseable package claim)
 // NOTA: el paquete es el PRIMER token que no es flag — los flags cortos (-y) NUNCA
 // consumen el token siguiente (bug corregido: "npx -y @scope/pkg cmd" → @scope/pkg)
-function parseInstallPackage(install) {
+// NOTA 2: los tags de version (pkg@latest, @scope/pkg@1.2.3) se strippean antes
+// del probe al registry (stripVersionTag) — el registry no resuelve "@version".
+export function parseInstallPackage(install) {
   const s = String(install || '').trim();
   let m;
-  // npx [-flags] [@scope/]pkg …  |  pnpm dlx/exec [-flags] pkg …
-  if ((m = /^(?:npx|pnpm)\s+(?:(?:dlx|exec)\s+)?/i.exec(s))) {
+  // npx|pnpm|bunx [-flags] [@scope/]pkg[@version] …  |  pnpm dlx/exec [-flags] pkg …
+  if ((m = /^(?:npx|pnpm|bunx)\s+(?:(?:dlx|exec)\s+)?/i.exec(s))) {
     for (const t of s.slice(m[0].length).trim().split(/\s+/)) {
       if (!t || t === '--' || t.startsWith('-')) continue;
-      return { registry: 'npm', package: t };
+      return { registry: 'npm', package: stripVersionTag(t) };
     }
   }
   // npm|pnpm|yarn|bun i|install|add [-flags] pkg
   if ((m = /^(?:npm|pnpm|yarn|bun)\s+(?:i|install|add)\s+/i.exec(s))) {
     for (const t of s.slice(m[0].length).trim().split(/\s+/)) {
       if (!t || t === '--' || t.startsWith('-')) continue;
-      return { registry: 'npm', package: t };
+      return { registry: 'npm', package: stripVersionTag(t) };
     }
   }
   if ((m = /(?:^|\s)(?:pip3?|python3?\s+-m\s+pip|uv\s+pip)\s+install\s+(?:-[A-Za-z]\s+|--[a-z-]+\s+)*([A-Za-z0-9._-]+)/i.exec(s)))
     return { registry: 'pypi', package: m[1] };
+  // uvx pkg[@version] — uv tool run (PyPI)
+  if ((m = /(?:^|\s)uvx\s+(?:-[A-Za-z]+\s+)*([A-Za-z0-9._-]+)/i.exec(s)))
+    return { registry: 'pypi', package: m[1].split('@')[0] };
   if ((m = /(?:^|\s)cargo\s+(?:install|add)\s+(?:--[\w-]+\s+)*([a-zA-Z0-9_-]+)/i.exec(s)))
     return { registry: 'crates', package: m[1] };
   if ((m = /(?:^|\s)docker\s+pull\s+([A-Za-z0-9._\/:-]+)/i.exec(s)))
@@ -313,6 +390,9 @@ export async function processSubmission(payload, { dryRun = false, remoteIp = 'u
     skill.name, skill.description, skill.author, skill.category, skill.runtime,
     skill.install, skill.homepage, skill.repo_url, skill.license,
     skill.doc?.usage, skill.doc?.system_prompt, skill.doc?.setup?.install,
+    skill.pricing?.model, skill.pricing?.currency,
+    typeof skill.pricing?.price === 'string' ? skill.pricing.price : '',
+    skill.pricing?.details,
     Array.isArray(skill.tags) ? skill.tags.join(' ') : '',
     skill.files ? Object.values(skill.files).join(' ') : '',
     skill.code || '',
@@ -393,7 +473,9 @@ export async function processSubmission(payload, { dryRun = false, remoteIp = 'u
       runtime: skill.runtime || 'other', tags: Array.isArray(skill.tags) ? skill.tags.slice(0, 12) : ['mcp'],
       install: skill.install || '(not provided)', homepage: skill.homepage || null,
       repo_url: skill.repo_url || null, license: skill.license || null,
-      price: typeof skill.price === 'number' ? skill.price : 0,
+      // pricing: el vendor fija el precio que quiera; MarketNow verifica seguridad, no curación de precios
+      pricing: normalizePricing(skill),
+      price: typeof skill.price === 'number' ? skill.price : (typeof skill.pricing?.price === 'number' ? skill.pricing.price : 0),
       // payload completo para L2 review + catalog merge (ya capped: files ≤60KB, payload ≤100KB)
       doc: skill.doc || null,
       capabilities: skill.capabilities || null,
