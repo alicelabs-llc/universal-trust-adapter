@@ -10,12 +10,15 @@ const TRUST_API = "https://www.marketnow.site/api/trust";
 
 import { createHash } from "node:crypto";
 import ocspHandler from "./ocsp.js";
+import skillsHandler from "./skills.js";
 import { processSubmission } from "../lib/submit-core.mjs";
 
 // MCP Server info
+// NOTE: keep in sync with marketnow/mcp-server/package.json on every release.
+// v1.11.1 = serverInfo self-report fix + stats refresh (catalog 5.9.2).
 const SERVER_INFO = {
   name: "marketnow-mcp",
-  version: "1.11.0",
+  version: "1.11.1",
 };
 
 const SERVER_CAPABILITIES = {
@@ -161,6 +164,29 @@ async function callOcsp(query) {
   });
 }
 
+// Invoke the skills search handler in-process (same pattern as callOcsp).
+// FIX 2026-09-17: the old implementation fetched the full static
+// /api/skills.json blob (~98MB) and returned its first 10 entries regardless
+// of the query — the search tool never actually searched. Calling ./skills.js
+// in-process reuses its build-time catalog bundle (skills-lite.json) and its
+// real query engine (name/description/tags match), with no HTTP round-trip.
+function callSkills(query) {
+  return new Promise((resolve, reject) => {
+    const mockRes = {
+      _code: 0,
+      status(c) { mockRes._code = c; return mockRes; },
+      json(o) { resolve(o); return mockRes; },
+      end() { resolve(null); return mockRes; },
+      setHeader() {},
+    };
+    try {
+      skillsHandler({ method: "GET", query }, mockRes);
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
 // Tool fingerprinting (TFP-1.0) — roadmap v5.1 item 1 + OWASP MCP Cheat Sheet
 // 'verify tool descriptions haven't changed'. JCS over the tool definition + sha256.
 function fingerprintTools(tools, pinned) {
@@ -298,11 +324,34 @@ async function handleRequest(method, params, id) {
         }
 
         case "marketnow_search_skills": {
-          const resp = await fetch(`https://www.marketnow.site/api/skills.json?q=${encodeURIComponent(args.query || "")}`);
-          const data = await resp.json();
-          const skills = Array.isArray(data) ? data.slice(0, 10) : (data.skills || []).slice(0, 10);
+          // FIX 2026-09-17: real search via the in-process /api/skills engine
+          // (was: 98MB static fetch, query ignored, same 10 skills every time).
+          const query = { limit: "10" };
+          if (args.query) query.q = String(args.query);
+          if (args.category) query.category = String(args.category);
+          const data = await callSkills(query);
+          const skills = (Array.isArray(data) ? data : data?.skills || []).slice(0, 10);
           return {
-            content: [{ type: "text", text: JSON.stringify(skills, null, 2) }]
+            content: [{ type: "text", text: JSON.stringify({
+              success: true,
+              query: args.query || null,
+              category: args.category || null,
+              total_matches: Array.isArray(data) ? skills.length : (data?.total ?? skills.length),
+              count: skills.length,
+              skills: skills.map(s => ({
+                id: s.id,
+                name: s.name,
+                slug: s.slug,
+                description: (s.description || "").slice(0, 200),
+                category: s.category,
+                price: s.price,
+                runtime: s.runtime,
+                trust_score_100: s.trust_score_100,
+                npm_downloads_wk: s.npm_downloads_wk,
+                page_url: s.page_url,
+                badge_url: s.badge_url,
+              })),
+            }, null, 2) }]
           };
         }
 
