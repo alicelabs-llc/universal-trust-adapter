@@ -23,7 +23,7 @@
 //      clean JSON 500s instead of opaque FUNCTION_INVOCATION_FAILED.
 // ============================================================================
 
-import { createPrivateKey, createPublicKey, sign as edSign, verify as edVerify } from 'node:crypto';
+import { createPrivateKey, createPublicKey, createHash, sign as edSign, verify as edVerify } from 'node:crypto';
 
 // MarketNow registry CA (mn-ca-003, active since 2026-09-08; see /api/atc?action=ca-key)
 const MARKETNOW_CA = {
@@ -144,6 +144,37 @@ export async function handleTrust(req, res) {
         semantics: ['VALID', 'EXPIRED', 'REVOKED', 'SUSPENDED', 'SUPERSEDED', 'UNKNOWN'],
         fail_closed: true,
         mcp_tool: 'marketnow_check_revocation (via /api/mcp)',
+      });
+    }
+
+    // ── interceptor: the hosted rule manifest (kept in sync with
+    // @marketnow/cline-trust-plugin — the enforcing component). The endpoint
+    // answers with the REAL ruleset and semantics; it makes no claims about
+    // rules that do not exist in code. v1.1.1 rules: case-insensitive
+    // matching, path-segment boundaries (no "my.environment" false
+    // positives).
+    if (action === 'interceptor' || req.query._mode === 'interceptor') {
+      return res.status(200).json({
+        service: 'MarketNow UTA Interceptor',
+        version: '1.1.1',
+        description: 'Pre-execution trust filter for agent tool calls. The enforcing component is @marketnow/cline-trust-plugin (Cline plugin) — this endpoint publishes the rule manifest and policy semantics it enforces.',
+        rules: [
+          { id: 'R1', rule: 'blocked_path', matches: 'credential and secret files referenced as path segments: .env, .aws/credentials, .ssh/id_rsa, .npmrc, .git-credentials', semantics: 'DENY the call, emit audit receipt', case_insensitive: true, boundary: 'path-segment (a ".env" inside "my.environment" does NOT match)' },
+          { id: 'R2', rule: 'blocked_command', matches: 'destructive recursive deletes: rm with -r/-f flag combinations in any letter case', semantics: 'DENY the call, emit audit receipt', case_insensitive: true },
+          { id: 'R3', rule: 'blocked_path', matches: 'system files: /etc/passwd, /etc/shadow', semantics: 'DENY the call, emit audit receipt', case_insensitive: true },
+          { id: 'R4', rule: 'blocked_spawn', matches: 'tool names containing spawn/exec/shell', semantics: 'DENY the call, emit audit receipt' },
+          { id: 'R5', rule: 'secret_exfiltration', matches: 'secret material in outbound args (private key blocks, bearer tokens, sk-/ghp_/AKIA/xox-style tokens)', semantics: 'DENY the call, emit audit receipt', case_insensitive: true },
+          { id: 'R6', rule: 'revocation_gate', matches: 'wrapped server ATC card_id or CA kid (UTA_TRUST_CARD_ID / UTA_TRUST_KID env), resolved against /api/ocsp', semantics: 'DENY unless status=VALID and recommendation=PERMIT; responder unreachable = DENY (fail-closed)' },
+        ],
+        decision_semantics: {
+          on_match: 'DENY — the tool call never reaches the wrapped server; a signed audit receipt is emitted to the Merkle audit log',
+          on_no_match: 'PERMIT — call proceeds to the wrapped MCP server',
+          on_error: 'DENY (fail-closed)',
+          golden_rule: 'UNKNOWN = DENY, ERROR = DENY',
+        },
+        audit_log: 'Append-only Merkle tree of every decision (DENY + PERMIT) — get_audit_log in the plugin',
+        enforcement: 'npm @marketnow/cline-trust-plugin — wrap(externalServer) applies the full filter to every tools/call; check_interceptor() runs it dry',
+        integration_example: 'import uta from "@marketnow/cline-trust-plugin"; const wrapped = uta.wrap(server);',
       });
     }
     
@@ -421,6 +452,16 @@ function detectFormat(payload) {
   // ATC v2: has card_id + payload + signature
   if (payload.card_id && payload.payload && payload.signature) {
     return { format: 'atc-v2', confidence: 0.95 };
+  }
+
+  // ATC v2 (bare production payload, no envelope): schema_version 1.x +
+  // card_id + metadata + decision_authority — the payload half of a real
+  // ledger card. Detected as atc-v2 so verification can fail-closed with a
+  // precise reason ("pass the complete card envelope") instead of
+  // format:unknown.
+  if (payload.schema_version && String(payload.schema_version).startsWith('1.')
+      && payload.card_id && payload.metadata && payload.decision_authority && !payload.atc_version) {
+    return { format: 'atc-v2', confidence: 0.90 };
   }
 
   // W3C VC: has @context with W3C VC URI + proof
@@ -779,16 +820,98 @@ function utsToATC(uts) {
   };
 }
 
+// Registry of MarketNow CA keys (public) — used to resolve signature.ca_key_id
+// and to fail-closed on signatures under retired/compromised keys.
+const MN_CA_REGISTRY = {
+  'ca-key-001': { spki_b64: 'MCowBQYDK2VwAyEA8p1XlAnt5QRCGbyDRi8+U9MCvt8Xyzq36Rar45JHszM=', status: 'retired' },
+  'mn-ca-002': { spki_b64: 'MCowBQYDK2VwAyEATlD16v6Fy/+GM4je2SxwCz7yFEeo9d8LwqZf0yN8oFY=', status: 'retired-compromised' },
+  'mn-ca-003': { spki_b64: 'MCowBQYDK2VwAyEAUWJgyMWp9oKIGwN9EG8ayz/mYYp1lcQBI58rtpOs8CM=', status: 'active' },
+};
+
 function verifyATC(card, caKey) {
+  // FIX 2026-09-17 (audit Task 63, fragmentation finding): the atc-v2 adapter
+  // was structure-only AND rejected the real production cards on a string
+  // mismatch (signature.canonical_json documents the method in prose —
+  // "RFC 8785 JCS (JSON Canonicalization Scheme)" — while the check required
+  // the enum spelling "RFC_8785_JCS"). This made /api/trust?action=verify DENY
+  // every card in the real ledger. Now: REAL Ed25519 verification, identical
+  // to /api/atc?action=verify (RFC 8785 JCS over payload, sha256 hash check,
+  // Ed25519 against the resolved CA key), plus lifecycle checks.
   const issues = [], warnings = [];
-  if (!card?.payload || !card?.signature) return { valid: false, format: 'atc-v2', issues: ['missing payload/signature'], warnings };
+  if (!card?.payload || !card?.signature) return { valid: false, format: 'atc-v2', issues: ['missing payload/signature envelope — pass the complete card {card_id, status, payload, signature}'], warnings };
   const sig = card.signature, p = card.payload;
-  if (!sig.ca_key_id) warnings.push('v2_violation: ca_key_id missing');
-  if (!sig.evidence_hash) warnings.push('v2_violation: evidence_hash missing');
-  if (sig.canonical_json && sig.canonical_json !== 'RFC_8785_JCS') issues.push(`v2: ${sig.canonical_json} deprecated`);
+  if (typeof p !== 'object' || typeof sig !== 'object' || typeof sig.value !== 'string') {
+    return { valid: false, format: 'atc-v2', issues: ['malformed payload/signature objects'], warnings };
+  }
+
+  // Canonicalization documentation — accept the documented spellings; the
+  // authoritative field is signature.canonicalization_method when present.
+  const canonDoc = sig.canonicalization_method || sig.canonical_json || '';
+  const CANON_OK = ['RFC_8785_JCS', 'RFC 8785 JCS', 'RFC 8785 JCS (JSON Canonicalization Scheme)'];
+  if (canonDoc && !CANON_OK.includes(String(canonDoc).trim())) {
+    issues.push(`v2: unsupported canonicalization documented: ${canonDoc}`);
+  } else if (!canonDoc) {
+    warnings.push('v2_note: no canonicalization field — assuming RFC 8785 JCS');
+  }
+
+  // Lifecycle
   if (p.metadata?.expires_at && new Date(p.metadata.expires_at) < new Date()) issues.push('expired');
   if (card.status === 'revoked') issues.push('revoked');
-  return { valid: issues.length === 0, format: 'atc-v2', uts: atcToUTS(card), issues, warnings, v2_compliant: !warnings.some(w => w.startsWith('v2_violation')) };
+  if (card.status === 'superseded') issues.push('superseded');
+
+  // Trust anchor resolution: caller-supplied PEM, else the MarketNow registry.
+  // signature.ca_key_id selects the registry key when present (fail-closed on
+  // unknown ids and on the compromised mn-ca-002).
+  let anchorPem = null, anchorId = null;
+  if (caKey && typeof caKey === 'string' && caKey.includes('BEGIN')) {
+    anchorPem = caKey; anchorId = 'caller-supplied';
+  } else {
+    const claimed = sig.ca_key_id || MARKETNOW_CA.key_id;
+    const entry = MN_CA_REGISTRY[claimed] || null;
+    if (!entry) {
+      issues.push(`unknown CA key id: ${claimed} — resolve it against GET /api/atc?action=ca-key (fail-closed)`);
+    } else if (entry.status === 'retired-compromised') {
+      issues.push(`signature claims CA key ${claimed}, which is retired-compromised — DO NOT verify against it`);
+    } else if (entry.status === 'retired') {
+      // Cards signed under a since-retired key are historical evidence; they
+      // still verify, but the warning makes the rotation visible.
+      anchorPem = spkiToPem(entry.spki_b64); anchorId = claimed;
+      warnings.push(`CA key ${claimed} is retired (routine rotation) — signature verifies as historical evidence`);
+    } else {
+      anchorPem = spkiToPem(entry.spki_b64); anchorId = claimed;
+    }
+  }
+
+  // REAL crypto: JCS(payload) → sha256 vs signed_payload_hash → Ed25519.
+  let hashValid = null, signatureValid = null, canonicalSha256 = null;
+  if (anchorPem) {
+    try {
+      const canonical = jcs(p);
+      const canonicalBytes = Buffer.from(canonical, 'utf8');
+      canonicalSha256 = createHash('sha256').update(canonicalBytes).digest('hex');
+      if (sig.signed_payload_hash) hashValid = canonicalSha256 === sig.signed_payload_hash;
+      else warnings.push('v2_note: signed_payload_hash missing — hash pre-check skipped (signature still required)');
+      const sigBuf = Buffer.from(sig.value, 'hex');
+      if (sigBuf.length !== 64) {
+        issues.push('signature value is not 64 bytes (128 hex chars)');
+      } else {
+        signatureValid = edVerify(null, canonicalBytes, createPublicKey({ key: anchorPem, format: 'pem' }), sigBuf);
+        if (signatureValid !== true) issues.push(`Ed25519 signature verification failed against ${anchorId}`);
+      }
+    } catch (e) {
+      issues.push(`verification error: ${String(e && e.message ? e.message : e)}`);
+    }
+  }
+
+  return {
+    valid: issues.length === 0 && signatureValid === true,
+    format: 'atc-v2',
+    uts: atcToUTS(card),
+    issues,
+    warnings,
+    verified_by: anchorPem ? { algorithm: 'Ed25519 (RFC 8032)', trust_anchor: anchorId, canonicalization: 'RFC 8785 JCS', canonical_sha256: canonicalSha256, hash_valid: hashValid, signature_valid: signatureValid } : undefined,
+    v2_compliant: !warnings.some(w => w.startsWith('v2_violation')),
+  };
 }
 
 // ============================================================================

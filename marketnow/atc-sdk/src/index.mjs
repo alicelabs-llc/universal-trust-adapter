@@ -52,3 +52,4 @@
 export { generateKeyPair, loadKeyPairFromPrivate, signMessage, verifySignature, ATC_ALGORITHM } from './keys.mjs';
 export { issueATC, resignATC, canonicalizeATC, computePayloadHash, ATC_SPEC_VERSION, ATC_MAX_TTL_DAYS_DEFAULT } from './issue.mjs';
 export { verifyATC, verifyATCSync } from './verify.mjs';
+export { verifyLedgerCard, isLedgerCard } from './ledger-card.mjs';
