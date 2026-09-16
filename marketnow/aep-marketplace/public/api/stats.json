@@ -1,7 +1,7 @@
 {
   "$schema": "https://marketnow.site/api/stats.schema.json",
   "version": "2.0.0",
-  "generated_at": "2026-09-16T00:00:00Z",
+  "generated_at": "2026-09-16T20:00:15.000Z",
   "source_of_truth": "certification.json (L1) + certification-scans.json (L2) + catalog-meta.json (aggregate tracking). CI fails if any surface diverges.",
   "discovery": {
     "total_mcp_servers": 68387,
@@ -45,7 +45,7 @@
     "l2_own_packages": 13,
     "npm_vulnerabilities_own_packages": 0,
     "security_checks_performed": 683870,
-    "security_checks_methodology": "10 L1 checks x 68,387 entries + 29 L2 rules x 2,720 tarball scans",
+    "security_checks_methodology": "10 L1 checks x 68,387 entries + 29 L2 rules x 2,839 tarball scans (top 2,868 npm targets, 99% completion)",
     "sentinel_version": "v3.0",
     "sentinel_pipeline_stages": 12,
     "methodology_url": "https://marketnow.site/api/certification.json"
@@ -103,5 +103,14 @@
     ],
     "count": 14,
     "method": "human + machine-assisted, reviewed"
+  },
+  "distribution": {
+    "npm_package": "marketnow-mcp",
+    "npm_latest_version": "1.11.1",
+    "npm_latest_release_date": "2026-09-16",
+    "npm_versions_published": 20,
+    "npm_downloads_last_month": 939,
+    "npm_org": "alicelabs-llc",
+    "packages_on_npm": 14
   }
 }
