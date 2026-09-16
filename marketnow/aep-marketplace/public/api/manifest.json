@@ -17,5 +17,5 @@
     "by_tag": "Filter client-side: skills.filter(s => s.tags.includes('mcp'))",
     "search": "Filter client-side: skills.filter(s => s.name.toLowerCase().includes(query))"
   },
-  "generated_at": "2026-09-11T23:47:26.935Z"
+  "generated_at": "2026-09-16T15:24:12.478Z"
 }

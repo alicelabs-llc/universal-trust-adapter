@@ -140,8 +140,15 @@ for (const s of skills) {
   }
 
   // review_status (replaces universal 'verified: true')
-  s.review_status = (freeIds.has(s.id) || (s.id && s.id.startsWith('mn-sec-'))) ? 'human-reviewed' : 'auto-scanned';
-  s.verified = s.review_status !== 'auto-scanned'; // legacy compat
+  // 5.9.2: 'l2-reviewed' is the top tier — set by the catalog L2 review on the
+  // submission pipeline (Sentinel L1.5 + live evidence verification). The
+  // generator preserves it and never downgrades an L2-reviewed entry.
+  if (s.review_status === 'l2-reviewed') {
+    s.verified = true; // legacy compat
+  } else {
+    s.review_status = (freeIds.has(s.id) || (s.id && s.id.startsWith('mn-sec-'))) ? 'human-reviewed' : 'auto-scanned';
+    s.verified = s.review_status !== 'auto-scanned'; // legacy compat
+  }
 
   // permissions — declarative, inferred from metadata
   const setup = (s.doc && s.doc.setup) || {};
@@ -343,12 +350,19 @@ console.log(`   → public/api/skills.json       (accesible para agentes)`);
 // Lite version for web (no system prompts, no capabilities, truncated descriptions)
 // AUDIT-FUNC FIX: include translations + mark free skills with price=0
 const liteSkills = skills.map(s => {
+  // 5.9.2: an explicit s.free === false marks vendor-priced usage (e.g. per-call
+  // x402 in USDC on Base): listing/install stays free, but the vendor bills
+  // usage directly — the free flag must stay false even though price === 0
+  // (price covers the listing, not the vendor-side usage).
+  const isFree = (typeof s.free === 'boolean') ? s.free : (freeIds.has(s.id) || s.price === 0);
   const lite = {
     id: s.id, name: s.name, slug: s.slug,
     description: (s.description || "").slice(0, 200),
     category: s.category,
-    price: freeIds.has(s.id) ? 0 : s.price,  // FIX: free skills = 0
-    free: freeIds.has(s.id) || s.price === 0, // FIX: mark free=true
+    price: isFree ? 0 : s.price,
+    free: isFree,
+    ...(s.payment ? { payment: s.payment } : {}),
+    ...(s.currency ? { currency: s.currency } : {}),
     sentinel_score: s.sentinel_score, review_status: s.review_status,
     risk_level: s.risk_level, install: s.install,
     author: s.author, version: s.version, tags: (s.tags || []).slice(0, 5),
