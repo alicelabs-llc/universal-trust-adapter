@@ -23,7 +23,7 @@
     "l2_flagged_error": 1156,
     "l2_own_packages": 13,
     "npm_vulnerabilities_own_packages": 0,
-    "npm_versions_published": 20,
+    "npm_versions_published": 21,
     "npm_downloads_last_month": 939,
     "security_checks_performed": 683870,
     "security_checks_methodology": "10 L1 checks x 68,387 entries + 29 L2 rules x 2,839 tarball scans (top 2,868 npm targets, 99% completion)",
