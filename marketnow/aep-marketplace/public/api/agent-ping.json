@@ -1,9 +1,9 @@
 {
   "status": "alive",
-  "message": "MarketNow \u2014 Security infrastructure for AI agents. Sentinel two-level certification: L1 index-certified (68,387 entries, 10/10 checks) + L2 sentinel-scanned (2,720 top npm tarballs, 29 rules). 15 MCP tools (marketnow_* namespace) in marketnow-mcp v1.10.3.",
-  "positioning": "Security infrastructure for AI agents \u2014 not a marketplace. The catalog (68,387 index-certified skills, 132,736 total tracked across 9 sources) is distribution; the product is Sentinel.",
+  "message": "MarketNow — Security infrastructure for AI agents. Sentinel two-level certification: L1 index-certified (68,387 entries, 10/10 checks) + L2 sentinel-scanned (2,720 top npm tarballs, 29 rules). 15 MCP tools (marketnow_* namespace) in marketnow-mcp v1.10.3.",
+  "positioning": "Security infrastructure for AI agents — not a marketplace. The catalog (68,387 index-certified skills, 132,736 total tracked across 9 sources) is distribution; the product is Sentinel.",
   "version": "5.5.0",
-  "mcp_version": "1.10.3",
+  "mcp_version": "1.11.1",
   "stats": {
     "total_skills": 68387,
     "total_tracked_all_sources": 133425,
@@ -24,11 +24,11 @@
     "l2_own_packages": 13,
     "npm_vulnerabilities_own_packages": 0,
     "npm_versions_published": 18,
-    "npm_downloads_last_month": 1169,
+    "npm_downloads_last_month": 939,
     "security_checks_performed": 684912,
-    "security_checks_methodology": "10 L1 checks x 68,387 entries + 29 L2 rules x 2,720 tarball scans",
+    "security_checks_methodology": "10 L1 checks x 68,387 entries + 29 L2 rules x 2,839 tarball scans (top 2,868 npm targets, 99% completion)",
     "sentinel_version": "L1 index-certified + L2 sentinel-scanned (29 rules) + L3 trust-chain (ATC)",
-    "mcp_server": "npx -y marketnow-mcp@1.10.3",
+    "mcp_server": "npx -y marketnow-mcp@1.11.1",
     "mcp_tools_count": 15,
     "mcp_namespace": "marketnow_*",
     "ca_algorithm": "Ed25519 (RFC 8032)",
@@ -136,5 +136,6 @@
     "marketnow_check_revocation",
     "marketnow_fingerprint_tool"
   ],
-  "mcp_protocol": "2025-03-26"
+  "mcp_protocol": "2025-03-26",
+  "generated_at": "2026-09-16T20:00:15.000Z"
 }
