@@ -3,7 +3,7 @@
   "message": "MarketNow — Security infrastructure for AI agents. Sentinel two-level certification: L1 index-certified (68,387 entries, 10/10 checks) + L2 sentinel-scanned (2,839 tarballs, 29 rules). 15 MCP tools (marketnow_* namespace) in marketnow-mcp v1.12.0.",
   "positioning": "Security infrastructure for AI agents — not a marketplace. The catalog (68,387 index-certified skills, 132,736 total tracked across 9 sources) is distribution; the product is Sentinel.",
   "version": "5.5.0",
-  "mcp_version": "1.12.0",
+  "mcp_version": "1.13.0",
   "stats": {
     "total_skills": 68387,
     "total_tracked_all_sources": 132736,

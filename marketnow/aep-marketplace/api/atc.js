@@ -46,11 +46,13 @@ const RECEIPT_ID_RE = /^rcpt_[a-z0-9]{16,64}$/i;
 const REF_CODE_RE = /^ref_[a-z0-9]{6,32}$/i;
 const AGENT_ID_RE = /^[a-zA-Z0-9_-]{3,64}$/;
 
-// ATC/1.4 (unified verification profile) — one format, one verification path. The production
-// envelope (card_id + payload + signature) is the canonical shape; the
-// signature block carries ca_key_id + canonicalization_method +
-// signed_payload_hash. See action=spec.
-const ATC_SPEC_VERSION = 'ATC/1.4';
+// ATC/3.0 (unified credential profile) — one version, one verification path. The production
+// envelope (card_id + payload + signature) is ATC/3.0-core, the canonical shape every
+// verifier MUST accept; the signature block carries ca_key_id + canonicalization_method +
+// signed_payload_hash. The RFC-ATC-v3-Draft-00 multi-sig shape is ATC/3.0-extended.
+// The interim "ATC/1.4" label (2026-09-17) was re-versioned to 3.0-core the same day.
+const ATC_SPEC_VERSION = 'ATC/3.0';
+const ATC_PROFILE = 'core';
 
 const VALID_ACTIONS = ['ca-key', 'spec', 'ledger', 'verify', 'envelope', 'verify-receipt', 'lookup', 'lookup-referral'];
 
@@ -159,15 +161,15 @@ function caKeyPayload() {
 function specPayload() {
   return {
     action: 'spec',
-    spec: ATC_SPEC_VERSION + ' (Agent Trust Card — Unified Verification Profile)',
+    spec: ATC_SPEC_VERSION + ' (Agent Trust Card — Unified Credential Profile, profile: ' + ATC_PROFILE + ')',
     unified_format: {
-      what: 'One Agent Trust Card format, one verification path, everywhere.',
+      what: 'One Agent Trust Card version, one verification path, everywhere. ATC/3.0-core = the production envelope (single Ed25519 signature — the RFC v3 minimum). ATC/3.0-extended = the multi-sig signatures[] shape from RFC-ATC-v3-Draft-00 (atc-ed25519 + optional eat-cwt / w3c-vc, TEE-ready). Every verifier MUST accept core; extended is opt-in.',
       envelope: {
         card_id: 'ATC-<year>-<digits>',
         status: 'active | revoked | superseded',
         payload: {
           card_id: 'mirrors envelope card_id',
-          schema_version: '"1.1.0" (production payload schema — unchanged by ATC/1.4)',
+          schema_version: '"1.1.0" (production payload schema — unchanged by ATC/3.0-core)',
           decision_authority: '"consumer" — the card is evidence; the consumer decides',
           agent_id: 'subject identifier',
           identity: '{ public_key, key_algorithm }',
@@ -186,14 +188,19 @@ function specPayload() {
       },
       verification_paths: [
         'GET /api/atc?action=verify&card_id=… — served bytes, real Ed25519 (this endpoint)',
-        'POST /api/trust {action:"verify", payload:<card>} — same crypto, auto-detected as atc-v2',
-        'npm agent-trust-card (atc verify card.json) — verifyATCSync auto-detects both ATC/1.0 spec cards and ATC/1.4 production cards',
-        'npm marketnow-mcp (marketnow_verify_atc_spec) — self-contained verifier, both formats',
+        'POST /api/trust {action:"verify", payload:<card>} — same crypto; the envelope is detected and reported as ATC/3.0-core',
+        'npm agent-trust-card (atc verify card.json) — verifyATCSync auto-detects both ATC/1.0 spec cards and ATC/3.0-core envelopes (agent-trust-card >= 1.3.0)',
+        'npm marketnow-mcp (marketnow_verify_atc_spec) — self-contained verifier, both formats (marketnow-mcp >= 1.13.0)',
       ],
+      profiles: {
+        core: 'The envelope in this spec — one Ed25519 (RFC 8032) signature over JCS(payload). The 57 production ledger cards conform as-is; no re-issuance required. Schema: https://marketnow.site/atc/schema-3.0',
+        extended: 'RFC-ATC-v3-Draft-00 shape — atc_version "3.0.0" + signatures[] (atc-ed25519 required, eat-cwt / w3c-vc optional) + artifact binding + UTA-ATC-V3-CREDENTIAL domain separation. Implemented in atc-sdk/src/v3, verified by /api/trust.',
+      },
       legacy_compatibility: [
-        'ATC/1.0 spec cards (issueATC from agent-trust-card SDK): still verify — controls ATC-001..008.',
-        'atc-v3 multi-sig envelopes: auto-detected; first signature verified, envelope semantics preserved.',
-        'Detection is structural (card_id+payload+signature | atc_version 3.x | spec_version ATC/1.0) — never heuristic trust.',
+        'ATC/1.0 spec cards (issueATC from agent-trust-card SDK): still verify — controls ATC-001..008, with a legacy-shape warning.',
+        'atc-v3 draft envelopes (atc_version 3.x + signatures[]): verified as ATC/3.0-extended; first signature verified, envelope semantics preserved.',
+        'Detection is structural (card_id+payload+signature | atc_version 3.x + signatures[] | spec_version ATC/1.0) — never heuristic trust.',
+        'The interim ATC/1.4 label (issued earlier on 2026-09-17) is withdrawn — same envelope, same crypto, re-versioned as ATC/3.0-core.',
       ],
     },
     signature: {
@@ -210,7 +217,8 @@ function specPayload() {
     notes: [
       'All cards in the ledger were re-signed 2026-09-08 under ' + CA_KEY_ID + ' (CA rotation; mn-ca-002 is retired-compromised).',
       'The pre-2026-08-12 canonicalization (JSON.stringify with a sorted-keys replacer) was broken and is fully retired; no card signed under it remains in the ledger.',
-      'ATC/1.4 (Unified Verification Profile) closes the fragmentation found in audit 2026-09-17 (spec 1.0 / v2 envelope / v3 multi-sig / schema 1.1.0 all coexisted): the production envelope is the canonical wire format, every public verifier accepts it, and legacy shapes still verify with explicit warnings. It intentionally does NOT collide with the draft ATC/2.0 spec (content-addressed multi-sig) — that draft remains a forward-looking proposal.',
+      'ATC/3.0 (Unified Credential Profile) closes the fragmentation found in audit 2026-09-17 (spec 1.0 / v2 envelope / v3 multi-sig / schema 1.1.0 all coexisted): the production envelope is ATC/3.0-core, the canonical wire format every public verifier accepts; the RFC-ATC-v3-Draft-00 multi-sig shape is ATC/3.0-extended; the ATC/2.0 draft (content-addressed multi-sig, never implemented) is superseded and withdrawn. One current version: ATC/3.0.',
+      'Version ladder: ATC/1.0 (legacy, still verifies) -> ATC/2.0 (draft, withdrawn, never shipped) -> ATC/3.0 (current: core + extended). The interim ATC/1.4 label published earlier today was re-versioned to 3.0-core — same envelope, same crypto.',
     ],
   };
 }
