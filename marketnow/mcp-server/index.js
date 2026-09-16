@@ -99,6 +99,8 @@ import {
 
 // ATC/1.0 spec verifier (NEW in v1.10.0)
 import { verifyATC as verifyATCSpec } from './lib/atc-verify.mjs';
+// ATC/1.4 unified: production-envelope verifier (ledger cards) — NEW in v1.12.0
+import { verifyLedgerCard } from './lib/atc-verify.mjs';
 
 const API_BASE = 'https://marketnow.site/api';
 
@@ -230,10 +232,49 @@ async function fingerprintToolDefs(args) {
   return result;
 }
 
-async function fetchOwaspCompliance() {
-  const res = await fetch(`${API_BASE}/owasp`);
-  if (!res.ok) throw new Error(`Failed to fetch OWASP compliance: HTTP ${res.status}`);
-  return res.json();
+async function fetchOwaspCompliance(args) {
+  // FIX 1.12.0 (audit Task 63): the old implementation fetched /api/owasp —
+  // a lambda that was removed under the Vercel Hobby cap (404 → broken tool)
+  // and which, when it existed, only returned a stub. The compliance matrix is
+  // now a REAL static artifact (/api/owasp.json) and per-skill data is
+  // computed locally from the skills catalog (the client already holds it).
+  const res = await fetch(`${API_BASE}/owasp.json`);
+  const matrix = res.ok ? await res.json() : {
+    service: 'MarketNow',
+    artifact: 'OWASP MCP Cheat Sheet — alignment matrix',
+    fallback: true,
+    note: 'Live matrix unavailable — fetch /api/owasp.json directly.',
+    controls: [],
+    summary: { implemented: 0, partial: 0, total: 0, unavailable: true },
+  };
+
+  const skillId = args && args.skill_id ? String(args.skill_id) : null;
+  if (!skillId) return matrix;
+
+  // Per-skill: Sentinel evidence + install surface from the catalog the
+  // client already caches. Honest scope: this is catalog evidence, not a
+  // sandbox report — L2 sandbox results live at /api/certification.json.
+  validatePattern('skill_id', skillId, PATTERNS.skill_id, 'mn-ai-00001');
+  const skills = await fetchSkills();
+  const skill = skills.find(s => s.id === skillId || s.slug === skillId);
+  if (!skill) {
+    const err = new Error(`Skill not found: ${skillId}`);
+    err.code = 'NOT_FOUND';
+    throw err;
+  }
+  return {
+    ...matrix,
+    skill: {
+      skill_id: skill.id,
+      name: skill.name,
+      category: skill.category,
+      sentinel_score: skill.sentinel_score ?? null,
+      install: skill.install || null,
+      page_url: `https://marketnow.site/skill/${skill.id}`,
+      fingerprint_how_to: 'Run marketnow_fingerprint_tool with the server\'s tools/list output to pin (TFP-1.0) and later diff for drift.',
+      note: 'Per-skill capability manifests ship inside Agent Trust Cards (see marketnow_verify_trust / ATC/1.4).',
+    },
+  };
 }
 
 // ─── Input validation helpers (Rule C — strict schemas) ─────────────────────
@@ -249,8 +290,18 @@ const PATTERNS = {
   repo_url: /^https:\/\/github\.com\/[\w.-]+\/[\w.-]+$/i,
 };
 
-function validatePattern(name, value, pattern, example) {
-  if (value === undefined || value === null) return; // optional or required handled elsewhere
+function validatePattern(name, value, pattern, example, opts) {
+  // FIX 1.12.0 (audit Task 63): undefined/null required fields used to slip
+  // through and explode downstream as INTERNAL_ERROR. Now a missing required
+  // value is an explicit INVALID_ARGUMENT at the boundary.
+  if (value === undefined || value === null) {
+    if (opts && opts.required) {
+      const err = new Error(`Missing required argument: ${name} (e.g. ${example})`);
+      err.code = 'INVALID_ARGUMENT';
+      throw err;
+    }
+    return; // optional and absent — fine
+  }
   if (typeof value !== 'string' || !pattern.test(value)) {
     const err = new Error(
       `Invalid ${name}: must match ${pattern.toString()} (e.g. ${example}). Got: ${String(value).slice(0, 60)}`
@@ -275,6 +326,14 @@ function clampInt(value, min, max, fallback) {
 async function searchSkills(args) {
   const { query = '', category, max_price, sort_by = 'relevance', sort_order = 'desc' } = args;
   const limit = clampInt(args.limit, 1, 50, 10);
+
+  // FIX 1.12.0 (audit Task 63): unbounded 100KB queries were accepted (and
+  // substring-matched). Bound the query like every other input.
+  if (query !== undefined && query !== null && (typeof query !== 'string' || query.length > 300)) {
+    const err = new Error('query must be a string of at most 300 characters');
+    err.code = 'INVALID_ARGUMENT';
+    throw err;
+  }
 
   if (category && !KNOWN_CATEGORIES.includes(category)) {
     const err = new Error(`Unknown category: ${category}. Valid: ${KNOWN_CATEGORIES.join(', ')}`);
@@ -338,7 +397,7 @@ async function searchSkills(args) {
 
 async function getSkill(args) {
   const { skill_id } = args;
-  validatePattern('skill_id', skill_id, PATTERNS.skill_id, 'mn-ai-00001');
+  validatePattern('skill_id', skill_id, PATTERNS.skill_id, 'mn-ai-00001', { required: true });
   const skills = await fetchSkills();
   const skill = skills.find(s => s.id === skill_id || s.slug === skill_id);
   if (!skill) {
@@ -360,7 +419,7 @@ async function listCategories() {
 
 async function getInstallCommand(args) {
   const { skill_id } = args;
-  validatePattern('skill_id', skill_id, PATTERNS.skill_id, 'mn-ai-00001');
+  validatePattern('skill_id', skill_id, PATTERNS.skill_id, 'mn-ai-00001', { required: true });
   const skills = await fetchSkills();
   const skill = skills.find(s => s.id === skill_id || s.slug === skill_id);
   if (!skill) {
@@ -382,7 +441,7 @@ async function getInstallCommand(args) {
 
 async function verifyTrust(args) {
   const { card_id } = args;
-  validatePattern('card_id', card_id, PATTERNS.card_id, 'ATC-2026-7777670');
+  validatePattern('card_id', card_id, PATTERNS.card_id, 'ATC-2026-7777670', { required: true });
   const res = await fetch(`${API_BASE}/atc?action=verify&card_id=${encodeURIComponent(card_id)}`);
   if (!res.ok) throw new Error(`Verify failed: HTTP ${res.status}`);
   return await res.json();
@@ -390,7 +449,7 @@ async function verifyTrust(args) {
 
 async function verifyReceipt(args) {
   const { receipt_id } = args;
-  validatePattern('receipt_id', receipt_id, PATTERNS.receipt_id, 'rcpt_c8b9dc67f88e4da5bd3a');
+  validatePattern('receipt_id', receipt_id, PATTERNS.receipt_id, 'rcpt_c8b9dc67f88e4da5bd3a', { required: true });
   const res = await fetch(`${API_BASE}/atc?action=verify-receipt&receipt_id=${encodeURIComponent(receipt_id)}`);
   if (!res.ok) {
     if (res.status === 404) {
@@ -408,9 +467,9 @@ async function verifyReceipt(args) {
 
 async function submitSkill(args) {
   const { repo_url, name, description, submitter_agent_id, submitter_email, ref_code } = args;
-  validatePattern('repo_url', repo_url, PATTERNS.repo_url, 'https://github.com/user/my-mcp-server');
+  validatePattern('repo_url', repo_url, PATTERNS.repo_url, 'https://github.com/user/my-mcp-server', { required: true });
   if (submitter_agent_id) validatePattern('submitter_agent_id', submitter_agent_id, PATTERNS.agent_id, 'agent_claude_001');
-  if (ref_code) validatePattern('ref_code', ref_code, PATTERNS.ref_code, 'ref_a1b2c3d4');
+  if (ref_code) validatePattern('ref_code', ref_code, PATTERNS.ref_code, 'ref_a1b2c3d4', { required: true });
 
   const res = await fetch(`${API_BASE}/submit-skill`, {
     method: 'POST',
@@ -457,7 +516,7 @@ async function submitSkill(args) {
 
 async function mintReferral(args) {
   const { agent_id } = args;
-  validatePattern('agent_id', agent_id, PATTERNS.agent_id, 'agent_claude_001');
+  validatePattern('agent_id', agent_id, PATTERNS.agent_id, 'agent_claude_001', { required: true });
   const res = await fetch(`${API_BASE}/referrals`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -469,7 +528,7 @@ async function mintReferral(args) {
 
 async function lookupReferral(args) {
   const { ref_code } = args;
-  validatePattern('ref_code', ref_code, PATTERNS.ref_code, 'ref_a1b2c3d4');
+  validatePattern('ref_code', ref_code, PATTERNS.ref_code, 'ref_a1b2c3d4', { required: true });
   const res = await fetch(`${API_BASE}/referrals?action=lookup&ref_code=${encodeURIComponent(ref_code)}`);
   if (!res.ok) {
     if (res.status === 404) {
@@ -537,7 +596,7 @@ const require_ = createRequire(import.meta.url);
 const PKG_VERSION = require_('./package.json').version;
 const server = new Server(
   {
-    name: 'marketnow',
+    name: 'marketnow-mcp', // FIX 1.12.0: was 'marketnow' — align with the hosted /api/mcp serverInfo so clients see ONE server identity
     version: PKG_VERSION,
   },
   {
@@ -823,7 +882,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: 'marketnow_verify_atc_spec',
       description:
-        'Verify ANY Agent Trust Card (ATC) against the open ATC/1.0 specification — works regardless of issuer (MarketNow Sentinel CA, a third-party CA, or a self-signed test CA). Returns per-control pass/fail status for all 8 required controls (ATC-001 Identity, ATC-002 Attestation, ATC-003 Capabilities, ATC-004 Evidence, ATC-005 Risk, ATC-006 Signature, ATC-007 Revocation, ATC-008 Expiration). Use this BEFORE trusting an ATC from any source — the verifier is self-contained (does not call MarketNow servers) and uses node:crypto + RFC 8785 JCS canonical JSON + Ed25519 (RFC 8032) per the spec. This tool makes marketnow-mcp the LIVE REFERENCE IMPLEMENTATION of ATC/1.0.',
+        'Verify ANY Agent Trust Card — DUAL FORMAT (ATC/1.4 unified, since v1.12.0). (1) Production ledger envelopes {card_id, status, payload (schema_version 1.1.0), signature}: real Ed25519 verification against the embedded MarketNow CA key registry (rotation-aware: ca-key-001 retired, mn-ca-002 retired-compromised = fail-closed, mn-ca-003 active), RFC 8785 JCS canonicalization, sha256 signed_payload_hash pre-check, lifecycle status. These are the cards you get from marketnow_verify_trust and GET /api/atc/<id>.json. (2) ATC/1.0 spec cards (spec_version "ATC/1.0", any issuer): the original 8-control conformance verifier (ATC-001 Identity through ATC-008 Expiration). Self-contained — no network calls, node:crypto + RFC 8785 JCS + Ed25519 (RFC 8032). Use this BEFORE trusting an ATC from any source.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -916,7 +975,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         result = await listCategories();
         break;
       case 'marketnow_get_manifest':
-        result = await getManifest();
+        // FIX 1.12.0 (audit Task 63): the handler called getManifest(), which
+        // never existed (the function is fetchManifest) — a pure ReferenceError
+        // that made this tool permanently broken since v1.0.
+        result = await fetchManifest();
         break;
       case 'marketnow_get_install_command':
         result = await getInstallCommand(args || {});
@@ -940,7 +1002,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         result = await recommendSkills(args || {});
         break;
       case 'marketnow_get_owasp_compliance':
-        result = await fetchOwaspCompliance();
+        result = await fetchOwaspCompliance(args || {});
         break;
       case 'marketnow_check_revocation':
         result = await checkRevocation(args || {});
@@ -961,10 +1023,18 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           err.code = 'INVALID_ARGUMENT';
           throw err;
         }
-        result = verifyATCSpec(args.atc, {
-          ca_public_key: args.ca_public_key,
-          fetch_revocation: args.fetch_revocation === true,
-        });
+        // ATC/1.4 unified (v1.12.0): if the document is a production ledger
+        // envelope {card_id, status, payload, signature}, verify it with real
+        // Ed25519 against the MarketNow CA registry (embedded, offline).
+        // Otherwise fall through to the ATC/1.0 spec conformance path.
+        if (args.atc.card_id && args.atc.payload && args.atc.signature && args.atc.payload.schema_version) {
+          result = verifyLedgerCard(args.atc, { ca_public_key: args.ca_public_key });
+        } else {
+          result = verifyATCSpec(args.atc, {
+            ca_public_key: args.ca_public_key,
+            fetch_revocation: args.fetch_revocation === true,
+          });
+        }
         break;
       }
       default: {

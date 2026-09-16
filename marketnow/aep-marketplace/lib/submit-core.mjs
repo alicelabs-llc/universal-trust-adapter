@@ -162,6 +162,23 @@ const INJECTION_PATTERNS = [
   [/\/(system|admin|debug) prompt/i, 'medium'],
 ];
 
+// MARKUP / XSS — audit Task 63 finding: a submission with a real package behind
+// it could carry <script>/<iframe>/on* handlers in name/description and pass
+// as "accepted" (the injection scanner only looked for prompt-injection
+// phrasing). These fields are RENDERED on the site, so active markup is a
+// stored-XSS vector. Severity: high (blocker — the submission is rejected).
+// Scoped to RENDERED fields only (name/description/author/pricing/tags/doc),
+// never to skill.files/code where HTML may be legitimate content.
+const MARKUP_PATTERNS = [
+  [/<\s*script\b/i, 'high', '<script> markup in rendered field'],
+  [/<\s*iframe\b/i, 'high', '<iframe> markup in rendered field'],
+  [/<\s*img\b[^>]*\bon\w+\s*=/i, 'high', '<img> with inline event handler in rendered field'],
+  [/\bon(?:error|load|click|mouseover|focus|animationstart)\s*=/i, 'high', 'inline HTML event handler in rendered field'],
+  [/javascript\s*:/i, 'high', 'javascript: URI in rendered field'],
+  [/<\s*svg\b[^>]*\bon\w+\s*=/i, 'high', '<svg> with inline event handler in rendered field'],
+  [/data\s*:\s*text\s*\/html/i, 'medium', 'data:text/html URI in rendered field'],
+];
+
 const SECRET_PATTERNS = [
   [/sk-[A-Za-z0-9]{20,}/, 'critical', 'OpenAI-style key'],
   [/gh[pousr]_[A-Za-z0-9]{20,}/, 'critical', 'GitHub token'],
@@ -402,6 +419,18 @@ export async function processSubmission(payload, { dryRun = false, remoteIp = 'u
   scanText(textBlob, SECRET_PATTERNS, findings, 'payload');
   scanText(textBlob, DANGEROUS_API, findings, 'code');
   scanText(textBlob, SUSPICIOUS_URLS, findings, 'urls');
+
+  // 2.5 XSS/markup — rendered fields ONLY (files/code excluded: HTML there can
+  // be legitimate content). Blocking severity: these fields render on the site.
+  const renderedBlob = [
+    skill.name, skill.description, skill.author, skill.category,
+    typeof skill.pricing?.price === 'string' ? skill.pricing.price : '',
+    skill.pricing?.details,
+    Array.isArray(skill.tags) ? skill.tags.join(' ') : '',
+    skill.doc?.usage, skill.doc?.system_prompt,
+    skill.homepage, skill.install,
+  ].map(x => String(x || '')).join('\n');
+  scanText(renderedBlob, MARKUP_PATTERNS, findings, 'rendered-fields');
 
   // 3. typosquat
   const lname = String(skill.name).toLowerCase();

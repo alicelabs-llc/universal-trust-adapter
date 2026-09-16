@@ -164,11 +164,21 @@ Full audit report — including the 4-rule checklist, smoke-test commands, and t
 - **Website:** https://marketnow.site
 - **GitHub:** https://github.com/alicelabs-llc/marketnow
 - **npm:** https://www.npmjs.com/package/marketnow-mcp
-- **Audit:** https://marketnow.site/api/audit-report.json
-- **OWASP compliance:** https://marketnow.site/api/owasp
-- **Trust API:** https://marketnow.site/api/trust-score
-- **Interceptor:** https://marketnow.site/api/interceptor
+- **Audit:** https://marketnow.site/api/audit-report.json (historical, 2026-08-09 run — superseded by /api/stats.json)
+- **OWASP compliance:** https://marketnow.site/api/owasp.json
+- **Trust API:** https://marketnow.site/api/trust (also marketnow_verify_trust)
+- **Interceptor:** https://marketnow.site/api/interceptor (rule manifest; enforcement is npm @marketnow/cline-trust-plugin)
 - **ATC CA key:** https://marketnow.site/api/atc?action=ca-key
+
+---
+
+## v1.12.0 — Audit-63 repair + ATC/1.4 unified verification (2026-09-17)
+
+- **marketnow_get_manifest FIXED** — the handler called `getManifest()`, a function that never existed (it is `fetchManifest()`); a pure ReferenceError had broken the tool since v1.0.
+- **marketnow_get_owasp_compliance REBUILT** — serves the real OWASP MCP Cheat Sheet alignment matrix (12 controls, static `/api/owasp.json`) plus per-skill Sentinel evidence; the previous endpoint was removed under the Vercel Hobby function cap and had only ever returned a stub.
+- **marketnow_verify_receipt / marketnow_mint_referral / marketnow_lookup_referral LIVE** — receipts verify against the CA key registry (reports WHICH key signed + its lifecycle status; retired-compromised keys fail closed); referral codes are deterministic and self-certifying (MNR-REF-1.0), stats settle in the public referral registry.
+- **ATC/1.4 (Unified Verification Profile)** — `marketnow_verify_atc_spec` auto-detects BOTH formats: production ledger envelopes `{card_id, status, payload, signature}` verify with real Ed25519 against the embedded CA key registry (fail-closed on unknown/compromised anchors); ATC/1.0 spec cards keep the 8-control conformance path. Spec: https://marketnow.site/atc/unified
+- **Input validation hardened** — missing required arguments return INVALID_ARGUMENT (was: downstream INTERNAL_ERROR); `query` bounded to 300 chars; `serverInfo.name` unified as `marketnow-mcp`.
 
 ---
 
@@ -183,6 +193,7 @@ Built by AliceLabs LLC (Wyoming, USA) — founder Edison Flores.
 - **2025**: AliceLabs LLC legally founded in Wyoming, USA (founder Edison Flores, Ecuadorian)
 - **2026-03-30**: GitHub organization `github.com/alicelabs-llc` created
 - **2026-06-29**: MarketNow launched publicly (first npm release: `marketnow-mcp@1.5.1`)
-- **2026-08-09**: Current npm latest: `marketnow-mcp@1.10.0` (15 versions total)
+- **2026-08-09**: `marketnow-mcp@1.10.0` era (15 versions total)
+- **2026-09-17**: Current npm latest: `marketnow-mcp@1.12.0` — audit-63 repair: 5 broken tools fixed, ATC/1.4 unified verification, hardened validation
 - **2026-08-19**: Independent audit by Z.ai (8 findings F1-F8 applied, see REPORT.pdf)
 

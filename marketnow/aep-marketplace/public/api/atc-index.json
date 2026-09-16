@@ -5,7 +5,7 @@
   "cards": [
     {
       "card_id": "ATC-2026-1509360",
-      "status": "active",
+      "status": "revoked",
       "agent_id": "skill.mn-sub-51326",
       "agent_name": "awesome-mcp-servers",
       "sentinel_review_score": 0,
