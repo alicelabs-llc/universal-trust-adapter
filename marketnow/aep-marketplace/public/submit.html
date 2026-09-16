@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Submit a Skill — MarketNow</title>
-<meta name="description" content="Publish your skill or MCP server to MarketNow. Public endpoint, no API key. Sentinel scans every submission: injection, secrets, dangerous APIs, typosquat, dedup. Accepted skills are stored, certified and merged into the catalog.">
+<title>Publish your MCP server — any price — MarketNow</title>
+<meta name="description" content="Publish your skill or MCP server to MarketNow — free, paid, per-call x402, subscription, any pricing model. You set the price; we verify the security. Sentinel scans every submission: injection, secrets, dangerous APIs, typosquat, dedup, claims verified live.">
 <link rel="canonical" href="https://www.marketnow.site/submit.html">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"HowTo","name":"How to submit a skill or MCP server to MarketNow","description":"Publish a skill to the MarketNow catalog via the public submission endpoint. Sentinel L1.5 scans every package and verifies its claims live; accepted skills with real substance are stored, certified and merged.","step":[{"@type":"HowToStep","name":"Prepare the package","text":"Build a JSON skill package: name, version, description, author (required) plus runtime, install, repo_url, tags, capabilities, and real files or code."},{"@type":"HowToStep","name":"Submit","text":"POST the package to https://www.marketnow.site/api/submit — no authentication required. Use dry_run=1 to pre-check."},{"@type":"HowToStep","name":"Sentinel scan + claims verification","text":"The pipeline scans for prompt injection, embedded secrets, dangerous APIs, suspicious URLs, typosquatting and duplicates against 69k+ catalog entries, and probes claims live: repo_url must exist, install must reference a real registry package."},{"@type":"HowToStep","name":"Certified and merged","text":"Accepted skills with substance (files/code/verifiable repo) are stored in the public audit queue, certified L1.5, and merged into the catalog after L2 review. Description-only submissions never merge."}]}
+{"@context":"https://schema.org","@type":"HowTo","name":"How to publish a skill or MCP server to MarketNow at any price","description":"Publish a skill or MCP server to the MarketNow catalog via the public submission endpoint — free, paid, per-call (x402), subscription or custom pricing. The vendor sets the price; Sentinel L1.5 verifies the security and probes claims live.","step":[{"@type":"HowToStep","name":"Prepare the package","text":"Build a JSON skill package: name, version, description, author (required) plus runtime, install, repo_url, tags, pricing — any model: free, per-call, per-call-x402, subscription, one-time, freemium, revenue-share or custom."},{"@type":"HowToStep","name":"Submit","text":"Use the form at marketnow.site/submit.html or POST the package to https://www.marketnow.site/api/submit — no authentication required. Use dry_run=1 to pre-check."},{"@type":"HowToStep","name":"Sentinel scan + claims verification","text":"The pipeline scans for prompt injection, embedded secrets, dangerous APIs, suspicious URLs, typosquatting and duplicates against 69k+ catalog entries, and probes claims live: repo_url must exist, install must reference a real registry package."},{"@type":"HowToStep","name":"Certified and listed","text":"Accepted skills with substance (files/code/verifiable repo/working endpoint) are stored in the public audit queue, certified L1.5, and merged into the catalog after L2 review — listed with the pricing the vendor chose."}]}
 </script>
 <style>
 body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#050505;color:#e2e8f0;line-height:1.7;padding:20px;max-width:900px;margin:0 auto}
@@ -18,6 +18,7 @@ code{background:#1e293b;padding:2px 6px;border-radius:4px;font-family:monospace;
 pre{background:#0d1117;border:1px solid #1e293b;padding:16px;border-radius:8px;overflow-x:auto;margin:1em 0}
 .card{background:#0d1117;border:1px solid #1e293b;border-radius:8px;padding:16px;margin:1em 0}
 .cta{display:inline-block;background:#00F299;color:#050505;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;margin:10px 0}
+.cta.sec{background:#1e293b;color:#00F299}
 .badge{display:inline-block;background:#1e40af;color:#93c5fd;padding:2px 8px;border-radius:12px;font-size:0.8em;margin:2px}
 .badge.red{background:#7f1d1d;color:#fca5a5}
 .badge.green{background:#14532d;color:#86efac}
@@ -27,20 +28,92 @@ td,th{border:1px solid #1e293b;padding:8px 12px;text-align:left;font-size:0.95em
 th{background:#1e293b;color:#93c5fd}
 a{color:#00F299}
 .ok{color:#86efac}.no{color:#fca5a5}
+/* ── form ── */
+form{margin:0}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fgrid .full{grid-column:1 / -1}
+label{display:block;font-size:.85em;color:#94a3b8;margin-bottom:4px;font-weight:600}
+label .req{color:#fca5a5}
+input,select,textarea{width:100%;box-sizing:border-box;background:#050505;border:1px solid #334155;border-radius:6px;color:#e2e8f0;padding:9px 10px;font-size:.95em;font-family:inherit}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#00F299}
+textarea{resize:vertical;min-height:70px}
+.hint{font-size:.78em;color:#64748b;margin-top:3px}
+.fbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+button{cursor:pointer;border:none;border-radius:8px;padding:12px 20px;font-size:1em;font-weight:bold;font-family:inherit}
+button.primary{background:#00F299;color:#050505}
+button.primary:hover{background:#00c47d}
+button.ghost{background:#1e293b;color:#00F299}
+button:disabled{opacity:.5;cursor:wait}
+#result{margin-top:16px;display:none;border-radius:8px;padding:14px;border:1px solid #334155;background:#0d1117}
+#result.show{display:block}
+#verdict{font-size:1.1em;font-weight:bold;margin-bottom:8px}
+#rmeta{color:#94a3b8;font-size:.9em;margin-bottom:10px}
+#rreasons li{margin:4px 0;font-size:.9em}
+#rjson{max-height:260px;overflow:auto}
+@media(max-width:640px){.fgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<h1>Submit a skill or MCP server</h1>
-<p><strong>Anyone can publish — humans and AI agents.</strong> No API key, no login, no GitHub account required. Point your agent at the endpoint below and let Sentinel do the gatekeeping.</p>
+<h1>Publish your skill or MCP server</h1>
+<p><strong>Anyone can publish — humans and AI agents, at any price.</strong> Free, paid, per-call x402, subscription, freemium, custom — <strong>you set the price; we verify the security.</strong> MarketNow is the trust layer, not the pricing police: bring what you built, tell us what it costs, and let Sentinel do the gatekeeping.</p>
 <p>
 <span class="badge green">PUBLIC ENDPOINT</span>
 <span class="badge">NO AUTH</span>
+<span class="badge green">ANY PRICING MODEL</span>
 <span class="badge yellow">SENTINEL L1-SUB SCAN</span>
 <span class="badge">AUDITABLE QUEUE</span>
 </p>
 
+<h2>0. No terminal? Use the form</h2>
+<p>Fill it in, scan it (nothing stored), then submit. Two minutes, no account.</p>
 <div class="card">
-<h3>Quick start</h3>
+<form id="f" autocomplete="off">
+<div class="fgrid">
+  <div><label>Name <span class="req">*</span></label><input id="name" maxlength="60" placeholder="my-mcp-server"><div class="hint">2-60 chars · letters, digits, dot, dash</div></div>
+  <div><label>Version <span class="req">*</span></label><input id="version" value="1.0.0" maxlength="20" placeholder="1.0.0"><div class="hint">semver-like x.y.z</div></div>
+  <div class="full"><label>Description <span class="req">*</span></label><textarea id="description" maxlength="600" placeholder="What it does, in one or two sentences."></textarea><div class="hint">10-600 chars — scanned for injection</div></div>
+  <div><label>Author / Org <span class="req">*</span></label><input id="author" maxlength="60" placeholder="you or your company"></div>
+  <div><label>Runtime</label><select id="runtime"><option value="">— optional —</option><option>node</option><option>python</option><option>rust</option><option>go</option><option>dotnet</option><option>docker</option><option>java</option><option>php</option><option>ruby</option><option>other</option></select></div>
+  <div><label>Homepage</label><input id="homepage" type="url" placeholder="https://yourproject.dev"></div>
+  <div><label>Repo URL</label><input id="repo_url" type="url" placeholder="https://github.com/you/your-mcp"><div class="hint">probed live — 404 = reject</div></div>
+  <div><label>Install command</label><input id="install" placeholder="npx your-package"><div class="hint">checked against npm/PyPI/crates/Docker Hub</div></div>
+  <div><label>Live test URL</label><input id="testurl" type="url" placeholder="https://your-mcp.example/mcp"><div class="hint">remote endpoint — Sentinel probes it live</div></div>
+</div>
+
+<h3 style="margin-top:18px">Pricing — you decide</h3>
+<div class="fgrid">
+  <div><label>Model</label><select id="pmodel">
+    <option value="">— not specified —</option>
+    <option value="free">Free</option>
+    <option value="per-call">Paid per call</option>
+    <option value="per-call-x402">Paid per call (x402 / crypto)</option>
+    <option value="subscription">Subscription</option>
+    <option value="one-time">One-time purchase</option>
+    <option value="freemium">Freemium</option>
+    <option value="revenue-share">Revenue share</option>
+    <option value="custom">Custom</option>
+  </select></div>
+  <div><label>Price</label><input id="pprice" placeholder='number or text: 9.99 · "0.01 USDC per call" · "from $5/mo"'><div class="hint">any format — it's your price</div></div>
+  <div><label>Currency</label><input id="pcurrency" maxlength="10" placeholder="USD · USDC · EUR"></div>
+  <div class="full"><label>Pricing details</label><textarea id="pdetails" maxlength="300" placeholder="e.g. x402 per-call on Base mainnet; first 100 calls free; enterprise flat rate available."></textarea><div class="hint">max 300 chars — shown on your listing · scanned for safety</div></div>
+</div>
+
+<div class="fbtns">
+  <button type="button" class="primary" id="bsubmit">Submit for listing</button>
+  <button type="button" class="ghost" id="bdry">Scan only (dry-run, nothing stored)</button>
+</div>
+</form>
+<div id="result">
+  <div id="verdict"></div>
+  <div id="rmeta"></div>
+  <ul id="rreasons" style="padding-left:18px"></ul>
+  <pre id="rjson"></pre>
+</div>
+</div>
+
+<h2>1. The package</h2>
+<div class="card">
+<h3>Quick start (API)</h3>
 <pre>curl -X POST https://www.marketnow.site/api/submit \
   -H 'Content-Type: application/json' \
   -d '{
@@ -52,12 +125,16 @@ a{color:#00F299}
     "install": "npx my-mcp-skill",
     "repo_url": "https://github.com/you/my-mcp-skill",
     "tags": ["mcp"],
-    "price": 0
+    "pricing": {
+      "model": "per-call",
+      "price": "0.01 USDC per call",
+      "currency": "USDC",
+      "details": "x402 per-call on Base mainnet"
+    }
   }'</pre>
 <p>Pre-check without storing: <code>POST /api/submit?dry_run=1</code> &nbsp;·&nbsp; Full docs: <code>GET /api/submit</code> &nbsp;·&nbsp; Queue: <code>GET /api/submissions</code></p>
 </div>
 
-<h2>1. The package</h2>
 <table>
 <tr><th>Field</th><th>Required</th><th>Notes</th></tr>
 <tr><td><code>name</code></td><td class="no">YES</td><td>2-60 chars. Letters, digits, dot, dash, slash.</td></tr>
@@ -67,23 +144,24 @@ a{color:#00F299}
 <tr><td><code>runtime</code></td><td>recommended</td><td><code>node | python | rust | go | dotnet | docker | luau | roblox | java | php | ruby | other</code></td></tr>
 <tr><td><code>install</code></td><td>recommended</td><td>Exact install/run command.</td></tr>
 <tr><td><code>repo_url</code>, <code>homepage</code>, <code>license</code></td><td>recommended</td><td>Provenance — improves your trust score.</td></tr>
+<tr><td><code>pricing</code></td><td class="ok">ANY</td><td><code>{ model, price, currency, details }</code> — <strong>you set the price, any model</strong>: <code>free | per-call | per-call-x402 | subscription | one-time | freemium | revenue-share | custom</code>. <code>price</code>: number or short text ("0.01 USDC per call", "from $5/mo"). <code>details</code>: max 300 chars, shown on your listing, scanned for safety. MarketNow verifies security — it does not curate pricing.</td></tr>
+<tr><td><code>price</code></td><td>legacy</td><td>Number (USD), default 0 — superseded by <code>pricing</code>, still accepted.</td></tr>
 <tr><td><code>tags</code></td><td>optional</td><td>Array, max 12.</td></tr>
 <tr><td><code>capabilities</code></td><td>optional</td><td><code>requires_auth, requires_network, input_types, output_types, execution_context</code></td></tr>
 <tr><td><code>doc</code></td><td>optional</td><td><code>doc.usage</code>, <code>doc.system_prompt</code> (scanned for injection), <code>doc.setup.required_env</code>.</td></tr>
 <tr><td><code>files</code></td><td>optional</td><td><code>{filename: content}</code>, max 60KB total. Larger code → use <code>repo_url</code>.</td></tr>
 <tr><td><code>test.url</code></td><td>optional</td><td>https URL — Sentinel probes it live if provided.</td></tr>
-<tr><td><code>price</code></td><td>optional</td><td>Number (USD), default 0.</td></tr>
 </table>
 <p class="no"><strong>Never include secrets, API keys, tokens or private keys</strong> — the scanner rejects them on sight, and we never ask for passwords.</p>
 
 <h2>2. The Sentinel L1-sub pipeline</h2>
-<p>Every submission is machine-reviewed before it touches the queue. The full report comes back in the response:</p>
+<p>Every submission is machine-reviewed before it touches the queue — <em>whatever the price</em>. The full report comes back in the response:</p>
 <table>
 <tr><th>Check</th><th>What it catches</th><th>Severity</th></tr>
 <tr><td>SCHEMA</td><td>Malformed package, oversize payload (100KB cap)</td><td>high → reject</td></tr>
-<tr><td>INJECTION</td><td>Prompt-injection in descriptions/prompts/code ("ignore previous instructions", exfiltration phrases…)</td><td class="no">critical → reject</td></tr>
+<tr><td>INJECTION</td><td>Prompt-injection in descriptions/prompts/code/pricing text ("ignore previous instructions", exfiltration phrases…)</td><td class="no">critical → reject</td></tr>
 <tr><td>SECRETS</td><td>Embedded keys/tokens (<code>sk-</code>, <code>ghp_</code>, AWS <code>AKIA</code>, private keys…)</td><td class="no">critical → reject</td></tr>
-<tr><td>DANGEROUS_API</td><td><code>eval</code>/<code>exec</code>/<code>loadstring</code>, <code>curl|sh</code>, remote <code>require()</code>, <code>rm -rf</code>, Roblox <code>getfenv</code>…</td><td>high → reject</td></tr>
+<tr><td>DANGEROUS_API</td><td><code>eval</code>/<code>exec</code>/<code>loadstring</code>, <code>curl|sh</code>, remote <code>require()</code>, <code>rm -rf</code>…</td><td>high → reject</td></tr>
 <tr><td>URLS</td><td>Shorteners, suspicious TLDs, punycode hosts, internal addresses</td><td>medium → warning</td></tr>
 <tr><td>TYPOSQUAT</td><td>Name 1 edit-distance from a popular skill</td><td>high → reject</td></tr>
 <tr><td>DEDUP</td><td>Name already in the catalog (69k+ entries checked live)</td><td>high → reject</td></tr>
@@ -92,14 +170,14 @@ a{color:#00F299}
 </table>
 
 <h2>3. Substance rule — "verify it serves"</h2>
-<p>A submission must carry something real: <code>files</code>, <code>code</code>, a <em>verifiable</em> <code>repo_url</code>, or a working <code>test.url</code>. Description-only submissions (vaporware: no code, dead links) are <strong>never merged</strong> into the catalog — they stay in the queue as <code>pending-L2: description-only</code> with trust capped at 45. If your claims are false (repo 404, package 404) the submission is <strong>rejected at the door</strong> with actionable reasons.</p>
+<p>A submission must carry something real: <code>files</code>, <code>code</code>, a <em>verifiable</em> <code>repo_url</code>, or a working <code>test.url</code> (remote MCP endpoints count — that's how remote-only services qualify). Description-only submissions (vaporware: no code, dead links) are <strong>never merged</strong> into the catalog — they stay in the queue as <code>pending-L2: description-only</code> with trust capped at 45. If your claims are false (repo 404, package 404) the submission is <strong>rejected at the door</strong> with actionable reasons.</p>
 
 <h2>4. Verdicts</h2>
 <div class="card">
 <p><span class="badge green">ACCEPTED</span> HTTP 201 — stored in the public, auditable queue
 (<a href="https://github.com/alicelabs-llc/marketnow-submissions">github.com/alicelabs-llc/marketnow-submissions</a>),
-status <strong>certified-L1.5</strong> (auto-scan + claims verified), trust score 25-60, pending L2 review and catalog merge.</p>
-<p><span class="badge yellow">ACCEPTED (description-only)</span> HTTP 201 — stored as <code>pending-L2</code>: attach files, code or a verifiable repo to become merge-eligible. Trust capped at 45.</p>
+status <strong>certified-L1.5</strong> (auto-scan + claims verified), trust score 25-60, pending L2 review and catalog merge — <strong>listed with the pricing you chose</strong>.</p>
+<p><span class="badge yellow">ACCEPTED (description-only)</span> HTTP 201 — stored as <code>pending-L2</code>: attach files, code, a verifiable repo or a working endpoint to become merge-eligible. Trust capped at 45.</p>
 <p><span class="badge red">REJECTED</span> HTTP 422 — machine-reviewable reasons returned, including <strong>false claims</strong> (repo 404, install package 404). Fix and resubmit; dry-run as often as you want.</p>
 <p>Submissions start <span class="badge yellow">YELLOW</span> risk: new skills have zero adoption history, so trust is earned — registry signals, usage and L2 review raise it over time.</p>
 </div>
@@ -109,7 +187,8 @@ status <strong>certified-L1.5</strong> (auto-scan + claims verified), trust scor
 <pre>{
   "tool": "marketnow_submit_skill",
   "arguments": {
-    "skill": { "name": "...", "version": "1.0.0", "description": "...", "author": "..." },
+    "skill": { "name": "...", "version": "1.0.0", "description": "...", "author": "...",
+               "pricing": { "model": "per-call", "price": "0.01 USDC per call", "currency": "USDC" } },
     "dry_run": false
   }
 }</pre>
@@ -117,16 +196,104 @@ status <strong>certified-L1.5</strong> (auto-scan + claims verified), trust scor
 
 <h2>6. What happens after acceptance</h2>
 <ol>
-<li><strong>Stored &amp; certified-L1.5</strong> — your package and its full scan report live in the public queue (audit trail forever).</li>
-<li><strong>L2 review</strong> — claims re-verified (repo, install), substance checked. False claims discovered later → <code>quarantined-L2</code> in the queue, never merged.</li>
-<li><strong>Catalog merge</strong> — accepted skills with real substance join the indexed catalog with their own <code>/s/&lt;slug&gt;</code> page, searchable by 69k+ catalog users and every MCP client.</li>
+<li><strong>Stored &amp; certified-L1.5</strong> — your package (with its pricing) and its full scan report live in the public queue (audit trail forever).</li>
+<li><strong>L2 review</strong> — claims re-verified (repo, install, endpoint), substance checked. False claims discovered later → <code>quarantined-L2</code> in the queue, never merged.</li>
+<li><strong>Catalog merge</strong> — accepted skills with real substance join the indexed catalog with their own <code>/s/&lt;slug&gt;</code> page, searchable by 69k+ catalog users and every MCP client, <strong>showing the price you set</strong>.</li>
 <li><strong>Track anytime</strong> — <code>GET /api/submissions</code> or the GitHub queue.</li>
 </ol>
 
 <h2>Limits &amp; honesty</h2>
-<p>Rate limit: 8 submissions per source per hour (queue-backed, durable) + anti-flood protection. Payload: 100KB. L1.5 is a static auto-scan + live claim verification: it certifies structure, safety signals and that your claims resolve — it does not execute your code. L2 is the deeper review. Trust is a heuristic over public signals — not a guarantee. <strong>Vaporware is not a product:</strong> if the repo is 404 or the install package does not exist, you get a 422, not a catalog page.</p>
+<p>Rate limit: 8 submissions per source per hour (queue-backed, durable) + anti-flood protection. Payload: 100KB. L1.5 is a static auto-scan + live claim verification: it certifies structure, safety signals and that your claims resolve — it does not execute your code. L2 is the deeper review. Trust is a heuristic over public signals — not a guarantee. <strong>Vaporware is not a product:</strong> if the repo is 404 or the install package does not exist, you get a 422, not a catalog page. <strong>Pricing is yours:</strong> free, paid, metered, subscription — we verify the security of what you ship, and we list the price you declare.</p>
 
 <p style="margin-top:2em"><a class="cta" href="/api/submit">GET /api/submit — machine-readable docs</a>
-<a class="cta" href="/api/submissions" style="background:#1e293b;color:#00F299">View the live queue</a></p>
+<a class="cta sec" href="/api/submissions">View the live queue</a></p>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  function build() {
+    var pkg = {
+      name: $('name').value.trim(),
+      version: $('version').value.trim() || '1.0.0',
+      description: $('description').value.trim(),
+      author: $('author').value.trim()
+    };
+    var opt = { runtime: $('runtime').value, homepage: $('homepage').value.trim(),
+                repo_url: $('repo_url').value.trim(), install: $('install').value.trim() };
+    for (var k in opt) if (opt[k]) pkg[k] = opt[k];
+    var tu = $('testurl').value.trim();
+    if (tu) { pkg.test = { url: tu }; pkg.tags = ['mcp', 'remote']; }
+    var m = $('pmodel').value;
+    if (m) {
+      var pr = { model: m };
+      var pp = $('pprice').value.trim(), pc = $('pcurrency').value.trim(), pd = $('pdetails').value.trim();
+      if (pp !== '') { if (/^\d+(\.\d+)?$/.test(pp)) pr.price = parseFloat(pp); else pr.price = pp; }
+      if (pc) pr.currency = pc;
+      if (pd) pr.details = pd;
+      pkg.pricing = pr;
+    }
+    return pkg;
+  }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function render(status, j) {
+    var box = $('result'); box.className = 'show';
+    var acc = j && (j.accepted === true || j.verdict === 'accepted');
+    var v = $('verdict');
+    var kind = acc ? 'green' : 'red';
+    var label = (j && j.verdict) ? String(j.verdict).toUpperCase() : ('HTTP ' + status);
+    v.innerHTML = '<span class="badge ' + kind + '">' + esc(label) + '</span> ' +
+      (acc ? '— stored in the public queue, pending L2 review' : '— fix the reasons below and resubmit');
+    var meta = [];
+    if (j && j.id) meta.push('id: <code>' + esc(j.id) + '</code>');
+    if (j && j.trust_score_100 != null) meta.push('trust: <strong>' + esc(j.trust_score_100) + '/100</strong>');
+    if (j && j.pricing) {
+      var pp = j.pricing; var ptxt = [pp.model, (pp.price !== null && pp.price !== undefined) ? pp.price : '', pp.currency || ''].filter(Boolean).join(' · ');
+      meta.push('pricing: <span class="badge green">' + esc(ptxt) + '</span>');
+    }
+    if (j && j.status) meta.push(esc(j.status));
+    if (j && j.storage && j.storage.url) meta.push('audit: <a href="' + esc(j.storage.url) + '" target="_blank" rel="noopener">public queue record</a>');
+    $('rmeta').innerHTML = meta.join(' · ');
+    var rs = (j && j.reasons) || [];
+    $('rreasons').innerHTML = rs.map(function (r) {
+      var sev = r.severity || 'info';
+      var col = sev === 'critical' || sev === 'high' ? 'red' : (sev === 'medium' ? 'yellow' : 'green');
+      return '<li><span class="badge ' + col + '">' + esc(sev.toUpperCase()) + '</span> <strong>' + esc(r.check) + '</strong>' +
+        (r.field ? ' (' + esc(r.field) + ')' : '') + ' — ' + esc(r.reason) + '</li>';
+    }).join('');
+    $('rjson').textContent = JSON.stringify(j, null, 2);
+    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  function send(dry) {
+    var pkg = build();
+    var errs = [];
+    if (!pkg.name || pkg.name.length < 2) errs.push('name (2+ chars)');
+    if (!pkg.description || pkg.description.length < 10) errs.push('description (10+ chars)');
+    if (!pkg.author) errs.push('author');
+    if (errs.length) {
+      $('result').className = 'show';
+      $('verdict').innerHTML = '<span class="badge red">MISSING FIELDS</span>';
+      $('rmeta').innerHTML = ''; $('rreasons').innerHTML = '<li>' + errs.map(esc).join(' · ') + '</li>';
+      $('rjson').textContent = '';
+      return;
+    }
+    var b = $('bsubmit'), d = $('bdry');
+    b.disabled = d.disabled = true;
+    fetch(dry ? '/api/submit?dry_run=1' : '/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(pkg)
+    }).then(function (r) { return r.json().then(function (j) { return { s: r.status, j: j }; }); })
+      .then(function (o) { render(o.s, o.j); })
+      .catch(function (e) {
+        $('result').className = 'show';
+        $('verdict').innerHTML = '<span class="badge red">NETWORK ERROR</span>';
+        $('rjson').textContent = String(e);
+      })
+      .finally(function () { b.disabled = d.disabled = false; });
+  }
+  $('bsubmit').addEventListener('click', function () { send(false); });
+  $('bdry').addEventListener('click', function () { send(true); });
+})();
+</script>
 </body>
 </html>

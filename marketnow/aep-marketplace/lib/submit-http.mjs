@@ -42,7 +42,9 @@ const DOCS = {
     install: 'exact install command', repo_url: 'source repo', homepage: 'project page',
     license: 'SPDX', tags: 'array max 12', capabilities: 'object',
     'doc.usage': 'string', 'doc.system_prompt': 'string (scanned for injection)',
-    files: '{filename: content} max 60KB', 'test.url': 'https (probed live)', price: 'number USD',
+    files: '{filename: content} max 60KB', 'test.url': 'https (probed live)',
+    price: 'number USD (legacy — use pricing instead)',
+    pricing: '{ model: free|per-call|per-call-x402|subscription|one-time|freemium|revenue-share|custom, price: number-or-string, currency, details (max 300 chars, scanned) } — the vendor sets ANY price; MarketNow verifies security, it does not curate pricing',
   },
   pipeline: ['SCHEMA', 'INJECTION', 'SECRETS', 'DANGEROUS_API', 'URLS', 'TYPOSQUAT', 'DEDUP (live vs 69k+ catalog names)', 'CLAIMS_VERIFIED (repo + install package probed live)', 'REACHABILITY', 'DURABLE_RATE_LIMIT (queue-backed, 8/h, anti-flood 25/10min)'],
   verdicts: {
@@ -51,9 +53,9 @@ const DOCS = {
     rejected: '422 — reasons returned (includes false claims: repo 404, install package 404)',
     rate_limited: '429 — durable limit exceeded',
   },
-  honesty: 'Claims are verified live: if your repo_url 404s or your install references a package that does not exist on npm/PyPI/crates/Docker Hub, the submission is REJECTED. Description-only submissions never reach the catalog.',
+  honesty: 'Claims are verified live: if your repo_url 404s or your install references a package that does not exist on npm/PyPI/crates/Docker Hub, the submission is REJECTED. Description-only submissions never reach the catalog. Pricing is 100% vendor-decided: free, per-call (x402), subscription, custom — any model; we verify the security, not the price.',
   warning: 'Never include secrets — the scanner rejects them. We never ask for passwords or private keys.',
-  example_curl: `curl -X POST https://www.marketnow.site/api/submit -H 'Content-Type: application/json' -d '{"name":"my-skill","version":"1.0.0","description":"what it does","author":"you","runtime":"node","install":"npx my-skill"}'`,
+  example_curl: `curl -X POST https://www.marketnow.site/api/submit -H 'Content-Type: application/json' -d '{"name":"my-skill","version":"1.0.0","description":"what it does","author":"you","runtime":"node","install":"npx my-skill","pricing":{"model":"per-call","price":"0.01 USDC per call","currency":"USDC","details":"x402 per-call on Base"}}'`,
 };
 
 const CORS = {
@@ -107,6 +109,7 @@ export async function mountSubmission(req, res) {
         verdict: result.verdict,
         status: result.status,
         trust_score_100: result.trust_score_100,
+        pricing: (result.record && result.record.skill && result.record.skill.pricing) || null,
         dry_run: result.dry_run,
         reasons: result.reasons,
         storage: result.storage,
