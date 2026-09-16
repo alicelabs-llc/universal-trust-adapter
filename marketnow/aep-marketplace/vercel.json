@@ -37,7 +37,7 @@
     },
     {
       "source": "/api/interceptor",
-      "destination": "/api/agent-economy?_mode=interceptor"
+      "destination": "/api/trust?_mode=interceptor"
     },
     {
       "source": "/api/skills/:id",
@@ -158,6 +158,18 @@
     {
       "source": "/api/submissions",
       "destination": "/api/skills?_mode=queue"
+    },
+    {
+      "source": "/atc/schema-3.0",
+      "destination": "/atc/spec/atc-3.0.json"
+    },
+    {
+      "source": "/atc/schema-1.4",
+      "destination": "/atc/spec/atc-1.4-uvp.json"
+    },
+    {
+      "source": "/atc/unified",
+      "destination": "/atc/spec/SPEC-3.0-UVP.md"
     }
   ],
   "headers": [

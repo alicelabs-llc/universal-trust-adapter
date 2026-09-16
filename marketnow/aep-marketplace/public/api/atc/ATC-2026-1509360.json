@@ -1,6 +1,6 @@
 {
   "card_id": "ATC-2026-1509360",
-  "status": "active",
+  "status": "revoked",
   "payload": {
     "card_id": "ATC-2026-1509360",
     "schema_version": "1.1.0",
@@ -49,5 +49,7 @@
     "canonicalization_method": "RFC_8785_JCS",
     "ca_key_id": "mn-ca-003",
     "ca_key_fingerprint_sha256": "f2c8d4a885a70da9"
-  }
+  },
+  "revoked_at": "2026-08-09T19:38:14.746Z",
+  "revocation_reason": "test"
 }

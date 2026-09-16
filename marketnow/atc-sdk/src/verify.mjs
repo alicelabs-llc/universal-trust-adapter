@@ -23,6 +23,7 @@ import {
   verify as edVerify,
 } from 'node:crypto';
 import { canonicalizeATC, computePayloadHash } from './issue.mjs';
+import { verifyLedgerCard, isLedgerCard } from './ledger-card.mjs';
 
 const ATC_SPEC_VERSION = 'ATC/1.0';
 const ATC_ALGORITHM = 'Ed25519';
@@ -420,6 +421,15 @@ function isCardRevoked(revocationList, cardId) {
  * @returns {Promise<object>} Verification result.
  */
 export async function verifyATC(atc, options = {}) {
+  // ATC/3.0-core (v1.2.0 as interim 1.4, v1.3.0 re-versioned): production
+  // ledger envelopes auto-dispatch to the unified verifier (same path as verifyATCSync).
+  if (isLedgerCard(atc)) {
+    const ledgerResult = verifyLedgerCard(atc, options);
+    if (options.fetch_revocation) {
+      ledgerResult.warnings.push('fetch_revocation for ledger cards: check https://marketnow.site/api/ocsp?card_id=' + encodeURIComponent(atc.card_id) + ' (fail-closed)');
+    }
+    return ledgerResult;
+  }
   const errors = [];
   const warnings = [];
   const controlsPassed = [];
@@ -573,6 +583,11 @@ export async function verifyATC(atc, options = {}) {
 
 // Synchronous verification (no revocation list fetch). For backward compat with v1.0 callers.
 export function verifyATCSync(atc, options = {}) {
+  // ATC/3.0-core (v1.2.0 as interim 1.4, v1.3.0 re-versioned): production
+  // ledger envelopes auto-dispatch to the unified verifier — the real cards
+  // from the MarketNow ledger verify with real Ed25519 instead of failing
+  // spec_version dispatch.
+  if (isLedgerCard(atc)) return verifyLedgerCard(atc, options);
   // Strip fetch_revocation from options and call verifyATC — but verifyATC is async.
   // For sync callers, we run all checks except the revocation list fetch.
   const opts = { ...options, fetch_revocation: false };

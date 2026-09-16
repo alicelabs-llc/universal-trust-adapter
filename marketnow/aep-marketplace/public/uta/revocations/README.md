@@ -9,7 +9,7 @@ it existed as a *promised* feature on `/api/trust?action=revocation` and is now 
 | File | Purpose |
 |------|---------|
 | `crl.json` | The signed CRL — Ed25519 signature over RFC 8785 JCS canonical payload |
-| `registry-key.json` | Public key of the registry signing key (mn-revoc-001) + verification steps |
+| `registry-key.json` | Public key of the registry signing key (mn-revoc-002) + verification steps |
 
 ## Endpoints (live)
 - `GET /api/crl` — serves the CRL + verification instructions
@@ -27,7 +27,12 @@ Unknown subjects answer `UNKNOWN` with recommendation `DENY` (fail-closed).
 | ATC-2026-5936297 | REVOKED (SUPERSEDED) | 2026-07-22 | Buggy canonicalization, re-issued |
 | ATC-2026-9880252 | REVOKED (SUPERSEDED) | 2026-07-23 | Re-signing under RFC 8785 |
 | mn-ca-002 | REVOKED (KEY_COMPROMISE) | 2026-09-08 | Private key committed publicly |
+| ATC-2026-1509360 | REVOKED | 2026-08-09 | test (propagated to CRL 2026-09-17) |
 
 Registry updates happen via new CRL versions in the source repo
 (`marketnow/_data/atc` + this build) — each version is independently verifiable
 against the same public key.
+
+**Key rotation 2026-09-17:** mn-revoc-001 → mn-revoc-002 during scheduled CRL
+renewal (the previous CRL's next_update window elapsed). registry-key.json is the
+authoritative anchor; it carries the rotation history.
