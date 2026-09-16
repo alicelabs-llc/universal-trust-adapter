@@ -517,3 +517,169 @@ export function verifyATC(atc, options = {}) {
     agent_name: atc.identity?.agent_name || null,
   };
 }
+
+// ═════════════════════════════════════════════════════════════════════════════
+// ATC/3.0-core (Unified Credential Profile) — production ledger-card verifier.
+// NEW in v1.12.0 as "ATC/1.4" (interim label), re-versioned ATC/3.0-core in v1.13.0 — closes the audit-63 fragmentation finding: the 57 cards in
+// the real ledger ({card_id, status, payload{schema_version 1.1.0}, signature})
+// were verifiable only by the hosted /api/atc endpoint. This function gives
+// the npm package the same verification, offline, with the CA key registry
+// embedded (rotation-aware, fail-closed on unknown/compromised keys).
+// ═════════════════════════════════════════════════════════════════════════════
+
+const MN_CA_KEY_REGISTRY = {
+  'ca-key-001': { spki_b64: 'MCowBQYDK2VwAyEA8p1XlAnt5QRCGbyDRi8+U9MCvt8Xyzq36Rar45JHszM=', status: 'retired' },
+  'mn-ca-002': { spki_b64: 'MCowBQYDK2VwAyEATlD16v6Fy/+GM4je2SxwCz7yFEeo9d8LwqZf0yN8oFY=', status: 'retired-compromised' },
+  'mn-ca-003': { spki_b64: 'MCowBQYDK2VwAyEAUWJgyMWp9oKIGwN9EG8ayz/mYYp1lcQBI58rtpOs8CM=', status: 'active' },
+};
+
+const ATC30_CANON_OK = new Set([
+  'RFC_8785_JCS',
+  'RFC 8785 JCS',
+  'RFC 8785 JCS (JSON Canonicalization Scheme)',
+]);
+
+export function verifyLedgerCard(card, options = {}) {
+  const errors = [];
+  const warnings = [];
+  const controls_passed = [];
+  const controls_failed = [];
+
+  const fail = (control, msg) => { controls_failed.push(control); errors.push(msg); };
+  const pass = (control) => controls_passed.push(control);
+
+  // ENVELOPE
+  if (!card || typeof card !== 'object') {
+    return { valid: false, format: 'ATC/3.0-core', errors: ['card must be an object'], warnings, controls_failed: ['ATC30-ENVELOPE'] };
+  }
+  if (!card.card_id || !card.payload || !card.signature) {
+    fail('ATC30-ENVELOPE', 'not a production ledger envelope — expected {card_id, status, payload, signature} (schema_version 1.1.0 inside payload)');
+  } else {
+    pass('ATC30-ENVELOPE');
+  }
+  const p = card.payload || {};
+  const sig = card.signature || {};
+
+  // PAYLOAD STRUCTURE
+  if (!p.schema_version || !String(p.schema_version).startsWith('1.')) {
+    fail('ATC30-PAYLOAD', `payload.schema_version "${p.schema_version}" is not a 1.x production schema (expected "1.1.0")`);
+  } else if (p.card_id !== card.card_id) {
+    fail('ATC30-PAYLOAD', `card_id mismatch: envelope "${card.card_id}" vs payload "${p.card_id}"`);
+  } else if (!p.metadata || !p.metadata.issued_at || !p.metadata.expires_at) {
+    fail('ATC30-PAYLOAD', 'payload.metadata.{issued_at,expires_at} required');
+  } else if (!p.agent_id) {
+    fail('ATC30-PAYLOAD', 'payload.agent_id required');
+  } else {
+    pass('ATC30-PAYLOAD');
+  }
+
+  // SIGNATURE BLOCK
+  const canonDoc = sig.canonicalization_method || sig.canonical_json || '';
+  if (canonDoc && !ATC30_CANON_OK.has(String(canonDoc).trim())) {
+    fail('ATC30-CANON', `unsupported documented canonicalization: ${canonDoc}`);
+  } else {
+    if (!canonDoc) warnings.push('no canonicalization field — assuming RFC 8785 JCS');
+    pass('ATC30-CANON');
+  }
+
+  // LIFECYCLE
+  const now = Date.now();
+  if (card.status && card.status !== 'active') {
+    fail('ATC30-LIFECYCLE', `card status is ${card.status} (CRL/ledger revocation path)`);
+  } else if (p.metadata?.expires_at && Date.parse(p.metadata.expires_at) < now) {
+    fail('ATC30-LIFECYCLE', `card expired at ${p.metadata.expires_at}`);
+  } else {
+    pass('ATC30-LIFECYCLE');
+  }
+
+  // CRYPTO — JCS(payload) → sha256 pre-check → Ed25519 against the resolved CA key
+  let hash_valid = null;
+  let signature_valid = null;
+  let trust_anchor = null;
+  if (controls_failed.includes('ATC30-ENVELOPE')) {
+    // no point verifying crypto over a broken envelope
+  } else {
+    try {
+      const canonical = canonicalize(p);
+      if (typeof canonical !== 'string') throw new Error('canonicalize returned non-string');
+      const canonicalBytes = Buffer.from(canonical, 'utf8');
+      const hash = createHash('sha256').update(canonicalBytes).digest('hex');
+
+      if (sig.signed_payload_hash) {
+        hash_valid = hash === sig.signed_payload_hash;
+        if (hash_valid) pass('ATC30-HASH'); else fail('ATC30-HASH', 'sha256(canonical payload) does not match signature.signed_payload_hash — canonicalization or payload mismatch');
+      } else {
+        warnings.push('signed_payload_hash absent — hash pre-check skipped');
+      }
+
+      // trust anchor: caller override > registry resolution via ca_key_id
+      let anchorPub = null;
+      if (options.ca_public_key && typeof options.ca_public_key === 'string') {
+        // accept SPKI base64 or PEM
+        anchorPub = options.ca_public_key.includes('BEGIN')
+          ? createPublicKey({ key: options.ca_public_key, format: 'pem' })
+          : createPublicKey({ key: Buffer.from(options.ca_public_key, 'base64'), format: 'der', type: 'spki' });
+        trust_anchor = 'caller-supplied';
+      } else {
+        const claimed = sig.ca_key_id || 'mn-ca-003';
+        const entry = MN_CA_KEY_REGISTRY[claimed];
+        if (!entry) {
+          fail('ATC30-ANCHOR', `unknown CA key id "${claimed}" — resolve against GET /api/atc?action=ca-key (fail-closed)`);
+        } else if (entry.status === 'retired-compromised') {
+          fail('ATC30-ANCHOR', `signature claims CA key ${claimed}, which is retired-compromised — DO NOT verify against it`);
+        } else {
+          if (entry.status === 'retired') warnings.push(`CA key ${claimed} is retired (routine rotation) — signature verifies as historical evidence`);
+          anchorPub = createPublicKey({ key: Buffer.from(entry.spki_b64, 'base64'), format: 'der', type: 'spki' });
+          trust_anchor = claimed;
+        }
+      }
+
+      if (anchorPub) {
+        const sigHex = String(sig.value || '');
+        if (!/^[0-9a-f]{128}$/.test(sigHex)) {
+          fail('ATC30-SIGNATURE', 'signature.value must be 64 bytes as 128 hex chars');
+        } else {
+          signature_valid = edVerify(null, canonicalBytes, anchorPub, Buffer.from(sigHex, 'hex'));
+          if (signature_valid) pass('ATC30-SIGNATURE');
+          else fail('ATC30-SIGNATURE', `Ed25519 signature verification failed against ${trust_anchor}`);
+        }
+      }
+    } catch (e) {
+      fail('ATC30-CRYPTO', `verification error: ${String(e && e.message ? e.message : e)}`);
+    }
+  }
+
+  controls_passed.sort();
+  controls_failed.sort();
+
+  return {
+    valid: errors.length === 0,
+    format: 'ATC/3.0-core (production ledger envelope)',
+    spec_version: 'ATC/3.0',
+    profile: 'core',
+    controls_passed,
+    controls_failed,
+    errors,
+    warnings,
+    card_id: card.card_id || null,
+    status: card.status || null,
+    agent_id: p.agent_id || null,
+    agent_name: p.agent_name || null,
+    issuer: p.metadata?.issuer || null,
+    trust: p.trust || null,
+    issued_at: p.metadata?.issued_at || null,
+    expires_at: p.metadata?.expires_at || null,
+    crypto: {
+      algorithm: 'Ed25519 (RFC 8032)',
+      canonicalization: 'RFC 8785 JCS',
+      hash_valid,
+      signature_valid,
+      trust_anchor,
+    },
+    revocation: {
+      check_url: `https://marketnow.site/api/ocsp?card_id=${encodeURIComponent(card.card_id || '')}`,
+      note: 'Caller MUST check revocation separately (fail-closed: UNKNOWN = DENY).',
+    },
+    decision_authority: 'consumer',
+  };
+}

@@ -15,10 +15,10 @@ import { processSubmission } from "../lib/submit-core.mjs";
 
 // MCP Server info
 // NOTE: keep in sync with marketnow/mcp-server/package.json on every release.
-// v1.11.1 = serverInfo self-report fix + stats refresh (catalog 5.9.2).
+// v1.13.0 = ATC/3.0 re-version alignment (hosted server matches npm marketnow-mcp). v1.12.0 = audit Task 63 fixes: jsonrpc strict validation, client limit honored.
 const SERVER_INFO = {
   name: "marketnow-mcp",
-  version: "1.11.1",
+  version: "1.13.0",
 };
 
 const SERVER_CAPABILITIES = {
@@ -326,11 +326,14 @@ async function handleRequest(method, params, id) {
         case "marketnow_search_skills": {
           // FIX 2026-09-17: real search via the in-process /api/skills engine
           // (was: 98MB static fetch, query ignored, same 10 skills every time).
-          const query = { limit: "10" };
-          if (args.query) query.q = String(args.query);
+          // FIX 2026-09-17 (b): honor the client's limit (was: always 10).
+          const clientLimit = Number(args.limit);
+          const limit = Number.isInteger(clientLimit) && clientLimit >= 1 && clientLimit <= 50 ? clientLimit : 10;
+          const query = { limit: String(limit) };
+          if (args.query) query.q = String(args.query).slice(0, 300);
           if (args.category) query.category = String(args.category);
           const data = await callSkills(query);
-          const skills = (Array.isArray(data) ? data : data?.skills || []).slice(0, 10);
+          const skills = (Array.isArray(data) ? data : data?.skills || []).slice(0, limit);
           return {
             content: [{ type: "text", text: JSON.stringify({
               success: true,
@@ -454,17 +457,36 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const body = req.body;
-      
-      // Handle batch requests
+
+      // FIX 2026-09-17 (audit): reject non-2.0 JSON-RPC envelopes instead of
+      // processing them silently. jsonrpc "1.0" / "2" / missing → -32600.
+      const badRpc = (o) => !o || o.jsonrpc !== "2.0" || typeof o.method !== "string";
+
+      // Handle batch requests (each item validated individually)
       if (Array.isArray(body)) {
+        if (body.length === 0 || body.some(badRpc)) {
+          return res.status(200).json({
+            jsonrpc: "2.0",
+            error: { code: -32600, message: "Invalid Request — every batch item needs jsonrpc exactly \"2.0\" and a string method" },
+            id: null,
+          });
+        }
         const results = [];
-        for (const req of body) {
-          const result = await handleRequest(req.method, req.params, req.id);
+        for (const r of body) {
+          const result = await handleRequest(r.method, r.params, r.id);
           if (result !== null) {
-            results.push({ jsonrpc: "2.0", result, id: req.id });
+            results.push({ jsonrpc: "2.0", result, id: r.id });
           }
         }
         return res.status(200).json(results);
+      }
+
+      if (badRpc(body)) {
+        return res.status(200).json({
+          jsonrpc: "2.0",
+          error: { code: -32600, message: "Invalid Request — jsonrpc must be exactly \"2.0\" and method must be a string" },
+          id: body?.id ?? null,
+        });
       }
 
       // Single request

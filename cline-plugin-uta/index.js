@@ -27,7 +27,7 @@ const auditLog = [];
 // published; every rule below is enforced here, fail-closed, testable offline).
 const filter = {
   allowHosts: ['api.github.com', 'registry.npmjs.org'],
-  denyActions: ['shell_exec', 'rm_rf', 'DROP_TABLE', 'DELETE_FROM'],
+  denyActions: ['shell_exec', 'rm_rf', 'DROP_TABLE'], // matched case-insensitively since v1.1.1
   blockedPaths: ['.env', '.aws/credentials', '.ssh/id_rsa', '.npmrc', '.git-credentials'],
   requireApprovalAbove: { spend_usd: 1 },
 
@@ -250,33 +250,43 @@ const tools = {
       arguments: toolArgs || {},
     };
 
-    // Check against filter rules
+    // Check against filter rules — v1.1.1: case-insensitive + path-segment
+    // boundaries (see hardened matchers above this file's exports).
     const argsStr = JSON.stringify(toolArgs || {});
+    const lower = lowerArgs(argsStr);
+    const toolLower = lowerArgs(tool_name);
     const checks = [];
 
-    // Rule 1: .env reads
-    if (argsStr.includes('.env') || argsStr.includes('..%2F.env')) {
-      checks.push({ rule: 'blocked_path', allowed: false, reason: '.env access blocked' });
+    // Rule 1: .env reads (path-segment match — "my.environment" does NOT match)
+    if (pathSegmentMatch(lower, '.env') || argsStr.toLowerCase().includes('..%2f.env')) {
+      checks.push({ rule: 'blocked_path', allowed: false, reason: '.env access blocked (path-segment match)' });
     }
 
-    // Rule 2: rm -rf
-    if (argsStr.includes('rm -rf') || argsStr.includes('rm -r ')) {
-      checks.push({ rule: 'blocked_command', allowed: false, reason: 'Destructive command blocked' });
+    // Rule 2: rm with recursive flags, any case, flag order, spacing
+    if (isRmRecursive(lower)) {
+      checks.push({ rule: 'blocked_command', allowed: false, reason: 'Destructive recursive delete blocked' });
     }
 
-    // Rule 3: /etc/passwd
-    if (argsStr.includes('/etc/passwd') || argsStr.includes('/etc/shadow')) {
+    // Rule 3: system files (case-insensitive)
+    if (lower.includes('/etc/passwd') || lower.includes('/etc/shadow')) {
       checks.push({ rule: 'blocked_path', allowed: false, reason: 'System file access blocked' });
     }
 
-    // Rule 4: credential files
-    if (argsStr.includes('.aws/credentials') || argsStr.includes('.ssh/id_rsa') || argsStr.includes('.npmrc')) {
+    // Rule 4: credential files (path-segment, case-insensitive)
+    if (pathSegmentMatch(lower, '.aws/credentials') || pathSegmentMatch(lower, '.ssh/id_rsa') || pathSegmentMatch(lower, '.npmrc') || pathSegmentMatch(lower, '.git-credentials')) {
       checks.push({ rule: 'blocked_path', allowed: false, reason: 'Credential file access blocked' });
     }
 
-    // Rule 5: shell spawn
-    if (tool_name.includes('spawn') || tool_name.includes('exec') || tool_name.includes('shell')) {
+    // Rule 5: shell spawn (case-insensitive tool name)
+    if (toolLower.includes('spawn') || toolLower.includes('exec') || toolLower.includes('shell')) {
       checks.push({ rule: 'blocked_spawn', allowed: false, reason: 'Process spawn blocked' });
+    }
+
+    // Rule 5.5 (v1.1.1): secret exfiltration — private key blocks and
+    // machine-shaped tokens in outbound args (case-insensitive patterns).
+    if (/-----BEGIN (RSA |EC |OPENSSH |ED25519 )?PRIVATE KEY-----/i.test(argsStr) ||
+        /\b(gh[pousr]_[a-z0-9]{20,}|sk-[a-z0-9]{20,}|akia[0-9a-z]{16}|xox[baprs]-[a-z0-9-]{10,})\b/i.test(argsStr)) {
+      checks.push({ rule: 'secret_exfiltration', allowed: false, reason: 'Secret material in outbound args blocked' });
     }
 
     // Rule 6 (v1.1.0): revocation gate — DENY if the wrapped server's
@@ -336,7 +346,12 @@ const tools = {
 // MCP server handler
 export default {
   name: 'uta-trust-gateway',
-  version: '1.1.0',
+  version: '1.1.1',
+
+  // v1.1.1: programmatic access to the hardened pre-exec filter (same rules
+  // wrap() and handleRequest enforce) and the detailed checks view.
+  check: (toolName, args) => checkInterceptor(toolName, args),
+  check_interceptor: (args) => tools.check_interceptor({ tool_name: args.tool_name, arguments: args.arguments || {} }),
 
   async handleRequest(method, params) {
     switch (method) {
@@ -404,16 +419,60 @@ export default {
   computeFingerprints,
 };
 
+
+// ─── v1.1.1 hardened matchers ───────────────────────────────────────────────
+// Audit 2026-09-63 findings fixed here:
+//   (1) Case-sensitivity bypass: "RM -RF" / ".ENV" / "/ETC/PASSWD" sailed
+//       through the old string-includes rules. All matching now runs on a
+//       lowercased copy.
+//   (2) ".env" false positive: "my.environment", "dev.env-file-docs" etc.
+//       matched a bare substring. Now ".env" must appear as a PATH SEGMENT
+//       (boundary = start/end or any of / \\ : ; space " ' ) — "my.environment"
+//       no longer matches, real paths like "/app/.env", "~/.env", "config/.env"
+//       still do.
+//   (3) rm -rf variants: "rm -fr", "RM -RF", "rm  -rf" (double space) now
+//       match via a case-insensitive regex over rm with recursive flags.
+const _LOWER_CACHE_KEY = Symbol('mn-lower');
+function lowerArgs(argsStr) {
+  return String(argsStr || '').toLowerCase();
+}
+function pathSegmentMatch(lower, target) {
+  const t = String(target).toLowerCase();
+  let i = lower.indexOf(t);
+  while (i !== -1) {
+    const before = i === 0 ? '' : lower[i - 1];
+    const afterIdx = i + t.length;
+    const after = afterIdx >= lower.length ? '' : lower[afterIdx];
+    const okBefore = before === '' || '/\\:;\s"\''.includes(before);
+    // after-boundary also allows '.' — dotenv-convention variants like
+    // ".env.production" and ".env.local" ARE env files and must block.
+    const okAfter = after === '' || '/\\:;\s"\'..'.includes(after) || after === '$';
+    if (okBefore && okAfter) return true;
+    i = lower.indexOf(t, i + 1);
+  }
+  return false;
+}
+const RM_RECURSIVE_RE = /\brm\s+(-[a-z]*[rf][a-z]*\s*)+(~|\/|\$|\*|[a-z0-9_.$~\/ -])/i;
+function isRmRecursive(lower) {
+  return RM_RECURSIVE_RE.test(lower);
+}
+
 async function checkInterceptor(toolName, args) {
   const argsStr = JSON.stringify(args || {});
+  const lower = lowerArgs(argsStr);
 
-  if (argsStr.includes('.env')) return { allowed: false, rule: 'blocked_path', reason: '.env access blocked' };
-  if (argsStr.includes('rm -rf')) return { allowed: false, rule: 'blocked_command', reason: 'rm -rf blocked' };
-  if (argsStr.includes('DROP TABLE')) return { allowed: false, rule: 'blocked_command', reason: 'DROP TABLE blocked' };
-  if (argsStr.includes('/etc/passwd')) return { allowed: false, rule: 'blocked_path', reason: 'System file blocked' };
-  if (argsStr.includes('.aws/credentials')) return { allowed: false, rule: 'blocked_path', reason: 'Credential file blocked' };
-  if (argsStr.includes('.ssh/id_rsa')) return { allowed: false, rule: 'blocked_path', reason: 'SSH key blocked' };
-  if (toolName.includes('spawn') || toolName.includes('exec')) return { allowed: false, rule: 'blocked_spawn', reason: 'Process spawn blocked' };
+  // v1.1.1: hardened matchers — case-insensitive, path-segment boundaries.
+  if (pathSegmentMatch(lower, '.env')) return { allowed: false, rule: 'blocked_path', reason: '.env access blocked' };
+  if (isRmRecursive(lower)) return { allowed: false, rule: 'blocked_command', reason: 'rm -rf (recursive delete) blocked' };
+  if (lower.includes('drop table')) return { allowed: false, rule: 'blocked_command', reason: 'DROP TABLE blocked' };
+  if (lower.includes('/etc/passwd') || lower.includes('/etc/shadow')) return { allowed: false, rule: 'blocked_path', reason: 'System file blocked' };
+  if (pathSegmentMatch(lower, '.aws/credentials')) return { allowed: false, rule: 'blocked_path', reason: 'Credential file blocked' };
+  if (pathSegmentMatch(lower, '.ssh/id_rsa')) return { allowed: false, rule: 'blocked_path', reason: 'SSH key blocked' };
+  if (pathSegmentMatch(lower, '.npmrc') || pathSegmentMatch(lower, '.git-credentials')) return { allowed: false, rule: 'blocked_path', reason: 'Credential file blocked' };
+  if (/-----BEGIN (RSA |EC |OPENSSH |ED25519 )?PRIVATE KEY-----/i.test(argsStr)) return { allowed: false, rule: 'secret_exfiltration', reason: 'Private key in outbound args blocked' };
+  if (/\b(gh[pousr]_[a-z0-9]{20,}|sk-[a-z0-9]{20,}|akia[0-9a-z]{16}|xox[baprs]-[a-z0-9-]{10,})\b/i.test(argsStr)) return { allowed: false, rule: 'secret_exfiltration', reason: 'API token in outbound args blocked' };
+  const toolLower = lowerArgs(toolName);
+  if (toolLower.includes('spawn') || toolLower.includes('exec')) return { allowed: false, rule: 'blocked_spawn', reason: 'Process spawn blocked' };
 
   return { allowed: true };
 }

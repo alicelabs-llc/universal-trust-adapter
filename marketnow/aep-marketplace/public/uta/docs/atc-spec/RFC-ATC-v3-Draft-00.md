@@ -1,6 +1,8 @@
 # RFC: ATC v3.0 — Multi-Format Cryptographic Profile
 
-**Status:** Draft 00 — Pre-public review
+**Status:** Finalized as **ATC/3.0-extended** (2026-09-17) — see https://marketnow.site/atc/unified (SPEC-3.0-UVP.md). The multi-format profile below is the extended profile of ATC/3.0; the production envelope is ATC/3.0-core.
+
+**Original status:** Draft 00 — Pre-public review
 **Version:** 3.0.0-rfc-00
 **Issued:** 2026-08-20
 **Editors:** Edison Flores, Alejandro Flores — AliceLabs LLC

@@ -2,10 +2,10 @@
   "service": "MarketNow",
   "page": "Sentinel Status",
   "version": "2.0.0",
-  "effective_date": "2026-07-05",
+  "effective_date": "2026-09-17",
   "url": "https://marketnow.site/api/sentinel-status.json",
   "current_production_version": "L1.5 + L1.6 (real-time) + L2 (GitHub Actions)",
-  "production_endpoint": "POST /api/audit-skill",
+  "production_endpoint": "POST /api/submit (L1.5 metadata + L1.7 malware scan, synchronous) + L2 sandbox audit (queued)",
   "architecture": {
     "l15": {
       "runs_in": "Vercel serverless (real-time)",
@@ -43,5 +43,6 @@
     ]
   },
   "l2_design_doc": "https://github.com/alicelabs-llc/marketnow/blob/master/SENTINEL_L2_DESIGN.md",
-  "design_phase": "L3 (red teaming with LLMs) — future"
+  "design_phase": "L3 (red teaming with LLMs) — future",
+  "production_endpoint_note": "The legacy /api/audit-skill route was consolidated into /api/submit during the Hobby 12-function cleanup; submissions are also accepted from the MCP tool marketnow_submit_skill."
 }

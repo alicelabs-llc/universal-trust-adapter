@@ -130,12 +130,13 @@ async function cmdIssue(options) {
 
 async function cmdVerify(cardPath) {
   const atc = loadJSON(cardPath);
-  const result = verifyATCSync(atc);
+  const result = verifyATCSync(atc); // v1.2.0: auto-detects ATC/1.4 ledger envelopes and ATC/1.0 spec cards
+  const isLedger = result.format === 'ATC/1.4 (production ledger envelope)';
   console.log('');
   if (result.valid) {
-    console.log(`${BOLD}${GREEN}✓ ATC VALID${RESET}  ${DIM}(${result.controls_passed.length}/8 controls passed)${RESET}`);
+    console.log(`${BOLD}${GREEN}✓ ATC VALID${RESET}  ${DIM}(${result.controls_passed.length} controls passed${isLedger ? ' — ATC/1.4 ledger envelope' : ' / 8 controls passed'})${RESET}`);
   } else {
-    console.log(`${BOLD}${RED}✗ ATC INVALID${RESET}  ${DIM}(${result.controls_passed.length}/8 controls passed, ${result.controls_failed.length} failed)${RESET}`);
+    console.log(`${BOLD}${RED}✗ ATC INVALID${RESET}  ${DIM}(${result.controls_passed.length} controls passed, ${result.controls_failed.length} failed${isLedger ? ' — ATC/1.4 ledger envelope' : ''})${RESET}`);
   }
   console.log('');
   console.log(`${BOLD}Card${RESET}         ${result.card_id || '(none)'}`);
@@ -146,10 +147,19 @@ async function cmdVerify(cardPath) {
   console.log(`${BOLD}Expires${RESET}     ${result.expires_at || '(none)'}`);
   console.log('');
   console.log(`${BOLD}Controls${RESET}`);
-  const allControls = ['ATC-001', 'ATC-002', 'ATC-003', 'ATC-004', 'ATC-005', 'ATC-006', 'ATC-007', 'ATC-008'];
+  const allControls = isLedger
+    ? [...new Set([...result.controls_passed, ...result.controls_failed])].sort()
+    : ['ATC-001', 'ATC-002', 'ATC-003', 'ATC-004', 'ATC-005', 'ATC-006', 'ATC-007', 'ATC-008'];
   for (const c of allControls) {
     const passed = result.controls_passed.includes(c);
     console.log(`  ${passed ? GREEN + '✓' + RESET : RED + '✗' + RESET}  ${c}`);
+  }
+  if (isLedger && result.crypto) {
+    console.log('');
+    console.log(`${BOLD}Crypto${RESET}`);
+    console.log(`  algorithm: ${result.crypto.algorithm} over ${result.crypto.canonicalization}`);
+    console.log(`  trust anchor: ${result.crypto.trust_anchor || '(none)'}  signature_valid: ${result.crypto.signature_valid}`);
+    console.log(`  revocation: ${result.revocation.check_url} (fail-closed)`);
   }
   if (result.errors.length > 0) {
     console.log('');

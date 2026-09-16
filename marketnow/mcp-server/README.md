@@ -164,11 +164,32 @@ Full audit report — including the 4-rule checklist, smoke-test commands, and t
 - **Website:** https://marketnow.site
 - **GitHub:** https://github.com/alicelabs-llc/marketnow
 - **npm:** https://www.npmjs.com/package/marketnow-mcp
-- **Audit:** https://marketnow.site/api/audit-report.json
-- **OWASP compliance:** https://marketnow.site/api/owasp
-- **Trust API:** https://marketnow.site/api/trust-score
-- **Interceptor:** https://marketnow.site/api/interceptor
+- **Audit:** https://marketnow.site/api/audit-report.json (historical, 2026-08-09 run — superseded by /api/stats.json)
+- **OWASP compliance:** https://marketnow.site/api/owasp.json
+- **Trust API:** https://marketnow.site/api/trust (also marketnow_verify_trust)
+- **Interceptor:** https://marketnow.site/api/interceptor (rule manifest; enforcement is npm @marketnow/cline-trust-plugin)
 - **ATC CA key:** https://marketnow.site/api/atc?action=ca-key
+
+---
+
+## v1.13.0 — ATC/3.0 unified credential profile (2026-09-17)
+
+The interim "ATC/1.4" label published earlier today in v1.12.0 is **re-versioned as ATC/3.0** — same envelope, same crypto, one version number. The unified format now converges on the established version ladder instead of sitting below it:
+
+- **ATC/3.0-core** — the production envelope `{card_id, status, payload (schema_version 1.1.0), signature}`: one Ed25519 (RFC 8032) signature over RFC 8785 JCS of the payload. This is the RFC v3 minimum ("the minimum required is one valid signature") and the wire format of the 57 production ledger cards. Every verifier MUST accept it. No re-issuance needed.
+- **ATC/3.0-extended** — the multi-sig shape from RFC-ATC-v3-Draft-00 (`atc_version "3.0.0"` + `signatures[]` with atc-ed25519 / eat-cwt / w3c-vc, artifact binding, `UTA-ATC-V3-CREDENTIAL` domain separation). Implemented in `atc-sdk/src/v3`, verified by `/api/trust`. Opt-in for issuers; TEE-ready.
+- **ATC/2.0 draft (SPEC-v2.md)** — superseded and withdrawn (never implemented by any card).
+- **ATC/1.0 spec cards** — still verify via the 8-control path, with a legacy-shape warning.
+- Spec: https://marketnow.site/atc/unified — Schema: https://marketnow.site/atc/schema-3.0 — Live: `GET /api/atc?action=spec`
+- Verification control ids renamed `ATC14-*` → `ATC30-*`; responses report `spec_version: "ATC/3.0", profile: "core"`.
+
+## v1.12.0 — Audit-63 repair + ATC/1.4 unified verification (2026-09-17)
+
+- **marketnow_get_manifest FIXED** — the handler called `getManifest()`, a function that never existed (it is `fetchManifest()`); a pure ReferenceError had broken the tool since v1.0.
+- **marketnow_get_owasp_compliance REBUILT** — serves the real OWASP MCP Cheat Sheet alignment matrix (12 controls, static `/api/owasp.json`) plus per-skill Sentinel evidence; the previous endpoint was removed under the Vercel Hobby function cap and had only ever returned a stub.
+- **marketnow_verify_receipt / marketnow_mint_referral / marketnow_lookup_referral LIVE** — receipts verify against the CA key registry (reports WHICH key signed + its lifecycle status; retired-compromised keys fail closed); referral codes are deterministic and self-certifying (MNR-REF-1.0), stats settle in the public referral registry.
+- **ATC/1.4 (Unified Verification Profile)** — `marketnow_verify_atc_spec` auto-detects BOTH formats: production ledger envelopes `{card_id, status, payload, signature}` verify with real Ed25519 against the embedded CA key registry (fail-closed on unknown/compromised anchors); ATC/1.0 spec cards keep the 8-control conformance path. Spec: https://marketnow.site/atc/unified
+- **Input validation hardened** — missing required arguments return INVALID_ARGUMENT (was: downstream INTERNAL_ERROR); `query` bounded to 300 chars; `serverInfo.name` unified as `marketnow-mcp`.
 
 ---
 
@@ -183,6 +204,7 @@ Built by AliceLabs LLC (Wyoming, USA) — founder Edison Flores.
 - **2025**: AliceLabs LLC legally founded in Wyoming, USA (founder Edison Flores, Ecuadorian)
 - **2026-03-30**: GitHub organization `github.com/alicelabs-llc` created
 - **2026-06-29**: MarketNow launched publicly (first npm release: `marketnow-mcp@1.5.1`)
-- **2026-08-09**: Current npm latest: `marketnow-mcp@1.10.0` (15 versions total)
+- **2026-08-09**: `marketnow-mcp@1.10.0` era (15 versions total)
+- **2026-09-17**: Current npm latest: `marketnow-mcp@1.13.0` — ATC/3.0 unified credential profile (re-version of the interim ATC/1.4 from v1.12.0). v1.12.0: 5 broken tools fixed, unified verification, hardened validation
 - **2026-08-19**: Independent audit by Z.ai (8 findings F1-F8 applied, see REPORT.pdf)
 

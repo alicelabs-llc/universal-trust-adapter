@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marketnow.site/schemas/atc-1.4-uvp.json",
+  "title": "ATC/1.4 — WITHDRAWN, re-versioned as ATC/3.0-core",
+  "description": "Superseded 2026-09-17 by ATC/3.0. Same envelope, same crypto, one version number. The current schema is atc-3.0.json (https://marketnow.site/atc/schema-3.0).",
+  "superseded_by": {
+    "spec": "https://marketnow.site/atc/unified",
+    "schema": "https://marketnow.site/atc/schema-3.0",
+    "spec_version": "ATC/3.0",
+    "profile": "core"
+  }
+}

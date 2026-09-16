@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marketnow.site/schemas/atc-3.0.json",
+  "title": "ATC/3.0 — Agent Trust Card, Unified Credential Profile (Core)",
+  "description": "The canonical wire format for Agent Trust Cards as deployed in the MarketNow production ledger (57 cards). ATC/3.0-core formalizes that envelope: card_id + status + payload (schema_version 1.1.0) + signature block (Ed25519/RFC 8032 over RFC 8785 JCS of payload, sha256 signed_payload_hash pre-check, ca_key_id, canonicalization_method). ATC/3.0-extended (from RFC-ATC-v3-Draft-00) adds a signatures[] array with atc-ed25519/eat-cwt/w3c-vc entries plus artifact binding; see SPEC-3.0-UVP.md. Every public verifier (/api/atc, /api/trust, agent-trust-card SDK, marketnow-mcp) accepts the core envelope. ATC/1.0 spec cards remain verifiable with explicit legacy warnings. The ATC/2.0 draft (content-addressed IDs, multi-sig) is superseded and withdrawn. This profile re-versions the interim ATC/1.4 label (2026-09-17): same envelope, same crypto, one version number.",
+  "type": "object",
+  "required": ["card_id", "status", "payload", "signature"],
+  "additionalProperties": true,
+  "properties": {
+    "card_id": {
+      "type": "string",
+      "pattern": "^ATC-[0-9]{4}-[0-9]{4,10}$",
+      "description": "Card identifier, mirrored inside payload.card_id."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "revoked", "superseded"],
+      "description": "Ledger status. revoked/superseded cards fail verification and appear in the CRL."
+    },
+    "payload": {
+      "type": "object",
+      "required": ["card_id", "schema_version", "decision_authority", "agent_id", "identity", "trust", "capabilities", "metadata"],
+      "additionalProperties": true,
+      "properties": {
+        "card_id": { "type": "string", "pattern": "^ATC-[0-9]{4}-[0-9]{4,10}$" },
+        "schema_version": { "type": "string", "const": "1.1.0" },
+        "decision_authority": {
+          "type": "string",
+          "const": "consumer",
+          "description": "The card is evidence; the consuming runtime makes the trust decision."
+        },
+        "agent_id": { "type": "string", "minLength": 3, "maxLength": 128 },
+        "agent_name": { "type": "string" },
+        "identity": {
+          "type": "object",
+          "required": ["public_key", "key_algorithm"],
+          "properties": {
+            "public_key": { "type": "string" },
+            "key_algorithm": { "type": "string", "enum": ["Ed25519"] }
+          }
+        },
+        "trust": {
+          "type": "object",
+          "description": "Sentinel evidence — review scores, audit layers, risk level. Not a verdict.",
+          "properties": {
+            "sentinel_review_score": { "type": "integer", "minimum": 0, "maximum": 10 },
+            "sentinel_score": { "type": "integer", "minimum": 0, "maximum": 10 },
+            "audit_layers_passed": { "type": "object" },
+            "composite_trust": { "type": "integer" },
+            "risk_level": { "type": "string" },
+            "certificate_id": { "type": ["string", "null"] }
+          }
+        },
+        "capabilities": {
+          "type": "object",
+          "properties": {
+            "provides": { "type": "array", "items": { "type": "string" } },
+            "protocol_language": { "type": "string" },
+            "translate": { "type": "boolean" }
+          }
+        },
+        "payment": {
+          "type": "object",
+          "properties": {
+            "method": { "type": "string" },
+            "wallet_address": { "type": ["string", "null"] }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "required": ["issued_at", "expires_at", "issuer", "revocation_url"],
+          "properties": {
+            "issued_at": { "type": "string", "format": "date-time" },
+            "expires_at": { "type": "string", "format": "date-time" },
+            "issuer": { "type": "string" },
+            "revocation_url": { "type": "string", "format": "uri" }
+          }
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "required": ["algorithm", "value", "signed_by", "signed_at"],
+      "additionalProperties": true,
+      "properties": {
+        "algorithm": { "type": "string", "const": "Ed25519 (RFC 8032)" },
+        "value": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{128}$",
+          "description": "Ed25519 signature (64 bytes, hex) over the RFC 8785 JCS canonicalization of payload."
+        },
+        "signed_by": { "type": "string" },
+        "signed_at": { "type": "string", "format": "date-time" },
+        "canonical_json": {
+          "type": "string",
+          "description": "Documentation of the canonicalization. Accepted spellings: 'RFC_8785_JCS', 'RFC 8785 JCS', 'RFC 8785 JCS (JSON Canonicalization Scheme)'."
+        },
+        "canonicalization_method": {
+          "type": "string",
+          "const": "RFC_8785_JCS",
+          "description": "Authoritative machine-readable canonicalization marker (cards re-signed 2026-09-08+)."
+        },
+        "signed_payload_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "sha256 hex of the canonical bytes — pre-check before Ed25519 verify; use it to diff canonicalizations byte-for-byte."
+        },
+        "ca_key_id": {
+          "type": "string",
+          "description": "Signing CA key id — resolve against the CA key registry (GET /api/atc?action=ca-key). Unknown ids fail closed."
+        },
+        "ca_key_fingerprint_sha256": { "type": "string" },
+        "verify_with": { "type": "string" },
+        "resigned_at": { "type": "string", "format": "date-time" },
+        "resign_reason": { "type": "string" }
+      }
+    },
+    "revoked_at": { "type": "string", "format": "date-time" },
+    "revocation_reason": { "type": "string" }
+  },
+  "$defs": {
+    "profiles": {
+      "core": {
+        "description": "The envelope in this schema. One Ed25519 signature over JCS(payload). Every verifier MUST accept it.",
+        "wire_identity": "spec_version ATC/3.0, profile core"
+      },
+      "extended": {
+        "description": "RFC-ATC-v3-Draft-00 shape: atc_version 3.0.0 + signatures[] (atc-ed25519 required, eat-cwt/w3c-vc optional) + artifact binding + UTA-ATC-V3-CREDENTIAL domain separation. Verifiers MAY support it; every extended verifier MUST accept core.",
+        "reference": "https://marketnow.site/atc/spec/SPEC-3.0-UVP.md"
+      }
+    },
+    "verification_profile": {
+      "steps": [
+        "1. Fetch the card bytes (e.g. GET /api/atc/ATC-2026-1509360.json).",
+        "2. Parse JSON; confirm envelope fields (card_id, status, payload, signature).",
+        "3. canonical = RFC 8785 JCS(payload); bytes = utf8(canonical).",
+        "4. sha256(bytes) must equal signature.signed_payload_hash (when present).",
+        "5. Ed25519-verify bytes against the CA key resolved from signature.ca_key_id via the CA key registry; unknown or retired-compromised keys fail closed.",
+        "6. Check lifecycle: status active, not expired, not in the CRL (GET /api/crl or OCSP /api/ocsp?card_id=...).",
+        "7. Consume: the trust block is evidence — the consumer decides."
+      ],
+      "fail_closed": "UNKNOWN = DENY, ERROR = DENY, EXPIRED = DENY, REVOKED = DENY"
+    }
+  }
+}
