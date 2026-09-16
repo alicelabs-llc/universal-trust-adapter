@@ -53,9 +53,9 @@
   "tools": {
     "mcp_server_tools_count": 15,
     "mcp_server_package": "marketnow-mcp",
-    "mcp_server_version": "1.10.3",
+    "mcp_server_version": "1.13.0",
     "atc_sdk_package": "agent-trust-card",
-    "atc_sdk_version": "1.1.2"
+    "atc_sdk_version": "1.3.0"
   },
   "formats": {
     "supported": [
@@ -106,9 +106,9 @@
   },
   "distribution": {
     "npm_package": "marketnow-mcp",
-    "npm_latest_version": "1.12.0",
+    "npm_latest_version": "1.13.0",
     "npm_latest_release_date": "2026-09-17",
-    "npm_versions_published": 21,
+    "npm_versions_published": 22,
     "npm_downloads_last_month": 939,
     "npm_org": "alicelabs-llc",
     "packages_on_npm": 14

@@ -1,5 +1,5 @@
 /**
- * ATC/1.4 (Unified Verification Profile) — production ledger-card verifier.
+ * ATC/3.0-core (Unified Credential Profile) — production ledger-card verifier.
  *
  * NEW in agent-trust-card v1.2.0 — closes the audit-63 fragmentation finding:
  * the real production cards in the MarketNow ledger ({card_id, status, payload
@@ -25,14 +25,14 @@ const MN_CA_KEY_REGISTRY = {
   'mn-ca-003': { spki_b64: 'MCowBQYDK2VwAyEAUWJgyMWp9oKIGwN9EG8ayz/mYYp1lcQBI58rtpOs8CM=', status: 'active' },
 };
 
-const ATC14_CANON_OK = new Set([
+const ATC30_CANON_OK = new Set([
   'RFC_8785_JCS',
   'RFC 8785 JCS',
   'RFC 8785 JCS (JSON Canonicalization Scheme)',
 ]);
 
 /**
- * Structural detection of a production ledger envelope (ATC/1.4).
+ * Structural detection of a production ledger envelope (ATC/3.0-core).
  * Used by verifyATCSync()/verifyATC() auto-dispatch and the CLI.
  *
  * @param {object} doc
@@ -54,7 +54,7 @@ export function isLedgerCard(doc) {
 }
 
 /**
- * Verify a production ledger card (ATC/1.4 envelope) — real Ed25519,
+ * Verify a production ledger card (ATC/3.0-core envelope) — real Ed25519,
  * registry-aware trust anchors, fail-closed.
  *
  * @param {object} card — {card_id, status, payload, signature}
@@ -73,46 +73,46 @@ export function verifyLedgerCard(card, options = {}) {
   if (!isLedgerCard(card)) {
     return {
       valid: false,
-      format: 'ATC/1.4',
+      format: 'ATC/3.0-core',
       errors: ['not a production ledger envelope — expected {card_id, status, payload (schema_version 1.x), signature}'],
       warnings,
       controls_passed: [],
-      controls_failed: ['ATC14-ENVELOPE'],
+      controls_failed: ['ATC30-ENVELOPE'],
       card_id: card && card.card_id ? card.card_id : null,
     };
   }
-  controls_passed.push('ATC14-ENVELOPE');
+  controls_passed.push('ATC30-ENVELOPE');
 
   const p = card.payload;
   const sig = card.signature;
 
   // Payload structure
   if (p.card_id !== card.card_id) {
-    fail('ATC14-PAYLOAD', `card_id mismatch: envelope "${card.card_id}" vs payload "${p.card_id}"`);
+    fail('ATC30-PAYLOAD', `card_id mismatch: envelope "${card.card_id}" vs payload "${p.card_id}"`);
   } else if (!p.metadata || !p.metadata.issued_at || !p.metadata.expires_at) {
-    fail('ATC14-PAYLOAD', 'payload.metadata.{issued_at,expires_at} required');
+    fail('ATC30-PAYLOAD', 'payload.metadata.{issued_at,expires_at} required');
   } else if (!p.agent_id) {
-    fail('ATC14-PAYLOAD', 'payload.agent_id required');
+    fail('ATC30-PAYLOAD', 'payload.agent_id required');
   } else {
-    controls_passed.push('ATC14-PAYLOAD');
+    controls_passed.push('ATC30-PAYLOAD');
   }
 
   // Canonicalization documentation
   const canonDoc = sig.canonicalization_method || sig.canonical_json || '';
-  if (canonDoc && !ATC14_CANON_OK.has(String(canonDoc).trim())) {
-    fail('ATC14-CANON', `unsupported documented canonicalization: ${canonDoc}`);
+  if (canonDoc && !ATC30_CANON_OK.has(String(canonDoc).trim())) {
+    fail('ATC30-CANON', `unsupported documented canonicalization: ${canonDoc}`);
   } else {
     if (!canonDoc) warnings.push('no canonicalization field — assuming RFC 8785 JCS');
-    controls_passed.push('ATC14-CANON');
+    controls_passed.push('ATC30-CANON');
   }
 
   // Lifecycle
   if (card.status && card.status !== 'active') {
-    fail('ATC14-LIFECYCLE', `card status is ${card.status} (revocation path — check the CRL/OCSP)`);
+    fail('ATC30-LIFECYCLE', `card status is ${card.status} (revocation path — check the CRL/OCSP)`);
   } else if (p.metadata?.expires_at && Date.parse(p.metadata.expires_at) < Date.now()) {
-    fail('ATC14-LIFECYCLE', `card expired at ${p.metadata.expires_at}`);
+    fail('ATC30-LIFECYCLE', `card expired at ${p.metadata.expires_at}`);
   } else {
-    controls_passed.push('ATC14-LIFECYCLE');
+    controls_passed.push('ATC30-LIFECYCLE');
   }
 
   // Crypto: JCS(payload) → sha256 pre-check → Ed25519 against resolved anchor
@@ -128,8 +128,8 @@ export function verifyLedgerCard(card, options = {}) {
 
     if (sig.signed_payload_hash) {
       hash_valid = canonical_sha256 === sig.signed_payload_hash;
-      if (hash_valid) controls_passed.push('ATC14-HASH');
-      else fail('ATC14-HASH', 'sha256(canonical payload) does not match signature.signed_payload_hash');
+      if (hash_valid) controls_passed.push('ATC30-HASH');
+      else fail('ATC30-HASH', 'sha256(canonical payload) does not match signature.signed_payload_hash');
     } else {
       warnings.push('signed_payload_hash absent — hash pre-check skipped');
     }
@@ -144,9 +144,9 @@ export function verifyLedgerCard(card, options = {}) {
       const claimed = sig.ca_key_id || 'mn-ca-003';
       const entry = MN_CA_KEY_REGISTRY[claimed];
       if (!entry) {
-        fail('ATC14-ANCHOR', `unknown CA key id "${claimed}" — resolve against GET /api/atc?action=ca-key (fail-closed)`);
+        fail('ATC30-ANCHOR', `unknown CA key id "${claimed}" — resolve against GET /api/atc?action=ca-key (fail-closed)`);
       } else if (entry.status === 'retired-compromised') {
-        fail('ATC14-ANCHOR', `signature claims CA key ${claimed}, which is retired-compromised — DO NOT verify against it`);
+        fail('ATC30-ANCHOR', `signature claims CA key ${claimed}, which is retired-compromised — DO NOT verify against it`);
       } else {
         if (entry.status === 'retired') warnings.push(`CA key ${claimed} is retired (routine rotation) — signature verifies as historical evidence`);
         anchorPub = createPublicKey({ key: Buffer.from(entry.spki_b64, 'base64'), format: 'der', type: 'spki' });
@@ -157,15 +157,15 @@ export function verifyLedgerCard(card, options = {}) {
     if (anchorPub) {
       const sigHex = String(sig.value || '');
       if (!/^[0-9a-f]{128}$/.test(sigHex)) {
-        fail('ATC14-SIGNATURE', 'signature.value must be 64 bytes as 128 hex chars');
+        fail('ATC30-SIGNATURE', 'signature.value must be 64 bytes as 128 hex chars');
       } else {
         signature_valid = edVerify(null, canonicalBytes, anchorPub, Buffer.from(sigHex, 'hex'));
-        if (signature_valid) controls_passed.push('ATC14-SIGNATURE');
-        else fail('ATC14-SIGNATURE', `Ed25519 signature verification failed against ${trust_anchor}`);
+        if (signature_valid) controls_passed.push('ATC30-SIGNATURE');
+        else fail('ATC30-SIGNATURE', `Ed25519 signature verification failed against ${trust_anchor}`);
       }
     }
   } catch (e) {
-    fail('ATC14-CRYPTO', `verification error: ${String(e && e.message ? e.message : e)}`);
+    fail('ATC30-CRYPTO', `verification error: ${String(e && e.message ? e.message : e)}`);
   }
 
   controls_passed.sort();
@@ -173,8 +173,8 @@ export function verifyLedgerCard(card, options = {}) {
 
   return {
     valid: errors.length === 0,
-    format: 'ATC/1.4 (production ledger envelope)',
-    spec_version: 'ATC/1.4',
+    format: 'ATC/3.0-core (production ledger envelope)',
+    spec_version: 'ATC/3.0', profile: 'core',
     controls_passed,
     controls_failed,
     errors,

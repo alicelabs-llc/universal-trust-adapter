@@ -96,7 +96,7 @@ export async function handleTrust(req, res) {
         uts_version: '2.0.0',
         total_formats: 8,
         formats: [
-          { id: 'atc-v3', name: 'Agent Trust Card v3', version: '3.0.0', status: 'stable', algorithm: 'Ed25519 (RFC 8032)' },
+          { id: 'atc-v3', name: 'Agent Trust Card v3 (ATC/3.0-extended; core = production envelope)', version: '3.0.0', status: 'stable', algorithm: 'Ed25519 (RFC 8032)' },
           { id: 'jwt', name: 'JWT (OAuth/OIDC)', version: 'RFC 7519', status: 'stable', algorithm: 'RS256 / ES256 / EdDSA' },
           { id: 'w3c-vc', name: 'W3C Verifiable Credential', version: '2.0', status: 'stable', algorithm: 'Ed25519Signature2020' },
           { id: 'a2a-card', name: 'Google A2A Agent Card', version: '1.0', status: 'stable', algorithm: 'Ed25519Signature2020' },
@@ -188,7 +188,7 @@ export async function handleTrust(req, res) {
       pipeline: '12 stages: PARSE → DETECT → SCHEMA → CRYPTO → ISSUER → KEY_BINDING → POP → PROVENANCE → LIFECYCLE → EVIDENCE → POLICY → DECISION',
       golden_rule: 'UNKNOWN = DENY, ERROR = DENY, EXPIRED = DENY, REVOKED = DENY',
       formats_available: [
-        { id: 'atc-v3', name: 'Agent Trust Card v3', version: '3.0.0', status: 'stable', algorithm: 'Ed25519 (RFC 8032)' },
+        { id: 'atc-v3', name: 'Agent Trust Card v3 (ATC/3.0-extended; core = production envelope)', version: '3.0.0', status: 'stable', algorithm: 'Ed25519 (RFC 8032)' },
         { id: 'jwt', name: 'JWT (OAuth/OIDC)', version: 'RFC 7519', status: 'stable', algorithm: 'RS256 / ES256 / EdDSA' },
         { id: 'w3c-vc', name: 'W3C Verifiable Credential', version: '2.0', status: 'stable', algorithm: 'Ed25519Signature2020' },
         { id: 'a2a-card', name: 'Google A2A Agent Card', version: '1.0', status: 'stable', algorithm: 'Ed25519Signature2020' },
@@ -573,7 +573,7 @@ function atcV3ToUTS(cred) {
     capabilities: { provides: cred.capabilities?.provides || [], requires: cred.capabilities?.requires || [], protocols: cred.capabilities?.protocols || ['mcp'] },
     provenance: { source: 'marketnow', original_format: 'atc-v3', binding_hash: cred.artifact_binding?.binding_hash },
     lifecycle: { issued_at: cred.lifecycle?.issued_at, expires_at: cred.lifecycle?.expires_at, revoked: cred.lifecycle?.revoked || false, version: cred.atc_version || '3.0.0' },
-    format: { type: 'atc-v3', version: cred.atc_version || '3.0.0', raw: cred },
+    format: { type: 'atc-v3', version: cred.atc_version || '3.0.0', canonical_spec: 'ATC/3.0-extended', raw: cred },
     warnings: [],
   };
 }
@@ -632,7 +632,7 @@ function verifyATCv3(cred, caKey) {
   }
 
   if (sig.value === '00'.repeat(64)) warnings.push('signature is placeholder — use @marketnow/trust-core for real verification');
-  return { valid: issues.length === 0, format: 'atc-v3', uts: atcV3ToUTS(cred), issues, warnings, verified_by: { algorithm: 'Ed25519 (RFC 8032)', trust_anchor: trustAnchorId, canonicalization: 'RFC 8785 JCS' } };
+  return { valid: issues.length === 0, format: 'atc-v3', canonical_spec: 'ATC/3.0-extended', spec_version: 'ATC/3.0', uts: atcV3ToUTS(cred), issues, warnings, verified_by: { algorithm: 'Ed25519 (RFC 8032)', trust_anchor: trustAnchorId, canonicalization: 'RFC 8785 JCS' } };
 }
 
 // ============================================================================
@@ -796,9 +796,9 @@ function atcToUTS(card) {
     identity: { public_key: id.public_key, key_algorithm: id.key_algorithm || 'Ed25519', key_id: sig.ca_key_id },
     trust: { score: t.sentinel_review_score || 0, confidence: t.risk_level === 'low' ? 'high' : 'medium', evidence, assessor: meta.issuer || 'MarketNow', assessed_at: meta.issued_at, expires_at: meta.expires_at },
     capabilities: { provides: cap.provides || [], requires: [], protocols: [cap.protocol_language || 'mcp'] },
-    provenance: { source: 'marketnow', original_signature_hash: sig.evidence_hash, original_format: 'atc-v2' },
+    provenance: { source: 'marketnow', original_signature_hash: sig.evidence_hash, original_format: 'atc-v2', canonical_spec: 'ATC/3.0-core' },
     lifecycle: { issued_at: meta.issued_at, expires_at: meta.expires_at, revoked: card.status === 'revoked', version: p.schema_version || '2.0.0' },
-    format: { type: 'atc-v2', version: p.schema_version || '2.0.0', raw: card },
+    format: { type: 'atc-v2', version: p.schema_version || '2.0.0', canonical_spec: 'ATC/3.0-core', raw: card },
     warnings,
   };
 }
@@ -906,6 +906,8 @@ function verifyATC(card, caKey) {
   return {
     valid: issues.length === 0 && signatureValid === true,
     format: 'atc-v2',
+    canonical_spec: 'ATC/3.0-core',
+    spec_version: 'ATC/3.0',
     uts: atcToUTS(card),
     issues,
     warnings,

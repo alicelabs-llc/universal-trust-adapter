@@ -99,7 +99,7 @@ import {
 
 // ATC/1.0 spec verifier (NEW in v1.10.0)
 import { verifyATC as verifyATCSpec } from './lib/atc-verify.mjs';
-// ATC/1.4 unified: production-envelope verifier (ledger cards) — NEW in v1.12.0
+// ATC/3.0-core unified: production-envelope verifier (ledger cards) — v1.12.0 (interim 1.4 label), re-versioned v1.13.0
 import { verifyLedgerCard } from './lib/atc-verify.mjs';
 
 const API_BASE = 'https://marketnow.site/api';
@@ -272,7 +272,7 @@ async function fetchOwaspCompliance(args) {
       install: skill.install || null,
       page_url: `https://marketnow.site/skill/${skill.id}`,
       fingerprint_how_to: 'Run marketnow_fingerprint_tool with the server\'s tools/list output to pin (TFP-1.0) and later diff for drift.',
-      note: 'Per-skill capability manifests ship inside Agent Trust Cards (see marketnow_verify_trust / ATC/1.4).',
+      note: 'Per-skill capability manifests ship inside Agent Trust Cards (see marketnow_verify_trust / ATC/3.0-core).',
     },
   };
 }
@@ -882,7 +882,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: 'marketnow_verify_atc_spec',
       description:
-        'Verify ANY Agent Trust Card — DUAL FORMAT (ATC/1.4 unified, since v1.12.0). (1) Production ledger envelopes {card_id, status, payload (schema_version 1.1.0), signature}: real Ed25519 verification against the embedded MarketNow CA key registry (rotation-aware: ca-key-001 retired, mn-ca-002 retired-compromised = fail-closed, mn-ca-003 active), RFC 8785 JCS canonicalization, sha256 signed_payload_hash pre-check, lifecycle status. These are the cards you get from marketnow_verify_trust and GET /api/atc/<id>.json. (2) ATC/1.0 spec cards (spec_version "ATC/1.0", any issuer): the original 8-control conformance verifier (ATC-001 Identity through ATC-008 Expiration). Self-contained — no network calls, node:crypto + RFC 8785 JCS + Ed25519 (RFC 8032). Use this BEFORE trusting an ATC from any source.',
+        'Verify ANY Agent Trust Card — DUAL FORMAT (ATC/3.0 unified, since v1.13.0). (1) Production ledger envelopes {card_id, status, payload (schema_version 1.1.0), signature}: real Ed25519 verification against the embedded MarketNow CA key registry (rotation-aware: ca-key-001 retired, mn-ca-002 retired-compromised = fail-closed, mn-ca-003 active), RFC 8785 JCS canonicalization, sha256 signed_payload_hash pre-check, lifecycle status. These are the cards you get from marketnow_verify_trust and GET /api/atc/<id>.json. (2) ATC/1.0 spec cards (spec_version "ATC/1.0", any issuer): the original 8-control conformance verifier (ATC-001 Identity through ATC-008 Expiration). Self-contained — no network calls, node:crypto + RFC 8785 JCS + Ed25519 (RFC 8032). Use this BEFORE trusting an ATC from any source.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -1023,7 +1023,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           err.code = 'INVALID_ARGUMENT';
           throw err;
         }
-        // ATC/1.4 unified (v1.12.0): if the document is a production ledger
+        // ATC/3.0-core unified (v1.12.0 interim label, v1.13.0): if the document is a production ledger
         // envelope {card_id, status, payload, signature}, verify it with real
         // Ed25519 against the MarketNow CA registry (embedded, offline).
         // Otherwise fall through to the ATC/1.0 spec conformance path.
