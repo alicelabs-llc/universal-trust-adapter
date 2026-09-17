@@ -1,7 +1,16 @@
 {
   "service": "MarketNow",
-  "current_version": "5.9.2",
+  "current_version": "5.9.3",
   "changelog": [
+    {
+      "version": "5.9.3",
+      "date": "2026-09-17",
+      "changes": [
+        "FIRST EXTERNAL SUBMISSION MERGED \u2014 aria-icons by Leul Aria (leularia.com), submitted through the public POST /api/submit endpoint (mn-sub-260915-534e91). 340k SVG icons: browser, CLI that writes icons as source files into the project, and a stdio MCP server for Cursor/Claude (12 tools). The auto-indexed npm entry is replaced by the L2-reviewed community entry \u2014 the total stays 68,387 (replacement, not an addition).",
+        "L2 REVIEW (static + dynamic, 2026-09-17): claims verified live \u2014 repo github.com/LeulAria/Aria-Icons 200, npm aria-icons@0.1.0 200 (published 2026-08-28), homepage icons.leularia.com 200. The shipped tarball (sha256 6a0f75ebdd7f\u2026) has no install scripts, only bundled well-known deps (commander, zod, chalk, @clack/prompts, MCP SDK); child_process is limited to commander's --fork self re-execution; a single env var is read (ARIA_ICONS_API) and a single network call site exists \u2014 the author's own API. In the dynamic sandbox the CLI's search/get/add/doctor commands behaved as documented, writes were confined to the project tree plus ~/.aria-icons/preferences.json (local usage history), and the MCP server answered initialize (protocol 2024-11-05), tools/list (12 tools), ping and a live tools/call. Trust raised 48 \u2192 62; risk_level yellow (package age <30d remains a factual factor).",
+        "Honesty note: the submission declared skill version 1.0.0; the catalog records the live npm artifact version (0.1.0, the only version ever published). The remote hosted MCP at icons.leularia.com/api/mcp is disclosed in the entry docs."
+      ]
+    },
     {
       "version": "5.9.2",
       "date": "2026-09-16",
