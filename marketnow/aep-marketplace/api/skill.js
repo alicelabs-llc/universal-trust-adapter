@@ -1,5 +1,5 @@
 // MarketNow per-skill public page — SEO + schema.org (Lulu parity)
-// catalog-version 2026-09-12: 68,387 entries (5.9.2: +humanmirror-x402-catalog (first vendor-priced x402 listing, L2-reviewed))
+// catalog-version 2026-09-12: 68,387 entries (5.9.3: aria-icons L2 merge — first external submission, replaces npm-indexed entry))
 // =================================================================
 // GET /api/skill?slug=<slug>   (rewrite: /s/:slug -> here)
 //

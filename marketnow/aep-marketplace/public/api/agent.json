@@ -164,7 +164,7 @@
     "subscription_fee": 0,
     "explanation": "Buyers never pay MarketNow. All 68,387 skills are free to install."
   },
-  "generated_at": "2026-09-16T20:00:15.000Z",
+  "generated_at": "2026-09-17T02:53:30.038Z",
   "metadata": {
     "stats_source": "https://marketnow.site/api/stats.json",
     "sentinel_methodology": "https://marketnow.site/security/sentinel-v3.0",
