@@ -217,7 +217,7 @@ for (const s of skills) {
       ...(s.source?.repo_url ? { repo_url: s.source.repo_url } : {}),
       ...(s.source?.curated ? { curated: true } : {}),
     };
-  } else if (s.id && (s.id.startsWith('mn-sm-') || s.id.startsWith('mn-ofr-') || s.id.startsWith('mn-cr-') || s.id.startsWith('mn-pyc-') || s.id.startsWith('mn-sm2-') || s.id.startsWith('mn-dh-') || s.id.startsWith('mn-sub-'))) {
+  } else if (s.id && (s.id.startsWith('mn-sm-') || s.id.startsWith('mn-ofr-') || s.id.startsWith('mn-cr-') || s.id.startsWith('mn-pyc-') || s.id.startsWith('mn-sm2-') || s.id.startsWith('mn-dh-') || s.id.startsWith('mn-sub-') || s.id.startsWith('mn-own-'))) {
     // v3/v4 expansion sources — PRESERVE the merged source object as-is:
     //   mn-sm-* / mn-sm2-*  smithery registry (use_count/verified)
     //   mn-ofr-* official MCP registry (publisher-verified remotes)
@@ -225,6 +225,7 @@ for (const s of skills) {
     //   mn-pyc-* PyPI community tier (low adoption signal, trust capped 55)
     //   mn-dh-*  Docker Hub (stars/pulls — docker pull = riesgo amarillo, aislado)
     //   mn-sub-* community submission (POST /api/submit — Sentinel L1-sub certified)
+    //   mn-own-* first-party skill (developed + L2-reviewed by AliceLabs core team)
     s.source = {
       ...s.source,
       url: existingUrl || s.source?.url,

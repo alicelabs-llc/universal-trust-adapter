@@ -1,7 +1,16 @@
 {
   "service": "MarketNow",
-  "current_version": "5.9.3",
+  "current_version": "5.9.4",
   "changelog": [
+    {
+      "version": "5.9.4",
+      "date": "2026-09-18",
+      "changes": [
+        "FIRST FIRST-PARTY SKILL SYNCED TO REPO \u2014 universal-memory (mn-own-00001), the persistent local memory for ANY AI agent (one shared JSONL store across Claude Code, Cursor, Codex, Copilot, Windsurf, Gemini CLI, Cline and every file-capable agent; dual single-file CLI \u2014 memory.cjs Node >= 18 and memory.py Python >= 3.8 \u2014 with verified cross-CLI interoperability; zero dependencies, zero network calls, real deletion). Live at marketnow.site/skills/universal-memory/ since 2026-09-17 as tier 'official', trust 92, L2-reviewed. This commit closes the repo<->production drift: the entry and the skill files are now in the source of truth, so future deploys from main will not lose it.",
+        "Generator hardening: generate_skills.cjs source-normalization chain now recognizes the mn-own-* prefix (first-party) \u2014 preserves source.type 'first-party' instead of rewriting it to 'github'.",
+        "Catalog: 68,387 -> 68,388. No other entries touched \u2014 verified: regenerated skills.json / skills-lite.json match the live production catalog (same IDs, same sequence, same um entry)."
+      ]
+    },
     {
       "version": "5.9.3",
       "date": "2026-09-17",
