@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>अजनबी का घोषणापत्र · MarketNow</title>
+<meta name="description" content="सदस्यता माँगने वाला भरोसा भरोसा नहीं है। वह एक मेहमान-सूची है।">
+<link rel="icon" type="image/svg+xml" href="https://www.marketnow.site/favicon.svg">
+<link rel="canonical" href="https://alicelabs-llc.github.io/universal-trust-adapter/manifesto/hi/">
+<style>
+:root{--mint:#00F299;--blue:#00d1ff;--purple:#A892FF;--bg:#0a0a0b;--panel:rgba(255,255,255,.03);
+--border:rgba(255,255,255,.05);--txt:#d4d4d8;--dim:#71717a;--red:#f87171;
+--mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,'Liberation Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;overflow-x:hidden}
+::selection{background:rgba(0,242,153,.3);color:#fff}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(0,242,153,.3);border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:rgba(0,242,153,.5)}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+
+/* ── navbar (Navbar.jsx: sticky glass-panel border-b) ── */
+.nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,11,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 24px}
+.brand{display:flex;align-items:center;gap:8px}
+.brand:hover{text-decoration:none}
+.logo{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#00F299,#00d1ff);display:flex;align-items:center;justify-content:center;color:#000;font-weight:700;font-size:18px;transition:transform .2s}
+.brand:hover .logo{transform:scale(1.05)}
+.brand-text{color:#fff;font-weight:700;font-size:14px;letter-spacing:-.01em}
+.brand-text .mint{color:var(--mint)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{color:var(--dim);font-size:12px;font-weight:500;letter-spacing:.02em;padding:8px 10px;border-radius:8px;transition:color .2s}
+.nav-links a:hover{color:#fff;text-decoration:none}
+.nav-links a.active{color:#fff}
+.nav-links a .chev{font-size:8px;margin-left:4px;opacity:.6}
+.nav-right{display:flex;align-items:center;gap:10px}
+.api-pill{display:flex;align-items:center;gap:6px;padding:6px 16px;border:1px solid rgba(0,242,153,.3);border-radius:99px;color:var(--mint);font-family:var(--mono);font-size:12px;letter-spacing:.05em;transition:all .3s}
+.api-pill:hover{background:rgba(0,242,153,.1);border-color:rgba(0,242,153,.5);text-decoration:none}
+.btn-signin{padding:6px 16px;background:var(--mint);color:#000;font-weight:700;font-size:12px;border-radius:8px;transition:background .2s}
+.btn-signin:hover{background:rgba(0,242,153,.9);text-decoration:none}
+@media(max-width:1023px){.nav-links{display:none}}
+
+/* ── hero (UTA.jsx §1: grid 64px, centrado, max-w-5xl) ── */
+.hero{position:relative;text-align:center;max-width:1024px;margin:0 auto;padding:96px 24px 48px}
+.hero::before{content:"";position:absolute;inset:0;background:
+ linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
+.hero>*{position:relative}
+.orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.orb-mint{width:500px;height:500px;background:rgba(0,242,153,.05);top:-150px;left:-100px}
+.orb-blue{width:450px;height:450px;background:rgba(0,209,255,.05);top:20%;right:-150px}
+.orb-purple{width:400px;height:400px;background:rgba(168,146,255,.04);bottom:-100px;left:30%}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:99px;background:rgba(0,209,255,.1);border:1px solid rgba(0,209,255,.2);margin-bottom:24px}
+.pill .txt{color:var(--blue);font-family:var(--mono);font-size:12px;letter-spacing:.08em}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
+.dot.mint{background:var(--mint)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+h1{font-size:clamp(32px,6vw,60px);font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
+h1 .accent{color:var(--mint)}
+.tagline{font-size:clamp(18px,3vw,24px);color:var(--blue);font-weight:700;margin-bottom:24px}
+.desc{color:#d4d4d8;font-size:18px;line-height:1.625;max-width:672px;margin:0 auto 32px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:768px;margin:0 auto 32px}
+@media(min-width:768px){.stats{grid-template-columns:repeat(6,1fr)}}
+.stat{padding:12px;border-radius:12px;background:rgba(0,0,0,.4);border:1px solid var(--border)}
+.stat .v{color:var(--mint);font-size:20px;font-weight:700;font-family:var(--mono)}
+.stat .l{color:var(--dim);font-size:10px;margin-top:4px}
+.btn-row{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;margin-bottom:24px}
+@media(min-width:640px){.btn-row{flex-direction:row}}
+.btn{padding:12px 24px;font-size:14px;font-weight:700;border-radius:12px;transition:all .2s}
+.btn:hover{text-decoration:none}
+.btn-mint{background:var(--mint);color:#000}.btn-mint:hover{background:rgba(0,242,153,.9)}
+.btn-blue{border:1px solid rgba(0,209,255,.3);background:rgba(0,209,255,.1);color:var(--blue)}.btn-blue:hover{background:rgba(0,209,255,.2)}
+.btn-white{border:1px solid rgba(255,255,255,.1);color:#fff;font-weight:500}.btn-white:hover{background:rgba(255,255,255,.05)}
+.chip{display:inline-block;padding:8px 16px;border-radius:10px;background:rgba(0,0,0,.4);border:1px solid var(--border)}
+.chip code{font-family:var(--mono);font-size:12px;color:var(--mint)}
+.chip code.blue{color:var(--blue)}
+.chip .sep{color:var(--dim);font-size:12px;margin:0 8px}
+
+/* ── secciones (UTA.jsx: max-w-5xl premium-card) ── */
+section.blk{max-width:1024px;margin:0 auto;padding:0 24px 56px}
+.premium{background:var(--panel);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:40px;padding:32px;transition:all .5s cubic-bezier(.4,0,.2,1)}
+.premium:hover{border-color:rgba(0,242,153,.3);box-shadow:0 0 50px rgba(0,242,153,.05)}
+@media(max-width:640px){.premium{border-radius:24px;padding:24px}}
+h2{color:#fff;font-size:24px;font-weight:700;margin-bottom:16px;letter-spacing:-.01em}
+h3{color:#fff;font-size:15px;font-weight:700;margin-bottom:6px}
+p{line-height:1.625;margin-bottom:14px}
+.body{color:#d4d4d8;font-size:14px}
+.note{color:var(--dim);font-size:13px}
+.eyebrow{color:var(--blue);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+
+/* tarjetas internas (UTA.jsx §4: bg-black/40 border blue/20) */
+.icards{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:768px){.icards{grid-template-columns:repeat(3,1fr)}}
+.icard{padding:20px;border-radius:12px;background:rgba(0,0,0,.4);border:1px solid rgba(0,209,255,.2);transition:border-color .2s}
+.icard:hover{border-color:rgba(0,209,255,.5)}
+.icard .path{color:var(--blue);font-family:var(--mono);font-size:11px;margin-bottom:8px;display:block}
+.icard h3 a{color:#fff}.icard h3 a:hover{color:var(--blue);text-decoration:none}
+.icard p{color:var(--dim);font-size:12.5px;line-height:1.5;margin:0}
+.icard .go{color:var(--mint);font-size:12px;font-weight:500;display:inline-block;margin-top:12px}
+.icard .go:hover{text-decoration:underline}
+
+/* tablas */
+.tblwrap{border-radius:12px;background:rgba(0,0,0,.4);border:1px solid var(--border);overflow-x:auto;margin:16px 0 8px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:560px}
+@media(max-width:640px){
+  table{min-width:0;font-size:12.5px}
+  tr.th-row{display:none}
+  table tr{display:block;padding:12px 14px;border-bottom:1px solid var(--border)}
+  table tr:last-child{border-bottom:none}
+  td{display:block;border:none;padding:2px 0;overflow-wrap:break-word;word-break:break-word}
+  td::before{content:attr(data-th)" · ";display:inline;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim)}
+  td .mono,td>a.mono{word-break:break-all}.hash{font-size:11px}
+}
+th{font-family:var(--mono);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);text-align:left;padding:12px 14px;border-bottom:1px solid var(--border)}
+td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top;color:#d4d4d8}
+tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:rgba(255,255,255,.03)}
+.mono{font-family:var(--mono);font-size:12.5px}
+.hash{font-family:var(--mono);font-size:12px;color:var(--purple);word-break:break-all}
+.ok{color:var(--mint)}.bad{color:var(--red)}
+.tagchip{display:inline-block;padding:2px 8px;border-radius:6px;background:rgba(255,255,255,.05);color:#d4d4d8;font-family:var(--mono);font-size:10px}
+
+/* código (UTA.jsx chip: bg-black/40 + white/5) */
+pre{background:rgba(0,0,0,.6);border:1px solid var(--border);border-radius:12px;padding:16px 18px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;font:13px/1.7 var(--mono);margin:12px 0}
+pre .c{color:var(--dim)}
+pre .cmd{color:var(--mint)}
+ul.pts{margin:0 0 14px 18px}ul.pts li{margin-bottom:8px;line-height:1.5;font-size:14px}
+ul.files{margin:0 0 4px 18px}ul.files li{margin-bottom:6px;font-size:13px}
+.kv{display:grid;grid-template-columns:180px 1fr;gap:6px 16px;font-size:13.5px;margin:12px 0}
+.kv b{color:var(--dim);font-weight:500;font-family:var(--mono);font-size:11px;padding-top:2px}
+@media(max-width:640px){.kv{grid-template-columns:1fr}}
+
+/* footer (site: links centrados + copyright) */
+footer{border-top:1px solid var(--border);margin-top:32px;padding:40px 24px;text-align:center}
+.f-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-bottom:20px}
+.f-links a{color:var(--dim);font-size:13px}
+.f-links a:hover{text-decoration:underline;color:#fff}
+.f-links a.mint{color:var(--mint)}
+.copy{color:#52525b;font-size:12px}
+.crumb{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:#a1a1aa}
+.crumb a{color:#a1a1aa}.crumb a:hover{color:var(--mint)}
+.crumbwrap{max-width:1024px;margin:24px auto 0;padding:0 24px;text-align:center}
+</style>
+
+<style>
+.langbar-wrap{display:flex;justify-content:center;margin:20px 0 8px}
+.langbar{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;max-width:720px}
+.langbar a{padding:5px 12px;border:1px solid rgba(255,255,255,.08);border-radius:99px;color:var(--dim);font-size:11.5px;font-family:ui-sans-serif,system-ui,sans-serif;transition:all .2s}
+.langbar a:hover{color:#fff;border-color:rgba(0,242,153,.4);text-decoration:none}
+.langbar a.on{color:var(--mint);border-color:rgba(0,242,153,.5);background:rgba(0,242,153,.08)}
+.plist{display:flex;flex-direction:column;gap:14px;margin-top:18px}
+.prow{padding:16px 18px;border:1px solid var(--border);border-radius:14px;background:var(--panel);transition:border-color .2s}
+.prow:hover{border-color:rgba(0,242,153,.35)}
+.prow h3{color:#fff;font-size:15.5px;font-weight:700;margin-bottom:6px;letter-spacing:-.01em}
+.prow p{font-size:14px;line-height:1.65;color:var(--txt)}
+[dir="rtl"] .prow{text-align:right}
+.icard .t{color:#fff;font-weight:600;font-size:14px;margin-bottom:4px}
+</style>
+</head>
+<body>
+<div class="orb orb-mint"></div><div class="orb orb-blue"></div><div class="orb orb-purple"></div>
+
+<nav class="nav"><div class="nav-inner">
+  <a class="brand" href="https://www.marketnow.site/"><div class="logo">M</div><span class="brand-text">MARKET<span class="mint">NOW</span></span></a>
+  <div class="nav-links">
+    <a href="https://www.marketnow.site/registry">MARKETPLACE<span class="chev">▾</span></a>
+    <a href="https://www.marketnow.site/uta" class="active">TRUST<span class="chev">▾</span></a>
+    <a href="https://www.marketnow.site/blog">RESOURCES<span class="chev">▾</span></a>
+    <a href="https://www.marketnow.site/about">ACCOUNT<span class="chev">▾</span></a>
+  </div>
+  <div class="nav-right">
+    <a class="api-pill" href="https://www.marketnow.site/handshake"><span class="dot mint"></span>API</a>
+    <a class="btn-signin" href="https://www.marketnow.site/dashboard">SIGN IN</a>
+  </div>
+</div></nav>
+<header class="hero">
+  <div class="pill"><span class="dot"></span><span class="txt">THE STRANGER MANIFESTO · 13 LANGUAGES · RECEIPTS LIVE</span></div>
+  <h1>अजनबी का <span class="accent">घोषणापत्र</span></h1>
+  <p class="tagline">सदस्यता माँगने वाला भरोसा भरोसा नहीं है। वह एक मेहमान-सूची है।</p>
+  <div class="langbar-wrap"><div class="langbar"><a href="../ar/">العربية</a><a href="../de/">Deutsch</a><a href="../">English</a><a href="../es/">Español</a><a href="../fr/">Français</a><a href="../hi/" class="on">हिन्दी</a><a href="../it/">Italiano</a><a href="../ja/">日本語</a><a href="../ko/">한국어</a><a href="../pt/">Português</a><a href="../ru/">Русский</a><a href="../tr/">Türkçe</a><a href="../zh/">中文</a></div></div>
+  <div class="stats"><div class="stat"><div class="v">10</div><div class="l">PRINCIPLES</div></div><div class="stat"><div class="v">13</div><div class="l">LANGUAGES</div></div><div class="stat"><div class="v">1</div><div class="l">PUBLIC LOG</div></div><div class="stat"><div class="v">0</div><div class="l">TRUST REQUIRED</div></div></div>
+  <div class="btn-row"><a class="btn btn-mint" href="#receipts">Verify everything</a><a class="btn btn-blue" href="https://github.com/alicelabs-llc/universal-trust-adapter" target="_blank" rel="noopener">GitHub</a><a class="btn btn-white" href="https://www.marketnow.site/uta/conformance/">Conformance suite</a></div>
+</header>
+<main style="position:relative;z-index:1">
+<section class="blk" id="principles"><div class="premium">
+  <div class="eyebrow">The rules we build by</div>
+  <h2>10 principles</h2>
+  <div class="plist"><div class="prow"><h3>1. एक अजनबी सत्यापित कर सके।</h3><p>अगर सबूत के लिए नेटवर्क के अंदर होना ज़रूरी है — सदस्यता, कुंजी, रिश्ता — तो वह अनुमति है, सबूत नहीं। अनुमति ठीक है। उसे भरोसा मत कहो।</p></div><div class="prow"><h3>2. बंद होकर असफल हो (fail closed)।</h3><p>जब सबूत ग़ायब हो, बासी हो, या जाँचा न जा सके — जवाब <i>नहीं</i> है। सबूत का अभाव बेगुनाही का सबूत नहीं है; वह एक अनुत्तरित सवाल है — और अनुत्तरित सवाल पैसे को अधिकार नहीं देते।</p></div><div class="prow"><h3>3. जाँचने वाले की जाँच।</h3><p>वेरिफ़ायर दावे का हिस्सा है। जिस स्कोरिंग इंजन को कोई नहीं छेड़ता, वह अप्रमाणित प्रमाण है। हम अपने रनर को उन म्यूटेंट्स से भिड़ाते हैं जो उसे हराना चाहते हैं — और नतीजे प्रकाशित करते हैं।</p></div><div class="prow"><h3>4. सच बाइट्स से निकलता है।</h3><p>मेटाडेटा झूठ बोल सकता है। साइडकार झूठ बोल सकता है। डैशबोर्ड झूठ बोल सकते हैं। कैननिकल बाइट्स पर हस्ताक्षर को बहलाकर पै नहीं बदला जा सकता। सच निकाला जाता है, घोषित नहीं।</p></div><div class="prow"><h3>5. ताज़गी दोतरफ़ा है।</h3><p>भविष्य की तारीख़ वाला क्रेडेंशियल उतना ही टूटा है जितना अतीत का। खिड़की की निचली और ऊपरी सीमा दोनों हैं। दोनों जाँचो — या कुछ नहीं।</p></div><div class="prow"><h3>6. वापसी (revocation) जारी करने का हिस्सा है।</h3><p>वापस कैसे लें, यह बताए बिना सबूत प्रकाशित करना — आधा वादा प्रकाशित करना है। कुंजियाँ, रनर और नीतियाँ revoke हो सकनी चाहिए — और एक डिस्कनेक्टेड वेरिफ़ायर एक ही हस्ताक्षरित नोट से अपडेट हो सके।</p></div><div class="prow"><h3>7. एंकर उसके नियंत्रण से बाहर रहते हैं जो एंकर गाड़ता है।</h3><p>क्या प्रकाशित हुआ, उसका रिकॉर्ड वहाँ रहना चाहिए जहाँ प्रकाशक उसे बदल न सके। हम हर रिलीज़ को सार्वजनिक पारदर्शिता लॉग (Rekor / Sigstore) में एंकर करते हैं, जिसके inclusion प्रूफ़ उन कुंजियों से जाँचे जाते हैं जो हमारे पास नहीं हैं।</p></div><div class="prow"><h3>8. न कुंजी, न दरवाज़ा।</h3><p>API key माँगने वाला सत्यापन बंद किया जा सकता है, महँगा किया जा सकता है, या लॉग किया जा सकता है। सत्यापन ऑफ़लाइन, बिना कुंजी, मिलीसेकंड में, किसी भी डिवाइस पर चलना चाहिए।</p></div><div class="prow"><h3>9. पुनरुत्पादन योग्य — वरना हुआ ही नहीं।</h3><p>अगर कोई अजनबी सार्वजनिक सोर्स से आर्टिफैक्ट दोबारा नहीं बना सकता और वही बाइट्स नहीं पा सकता, तो वह आर्टिफैक्ट आस्था की वस्तु है। हमारा हम बाइट-दर-बाइट दोबारा बनाते हैं और साबित करते हैं।</p></div><div class="prow"><h3>10. रसीदें, रोडमैप नहीं।</h3><p>वादा मार्केटिंग है। रसीद एक चेकसम है, ऐसे लॉग में जिसे कोई संपादित नहीं कर सकता। स्लाइड नहीं — कमांड दिखाओ। कोई भी हमारा ऑडिट कर सकता है। कमांड ये हैं।</p></div></div>
+</div></section><section class="blk" id="receipts"><div class="premium">
+  <div class="eyebrow">Receipts — live URLs, zero trust</div>
+  <h2>Verify everything</h2>
+  <div class="icards"><div class="icard"><div class="t">कॉन्फ़ॉर्मेंस सूट (14 वेक्टर, 24 जाँचें, 10 म्यूटेंट)</div><a href="https://www.marketnow.site/uta/conformance/" target="_blank" rel="noopener">https://www.marketnow.site/uta/conformance/</a></div><div class="icard"><div class="t">Rekor एंकर (append-only, तीसरा पक्ष)</div><a href="https://www.marketnow.site/uta/conformance/anchors/" target="_blank" rel="noopener">https://www.marketnow.site/uta/conformance/anchors/</a></div><div class="icard"><div class="t">पुनरुत्पादन योग्य बिल्ड</div><a href="https://www.marketnow.site/uta/conformance/repro/" target="_blank" rel="noopener">https://www.marketnow.site/uta/conformance/repro/</a></div><div class="icard"><div class="t">सोर्स</div><a href="https://github.com/alicelabs-llc/universal-trust-adapter" target="_blank" rel="noopener">https://github.com/alicelabs-llc/universal-trust-adapter</a></div></div>
+  <p class="note">— <b>AliceLabs / MarketNow</b>, 09-09-2026</p>
+</div></section>
+</main>
+<footer>
+  <div class="f-links">
+    <a href="https://www.marketnow.site/trust">Trust Roadmap</a><a href="https://www.marketnow.site/standards">Standards</a><a href="https://www.marketnow.site/uta" class="mint">UTA</a>
+    <a href="https://www.marketnow.site/catalog">Catalog Transparency</a><a href="https://www.marketnow.site/mandates">Mandates</a><a href="https://www.marketnow.site/pricing">Pricing</a><a href="https://www.marketnow.site/about">About</a>
+  </div>
+  <div class="copy">©2026 AliceLabs LLC · MNNC-1.0 License · Built for developers and agents</div>
+</footer>
+</body>
+</html>

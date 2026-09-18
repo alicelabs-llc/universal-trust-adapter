@@ -1,0 +1,57 @@
+{
+  "schema": "uta-rekor-anchor/1.0",
+  "log": {
+    "url": "https://rekor.sigstore.dev",
+    "operator": "Sigstore (public good instance)",
+    "log_index": 2762061972,
+    "uuid": "108e9186e8c5677a91a6963aa1e9125a7350c84e5018e60e6d374db7117011c1f67e8b4c5bf420e0",
+    "integrated_time": 1788901413,
+    "integrated_time_iso": "2026-09-08T21:03:33.000Z",
+    "log_id": "c0d23d6ad406973f9559f3ba2d1ca01f84147d8ffc5b8445c224f98b9591801d"
+  },
+  "statement": {
+    "file": "anchor-statement.json",
+    "canonical_sha256": "f6fee1fc932c266232dbfd9bd817cdca1cd9b7fefc859ba4a6b46926e5fd6a92",
+    "canonical_bytes": 1206,
+    "note": "RFC 8785-style serialization: recursive sorted keys, no whitespace, UTF-8; content is ASCII-only"
+  },
+  "countersignature": {
+    "algorithm": "ECDSA P-256 over SHA-256 (DER)",
+    "public_key_spki_pem": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE7QD3BXJFXMeXfCO6jh2Ze7CXUMgV\nNYotr3noKF7s/IHiEUJCcE2Aau+Vevf6hGVHtsAgPtfcAPjcrtpa3t3AqA==\n-----END PUBLIC KEY-----",
+    "private_key": "discarded after signing — this key can never sign again (same policy as ca-test-1)",
+    "signature_der_b64": "MEQCIFYvbd7pjYC+FoP6zz727A3jfJBAjVD+OGp45YsIM+kMAiBJpLGsb5zknysh1GDugp/xme4AiqniXhgPj0P8q7CntQ=="
+  },
+  "inclusion": {
+    "checkpoint": "rekor.sigstore.dev - 1193050959916656506\n2640157764\nULxkxPjc5hhDACWMsfHmRxSsEezQp2p0fXK4EJweLvA=\n\n— rekor.sigstore.dev wNI9ajBGAiEA6nGH+YRbm9NKxn+vkQMy4RsXpbNFhIOLbmXH7ytWDm0CIQDkzQfQmbAicmdHdbsCLC7hhNEAVtGFyAeTxT89GIAEag==\n",
+    "root_hash": "50bc64c4f8dce6184300258cb1f1e64714ac11ecd0a76a747d72b8109c1e2ef0",
+    "tree_size": 2640157764,
+    "proof_hashes": [
+      "f1ae8d4b6dab599c8fc06b4294949c49ba36de75cb1a0940d5ef647aded29607",
+      "b67f2e605bfa283b62f9d331bc73b0ae82a9abc7fd1d8e9e068b79205b59b097",
+      "68b18c0905575853e35b2590f9aeba94ed5b9a7408edebae40d8730ba5be9b07",
+      "4c88e886484fd986c6eb12eed87818f34811268f9b8383c50550fa8dd79e3215",
+      "22b17c80ef7d1d7513e9942c578ad6556b84ca6942f19b1c4a08f8960bd26254",
+      "11e1b4c2f5640ea8dd6690062b6966eba698ca3faecf626d71fe1f79578032ec",
+      "17483863695fb839ac2801ae199ace1dd61f03b55547b1155746bb529245f539",
+      "127035ccbc076e29a738f571202c5c2ac0e536ebcbae61e9f1cb0d802f03b866",
+      "52705a4e7f74d316789eee7e65a8c4c949b4c7b3a30219740c39494c143a7f3e",
+      "240cd09eff2d83bcd6a228006ef6a6c6388ae55c1d3ca52921bd52968561cc5e",
+      "bd75a6dde04f1ee74df9309d98f93feed12bbf8630fcfcdafdffaf86762141ee",
+      "dfb07b88d58d6cedb5382f3a5b16927928043db35f82a5776d1872339db1ccfb",
+      "45841ebe61ee8c569c0971047ec3691fe2cfcad8e4f36c677e2b936bdc955e9c",
+      "d0d118e580f6d7ac01b58bb8337e09305107fbd924ce3ccb88436ab3bc2cea20",
+      "e75a15b5e9906be75d7d6e28785e490b4bf7db85a5df5bd0d89395335838eecc",
+      "8133af0f43f05617ae9c1636da768eea2632c50098d8daa64f847915c77d9138",
+      "4c7a68a28c93d5a2432e7b5b64202ffcd6fcd7165d96f113ee7776519be1508a",
+      "eed0f62bc980a864cc10dacfd985d6cfbd417935903c28987770844808102f3f",
+      "79748bacba8a4b14538b148ffe4e188a6ae207696e7daa3ab6ba93aecc719728",
+      "4a775b30a56d7137a7024c22d8905f1b30fe9a17b1a75a896d1218f80d494485",
+      "c47fc30ac78b1ebf5e2a8613f2ab0e4592bbcd5744198587b95b6c56b0fde706"
+    ]
+  },
+  "verify": {
+    "entry_url": "https://rekor.sigstore.dev/api/v1/log/entries?logIndex=2762061972",
+    "rekor_public_key_url": "https://rekor.sigstore.dev/api/v1/log/publicKey",
+    "local_script": "verify-rekor.mjs"
+  }
+}

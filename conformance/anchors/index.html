@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rekor Anchors · MarketNow</title>
+<meta name="description" content="UTA conformance artifacts — canonical bytes, expected verdicts, tested runner, Rekor anchors. Verifiable by a stranger from live URLs only.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="canonical" href="https://www.marketnow.site/uta/conformance/">
+<style>
+:root{--mint:#00F299;--blue:#00d1ff;--purple:#A892FF;--bg:#0a0a0b;--panel:rgba(255,255,255,.03);
+--border:rgba(255,255,255,.05);--txt:#d4d4d8;--dim:#71717a;--red:#f87171;
+--mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,'Liberation Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;overflow-x:hidden}
+::selection{background:rgba(0,242,153,.3);color:#fff}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(0,242,153,.3);border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:rgba(0,242,153,.5)}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+
+/* ── navbar (Navbar.jsx: sticky glass-panel border-b) ── */
+.nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,11,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 24px}
+.brand{display:flex;align-items:center;gap:8px}
+.brand:hover{text-decoration:none}
+.logo{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#00F299,#00d1ff);display:flex;align-items:center;justify-content:center;color:#000;font-weight:700;font-size:18px;transition:transform .2s}
+.brand:hover .logo{transform:scale(1.05)}
+.brand-text{color:#fff;font-weight:700;font-size:14px;letter-spacing:-.01em}
+.brand-text .mint{color:var(--mint)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{color:var(--dim);font-size:12px;font-weight:500;letter-spacing:.02em;padding:8px 10px;border-radius:8px;transition:color .2s}
+.nav-links a:hover{color:#fff;text-decoration:none}
+.nav-links a.active{color:#fff}
+.nav-links a .chev{font-size:8px;margin-left:4px;opacity:.6}
+.nav-right{display:flex;align-items:center;gap:10px}
+.api-pill{display:flex;align-items:center;gap:6px;padding:6px 16px;border:1px solid rgba(0,242,153,.3);border-radius:99px;color:var(--mint);font-family:var(--mono);font-size:12px;letter-spacing:.05em;transition:all .3s}
+.api-pill:hover{background:rgba(0,242,153,.1);border-color:rgba(0,242,153,.5);text-decoration:none}
+.btn-signin{padding:6px 16px;background:var(--mint);color:#000;font-weight:700;font-size:12px;border-radius:8px;transition:background .2s}
+.btn-signin:hover{background:rgba(0,242,153,.9);text-decoration:none}
+@media(max-width:1023px){.nav-links{display:none}}
+
+/* ── hero (UTA.jsx §1: grid 64px, centrado, max-w-5xl) ── */
+.hero{position:relative;text-align:center;max-width:1024px;margin:0 auto;padding:96px 24px 48px}
+.hero::before{content:"";position:absolute;inset:0;background:
+ linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
+.hero>*{position:relative}
+.orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.orb-mint{width:500px;height:500px;background:rgba(0,242,153,.05);top:-150px;left:-100px}
+.orb-blue{width:450px;height:450px;background:rgba(0,209,255,.05);top:20%;right:-150px}
+.orb-purple{width:400px;height:400px;background:rgba(168,146,255,.04);bottom:-100px;left:30%}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:99px;background:rgba(0,209,255,.1);border:1px solid rgba(0,209,255,.2);margin-bottom:24px}
+.pill .txt{color:var(--blue);font-family:var(--mono);font-size:12px;letter-spacing:.08em}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
+.dot.mint{background:var(--mint)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+h1{font-size:clamp(32px,6vw,60px);font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
+h1 .accent{color:var(--mint)}
+.tagline{font-size:clamp(18px,3vw,24px);color:var(--blue);font-weight:700;margin-bottom:24px}
+.desc{color:#d4d4d8;font-size:18px;line-height:1.625;max-width:672px;margin:0 auto 32px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:768px;margin:0 auto 32px}
+@media(min-width:768px){.stats{grid-template-columns:repeat(6,1fr)}}
+.stat{padding:12px;border-radius:12px;background:rgba(0,0,0,.4);border:1px solid var(--border)}
+.stat .v{color:var(--mint);font-size:20px;font-weight:700;font-family:var(--mono)}
+.stat .l{color:var(--dim);font-size:10px;margin-top:4px}
+.btn-row{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;margin-bottom:24px}
+@media(min-width:640px){.btn-row{flex-direction:row}}
+.btn{padding:12px 24px;font-size:14px;font-weight:700;border-radius:12px;transition:all .2s}
+.btn:hover{text-decoration:none}
+.btn-mint{background:var(--mint);color:#000}.btn-mint:hover{background:rgba(0,242,153,.9)}
+.btn-blue{border:1px solid rgba(0,209,255,.3);background:rgba(0,209,255,.1);color:var(--blue)}.btn-blue:hover{background:rgba(0,209,255,.2)}
+.btn-white{border:1px solid rgba(255,255,255,.1);color:#fff;font-weight:500}.btn-white:hover{background:rgba(255,255,255,.05)}
+.chip{display:inline-block;padding:8px 16px;border-radius:10px;background:rgba(0,0,0,.4);border:1px solid var(--border)}
+.chip code{font-family:var(--mono);font-size:12px;color:var(--mint)}
+.chip code.blue{color:var(--blue)}
+.chip .sep{color:var(--dim);font-size:12px;margin:0 8px}
+
+/* ── secciones (UTA.jsx: max-w-5xl premium-card) ── */
+section.blk{max-width:1024px;margin:0 auto;padding:0 24px 56px}
+.premium{background:var(--panel);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:40px;padding:32px;transition:all .5s cubic-bezier(.4,0,.2,1)}
+.premium:hover{border-color:rgba(0,242,153,.3);box-shadow:0 0 50px rgba(0,242,153,.05)}
+@media(max-width:640px){.premium{border-radius:24px;padding:24px}}
+h2{color:#fff;font-size:24px;font-weight:700;margin-bottom:16px;letter-spacing:-.01em}
+h3{color:#fff;font-size:15px;font-weight:700;margin-bottom:6px}
+p{line-height:1.625;margin-bottom:14px}
+.body{color:#d4d4d8;font-size:14px}
+.note{color:var(--dim);font-size:13px}
+.eyebrow{color:var(--blue);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+
+/* tarjetas internas (UTA.jsx §4: bg-black/40 border blue/20) */
+.icards{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:768px){.icards{grid-template-columns:repeat(3,1fr)}}
+.icard{padding:20px;border-radius:12px;background:rgba(0,0,0,.4);border:1px solid rgba(0,209,255,.2);transition:border-color .2s}
+.icard:hover{border-color:rgba(0,209,255,.5)}
+.icard .path{color:var(--blue);font-family:var(--mono);font-size:11px;margin-bottom:8px;display:block}
+.icard h3 a{color:#fff}.icard h3 a:hover{color:var(--blue);text-decoration:none}
+.icard p{color:var(--dim);font-size:12.5px;line-height:1.5;margin:0}
+.icard .go{color:var(--mint);font-size:12px;font-weight:500;display:inline-block;margin-top:12px}
+.icard .go:hover{text-decoration:underline}
+
+/* tablas */
+.tblwrap{border-radius:12px;background:rgba(0,0,0,.4);border:1px solid var(--border);overflow-x:auto;margin:16px 0 8px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:560px}
+@media(max-width:640px){
+  table{min-width:0;font-size:12.5px}
+  tr.th-row{display:none}
+  table tr{display:block;padding:12px 14px;border-bottom:1px solid var(--border)}
+  table tr:last-child{border-bottom:none}
+  td{display:block;border:none;padding:2px 0;overflow-wrap:break-word;word-break:break-word}
+  td::before{content:attr(data-th)" · ";display:inline;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim)}
+  td .mono,td>a.mono{word-break:break-all}.hash{font-size:11px}
+}
+th{font-family:var(--mono);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);text-align:left;padding:12px 14px;border-bottom:1px solid var(--border)}
+td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top;color:#d4d4d8}
+tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:rgba(255,255,255,.03)}
+.mono{font-family:var(--mono);font-size:12.5px}
+.hash{font-family:var(--mono);font-size:12px;color:var(--purple);word-break:break-all}
+.ok{color:var(--mint)}.bad{color:var(--red)}
+.tagchip{display:inline-block;padding:2px 8px;border-radius:6px;background:rgba(255,255,255,.05);color:#d4d4d8;font-family:var(--mono);font-size:10px}
+
+/* código (UTA.jsx chip: bg-black/40 + white/5) */
+pre{background:rgba(0,0,0,.6);border:1px solid var(--border);border-radius:12px;padding:16px 18px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;font:13px/1.7 var(--mono);margin:12px 0}
+pre .c{color:var(--dim)}
+pre .cmd{color:var(--mint)}
+ul.pts{margin:0 0 14px 18px}ul.pts li{margin-bottom:8px;line-height:1.5;font-size:14px}
+ul.files{margin:0 0 4px 18px}ul.files li{margin-bottom:6px;font-size:13px}
+.kv{display:grid;grid-template-columns:180px 1fr;gap:6px 16px;font-size:13.5px;margin:12px 0}
+.kv b{color:var(--dim);font-weight:500;font-family:var(--mono);font-size:11px;padding-top:2px}
+@media(max-width:640px){.kv{grid-template-columns:1fr}}
+
+/* footer (site: links centrados + copyright) */
+footer{border-top:1px solid var(--border);margin-top:32px;padding:40px 24px;text-align:center}
+.f-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-bottom:20px}
+.f-links a{color:var(--dim);font-size:13px}
+.f-links a:hover{text-decoration:underline;color:#fff}
+.f-links a.mint{color:var(--mint)}
+.copy{color:#52525b;font-size:12px}
+.crumb{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:#a1a1aa}
+.crumb a{color:#a1a1aa}.crumb a:hover{color:var(--mint)}
+.crumbwrap{max-width:1024px;margin:24px auto 0;padding:0 24px;text-align:center}
+</style>
+</head>
+<body>
+<div class="orb orb-mint"></div><div class="orb orb-blue"></div><div class="orb orb-purple"></div>
+
+<nav class="nav"><div class="nav-inner">
+  <a class="brand" href="/"><div class="logo">M</div><span class="brand-text">MARKET<span class="mint">NOW</span></span></a>
+  <div class="nav-links">
+    <a href="/registry">MARKETPLACE<span class="chev">▾</span></a>
+    <a href="/uta" class="active">TRUST<span class="chev">▾</span></a>
+    <a href="/blog">RESOURCES<span class="chev">▾</span></a>
+    <a href="/about">ACCOUNT<span class="chev">▾</span></a>
+  </div>
+  <div class="nav-right">
+    <a class="api-pill" href="/handshake"><span class="dot mint"></span>API</a>
+    <a class="btn-signin" href="/dashboard">SIGN IN</a>
+  </div>
+</div></nav>
+
+<header class="hero">
+  <div class="pill"><span class="dot"></span><span class="txt">REKOR · SIGSTORE PUBLIC LOG · APPEND-ONLY</span></div>
+  <h1>Third-party <span class="accent">Rekor anchors</span></h1>
+  <p class="tagline">The publisher cannot rewrite what the log already holds</p>
+  <p class="desc">Suite digests countersigned and timestamped by Sigstore's public transparency log. Inclusion is checkable by anyone, after the fact — the timestamps are not ours.</p>
+  <div class="stats"><div class="stat"><div class="v">5</div><div class="l">ENTRIES</div></div><div class="stat"><div class="v">22</div><div class="l">DIGESTS ANCHORED</div></div><div class="stat"><div class="v">9</div><div class="l">VERIFY CHECKS</div></div><div class="stat"><div class="v">3</div><div class="l">BUG→FIX HISTORY</div></div><div class="stat"><div class="v">#2</div><div class="l">ENTRY 2764017355</div></div><div class="stat"><div class="v">#3</div><div class="l">ENTRY 2764479676</div></div><div class="stat"><div class="v">#5</div><div class="l">ENTRY 2787622029</div></div></div>
+  <div class="btn-row"><a class="btn btn-mint" href="#run">Verify entry #5</a><a class="btn btn-blue" href="https://rekor.sigstore.dev" target="_blank" rel="noopener">rekor.sigstore.dev</a><a class="btn btn-white" href="../">← Suite root</a></div>
+  <div class="chip"><code>node anchors/verify-rekor.mjs</code><span class="sep">·</span><code class="blue">9/9 live checks</code></div>
+</header>
+
+<main style="position:relative;z-index:1">
+
+<div class="crumbwrap"><div class="crumb"><a href="/uta">uta</a> / <a href="/uta/conformance/">conformance</a> anchors /</div></div>
+<section class="blk"><div class="premium">
+  <div class="eyebrow">Sigstore Rekor · append-only · inclusion-checkable</div>
+  <h2>Five entries, third-party timestamps</h2>
+  <p class="body">The digests of this suite are countersigned and timestamped by <b>rekor.sigstore.dev</b>. The publisher cannot rewrite an entry once it is in the log; a stranger can check inclusion after the fact. Entries #2, #3 and #5 were forced by <a href="https://dev.to/anp2network">@anp2network</a>'s bug reports — the log's own history now shows both the bug and the fix, with a third party's timestamps.</p>
+  <div class="tblwrap"><table>
+  <tr class="th-row"><th>Entry</th><th>logIndex</th><th>Integrated (UTC)</th><th>What it anchors</th><th>Statement sha256</th></tr>
+  <tr>
+<td data-th='entry'><b>#1</b></td>
+<td data-th='logIndex' class="mono"><a href="https://rekor.sigstore.dev">2762061972</a></td>
+<td data-th='integrated (UTC)' class="mono">2026-09-08 21:03:33</td>
+<td data-th='anchors'>vectors v1.3.0 — npm tarball, tar layer, source manifest, vector index (4 digests)</td>
+<td data-th='sha256'><span class="hash" title="f6fee1fc932c266232dbfd9bd817cdca1cd9b7fefc859ba4a6b46926e5fd6a92">f6fee1fc932c266232…</span></td>
+</tr>
+  <tr>
+<td data-th='entry'><b>#2</b></td>
+<td data-th='logIndex' class="mono"><a href="https://rekor.sigstore.dev">2764017355</a></td>
+<td data-th='integrated (UTC)' class="mono">2026-09-09 01:14:24</td>
+<td data-th='anchors'>runner v1.3.2 — runner bytes, answer key, suite, mutants, README, index (6 digests)</td>
+<td data-th='sha256'><span class="hash" title="dfda2410a2f9a8283730b31c1d5201f3fb1baae3f346a15ce1c149e28380f750">dfda2410a2f9a82837…</span></td>
+</tr>
+  <tr>
+<td data-th='entry'><b>#3</b></td>
+<td data-th='logIndex' class="mono"><a href="https://rekor.sigstore.dev">2764479676</a></td>
+<td data-th='integrated (UTC)' class="mono">2026-09-09 02:26:31</td>
+<td data-th='anchors'>v1.3.3 — two-sided window + derived ground truth: runner, generator, premature-atc card+canonical, answer key, suite, mutants, README, index (8 digests)</td>
+<td data-th='sha256'><span class="hash" title="0b1913c6b30311333357f3d9629ae69ea7d10b7cbd19ac64833889a3c20e0f60">0b1913c6b303113333…</span></td>
+</tr>
+  <tr>
+<td data-th='entry'><b>#4</b></td>
+<td data-th='logIndex' class="mono"><a href="https://rekor.sigstore.dev">2771735480</a></td>
+<td data-th='integrated (UTC)' class="mono">2026-09-09 17:24:25</td>
+<td data-th='anchors'>revocation registry MNR-CRL-1.0 — CRL full file, signed payload hash, registry key (3 digests; roadmap v5.1.5)</td>
+<td data-th='sha256'><span class="hash" title="954649a60531f7d1270ce386b7dcef05048814b87fa38010684327ad5283ea91">954649a60531f7d1…</span></td>
+</tr>
+  <tr>
+<td data-th='entry'><b>#5</b></td>
+<td data-th='logIndex' class="mono"><a href="https://rekor.sigstore.dev">2787622029</a></td>
+<td data-th='integrated (UTC)' class="mono">2026-09-10 21:52:48</td>
+<td data-th='anchors'>v1.4.0 — anp2 round 3: adversarial two-bound distribution, generated mutation sweep (113 mutants, 21 classified survivors), Rekor-in-the-loop verifier, 5-surface answer key (11 digests)</td>
+<td data-th='sha256'><span class="hash" title="ca1e2b6c69d620f378b093b0755cffaee18da4e93cd7ef1c244b7a6a232b3473">ca1e2b6c69d620f378…</span></td>
+</tr>
+<tr>
+<td data-th='entry'><b>#6</b></td>
+<td data-th='logIndex' class="mono"><a href="https://rekor.sigstore.dev">2795106183</a></td>
+<td data-th='integrated' class="mono">2026-09-11T15:38:34Z</td>
+<td data-th='anchors'>The release chain: persistent Ed25519 release identity + release statement r1 (counter 1, v1.5.0) — rollback resistance. Verify: <span class="hash">verify-artifact.mjs --release</span></td>
+<td data-th='sha' class="mono">ac565b1cd30678b6e7e71fda693e69ec…</td>
+</tr>
+<tr>
+<td data-th='entry'><b>#7</b></td>
+<td data-th='logIndex' class="mono"><a href="https://rekor.sigstore.dev">2795233758</a></td>
+<td data-th='integrated' class="mono">2026-09-11T15:49:43Z</td>
+<td data-th='anchors'>The r1→r2 ADVANCE: release 2 chained to release 1 (higher log index, grown tree) — a supersession you can prove, not a rewrite. Verify: <span class="hash">verify-artifact.mjs --release</span></td>
+<td data-th='sha' class="mono">4d5f5db5c40ed0997440…</td>
+</tr>
+  </table></div>
+  <pre><span class="c"># the log in the ACTUAL verification path — digest from Rekor, not the hub:</span>
+<span class="cmd">node anchors/verify-artifact.mjs https://www.marketnow.site/uta/conformance/score-runner.mjs</span>
+<span class="c"># or the whole suite, digest chain re-rooted at the live entry #5 first:</span>
+<span class="cmd">node runner-tests/runner-tests.mjs --rekor</span>
+<span class="c"># the anchor itself — 9 checks against the live log:</span>
+<span class="cmd">node anchors/verify-rekor.mjs --record anchors/anchor-record-v5.json \</span>
+<span class="cmd">                                   --statement anchors/anchor-statement-v5.json</span></pre>
+  <p class="note">With no arguments, <code class="mono">verify-rekor.mjs</code> verifies all records; <code class="mono">verify-artifact.mjs &lt;any-file&gt;</code> checks any artifact's bytes against the Rekor-rooted pins.</p>
+</div></section>
+
+<section class="blk"><div class="premium">
+  <div class="eyebrow">Files</div>
+  <h2>Records and statements</h2>
+  <ul class="files">
+    <li><a href="README.md" class="mono">README.md</a> — what was anchored, entry by entry, and why</li>
+    <li><a href="verify-rekor.mjs" class="mono">verify-rekor.mjs</a> — the 9-check verifier</li>
+    <li><a href="verify-artifact.mjs" class="mono">verify-artifact.mjs</a> — Rekor-in-the-loop: any artifact, any origin, digest from the entry</li>
+    <li>Per entry: <code class="mono">anchor-record(-v2/-v3/-v4/-v5).json</code> (log coordinates) + <code class="mono">anchor-statement(-v2/-v3/-v4/-v5).json</code> (the digests)</li>
+    <li><a href="../">← conformance suite root</a></li>
+  </ul>
+</div></section>
+</main>
+
+<footer>
+  <div class="f-links">
+    <a href="/trust">Trust Roadmap</a><a href="/standards">Standards</a><a href="/uta" class="mint">UTA</a>
+    <a href="/catalog">Catalog Transparency</a><a href="/mandates">Mandates</a><a href="/pricing">Pricing</a><a href="/about">About</a>
+  </div>
+  <div class="copy">©2026 AliceLabs LLC · MNNC-1.0 License · Built for developers and agents</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,71 @@
+{
+  "schema": "uta-source-manifest/1.0",
+  "package": "agent-trust-card",
+  "version": "1.1.2",
+  "source_tree": "github.com/alicelabs-llc/universal-trust-adapter:marketnow/atc-sdk",
+  "commit": "215ccab0443932f96b2fb19f6051c114617ad67b",
+  "files": {
+    "LICENSE": {
+      "sha256": "a1d9fdb9c49090a80f38b363f344e152d359181908e3ab42e201dc3cf083d1fd",
+      "bytes": 1066,
+      "tar_path": "package/LICENSE"
+    },
+    "src/v3/atc-v3.js": {
+      "sha256": "b707761506f17ccb706b0871d9d9b045771e3542adc5beb85230849735dfd2ae",
+      "bytes": 18068,
+      "tar_path": "package/src/v3/atc-v3.js"
+    },
+    "package.json": {
+      "sha256": "9311f0964ce7819bac36015da2d471f61c824ba1fa432c993b8ec6af579816f5",
+      "bytes": 1968,
+      "tar_path": "package/package.json"
+    },
+    "CONFORMANCE.md": {
+      "sha256": "212f7eb6536fde05e005a399b292dc3de18c045f24f7efd9c94fc27325ec4e61",
+      "bytes": 5635,
+      "tar_path": "package/CONFORMANCE.md"
+    },
+    "README.md": {
+      "sha256": "cf416a39a05cf03d1a6d136ae96bddd13c86e2e7b9806109969d7b480874b824",
+      "bytes": 8211,
+      "tar_path": "package/README.md"
+    },
+    "bin/atc.mjs": {
+      "sha256": "4ef07ef1f2b1f2e29d0f6695bd2701036b710a805afee86e38deca3cb73da728",
+      "bytes": 11519,
+      "tar_path": "package/bin/atc.mjs"
+    },
+    "src/index.mjs": {
+      "sha256": "843b2b3fd324610263fde311140cc06c83edd437dbf06f3201c6eab45919f6d1",
+      "bytes": 2343,
+      "tar_path": "package/src/index.mjs"
+    },
+    "src/issue.mjs": {
+      "sha256": "af1d86de4261000a74a233a4469fd4a8ce5c0bfb2649c7697611aaddae8caf10",
+      "bytes": 4338,
+      "tar_path": "package/src/issue.mjs"
+    },
+    "src/keys.mjs": {
+      "sha256": "e6c74d747beee09fc39bb380e0009a5a4882293df493924651bbf76611e91593",
+      "bytes": 3136,
+      "tar_path": "package/src/keys.mjs"
+    },
+    "src/verify.mjs": {
+      "sha256": "c962b8266c347cb8e5bf2d472218347ac7baacf2ff9a15967629353d02f98c2e",
+      "bytes": 25360,
+      "tar_path": "package/src/verify.mjs"
+    },
+    "src/v3/atc-v3.d.ts": {
+      "sha256": "329384a20dccefa4e14d1cfb4b432b95194ecb9d286335dcaa414dbb63aafacf",
+      "bytes": 6019,
+      "tar_path": "package/src/v3/atc-v3.d.ts"
+    },
+    "src/v3/atc-v3.ts": {
+      "sha256": "f902d982f48076e8325687540fdfaad03755aabdbaab3db07bc0c3434a019728",
+      "bytes": 20598,
+      "tar_path": "package/src/v3/atc-v3.ts"
+    }
+  },
+  "file_count": 12,
+  "source_bytes_total": 108261
+}

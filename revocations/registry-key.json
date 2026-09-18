@@ -1,0 +1,32 @@
+{
+  "key_id": "mn-revoc-002",
+  "purpose": "Signs the MarketNow Revocation Registry (MNR-CRL-1.0). Delegated key — the ATC CA key never signs revocations directly.",
+  "algorithm": "Ed25519 (RFC 8032)",
+  "public_key_spki_base64": "MCowBQYDK2VwAyEAFYU1lGkafN7JVn7aYq07yyOF/csLLDiLVjJbalAGix8=",
+  "canonicalization": "RFC 8785 JCS",
+  "rotation_history": [
+    {
+      "key_id": "mn-revoc-001",
+      "status": "retired",
+      "rotated_at": "2026-09-16T21:22:08Z",
+      "note": "Routine rotation 2026-09-17 during scheduled CRL renewal (previous CRL expired at next_update 2026-09-16T17:01:46Z)."
+    },
+    {
+      "key_id": "mn-revoc-002",
+      "status": "active",
+      "active_since": "2026-09-16T21:22:08Z",
+      "note": "Current registry signing key."
+    }
+  ],
+  "verify_steps": [
+    "1. Take crl.json and remove the \"signature\" object → payload.",
+    "2. canonical = \"MNR-CRL-1.0:\" + JCS(payload).",
+    "3. sha256(utf8(canonical)) must equal signature.signed_payload_hash.",
+    "4. Ed25519-verify canonical bytes against this public key with signature.value (64-byte hex)."
+  ],
+  "authoritative_crl": "/uta/revocations/crl.json",
+  "endpoints": {
+    "ocsp": "/api/ocsp?card_id=… (or ?kid=…)",
+    "crl": "/api/crl"
+  }
+}

@@ -1,0 +1,52 @@
+{
+ "card_id": "ATC-TEST-WRONG-CA-001",
+ "status": "active",
+ "payload": {
+  "card_id": "ATC-TEST-WRONG-CA-001",
+  "schema_version": "2.0.0",
+  "agent_id": "test-agent-wrong-ca",
+  "agent_name": "Wrong CA Test Agent",
+  "identity": {
+   "public_key": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+   "key_algorithm": "Ed25519"
+  },
+  "trust": {
+   "sentinel_review_score": 8,
+   "sentinel_score": 8,
+   "audit_layers_passed": {
+    "L1.5": true,
+    "L2.5": true
+   },
+   "composite_trust": 8,
+   "risk_level": "low"
+  },
+  "capabilities": {
+   "provides": [
+    "search",
+    "read"
+   ],
+   "protocol_language": "mcp",
+   "translate": true
+  },
+  "payment": {
+   "method": "none",
+   "wallet_address": null
+  },
+  "metadata": {
+   "issued_at": "2026-08-20T00:00:00Z",
+   "expires_at": "2027-08-20T00:00:00Z",
+   "issuer": "MarketNow Sentinel CA"
+  }
+ },
+ "signature": {
+  "algorithm": "Ed25519 (RFC 8032)",
+  "value": "ad58fb9099aede927d216776f57a7d291534d1be6355772c70072715bfe3aea37c0c9cbc3ac80bfd4b9205b5ce520e9af448560c237f2e8c9bbe566e38e82404",
+  "signed_by": "MarketNow Sentinel Test CA (throwaway, vectors-only)",
+  "signed_at": "2026-09-08T00:00:00Z",
+  "canonical_json": "RFC_8785_JCS",
+  "ca_key_id": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+  "evidence_hash": "sha256:valid_test",
+  "policy_version": "2.0.0",
+  "note": "Signed by a DIFFERENT throwaway CA while claiming the published test CA key. A runner that skips Ed25519 verification will wrongly pass this card."
+ }
+}

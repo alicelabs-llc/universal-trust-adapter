@@ -1,0 +1,97 @@
+{
+  "created": "2026-09-10T21:52:47Z",
+  "digests": {
+    "score_runner_v1_4_0": {
+      "sha256": "5802cc35c076c3e45dbca9200b483b1606302fe0a8cf93afb9d4775ffa28565b",
+      "bytes": 18641,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/score-runner.mjs"
+      ],
+      "note": "the tested thing: reference scorer v1.4.0 — five-surface oracle target, behavior unchanged from v1.3.3, bytes re-pinned after the doc-nit drift"
+    },
+    "generator_v1_4_0": {
+      "sha256": "60d064943057b5b3caa017ebc64e113e7083589d643e69ebb97e014702a7f1ac",
+      "bytes": 20390,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/vectors/generate-accept-vectors.mjs"
+      ],
+      "note": "adversarial mode added (anp2network round 3): correctly-signed ca-test-2 cards probing BOTH window bounds relative to the scoring clock, offsets sampled with boundary-exact head cards (issued==NOW, expires==NOW); FATAL kept in valid-card modes"
+    },
+    "conformance_vectors_index_v1_4_0": {
+      "sha256": "edfa37d3ca380d4b46499e8c9aa20c9a243d9e4571bf1ca447a7190d1cf7dd17",
+      "bytes": 45945,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/vectors/_index.json"
+      ],
+      "note": "schema v1.4.0: adversarial_window_rule + artifact_verification_rule, generator/sweep rules, honest drift admission in updates; the 14 fixed vectors unchanged byte-for-byte"
+    },
+    "runner_answer_key_v1_4_0": {
+      "sha256": "79a5c5936be9ba9fb56fecc0370618f48fecc467b46f200601191224c8ba4d0c",
+      "bytes": 5623,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/runner-tests/answer-key.json"
+      ],
+      "note": "behavioral oracle re-recorded across FIVE surfaces (matrix-over-challenge, reference, adversarial challenge 24/24, malformed + poisoned-sidecar fail-closed probes); runner sha256 5802cc35…; valid through 2027-08-19"
+    },
+    "runner_test_suite_v1_4_0": {
+      "sha256": "e5f60fb66a8dfb6ea56af2dcc6a8abaad7f510ec15bc82cb83f2add3ea9060e1",
+      "bytes": 30773,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/runner-tests/runner-tests.mjs"
+      ],
+      "note": "the suite: 27 checks; --rekor re-roots the digest chain at the live entry before any local check (the log in the actual verification path)"
+    },
+    "runner_mutant_definitions_v1_4_0": {
+      "sha256": "9f082e251920b477407c6f299f7fc941e20e026dcafcb88dde2db27621f0cc46",
+      "bytes": 4570,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/runner-tests/mutants.json"
+      ],
+      "note": "the 10 curated byte-patch mutants (teeth); digests pinned in the answer key"
+    },
+    "mutation_sweep_script_v1_4_0": {
+      "sha256": "e22907d3338e14633efffea2788ad596cc195b24dd22dd0b4dea520bd5dc3cca",
+      "bytes": 25677,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/runner-tests/generate-mutants.mjs"
+      ],
+      "note": "the GENERATED sweep: 12 declared syntax-level operators applied at every code site (lexer excludes comments/strings/templates/regex); --check reproduces the published results"
+    },
+    "mutation_sweep_results_v1_4_0": {
+      "sha256": "e3fa9a4fc808c76f639c3a2bac370d690ef393c4a839ec63e8311e4664468799",
+      "bytes": 70667,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/runner-tests/mutant-sweep.json"
+      ],
+      "note": "113 valid mutants, 92 caught, 21 survivors published and classified: 5 equivalent, 2 equivalent-under-oracle, 3 equivalent-by-masking, 11 REAL named blind spots; three-iteration history included"
+    },
+    "rekor_in_loop_verifier_v1_4_0": {
+      "sha256": "eb2262924772304f0dc496aeb9ab0145067891da337f834f85654ade9aec6022",
+      "bytes": 10337,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/anchors/verify-artifact.mjs"
+      ],
+      "note": "anp2network's \"one line\" made executable: download artifact → fetch entry live → authenticate statement against the committed hash → verify Rekor signatures + countersignature → compare sha256 of the downloaded bytes against Rekor-rooted pins"
+    },
+    "runner_tests_readme_v1_4_0": {
+      "sha256": "762b39e8c335b9f2b47f2601b49f173955278b7db452642bc6de7faf4cbc768c",
+      "bytes": 10869,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/runner-tests/README.md"
+      ],
+      "note": "v1.4.0 section: the three round-3 items, the sweep numbers, the honest drift admission, the stranger flows"
+    },
+    "vectors_readme_v1_4_0": {
+      "sha256": "c0a41953ef39c075cfa205584bd0004df4addf3e7afc73f2b44fcf9d56791f1c",
+      "bytes": 10220,
+      "served_from": [
+        "https://www.marketnow.site/uta/conformance/vectors/README.md"
+      ],
+      "note": "generator usage incl. the adversarial challenge commands"
+    }
+  },
+  "subject": "universal-trust-adapter: adversarial window distribution + generated mutation sweep + Rekor-in-loop artifact verification — anp2network round 3 (dev.to comment 3ehcp) — conformance suite v1.4.0",
+  "publisher": "AliceLabs LLC",
+  "repo": "github.com/alicelabs-llc/universal-trust-adapter",
+  "commit": "org main lineage post-2dbaa429; the v1.4.0 push follows this anchor — the live hub URLs above serve the pinned bytes immediately, and verify-artifact.mjs checks any origin against this entry"
+}

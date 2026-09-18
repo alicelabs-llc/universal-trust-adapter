@@ -1,0 +1,22 @@
+{
+  "schema": "uta-test-ca-keys/v1",
+  "description": "Test CA keypairs for the UTA conformance vectors. TEST KEYS ONLY — never use in production. ca-test-2 is the GENERATOR CA: its private key is published so anyone can produce unlimited fresh signed cards (see generate-accept-vectors.mjs) and verify the suite against unbounded challenges instead of a memorizable fixed set.",
+  "published_at": "2026-09-09T00:00:00Z",
+  "ca_test_1": {
+    "name": "ca-test-1 (frozen v1.2.0 anchor)",
+    "status": "frozen — private key was discarded at generation time (single-session throwaway) and no further cards can ever be signed by it",
+    "public_key_spki_b64": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0="
+  },
+  "ca_test_2": {
+    "name": "ca-test-2 (generator CA)",
+    "algorithm": "Ed25519 (RFC 8032)",
+    "public_key_spki_b64": "MCowBQYDK2VwAyEAvtRhFInVXf939xGvD9i6dhBWAAMFjUAA66Qn2KzEWsg=",
+    "public_key_raw32_hex": "bed4611489d55dff77f711af0fd8ba7610560003058d4000eba427d8acc45ac8",
+    "private_key_pkcs8_b64": "MC4CAQAwBQYDK2VwBCIEID4A+aNSAN8hpnrrcmIEUztqqWXBuuTvzPR57TnANAMa",
+    "note": "Private key INTENTIONALLY published. Anyone can re-derive signatures, extend the vector set, and generate unlimited accept/reject cards. This is what makes the accept side unmemorizable: any fixed set stays memorizable, a generator does not."
+  },
+  "usage": {
+    "verify_card": "crypto.verify(null, jcsBytes, createPublicKey({key: Buffer.from(spki_b64,\"base64\"), format:\"der\", type:\"spki\"}), Buffer.from(sig_hex,\"hex\"))",
+    "sign_card": "crypto.sign(null, jcsBytes, createPrivateKey({key: Buffer.from(private_key_pkcs8_b64,\"base64\"), format:\"der\", type:\"pkcs8\"}))"
+  }
+}

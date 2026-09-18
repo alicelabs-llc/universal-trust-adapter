@@ -1,0 +1,4134 @@
+{
+ "schema": "uta-runner-twosite-mutation-sweep/1.0",
+ "as_of": "2026-09-11",
+ "target": "score-runner.mjs",
+ "target_sha256": "c0bd20e6987d94d75f63e3756d49d1d0d89ea0c4c80175cee0e18db1062dba25",
+ "oracle": {
+  "answer_key_sha256": "79a5c5936be9ba9fb56fecc0370618f48fecc467b46f200601191224c8ba4d0c",
+  "surfaces": [
+   "--matrix separation table (8 rows, failure lists included)",
+   "reference-mode verdict + exit code",
+   "adversarial challenge (seeded two-bound distribution via --generated)",
+   "fail-closed probe: malformed card (exit 1 + marker)",
+   "fail-closed probe: poisoned sidecar (exit 1 + marker)"
+  ],
+  "note": "Same oracle as the single-site sweep. A coordinated pair the suite cannot distinguish from pristine on ANY surface is a survivor \u2014 it names a fault that lives across two sites, exactly the class the single-site sweep cannot express."
+ },
+ "declared_families": [
+  {
+   "id": "window",
+   "label": "two-sided validity window",
+   "membership_markers": [
+    "expires_at",
+    "issued_at",
+    "inWindow"
+   ]
+  },
+  {
+   "id": "anchor",
+   "label": "pinned trust-anchor set",
+   "membership_markers": [
+    "anchors"
+   ]
+  },
+  {
+   "id": "signature",
+   "label": "Ed25519 signature verify",
+   "membership_markers": [
+    "cryptoVerify"
+   ]
+  },
+  {
+   "id": "fail-closed",
+   "label": "fail-closed aborts",
+   "membership_markers": [
+    "FATAL"
+   ]
+  }
+ ],
+ "family_site_counts": {
+  "window": {
+   "and-or": 17,
+   "or-and": 2,
+   "eq-flip": 0,
+   "le-narrow": 5,
+   "lt-widen": 0,
+   "gt-widen": 5
+  },
+  "anchor": {
+   "and-or": 0,
+   "or-and": 0,
+   "eq-flip": 0,
+   "le-narrow": 0,
+   "lt-widen": 0,
+   "gt-widen": 0
+  },
+  "signature": {
+   "and-or": 0,
+   "or-and": 0,
+   "eq-flip": 0,
+   "le-narrow": 0,
+   "lt-widen": 0,
+   "gt-widen": 0
+  },
+  "fail-closed": {
+   "and-or": 0,
+   "or-and": 0,
+   "eq-flip": 0,
+   "le-narrow": 0,
+   "lt-widen": 0,
+   "gt-widen": 0
+  }
+ },
+ "operators": [
+  "and-or",
+  "or-and",
+  "eq-flip",
+  "le-narrow",
+  "lt-widen",
+  "gt-widen"
+ ],
+ "pairing_rule": "unordered pairs of sites from the SAME operator AND the SAME declared invariant family (both edits applied together)",
+ "totals": {
+  "pairs": 157,
+  "valid": 157,
+  "caught": 156,
+  "survivors": 1,
+  "invalid_syntax": 0
+ },
+ "pairs": [
+  {
+   "id": "and-or#window@L126:c59+L128:c26",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "9e2142112488c908708e798ae924c6561da4f4da85dd469071e77e06ac30541d"
+  },
+  {
+   "id": "and-or#window@L126:c59+L128:c38",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "2601d2e802bfcba33d214eb639364242eb4f727a1c887845e3d303c96242ef94"
+  },
+  {
+   "id": "and-or#window@L126:c59+L128:c50",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "f122dd99ca29cb71c5c2cff984cf13746a19f63df688278698c1c65d422aaba9"
+  },
+  {
+   "id": "and-or#window@L126:c59+L136:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "e685a4833841725d11bc544ca566c7a15af9bd2bc999519ec9d04f7492be627a"
+  },
+  {
+   "id": "and-or#window@L126:c59+L138:c29",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "d26743cc0007fdb6df6d87ce74d32c42633f47b167553828a67f5b7abcd1531d"
+  },
+  {
+   "id": "and-or#window@L126:c59+L155:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "42bf303fe05eac910785562785c7d99f5debdae6236452caec8f9295e9778b8e"
+  },
+  {
+   "id": "and-or#window@L126:c59+L157:c26",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "cfcef1a10cef95c87cd522449f3101259fec373c48f88567f1a3e95012320e8a"
+  },
+  {
+   "id": "and-or#window@L126:c59+L157:c38",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "c5122c349dd20f1c5e7c26ee07c6d25304ef297a1e78bc953751da75ec6fdc3e"
+  },
+  {
+   "id": "and-or#window@L126:c59+L182:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "551e99f74bb1fca976bce3c0ab511f73a791dda95ff17f4e31b57cbbbc7723c7"
+  },
+  {
+   "id": "and-or#window@L126:c59+L184:c33",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "441ff8fbb137c26f62864cf644039efe7f40a4009330c5f3d1d32030dbca8b6e"
+  },
+  {
+   "id": "and-or#window@L126:c59+L184:c45",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "24439d9d7a5b4ddb222cf6c09b4ae86d33c4946c8da4ad09b4dfc242f8c80a24"
+  },
+  {
+   "id": "and-or#window@L126:c59+L184:c57",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "3a7c93b9cd5762c01962342d7489dcb111c7a4379625b0843b2d7fbe32c4d3ec"
+  },
+  {
+   "id": "and-or#window@L126:c59+L251:c61",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "2e28a4e8c4a7b6d78a99edd4a958b25054f89b480d2fb76aad37db0cf5878991"
+  },
+  {
+   "id": "and-or#window@L126:c59+L253:c35",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "56f0c1668a9bf17cd38e4f933b19daba63427278d223abc59c53369f4466129e"
+  },
+  {
+   "id": "and-or#window@L126:c59+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "586f907bf881fa58d71e717abef7ff2c1305e815e84b45640b589510cb9cb4c6"
+  },
+  {
+   "id": "and-or#window@L126:c59+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "ac6a1ae1ae5d27a021feff47fbe5520dc951c59aae2ae8a7902222d6d0125c1f"
+  },
+  {
+   "id": "and-or#window@L128:c26+L128:c38",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "a7efa41c6adba7847bede5c26ad7ed4512a258b2daf8679170d6e66d9c230e7f"
+  },
+  {
+   "id": "and-or#window@L128:c26+L128:c50",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "24acfdff3120046188ce33be135e1d037106a790348b1466d77e57f963b2d293"
+  },
+  {
+   "id": "and-or#window@L128:c26+L136:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "c70221fa786f037dae69cdb64f6d3adeb95e1ba490b9863fc327ef9b7a248b30"
+  },
+  {
+   "id": "and-or#window@L128:c26+L138:c29",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "78434f50f8902576fc5ddbaf54c1133eb0525ca26ab7ccecd824c1dda9492042"
+  },
+  {
+   "id": "and-or#window@L128:c26+L155:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "0ed2e3a06236ec775bf870a929fcf5a1ef08934cc5da517540d8fd0a8a21218e"
+  },
+  {
+   "id": "and-or#window@L128:c26+L157:c26",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "4a9f7812d9cf08baf58d42cd58d9b60e34cb866e11923a27a562b19b5b626b58"
+  },
+  {
+   "id": "and-or#window@L128:c26+L157:c38",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "ab70296a9f2ff3f25e6ab96dcf43bcf5a021910e32a66cca94591959f2615e99"
+  },
+  {
+   "id": "and-or#window@L128:c26+L182:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "0a845c8a52326a0f2849eff031b575536bee864d44eddff17f529cd12a8379fe"
+  },
+  {
+   "id": "and-or#window@L128:c26+L184:c33",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "c93345c49fa343af83b778308fd77b28dab60776502a02acd704c1dc39265394"
+  },
+  {
+   "id": "and-or#window@L128:c26+L184:c45",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "833babaee92f780158bf4e7d07f132226e3df201e9d668d5d6b3b0280ca92c71"
+  },
+  {
+   "id": "and-or#window@L128:c26+L184:c57",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "fdde8a0589c8306dbec94541ac18be0b86319b382eb042fe8feda274d759658d"
+  },
+  {
+   "id": "and-or#window@L128:c26+L251:c61",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "eeb2c2af4be8f9d174dd4490b87b7408a6004b0c8c435f7167c0b7830d26e8c3"
+  },
+  {
+   "id": "and-or#window@L128:c26+L253:c35",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "ab4d528b24895fa55c126a10dc6d487717ce23b11d2597608db3623b9a7c0c28"
+  },
+  {
+   "id": "and-or#window@L128:c26+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "cbb33ca65897aaa3bcdadb58a817433d7b2c358d2a16645c33e067d6b04359ef"
+  },
+  {
+   "id": "and-or#window@L128:c26+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "f5fc8a00d6e4a060495db42603957e4c7ec934c556692172a6507980825421f4"
+  },
+  {
+   "id": "and-or#window@L128:c38+L128:c50",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "8efa2115a2f1fff2982ee702fb74a9419ba244ea3415b1404aa51ef1f20af932"
+  },
+  {
+   "id": "and-or#window@L128:c38+L136:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "964beccfca29a23cf4dd8da01614373e7350317418ed266aebf75a82daf5c154"
+  },
+  {
+   "id": "and-or#window@L128:c38+L138:c29",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "44c0d081664da6a51ece213b33de3dfab4bd026dcb8157231ce34441d7b5cfa9"
+  },
+  {
+   "id": "and-or#window@L128:c38+L155:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "6fcbbc4cd4ae2dcaf75d921558870d167b97b836c23187c20ee3472bf3a39cc1"
+  },
+  {
+   "id": "and-or#window@L128:c38+L157:c26",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "1511bc68c2bbe6d95b063bfb0c62720c7acc763aef7fda661ca4b3b8043c3f76"
+  },
+  {
+   "id": "and-or#window@L128:c38+L157:c38",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "df345f670ebc75de92b6dbb052bd596ee12c2884984c84986657d892ce4f9a09"
+  },
+  {
+   "id": "and-or#window@L128:c38+L182:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "72a49f224863cbd3e0600e3b339f112f964cf747db44a6e7667420157e84523a"
+  },
+  {
+   "id": "and-or#window@L128:c38+L184:c33",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "3b4372869f1934a2531ca6cdf127a2ce5dfb15480e2a9efb65b568af88a90839"
+  },
+  {
+   "id": "and-or#window@L128:c38+L184:c45",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "b83b2bf76c1b36d22420d85ca8ef72ff3a45284155759d3ffedf507f5f7c8843"
+  },
+  {
+   "id": "and-or#window@L128:c38+L184:c57",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "373ce1c309008f99fc73217818ec01840c1bcc37000ce1030923befc8c208b78"
+  },
+  {
+   "id": "and-or#window@L128:c38+L251:c61",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "fbc1720aeb32f2cd53f3ead893051b6c2db452dbbe734aa9d316d1fbc1fcb72e"
+  },
+  {
+   "id": "and-or#window@L128:c38+L253:c35",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "f368174dd667d8b1a375f013a587d4d5a841e73d0fd349f8de9f2a121d5f0d00"
+  },
+  {
+   "id": "and-or#window@L128:c38+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "1803643f3f6aa3294ecf6276136aa5a1e1481b4c1f2d00fa7a800d77a30ef0a6"
+  },
+  {
+   "id": "and-or#window@L128:c38+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "7f53ca39b58e3153095a998aa90f4cbdd6d27dcf23c1295eff441ff3f13e600b"
+  },
+  {
+   "id": "and-or#window@L128:c50+L136:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "45588013093626e2877d7de3390e9b64ac7b832f266e21897a565b997aaa527f"
+  },
+  {
+   "id": "and-or#window@L128:c50+L138:c29",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "6c62b6710f104ee7c2b3a86c3efa00cf2fc890a10c381249a42db3e7a25efb83"
+  },
+  {
+   "id": "and-or#window@L128:c50+L155:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "a22fb0702e68ccb895d960cb29d2ae334274d91737b63a0a7dc0e52652ca2ea3"
+  },
+  {
+   "id": "and-or#window@L128:c50+L157:c26",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "24111dfd15166c378c7371b8cef49e8be6973be064e400645a81747e680dadef"
+  },
+  {
+   "id": "and-or#window@L128:c50+L157:c38",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "99337478b80704775c42e217d9175d1ed671ac691b3818b09e9b66f7e87de803"
+  },
+  {
+   "id": "and-or#window@L128:c50+L182:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "80ff644539ab2f360ccf7dfd281961badf79b1c8639af116cf8a971dd547d99e"
+  },
+  {
+   "id": "and-or#window@L128:c50+L184:c33",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "3b4e589a33386f7bc76e8dce487549adde511b9ee1d67436f6219bb5a0160a1a"
+  },
+  {
+   "id": "and-or#window@L128:c50+L184:c45",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "2ab5de2d79ed75add94db7ce8abecd3ac13e57fc362ac5b309d8ef4b2b01efe4"
+  },
+  {
+   "id": "and-or#window@L128:c50+L184:c57",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial"
+   ],
+   "sha256": "0dd1d5a4b236a7efcf9f61d8551515f77dda0d258cd0b2c83ae122502139254e"
+  },
+  {
+   "id": "and-or#window@L128:c50+L251:c61",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "e40073ffa59fc2be52c3fa3d84c672945539912b16f10b3971172bc037818e6a"
+  },
+  {
+   "id": "and-or#window@L128:c50+L253:c35",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "482b4136fec54850ef5bb7ce758a5248e2866b2c8daa8d888b2afc0fdd531e69"
+  },
+  {
+   "id": "and-or#window@L128:c50+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "90a5597eaf51deee014fed57409dabf0afc0c0973fae088516ad781a78c3b265"
+  },
+  {
+   "id": "and-or#window@L128:c50+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 128,
+    "col": 50,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow, status"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "reference",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "5f9dbff6f53707c2b4c0c4c78611b241b88539de0511c9b3f3412c20a618df12"
+  },
+  {
+   "id": "and-or#window@L136:c59+L138:c29",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "959241d22a814eb1a5a42d3e2c52cc50de2955d6e2fc40c1c25346d9d36925b1"
+  },
+  {
+   "id": "and-or#window@L136:c59+L155:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "86b142a23399d3625b12e988dd0dcecfc5ff02269841e9ecab980daa49502213"
+  },
+  {
+   "id": "and-or#window@L136:c59+L157:c26",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "ca0673d27d52533dc05147b26574dcd613585929373e5b86cb5746f13c9e4534"
+  },
+  {
+   "id": "and-or#window@L136:c59+L157:c38",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "701b1410fd04a59ffbf1d58d9b83c237d6774cc164bb5bca25332df7b46e950f"
+  },
+  {
+   "id": "and-or#window@L136:c59+L182:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "e94e9f2593b5450a0dd2ec32d02e15e895b7d8ed1b9c016d11fdd036da36cc5b"
+  },
+  {
+   "id": "and-or#window@L136:c59+L184:c33",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "f1046d11e889ae7be1f06e127fef7f847162dad7294c26ca0840cce70b5026b4"
+  },
+  {
+   "id": "and-or#window@L136:c59+L184:c45",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "74c1e5e127ca200318b54374a4f56e6e2dd0a063dd4c95f3fb5eefc82a0cf777"
+  },
+  {
+   "id": "and-or#window@L136:c59+L184:c57",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "89e4d992bd67b597039d63e0c8c577e1e173d5cca8de2ac5d5a765f22e77f898"
+  },
+  {
+   "id": "and-or#window@L136:c59+L251:c61",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "5dc4e9f7cfd039c753de19f7c2bd2937298de9e5037e9ddca2955a1ae68a60bd"
+  },
+  {
+   "id": "and-or#window@L136:c59+L253:c35",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "cf19a32507c6652dfb44de2a1c40f51fae8191c234ee9fa7b9e9c0342dba0555"
+  },
+  {
+   "id": "and-or#window@L136:c59+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "e230192f9dbd1c8d85fad5acbc754cd641fb9b77c0b23da9c62b71ecf4fc506e"
+  },
+  {
+   "id": "and-or#window@L136:c59+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "daf9f1219f44d54dc2053b14fb1237e7d3e1f73b0859525acced265e63c5ba1a"
+  },
+  {
+   "id": "and-or#window@L138:c29+L155:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "6c27322cb556b2942328d9f6da21bafbef4a5a6c7e3d98b548e8d7ab33438e50"
+  },
+  {
+   "id": "and-or#window@L138:c29+L157:c26",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "344fbd687db0f91f0c5a80712d0cacbded3d53cbe5e75b5349cbdb067828f4a7"
+  },
+  {
+   "id": "and-or#window@L138:c29+L157:c38",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "456b2aa418ef88c30fd15f5efef7be86079dc705fa86f51e24b6deb2261da7f3"
+  },
+  {
+   "id": "and-or#window@L138:c29+L182:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "76d7d8eb586a4f6962306574a9d5c35099d5b90656ecc7f7aa2ff6c86eab5569"
+  },
+  {
+   "id": "and-or#window@L138:c29+L184:c33",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "395880ac940f6a47ba201340b07cf39a029d16ea65ae95fbf134fc947c69717e"
+  },
+  {
+   "id": "and-or#window@L138:c29+L184:c45",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "d1e997a6d013580f84d18077c3ef2cff940aae2d034f9803a1aeff6c53f005e8"
+  },
+  {
+   "id": "and-or#window@L138:c29+L184:c57",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "f9f133a94bd4957ef1b9d51dedc42572a1460f65f65d3d253546add25ec5ad51"
+  },
+  {
+   "id": "and-or#window@L138:c29+L251:c61",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "dae8f66f04050989ff0146d6ea0ac235b81b0dd4bcbc3b21672e5f18fdbe5022"
+  },
+  {
+   "id": "and-or#window@L138:c29+L253:c35",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "74cc5ef9a35a3830e62a254115072fc44dbd94c6791bdd1f1248cb2656942ff5"
+  },
+  {
+   "id": "and-or#window@L138:c29+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "294adcc2f834197f2b500eebe8a3b7b89ae632c2d7dc642f94e9b103c95cb8d1"
+  },
+  {
+   "id": "and-or#window@L138:c29+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 138,
+    "col": 29,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "63bd4a9ec8316d78726a07f5d2ba078f0161ede45da68afad0492d05024f8d9d"
+  },
+  {
+   "id": "and-or#window@L155:c59+L157:c26",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "a118363db6a47161ccf6be24f1e6de773b5dc688ba7158836af02c467a1f4f93"
+  },
+  {
+   "id": "and-or#window@L155:c59+L157:c38",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "13a47cb1866fde9bd69e94e1c4391508446cb19acb2c18e5fe9d5e6b3e2ffece"
+  },
+  {
+   "id": "and-or#window@L155:c59+L182:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "c6d97526d8922b36be29f68d8066ca144698c62aef354ccb51867be435aef488"
+  },
+  {
+   "id": "and-or#window@L155:c59+L184:c33",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "b012077d50f2a5209f581f5d42aa4d720bcf92cf522a438f8df3f9ee3230528a"
+  },
+  {
+   "id": "and-or#window@L155:c59+L184:c45",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "94bb09aaacaf85e512ce7868338c1a05da307a2784817326097efaeebaf4546e"
+  },
+  {
+   "id": "and-or#window@L155:c59+L184:c57",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "2e77d381ba0cf1374c1d8888d43b655bbe501e75c49c9d2fe846b583b819dce2"
+  },
+  {
+   "id": "and-or#window@L155:c59+L251:c61",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "5a8c55374689aa5fd976e4e937e9a6319920c551cea5db96d384991f6cc1720a"
+  },
+  {
+   "id": "and-or#window@L155:c59+L253:c35",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "6c19926209de0f7be75c34b41e3aa823c1dc354b4168fd587baae03a716e9b70"
+  },
+  {
+   "id": "and-or#window@L155:c59+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "a2ba893e929a132c85bc1c1f90859621b70defd2eee22e37d134b72e0c012e66"
+  },
+  {
+   "id": "and-or#window@L155:c59+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 155,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "73e224c8b77bb4d47d36392b574713cd5c0f697fedbcdf9738f169add1bfaba1"
+  },
+  {
+   "id": "and-or#window@L157:c26+L157:c38",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "5c2963f8b4e4e02d53f12fa28c090472cfc899028014b5ef32c00761f709f0d6"
+  },
+  {
+   "id": "and-or#window@L157:c26+L182:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "4698314d0c1449b7986ca23e7de4f8213d752f7d6046c032982cd905e2269dba"
+  },
+  {
+   "id": "and-or#window@L157:c26+L184:c33",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "3c1fa1b45c0aa9ecb502a80af8bec010aa1d1dee2eaf555da49b5830bda1c5b8"
+  },
+  {
+   "id": "and-or#window@L157:c26+L184:c45",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "ac015ee533ef547ab77149f39a556eb7bd0d14259fbb71f2c3af74f34a18e04f"
+  },
+  {
+   "id": "and-or#window@L157:c26+L184:c57",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "d83dffe7f087425db2583edb47fd204ec682ac322311f97f27d86b349ce398c5"
+  },
+  {
+   "id": "and-or#window@L157:c26+L251:c61",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "a8544b7a3af9adda452d338831622ad71d3195e55b62c1517a29bf836c331ef4"
+  },
+  {
+   "id": "and-or#window@L157:c26+L253:c35",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "f6a502ed84f4c4f1a18b7d25eac3293337d7c42e9a83a2c60dae16c2119cfd02"
+  },
+  {
+   "id": "and-or#window@L157:c26+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "36e561416b2819543b1f2f64881dac31d11da395d0a2b76290732d246245979f"
+  },
+  {
+   "id": "and-or#window@L157:c26+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 26,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "f0b3b9bfc51a64ed67d3af0420f44cb741051dc4b71aa894dc6e258b849c1858"
+  },
+  {
+   "id": "and-or#window@L157:c38+L182:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "4ca62f97c5a9e5e193af4f0a9422bbd76597301ab6a29e3a9d7e7101088465ae"
+  },
+  {
+   "id": "and-or#window@L157:c38+L184:c33",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "fc30b57a1eb9b5e228f6d264a699f39d4c5f611e00c0cf54ccdabcbe1ac37cbe"
+  },
+  {
+   "id": "and-or#window@L157:c38+L184:c45",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "a65e35e7f3a518b3034e840f1cc159a4184b4cfc03af785dc01625ee072e1f55"
+  },
+  {
+   "id": "and-or#window@L157:c38+L184:c57",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "c43ed6b49b5b99e81fb8074e70fc6304880ac4888ce21c0b8ab1f9fd3955234e"
+  },
+  {
+   "id": "and-or#window@L157:c38+L251:c61",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "925d2820c60554e2d1685f0c364e6c8675cdda02361f84d6c1d8763e987f82c8"
+  },
+  {
+   "id": "and-or#window@L157:c38+L253:c35",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "3765613fa157dc710f3cb9a64f0b814e63464950d1a59e66dc4b6d7dc53091d9"
+  },
+  {
+   "id": "and-or#window@L157:c38+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "c83d77917c71cdffb29c7eb256b836eb7a096ad4998af43731fec5b0516de12d"
+  },
+  {
+   "id": "and-or#window@L157:c38+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 157,
+    "col": 38,
+    "token": "&&",
+    "replacement": "||",
+    "context": "return { verify: sigOk && inWindow && statusOk, stages: null };"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "a9aa1b64ebc5c1c22d0669328956f7b58792495b98e936b961152657175cd77f"
+  },
+  {
+   "id": "and-or#window@L182:c59+L184:c33",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "e13540ddca2d9ff2ef4547dc9cf91c9c3333fa5206210a502ebb92d9dc3711a8"
+  },
+  {
+   "id": "and-or#window@L182:c59+L184:c45",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "e06e842e1ef79e1e14424fb89d6ea6a315e95c0c931f27f05c008507e6807d13"
+  },
+  {
+   "id": "and-or#window@L182:c59+L184:c57",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "097830acbd2705e702b4744958fc3974a5cf9ecf31f5ebe6c1a7fb7f8924422e"
+  },
+  {
+   "id": "and-or#window@L182:c59+L251:c61",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "17c745fd3d8c2e44a3a2869322d9ec38a1b624be6020230428ee83dda2b8e46f"
+  },
+  {
+   "id": "and-or#window@L182:c59+L253:c35",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "f38e2371ea1fdc0ecd96215a6f6534c795f35b0dc2b03cc9de7f2a641c3cddf1"
+  },
+  {
+   "id": "and-or#window@L182:c59+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "eb894d9e2497ff2db302fe03c950c0015136be2f32974c08caea368d95399f1c"
+  },
+  {
+   "id": "and-or#window@L182:c59+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 182,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "a8695caae420ac41a1160589da2cd7a4667f30228bf4f91cc15c8d7da6a32af1"
+  },
+  {
+   "id": "and-or#window@L184:c33+L184:c45",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "e5015581b4d7f715364338305400463eceecfd6541dd1ac8f8e2efd74e1f1422"
+  },
+  {
+   "id": "and-or#window@L184:c33+L184:c57",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "28c0a3ca581bc11e9dc102adda09269b219b3978f13f677748ef40403b3197f2"
+  },
+  {
+   "id": "and-or#window@L184:c33+L251:c61",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "27ec226ca963427d87e47cdfa89fc2a46b9a932ca8f5299beb77e3802c591114"
+  },
+  {
+   "id": "and-or#window@L184:c33+L253:c35",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "7722b1c2ce6c02fa2e1bb39a70c34a2fe1c3b7d65f08ca4c236dff94335f0cc7"
+  },
+  {
+   "id": "and-or#window@L184:c33+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "6c33a603d4579d993020dde498682b6fa96d24bb17e29bd4c2f5c2d0f43751e2"
+  },
+  {
+   "id": "and-or#window@L184:c33+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 33,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "22c1775f73c2cc4962e1e587bbb1cc9e72b393740200b390ec8eaa3749bf9257"
+  },
+  {
+   "id": "and-or#window@L184:c45+L184:c57",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "5e728fe7446e3d6cea45ddb619b5fcb6dd1232ecd3d30a74915b2f5ebb094775"
+  },
+  {
+   "id": "and-or#window@L184:c45+L251:c61",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "0c3fb6dff2622a6cb2f67eac37b5f0a03482c3e95ac47791cb602b3bcf37db9d"
+  },
+  {
+   "id": "and-or#window@L184:c45+L253:c35",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "4ad8569e74021066acd5f263cf0d784a817fb2c26c83c734501bde9757104285"
+  },
+  {
+   "id": "and-or#window@L184:c45+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "0b0032f020c7cad673ae6059920d570c4ae7e9eeb4fc90337ef7a97c1eb94cdb"
+  },
+  {
+   "id": "and-or#window@L184:c45+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 45,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "e18a5507b99800384649b659e67713b3c114c6d4c6bbf2e6f57141bc6d72ac52"
+  },
+  {
+   "id": "and-or#window@L184:c57+L251:c61",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "8aa94ccb6e6f32643a2c872286fc558bfbd5b4f86f5ac9a15d08eb222844ada8"
+  },
+  {
+   "id": "and-or#window@L184:c57+L253:c35",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "8162398f2f2ac07213dd6b8aae2a623601858434f10fc5fcf383da52ff2439b9"
+  },
+  {
+   "id": "and-or#window@L184:c57+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "8788b3f72bdfa5b5616fb54ca2e4cc36358878fb8fe556a9711be2cde6fa1d09"
+  },
+  {
+   "id": "and-or#window@L184:c57+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 184,
+    "col": 57,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const truth = { verify: sigOk && anchorOk && inWindow && statusOk, stages: stagesOf(sigOk, anchorOk, inWindow,"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "87e1b9c1ce9f357b9145f6688a30e64e578ac410b88e906cc7e2506fce8cfea6"
+  },
+  {
+   "id": "and-or#window@L251:c61+L253:c35",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "585b633f930601dc0caf11bc58d5ffb69c05357e679a035f3b8f3e1972d400b1"
+  },
+  {
+   "id": "and-or#window@L251:c61+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "e6398b0be7bc638adcb41952d1f47b4544f2aab3ce56044b3580c105aaae8af2"
+  },
+  {
+   "id": "and-or#window@L251:c61+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 251,
+    "col": 61,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "e8718ab642ea6beb1bc17beab1c8c20ff1c8ecb169e99687e106e225ea7140d9"
+  },
+  {
+   "id": "and-or#window@L253:c35+L253:c47",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "9a405c413d7b99d882149cb16d18866e2901da7a35c3aaa5c7fbd165b6154dee"
+  },
+  {
+   "id": "and-or#window@L253:c35+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 253,
+    "col": 35,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "1418dc7dd9024c7fb7962019aed04690be1067b07af75dcf16417194a94761d9"
+  },
+  {
+   "id": "and-or#window@L253:c47+L253:c59",
+   "op": "and-or",
+   "family": "window",
+   "site_a": {
+    "line": 253,
+    "col": 47,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "site_b": {
+    "line": 253,
+    "col": 59,
+    "token": "&&",
+    "replacement": "||",
+    "context": "const expected_verify = sigOk && anchorOk && inWindow && statusOk;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "cd17316e7d4f9221b01232a1ffb5c29a347b74369ec9487ab182d7448977e1b7"
+  },
+  {
+   "id": "or-and#window@L241:c44+L241:c83",
+   "op": "or-and",
+   "family": "window",
+   "site_a": {
+    "line": 241,
+    "col": 44,
+    "token": "||",
+    "replacement": "&&",
+    "context": "!card.payload?.metadata?.issued_at || !card.payload?.metadata?.expires_at || !card.status) {"
+   },
+   "site_b": {
+    "line": 241,
+    "col": 83,
+    "token": "||",
+    "replacement": "&&",
+    "context": "!card.payload?.metadata?.issued_at || !card.payload?.metadata?.expires_at || !card.status) {"
+   },
+   "status": "SURVIVOR",
+   "diverges_at": [],
+   "sha256": "ddbb75a20b56e4e038b60c4e7f1b5f09e6b2a5340bb00f6caa120f34897c5b19"
+  },
+  {
+   "id": "le-narrow#window@L126:c94+L136:c94",
+   "op": "le-narrow",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 136,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial"
+   ],
+   "sha256": "4fbd77838e5d256ae161f1e1337bf08d084967827736c7d4a453f389865593f1"
+  },
+  {
+   "id": "le-narrow#window@L126:c94+L155:c94",
+   "op": "le-narrow",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 155,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial"
+   ],
+   "sha256": "f04f06c7ee02d7d1c3b03d8295a0d736221a74e97fa3e3e7af564ff9b87cf19b"
+  },
+  {
+   "id": "le-narrow#window@L126:c94+L182:c94",
+   "op": "le-narrow",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial"
+   ],
+   "sha256": "735fe8993f7ae512e9f92e767cdc3dabe0a12b70f938f27a962f128615c06ca3"
+  },
+  {
+   "id": "le-narrow#window@L126:c94+L251:c96",
+   "op": "le-narrow",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 96,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "a147ef0ca19aab03939d13a83c1ac6f700413b6526ce9c206d0266d0f8a1401d"
+  },
+  {
+   "id": "le-narrow#window@L136:c94+L155:c94",
+   "op": "le-narrow",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 155,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "0274f81dd19eee275d10494f251acb9e1ebdd20ff65749c1df63ff1973200659"
+  },
+  {
+   "id": "le-narrow#window@L136:c94+L182:c94",
+   "op": "le-narrow",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "e288b539134ea9eb92dd9f9bec12a36be5c409225e21ab69d8fb84743ed4afd7"
+  },
+  {
+   "id": "le-narrow#window@L136:c94+L251:c96",
+   "op": "le-narrow",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 96,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "41865c3f7099fdfdc485dc0f6c8eefb869e3420ea48de4f9ac42ef519acc1741"
+  },
+  {
+   "id": "le-narrow#window@L155:c94+L182:c94",
+   "op": "le-narrow",
+   "family": "window",
+   "site_a": {
+    "line": 155,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "096367e3c4333917afc5a90fdb16e824cb5ad726f1c606eedb5f4738443b7f3e"
+  },
+  {
+   "id": "le-narrow#window@L155:c94+L251:c96",
+   "op": "le-narrow",
+   "family": "window",
+   "site_a": {
+    "line": 155,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 96,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "04915d98956bc36140ccdc07fa99b76271e6c88bdbe3b93f4ce657229b05131f"
+  },
+  {
+   "id": "le-narrow#window@L182:c94+L251:c96",
+   "op": "le-narrow",
+   "family": "window",
+   "site_a": {
+    "line": 182,
+    "col": 94,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 96,
+    "token": "<=",
+    "replacement": "<",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "af1bd1958f3fb52a139717cfec43881f81abf85415c094f4de93083e3f7bc411"
+  },
+  {
+   "id": "gt-widen#window@L126:c53+L136:c53",
+   "op": "gt-widen",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 136,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial"
+   ],
+   "sha256": "83760800b9fd493205865afde4564f56d6eecfad379db595dedcb88998bc857d"
+  },
+  {
+   "id": "gt-widen#window@L126:c53+L155:c53",
+   "op": "gt-widen",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 155,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial"
+   ],
+   "sha256": "61b480a91ca70585ea9e37cdc29a87f4fd58e69d2958a52cf16c82ca4ca94a11"
+  },
+  {
+   "id": "gt-widen#window@L126:c53+L182:c53",
+   "op": "gt-widen",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial"
+   ],
+   "sha256": "264d71caec82a0353776df678f50060f0c37e14cacd53452e466150be4f80f03"
+  },
+  {
+   "id": "gt-widen#window@L126:c53+L251:c55",
+   "op": "gt-widen",
+   "family": "window",
+   "site_a": {
+    "line": 126,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 55,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "2d50454fe2e16b68687e50fade62b0f639e1f9179042194abd404a9326865d2c"
+  },
+  {
+   "id": "gt-widen#window@L136:c53+L155:c53",
+   "op": "gt-widen",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 155,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "1ea3947ee67d47589f973ec8eaf9036ad2c33d716d709184cee23ee9f297b661"
+  },
+  {
+   "id": "gt-widen#window@L136:c53+L182:c53",
+   "op": "gt-widen",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "ac19e442a231656b027012c424789c7f79d2e9e72e648f5c95f07e47aa81aaef"
+  },
+  {
+   "id": "gt-widen#window@L136:c53+L251:c55",
+   "op": "gt-widen",
+   "family": "window",
+   "site_a": {
+    "line": 136,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 55,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "d92a307555b0b93ca0021233956c4f843ef4ae6e44e4a859bc466a33b18154c0"
+  },
+  {
+   "id": "gt-widen#window@L155:c53+L182:c53",
+   "op": "gt-widen",
+   "family": "window",
+   "site_a": {
+    "line": 155,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 182,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix"
+   ],
+   "sha256": "cc01898607520c689d72f0b27a8be2f8fde832a252e715311d187fc7adc58075"
+  },
+  {
+   "id": "gt-widen#window@L155:c53+L251:c55",
+   "op": "gt-widen",
+   "family": "window",
+   "site_a": {
+    "line": 155,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 55,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "9c09432d5c7d5ee5e3ec134e32c93ece2da4ff6235f684faec0bbf4a1d6ecd68"
+  },
+  {
+   "id": "gt-widen#window@L182:c53+L251:c55",
+   "op": "gt-widen",
+   "family": "window",
+   "site_a": {
+    "line": 182,
+    "col": 53,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "site_b": {
+    "line": 251,
+    "col": 55,
+    "token": ">",
+    "replacement": ">=",
+    "context": "const inWindow = card.payload.metadata.expires_at > NOW && card.payload.metadata.issued_at <= NOW;"
+   },
+   "status": "caught",
+   "diverges_at": [
+    "matrix",
+    "adversarial",
+    "exit-1"
+   ],
+   "sha256": "c64bbce8ab067efe2f217d371dc2c46c46b717da9d24fd45eabef0e0f7b9aade"
+  }
+ ],
+ "survivors_detail": [
+  {
+   "id": "or-and#window@L241:c44+L241:c83",
+   "op": "or-and",
+   "family": "window",
+   "site_a": {
+    "line": 241,
+    "col": 44,
+    "token": "||",
+    "replacement": "&&",
+    "context": "!card.payload?.metadata?.issued_at || !card.payload?.metadata?.expires_at || !card.status) {"
+   },
+   "site_b": {
+    "line": 241,
+    "col": 83,
+    "token": "||",
+    "replacement": "&&",
+    "context": "!card.payload?.metadata?.issued_at || !card.payload?.metadata?.expires_at || !card.status) {"
+   },
+   "classification": "real (narrow)",
+   "justification": "The fail-closed guard line (!issued_at || !expires_at || !status) loses two of its three disjunctions, but the malformed-card probe deletes the ENTIRE signature/metadata block \u2014 all three conditions fire at once, so the weakened guard still aborts. A card missing exactly ONE field (e.g. issued_at absent, expires_at present) would slip past the mutated guard and be scored instead of refused \u2014 the suite never probes single-field absence, only whole-block absence. Names the check the suite does not enforce: fine-grained field-absence probes."
+  }
+ ],
+ "relationship_to_single_site": "SEPARATE column by design (anp2network round 4, 3ehp6): the single-site number in mutant-sweep.json is untouched and stays comparable across releases. Two-site results speak only to coordinated faults; they are not comparable to single-site counts and are not summed with them.",
+ "reproducibility": {
+  "regenerate": "node generate-mutants-twosite.mjs --check",
+  "deterministic": true
+ },
+ "note": "Generated two-site coordinated mutation sweep: pairs of same-operator edits inside one declared invariant family (window / anchor / signature / fail-closed), applied together and observed through the answer-key oracle. The interesting survivor is a coherent corruption of a check in BOTH the runner and the derived-truth oracle \u2014 the fault class where the answer key moves with the fault."
+}
