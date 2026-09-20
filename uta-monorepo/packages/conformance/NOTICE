@@ -1,15 +1,12 @@
-Universal Trust Adapter (UTA)
-Copyright (c) 2025–2026 AliceLabs LLC (Wyoming, USA)
+MarketNow / Universal Trust Adapter (UTA)
+Copyright 2025-2026 AliceLabs LLC, Edison Flores, and Alejandro Flores
 
-This product includes software licensed under the
-AliceLabs Source-Available License v1.0 (AL-1.0).
-See LICENSE-AL-1.0 for full terms.
+This product includes software developed by AliceLabs LLC
+(https://www.marketnow.site).
 
-Creators: Edison Flores & Alejandro Flores
-
-Trademarks:
-  "AliceLabs", "AliceLabs LLC", "MarketNow", "Sentinel", "ATC",
-  "Agent Trust Card", "MNNC", "UTA", "Universal Trust Adapter"
-  and "Universal Trust Schema" are trademarks of AliceLabs LLC.
-
-For inquiries: info@alicelabs.site
+TRADEMARK NOTICE
+"MarketNow", "AliceLabs", "Universal Trust Adapter", "UTA", "ATC",
+"Agent Trust Credential", "UTS" and "Universal Trust Schema" are trademarks
+of AliceLabs LLC. The MIT and Apache-2.0 licenses do NOT grant any right to
+use these trademarks, except as reasonably required to describe the origin
+of the Work.

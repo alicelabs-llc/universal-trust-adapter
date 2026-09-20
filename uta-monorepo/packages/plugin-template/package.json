@@ -4,11 +4,22 @@
   "description": "UTA plugin template — copy this to create a new adapter",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist", "README.md", "LICENSE"],
-  "keywords": ["uta", "trust", "adapter", "plugin"],
-  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "uta",
+    "trust",
+    "adapter",
+    "plugin"
+  ],
+  "license": "(MIT OR Apache-2.0)",
   "author": "Your Name <you@example.com>",
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "tsc"
   },

@@ -1,7 +1,7 @@
 {
   "name": "@marketnow/trust-observability",
-  "version": "1.0.0",
-  "description": "UTA Observability \u2014 structured logging, OpenTelemetry tracing, Prometheus metrics",
+  "version": "1.0.2",
+  "description": "UTA Observability — structured logging, OpenTelemetry tracing, Prometheus metrics",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -10,7 +10,7 @@
     "LICENSE-AL-1.0"
   ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
-  "license": "AL-1.0",
+  "license": "(MIT OR Apache-2.0)",
   "engines": {
     "node": ">=18"
   },

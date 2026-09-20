@@ -1,6 +1,6 @@
 {
   "name": "@marketnow/sentinel-rules",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "29 security rules for MCP servers & agents — tool poisoning, prompt injection, exfiltration, attack chains, stale-trust caching. Ships semgrep ruleset + zero-dependency lite scanner.",
   "bin": {
     "sentinel-scan": "bin/sentinel-scan.mjs"
@@ -25,7 +25,7 @@
     "linter"
   ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
-  "license": "AL-1.0",
+  "license": "(MIT OR Apache-2.0)",
   "homepage": "https://www.marketnow.site",
   "repository": {
     "type": "git",

@@ -2,7 +2,7 @@
   "name": "@marketnow/trust-adapter-template",
   "version": "0.1.0",
   "description": "MIT-licensed template for building custom trust adapters that plug into the Universal Trust Adapter (UTA).",
-  "license": "MIT",
+  "license": "(MIT OR Apache-2.0)",
   "authors": [
     "Edison Flores <edison@alicelabs.site>",
     "Alejandro Flores <alejandro@alicelabs.site>"

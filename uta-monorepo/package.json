@@ -4,7 +4,7 @@
   "private": true,
   "description": "Universal Trust Adapter — The USB-C of agent trust",
   "author": "AliceLabs LLC <info@alicelabs.site>",
-  "license": "AL-1.0",
+  "license": "(MIT OR Apache-2.0)",
   "workspaces": [
     "packages/*",
     "services/*"

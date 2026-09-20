@@ -4,12 +4,27 @@
   "description": "UTA Webhooks — real-time revocation notifications with HMAC + Ed25519 signatures",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist", "README.md", "LICENSE-AL-1.0"],
-  "keywords": ["webhooks", "notifications", "revocation", "real-time", "hmac", "ed25519"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE-AL-1.0"
+  ],
+  "keywords": [
+    "webhooks",
+    "notifications",
+    "revocation",
+    "real-time",
+    "hmac",
+    "ed25519"
+  ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
-  "license": "AL-1.0",
-  "engines": { "node": ">=18" },
-  "scripts": { "build": "tsc" },
+  "license": "(MIT OR Apache-2.0)",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "@marketnow/trust-core": "1.0.0"
   },

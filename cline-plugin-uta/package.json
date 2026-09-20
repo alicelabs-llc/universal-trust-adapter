@@ -1,6 +1,6 @@
 {
   "name": "@marketnow/cline-trust-plugin",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Trust verification plugin for Cline — the UTA Interceptor. v1.1.1: hardened interceptor rules (case-insensitive matching, path-segment boundaries — no more 'my.environment' false positives, RM -RF bypass fixed, secret-exfiltration rule added). v1.1.0 (first npm release): revocation gate (fail-closed OCSP-style checks against the signed MarketNow Revocation Registry) + TFP-1.0 tool-surface pinning and drift detection (OWASP 'verify tool descriptions haven't changed'). Still wraps MCP servers with pre-exec filter, credential protection, and Merkle tree audit log.",
   "main": "index.js",
   "type": "module",
@@ -22,7 +22,7 @@
     "tool-poisoning"
   ],
   "author": "AliceLabs LLC",
-  "license": "AL-1.0",
+  "license": "(MIT OR Apache-2.0)",
   "cline": {
     "pluginType": "mcp-server",
     "displayName": "UTA Trust Gateway",

@@ -195,9 +195,13 @@ The interim "ATC/1.4" label published earlier today in v1.12.0 is **re-versioned
 
 ## License
 
-AliceLabs LLC Proprietary (MNNC-1.0). For licensing: legal@alicelabs.site
+## License
 
-Built by AliceLabs LLC (Wyoming, USA) — founder Edison Flores.
+Dual-licensed under **MIT OR Apache-2.0, at your option** — free for any use, including
+commercial use. This repo and all MarketNow npm packages (marketnow-mcp v1.14.0+,
+agent-trust-card v1.4.0+, @marketnow/*) ship dual-licensed: see
+[LICENSE-MIT](LICENSE-MIT) and [LICENSE-APACHE](LICENSE-APACHE).
+Trademarks ("MarketNow", "UTA", "ATC") are reserved by AliceLabs LLC — see [NOTICE](NOTICE).
 
 ## Timeline
 
@@ -207,4 +211,4 @@ Built by AliceLabs LLC (Wyoming, USA) — founder Edison Flores.
 - **2026-08-09**: `marketnow-mcp@1.10.0` era (15 versions total)
 - **2026-09-17**: Current npm latest: `marketnow-mcp@1.13.0` — ATC/3.0 unified credential profile (re-version of the interim ATC/1.4 from v1.12.0). v1.12.0: 5 broken tools fixed, unified verification, hardened validation
 - **2026-08-19**: Independent audit by Z.ai (8 findings F1-F8 applied, see REPORT.pdf)
-
+- **2026-09-20**: `marketnow-mcp@1.14.0` — dual license MIT OR Apache-2.0 (Docker MCP Catalog + Cursor Publisher alignment)

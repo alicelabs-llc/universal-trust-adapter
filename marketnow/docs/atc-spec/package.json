@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MNNC-1.0",
+  "license": "(MIT OR Apache-2.0)",
   "type": "commonjs",
   "dependencies": {
     "canonicalize": "^3.0.0"

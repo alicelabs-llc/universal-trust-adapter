@@ -4,12 +4,26 @@
   "description": "UTA Key Rotation — automated CA key rotation with overlap period",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist", "README.md", "LICENSE-AL-1.0"],
-  "keywords": ["key-rotation", "ca", "overlap", "automation", "security"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE-AL-1.0"
+  ],
+  "keywords": [
+    "key-rotation",
+    "ca",
+    "overlap",
+    "automation",
+    "security"
+  ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
-  "license": "AL-1.0",
-  "engines": { "node": ">=18" },
-  "scripts": { "build": "tsc" },
+  "license": "(MIT OR Apache-2.0)",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "@marketnow/trust-core": "1.0.0"
   },

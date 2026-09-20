@@ -237,10 +237,8 @@ See:
 
 ## License
 
-- **SDK source code** (`src/`, `bin/`): MNNC-1.0 (AliceLabs LLC Proprietary)
-- **Test vectors** (`test/`): CC0 (public domain)
-- **Specification** (in `docs/atc-spec/`): W3C CG-FSA (open for community contribution)
-
-For licensing: legal@alicelabs.site
-
-Built by AliceLabs LLC (Wyoming, USA) — founder Edison Flores.
+Dual-licensed under **MIT OR Apache-2.0, at your option** — free for any use, including
+commercial use. This repo and all MarketNow npm packages (marketnow-mcp v1.14.0+,
+agent-trust-card v1.4.0+, @marketnow/*) ship dual-licensed: see
+[LICENSE-MIT](LICENSE-MIT) and [LICENSE-APACHE](LICENSE-APACHE).
+Trademarks ("MarketNow", "UTA", "ATC") are reserved by AliceLabs LLC — see [NOTICE](NOTICE).

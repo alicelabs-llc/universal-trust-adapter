@@ -1,21 +1,24 @@
-MIT License
+Dual-Licensed: MIT OR Apache-2.0, at your option.
 
-Copyright (c) 2026 MarketNow
+This work is dual-licensed under both the MIT License and the Apache
+License, Version 2.0. You may use, copy, modify, and redistribute this
+work under the terms of EITHER license, at your option.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+  - MIT License:        see LICENSE-MIT
+    (https://opensource.org/licenses/MIT)
+  - Apache License 2.0: see LICENSE-APACHE
+    (https://www.apache.org/licenses/LICENSE-2.0)
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+New versions of this work will be published under this dual license;
+previously published versions retain the license under which they were
+originally released.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Unless you explicitly state otherwise, any contribution intentionally
+submitted for inclusion in this work by you, as defined in the Apache-2.0
+license, shall be dual-licensed as above, without any additional terms
+or conditions.
+
+Trademarks ("MarketNow", "AliceLabs", "UTA", "ATC", "UTS") are reserved
+by AliceLabs LLC and are not licensed under this notice - see NOTICE.
+
+Copyright (c) 2025-2026 AliceLabs LLC, Edison Flores, and Alejandro Flores.

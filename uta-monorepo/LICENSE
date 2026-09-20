@@ -1,16 +1,24 @@
-This repository is licensed under the AliceLabs Source-Available License v1.0 (AL-1.0).
+Dual-Licensed: MIT OR Apache-2.0, at your option.
 
-The full license text is in: LICENSE-AL-1.0
+This work is dual-licensed under both the MIT License and the Apache
+License, Version 2.0. You may use, copy, modify, and redistribute this
+work under the terms of EITHER license, at your option.
 
-For commercial licensing: legal@alicelabs.site
+  - MIT License:        see LICENSE-MIT
+    (https://opensource.org/licenses/MIT)
+  - Apache License 2.0: see LICENSE-APACHE
+    (https://www.apache.org/licenses/LICENSE-2.0)
 
-License table:
-  packages/core/           → AL-1.0 (proprietary, source-available)
-  packages/uts/            → CC-BY-NC-ND 4.0 (spec is open for reading)
-  packages/adapters/       → AL-1.0 (proprietary, source-available)
-  packages/conformance/    → AL-1.0 (proprietary, source-available)
-  packages/gateway/        → AL-1.0 (proprietary, source-available)
-  specs/                   → CC-BY-NC-ND 4.0 (open for reading)
-  vectors/                 → CC-BY-4.0 (open for use)
-  threat-model/             → CC-BY-4.0 (open for use)
-  supply-chain/             → AL-1.0 (proprietary)
+New versions of this work will be published under this dual license;
+previously published versions retain the license under which they were
+originally released.
+
+Unless you explicitly state otherwise, any contribution intentionally
+submitted for inclusion in this work by you, as defined in the Apache-2.0
+license, shall be dual-licensed as above, without any additional terms
+or conditions.
+
+Trademarks ("MarketNow", "AliceLabs", "UTA", "ATC", "UTS") are reserved
+by AliceLabs LLC and are not licensed under this notice - see NOTICE.
+
+Copyright (c) 2025-2026 AliceLabs LLC, Edison Flores, and Alejandro Flores.

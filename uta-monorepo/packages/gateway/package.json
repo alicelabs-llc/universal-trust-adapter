@@ -1,7 +1,7 @@
 {
   "name": "@marketnow/trust-gateway",
-  "version": "1.0.3",
-  "description": "UTA Trust Gateway \u2014 MCP middleware enforcing trust decisions on agent tool calls (12-stage pipeline, Ed25519/JCS, signed receipts). Zero deps, self-contained.",
+  "version": "1.0.4",
+  "description": "UTA Trust Gateway — MCP middleware enforcing trust decisions on agent tool calls (12-stage pipeline, Ed25519/JCS, signed receipts). Zero deps, self-contained.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -21,7 +21,7 @@
     "audit-trail"
   ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
-  "license": "AL-1.0",
+  "license": "(MIT OR Apache-2.0)",
   "homepage": "https://github.com/eddyflores100-lang/universal-trust-adapter",
   "repository": {
     "type": "git",
