@@ -25,3 +25,5 @@ marketnow/_data/atc/ca-legacy-keypair*.json
 upload/
 *.bak-mnreal
 *.bak-curation2
+# Agent artifacts — never publish (untracked 2026-09-21, see AUDITORIA-FORENSE)
+download/
