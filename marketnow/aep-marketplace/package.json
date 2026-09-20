@@ -45,7 +45,7 @@
     "vite": "^8.0.12",
     "wrangler": "^4.105.0"
   },
-  "license": "MNNC-1.0",
+  "license": "(MIT OR Apache-2.0)",
   "atc_version": "2.0",
   "config": {
     "supabase_required_env": [

@@ -1,6 +1,6 @@
 {
   "name": "marketnow-install-stack",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "One-command curated skill-stack installs for Claude Desktop, Cursor and Cline. Resolves stacks against the LIVE MarketNow catalog (9,000+ MCP skills; /api/skills?category=...&filter=free) with an embedded offline fallback, follows HTTP redirects, honors each skill's real install command (npx / uvx), merges into your existing agent config with automatic backup, and supports --help / --list. Stacks: financial-auditor (Finance), security-analyst (Security), data-pipeline (Data), dev-productivity (Developer Tools), growth-hacking (AI/ML). v1.2.0 reliability release — fixes the broken apex-domain fetch and the removed /api/stacks endpoint from v1.1.x.",
   "type": "commonjs",
   "main": "index.js",
@@ -33,7 +33,7 @@
     "marketnow"
   ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
-  "license": "MNNC-1.0",
+  "license": "(MIT OR Apache-2.0)",
   "homepage": "https://marketnow.site",
   "repository": {
     "type": "git",

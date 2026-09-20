@@ -161,11 +161,8 @@ supply-chain/        # SLSA + Sigstore + SBOM CI/CD design
 
 ## License
 
-| Path | License |
-|------|---------|
-| packages/core, adapters, gateway, conformance | AL-1.0 (source-available, commercial requires license) |
-| specs/ (UTS, ATC RFC) | CC-BY-NC-ND 4.0 (open for reading) |
-| vectors/, threat-model/ | CC-BY-4.0 (open for use) |
-| Plugin template (when available) | MIT |
-
-Built by Edison Flores & Alejandro Flores at AliceLabs LLC (Wyoming, USA).
+Dual-licensed under **MIT OR Apache-2.0, at your option** — free for any use, including
+commercial use. This repo and all MarketNow npm packages (marketnow-mcp v1.14.0+,
+agent-trust-card v1.4.0+, @marketnow/*) ship dual-licensed: see
+[LICENSE-MIT](LICENSE-MIT) and [LICENSE-APACHE](LICENSE-APACHE).
+Trademarks ("MarketNow", "UTA", "ATC") are reserved by AliceLabs LLC — see [NOTICE](NOTICE).

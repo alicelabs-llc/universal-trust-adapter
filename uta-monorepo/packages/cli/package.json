@@ -1,7 +1,7 @@
 {
   "name": "@marketnow/uta-verify",
-  "version": "1.0.0",
-  "description": "UTA Verify CLI \u2014 command-line credential verifier (ATC v3, JWT, VC, A2A, EAT, ZTA, MCP)",
+  "version": "1.0.1",
+  "description": "UTA Verify CLI — command-line credential verifier (ATC v3, JWT, VC, A2A, EAT, ZTA, MCP)",
   "main": "dist/uta-verify.js",
   "bin": {
     "uta-verify": "dist/uta-verify.js"
@@ -21,7 +21,7 @@
     "atc"
   ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
-  "license": "AL-1.0",
+  "license": "(MIT OR Apache-2.0)",
   "engines": {
     "node": ">=18"
   },

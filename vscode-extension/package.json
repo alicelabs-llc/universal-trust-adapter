@@ -4,14 +4,29 @@
   "description": "Shows green/red trust badge next to MCP servers. Uses @marketnow/trust-core to verify ATC credentials before execution.",
   "version": "0.1.0",
   "publisher": "alicelabs",
-  "license": "AL-1.0",
+  "license": "(MIT OR Apache-2.0)",
   "repository": {
     "type": "git",
     "url": "https://github.com/alicelabs-llc/universal-trust-adapter"
   },
-  "engines": { "vscode": "^1.80.0" },
-  "categories": ["Other", "Testing", "Security"],
-  "keywords": ["mcp", "ai", "agents", "trust", "security", "claude", "cline", "cursor"],
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other",
+    "Testing",
+    "Security"
+  ],
+  "keywords": [
+    "mcp",
+    "ai",
+    "agents",
+    "trust",
+    "security",
+    "claude",
+    "cline",
+    "cursor"
+  ],
   "activationEvents": [
     "onCommand:uta.verifyTrust",
     "onLanguage:json",
@@ -70,12 +85,16 @@
     "icons": {
       "uta-trusted": {
         "description": "Trusted MCP server",
-        "default": { "fontPath": "icons.woff", "fontCharacter": "\\E001"
+        "default": {
+          "fontPath": "icons.woff",
+          "fontCharacter": "\\E001"
         }
       },
       "uta-untrusted": {
         "description": "Untrusted MCP server",
-        "default": { "fontPath": "icons.woff", "fontCharacter": "\\E002"
+        "default": {
+          "fontPath": "icons.woff",
+          "fontCharacter": "\\E002"
         }
       }
     }

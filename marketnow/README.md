@@ -163,19 +163,8 @@ The 12 tools:
 
 ## License
 
-AL code in this repository is PROPRIETARY — property of AliceLabs LLC.
-
-For licensing: legal@alicelabs.site
-For support: support@alicelabs.site
-General: info@alicelabs.site
-
-Built by AliceLabs LLC (Wyoming, USA) — founder Edison Flores.
-
-## Timeline
-
-- **2025**: AliceLabs LLC legally founded in Wyoming, USA (founder Edison Flores, Ecuadorian)
-- **2026-03-30**: GitHub organization `github.com/alicelabs-llc` created
-- **2026-06-29**: MarketNow launched publicly (first npm release: `marketnow-mcp@1.5.1`)
-- **2026-08-09**: Current npm latest: `marketnow-mcp@1.10.0` (15 versions total)
-- **2026-08-19**: Independent audit by Z.ai (8 findings F1-F8 applied, see REPORT.pdf)
-
+Dual-licensed under **MIT OR Apache-2.0, at your option** — free for any use, including
+commercial use. This repo and all MarketNow npm packages (marketnow-mcp v1.14.0+,
+agent-trust-card v1.4.0+, @marketnow/*) ship dual-licensed: see
+[LICENSE-MIT](LICENSE-MIT) and [LICENSE-APACHE](LICENSE-APACHE).
+Trademarks ("MarketNow", "UTA", "ATC") are reserved by AliceLabs LLC — see [NOTICE](NOTICE).

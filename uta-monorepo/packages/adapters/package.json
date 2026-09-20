@@ -1,6 +1,6 @@
 {
   "name": "@marketnow/trust-adapters",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "UTA Trust Adapters — ATC v3, EAT-AI, A2A, ZTA, MCP, W3C VC, OAuth/OIDC, SPIFFE, X.509 normalized for the TrustEngine. Zero deps, self-contained.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,7 +33,7 @@
     "multi-signature"
   ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
-  "license": "AL-1.0",
+  "license": "(MIT OR Apache-2.0)",
   "homepage": "https://github.com/eddyflores100-lang/universal-trust-adapter",
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 {
   "name": "@marketnow/trust-core",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "UTA Verification Core — the full agent-trust stack in one zero-dependency package: 12-stage verification pipeline, Ed25519 (RFC 8032) + JCS (RFC 8785) canonicalization, proof-of-possession, behavioral baselines with statistical drift detection (7 signal classes), capability graph with org policies (ALLOW / REQUIRE_APPROVAL / BLOCK + approval workflow), multi-tool attack-chain detection (AC-001..007) with data-flow graphs and trajectory risk scoring, cross-agent delegation gates, memory poisoning detection, Merkle transparency log with signed tree heads (RFC 6962-style), TFP-1.0 tool fingerprinting with drift reports, and evidence-first findings with confidence scoring. Every release is exercised by a registry-installed smoke suite (21/21). Zero runtime dependencies.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,7 +30,7 @@
     "sigstore"
   ],
   "author": "AliceLabs LLC <info@alicelabs.site>",
-  "license": "AL-1.0",
+  "license": "(MIT OR Apache-2.0)",
   "homepage": "https://github.com/eddyflores100-lang/universal-trust-adapter",
   "repository": {
     "type": "git",
