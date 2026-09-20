@@ -1,6 +1,6 @@
 {
   "name": "@marketnow/sentinel-rules",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "29 security rules for MCP servers & agents — tool poisoning, prompt injection, exfiltration, attack chains, stale-trust caching. Ships semgrep ruleset + zero-dependency lite scanner.",
   "bin": {
     "sentinel-scan": "bin/sentinel-scan.mjs"
@@ -9,10 +9,10 @@
     "bin",
     "rules",
     "README.md",
-    "LICENSE-AL-1.0",
     "NOTICE",
     "LICENSE-MIT",
-    "LICENSE-APACHE"
+    "LICENSE-APACHE",
+    "LICENSE"
   ],
   "keywords": [
     "semgrep",

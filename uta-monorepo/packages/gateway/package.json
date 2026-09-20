@@ -1,6 +1,6 @@
 {
   "name": "@marketnow/trust-gateway",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "UTA Trust Gateway — MCP middleware enforcing trust decisions on agent tool calls (12-stage pipeline, Ed25519/JCS, signed receipts). Zero deps, self-contained.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,10 +8,10 @@
     "dist",
     "core",
     "README.md",
-    "LICENSE-AL-1.0",
     "NOTICE",
     "LICENSE-MIT",
-    "LICENSE-APACHE"
+    "LICENSE-APACHE",
+    "LICENSE"
   ],
   "keywords": [
     "mcp",
