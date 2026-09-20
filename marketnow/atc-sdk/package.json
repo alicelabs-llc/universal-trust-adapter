@@ -68,6 +68,9 @@
     "bin/",
     "README.md",
     "LICENSE",
-    "CONFORMANCE.md"
+    "CONFORMANCE.md",
+    "LICENSE-MIT",
+    "LICENSE-APACHE",
+    "NOTICE"
   ]
 }

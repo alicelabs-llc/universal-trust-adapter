@@ -92,7 +92,10 @@
     "README.md",
     "LICENSE",
     "AUDIT.md",
-    "VERIFICATION-LOG.md"
+    "VERIFICATION-LOG.md",
+    "LICENSE-MIT",
+    "LICENSE-APACHE",
+    "NOTICE"
   ],
   "mcpName": "io.github.alicelabs-llc/marketnow",
   "audit_applied": {

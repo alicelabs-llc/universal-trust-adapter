@@ -49,6 +49,9 @@
   "files": [
     "audit.mjs",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "LICENSE-MIT",
+    "LICENSE-APACHE",
+    "NOTICE"
   ]
 }
