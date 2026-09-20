@@ -1,12 +1,12 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.alicelabs-llc/marketnow",
+  "name": "site.marketnow/marketnow",
   "description": "Free trust & safety layer for AI agents: pre-call MCP tool gating, Agent Trust Cards, audit trails.",
   "repository": {
     "url": "https://github.com/alicelabs-llc/marketnow",
     "source": "github"
   },
-  "version": "1.14.0",
+  "version": "1.14.1",
   "homepage": "https://marketnow.site",
   "license": "(MIT OR Apache-2.0)",
   "author": {
@@ -29,7 +29,7 @@
     {
       "registryType": "npm",
       "identifier": "marketnow-mcp",
-      "version": "1.14.0",
+      "version": "1.14.1",
       "transport": {
         "type": "stdio"
       }
