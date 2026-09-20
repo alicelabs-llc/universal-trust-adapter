@@ -1,16 +1,16 @@
 {
   "name": "@marketnow/trust-mcp-middleware",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "UTA MCP middleware — wraps Anthropic MCP tools/call with TrustGateway enforcement",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
     "README.md",
-    "LICENSE-AL-1.0",
     "LICENSE-MIT",
     "LICENSE-APACHE",
-    "NOTICE"
+    "NOTICE",
+    "LICENSE"
   ],
   "keywords": [
     "mcp",

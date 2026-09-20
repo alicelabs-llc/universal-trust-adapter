@@ -1,6 +1,6 @@
 {
   "name": "@marketnow/trust-adapters",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "UTA Trust Adapters — ATC v3, EAT-AI, A2A, ZTA, MCP, W3C VC, OAuth/OIDC, SPIFFE, X.509 normalized for the TrustEngine. Zero deps, self-contained.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,10 +8,10 @@
     "dist",
     "core",
     "README.md",
-    "LICENSE-AL-1.0",
     "NOTICE",
     "LICENSE-MIT",
-    "LICENSE-APACHE"
+    "LICENSE-APACHE",
+    "LICENSE"
   ],
   "keywords": [
     "trust",

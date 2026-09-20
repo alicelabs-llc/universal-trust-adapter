@@ -7,7 +7,10 @@
   "files": [
     "dist",
     "README.md",
-    "LICENSE-AL-1.0"
+    "LICENSE",
+    "LICENSE-MIT",
+    "LICENSE-APACHE",
+    "NOTICE"
   ],
   "keywords": [
     "websocket",

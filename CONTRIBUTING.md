@@ -178,7 +178,7 @@ Maintainers only:
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the [AL-1.0 License](./LICENSE-AL-1.0).
+By contributing, you agree that your contributions will be licensed under the [AL-1.0 License](./LICENSE (MIT OR Apache-2.0)).
 
 ## Questions?
 

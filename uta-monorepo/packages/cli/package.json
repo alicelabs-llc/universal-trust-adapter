@@ -1,6 +1,6 @@
 {
   "name": "@marketnow/uta-verify",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "UTA Verify CLI — command-line credential verifier (ATC v3, JWT, VC, A2A, EAT, ZTA, MCP)",
   "main": "dist/uta-verify.js",
   "bin": {
@@ -9,10 +9,10 @@
   "files": [
     "dist",
     "README.md",
-    "LICENSE-AL-1.0",
     "LICENSE-MIT",
     "LICENSE-APACHE",
-    "NOTICE"
+    "NOTICE",
+    "LICENSE"
   ],
   "keywords": [
     "cli",
