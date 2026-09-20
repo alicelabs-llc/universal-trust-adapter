@@ -13,5 +13,14 @@
   "bugs": {
     "url": "https://github.com/alicelabs-llc/universal-trust-adapter/issues"
   },
-  "license": "(MIT OR Apache-2.0)"
+  "license": "(MIT OR Apache-2.0)",
+  "files": [
+    "index.js",
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "LICENSE-MIT",
+    "LICENSE-APACHE",
+    "NOTICE"
+  ]
 }

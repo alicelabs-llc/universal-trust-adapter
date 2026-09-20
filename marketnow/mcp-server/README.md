@@ -195,8 +195,6 @@ The interim "ATC/1.4" label published earlier today in v1.12.0 is **re-versioned
 
 ## License
 
-## License
-
 Dual-licensed under **MIT OR Apache-2.0, at your option** — free for any use, including
 commercial use. This repo and all MarketNow npm packages (marketnow-mcp v1.14.0+,
 agent-trust-card v1.4.0+, @marketnow/*) ship dual-licensed: see

@@ -8,7 +8,9 @@
     "dist",
     "README.md",
     "LICENSE-AL-1.0",
-    "NOTICE"
+    "NOTICE",
+    "LICENSE-MIT",
+    "LICENSE-APACHE"
   ],
   "keywords": [
     "trust",

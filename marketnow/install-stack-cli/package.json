@@ -49,6 +49,9 @@
   "files": [
     "index.js",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "LICENSE-MIT",
+    "LICENSE-APACHE",
+    "NOTICE"
   ]
 }

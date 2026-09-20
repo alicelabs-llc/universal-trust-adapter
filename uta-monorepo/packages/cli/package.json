@@ -9,7 +9,10 @@
   "files": [
     "dist",
     "README.md",
-    "LICENSE-AL-1.0"
+    "LICENSE-AL-1.0",
+    "LICENSE-MIT",
+    "LICENSE-APACHE",
+    "NOTICE"
   ],
   "keywords": [
     "cli",
