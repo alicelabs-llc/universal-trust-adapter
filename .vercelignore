@@ -8,7 +8,7 @@
 # ── inside the site: keep the upload lean ──
 /marketnow/aep-marketplace/marketnow-source
 /marketnow/aep-marketplace/docs
-/marketnow/aep-marketplace/scripts
+# scripts/ YA NO se excluye: contiene check-asset-sizes.mjs (gate F-06 del prebuild)
 /marketnow/aep-marketplace/tests
 /marketnow/aep-marketplace/mcp-server
 /marketnow/aep-marketplace/db
