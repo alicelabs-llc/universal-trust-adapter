@@ -1,0 +1,57 @@
+# CI — OpenSSF Scorecard: CI-Tests + Token-Permissions
+# Corre la suite de tests de adaptadores UTA y el gate+build de MarketNow
+# en cada push a main y en cada pull request.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Least privilege — el CI solo necesita leer el código
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  uta-adapter-tests:
+    name: UTA adapter tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # Pinned by commit SHA — OpenSSF Scorecard: Pinned-Actions
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '24'
+      - name: Adapter test suite (translation matrix, signatures, revocations)
+        run: node tests/test.mjs
+
+  marketnow-gate-build:
+    name: MarketNow asset gate + build
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: marketnow/aep-marketplace
+    steps:
+      # Pinned by commit SHA — OpenSSF Scorecard: Pinned-Actions
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: marketnow/aep-marketplace/package-lock.json
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Asset size gate (audit F-06 — prohibits 50MB+ dumps)
+        run: node scripts/check-asset-sizes.mjs
+      - name: Production build (vite)
+        run: npm run build
+      - name: MCP server syntax check
+        run: node --check mcp.js

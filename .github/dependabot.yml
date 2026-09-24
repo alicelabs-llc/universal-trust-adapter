@@ -1,0 +1,95 @@
+# Dependency updates — OpenSSF Scorecard: Dependency-Update-Tool
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates
+version: 2
+
+updates:
+  # GitHub Actions referenced by .github/workflows/* (pinning maintenance)
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: America/Guayaquil
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: "chore(actions)"
+
+  # MarketNow AEP marketplace (production app — marketnow.site)
+  - package-ecosystem: npm
+    directory: /marketnow/aep-marketplace
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: America/Guayaquil
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - marketnow
+    commit-message:
+      prefix: "chore(deps)"
+
+  # UTA monorepo workspace
+  - package-ecosystem: npm
+    directory: /uta-monorepo
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: America/Guayaquil
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - uta-monorepo
+    commit-message:
+      prefix: "chore(deps)"
+
+  # Standalone npm packages that ship to the registry
+  - package-ecosystem: npm
+    directory: /marketnow/mcp-server
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: America/Guayaquil
+    open-pull-requests-limit: 3
+    labels:
+      - dependencies
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: npm
+    directory: /marketnow/atc-sdk
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: America/Guayaquil
+    open-pull-requests-limit: 3
+    labels:
+      - dependencies
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: npm
+    directory: /marketnow/marketnow-cli
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: America/Guayaquil
+    open-pull-requests-limit: 3
+    labels:
+      - dependencies
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: npm
+    directory: /marketnow/install-stack-cli
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: America/Guayaquil
+    open-pull-requests-limit: 3
+    labels:
+      - dependencies
+    commit-message:
+      prefix: "chore(deps)"
