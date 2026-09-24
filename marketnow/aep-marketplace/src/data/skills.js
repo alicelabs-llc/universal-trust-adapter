@@ -6,14 +6,18 @@ let freeSkillsCache = null;
 export async function getAllSkills() {
   if (skillsCache) return skillsCache;
   try {
-    // skills-lite.json first — 2x+ smaller, has everything the UI needs (v5.4 catalog is 40k entries)
+    // skills-lite.json first — has everything the UI needs
     const res = await fetch(`${API_BASE}/api/skills-lite.json`);
     if (res.ok) { skillsCache = await res.json(); return skillsCache; }
   } catch {}
-  // Fallback to skills_index.json — full data (doc, capabilities, sentinel)
+  // Fallback: paginated API (skills_index.json removed 2026-09-25 — audit F-06)
   try {
-    const res = await fetch(`${API_BASE}/api/skills_index.json`);
-    if (res.ok) { skillsCache = await res.json(); return skillsCache; }
+    const res = await fetch(`${API_BASE}/api/skills?page=1&limit=500`);
+    if (res.ok) {
+      const d = await res.json();
+      skillsCache = d.skills || [];
+      return skillsCache;
+    }
   } catch {}
   return [];
 }

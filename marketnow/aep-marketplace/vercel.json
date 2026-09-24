@@ -4,6 +4,14 @@
   "framework": "vite",
   "rewrites": [
     {
+      "source": "/api/skills.json",
+      "destination": "/api/skills?_mode=manifest"
+    },
+    {
+      "source": "/api/stats.json",
+      "destination": "/api/skills?_mode=stats"
+    },
+    {
       "source": "/(.*\\.sh)",
       "destination": "/api/skills?_mode=notfound"
     },

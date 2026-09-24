@@ -23,8 +23,8 @@
   "paths": {
     "/api/skills.json": {
       "get": {
-        "summary": "List all skills",
-        "description": "Returns the complete catalog of 68,387 skills. Each skill includes id, name, slug, description, category, tags, price, currency, install command, translations (if available), and system_prompt (if available).\n\n**Cache this response locally** — refresh every 24 hours maximum. The catalog changes infrequently.",
+        "summary": "Skills catalog dump (DEPRECATED — removed 2026-09-25)",
+        "description": "Returns a small deprecation manifest. The unpaginated 94MB catalog dump was removed on 2026-09-25 (audit AUD-2026-0821-MN finding F-06). Use GET /api/skills?page=1&limit=100 (paginated, max limit 500, supports category, filter, sort, q, risk, tier) or GET /api/skills-lite.json for the bulk dataset the UI uses. See /api/manifest.json.",
         "operationId": "listSkills",
         "parameters": [
           {
@@ -138,7 +138,8 @@
               }
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/api/manifest.json": {

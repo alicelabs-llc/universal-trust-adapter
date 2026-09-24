@@ -24,8 +24,8 @@ SECURITY AUDIT:
 POST https://www.marketnow.site/api/audit-skill
 Body: {"skillId":"mn-gen-00015"}
 
-ALL SKILLS (bulk download):
-curl https://www.marketnow.site/api/skills.json
+ALL SKILLS (paginated — the bulk dump /api/skills.json was removed 2026-09-25, audit F-06):
+curl "https://www.marketnow.site/api/skills?page=1&limit=100"
 
 AGENT INSTRUCTIONS:
 curl https://www.marketnow.site/api/agent.json

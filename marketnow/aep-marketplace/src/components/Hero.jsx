@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 export default function Hero({ onSignIn }) {
-  const [stats, setStats] = useState({ total: 68387, categories: 16, avgPrice: 2.50 });
+  const [stats, setStats] = useState({ total: 68388, categories: 16, avgPrice: 2.50 });
 
   useEffect(() => {
     fetch('/api/manifest.json')
