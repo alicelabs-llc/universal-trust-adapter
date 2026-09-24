@@ -1,9 +1,9 @@
 {
   "schema": "marketnow-catalog-meta/1.0",
-  "generated_at": "2026-09-16",
-  "total_all": 132736,
-  "core_certified": 59256,
-  "community_indexed": 9131,
+  "generated_at": "2026-09-25",
+  "total_all": 132737,
+  "core_certified": 59255,
+  "community_indexed": 9133,
   "aggregate_tracked": 64349,
   "sources": {
     "github": 11438,
@@ -16,5 +16,6 @@
     "docker": 625,
     "npm-registry": 19519,
     "community-submission": 2
-  }
+  },
+  "note": "Tiers recomputed from the deployed skills-lite.json bundle (core includes the official first-party entry). CI gate: tiers must sum to the bundle total."
 }
