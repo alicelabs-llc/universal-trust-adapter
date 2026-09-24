@@ -22,7 +22,7 @@ Add to Claude Desktop / Cursor / Cline config:
 ```
 
 ## Security layers (10)
-- L1.5: 6 metadata checks (auth, injection, CORS, OAuth, rate limiting)
+- L1 (Sentinel v3.0): 10 index certification checks on every entry (metadata, auth, injection, CORS, OAuth, rate limiting)
 - L1.6: 36 semgrep rules + 18 secret patterns + OSV dependency check
 - L1.7: 8 malware patterns + binary/launcher detection (opens package zips)
 - L1.8: 28 malware family signatures (Emotet, LockBit, Cobalt Strike, Mimikatz, RedLine, etc.)
@@ -100,7 +100,7 @@ Discussion: https://github.com/PipedreamHQ/awesome-mcp-servers/issues/94
 ## API endpoints (14)
 - GET /api/health — 41 bytes, ultra-lightweight
 - GET /api/manifest — all metadata in one call
-- GET /api/skills.json — all 66,496 skills
+- GET /api/skills?page=1&limit=100 — paginated catalog, 68,388 skills (/api/skills.json removed 2026-09-25 — audit F-06; returns deprecation manifest)
 - GET /api/audit-skill?skillId=X — real-time 10-layer audit
 - GET /api/trust-score?skillId=X — trust score for a skill
 - GET /api/security — security overview (10 layers)

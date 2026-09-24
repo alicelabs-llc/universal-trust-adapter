@@ -171,6 +171,6 @@
     "pricing_source": "https://marketnow.site/api/pricing.json"
   },
   "api_notes": {
-    "skills_pagination": "The /api/skills endpoint is paginated (default 100 per page, max 500). The old /api/skills.json (24MB) is deprecated — use /api/skills?page=1&limit=100 instead."
+    "skills_pagination": "The /api/skills endpoint is paginated (default 100 per page, max 500). The old /api/skills.json dump was REMOVED 2026-09-25 (audit F-06, it had grown to 94MB) — that URL now returns a deprecation manifest; use /api/skills?page=1&limit=100 or /api/skills-lite.json instead."
   }
 }

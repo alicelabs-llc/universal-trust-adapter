@@ -13,9 +13,16 @@
 // POST /api/submit  → rewrite → /api/skills?_mode=submit  (public, no auth)
 // GET  /api/submit  → docs schema
 // GET  /api/submissions → rewrite → /api/skills?_mode=queue (public queue)
+//
+// ── F-06 closure endpoints (audit AUD-2026-0821-MN, Phase 2, 2026-09-25) ──
+// GET /api/skills.json → rewrite → /api/skills?_mode=manifest (deprecation manifest;
+//        the 94MB unpaginated dump was removed from public/)
+// GET /api/stats.json  → rewrite → /api/skills?_mode=stats (live-computed stats —
+//        kills the static-file drift: totals/versions derived from this bundle + stamp)
 
 import skillsData from '../public/api/skills-lite.json' with { type: 'json' };
 import catalogMeta from '../public/api/catalog-meta.json' with { type: 'json' };
+import statsBase from '../lib/stats-base.json' with { type: 'json' };
 import { mountSubmission } from '../lib/submit-http.mjs';
 
 const SITE = 'https://www.marketnow.site';
@@ -41,6 +48,72 @@ export default function handler(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=600');
   res.setHeader('Access-Control-Allow-Origin', '*');
+
+  const allSkills = skillsData.skills || skillsData || [];
+
+  // ── F-06: deprecation manifest for the removed /api/skills.json blob ──
+  if (req.query._mode === 'manifest') {
+    return res.status(200).json({
+      deprecated: true,
+      resource: '/api/skills.json',
+      removed_date: '2026-09-25',
+      reason: 'Unpaginated full-catalog dump grew to 94MB (audit F-06 regression, 24MB → 94MB). Replaced by the paginated API; the same data the UI uses ships as skills-lite.json.',
+      total_catalog: allSkills.length,
+      alternatives: {
+        paginated_api: '/api/skills?page=1&limit=100',
+        paginated_params: 'page, limit (max 500), category, filter=free, sort=recent|downloads|trust|name, q, risk=red|yellow|green, tier=core|community',
+        lite_dataset: '/api/skills-lite.json',
+        free_dataset: '/api/free-skills.json',
+        stats: '/api/stats.json',
+        manifest: '/api/manifest.json',
+        openapi: '/api/openapi.json'
+      },
+      note: 'clients that cached the old dump should re-fetch page-by-page; server-side search: /api/search?q='
+    });
+  }
+
+  // ── N-09: live stats (replaces the drifting static stats.json) ──
+  if (req.query._mode === 'stats') {
+    const free = allSkills.filter(s => s.is_free === true || s.free === true || (s.price === 0 && !s.payment)).length;
+    const cats = {};
+    for (const s of allSkills) {
+      const k = String(s.category || 'uncategorized').toLowerCase().trim().replace(/\s+/g, '-');
+      cats[k] = (cats[k] || 0) + 1;
+    }
+    const sortedCats = Object.fromEntries(Object.entries(cats).sort((a, b) => b[1] - a[1]));
+    const base = JSON.parse(JSON.stringify(statsBase));
+    const stamp = base._stamp || {};
+    delete base._stamp;
+    base.computed_at = new Date().toISOString();
+    base.computed_from = 'skills-lite.json bundle (' + allSkills.length + ' entries) + catalog-meta.json + npm stamp ' + (stamp.stamped_at || 'n/a');
+    base.discovery = {
+      ...base.discovery,
+      total_mcp_servers: allSkills.length,
+      total_tracked_all_sources: catalogMeta.total_all,
+      core_certified: catalogMeta.core_certified,
+      community_indexed: catalogMeta.community_indexed,
+      aggregate_tracked: catalogMeta.aggregate_tracked,
+      free,
+      free_to_install: allSkills.length,
+      paid: allSkills.length - free,
+      categories: sortedCats
+    };
+    if (base.security) {
+      base.security.l1_index_certified = allSkills.length;
+      base.security.security_checks_performed = (base.security.l1_checks || 10) * allSkills.length;
+    }
+    if (stamp.mcp_server_version && base.tools) {
+      base.tools.mcp_server_version = stamp.mcp_server_version;
+      base.tools.atc_sdk_version = stamp.atc_sdk_version;
+    }
+    if (stamp.npm_latest_version && base.distribution) {
+      base.distribution.npm_latest_version = stamp.npm_latest_version;
+      base.distribution.npm_latest_release_date = stamp.npm_latest_release_date;
+      base.distribution.npm_versions_published = stamp.npm_versions_published;
+      base.distribution.npm_downloads_last_month = stamp.npm_downloads_last_month;
+    }
+    return res.status(200).json(base);
+  }
 
   const page = Math.max(1, parseInt(req.query.page || '1', 10));
   const limit = Math.min(500, Math.max(1, parseInt(req.query.limit || '100', 10)));

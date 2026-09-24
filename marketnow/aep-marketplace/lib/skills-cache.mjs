@@ -7,10 +7,10 @@
  *           el sitio cae.
  *
  * SOLUCIÓN: 
- *   1. Cargar skills-lite.json (4.6MB) en vez de skills.json (30MB)
+ *   1. Cargar skills-lite.json (48MB) en vez de skills.json (94MB, ELIMINADO 2026-09-25 — audit F-06)
  *   2. Cache en memoria del módulo con TTL de 5 minutos
- *   3. Eliminar self-fetch (fetch al propio dominio)
- *   4. Fallback a skills.json si lite no existe
+ *   3. Eliminar self-fetch (fetch al propio dominio) salvo último recurso
+ *   4. Fallback HTTP a skills-lite.json (el dump completo skills.json fue removido)
  *
  * Notas:
  *   - El cache sobrevive warm starts en Vercel (module-level)
@@ -59,10 +59,10 @@ async function _loadSkills() {
   const now = Date.now();
 
   // Estrategia 1: leer archivo desde filesystem (build-time embed)
+  // skills.json (94MB) removido 2026-09-25 — F-06: solo skills-lite
   const candidates = [
     PATH.join(process.cwd(), 'public', 'api', 'skills-lite.json'),
     PATH.join(process.cwd(), 'dist', 'api', 'skills-lite.json'),
-    PATH.join(process.cwd(), 'public', 'api', 'skills.json'),
     PATH.join(__dirname, '..', 'public', 'api', 'skills-lite.json'),
   ];
 
