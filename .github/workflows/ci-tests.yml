@@ -54,4 +54,4 @@ jobs:
       - name: Production build (vite)
         run: npm run build
       - name: MCP server syntax check
-        run: node --check mcp.js
+        run: node --check api/mcp.js && node --check api/audit-skill.js && node --check api/skills.js && node --check api/trust.js
