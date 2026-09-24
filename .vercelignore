@@ -23,3 +23,4 @@
 # v5.5: dump duplicado para el SPA (94MB) — nadie lo importa (el SPA hace fetch
 # de /api/skills-lite.json en runtime); el build remoto lo regenera igual.
 /marketnow/aep-marketplace/src/data/all_skills.json
+/marketnow/aep-marketplace/dist
