@@ -15,10 +15,10 @@ import { processSubmission } from "../lib/submit-core.mjs";
 
 // MCP Server info
 // NOTE: keep in sync with marketnow/mcp-server/package.json on every release.
-// v1.13.0 = ATC/3.0 re-version alignment (hosted server matches npm marketnow-mcp). v1.12.0 = audit Task 63 fixes: jsonrpc strict validation, client limit honored.
+// v1.14.1 = sync with npm marketnow-mcp@1.14.1 (recupera fix c281daae perdido en redeploy 23-sep). v1.13.0 = ATC/3.0 re-version alignment. v1.12.0 = audit Task 63 fixes: jsonrpc strict validation, client limit honored.
 const SERVER_INFO = {
   name: "marketnow-mcp",
-  version: "1.13.0",
+  version: "1.14.1",
 };
 
 const SERVER_CAPABILITIES = {
