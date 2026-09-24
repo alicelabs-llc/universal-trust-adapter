@@ -143,7 +143,7 @@
       "severity": "medio",
       "title": "Auditoría F1-F8 no está públicamente cerrada",
       "status": "fixed",
-      "fix_commit": "pending-this-commit",
+      "fix_commit": "c14f456f",
       "fix_date": "2026-09-25",
       "last_verified": "2026-09-25",
       "verifier": "Este archivo cierra la auditoría con evidencia verificable: pdf_sha256 real (el PDF ya se sirve como binario en /AUDIT_REPORT.pdf — antes el 200 era el catch-all SPA devolviendo HTML), 0 fix_commit 'pending', verifiers re-escritos contra la realidad del 25-sep-2026 y fase 2 documentada en phase2_closure"
