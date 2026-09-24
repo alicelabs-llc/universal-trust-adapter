@@ -58,7 +58,7 @@
     "url": "mailto:support@alicelabs.site"
   },
   "dependencies": {
-    "canonicalize": "^2.0.0"
+    "canonicalize": "^5.1.0"
   },
   "engines": {
     "node": ">=18"
