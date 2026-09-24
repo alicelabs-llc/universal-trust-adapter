@@ -33,7 +33,7 @@
     "@marketnow/trust-gateway": "^1.0.3"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
+    "typescript": "^7.0.2",
     "@types/node": "^20.0.0"
   },
   "repository": {
