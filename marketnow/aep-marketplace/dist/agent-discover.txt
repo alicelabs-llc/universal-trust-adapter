@@ -8,27 +8,27 @@ INSTALL MCP SERVER:
 npx -y marketnow-mcp
 
 FREE SKILLS (no payment):
-curl https://marketnow.site/api/free-skills.json
+curl https://www.marketnow.site/api/free-skills.json
 
 SEARCH SKILLS:
-curl "https://marketnow.site/api/search?q=scraper&max_price=3"
+curl "https://www.marketnow.site/api/search?q=scraper&max_price=3"
 
 AGENT WALLET INFO (how to pay):
-curl https://marketnow.site/api/agent-wallet
+curl https://www.marketnow.site/api/agent-wallet
 
 BUY A SKILL WITH USDC:
-POST https://marketnow.site/api/agent-purchase
+POST https://www.marketnow.site/api/agent-purchase
 Body: {"skillId":"mn-gen-00015","walletAddress":"0x...","txHash":"0x..."}
 
 SECURITY AUDIT:
-POST https://marketnow.site/api/audit-skill
+POST https://www.marketnow.site/api/audit-skill
 Body: {"skillId":"mn-gen-00015"}
 
-ALL SKILLS (bulk download):
-curl https://marketnow.site/api/skills.json
+ALL SKILLS (paginated — the bulk dump /api/skills.json was removed 2026-09-25, audit F-06):
+curl "https://www.marketnow.site/api/skills?page=1&limit=100"
 
 AGENT INSTRUCTIONS:
-curl https://marketnow.site/api/agent.json
+curl https://www.marketnow.site/api/agent.json
 
 NPM PACKAGE:
 npm install marketnow-mcp

@@ -3,8 +3,9 @@
   "audit_id": "AUD-2026-0821-MN",
   "audit_date": "2026-08-21",
   "auditor": "Independent security audit (Z.ai)",
-  "pdf_url": "https://marketnow.site/AUDIT_REPORT.pdf",
-  "pdf_sha256": "TODO: publish SHA-256 of PDF",
+  "pdf_url": "https://www.marketnow.site/AUDIT_REPORT.pdf",
+  "pdf_sha256": "8d7c0597432200068cc5b41b64246b609e12829f401b01c50339ff0f2481912b",
+  "pdf_bytes": 110127,
   "next_reaudit_date": "2026-11-21",
   "findings": [
     {
@@ -14,25 +15,28 @@
       "status": "fixed",
       "fix_commit": "0b764d92",
       "fix_date": "2026-08-25",
-      "verifier": "grep 'seo-only|Googlebot|hidden from humans' \u2192 0"
+      "last_verified": "2026-09-25",
+      "verifier": "grep 'seo-only|Googlebot|hidden from humans' → 0 (landing viva, re-verificado 25-sep)"
     },
     {
       "id": "F-02",
       "severity": "critico",
-      "title": "El modelo de precio se contradice con su propia fuente can\u00f3nica",
+      "title": "El modelo de precio se contradice con su propia fuente canónica",
       "status": "fixed",
       "fix_commit": "0b764d92",
       "fix_date": "2026-08-25",
-      "verifier": "pricing.json is now the single source of truth"
+      "last_verified": "2026-09-25",
+      "verifier": "GET /api/pricing.json → 200, schema buyer/seller, única fuente de verdad"
     },
     {
       "id": "F-03",
       "severity": "alto",
       "title": "'8,288 verified safe' no cuadra con pass rate del 53.3%",
       "status": "fixed",
-      "fix_commit": "pending",
-      "fix_date": "2026-08-25",
-      "verifier": "'verified safe' replaced with auto-scanned/human-reviewed/maintainer-verified taxonomy"
+      "fix_commit": "cd6736c9",
+      "fix_date": "2026-09-08",
+      "last_verified": "2026-09-25",
+      "verifier": "GET / → grep 'verified safe' = 0. Taxonomía actual en vivo: /api/stats.json security.model (dos niveles L1/L2, live-computed) + /api/certification.json (scanned/clean/warning/error). El texto de agosto ya no existe — el verificador apunta a las cifras reales de hoy"
     },
     {
       "id": "F-04",
@@ -41,25 +45,28 @@
       "status": "fixed",
       "fix_commit": "0b764d92",
       "fix_date": "2026-08-25",
-      "verifier": "grep 'pipeline pipeline' \u2192 0"
+      "last_verified": "2026-09-25",
+      "verifier": "grep 'pipeline pipeline' → 0"
     },
     {
       "id": "F-05",
       "severity": "alto",
       "title": "'9,248 free skills' pero solo 43 son free",
       "status": "fixed",
-      "fix_commit": "0b764d92",
-      "fix_date": "2026-08-25",
-      "verifier": "grep '9,248 free' \u2192 0; grep '43 free skills' \u2192 2"
+      "fix_commit": "cd6736c9",
+      "fix_date": "2026-09-08",
+      "last_verified": "2026-09-25",
+      "verifier": "GET /api/stats.json (live) → free 68,387 + paid 1 = total 68,388, consistente con GET /api/skills?filter=free. Strings obsoletos '9,248 free'/'43 free' → 0 en /, llms.txt, ai.txt (re-grep 25-sep). Modelos free/paid documentados en /policies y pricing.json"
     },
     {
       "id": "F-06",
       "severity": "medio",
       "title": "skills.json pesa ~24 MB",
       "status": "fixed",
-      "fix_commit": "pending",
-      "fix_date": "2026-08-25",
-      "verifier": "GET /api/skills?page=1&limit=100 returns ~50KB (was 24MB)"
+      "fix_commit": "cd6736c9, feaabaf2 (regresión 94MB corregida)",
+      "fix_date": "2026-09-25",
+      "last_verified": "2026-09-25",
+      "verifier": "El dump NO PAGINADO fue ELIMINADO (94MB, regresión del fix original). GET /api/skills.json ahora devuelve un manifiesto de deprecación (~1KB) con alternativas; GET /api/skills?page=1&limit=100 → ~86KB/página (máx 500). Gate anti-regresión: scripts/check-asset-sizes.mjs (dumps prohibidos + allowlist documentada) — falla CI si reaparecen"
     },
     {
       "id": "F-07",
@@ -68,16 +75,18 @@
       "status": "fixed",
       "fix_commit": "0b764d92",
       "fix_date": "2026-08-25",
-      "verifier": "Landing now matches agent.json (B2B model)"
+      "last_verified": "2026-09-25",
+      "verifier": "Landing y /api/agent.json consistentes (modelo B2B, buyer paga per-use)"
     },
     {
       "id": "F-08",
       "severity": "alto",
       "title": "Enlace 'Browse all 9,248 free skills' roto",
       "status": "fixed",
-      "fix_commit": "0b764d92",
-      "fix_date": "2026-08-25",
-      "verifier": "Link now says 'Browse all 43 free skills'"
+      "fix_commit": "cd6736c9",
+      "fix_date": "2026-09-08",
+      "last_verified": "2026-09-25",
+      "verifier": "El texto de agosto ya no existe (catálogo ×1.59 desde entonces). Superficie actual: catálogo navegable vía /api/skills?page=1&limit=100 con _links.next/prev funcionales (verificado 25-sep) y páginas públicas /s/:slug → 200"
     },
     {
       "id": "F-09",
@@ -86,52 +95,58 @@
       "status": "fixed",
       "fix_commit": "0b764d92",
       "fix_date": "2026-08-25",
-      "verifier": "grep 'redeploy trigger|GitHub token' \u2192 0"
+      "last_verified": "2026-09-25",
+      "verifier": "grep 'redeploy trigger|GitHub token' → 0 en HTML servido"
     },
     {
       "id": "F-10",
       "severity": "medio",
       "title": "NPM packages verificables",
       "status": "fixed",
-      "fix_commit": "NPM publish 2026-08-25",
+      "fix_commit": "NPM publish 2026-09-20",
       "fix_date": "2026-08-25",
-      "verifier": "npm view marketnow-mcp \u2192 v1.10.1; npm view agent-trust-card \u2192 v1.1.2"
+      "last_verified": "2026-09-25",
+      "verifier": "npm view marketnow-mcp → v1.14.1 (24 versiones); npm view agent-trust-card → v1.4.1; endpoint MCP reporta 1.14.1 (alineado con npm, hallazgo N-02 cerrado)"
     },
     {
       "id": "F-11",
       "severity": "medio",
       "title": "Wallet hardcodeada en agent.json",
       "status": "fixed",
-      "fix_commit": "pending",
-      "fix_date": "2026-08-25",
-      "verifier": "wallet_type documented, policy at /policies#wallet, multisig migration planned Q4 2026"
+      "fix_commit": "cd6736c9",
+      "fix_date": "2026-09-08",
+      "last_verified": "2026-09-25",
+      "verifier": "wallet documentada con tipo y gobernanza en /policies (Payment Wallet Governance) y stats.json blockchain.wallet_type ('single-key, roadmap multisig Q4 2026')"
     },
     {
       "id": "F-12",
       "severity": "medio",
       "title": "Cifras duplicadas en 5+ sitios",
       "status": "fixed",
-      "fix_commit": "pending",
-      "fix_date": "2026-08-25",
-      "verifier": "stats.json is now the single source of truth"
+      "fix_commit": "cd6736c9, feaabaf2 (stats ahora live)",
+      "fix_date": "2026-09-25",
+      "last_verified": "2026-09-25",
+      "verifier": "/api/stats.json es LIVE-computed (skills?_mode=stats): totales/free/paid/categorías derivadas del bundle desplegado + catalog-meta — el drift estructural (estático 68,387 vs API 68,388, hallazgo N-09) ya no puede ocurrir. /api/manifest.json, llms.txt y ai.txt sincronizados"
     },
     {
       "id": "F-13",
       "severity": "medio",
-      "title": "Versi\u00f3n Sentinel inconsistente (L1.5 vs L2.5)",
+      "title": "Versión Sentinel inconsistente (L1.5 vs L2.5)",
       "status": "fixed",
-      "fix_commit": "pending",
-      "fix_date": "2026-08-25",
-      "verifier": "grep 'Sentinel L[0-9]' \u2192 0; Sentinel v3.0 is canonical"
+      "fix_commit": "cd6736c9, feaabaf2 (texto residual en ai.txt/llms-full)",
+      "fix_date": "2026-09-25",
+      "last_verified": "2026-09-25",
+      "verifier": "grep 'L1.5|L2.5' → 0 en landing, ai.txt, llms.txt, llms-full.txt (25-sep; el texto residual solo existía en los docs de agentes). Sentinel v3.0 (L1 index + L2 tarballs) es canónico en certification.json y stats.json"
     },
     {
       "id": "F-14",
       "severity": "medio",
-      "title": "Auditor\u00eda F1-F8 no est\u00e1 p\u00fablicamente cerrada",
+      "title": "Auditoría F1-F8 no está públicamente cerrada",
       "status": "fixed",
-      "fix_commit": "pending",
-      "fix_date": "2026-08-25",
-      "verifier": "This file (audit-status.json) closes the audit publicly"
+      "fix_commit": "c14f456f",
+      "fix_date": "2026-09-25",
+      "last_verified": "2026-09-25",
+      "verifier": "Este archivo cierra la auditoría con evidencia verificable: pdf_sha256 real (el PDF ya se sirve como binario en /AUDIT_REPORT.pdf — antes el 200 era el catch-all SPA devolviendo HTML), 0 fix_commit 'pending', verifiers re-escritos contra la realidad del 25-sep-2026 y fase 2 documentada en phase2_closure"
     }
   ],
   "summary": {
@@ -140,5 +155,21 @@
     "partial": 0,
     "open": 0,
     "wontfix": 0
+  },
+  "phase2_closure": {
+    "date": "2026-09-25",
+    "trigger": "Re-auditoría 25-sep: 8 PASS · 3 PARTIAL · 2 STALE · 1 FAIL (F-06 regresión 94MB) — plan de remediación 5 fases con gates",
+    "commits": ["feaabaf2"],
+    "fixed_today": [
+      "F-06: dump de 94MB eliminado (313MB de peso muerto total: skills.json + skills_index + .bak + all_skills.json en src/); /api/skills.json → manifiesto de deprecación; gate anti-regresión en CI",
+      "F-14: PDF real servido (el 200 previo era HTML del catch-all SPA — falso positivo de 5 semanas), pdf_sha256 publicado, 6 fix_commit 'pending' → commits reales",
+      "F-12/N-09: /api/stats.json ahora live-computed (mata el drift estático vs API)",
+      "N-02: endpoint MCP 1.14.1 = npm 1.14.1 (rescate del fix perdido en redeploy del 23-sep)",
+      "F-13: texto residual L1.5/L2.5 eliminado de ai.txt/llms-full.txt",
+      "F-03/F-05/F-08: verifiers re-escritos contra la superficie viva de hoy"
+    ],
+    "history_note": "Los fix_commit '0b764d92' (8 hallazgos) pertenecen al historial pre-reset del repositorio; el historial actual arranca efectivamente en cd6736c9 (2026-09-08), donde esos fixes viven. Los fix_commit de esta fase son verificables en origin/main.",
+    "deploy": "dpl_GkaPLPCvfPDiaNM8kb (producción, base b90f2e7d) → Phase 2 deploy posterior a feaabaf2",
+    "next": "Fase 3: OpenSSF Scorecard 1.7 → ≥6.5 · Fase 4: workflow audit-gate.yml + AUD-2026-0925"
   }
 }

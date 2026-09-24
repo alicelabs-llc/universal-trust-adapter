@@ -59,7 +59,7 @@ tracker of the wider ecosystem (no trust claims, clearly labeled).
 
 ```
 GET https://www.marketnow.site/api/skills?sort=trust&limit=100 — paginated API (sort=recent|downloads|trust|name, q=, risk=, category=, tier=core|community)
-GET https://www.marketnow.site/api/skills.json               — full catalog (66,496 skills)
+GET https://www.marketnow.site/api/skills?page=1&limit=100  — paginated catalog (68,388 skills; /api/skills.json returns a deprecation manifest since 2026-09-25)
 GET https://www.marketnow.site/api/categories.json           — 16 categories
 GET https://www.marketnow.site/api/manifest.json             — API manifest
 GET https://www.marketnow.site/s/<slug>                     — public page per skill (install, trust, risk, FAQ)
@@ -85,7 +85,7 @@ Auto-updates every 5 min via GitHub Actions
 
 ```bash
 # Universal installer (verified, Sigstore-signed)
-curl -fsSL https://marketnow.site/install.sh | bash
+curl -fsSL https://www.marketnow.site/install.sh | bash
 
 # Or via npm
 npm install -g @marketnow/trust-core @marketnow/trust-adapters @marketnow/trust-gateway

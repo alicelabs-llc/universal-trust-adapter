@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For AI Agents — MarketNow Agent Discovery Hub</title>
-    <meta name="description" content="MarketNow is built for AI agents. MCP server, A2A protocol, JSON-RPC, llms.txt, agent.json. 66,496 index-certified skills. Machine-readable everything.">
+    <meta name="description" content="MarketNow is built for AI agents. MCP server, A2A protocol, JSON-RPC, llms.txt, agent.json. 68,388 index-certified skills. Machine-readable everything.">
     <meta name="keywords" content="AI agent, MCP server, agent discovery, A2A protocol, agent commerce, machine readable API">
-    <link rel="canonical" href="https://marketnow.site/for-agents" />
+    <link rel="canonical" href="https://www.marketnow.site/for-agents" />
     <meta property="og:title" content="MarketNow — Built for AI Agents" />
-    <meta property="og:description" content="66,496 index-certified MCP skills. MCP server, A2A, JSON-RPC, llms.txt. Machine-readable everything." />
-    <meta property="og:url" content="https://marketnow.site/for-agents" />
+    <meta property="og:description" content="68,388 index-certified MCP skills. MCP server, A2A, JSON-RPC, llms.txt. Machine-readable everything." />
+    <meta property="og:url" content="https://www.marketnow.site/for-agents" />
     <meta property="og:type" content="website" />
     <meta name="robots" content="index, follow" />
     <style>
@@ -80,10 +80,10 @@
     </div>
   </nav>
     <h1>🤖 MarketNow — Built for AI Agents</h1>
-    <p>MarketNow is the first marketplace designed <strong>agent-first</strong>. Every endpoint is machine-readable. Every skill has a signed security certificate. Every interaction is protocol-native.</p>
+    <p>MarketNow is security and trust infrastructure for AI agents, designed <strong>agent-first</strong>. Every endpoint is machine-readable. Every skill has a signed security certificate. Every interaction is protocol-native.</p>
 
     <div>
-        <div class="stat"><span class="stat-num">66,496</span><span class="stat-label">Skills Indexed</span></div>
+        <div class="stat"><span class="stat-num">68,388</span><span class="stat-label">Skills Indexed</span></div>
         <div class="stat"><span class="stat-num">206</span><span class="stat-label">L2.5 Audited</span></div>
         <div class="stat"><span class="stat-num">65</span><span class="stat-label">Free Skills</span></div>
         <div class="stat"><span class="stat-num">4</span><span class="stat-label">MCP Tools</span></div>
@@ -107,7 +107,7 @@ npx -y marketnow-mcp
 
     <h3>Option 2: MCP HTTP Endpoint (SSE + JSON-RPC)</h3>
     <pre><code># Connect via HTTP transport
-POST https://marketnow.site/api/mcp
+POST https://www.marketnow.site/api/mcp
 Content-Type: application/json
 
 # Initialize
@@ -120,24 +120,24 @@ Content-Type: application/json
 {"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"search_skills","arguments":{"query":"filesystem","limit":5}}}
 
 # SSE stream
-GET https://marketnow.site/api/mcp
+GET https://www.marketnow.site/api/mcp
 Accept: text/event-stream</code></pre>
 
     <h3>Option 3: Direct REST API</h3>
     <pre><code># Search skills
-curl "https://marketnow.site/api/search?q=scraper&max_price=3"
+curl "https://www.marketnow.site/api/search?q=scraper&max_price=3"
 
 # Get a specific skill
-curl "https://marketnow.site/api/skills/mn-gen-00015"
+curl "https://www.marketnow.site/api/skills/mn-gen-00015"
 
 # List free skills
-curl "https://marketnow.site/api/free-skills.json"
+curl "https://www.marketnow.site/api/free-skills.json"
 
 # Get agent instructions
-curl "https://marketnow.site/api/agent.json"
+curl "https://www.marketnow.site/api/agent.json"
 
 # Verify a security certificate
-curl "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-filesystem"</code></pre>
+curl "https://www.marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-filesystem"</code></pre>
 
     <h2>📋 Agent Discovery Endpoints</h2>
     <table>
@@ -157,7 +157,7 @@ curl "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-filesy
     <h2>🛡️ Security Certificate Verification</h2>
     <p>Every skill has a signed SHA-256 security certificate. Agents should verify before installing:</p>
     <pre><code># Get certificate for a skill
-curl "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-filesystem"
+curl "https://www.marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-filesystem"
 
 # Response:
 {
@@ -168,7 +168,7 @@ curl "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-filesy
   "risk_level": "low",
   "signature": "5a9a6e1cdcc2dedf53599b1a0ee8ebff...",
   "signature_algorithm": "SHA-256",
-  "verification_url": "https://marketnow.site/verify?skillId=mn-mcp-filesystem"
+  "verification_url": "https://www.marketnow.site/verify?skillId=mn-mcp-filesystem"
 }</code></pre>
     <p>Agents should reject skills with <code>risk_level: "critical"</code> or <code>overall_score &lt; 5</code>.</p>
 
@@ -206,7 +206,7 @@ curl "https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-filesy
         <li><strong>AP2 Mandates</strong> — human-in-the-loop by default, agents opt into silent mode</li>
     </ul>
     <pre><code># Agent purchase flow
-POST https://marketnow.site/api/agent-purchase
+POST https://www.marketnow.site/api/agent-purchase
 Content-Type: application/json
 
 {
@@ -219,15 +219,15 @@ Content-Type: application/json
     <h2>🔄 A2A Protocol Support</h2>
     <p>MarketNow supports Agent-to-Agent communication via the A2A protocol:</p>
     <pre><code># Agent Card (A2A discovery)
-GET https://marketnow.site/.well-known/agent.json
+GET https://www.marketnow.site/.well-known/agent.json
 
 # Agent Card includes:
 {
   "schemaVersion": "v1.0",
   "agent": {
-    "name": "MarketNow — Agent Skill Exchange",
-    "description": "The largest MCP skill marketplace...",
-    "url": "https://marketnow.site",
+    "name": "MarketNow — Agent Security & Trust Infrastructure",
+    "description": "Security and trust infrastructure for AI agents...",
+    "url": "https://www.marketnow.site",
     "version": "4.0.0"
   },
   "capabilities": {
@@ -242,15 +242,15 @@ GET https://marketnow.site/.well-known/agent.json
     <h2>🚀 Quick Start for Agents</h2>
     <div class="card">
         <h3>Step 1: Discover</h3>
-        <pre><code>GET https://marketnow.site/api/agent-ping.json</code></pre>
+        <pre><code>GET https://www.marketnow.site/api/agent-ping.json</code></pre>
     </div>
     <div class="card">
         <h3>Step 2: Search</h3>
-        <pre><code>GET https://marketnow.site/api/search?q=filesystem&max_price=0</code></pre>
+        <pre><code>GET https://www.marketnow.site/api/search?q=filesystem&max_price=0</code></pre>
     </div>
     <div class="card">
         <h3>Step 3: Verify</h3>
-        <pre><code>GET https://marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-filesystem</code></pre>
+        <pre><code>GET https://www.marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-filesystem</code></pre>
     </div>
     <div class="card">
         <h3>Step 4: Install</h3>
@@ -268,11 +268,11 @@ GET https://marketnow.site/.well-known/agent.json
 
     <h2>🔗 Useful Links</h2>
     <ul>
-        <li><a href="https://marketnow.site/registry">Browse 66,496 MCP skills</a></li>
-        <li><a href="https://marketnow.site/api/free-skills.json">66,496 free-to-install skills (JSON)</a></li>
-        <li><a href="https://marketnow.site/api/openapi.yaml">OpenAPI 3.1 specification</a></li>
-        <li><a href="https://marketnow.site/security">Sentinel audit methodology</a></li>
-        <li><a href="https://marketnow.site/verify">Verify a security certificate</a></li>
+        <li><a href="https://www.marketnow.site/registry">Browse 68,388 MCP skills</a></li>
+        <li><a href="https://www.marketnow.site/api/free-skills.json">68,387 free skills + 1 vendor-priced (JSON)</a></li>
+        <li><a href="https://www.marketnow.site/api/openapi.yaml">OpenAPI 3.1 specification</a></li>
+        <li><a href="https://www.marketnow.site/security">Sentinel audit methodology</a></li>
+        <li><a href="https://www.marketnow.site/verify">Verify a security certificate</a></li>
         <li><a href="https://github.com/alicelabs-llc/marketnow">GitHub repository</a></li>
         <li><a href="https://www.npmjs.com/package/marketnow-mcp">npm package</a></li>
     </ul>

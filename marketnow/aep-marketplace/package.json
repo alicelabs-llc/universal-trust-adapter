@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "generate": "node generate_skills.cjs",
-    "prebuild": "node generate_skills.cjs",
-    "dev": "node generate_skills.cjs && vite",
+    "prebuild": "node scripts/check-asset-sizes.mjs",
+    "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

@@ -1,6 +1,11 @@
 # ATC/2.0 — Agent Trust Card Protocol Specification
 
-**Status**: Draft v2.0.0 — public for review
+> **SUPERSEDED / WITHDRAWN (2026-09-17)** — ATC/2.0 was a draft that no production card
+> ever implemented. It is withdrawn and superseded by **ATC/3.0** (core + extended):
+> https://marketnow.site/atc/unified — the current single version. This document is
+> retained for historical reference only.
+
+**Status**: Draft v2.0.0 — public for review (historical; withdrawn, see banner above)
 **Issued**: 2026-11-15
 **Supersedes**: ATC/1.0 (2026-08-10) and the interim multi-sig branch (schema_version 1.2.0)
 **Author**: Edison Flores, AliceLabs LLC

@@ -1,36 +1,54 @@
 /**
- * MarketNow — Skill Index Builder
- * ===============================
- * Carga las skills reales desde public/api/skills_index.json (limpiadas)
- * y genera los archivos derivados que consumen el SPA y los agentes:
+ * MarketNow — Skill Index Builder (OFFLINE catalog pipeline)
+ * ============================================================
+ * ⚠️ F-06 (audit AUD-2026-0821-MN, cierre 2026-09-25): este script YA NO genera
+ *    public/api/skills.json (94MB) ni src/data/all_skills.json (94MB) — el dump
+ *    no paginado fue ELIMINADO y el prebuild de deploy fue sustituido por el
+ *    gate anti-regresión scripts/check-asset-sizes.mjs.
  *
- *   - src/data/all_skills.json     (para el SPA React)
- *   - public/api/skills.json       (para agentes y crawlers via HTTP)
+ *    Este script es ahora una herramienta OFFLINE para actualizaciones de
+ *    catálogo (nuevos batches): se ejecuta manualmente (npm run generate) y
+ *    sus outputs se commitean a git. El deploy NO regenera datos — producción
+ *    sirve exactamente lo que está en el repo (reproducible).
+ *
+ * Fuentes (primera que exista):
+ *   - public/api/skills_index.json  (modo 'full' — pipeline completo offline,
+ *     requiere clean_skills_index.js; enriquece y regenera skills-lite)
+ *   - public/api/skills-lite.json   (modo 'lite' — solo refresca categories/
+ *     manifest/agent-sync; usado cuando el índice full no está en el repo)
+ *
+ * Outputs:
+ *   - public/api/skills-lite.json  (solo modo full)
  *   - public/api/categories.json   (índice de categorías con counts reales)
  *   - public/api/manifest.json     (manifest del API)
+ *   - public/api/agent.json        (sync de conteos y pricing)
  *
- * Uso: node generate_skills.cjs
- *
- * NOTA: Este script NO genera skills sintéticas. Solo copia y enriquece
- *       las skills reales que ya existen en skills_index.json.
- *       Para regenerar el índice limpio, ejecuta: node ../../scripts/clean_skills_index.js
+ * Uso: npm run generate  (o: node generate_skills.cjs)
  */
 
 const fs = require('fs');
 const path = require('path');
 
-// ─── Cargar skills reales ────────────────────────────────────────────────
+// ─── Cargar skills (full o lite) ──────────────────────────────────────────
 let skills = [];
+let mode = 'none';
 try {
   const realSkillsPath = path.join(__dirname, 'public', 'api', 'skills_index.json');
+  const litePath = path.join(__dirname, 'public', 'api', 'skills-lite.json');
   if (fs.existsSync(realSkillsPath)) {
     skills = JSON.parse(fs.readFileSync(realSkillsPath, 'utf8'));
-    console.log(`Loaded ${skills.length} real skills.`);
+    mode = 'full';
+    console.log(`Loaded ${skills.length} skills from skills_index.json (mode: full).`);
+  } else if (fs.existsSync(litePath)) {
+    const liteData = JSON.parse(fs.readFileSync(litePath, 'utf8'));
+    skills = Array.isArray(liteData) ? liteData : (liteData.skills || []);
+    mode = 'lite';
+    console.log(`Loaded ${skills.length} skills from skills-lite.json (mode: lite — no full index in repo).`);
   } else {
-    console.warn("⚠ skills_index.json not found. Run scripts/clean_skills_index.js first.");
+    console.warn("⚠ ni skills_index.json ni skills-lite.json encontrados.");
   }
 } catch (e) {
-  console.error("Error reading skills_index.json:", e.message);
+  console.error("Error reading catalog source:", e.message);
   process.exit(1);
 }
 
@@ -74,23 +92,27 @@ const apiManifest = {
   total_skills: skills.length,
   categories_count: categoryIndex.length,
   endpoints: {
-    all_skills:  "/api/skills.json",
-    categories:  "/api/categories.json",
-    manifest:    "/api/manifest.json",
-    stats:       "/api/skills_stats.json",
+    all_skills: "/api/skills (paginated — the unpaginated /api/skills.json dump was removed 2026-09-25, returns a deprecation manifest)",
+    categories: "/api/categories.json",
+    manifest: "/api/manifest.json",
+    stats: "/api/stats.json (live-computed)",
   },
   usage: {
-    fetch_all:    "GET https://www.marketnow.site/api/skills.json",
-    by_category:  "Filter client-side: skills.filter(s => s.category === 'Finance')",
-    by_tag:       "Filter client-side: skills.filter(s => s.tags.includes('mcp'))",
-    search:       "Filter client-side: skills.filter(s => s.name.toLowerCase().includes(query))",
+    fetch_page: "GET https://www.marketnow.site/api/skills?page=1&limit=100 (max limit 500)",
+    by_category: "GET /api/skills?category=Finance — or filter client-side on skills-lite.json",
+    by_tag: "Filter client-side: skills.filter(s => s.tags.includes('mcp'))",
+    search: "GET /api/search?q=weather — or filter client-side on the lite dataset",
+    sort: "GET /api/skills?sort=recent|downloads|trust|name",
   },
+  note_f06: "2026-09-25 (audit F-06 closure): /api/skills.json (94MB) removed; use paginated API or /api/skills-lite.json",
   generated_at: new Date().toISOString(),
 };
 
 // ─── Escritura de archivos ────────────────────────────────────────────────
+// F-06: NO se escriben public/api/skills.json ni src/data/all_skills.json.
+// El dump no paginado está ELIMINADO; si necesitas el dataset completo usa
+// skills-lite.json (repo) o la API paginada (runtime).
 const dirs = [
-  path.join(__dirname, 'src', 'data'),
   path.join(__dirname, 'public', 'api'),
 ];
 dirs.forEach(d => fs.mkdirSync(d, { recursive: true }));
@@ -130,6 +152,7 @@ if (fs.existsSync(certDir)) {
 console.log(`Loaded ${certScores.size} certificate scores for sentinel_score override.`);
 
 for (const s of skills) {
+  if (mode !== 'full') break; // lite mode: ya enriquecido — solo se refrescan categories/manifest/agent
   // C14 FIX: Override fabricated sentinel_score with real certificate score
   if (certScores.has(s.id)) {
     const certData = certScores.get(s.id);
@@ -275,32 +298,9 @@ for (const s of skills) {
   s.usdc_disclaimer = USDC_DISCLAIMER;
 }
 
-// SPA data — compacto (sin pretty-print: 66k entradas * ~1.7KB ahorrados)
-fs.writeFileSync(
-  path.join(__dirname, 'src', 'data', 'all_skills.json'),
-  JSON.stringify(skills)
-);
+console.log(`✅ MarketNow — ${skills.length} skills (mode: ${mode})`);
 
-// Public API — accesible por agentes via HTTP GET
-// COMPACTO (v5.5): el dump pretty-printado a 66,496 entradas superaba el limite
-// de 100MB por archivo de Vercel; compacto queda en ~75MB. La paginacion
-// humana vive en /api/skills (endpoint), no en este dump para agentes.
-fs.writeFileSync(
-  path.join(__dirname, 'public', 'api', 'skills.json'),
-  JSON.stringify(skills)
-);
-
-fs.writeFileSync(
-  path.join(__dirname, 'public', 'api', 'categories.json'),
-  JSON.stringify(categoryIndex, null, 2)
-);
-
-fs.writeFileSync(
-  path.join(__dirname, 'public', 'api', 'manifest.json'),
-  JSON.stringify(apiManifest, null, 2)
-);
-
-// Copy agent.json (machine-readable instructions for autonomous agents) if it exists
+// ── agent.json: sync de conteos y pricing (ambos modos) ──
 const agentJsonPath = path.join(__dirname, 'public', 'api', 'agent.json');
 if (fs.existsSync(agentJsonPath)) {
   // Update total_skills in agent.json to match current count
@@ -344,12 +344,17 @@ if (fs.existsSync(agentJsonPath)) {
   console.log(`   → public/api/agent.json       (machine-readable agent instructions)`);
 }
 
-console.log(`✅ MarketNow — ${skills.length} skills reales escritas`);
-console.log(`   → src/data/all_skills.json`);
-console.log(`   → public/api/skills.json       (accesible para agentes)`);
+// ── categories.json y manifest.json (ambos modos) ──
+fs.writeFileSync(
+  path.join(__dirname, 'public', 'api', 'categories.json'),
+  JSON.stringify(categoryIndex, null, 2)
+);
+fs.writeFileSync(
+  path.join(__dirname, 'public', 'api', 'manifest.json'),
+  JSON.stringify(apiManifest, null, 2)
+);
 
-// Lite version for web (no system prompts, no capabilities, truncated descriptions)
-// AUDIT-FUNC FIX: include translations + mark free skills with price=0
+// ── skills-lite.json (solo modo full: en modo lite el source YA es lite) ──
 const liteSkills = skills.map(s => {
   // 5.9.2: an explicit s.free === false marks vendor-priced usage (e.g. per-call
   // x402 in USDC on Base): listing/install stays free, but the vendor bills
@@ -383,10 +388,14 @@ const liteSkills = skills.map(s => {
   }
   return lite;
 });
-fs.writeFileSync(
-  path.join(__dirname, "public", "api", "skills-lite.json"),
-  JSON.stringify(liteSkills)
-);
-console.log(`   → public/api/skills-lite.json  (web-optimized, ~4MB, ${liteSkills.filter(s => s.free).length} free)`);
+if (mode === 'full') {
+  fs.writeFileSync(
+    path.join(__dirname, "public", "api", "skills-lite.json"),
+    JSON.stringify(liteSkills)
+  );
+  console.log(`   → public/api/skills-lite.json  (${liteSkills.filter(s => s.free).length} free)`);
+}
 console.log(`   → public/api/categories.json   (${categoryIndex.length} categorías)`);
 console.log(`   → public/api/manifest.json`);
+console.log(`   → public/api/agent.json        (sync de conteos)`);
+console.log(`✅ F-06: NO se escribieron skills.json ni all_skills.json (eliminados — audit 2026-09-25)`);

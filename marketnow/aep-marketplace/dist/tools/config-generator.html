@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MCP Config Generator — MarketNow</title>
 <meta name="description" content="Generate MCP server config JSON for Claude Desktop, Cursor, Cline. Select skills, get config instantly.">
-<link rel="canonical" href="https://marketnow.site/tools/config-generator.html" />
+<link rel="canonical" href="https://www.marketnow.site/tools/config-generator.html" />
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#050505;color:#e2e8f0;line-height:1.6;padding:20px;max-width:900px;margin:0 auto}
@@ -83,14 +83,14 @@ npx -y marketnow-mcp
 </div>
 
 <h2>Need more skills?</h2>
-<p>Browse all 66,496 index-certified MCP servers at <a href="https://marketnow.site/registry">marketnow.site/registry</a></p>
+<p>Browse all 68,387 index-certified MCP servers at <a href="https://www.marketnow.site/registry">marketnow.site/registry</a></p>
 
 <script>
 let selectedSkills = [];
 let allSkills = [];
 
 // Load free skills for quick search
-fetch('https://marketnow.site/api/free-skills.json')
+fetch('https://www.marketnow.site/api/free-skills.json')
   .then(r => r.json())
   .then(data => {
     allSkills = data.slice(0, 200); // Limit for performance
