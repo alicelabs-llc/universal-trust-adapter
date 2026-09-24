@@ -21,6 +21,19 @@ import { mountSubmission } from '../lib/submit-http.mjs';
 const SITE = 'https://www.marketnow.site';
 
 export default function handler(req, res) {
+  // 404 real para rutas de archivo inexistentes (.sh etc.) — fix anp2network
+  // (montado aqui via _mode por el cap de 12 funciones del plan Hobby)
+  if (req.query._mode === 'notfound') {
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('X-MarketNow-Note', 'static-miss');
+    return res.status(404).send(
+      '404 Not Found — MarketNow\n\n' +
+      'This path does not exist as a static file.\n' +
+      'If you expected a script here, verify the URL at https://www.marketnow.site/\n' +
+      'Reported paths that end in .sh but do not exist intentionally return 404 (not HTML).\n'
+    );
+  }
   // submission endpoints (POST/GET /api/submit, GET /api/submissions)
   if (req.query._mode === 'submit' || req.query._mode === 'queue') {
     return mountSubmission(req, res);

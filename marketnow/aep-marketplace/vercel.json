@@ -4,6 +4,10 @@
   "framework": "vite",
   "rewrites": [
     {
+      "source": "/(.*\\.sh)",
+      "destination": "/api/skills?_mode=notfound"
+    },
+    {
       "source": "/api/community",
       "destination": "/api/certification?_mode=community"
     },
