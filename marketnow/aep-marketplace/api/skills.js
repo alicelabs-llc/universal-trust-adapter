@@ -77,7 +77,7 @@ export default function handler(req, res) {
     const free = allSkills.filter(s => s.is_free === true || s.free === true || (s.price === 0 && !s.payment)).length;
     const cats = {};
     for (const s of allSkills) {
-      const k = String(s.category || 'uncategorized').toLowerCase().trim().replace(/\s+/g, '-');
+      const k = String(s.category || 'uncategorized').toLowerCase().trim().replace(/[\s/]+/g, '-');
       cats[k] = (cats[k] || 0) + 1;
     }
     const sortedCats = Object.fromEntries(Object.entries(cats).sort((a, b) => b[1] - a[1]));
