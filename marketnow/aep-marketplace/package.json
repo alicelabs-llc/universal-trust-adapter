@@ -18,7 +18,7 @@
     "@upstash/redis": "^1.34.0",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
+    "dotenv": "^18.0.2",
     "ethers": "^6.17.0",
     "express": "^5.2.1",
     "framer-motion": "^12.38.0",
