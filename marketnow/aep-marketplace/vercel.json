@@ -16,10 +16,6 @@
       "destination": "/mcps.html"
     },
     {
-      "source": "/(.*\\.sh)",
-      "destination": "/api/not-found"
-    },
-    {
       "source": "/api/trust-score",
       "destination": "/api/atc?action=trust"
     },
