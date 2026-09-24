@@ -1,8 +1,8 @@
 {
   "schemaVersion": "v1.0",
   "agent": {
-    "name": "MarketNow — Agent Skill Exchange",
-    "description": "The trust layer for agent commerce. Browse 66,496 index-certified MCP servers (130,845 total tracked), each with an install-risk tier and trust score; top 688 tarballs deep-scanned by Sentinel. Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
+    "name": "MarketNow — Agent Security & Trust Infrastructure",
+    "description": "Security and trust infrastructure for AI agents: Sentinel, a 10-layer audit pipeline (L1 index certification, L1.5–L1.9 static analysis, L2 deep tarball scans, L2.5 gVisor sandbox, L3 runtime monitoring), ATC/1.0 Agent Trust Cards, revocation registry and tool fingerprinting — with a 68,387-server indexed MCP catalog as the discovery and distribution layer (132,736 tracked across the ecosystem). Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
     "url": "https://marketnow.site",
     "version": "4.0.0"
   },
@@ -44,7 +44,7 @@
           {
             "id": "skill-search",
             "name": "MCP Skill Search",
-            "description": "AI agents can search and retrieve MCP server configurations from 66,496 index-certified skills (install-risk tier + trust score on every entry; 688 top tarballs deep-scanned). Supports natural language queries, category filtering, and security score thresholds.",
+            "description": "AI agents can search and retrieve MCP server configurations from 68,387 index-certified skills (install-risk tier + trust score on every entry; 688 top tarballs deep-scanned). Supports natural language queries, category filtering, and security score thresholds.",
             "commissionRate": 0.2,
             "referralEndpoints": {
               "register": "https://marketnow.site/api/agent/register",
@@ -72,17 +72,22 @@
   "security": {
     "sentinelL1": {
       "checks": [
-        "Repo Exists",
-        "Has README",
-        "Has Manifest",
-        "Has License",
-        "No Secrets",
-        "No Malicious Code"
+        "C1 unique id across catalog",
+        "C2 unique slug (badge + /s/ pages)",
+        "C3 required fields present",
+        "C4 provenance URL resolvable",
+        "C5 risk_level in model {red,yellow,green}",
+        "C6 trust_score_100 within [0,100]",
+        "C7 sentinel_score within [0,10]",
+        "C8 indexed_at recorded",
+        "C9 install command non-empty",
+        "C10 price/free consistency"
       ],
-      "scoreRange": "0-6",
-      "totalScanned": 66496,
-      "averageScore": 6.8,
-      "note": "L1 index certification covers all 66,496 entries. Average sentinel_score across the catalog: 6.8/10 (computed live from /api/skills-lite.json). L2 deep-scan: 688 tarballs."
+      "scoreRange": "sentinel_score 0-10 per entry; index certification is binary (all 10 checks pass)",
+      "totalScanned": 68387,
+      "certified": 68387,
+      "passRate": "100% (all 68,387 entries pass the 10 index checks)",
+      "methodology": "https://marketnow.site/api/certification.json"
     }
   },
   "economy": {
@@ -124,23 +129,28 @@
     "audit_scope": "Documented inconsistencies across agent.json, npm package.json, LICENSE files, README, and landing HTML."
   },
   "metrics": {
-    "skills_indexed": 66496,
-    "security_checks_performed": 684912,
-    "npm_versions_published": 18,
-    "npm_latest_version": "1.10.3",
+    "skills_indexed": 68387,
+    "security_checks_performed": 683870,
+    "npm_versions_published": 20,
+    "npm_latest_version": "1.11.1",
     "npm_first_release_date": "2026-06-29",
-    "npm_latest_release_date": "2026-08-09",
+    "npm_latest_release_date": "2026-09-16",
     "github_org_created_at": "2026-03-30",
-    "as_of": "2026-09-10T00:00:00Z",
+    "as_of": "2026-09-17",
     "source": "live API: https://marketnow.site/api/skills-lite.json + npm registry",
-    "skills_tracked_all_sources": 130845,
-    "l2_tarballs_deep_scanned": 688
+    "skills_tracked_all_sources": 132736,
+    "l2_tarballs_deep_scanned": 2839,
+    "npm_downloads_last_month": 939,
+    "l2_flagged_for_review": 1947,
+    "l2_clean": 885,
+    "security_checks_methodology": "10 L1 checks x 68,387 entries + 29 L2 rules x 2,839 tarball scans (top 2,868 npm targets, 99% completion)"
   },
-  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 66,496 indexed skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
+  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 68,387 indexed skills free. Vendor-priced usage (e.g. per-call x402) is billed by the vendor, never by MarketNow. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
   "buyer_pricing": {
     "model": "free",
     "per_skill_fee": 0,
     "subscription_fee": 0,
-    "explanation": "Buyers never pay MarketNow. All 66,496 indexed skills are free to install."
-  }
+    "explanation": "Buyers never pay MarketNow. All 68,387 indexed skills are free to install. Vendor-priced usage (e.g. per-call x402 on Base) is billed by the vendor, never by MarketNow."
+  },
+  "generated_at": "2026-09-16T20:00:36.000Z"
 }

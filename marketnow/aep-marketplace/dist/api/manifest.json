@@ -3,19 +3,21 @@
   "version": "2.0.0",
   "description": "Open marketplace for AI agent skills — MCP compatible. Every skill has a real description from its source repository.",
   "base_url": "https://www.marketnow.site/api",
-  "total_skills": 66496,
+  "total_skills": 68388,
   "categories_count": 16,
   "endpoints": {
-    "all_skills": "/api/skills.json",
+    "all_skills": "/api/skills (paginated — the unpaginated /api/skills.json dump was removed 2026-09-25, returns a deprecation manifest)",
     "categories": "/api/categories.json",
     "manifest": "/api/manifest.json",
-    "stats": "/api/skills_stats.json"
+    "stats": "/api/stats.json (live-computed)"
   },
   "usage": {
-    "fetch_all": "GET https://www.marketnow.site/api/skills.json",
-    "by_category": "Filter client-side: skills.filter(s => s.category === 'Finance')",
+    "fetch_page": "GET https://www.marketnow.site/api/skills?page=1&limit=100 (max limit 500)",
+    "by_category": "GET /api/skills?category=Finance — or filter client-side on skills-lite.json",
     "by_tag": "Filter client-side: skills.filter(s => s.tags.includes('mcp'))",
-    "search": "Filter client-side: skills.filter(s => s.name.toLowerCase().includes(query))"
+    "search": "GET /api/search?q=weather — or filter client-side on the lite dataset",
+    "sort": "GET /api/skills?sort=recent|downloads|trust|name"
   },
-  "generated_at": "2026-09-10T04:08:50.615Z"
+  "note_f06": "2026-09-25 (audit F-06 closure): /api/skills.json (94MB) removed; use paginated API or /api/skills-lite.json",
+  "generated_at": "2026-09-24T22:54:58.269Z"
 }
