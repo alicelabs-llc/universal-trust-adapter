@@ -16,8 +16,8 @@
   "discovery": {
     "total_mcp_servers": 68388,
     "total_tracked_all_sources": 132737,
-    "core_certified": 59256,
-    "community_indexed": 9131,
+    "core_certified": 59255,
+    "community_indexed": 9133,
     "aggregate_tracked": 64349,
     "free": 68387,
     "free_to_install": 68388,
@@ -70,7 +70,16 @@
     "atc_sdk_version": "1.4.1"
   },
   "formats": {
-    "supported": ["ATC", "EAT-AI", "ZTA", "A2A", "MCP-Card", "W3C-VC", "OAuth", "SPIFFE"],
+    "supported": [
+      "ATC",
+      "EAT-AI",
+      "ZTA",
+      "A2A",
+      "MCP-Card",
+      "W3C-VC",
+      "OAuth",
+      "SPIFFE"
+    ],
     "count": 8,
     "canonical_schema": "UTS v2.0.0"
   },
@@ -88,7 +97,22 @@
     "commission_rate": "0.20"
   },
   "i18n": {
-    "languages": ["en", "es", "pt", "zh", "fr", "de", "it", "ru", "tr", "ja", "ko", "ar", "hi", "uta"],
+    "languages": [
+      "en",
+      "es",
+      "pt",
+      "zh",
+      "fr",
+      "de",
+      "it",
+      "ru",
+      "tr",
+      "ja",
+      "ko",
+      "ar",
+      "hi",
+      "uta"
+    ],
     "count": 14,
     "method": "human + machine-assisted, reviewed"
   },
