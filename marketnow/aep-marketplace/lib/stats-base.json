@@ -15,7 +15,7 @@
   "source_of_truth": "Live-computed at request time by /api/skills?_mode=stats from the deployed catalog bundle (skills-lite.json) — see computed_at. Static sections (L2 scans, npm stamp) carry their own generation dates. CI fails if any surface diverges.",
   "discovery": {
     "total_mcp_servers": 68388,
-    "total_tracked_all_sources": 132736,
+    "total_tracked_all_sources": 132737,
     "core_certified": 59256,
     "community_indexed": 9131,
     "aggregate_tracked": 64349,
