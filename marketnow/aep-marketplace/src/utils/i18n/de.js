@@ -37,12 +37,12 @@ export default {
   'nav.language': 'Sprache',
 
   // Homepage hero
-  'hero.badge': 'VERTRAUENSCHICHT FÜR AGENT-COMMERCE · AP2 · x402 · OPEN SOURCE',
-  'hero.title1': 'Die Vertrauensschicht für',
-  'hero.title2': 'Agent-Commerce.',
-  'hero.body': 'Entdeckung ist gelöst (MCP-Registry, Smithery, Glama). Vertrauen nicht. MarketNow ist die Vertrauensschicht — jeder Skill Sentinel-geprüft, jede Zahlung on-chain verifiziert, jedes Mandat standardmäßig human genehmigt.',
-  'hero.meta': 'MCP-Server · AP2-kompatible Mandate · x402-Zahlungen · Source-available MNNC-1.0 · AliceLabs LLC',
-  'hero.searchPlaceholder': '66.496 Skills durchsuchen — z. B. „web scrape“, „postgres“, „discord“…',
+  'hero.badge': 'TRUST-INFRASTRUKTUR FÜR KI-AGENTEN · SENTINEL · ATC · UTA · SOURCE-AVAILABLE',
+  'hero.title1': 'Trust-Infrastruktur für',
+  'hero.title2': 'KI-Agenten.',
+  'hero.body': 'Entdeckung ist gelöst (MCP-Registry, Smithery, Glama). Vertrauen nicht. MarketNow macht KI-Agenten-Vertrauen zu maschinell verifizierbarer Infrastruktur — Sentinel prüft jeden Skill und Tarball, ATC identifiziert Agenten, UTA interoperiert über Credential-Formate, Interceptor setzt Runtime-Richtlinien durch.',
+  'hero.meta': 'MCP-Server · AP2-kompatible Mandate · x402-Zahlungen · Open-Core (MIT-Komponenten, AL-1.0-Kern) · AliceLabs LLC',
+  'hero.searchPlaceholder': 'Indizierte MCP-Server durchsuchen — z. B. „web scrape“, „postgres“, „discord“…',
   'hero.ctaBrowse': 'SKILLS DURCHSUCHEN →',
   'hero.ctaFree': 'GRATIS-SKILLS',
   'hero.ctaPublish': '+ SKILL VERÖFFENTLICHEN',

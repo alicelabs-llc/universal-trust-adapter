@@ -78,9 +78,10 @@
       "MCP-Card",
       "W3C-VC",
       "OAuth",
-      "SPIFFE"
+      "SPIFFE",
+      "X.509"
     ],
-    "count": 8,
+    "count": 9,
     "canonical_schema": "UTS v2.0.0"
   },
   "pipeline": {

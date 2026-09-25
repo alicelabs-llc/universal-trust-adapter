@@ -19,7 +19,7 @@ const CONTENT = {
     breakdowns: [
       {
         colorClass: 'text-[#00F299]',
-        title: '66,496 skills — Curated open-source MCP servers',
+        title: '68,388 skills — Index-certified MCP servers',
         bodyPre:
           'Sourced from public GitHub repositories tagged with "mcp-server" or "model-context-protocol". Each was scanned by Sentinel v3.0, given a category based on its README, and certified by Sentinel with a signed SHA-256 certificate.',
         bodyStrong: 'These are real, working MCP servers you can verify on GitHub.',
@@ -110,7 +110,7 @@ const CONTENT = {
     breakdowns: [
       {
         colorClass: 'text-[#00F299]',
-        title: '66,496 skills — Servidores MCP open-source curados',
+        title: '68,388 skills — Servidores MCP index-certified',
         bodyPre:
           'Obtenidos de repositorios públicos de GitHub etiquetados con "mcp-server" o "model-context-protocol". Cada uno fue escaneado por Sentinel v3.0, recibió una categoría basada en su README y certificada por Sentinel con un certificado SHA-256 firmado.',
         bodyStrong: 'Estos son servidores MCP reales y funcionales que puedes verificar en GitHub.',
@@ -292,7 +292,7 @@ const CONTENT = {
     breakdowns: [
       {
         colorClass: 'text-[#00F299]',
-        title: '66,496 个 skill —— 精选的开源 MCP 服务器',
+        title: '68,388 个 skill —— 索引认证的 MCP 服务器',
         bodyPre:
           '来源于 GitHub 上标记为 "mcp-server" 或 "model-context-protocol" 的公开仓库。每个都由 Sentinel v3.0 扫描,根据其 README 分配分类,并由 Sentinel 认证,附带签名的 SHA-256 证书。',
         bodyStrong: '这些是真实可用的 MCP 服务器,你可以在 GitHub 上验证。',

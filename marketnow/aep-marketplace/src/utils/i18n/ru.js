@@ -37,12 +37,12 @@ export default {
   'nav.language': 'Язык',
 
   // Homepage hero
-  'hero.badge': 'СЛОЙ ДОВЕРИЯ ДЛЯ КОММЕРЦИИ АГЕНТОВ · AP2 · x402 · OPEN SOURCE',
-  'hero.title1': 'Слой доверия для',
-  'hero.title2': 'коммерции агентов.',
-  'hero.body': 'Поиск решён (MCP-реестр, Smithery, Glama). Доверие — нет. MarketNow — это слой доверия: каждый навык проверен Sentinel, каждый платёж верифицирован on-chain, каждый мандат по умолчанию одобряет человек.',
-  'hero.meta': 'MCP-серверы · мандаты AP2 · платежи x402 · source-available MNNC-1.0 · AliceLabs LLC',
-  'hero.searchPlaceholder': 'Поиск среди 66 496 навыков — попробуйте «scrape web», «postgres», «discord»…',
+  'hero.badge': 'ИНФРАСТРУКТУРА ДОВЕРИЯ ДЛЯ ИИ-АГЕНТОВ · SENTINEL · ATC · UTA · SOURCE-AVAILABLE',
+  'hero.title1': 'Инфраструктура доверия для',
+  'hero.title2': 'ИИ-агентов.',
+  'hero.body': 'Поиск решён (MCP-реестр, Smithery, Glama). Доверие — нет. MarketNow превращает доверие к ИИ-агентам в машиночитаемую проверяемую инфраструктуру — Sentinel сканирует каждый навык и tarball, ATC идентифицирует агентов, UTA обеспечивает совместимость форматов, Interceptor применяет политики в рантайме.',
+  'hero.meta': 'MCP-серверы · мандаты AP2 · платежи x402 · open-core (компоненты MIT, ядро AL-1.0) · AliceLabs LLC',
+  'hero.searchPlaceholder': 'Поиск по индексированным MCP-серверам — «scrape web», «postgres», «discord»…',
   'hero.ctaBrowse': 'ОБЗОР НАВЫКОВ →',
   'hero.ctaFree': 'БЕСПЛАТНЫЕ НАВЫКИ',
   'hero.ctaPublish': '+ ОПУБЛИКОВАТЬ НАВЫК',

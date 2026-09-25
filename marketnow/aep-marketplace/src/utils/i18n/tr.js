@@ -37,12 +37,12 @@ export default {
   'nav.language': 'Dil',
 
   // Homepage hero
-  'hero.badge': 'AJAN TİCARETİ İÇİN GÜVEN KATMANI · AP2 · x402 · OPEN SOURCE',
-  'hero.title1': 'Ajan ticareti için',
-  'hero.title2': 'güven katmanı.',
-  'hero.body': 'Keşif çözüldü (MCP kaydı, Smithery, Glama). Güven çözülmedi. MarketNow güven katmanıdır — her yetenek Sentinel ile taranır, her ödeme zincir üzerinde doğrulanır, her mandat varsayılan olarak insan onaylıdır.',
-  'hero.meta': 'MCP sunucuları · AP2 uyumlu mandatlar · x402 ödemeleri · source-available MNNC-1.0 · AliceLabs LLC',
-  'hero.searchPlaceholder': '66.496 yetenek içinde ara — «web scrape», «postgres», «discord» deneyin…',
+  'hero.badge': 'YAPAY ZEKA AJANLARI İÇİN GÜVEN ALTYAPISI · SENTINEL · ATC · UTA · SOURCE-AVAILABLE',
+  'hero.title1': 'Yapay zeka ajanları için',
+  'hero.title2': 'güven altyapısı.',
+  'hero.body': 'Keşif çözüldü (MCP kaydı, Smithery, Glama). Güven çözülmedi. MarketNow, yapay zeka ajanı güvenini makine tarafından doğrulanabilir altyapıya dönüştürür — Sentinel her yeteneği ve tarballı tarar, ATC ajanları tanımlar, UTA kimlik formatları arasında birlikte çalışır, Interceptor çalışma zamanı politikasını uygular.',
+  'hero.meta': 'MCP sunucuları · AP2 uyumlu mandatlar · x402 ödemeleri · open-core (MIT bileşenler, AL-1.0 çekirdek) · AliceLabs LLC',
+  'hero.searchPlaceholder': 'İndekslenmiş MCP sunucularında ara — «web scrape», «postgres», «discord» deneyin…',
   'hero.ctaBrowse': 'YETENEKLERE GÖZ AT →',
   'hero.ctaFree': 'ÜCRETSİZ YETENEKLER',
   'hero.ctaPublish': '+ YETENEK YAYINLA',

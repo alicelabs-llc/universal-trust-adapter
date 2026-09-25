@@ -97,7 +97,7 @@ export default function Hero({ onSignIn }) {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00F299]/5 border border-[#00F299]/20">
               <span className="w-2 h-2 rounded-full bg-[#00F299] animate-pulse" />
               <span className="text-[#00F299] text-xs font-mono tracking-wider">
-                JOIN 5,000+ SKILLS ALREADY LISTED · LIST YOUR FIRST 3 FREE
+                INDEX-CERTIFIED SKILLS · L2 DEEP-SCANNED · LIST YOUR FIRST 3 FREE
               </span>
             </div>
           </motion.div>
@@ -105,7 +105,7 @@ export default function Hero({ onSignIn }) {
           {/* Stats — agent-relevant */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
             {[
-              { value: stats.total.toLocaleString() + '+', label: 'VERIFIED SKILLS' },
+              { value: stats.total.toLocaleString() + '+', label: 'INDEX-CERTIFIED (L1)' },
               { value: '$' + stats.avgPrice.toFixed(2), label: 'AVG PRICE (USD)' },
               { value: '0', label: 'COST FOR BUYERS' },
               { value: 'MCP v1.0', label: 'PROTOCOL' },

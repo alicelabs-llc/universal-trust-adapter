@@ -37,12 +37,12 @@ export default {
   'nav.language': 'Lingua',
 
   // Homepage hero
-  'hero.badge': 'LIVELLO DI FIDUCIA PER IL COMMERCIO DEGLI AGENTI · AP2 · x402 · OPEN SOURCE',
-  'hero.title1': 'Il livello di fiducia per',
-  'hero.title2': 'il commercio degli agenti.',
-  'hero.body': 'La discovery è risolta (registro MCP, Smithery, Glama). La fiducia no. MarketNow è il livello di fiducia — ogni skill scansionata da Sentinel, ogni pagamento verificato on-chain, ogni mandato approvato da un essere umano per impostazione predefinita.',
-  'hero.meta': 'Server MCP · mandati compatibili AP2 · pagamenti x402 · source-available MNNC-1.0 · AliceLabs LLC',
-  'hero.searchPlaceholder': 'Cerca tra 66.496 skill — prova «scrape web», «postgres», «discord»…',
+  'hero.badge': 'INFRASTRUTTURA DI FIDUCIA PER GLI AGENTI IA · SENTINEL · ATC · UTA · SOURCE-AVAILABLE',
+  'hero.title1': 'Infrastruttura di fiducia per',
+  'hero.title2': 'gli agenti IA.',
+  'hero.body': 'La discovery è risolta (registro MCP, Smithery, Glama). La fiducia no. MarketNow trasforma la fiducia degli agenti IA in infrastruttura verificabile a macchina — Sentinel scansiona ogni skill e tarball, ATC identifica gli agenti, UTA interoperà tra formati di credenziali, Interceptor applica le policy a runtime.',
+  'hero.meta': 'Server MCP · mandati compatibili AP2 · pagamenti x402 · open-core (componenti MIT, nucleo AL-1.0) · AliceLabs LLC',
+  'hero.searchPlaceholder': 'Cerca tra i server MCP indicizzati — prova «scrape web», «postgres», «discord»…',
   'hero.ctaBrowse': 'ESPLORA SKILL →',
   'hero.ctaFree': 'SKILL GRATUITE',
   'hero.ctaPublish': '+ PUBBLICA LA TUA SKILL',

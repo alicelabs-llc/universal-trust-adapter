@@ -37,12 +37,12 @@ export default {
   'nav.language': 'اللغة',
 
   // Homepage hero
-  'hero.badge': 'طبقة الثقة لتجارة الوكلاء · AP2 · x402 · مصدر مفتوح',
-  'hero.title1': 'طبقة الثقة',
-  'hero.title2': 'لتجارة الوكلاء.',
-  'hero.body': 'الاكتشاف محسوم (سجل MCP، Smithery، Glama). الثقة ليست كذلك. MarketNow هو طبقة الثقة — كل مهارة تُفحص بـ Sentinel، وكل دفعة تُتحقق على السلسلة، وكل توكيل يُعتمد من بشر افتراضيًا.',
-  'hero.meta': 'خوادم MCP · توكيلات متوافقة مع AP2 · مدفوعات x402 · كود متاح MNNC-1.0 · AliceLabs LLC',
-  'hero.searchPlaceholder': 'ابحث في 68,387 مهارة — جرّب «scrape web» أو «postgres» أو «discord»…',
+  'hero.badge': 'بنية الثقة لوكلاء الذكاء الاصطناعي · SENTINEL · ATC · UTA · المصدر متاح',
+  'hero.title1': 'بنية الثقة',
+  'hero.title2': 'لوكلاء الذكاء الاصطناعي.',
+  'hero.body': 'الاكتشاف محسوم (سجل MCP، Smithery، Glama). الثقة ليست كذلك. MarketNow يحوّل ثقة وكلاء الذكاء الاصطناعي إلى بنية تحتية قابلة للتحقق آليًا — Sentinel يفحص كل مهارة وكل tarball، وATC يحدد هوية الوكلاء، وUTA يتيح التشغيل البيني بين صيغ الاعتمادات، وInterceptor يفرض سياسات وقت التشغيل.',
+  'hero.meta': 'خوادم MCP · توكيلات متوافقة مع AP2 · مدفوعات x402 · open-core (مكونات MIT، نواة AL-1.0) · AliceLabs LLC',
+  'hero.searchPlaceholder': 'ابحث في خوادم MCP المفهرسة — جرّب «scrape web» أو «postgres» أو «discord»…',
   'hero.ctaBrowse': 'تصفّح المهارات →',
   'hero.ctaFree': 'مهارات مجانية',
   'hero.ctaPublish': '+ انشر مهارتك',

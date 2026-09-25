@@ -37,12 +37,12 @@ export default {
   'nav.language': '언어',
 
   // Homepage hero
-  'hero.badge': '에이전트 상거래를 위한 신뢰 계층 · AP2 · x402 · OPEN SOURCE',
-  'hero.title1': '에이전트 상거래를 위한',
-  'hero.title2': '신뢰 계층.',
-  'hero.body': '탐색은 해결됐습니다(MCP 레지스트리, Smithery, Glama). 신뢰는 아닙니다. MarketNow는 신뢰 계층입니다 — 모든 스킬은 Sentinel이 검사하고, 모든 결제는 온체인에서 검증되며, 모든 위임장은 기본적으로 사람이 승인합니다.',
-  'hero.meta': 'MCP 서버 · AP2 호환 위임장 · x402 결제 · 소스 공개 MNNC-1.0 · AliceLabs LLC',
-  'hero.searchPlaceholder': '68,387개 스킬 검색 — “scrape web”, “postgres”, “discord”…',
+  'hero.badge': 'AI 에이전트를 위한 트러스트 인프라 · SENTINEL · ATC · UTA · SOURCE-AVAILABLE',
+  'hero.title1': 'AI 에이전트를 위한',
+  'hero.title2': '트러스트 인프라.',
+  'hero.body': '탐색은 해결됐습니다(MCP 레지스트리, Smithery, Glama). 신뢰는 아닙니다. MarketNow는 AI 에이전트 신뢰를 기계 검증 가능한 인프라로 바꿉니다 — Sentinel이 모든 스킬과 tarball을 검사하고, ATC가 에이전트를 식별하며, UTA가 자격 형식 간 상호운용을 제공하고, Interceptor가 런타임 정책을 강제합니다.',
+  'hero.meta': 'MCP 서버 · AP2 호환 위임장 · x402 결제 · 오픈코어(MIT 구성 요소, AL-1.0 코어) · AliceLabs LLC',
+  'hero.searchPlaceholder': '인덱싱된 MCP 서버 검색 — "scrape web", "postgres", "discord"…',
   'hero.ctaBrowse': '스킬 둘러보기 →',
   'hero.ctaFree': '무료 스킬',
   'hero.ctaPublish': '+ 스킬 게시',

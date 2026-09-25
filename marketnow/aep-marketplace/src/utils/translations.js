@@ -59,12 +59,12 @@ const TRANSLATIONS_BASE = {
     'nav.language': 'Language',
 
     // Homepage hero
-    'hero.badge': 'TRUST LAYER FOR AGENT COMMERCE · AP2 · x402 · OPEN SOURCE',
-    'hero.title1': 'The trust layer for',
-    'hero.title2': 'agent commerce.',
-    'hero.body': 'Discovery is solved (MCP registry, Smithery, Glama). Trust is not. MarketNow is the trust layer — every skill Sentinel-scanned, every payment verified on-chain, every mandate human-approved by default.',
-    'hero.meta': 'MCP servers · AP2-compatible mandates · x402 payments · Source-available MNNC-1.0 · AliceLabs LLC',
-    'hero.searchPlaceholder': 'Search 68,387 skills — try "scrape web", "postgres", "discord"...',
+    'hero.badge': 'THE TRUST INFRASTRUCTURE FOR AI AGENTS · SENTINEL · ATC · UTA · SOURCE-AVAILABLE',
+    'hero.title1': 'Trust infrastructure for',
+    'hero.title2': 'AI agents.',
+    'hero.body': 'Discovery is solved (MCP registry, Smithery, Glama). Trust is not. MarketNow turns AI-agent trust into machine-verifiable infrastructure — Sentinel scans every skill and tarball, ATC identifies agents, UTA interoperates across credential formats, Interceptor enforces runtime policy.',
+    'hero.meta': 'MCP servers · AP2-compatible mandates · x402 payments · Open-core (MIT components, AL-1.0 core) · AliceLabs LLC',
+    'hero.searchPlaceholder': 'Search indexed MCP servers — try "scrape web", "postgres", "discord"...',
     'hero.ctaBrowse': 'BROWSE SKILLS →',
     'hero.ctaFree': 'FREE SKILLS',
     'hero.ctaPublish': '+ PUBLISH YOUR SKILL',

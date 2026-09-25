@@ -44,7 +44,7 @@
           {
             "id": "skill-search",
             "name": "MCP Skill Search",
-            "description": "AI agents can search and retrieve MCP server configurations from 68,387 verified skills. Supports natural language queries, category filtering, and security score thresholds.",
+            "description": "AI agents can search and retrieve MCP server configurations from 68,388 index-certified entries. Supports natural language queries, category filtering, and security score thresholds.",
             "commissionRate": 0.2,
             "referralEndpoints": {
               "register": "https://marketnow.site/api/agent/register",
@@ -84,9 +84,9 @@
         "C10 price/free consistency"
       ],
       "scoreRange": "sentinel_score 0-10 per entry; index certification is binary (all 10 checks pass)",
-      "totalScanned": 68387,
-      "certified": 68387,
-      "passRate": "100% (all 68,387 entries pass the 10 index checks)",
+      "totalScanned": 68388,
+      "certified": 68388,
+      "passRate": "100% (all 68,388 entries pass the 10 index checks)",
       "methodology": "https://marketnow.site/api/certification.json"
     }
   },
@@ -105,7 +105,7 @@
       "Seller Sentinel subscriptions (PRO $9.99/mo, ENTERPRISE $49.99/mo)",
       "Affiliate program (5% from MarketNow's share)"
     ],
-    "buyer_value": "All 68,387 catalog entries install free. Vendor-priced usage (x402) is billed by the vendor — MarketNow verifies security, not pricing.",
+    "buyer_value": "All 68,388 catalog entries install free. Vendor-priced usage (x402) is billed by the vendor — MarketNow verifies security, not pricing.",
     "seller_value": "Publish to the 68,388-server catalog and its agent traffic. Keep 80% of sales. Sentinel audits boost trust and conversion.",
     "commissionPolicy": "https://marketnow.site/policies#comisiones",
     "wallet_type": "single-sig (migration to 2-of-3 multisig pending Q4 2026)",
@@ -140,29 +140,29 @@
     "audit_scope": "Documented inconsistencies across agent.json, npm package.json, LICENSE files, README, and landing HTML."
   },
   "metrics": {
-    "skills_indexed": 68387,
-    "security_checks_performed": 683870,
+    "skills_indexed": 68388,
+    "security_checks_performed": 683880,
     "npm_versions_published": 20,
-    "npm_latest_version": "1.11.1",
+    "npm_latest_version": "1.14.1",
     "npm_first_release_date": "2026-06-29",
     "npm_latest_release_date": "2026-09-16",
     "github_org_created_at": "2026-03-30",
     "as_of": "2026-09-17",
     "source": "live API: https://marketnow.site/api/skills-lite.json + npm registry",
     "skills_tracked_all_sources": 132736,
-    "security_checks_methodology": "10 L1 checks x 68,387 entries + 29 L2 rules x 2,839 tarball scans (top 2,868 npm targets, 99% completion)",
+    "security_checks_methodology": "10 L1 checks x 68,388 entries + 29 L2 rules x 2,839 tarball scans (top 2,868 npm targets, 99% completion)",
     "l2_tarballs_deep_scanned": 2839,
     "l2_flagged_for_review": 1947,
     "l2_clean": 885,
     "npm_downloads_last_month": 939,
     "npm_vulnerabilities_own_packages": 0
   },
-  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 68,387 skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
+  "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 68,388 skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
   "buyer_pricing": {
     "model": "free",
     "per_skill_fee": 0,
     "subscription_fee": 0,
-    "explanation": "Buyers never pay MarketNow. All 68,387 skills are free to install."
+    "explanation": "Buyers never pay MarketNow. All 68,388 skills are free to install."
   },
   "generated_at": "2026-09-24T22:54:58.639Z",
   "metadata": {

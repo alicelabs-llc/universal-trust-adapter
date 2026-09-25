@@ -37,12 +37,12 @@ export default {
   'nav.language': 'भाषा',
 
   // Homepage hero
-  'hero.badge': 'एजेंट कॉमर्स के लिए ट्रस्ट लेयर · AP2 · x402 · OPEN SOURCE',
-  'hero.title1': 'एजेंट कॉमर्स के लिए',
-  'hero.title2': 'ट्रस्ट लेयर।',
-  'hero.body': 'डिस्कवरी सॉल्व हो चुकी है (MCP रजिस्ट्री, Smithery, Glama)। ट्रस्ट नहीं। MarketNow ट्रस्ट लेयर है — हर स्किल Sentinel-स्कैन, हर भुगतान ऑन-चेन सत्यापित, हर मैंडेट डिफ़ॉल्ट रूप से मानव-अनुमोदित।',
-  'hero.meta': 'MCP सर्वर · AP2-संगत मैंडेट · x402 भुगतान · सोर्स-अवेलेबल MNNC-1.0 · AliceLabs LLC',
-  'hero.searchPlaceholder': '68,387 स्किल खोजें — “scrape web”, “postgres”, “discord”…',
+  'hero.badge': 'AI एजेंटों के लिए ट्रस्ट इंफ्रास्ट्रक्चर · SENTINEL · ATC · UTA · SOURCE-AVAILABLE',
+  'hero.title1': 'AI एजेंटों के लिए',
+  'hero.title2': 'ट्रस्ट इंफ्रास्ट्रक्चर।',
+  'hero.body': 'डिस्कवरी सॉल्व हो चुकी है (MCP रजिस्ट्री, Smithery, Glama)। ट्रस्ट नहीं। MarketNow AI-एजेंट ट्रस्ट को मशीन-सत्यापन योग्य इंफ्रास्ट्रक्चर में बदलता है — Sentinel हर स्किल और tarball स्कैन करता है, ATC एजेंट पहचानता है, UTA क्रेडेंशियल फॉर्मैट के बीच इंटरऑप देता है, Interceptor रनटाइम पॉलिसी लागू करता है।',
+  'hero.meta': 'MCP सर्वर · AP2-संगत मैंडेट · x402 भुगतान · ओपन-कोर (MIT घटक, AL-1.0 कोर) · AliceLabs LLC',
+  'hero.searchPlaceholder': 'इंडेक्स किए गए MCP सर्वर खोजें — "scrape web", "postgres", "discord"…',
   'hero.ctaBrowse': 'स्किल ब्राउज़ करें →',
   'hero.ctaFree': 'मुफ़्त स्किल',
   'hero.ctaPublish': '+ स्किल प्रकाशित करें',

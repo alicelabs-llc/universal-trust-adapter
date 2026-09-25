@@ -37,12 +37,12 @@ export default {
   'nav.language': '言語',
 
   // Homepage hero
-  'hero.badge': 'エージェントコマースのためのトラストレイヤー · AP2 · x402 · OPEN SOURCE',
-  'hero.title1': 'エージェントコマースのための',
-  'hero.title2': 'トラストレイヤー。',
-  'hero.body': '発見は解決済み（MCPレジストリ、Smithery、Glama）。信頼は未解決。MarketNowはトラストレイヤーです — すべてのスキルをSentinelがスキャンし、すべての支払いをオンチェーンで検証し、すべてのマンダートはデフォルトで人間承認。',
-  'hero.meta': 'MCPサーバー · AP2互換マンダート · x402ペイメント · ソース閲覧可能なMNNC-1.0 · AliceLabs LLC',
-  'hero.searchPlaceholder': '68,387のスキルを検索 — 「scrape web」「postgres」「discord」…',
+  'hero.badge': 'AIエージェントのためのトラストインフラ · SENTINEL · ATC · UTA · SOURCE-AVAILABLE',
+  'hero.title1': 'AIエージェントのための',
+  'hero.title2': 'トラストインフラ。',
+  'hero.body': '発見は解決済み（MCPレジストリ、Smithery、Glama）。信頼は未解決。MarketNowはAIエージェントの信頼を機械検証可能なインフラに変えます — Sentinelがすべてのスキルとtarballをスキャンし、ATCがエージェントを識別し、UTAが資格フォーマット間の相互運用を実現し、Interceptorがランタイムポリシーを強制します。',
+  'hero.meta': 'MCPサーバー · AP2互換マンダート · x402ペイメント · オープンコア（MITコンポーネント、AL-1.0コア） · AliceLabs LLC',
+  'hero.searchPlaceholder': 'インデックス済みMCPサーバーを検索 — 「scrape web」「postgres」「discord」…',
   'hero.ctaBrowse': 'スキルを探す →',
   'hero.ctaFree': '無料スキル',
   'hero.ctaPublish': '+ スキルを公開',
