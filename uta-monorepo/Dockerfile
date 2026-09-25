@@ -9,7 +9,7 @@
 #          uta-trust-server:latest
 
 # ── Stage 1: Build ──
-FROM node:20-slim AS builder
+FROM node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5febfc0 AS builder
 
 WORKDIR /app
 
@@ -34,7 +34,7 @@ RUN npx tsc
 RUN node scripts/generate-sbom.js
 
 # ── Stage 2: Runtime ──
-FROM node:20-slim AS runtime
+FROM node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5febfc0 AS runtime
 
 WORKDIR /app
 
