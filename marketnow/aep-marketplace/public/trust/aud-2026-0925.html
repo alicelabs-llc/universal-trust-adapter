@@ -33,6 +33,7 @@ a { color:#8ab4ff; }
 <span class="badge ok">14/14 hallazgos re-verificados FIXED</span>
 <span class="badge info">OpenSSF Scorecard: 6.8/10 — meta ≥6.5 CUMPLIDO</span>
 <span class="badge info">Re-auditoría programada: 2026-12-25</span>
+<span class="badge info">2ª auditoría externa: P0 + S8 + S9 cerrados (evidencia por capa)</span>
 
 <h2>1. Resumen ejecutivo</h2>
 <p>La auditoría AUD-2026-0821-MN documentó 14 hallazgos que quedaron formalmente «cerrados» en
@@ -102,6 +103,20 @@ fixes del pre-reset), Gate B/B+ (Fase 1 — redeploy + push a GitHub), Gate C (F
 cierre). Cada fix quedó commiteado, puseado al canónico, desplegado y re-verificado contra
 producción. Los commits de la fase 3-4 son verificables en
 <code>main</code>: 4a966607, 51649aa5, c22308a5, 2f28db01.</p>
+
+<h2>7. Segunda auditoría externa (2026-09-25, revisor distinto)</h2>
+<p>Hallazgo P0: la homepage no consumía las fuentes de verdad (cifras pegadas vs agent.json /
+certification / npm). Cerrado: el bundle renderiza desde <code>/api/stats.json</code> (hook
+useLiveStats, cero números manuales) y 40+ superficies machine-readable sincronizadas
+(commits de85257f, 616cb698, e7125020). Este ciclo añade lo que ese revisor pidió como P1/P2:</p>
+<ul>
+<li><b>Evidencia pública por capa</b> — <a href="/security/evidence">/security/evidence</a> (L1→L9, cada reclamo → URL verificable) + <a href="/api/security">/api/security</a></li>
+<li><b>Sentinel v3.0 como página interactiva</b> — <a href="/security/sentinel-v3.0">/security/sentinel-v3.0</a> (12 etapas clicables con evidencia)</li>
+<li><b>Benchmark TP/FP/F1</b> — <a href="/security/sentinel-benchmark">/security/sentinel-benchmark</a>: P 0.75 · R 1.00 · F1 0.857 (n=18, reproducible desde el ledger público)</li>
+<li><b>Página de auditoría con PDF+SHA-256</b> — <a href="/security/audit-2026-08-19">/security/audit-2026-08-19</a></li>
+<li><b>Pentest independiente</b> — NO realizado; alcance publicado y controles compensatorios documentados (sección honesta en la página de auditoría)</li>
+<li><b>certification.json regenerado</b> — C1-C10 recalculados sobre el bundle vivo de 68,388 (antes: snapshot del 12-sep con 68,387); 40 URLs de provenance reparadas, 4 excepciones documentadas</li>
+</ul>
 
 <footer>
 AUD-2026-0925 · Re-auditoría emitida por MarketNow Ops · Auditoría base: AUD-2026-0821-MN (PDF firmado por SHA-256 arriba) ·

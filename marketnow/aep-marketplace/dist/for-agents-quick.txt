@@ -17,6 +17,10 @@ POST /api/recommend                 → Skill recommendations (body: {current_to
 POST /api/mcp                       → MCP JSON-RPC 2.0 (initialize, tools/list, tools/call)
 POST /api/agent-purchase            → Buy a skill (USDC on Base or Stripe)
 POST /api/audit-skill               → Trigger security audit for a new server
+GET  /api/security                  → 10 security layers, each with its public evidence
+GET  /api/security?view=quarantine  → quarantine ledger (SHA-256 per record)
+GET  /api/sentinel-benchmark.json   → Sentinel benchmark (P/R/F1)
+GET  /security/evidence             → layer-by-layer evidence matrix (HTML)
 GET  /api/changelog                 → Recent changes + new endpoints
 
 MCP TOOLS (via /api/mcp):

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Evidence Matrix — every security layer, publicly verifiable · MarketNow</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="MarketNow security claims mapped one-to-one to public evidence artifacts: L1 certification, L1.5-L1.9 static analysis, L2 deep scans, L2.5 sandbox, L3 runtime, benchmark and pentest status. No claim without a URL.">
+<link rel="canonical" href="https://marketnow.site/security/evidence">
+<style>
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin:0; font:16px/1.65 -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; background:#0b0e14; color:#dfe6f1; }
+main { max-width:1080px; margin:0 auto; padding:48px 24px 96px; }
+h1 { font-size:30px; margin:0 0 4px; letter-spacing:-.5px; }
+h2 { font-size:20px; margin:40px 0 12px; color:#8ab4ff; }
+.sub { color:#9aa7bd; margin:0 0 8px; }
+.badge { display:inline-block; padding:2px 10px; border-radius:999px; font-size:13px; font-weight:600; margin:8px 6px 16px 0; }
+.ok { background:#0f3d24; color:#5ee59b; } .info { background:#1c2a4a; color:#8ab4ff; } .warn { background:#4a3a10; color:#ffd66b; }
+table { width:100%; border-collapse:collapse; font-size:14px; margin:14px 0; }
+th,td { text-align:left; padding:10px 10px; border-bottom:1px solid #1e2636; vertical-align:top; }
+th { color:#8ab4ff; font-size:13px; text-transform:uppercase; letter-spacing:.4px; }
+td a { display:block; margin:2px 0; word-break:break-all; }
+code { background:#161d2b; padding:1px 6px; border-radius:5px; font-size:13px; color:#5ee59b; }
+a { color:#8ab4ff; }
+.lvl { font-weight:700; color:#8ab4ff; white-space:nowrap; }
+.st { font-size:12px; white-space:nowrap; }
+.warnbox { border:1px solid #4a3a10; background:#241d0b; border-radius:10px; padding:14px 16px; margin:14px 0; }
+.warnbox b { color:#ffd66b; }
+.kpis { display:flex; gap:14px; flex-wrap:wrap; margin:18px 0; }
+.kpi { flex:1 1 200px; border:1px solid #1e2636; background:#10151f; border-radius:12px; padding:16px 18px; }
+.kpi .n { font-size:26px; font-weight:700; color:#5ee59b; }
+.kpi .l { color:#9aa7bd; font-size:13px; }
+footer { margin-top:56px; color:#9aa7bd; font-size:13px; border-top:1px solid #1e2636; padding-top:18px; }
+@media (max-width:720px){ .hide-sm { display:none; } }
+</style></head><body><main>
+<h1>Security evidence matrix</h1>
+<p class="sub">Every layer MarketNow's agent declares → the public artifact where you verify it · generated 2026-09-25</p>
+<span class="badge ok">9 live</span>
+<span class="badge warn">1 partial (declared)</span>
+<span class="badge info">Machine version: /api/security</span>
+
+<p>The agent profile (<code>agent.json</code>) declares a 10-layer audit pipeline. This page exists so
+that claim is checkable: each row links the layer to a live endpoint, a repo file, or a signed
+record. Where a layer is partial or planned, the row says so — that is the point of the page.</p>
+
+<div class="kpis">
+<div class="kpi"><div class="n">10</div><div class="l">declared layers (L1→L3 + L4–L9 grouped)</div></div>
+<div class="kpi"><div class="n">68,388</div><div class="l">L1-certified entries · 10 checks · 9 fully green</div></div>
+<div class="kpi"><div class="n">2,839</div><div class="l">tarballs deep-scanned (29 rules)</div></div>
+<div class="kpi"><div class="n">0.857</div><div class="l">benchmark F1 (decision level, n=18)</div></div>
+</div>
+
+<h2>Layer → evidence</h2>
+<table>
+<tr><th>Layer</th><th>What it does</th><th>Status</th><th class="hide-sm">Live numbers</th><th>Verify at</th></tr>
+<tr><td class="lvl">L1</td><td>Index certification — 10 checks recomputed over the live bundle (unique ids/slugs, required fields, risk model, price consistency, provenance URL).</td><td class="st"><span class="badge ok">live</span></td>
+<td class="hide-sm">68,388 certified · C4: 4 documented exceptions (provenance unknown, url=null)</td>
+<td><a href="https://marketnow.site/api/certification.json">/api/certification.json</a><a href="https://marketnow.site/api/stats.json">/api/stats.json</a></td></tr>
+<tr><td class="lvl">L1.5</td><td>Metadata static checks — auth, injection hints, validation, CORS, OAuth, rate-limit — on every real-time audit call.</td><td class="st"><span class="badge ok">live</span></td>
+<td class="hide-sm">6 checks · ~200ms per call</td>
+<td><a href="https://marketnow.site/api/audit-skill?skillId=mn-gen-00003">/api/audit-skill?skillId=…</a></td></tr>
+<tr><td class="lvl">L1.6</td><td>Semgrep-equivalent rules + secret patterns + OSV dependency check (real-time + weekly batch).</td><td class="st"><span class="badge ok">live</span></td>
+<td class="hide-sm">18 + 18 rules · batch: 1,257 secret findings, 1 OSV vuln (own repo)</td>
+<td><a href="https://marketnow.site/api/audit-skill?sentinel-status=1">/api/audit-skill?sentinel-status=1</a></td></tr>
+<tr><td class="lvl">L1.7</td><td>Binary & malware detection: nested archives, PE executables, launchers. Born from the July trojan incident.</td><td class="st"><span class="badge ok">live</span></td>
+<td class="hide-sm">1 documented catch (issue #9) · regression vector embedded</td>
+<td><a href="https://github.com/alicelabs-llc/universal-trust-adapter/blob/main/marketnow/aep-marketplace/lib/sentinel-l17.mjs">lib/sentinel-l17.mjs (repo)</a></td></tr>
+<tr><td class="lvl">L1.8</td><td>Malware family signatures (YARA-class; Win64/Lazy.PGPK staged launcher).</td><td class="st"><span class="badge ok">live</span></td>
+<td class="hide-sm">backstop role · 0 catches beyond L1.7</td>
+<td><a href="https://github.com/alicelabs-llc/universal-trust-adapter/blob/main/marketnow/aep-marketplace/lib/sentinel-l18.mjs">lib/sentinel-l18.mjs (repo)</a></td></tr>
+<tr><td class="lvl">L1.9</td><td>Prompt-injection firewall over descriptions and system prompts.</td><td class="st"><span class="badge ok">live</span></td>
+<td class="hide-sm">1 public catch (ledger qd_2026_08_15_001)</td>
+<td><a href="https://marketnow.site/api/quarantine">/api/quarantine (ledger)</a></td></tr>
+<tr><td class="lvl">L2</td><td>Deep scan of shipped npm tarballs: download, shasum-verify, 29 rules in tarball mode (dist/ included — the code that runs).</td><td class="st"><span class="badge ok">live</span></td>
+<td class="hide-sm">2,839 / 2,868 targets (99%) · 885 clean · 791 warn · 1,156 error · 5.59M weekly dl covered</td>
+<td><a href="https://marketnow.site/api/certification-scans.json">/api/certification-scans.json</a><a href="https://marketnow.site/api/certification?summary=1">/api/certification?summary=1</a></td></tr>
+<tr><td class="lvl">L2.5</td><td>Sandbox execution: Docker --network none + seccomp + cap-drop ALL (GitHub Actions, async). gVisor: planned v3.1.</td><td class="st"><span class="badge warn">partial</span></td>
+<td class="hide-sm">1 runtime catch (trojan via clone() denial)</td>
+<td><a href="https://marketnow.site/security/sentinel-v3.0">/security/sentinel-v3.0 (config)</a></td></tr>
+<tr><td class="lvl">L3</td><td>Runtime monitoring & drift: tool-catalog drift detection, revocation registry (CRL + OCSP), interceptor policy manifest.</td><td class="st"><span class="badge ok">live</span></td>
+<td class="hide-sm">6 interceptor rules · CRL/OCSP endpoints live</td>
+<td><a href="https://marketnow.site/api/interceptor.json">/api/interceptor.json</a><a href="https://marketnow.site/api/crl">/api/crl</a><a href="https://marketnow.site/api/ocsp">/api/ocsp</a></td></tr>
+<tr><td class="lvl">L4–L9</td><td>Dependency scan (OSV), secret patterns, family signatures, SBOM (SPDX 2.3), interceptor policy, post-execution filter.</td><td class="st"><span class="badge ok">live</span></td>
+<td class="hide-sm">OSV: 0 vulnerabilities / 688 locked deps · OWASP MCP cheat-sheet matrix</td>
+<td><a href="https://marketnow.site/api/owasp.json">/api/owasp.json</a><a href="https://github.com/alicelabs-llc/universal-trust-adapter/blob/main/.github/workflows/ci-tests.yml">CI workflows (repo)</a></td></tr>
+</table>
+
+<h2>Decision evidence</h2>
+<table>
+<tr><th>Claim</th><th>Where to verify</th></tr>
+<tr><td>Quarantine ledger — tamper-evident, SHA-256 per record, auditable FP/FN rate over time</td><td><a href="https://marketnow.site/api/quarantine">/api/quarantine</a></td></tr>
+<tr><td>Sentinel benchmark — precision 0.75 · recall 1.00 · F1 0.857 (n=18, all inputs public)</td><td><a href="https://marketnow.site/security/sentinel-benchmark">/security/sentinel-benchmark</a></td></tr>
+<tr><td>Independent pentest — NOT performed yet; scope published, compensating controls live</td><td><a href="https://marketnow.site/security/audit-2026-08-19#pentest">/security/audit-2026-08-19#pentest</a></td></tr>
+<tr><td>Current audit state — AUD-2026-0925 supersedes AUD-2026-0821-MN; re-audit 2026-12-25</td><td><a href="https://marketnow.site/trust/audit-status.json">/trust/audit-status.json</a></td></tr>
+</table>
+
+<h2>What this matrix does not claim</h2>
+<div class="warnbox"><b>Honesty notes.</b>
+<ul style="margin:8px 0 0; padding-left:20px">
+<li>L2 covers the top-2,868 npm targets (99% completion of that selection); the long tail carries L1 certification only.</li>
+<li>Four catalog entries have <code>source.url = null</code> (provenance unknown, smithery import) — published as C4 exceptions in the certification, not hidden.</li>
+<li>Benchmark n is small (18 decisions); it demonstrates verifiable transparency, not statistical power.</li>
+<li>gVisor (L2.5) and the maintainer-verified program are planned, not shipped.</li>
+</ul></div>
+
+<footer>Machine-readable twin of this page: <a href="/api/security">/api/security</a> ·
+pipeline spec: <a href="/security/sentinel-v3.0">/security/sentinel-v3.0</a> ·
+generated from repo artifacts 2026-09-25</footer>
+</main></body></html>

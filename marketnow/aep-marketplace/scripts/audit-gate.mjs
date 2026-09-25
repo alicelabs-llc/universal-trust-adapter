@@ -13,7 +13,11 @@
 //   4 CATALOG       — skills-lite bundle vs stats-base vs catalog-meta vs landing
 //   5 NPM-SYNC      — registry.npmjs.org/marketnow-mcp dist-tags vs local
 //   6 NO-DUMPS      — los dumps prohibidos de F-06 no pueden volver
+//   7 CERT-FRESH    — certificación L1 regenerada y consistente (S9, 2ª auditoría)
+//   8 SECURITY-SURFACES — páginas/evidencia por capa presentes + rewrites correctos (S8)
+//   9 BENCHMARK     — TP/FP/F1 recalculable, limitaciones y reproducibilidad (S8)
 //  (live) LIVE-PROD — MCP initialize serverInfo + /api/stats.json vs bundle
+//  (live) LIVE-SEC  — superficies de seguridad vivas + cert/benchmark vivo == repo
 
 import { createHash } from 'node:crypto';
 import { readFileSync, existsSync, statSync } from 'node:fs';
@@ -155,6 +159,95 @@ try {
   else log('✓', 'NO-DUMPS', 'ningún dump prohibido de F-06 en el árbol');
 } catch (e) { log('✗', 'NO-DUMPS', e.message); }
 
+// ── Gate 7: certificación L1 fresca y consistente (S9, 2ª auditoría) ───────
+try {
+  const cert = j('public/api/certification.json');
+  const bundle = j('public/api/skills-lite.json');
+  const sb = j('lib/stats-base.json');
+  const checks = [
+    [cert.catalog_total === bundle.length, `cert catalog_total=${cert.catalog_total} vs bundle=${bundle.length}`],
+    [/^2026-09-2[0-9]/.test(cert.generated_at || ''), `cert generated_at=${cert.generated_at} — snapshot viejo (regenera con scripts/certify_regen_2026_09_25.py)`],
+    [(cert.checks || []).length === 10, `cert checks=${(cert.checks || []).length} (esperados 10)`],
+    [cert.index_certification?.checks_passed === sb.security?.l1_checks_passed,
+      `cert checks_passed=${cert.index_certification?.checks_passed} vs stats l1_checks_passed=${sb.security?.l1_checks_passed}`],
+    [!!cert.benchmark?.f1 && typeof cert.benchmark.f1 === 'number', 'cert debe enlazar el benchmark (f1 numérico)'],
+  ];
+  for (const [ok, msg] of checks) log(ok ? '✓' : '✗', 'CERT-FRESH', msg);
+  // C4 exceptions must be documented, not hidden
+  const c4 = (cert.checks || []).find(c => c.id === 'C4');
+  if (c4 && c4.fail > 0 && !(c4.examples || []).length)
+    log('✗', 'CERT-FRESH', 'C4 tiene fails sin examples documentados (honestidad: publica los casos)');
+  else if (c4) log('✓', 'CERT-FRESH', `C4: ${c4.fail} excepciones documentadas con ejemplos`);
+} catch (e) { log('✗', 'CERT-FRESH', e.message); }
+
+// ── Gate 8: superficies de seguridad públicas (S8, 2ª auditoría) ───────────
+try {
+  const required = [
+    'public/security/sentinel-v3.0.html',
+    'public/security/sentinel-v3.0.md',
+    'public/security/evidence.html',
+    'public/security/sentinel-benchmark.html',
+    'public/security/audit-2026-08-19.html',
+    'public/api/sentinel-benchmark.json',
+    'lib/security-layers.json',
+    'public/_data/quarantine_decisions/MANIFEST.json',
+  ];
+  const missing = required.filter(p => !existsSync(join(ROOT, p)));
+  if (missing.length) log('✗', 'SECURITY-SURFACES', `archivos ausentes: ${missing.join(', ')}`);
+  else log('✓', 'SECURITY-SURFACES', `${required.length} superficies de seguridad presentes`);
+  // rewrites: /api/security → _mode=security y clean URLs de páginas
+  const vc = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8'));
+  const rw = vc.rewrites || [];
+  const need = [
+    ['/api/security', '/api/skills?_mode=security'],
+    ['/api/quarantine', '/api/skills?_mode=security&view=quarantine'],
+    ['/api/honeypot', '/api/skills?_mode=security&view=honeypot'],
+    ['/api/threat-intel', '/api/skills?_mode=security&view=threat-intel'],
+    ['/api/agent-analytics', '/api/skills?_mode=security&view=analytics'],
+    ['/security/sentinel-v3.0', '/security/sentinel-v3.0.html'],
+    ['/security/evidence', '/security/evidence.html'],
+    ['/security/sentinel-benchmark', '/security/sentinel-benchmark.html'],
+    ['/security/audit-2026-08-19', '/security/audit-2026-08-19.html'],
+  ];
+  const badRw = need.filter(([s, d]) => !rw.some(r => r.source === s && r.destination === d));
+  if (badRw.length) log('✗', 'SECURITY-SURFACES', `rewrites faltantes: ${badRw.map(b => b[0]).join(', ')}`);
+  else log('✓', 'SECURITY-SURFACES', `9 rewrites de seguridad correctos en vercel.json`);
+  // ninguna superficie puede apuntar a la función inexistente /api/security.js
+  const stale = rw.filter(r => String(r.destination).startsWith('/api/security?'));
+  if (stale.length) log('✗', 'SECURITY-SURFACES', `rewrites huérfanos hacia /api/security? (función inexistente): ${stale.map(s => s.source).join(', ')}`);
+  // el handler realmente monta el modo security
+  const skillsSrc = readFileSync(join(ROOT, 'api/skills.js'), 'utf8');
+  log(skillsSrc.includes("_mode === 'security'") ? '✓' : '✗', 'SECURITY-SURFACES',
+    "api/skills.js monta _mode=security (patrón Hobby 12-funciones)");
+} catch (e) { log('✗', 'SECURITY-SURFACES', e.message); }
+
+// ── Gate 9: benchmark honesto y verificable (S8, 2ª auditoría) ─────────────
+try {
+  const bm = j('public/api/sentinel-benchmark.json');
+  const m = bm.methodology || {};
+  const cm = m.confusion_matrix || {};
+  const met = m.metrics || {};
+  const tp = cm.true_positives, fp = cm.false_positives, fn = cm.false_negatives, tn = cm.true_negatives;
+  const pCalc = tp / (tp + fp), rCalc = tp / (tp + fn);
+  const f1Calc = 2 * pCalc * rCalc / (pCalc + rCalc);
+  const checks = [
+    [[tp, fp, fn, tn].every(x => typeof x === 'number' && x >= 0), 'matriz de confusión completa y numérica'],
+    [Math.abs(met.precision - pCalc) < 0.001, `precision=${met.precision} vs recalculada=${pCalc.toFixed(3)}`],
+    [Math.abs(met.recall - rCalc) < 0.001, `recall=${met.recall} vs recalculada=${rCalc.toFixed(3)}`],
+    [Math.abs(met.f1 - f1Calc) < 0.001, `f1=${met.f1} vs recalculada=${f1Calc.toFixed(3)}`],
+    [(m.limitations || []).length >= 3, `limitaciones documentadas (${(m.limitations || []).length}) — el benchmark debe publicar sus debilidades`],
+    [(m.reproducibility || []).length >= 3, `pasos de reproducibilidad (${(m.reproducibility || []).length})`],
+  ];
+  for (const [ok, msg] of checks) log(ok ? '✓' : '✗', 'BENCHMARK', msg);
+  // el ledger citado debe existir y coincidir en conteo de positivos
+  const man = j('public/_data/quarantine_decisions/MANIFEST.json');
+  const posRecords = (m.corpora?.positives?.records || []);
+  const ledgerIds = new Set((man.records || []).map(r => r.decision_id));
+  const cited = posRecords.filter(r => ledgerIds.has(r.id)).length;
+  log(posRecords.filter(r => r.id?.startsWith('qd_')).length === cited
+    ? '✓' : '✗', 'BENCHMARK', `positivos citados existen en el ledger (${cited}/${posRecords.filter(r => r.id?.startsWith('qd_')).length})`);
+} catch (e) { log('✗', 'BENCHMARK', e.message); }
+
 // ── Gate live: producción (solo --live / reauditoría) ───────────────────────
 if (LIVE) {
   try {
@@ -178,6 +271,47 @@ if (LIVE) {
       log('✓', 'LIVE-PROD', `/api/stats.json vivo coincide con el repo (${d.total_mcp_servers} / ${d.total_tracked_all_sources})`);
     else log('✗', 'LIVE-PROD', `stats en vivo (${d.total_mcp_servers}/${d.total_tracked_all_sources}) ≠ repo (${bundle.length}/${j('public/api/catalog-meta.json').total_all})`);
   } catch (e) { log('✗', 'LIVE-PROD', `stats en vivo falló: ${e.message}`); }
+
+  // superficies de seguridad en producción (S8): 200 + JSON bien formado
+  try {
+    const surfaces = [
+      ['/api/security', 'application/json', true],
+      ['/api/quarantine', 'application/json', true],
+      ['/api/honeypot', 'application/json', true],
+      ['/api/threat-intel', 'application/json', true],
+      ['/security/sentinel-v3.0', 'text/html', false],
+      ['/security/evidence', 'text/html', false],
+      ['/security/sentinel-benchmark', 'text/html', false],
+      ['/security/audit-2026-08-19', 'text/html', false],
+    ];
+    let okCount = 0;
+    for (const [path, ctype, json] of surfaces) {
+      try {
+        const res = await fetch(`${PROD}${path}`, { signal: AbortSignal.timeout(20000) });
+        const ct = String(res.headers.get('content-type') || '');
+        if (res.status !== 200 || !ct.includes(ctype)) {
+          log('✗', 'LIVE-SEC', `${path} → ${res.status} ${ct} (esperaba 200 ${ctype})`);
+          continue;
+        }
+        if (json) await res.json(); // debe parsear
+        okCount++;
+      } catch (e2) { log('✗', 'LIVE-SEC', `${path} falló: ${e2.message}`); }
+    }
+    if (okCount === surfaces.length) log('✓', 'LIVE-SEC', `${okCount}/${surfaces.length} superficies de seguridad vivas y bien tipadas`);
+    // certificación viva == repo
+    const certRes = await fetch(`${PROD}/api/certification.json`, { signal: AbortSignal.timeout(20000) });
+    const certLive = await certRes.json();
+    const certRepo = j('public/api/certification.json');
+    if (certLive.catalog_total === certRepo.catalog_total && (certLive.generated_at || '') === (certRepo.generated_at || ''))
+      log('✓', 'LIVE-SEC', `certificación viva = repo (total ${certLive.catalog_total}, ${certLive.generated_at})`);
+    else log('✗', 'LIVE-SEC', `cert viva (${certLive.catalog_total}/${certLive.generated_at}) ≠ repo (${certRepo.catalog_total}/${certRepo.generated_at})`);
+    // benchmark vivo == repo
+    const bmRes = await fetch(`${PROD}/api/sentinel-benchmark.json`, { signal: AbortSignal.timeout(20000) });
+    const bmLive = await bmRes.json();
+    const bmRepo = j('public/api/sentinel-benchmark.json');
+    log(bmLive.methodology?.metrics?.f1 === bmRepo.methodology?.metrics?.f1
+      ? '✓' : '✗', 'LIVE-SEC', `benchmark vivo F1=${bmLive.methodology?.metrics?.f1} vs repo F1=${bmRepo.methodology?.metrics?.f1}`);
+  } catch (e) { log('✗', 'LIVE-SEC', `verificación de superficies falló: ${e.message}`); }
 }
 
 // ── Resumen ────────────────────────────────────────────────────────────────

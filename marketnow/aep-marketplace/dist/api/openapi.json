@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "MarketNow Skills API",
-    "description": "The open marketplace for MCP-compatible agent skills. 68,388 index-certified skills, free to install, with B2B pricing tiers. Designed for autonomous agent consumption.\n\n## Authentication\nMost read endpoints are public (no auth required). Write endpoints (checkout) require no auth but redirect to Stripe.\n\n## Rate Limits\n- Anonymous: 60 requests/minute\n- The full catalog (/api/skills.json) is ~94MB uncompressed (~8MB gzipped transfer) — cache locally for 24h\n\n## Languages\nThe site UI and docs are available in 14 languages. Skill metadata is English-primary.\n\n## Concurrency & Rate Limits (v4.0)\n- Search: 60 req/min per IP\n- Audit: 30 req/min per IP\n- Purchase: 20 req/min per IP\n- Mandates: 30 req/min per IP\n- All endpoints use in-memory caches (5min TTL for skills, 30s for mandates)\n- USDC verification uses a 4-endpoint RPC pool with automatic failover\n- Monitoring: GET /api/manifest?health\n\n## Stats (live)\n- 68,388 MCP skills indexed\n- 16 categories\n- 68,387 free skills\n- 14 languages: EN, ES, PT, ZH, FR, DE, IT, RU, TR, JA, KO, AR, HI, UTA\n- Pricing: B2B pricing: Community (Free) / Team ($99/mo) / Enterprise (Custom)\n- License: AliceLabs LLC Proprietary\n\n\n## Concurrency & Rate Limits (v4.1)\n- Search: 60 req/min per IP\n- Audit: 30 req/min per IP\n- Purchase: 20 req/min per IP\n- Mandates: 30 req/min per IP\n- All endpoints use in-memory caches (5min TTL for skills, 30s for mandates)\n- USDC verification uses a 4-endpoint RPC pool with automatic failover\n- Monitoring: GET /api/manifest?health\n\n## Stats (live)\n- 68,388 MCP skills indexed\n- 16 categories\n- 68,387 free skills\n- 14 languages: EN, ES, PT, ZH, FR, DE, IT, RU, TR, JA, KO, AR, HI, UTA\n- Pricing: B2B pricing: Community (Free) / Team ($99/mo) / Enterprise (Custom)\n- License: AliceLabs LLC Proprietary\n- Maintainer: AliceLabs LLC (Wyoming, USA, 2025)\n",
+    "description": "The open marketplace for MCP-compatible agent skills. 68,388 index-certified skills, free to install, with B2B pricing tiers. Designed for autonomous agent consumption.\n\n## Authentication\nMost read endpoints are public (no auth required). Write endpoints (checkout) require no auth but redirect to Stripe.\n\n## Rate Limits\n- Anonymous: 60 requests/minute\n- The full catalog (/api/skills.json) is ~94MB uncompressed (~8MB gzipped transfer) \u2014 cache locally for 24h\n\n## Languages\nThe site UI and docs are available in 14 languages. Skill metadata is English-primary.\n\n## Concurrency & Rate Limits (v4.0)\n- Search: 60 req/min per IP\n- Audit: 30 req/min per IP\n- Purchase: 20 req/min per IP\n- Mandates: 30 req/min per IP\n- All endpoints use in-memory caches (5min TTL for skills, 30s for mandates)\n- USDC verification uses a 4-endpoint RPC pool with automatic failover\n- Monitoring: GET /api/manifest?health\n\n## Stats (live)\n- 68,388 MCP skills indexed\n- 16 categories\n- 68,387 free skills\n- 14 languages: EN, ES, PT, ZH, FR, DE, IT, RU, TR, JA, KO, AR, HI, UTA\n- Pricing: B2B pricing: Community (Free) / Team ($99/mo) / Enterprise (Custom)\n- License: AliceLabs LLC Proprietary\n\n\n## Concurrency & Rate Limits (v4.1)\n- Search: 60 req/min per IP\n- Audit: 30 req/min per IP\n- Purchase: 20 req/min per IP\n- Mandates: 30 req/min per IP\n- All endpoints use in-memory caches (5min TTL for skills, 30s for mandates)\n- USDC verification uses a 4-endpoint RPC pool with automatic failover\n- Monitoring: GET /api/manifest?health\n\n## Stats (live)\n- 68,388 MCP skills indexed\n- 16 categories\n- 68,387 free skills\n- 14 languages: EN, ES, PT, ZH, FR, DE, IT, RU, TR, JA, KO, AR, HI, UTA\n- Pricing: B2B pricing: Community (Free) / Team ($99/mo) / Enterprise (Custom)\n- License: AliceLabs LLC Proprietary\n- Maintainer: AliceLabs LLC (Wyoming, USA, 2025)\n",
     "version": "4.1.0",
     "contact": {
       "name": "MarketNow",
@@ -23,7 +23,7 @@
   "paths": {
     "/api/skills.json": {
       "get": {
-        "summary": "Skills catalog dump (DEPRECATED — removed 2026-09-25)",
+        "summary": "Skills catalog dump (DEPRECATED \u2014 removed 2026-09-25)",
         "description": "Returns a small deprecation manifest. The unpaginated 94MB catalog dump was removed on 2026-09-25 (audit AUD-2026-0821-MN finding F-06). Use GET /api/skills?page=1&limit=100 (paginated, max limit 500, supports category, filter, sort, q, risk, tier) or GET /api/skills-lite.json for the bulk dataset the UI uses. See /api/manifest.json.",
         "operationId": "listSkills",
         "parameters": [
@@ -463,7 +463,7 @@
     "/api/agent-purchase": {
       "post": {
         "summary": "Agent programmatic purchase (USDC on Base + mandate-aware)",
-        "description": "Dual-mode purchase endpoint. Returns one of: instant_download (free skill), instant_purchase (paid skill with valid mandate + verified USDC tx), direct_purchase (paid skill with verified USDC tx, no mandate), requires_payment (mandate valid but no txHash yet), requires_human_approval (no mandate and no payment — agent must request approval).",
+        "description": "Dual-mode purchase endpoint. Returns one of: instant_download (free skill), instant_purchase (paid skill with valid mandate + verified USDC tx), direct_purchase (paid skill with verified USDC tx, no mandate), requires_payment (mandate valid but no txHash yet), requires_human_approval (no mandate and no payment \u2014 agent must request approval).",
         "operationId": "agentPurchase",
         "requestBody": {
           "required": true,
@@ -501,7 +501,7 @@
         },
         "responses": {
           "200": {
-            "description": "Purchase response — check the 'mode' field to determine next step",
+            "description": "Purchase response \u2014 check the 'mode' field to determine next step",
             "content": {
               "application/json": {
                 "schema": {
@@ -548,6 +548,77 @@
           },
           "405": {
             "description": "Method not allowed"
+          }
+        }
+      }
+    },
+    "/api/security": {
+      "get": {
+        "summary": "Security overview \u2014 10 audit layers with per-layer public evidence",
+        "description": "Machine-readable map of the Sentinel v3.0 pipeline: each layer with status, counts and the artifact where it can be verified. Mounted via /api/skills?_mode=security (Vercel Hobby 12-function cap).",
+        "parameters": [
+          {
+            "name": "view",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "overview",
+                "quarantine",
+                "honeypot",
+                "threat-intel",
+                "analytics"
+              ]
+            },
+            "description": "overview (default) | quarantine ledger | honeypot methodology | threat-intel feeds | analytics aggregates"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Layer map / view payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/quarantine": {
+      "get": {
+        "summary": "Tamper-evident quarantine ledger (SHA-256 per record)",
+        "description": "Alias of /api/security?view=quarantine. Every quarantine decision is a signed public record; third parties can audit FP/FN rate over time.",
+        "responses": {
+          "200": {
+            "description": "Ledger manifest + records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sentinel-benchmark.json": {
+      "get": {
+        "summary": "Sentinel decision-level benchmark (precision/recall/F1)",
+        "description": "Confusion matrix over labeled public corpora (quarantine ledger + documented incidents + first-party package corpus). Includes limitations and reproducibility steps. Human version: /security/sentinel-benchmark.",
+        "responses": {
+          "200": {
+            "description": "Benchmark with methodology, corpora, matrix and metrics",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
           }
         }
       }

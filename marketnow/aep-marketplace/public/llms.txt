@@ -67,6 +67,13 @@ GET https://www.marketnow.site/api/badge/<slug>.svg         — embeddable trust
 GET https://www.marketnow.site/api/certification              — L1/L2 certification report (methodology + checks)
 GET https://www.marketnow.site/api/certification?package=<n>  — deep-scan verdict for a scanned npm package
 GET https://www.marketnow.site/api/certification-scans.json   — raw 29-rule scan findings (shasum-verified artifacts)
+GET https://www.marketnow.site/api/security             — security overview: 10 layers with per-layer evidence (machine-readable)
+GET https://www.marketnow.site/api/security?view=quarantine — tamper-evident quarantine ledger (SHA-256 per record)
+GET https://www.marketnow.site/api/sentinel-benchmark.json — decision-level benchmark (precision/recall/F1, reproducible)
+GET https://www.marketnow.site/security/evidence        — evidence matrix: every layer mapped to its public artifact (HTML)
+GET https://www.marketnow.site/security/sentinel-v3.0   — Sentinel v3.0 pipeline spec, interactive (HTML)
+GET https://www.marketnow.site/security/sentinel-benchmark — benchmark page with confusion matrix (HTML)
+GET https://www.marketnow.site/security/audit-2026-08-19 — audit AUD-2026-0821-MN: findings, PDF + SHA-256 (HTML)
 GET https://www.marketnow.site/api/community                  — aggregate ecosystem tracker (64,349, no trust claims)
 GET https://www.marketnow.site/mcps                           — human-friendly MCP directory (search, tiers, filters)
 ```

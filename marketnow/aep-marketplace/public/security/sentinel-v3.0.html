@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Sentinel v3.0 — Security Audit Pipeline · MarketNow</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Sentinel v3.0: MarketNow's 12-stage security audit pipeline. Every layer mapped to public, verifiable evidence. Includes decision-level benchmark (P 0.75 · R 1.00 · F1 0.857) and honest limitations.">
+<link rel="canonical" href="https://marketnow.site/security/sentinel-v3.0">
+<style>
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin:0; font:16px/1.65 -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; background:#0b0e14; color:#dfe6f1; }
+main { max-width:1020px; margin:0 auto; padding:48px 24px 96px; }
+h1 { font-size:30px; margin:0 0 4px; letter-spacing:-.5px; }
+h2 { font-size:20px; margin:40px 0 12px; color:#8ab4ff; }
+.sub { color:#9aa7bd; margin:0 0 8px; }
+.badge { display:inline-block; padding:2px 10px; border-radius:999px; font-size:13px; font-weight:600; margin:8px 6px 16px 0; }
+.ok { background:#0f3d24; color:#5ee59b; }
+.info { background:#1c2a4a; color:#8ab4ff; }
+.warn { background:#4a3a10; color:#ffd66b; }
+.meta { border:1px solid #1e2636; background:#10151f; border-radius:12px; padding:18px 22px; margin:20px 0; }
+table { width:100%; border-collapse:collapse; font-size:14px; margin:14px 0; }
+th,td { text-align:left; padding:9px 10px; border-bottom:1px solid #1e2636; vertical-align:top; }
+th { color:#8ab4ff; font-size:13px; text-transform:uppercase; letter-spacing:.4px; }
+code { background:#161d2b; padding:1px 6px; border-radius:5px; font-size:13px; color:#5ee59b; }
+pre { background:#161d2b; padding:14px 16px; border-radius:10px; overflow-x:auto; font-size:13px; line-height:1.5; }
+a { color:#8ab4ff; }
+.kpis { display:flex; gap:14px; flex-wrap:wrap; margin:18px 0; }
+.kpi { flex:1 1 150px; border:1px solid #1e2636; background:#10151f; border-radius:12px; padding:16px 18px; }
+.kpi .n { font-size:26px; font-weight:700; color:#5ee59b; }
+.kpi .l { color:#9aa7bd; font-size:13px; }
+.stages { display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:10px; margin:16px 0; }
+.stage { border:1px solid #1e2636; background:#10151f; border-radius:10px; padding:12px 14px; cursor:pointer; transition:border-color .15s; }
+.stage:hover { border-color:#8ab4ff; }
+.stage.sel { border-color:#8ab4ff; background:#141c2e; }
+.stage .id { font-weight:700; color:#8ab4ff; font-size:15px; }
+.stage .nm { color:#dfe6f1; font-size:13px; min-height:34px; }
+.stage .st { font-size:11px; margin-top:6px; }
+.st-live { color:#5ee59b; } .st-partial { color:#ffd66b; }
+#detail { border:1px solid #8ab4ff44; background:#10151f; border-radius:12px; padding:18px 20px; margin:12px 0 0; min-height:120px; }
+#detail h3 { margin:0 0 6px; color:#8ab4ff; font-size:17px; }
+#detail .ev a { display:block; margin:3px 0; }
+.counts { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+.chip { background:#161d2b; border:1px solid #1e2636; border-radius:6px; padding:3px 8px; font-size:12.5px; }
+footer { margin-top:56px; color:#9aa7bd; font-size:13px; border-top:1px solid #1e2636; padding-top:18px; }
+.warnbox { border:1px solid #4a3a10; background:#241d0b; border-radius:10px; padding:14px 16px; margin:14px 0; }
+.warnbox b { color:#ffd66b; }
+</style></head><body><main>
+<h1>Sentinel v3.0</h1>
+<p class="sub">The security audit pipeline of <strong>marketnow.site</strong> · 12 stages · every layer backed by public evidence</p>
+<span class="badge ok">L2: 2,839 / 2,868 tarballs scanned (99%)</span>
+<span class="badge info">Decision benchmark: F1 0.857</span>
+<span class="badge info">Spec (md): /security/sentinel-v3.0.md</span>
+
+<p>Sentinel is not a score of popularity — it is a layered inspection pipeline where each stage
+produces artifacts you can verify yourself. This page is the interactive map: click any stage
+to see what it does, what it caught, and where its evidence lives. Nothing here is claimed
+without a URL.</p>
+
+<div class="kpis">
+<div class="kpi"><div class="n">12</div><div class="l">pipeline stages (L1→L9)</div></div>
+<div class="kpi"><div class="n">29</div><div class="l">L2 rules on shipped artifacts</div></div>
+<div class="kpi"><div class="n">68,388</div><div class="l">L1 index-certified entries</div></div>
+<div class="kpi"><div class="n">5.59M</div><div class="l">weekly downloads covered by L2</div></div>
+</div>
+
+<h2>Pipeline — click a stage</h2>
+<div class="stages" id="stages"></div>
+<div id="detail"><h3>Sentinel v3.0</h3><p class="sub">Select a stage above to inspect its evidence.</p></div>
+
+<h2>Review taxonomy — we never claim "verified" without earning it</h2>
+<table>
+<tr><th>Status</th><th>Count</th><th>Meaning</th></tr>
+<tr><td>Auto-scanned</td><td>2,839</td><td>Sentinel ran; no human review. All L2-flagged artifacts keep their findings public.</td></tr>
+<tr><td>Human-reviewed</td><td>22</td><td>Curated free skills with manual review.</td></tr>
+<tr><td>Maintainer-verified</td><td>0</td><td>Program not yet launched — honestly reported as zero.</td></tr>
+</table>
+
+<h2>Sandbox configuration (L2.5)</h2>
+<pre>docker run --rm -i \
+  --network none \
+  --read-only \
+  --tmpfs /tmp:rw,size=64m,mode=1777 \
+  --cap-drop ALL \
+  --security-opt no-new-privileges \
+  --user 65534:65534 \
+  --memory 256m \
+  --pids-limit 64 \
+  --cgroup-parent=/marketnow/audit \
+  "$IMAGE"</pre>
+<p class="sub">gVisor dynamic analysis is planned for Sentinel v3.1 (status: partial, not hidden).</p>
+
+<h2>Per-stage catch counts (real data)</h2>
+<table>
+<tr><th>Stage</th><th>Catches</th><th>Notes</th></tr>
+<tr><td>L1 metadata validation</td><td>14 malformed manifests / 14,581</td><td>none malicious</td></tr>
+<tr><td>L1.6 secrets (gitleaks batch)</td><td>1,257 findings</td><td>mostly test fixtures; OSV: 1 vuln</td></tr>
+<tr><td>L1.6 semgrep (18 rules)</td><td>0 findings</td><td>own repo batch 2026-09-20</td></tr>
+<tr><td>L1.7 binary detection</td><td>1 trojan (issue #9)</td><td>Trojan:Win64/Lazy.PGPK!MTB — regression vector since</td></tr>
+<tr><td>L1.9 prompt injection</td><td>1 catch (ledger qd_001)</td><td>public quarantine record</td></tr>
+<tr><td>L2 deep tarball scan</td><td>1,156 error / 791 warning verdicts</td><td>29 rules, shasum-verified artifacts</td></tr>
+<tr><td>L2.5 sandbox (seccomp)</td><td>1 trojan via clone() denial</td><td>the same incident, runtime layer</td></tr>
+<tr><td>L4 dependency scan</td><td>0 CVEs in production deps</td><td>OSV: 0 vulns across 688 locked deps (2026-09-25)</td></tr>
+</table>
+
+<h2>Honest limitations</h2>
+<div class="warnbox"><b>This is not a substitute for human review of code that executes on your machine.</b>
+<ul style="margin:8px 0 0; padding-left:20px">
+<li>L1.5/L1.6 static analysis is regex-based (Semgrep-equivalent lite). Obfuscation, encodings and indirect calls can evade patterns.</li>
+<li>L2 scans the top 2,868 npm targets by weekly downloads — long-tail packages carry L1 certification only (99% completion of the covered set).</li>
+<li>L2.5 sandbox runs async (GitHub Actions) on repo-linked skills; gVisor is roadmap.</li>
+<li>Independent pentest: <b>not yet performed</b> — scope published at <a href="/security/audit-2026-08-19#pentest">/security/audit-2026-08-19#pentest</a>.</li>
+<li>Maintainer-verified count is 0 because the program has not launched.</li>
+</ul></div>
+
+<h2>Evidence index</h2>
+<ul>
+<li><a href="/security/evidence">Layer-by-layer evidence matrix</a> — every claim → its public artifact</li>
+<li><a href="/security/sentinel-benchmark">Sentinel benchmark (TP/FP/F1)</a> — decision-level, reproducible from the public ledger</li>
+<li><a href="/api/security">/api/security</a> — machine-readable overview of all layers</li>
+<li><a href="/api/certification.json">/api/certification.json</a> — L1 checks C1–C10 recomputed over the live bundle</li>
+<li><a href="/api/certification-scans.json">/api/certification-scans.json</a> — raw L2 results per package (2,839)</li>
+<li><a href="/api/quarantine">/api/quarantine</a> — tamper-evident quarantine ledger (SHA-256 per record)</li>
+<li><a href="/security/audit-2026-08-19">Audit AUD-2026-0821-MN</a> — original findings, remediation and PDF+SHA-256</li>
+</ul>
+
+<footer>Sentinel v3.0 · marketnow.site · spec updated 2026-08-25, evidence page generated 2026-09-25 ·
+threat model: <a href="https://github.com/alicelabs-llc/universal-trust-adapter/blob/main/uta-repo/THREAT_MODEL.md">THREAT_MODEL.md</a></footer>
+
+<script>
+const STAGES = [
+ {id:'L1', nm:'Index certification', st:'live', what:'10 catalog checks (unique ids/slugs, required fields, risk model, price consistency) recomputed over the full bundle.',
+  ev:['/api/certification.json','/api/stats.json'], counts:{certified:68388, checks:10, checks_fully_green:9, c4_exceptions:4}}},
+ {id:'L1.5', nm:'Metadata static checks', st:'live', what:'6 metadata checks (auth, injection hints, validation, CORS, OAuth, rate limiting) on every real-time audit call (~200ms).',
+  ev:['/api/audit-skill?skillId=mn-gen-00003'], counts:{checks:6, latency_ms:200}},
+ {id:'L1.6', nm:'Semgrep-equivalent + secrets + OSV', st:'live', what:'18 Semgrep-style rules + 18 secret patterns + OSV dependency check. Real-time on audit calls and weekly batch.',
+  ev:['/api/audit-skill?sentinel-status=1'], counts:{semgrep_rules:18, secret_patterns:18, batch_secrets:1257, batch_osv:1}},
+ {id:'L1.7', nm:'Binary & malware detection', st:'live', what:'Nested archives, PE executables, launcher scripts. Born from the July trojan incident (issue #9) — regression vector embedded.',
+  ev:['https://github.com/alicelabs-llc/universal-trust-adapter/blob/main/marketnow/aep-marketplace/lib/sentinel-l17.mjs','/api/quarantine'], counts:{documented_catches:1, regression_vectors:1}},
+ {id:'L1.8', nm:'Malware family signatures', st:'live', what:'YARA-class family matching (Win64/Lazy.PGPK staged launcher signature). Backstop layer, runs with L1.7.',
+  ev:['https://github.com/alicelabs-llc/universal-trust-adapter/blob/main/marketnow/aep-marketplace/lib/sentinel-l18.mjs'], counts:{families:1, catches:'backstop (0 beyond L1.7)'}},
+ {id:'L1.9', nm:'Prompt injection firewall', st:'live', what:'Injection patterns in descriptions/system prompts (rule PI-007 and siblings). First public catch: ledger qd_001.',
+  ev:['https://github.com/alicelabs-llc/universal-trust-adapter/blob/main/marketnow/aep-marketplace/lib/sentinel-l19.mjs','/api/quarantine'], counts:{documented_catches:1}},
+ {id:'L2', nm:'Deep tarball scan (29 rules)', st:'live', what:'Shipped npm tarballs downloaded, shasum-verified, scanned with 29 rules in tarball mode (dist/ included — the code that actually runs).',
+  ev:['/api/certification-scans.json','/api/certification?package=agent-trust-card'], counts:{targets:2868, scanned:2839, completion:'99%', clean:885, flagged_warning:791, flagged_error:1156}},
+ {id:'L2.5', nm:'Sandbox execution', st:'partial', what:'Docker sandbox (--network none, seccomp, read-only) via GitHub Actions on repo-linked skills. gVisor: planned for v3.1.',
+  ev:['/api/audit-skill?sentinel-status=1'], counts:{profile:'no-network · read-only · cap-drop ALL · seccomp', catches:1}},
+ {id:'L3', nm:'Runtime monitoring & drift', st:'live', what:'Tool-catalog drift detection and revocation machinery (CRL + OCSP) re-checking certified entries over time.',
+  ev:['/api/interceptor.json','/api/crl','/api/ocsp'], counts:{interceptor_rules:6}},
+ {id:'L4', nm:'Dependency scan (OSV)', st:'live', what:'CVE database over locked dependency trees. Current state: 0 vulnerabilities across 688 exact locked deps (OSV querybatch, 2026-09-25).',
+  ev:['https://github.com/alicelabs-llc/universal-trust-adapter/blob/main/scripts/osv_batch_locks.py'], counts:{vulns:0, deps:688}},
+ {id:'L5–L7', nm:'Secrets / families / SBOM', st:'live', what:'Secret patterns in committed files (gitleaks batch), YARA family backstop, SPDX 2.3 SBOM generation for first-party packages.',
+  ev:['/api/owasp.json'], counts:{batch_secret_findings:1257, sbom:'SPDX 2.3'}},
+ {id:'L8–L9', nm:'Policy & post-execution filter', st:'live', what:'Interceptor rule manifest (pre-execution policy enforcement via the Cline trust plugin) and post-execution result inspection.',
+  ev:['/api/interceptor.json'], counts:{interceptor_rules:6, production_blocks:0, warnings:12}},
+];
+const el = (h) => { const d = document.createElement('div'); d.innerHTML = h; return d.firstElementChild; };
+const stagesEl = document.getElementById('stages');
+const detail = document.getElementById('detail');
+function show(s, node) {
+  document.querySelectorAll('.stage').forEach(x => x.classList.remove('sel'));
+  node.classList.add('sel');
+  const counts = Object.entries(s.counts||{}).map(([k,v]) => `<span class="chip">${k}: <b>${v}</b></span>`).join('');
+  const ev = (s.ev||[]).map(u => `<a href="${u.startsWith('/')?'https://marketnow.site'+u:u}">${u}</a>`).join('');
+  detail.innerHTML = `<h3>${s.id} — ${s.nm} <span class="badge ${s.st==='live'?'ok':'warn'}">${s.st}</span></h3>
+    <p>${s.what}</p><div class="counts">${counts}</div><div class="ev">${ev}</div>`;
+}
+STAGES.forEach((s, i) => {
+  const node = el(`<div class="stage"><div class="id">${s.id}</div><div class="nm">${s.nm}</div><div class="st ${s.st==='live'?'st-live':'st-partial'}">● ${s.st}</div></div>`);
+  node.onclick = () => show(s, node);
+  stagesEl.appendChild(node);
+  if (i === 0) show(s, node);
+});
+</script>
+</main></body></html>

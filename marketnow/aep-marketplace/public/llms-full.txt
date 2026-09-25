@@ -103,10 +103,16 @@ Discussion: https://github.com/PipedreamHQ/awesome-mcp-servers/issues/94
 - GET /api/skills?page=1&limit=100 — paginated catalog, 68,388 skills (/api/skills.json removed 2026-09-25 — audit F-06; returns deprecation manifest)
 - GET /api/audit-skill?skillId=X — real-time 10-layer audit
 - GET /api/trust-score?skillId=X — trust score for a skill
-- GET /api/security — security overview (10 layers)
-- GET /api/security?view=honeypot — honeypot hit log
-- GET /api/security?view=quarantine — quarantined skills
-- GET /api/security?view=analytics — agent analytics
+- GET /api/security — security overview: 10 layers with per-layer evidence (machine-readable)
+- GET /api/security?view=honeypot — honeypot methodology and enforcement (per-instance logs are ephemeral by design)
+- GET /api/security?view=quarantine — tamper-evident quarantine ledger (SHA-256 per record, auditable FP/FN)
+- GET /api/security?view=threat-intel — IOC feeds consulted at scan time
+- GET /api/security?view=analytics — aggregate security analytics (L1/L2 counts)
+- GET /api/sentinel-benchmark.json — decision-level benchmark (P 0.75 / R 1.00 / F1 0.857, all inputs public)
+- /security/evidence — evidence matrix: every layer → its public artifact
+- /security/sentinel-v3.0 — pipeline spec (12 stages, interactive)
+- /security/sentinel-benchmark — benchmark with confusion matrix
+- /security/audit-2026-08-19 — audit AUD-2026-0821-MN page (findings, PDF + SHA-256, pentest status)
 - GET /api/atc — ATC list + operations (issue, verify, revoke, translate)
 - POST /api/agent-purchase — install a skill (free)
 - GET /api/mandates — manage spending mandates

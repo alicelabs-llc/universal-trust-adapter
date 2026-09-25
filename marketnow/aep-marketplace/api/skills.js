@@ -23,6 +23,8 @@
 import skillsData from '../public/api/skills-lite.json' with { type: 'json' };
 import catalogMeta from '../public/api/catalog-meta.json' with { type: 'json' };
 import statsBase from '../lib/stats-base.json' with { type: 'json' };
+import securityLayers from '../lib/security-layers.json' with { type: 'json' };
+import quarantineManifest from '../public/_data/quarantine_decisions/MANIFEST.json' with { type: 'json' };
 import { mountSubmission } from '../lib/submit-http.mjs';
 
 const SITE = 'https://www.marketnow.site';
@@ -44,6 +46,13 @@ export default function handler(req, res) {
   // submission endpoints (POST/GET /api/submit, GET /api/submissions)
   if (req.query._mode === 'submit' || req.query._mode === 'queue') {
     return mountSubmission(req, res);
+  }
+  // ── Security evidence endpoints (2nd external audit S8, 2026-09-25) ──
+  // /api/security, /api/quarantine, /api/honeypot, /api/threat-intel,
+  // /api/agent-analytics → rewritten here as _mode=security&view=<v>
+  // (mounted via _mode for the Hobby 12-function cap; no api/security.js file)
+  if (req.query._mode === 'security') {
+    return securityResponse(req, res);
   }
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=600');
@@ -234,3 +243,93 @@ export default function handler(req, res) {
 // batch4: catalog 68,387 (2026-09-12) — touch forces skills-lite.json re-bundle
 
 // batch6: catalog 68,388 (2026-09-18 universal-memory first-party sync) — touch forces re-bundle
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Security evidence API (2nd external audit S8 closure, 2026-09-25)
+// Mounted via _mode=security because the Hobby plan caps Serverless Functions
+// at 12 (audit-skill.js exists = 12 in use). All numbers come from artifacts
+// that live in the repo/deploy — nothing is invented at request time.
+// Views: overview (default) | quarantine | honeypot | threat-intel | analytics
+// ─────────────────────────────────────────────────────────────────────────────
+function securityResponse(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=600');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  const view = String(req.query.view || 'overview');
+
+  if (view === 'quarantine') {
+    return res.status(200).json({
+      view: 'quarantine',
+      description: 'Tamper-evident public ledger of every quarantine decision. Third parties can audit FP/FN rate over time.',
+      ledger: quarantineManifest,
+      how_to_verify: 'Every record carries record_sha256; the manifest lists each file under /_data/quarantine_decisions/.',
+      benchmark: { url: '/api/sentinel-benchmark.json', html: '/security/sentinel-benchmark' },
+    });
+  }
+
+  if (view === 'honeypot') {
+    // lib/honeypot.mjs keeps logs in-memory per instance (ephemeral by design);
+    // this endpoint publishes the METHODOLOGY, never fabricated counts.
+    return res.status(200).json({
+      view: 'honeypot',
+      description: 'Fake vulnerable endpoints monitored for attacker reconnaissance. Logs are in-memory per server instance (ephemeral); any hit auto-bans the IP for 24h.',
+      paths: ['/admin', '/.env', '/wp-admin', '/.git/config', '/phpmyadmin', '/api/internal/debug'],
+      enforcement: 'first hit → 24h auto-ban (lib/waf.mjs); IPs cross-checked against threat-intel feeds',
+      honesty_note: 'Live hit counters are per-instance and NOT published as historical truth — only the quarantine ledger (/api/quarantine) is a durable public record.',
+      source: 'lib/honeypot.mjs (repo)',
+    });
+  }
+
+  if (view === 'threat-intel') {
+    return res.status(200).json({
+      view: 'threat-intel',
+      description: 'IOC feeds consulted at scan time (Sentinel L1.8 checks skill source URLs against URLhaus).',
+      feeds: [
+        { name: 'abuse.ch MalwareBazaar', what: 'malware samples + hashes' },
+        { name: 'urlhaus.abuse.ch', what: 'malicious URLs' },
+        { name: 'threatfox.abuse.ch', what: 'IOCs from campaigns' },
+        { name: 'CIRCL MISP', what: 'open-source threat intel' },
+        { name: 'AlienVault OTX', what: 'community pulses' },
+      ],
+      cache: 'in-memory, 5-min TTL (lib/threat-intel.mjs)',
+      honesty_note: 'IOC lookups run when scans run; this endpoint publishes the feed list, not a live mirror.',
+    });
+  }
+
+  if (view === 'analytics') {
+    const s = statsBase.security || {};
+    return res.status(200).json({
+      view: 'analytics',
+      description: 'Aggregate security analytics computed from the catalog bundle and L2 scan artifacts.',
+      l1: { index_certified: s.l1_index_certified, checks: s.l1_checks, checks_passed: s.l1_checks_passed,
+            checks_performed: s.security_checks_performed },
+      l2: { targets: s.l2_targets, scanned: s.l2_sentinel_scanned, completion_pct: s.l2_completion_pct,
+            clean: s.l2_clean, flagged_warning: s.l2_flagged_warning, flagged_error: s.l2_flagged_error,
+            scan_errors: s.l2_scan_errors, own_packages: s.l2_own_packages },
+      npm_vulnerabilities_own_packages: s.npm_vulnerabilities_own_packages,
+      methodology_url: '/api/certification.json',
+    });
+  }
+
+  // overview (default): the layer-by-layer evidence map — what the agent claims
+  // (10-layer Sentinel pipeline) mapped to where each claim can be verified.
+  return res.status(200).json({
+    ...securityLayers,
+    computed_at: new Date().toISOString(),
+    computed_from: 'lib/security-layers.json + quarantine MANIFEST + stats stamp (repo artifacts)',
+    endpoints: {
+      overview: '/api/security',
+      quarantine_ledger: '/api/security?view=quarantine (alias /api/quarantine)',
+      honeypot: '/api/security?view=honeypot (alias /api/honeypot)',
+      threat_intel: '/api/security?view=threat-intel (alias /api/threat-intel)',
+      analytics: '/api/security?view=analytics (alias /api/agent-analytics)',
+    },
+    human_pages: {
+      sentinel_v3: '/security/sentinel-v3.0',
+      evidence_matrix: '/security/evidence',
+      benchmark: '/security/sentinel-benchmark',
+      audit_2026_08_19: '/security/audit-2026-08-19',
+      latest_audit: '/trust/aud-2026-0925.html',
+    },
+  });
+}

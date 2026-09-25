@@ -72,20 +72,40 @@
       "destination": "/api/atc"
     },
     {
-      "source": "/api/agent-analytics",
-      "destination": "/api/security?view=analytics"
+      "source": "/api/security",
+      "destination": "/api/skills?_mode=security"
     },
     {
       "source": "/api/quarantine",
-      "destination": "/api/security?view=quarantine"
+      "destination": "/api/skills?_mode=security&view=quarantine"
     },
     {
       "source": "/api/honeypot",
-      "destination": "/api/security?view=honeypot"
+      "destination": "/api/skills?_mode=security&view=honeypot"
     },
     {
       "source": "/api/threat-intel",
-      "destination": "/api/security?view=threat-intel"
+      "destination": "/api/skills?_mode=security&view=threat-intel"
+    },
+    {
+      "source": "/api/agent-analytics",
+      "destination": "/api/skills?_mode=security&view=analytics"
+    },
+    {
+      "source": "/security/sentinel-v3.0",
+      "destination": "/security/sentinel-v3.0.html"
+    },
+    {
+      "source": "/security/evidence",
+      "destination": "/security/evidence.html"
+    },
+    {
+      "source": "/security/sentinel-benchmark",
+      "destination": "/security/sentinel-benchmark.html"
+    },
+    {
+      "source": "/security/audit-2026-08-19",
+      "destination": "/security/audit-2026-08-19.html"
     },
     {
       "source": "/((?!api/|uta/|trust/|policies/|security/|for-agents|landing-pages/|tools/|acp|atc|status|\\.well-known/).*)",

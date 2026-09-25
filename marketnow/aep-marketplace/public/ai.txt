@@ -32,6 +32,11 @@
 
 # Machine-readable API (JSON/YAML):
 # - /api/skills            — paginated catalog (page, limit max 500, category, filter, sort, q)
+# - /api/security          — security overview: 10 layers with per-layer evidence
+# - /api/sentinel-benchmark.json — Sentinel decision benchmark (TP/FP/F1, reproducible)
+# - /security/evidence     — evidence matrix per layer (HTML)
+# - /security/sentinel-v3.0 — Sentinel v3.0 pipeline spec (HTML)
+# - /security/audit-2026-08-19 — audit page with PDF + SHA-256 (HTML)
 # - /api/agent.json        — agent instructions, trust model, schema
 # - /api/manifest.json     — marketplace metadata (v4.0.0)
 # - /api/openapi.yaml      — OpenAPI 3.1 specification

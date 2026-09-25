@@ -1,129 +1,130 @@
 {
-  "_stamp": {
-    "mcp_server_version": "1.14.1",
-    "atc_sdk_version": "1.4.1",
-    "npm_latest_version": "1.14.1",
-    "npm_latest_release_date": "2026-09-20",
-    "npm_versions_published": 24,
-    "npm_downloads_last_month": 1839,
-    "stamped_at": "2026-09-25",
-    "note": "npm figures verified live against registry.npmjs.org on stamp date. mcp_server_version must match api/mcp.js SERVER_INFO (sync-versions.js)."
+ "_stamp": {
+  "mcp_server_version": "1.14.1",
+  "atc_sdk_version": "1.4.1",
+  "npm_latest_version": "1.14.1",
+  "npm_latest_release_date": "2026-09-20",
+  "npm_versions_published": 24,
+  "npm_downloads_last_month": 1839,
+  "stamped_at": "2026-09-25",
+  "note": "npm figures verified live against registry.npmjs.org on stamp date. mcp_server_version must match api/mcp.js SERVER_INFO (sync-versions.js)."
+ },
+ "$schema": "https://marketnow.site/api/stats.schema.json",
+ "version": "2.1.0",
+ "generated_at": "2026-09-25",
+ "source_of_truth": "Live-computed at request time by /api/skills?_mode=stats from the deployed catalog bundle (skills-lite.json) — see computed_at. Static sections (L2 scans, npm stamp) carry their own generation dates. CI fails if any surface diverges.",
+ "discovery": {
+  "total_mcp_servers": 68388,
+  "total_tracked_all_sources": 132737,
+  "core_certified": 59255,
+  "community_indexed": 9133,
+  "aggregate_tracked": 64349,
+  "free": 68387,
+  "free_to_install": 68388,
+  "paid": 1,
+  "categories": {
+   "developer-tools": 32260,
+   "ai-ml": 7748,
+   "version-control": 7459,
+   "search": 4914,
+   "finance": 3685,
+   "security": 2566,
+   "monitoring": 2059,
+   "data": 2026,
+   "communication": 1931,
+   "browser-automation": 1627,
+   "cloud-platforms": 1455,
+   "file-system": 556,
+   "web-apis": 82,
+   "community-submitted": 18,
+   "productivity": 1,
+   "marketing": 1
   },
-  "$schema": "https://marketnow.site/api/stats.schema.json",
-  "version": "2.1.0",
-  "generated_at": "2026-09-25",
-  "source_of_truth": "Live-computed at request time by /api/skills?_mode=stats from the deployed catalog bundle (skills-lite.json) — see computed_at. Static sections (L2 scans, npm stamp) carry their own generation dates. CI fails if any surface diverges.",
-  "discovery": {
-    "total_mcp_servers": 68388,
-    "total_tracked_all_sources": 132737,
-    "core_certified": 59255,
-    "community_indexed": 9133,
-    "aggregate_tracked": 64349,
-    "free": 68387,
-    "free_to_install": 68388,
-    "paid": 1,
-    "categories": {
-      "developer-tools": 32260,
-      "ai-ml": 7748,
-      "version-control": 7459,
-      "search": 4914,
-      "finance": 3685,
-      "security": 2566,
-      "monitoring": 2059,
-      "data": 2026,
-      "communication": 1931,
-      "browser-automation": 1627,
-      "cloud-platforms": 1455,
-      "file-system": 556,
-      "web-apis": 82,
-      "community-submitted": 18,
-      "productivity": 1,
-      "marketing": 1
-    },
-    "community_submissions": 18
-  },
-  "security": {
-    "model": "two-level: L1 index-certified (all entries) + L2 sentinel-scanned (shipped npm tarballs)",
-    "l1_index_certified": 68388,
-    "l1_checks": 10,
-    "l1_checks_passed": 10,
-    "l2_targets": 2868,
-    "l2_sentinel_scanned": 2839,
-    "l2_completion_pct": 99.0,
-    "l2_clean": 885,
-    "l2_flagged_warning": 791,
-    "l2_flagged_error": 1156,
-    "l2_scan_errors": 29,
-    "l2_own_packages": 13,
-    "npm_vulnerabilities_own_packages": 0,
-    "security_checks_performed": 683880,
-    "security_checks_methodology": "10 L1 checks x 68,388 entries + 29 L2 rules x 2,839 tarball scans (top 2,868 npm targets, 99% completion)",
-    "sentinel_version": "v3.0",
-    "sentinel_pipeline_stages": 12,
-    "methodology_url": "https://marketnow.site/api/certification.json"
-  },
-  "tools": {
-    "mcp_server_tools_count": 15,
-    "mcp_server_package": "marketnow-mcp",
-    "mcp_server_version": "1.14.1",
-    "atc_sdk_package": "agent-trust-card",
-    "atc_sdk_version": "1.4.1"
-  },
-  "formats": {
-    "supported": [
-      "ATC",
-      "EAT-AI",
-      "ZTA",
-      "A2A",
-      "MCP-Card",
-      "W3C-VC",
-      "OAuth",
-      "SPIFFE",
-      "X.509"
-    ],
-    "count": 9,
-    "canonical_schema": "UTS v2.0.0"
-  },
-  "pipeline": {
-    "stages": 12,
-    "verification_controls": 8,
-    "signature_algorithm": "Ed25519 (RFC 8032)",
-    "canonicalization": "RFC 8785 JCS",
-    "domain_separation": 7
-  },
-  "blockchain": {
-    "network": "Base",
-    "payment_wallet": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee",
-    "wallet_type": "single-key (public roadmap: migrate to multisig escrow Q4 2026)",
-    "commission_rate": "0.20"
-  },
-  "i18n": {
-    "languages": [
-      "en",
-      "es",
-      "pt",
-      "zh",
-      "fr",
-      "de",
-      "it",
-      "ru",
-      "tr",
-      "ja",
-      "ko",
-      "ar",
-      "hi",
-      "uta"
-    ],
-    "count": 14,
-    "method": "human + machine-assisted, reviewed"
-  },
-  "distribution": {
-    "npm_package": "marketnow-mcp",
-    "npm_latest_version": "1.14.1",
-    "npm_latest_release_date": "2026-09-20",
-    "npm_versions_published": 24,
-    "npm_downloads_last_month": 1839,
-    "npm_org": "alicelabs-llc",
-    "packages_on_npm": 14
-  }
+  "community_submissions": 18
+ },
+ "security": {
+  "model": "two-level: L1 index-certified (all entries) + L2 sentinel-scanned (shipped npm tarballs)",
+  "l1_index_certified": 68388,
+  "l1_checks": 10,
+  "l1_checks_passed": 9,
+  "l2_targets": 2868,
+  "l2_sentinel_scanned": 2839,
+  "l2_completion_pct": 99.0,
+  "l2_clean": 885,
+  "l2_flagged_warning": 791,
+  "l2_flagged_error": 1156,
+  "l2_scan_errors": 29,
+  "l2_own_packages": 13,
+  "npm_vulnerabilities_own_packages": 0,
+  "security_checks_performed": 683880,
+  "security_checks_methodology": "10 L1 checks x 68,388 entries + 29 L2 rules x 2,839 tarball scans (top 2,868 npm targets, 99% completion)",
+  "sentinel_version": "v3.0",
+  "sentinel_pipeline_stages": 12,
+  "methodology_url": "https://marketnow.site/api/certification.json",
+  "l1_checks_note": "C4 documents 4 smithery entries with url=null (provenance unknown) — see /api/certification.json checks"
+ },
+ "tools": {
+  "mcp_server_tools_count": 15,
+  "mcp_server_package": "marketnow-mcp",
+  "mcp_server_version": "1.14.1",
+  "atc_sdk_package": "agent-trust-card",
+  "atc_sdk_version": "1.4.1"
+ },
+ "formats": {
+  "supported": [
+   "ATC",
+   "EAT-AI",
+   "ZTA",
+   "A2A",
+   "MCP-Card",
+   "W3C-VC",
+   "OAuth",
+   "SPIFFE",
+   "X.509"
+  ],
+  "count": 9,
+  "canonical_schema": "UTS v2.0.0"
+ },
+ "pipeline": {
+  "stages": 12,
+  "verification_controls": 8,
+  "signature_algorithm": "Ed25519 (RFC 8032)",
+  "canonicalization": "RFC 8785 JCS",
+  "domain_separation": 7
+ },
+ "blockchain": {
+  "network": "Base",
+  "payment_wallet": "0x39Dddf5aEdb58A559CF195fB8bdF23F0604Bf5Ee",
+  "wallet_type": "single-key (public roadmap: migrate to multisig escrow Q4 2026)",
+  "commission_rate": "0.20"
+ },
+ "i18n": {
+  "languages": [
+   "en",
+   "es",
+   "pt",
+   "zh",
+   "fr",
+   "de",
+   "it",
+   "ru",
+   "tr",
+   "ja",
+   "ko",
+   "ar",
+   "hi",
+   "uta"
+  ],
+  "count": 14,
+  "method": "human + machine-assisted, reviewed"
+ },
+ "distribution": {
+  "npm_package": "marketnow-mcp",
+  "npm_latest_version": "1.14.1",
+  "npm_latest_release_date": "2026-09-20",
+  "npm_versions_published": 24,
+  "npm_downloads_last_month": 1839,
+  "npm_org": "alicelabs-llc",
+  "packages_on_npm": 14
+ }
 }

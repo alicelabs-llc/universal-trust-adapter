@@ -1,18 +1,14 @@
-# MarketNow Skills API - OpenAPI 3.1
-# Auto-generated from openapi.json by sync-openapi.py
-# Live at: https://www.marketnow.site/api/openapi.yaml
-# Also available as JSON: https://www.marketnow.site/api/openapi.json
-
 openapi: 3.1.0
 info:
   title: MarketNow Skills API
-  description: 'The open marketplace for MCP-compatible agent skills. 68,388 index-certified skills, free to install.
-    Designed for autonomous agent consumption.
+  description: 'The open marketplace for MCP-compatible agent skills. 68,388 index-certified skills, free
+    to install. Designed for autonomous agent consumption.
 
 
     ## Authentication
 
-    Most read endpoints are public (no auth required). Write endpoints (checkout) require no auth but redirect to Stripe.
+    Most read endpoints are public (no auth required). Write endpoints (checkout) require no auth but
+    redirect to Stripe.
 
 
     ## Rate Limits
@@ -24,7 +20,8 @@ info:
 
     ## Languages
 
-    Skills are available in 5 languages: en, es, zh, pt, fr. Each skill with a system_prompt has a `translations` field.
+    Skills are available in 5 languages: en, es, zh, pt, fr. Each skill with a system_prompt has a `translations`
+    field.
 
 
     ## Concurrency & Rate Limits (v4.0)
@@ -109,8 +106,9 @@ paths:
   /api/skills.json:
     get:
       summary: List all skills
-      description: 'Returns the complete catalog of 68,388 skills. Each skill includes id, name, slug, description, category,
-        tags, price, currency, install command, translations (if available), and system_prompt (if available).
+      description: 'Returns the complete catalog of 68,388 skills. Each skill includes id, name, slug,
+        description, category, tags, price, currency, install command, translations (if available), and
+        system_prompt (if available).
 
 
         **Cache this response locally** — refresh every 24 hours maximum. The catalog changes infrequently.'
@@ -207,7 +205,8 @@ paths:
   /api/manifest.json:
     get:
       summary: Get marketplace metadata
-      description: Returns marketplace metadata including total skills, pricing tiers, commission rates, and API version.
+      description: Returns marketplace metadata including total skills, pricing tiers, commission rates,
+        and API version.
       operationId: getManifest
       responses:
         '200':
@@ -243,8 +242,8 @@ paths:
   /api/agent.json:
     get:
       summary: Get agent instructions
-      description: Machine-readable instructions for autonomous agents. Includes workflow, tools, rate limits, and authentication
-        requirements.
+      description: Machine-readable instructions for autonomous agents. Includes workflow, tools, rate
+        limits, and authentication requirements.
       operationId: getAgentInstructions
       responses:
         '200':
@@ -273,8 +272,9 @@ paths:
   /api/create-checkout-session:
     post:
       summary: Create Stripe Checkout session
-      description: 'Creates a Stripe Checkout session for purchasing a skill. Returns a URL that the user (or agent''s human
-        operator) should be redirected to. After payment, Stripe redirects back to /vault?success=true&skillId=X.
+      description: 'Creates a Stripe Checkout session for purchasing a skill. Returns a URL that the user
+        (or agent''s human operator) should be redirected to. After payment, Stripe redirects back to
+        /vault?success=true&skillId=X.
 
 
         **This endpoint creates real charges in LIVE mode.**'
@@ -320,8 +320,8 @@ paths:
   /api/stripe-webhook:
     post:
       summary: Stripe webhook receiver
-      description: 'Receives Stripe webhook events. Verifies signature using STRIPE_WEBHOOK_SECRET. Handles: checkout.session.completed,
-        payment_intent.payment_failed, charge.refunded.
+      description: 'Receives Stripe webhook events. Verifies signature using STRIPE_WEBHOOK_SECRET. Handles:
+        checkout.session.completed, payment_intent.payment_failed, charge.refunded.
 
 
         **This endpoint is called by Stripe, not by agents.**'
@@ -334,8 +334,9 @@ paths:
   /api/mandates:
     get:
       summary: Get / list delegated mandates
-      description: ACP / AP2 delegated mandates. With ?id= returns a single mandate. With ?owner=0x... returns all mandates
-        owned by that wallet. With ?agent=agent_xxx returns all mandates granted to that agent.
+      description: ACP / AP2 delegated mandates. With ?id= returns a single mandate. With ?owner=0x...
+        returns all mandates owned by that wallet. With ?agent=agent_xxx returns all mandates granted
+        to that agent.
       operationId: getMandates
       parameters:
       - name: id
@@ -369,8 +370,8 @@ paths:
 
         - action=revoke: revoke a mandate by id
 
-        - action=spend: record a spend against a mandate (called internally by /api/agent-purchase after a successful on-chain
-        payment)'
+        - action=spend: record a spend against a mandate (called internally by /api/agent-purchase after
+        a successful on-chain payment)'
       operationId: postMandates
       requestBody:
         required: true
@@ -438,21 +439,23 @@ paths:
   /api/atc:
     get:
       summary: Agent Trust Card (ATC) — verify identity, validity, and review evidence
-      description: 'Agent Trust Card API — SSL certificates for AI agents. MarketNow acts as the Certificate Authority.
-        Every ATC is cryptographically signed with the CA Ed25519 private key and persisted to a public GitHub ledger.
+      description: 'Agent Trust Card API — SSL certificates for AI agents. MarketNow acts as the Certificate
+        Authority. Every ATC is cryptographically signed with the CA Ed25519 private key and persisted
+        to a public GitHub ledger.
 
 
-        Schema v1.1.0 (July 2026): renamed trust.sentinel_score → trust.sentinel_review_score (review evidence,
-        not a verdict). Added decision_authority="consumer" (the runtime makes the trust decision, not the card).
+        Schema v1.1.0 (July 2026): renamed trust.sentinel_score → trust.sentinel_review_score (review
+        evidence, not a verdict). Added decision_authority="consumer" (the runtime makes the trust decision,
+        not the card).
 
 
-        Action-receipts (also v1.1.0): signed delivery proof for completed purchases. Emitted automatically by
-        POST /api/agent-purchase. Verify with action=verify-receipt.'
+        Action-receipts (also v1.1.0): signed delivery proof for completed purchases. Emitted automatically
+        by POST /api/agent-purchase. Verify with action=verify-receipt.'
       operationId: atcOperations
       parameters:
       - name: action
         in: query
-        description: 'ATC operation to perform'
+        description: ATC operation to perform
         required: true
         schema:
           type: string
@@ -493,8 +496,8 @@ paths:
           description: CA not configured
     post:
       summary: Issue, revoke, or translate ATCs
-      description: 'Issue a new ATC (signs with CA key + persists to GitHub), revoke an existing ATC, or
-        translate agent tool schemas between frameworks (LangChain ↔ MCP ↔ AutoGen ↔ CrewAI ↔ OpenAI Functions).'
+      description: Issue a new ATC (signs with CA key + persists to GitHub), revoke an existing ATC, or
+        translate agent tool schemas between frameworks (LangChain ↔ MCP ↔ AutoGen ↔ CrewAI ↔ OpenAI Functions).
       operationId: atcMutations
       requestBody:
         required: true
@@ -544,9 +547,10 @@ paths:
   /api/agent-purchase:
     post:
       summary: Agent programmatic purchase (USDC on Base + mandate-aware)
-      description: 'Dual-mode purchase endpoint. Returns one of: instant_download (free skill), instant_purchase (paid skill
-        with valid mandate + verified USDC tx), direct_purchase (paid skill with verified USDC tx, no mandate), requires_payment
-        (mandate valid but no txHash yet), requires_human_approval (no mandate and no payment — agent must request approval).'
+      description: 'Dual-mode purchase endpoint. Returns one of: instant_download (free skill), instant_purchase
+        (paid skill with valid mandate + verified USDC tx), direct_purchase (paid skill with verified
+        USDC tx, no mandate), requires_payment (mandate valid but no txHash yet), requires_human_approval
+        (no mandate and no payment — agent must request approval).'
       operationId: agentPurchase
       requestBody:
         required: true
@@ -605,6 +609,57 @@ paths:
           description: Skill or mandate not found
         '405':
           description: Method not allowed
+  /api/security:
+    get:
+      summary: Security overview — 10 audit layers with per-layer public evidence
+      description: 'Machine-readable map of the Sentinel v3.0 pipeline: each layer with status, counts
+        and the artifact where it can be verified. Mounted via /api/skills?_mode=security (Vercel Hobby
+        12-function cap).'
+      parameters:
+      - name: view
+        in: query
+        schema:
+          type: string
+          enum:
+          - overview
+          - quarantine
+          - honeypot
+          - threat-intel
+          - analytics
+        description: overview (default) | quarantine ledger | honeypot methodology | threat-intel feeds
+          | analytics aggregates
+      responses:
+        '200':
+          description: Layer map / view payload
+          content:
+            application/json:
+              schema:
+                type: object
+  /api/quarantine:
+    get:
+      summary: Tamper-evident quarantine ledger (SHA-256 per record)
+      description: Alias of /api/security?view=quarantine. Every quarantine decision is a signed public
+        record; third parties can audit FP/FN rate over time.
+      responses:
+        '200':
+          description: Ledger manifest + records
+          content:
+            application/json:
+              schema:
+                type: object
+  /api/sentinel-benchmark.json:
+    get:
+      summary: Sentinel decision-level benchmark (precision/recall/F1)
+      description: 'Confusion matrix over labeled public corpora (quarantine ledger + documented incidents
+        + first-party package corpus). Includes limitations and reproducibility steps. Human version:
+        /security/sentinel-benchmark.'
+      responses:
+        '200':
+          description: Benchmark with methodology, corpora, matrix and metrics
+          content:
+            application/json:
+              schema:
+                type: object
 components:
   schemas:
     Skill:
@@ -783,9 +838,9 @@ components:
           type: object
     ATCVerifyResponse:
       type: object
-      description: 'ATC verify response (schema v1.1.0). The ATC answers a narrow set of questions:
-        identity, issuer, validity, review evidence. It does NOT answer "should this agent be trusted?" —
-        that is a runtime policy decision the consumer makes.'
+      description: 'ATC verify response (schema v1.1.0). The ATC answers a narrow set of questions: identity,
+        issuer, validity, review evidence. It does NOT answer "should this agent be trusted?" — that is
+        a runtime policy decision the consumer makes.'
       properties:
         valid:
           type: boolean
@@ -799,10 +854,10 @@ components:
           type: number
           minimum: 0
           maximum: 10
-          description: 'Review evidence (0-10). NOT a trust verdict. Renamed from sentinel_score in v1.1.0.'
+          description: Review evidence (0-10). NOT a trust verdict. Renamed from sentinel_score in v1.1.0.
         sentinel_score:
           type: number
-          description: 'DEPRECATED alias for sentinel_review_score. Will be removed in v2.0.0.'
+          description: DEPRECATED alias for sentinel_review_score. Will be removed in v2.0.0.
         composite_trust:
           type: number
         risk_level:
@@ -818,7 +873,7 @@ components:
           type: string
           enum:
           - consumer
-          description: 'Always "consumer" — the runtime makes the trust decision, not the card.'
+          description: Always "consumer" — the runtime makes the trust decision, not the card.
         capabilities:
           type: array
           items:
@@ -850,30 +905,30 @@ components:
       type: object
       description: 'Action-receipt verify response. A signed delivery proof for a completed purchase.
         Emitted automatically by POST /api/agent-purchase on instant_purchase and direct_purchase modes.
-        Persisted to _data/receipts/{receipt_id}.json (public GitHub audit ledger).
-        Interop with Vibe (doteyeso-ops): receipt_id → vibe_action_receipt, mandate_id → vibe_decision_ref,
-        settle_txhash → vibe_settle_coordinate.'
+        Persisted to _data/receipts/{receipt_id}.json (public GitHub audit ledger). Interop with Vibe
+        (doteyeso-ops): receipt_id → vibe_action_receipt, mandate_id → vibe_decision_ref, settle_txhash
+        → vibe_settle_coordinate.'
       properties:
         valid:
           type: boolean
         receipt_id:
           type: string
-          pattern: '^rcpt_[a-f0-9]{20}$'
+          pattern: ^rcpt_[a-f0-9]{20}$
         issued_at:
           type: string
           format: date-time
         mandate_id:
           type: string
           nullable: true
-          description: 'Set when purchase used a mandate. Maps to Vibe decision_ref.'
+          description: Set when purchase used a mandate. Maps to Vibe decision_ref.
         settle_txhash:
           type: string
           nullable: true
-          description: 'On-chain tx hash (Base). Maps to Vibe settle_coordinate.'
+          description: On-chain tx hash (Base). Maps to Vibe settle_coordinate.
         atc_card_id:
           type: string
           nullable: true
-          description: 'Co-signed ATC card ID (does NOT replace the settle receipt).'
+          description: Co-signed ATC card ID (does NOT replace the settle receipt).
         delivered:
           type: object
           properties:
@@ -897,7 +952,7 @@ components:
           type: boolean
         interop:
           type: object
-          description: 'Join-key map for Vibe (doteyeso-ops) integration'
+          description: Join-key map for Vibe (doteyeso-ops) integration
           properties:
             vibe_decision_ref:
               type: string
@@ -909,7 +964,7 @@ components:
               type: string
     ATCSpec:
       type: object
-      description: 'ATC protocol spec (GET /api/atc?action=spec)'
+      description: ATC protocol spec (GET /api/atc?action=spec)
       properties:
         protocol:
           type: string
@@ -937,7 +992,7 @@ components:
             type: string
     ATCList:
       type: object
-      description: 'ATC list response (GET /api/atc)'
+      description: ATC list response (GET /api/atc)
       properties:
         total:
           type: integer
@@ -960,7 +1015,7 @@ components:
                 type: number
               sentinel_score:
                 type: number
-                description: 'DEPRECATED alias'
+                description: DEPRECATED alias
               risk_level:
                 type: string
               status:
