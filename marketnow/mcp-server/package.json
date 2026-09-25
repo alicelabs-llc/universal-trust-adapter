@@ -81,7 +81,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",
-    "canonicalize": "^2.0.0"
+    "canonicalize": "^5.1.0"
   },
   "engines": {
     "node": ">=18"
