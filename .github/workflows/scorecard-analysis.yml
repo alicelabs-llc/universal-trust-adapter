@@ -26,7 +26,7 @@ jobs:
       actions: read
     steps:
       # Pinned by commit SHA — OpenSSF Scorecard: Pinned-Actions
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Run analysis
         uses: ossf/scorecard-action@4eaacf0543bb3f2c246792bd56e8cdeffafb205a # v2.4.3
         with:
@@ -35,7 +35,7 @@ jobs:
           # Publica en https://api.securityscorecards.dev/repos/alicelabs-llc/universal-trust-adapter
           publish_results: true
       - name: Upload SARIF artifact
-        uses: actions/upload-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: SARIF file
           path: results.sarif
