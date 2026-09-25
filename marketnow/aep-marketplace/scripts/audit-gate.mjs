@@ -114,6 +114,10 @@ try {
   const nf = (n) => n.toLocaleString('en-US');
   checks.push([landing.includes(nf(bundle.length)) && landing.includes(nf(cm.total_all)),
     `landing debe citar ${nf(bundle.length)} y ${nf(cm.total_all)}`]);
+  // agent.json (docs públicos de agentes) — cifras del catálogo
+  const agentJson = readFileSync(join(ROOT, 'public/api/agent.json'), 'utf8');
+  checks.push([agentJson.includes(nf(bundle.length)) && agentJson.includes(nf(cm.total_all)),
+    `agent.json debe citar ${nf(bundle.length)} (indexed) y ${nf(cm.total_all)} (tracked)`]);
   for (const [ok, msg] of checks) log(ok ? '✓' : '✗', 'CATALOG', msg);
   log('✓', 'CATALOG', `bundle de ${bundle.length} skills parseado en ${((Date.now() - t0) / 1000).toFixed(1)}s`);
 } catch (e) { log('✗', 'CATALOG', e.message); }
@@ -154,7 +158,7 @@ try {
 // ── Gate live: producción (solo --live / reauditoría) ───────────────────────
 if (LIVE) {
   try {
-    const res = await fetch(`${PROD}/mcp`, {
+    const res = await fetch(`${PROD}/api/mcp`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'audit-gate', version: '1.0.0' } } }),
