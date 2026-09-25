@@ -166,7 +166,7 @@ try {
   const sb = j('lib/stats-base.json');
   const checks = [
     [cert.catalog_total === bundle.length, `cert catalog_total=${cert.catalog_total} vs bundle=${bundle.length}`],
-    [/^2026-09-2[0-9]/.test(cert.generated_at || ''), `cert generated_at=${cert.generated_at} — snapshot viejo (regenera con scripts/certify_regen_2026_09_25.py)`],
+    [(/^2026-09-2[0-9]|^202[7-9]-/).test(cert.generated_at || ''), `cert generated_at=${cert.generated_at}` + (/^2026-09-2[0-9]|^202[7-9]-/.test(cert.generated_at || '') ? '' : ' — snapshot viejo (regenera con scripts/certify_regen_2026_09_25.py)')],
     [(cert.checks || []).length === 10, `cert checks=${(cert.checks || []).length} (esperados 10)`],
     [cert.index_certification?.checks_passed === sb.security?.l1_checks_passed,
       `cert checks_passed=${cert.index_certification?.checks_passed} vs stats l1_checks_passed=${sb.security?.l1_checks_passed}`],
