@@ -198,7 +198,8 @@
       "4a966607",
       "51649aa5",
       "c22308a5",
-      "2f28db01"
+      "2f28db01",
+      "db246165"
     ],
     "phase3_fixed": [
       "CI-Tests: workflow ci-tests.yml (suite de 83 tests de adaptadores + gate F-06 + build vite + syntax check de endpoints) — verde en main",
@@ -221,11 +222,11 @@
     "openssf": {
       "tool": "OpenSSF Scorecard v5.5.0 (CLI, GITHUB_AUTH_TOKEN)",
       "checked_at": "2026-09-25",
-      "score": 6.0,
+      "score": 6.8,
       "baseline": "1.7 (2026-09-24, pre-Fase-3)",
       "target": ">= 6.5",
-      "score_met": false,
-      "evidence": "Badge público verificado 2026-09-25 00:22Z: api.securityscorecards.dev/projects/github.com/alicelabs-llc/universal-trust-adapter (commit 7486f38f, scorecard-action v5.3). Post-badge se cerraron las 22 GHSAs residuales (overrides npm en ambos mcp-server, commit 262df956 — OSV querybatch: 0 vulns en las 688 deps de los 6 locks) y se añadió workflow de packaging npm-publish.yml + LICENSE con texto MIT completo: proyección ≥6.5 en el próximo refresco del badge (schedule dominical o próximo push-disparador). Baseline pre-Fase-3: 1.7.",
+      "score_met": true,
+      "evidence": "Badge publico refrescado 2026-09-25 01:00:39Z: api.securityscorecards.dev/projects/github.com/alicelabs-llc/universal-trust-adapter — score 6.8/10 sobre main db246165 (workflow scorecard-analysis.yml, run verde junto a CI + Audit gate + CodeQL: 4/4). Meta >=6.5 CUMPLIDA: al entrar en el badge el cierre de las 22 GHSAs residuales (262df956, OSV querybatch: 0 vulns en 688 deps), LICENSE MIT completo y npm-publish.yml. Baseline pre-Fase-3: 1.7. Pendientes estructurales del proximo ciclo: Branch-Protection (sube al madurar el ruleset), Maintained (0, repo <90 dias), Code-Review (flujo push directo).",
       "badge_url": "https://api.securityscorecards.dev/projects/github.com/alicelabs-llc/universal-trust-adapter"
     },
     "gates_closed": [
