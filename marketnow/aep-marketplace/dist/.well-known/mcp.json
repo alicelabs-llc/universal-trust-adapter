@@ -22,19 +22,19 @@
     },
     {
       "name": "marketnow_verify_trust",
-      "description": "Verify any AI agent credential (JWT, W3C VC, MCP Card, ATC v3, A2A, EAT-AI, ZTA, X.509)"
+      "description": "Verify any AI agent credential (ATC v3, JWT/OAuth, W3C VC, MCP Card, A2A, EAT-AI, ZTA, SPIFFE SVID, X.509) through the UTA 12-stage credential-verification pipeline (PARSE→DECISION — distinct from Sentinel's 12 skill-audit stages). Returns validity, format, trust score, and issues."
     },
     {
       "name": "marketnow_translate_credential",
-      "description": "Translate a credential between 8 formats through the Universal Trust Schema (UTS)"
+      "description": "Translate a credential between the 9 adapter formats (ATC, JWT/OAuth, W3C VC, A2A, EAT-AI, ZTA, MCP Card, SPIFFE, X.509) through the Universal Trust Schema (UTS). See /api/trust?action=formats."
     },
     {
       "name": "marketnow_list_formats",
-      "description": "List all supported credential formats with their algorithms and status"
+      "description": "List all 9 supported credential adapter formats (ATC, EAT-AI, ZTA, A2A, MCP Card, W3C VC, OAuth, SPIFFE, X.509) with their algorithms and status"
     },
     {
       "name": "marketnow_get_pipeline",
-      "description": "Get the 12-stage verification pipeline details"
+      "description": "Get the 12-stage credential-verification pipeline details (PARSE→DECISION)"
     },
     {
       "name": "marketnow_check_domain",

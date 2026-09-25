@@ -45,8 +45,8 @@ npm install -g marketnow-mcp       # MCP server (15 trust tools; remote endpoint
 
 | Metric | Value |
 |---|---|
-| NPM packages | 9 |
-| NPM monthly downloads | 7,351 |
+| NPM packages | 14 |
+| NPM monthly downloads | 9,585 |
 | Test vectors (ATC/1.0) | 5 frozen + manifest |
 | Test vectors (ATC v3.0) | 36 (8 positive + 17 negative + 5 mutation + 6 cross-language) |
 | Conformance tests | v1.3.5 — 14 public vectors · 24 checks + 10 mutants (runner-under-test) |
@@ -67,6 +67,11 @@ npm install -g marketnow-mcp       # MCP server (15 trust tools; remote endpoint
 | [`@marketnow/trust-gateway`](https://www.npmjs.com/package/@marketnow/trust-gateway) | 1.0.5 | Gateway + post-exec filter | 875 |
 | [`@marketnow/uta-conformance`](https://www.npmjs.com/package/@marketnow/uta-conformance) | 1.3.5 | 14 signed vectors + reference scorer | 406 |
 | [`@marketnow/cline-trust-plugin`](https://www.npmjs.com/package/@marketnow/cline-trust-plugin) | 1.1.2 | Interceptor: revocation gate + tool pinning | 452 |
+| [`marketnow-audit`](https://www.npmjs.com/package/marketnow-audit) | 1.0.1 | Security audit CLI (domain scam-check, ATC verify, OCSP, catalog) | 316 |
+| [`@marketnow/uta-verify`](https://www.npmjs.com/package/%40marketnow/uta-verify) | 1.0.2 | CLI credential verifier (CI exit codes) | 400 |
+| [`@marketnow/sentinel-rules`](https://www.npmjs.com/package/%40marketnow/sentinel-rules) | 1.1.2 | 29 MCP security rules + zero-dep lite scanner | 566 |
+| [`@marketnow/trust-mcp-middleware`](https://www.npmjs.com/package/%40marketnow/trust-mcp-middleware) | 1.0.2 | MCP tools/call wrapper: credential enforcement | 402 |
+| [`@marketnow/trust-observability`](https://www.npmjs.com/package/%40marketnow/trust-observability) | 1.0.3 | Zero-dep observability: logging, tracing, metrics | 550 |
 
 ## 🛡️ 5 Anti-ban download channels
 
@@ -82,7 +87,7 @@ npm install -g marketnow-mcp       # MCP server (15 trust tools; remote endpoint
 |---|---|---|
 | **1. Plugin Template** | Interface + boilerplate for third-party adapters | **MIT** |
 | **2. UTS Specification** | Universal Trust Schema (spec + JSON Schema) | **CC-BY-NC-ND 4.0** |
-| **3. The Engine + Sentinel + Interceptor** | TrustEngine core, 8-layer audit, eBPF enforcement | **AL-1.0** |
+| **3. The Engine + Sentinel + Interceptor** | TrustEngine core, Sentinel 12-stage / 10-layer audit, eBPF enforcement | **AL-1.0** |
 
 ## 🧪 Try it
 

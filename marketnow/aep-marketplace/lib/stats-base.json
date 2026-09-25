@@ -6,9 +6,11 @@
     "npm_latest_release_date": "2026-09-20",
     "npm_versions_published": 24,
     "npm_downloads_last_month": 1839,
-    "stamped_at": "2026-09-25",
+    "stamped_at": "2026-09-25T03:55:30Z",
     "note": "npm figures verified live against registry.npmjs.org on stamp date. mcp_server_version must match api/mcp.js SERVER_INFO (sync-versions.js).",
-    "checked_at": "2026-09-25"
+    "checked_at": "2026-09-25",
+    "npm_packages_count": 14,
+    "npm_monthly_downloads": 9585
   },
   "$schema": "https://marketnow.site/api/stats.schema.json",
   "version": "2.1.0",
@@ -70,7 +72,8 @@
       "l2_formula": "29 L2 rules x 2839 tarballs",
       "total": 766211
     },
-    "sentinel_layers": 10
+    "sentinel_layers": 10,
+    "l2_sentinel_rule_count": 29
   },
   "tools": {
     "mcp_server_tools_count": 15,

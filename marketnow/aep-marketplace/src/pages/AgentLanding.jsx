@@ -193,7 +193,7 @@ export default function AgentLanding() {
             <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00d1ff]/10 border border-[#00d1ff]/20 mb-3">
-                  <span className="text-[#00d1ff] text-[10px] font-mono tracking-wider">UTA v1.1.0</span>
+                  <span className="text-[#00d1ff] text-[10px] font-mono tracking-wider">UTA · OPEN CORE · CONFORMANCE v{stats.utaConformance}</span>
                 </div>
                 <h2 className="text-white text-2xl font-bold mb-1">Universal Trust Adapter (UTA)</h2>
                 <p className="text-zinc-400 text-sm">The USB-C of agent trust. Translates between {stats.adapters} trust credential formats via canonical Universal Trust Schema ({stats.uts}).</p>
@@ -246,19 +246,13 @@ export default function AgentLanding() {
               </div>
             </div>
 
-            {/* NPM packages — versions synced with /api/stats.json; downloads live from registry */}
+            {/* NPM packages — versions synced with /api/stats.json (section uta → lib/npm-versions.json ← registry); downloads live from registry */}
             <div className="mb-4 p-3 rounded-lg bg-black/40 border border-white/5">
-              <div className="text-zinc-500 text-[10px] mb-2">NPM PACKAGES{stats.npmDownloads != null ? ` (${stats.npmDownloads.toLocaleString()} downloads/mo — marketnow-mcp, live from registry)` : ' (downloads: live from npm registry)'}</div>
+              <div className="text-zinc-500 text-[10px] mb-2">NPM PACKAGES{stats.npmDownloads != null ? ` (${stats.npmDownloads.toLocaleString()} downloads/mo — marketnow-mcp, live from registry)` : ' (downloads: live from npm registry)'} · {stats.utaPackagesCount} packages (registry-synced)</div>
               <div className="flex flex-wrap gap-2">
-                <code className="text-[#00F299] text-[10px] font-mono px-2 py-1 rounded bg-[#00F299]/5">marketnow-mcp@{stats.mcpVersion}</code>
-                <code className="text-[#00d1ff] text-[10px] font-mono px-2 py-1 rounded bg-[#00d1ff]/5">agent-trust-card@{stats.atcSdkVersion}</code>
-                <code className="text-[#00F299] text-[10px] font-mono px-2 py-1 rounded bg-[#00F299]/5">@marketnow/trust-core@1.0.1</code>
-                <code className="text-[#00d1ff] text-[10px] font-mono px-2 py-1 rounded bg-[#00d1ff]/5">@marketnow/uts@2.0.1</code>
-                <code className="text-[#00F299] text-[10px] font-mono px-2 py-1 rounded bg-[#00F299]/5">@marketnow/trust-adapters@1.0.2</code>
-                <code className="text-[#00d1ff] text-[10px] font-mono px-2 py-1 rounded bg-[#00d1ff]/5">@marketnow/trust-gateway@1.0.1</code>
-                <code className="text-[#00F299] text-[10px] font-mono px-2 py-1 rounded bg-[#00F299]/5">@marketnow/uta-verify@1.0.0</code>
-                <code className="text-[#00d1ff] text-[10px] font-mono px-2 py-1 rounded bg-[#00d1ff]/5">@marketnow/uta-conformance@1.3.5</code>
-                <code className="text-[#00F299] text-[10px] font-mono px-2 py-1 rounded bg-[#00F299]/5">@marketnow/trust-observability@1.0.1</code>
+                {stats.utaPackages.map((p, i) => (
+                  <code key={p.name} className={i % 2 === 0 ? 'text-[#00F299] text-[10px] font-mono px-2 py-1 rounded bg-[#00F299]/5' : 'text-[#00d1ff] text-[10px] font-mono px-2 py-1 rounded bg-[#00d1ff]/5'}>{p.name}@{p.version}</code>
+                ))}
               </div>
             </div>
 

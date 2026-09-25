@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { useLang } from '../context/LanguageContext.jsx';
+import { useLiveStats } from '../utils/liveStats';
 
 // ═══════════════════════════════════════════════════════════════
 // DATA (labels are translation keys — resolved via t())
@@ -14,6 +15,7 @@ const FORMATS = [
   { name: 'W3C VC', full: 'Verifiable Credential', org: 'W3C', color: '#34d399', language: 'JSON-LD + LD-Proofs', rfc: 'VC Data Model 2.0', fields: ['issuer', 'credentialSubject', 'proof.type'] },
   { name: 'OAuth/OIDC', full: 'OAuth 2.0 / OIDC', org: 'IETF', color: '#60a5fa', language: 'JWT (RS256/ES256/EdDSA)', rfc: 'RFC 6749 + OIDC Core', fields: ['sub', 'iss', 'scope', 'exp'] },
   { name: 'SPIFFE', full: 'SPIFFE SVID', org: 'CNCF', color: '#fb923c', language: 'X.509 + JWT', rfc: 'SPIFFE v1.0', fields: ['spiffe_id', 'trust_domain', 'ttl'] },
+  { name: 'X.509', full: 'X.509 Certificate', org: 'IETF / ITU-T', color: '#f87171', language: 'ASN.1 DER + RSA/ECDSA/Ed25519', rfc: 'RFC 5280 (v3)', fields: ['subject', 'issuer', 'validity', 'SAN'] },
 ];
 
 const STAGES = [
@@ -23,10 +25,11 @@ const STAGES = [
   { n: 10, key: 'uta.stage.10' }, { n: 11, key: 'uta.stage.11' }, { n: 12, key: 'uta.stage.12' },
 ];
 
+// STATS — 4ª ronda de auditoría: valores vivos desde /api/stats.json (sección uta).
+// El fallback de useLiveStats se re-deriva del registry (sync_npm_versions.py),
+// así la página nunca más puede quedarse atrás respecto a npm.
 const STATS = [
-  { value: '8', label: 'uta.stat.adapters' }, { value: '12', label: 'uta.stat.stages' },
-  { value: '41', label: 'uta.stat.vectors' }, { value: '23/23', label: 'uta.stat.conformance' },
-  { value: '7', label: 'uta.stat.packages' }, { value: '2,339', label: 'uta.stat.downloads' },
+  { value: '9', label: 'uta.stat.adapters' }, { value: '12', label: 'uta.stat.stages' },
 ];
 
 const COMPARISON = [
@@ -230,6 +233,17 @@ function PlaygroundDemo() {
 // ═══════════════════════════════════════════════════════════════
 export default function UTA() {
   const { t } = useLang();
+  const stats = useLiveStats();
+  // STATS vivos: adapters/stages fijos (arquitectura) + npm vivos (registry vía
+  // /api/stats.json sección uta). El fallback de useLiveStats es el último
+  // snapshot del registry — nunca una generación vieja hand-editada.
+  const liveStats = [
+    ...STATS,
+    { value: stats.utaVectors.toLocaleString(), label: 'uta.stat.vectors' },
+    { value: `v${stats.utaConformance} · ${stats.utaChecks}`, label: 'uta.stat.conformance' },
+    { value: stats.utaPackagesCount.toLocaleString(), label: 'uta.stat.packages' },
+    { value: stats.utaMonthlyDownloads.toLocaleString(), label: 'uta.stat.downloads' },
+  ];
   return (
     <div className="relative min-h-screen overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
@@ -241,7 +255,7 @@ export default function UTA() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00d1ff]/10 border border-[#00d1ff]/20 mb-6">
               <span className="w-2 h-2 rounded-full bg-[#00d1ff] animate-pulse" />
-              <span className="text-[#00d1ff] text-xs font-mono tracking-wider">UTA v1.1.0 · OPEN SOURCE · AL-1.0 LICENSE</span>
+              <span className="text-[#00d1ff] text-xs font-mono tracking-wider">UTA · OPEN CORE · MIT/Apache-2.0 (SDKs) · AL-1.0 (core) · CONFORMANCE v{stats.utaConformance}</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">{t('uta.hero.title')}</h1>
             <p className="text-2xl text-[#00d1ff] font-bold mb-6">{t('uta.hero.tagline')}</p>
@@ -249,7 +263,7 @@ export default function UTA() {
               {t('uta.hero.desc')}
             </p>
             <div className="grid grid-cols-3 md:grid-cols-6 gap-3 max-w-3xl mx-auto mb-8">
-              {STATS.map(s => (
+              {liveStats.map(s => (
                 <div key={s.label} className="p-3 rounded-xl bg-black/40 border border-white/5">
                   <div className="text-[#00F299] text-xl font-bold font-mono">{s.value}</div>
                   <div className="text-zinc-500 text-[10px] mt-1">{t(s.label)}</div>
@@ -262,9 +276,9 @@ export default function UTA() {
               <a href="/playground.html" className="px-6 py-3 border border-white/10 text-white font-medium rounded-xl hover:bg-white/5 transition-all text-sm">{t('uta.hero.ctaLive')}</a>
             </div>
             <div className="inline-block px-4 py-2 rounded-lg bg-black/40 border border-white/5">
-              <code className="text-[#00F299] text-xs font-mono">npm install agent-trust-card@1.1.2</code>
+              <code className="text-[#00F299] text-xs font-mono">npm install agent-trust-card@{stats.atcSdkVersion}</code>
               <span className="text-zinc-600 text-xs mx-2">·</span>
-              <code className="text-[#00d1ff] text-xs font-mono">npx -y marketnow-mcp@1.14.1</code>
+              <code className="text-[#00d1ff] text-xs font-mono">npx -y marketnow-mcp@{stats.mcpVersion}</code>
             </div>
           </motion.div>
         </section>
@@ -451,7 +465,7 @@ export default function UTA() {
               <div className="text-zinc-500 text-[10px] font-mono space-y-1">
                 <div>git clone https://github.com/alicelabs-llc/universal-trust-adapter</div>
                 <div>cd marketnow/atc-sdk && npm install</div>
-                <div className="text-[#00F299]">node test/conformance.mjs  # 23/23 pass</div>
+                <div className="text-[#00F299]">npx @marketnow/uta-conformance  # 14 vectors · 24 checks (v{stats.utaConformance})</div>
               </div>
             </div>
           </motion.div>
@@ -486,9 +500,9 @@ export default function UTA() {
                 <a href="/uta/CONTRIBUTING.md" target="_blank" rel="noopener" className="px-6 py-3 border border-white/10 text-white font-medium rounded-xl hover:bg-white/5 transition-all text-sm">{t('uta.adopt.contribute')}</a>
               </div>
               <div className="inline-block px-4 py-2 rounded-lg bg-black/40 border border-white/5">
-                <code className="text-[#00F299] text-xs font-mono">npm install agent-trust-card@1.1.2</code>
+                <code className="text-[#00F299] text-xs font-mono">npm install agent-trust-card@{stats.atcSdkVersion}</code>
                 <span className="text-zinc-600 text-xs mx-2">·</span>
-                <code className="text-[#00d1ff] text-xs font-mono">npx -y marketnow-mcp@1.14.1</code>
+                <code className="text-[#00d1ff] text-xs font-mono">npx -y marketnow-mcp@{stats.mcpVersion}</code>
               </div>
             </div>
           </motion.div>

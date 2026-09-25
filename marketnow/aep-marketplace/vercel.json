@@ -280,5 +280,12 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/uta/",
+      "destination": "/uta",
+      "permanent": false
+    }
   ]
 }

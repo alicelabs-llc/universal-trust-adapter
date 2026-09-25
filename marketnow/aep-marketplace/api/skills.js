@@ -24,6 +24,7 @@ import skillsData from '../public/api/skills-lite.json' with { type: 'json' };
 import catalogMeta from '../public/api/catalog-meta.json' with { type: 'json' };
 import statsBase from '../lib/stats-base.json' with { type: 'json' };
 import securityLayers from '../lib/security-layers.json' with { type: 'json' };
+import npmVersions from '../lib/npm-versions.json' with { type: 'json' };
 import quarantineManifest from '../public/_data/quarantine_decisions/MANIFEST.json' with { type: 'json' };
 import { mountSubmission } from '../lib/submit-http.mjs';
 
@@ -109,7 +110,37 @@ export default function handler(req, res) {
     };
     if (base.security) {
       base.security.l1_index_certified = allSkills.length;
-      base.security.security_checks_performed = (base.security.l1_checks || 10) * allSkills.length;
+      // 4ª ronda (2026-09-26): el total debe incluir L1 + L2 (antes este override
+      // dejaba security_checks_performed = 683,880 mientras el propio desglose
+      // y agent.json decían 766,211 — contradicción interna en el mismo JSON).
+      const l1Total = (base.security.l1_checks || 10) * allSkills.length;
+      const l2Rules = base.security.l2_sentinel_rule_count || 29;
+      const l2Scanned = base.security.l2_sentinel_scanned || 0;
+      const l2Total = l2Rules * l2Scanned;
+      base.security.security_checks_performed = l1Total + l2Total;
+      base.security.security_checks_breakdown = {
+        l1_index_checks: l1Total,
+        l1_formula: `${base.security.l1_checks || 10} L1 checks x ${allSkills.length} entries`,
+        l2_sentinel_rule_checks: l2Total,
+        l2_formula: `${l2Rules} L2 rules x ${l2Scanned} tarballs`,
+        total: l1Total + l2Total,
+      };
+      base.security.security_checks_methodology =
+        `${(l1Total + l2Total).toLocaleString('en-US')} total = ${l1Total.toLocaleString('en-US')} L1 (${base.security.l1_checks || 10} L1 checks × ${allSkills.length} entries) + ${l2Total.toLocaleString('en-US')} L2 (${l2Rules} L2 rules × ${l2Scanned} tarballs; top ${base.security.l2_targets || 0} npm targets, ${base.security.l2_completion_pct || 0}% completion)`;
+    }
+    // 4ª ronda: sección uta — versiones npm vivas para el SPA (chips de paquetes,
+    // stats de la página /uta). Fuente: lib/npm-versions.json (sync_npm_versions.py).
+    if (npmVersions && npmVersions.packages) {
+      base.uta = {
+        packages: npmVersions.packages,
+        packages_count: npmVersions.packages.length,
+        monthly_downloads: npmVersions.totals?.dl_month ?? null,
+        conformance_version: npmVersions.conformance_version,
+        test_vectors: npmVersions.test_vectors,
+        conformance_checks: npmVersions.conformance_checks,
+        adapters: base.formats?.count || 9,
+        source: 'lib/npm-versions.json — synced from registry.npmjs.org by scripts/sync_npm_versions.py (weekly workflow + gate)',
+      };
     }
     if (stamp.mcp_server_version && base.tools) {
       base.tools.mcp_server_version = stamp.mcp_server_version;

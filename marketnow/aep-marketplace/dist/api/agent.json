@@ -25,19 +25,19 @@
           },
           {
             "name": "marketnow_verify_trust",
-            "description": "Verify any AI agent credential (JWT, W3C VC, MCP Card, ATC v3, A2A, EAT-AI, ZTA, X.509)"
+            "description": "Verify any AI agent credential (ATC v3, JWT/OAuth, W3C VC, MCP Card, A2A, EAT-AI, ZTA, SPIFFE SVID, X.509) through the UTA 12-stage credential-verification pipeline (PARSE→DECISION — distinct from Sentinel's 12 skill-audit stages). Returns validity, format, trust score, and issues."
           },
           {
             "name": "marketnow_translate_credential",
-            "description": "Translate a credential between 8 formats through the Universal Trust Schema (UTS)"
+            "description": "Translate a credential between the 9 adapter formats (ATC, JWT/OAuth, W3C VC, A2A, EAT-AI, ZTA, MCP Card, SPIFFE, X.509). Lossless conversion through Universal Trust Schema (UTS). See /api/trust?action=formats."
           },
           {
             "name": "marketnow_list_formats",
-            "description": "List all supported credential formats with their algorithms and status"
+            "description": "List all 9 supported credential adapter formats (ATC, EAT-AI, ZTA, A2A, MCP Card, W3C VC, OAuth, SPIFFE, X.509) with their algorithms and status."
           },
           {
             "name": "marketnow_get_pipeline",
-            "description": "Get the 12-stage verification pipeline details"
+            "description": "Get the 12-stage credential-verification pipeline details (PARSE→DECISION)."
           },
           {
             "name": "marketnow_check_domain",
@@ -173,7 +173,7 @@
     "github_org_created_at": "2026-03-30",
     "as_of": "2026-09-25",
     "source": "live API: https://marketnow.site/api/skills-lite.json + npm registry",
-    "skills_tracked_all_sources": 132736,
+    "skills_tracked_all_sources": 132737,
     "security_checks_methodology": "766,211 total = 683,880 L1 (10 L1 checks × 68,388 entries) + 82,331 L2 (29 L2 rules × 2,839 tarballs; top 2,868 npm targets, 99% completion)",
     "l2_tarballs_deep_scanned": 2839,
     "l2_flagged_for_review": 1947,
@@ -186,7 +186,9 @@
       "l2_sentinel_rule_checks": 82331,
       "l2_formula": "29 L2 rules x 2839 tarballs",
       "total": 766211
-    }
+    },
+    "npm_packages_published": 14,
+    "npm_monthly_downloads": 9585
   },
   "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 68,388 skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
   "buyer_pricing": {
@@ -205,9 +207,10 @@
     "skills_pagination": "The /api/skills endpoint is paginated (default 100 per page, max 500). The old /api/skills.json dump was REMOVED 2026-09-25 (audit F-06, it had grown to 94MB) — that URL now returns a deprecation manifest; use /api/skills?page=1&limit=100 or /api/skills-lite.json instead."
   },
   "taxonomy": {
-    "sentinel": "12 pipeline stages grouped into 10 audit layers (L1-L9) — see /security/sentinel-v3.0",
+    "sentinel": "12 pipeline stages (L1 index certification → L8-L9 post-execution filter) grouped into 10 audit layers — audits SKILLS / catalog artifacts. See /security/sentinel-v3.0",
+    "uta_verification": "12 credential-verification stages (PARSE → DETECT → SCHEMA → CRYPTO → ISSUER → KEY_BINDING → POP → PROVENANCE → LIFECYCLE → EVIDENCE → POLICY → DECISION) — verifies CREDENTIALS (ATC, JWT, W3C VC, X.509…). See /api/trust?action=pipeline",
     "atc_1_0": "10 credential verification controls (8 required + 2 optional) — see /atc/spec/SPEC.md section 2",
-    "uta": "adapter layer, not a pipeline: 9 trust-credential format adapters — see /uta",
-    "note": "These counts are different systems, not three ways of counting the same thing: Sentinel counts audit pipeline stages/layers, ATC/1.0 counts credential verification controls, UTA counts supported credential formats."
+    "uta_adapters": "9 trust-credential format adapters (ATC, EAT-AI, ZTA, A2A, MCP Card, W3C VC, OAuth, SPIFFE, X.509) — npm @marketnow/trust-adapters. See /uta",
+    "note": "Four counts, four different systems — not four ways of counting the same thing: Sentinel counts skill-audit stages; UTA verification counts credential-verification stages (both happen to be 12 — coincidence, not double-counting); ATC/1.0 counts credential verification controls; UTA adapters counts supported credential formats."
   }
 }

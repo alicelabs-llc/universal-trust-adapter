@@ -183,8 +183,8 @@ npx marketnow-audit bit.ly        # domain scam-check + ATC + OCSP, CI exit code
 | [`@marketnow/sentinel-rules`](https://www.npmjs.com/package/@marketnow/sentinel-rules) | 1.1.2 | 29 MCP security rules: semgrep config + zero-dep lite scanner — `npx @marketnow/sentinel-rules --path .` | 471/wk |
 | [`@marketnow/trust-mcp-middleware`](https://www.npmjs.com/package/@marketnow/trust-mcp-middleware) | 1.0.2 | MCP `tools/call` wrapper: credential enforcement + signed audit receipts | 319/wk |
 | [`@marketnow/trust-observability`](https://www.npmjs.com/package/@marketnow/trust-observability) | 1.0.3 | Zero-dep observability: structured logging, tracing, Prometheus metrics | 461/wk |
-| [`@marketnow/uta-verify`](https://www.npmjs.com/package/@marketnow/uta-verify) | 1.0.0 | CLI credential verifier: ATC v3, JWT, VC, A2A, EAT, ZTA, MCP — CI exit codes | new |
-| [`marketnow-audit`](https://www.npmjs.com/package/marketnow-audit) | 1.0.0 | Security audit CLI: domain scam-check, ATC verify, OCSP status, catalog — exit codes for CI (`0` PERMIT / `1` DENY / `2` CAUTION) | new |
+| [`@marketnow/uta-verify`](https://www.npmjs.com/package/@marketnow/uta-verify) | 1.0.2 | CLI credential verifier: ATC v3, JWT, VC, A2A, EAT, ZTA, MCP — CI exit codes | new |
+| [`marketnow-audit`](https://www.npmjs.com/package/marketnow-audit) | 1.0.1 | Security audit CLI: domain scam-check, ATC verify, OCSP status, catalog — exit codes for CI (`0` PERMIT / `1` DENY / `2` CAUTION) | new |
 
 ## 🛡️ 5 Anti-ban download channels
 

@@ -33,6 +33,31 @@ export const FALLBACK_STATS = {
   uts: 'UTS v2.0.0',
   generatedAt: '2026-09-25',
   npmDownloads: null,    // live from registry.npmjs.org, null until known
+  // uta.* — 4ª ronda de auditoría: la página /uta y los chips de paquetes del
+  // landing ya NO hardcodean versiones: vienen de /api/stats.json → seccion uta
+  // (fuente: lib/npm-versions.json, sincronizado del registry por sync_npm_versions.py).
+  // Fallback = último estado conocido del registry (13 paquetes, 2026-09-26).
+  utaPackages: [
+    { name: 'marketnow-mcp', version: '1.14.1' },
+    { name: 'agent-trust-card', version: '1.4.1' },
+    { name: 'marketnow-install-stack', version: '1.2.1' },
+    { name: 'marketnow-audit', version: '1.0.1' },
+    { name: '@marketnow/uts', version: '2.0.3' },
+    { name: '@marketnow/trust-core', version: '2.0.3' },
+    { name: '@marketnow/trust-adapters', version: '1.0.4' },
+    { name: '@marketnow/trust-gateway', version: '1.0.5' },
+    { name: '@marketnow/uta-verify', version: '1.0.2' },
+    { name: '@marketnow/uta-conformance', version: '1.3.5' },
+    { name: '@marketnow/cline-trust-plugin', version: '1.1.2' },
+    { name: '@marketnow/sentinel-rules', version: '1.1.2' },
+    { name: '@marketnow/trust-mcp-middleware', version: '1.0.2' },
+    { name: '@marketnow/trust-observability', version: '1.0.3' },
+  ],
+  utaPackagesCount: 14,
+  utaMonthlyDownloads: 9585,
+  utaConformance: '1.3.5',
+  utaVectors: 41,
+  utaChecks: 24,
 };
 
 const num = (v, d) => (typeof v === 'number' && Number.isFinite(v) ? v : d);
@@ -42,6 +67,8 @@ export function mapStats(d) {
   const sec = d?.security || {};
   const tools = d?.tools || {};
   const fmt = d?.formats || {};
+  const uta = d?.uta || {};
+  const pkgs = Array.isArray(uta.packages) && uta.packages.length ? uta.packages : null;
   return {
     total: num(disc.total_mcp_servers, FALLBACK_STATS.total),
     tracked: num(disc.total_tracked_all_sources, FALLBACK_STATS.tracked),
@@ -67,6 +94,12 @@ export function mapStats(d) {
     uts: fmt.canonical_schema || FALLBACK_STATS.uts,
     generatedAt: d?.generated_at || FALLBACK_STATS.generatedAt,
     npmDownloads: null,
+    utaPackages: pkgs || FALLBACK_STATS.utaPackages,
+    utaPackagesCount: num(uta.packages_count, pkgs ? pkgs.length : FALLBACK_STATS.utaPackagesCount),
+    utaMonthlyDownloads: num(uta.monthly_downloads, FALLBACK_STATS.utaMonthlyDownloads),
+    utaConformance: uta.conformance_version || FALLBACK_STATS.utaConformance,
+    utaVectors: num(uta.test_vectors, FALLBACK_STATS.utaVectors),
+    utaChecks: num(uta.conformance_checks, FALLBACK_STATS.utaChecks),
   };
 }
 

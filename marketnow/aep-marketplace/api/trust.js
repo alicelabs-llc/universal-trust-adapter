@@ -91,21 +91,31 @@ export async function handleTrust(req, res) {
     const action = req.query.action;
     
     if (action === 'formats') {
+      // 4ª ronda (2026-09-26): 9 formatos = los 9 adapters del paquete npm
+      // @marketnow/trust-adapters (verificable: unpkg.com/@marketnow/trust-adapters/
+      // dist/ — oauth-adapter.js y spiffe-adapter.js incluidos). Antes este endpoint
+      // listaba 8 (OAuth plegado bajo JWT, SPIFFE ausente) mientras stats.json,
+      // /uta/README.md y agent.json declaraban 9 — drift de la 4ª auditoría.
       return res.status(200).json({
         service: 'MarketNow Universal Trust API (UTA v1.0.0)',
         uts_version: '2.0.0',
-        total_formats: 8,
+        total_formats: 9,
+        adapter_package: '@marketnow/trust-adapters (npm)',
         formats: [
           { id: 'atc-v3', name: 'Agent Trust Card v3 (ATC/3.0-extended; core = production envelope)', version: '3.0.0', status: 'stable', algorithm: 'Ed25519 (RFC 8032)' },
-          { id: 'jwt', name: 'JWT (OAuth/OIDC)', version: 'RFC 7519', status: 'stable', algorithm: 'RS256 / ES256 / EdDSA' },
+          { id: 'jwt', name: 'JWT (OAuth/OIDC — RFC 7519)', version: 'RFC 7519', status: 'stable', algorithm: 'RS256 / ES256 / EdDSA' },
           { id: 'w3c-vc', name: 'W3C Verifiable Credential', version: '2.0', status: 'stable', algorithm: 'Ed25519Signature2020' },
           { id: 'a2a-card', name: 'Google A2A Agent Card', version: '1.0', status: 'stable', algorithm: 'Ed25519Signature2020' },
           { id: 'eat-ai', name: 'IETF EAT-AI (CWT/COSE)', version: 'draft-00', status: 'beta', algorithm: 'EdDSA / ES256 / RS256' },
           { id: 'zta', name: 'Anthropic ZTA', version: '1.0', status: 'beta', algorithm: 'Ed25519 + UTA-ZTA-CARD domain' },
           { id: 'mcp-card', name: 'MCP Server Card', version: '1.0', status: 'stable', algorithm: 'Ed25519 + UTA-MCP-CARD domain' },
-          { id: 'x509', name: 'X.509 Certificate', version: '3', status: 'stable', algorithm: 'RSA / ECDSA / Ed25519' },
+          { id: 'x509', name: 'X.509 Certificate (incl. SPIFFE X.509-SVID)', version: '3', status: 'stable', algorithm: 'RSA / ECDSA / Ed25519' },
+          { id: 'oauth', name: 'OAuth/OIDC token (via JWT adapter — oauth-adapter.js)', version: '2.1/OIDC', status: 'stable', algorithm: 'RS256 / ES256 (JWT profile)' },
+          { id: 'spiffe', name: 'SPIFFE SVID (spiffe-adapter.js; X.509-SVID crypto path)', version: '1.0', status: 'beta', algorithm: 'X.509 SVID / JWT-SVID profile' },
         ],
+        note: 'The 9 adapter formats map to 10 registry entries: JWT and OAuth/OIDC share the RFC 7519 crypto path (one adapter each in the npm package: jwt under crypto-adapters, oauth under oauth-adapter.js). Registry ids are verification paths; the adapter layer count is 9 (ATC, EAT-AI, ZTA, A2A, MCP Card, W3C VC, OAuth, SPIFFE, X.509).',
         pipeline_stages: 12,
+        pipeline_note: '12 credential-verification stages (PARSE→DECISION) — distinct from Sentinel\'s 12 skill-audit stages; see /api/trust?action=pipeline and /security/sentinel-v3.0.',
         test_count: 480,
         performance: '6,744 verifications/sec',
         languages: ['TypeScript', 'Python', 'Rust', 'Go'],
@@ -183,8 +193,8 @@ export async function handleTrust(req, res) {
       version: '1.0.0',
       uts_version: '2.0.0',
       uta_version: '1.0.0',
-      description: 'UTA (Universal Trust Adapter) — The USB-C of Agent Trust. 12-stage fail-closed pipeline, 8 credential formats, real cryptographic verification.',
-      architecture: 'Universal Trust Schema (UTS) v2 as IR. 12-stage verification pipeline. 8 adapters. O(N) complexity.',
+      description: 'UTA (Universal Trust Adapter) — The USB-C of Agent Trust. 12-stage fail-closed credential-verification pipeline, 9 credential formats, real cryptographic verification.',
+      architecture: 'Universal Trust Schema (UTS) v2 as IR. 12-stage verification pipeline. 9 adapters. O(N) complexity.',
       pipeline: '12 stages: PARSE → DETECT → SCHEMA → CRYPTO → ISSUER → KEY_BINDING → POP → PROVENANCE → LIFECYCLE → EVIDENCE → POLICY → DECISION',
       golden_rule: 'UNKNOWN = DENY, ERROR = DENY, EXPIRED = DENY, REVOKED = DENY',
       formats_available: [
@@ -212,7 +222,7 @@ export async function handleTrust(req, res) {
         translate: 'POST /api/trust?action=translate — translate payload from format X to Y',
         issue: 'POST /api/trust?action=issue — issue credentials in multiple formats',
         bridge: 'POST /api/trust?action=bridge — verify in ecosystem A, issue in B',
-        formats: 'GET /api/trust?action=formats — list all 8 supported formats',
+        formats: 'GET /api/trust?action=formats — list all 9 supported adapter formats',
         pipeline: 'GET /api/trust?action=pipeline — list 12 pipeline stages',
         revocation: 'GET /api/trust?action=revocation — list revocation methods',
       },

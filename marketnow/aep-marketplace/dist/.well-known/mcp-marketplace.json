@@ -2,22 +2,35 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "MarketNow",
   "tagline": "Trust layer for agent commerce",
-  "description": "Trust layer for agent commerce. Discovery is solved (MCP registry, Smithery, Glama); trust is not. MarketNow provides Sentinel security certification, AP2-compatible mandates, x402 payments, and human-in-the-loop-by-default agent spending. 68,387 index-certified MCP skills (132,736 total tracked), all free to install. AliceLabs LLC Proprietary, maintained by AliceLabs LLC.",
+  "description": "Trust layer for agent commerce. Discovery is solved (MCP registry, Smithery, Glama); trust is not. MarketNow provides Sentinel security certification, AP2-compatible mandates, x402 payments, and human-in-the-loop-by-default agent spending. 68,388 index-certified MCP skills (132,737 total tracked), all free to install. AliceLabs LLC Proprietary, maintained by AliceLabs LLC.",
   "url": "https://marketnow.site",
   "api_base": "https://marketnow.site/api",
   "version": "2.0.0",
-  "last_updated": "2026-07-02T00:00:00.000Z",
+  "last_updated": "2026-09-26T00:00:00.000Z",
   "stats": {
-    "total_skills": 68387,
-    "free_skills": 43,
-    "categories": 58,
+    "total_skills": 68388,
+    "index_certified": 68388,
+    "free_skills": 68387,
+    "paid_skills": 1,
+    "l2_tarballs_deep_scanned": 2839,
+    "categories": 16,
     "languages": [
       "en",
       "es",
-      "zh",
       "pt",
-      "fr"
-    ]
+      "zh",
+      "fr",
+      "de",
+      "it",
+      "ru",
+      "tr",
+      "ja",
+      "ko",
+      "ar",
+      "hi"
+    ],
+    "languages_note": "13 site languages + UTA conformance vector set (count reported as 14 in /api/stats.json i18n)",
+    "canonical": "/api/stats.json"
   },
   "pricing": {
     "model": "one-time",
@@ -84,7 +97,7 @@
     "largest MCP marketplace (we are the trust layer, not the largest)",
     "no humans needed (human-in-loop is default; silent requires opt-in)",
     "ETH/BSC/SOL/BTC payments (USDC on Base only)",
-    "9,248 skills (stale count — today: 68,387 index-certified / 132,736 tracked; canonical: /api/agent.json skills_indexed)",
+    "9,248 skills (stale count — today: 68,388 index-certified / 132,737 tracked; canonical: /api/agent.json skills_indexed)",
     "open registry with no manual approval (mandates default to notify mode)"
   ],
   "canonical_sources": {

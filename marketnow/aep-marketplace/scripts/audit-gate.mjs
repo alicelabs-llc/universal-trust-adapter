@@ -21,8 +21,12 @@
 //  12 MCP-TOOLS     — 9 tools remotas vs 15 del paquete npm, nota explícita (P0-4)
 //  13 STALE-DRIFT   — generación vieja (23/23, 116/409, UTA v1.0.0) erradicada (P0-1)
 //  14 NEW-SURFACES  — /licensing, /security/incidents/2026-09-08, TEST ONLY (P1-7/8/9)
+//  15 SPA-SYNC      — chips/stats del SPA driven del registry, cero generación vieja (4ª ronda)
+//  16 TRACKED       — 132,737/68,388 consistentes en todos los well-known (4ª ronda)
+//  17 FORMATS-9     — 9 adapters en stats/trust.js/mcp.js/agent.json (4ª ronda)
 //  (live) LIVE-PROD — MCP initialize serverInfo + /api/stats.json vs bundle
 //  (live) LIVE-SEC  — superficies de seguridad vivas + cert/benchmark vivo == repo
+//  (live) LIVE 4ª   — math stats (performed==breakdown), sección uta, /uta y /uta/ redirect
 
 import { createHash } from 'node:crypto';
 import { readFileSync, existsSync, statSync } from 'node:fs';
@@ -288,6 +292,10 @@ try {
     [/12 stages\/10 layers|12 pipeline stages.*10 audit layers/.test(aj.taxonomy?.sentinel || ''), 'agent.json taxonomy.sentinel cita 12/10'],
     [/8 required \+ 2 optional/.test(aj.taxonomy?.atc_1_0 || ''), 'agent.json taxonomy.atc_1_0 cita 10 controles (8 requeridos)'],
     [!ghReadme.includes('TrustEngine core, 8-layer audit'), 'GitHub README sin "8-layer audit" (era la contradicción P0-3)'],
+    [!readFileSync(join(ROOT, 'public/uta/README.md'), 'utf8').includes('8-layer audit'), 'uta/README.md sin "8-layer audit"'],
+    [!!aj.taxonomy?.uta_verification && /PARSE/.test(aj.taxonomy.uta_verification), 'agent.json taxonomy.uta_verification (12 PARSE→DECISION, distinta de Sentinel)'],
+    [!!aj.taxonomy?.uta_adapters && /SPIFFE/.test(aj.taxonomy.uta_adapters), 'agent.json taxonomy.uta_adapters (9 con OAuth/SPIFFE)'],
+    [/Four counts, four different systems/.test(aj.taxonomy?.note || ''), 'taxonomy note explica los 4 sistemas'],
     [ghReadme.includes('12 stages / 10 layers') && ghReadme.includes('8 required + 2 optional'), 'GitHub README: sección taxonomy 12/10/10 presente'],
     [spec.includes('The 10 Controls') && spec.includes('controls 001–008'), 'SPEC.md: 10 controles, 001–008 requeridos'],
     [aj.agent?.description?.includes('12-stage / 10-layer'), 'agent.json description usa "12-stage / 10-layer"'],
@@ -380,6 +388,83 @@ try {
     checks.push([rw.some(r => r.source === src), `rewrite ${src} presente`]);
   for (const [ok, msg] of checks) log(ok ? '✓' : '✗', 'NEW-SURFACES', msg);
 } catch (e) { log('✗', 'NEW-SURFACES', e.message); }
+
+// ── Gate 15: SPA-SYNC (4ª auditoría, homepage chips + /uta stats) ───────────
+try {
+  const banned = [
+    ['src/pages/UTA.jsx', ['UTA v1.1.0', 'AL-1.0 LICENSE', 'agent-trust-card@1.1.2', 'marketnow-mcp@1.14.1</code>']],
+    ['src/pages/AgentLanding.jsx', ['UTA v1.1.0', 'trust-core@1.0.1', '@marketnow/uts@2.0.1', 'trust-adapters@1.0.2', 'trust-gateway@1.0.1', 'uta-verify@1.0.0', 'trust-observability@1.0.1', 'value: \'8\'', 'value: \'23/23\'', 'value: \'7\'', '2,339']],
+    ['src/utils/liveStats.js', ['23/23']],
+  ];
+  const checks = [];
+  for (const [file, pats] of banned) {
+    const t = readFileSync(join(ROOT, file), 'utf8');
+    const hit = pats.filter(p => t.includes(p));
+    checks.push([hit.length === 0, hit.length ? `${file} contiene generación vieja: ${hit.join(', ')}` : `${file} sin generación vieja`]);
+  }
+  // los i18n no pueden declarar 8 adapters / 23-23 / 7 o 13 packages / 8 formatos
+  const i18nDir = join(ROOT, 'src/utils/i18n');
+  const { readdirSync } = await import('node:fs');
+  const i18nFiles = readdirSync(i18nDir).filter(f => f.endsWith('.js'));
+  let i18nBad = [];
+  for (const f of i18nFiles) {
+    const t = readFileSync(join(i18nDir, f), 'utf8');
+    for (const pat of [/'uta\.rm\.d2':\s*'8 /, /'uta\.rm\.d3':\s*'23\/23/, /'uta\.rm\.d4':\s*'(7|13|12) /, /'uta\.hero\.desc'[^]*?entre 8 /])
+      if (pat.test(t)) i18nBad.push(`${f}: ${pat}`);
+  }
+  checks.push([i18nBad.length === 0, i18nBad.length ? `i18n con valores viejos: ${i18nBad.slice(0, 4).join(' | ')}` : `i18n (${i18nFiles.length} idiomas): 9 adapters · Conformance v1.3.5 · 24 checks · 14 NPM`]);
+  // lib/npm-versions.json: 14 paquetes == fallback del SPA == gate de versiones
+  const nvj = j('lib/npm-versions.json');
+  const ls = readFileSync(join(ROOT, 'src/utils/liveStats.js'), 'utf8');
+  const fbCount = Number((ls.match(/utaPackagesCount: (\d+)/) || [])[1]);
+  checks.push([(nvj.packages || []).length === 14, `lib/npm-versions.json: ${(nvj.packages || []).length} paquetes (esperados 14)`]);
+  checks.push([fbCount === (nvj.packages || []).length, `liveStats fallback utaPackagesCount=${fbCount} == registry ${(nvj.packages || []).length}`]);
+  // chips del landing renderizan desde stats.utaPackages (dinámico), no hardcode
+  const al = readFileSync(join(ROOT, 'src/pages/AgentLanding.jsx'), 'utf8');
+  checks.push([/stats\.utaPackages\.map/.test(al), 'AgentLanding: chips de paquetes renderizados desde stats.utaPackages (registry-driven)']);
+  for (const [ok, msg] of checks) log(ok ? '✓' : '✗', 'SPA-SYNC', msg);
+} catch (e) { log('✗', 'SPA-SYNC', e.message); }
+
+// ── Gate 16: TRACKED-CONSISTENCY (4ª auditoría: 132,737 en todas partes) ────
+try {
+  const sbT = j('lib/stats-base.json').discovery?.total_tracked_all_sources;
+  const ajT = j('public/api/agent.json').metrics?.skills_tracked_all_sources;
+  const wkT = j('public/.well-known/agent.json').metrics?.skills_tracked_all_sources;
+  const mcpDesc = readFileSync(join(ROOT, 'public/.well-known/mcp.json'), 'utf8');
+  const mcpT = Number((mcpDesc.match(/([\d,]{4,7}) total tracked/) || [])[1]?.replace(/,/g, ''));
+  const mkT = j('public/.well-known/mcp-marketplace.json')?.stats?.total_skills;
+  const scDesc = readFileSync(join(ROOT, 'public/.well-known/mcp/server-card.json'), 'utf8');
+  const scT = Number((scDesc.match(/([\d,]{4,7}) total tracked/) || [])[1]?.replace(/,/g, ''));
+  const aip = readFileSync(join(ROOT, 'public/.well-known/ai-plugin.json'), 'utf8');
+  const aipN = Number((aip.match(/install ([\d,]{4,7}) index-certified/) || [])[1]?.replace(/,/g, ''));
+  const checks = [
+    [sbT === 132737, `stats-base total_tracked=${sbT}`],
+    [ajT === sbT && wkT === sbT, `agent.json (canonical=${ajT}, well-known=${wkT}) == stats-base`],
+    [mcpT === sbT, `mcp.json "${mcpT} total tracked" == ${sbT}`],
+    [mkT === 68388, `mcp-marketplace.json stats.total_skills=${mkT} (== bundle)`],
+    [scT === sbT, `server-card.json "${scT} total tracked" == ${sbT}`],
+    [aipN === 68388, `ai-plugin.json "${aipN} index-certified" == 68,388`],
+  ];
+  for (const [ok, msg] of checks) log(ok ? '✓' : '✗', 'TRACKED', msg);
+} catch (e) { log('✗', 'TRACKED', e.message); }
+
+// ── Gate 17: FORMATS-9 (4ª auditoría: 9 adapters en API + docs + tools) ─────
+try {
+  const sbF = j('lib/stats-base.json').formats?.count;
+  const trust = readFileSync(join(ROOT, 'api/trust.js'), 'utf8');
+  const mcpjs = readFileSync(join(ROOT, 'api/mcp.js'), 'utf8');
+  const aj = JSON.stringify(j('public/api/agent.json'));
+  const checks = [
+    [sbF === 9, `stats-base formats.count=${sbF} (9 adapters)`],
+    [/total_formats: 9/.test(trust), 'api/trust.js action=formats declara 9'],
+    [/9 credential formats/.test(trust), 'api/trust.js description: 9 credential formats'],
+    [!mcpjs.includes('between 8 formats') && mcpjs.includes('9 adapter formats'), 'api/mcp.js tools: 9 adapter formats'],
+    [aj.includes('9 adapter formats') && !aj.includes('between 8 formats'), 'agent.json tool descriptions: 9 adapter formats'],
+    [!trust.includes('architecture: \'Universal Trust Schema (UTS) v2 as IR. 12-stage verification pipeline. 8 adapters'), 'api/trust.js architecture sin "8 adapters"'],
+    [/X\.509/.test(readFileSync(join(ROOT, 'src/pages/UTA.jsx'), 'utf8').match(/const FORMATS = \[[\s\S]*?\];/)?.[0] || ''), 'UTA.jsx FORMATS incluye X.509 (9 tarjetas)'],
+  ];
+  for (const [ok, msg] of checks) log(ok ? '✓' : '✗', 'FORMATS-9', msg);
+} catch (e) { log('✗', 'FORMATS-9', e.message); }
 
 // ── Gate live: producción (solo --live / reauditoría) ───────────────────────
 if (LIVE) {
@@ -475,6 +560,28 @@ if (LIVE) {
       log(liveToolCount === 9
         ? '✓' : '✗', 'LIVE-SEC', `tools/list vivo: ${liveToolCount} tools remotas (agent.json declara 9, npm package 15 — nota publicada)`);
     } catch (e2) { log('✗', 'LIVE-SEC', `tools/list vivo falló: ${e2.message}`); }
+    // 4ª ronda en vivo: math del stats.json (performed == breakdown.total == agent.json)
+    try {
+      const stRes = await fetch(`${PROD}/api/stats.json`, { signal: AbortSignal.timeout(20000) });
+      const st = await stRes.json();
+      const sec = st?.security || {};
+      const tot = sec.security_checks_breakdown?.total;
+      log(sec.security_checks_performed === tot && tot === j('public/api/agent.json').metrics?.security_checks_performed
+        ? '✓' : '✗', 'LIVE-SEC', `stats vivo: performed=${sec.security_checks_performed} == breakdown.total=${tot} == agent.json (766,211)`);
+      const utaLive = st?.uta;
+      const nvj = j('lib/npm-versions.json');
+      log(utaLive?.packages_count === (nvj.packages || []).length
+        ? '✓' : '✗', 'LIVE-SEC', `stats vivo sección uta: ${utaLive?.packages_count} packages (registry ${nvj.packages.length}) + conformance v${utaLive?.conformance_version}`);
+    } catch (e2) { log('✗', 'LIVE-SEC', `stats math vivo falló: ${e2.message}`); }
+    // 4ª ronda en vivo: /uta responde y /uta/ redirige (antes 404)
+    try {
+      const utaRes = await fetch(`${PROD}/uta`, { signal: AbortSignal.timeout(20000) });
+      log(utaRes.status === 200 ? '✓' : '✗', 'LIVE-SEC', `GET /uta → ${utaRes.status} (SPA route)`);
+      const utaSlash = await fetch(`${PROD}/uta/`, { redirect: 'manual', signal: AbortSignal.timeout(20000) });
+      const loc = utaSlash.headers.get('location') || '';
+      log([301, 302, 307, 308].includes(utaSlash.status) && /\/uta$/.test(loc)
+        ? '✓' : '✗', 'LIVE-SEC', `GET /uta/ → ${utaSlash.status} ${loc || '(sin redirect)'} (esperaba 3xx → /uta)`);
+    } catch (e2) { log('✗', 'LIVE-SEC', `/uta vivo falló: ${e2.message}`); }
   } catch (e) { log('✗', 'LIVE-SEC', `verificación de superficies falló: ${e.message}`); }
 }
 

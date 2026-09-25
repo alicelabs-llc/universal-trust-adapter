@@ -29,7 +29,7 @@ const SERVER_CAPABILITIES = {
 const TOOLS = [
   {
     name: "marketnow_verify_trust",
-    description: "Verify any AI agent credential (JWT, W3C VC, MCP Card, ATC v3, A2A, EAT-AI, ZTA, X.509) through the UTA 12-stage verification pipeline. Returns validity, format, trust score, and issues.",
+    description: "Verify any AI agent credential (ATC v3, JWT/OAuth, W3C VC, MCP Card, A2A, EAT-AI, ZTA, SPIFFE SVID, X.509) through the UTA 12-stage credential-verification pipeline (PARSE→DECISION — distinct from Sentinel's 12 skill-audit stages). Returns validity, format, trust score, and issues.",
     inputSchema: {
       type: "object",
       properties: {
@@ -43,7 +43,7 @@ const TOOLS = [
   },
   {
     name: "marketnow_translate_credential",
-    description: "Translate a credential between 8 formats (ATC v3, JWT, W3C VC, A2A, EAT-AI, ZTA, MCP Card, X.509). Lossless conversion through Universal Trust Schema (UTS).",
+    description: "Translate a credential between the 9 adapter formats (ATC, JWT/OAuth, W3C VC, A2A, EAT-AI, ZTA, MCP Card, SPIFFE, X.509). Lossless conversion through Universal Trust Schema (UTS). See /api/trust?action=formats.",
     inputSchema: {
       type: "object",
       properties: {
@@ -56,12 +56,12 @@ const TOOLS = [
   },
   {
     name: "marketnow_list_formats",
-    description: "List all 8 supported credential formats with their algorithms and status.",
+    description: "List all 9 supported credential adapter formats (ATC, EAT-AI, ZTA, A2A, MCP Card, W3C VC, OAuth, SPIFFE, X.509) with their algorithms and status.",
     inputSchema: { type: "object", properties: {} }
   },
   {
     name: "marketnow_get_pipeline",
-    description: "Get the 12-stage verification pipeline details.",
+    description: "Get the 12-stage credential-verification pipeline details (PARSE→DECISION).",
     inputSchema: { type: "object", properties: {} }
   },
   {
