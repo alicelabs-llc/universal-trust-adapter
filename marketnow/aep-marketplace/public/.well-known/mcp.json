@@ -1,8 +1,8 @@
 {
   "$schema": "https://marketnow.site/.well-known/mcp.schema.json",
   "name": "marketnow",
-  "description": "MarketNow — Trust layer for agent commerce. 68,387 index-certified MCP-compatible skills (132,736 total tracked). Sentinel L1 index certification on every entry, L2 deep-scan on top npm tarballs, x402 payments (HTTP 402 + USDC on Base), and AP2 delegated mandates. AliceLabs LLC Proprietary. Maintained by AliceLabs LLC (Wyoming, USA).",
-  "version": "1.4.0",
+  "description": "MarketNow — Trust layer for agent commerce. 68,388 index-certified MCP-compatible skills (132,737 total tracked). Sentinel L1 index certification on every entry, L2 deep-scan on top npm tarballs, x402 payments (HTTP 402 + USDC on Base), and AP2 delegated mandates. AliceLabs LLC Proprietary. Maintained by AliceLabs LLC (Wyoming, USA).",
+  "version": "1.14.1",
   "homepage": "https://marketnow.site",
   "repository": "https://github.com/alicelabs-llc/marketnow",
   "npm_package": "marketnow-mcp",
@@ -17,24 +17,40 @@
   },
   "tools": [
     {
-      "name": "search_skills",
-      "description": "Search skills by query, category, or max price"
+      "name": "marketnow_search_skills",
+      "description": "Search the MarketNow registry of indexed MCP servers (68k+ across GitHub, npm and PyPI)"
     },
     {
-      "name": "get_skill",
-      "description": "Get full details of a specific skill by ID or slug"
+      "name": "marketnow_verify_trust",
+      "description": "Verify any AI agent credential (JWT, W3C VC, MCP Card, ATC v3, A2A, EAT-AI, ZTA, X.509)"
     },
     {
-      "name": "list_categories",
-      "description": "List all 16 categories with counts"
+      "name": "marketnow_translate_credential",
+      "description": "Translate a credential between 8 formats through the Universal Trust Schema (UTS)"
     },
     {
-      "name": "get_manifest",
-      "description": "Get marketplace metadata (68,387 skills, pricing tiers, commission)"
+      "name": "marketnow_list_formats",
+      "description": "List all supported credential formats with their algorithms and status"
     },
     {
-      "name": "get_install_command",
-      "description": "Get the npx install command for a skill"
+      "name": "marketnow_get_pipeline",
+      "description": "Get the 12-stage verification pipeline details"
+    },
+    {
+      "name": "marketnow_check_domain",
+      "description": "Check if a domain is suspicious (scam checker). Returns risk score and reasons"
+    },
+    {
+      "name": "marketnow_check_revocation",
+      "description": "Check revocation status of an ATC (card_id) or CA key (kid) against the signed CRL"
+    },
+    {
+      "name": "marketnow_fingerprint_tool",
+      "description": "Cryptographically fingerprint MCP tool definitions (SHA-256 + RFC 8785 JCS) against tool poisoning"
+    },
+    {
+      "name": "marketnow_submit_skill",
+      "description": "Publish a skill to the MarketNow catalog (write side, Sentinel-validated)"
     }
   ],
   "config_examples": {
@@ -73,7 +89,7 @@
     }
   },
   "marketplace_stats": {
-    "total_skills": 68387,
+    "total_skills": 68388,
     "categories": 58,
     "price_min_usd": 0.99,
     "price_max_usd": 9.99,
@@ -121,5 +137,10 @@
   "license": "MNNC-1.0",
   "maintainer": "AliceLabs LLC (Wyoming, USA, 2025)",
   "founder": "Edison Flores",
-  "generated_at": "2026-07-04T00:00:00Z"
+  "generated_at": "2026-09-25T00:00:00Z",
+  "tool_counts": {
+    "remote_endpoint": 9,
+    "npm_package": 15
+  },
+  "tools_note": "The remote endpoint (marketnow.site/api/mcp) exposes 9 public discovery/trust tools. The npm package marketnow-mcp@1.14.1 exposes 15 LOCAL trust/security tools (verify_trust, verify_receipt, check_revocation, fingerprint_tool, mint_referral, ...) that run client-side against local credentials and the public APIs. Remote discovery surface and local package surface are different by design."
 }

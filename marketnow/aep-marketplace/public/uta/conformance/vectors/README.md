@@ -32,6 +32,8 @@ Plus `_index.json` — a manifest listing all vectors, their expected outcomes, 
 
 **`_test-ca-keys.json` — the ca-test-2 private key is PUBLISHED.** That is the point of v1.3.0: anyone can re-derive signatures and generate unlimited fresh signed cards, so the accept side of the suite cannot be memorized.
 
+> ⚠️ **TEST ONLY — this private key is intentionally public and MUST NEVER be trusted in production.** It exists so the suite is reproducible cross-language; signatures under ca-test-2 prove conformance behavior, nothing else.
+
 Public keys published beside the vectors:
 
 | File | Key |

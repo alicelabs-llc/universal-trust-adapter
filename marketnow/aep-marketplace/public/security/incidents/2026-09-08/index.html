@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>CA incident 2026-09-08 — mn-ca-002 → mn-ca-003 rotation postmortem · MarketNow</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Postmortem: MarketNow CA key mn-ca-002 was rotated to mn-ca-003 on 2026-09-08 after private-key material was found committed to a public repository. Detection, timeline, scope, revocation evidence (signed CRL, live OCSP, 4 Rekor anchors), impact, resolution and lessons learned. Exposure confirmed; no third-party misuse observed.">
+<link rel="canonical" href="https://marketnow.site/security/incidents/2026-09-08">
+<style>
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin:0; font:16px/1.65 -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; background:#0b0e14; color:#dfe6f1; }
+main { max-width:1020px; margin:0 auto; padding:48px 24px 96px; }
+h1 { font-size:30px; margin:0 0 4px; letter-spacing:-.5px; }
+h2 { font-size:20px; margin:40px 0 12px; color:#8ab4ff; }
+h3 { font-size:15px; margin:22px 0 8px; color:#dfe6f1; }
+.sub { color:#9aa7bd; margin:0 0 8px; }
+.badge { display:inline-block; padding:2px 10px; border-radius:999px; font-size:13px; font-weight:600; margin:8px 6px 16px 0; }
+.ok { background:#0f3d24; color:#5ee59b; } .info { background:#1c2a4a; color:#8ab4ff; }
+.bad { background:#4a2010; color:#ff9d66; } .warn { background:#4a3a10; color:#ffd66b; }
+table { width:100%; border-collapse:collapse; font-size:14px; margin:14px 0; }
+th,td { text-align:left; padding:9px 10px; border-bottom:1px solid #1e2636; vertical-align:top; }
+th { color:#8ab4ff; font-size:13px; text-transform:uppercase; letter-spacing:.4px; }
+code { background:#161d2b; padding:1px 6px; border-radius:5px; font-size:13px; color:#5ee59b; }
+a { color:#8ab4ff; }
+blockquote { border-left:3px solid #8ab4ff; margin:14px 0; padding:10px 18px; background:#101725; border-radius:0 10px 10px 0; }
+blockquote p { margin:0; }
+.callout { border:1px solid #1c2a4a; background:#101725; border-radius:12px; padding:16px 18px; margin:16px 0; }
+.warnbox { border:1px solid #4a3a10; background:#241d0b; border-radius:10px; padding:14px 16px; margin:14px 0; }
+.warnbox b { color:#ffd66b; }
+footer { margin-top:56px; color:#9aa7bd; font-size:13px; border-top:1px solid #1e2636; padding-top:18px; }
+pre { background:#161d2b; padding:14px 16px; border-radius:10px; overflow-x:auto; font-size:13px; line-height:1.5; }
+.tl { list-style:none; padding:0; margin:14px 0; border-left:2px solid #1e2636; }
+.tl li { margin:0 0 14px 0; padding:0 0 0 22px; position:relative; }
+.tl li:before { content:''; position:absolute; left:-7px; top:6px; width:12px; height:12px; border-radius:50%; background:#8ab4ff; }
+.tl li.bad:before { background:#ff9d66; } .tl li.ok:before { background:#5ee59b; }
+.tl .t { color:#9aa7bd; font-size:13px; font-family:ui-monospace,Menlo,Consolas,monospace; }
+</style></head><body><main>
+<h1>CA incident 2026-09-08</h1>
+<p class="sub">Rotation <code>mn-ca-002 → mn-ca-003</code> · postmortem public · every claim links its registry · 2026-09-25</p>
+<span class="badge bad">Exposure: CONFIRMED</span>
+<span class="badge ok">Third-party misuse: none observed</span>
+<span class="badge info">Revoked same-day · fail-closed</span>
+<span class="badge info">4 Rekor anchors</span>
+
+<p>On <b>2026-09-08</b> MarketNow rotated its production CA key <code>mn-ca-002</code> to
+<code>mn-ca-003</code> and published the revocation the same day. This page is the postmortem
+the incident deserves: what happened, what it affected, what the response was, and what it
+proved about the revocation machinery. Nothing here is a claim without a link.</p>
+
+<h2>Detection</h2>
+<p>During a key-hygiene review of public surfaces on 2026-09-08, private key material for the
+CA key <code>mn-ca-002</code> (active since 2026-08-12) was found committed to a public
+repository. The revocation registry records the finding in the key's own words — this is the
+live OCSP response, fetched from production:</p>
+<blockquote><p>"Private key material was found committed to a public repository. Any signature
+that only verifies under this key must be treated as untrusted."</p></blockquote>
+<p><i>Source: <a href="/api/ocsp?kid=mn-ca-002">GET /api/ocsp?kid=mn-ca-002</a> → status
+<code>KEY_COMPROMISE</code>, recommendation <code>DENY</code> (fail-closed).</i></p>
+<p>Detection was <b>manual review</b>, not automated scanning — raw Ed25519 private keys are not
+covered by default secret-scanning patterns. That fact is lesson #1 below.</p>
+
+<h2>Timeline</h2>
+<ul class="tl">
+<li class="t">2026-07-16 — ca-key-001 active (first generation CA key).</li>
+<li class="t">2026-08-12 — scheduled rotation: ca-key-001 retired, <b>mn-ca-002 activated</b>.</li>
+<li class="bad t">2026-09-08 (detection) — key-hygiene review finds mn-ca-002 private key material committed to a public repository. Exposure treated as confirmed (worst-case).</li>
+<li class="ok t">2026-09-08 (same day) — <b>mn-ca-002 revoked (KEY_COMPROMISE)</b>, mn-ca-003 activated, revocation published, OCSP fail-closed answers DENY.</li>
+<li class="ok t">2026-09-08T21:03:33Z — first Rekor transparency anchor integrated for the rotation digests.</li>
+<li class="ok t">2026-09-09T17:24:25Z — Rekor <b>entry #4 anchors the revocation registry itself</b> (logIndex 2771735480, entry UUID 108e9186e8c5677a…).</li>
+<li class="t">2026-09-16/17 — registry signing key rotated mn-revoc-001 → mn-revoc-002 during scheduled CRL renewal (the CA key never signs revocations — delegated by design).</li>
+<li class="t">2026-09-25 — this postmortem published; repository wording aligned with the registry record.</li>
+</ul>
+
+<h2>Scope</h2>
+<table>
+<tr><th>Item</th><th>Status</th><th>Detail</th></tr>
+<tr><td><code>mn-ca-002</code> (CA key)</td><td><span class="badge bad">REVOKED</span></td><td>Active window 2026-08-12 → 2026-09-08. Any ATC that only verifies under this key must be treated as untrusted (fail-closed).</td></tr>
+<tr><td>ATCs issued under mn-ca-002</td><td><span class="badge warn">Re-issued</span></td><td>Production ATCs re-issued under mn-ca-003. Historic superseded ATCs (3, from July) remain in the CRL with reason SUPERSEDED.</td></tr>
+<tr><td><code>mn-ca-003</code> (successor)</td><td><span class="badge ok">ACTIVE</span></td><td>Active since 2026-09-08. Never published, never committed.</td></tr>
+<tr><td>Test CAs (<code>ca-test-1</code>, <code>ca-test-2</code>)</td><td><span class="badge info">Unrelated</span></td><td>Separate throwaway keys for the conformance suite — intentionally public, labeled TEST ONLY, never production CAs.</td></tr>
+<tr><td>Revocation registry key</td><td><span class="badge info">Rotated</span></td><td>mn-revoc-001 → mn-revoc-002 (2026-09-17). The registry is signed by a delegated key, so CA compromise cannot forge revocations.</td></tr>
+</table>
+
+<h2>Evidence (all public, all verifiable)</h2>
+<table>
+<tr><th>Artifact</th><th>What it proves</th><th>Where</th></tr>
+<tr><td>Signed CRL (MNR-CRL-1.0)</td><td>mn-ca-002 status <code>retired-compromised</code> since 2026-09-08; Ed25519 signature over RFC 8785 JCS payload; verification steps included</td><td><a href="/api/crl">/api/crl</a> · <a href="/uta/revocations/crl.json">crl.json</a></td></tr>
+<tr><td>Live OCSP responder</td><td><code>kid=mn-ca-002</code> → KEY_COMPROMISE / DENY / fail-closed, nonce anti-replay</td><td><a href="/api/ocsp?kid=mn-ca-002">/api/ocsp?kid=mn-ca-002</a></td></tr>
+<tr><td>Rekor anchors ×4</td><td>Rotation digests + the CRL itself anchored in Sigstore's public append-only log (logIndex 2762061972, 2764017355, 2764479676, 2771735480)</td><td><a href="/uta/conformance/anchors/">anchors</a> · <a href="https://rekor.sigstore.dev">rekor.sigstore.dev</a></td></tr>
+<tr><td>Registry key + history</td><td>mn-revoc-002 public key, SPKI base64, rotation history</td><td><a href="/uta/revocations/registry-key.json">registry-key.json</a></td></tr>
+<tr><td>Repository documentation</td><td>Revocation semantics, states, fail-closed policy</td><td><a href="/uta/revocations/">revocations README</a></td></tr>
+</table>
+
+<h2>Revocation mechanics exercised</h2>
+<p>This was not a drill: the incident exercised the full revocation path that roadmap v5.1
+shipped. The CRL is <b>append-only and signed by a delegated registry key</b> (mn-revoc-002),
+not by the CA — so a compromised CA key cannot forge or suppress revocations. The OCSP
+responder resolves per-subject status (<code>card_id</code> or <code>kid</code>) against the
+signed CRL, embeds the CRL signature so clients can verify independently, and answers
+<code>UNKNOWN → DENY</code> (fail-closed) for anything it cannot resolve. Inside the rotation
+window, a correctly implemented verifier therefore <b>denied</b> mn-ca-002 signatures instead
+of trusting them — the safe failure.</p>
+
+<h2>Impact</h2>
+<ul>
+<li><b>Exposure: confirmed.</b> Private key material for mn-ca-002 was committed to a public repository (registry record, quoted above under Detection).</li>
+<li><b>Third-party misuse: none observed.</b> No signatures verifying under mn-ca-002 were observed after rotation. The response nonetheless treated the exposure as a full compromise — worst-case handling, per the fail-closed design.</li>
+<li><b>Bounded blast radius.</b> mn-ca-002's active window was 2026-08-12 → 2026-09-08; signatures from that window that only verify under this key are untrusted by policy. Successor mn-ca-003 was never exposed.</li>
+<li><b>Zero buyer/seller impact.</b> The CA key signs agent trust cards, not marketplace transactions; the catalog, payments and scans operated continuously.</li>
+</ul>
+
+<h2>Resolution</h2>
+<ul>
+<li>mn-ca-003 active since 2026-09-08; production ATCs re-issued under it.</li>
+<li>mn-ca-002 revoked with reason KEY_COMPROMISE, published same-day in the signed CRL and served live by OCSP.</li>
+<li>Rotation and revocation anchored in Sigstore Rekor (4 log entries) — third parties can verify the response, not just take our word for it.</li>
+<li>Registry signing key rotated on schedule (mn-revoc-001 → mn-revoc-002), proving CA-key compromise and registry integrity are decoupled.</li>
+<li>Repository wording aligned with the registry record (2026-09-25): earlier README phrasing said "suspected compromise (no confirmed leak)" — the registry's record is the authority and says exposure <i>was</i> confirmed; the README now matches it.</li>
+</ul>
+
+<h2>Lessons learned</h2>
+<div class="warnbox">
+<b>1 — Secret scanning does not catch raw Ed25519 keys.</b> Detection came from a manual
+key-hygiene review. Default scanner patterns target tokens/PEM, not bare key material.
+Mitigation: treat <i>any</i> private-key material visible in a public context as compromised
+— rotate first, investigate second. That is exactly what happened here, and it is the correct
+default for trust infrastructure.
+</div>
+<div class="callout">
+<b>2 — The machinery worked under a real incident.</b> CRL publication, OCSP fail-closed
+resolution and delegated registry signing all ran in production, same-day, under a real
+KEY_COMPROMISE — not in a test harness. Every trust claim about the revocation system now has
+an incident behind it.
+</div>
+<div class="callout">
+<b>3 — Transparency anchoring converts incidents into evidence.</b> Because the rotation and
+the CRL are anchored in Rekor, the response itself is independently verifiable by strangers.
+An external auditor does not need to believe the postmortem — they can check the log entries.
+</div>
+<div class="callout">
+<b>4 — Postmortems must use the registry's language.</b> The README softened the event to
+"suspected compromise (no confirmed leak)" while the registry recorded a confirmed exposure.
+Both surfaces now say the same thing. For a trust company, wording drift <i>is</i> an incident
+class of its own — the fix is to make the signed registry the single source of truth for
+incident wording, and human prose must quote it.
+</div>
+
+<h2>Verify this postmortem yourself</h2>
+<pre># Live OCSP status of the revoked key
+curl -s 'https://marketnow.site/api/ocsp?kid=mn-ca-002' | jq '{status, recommendation, evidence}'
+
+# The signed CRL (status of every CA key)
+curl -s https://marketnow.site/api/crl | jq '.crl.ca_key_status'
+
+# Rekor entry #4 — the revocation registry, anchored
+# log: https://rekor.sigstore.dev · logIndex 2771735480
+# local verification: /uta/conformance/anchors/ → verify-rekor.mjs</pre>
+
+<footer>
+MarketNow · incident response · <a href="/">marketnow.site</a> ·
+<a href="/security/evidence">evidence index</a> ·
+<a href="/uta/revocations/">revocation registry</a> ·
+<a href="/licensing">license matrix</a> ·
+<a href="https://github.com/alicelabs-llc/universal-trust-adapter">GitHub</a><br>
+Don't trust MarketNow. Verify MarketNow.
+</footer>
+</main></body></html>

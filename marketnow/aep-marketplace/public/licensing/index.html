@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>License matrix — every component, one table · MarketNow</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Official license matrix for MarketNow / UTA: npm packages (MIT OR Apache-2.0), UTS spec (CC-BY-NC-ND 4.0), Layer-3 core (AL-1.0 + commercial), repo scaffolding (MIT). License drift is a trust problem — this page is the single source.">
+<link rel="canonical" href="https://marketnow.site/licensing">
+<style>
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin:0; font:16px/1.65 -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; background:#0b0e14; color:#dfe6f1; }
+main { max-width:1020px; margin:0 auto; padding:48px 24px 96px; }
+h1 { font-size:30px; margin:0 0 4px; letter-spacing:-.5px; }
+h2 { font-size:20px; margin:40px 0 12px; color:#8ab4ff; }
+.sub { color:#9aa7bd; margin:0 0 8px; }
+.badge { display:inline-block; padding:2px 10px; border-radius:999px; font-size:13px; font-weight:600; margin:8px 6px 16px 0; }
+.ok { background:#0f3d24; color:#5ee59b; } .info { background:#1c2a4a; color:#8ab4ff; } .warn { background:#4a3a10; color:#ffd66b; }
+table { width:100%; border-collapse:collapse; font-size:14px; margin:14px 0; }
+th,td { text-align:left; padding:9px 10px; border-bottom:1px solid #1e2636; vertical-align:top; }
+th { color:#8ab4ff; font-size:13px; text-transform:uppercase; letter-spacing:.4px; }
+td.v { color:#9aa7bd; font-size:13px; }
+code { background:#161d2b; padding:1px 6px; border-radius:5px; font-size:13px; color:#5ee59b; }
+a { color:#8ab4ff; }
+.callout { border:1px solid #1c2a4a; background:#101725; border-radius:12px; padding:16px 18px; margin:16px 0; }
+.warnbox { border:1px solid #4a3a10; background:#241d0b; border-radius:10px; padding:14px 16px; margin:14px 0; }
+.warnbox b { color:#ffd66b; }
+footer { margin-top:56px; color:#9aa7bd; font-size:13px; border-top:1px solid #1e2636; padding-top:18px; }
+pre { background:#161d2b; padding:14px 16px; border-radius:10px; overflow-x:auto; font-size:13px; line-height:1.5; }
+</style></head><body><main>
+<h1>License matrix</h1>
+<p class="sub">One component, one license, one place to verify it · 2026-09-25 · <a href="/api/licensing.json">machine version</a></p>
+<span class="badge ok">12 npm packages MIT OR Apache-2.0</span>
+<span class="badge info">Spec CC-BY-NC-ND 4.0</span>
+<span class="badge warn">Layer-3 core AL-1.0</span>
+
+<p>MarketNow is <b>open-core</b>: the npm ecosystem and the verification scaffolding are
+permissively licensed so agents and developers can depend on them; the engine core is
+source-available (AL-1.0) with commercial options for hosted/resale use. Trust infrastructure
+cannot afford license ambiguity — <i>documentation drift itself is a trust problem</i> —
+so every layer declares its license here, with the registry or file that proves it.</p>
+
+<h2>The matrix</h2>
+<table>
+<tr><th>Component</th><th>License</th><th>Scope</th><th>Where to verify</th></tr>
+<tr><td><b>marketnow-mcp, agent-trust-card, marketnow-install-stack, @marketnow/uts, @marketnow/trust-core, @marketnow/trust-adapters (≥1.0.3), @marketnow/trust-gateway, @marketnow/cline-trust-plugin, @marketnow/uta-conformance, @marketnow/sentinel-rules, @marketnow/trust-mcp-middleware, @marketnow/trust-observability</b></td><td><code>MIT OR Apache-2.0</code></td><td>All 12 npm packages as published on the registry (SPDX dual license expression). Free to use, modify and redistribute under either license at your option.</td><td class='v'>registry.npmjs.org → versions[].license, or: npm view &lt;pkg&gt; license</td></tr>
+<tr><td><b>@marketnow/trust-adapters 1.0.0 – 1.0.2</b></td><td><code>AL-1.0 (historical)</code></td><td>Versions 1.0.0–1.0.2 were published under AL-1.0 (AliceLabs Source-Available). The package was relicensed to MIT OR Apache-2.0 starting at 1.0.3 (2026-09-20). Old tarballs keep their original license — the registry history is the proof.</td><td class='v'>registry.npmjs.org/@marketnow/trust-adapters → versions 1.0.0–1.0.2</td></tr>
+<tr><td><b>UTA repository root (conformance, specs tooling, docs, CI)</b></td><td><code>MIT</code></td><td>The open-core scaffolding of this repository: everything that is not the proprietary Layer-3 core.</td><td class='v'>github.com/alicelabs-llc/universal-trust-adapter → /LICENSE</td></tr>
+<tr><td><b>Plugin Template (uta-monorepo/packages/plugin-template)</b></td><td><code>MIT OR Apache-2.0</code></td><td>Interface + boilerplate for third-party format adapters.</td><td class='v'>uta-monorepo/packages/plugin-template/package.json</td></tr>
+<tr><td><b>UTS Specification (spec/UTS-v1.md + uts-v1.json)</b></td><td><code>CC-BY-NC-ND 4.0</code></td><td>The Universal Trust Schema specification documents: readable and shareable verbatim, no derivatives, non-commercial.</td><td class='v'>github.com → spec/UTS-v1.md + README Open-Core table</td></tr>
+<tr><td><b>Layer 3 core — TrustEngine + Sentinel + Interceptor (proprietary/)</b></td><td><code>AL-1.0 + commercial options</code></td><td>The source-available engine core. Review and internal use free; commercial hosting/resale of the core requires a commercial license.</td><td class='v'>proprietary/LICENSE-AL-1.0 + proprietary/COMMERCIAL-LICENSE.md</td></tr>
+<tr><td><b>marketnow.site website (aep-marketplace)</b></td><td><code>MIT OR Apache-2.0</code></td><td>The marketplace site that serves this page.</td><td class='v'>marketnow/aep-marketplace/LICENSE in the repository</td></tr>
+<tr><td><b>Conformance test vectors + Rekor anchors + CRL/OCSP data</b></td><td><code>Published verbatim (part of repo MIT)</code></td><td>Test vectors, digests, anchors and revocation records are published exactly so strangers can verify — they are not separately relicensed.</td><td class='v'>marketnow.site/uta/conformance/ + /api/crl</td></tr>
+</table>
+
+<h2>License evolution (declared, not hidden)</h2>
+<div class="callout">
+<p><b>@marketnow/trust-adapters</b> was originally published under AL-1.0 (versions 1.0.0–1.0.2,
+through 2026-09-09). At <b>1.0.3 (2026-09-20)</b> the package moved to
+<b>MIT OR Apache-2.0</b> to match the rest of the npm ecosystem. The npm registry keeps the
+per-version license history, so the transition is independently verifiable — including the
+1.0.1 → 1.0.2 tarball correction documented on the package page.</p>
+<p><b>@marketnow/uta-conformance</b> has been <b>MIT OR Apache-2.0</b> since publication.
+Speculative/documentation layers use CC-BY-NC-ND 4.0. Nothing on this page licenses the
+Layer-3 core permissively — that is a deliberate open-core decision, and its terms live in
+<code>proprietary/COMMERCIAL-LICENSE.md</code>.</p>
+</div>
+
+<h2>What you can do</h2>
+<table>
+<tr><th>Use</th><th>npm packages (MIT OR Apache-2.0)</th><th>UTS spec (CC-BY-NC-ND)</th><th>Core (AL-1.0)</th></tr>
+<tr><td>Install &amp; run in production</td><td class="v">Yes</td><td class="v">n/a</td><td class="v">Yes (internal use)</td></tr>
+<tr><td>Fork / modify / redistribute</td><td class="v">Yes — keep the notice</td><td class="v">No derivatives</td><td class="v">Source-available review; redistribution under AL-1.0 terms</td></tr>
+<tr><td>Build a commercial product on top</td><td class="v">Yes</td><td class="v">Non-commercial use of the text</td><td class="v">Requires COMMERCIAL-LICENSE.md</td></tr>
+<tr><td>Re-host MarketNow / resell the audit pipeline</td><td colspan="3" class="v">Requires a separate commercial license from AliceLabs LLC — legal@alicelabs.site</td></tr>
+</table>
+
+<h2>Verify it yourself</h2>
+<pre>curl -s https://registry.npmjs.org/@marketnow/trust-adapters \
+  | jq '.versions | to_entries | map({v:.key, license:.value.license})'
+
+curl -s https://registry.npmjs.org/marketnow-mcp | jq '.dist-tags, .versions[.dist-tags.latest].license'</pre>
+<p>The <a href="/api/licensing.json">machine-readable version</a> of this matrix is generated from
+the same source and is checked by the audit gate on every push (LICENSE-MATRIX check).</p>
+
+<footer>
+MarketNow / Universal Trust Adapter · AliceLabs LLC (Wyoming, USA) ·
+<a href="/">marketnow.site</a> · <a href="/security/evidence">evidence index</a> ·
+<a href="/security/sentinel-v3.0">Sentinel taxonomy</a> ·
+<a href="https://github.com/alicelabs-llc/universal-trust-adapter">GitHub</a><br>
+Don't trust MarketNow. Verify MarketNow.
+</footer>
+</main></body></html>

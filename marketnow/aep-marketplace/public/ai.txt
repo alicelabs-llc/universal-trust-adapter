@@ -37,6 +37,8 @@
 # - /security/evidence     — evidence matrix per layer (HTML)
 # - /security/sentinel-v3.0 — Sentinel v3.0 pipeline spec (HTML)
 # - /security/audit-2026-08-19 — audit page with PDF + SHA-256 (HTML)
+# - /licensing — official license matrix (HTML)
+# - /security/incidents/2026-09-08 — CA incident postmortem (HTML)
 # - /api/agent.json        — agent instructions, trust model, schema
 # - /api/manifest.json     — marketplace metadata (v4.0.0)
 # - /api/openapi.yaml      — OpenAPI 3.1 specification

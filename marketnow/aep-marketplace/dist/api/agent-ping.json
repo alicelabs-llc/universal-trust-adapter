@@ -25,8 +25,8 @@
     "npm_vulnerabilities_own_packages": 0,
     "npm_versions_published": 21,
     "npm_downloads_last_month": 939,
-    "security_checks_performed": 683880,
-    "security_checks_methodology": "10 L1 checks x 68,388 entries + 29 L2 rules x 2,839 tarball scans (top 2,868 npm targets, 99% completion)",
+    "security_checks_performed": 766211,
+    "security_checks_methodology": "766,211 total = 683,880 L1 (10 L1 checks × 68,388 entries) + 82,331 L2 (29 L2 rules × 2,839 tarballs; top 2,868 npm targets, 99% completion)",
     "sentinel_version": "L1 index-certified + L2 sentinel-scanned (29 rules) + L3 trust-chain (ATC)",
     "mcp_server": "npx -y marketnow-mcp@1.14.1",
     "mcp_tools_count": 15,
@@ -39,7 +39,14 @@
     "maintainer": "AliceLabs LLC",
     "company": "AliceLabs LLC (Wyoming, USA, 2026)",
     "founder": "Edison Flores",
-    "generated_at": "2026-09-10T03:57:39Z"
+    "generated_at": "2026-09-10T03:57:39Z",
+    "security_checks_breakdown": {
+      "l1_index_checks": 683880,
+      "l1_formula": "10 L1 checks x 68388 entries",
+      "l2_sentinel_rule_checks": 82331,
+      "l2_formula": "29 L2 rules x 2839 tarballs",
+      "total": 766211
+    }
   },
   "pricing": {
     "free": {
@@ -137,5 +144,14 @@
     "marketnow_fingerprint_tool"
   ],
   "mcp_protocol": "2025-03-26",
-  "generated_at": "2026-09-16T20:00:15.000Z"
+  "generated_at": "2026-09-25T00:00:00.000Z",
+  "security_checks_performed": 766211,
+  "security_checks_breakdown": {
+    "l1_index_checks": 683880,
+    "l1_formula": "10 L1 checks x 68388 entries",
+    "l2_sentinel_rule_checks": 82331,
+    "l2_formula": "29 L2 rules x 2839 tarballs",
+    "total": 766211
+  },
+  "security_checks_methodology": "766,211 total = 683,880 L1 (10 L1 checks × 68,388 entries) + 82,331 L2 (29 L2 rules × 2,839 tarballs; top 2,868 npm targets, 99% completion)"
 }

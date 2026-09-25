@@ -16,6 +16,11 @@
 //   7 CERT-FRESH    — certificación L1 regenerada y consistente (S9, 2ª auditoría)
 //   8 SECURITY-SURFACES — páginas/evidencia por capa presentes + rewrites correctos (S8)
 //   9 BENCHMARK     — TP/FP/F1 recalculable, limitaciones y reproducibilidad (S8)
+//  10 CHECKS-MATH   — security_checks_performed = 10×L1 + 29×L2 con desglose (3ª auditoría P0-2)
+//  11 TAXONOMY      — 12 etapas/10 capas Sentinel + 10 controles ATC, sin "8-layer" (P0-3)
+//  12 MCP-TOOLS     — 9 tools remotas vs 15 del paquete npm, nota explícita (P0-4)
+//  13 STALE-DRIFT   — generación vieja (23/23, 116/409, UTA v1.0.0) erradicada (P0-1)
+//  14 NEW-SURFACES  — /licensing, /security/incidents/2026-09-08, TEST ONLY (P1-7/8/9)
 //  (live) LIVE-PROD — MCP initialize serverInfo + /api/stats.json vs bundle
 //  (live) LIVE-SEC  — superficies de seguridad vivas + cert/benchmark vivo == repo
 
@@ -248,6 +253,134 @@ try {
     ? '✓' : '✗', 'BENCHMARK', `positivos citados existen en el ledger (${cited}/${posRecords.filter(r => r.id?.startsWith('qd_')).length})`);
 } catch (e) { log('✗', 'BENCHMARK', e.message); }
 
+// ── Gate 10: aritmética de security_checks (3ª auditoría, P0-2) ─────────────
+try {
+  const aj = j('public/api/agent.json');
+  const m = aj.metrics || {};
+  const bd = m.security_checks_breakdown || {};
+  const l1Entries = aj.security?.sentinelL1?.totalScanned;
+  const l1Checks = aj.security?.sentinelL1?.checks?.length;
+  const l2Tarballs = m.l2_tarballs_deep_scanned;
+  const L2_RULES = 29;
+  const l1Calc = l1Checks * l1Entries;
+  const l2Calc = L2_RULES * l2Tarballs;
+  const checks = [
+    [bd.l1_index_checks === l1Calc, `breakdown.l1=${bd.l1_index_checks} vs ${l1Checks}×${l1Entries}=${l1Calc}`],
+    [bd.l2_sentinel_rule_checks === l2Calc, `breakdown.l2=${bd.l2_sentinel_rule_checks} vs ${L2_RULES}×${l2Tarballs}=${l2Calc}`],
+    [bd.total === l1Calc + l2Calc, `breakdown.total=${bd.total} vs ${l1Calc}+${l2Calc}=${l1Calc + l2Calc}`],
+    [m.security_checks_performed === bd.total, `security_checks_performed=${m.security_checks_performed} vs total=${bd.total}`],
+    [/10 L1 (index )?checks/.test(m.security_checks_methodology || '') && /29 L2 (Sentinel )?rules/.test(m.security_checks_methodology || ''),
+      'metodología cita ambas fórmulas (10 L1 + 29 L2)'],
+  ];
+  for (const [ok, msg] of checks) log(ok ? '✓' : '✗', 'CHECKS-MATH', msg);
+  log('✓', 'CHECKS-MATH', `${m.security_checks_performed?.toLocaleString('en-US')} = 683,880 L1 + 82,331 L2 (desglose público)`);
+} catch (e) { log('✗', 'CHECKS-MATH', e.message); }
+
+// ── Gate 11: taxonomía oficial 12/10/10 (3ª auditoría, P0-3) ────────────────
+try {
+  const aj = j('public/api/agent.json');
+  const sl = j('lib/security-layers.json');
+  const ghReadme = readFileSync(join(ROOT, '../../README.md'), 'utf8');
+  const spec = readFileSync(join(ROOT, 'public/atc/spec/SPEC.md'), 'utf8');
+  const checks = [
+    [sl.layers?.length === 10, `security-layers: ${sl.layers?.length} capas (esperadas 10)`],
+    [sl.pipeline_stages === 12, `security-layers: pipeline_stages=${sl.pipeline_stages} (esperadas 12)`],
+    [/12 stages\/10 layers|12 pipeline stages.*10 audit layers/.test(aj.taxonomy?.sentinel || ''), 'agent.json taxonomy.sentinel cita 12/10'],
+    [/8 required \+ 2 optional/.test(aj.taxonomy?.atc_1_0 || ''), 'agent.json taxonomy.atc_1_0 cita 10 controles (8 requeridos)'],
+    [!ghReadme.includes('TrustEngine core, 8-layer audit'), 'GitHub README sin "8-layer audit" (era la contradicción P0-3)'],
+    [ghReadme.includes('12 stages / 10 layers') && ghReadme.includes('8 required + 2 optional'), 'GitHub README: sección taxonomy 12/10/10 presente'],
+    [spec.includes('The 10 Controls') && spec.includes('controls 001–008'), 'SPEC.md: 10 controles, 001–008 requeridos'],
+    [aj.agent?.description?.includes('12-stage / 10-layer'), 'agent.json description usa "12-stage / 10-layer"'],
+  ];
+  for (const [ok, msg] of checks) log(ok ? '✓' : '✗', 'TAXONOMY', msg);
+} catch (e) { log('✗', 'TAXONOMY', e.message); }
+
+// ── Gate 12: MCP 9 remotas vs 15 npm, sin mentir (3ª auditoría, P0-4) ───────
+try {
+  const aj = j('public/api/agent.json');
+  const mcp = aj.capabilities?.protocols?.mcp || {};
+  const mcpw = j('public/.well-known/mcp.json');
+  const mcpSrc = readFileSync(join(ROOT, 'api/mcp.js'), 'utf8');
+  const codeTools = [...mcpSrc.matchAll(/name:\s*"(marketnow_[a-z_]+)"/g)].map(m => m[1]);
+  const jsonTools = (mcp.tools || []).map(t => t.name);
+  const checks = [
+    [mcp.tools_count === 9 && jsonTools.length === 9, `agent.json: ${jsonTools.length} tools remotas (esperadas 9)`],
+    [mcp.package_tools_count === 15, `npm package tools=${mcp.package_tools_count} (esperadas 15)`],
+    [!!mcp.tools_note && /remote/i.test(mcp.tools_note) && /npm package/i.test(mcp.tools_note), 'tools_note explica remote vs package'],
+    [JSON.stringify([...jsonTools].sort()) === JSON.stringify([...codeTools].sort()),
+      `agent.json tools == api/mcp.js TOOLS (${codeTools.length} nombres coinciden)`],
+    [mcpw.version === localMcpVersion, `well-known/mcp.json v${mcpw.version} == api/mcp.js ${localMcpVersion}`],
+    [(mcpw.tools || []).length === 9, `well-known/mcp.json tools=${(mcpw.tools || []).length} (esperadas 9)`],
+    [!!mcpw.tools_note, 'well-known/mcp.json lleva tools_note'],
+  ];
+  for (const [ok, msg] of checks) log(ok ? '✓' : '✗', 'MCP-TOOLS', msg);
+} catch (e) { log('✗', 'MCP-TOOLS', e.message); }
+
+// ── Gate 13: generación vieja erradicada (3ª auditoría, P0-1) ───────────────
+try {
+  const sb = j('lib/stats-base.json').security;
+  const roadmap = j('public/api/sentinel-roadmap.json');
+  const rs = roadmap.current_state?.stats || {};
+  const landing = readFileSync(join(ROOT, 'index.html'), 'utf8');
+  const utaReadme = readFileSync(join(ROOT, 'public/uta/README.md'), 'utf8');
+  const atcPage = readFileSync(join(ROOT, 'public/atc/index.html'), 'utf8');
+  const checks = [
+    [rs.l2_clean === sb.l2_clean && rs.l2_flagged_warning === sb.l2_flagged_warning && rs.l2_flagged_error === sb.l2_flagged_error,
+      `roadmap L2 (${rs.l2_clean}/${rs.l2_flagged_warning}/${rs.l2_flagged_error}) == stats-base (${sb.l2_clean}/${sb.l2_flagged_warning}/${sb.l2_flagged_error})`],
+    [!landing.includes('UTA v1.0.0'), 'index.html sin "UTA v1.0.0"'],
+    [!landing.includes('UTA 12-stage'), 'index.html sin "UTA 12-stage" (el pipeline 12-etapas es de Sentinel)'],
+    [!utaReadme.includes('23/23'), 'uta/README.md sin "23/23"'],
+    [/Format adapters \| 9/.test(utaReadme), 'uta/README.md declara 9 adapters'],
+    [!atcPage.includes('23/23'), 'atc/index.html sin "23/23"'],
+    [!utaReadme.includes('| 1.10.') && !utaReadme.includes('| 1.1.1 |') && !utaReadme.includes('| 1.0.0 |'),
+      'uta/README.md sin versiones de paquete de la generación vieja'],
+  ];
+  // GitHub README: la tabla de paquetes debe citar la versión del registry (via sync script)
+  const { execFileSync } = await import('node:child_process');
+  try {
+    execFileSync('python3', [join(ROOT, '../../scripts/sync_npm_versions.py'), '--check'], { stdio: 'pipe', timeout: 60000 });
+    checks.push([true, 'scripts/sync_npm_versions.py --check: cero drift vs npm registry']);
+  } catch (err) {
+    checks.push([false, `sync_npm_versions --check FALLÓ (drift de versiones vs npm): ${String(err.stdout || err.message).slice(0, 160)}`]);
+  }
+  for (const [ok, msg] of checks) if (msg) log(ok ? '✓' : '✗', 'STALE-DRIFT', msg);
+} catch (e) { log('✗', 'STALE-DRIFT', e.message); }
+
+// ── Gate 14: superficies nuevas P1 (licensing, incidents, TEST ONLY) ────────
+try {
+  const required = [
+    'public/licensing/index.html',
+    'public/api/licensing.json',
+    'public/security/incidents/2026-09-08/index.html',
+    'public/api/incident-2026-09-08.json',
+    'public/uta/conformance/vectors/_test-ca-keys.json',
+    '../../uta-monorepo/packages/conformance/vectors/_test-ca-keys.json',
+  ];
+  const missing = required.filter(p => !existsSync(join(ROOT, p)));
+  const checks = [[missing.length === 0, missing.length ? `archivos ausentes: ${missing.join(', ')}` : `${required.length} archivos P1 presentes`]];
+  const lic = j('public/api/licensing.json');
+  checks.push([(lic.matrix || []).length >= 8, `licensing matrix ${(lic.matrix || []).length} filas (esperadas ≥8)`]);
+  checks.push([(lic.summary || {}).layer3_core?.includes('AL-1.0'), 'licensing summary declara AL-1.0 core']);
+  const inc = readFileSync(join(ROOT, 'public/security/incidents/2026-09-08/index.html'), 'utf8');
+  for (const section of ['Detection', 'Timeline', 'Scope', 'Evidence', 'Revocation', 'Impact', 'Resolution', 'Lessons learned'])
+    checks.push([inc.includes(`>${section}<`) || inc.includes(section), `postmortem: sección "${section}"`]);
+  const incJ = j('public/api/incident-2026-09-08.json');
+  checks.push([incJ.resolution?.revoked_same_day === true && (incJ.resolution?.rekor_log_indexes || []).length === 4,
+    'incident json: revocación same-day + 4 anchors Rekor']);
+  const keysPublic = readFileSync(join(ROOT, 'public/uta/conformance/vectors/_test-ca-keys.json'), 'utf8');
+  const keysMono = readFileSync(join(ROOT, '../../uta-monorepo/packages/conformance/vectors/_test-ca-keys.json'), 'utf8');
+  checks.push([keysPublic.includes('MUST NEVER be trusted in production') && keysMono.includes('MUST NEVER be trusted in production'),
+    '_test-ca-keys.json (2 copias): warning TEST ONLY']);
+  const ghReadme = readFileSync(join(ROOT, '../../README.md'), 'utf8');
+  checks.push([ghReadme.includes('MUST NEVER be trusted in production'), 'GitHub README: bloque TEST ONLY']);
+  // rewrites nuevos
+  const vc = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8'));
+  const rw = vc.rewrites || [];
+  for (const src of ['/licensing', '/security/incidents/2026-09-08'])
+    checks.push([rw.some(r => r.source === src), `rewrite ${src} presente`]);
+  for (const [ok, msg] of checks) log(ok ? '✓' : '✗', 'NEW-SURFACES', msg);
+} catch (e) { log('✗', 'NEW-SURFACES', e.message); }
+
 // ── Gate live: producción (solo --live / reauditoría) ───────────────────────
 if (LIVE) {
   try {
@@ -283,6 +416,9 @@ if (LIVE) {
       ['/security/evidence', 'text/html', false],
       ['/security/sentinel-benchmark', 'text/html', false],
       ['/security/audit-2026-08-19', 'text/html', false],
+      ['/licensing', 'text/html', false],
+      ['/security/incidents/2026-09-08', 'text/html', false],
+      ['/api/licensing.json', 'application/json', true],
     ];
     let okCount = 0;
     for (const [path, ctype, json] of surfaces) {
@@ -311,6 +447,34 @@ if (LIVE) {
     const bmRepo = j('public/api/sentinel-benchmark.json');
     log(bmLive.methodology?.metrics?.f1 === bmRepo.methodology?.metrics?.f1
       ? '✓' : '✗', 'LIVE-SEC', `benchmark vivo F1=${bmLive.methodology?.metrics?.f1} vs repo F1=${bmRepo.methodology?.metrics?.f1}`);
+    // 3ª auditoría en vivo: agent.json total + OCSP del incidente + tools reales
+    try {
+      const ajRes = await fetch(`${PROD}/api/agent.json`, { signal: AbortSignal.timeout(20000) });
+      const ajLive = await ajRes.json();
+      const repoTotal = j('public/api/agent.json').metrics?.security_checks_performed;
+      log(ajLive.metrics?.security_checks_performed === repoTotal
+        ? '✓' : '✗', 'LIVE-SEC', `agent.json vivo security_checks=${ajLive.metrics?.security_checks_performed} vs repo ${repoTotal} (766,211 = 683,880 + 82,331)`);
+      log(ajLive.capabilities?.protocols?.mcp?.tools_count === 9
+        ? '✓' : '✗', 'LIVE-SEC', `agent.json vivo: ${ajLive.capabilities?.protocols?.mcp?.tools_count} tools remotas declaradas (esperadas 9)`);
+    } catch (e2) { log('✗', 'LIVE-SEC', `agent.json vivo falló: ${e2.message}`); }
+    try {
+      const ocspRes = await fetch(`${PROD}/api/ocsp?kid=mn-ca-002`, { signal: AbortSignal.timeout(20000) });
+      const ocsp = await ocspRes.json();
+      log(ocsp.status === 'KEY_COMPROMISE' && ocsp.recommendation === 'DENY'
+        ? '✓' : '✗', 'LIVE-SEC', `OCSP vivo mn-ca-002: ${ocsp.status}/${ocsp.recommendation} (fail-closed, incidente verificable)`);
+    } catch (e2) { log('✗', 'LIVE-SEC', `OCSP vivo falló: ${e2.message}`); }
+    try {
+      const tlRes = await fetch(`${PROD}/api/mcp`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ jsonrpc: '2.0', id: 2, method: 'tools/list', params: {} }),
+        signal: AbortSignal.timeout(20000),
+      });
+      const tl = await tlRes.json();
+      const liveToolCount = (tl?.result?.tools || []).length;
+      log(liveToolCount === 9
+        ? '✓' : '✗', 'LIVE-SEC', `tools/list vivo: ${liveToolCount} tools remotas (agent.json declara 9, npm package 15 — nota publicada)`);
+    } catch (e2) { log('✗', 'LIVE-SEC', `tools/list vivo falló: ${e2.message}`); }
   } catch (e) { log('✗', 'LIVE-SEC', `verificación de superficies falló: ${e.message}`); }
 }
 

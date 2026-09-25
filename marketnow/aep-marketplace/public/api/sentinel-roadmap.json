@@ -16,9 +16,11 @@
       "total_skills": 68388,
       "certified": 68388,
       "with_l2": 2839,
-      "l2_clean": 116,
-      "l2_flagged_warning": 160,
-      "l2_flagged_error": 409
+      "l2_clean": 885,
+      "l2_flagged_warning": 791,
+      "l2_flagged_error": 1156,
+      "l2_note": "L2 numbers track /api/stats.json (security block) — this file never hardcodes them again",
+      "source_of_truth": "https://marketnow.site/api/stats.json"
     }
   },
   "roadmap": [

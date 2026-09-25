@@ -21,6 +21,8 @@ GET  /api/security                  → 10 security layers, each with its public
 GET  /api/security?view=quarantine  → quarantine ledger (SHA-256 per record)
 GET  /api/sentinel-benchmark.json   → Sentinel benchmark (P/R/F1)
 GET  /security/evidence             → layer-by-layer evidence matrix (HTML)
+GET  /licensing                     → license matrix, machine version /api/licensing.json
+GET  /security/incidents/2026-09-08 → CA rotation postmortem (OCSP/CRL/Rekor verifiable)
 GET  /api/changelog                 → Recent changes + new endpoints
 
 MCP TOOLS (via /api/mcp):

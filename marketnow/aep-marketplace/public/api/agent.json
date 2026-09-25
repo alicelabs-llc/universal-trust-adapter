@@ -2,7 +2,7 @@
   "schemaVersion": "v1.0",
   "agent": {
     "name": "MarketNow — Agent Security & Trust Infrastructure",
-    "description": "Security and trust infrastructure for AI agents: Sentinel, a 10-layer audit pipeline (L1 index certification, L1.5–L1.9 static analysis, L2 deep tarball scans, L2.5 gVisor sandbox, L3 runtime monitoring), ATC/1.0 Agent Trust Cards, revocation registry and tool fingerprinting — with a 68,388-server indexed MCP catalog as the discovery and distribution layer (132,737 tracked across the ecosystem). Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
+    "description": "Security and trust infrastructure for AI agents: Sentinel, a 12-stage / 10-layer audit pipeline (L1 index certification, L1.5–L1.9 static analysis, L2 deep tarball scans, L2.5 gVisor sandbox, L3 runtime monitoring), ATC/1.0 Agent Trust Cards, revocation registry and tool fingerprinting — with a 68,388-server indexed MCP catalog as the discovery and distribution layer (132,737 tracked across the ecosystem). Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
     "url": "https://marketnow.site",
     "version": "4.0.0"
   },
@@ -20,22 +20,46 @@
         },
         "tools": [
           {
-            "name": "search_skills",
-            "description": "Search the marketplace for MCP skills by query, category, or minimum security score"
+            "name": "marketnow_search_skills",
+            "description": "Search the MarketNow registry of indexed MCP servers (68k+ across GitHub, npm and PyPI)"
           },
           {
-            "name": "get_skill",
-            "description": "Retrieve full metadata, install command, and security score for a specific skill"
+            "name": "marketnow_verify_trust",
+            "description": "Verify any AI agent credential (JWT, W3C VC, MCP Card, ATC v3, A2A, EAT-AI, ZTA, X.509)"
           },
           {
-            "name": "get_categories",
-            "description": "List all available skill categories with counts"
+            "name": "marketnow_translate_credential",
+            "description": "Translate a credential between 8 formats through the Universal Trust Schema (UTS)"
           },
           {
-            "name": "health",
-            "description": "Check marketplace API connectivity and stats"
+            "name": "marketnow_list_formats",
+            "description": "List all supported credential formats with their algorithms and status"
+          },
+          {
+            "name": "marketnow_get_pipeline",
+            "description": "Get the 12-stage verification pipeline details"
+          },
+          {
+            "name": "marketnow_check_domain",
+            "description": "Check if a domain is suspicious (scam checker). Returns risk score and reasons"
+          },
+          {
+            "name": "marketnow_check_revocation",
+            "description": "Check revocation status of an ATC (card_id) or CA key (kid) against the signed CRL"
+          },
+          {
+            "name": "marketnow_fingerprint_tool",
+            "description": "Cryptographically fingerprint MCP tool definitions (SHA-256 + RFC 8785 JCS) against tool poisoning"
+          },
+          {
+            "name": "marketnow_submit_skill",
+            "description": "Publish a skill to the MarketNow catalog (write side, Sentinel-validated)"
           }
-        ]
+        ],
+        "tools_count": 9,
+        "package_tools_count": 15,
+        "package": "marketnow-mcp@1.14.1 (npm)",
+        "tools_note": "The remote endpoint (marketnow.site/api/mcp) exposes 9 public discovery/trust tools. The npm package marketnow-mcp@1.14.1 exposes 15 LOCAL trust/security tools (verify_trust, verify_receipt, check_revocation, fingerprint_tool, mint_referral, ...) that run client-side against local credentials and the public APIs. Remote discovery surface and local package surface are different by design."
       },
       "a2a": {
         "version": "1.0",
@@ -141,21 +165,28 @@
   },
   "metrics": {
     "skills_indexed": 68388,
-    "security_checks_performed": 683880,
+    "security_checks_performed": 766211,
     "npm_versions_published": 20,
     "npm_latest_version": "1.14.1",
     "npm_first_release_date": "2026-06-29",
-    "npm_latest_release_date": "2026-09-16",
+    "npm_latest_release_date": "2026-09-25",
     "github_org_created_at": "2026-03-30",
-    "as_of": "2026-09-17",
+    "as_of": "2026-09-25",
     "source": "live API: https://marketnow.site/api/skills-lite.json + npm registry",
     "skills_tracked_all_sources": 132736,
-    "security_checks_methodology": "10 L1 checks x 68,388 entries + 29 L2 rules x 2,839 tarball scans (top 2,868 npm targets, 99% completion)",
+    "security_checks_methodology": "766,211 total = 683,880 L1 (10 L1 checks × 68,388 entries) + 82,331 L2 (29 L2 rules × 2,839 tarballs; top 2,868 npm targets, 99% completion)",
     "l2_tarballs_deep_scanned": 2839,
     "l2_flagged_for_review": 1947,
     "l2_clean": 885,
     "npm_downloads_last_month": 939,
-    "npm_vulnerabilities_own_packages": 0
+    "npm_vulnerabilities_own_packages": 0,
+    "security_checks_breakdown": {
+      "l1_index_checks": 683880,
+      "l1_formula": "10 L1 checks x 68388 entries",
+      "l2_sentinel_rule_checks": 82331,
+      "l2_formula": "29 L2 rules x 2839 tarballs",
+      "total": 766211
+    }
   },
   "pricing_source_of_truth": "agent.json is the canonical pricing source. Landing page and README must match. MarketNow does NOT sell skills to buyers — buyers install all 68,388 skills free. Revenue comes from sellers who subscribe to Sentinel (PRO $9.99/mo, ENTERPRISE $49.99/mo) and 20% commission on seller sales.",
   "buyer_pricing": {
@@ -164,7 +195,7 @@
     "subscription_fee": 0,
     "explanation": "Buyers never pay MarketNow. All 68,388 skills are free to install."
   },
-  "generated_at": "2026-09-24T22:54:58.639Z",
+  "generated_at": "2026-09-25T00:00:00.000Z",
   "metadata": {
     "stats_source": "https://marketnow.site/api/stats.json",
     "sentinel_methodology": "https://marketnow.site/security/sentinel-v3.0",
@@ -172,5 +203,11 @@
   },
   "api_notes": {
     "skills_pagination": "The /api/skills endpoint is paginated (default 100 per page, max 500). The old /api/skills.json dump was REMOVED 2026-09-25 (audit F-06, it had grown to 94MB) — that URL now returns a deprecation manifest; use /api/skills?page=1&limit=100 or /api/skills-lite.json instead."
+  },
+  "taxonomy": {
+    "sentinel": "12 pipeline stages grouped into 10 audit layers (L1-L9) — see /security/sentinel-v3.0",
+    "atc_1_0": "10 credential verification controls (8 required + 2 optional) — see /atc/spec/SPEC.md section 2",
+    "uta": "adapter layer, not a pipeline: 9 trust-credential format adapters — see /uta",
+    "note": "These counts are different systems, not three ways of counting the same thing: Sentinel counts audit pipeline stages/layers, ATC/1.0 counts credential verification controls, UTA counts supported credential formats."
   }
 }
