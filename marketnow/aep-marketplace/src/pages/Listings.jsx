@@ -18,7 +18,7 @@ const CONTENT = {
     saysLabel: 'mcp.so says:',
     realityLabel: 'reality:',
     problems: [
-      { claim: '"9,248 verified MCP-compatible skills"', reality: '68,387' },
+      { claim: '"9,248 verified MCP-compatible skills"', reality: '68,388' },
       {
         claim: '"agent-to-agent crypto payments (ETH/BSC/SOL/BTC)"',
         reality: 'USDC on Base only',
@@ -84,10 +84,10 @@ const CONTENT = {
         lastChecked: '2026-07-04',
         whatWeFixed: [
           'Smithery pulls from our server-card.json at /.well-known/mcp/server-card.json',
-          'Our server-card.json is up to date with current numbers (68,387 skills, USDC on Base, MNNC-1.0)',
+          'Our server-card.json is up to date with current numbers (68,388 skills, USDC on Base, open-core AL-1.0)',
         ],
         knownDiscrepancies: [
-          'Smithery HTML still shows "9,248" in some cached views (their crawler may not have re-indexed our 68,387 update yet)',
+          'Smithery HTML still shows "9,248" in some cached views (their crawler may not have re-indexed our 68,388 update yet)',
         ],
         notes:
           'Smithery quality score: 84/100. Listing should reflect current data once Smithery re-crawls our server-card.json. Their cache TTL is typically 24-48h.',
@@ -106,7 +106,7 @@ const CONTENT = {
           'Listing owner must update manually via mcp.so dashboard (requires login as @edgarfloresguerra2011-a11y)',
         ],
         knownDiscrepancies: [
-          'Listing says "9,248 verified MCP-compatible skills" — stale; current catalog is 68,387 indexed (with install-risk + trust tiers, not blanket "verified")',
+          'Listing says "9,248 verified MCP-compatible skills" — stale; current catalog is 68,388 indexed (with install-risk + trust tiers, not blanket "verified")',
           'Listing says "agent-to-agent crypto payments (ETH/BSC/SOL/BTC)" — we only support USDC on Base, NOT ETH/BSC/SOL/BTC directly',
           'Listing says "open registry with no manual approval needed" — we removed this framing; human-in-loop is now the default for mandates',
           'Listing says "largest open MCP skill marketplace" — we no longer claim to be the largest; we position as the trust layer',
@@ -126,7 +126,7 @@ const CONTENT = {
           'Glama crawls our server-card.json and GitHub repo for metadata',
         ],
         notes:
-          'Glama.ai appears to have indexed MarketNow. Verify the listing shows current numbers (68,387 skills, USDC on Base, MNNC-1.0). If stale, Glama\'s crawler should refresh within 7-14 days.',
+          'Glama.ai appears to have indexed MarketNow. Verify the listing shows current numbers (68,388 skills, USDC on Base, open-core AL-1.0). If stale, Glama\'s crawler should refresh within 7-14 days.',
       },
       {
         name: 'PulseMCP',
@@ -167,7 +167,7 @@ const CONTENT = {
     saysLabel: 'mcp.so dice:',
     realityLabel: 'realidad:',
     problems: [
-      { claim: '"9,248 verified MCP-compatible skills"', reality: '68,387' },
+      { claim: '"9,248 verified MCP-compatible skills"', reality: '68,388' },
       {
         claim: '"agent-to-agent crypto payments (ETH/BSC/SOL/BTC)"',
         reality: 'solo USDC on Base',
@@ -233,7 +233,7 @@ const CONTENT = {
         lastChecked: '2026-07-04',
         whatWeFixed: [
           'Smithery toma datos de nuestro server-card.json en /.well-known/mcp/server-card.json',
-          'Nuestro server-card.json está actualizado con los números actuales (68,387 skills, USDC on Base, MNNC-1.0)',
+          'Nuestro server-card.json está actualizado con los números actuales (68,388 skills, USDC on Base, open-core AL-1.0)',
         ],
         knownDiscrepancies: [
           'El HTML de Smithery todavía muestra "68,387" en algunas vistas cacheadas (su crawler puede no haber re-indexado aún)',
@@ -275,7 +275,7 @@ const CONTENT = {
           'Glama hace crawl de nuestro server-card.json y repo de GitHub para metadatos',
         ],
         notes:
-          'Glama.ai parece haber indexado MarketNow. Verifica que el listado muestre los números actuales (68,387 skills, USDC on Base, MNNC-1.0). Si está desactualizado, el crawler de Glama debería refrescar en 7-14 días.',
+          'Glama.ai parece haber indexado MarketNow. Verifica que el listado muestre los números actuales (68,388 skills, USDC on Base, open-core AL-1.0). Si está desactualizado, el crawler de Glama debería refrescar en 7-14 días.',
       },
       {
         name: 'PulseMCP',
@@ -316,7 +316,7 @@ const CONTENT = {
     saysLabel: 'mcp.so diz:',
     realityLabel: 'realidade:',
     problems: [
-      { claim: '"9,248 verified MCP-compatible skills"', reality: '68,387' },
+      { claim: '"9,248 verified MCP-compatible skills"', reality: '68,388' },
       {
         claim: '"agent-to-agent crypto payments (ETH/BSC/SOL/BTC)"',
         reality: 'apenas USDC on Base',
@@ -382,7 +382,7 @@ const CONTENT = {
         lastChecked: '2026-07-04',
         whatWeFixed: [
           'Smithery puxa do nosso server-card.json em /.well-known/mcp/server-card.json',
-          'Nosso server-card.json está atualizado com os números atuais (68,387 skills, USDC on Base, MNNC-1.0)',
+          'Nosso server-card.json está atualizado com os números atuais (68,388 skills, USDC on Base, open-core AL-1.0)',
         ],
         knownDiscrepancies: [
           'O HTML do Smithery ainda mostra "68,387" em algumas views em cache (o crawler pode não ter re-indexado ainda)',
@@ -424,7 +424,7 @@ const CONTENT = {
           'Glama faz crawl do nosso server-card.json e do repo no GitHub para metadados',
         ],
         notes:
-          'Glama.ai parece ter indexado o MarketNow. Verifique se a listagem mostra os números atuais (68,387 skills, USDC on Base, MNNC-1.0). Se desatualizada, o crawler da Glama deve atualizar em 7-14 dias.',
+          'Glama.ai parece ter indexado o MarketNow. Verifique se a listagem mostra os números atuais (68,388 skills, USDC on Base, open-core AL-1.0). Se desatualizada, o crawler da Glama deve atualizar em 7-14 dias.',
       },
       {
         name: 'PulseMCP',
@@ -465,7 +465,7 @@ const CONTENT = {
     saysLabel: 'mcp.so 写的是：',
     realityLabel: '实际情况：',
     problems: [
-      { claim: '"9,248 verified MCP-compatible skills"', reality: '68,387' },
+      { claim: '"9,248 verified MCP-compatible skills"', reality: '68,388' },
       {
         claim: '"agent-to-agent crypto payments (ETH/BSC/SOL/BTC)"',
         reality: '仅支持 USDC on Base',
@@ -612,7 +612,7 @@ const CONTENT = {
     saysLabel: 'mcp.so dit :',
     realityLabel: 'réalité :',
     problems: [
-      { claim: '"9,248 verified MCP-compatible skills"', reality: '68,387' },
+      { claim: '"9,248 verified MCP-compatible skills"', reality: '68,388' },
       {
         claim: '"agent-to-agent crypto payments (ETH/BSC/SOL/BTC)"',
         reality: 'USDC on Base uniquement',
@@ -678,7 +678,7 @@ const CONTENT = {
         lastChecked: '2026-07-04',
         whatWeFixed: [
           'Smithery récupère depuis notre server-card.json à /.well-known/mcp/server-card.json',
-          'Notre server-card.json est à jour avec les chiffres actuels (68,387 skills, USDC on Base, MNNC-1.0)',
+          'Notre server-card.json est à jour avec les chiffres actuels (68,388 skills, USDC on Base, open-core AL-1.0)',
         ],
         knownDiscrepancies: [
           'Le HTML de Smithery affiche encore "68,387" dans certaines vues en cache (leur crawler n\'a peut-être pas encore ré-indexé)',
@@ -720,7 +720,7 @@ const CONTENT = {
           'Glama crawle notre server-card.json et notre repo GitHub pour les métadonnées',
         ],
         notes:
-          'Glama.ai semble avoir indexé MarketNow. Vérifiez que le listing affiche les chiffres actuels (68,387 skills, USDC on Base, MNNC-1.0). Si obsolète, le crawler de Glama devrait se rafraîchir en 7-14 jours.',
+          'Glama.ai semble avoir indexé MarketNow. Vérifiez que le listing affiche les chiffres actuels (68,388 skills, USDC on Base, open-core AL-1.0). Si obsolète, le crawler de Glama devrait se rafraîchir en 7-14 jours.',
       },
       {
         name: 'PulseMCP',

@@ -44,7 +44,7 @@
           {
             "id": "skill-search",
             "name": "MCP Skill Search",
-            "description": "AI agents can search and retrieve MCP server configurations from 68,387 index-certified skills (install-risk tier + trust score on every entry; 688 top tarballs deep-scanned). Supports natural language queries, category filtering, and security score thresholds.",
+            "description": "AI agents can search and retrieve MCP server configurations from 68,388 index-certified entries (install-risk tier + trust score on every entry; 2,839 top tarballs deep-scanned). Supports natural language queries, category filtering, and security score thresholds.",
             "commissionRate": 0.2,
             "referralEndpoints": {
               "register": "https://marketnow.site/api/agent/register",
@@ -84,9 +84,9 @@
         "C10 price/free consistency"
       ],
       "scoreRange": "sentinel_score 0-10 per entry; index certification is binary (all 10 checks pass)",
-      "totalScanned": 68387,
-      "certified": 68387,
-      "passRate": "100% (all 68,387 entries pass the 10 index checks)",
+      "totalScanned": 68388,
+      "certified": 68388,
+      "passRate": "100% (all 68,388 entries pass the 10 index checks)",
       "methodology": "https://marketnow.site/api/certification.json"
     }
   },
@@ -129,8 +129,8 @@
     "audit_scope": "Documented inconsistencies across agent.json, npm package.json, LICENSE files, README, and landing HTML."
   },
   "metrics": {
-    "skills_indexed": 68387,
-    "security_checks_performed": 683870,
+    "skills_indexed": 68388,
+    "security_checks_performed": 683880,
     "npm_versions_published": 20,
     "npm_latest_version": "1.11.1",
     "npm_first_release_date": "2026-06-29",

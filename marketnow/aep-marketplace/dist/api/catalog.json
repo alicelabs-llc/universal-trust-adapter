@@ -56,9 +56,9 @@
   },
   "current_state": {
     "note": "This document is a frozen disclosure of the legacy 9,248-skill catalog (effective 2026-07-02), preserved as a historical record of how that catalog was built.",
-    "total_skills_now": 68387,
-    "total_tracked_all_sources": 133425,
-    "l2_tarballs_deep_scanned": 688,
+    "total_skills_now": 68388,
+    "total_tracked_all_sources": 132737,
+    "l2_tarballs_deep_scanned": 2839,
     "canonical_sources": [
       "/api/certification.json",
       "/api/catalog-meta.json",

@@ -13,8 +13,8 @@
       "L2 v2.0 — Docker sandbox + active MCP probe with adversarial inputs (async via GitHub Actions)"
     ],
     "stats": {
-      "total_skills": 68387,
-      "certified": 68387,
+      "total_skills": 68388,
+      "certified": 68388,
       "with_l2": 2839,
       "l2_clean": 116,
       "l2_flagged_warning": 160,
