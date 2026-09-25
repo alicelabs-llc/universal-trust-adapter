@@ -2,7 +2,7 @@
   "schemaVersion": "v1.0",
   "agent": {
     "name": "MarketNow — Agent Security & Trust Infrastructure",
-    "description": "Security and trust infrastructure for AI agents: Sentinel, a 10-layer audit pipeline (L1 index certification, L1.5–L1.9 static analysis, L2 deep tarball scans, L2.5 gVisor sandbox, L3 runtime monitoring), ATC/1.0 Agent Trust Cards, revocation registry and tool fingerprinting — with a 68,387-server indexed MCP catalog as the discovery and distribution layer (132,736 tracked across the ecosystem). Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
+    "description": "Security and trust infrastructure for AI agents: Sentinel, a 10-layer audit pipeline (L1 index certification, L1.5–L1.9 static analysis, L2 deep tarball scans, L2.5 gVisor sandbox, L3 runtime monitoring), ATC/1.0 Agent Trust Cards, revocation registry and tool fingerprinting — with a 68,388-server indexed MCP catalog as the discovery and distribution layer (132,737 tracked across the ecosystem). Agents can discover, install, and recommend MCP skills to other agents, earning commission on referrals. Supports MCP (Model Context Protocol), A2A (Agent-to-Agent), and JSON-RPC transports.",
     "url": "https://marketnow.site",
     "version": "4.0.0"
   },
@@ -106,7 +106,7 @@
       "Affiliate program (5% from MarketNow's share)"
     ],
     "buyer_value": "All 68,387 catalog entries install free. Vendor-priced usage (x402) is billed by the vendor — MarketNow verifies security, not pricing.",
-    "seller_value": "Publish to the 68,387-server catalog and its agent traffic. Keep 80% of sales. Sentinel audits boost trust and conversion.",
+    "seller_value": "Publish to the 68,388-server catalog and its agent traffic. Keep 80% of sales. Sentinel audits boost trust and conversion.",
     "commissionPolicy": "https://marketnow.site/policies#comisiones",
     "wallet_type": "single-sig (migration to 2-of-3 multisig pending Q4 2026)",
     "wallet_governance": "https://marketnow.site/policies#wallet"
