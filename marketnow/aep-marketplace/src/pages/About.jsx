@@ -38,7 +38,7 @@ const CONTENT = {
     ],
     whatWeHeading: 'What we are',
     whatWe: [
-      'Open source — MNNC-1.0 licensed, full code on GitHub, every change is a public commit',
+      'Open source — dual MIT OR Apache-2.0 (open core), full code on GitHub, every change is a public commit',
       'Transparent — every mandate spend is a git commit visible at _data/mandates/',
       { pre: 'Honest — our ', linkText: 'trust roadmap', linkTo: '/trust', post: ' admits what is done, partial, and pending.' },
       'Agent-native — our API and MCP server are designed for AI consumption, not just humans',
@@ -83,7 +83,7 @@ const CONTENT = {
     ],
     whatWeHeading: 'Lo que somos',
     whatWe: [
-      'Open source — licencia MNNC-1.0, código completo en GitHub, cada cambio es un commit público',
+      'Open source — licencia dual MIT OR Apache-2.0 (open core), código completo en GitHub, cada cambio es un commit público',
       'Transparente — cada gasto de mandato es un git commit visible en _data/mandates/',
       { pre: 'Honestos — nuestra ', linkText: 'hoja de confianza', linkTo: '/trust', post: ' admite qué está hecho, parcial y pendiente.' },
       'Agent-native — nuestra API y MCP server están diseñados para consumo de IA, no solo humanos',
@@ -128,7 +128,7 @@ const CONTENT = {
     ],
     whatWeHeading: 'O que somos',
     whatWe: [
-      'Open source — licenciado MNNC-1.0, código completo no GitHub, cada mudança é um commit público',
+      'Open source — licença dupla MIT OR Apache-2.0 (open core), código completo no GitHub, cada mudança é um commit público',
       'Transparente — cada gasto de mandato é um git commit visível em _data/mandates/',
       { pre: 'Honestos — nossa ', linkText: 'trilha de confiança', linkTo: '/trust', post: ' admite o que está feito, parcial e pendente.' },
       'Agent-native — nossa API e MCP server são projetados para consumo de IA, não apenas humanos',
@@ -173,7 +173,7 @@ const CONTENT = {
     ],
     whatWeHeading: '我们是什么',
     whatWe: [
-      '开源 —— 采用 MNNC-1.0 许可，全部代码在 GitHub 上，每一次改动都是公开的 commit',
+      '开源 —— 采用 MIT OR Apache-2.0 双许可（开源核心），全部代码在 GitHub 上，每一次改动都是公开的 commit',
       '透明 —— 每一笔 mandate 支出都是一个 git commit，可在 _data/mandates/ 查看',
       { pre: '诚实 —— 我们的 ', linkText: '信任路线图', linkTo: '/trust', post: ' 坦诚承认哪些已完成、部分完成、尚未开始。' },
       'Agent 原生 —— 我们的 API 和 MCP server 是为 AI 消费而设计的，不仅服务于人类',
@@ -218,7 +218,7 @@ const CONTENT = {
     ],
     whatWeHeading: 'Ce que nous sommes',
     whatWe: [
-      'Open source — licence MNNC-1.0, code complet sur GitHub, chaque changement est un commit public',
+      'Open source — double licence MIT OR Apache-2.0 (open core), code complet sur GitHub, chaque changement est un commit public',
       'Transparent — chaque dépense de mandat est un git commit visible sur _data/mandates/',
       { pre: 'Honnêtes — notre ', linkText: 'feuille de confiance', linkTo: '/trust', post: ' admet ce qui est fait, partiel et en attente.' },
       'Agent-native — notre API et MCP server sont conçus pour la consommation IA, pas seulement humaine',

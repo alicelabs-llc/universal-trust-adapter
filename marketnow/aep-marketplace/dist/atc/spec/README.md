@@ -3,7 +3,7 @@
 **Status**: Draft v1.0.0 — public for review
 **Issued**: 2026-08-10
 **Author**: Edison Flores, AliceLabs LLC
-**License**: Reference implementation is MNNC-1.0 (AliceLabs LLC Proprietary). The specification itself is published for community contribution under W3C CG-FSA terms.
+**License**: Reference implementation is MIT OR Apache-2.0 (dual, open-core). The specification itself is published for community contribution under W3C CG-FSA terms.
 
 ## What is this?
 
@@ -164,8 +164,8 @@ https://marketnow.site/atc
 ## License
 
 - **Specification** (`SPEC.md`, `PRIOR-ART-TIMELINE.md`, this `README.md`): W3C CG-FSA (open, royalty-free for contributors)
-- **Reference implementation** (`reference-impl/atc-1.0.mjs`): MNNC-1.0 (AliceLabs LLC Proprietary)
-- **JSON Schema** (`schemas/atc-1.0.json`): MNNC-1.0 (AliceLabs LLC Proprietary)
+- **Reference implementation** (`reference-impl/atc-1.0.mjs`): MIT OR Apache-2.0 (dual, open-core)
+- **JSON Schema** (`schemas/atc-1.0.json`): MIT OR Apache-2.0 (dual, open-core)
 - **Test vectors** (`test-vectors/*.json`): Public domain (CC0)
 
 This dual-licensing model ensures the spec stays open while the reference implementation remains under AliceLabs control. If you want to ship a competing implementation, you can read the spec and the test vectors for free — but you'll need to write your own implementation from scratch.

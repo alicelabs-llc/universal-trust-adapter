@@ -69,7 +69,7 @@ The Sentinel engine writes a new record here every time it makes a quarantine de
 
 ## License
 
-MNNC-1.0 — see https://marketnow.site/LICENSE
+Dual MIT OR Apache-2.0 — see https://marketnow.site/LICENSE
 
 ## Contact
 

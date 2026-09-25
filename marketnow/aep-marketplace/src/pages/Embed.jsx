@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext.jsx';
 
 // Badge data — SVG content, markdown, and HTML are literal code snippets
-// served to all users (brand names like MarketNow / Sentinel / MNNC-1.0
+// served to all users (brand names like MarketNow / Sentinel / license badge
 // stay English inside the SVG). The friendly `label` is translated per
 // language via CONTENT[lang].badgeLabels[id].
 const BADGES = [
@@ -22,9 +22,9 @@ const BADGES = [
   },
   {
     id: 'open-source',
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" width="140" height="28" viewBox="0 0 140 28"><rect width="140" height="28" rx="4" fill="#050505" stroke="#00d1ff"/><text x="70" y="19" font-family="monospace" font-size="11" font-weight="bold" fill="#00d1ff" text-anchor="middle">🔓 MNNC-1.0 License</text></svg>`,
-    markdown: '![MNNC-1.0 License](https://marketnow.site/badges/open-source.svg)](https://github.com/edgarfloresguerra2011-a11y/marketnow)',
-    html: '<a href="https://github.com/edgarfloresguerra2011-a11y/marketnow"><img src="https://marketnow.site/badges/open-source.svg" alt="Source-Available MNNC-1.0" /></a>',
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" width="140" height="28" viewBox="0 0 140 28"><rect width="140" height="28" rx="4" fill="#050505" stroke="#00d1ff"/><text x="70" y="19" font-family="monospace" font-size="11" font-weight="bold" fill="#00d1ff" text-anchor="middle">🔓 MIT OR Apache-2.0</text></svg>`,
+    markdown: '![MIT OR Apache-2.0 License](https://marketnow.site/badges/open-source.svg)](https://github.com/alicelabs-llc/universal-trust-adapter)',
+    html: '<a href="https://github.com/alicelabs-llc/universal-trust-adapter"><img src="https://marketnow.site/badges/open-source.svg" alt="Open-Core MIT OR Apache-2.0" /></a>',
   },
   {
     id: 'available-on',
@@ -45,7 +45,7 @@ const CONTENT = {
     badgeLabels: {
       'powered-by': 'Powered by MarketNow',
       'verified-skill': 'Sentinel v3.0 Verified',
-      'open-source': 'Source-Available MNNC-1.0',
+      'open-source': 'Open-Core: MIT OR Apache-2.0',
       'available-on': 'Available on MarketNow',
     },
     markdownLabel: 'MARKDOWN',
@@ -71,7 +71,7 @@ const CONTENT = {
     badgeLabels: {
       'powered-by': 'Powered by MarketNow',
       'verified-skill': 'Verificado por Sentinel v3.0',
-      'open-source': 'Source-Available MNNC-1.0',
+      'open-source': 'Open-Core: MIT OR Apache-2.0',
       'available-on': 'Disponible en MarketNow',
     },
     markdownLabel: 'MARKDOWN',
@@ -97,7 +97,7 @@ const CONTENT = {
     badgeLabels: {
       'powered-by': 'Powered by MarketNow',
       'verified-skill': 'Verificado por Sentinel v3.0',
-      'open-source': 'Source-Available MNNC-1.0',
+      'open-source': 'Open-Core: MIT OR Apache-2.0',
       'available-on': 'Disponível no MarketNow',
     },
     markdownLabel: 'MARKDOWN',
@@ -123,7 +123,7 @@ const CONTENT = {
     badgeLabels: {
       'powered-by': 'Powered by MarketNow',
       'verified-skill': 'Sentinel v3.0 已验证',
-      'open-source': 'Source-Available MNNC-1.0',
+      'open-source': 'Open-Core: MIT OR Apache-2.0',
       'available-on': '在 MarketNow 上可用',
     },
     markdownLabel: 'MARKDOWN',
@@ -149,7 +149,7 @@ const CONTENT = {
     badgeLabels: {
       'powered-by': 'Powered by MarketNow',
       'verified-skill': 'Vérifié par Sentinel v3.0',
-      'open-source': 'Source-Available MNNC-1.0',
+      'open-source': 'Open-Core: MIT OR Apache-2.0',
       'available-on': 'Disponible sur MarketNow',
     },
     markdownLabel: 'MARKDOWN',

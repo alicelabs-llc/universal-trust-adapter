@@ -14,7 +14,7 @@ ATC (Agent Trust Card) is **SSL certificates for AI agents** — a cryptographic
 
 - **Spec**: [ATC/1.0](https://marketnow.site/atc) — 10 controls (8 required, 2 optional)
 - **Crypto**: Ed25519 (RFC 8032) signatures + RFC 8785 JCS canonical JSON + SHA-256
-- **License**: MNNC-1.0 (AliceLabs LLC Proprietary). The spec is open; the SDK is proprietary.
+- **License**: MIT OR Apache-2.0 (dual, open-core). The spec is open; the SDK is proprietary.
 
 ---
 
@@ -237,7 +237,7 @@ See:
 
 ## License
 
-- **SDK source code** (`src/`, `bin/`): MNNC-1.0 (AliceLabs LLC Proprietary)
+- **SDK source code** (`src/`, `bin/`): MIT OR Apache-2.0 (dual, open-core)
 - **Test vectors** (`test/`): CC0 (public domain)
 - **Specification** (in `docs/atc-spec/`): W3C CG-FSA (open for community contribution)
 

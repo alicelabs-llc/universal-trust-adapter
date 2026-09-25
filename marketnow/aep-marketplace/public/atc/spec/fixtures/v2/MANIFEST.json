@@ -3,8 +3,8 @@
   "breaking_changes": true,
   "ca_key_rotation_note": {
     "new_ca_key_status": "active (deployed at /api/atc?action=ca-key)",
-    "original_ca_key_status": "deprecated (kept for backwards compatibility \u2014 verifiers should still accept signatures from it during the rotation period)",
-    "reason": "Per @anp2network's feedback on article #4381969 \u2014 canonicalization bug required rotation. The original CA key is deprecated.",
+    "original_ca_key_status": "deprecated (kept for backwards compatibility — verifiers should still accept signatures from it during the rotation period)",
+    "reason": "Per @anp2network's feedback on article #4381969 — canonicalization bug required rotation. The original CA key is deprecated.",
     "rotation_date": "2026-08-13",
     "status": "in_progress",
     "verifier_guidance": "During rotation period: accept cards signed with EITHER key. After rotation completes: accept only new key."
@@ -312,14 +312,14 @@
     }
   ],
   "immutability": "This manifest is content-addressed. The SHA-256 of this manifest is the canonical version ID. Any change creates a new version.",
-  "license": "MNNC-1.0 \u2014 see https://marketnow.site/LICENSE",
+  "license": "Dual MIT OR Apache-2.0 — see https://marketnow.site/LICENSE",
   "manifest_sha256": "d6c360c239f661a597a39aab78b969190354262b154dd99add0d0e47e2314fb1",
   "manifest_version": "v2",
   "migration_guide_url": "https://marketnow.site/atc/spec/MIGRATION_V1_TO_V2.md",
   "must_fail_against_orphaned_ca_count": 16,
   "must_fail_count": 16,
   "must_pass_count": 0,
-  "must_pass_status": "EMPTY \u2014 pending new CA key issuance. The original ATC cards in _data/atc/ were signed with the deprecated CA key. New cards signed with the new production CA key (post-rotation) will be added here once issued. See must-pass/README.md for details.",
+  "must_pass_status": "EMPTY — pending new CA key issuance. The original ATC cards in _data/atc/ were signed with the deprecated CA key. New cards signed with the new production CA key (post-rotation) will be added here once issued. See must-pass/README.md for details.",
   "published_at": "2026-08-19T21:11:54.809264+00:00",
   "publisher": "MarketNow Sentinel CA",
   "publisher_url": "https://marketnow.site",

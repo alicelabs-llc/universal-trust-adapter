@@ -63,28 +63,29 @@ const CONTENT = {
         name: 'npm (marketnow-mcp)',
         url: 'https://www.npmjs.com/package/marketnow-mcp',
         status: 'updated',
-        version: '1.4.0',
-        lastChecked: '2026-07-04',
+        version: '1.14.1',
+        lastChecked: '2026-09-26',
         whatWeFixed: [
-          'v1.2.0: description said "9,248+ verified skills" → "9,248 MCP-compatible skills"',
+          'v1.3.0: description said "8,535+ verified skills" → v1.4.0: "8,560 MCP-compatible skills"',
           'v1.3.0: added "trust layer for agent commerce" positioning',
           'v1.4.0: description now includes "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0: removed "open-source" and "mit" keywords (license is MNNC-1.0, not MIT)',
           'v1.4.0: added "trust-layer" and "aliceLabs" keywords',
           'License field: MIT → MNNC-1.0 (corrected in v1.4.0 source)',
+          'v1.14.1: license MNNC-1.0 → dual MIT OR Apache-2.0 (open-core relicensing)',
         ],
         notes:
-          'npm package v1.4.0 published 2026-07-04. Old versions (1.1.0–1.3.0) are immutable in the registry — they cannot be changed. v1.4.0 is the canonical version with correct data. Mirrors propagate within 24h.',
+          'npm package v1.14.1 published 2026-09-20. Old versions are immutable in the registry — they cannot be changed. v1.14.1 is the current canonical version. Mirrors propagate within 24h.',
       },
       {
         name: 'Smithery',
-        url: 'https://smithery.ai/servers/alicelabs/marketnow',
+        url: 'https://smithery.ai/servers/eddyflores100/marketnow-mcp',
         status: 'partially-correct',
         version: 'N/A',
         lastChecked: '2026-07-04',
         whatWeFixed: [
           'Smithery pulls from our server-card.json at /.well-known/mcp/server-card.json',
-          'Our server-card.json is up to date with current numbers (68,388 skills, USDC on Base, open-core AL-1.0)',
+          'Our server-card.json is up to date with current numbers (68,388 skills, USDC on Base, dual MIT OR Apache-2.0)',
         ],
         knownDiscrepancies: [
           'Smithery HTML still shows "9,248" in some cached views (their crawler may not have re-indexed our 68,388 update yet)',
@@ -110,7 +111,7 @@ const CONTENT = {
           'Listing says "agent-to-agent crypto payments (ETH/BSC/SOL/BTC)" — we only support USDC on Base, NOT ETH/BSC/SOL/BTC directly',
           'Listing says "open registry with no manual approval needed" — we removed this framing; human-in-loop is now the default for mandates',
           'Listing says "largest open MCP skill marketplace" — we no longer claim to be the largest; we position as the trust layer',
-          'Listing says "MIT license" — actual license is MNNC-1.0 (source-available, non-commercial)',
+          'Listing says "MIT license" — the actual license is dual MIT OR Apache-2.0 (open-core; MNNC-1.0 was retired 2026-09-20)',
         ],
         notes:
           'mcp.so is operated by chatmcp (GitHub: chatmcp/mcpso). The listing owner (Edison Flores) has not yet logged in to mcp.so to edit the listing directly. The listing can be edited via the mcp.so dashboard.',
@@ -126,7 +127,7 @@ const CONTENT = {
           'Glama crawls our server-card.json and GitHub repo for metadata',
         ],
         notes:
-          'Glama.ai appears to have indexed MarketNow. Verify the listing shows current numbers (68,388 skills, USDC on Base, open-core AL-1.0). If stale, Glama\'s crawler should refresh within 7-14 days.',
+          'Glama.ai appears to have indexed MarketNow. Verify the listing shows current numbers (68,388 skills, USDC on Base, dual MIT OR Apache-2.0). If stale, Glama\'s crawler should refresh within 7-14 days.',
       },
       {
         name: 'PulseMCP',
@@ -212,18 +213,19 @@ const CONTENT = {
         name: 'npm (marketnow-mcp)',
         url: 'https://www.npmjs.com/package/marketnow-mcp',
         status: 'updated',
-        version: '1.4.0',
-        lastChecked: '2026-07-04',
+        version: '1.14.1',
+        lastChecked: '2026-09-26',
         whatWeFixed: [
-          'v1.2.0: la descripción decía "66,496+ verified skills" → "66,496 MCP-compatible skills"',
+          'v1.3.0: la descripción decía "8,535+ verified skills" → v1.4.0: "8,560 MCP-compatible skills"',
           'v1.3.0: se añadió el posicionamiento de "trust layer for agent commerce"',
           'v1.4.0: la descripción ahora incluye "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0: se eliminaron las keywords "open-source" y "mit" (la licencia es MNNC-1.0, no MIT)',
           'v1.4.0: se añadieron las keywords "trust-layer" y "aliceLabs"',
           'Campo de licencia: MIT → MNNC-1.0 (corregido en el código fuente v1.4.0)',
+          'v1.14.1: licencia MNNC-1.0 → dual MIT OR Apache-2.0 ( relicensing open-core)',
         ],
         notes:
-          'Paquete npm v1.4.0 publicado el 2026-07-04. Las versiones antiguas (1.1.0–1.3.0) son inmutables en el registro — no pueden cambiarse. v1.4.0 es la versión canónica con datos correctos. Los mirrors se propagan en 24h.',
+          'Paquete npm v1.14.1 publicado el 2026-09-20. Las versiones antiguas son inmutables en el registro — no pueden cambiarse. v1.14.1 es la versión canónica actual. Los mirrors se propagan en 24h.',
       },
       {
         name: 'Smithery',
@@ -233,10 +235,10 @@ const CONTENT = {
         lastChecked: '2026-07-04',
         whatWeFixed: [
           'Smithery toma datos de nuestro server-card.json en /.well-known/mcp/server-card.json',
-          'Nuestro server-card.json está actualizado con los números actuales (68,388 skills, USDC on Base, open-core AL-1.0)',
+          'Nuestro server-card.json está actualizado con los números actuales (68,388 skills, USDC on Base, licencia dual MIT OR Apache-2.0)',
         ],
         knownDiscrepancies: [
-          'El HTML de Smithery todavía muestra "68,387" en algunas vistas cacheadas (su crawler puede no haber re-indexado aún)',
+          'El HTML de Smithery todavía muestra "9,248" en algunas vistas cacheadas (su crawler puede no haber re-indexado aún)',
         ],
         notes:
           'Puntaje de calidad de Smithery: 84/100. El listado debería reflejar los datos actuales una vez que Smithery vuelva a crawlear nuestro server-card.json. Su TTL de caché suele ser 24-48h.',
@@ -255,11 +257,11 @@ const CONTENT = {
           'El dueño del listado debe actualizar manualmente vía el dashboard de mcp.so (requiere login como @edgarfloresguerra2011-a11y)',
         ],
         knownDiscrepancies: [
-          'El listado dice "68,387 verified MCP-compatible skills" — debería ser 68,387',
+          'El listado dice "9,248 verified MCP-compatible skills" — desactualizado; el catálogo actual es 68,388 indexados (con install-risk + trust tiers, no un "verified" indiscriminado)',
           'El listado dice "agent-to-agent crypto payments (ETH/BSC/SOL/BTC)" — solo soportamos USDC on Base, NO ETH/BSC/SOL/BTC directamente',
           'El listado dice "open registry with no manual approval needed" — eliminamos este framing; human-in-loop es ahora el comportamiento por defecto para mandates',
           'El listado dice "largest open MCP skill marketplace" — ya no afirmamos ser los más grandes; nos posicionamos como la capa de confianza',
-          'El listado dice "MIT license" — la licencia real es MNNC-1.0 (source-available, non-commercial)',
+          'El listado dice "MIT license" — la licencia real es dual MIT OR Apache-2.0 (open-core; MNNC-1.0 fue retirada el 2026-09-20)',
         ],
         notes:
           'mcp.so es operado por chatmcp (GitHub: chatmcp/mcpso). El dueño del listado (Edison Flores) aún no ha iniciado sesión en mcp.so para editar el listado directamente. El listado se puede editar vía el dashboard de mcp.so.',
@@ -275,7 +277,7 @@ const CONTENT = {
           'Glama hace crawl de nuestro server-card.json y repo de GitHub para metadatos',
         ],
         notes:
-          'Glama.ai parece haber indexado MarketNow. Verifica que el listado muestre los números actuales (68,388 skills, USDC on Base, open-core AL-1.0). Si está desactualizado, el crawler de Glama debería refrescar en 7-14 días.',
+          'Glama.ai parece haber indexado MarketNow. Verifica que el listado muestre los números actuales (68,388 skills, USDC on Base, licencia dual MIT OR Apache-2.0). Si está desactualizado, el crawler de Glama debería refrescar en 7-14 días.',
       },
       {
         name: 'PulseMCP',
@@ -361,18 +363,19 @@ const CONTENT = {
         name: 'npm (marketnow-mcp)',
         url: 'https://www.npmjs.com/package/marketnow-mcp',
         status: 'updated',
-        version: '1.4.0',
-        lastChecked: '2026-07-04',
+        version: '1.14.1',
+        lastChecked: '2026-09-26',
         whatWeFixed: [
-          'v1.2.0: a descrição dizia "68,387+ verified skills" → "68,387 MCP-compatible skills"',
+          'v1.3.0: a descrição dizia "8,535+ verified skills" → v1.4.0: "8,560 MCP-compatible skills"',
           'v1.3.0: adicionado o posicionamento de "trust layer for agent commerce"',
           'v1.4.0: a descrição agora inclui "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0: removidas as keywords "open-source" e "mit" (a licença é MNNC-1.0, não MIT)',
           'v1.4.0: adicionadas as keywords "trust-layer" e "aliceLabs"',
           'Campo de licença: MIT → MNNC-1.0 (corrigido no código-fonte v1.4.0)',
+          'v1.14.1: licença MNNC-1.0 → dupla MIT OR Apache-2.0 (relicensing open-core)',
         ],
         notes:
-          'Pacote npm v1.4.0 publicado em 2026-07-04. Versões antigas (1.1.0–1.3.0) são imutáveis no registro — não podem ser alteradas. v1.4.0 é a versão canônica com dados corretos. Mirrors propagam em 24h.',
+          'Pacote npm v1.14.1 publicado em 2026-09-20. Versões antigas são imutáveis no registro — não podem ser alteradas. v1.14.1 é a versão canônica atual. Mirrors propagam em 24h.',
       },
       {
         name: 'Smithery',
@@ -382,10 +385,10 @@ const CONTENT = {
         lastChecked: '2026-07-04',
         whatWeFixed: [
           'Smithery puxa do nosso server-card.json em /.well-known/mcp/server-card.json',
-          'Nosso server-card.json está atualizado com os números atuais (68,388 skills, USDC on Base, open-core AL-1.0)',
+          'Nosso server-card.json está atualizado com os números atuais (68,388 skills, USDC on Base, licença dupla MIT OR Apache-2.0)',
         ],
         knownDiscrepancies: [
-          'O HTML do Smithery ainda mostra "68,387" em algumas views em cache (o crawler pode não ter re-indexado ainda)',
+          'O HTML do Smithery ainda mostra "9,248" em algumas views em cache (o crawler pode não ter re-indexado ainda)',
         ],
         notes:
           'Pontuação de qualidade do Smithery: 84/100. A listagem deve refletir os dados atuais assim que o Smithery re-crawlear nosso server-card.json. O TTL de cache deles costuma ser 24-48h.',
@@ -404,11 +407,11 @@ const CONTENT = {
           'O dono da listagem precisa atualizar manualmente via o dashboard do mcp.so (requer login como @edgarfloresguerra2011-a11y)',
         ],
         knownDiscrepancies: [
-          'A listagem diz "68,387 verified MCP-compatible skills" — deveria ser 68,387',
+          'A listagem diz "9,248 verified MCP-compatible skills" — desatualizado; o catálogo atual é 68,388 indexados (com install-risk + trust tiers, não um "verified" indiscriminado)',
           'A listagem diz "agent-to-agent crypto payments (ETH/BSC/SOL/BTC)" — só suportamos USDC on Base, NÃO ETH/BSC/SOL/BTC diretamente',
           'A listagem diz "open registry with no manual approval needed" — removemos esse framing; human-in-loop agora é o padrão para mandates',
           'A listagem diz "largest open MCP skill marketplace" — não afirmamos mais ser os maiores; nos posicionamos como a camada de confiança',
-          'A listagem diz "MIT license" — a licença real é MNNC-1.0 (source-available, non-commercial)',
+          'A listagem diz "MIT license" — a licença real é dupla MIT OR Apache-2.0 (open-core; MNNC-1.0 foi retirada em 2026-09-20)',
         ],
         notes:
           'mcp.so é operado pela chatmcp (GitHub: chatmcp/mcpso). O dono da listagem (Edison Flores) ainda não fez login no mcp.so para editar a listagem diretamente. A listagem pode ser editada via o dashboard do mcp.so.',
@@ -424,7 +427,7 @@ const CONTENT = {
           'Glama faz crawl do nosso server-card.json e do repo no GitHub para metadados',
         ],
         notes:
-          'Glama.ai parece ter indexado o MarketNow. Verifique se a listagem mostra os números atuais (68,388 skills, USDC on Base, open-core AL-1.0). Se desatualizada, o crawler da Glama deve atualizar em 7-14 dias.',
+          'Glama.ai parece ter indexado o MarketNow. Verifique se a listagem mostra os números atuais (68,388 skills, USDC on Base, licença dupla MIT OR Apache-2.0). Se desatualizada, o crawler da Glama deve atualizar em 7-14 dias.',
       },
       {
         name: 'PulseMCP',
@@ -508,18 +511,19 @@ const CONTENT = {
         name: 'npm (marketnow-mcp)',
         url: 'https://www.npmjs.com/package/marketnow-mcp',
         status: 'updated',
-        version: '1.4.0',
-        lastChecked: '2026-07-04',
+        version: '1.14.1',
+        lastChecked: '2026-09-26',
         whatWeFixed: [
-          'v1.2.0：描述中曾写为 "68,387+ verified skills" → "68,387 MCP-compatible skills"',
+          'v1.3.0：描述中曾写为 "8,535+ verified skills" → v1.4.0："8,560 MCP-compatible skills"',
           'v1.3.0：添加了 "trust layer for agent commerce" 的定位',
           'v1.4.0：描述现已包含 "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0：移除了 "open-source" 与 "mit" 关键词（license 为 MNNC-1.0，不是 MIT）',
           'v1.4.0：添加了 "trust-layer" 与 "aliceLabs" 关键词',
           'License 字段：MIT → MNNC-1.0（已在 v1.4.0 源码中更正）',
+          'v1.14.1：许可证 MNNC-1.0 → 双许可 MIT OR Apache-2.0（open-core 重许可）',
         ],
         notes:
-          'npm 包 v1.4.0 发布于 2026-07-04。旧版本（1.1.0–1.3.0）在 registry 中不可变 —— 无法更改。v1.4.0 是数据正确的权威版本。镜像在 24 小时内传播完成。',
+          'npm 包 v1.14.1 发布于 2026-09-20。旧版本在 registry 中不可变 —— 无法更改。v1.14.1 是当前的权威版本。镜像在 24 小时内传播完成。',
       },
       {
         name: 'Smithery',
@@ -529,10 +533,10 @@ const CONTENT = {
         lastChecked: '2026-07-04',
         whatWeFixed: [
           'Smithery 从我们的 /.well-known/mcp/server-card.json 拉取数据',
-          '我们的 server-card.json 已更新为当前数据（68,387 skills，USDC on Base，MNNC-1.0）',
+          '我们的 server-card.json 已更新为当前数据（68,388 skills，USDC on Base，双许可 MIT OR Apache-2.0）',
         ],
         knownDiscrepancies: [
-          'Smithery 的 HTML 在某些缓存视图中仍显示 "68,387"（其爬虫可能尚未重新索引）',
+          'Smithery 的 HTML 在某些缓存视图中仍显示 "9,248"（其爬虫可能尚未重新索引）',
         ],
         notes:
           'Smithery 质量分：84/100。一旦 Smithery 重新爬取我们的 server-card.json，列表应反映当前数据。其缓存 TTL 通常为 24-48 小时。',
@@ -551,11 +555,11 @@ const CONTENT = {
           '列表所有者必须通过 mcp.so dashboard 手动更新（需以 @edgarfloresguerra2011-a11y 身份登录）',
         ],
         knownDiscrepancies: [
-          '列表写的是 "68,387 verified MCP-compatible skills" —— 应为 68,387',
+          '列表写的是 "9,248 verified MCP-compatible skills" —— 已过时；当前目录为 68,388 条已索引条目（含安装风险与信任分级，而非笼统的 "verified"）',
           '列表写的是 "agent-to-agent crypto payments (ETH/BSC/SOL/BTC)" —— 我们只支持 USDC on Base，不直接支持 ETH/BSC/SOL/BTC',
           '列表写的是 "open registry with no manual approval needed" —— 我们已移除该表述；human-in-loop 现为 mandates 的默认行为',
           '列表写的是 "largest open MCP skill marketplace" —— 我们不再声称是最大的；我们定位为信任层',
-          '列表写的是 "MIT license" —— 实际 license 是 MNNC-1.0（source-available, non-commercial）',
+          '列表写的是 "MIT license" —— 实际许可证为双许可 MIT OR Apache-2.0（open-core；MNNC-1.0 已于 2026-09-20 废弃）',
         ],
         notes:
           'mcp.so 由 chatmcp 运营（GitHub：chatmcp/mcpso）。列表所有者（Edison Flores）尚未登录 mcp.so 直接编辑该列表。该列表可通过 mcp.so dashboard 编辑。',
@@ -571,7 +575,7 @@ const CONTENT = {
           'Glama 会爬取我们的 server-card.json 与 GitHub 仓库获取元数据',
         ],
         notes:
-          'Glama.ai 似乎已索引 MarketNow。请核实列表显示的是当前数据（68,387 skills，USDC on Base，MNNC-1.0）。如已过时，Glama 的爬虫应在 7-14 天内刷新。',
+          'Glama.ai 似乎已索引 MarketNow。请核实列表显示的是当前数据（68,388 skills，USDC on Base，双许可 MIT OR Apache-2.0）。如已过时，Glama 的爬虫应在 7-14 天内刷新。',
       },
       {
         name: 'PulseMCP',
@@ -657,18 +661,19 @@ const CONTENT = {
         name: 'npm (marketnow-mcp)',
         url: 'https://www.npmjs.com/package/marketnow-mcp',
         status: 'updated',
-        version: '1.4.0',
-        lastChecked: '2026-07-04',
+        version: '1.14.1',
+        lastChecked: '2026-09-26',
         whatWeFixed: [
-          'v1.2.0 : la description disait "68,387+ verified skills" → "68,387 MCP-compatible skills"',
+          'v1.3.0 : la description disait "8,535+ verified skills" → v1.4.0 : "8,560 MCP-compatible skills"',
           'v1.3.0 : ajout du positionnement « trust layer for agent commerce »',
           'v1.4.0 : la description inclut désormais "UTA v1.0.0, x402 (USDC on Base), AP2 mandates, AliceLabs LLC"',
           'v1.4.0 : suppression des mots-clés "open-source" et "mit" (la licence est MNNC-1.0, pas MIT)',
           'v1.4.0 : ajout des mots-clés "trust-layer" et "aliceLabs"',
           'Champ de licence : MIT → MNNC-1.0 (corrigé dans le code source v1.4.0)',
+          'v1.14.1 : licence MNNC-1.0 → double MIT OR Apache-2.0 (relicensing open-core)',
         ],
         notes:
-          "Paquet npm v1.4.0 publié le 2026-07-04. Les anciennes versions (1.1.0–1.3.0) sont immuables dans le registre — elles ne peuvent pas être modifiées. v1.4.0 est la version canonique avec les données correctes. Les miroirs se propagent en 24h.",
+          "Paquet npm v1.14.1 publié le 2026-09-20. Les anciennes versions sont immuables dans le registre — elles ne peuvent pas être modifiées. v1.14.1 est la version canonique actuelle. Les miroirs se propagent en 24h.",
       },
       {
         name: 'Smithery',
@@ -678,10 +683,10 @@ const CONTENT = {
         lastChecked: '2026-07-04',
         whatWeFixed: [
           'Smithery récupère depuis notre server-card.json à /.well-known/mcp/server-card.json',
-          'Notre server-card.json est à jour avec les chiffres actuels (68,388 skills, USDC on Base, open-core AL-1.0)',
+          'Notre server-card.json est à jour avec les chiffres actuels (68,388 skills, USDC on Base, double licence MIT OR Apache-2.0)',
         ],
         knownDiscrepancies: [
-          'Le HTML de Smithery affiche encore "68,387" dans certaines vues en cache (leur crawler n\'a peut-être pas encore ré-indexé)',
+          'Le HTML de Smithery affiche encore "9,248" dans certaines vues en cache (leur crawler n\'a peut-être pas encore ré-indexé)',
         ],
         notes:
           "Score de qualité Smithery : 84/100. Le listing devrait refléter les données actuelles une fois que Smithery recrawl notre server-card.json. Leur TTL de cache est généralement de 24-48h.",
@@ -700,11 +705,11 @@ const CONTENT = {
           "Le propriétaire du listing doit le mettre à jour manuellement via le dashboard mcp.so (connexion requise en tant que @edgarfloresguerra2011-a11y)",
         ],
         knownDiscrepancies: [
-          'Le listing dit "68,387 verified MCP-compatible skills" — devrait être 68,387',
+          'Le listing dit "9,248 verified MCP-compatible skills" — obsolète ; le catalogue actuel est 68,388 entrées indexées (avec install-risk + trust tiers, pas un "verified" global)',
           'Le listing dit "agent-to-agent crypto payments (ETH/BSC/SOL/BTC)" — nous ne supportons que USDC on Base, PAS ETH/BSC/SOL/BTC directement',
           'Le listing dit "open registry with no manual approval needed" — nous avons retiré ce framing ; human-in-loop est désormais le défaut pour les mandates',
           'Le listing dit "largest open MCP skill marketplace" — nous ne prétendons plus être les plus grands ; nous nous positionnons comme la couche de confiance',
-          'Le listing dit "MIT license" — la licence réelle est MNNC-1.0 (source-available, non-commercial)',
+          'Le listing dit "MIT license" — la licence réelle est double MIT OR Apache-2.0 (open-core ; MNNC-1.0 retirée le 2026-09-20)',
         ],
         notes:
           "mcp.so est opéré par chatmcp (GitHub : chatmcp/mcpso). Le propriétaire du listing (Edison Flores) ne s'est pas encore connecté à mcp.so pour éditer le listing directement. Le listing peut être édité via le dashboard mcp.so.",
@@ -720,7 +725,7 @@ const CONTENT = {
           'Glama crawle notre server-card.json et notre repo GitHub pour les métadonnées',
         ],
         notes:
-          'Glama.ai semble avoir indexé MarketNow. Vérifiez que le listing affiche les chiffres actuels (68,388 skills, USDC on Base, open-core AL-1.0). Si obsolète, le crawler de Glama devrait se rafraîchir en 7-14 jours.',
+          'Glama.ai semble avoir indexé MarketNow. Vérifiez que le listing affiche les chiffres actuels (68,388 skills, USDC on Base, double licence MIT OR Apache-2.0). Si obsolète, le crawler de Glama devrait se rafraîchir en 7-14 jours.',
       },
       {
         name: 'PulseMCP',

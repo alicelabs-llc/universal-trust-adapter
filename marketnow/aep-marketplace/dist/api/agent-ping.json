@@ -35,7 +35,7 @@
     "canonical_json": "RFC 8785 JCS",
     "owasp_controls_live": 4,
     "owasp_controls_planned": 8,
-    "license": "MNNC-1.0 (AliceLabs LLC Proprietary)",
+    "license": "MIT OR Apache-2.0 (dual, open-core)",
     "maintainer": "AliceLabs LLC",
     "company": "AliceLabs LLC (Wyoming, USA, 2026)",
     "founder": "Edison Flores",

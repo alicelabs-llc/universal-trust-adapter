@@ -95,7 +95,7 @@ If you find a new attack vector not covered by these fixtures, contact security@
 
 ## License
 
-MNNC-1.0 — see https://marketnow.site/LICENSE
+Dual MIT OR Apache-2.0 — see https://marketnow.site/LICENSE
 
 ## Contact
 

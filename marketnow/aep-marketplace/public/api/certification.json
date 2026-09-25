@@ -60,22 +60,22 @@
         {
           "id": "mn-sm2-03074",
           "slug": "dynamicendpoints-psadt-mcp",
-          "why": "provenance URL well-formed (https + real host); resolvability spot-checked by audit-gate"
+          "why": "provenance URL is null (smithery import with unknown source) — see repairs_applied.smithery_provenance_urls_2026_09_25"
         },
         {
           "id": "mn-sm2-04323",
           "slug": "kj455-mcp-kibela",
-          "why": "provenance URL well-formed (https + real host); resolvability spot-checked by audit-gate"
+          "why": "provenance URL is null (smithery import with unknown source) — see repairs_applied.smithery_provenance_urls_2026_09_25"
         },
         {
           "id": "mn-sm2-04842",
           "slug": "devlimelabs-meilisearch-ts-mcp",
-          "why": "provenance URL well-formed (https + real host); resolvability spot-checked by audit-gate"
+          "why": "provenance URL is null (smithery import with unknown source) — see repairs_applied.smithery_provenance_urls_2026_09_25"
         },
         {
           "id": "mn-sm2-05927",
           "slug": "cdugo-mcp-get-docs",
-          "why": "provenance URL well-formed (https + real host); resolvability spot-checked by audit-gate"
+          "why": "provenance URL is null (smithery import with unknown source) — see repairs_applied.smithery_provenance_urls_2026_09_25"
         }
       ]
     },

@@ -2,7 +2,7 @@
 
 > **Purpose**: Internal record-keeping for AliceLabs LLC. Tracks aggregate counts of ATC/1.0 verifications performed via `marketnow-mcp@1.10.0`'s `marketnow_verify_atc_spec` tool. **No personally identifying information is collected** — only aggregate counts by date, issuer, and result.
 >
-> **License**: MNNC-1.0 (AliceLabs LLC Proprietary). Internal use only.
+> **License**: MIT OR Apache-2.0 (dual, open-core). Internal use only.
 >
 > **Public-facing summary**: This log is mirrored as a JSON aggregate at `/api/atc-verification-stats` (planned for v1.11.0).
 

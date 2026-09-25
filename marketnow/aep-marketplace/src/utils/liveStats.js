@@ -54,7 +54,7 @@ export const FALLBACK_STATS = {
     { name: '@marketnow/trust-observability', version: '1.0.3' },
   ],
   utaPackagesCount: 14,
-  utaMonthlyDownloads: 9585,
+  utaMonthlyDownloads: 9663,
   utaConformance: '1.3.5',
   utaVectors: 41,
   utaChecks: 24,

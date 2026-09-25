@@ -39,6 +39,6 @@
   },
   "immutability": "Records are content-addressed. Each record's record_sha256 is computed over its own content (including itself for tamper-evidence). Any change creates a new record_sha256, which would mismatch the manifest.",
   "appeal_process": "If you believe a quarantine decision is wrong, file an appeal at https://marketnow.site/appeals?qd={decision_id}",
-  "license": "MNNC-1.0 \u2014 see https://marketnow.site/LICENSE",
+  "license": "Dual MIT OR Apache-2.0 \u2014 see https://marketnow.site/LICENSE",
   "contact": "security@alicelabs.site"
 }

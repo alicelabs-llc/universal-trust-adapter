@@ -46,7 +46,7 @@ npm install -g marketnow-mcp       # MCP server (15 trust tools; remote endpoint
 | Metric | Value |
 |---|---|
 | NPM packages | 14 |
-| NPM monthly downloads | 9,585 |
+| NPM monthly downloads | 9,663 |
 | Test vectors (ATC/1.0) | 5 frozen + manifest |
 | Test vectors (ATC v3.0) | 36 (8 positive + 17 negative + 5 mutation + 6 cross-language) |
 | Conformance tests | v1.3.5 — 14 public vectors · 24 checks + 10 mutants (runner-under-test) |

@@ -4,7 +4,7 @@
 **Issued**: 2026-08-10
 **Author**: Edison Flores, AliceLabs LLC
 **Repository**: https://github.com/alicelabs-llc/marketnow/tree/master/docs/atc-spec
-**License**: MNNC-1.0 (AliceLabs LLC Proprietary) for the reference implementation; the specification itself is published under the [W3C Community Group Final Specification Agreement](https://www.w3.org/community/about/agreements/final/) terms for community contributions.
+**License**: Dual MIT OR Apache-2.0 for the reference implementation (relicensed from MNNC-1.0 on 2026-09-20); the specification itself is published under the [W3C Community Group Final Specification Agreement](https://www.w3.org/community/about/agreements/final/) terms for community contributions.
 **Prior art**: See [PRIOR-ART-TIMELINE.md](./PRIOR-ART-TIMELINE.md)
 
 ---

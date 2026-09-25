@@ -55,8 +55,8 @@ export const UTA_KEYS = {
     'uta.live.demo.translatedWarn': '✅ translated · {n} warnings',
     'uta.live.demo.issuer': 'issuer:',
 
-    'uta.adapters.title': '8 Format Adapters',
-    'uta.adapters.bodyA': 'Each adapter translates its native format to/from the Universal Trust Schema — preserving the security properties of the original credential. Watch all 56 pairs live in the',
+    'uta.adapters.title': '9 Format Adapters',
+    'uta.adapters.bodyA': 'Each adapter translates its native format to/from the Universal Trust Schema — preserving the security properties of the original credential. The live translator runs the 8 translation-ready formats (56 pairs) — try it in the',
     'uta.adapters.link': 'Credential Translator',
     'uta.adapters.bodyB': '.',
 
@@ -190,8 +190,8 @@ export const UTA_KEYS = {
     'uta.live.demo.translatedWarn': '✅ traducido · {n} avisos',
     'uta.live.demo.issuer': 'emisor:',
 
-    'uta.adapters.title': '8 adaptadores de formato',
-    'uta.adapters.bodyA': 'Cada adaptador traduce su formato nativo hacia/desde el Esquema Universal de Confianza — preservando las propiedades de seguridad de la credencial original. Mira los 56 pares en vivo en el',
+    'uta.adapters.title': '9 adaptadores de formato',
+    'uta.adapters.bodyA': 'Cada adaptador traduce su formato nativo hacia/desde el Esquema Universal de Confianza — preservando las propiedades de seguridad de la credencial original. El traductor en vivo ejecuta los 8 formatos traducibles (56 pares) — pruébalo en el',
     'uta.adapters.link': 'Traductor de Credenciales',
     'uta.adapters.bodyB': '.',
 
@@ -325,8 +325,8 @@ export const UTA_KEYS = {
     'uta.live.demo.translatedWarn': '✅ traduzido · {n} avisos',
     'uta.live.demo.issuer': 'emissor:',
 
-    'uta.adapters.title': '8 adaptadores de formato',
-    'uta.adapters.bodyA': 'Cada adaptador traduz seu formato nativo de/para o Esquema Universal de Confiança — preservando as propriedades de segurança da credencial original. Veja os 56 pares ao vivo no',
+    'uta.adapters.title': '9 adaptadores de formato',
+    'uta.adapters.bodyA': 'Cada adaptador traduz seu formato nativo de/para o Esquema Universal de Confiança — preservando as propriedades de segurança da credencial original. O tradutor ao vivo executa os 8 formatos traduzíveis (56 pares) — experimente no',
     'uta.adapters.link': 'Tradutor de Credenciais',
     'uta.adapters.bodyB': '.',
 
@@ -460,8 +460,8 @@ export const UTA_KEYS = {
     'uta.live.demo.translatedWarn': '✅ 已翻译 · {n} 条警告',
     'uta.live.demo.issuer': '签发者：',
 
-    'uta.adapters.title': '8 个格式适配器',
-    'uta.adapters.bodyA': '每个适配器在其原生格式与通用信任模式之间互译——保留原始凭证的安全属性。在',
+    'uta.adapters.title': '9 个格式适配器',
+    'uta.adapters.bodyA': '每个适配器在其原生格式与通用信任模式之间互译——保留原始凭证的安全属性。在线翻译器运行 8 个可翻译格式（56 个组合）——在',
     'uta.adapters.link': '凭证翻译器',
     'uta.adapters.bodyB': '中实时查看全部 56 个组合。',
 
@@ -595,8 +595,8 @@ export const UTA_KEYS = {
     'uta.live.demo.translatedWarn': '✅ traduit · {n} avertissements',
     'uta.live.demo.issuer': 'émetteur :',
 
-    'uta.adapters.title': '8 adaptateurs de format',
-    'uta.adapters.bodyA': 'Chaque adaptateur traduit son format natif vers/depuis le Schéma Universel de Confiance — en préservant les propriétés de sécurité de l\u2019identifiant d\u2019origine. Voyez les 56 paires en direct dans le',
+    'uta.adapters.title': '9 adaptateurs de format',
+    'uta.adapters.bodyA': 'Chaque adaptateur traduit son format natif vers/depuis le Schéma Universel de Confiance — en préservant les propriétés de sécurité de l’identifiant d’origine. Le traducteur en direct exécute les 8 formats traduisibles (56 paires) — essayez-le dans le',
     'uta.adapters.link': 'Traducteur d\u2019Identifiants',
     'uta.adapters.bodyB': '.',
 

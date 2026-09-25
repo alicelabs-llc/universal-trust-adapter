@@ -110,8 +110,12 @@
       "scoreRange": "sentinel_score 0-10 per entry; index certification is binary (all 10 checks pass)",
       "totalScanned": 68388,
       "certified": 68388,
-      "passRate": "100% (all 68,388 entries pass the 10 index checks)",
-      "methodology": "https://marketnow.site/api/certification.json"
+      "passRate": "683,876/683,880 index checks pass (99.999%); 4 smithery-sourced entries carry documented C4 provenance exceptions (url=null) — see /api/certification.json checks",
+      "methodology": "https://marketnow.site/api/certification.json",
+      "checksTotal": 10,
+      "checksFullyGreen": 9,
+      "exceptions": 4,
+      "exceptionsNote": "4 entries with url=null provenance (smithery imports) — documented, not hidden"
     }
   },
   "economy": {
