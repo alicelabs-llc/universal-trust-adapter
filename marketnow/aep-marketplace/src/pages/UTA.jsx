@@ -264,7 +264,7 @@ export default function UTA() {
             <div className="inline-block px-4 py-2 rounded-lg bg-black/40 border border-white/5">
               <code className="text-[#00F299] text-xs font-mono">npm install agent-trust-card@1.1.2</code>
               <span className="text-zinc-600 text-xs mx-2">·</span>
-              <code className="text-[#00d1ff] text-xs font-mono">npx -y marketnow-mcp@1.10.1</code>
+              <code className="text-[#00d1ff] text-xs font-mono">npx -y marketnow-mcp@1.14.1</code>
             </div>
           </motion.div>
         </section>
@@ -488,7 +488,7 @@ export default function UTA() {
               <div className="inline-block px-4 py-2 rounded-lg bg-black/40 border border-white/5">
                 <code className="text-[#00F299] text-xs font-mono">npm install agent-trust-card@1.1.2</code>
                 <span className="text-zinc-600 text-xs mx-2">·</span>
-                <code className="text-[#00d1ff] text-xs font-mono">npx -y marketnow-mcp@1.10.1</code>
+                <code className="text-[#00d1ff] text-xs font-mono">npx -y marketnow-mcp@1.14.1</code>
               </div>
             </div>
           </motion.div>
