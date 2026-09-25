@@ -20,7 +20,7 @@ const CONTENT = {
     subtitle: 'Everything an autonomous agent needs to discover, evaluate, and install skills from MarketNow. All endpoints are public, JSON-formatted, and CORS-enabled. No API key required for reads.',
     endpointsTitle: 'PUBLIC ENDPOINTS',
     endpoints: [
-      { method: 'GET', path: '/api/skills.json', desc: 'List all 68,388 skills with prices, categories, install commands', size: '~7 MB' },
+      { method: 'GET', path: '/api/skills.json', desc: 'Deprecation manifest — the 7MB dump was retired; use the paginated /api/skills (68,388 entries)', size: '~1 KB' },
       { method: 'GET', path: '/api/categories.json', desc: 'List all 16 categories with skill counts', size: '~2 KB' },
       { method: 'GET', path: '/api/manifest.json', desc: 'API metadata, total skill count, version', size: '~1 KB' },
       { method: 'GET', path: '/api/agent.json', desc: 'Machine-readable agent instructions, schema, workflow', size: '~3 KB' },
@@ -37,7 +37,7 @@ const CONTENT = {
     workflowTitle: 'AGENT WORKFLOW',
     stepPrefix: 'STEP',
     workflowSteps: [
-      { step: '1', title: 'Discover', desc: 'GET /api/skills.json' },
+      { step: '1', title: 'Discover', desc: 'GET /api/manifest.json' },
       { step: '2', title: 'Filter', desc: 'By category, price, tags' },
       { step: '3', title: 'Evaluate', desc: 'Read description + score' },
       { step: '4', title: 'Purchase', desc: 'Buyers install free' },
@@ -68,7 +68,7 @@ const CONTENT = {
     subtitle: 'Todo lo que un agente autónomo necesita para descubrir, evaluar e instalar skills de MarketNow. Todos los endpoints son públicos, en formato JSON y con CORS habilitado. No se requiere API key para lecturas.',
     endpointsTitle: 'ENDPOINTS PÚBLICOS',
     endpoints: [
-      { method: 'GET', path: '/api/skills.json', desc: 'Lista las 68,388 skills con precios, categorías y comandos de instalación', size: '~7 MB' },
+      { method: 'GET', path: '/api/skills.json', desc: 'Manifest de deprecación — el dump de 7MB fue retirado; usa /api/skills paginado (68,388 entradas)', size: '~1 KB' },
       { method: 'GET', path: '/api/categories.json', desc: 'Lista las 25 categorías con conteo de skills', size: '~2 KB' },
       { method: 'GET', path: '/api/manifest.json', desc: 'Metadatos de la API, conteo total de skills, versión', size: '~1 KB' },
       { method: 'GET', path: '/api/agent.json', desc: 'Instrucciones para agentes legibles por máquina, schema, workflow', size: '~3 KB' },
@@ -85,7 +85,7 @@ const CONTENT = {
     workflowTitle: 'WORKFLOW DEL AGENTE',
     stepPrefix: 'PASO',
     workflowSteps: [
-      { step: '1', title: 'Descubrir', desc: 'GET /api/skills.json' },
+      { step: '1', title: 'Descubrir', desc: 'GET /api/manifest.json' },
       { step: '2', title: 'Filtrar', desc: 'Por categoría, precio, tags' },
       { step: '3', title: 'Evaluar', desc: 'Leer descripción + score' },
       { step: '4', title: 'Comprar', desc: 'Compradores instalan gratis' },
@@ -116,7 +116,7 @@ const CONTENT = {
     subtitle: 'Tudo o que um agente autônomo precisa para descobrir, avaliar e instalar skills do MarketNow. Todos os endpoints são públicos, em formato JSON e com CORS habilitado. Não precisa de API key para leituras.',
     endpointsTitle: 'ENDPOINTS PÚBLICOS',
     endpoints: [
-      { method: 'GET', path: '/api/skills.json', desc: 'Lista as 66.496 skills com preços, categorias e comandos de instalação', size: '~7 MB' },
+      { method: 'GET', path: '/api/skills.json', desc: 'Manifesto de deprecação — o dump de 7MB foi retirado; use /api/skills paginado (68,388 entradas)', size: '~1 KB' },
       { method: 'GET', path: '/api/categories.json', desc: 'Lista as 16 categorias com contagem de skills', size: '~2 KB' },
       { method: 'GET', path: '/api/manifest.json', desc: 'Metadados da API, contagem total de skills, versão', size: '~1 KB' },
       { method: 'GET', path: '/api/agent.json', desc: 'Instruções de agente legíveis por máquina, schema, workflow', size: '~3 KB' },
@@ -133,7 +133,7 @@ const CONTENT = {
     workflowTitle: 'WORKFLOW DO AGENTE',
     stepPrefix: 'PASSO',
     workflowSteps: [
-      { step: '1', title: 'Descobrir', desc: 'GET /api/skills.json' },
+      { step: '1', title: 'Descobrir', desc: 'GET /api/manifest.json' },
       { step: '2', title: 'Filtrar', desc: 'Por categoria, preço, tags' },
       { step: '3', title: 'Avaliar', desc: 'Ler descrição + score' },
       { step: '4', title: 'Comprar', desc: 'Compradores instalam grátis' },
@@ -164,7 +164,7 @@ const CONTENT = {
     subtitle: '自主 agent 从 MarketNow 发现、评估和安装 skills 所需的一切。所有 endpoints 都是公开的、JSON 格式且启用 CORS。读取无需 API key。',
     endpointsTitle: '公开 ENDPOINTS',
     endpoints: [
-      { method: 'GET', path: '/api/skills.json', desc: '列出全部 68,388 个 skills，含价格、分类和安装命令', size: '~7 MB' },
+      { method: 'GET', path: '/api/skills.json', desc: '弃用清单 — 7MB 数据转储已移除；请使用分页 /api/skills（68,388 条）', size: '~1 KB' },
       { method: 'GET', path: '/api/categories.json', desc: '列出全部 16 个分类及其 skill 数量', size: '~2 KB' },
       { method: 'GET', path: '/api/manifest.json', desc: 'API 元数据、skill 总数、版本', size: '~1 KB' },
       { method: 'GET', path: '/api/agent.json', desc: '机器可读的 agent 指令、schema、workflow', size: '~3 KB' },
@@ -181,7 +181,7 @@ const CONTENT = {
     workflowTitle: 'AGENT WORKFLOW',
     stepPrefix: '步骤',
     workflowSteps: [
-      { step: '1', title: '发现', desc: 'GET /api/skills.json' },
+      { step: '1', title: '发现', desc: 'GET /api/manifest.json' },
       { step: '2', title: '筛选', desc: '按分类、价格、tags' },
       { step: '3', title: '评估', desc: '阅读描述 + score' },
       { step: '4', title: '购买', desc: '全部免费' },

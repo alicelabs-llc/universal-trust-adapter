@@ -137,7 +137,7 @@ curl "https://www.marketnow.site/api/free-skills.json"
 curl "https://www.marketnow.site/api/agent.json"
 
 # Verify a security certificate
-curl "https://www.marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-filesystem"</code></pre>
+curl "https://www.marketnow.site/api/audit-skill?certificate=1&skillId=real-discord-mcp"</code></pre>
 
     <h2>📋 Agent Discovery Endpoints</h2>
     <table>
@@ -157,7 +157,7 @@ curl "https://www.marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-fi
     <h2>🛡️ Security Certificate Verification</h2>
     <p>Every skill has a signed SHA-256 security certificate. Agents should verify before installing:</p>
     <pre><code># Get certificate for a skill
-curl "https://www.marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-filesystem"
+curl "https://www.marketnow.site/api/audit-skill?certificate=1&skillId=real-discord-mcp"
 
 # Response:
 {
@@ -206,7 +206,7 @@ curl "https://www.marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-fi
         <li><strong>AP2 Mandates</strong> — human-in-the-loop by default, agents opt into silent mode</li>
     </ul>
     <pre><code># Agent purchase flow
-POST https://www.marketnow.site/api/agent-purchase
+POST https://www.marketnow.site/api/agent-purchase (PLANNED — gate C1; responds with commerce status JSON)
 Content-Type: application/json
 
 {
@@ -250,7 +250,7 @@ GET https://www.marketnow.site/.well-known/agent.json
     </div>
     <div class="card">
         <h3>Step 3: Verify</h3>
-        <pre><code>GET https://www.marketnow.site/api/audit-skill?certificate=1&skillId=mn-mcp-filesystem</code></pre>
+        <pre><code>GET https://www.marketnow.site/api/audit-skill?certificate=1&skillId=real-discord-mcp</code></pre>
     </div>
     <div class="card">
         <h3>Step 4: Install</h3>

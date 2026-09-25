@@ -55,5 +55,6 @@
     "Hard caps: max $500 total per mandate, max $50 per single purchase (cannot be raised)",
     "Default 90-day expiry; mandates auto-expire"
   ],
-  "human_in_loop_disclosure": "This is the core of Claude's feedback: human-in-the-loop is the DEFAULT, not opt-out. The 'no humans needed' framing has been removed from the site. Mandates notify the principal by default; silent autonomous spending requires explicit opt-in. This is implemented in code (mandates.js enforces notificationMode validation), not just in copy."
+  "human_in_loop_disclosure": "This is the core of Claude's feedback: human-in-the-loop is the DEFAULT, not opt-out. The 'no humans needed' framing has been removed from the site. Mandates notify the principal by default; silent autonomous spending requires explicit opt-in. This is implemented in code (mandates.js enforces notificationMode validation), not just in copy.",
+  "api_endpoint_status": "planned — GET /api/mandates returns the commerce status JSON until the mandate ledger is live (gate C1)"
 }

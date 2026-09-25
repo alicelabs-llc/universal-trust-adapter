@@ -17,7 +17,7 @@ AGENT WALLET INFO (how to pay):
 curl https://www.marketnow.site/api/agent-wallet
 
 BUY A SKILL WITH USDC:
-POST https://www.marketnow.site/api/agent-purchase
+POST https://www.marketnow.site/api/agent-purchase (PLANNED gate C1 — responds with commerce status JSON)
 Body: {"skillId":"mn-gen-00015","walletAddress":"0x...","txHash":"0x..."}
 
 SECURITY AUDIT:

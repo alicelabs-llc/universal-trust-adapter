@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marketnow.site/.well-known/mcp.schema.json",
+  "title": "MarketNow MCP server card",
+  "description": "Schema for the MarketNow MCP discovery document (/.well-known/mcp.json). Validated 2026-09-25 against the served document.",
+  "type": "object",
+  "required": [
+    "name",
+    "version",
+    "transport",
+    "tools"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "const": "marketnow"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 40
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri"
+    },
+    "repository": {
+      "type": "string",
+      "format": "uri"
+    },
+    "npm_package": {
+      "type": "string"
+    },
+    "npm_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "install": {
+      "type": "string"
+    },
+    "transport": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "http_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "stdio_command": {
+          "type": "string"
+        },
+        "sse_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "tools": {
+      "type": "array",
+      "minItems": 9,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "description"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^marketnow_[a-z_]+$"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 20
+          }
+        }
+      }
+    },
+    "tool_counts": {
+      "type": "object",
+      "properties": {
+        "remote_endpoint": {
+          "type": "integer",
+          "minimum": 9
+        },
+        "npm_package": {
+          "type": "integer",
+          "minimum": 15
+        }
+      }
+    },
+    "marketplace_stats": {
+      "type": "object",
+      "properties": {
+        "total_skills": {
+          "type": "integer",
+          "minimum": 60000
+        },
+        "categories": {
+          "type": "integer",
+          "minimum": 40
+        },
+        "currency": {
+          "type": "string"
+        },
+        "payment_model": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

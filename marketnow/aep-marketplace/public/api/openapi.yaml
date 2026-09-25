@@ -269,173 +269,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Bundle'
-  /api/create-checkout-session:
-    post:
-      summary: Create Stripe Checkout session
-      description: 'Creates a Stripe Checkout session for purchasing a skill. Returns a URL that the user
-        (or agent''s human operator) should be redirected to. After payment, Stripe redirects back to
-        /vault?success=true&skillId=X.
-
-
-        **This endpoint creates real charges in LIVE mode.**'
-      operationId: createCheckoutSession
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-              - skillId
-              properties:
-                skillId:
-                  type: string
-                  description: Skill ID (e.g. mn-gen-00015)
-                  example: mn-gen-00015
-                affiliateCode:
-                  type: string
-                  description: Optional affiliate code for commission tracking
-                  example: aff_abc12345
-      responses:
-        '200':
-          description: Checkout session created
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  url:
-                    type: string
-                    format: uri
-                    description: Stripe Checkout URL
-                  sessionId:
-                    type: string
-                    description: Stripe session ID (cs_live_...)
-        '400':
-          description: Missing skillId
-        '404':
-          description: Skill not found
-        '503':
-          description: Stripe not configured
-  /api/stripe-webhook:
-    post:
-      summary: Stripe webhook receiver
-      description: 'Receives Stripe webhook events. Verifies signature using STRIPE_WEBHOOK_SECRET. Handles:
-        checkout.session.completed, payment_intent.payment_failed, charge.refunded.
-
-
-        **This endpoint is called by Stripe, not by agents.**'
-      operationId: stripeWebhook
-      responses:
-        '200':
-          description: Webhook received
-        '400':
-          description: Invalid signature
-  /api/mandates:
-    get:
-      summary: Get / list delegated mandates
-      description: ACP / AP2 delegated mandates. With ?id= returns a single mandate. With ?owner=0x...
-        returns all mandates owned by that wallet. With ?agent=agent_xxx returns all mandates granted
-        to that agent.
-      operationId: getMandates
-      parameters:
-      - name: id
-        in: query
-        required: false
-        schema:
-          type: string
-        description: mand_xxx
-      - name: owner
-        in: query
-        required: false
-        schema:
-          type: string
-        description: wallet address (lowercase)
-      - name: agent
-        in: query
-        required: false
-        schema:
-          type: string
-        description: agentId
-      responses:
-        '200':
-          description: Mandate(s) returned
-        '404':
-          description: Not found
-    post:
-      summary: Create / revoke / spend a mandate
-      description: 'Three actions selected by the ''action'' field in the body:
-
-        - (no action): create a new mandate
-
-        - action=revoke: revoke a mandate by id
-
-        - action=spend: record a spend against a mandate (called internally by /api/agent-purchase after
-        a successful on-chain payment)'
-      operationId: postMandates
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                action:
-                  type: string
-                  enum:
-                  - revoke
-                  - spend
-                owner:
-                  type: string
-                  description: wallet address (create only)
-                agentId:
-                  type: string
-                  description: create only
-                agentName:
-                  type: string
-                  description: create only, optional
-                spendingLimitUsd:
-                  type: number
-                  minimum: 0.01
-                  maximum: 500
-                  description: create only
-                perPurchaseCapUsd:
-                  type: number
-                  minimum: 0.01
-                  maximum: 50
-                  description: create only, optional
-                categories:
-                  type: array
-                  items:
-                    type: string
-                  description: create only, optional (defaults to ['*'])
-                expiresAt:
-                  type: string
-                  format: date-time
-                  description: create only, optional
-                signature:
-                  type: string
-                  description: EIP-191 signature over mandate hash, optional but recommended
-                id:
-                  type: string
-                  description: required for revoke / spend
-                amount:
-                  type: number
-                  description: required for spend
-                txHash:
-                  type: string
-                  description: optional for spend, on-chain tx reference
-      responses:
-        '200':
-          description: Action completed
-        '201':
-          description: Mandate created
-        '400':
-          description: Validation error
-        '404':
-          description: Mandate not found
-        '409':
-          description: Mandate revoked / expired / insufficient remaining
   /api/atc:
     get:
       summary: Agent Trust Card (ATC) — verify identity, validity, and review evidence
@@ -449,8 +282,9 @@ paths:
         not the card).
 
 
-        Action-receipts (also v1.1.0): signed delivery proof for completed purchases. Emitted automatically
-        by POST /api/agent-purchase. Verify with action=verify-receipt.'
+        Action-receipts (also v1.1.0): signed delivery proof for completed purchases (PLANNED, gate C1 —
+        will be emitted by POST /api/agent-purchase once the purchase ledger is live). Verify with
+        action=verify-receipt.'
       operationId: atcOperations
       parameters:
       - name: action
@@ -544,71 +378,6 @@ paths:
           description: Missing required field
         '503':
           description: CA not configured
-  /api/agent-purchase:
-    post:
-      summary: Agent programmatic purchase (USDC on Base + mandate-aware)
-      description: 'Dual-mode purchase endpoint. Returns one of: instant_download (free skill), instant_purchase
-        (paid skill with valid mandate + verified USDC tx), direct_purchase (paid skill with verified
-        USDC tx, no mandate), requires_payment (mandate valid but no txHash yet), requires_human_approval
-        (no mandate and no payment — agent must request approval).'
-      operationId: agentPurchase
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-              - skillId
-              properties:
-                skillId:
-                  type: string
-                walletAddress:
-                  type: string
-                  description: agent's wallet, required for paid
-                txHash:
-                  type: string
-                  description: USDC Transfer on Base, required for paid
-                mandateId:
-                  type: string
-                  description: optional, enables autonomous purchase within pre-approved limit
-                agentId:
-                  type: string
-                  description: optional, for tracking
-      responses:
-        '200':
-          description: Purchase response — check the 'mode' field to determine next step
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  mode:
-                    type: string
-                    enum:
-                    - instant_download
-                    - instant_purchase
-                    - direct_purchase
-                    - requires_payment
-                    - requires_human_approval
-                  license:
-                    type: object
-                  system_prompt:
-                    type: string
-                  install:
-                    type: string
-                  mandate:
-                    type: object
-                  options:
-                    type: object
-        '400':
-          description: Payment verification failed
-        '404':
-          description: Skill or mandate not found
-        '405':
-          description: Method not allowed
   /api/security:
     get:
       summary: Security overview — 10 audit layers with per-layer public evidence
@@ -1029,3 +798,6 @@ components:
               expires_at:
                 type: string
                 format: date-time
+
+# Commerce endpoints (agent-purchase, checkout, mandates) are PLANNED (gate C1)
+# and intentionally not listed; they respond with a status JSON via /api/skills?_mode=commerce.

@@ -1,9 +1,9 @@
 {
-  "agent_api_version": "2.0",
+  "agent_api_version": "2.1",
   "endpoints": {
     "search": {
       "method": "GET",
-      "path": "/api/skills.json",
+      "path": "/api/search",
       "params": {
         "q": "string - search query",
         "category": "string - filter by category",
@@ -14,17 +14,18 @@
         "limit": "number - max results (default 20, max 100)",
         "sort": "string - name|price|score|category"
       },
-      "example": "GET /api/skills.json?q=scrape&max_price=3&language=en&sort=price",
-      "returns": "Array of skills with all fields including translations"
+      "example": "GET /api/search?q=scrape&limit=20",
+      "returns": "Paginated skill list (page/limit/filter/sort/risk/tier params). /api/skills.json serves a deprecation manifest pointing here.",
+      "status": "live (rewrite of the paginated /api/skills API)"
     },
     "compare": {
       "method": "GET",
       "path": "/api/compare",
-      "params": {
-        "ids": "string - comma-separated skill IDs (max 5)"
-      },
-      "example": "GET /api/compare?ids=mn-prompt-01arquitecto,mn-gen-00003",
-      "returns": "Side-by-side comparison of skills"
+      "status": "removed",
+      "note": "The compare endpoint was retired. Use GET /api/skills?q= with the ids you want to compare, or /api/skill?slug=<slug>&_mode=json per skill.",
+      "params": {},
+      "example": "GET /api/skills?q=filesystem",
+      "returns": "Paginated skill list"
     },
     "bulk_download": {
       "method": "GET",
@@ -65,7 +66,8 @@
         "url": "string - Stripe Checkout URL",
         "sessionId": "string - Stripe session ID"
       },
-      "note": "Redirect user to the URL. After payment, Stripe redirects back to /vault?success=true"
+      "note": "Responds with the commerce status JSON until the purchase ledger is live (gate C1).",
+      "status": "planned"
     },
     "verify_purchase": {
       "method": "GET",
@@ -176,5 +178,7 @@
         }
       }
     }
-  }
+  },
+  "updated_at": "2026-09-25",
+  "source_of_truth": "/api/manifest.json + /api/openapi.json"
 }

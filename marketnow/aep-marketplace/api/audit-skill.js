@@ -6,19 +6,23 @@
  * See SENTINEL-LICENSE for full terms.
  *
  * "Sentinel" is a trademark of AliceLabs LLC.
- * Patent pending on the 3-layer audit pipeline (L1.5 → L1.6 → L2).
+ * Patent pending on the 3-stage real-time pipeline (metadata → static analysis → L2 trigger; legacy names L1.5 → L1.6 → L2).
  *
  * For licensing: legal@alicelabs.site
  * For verification: https://marketnow.site/verify
  */
 
 /**
- * MarketNow — Sentinel L1.5 + L1.6 + L2 Security Audit
+ * MarketNow — Sentinel v3.0 Security Audit (real-time path)
+ * Taxonomía oficial: 12 etapas / 10 capas (/security/sentinel-v3.0).
+ * El pipeline en tiempo real ejecuta: capa 2 (metadata estático, legacy 'L1.5') →
+ * capa 3 (Semgrep-equivalente 18 reglas + secret patterns + OSV, legacy 'L1.6') →
+ * dispara L2 deep-scan (29 reglas, Docker sandbox, GitHub Actions) sobre tarballs.
  * =====================================================
  *
  * Runs TWO layers in real-time on every call:
- *   L1.5: 6 metadata checks (AUTH, injection, validation, CORS, OAuth, rate limiting)
- *   L1.6: 18 Semgrep rules + 18 secret patterns + OSV dependency check
+ *   Capa 2 (legacy L1.5): 6 metadata checks (AUTH, injection, validation, CORS, OAuth, rate limiting)
+ *   Capa 3 (legacy L1.6): 18 Semgrep rules + 18 secret patterns + OSV dependency check
  *
  * L2 (Docker sandbox) runs via GitHub Actions — results are static in the catalog.
  *
@@ -290,7 +294,7 @@ async function handleSentinelStatus(req, res) {
     const data = {
       endpoint: '/api/audit-skill?sentinel-status=1',
       generated_at: new Date().toISOString(),
-      architecture: 'L1.5 (Vercel real-time) → L1.6 (Vercel real-time + weekly batch) → L2 (GitHub Actions Docker sandbox)',
+      architecture: 'Layer 2 metadata checks (real-time; legacy L1.5) → Layer 3 static analysis: 18 Semgrep rules + secrets + OSV (real-time + weekly batch; legacy L1.6) → L2 deep-scan 29 rules (GitHub Actions Docker sandbox)',
       l16_batch: batchResults
         ? {
             status: 'available',
@@ -312,7 +316,7 @@ async function handleSentinelStatus(req, res) {
           }
         : {
             status: 'not_run_yet',
-            message: 'No L1.6 batch audit has run yet. The cron is weekly (Sunday midnight UTC). Manual dispatch: Actions tab → Sentinel L1.6 Batch Audit → Run workflow.',
+            message: 'No weekly batch audit results are published yet. Batch audits run via CI on the weekly cadence; live status: /trust/audit-status.json.',
           },
       l2_sandbox: {
         status: l2Index.count > 0 ? 'available' : 'no_results_yet',
@@ -378,7 +382,7 @@ export default secureLight(async function handler(req, res) {
   if (checkRateLimit(req, res, 'audit')) return;
 
   // ─── Sub-endpoint: GET /api/audit-skill?sentinel-status=1 ─────────────
-  // Returns the latest L1.6 batch audit + L2 sandbox coverage. Merged here
+  // Returns the latest weekly batch (static layer 3) + L2 sandbox coverage. Merged here
   // to stay under Vercel Hobby's 12-serverless-function-per-deploy limit.
   if (req.method === 'GET' && (req.query['sentinel-status'] || req.query.sentinelStatus)) {
     return handleSentinelStatus(req, res);
@@ -595,7 +599,7 @@ export default secureLight(async function handler(req, res) {
     const failCount = checks.filter(c => c.status === 'fail').length;
     const warningCount = checks.filter(c => c.status === 'warning').length;
     
-    // Overall score (L1.5)
+    // Overall score (metadata layer 2, legacy L1.5)
     let overallScore = 10;
     overallScore -= criticalCount * 4;
     overallScore -= highCount * 2;
@@ -603,10 +607,10 @@ export default secureLight(async function handler(req, res) {
     overallScore -= failCount * 2;
     overallScore = Math.max(0, Math.min(10, overallScore));
 
-    // ═══ L1.6: Run enhanced analysis (Semgrep + Secrets + OSV) ═══
+    // ═══ Layer 3 (legacy L1.6): Run enhanced analysis (Semgrep + Secrets + OSV) ═══
     const l16Result = await runL16(skill);
 
-    // Apply L1.6 score adjustment
+    // Apply layer-3 score adjustment
     overallScore += l16Result.score_adjustment;
     overallScore = Math.max(0, Math.min(10, overallScore));
 
@@ -638,11 +642,11 @@ export default secureLight(async function handler(req, res) {
       l2Data.status = 'no_github_repo';
     }
 
-    // Build L1.6 checks for report
+    // Build layer-3 checks for report
     const l16Checks = [];
     if (l16Result.findings.semgrep.length > 0) {
       l16Checks.push({
-        name: 'L1.6 SEMGREP RULES',
+        name: 'LAYER 3 SEMGREP RULES',
         status: 'fail',
         detail: `${l16Result.findings.semgrep.length} finding(s): ${l16Result.findings.semgrep.map(s => s.name).join(', ')}`,
         risk: l16Result.findings.total_critical > 0 ? 'critical' : 'high',
@@ -651,7 +655,7 @@ export default secureLight(async function handler(req, res) {
       });
     } else {
       l16Checks.push({
-        name: 'L1.6 SEMGREP RULES',
+        name: 'LAYER 3 SEMGREP RULES',
         status: 'pass',
         detail: `${SEMGREP_RULES.length} rules checked, 0 findings`,
         risk: 'low',
@@ -661,7 +665,7 @@ export default secureLight(async function handler(req, res) {
 
     if (l16Result.findings.secrets.length > 0) {
       l16Checks.push({
-        name: 'L1.6 SECRET DETECTION',
+        name: 'LAYER 3 SECRET DETECTION',
         status: 'fail',
         detail: `${l16Result.findings.secrets.length} secret(s) found: ${l16Result.findings.secrets.map(s => s.name).join(', ')}`,
         risk: l16Result.findings.secrets.some(s => s.severity === 'critical') ? 'critical' : 'high',
@@ -670,7 +674,7 @@ export default secureLight(async function handler(req, res) {
       });
     } else {
       l16Checks.push({
-        name: 'L1.6 SECRET DETECTION',
+        name: 'LAYER 3 SECRET DETECTION',
         status: 'pass',
         detail: `${SECRET_PATTERNS.length} patterns checked, 0 secrets found`,
         risk: 'low',
@@ -680,7 +684,7 @@ export default secureLight(async function handler(req, res) {
 
     if (l16Result.findings.osv.length > 0) {
       l16Checks.push({
-        name: 'L1.6 OSV DEPENDENCIES',
+        name: 'LAYER 3 OSV DEPENDENCIES',
         status: 'fail',
         detail: `${l16Result.findings.osv.length} vulnerable dependencies: ${l16Result.findings.osv.map(v => v.id).join(', ')}`,
         risk: 'high',
@@ -689,7 +693,7 @@ export default secureLight(async function handler(req, res) {
       });
     } else {
       l16Checks.push({
-        name: 'L1.6 OSV DEPENDENCIES',
+        name: 'LAYER 3 OSV DEPENDENCIES',
         status: 'pass',
         detail: 'OSV API checked — no known vulnerabilities',
         risk: 'low',
@@ -697,12 +701,12 @@ export default secureLight(async function handler(req, res) {
       });
     }
 
-    // Merge L1.5 + L1.6 checks
+    // Merge metadata (L2) + static (L3) checks
     const allChecks = [...checks, ...l16Checks];
     const allCritical = criticalCount + l16Result.findings.total_critical;
     const allHigh = highCount + l16Result.findings.total_high;
 
-    // ─── FINAL risk_level: take the WORST of (L1.5+L1.6) and (L2 sandbox) ───
+    // ─── FINAL risk_level: take the WORST of (real-time layers 2+3) and (L2 deep-scan sandbox) ───
     // L2 detects runtime behavior (credential exfiltration, network calls, fs writes)
     // that static analysis cannot see — if L2 says critical, the skill is critical
     // even if the static score looks clean. Bug fix: previously L2 only adjusted
@@ -734,10 +738,10 @@ export default secureLight(async function handler(req, res) {
       },
       audit: {
         timestamp: new Date().toISOString(),
-        auditor: 'Sentinel L1.5 + L1.6 + L2 (Real-time Security Audit)',
+        auditor: 'Sentinel v3.0 (Real-time Security Audit; layers: metadata → static → L2-trigger)',
         overall_score: overallScore,
         max_score: 10,
-        summary: `L1.5: ${passCount} passed, ${warningCount} warnings, ${failCount} failed | L1.6: ${l16Result.findings.semgrep.length} semgrep, ${l16Result.findings.secrets.length} secrets, ${l16Result.findings.osv.length} OSV vulns | L2: ${l2Data.status}`,
+        summary: `metadata: ${passCount} passed, ${warningCount} warnings, ${failCount} failed | static (L3): ${l16Result.findings.semgrep.length} semgrep, ${l16Result.findings.secrets.length} secrets, ${l16Result.findings.osv.length} OSV vulns | L2: ${l2Data.status}`,
         risk_level: finalRisk,
         risk_breakdown: {
           l15_l16: l15l16Risk,

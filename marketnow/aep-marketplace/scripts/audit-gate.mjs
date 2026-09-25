@@ -466,6 +466,84 @@ try {
   for (const [ok, msg] of checks) log(ok ? '✓' : '✗', 'FORMATS-9', msg);
 } catch (e) { log('✗', 'FORMATS-9', e.message); }
 
+// ── Gate 18: 5ª RONDA — JSON válido + endpoints declarados vivos + i18n + free-count + mcp.canon ──
+try {
+  // 18a. JSON-VALID: los machine-readable de agentes deben parsear (agent-protocol.json era JSON inválido)
+  const mustParse = ['public/agent-protocol.json', 'public/api/agent-endpoint.json', 'public/api/agent-feed.json',
+    'public/api/manifest.json', 'public/api/mandates-info.json', 'public/api/openapi.json',
+    'public/.well-known/mcp.json', 'public/.well-known/agent.json', 'public/.well-known/mcp-marketplace.json',
+    'public/.well-known/mcp.schema.json', 'public/api/health.json', 'public/failure-taxonomy.json'];
+  const badJson = [];
+  for (const p of mustParse) {
+    try { JSON.parse(readFileSync(join(ROOT, p), 'utf8')); } catch { badJson.push(p); }
+  }
+  log(badJson.length ? '✗' : '✓', 'JSON-VALID', badJson.length ? `JSON inválido: ${badJson.join(', ')}` : `${mustParse.length} machine-readable parsean como JSON`);
+
+  // 18b. ENDPOINT-RESOLVE: cada path /api/ declarado en docs clave debe tener archivo estático, función o rewrite
+  const docs = ['public/agent-protocol.json', 'public/api/agent-endpoint.json', 'public/for-agents-quick.txt',
+    'public/llms.txt', 'public/llms-full.txt', 'public/agent-discover.txt'];
+  const decl = new Set();
+  const DECL_RE = /(?:GET|POST|PUT|DELETE|PATCH|curl(?:\s+-[A-Za-z]+)*)\s+(?:https?:\/\/[a-z.]*marketnow\.site)?(\/api\/[\w./-]+)/gi;
+  for (const p of docs) {
+    const txt = readFileSync(join(ROOT, p), 'utf8');
+    let m; DECL_RE.lastIndex = 0;
+    while ((m = DECL_RE.exec(txt))) decl.add(m[1].replace(/[.,]$/, ''));
+  }
+  try { for (const p of Object.keys(j('public/api/openapi.json').paths)) decl.add(p); } catch {}
+  try { for (const v of Object.values(j('public/api/agent-endpoint.json').endpoints || {})) if (v?.path) decl.add(v.path); } catch {}
+  const vercel = j('vercel.json');
+  const hasStatic = (p) => existsSync(join(ROOT, 'public', p)) || p === '/api/skills' || p === '/api/atc' || p === '/api/trust' || p === '/api/mcp' || p === '/api/skill' || p === '/api/audit-skill' || p === '/api/certification' || p === '/api/scam-check' || p === '/api/crl' || p === '/api/ocsp' || p === '/api/resilience' || p === '/api/trust-card';
+  const hasRewrite = (p) => vercel.rewrites.some(r => {
+    const s = r.source;
+    if (s === p) return true;
+    if (/\/:/.test(s)) { const base = s.split('/:')[0]; return p.startsWith(base + '/'); }
+    return false;
+  });
+  const unresolved = [...decl].filter(p => !hasStatic(p) && !hasRewrite(p) && !/X\b/.test(p));
+  log(unresolved.length ? '✗' : '✓', 'ENDPOINT-RESOLVE', unresolved.length ? `paths declarados sin resolución (estático/función/rewrite): ${unresolved.join(', ')}` : `${decl.size} paths declarados en docs clave resuelven (archivo, función o rewrite)`);
+
+  // 18c. I18N-STALE: números/claims viejos en las traducciones (66,496 julio-era, UTA v1.0.0, 8-formatos sin 9)
+  const i18nFiles = ['src/utils/translations.js', 'src/utils/i18n/uta.js', 'src/utils/i18n/ar.js', 'src/utils/i18n/de.js',
+    'src/utils/i18n/hi.js', 'src/utils/i18n/it.js', 'src/utils/i18n/ja.js', 'src/utils/i18n/ko.js',
+    'src/utils/i18n/ru.js', 'src/utils/i18n/tr.js'];
+  const i18nBad = [];
+  for (const p of i18nFiles) {
+    const txt = readFileSync(join(ROOT, p), 'utf8');
+    if (/66[.,]496|66 496/.test(txt)) i18nBad.push(`${p}: 66,496`);
+    if (/UTA v1\.0\.0/.test(txt)) i18nBad.push(`${p}: UTA v1.0.0`);
+    if (/(problem\.title|problem\.strong)[^'\n]*'[^'\n]*\b8\b/.test(txt)) i18nBad.push(`${p}: '8' en uta.problem`);
+  }
+  log(i18nBad.length ? '✗' : '✓', 'I18N-STALE', i18nBad.length ? i18nBad.join(' | ') : `${i18nFiles.length} archivos i18n sin 66,496 / UTA v1.0.0 / '8 formats'`);
+
+  // 18d. FREE-COUNT: free-skills.json == stats-base discovery.free (había off-by-one)
+  try {
+    const fsList = j('public/api/free-skills.json');
+    const expect = j('lib/stats-base.json').discovery.free;
+    log(Array.isArray(fsList) && fsList.length === expect ? '✓' : '✗', 'FREE-COUNT', `free-skills.json=${Array.isArray(fsList) ? fsList.length : 'n/a'} == stats free ${expect}`);
+  } catch (e) { log('✗', 'FREE-COUNT', `no se pudo contar: ${e.message}`); }
+
+  // 18e. MCP-CANON: mcp.json bien-known canónico (descripción 132,737 + stats + tool_counts + schema)
+  try {
+    const mcp = j('public/.well-known/mcp.json');
+    const ok = mcp.description.includes('(132,737 total tracked)') &&
+      mcp.marketplace_stats?.total_skills === 68388 &&
+      mcp.tool_counts?.remote_endpoint === 9 && mcp.tool_counts?.npm_package === 15 &&
+      existsSync(join(ROOT, 'public/.well-known/mcp.schema.json')) &&
+      JSON.stringify(mcp.tools).includes('9 adapter formats');
+    log(ok ? '✓' : '✗', 'MCP-CANON', ok ? 'mcp.json: desc 132,737 · 68,388 · tools 9 remotas (9 adapter formats) · tool_counts 9/15 · schema presente' : 'mcp.json canónico diverge (desc/stats/tool_counts/schema/9-formats)');
+  } catch (e) { log('✗', 'MCP-CANON', e.message); }
+
+  // 18f. COMMERCE-HONEST: endpoints de comercio declarados PLANNED en docs + respuesta tipada
+  const fq = readFileSync(join(ROOT, 'public/for-agents-quick.txt'), 'utf8');
+  const lf = readFileSync(join(ROOT, 'public/llms-full.txt'), 'utf8');
+  const ap = j('public/agent-protocol.json');
+  const commerceOk = /agent-purchase\s+→\s+PLANNED/.test(fq) && /PLANNED \(gate C1\)/.test(lf) &&
+    ap.agent_workflow?.step_6_pay?.includes('PLANNED') && ap.payment?.status?.startsWith('planned');
+  log(commerceOk ? '✓' : '✗', 'COMMERCE-HONEST', commerceOk ? 'commerce endpoints marcados PLANNED en for-agents-quick/llms-full/agent-protocol' : 'commerce endpoints sin marcar PLANNED en algún doc');
+  const skillsSrc = readFileSync(join(ROOT, 'api/skills.js'), 'utf8');
+  log(skillsSrc.includes("_mode === 'commerce'") && skillsSrc.includes("_mode === 'recommend'") ? '✓' : '✗', 'COMMERCE-HONEST', '_mode=commerce y _mode=recommend montados en api/skills.js');
+} catch (e) { log('✗', 'ROUND5', e.message); }
+
 // ── Gate live: producción (solo --live / reauditoría) ───────────────────────
 if (LIVE) {
   try {
@@ -582,6 +660,70 @@ if (LIVE) {
       log([301, 302, 307, 308].includes(utaSlash.status) && /\/uta$/.test(loc)
         ? '✓' : '✗', 'LIVE-SEC', `GET /uta/ → ${utaSlash.status} ${loc || '(sin redirect)'} (esperaba 3xx → /uta)`);
     } catch (e2) { log('✗', 'LIVE-SEC', `/uta vivo falló: ${e2.message}`); }
+    // 5ª ronda en vivo: los endpoints antes muertos ahora responden con JSON tipado
+    try {
+      const simple = [
+        ['/api/health', (r) => r.ok === true, 'ok:true'],
+        ['/api/manifest', (r) => r && (r.alternatives || r.endpoints || r.total_catalog), 'manifest JSON'],
+        ['/api/changelog', (r) => Array.isArray(r) || r.versions || r.changelog || r.length > 0, 'changelog JSON'],
+        ['/api/search?q=filesystem&limit=2', (r) => (r.total ?? 0) > 0, 'resultados de búsqueda'],
+        ['/api/skills/real-discord-mcp', (r) => r.ok === true && r.slug === 'real-discord-mcp', 'skill JSON'],
+        ['/api/trust-score?skillId=real-discord-mcp', (r) => r.ok === true && typeof r.trust_score === 'number', 'trust-score JSON'],
+        ['/api/agent-purchase', (r) => r.status === 'planned' && r.gate === 'C1', 'commerce status (planned)'],
+        ['/api/mandates', (r) => r.status === 'planned', 'mandates status (planned)'],
+        ['/api/verify-purchase', (r) => r.status === 'planned', 'verify-purchase status (planned)'],
+      ];
+      for (const [path, pred, label] of simple) {
+        try {
+          const res = await fetch(`${PROD}${path}`, { signal: AbortSignal.timeout(20000) });
+          const body = await res.json().catch(() => ({}));
+          log(res.status === 200 && pred(body) ? '✓' : '✗', 'LIVE-R5', `GET ${path} → 200 ${label}`);
+        } catch (e3) { log('✗', 'LIVE-R5', `GET ${path} falló: ${e3.message}`); }
+      }
+      // POST /api/recommend (heuristic recommender)
+      try {
+        const res = await fetch(`${PROD}/api/recommend`, {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ current_tools: ['filesystem'], agent_type: 'coding' }),
+          signal: AbortSignal.timeout(25000),
+        });
+        const body = await res.json().catch(() => ({}));
+        log(res.status === 200 && Array.isArray(body.recommendations) && body.recommendations.length > 0
+          ? '✓' : '✗', 'LIVE-R5', `POST /api/recommend → 200 con ${body.recommendations?.length ?? 0} recomendaciones`);
+      } catch (e3) { log('✗', 'LIVE-R5', `POST /api/recommend falló: ${e3.message}`); }
+      // agent-protocol.json vivo parsea (era JSON inválido en producción)
+      try {
+        const res = await fetch(`${PROD}/agent-protocol.json`, { signal: AbortSignal.timeout(20000) });
+        const apLive = await res.json();
+        log(res.status === 200 && apLive.stats?.index_certified === 68388 && apLive.payment?.status?.startsWith('planned')
+          ? '✓' : '✗', 'LIVE-R5', `agent-protocol.json vivo: JSON válido, 68,388, commerce planned`);
+      } catch (e3) { log('✗', 'LIVE-R5', `agent-protocol.json vivo: ${e3.message}`); }
+      // mcp.schema.json vivo (referenciado por $schema)
+      try {
+        const res = await fetch(`${PROD}/.well-known/mcp.schema.json`, { signal: AbortSignal.timeout(20000) });
+        log(res.status === 200 ? '✓' : '✗', 'LIVE-R5', `GET /.well-known/mcp.schema.json → ${res.status} (referenciado por $schema)`);
+      } catch (e3) { log('✗', 'LIVE-R5', `mcp.schema.json falló: ${e3.message}`); }
+      // free-skills.json vivo == stats free (off-by-one erradicado)
+      try {
+        const [fsRes, stRes] = await Promise.all([
+          fetch(`${PROD}/api/free-skills.json`, { signal: AbortSignal.timeout(60000) }),
+          fetch(`${PROD}/api/stats.json`, { signal: AbortSignal.timeout(20000) }),
+        ]);
+        const fsList = await fsRes.json();
+        const st = await stRes.json();
+        const liveFree = st?.discovery?.free ?? st?.skills?.free;
+        log(Array.isArray(fsList) && fsList.length === liveFree
+          ? '✓' : '✗', 'LIVE-R5', `free-skills.json vivo=${Array.isArray(fsList) ? fsList.length : 'n/a'} == stats free ${liveFree}`);
+      } catch (e3) { log('✗', 'LIVE-R5', `free-skills vivo falló: ${e3.message}`); }
+      // audit-skill: taxonomía oficial en la respuesta (antes decía L1.5+L1.6 muertos)
+      try {
+        const res = await fetch(`${PROD}/api/audit-skill?skillId=real-discord-mcp`, { signal: AbortSignal.timeout(30000) });
+        const body = await res.json();
+        const aud = String(body?.audit?.auditor || '');
+        log(res.status === 200 && aud.includes('Sentinel v3.0') && !aud.includes('L1.5')
+          ? '✓' : '✗', 'LIVE-R5', `audit-skill vivo: auditor="${aud.slice(0, 60)}…" (taxonomía oficial)`);
+      } catch (e3) { log('✗', 'LIVE-R5', `audit-skill vivo falló: ${e3.message}`); }
+    } catch (e2) { log('✗', 'LIVE-R5', `bloque 5ª ronda vivo falló: ${e2.message}`); }
   } catch (e) { log('✗', 'LIVE-SEC', `verificación de superficies falló: ${e.message}`); }
 }
 

@@ -29,19 +29,7 @@
     },
     {
       "source": "/api/trust-score",
-      "destination": "/api/atc?action=trust"
-    },
-    {
-      "source": "/api/execute",
-      "destination": "/api/agent-economy?_mode=execute"
-    },
-    {
-      "source": "/api/stacks",
-      "destination": "/api/agent-economy?_mode=stacks"
-    },
-    {
-      "source": "/api/stream",
-      "destination": "/api/agent-economy?_mode=stream"
+      "destination": "/api/skill?_mode=trust-score"
     },
     {
       "source": "/api/interceptor",
@@ -49,11 +37,11 @@
     },
     {
       "source": "/api/skills/:id",
-      "destination": "/api/search?_mode=detail"
+      "destination": "/api/skill?_mode=json&slug=:id"
     },
     {
       "source": "/api/recommend",
-      "destination": "/api/search?_mode=recommend"
+      "destination": "/api/skills?_mode=recommend"
     },
     {
       "source": "/s/:slug",
@@ -206,6 +194,62 @@
     {
       "source": "/security/incidents/2026-09-08",
       "destination": "/security/incidents/2026-09-08/index.html"
+    },
+    {
+      "source": "/api/search",
+      "destination": "/api/skills"
+    },
+    {
+      "source": "/api/health",
+      "destination": "/api/health.json"
+    },
+    {
+      "source": "/api/manifest",
+      "destination": "/api/manifest.json"
+    },
+    {
+      "source": "/api/changelog",
+      "destination": "/changelog.json"
+    },
+    {
+      "source": "/api/mandates",
+      "destination": "/api/skills?_mode=commerce"
+    },
+    {
+      "source": "/api/agent-purchase",
+      "destination": "/api/skills?_mode=commerce"
+    },
+    {
+      "source": "/api/create-checkout-session",
+      "destination": "/api/skills?_mode=commerce"
+    },
+    {
+      "source": "/api/stripe-webhook",
+      "destination": "/api/skills?_mode=commerce"
+    },
+    {
+      "source": "/api/verify-purchase",
+      "destination": "/api/skills?_mode=commerce"
+    },
+    {
+      "source": "/api/acp",
+      "destination": "/api/skills?_mode=planned"
+    },
+    {
+      "source": "/api/agent-register",
+      "destination": "/api/skills?_mode=planned"
+    },
+    {
+      "source": "/api/ai-match",
+      "destination": "/api/skills?_mode=planned"
+    },
+    {
+      "source": "/api/compare",
+      "destination": "/api/skills?_mode=planned"
+    },
+    {
+      "source": "/api/agent-wallet",
+      "destination": "/api/agent-wallet.json"
     }
   ],
   "headers": [

@@ -55,6 +55,105 @@ export default function handler(req, res) {
   if (req.query._mode === 'security') {
     return securityResponse(req, res);
   }
+
+  // ── 5ª ronda (2026-09-25): commerce endpoints declarados como PLANNED ──
+  // /api/agent-purchase, /api/create-checkout-session, /api/stripe-webhook,
+  // /api/verify-purchase, /api/mandates → rewritten here as _mode=commerce.
+  // Antes 404aban (documento muerto en openapi + docs de agentes). Ahora
+  // responden con el estado real: la implementación vive en server/routes/
+  // (checkout.js) pero NO está desplegada en Vercel (cap 12 funciones Hobby +
+  // STRIPE_SECRET_KEY sin configurar). Gate C1 del plan agent-commerce.
+  if (req.query._mode === 'commerce') {
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    return res.status(200).json({
+      status: 'planned',
+      gate: 'C1',
+      note: 'Commerce endpoints are not live yet. This response replaces a former 404 so agents get a typed, honest answer.',
+      implemented_but_not_deployed: [
+        'server/routes/checkout.js (Stripe checkout + webhook, needs STRIPE_SECRET_KEY)',
+        'server/routes/vault.js (USDC on Base payments)',
+        'AP2 delegated mandates ledger (see /api/mandates-info.json for the policy)'
+      ],
+      what_works_today: {
+        free_install: 'every free skill (68,387 of 68,388) installs directly — see /api/free-skills.json',
+        skill_detail: '/s/<slug> (page) · /api/skills/<slug> (JSON)',
+        trust: '/api/trust-score?skillId=<slug> · certificates: /api/audit-skill?certificate=1&skillId=<slug>',
+        payments_today: 'none — no payment is collected anywhere on the site today'
+      },
+      see_also: [
+        '/api/manifest.json', '/api/openapi.json', '/licensing',
+        'https://marketnow.site/agent-protocol.json (payment.status)'
+      ],
+      source_of_truth: '/api/stats.json'
+    });
+  }
+
+  // ── 5ª ronda: _mode=planned — respuesta tipada para endpoints declarados pero no implementados ──
+  // /api/acp, /api/agent-register, /api/ai-match, /api/compare → rewritten here.
+  // Antes 404aban siendo documentados en for-agents-quick/agent-discover/agent-endpoint.
+  if (req.query._mode === 'planned') {
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    return res.status(200).json({
+      status: 'planned',
+      note: 'This endpoint is documented but not implemented yet. The typed response replaces a former 404 so agents can rely on it.',
+      planned: {
+        '/api/acp': 'Agent Communication Protocol API (discover/negotiate/execute/rate) — design phase; today see /acp (docs) and /agent-protocol.json (MAP)',
+        '/api/agent-register': 'agent registration — GitHub-issue based for now (see /agent-protocol.json agent_registration)',
+        '/api/ai-match': 'AI matching — coming soon; today use /api/search?q= and filter client-side',
+        '/api/compare': 'removed — use /api/skills?q=<ids> or /api/skills/<slug> (JSON) per skill'
+      },
+      wallet_info: '/api/agent-wallet.json (static, live)',
+      source_of_truth: '/api/manifest.json'
+    });
+  }
+
+  // ── 5ª ronda: POST /api/recommend (prometido en for-agents-quick/llms-full) ──
+  // Recomendador heurístico real sobre el bundle: categorías de las tools
+  // actuales → top skills libres por sentinel_score, excluyendo las que ya tiene.
+  if (req.query._mode === 'recommend') {
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    let body = {};
+    try { body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {}); } catch { body = {}; }
+    const currentTools = Array.isArray(body.current_tools) ? body.current_tools.map(String) : [];
+    const agentType = String(body.agent_type || 'general').toLowerCase();
+    const list = skillsData.skills || skillsData || [];
+    const owned = new Set(currentTools.map(t => t.toLowerCase()));
+    // categorías preferidas: la del agent_type si existe mapeo, sino las más populares
+    const CAT_BY_TYPE = {
+      coding: ['developer-tools', 'version-control', 'search'], research: ['search', 'ai-ml', 'data'],
+      data: ['data', 'developer-tools', 'monitoring'], finance: ['finance', 'security'],
+      communication: ['communication', 'browser-automation'], security: ['security', 'monitoring']
+    };
+    const prefer = CAT_BY_TYPE[agentType] || ['developer-tools', 'search', 'ai-ml'];
+    const scored = list
+      .filter(s => (s.free === true || s.is_free === true || (s.price === 0 && !s.payment)))
+      .filter(s => !owned.has(String(s.slug || '').toLowerCase()) && !owned.has(String(s.name || '').toLowerCase()))
+      .map(s => {
+        const cat = String(s.category || '').toLowerCase().trim().replace(/[\s/]+/g, '-');
+        let score = (typeof s.sentinel_score === 'number' ? s.sentinel_score : 5) * 10;
+        if (prefer.includes(cat)) score += 30;
+        if (s.risk_level === 'red') score -= 100;
+        return { slug: s.slug, name: s.name, category: s.category, sentinel_score: s.sentinel_score ?? null, risk_level: s.risk_level ?? 'unknown', install: s.install || null, score };
+      })
+      .filter(s => s.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 5);
+    return res.status(200).json({
+      ok: true,
+      method: 'heuristic (category match + sentinel score; no ML in this endpoint)',
+      input: { current_tools: currentTools.length, agent_type: agentType },
+      recommendations: scored,
+      note: 'Scores are Sentinel audit scores (0-10). Verify any skill with /api/trust-score?skillId=<slug> before installing.',
+      see_also: ['/api/skills?sort=trust', '/api/free-skills.json']
+    });
+  }
+
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=600');
   res.setHeader('Access-Control-Allow-Origin', '*');

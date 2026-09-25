@@ -265,12 +265,57 @@ export default function handler(req, res) {
   // /api/badge/:slug (rewrite) y /api/badge?slug= (rewrite) → modo badge
   if (req.query._mode === 'badge') { badgeResponse(req, res); return; }
 
-  const slug = String(req.query.slug || '').toLowerCase().trim();
+  const slug = String(req.query.slug || req.query.skillId || '').toLowerCase().trim();
   const skill = findSkill(slug);
 
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+
+  // ── 5ª ronda (2026-09-25): /api/skills/:id → JSON (antes 404 vía rewrite muerto) ──
+  if (req.query._mode === 'json') {
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=600');
+    if (!skill) {
+      return res.status(404).json({ ok: false, error: 'skill_not_found', slug, hint: 'GET /api/skills?q=<term> to search, or /api/manifest.json for the catalog map' });
+    }
+    const trust = Number.isFinite(skill.trust_score_100) ? skill.trust_score_100 : (skill.sentinel_score || 0) * 10;
+    return res.status(200).json({
+      ok: true, id: skill.id, name: skill.name, slug: skill.slug, category: skill.category,
+      description: skill.description || null, price: skill.price ?? null, free: skill.free ?? null,
+      payment: skill.payment || null,
+      sentinel_score: skill.sentinel_score ?? null, trust_score_100: Math.round(trust),
+      risk_level: skill.risk_level || 'unknown', install: skill.install || null,
+      page_url: `${SITE}/s/${skill.slug}`, badge_url: `${SITE}/api/badge/${encodeURIComponent(skill.slug)}.svg`,
+      certificate_url: `${SITE}/api/audit-skill?certificate=1&skillId=${encodeURIComponent(skill.slug)}`,
+      trust_score_url: `${SITE}/api/trust-score?skillId=${encodeURIComponent(skill.slug)}`
+    });
+  }
+
+  // ── 5ª ronda: /api/trust-score?skillId=X (antes rewrite a una acción inválida de atc.js) ──
+  if (req.query._mode === 'trust-score') {
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=600');
+    if (!skill) {
+      return res.status(404).json({ ok: false, error: 'skill_not_found', skillId: slug, hint: 'GET /api/skills?q=<term> to find slugs' });
+    }
+    const score10 = Number.isFinite(skill.sentinel_score) ? skill.sentinel_score : null;
+    const score100 = Number.isFinite(skill.trust_score_100) ? skill.trust_score_100 : (score10 != null ? score10 * 10 : null);
+    const risk = String(skill.risk_level || 'yellow').toLowerCase();
+    let recommendation;
+    if (risk === 'red') recommendation = 'do_not_install';
+    else if (score10 != null && score10 >= 8) recommendation = 'safe_to_install';
+    else if (score10 != null && score10 >= 5) recommendation = 'install_with_caution';
+    else if (score10 != null && score10 >= 2) recommendation = 'review_before_install';
+    else recommendation = 'insufficient_data';
+    return res.status(200).json({
+      ok: true, skillId: slug, trust_score: score10, trust_score_100: score100 != null ? Math.round(score100) : null,
+      max_score: 10, risk_level: risk, recommendation,
+      certificate_url: `${SITE}/api/audit-skill?certificate=1&skillId=${encodeURIComponent(skill.slug)}`,
+      scale: '0-10 (Sentinel audit score; 100-scale is the display score)', source: '/api/skill?_mode=trust-score',
+      levels: { safe_to_install: '>=8', install_with_caution: '5-7', review_before_install: '2-4', do_not_install: '0-1' }
+    });
+  }
 
   if (!skill) {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
