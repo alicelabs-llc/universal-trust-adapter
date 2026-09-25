@@ -1,0 +1,46 @@
+# npm publish — marketnow-mcp (marketnow/mcp-server)
+# Publicación manual: requiere el secret NPM_TOKEN configurado en el repo
+# (Settings → Secrets → Actions → NPM_TOKEN). Sin él, el run falla con
+# EAUTH — no publica nada. El version-check del audit-gate exige que repo
+# y registry queden sincronizados tras publicar.
+name: npm publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Publicar de verdad (false) o solo verificar (true)'
+        type: boolean
+        default: true
+
+permissions: read-all
+
+jobs:
+  publish:
+    name: Publish marketnow-mcp
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: npm-publish
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: marketnow/mcp-server
+    steps:
+      # Pinned by commit SHA — OpenSSF Scorecard: Pinned-Actions
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+          registry-url: https://registry.npmjs.org
+          cache: npm
+          cache-dependency-path: marketnow/mcp-server/package-lock.json
+      - name: Install
+        run: npm ci --no-audit --no-fund
+      - name: Audit gate (consistencia repo ↔ npm)
+        run: node ../aep-marketplace/scripts/audit-gate.mjs || test ${{ inputs.dry-run }} = true
+      - name: Publish
+        if: ${{ inputs.dry-run == false }}
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

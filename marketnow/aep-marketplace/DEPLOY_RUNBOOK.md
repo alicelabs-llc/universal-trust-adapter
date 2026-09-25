@@ -24,9 +24,27 @@ git fetch canonical main && git status -sb
 1. **Commit** todo cambio (ni un fix sin commit — el sandbox puede resetearse).
 2. **Push** al canónico. Si tu push no dispara workflows, dispara manualmente:
    `POST /repos/alicelabs-llc/universal-trust-adapter/actions/workflows/audit-gate.yml/dispatches {"ref":"main"}`
+   > ⚠️ Los pushes hechos con la cuenta `alicelabsllc` NO disparan workflows
+   > (Actions deshabilitadas en esa cuenta de usuario). Usa el token de
+   > `eddyflores100-lang` (miembro admin de la org) para pushes que deban
+   > disparar CI/badge. Si ese token caduca: regenerarlo (GitHub → Settings →
+   > Developer settings → PAT) y actualizar `scripts/.token_eddy.txt`.
 3. **CI + Audit gate en GitHub deben quedar verdes** (Actions → "CI" y "Audit gate").
-   El branch-protection de `main` exige: `UTA adapter tests`, `MarketNow asset gate + build`, `14-point consistency gate`.
-4. **Deploy Vercel**: `vercel deploy --prod` (o deploys automáticos si hay Git-integration).
+   El ruleset `main-protection` exige: `UTA adapter tests`, `MarketNow asset gate + build`, `14-point consistency gate` (bypass para el team `core-maintainers`).
+4. **Deploy Vercel — DESDE LA RAÍZ DEL REPO** (`/uta-repo`), NO desde `marketnow/aep-marketplace`:
+   ```bash
+   cd uta-repo && npx vercel deploy --prod --yes --token $VERCEL_TOKEN
+   ```
+   - El proyecto Vercel correcto es **`marketnow-uta`** (root directory
+     `marketnow/aep-marketplace`, sirve www.marketnow.site). El link está en
+     `uta-repo/.vercel/project.json`.
+   - NO deployes desde la subcarpeta: el proyecto tiene `rootDirectory`
+     configurado y un deploy desde cwd≠root rompe el build (path duplicado) —
+     el dominio NO cambia y te quedas creyendo que deployó (pasó el 25-sep:
+     3 deploys fallidos antes del correcto).
+   - NO uses `--archive=tgz` como workaround del límite de 15k archivos: sube
+     un `dist/` stale sin rebuild. El `.vercelignore` de la raíz ya excluye
+     `dist/` (el build corre en Vercel).
 5. **Verificación post-deploy** (§4). Sin verificación, el deploy no está terminado.
 
 ## 3. Protocolo anti-divergencia

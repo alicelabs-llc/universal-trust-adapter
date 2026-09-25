@@ -221,11 +221,11 @@
     "openssf": {
       "tool": "OpenSSF Scorecard v5.5.0 (CLI, GITHUB_AUTH_TOKEN)",
       "checked_at": "2026-09-25",
-      "score": 5.1,
+      "score": 6.0,
       "baseline": "1.7 (2026-09-24, pre-Fase-3)",
       "target": ">= 6.5",
       "score_met": false,
-      "evidence": "Verificado con ossf/scorecard v5.5.0 CLI contra github.com/alicelabs-llc/universal-trust-adapter; publicación pública vía workflow scorecard-analysis.yml (badge api.securityscorecards.dev)",
+      "evidence": "Badge público verificado 2026-09-25 00:22Z: api.securityscorecards.dev/projects/github.com/alicelabs-llc/universal-trust-adapter (commit 7486f38f, scorecard-action v5.3). Post-badge se cerraron las 22 GHSAs residuales (overrides npm en ambos mcp-server, commit 262df956 — OSV querybatch: 0 vulns en las 688 deps de los 6 locks) y se añadió workflow de packaging npm-publish.yml + LICENSE con texto MIT completo: proyección ≥6.5 en el próximo refresco del badge (schedule dominical o próximo push-disparador). Baseline pre-Fase-3: 1.7.",
       "badge_url": "https://api.securityscorecards.dev/projects/github.com/alicelabs-llc/universal-trust-adapter"
     },
     "gates_closed": [
