@@ -1,11 +1,14 @@
 # Universal Trust Adapter (UTA)
 
 > **Repo ecosystem (one owner per concern, split 2026-09-26):** this repo owns the
-> **ATC/1.0 protocol only** (spec, adapters, reference implementation, plugins).
-> Product code (`mcp-server`, npm `marketnow-mcp`, atc-sdk, integrations) lives in
-> `alicelabs-llc/MARKETNOW`; the live marketplace (site, catalog data, data
-> pipelines, Vercel deploys of marketnow.site) lives in
-> `eddyflores100-lang/marketnow`.
+> **ATC protocol** — the v3.0 RFC draft ([`spec/`](./spec/)), the UTS schema, the
+> 36-vector conformance corpus ([`uta-monorepo/vectors/`](./uta-monorepo/vectors/)),
+> the reference implementation ([`uta-monorepo/`](./uta-monorepo/)), format adapters,
+> plugins, and the Stranger Manifesto.
+> Product code (`mcp-server`, npm `marketnow-mcp`, `atc-sdk`, integrations) lives in
+> [`alicelabs-llc/MARKETNOW`](https://github.com/alicelabs-llc/MARKETNOW); the live marketplace
+> (site, catalog data, data pipelines, Vercel deploys of marketnow.site) lives in
+> [`eddyflores100-lang/marketnow`](https://github.com/eddyflores100-lang/marketnow).
 
 **The USB-C of agent trust.**
 
@@ -102,12 +105,8 @@ The 2026 gray-market quota trust crisis, documented — plus the receipts-based 
 **Stranger-verifiable trust evidence:**
 
 - **Rekor transparency anchors (entries #1–#3)** — result digests committed to Sigstore's public append-only log; 9 local checks against live third-party data (run the stranger test above)
-
-**Stranger-verifiable trust evidence:**
-
-- **Rekor transparency anchors** — result digests committed to Sigstore's public append-only log; 9 local checks against live third-party data (run the stranger test above)
 - **Exercised CA key rotation** — `mn-ca-002` → `mn-ca-003` (key material found in a public repo; exposure confirmed, no third-party misuse), revocation published same-day — [postmortem](https://marketnow.site/security/incidents/2026-09-08), verifiers fail-safe inside the window
-- **Reproducible build** — `agent-trust-card@1.1.2`'s tar layer rebuilds byte-exact from source (the `.tgz` is anchored by digest; the tar layer by rebuild)
+- **Reproducible build** — `agent-trust-card`'s tar layer rebuilds byte-exact from source (the `.tgz` is anchored by digest; the tar layer by rebuild)
 - **New failure vectors** — `premature-atc` (credential accepted before verification completes), `expired-atc` (key no longer valid at verify time), stage scoring, published generator CA
 - **Conformance v1.3.3** — 14 public vectors · 24 checks + 10 mutants (runner-under-test) · versioned digests
 
@@ -139,8 +138,8 @@ UTA supports **TWO versions of ATC** (Agent Trust Card):
 
 | Version | Status | Multi-sig | Spec file | Description |
 |---|---|---|---|---|
-| **ATC/1.0** | Public, stable | Single-sig (Ed25519) | [`SPEC.md`](./marketnow/docs/atc-spec/SPEC.md) | Simple, single-CA credential. SDK at `agent-trust-card@1.1.2` on NPM. |
-| **ATC v3.0** | Draft 00, pre-public review | Multi-format (Ed25519 + EAT-CWT + W3C VC) | [`RFC-ATC-v3-Draft-00.md`](./marketnow/docs/atc-spec/RFC-ATC-v3-Draft-00.md) | Multi-sig (N-of-M), multi-format. Backward-compatible with v2.0. Used internally by UTA. |
+| **ATC/1.0** | Public, stable | Single-sig (Ed25519) | [`SPEC.md` → MARKETNOW repo](https://github.com/alicelabs-llc/MARKETNOW/blob/master/docs/atc-spec/SPEC.md) | Simple, single-CA credential. SDK: npm [`agent-trust-card`](https://www.npmjs.com/package/agent-trust-card). |
+| **ATC v3.0** | Draft 00, pre-public review | Multi-format (Ed25519 + EAT-CWT + W3C VC) | [`spec/RFC-ATC-v3-Draft-00.md`](./spec/RFC-ATC-v3-Draft-00.md) | Multi-sig (N-of-M), multi-format. Backward-compatible with v2.0. Used internally by UTA. |
 
 ATC v3.0 supersedes ATC v2.0 (which itself was the basis for the simpler ATC/1.0 SDK). A v2.0 ATC remains valid; v3.0 verifiers accept v2.0 credentials and treat them as having a single signature.
 
@@ -167,9 +166,9 @@ npx marketnow-audit bit.ly        # domain scam-check + ATC + OCSP, CI exit code
 | NPM packages | 12 (combined last-week downloads: 4,901+) |
 | Conformance (live) | 14 public vectors · 24 checks + 10 mutants · v1.3.5 (npm-synced) |
 | Transparency anchors | 3 Rekor log entries (verify-rekor.mjs, 9 checks) |
-| CA key rotation | exercised 2026-09-08 (`mn-ca-002` → `mn-ca-003`) — [postmortem](https://marketnow.site/security/incidents/2026-09-08) — [postmortem](https://marketnow.site/security/incidents/2026-09-08) |
-| Test vectors (ATC/1.0) | 5 frozen + manifest |
-| Test vectors (ATC v3.0) | 36 (8 positive + 17 negative + 5 mutation + 6 cross-language) |
+| CA key rotation | exercised 2026-09-08 (`mn-ca-002` → `mn-ca-003`) — [postmortem](https://marketnow.site/security/incidents/2026-09-08) |
+| Test vectors (ATC/1.0) | 5 frozen + manifest — [MARKETNOW repo](https://github.com/alicelabs-llc/MARKETNOW/tree/master/docs/atc-spec/test-vectors) |
+| Test vectors (ATC v3.0) | 36 (8 positive + 17 negative + 5 mutation + 6 cross-language) — [`uta-monorepo/vectors/`](./uta-monorepo/vectors/) |
 | Format adapters | 9 (ATC, EAT-AI, ZTA, A2A, MCP Card, W3C VC, OAuth, SPIFFE, X.509) |
 | Dev.to articles | 100 (EN + 15 languages) |
 | Download channels | 5 (NPM, jsDelivr, unpkg, marketnow.site, GitHub) |
@@ -209,22 +208,7 @@ counting the same thing:
 | System | Count | What it counts | Where to verify |
 |---|---|---|---|
 | **Sentinel** (audit pipeline) | **12 stages / 10 layers** | Index certification (L1), static analysis (L1.5–L1.9), deep tarball scan (L2, 29 rules), sandbox (L2.5), runtime monitoring (L3), dependency/secrets/SBOM/policy (L4–L9) | [/security/sentinel-v3.0](https://marketnow.site/security/sentinel-v3.0) |
-| **ATC/1.0** (credential verification) | **10 controls — 8 required + 2 optional** | Signature, key selection, expiry, status, revocation… per ATC card | [SPEC.md §2](./marketnow/docs/atc-spec/SPEC.md) |
-| **UTA** (interop layer) | **9 format adapters** | Credential formats translated through UTS: ATC, EAT-AI, ZTA, A2A, MCP Card, W3C VC, OAuth, SPIFFE, X.509 | [/uta](https://marketnow.site/uta) |
-
-If a surface says "8-layer audit" anywhere, it is stale — the Sentinel pipeline is
-12 stages grouped into 10 audit layers (L1–L9). ATC's "8" is the count of *required*
-verification controls (10 total). UTA's number is *formats*, not layers.
-
-## 🔢 Taxonomy — which count belongs to which system
-
-Three different counts coexist in this ecosystem. They are **not** three ways of
-counting the same thing:
-
-| System | Count | What it counts | Where to verify |
-|---|---|---|---|
-| **Sentinel** (audit pipeline) | **12 stages / 10 layers** | Index certification (L1), static analysis (L1.5–L1.9), deep tarball scan (L2, 29 rules), sandbox (L2.5), runtime monitoring (L3), dependency/secrets/SBOM/policy (L4–L9) | [/security/sentinel-v3.0](https://marketnow.site/security/sentinel-v3.0) |
-| **ATC/1.0** (credential verification) | **10 controls — 8 required + 2 optional** | Signature, key selection, expiry, status, revocation… per ATC card | [SPEC.md §2](./marketnow/docs/atc-spec/SPEC.md) |
+| **ATC/1.0** (credential verification) | **10 controls — 8 required + 2 optional** | Signature, key selection, expiry, status, revocation… per ATC card | [SPEC.md §2 → MARKETNOW repo](https://github.com/alicelabs-llc/MARKETNOW/blob/master/docs/atc-spec/SPEC.md) |
 | **UTA** (interop layer) | **9 format adapters** | Credential formats translated through UTS: ATC, EAT-AI, ZTA, A2A, MCP Card, W3C VC, OAuth, SPIFFE, X.509 | [/uta](https://marketnow.site/uta) |
 
 If a surface says "8-layer audit" anywhere, it is stale — the Sentinel pipeline is
@@ -248,17 +232,19 @@ npx -y agent-trust-card verify card.json
 # Run the MCP server (works with Claude Desktop, Cursor, Cline, Continue, Aider)
 npx -y marketnow-mcp
 
-# Run the conformance suite
-git clone https://github.com/alicelabs-llc/universal-trust-adapter
-cd universal-trust-adapter/marketnow/atc-sdk
-npm install && node test/conformance.mjs
+# Run the conformance suite (no clone needed)
+npx -y @marketnow/uta-conformance
+
+# Or from source (atc-sdk lives in the MARKETNOW repo since the 2026-09-26 split):
+git clone https://github.com/alicelabs-llc/MARKETNOW
+cd MARKETNOW/atc-sdk && npm install && node test/conformance.mjs
 ```
 
 ## 🧬 Test vectors
 
-**ATC/1.0 (5 frozen):** [`marketnow/docs/atc-spec/test-vectors/`](./marketnow/docs/atc-spec/test-vectors) — 5 fixtures with canonical JCS bytes per vector + SHA-256 + Ed25519 signature.
+**ATC/1.0 (5 frozen):** [MARKETNOW repo → `docs/atc-spec/test-vectors/`](https://github.com/alicelabs-llc/MARKETNOW/tree/master/docs/atc-spec/test-vectors) — 5 fixtures with canonical JCS bytes per vector + SHA-256 + Ed25519 signature.
 
-**ATC v3.0 (36 vectors):** [`marketnow/docs/atc-spec/test-vectors-v3/`](./marketnow/docs/atc-spec/test-vectors-v3) — 8 positive + 17 negative + 5 mutation + 6 cross-language.
+**ATC v3.0 (36 vectors):** [`uta-monorepo/vectors/`](./uta-monorepo/vectors/) — 8 positive + 17 negative + 5 mutation + 6 cross-language, plus a prompt-injection corpus. MANIFEST with per-vector expected outcomes.
 
 The test CA keypair is intentionally published (including private key) for cross-language reproducibility.
 
@@ -269,25 +255,17 @@ The test CA keypair is intentionally published (including private key) for cross
 > [revocation registry](https://marketnow.site/api/crl) and the
 > [2026-09-08 incident postmortem](https://marketnow.site/security/incidents/2026-09-08).
 
-> ⚠️ **TEST ONLY — this private key is intentionally public. It MUST NEVER be trusted in production.**
-> `ca-test-2` exists so any stranger can regenerate and re-sign the conformance vectors in any language.
-> Signatures under `ca-test-2` prove conformance-suite behavior — nothing else. Production CAs
-> (`mn-ca-003`) are separate keys, never published, and their lifecycle is auditable in the
-> [revocation registry](https://marketnow.site/api/crl) and the
-> [2026-09-08 incident postmortem](https://marketnow.site/security/incidents/2026-09-08).
-
 ## 📋 Specs & docs
 
-- **License matrix (all components):** https://marketnow.site/licensing
-- **CA incident postmortem 2026-09-08:** https://marketnow.site/security/incidents/2026-09-08
-- **License matrix (all components):** https://marketnow.site/licensing
-- **CA incident postmortem 2026-09-08:** https://marketnow.site/security/incidents/2026-09-08
-- **ATC/1.0 Spec:** [`marketnow/docs/atc-spec/SPEC.md`](./marketnow/docs/atc-spec/SPEC.md)
-- **ATC v3.0 RFC Draft:** [`marketnow/docs/atc-spec/RFC-ATC-v3-Draft-00.md`](./marketnow/docs/atc-spec/RFC-ATC-v3-Draft-00.md)
+- **ATC/1.0 Spec:** [MARKETNOW repo → `docs/atc-spec/SPEC.md`](https://github.com/alicelabs-llc/MARKETNOW/blob/master/docs/atc-spec/SPEC.md)
+- **ATC v3.0 RFC Draft:** [`spec/RFC-ATC-v3-Draft-00.md`](./spec/RFC-ATC-v3-Draft-00.md)
+- **UTS v1:** [`spec/UTS-v1.md`](./spec/UTS-v1.md) · [`spec/uts-v1.json`](./spec/uts-v1.json)
 - **Domain Reputation API spec:** [`api/reputation-spec.md`](./api/reputation-spec.md)
 - **Universal Trust API spec:** [`api/trust-api-spec.md`](./api/trust-api-spec.md)
+- **Threat model (STRIDE + MITRE ATLAS):** [`uta-monorepo/threat-model/THREAT_MODEL.md`](./uta-monorepo/threat-model/THREAT_MODEL.md)
 - **Architecture:** [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md)
-- **Threat model:** [`uta-repo/THREAT_MODEL.md`](./uta-repo/THREAT_MODEL.md)
+- **License matrix (all components):** https://marketnow.site/licensing
+- **CA incident postmortem 2026-09-08:** https://marketnow.site/security/incidents/2026-09-08
 - **Contributing:** [`CONTRIBUTING.md`](./CONTRIBUTING.md)
 - **Security policy:** [`SECURITY.md`](./SECURITY.md)
 

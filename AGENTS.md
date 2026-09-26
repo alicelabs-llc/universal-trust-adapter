@@ -72,10 +72,20 @@ universal-trust-adapter/
 │   ├── threat-model/          # STRIDE + MITRE ATLAS
 │   ├── supply-chain/          # CI-CD hardening docs
 │   └── tests/                 # Cross-language test suite
-├── uta-repo/                  # Simplified single-package version
-├── marketnow/                 # Public website + marketplace + API
-└── spec/                      # Specs that apply across all packages
+├── spec/                      # Canonical specs: ATC v3 RFC draft + UTS v1 + JSON schema
+├── manifesto/                 # The Stranger Manifesto — 13 languages
+├── api/                       # Trust API + Domain Reputation specs (reference impl)
+├── adapters/                  # Adapter registry + plugin interfaces
+├── integrations/ · cline-plugin-uta/ · vscode-extension/   # Client integrations
+├── docs/ · audit/ · evidence/ · tests/                     # Docs, audits, receipts
+└── scripts/                   # Maintenance tooling
 ```
+
+> **Ecosystem (split 2026-09-26):** product code (`mcp-server`, `atc-sdk`, integrations,
+> npm packages) lives in [`alicelabs-llc/MARKETNOW`](https://github.com/alicelabs-llc/MARKETNOW);
+> the live marketplace (site, catalog, data pipelines, Vercel deploys) lives in
+> [`eddyflores100-lang/marketnow`](https://github.com/eddyflores100-lang/marketnow).
+> This repo owns the ATC protocol only.
 
 ## What each package does (one-liner)
 
