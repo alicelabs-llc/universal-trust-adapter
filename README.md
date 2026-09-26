@@ -148,8 +148,11 @@ ATC v3.0 supersedes ATC v2.0 (which itself was the basis for the simpler ATC/1.0
 ## 🚀 Quick install
 
 ```bash
-# Multi-source installer (tries 5 channels in order)
-curl -fsSL https://marketnow.site/install.sh | bash
+# Install the uta-verify CLI (npm channel — works for everyone with Node.js)
+npm install -g @marketnow/uta-verify
+# or: curl -fsSL https://marketnow.site/install.sh | bash
+#    (the site script wraps the same npm channel; it carries the new flow
+#     after the next marketnow.site deploy — see eddyflores100-lang/marketnow)
 
 # Or install individual packages
 npm install agent-trust-card        # ATC/1.0 SDK
