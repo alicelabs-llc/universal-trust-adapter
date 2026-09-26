@@ -1,10 +1,10 @@
 # MarketNow MCP Server
 
-> **Security infrastructure for AI agents.** 13 MCP tools — all under the `marketnow_*` namespace — that let Claude Desktop, Cursor, Cline, Continue, LangChain, and LlamaIndex agents search the marketplace, verify trust, consume the OWASP compliance API, and verify ANY Agent Trust Card against the ATC/1.0 spec without execution errors or hallucinations.
+> **Security infrastructure for AI agents.** 15 MCP tools — all under the `marketnow_*` namespace — that let Claude Desktop, Cursor, Cline, Continue, LangChain, and LlamaIndex agents search the marketplace, verify trust, consume the OWASP compliance API, and verify ANY Agent Trust Card against the ATC/1.0 spec without execution errors or hallucinations.
 
 [![npm version](https://img.shields.io/npm/v/marketnow-mcp.svg)](https://www.npmjs.com/package/marketnow-mcp)
-[![License: AliceLabs Proprietary](https://img.shields.io/badge/License-Proprietary-red)](LICENSE)
-[![Audit: PASS](https://img.shields.io/badge/Audit-v1.10.0%20PASS-brightgreen)](./AUDIT.md)
+[![License: MIT OR Apache-2.0](https://img.shields.io/badge/License-MIT%20OR%20Apache--2.0-blue)](LICENSE)
+[![Audit: PASS](https://img.shields.io/badge/Audit-v1.14.2%20PASS-brightgreen)](./AUDIT.md)
 
 ---
 
@@ -54,14 +54,14 @@ Same `mcpServers` block — add it under Settings → MCP, or your project's `.m
 
 ---
 
-## Tools exposed (13, all `marketnow_*`)
+## Tools exposed (15, all `marketnow_*`)
 
 | # | Tool | Purpose |
 |---|------|---------|
 | 1 | `marketnow_search_skills` | Search marketplace by query / category / price / sort |
 | 2 | `marketnow_get_skill` | Full metadata for one skill by ID or slug |
 | 3 | `marketnow_list_categories` | Marketplace taxonomy with live counts |
-| 4 | `marketnow_get_manifest` | Marketplace metadata + security metrics (1.2M checks, 1,030 threats, 80 quarantined) |
+| 4 | `marketnow_get_manifest` | Marketplace metadata + live totals (68,388 skills, 16 categories, security model) |
 | 5 | `marketnow_get_install_command` | `npx` install command for a skill |
 | 6 | `marketnow_verify_trust` | Verify an Agent Trust Card (Ed25519, RFC 8032) |
 | 7 | `marketnow_verify_receipt` | Verify a signed delivery proof (`rcpt_*`) |
@@ -71,6 +71,8 @@ Same `mcpServers` block — add it under Settings → MCP, or your project's `.m
 | 11 | `marketnow_recommend_skills` | AI-ranked recommendations for a natural-language task |
 | 12 | `marketnow_get_owasp_compliance` | OWASP MCP Cheat Sheet (12 controls) + SHA-256 tool fingerprint + capability manifest (filesystem/network/shell/credentials/process) |
 | 13 | `marketnow_verify_atc_spec` | **ATC/1.0 spec verifier** — accepts ANY Agent Trust Card (any issuer, any CA) and verifies all 8 required controls (ATC-001 Identity through ATC-008 Expiration). Self-contained: uses `node:crypto` + RFC 8785 JCS + Ed25519 (RFC 8032). Makes this package the LIVE REFERENCE IMPLEMENTATION of the ATC/1.0 specification. |
+| 14 | `marketnow_check_revocation` | OCSP-style revocation status for an ATC (card_id) or CA key (kid) against the signed MarketNow CRL (MNR-CRL-1.0) — VALID/EXPIRED/REVOKED/SUPERSEDED/UNKNOWN with PERMIT/DENY recommendation, fail-closed on unknown subjects. |
+| 15 | `marketnow_fingerprint_tool` | TFP-1.0 cryptographic tool fingerprinting (SHA-256 over RFC 8785 JCS canonical definitions) + drift report for pinned manifests — the OWASP MCP Cheat Sheet control against tool poisoning and rug-pull redefinitions. |
 
 ### Strict inputSchema (Rule C in practice)
 
@@ -139,7 +141,7 @@ The server fetches `https://marketnow.site/api/skills.json` (cached 1 hour) and 
 
 ## Pricing
 
-MarketNow is **security infrastructure**, not a marketplace. The marketplace (68,387 MCP servers indexed — catalog 5.9.2; vendor-priced listings like x402 per-call are billed 100% vendor-side) is distribution. The product is Sentinel — a 10-layer security audit pipeline.
+MarketNow is **security infrastructure**, not a marketplace. The marketplace (68,388 index-certified skills, 132,737 total tracked; vendor-priced listings like x402 per-call are billed 100% vendor-side) is distribution. The product is Sentinel — a two-level security pipeline: L1 index certification on every entry, L2 deep-scan of npm tarballs (766,211 total security checks).
 
 | Tier | Price | What you get |
 |------|-------|--------------|
@@ -207,6 +209,7 @@ Trademarks ("MarketNow", "UTA", "ATC") are reserved by AliceLabs LLC — see [NO
 - **2026-03-30**: GitHub organization `github.com/alicelabs-llc` created
 - **2026-06-29**: MarketNow launched publicly (first npm release: `marketnow-mcp@1.5.1`)
 - **2026-08-09**: `marketnow-mcp@1.10.0` era (15 versions total)
-- **2026-09-17**: Current npm latest: `marketnow-mcp@1.13.0` — ATC/3.0 unified credential profile (re-version of the interim ATC/1.4 from v1.12.0). v1.12.0: 5 broken tools fixed, unified verification, hardened validation
+- **2026-09-17**: `marketnow-mcp@1.13.0` — ATC/3.0 unified credential profile (re-version of the interim ATC/1.4 from v1.12.0). v1.12.0: 5 broken tools fixed, unified verification, hardened validation
 - **2026-08-19**: Independent audit by Z.ai (8 findings F1-F8 applied, see REPORT.pdf)
 - **2026-09-20**: `marketnow-mcp@1.14.0` — dual license MIT OR Apache-2.0 (Docker MCP Catalog + Cursor Publisher alignment)
+- **2026-09-26**: `marketnow-mcp@1.14.2` — sync with audit AUD-2026-0821-MN 6th-round closure: catalog 68,388 / 132,737 tracked (was 68,387), 15 tools documented (was 13), license badge fixed to the actual dual MIT OR Apache-2.0, description current (was v1.13.0), Audit badge v1.14.2 (criteria re-validated, see AUDIT.md addendum). No code changes — same 15 tools, backwards compatible.

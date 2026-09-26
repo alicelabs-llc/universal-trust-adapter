@@ -185,5 +185,20 @@ If you must support both names during a transition window, run two server instan
 
 ---
 
+## Addendum — re-validation for v1.14.2 (2026-09-26)
+
+The four golden rules below were originally audited for `marketnow-mcp@1.10.0` (2026-08-10, 13 tools). For `marketnow-mcp@1.14.2` the same criteria were re-validated against the current `index.js`:
+
+| #  | Criterion                                     | Status      | Evidence (v1.14.2)                                                                                       |
+|----|-----------------------------------------------|-------------|----------------------------------------------------------------------------------------------------------|
+| A  | Namespace prefix (`marketnow_*`)              | ✅ Validated | All **15** tools use `marketnow_` prefix + snake_case (grep-verified: 15 unique `name: 'marketnow_*'`).   |
+| B  | Intent-oriented descriptions                  | ✅ Validated | Every description states WHEN/WHY with predecessor calls; ATC verifier describes both card formats.      |
+| C  | Strict JSON-Schema (`type` + `enum` + `pattern` + bounds) | ✅ Validated | No `any`; enums on categoricals, patterns on IDs, bounds on numerics — runtime regexes match declared schemas. |
+| D  | Structured error handling (`isError: true`)   | ✅ Validated | All exceptions normalized into `{ isError, content }` with INVALID_ARGUMENT / NOT_FOUND / UNKNOWN_TOOL / INTERNAL_ERROR; no stack leaks. |
+
+v1.14.2 is a documentation-sync release (catalog 68,388 / 132,737 tracked, 15 tools documented, dual MIT OR Apache-2.0 license surfaced) — no tool code changed since v1.14.1.
+
+---
+
 *Maintained by AliceLabs LLC — Wyoming, USA. Report issues at
 https://github.com/alicelabs-llc/marketnow/issues*

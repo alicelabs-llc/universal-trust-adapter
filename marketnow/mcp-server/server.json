@@ -6,7 +6,7 @@
     "url": "https://github.com/alicelabs-llc/marketnow",
     "source": "github"
   },
-  "version": "1.14.1",
+  "version": "1.14.2",
   "homepage": "https://marketnow.site",
   "license": "(MIT OR Apache-2.0)",
   "author": {
@@ -29,7 +29,7 @@
     {
       "registryType": "npm",
       "identifier": "marketnow-mcp",
-      "version": "1.14.1",
+      "version": "1.14.2",
       "transport": {
         "type": "stdio"
       }
