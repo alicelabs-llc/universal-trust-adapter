@@ -180,7 +180,7 @@ npx marketnow-audit bit.ly        # domain scam-check + ATC + OCSP, CI exit code
 
 | Package | Version | Description | Downloads (last week) |
 |---|---|---|---|
-| [`marketnow-mcp`](https://www.npmjs.com/package/marketnow-mcp) | 1.14.1 | MCP server with 15 trust tools (+revocation, +fingerprinting; SDK hardened, `npm audit` clean) | 1,003/wk |
+| [`marketnow-mcp`](https://www.npmjs.com/package/marketnow-mcp) | 1.15.0 | MCP server with 15 trust tools (+revocation, +fingerprinting; SDK hardened, `npm audit` clean) | 1,003/wk |
 | [`agent-trust-card`](https://www.npmjs.com/package/agent-trust-card) | 1.4.1 | ATC/1.0 SDK (issue, verify, inspect) | 616/wk |
 | [`marketnow-install-stack`](https://www.npmjs.com/package/marketnow-install-stack) | 1.2.1 | Multi-source installer (5 stacks over the live catalog) | 178/wk |
 | [`@marketnow/uts`](https://www.npmjs.com/package/@marketnow/uts) | 2.0.3 | Universal Trust Schema | 298/wk |
