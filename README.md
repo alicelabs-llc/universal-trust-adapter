@@ -1,5 +1,12 @@
 # Universal Trust Adapter (UTA)
 
+> **Repo ecosystem (one owner per concern, split 2026-09-26):** this repo owns the
+> **ATC/1.0 protocol only** (spec, adapters, reference implementation, plugins).
+> Product code (`mcp-server`, npm `marketnow-mcp`, atc-sdk, integrations) lives in
+> `alicelabs-llc/MARKETNOW`; the live marketplace (site, catalog data, data
+> pipelines, Vercel deploys of marketnow.site) lives in
+> `eddyflores100-lang/marketnow`.
+
 **The USB-C of agent trust.**
 
 [![npm downloads](https://img.shields.io/npm/dm/marketnow-mcp.svg)](https://www.npmjs.com/package/marketnow-mcp)

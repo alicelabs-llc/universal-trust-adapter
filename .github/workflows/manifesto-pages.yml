@@ -4,11 +4,15 @@ on:
   push:
     branches: [main]
     paths:
-      - 'marketnow/aep-marketplace/public/manifesto/**'
-      - 'marketnow/aep-marketplace/public/uta/conformance/**'
-      - 'marketnow/aep-marketplace/public/uta/revocations/**'
+      # El contenido del protocolo (manifesto/conformance/revocations) vive en
+      # el repo marketplace (eddyflores100-lang/marketnow) desde el split 2026-09-26.
+      # Este workflow lo consume vía checkout — cualquier push a main lo revalida.
       - '.github/workflows/manifesto-pages.yml'
+      - 'docs/**'
   workflow_dispatch:
+  schedule:
+    # Re-publicación semanal para recoger contenido nuevo del marketplace
+    - cron: '0 6 * * 1'
 
 permissions:
   contents: read
@@ -29,6 +33,13 @@ jobs:
     steps:
       # Pinned by commit SHA — OpenSSF Scorecard: Pinned-Actions
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      # Repo marketplace (split 2026-09-26): fuente del contenido del protocolo
+      - name: Checkout marketplace content source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: eddyflores100-lang/marketnow
+          ref: master
+          path: marketplace
       - name: Fetch existing gh-pages content
         run: |
           git fetch origin gh-pages --depth=1 || true
@@ -49,7 +60,7 @@ jobs:
               html = html.replace('href="/manifesto"', f'href="{relprefix}"' if relprefix else 'href="."')
               html = re.sub(r'href="/(?!/)', f'href="{SITE}/', html)
               return html
-          SRC = "marketnow/aep-marketplace/public/manifesto"
+          SRC = "marketplace/aep-marketplace/public/manifesto"
           DST = "site/manifesto"
           PAGES = "https://alicelabs-llc.github.io/universal-trust-adapter/manifesto"
           os.makedirs(DST, exist_ok=True)
@@ -61,11 +72,11 @@ jobs:
                   transform(open(f"{SRC}/{l}/index.html", encoding="utf-8").read(), "../", f"{PAGES}/{l}/"))
           # conformance: links absolutos al sitio (ya son correctos) — copia directa con canonical propio
           import shutil
-          if os.path.isdir("marketnow/aep-marketplace/public/uta/conformance"):
-              shutil.copytree("marketnow/aep-marketplace/public/uta/conformance", "site/conformance", dirs_exist_ok=True)
+          if os.path.isdir("marketplace/aep-marketplace/public/uta/conformance"):
+              shutil.copytree("marketplace/aep-marketplace/public/uta/conformance", "site/conformance", dirs_exist_ok=True)
           # revocations: signed CRL (MNR-CRL-1.0) + registry key + README - static, stranger-verifiable
-          if os.path.isdir("marketnow/aep-marketplace/public/uta/revocations"):
-              shutil.copytree("marketnow/aep-marketplace/public/uta/revocations", "site/revocations", dirs_exist_ok=True)
+          if os.path.isdir("marketplace/aep-marketplace/public/uta/revocations"):
+              shutil.copytree("marketplace/aep-marketplace/public/uta/revocations", "site/revocations", dirs_exist_ok=True)
           print("site assembled")
           EOF
           if [ ! -f site/index.html ]; then

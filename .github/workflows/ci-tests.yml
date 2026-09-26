@@ -32,26 +32,3 @@ jobs:
       - name: Adapter test suite (translation matrix, signatures, revocations)
         run: node tests/test.mjs
 
-  marketnow-gate-build:
-    name: MarketNow asset gate + build
-    runs-on: ubuntu-latest
-    timeout-minutes: 25
-    defaults:
-      run:
-        working-directory: marketnow/aep-marketplace
-    steps:
-      # Pinned by commit SHA — OpenSSF Scorecard: Pinned-Actions
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version: '24'
-          cache: npm
-          cache-dependency-path: marketnow/aep-marketplace/package-lock.json
-      - name: Install dependencies
-        run: npm ci --no-audit --no-fund
-      - name: Asset size gate (audit F-06 — prohibits 50MB+ dumps)
-        run: node scripts/check-asset-sizes.mjs
-      - name: Production build (vite)
-        run: npm run build
-      - name: MCP server syntax check
-        run: node --check api/mcp.js && node --check api/audit-skill.js && node --check api/skills.js && node --check api/trust.js
