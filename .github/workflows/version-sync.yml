@@ -2,6 +2,16 @@
 # (Split 2026-09-26) Las superficies de DATOS del sitio las sincroniza
 # eddyflores100-lang/marketnow (version-sync propio). Este workflow toca
 # SOLO el README de este repo: tabla de paquetes + badges.
+#
+# FIX 2026-09-28 (P2-b, validado con drift real): dos bugs encadenados.
+#   1. bash: el payload JSON del contents API estaba mal entrecomillado
+#      («syntax error near unexpected token '('», run 36368480666) —
+#      ahora se construye con jq -n (sin interpolación de shell).
+#   2. ruleset main-protection (status checks) bloquea git push (GH013)
+#      y TAMBIEN puede bloquear el commit directo del contents API.
+#      Camino definitivo si el PUT directo falla: rama no protegida
+#      (las reglas solo cubren ~DEFAULT_BRANCH) -> PR -> checks ->
+#      auto-merge (repo con allow_auto_merge=true).
 name: Version sync (npm -> UTA README)
 
 on:
@@ -12,6 +22,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: version-sync
@@ -32,23 +43,47 @@ jobs:
           python-version: '3.12'
       - name: Sync versions (npm registry -> UTA README)
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${ github.token }}
+          REPO: alicelabs-llc/universal-trust-adapter
         run: |
+          set -uo pipefail
           python3 scripts/sync-readme-versions.py
           if git diff --quiet; then
             echo 'Sin drift — el README no diverge del registry.'
             exit 0
           fi
-          # F-01 fix 2026-09-28: el ruleset main-protection exige status checks,
-          # el git push directo del bot muere con GH013. Update via contents API;
-          # si el ruleset también bloquea el token del workflow, REPORTAR drift
-          # sin fallar (notice). Fix permanente: bypass para el bot o PR + auto-merge.
-          SHA=$(curl -sS -H "Authorization: Bearer $GH_TOKEN"             "https://api.github.com/repos/alicelabs-llc/universal-trust-adapter/contents/README.md?ref=main" | jq -r .sha)
+
+          # ── Camino 1: contents API directo (JSON construido con jq) ──
+          SHA=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" \
+            "https://api.github.com/repos/$REPO/contents/README.md?ref=main" | jq -r .sha)
           B64=$(base64 -w0 README.md)
-          CODE=$(curl -sS -o /tmp/put.json -w '%{http_code}' -X PUT             -H "Authorization: Bearer $GH_TOKEN"             -H 'Accept: application/vnd.github+json'             https://api.github.com/repos/alicelabs-llc/universal-trust-adapter/contents/README.md             -d "{"message":"chore(versions): sync npm dist-tags -> UTA README (automated)","content":"$B64","sha":"$SHA","branch":"main"}")
+          PAYLOAD=$(jq -n --arg msg "chore(versions): sync npm dist-tags -> UTA README (automated)" \
+            --arg content "$B64" --arg sha "$SHA" \
+            '{message:$msg, content:$content, sha:$sha, branch:"main"}')
+          CODE=$(curl -sS -o /tmp/put.json -w '%{http_code}' -X PUT \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H 'Accept: application/vnd.github+json' \
+            "https://api.github.com/repos/$REPO/contents/README.md" \
+            -d "$PAYLOAD")
           if [ "$CODE" = "200" ] || [ "$CODE" = "201" ]; then
-            echo "✓ README actualizado via contents API (HTTP $CODE)."
-          else
-            echo "::notice::ruleset bloquea el commit del bot (HTTP $CODE) — DRIFT PENDIENTE: README diverge del registry npm. Fix permanente: dar bypass al bot en main-protection o usar PR + auto-merge."
-            cat /tmp/put.json | head -c 300 || true
+            echo "README actualizado via contents API (HTTP $CODE)."
+            exit 0
+          fi
+          echo "::notice::contents API HTTP $CODE — camino PR + auto-merge."
+          head -c 300 /tmp/put.json || true
+
+          # ── Camino 2: PR (rama libre de ruleset -> checks -> auto-merge) ──
+          BRANCH="sync/npm-versions-$(date -u +%Y%m%d-%H%M%S)"
+          git config user.name "marketnow-sync-bot"
+          git config user.email "sync@marketnow.site"
+          git checkout -b "$BRANCH"
+          git add README.md
+          git commit -m "chore(versions): sync npm dist-tags -> UTA README (automated)"
+          git push origin "$BRANCH"
+          PR_URL=$(gh pr create --base main --head "$BRANCH" \
+            --title "chore(versions): sync npm dist-tags -> UTA README" \
+            --body "Automated version sync (npm registry -> UTA README). Direct commit was blocked by main-protection ruleset; this PR runs the required status checks and auto-merges when green." 2>&1 || true)
+          echo "PR: $PR_URL"
+          if ! gh pr merge "$BRANCH" --auto --squash --delete-branch 2>&1; then
+            echo "::notice::auto-merge no disponible — el PR queda abierto; se mezcla cuando los checks requeridos estén verdes."
           fi
