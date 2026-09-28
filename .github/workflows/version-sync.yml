@@ -43,7 +43,7 @@ jobs:
           python-version: '3.12'
       - name: Sync versions (npm registry -> UTA README)
         env:
-          GH_TOKEN: ${ github.token }}
+          GH_TOKEN: ${{ github.token }}
           REPO: alicelabs-llc/universal-trust-adapter
         run: |
           set -uo pipefail
