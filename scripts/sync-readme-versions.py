@@ -53,6 +53,17 @@ for name in PKGS:
     t = re.sub(
         rf'(\|\s*\[`{re.escape(name)}`\]\([^)]*\)\s*\|\s*)[0-9]+\.[0-9]+\.[0-9]+',
         rf'\g<1>{VER[name]}', t)
+# F-01 fix 2026-09-28: el README usa TAMBIÉN formato prosa —
+# 'npm `marketnow-mcp@1.14.1`' y '**MCP endpoint v1.14.1**'. Sin estos
+# patrones el sync reportaba 'sin drift' con el README desactualizado
+# (la tabla regex no matcheaba nada).
+for name in PKGS:
+    t = re.sub(
+        rf'({re.escape(name)})@v?[0-9]+\.[0-9]+\.[0-9]+',
+        rf'\g<1>@{VER[name]}', t)
+t = re.sub(r'MCP endpoint v[0-9]+\.[0-9]+\.[0-9]+',
+           f'MCP endpoint v{VER["marketnow-mcp"]}', t)
+
 t = re.sub(r'\| NPM packages \| \d+ \(combined last-week downloads: [0-9,]+\+ \) \|',
            f'| NPM packages | {len(PKGS)} (combined monthly downloads: {TOTAL_MO:,}+) |', t)
 t = re.sub(r'\| Conformance \(live\) \| [^|]+· v[0-9.]+[^|]*\|',
