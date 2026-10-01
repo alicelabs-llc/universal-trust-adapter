@@ -12,6 +12,7 @@
 
 **The USB-C of agent trust.**
 
+[![M8ven](https://m8ven.ai/badge/mcp/alicelabs-llc/universal-trust-adapter)](https://www.m8ven.com/mcp/alicelabs-llc/universal-trust-adapter)
 [![npm downloads](https://img.shields.io/npm/dm/marketnow-mcp.svg)](https://www.npmjs.com/package/marketnow-mcp)
 [![npm version](https://img.shields.io/npm/v/agent-trust-card.svg)](https://www.npmjs.com/package/agent-trust-card)
 [![GitHub release](https://img.shields.io/github/v/release/alicelabs-llc/universal-trust-adapter)](https://github.com/alicelabs-llc/universal-trust-adapter/releases)
