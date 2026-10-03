@@ -50,7 +50,7 @@
 
 import { readFileSync, writeFileSync, unlinkSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { join, dirname } from 'node:path';
+import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -64,6 +64,10 @@ const getArg = (name, fallback) => {
   return i !== -1 && args[i + 1] && !args[i + 1].startsWith('--') ? args[i + 1] : fallback;
 };
 const genDir = getArg('generated', null);
+// resolve to ABSOLUTE against the CALLER's cwd: the mutant subprocesses run
+// with cwd = this directory (so score-runner's relative vector paths work),
+// which would otherwise reinterpret a relative --generated path
+const genDirAbs = genDir ? resolve(process.cwd(), genDir) : null;
 const outFile = getArg('out', null);
 const strict = args.includes('--strict');
 
@@ -151,7 +155,7 @@ for (const [name, delta] of [['clock+1d', '+'], ['clock-1d', '-']]) {
 // --- run a copy of the runner (mutated or not) and capture (exit, stdout) ---
 const runSuite = (file) => {
   try {
-    const stdout = execFileSync('node', [file, '--json', ...(genDir ? ['--generated', genDir] : [])], {
+    const stdout = execFileSync('node', [file, '--json', ...(genDirAbs ? ['--generated', genDirAbs] : [])], {
       cwd: __dirname, timeout: 20000, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'],
     });
     return { exit: 0, stdout };
@@ -171,7 +175,7 @@ if (ref.exit !== 0) {
 const report = {
   tool: 'mutate-runner.mjs',
   suite_version: 'v1.7.0',
-  generated: genDir,
+  generated: genDirAbs,
   operators: {
     'cmp-swap': 'every comparison operator on the scored path: <= ↔ >=, < ↔ >, === ↔ !==',
     'guard-drop': 'every single-line `if (cond) return x;` guard, deleted',
@@ -188,7 +192,7 @@ const report = {
   survivors: [],
 };
 
-process.stderr.write(`running ${mutants.length} mutants (generated dir: ${genDir ?? 'none'})...\n`);
+process.stderr.write(`running ${mutants.length} mutants (generated dir: ${genDirAbs ?? 'none'})...\n`);
 for (const mu of mutants) {
   const ls = [...lines];
   mu.mutate(ls);
