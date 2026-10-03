@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ============================================================================
-// UTA conformance vectors — GENERATOR (v1.3.0)
+// UTA conformance vectors — GENERATOR (v1.7.0)
 // ============================================================================
 // Produces unlimited fresh signed cards so the accept side of the suite can
 // never be memorized. Any fixed vector set is learnable by recognition; this
@@ -9,20 +9,48 @@
 //
 // Modes:
 //   accept      cards signed AND declared by ca-test-2  → expected_verify: true
+//               v1.7.0: 20% of accept cards are issued TODAY — the boundary-in
+//               band. String `<=` vs `<` mutants and clock-minus-one mutants
+//               that would silently reject them are caught by the sidecar
+//               cross-check (the sidecar pins the generation-time clock).
 //   self-signed fresh attacker key per card, declared AND signing
 //               → fails trust_anchor_key_selection (expected_verify: false)
 //   wrong-ca    declares ca-test-2, signed by a fresh key
 //               → fails signature_verification (expected_verify: false)
+//   adversarial v1.7.0 (anp2 critique 3ehcp: "0/60 is a measurement of the
+//               generator, not of the runner's window"): correctly signed by
+//               ca-test-2, anchored, active — the ONLY defect is a violated
+//               validity window, so expiry_check must fail and everything else
+//               must pass. The lower bound is sampled as a DISTRIBUTION
+//               relative to the scoring clock (55% future-issued with mass at
+//               +2..7d, 35% already-expired including expires-at-NOW, 10%
+//               empty window) instead of one frozen constant. Window
+//               violations are EXPECTED failures here, not errors: FATAL is
+//               reserved for valid-card modes. The mirror rule also applies —
+//               an adversarial card that lands IN window is a FATAL, because
+//               the generator failed to produce the defect it exists to
+//               produce.
 //
 // Usage:
 //   node generate-accept-vectors.mjs                       # 10 accept cards → stdout
 //   node generate-accept-vectors.mjs --count 50 --seed 42  # reproducible set
 //   node generate-accept-vectors.mjs --mode self-signed --count 5
+//   node generate-accept-vectors.mjs --mode adversarial --count 40 --seed 7 --out ./adv
 //   node generate-accept-vectors.mjs --out ./gen-challenge # writes files like the fixed set
 //
 // The ca-test-2 private key is read from _test-ca-keys.json — it is
 // INTENTIONALLY PUBLISHED. Anyone can run this generator and challenge any
 // runner with fresh cards the runner has never seen.
+//
+// Midnight stability (why adversarial future offsets start at +2 days, and
+// boundary-in accept cards are issued TODAY): a generated set must stay
+// re-scoreable after midnight without the sidecar cross-check flipping to
+// FATAL. A card issued TODAY only drifts further into the past on re-score
+// (stable, expected_verify stays true). A card at NOW+1d would flip to
+// in-window after midnight — the derived truth would change while the sidecar
+// pinned the old one, aborting the run. The +1d hole is therefore deliberate
+// and is named in the mutation survivor list: a clock+1d runner survives,
+// because catching it would cost midnight portability of generated sets.
 //
 // Node ≥ 18, zero dependencies. Fail-closed: every emitted card is
 // self-verified before output; if verification fails, nothing is emitted.
@@ -53,8 +81,8 @@ const count = Math.max(1, parseInt(getArg('count', '10'), 10) || 10);
 const seed = getArg('seed', null);
 const mode = getArg('mode', 'accept');
 const outDir = getArg('out', null);
-if (!['accept', 'self-signed', 'wrong-ca'].includes(mode)) {
-  console.error(`unknown mode: ${mode} (use accept | self-signed | wrong-ca)`);
+if (!['accept', 'self-signed', 'wrong-ca', 'adversarial'].includes(mode)) {
+  console.error(`unknown mode: ${mode} (use accept | self-signed | wrong-ca | adversarial)`);
   process.exit(1);
 }
 
@@ -152,14 +180,69 @@ const randomCard = () => {
   return card;
 };
 
+// --- the NOW stamp the scoring clock will use (date-granularity, same format) ---
+const nowStamp = new Date().toISOString().slice(0, 10) + 'T00:00:00Z';
+const stamp = (d) => d.toISOString().slice(0, 10) + 'T00:00:00Z';
+
+// --- v1.7.0: adversarial window override — sample the offset relative to the
+// scoring clock so the lower bound is tested by a distribution, not a fixture.
+// Buckets: 55% future-issued (lower bound), 35% already-expired (upper bound,
+// including expires_at == NOW — the `expires_at > NOW` boundary itself),
+// 10% empty window (issued_at == expires_at in the future: a runner must not
+// derive validity from a duration or a signed window size).
+const adversarialWindow = (meta) => {
+  const bucket = rand();
+  if (bucket < 0.55) {
+    let days;
+    const b = rand();
+    if (b < 0.30) days = 2 + Math.floor(rand() * 6);       // +2..7d  — just past the boundary band
+    else if (b < 0.60) days = 8 + Math.floor(rand() * 83);  // +8..90d — near future
+    else if (b < 0.90) days = 91 + Math.floor(rand() * 640);// +91..730d
+    else days = 731 + Math.floor(rand() * 730);             // deep future (premature-atc territory)
+    const issuedOn = new Date(Date.now() + days * 86400000);
+    meta.issued_at = stamp(issuedOn);
+    meta.expires_at = stamp(new Date(issuedOn.getTime() + 1095 * 86400000));
+  } else if (bucket < 0.90) {
+    let days;
+    const b = rand();
+    if (b < 0.20) days = 0;                                 // expires TODAY — `expires_at > NOW` is false at equality
+    else if (b < 0.60) days = 1 + Math.floor(rand() * 30);  // expired 1..30d
+    else days = 31 + Math.floor(rand() * 700);              // expired 31..730d
+    const expiresOn = new Date(Date.now() - days * 86400000);
+    meta.expires_at = stamp(expiresOn);
+    // issued strictly before expires (1..364d), always in the past
+    meta.issued_at = stamp(new Date(expiresOn.getTime() - (1 + Math.floor(rand() * 364)) * 86400000));
+  } else {
+    const days = 2 + Math.floor(rand() * 89);               // +2..90d
+    const issuedOn = new Date(Date.now() + days * 86400000);
+    meta.issued_at = meta.expires_at = stamp(issuedOn);     // empty window
+  }
+  return meta;
+};
+
 // --- generate + self-verify (fail-closed) ---
 const results = [];
 for (let i = 0; i < count; i++) {
   const card = randomCard();
 
+  // v1.7.0 — mode-specific window shaping BEFORE signing (dates are inside the
+  // signed subtree):
+  //   accept:      20% boundary-in — issued_at == NOW (the `issued_at <= NOW`
+  //                equality case). Catches `<` vs `<=` and clock-minus-one
+  //                mutants via the sidecar cross-check.
+  //   adversarial: the window override above.
+  if (mode === 'accept' && rand() < 0.20) {
+    card.payload.metadata.issued_at = nowStamp;
+  } else if (mode === 'adversarial') {
+    adversarialWindow(card.payload.metadata);
+  }
+
   let declaredKey, signingPriv, expectedVerify;
   if (mode === 'accept') {
     declaredKey = ca2Spki; signingPriv = ca2Priv; expectedVerify = true;
+  } else if (mode === 'adversarial') {
+    // correctly signed by the real anchor — the window is the ONLY defect
+    declaredKey = ca2Spki; signingPriv = ca2Priv; expectedVerify = false;
   } else if (mode === 'self-signed') {
     const kp = generateKeyPairSync('ed25519');
     declaredKey = kp.publicKey.export({ format: 'der', type: 'spki' }).toString('base64');
@@ -170,7 +253,9 @@ for (let i = 0; i < count; i++) {
   }
 
   card.payload.identity.public_key = declaredKey;
-  card.signature.ca_key_id = mode === 'accept' ? ca2Spki : declaredKey;
+  // accept AND adversarial cards are genuinely signed by the anchor CA; the
+  // other two modes declare/sign with other keys
+  card.signature.ca_key_id = ['accept', 'adversarial'].includes(mode) ? ca2Spki : declaredKey;
 
   const { signature, ...subtree } = card;
   const canonical = jcs(subtree);
@@ -178,34 +263,46 @@ for (let i = 0; i < count; i++) {
   card.signature.value = cryptoSign(null, buf, signingPriv).toString('hex');
 
   // SELF-VERIFY before emitting anything — mode-aware fail-closed checks:
-  //   accept:      signature verifies under declared ca-test-2, declared key IS the anchor
-  //   self-signed: signature verifies under the declared (attacker) key, declared key is NOT the anchor
-  //   wrong-ca:    signature does NOT verify under declared ca-test-2 (signed by someone else)
-  //   window:      issued_at <= NOW < expires_at — BOTH bounds, enforced at generation
+  //   accept:       signature verifies under declared ca-test-2, declared key IS the anchor
+  //   self-signed:  signature verifies under the declared (attacker) key, declared key is NOT the anchor
+  //   wrong-ca:     signature does NOT verify under declared ca-test-2 (signed by someone else)
+  //   window:       issued_at <= NOW < expires_at — BOTH bounds, enforced at generation
+  //                 in valid-card modes (FATAL on violation).
+  //   adversarial:  the window MUST be violated (FATAL if the card lands IN
+  //                 window — the generator failed to produce the defect), AND
+  //                 the signature, anchor and status must all be clean, so the
+  //                 only failing stage is expiry_check.
   const declaredPub = createPublicKey({ key: Buffer.from(card.payload.identity.public_key, 'base64'), format: 'der', type: 'spki' });
   const sigOk = cryptoVerify(null, buf, declaredPub, Buffer.from(card.signature.value, 'hex'));
   const isAnchor = card.payload.identity.public_key === ca2Spki;
-  const nowStamp = new Date().toISOString().slice(0, 10) + 'T00:00:00Z';
   const notBeforeOk = card.payload.metadata.issued_at <= nowStamp;
   const notAfterOk = card.payload.metadata.expires_at > nowStamp;
-  if (!notBeforeOk || !notAfterOk) {
+  const windowOk = notBeforeOk && notAfterOk;
+  if (mode !== 'adversarial' && !windowOk) {
     console.error(`FATAL: ${mode}-mode card ${card.card_id} violates the validity window (issued_at ${card.payload.metadata.issued_at} vs NOW ${nowStamp}, expires_at ${card.payload.metadata.expires_at}) — the clock-derived date clamp failed`);
+    process.exit(1);
+  }
+  if (mode === 'adversarial' && windowOk) {
+    console.error(`FATAL: adversarial card ${card.card_id} landed INSIDE the validity window (issued_at ${card.payload.metadata.issued_at}, expires_at ${card.payload.metadata.expires_at} vs NOW ${nowStamp}) — the generator failed to produce the window violation it exists to produce`);
     process.exit(1);
   }
   const expectations = {
     accept: { sigOk: true, isAnchor: true },
     'self-signed': { sigOk: true, isAnchor: false },
     'wrong-ca': { sigOk: false, isAnchor: true },
+    adversarial: { sigOk: true, isAnchor: true },
   };
   const exp = expectations[mode];
   if (sigOk !== exp.sigOk || isAnchor !== exp.isAnchor) {
     console.error(`FATAL: ${mode}-mode card ${card.card_id} self-verification mismatch (sigOk=${sigOk}, isAnchor=${isAnchor}; expected sigOk=${exp.sigOk}, isAnchor=${exp.isAnchor})`);
     process.exit(1);
   }
-  // cross-check with the reference semantics: accept cards must fully verify
-  if (mode === 'accept') {
+  // cross-check with the reference semantics: accept AND adversarial cards
+  // must verify under the real anchor key (the window is the adversarial
+  // cards' ONLY defect)
+  if (mode === 'accept' || mode === 'adversarial') {
     const verifiedUnderCa = cryptoVerify(null, buf, ca2Pub, Buffer.from(card.signature.value, 'hex'));
-    if (!verifiedUnderCa) { console.error(`FATAL: accept-mode card ${card.card_id} does not verify under ca-test-2`); process.exit(1); }
+    if (!verifiedUnderCa) { console.error(`FATAL: ${mode}-mode card ${card.card_id} does not verify under ca-test-2`); process.exit(1); }
   }
 
   results.push({
@@ -215,7 +312,11 @@ for (let i = 0; i < count; i++) {
     expected_stages: {
       signature_verification: sigOk ? 'pass' : 'fail',
       trust_anchor_key_selection: isAnchor ? 'pass' : 'fail',
-      expiry_check: 'pass', // v1.3.3: enforced by the self-check above — BOTH bounds hold
+      // valid-card modes: enforced by the self-check above (BOTH bounds hold).
+      // adversarial: the DERIVED defect — the window is the only thing that
+      // fails (cross-checked against derived truth at score time, never taken
+      // from this sidecar alone).
+      expiry_check: mode === 'adversarial' ? 'fail' : 'pass',
       status_check: 'pass',
     },
     sha256: sha256hex(buf),

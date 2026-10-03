@@ -32,3 +32,25 @@ jobs:
       - name: Adapter test suite (translation matrix, signatures, revocations)
         run: node tests/test.mjs
 
+  uta-conformance:
+    name: UTA conformance (vectors + adversarial + mutation)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # Pinned by commit SHA — OpenSSF Scorecard: Pinned-Actions
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+      - name: Fixed vectors (reference runner must be 14/14)
+        run: node uta-monorepo/packages/conformance/score-runner.mjs
+      - name: Adversarial window sampling (generator fail-closed + reference 40/40)
+        run: |
+          node uta-monorepo/packages/conformance/vectors/generate-accept-vectors.mjs --mode adversarial --count 40 --seed 7 --out .gen-adv
+          node uta-monorepo/packages/conformance/score-runner.mjs --generated .gen-adv
+      - name: Accept boundary-in band (20% issued TODAY, sidecar pins the clock)
+        run: |
+          node uta-monorepo/packages/conformance/vectors/generate-accept-vectors.mjs --count 40 --seed 3 --out .gen-acc
+          node uta-monorepo/packages/conformance/score-runner.mjs --generated .gen-acc
+      - name: Mutation testing (strict, 0 observable survivors allowed)
+        run: node uta-monorepo/packages/conformance/mutate-runner.mjs --generated .gen-adv --strict

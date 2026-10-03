@@ -160,3 +160,77 @@ is the 14 vectors above, unchanged byte-for-byte.
   card_id/timestamps/signature), making the differential variable explicit.
 - `unsigned_control` inside each evidence doc: a request without a signature is rejected
   by AgentBouncer (`no_signature`), so the envelope verification is real.
+
+## Adversarial window sampling (v1.7.0)
+
+The 3ehcp critique was correct: after v1.3.3, `premature-atc` carried the
+lower bound alone — one card, `issued_at` frozen at `2030-01-01`. A runner
+could special-case that exact timestamp and still mishandle every other
+issuance time in the future half-plane, and 0/60 future-dated cards was a
+measurement of the generator, not of the runner's window.
+
+`generate-accept-vectors.mjs --mode adversarial` now emits **correctly
+signed, anchored, active** cards whose **only** defect is a violated
+validity window, sampled as a distribution relative to the scoring clock:
+
+| Bucket | Share | Range |
+|---|---|---|
+| future-issued (lower bound) | 55% | +2..7d (boundary band), +8..90d, +91..730d, +731..1460d |
+| already-expired (upper bound) | 35% | expires today (`expires_at > NOW` at equality), 1..30d, 31..730d |
+| empty window | 10% | `issued_at == expires_at` in the future |
+
+Accept mode additionally issues **20% of cards TODAY** — the boundary-in
+band. A runner using `<` instead of `<=`, or a clock-retarded runner,
+silently rejects them, and the sidecar cross-check (which pins the
+generation-time clock) turns that into a hard FATAL. Adversarial future
+offsets floor at **+2 days** so a generated set stays re-scoreable across
+midnight — the resulting `clock+1d` mutant survivor is a named, deliberate
+trade-off, not an accident.
+
+Fail-closed semantics are mirrored: in valid-card modes a window violation
+is a FATAL; in adversarial mode a card that lands **IN** window is a FATAL
+(the generator failed to produce the defect it exists to produce).
+
+## Mutation testing (v1.7.0)
+
+The hand-listed mutant catalogue was a closed set — our own memorizer
+argument pointed at the test suite ("memorizing wins whenever the set it
+has to cover is closed and small"). `mutate-runner.mjs` replaces it with
+generation: a declared operator set applied mechanically at every
+applicable site on the scored path of `score-runner.mjs`, every mutant
+actually executed against the full suite.
+
+```bash
+node vectors/generate-accept-vectors.mjs --mode adversarial --count 40 --seed 7 --out .gen-adv
+node mutate-runner.mjs --generated .gen-adv --out mutation-survivors.json
+```
+
+Classification is mechanical — no judgment calls:
+
+- **caught** — the suite fails under the mutant (exit != 0);
+- **equivalent-on-suite** — exit 0 with byte-identical `--json` output
+  (suite-equivalence, not true equivalence, is the honest claim);
+- **observable-escape** — exit 0 with changed output. Each one names a
+  check the suite does not enforce.
+
+Current published state (**46 mutants: 40 caught, 6 equivalent, 0
+observable** — see `../mutation-survivors.json`):
+
+- `clock+1d` survives — the deliberate midnight-portability trade-off
+  (adversarial offsets floor at +2d; catching a +1d clock shift would cost
+  re-scoreability of generated sets).
+- The meta-integrity check that guards the other checks can itself be
+  disabled — **self-verification bottoms out somewhere**, which is exactly
+  why external cross-anchoring (Rekor side, queued) is the exit, not more
+  internal checks.
+- The rest are dead-path-under-`--json`, error-message-only, or provably
+  order-neutral JCS comparator mutants on this suite.
+
+Derived-truth tightening shipped in the same release, each one closing a
+hole the mutation run itself found: `--generated` on the command line that
+is not parsed or yields 0 cards is now a FATAL (a silently-ignored input
+used to be a green run); every sidecar cross-check is bound to the card
+bytes via sha256 (on a uniform set, cross-checking the WRONG row still
+agreed on `expected_verify`); and the runner counts its own checks —
+byte-exactness, sidecar and stage cross-checks must each run exactly once
+per entry, a skipped check is a FATAL, not a green run.

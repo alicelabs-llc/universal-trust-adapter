@@ -1,0 +1,82 @@
+{
+  "tool": "mutate-runner.mjs",
+  "suite_version": "v1.7.0",
+  "generated": "/tmp/adv-final",
+  "operators": {
+    "cmp-swap": "every comparison operator on the scored path: <= \u2194 >=, < \u2194 >, === \u2194 !==",
+    "guard-drop": "every single-line `if (cond) return x;` guard, deleted",
+    "branch-negate": "every block `if (cond) {` condition, logically negated",
+    "clock+1d": "NOW advanced one day",
+    "clock-1d": "NOW retarded one day"
+  },
+  "scope": {
+    "runner": "score-runner.mjs",
+    "scored_path": "lines 1-100 and 159-335 of the scored path",
+    "excluded": "cheat simulators (diagnostic fixtures, not the runner under test) and the --matrix diagnostics block"
+  },
+  "totals": {
+    "mutants": 46,
+    "caught": 40,
+    "equivalent": 6,
+    "observable": 0
+  },
+  "survivors": [
+    {
+      "id": "cmp-swap:L57:78",
+      "op": "cmp-swap",
+      "line_no": 57,
+      "line": "? Object.fromEntries(Object.entries(x).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))",
+      "classification": "equivalent"
+    },
+    {
+      "id": "branch-negate:L279",
+      "op": "branch-negate",
+      "line_no": 279,
+      "line": "if (genIndex) {",
+      "classification": "equivalent"
+    },
+    {
+      "id": "cmp-swap:L302:11",
+      "op": "cmp-swap",
+      "line_no": 302,
+      "line": "if (genIdx !== -1 && (genDir === null || generated.length === 0)) {",
+      "classification": "equivalent"
+    },
+    {
+      "id": "cmp-swap:L303:78",
+      "op": "cmp-swap",
+      "line_no": 303,
+      "line": "console.error(`FATAL: --generated appeared on the command line but ${genDir === null ? 'the argument could not be parsed (the flag cannot be silently ignored)' : `produced 0 scoreable cards from ${genDir}`} \u2014 refusing to score a silently-partial run`);",
+      "classification": "equivalent"
+    },
+    {
+      "id": "branch-negate:L307",
+      "op": "branch-negate",
+      "line_no": 307,
+      "line": "if (!wantMatrix) {",
+      "classification": "caught (interface broken: --json output unparseable)"
+    },
+    {
+      "id": "branch-negate:L313",
+      "op": "branch-negate",
+      "line_no": 313,
+      "line": "if (wantJson) {",
+      "classification": "caught (interface broken: --json output unparseable)"
+    },
+    {
+      "id": "branch-negate:L327",
+      "op": "branch-negate",
+      "line_no": 327,
+      "line": "if (s2) {",
+      "classification": "equivalent"
+    },
+    {
+      "id": "clock+1d:L53",
+      "op": "clock+1d",
+      "line_no": 53,
+      "line": "const NOW = new Date().toISOString().slice(0, 10) + 'T00:00:00Z';",
+      "classification": "equivalent"
+    }
+  ],
+  "generated_with": "node vectors/generate-accept-vectors.mjs --mode adversarial --count 40 --seed 7"
+}

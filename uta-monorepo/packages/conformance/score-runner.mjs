@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ============================================================================
-// UTA conformance — REFERENCE SCORER (v1.3.3)
+// UTA conformance — REFERENCE SCORER (v1.7.0)
 // ============================================================================
 // v1.3.3 fixes (anp2 bug report, dev.to comment 3ec7d, 2026-09-08T21:35Z):
 //   1. The validity window is TWO-SIDED: issued_at <= NOW < expires_at.
@@ -11,6 +11,18 @@
 //      sidecar is demoted to a cross-check: if present it must AGREE with
 //      the derived truth (mismatch = hard FATAL); if absent, scoring still
 //      works and a true-by-default inversion is impossible.
+// v1.7.0 (anp2 critique 3ehcp, 2026-09-10 — "0/60 is a measurement of the
+//      generator, not of the runner's window"):
+//   3. --generated DIR now happily scores ADVERSARIAL cards (correctly
+//      signed, anchored, active — the only defect is a violated validity
+//      window). Derivation needed no change: a window violation derives
+//      expected_verify: false with expiry_check: 'fail' from the card bytes.
+//      The sidecar cross-check pins the generation-time clock, which is what
+//      catches clock-shifted runners (a clock-minus-one runner derives a
+//      different truth than the sidecar pinned → hard FATAL).
+//   4. --json prints machine-readable output (fixed + generated + per-vector
+//      detail) so mutation testing (mutate-runner.mjs) can compare observable
+//      behavior byte-for-byte and separate equivalent survivors from escapes.
 // ============================================================================
 // Implements stage_scoring_rule from _index.json:
 //   - the runner's boolean must match expected_verify
@@ -22,8 +34,9 @@
 // Modes:
 //   node score-runner.mjs                       → reference runner vs the 14 fixed vectors
 //   node score-runner.mjs --matrix              → simulate the cheat runners, print the table
-//   node score-runner.mjs --generated DIR       → also score generated cards (all must pass)
+//   node score-runner.mjs --generated DIR       → also score generated cards (any mode; all must pass)
 //   node score-runner.mjs --generated DIR --matrix  → both
+//   node score-runner.mjs --json [--generated DIR] → machine-readable (for mutate-runner.mjs)
 //
 // The reference runner: pinned anchors {ca-test-1, ca-test-2} + policy
 // (TWO-SIDED validity window, status) + tolerance for unknown x_* fields.
@@ -49,6 +62,7 @@ const sha256hex = (buf) => createHash('sha256').update(buf).digest('hex');
 // --- args ---
 const args = process.argv.slice(2);
 const wantMatrix = args.includes('--matrix');
+const wantJson = args.includes('--json');
 const genIdx = args.indexOf('--generated');
 const genDir = genIdx !== -1 && args[genIdx + 1] && !args[genIdx + 1].startsWith('--') ? args[genIdx + 1] : null;
 
@@ -143,21 +157,27 @@ const stageLiar = (card) => {
 
 // ============================================================================
 // SCORING — stage mismatches count as vector failures
+// detail (v1.7.0): per-vector observable behavior, so mutation testing can
+// compare outputs byte-for-byte and separate equivalent survivors from real
+// escapes. Collecting detail does not change pass/fail semantics.
 // ============================================================================
 const score = (runner, cards) => {
   let ok = 0;
   const failed = [];
+  const detail = [];
   for (const { id, card, expected_verify, expected_stages, digest } of cards) {
     const r = runner(card, digest);
     let correct = r.verify === expected_verify;
+    let stageMismatch = null;
     if (correct && expected_stages && r.stages) {
       for (const [stage, expected] of Object.entries(expected_stages)) {
-        if (r.stages[stage] !== expected) { correct = false; break; }
+        if (r.stages[stage] !== expected) { correct = false; stageMismatch = stage; break; }
       }
     }
     if (correct) ok++; else failed.push(id);
+    detail.push({ id, expected_verify, got_verify: r.verify, stages_expected: expected_stages || null, stages_got: r.stages || null, correct, stage_mismatch: stageMismatch });
   }
-  return { ok, total: cards.length, failed };
+  return { ok, total: cards.length, failed, detail };
 };
 
 // ============================================================================
@@ -165,6 +185,7 @@ const score = (runner, cards) => {
 // ============================================================================
 const loadCards = () => {
   const cards = [];
+  let byteAsserted = 0; // v1.7.0 meta-integrity: the runner counts its own checks
   for (const v of index.vectors) {
     const card = JSON.parse(readFileSync(join(VECTORS, v.original_vector_file), 'utf8'));
     let digest = null;
@@ -176,14 +197,25 @@ const loadCards = () => {
       const rederived = jcs(subtree);
       if (rederived !== published) { console.error(`FATAL: ${v.id} re-derivation mismatch`); process.exit(1); }
       if (digest !== v.sha256) { console.error(`FATAL: ${v.id} digest mismatch vs _index.json`); process.exit(1); }
+      byteAsserted++;
     }
     cards.push({ id: v.id, card, expected_verify: v.expected_verify, expected_stages: v.expected_stages || null, digest });
+  }
+  // v1.7.0 (found by mutation testing): a runner can silently SKIP the
+  // byte-exactness assertions and look healthy — the counter proves the
+  // checks ran, one per signed vector, neither more nor fewer.
+  const signedCount = index.vectors.filter(v => v.signed_subtree).length;
+  if (byteAsserted !== signedCount) {
+    console.error(`FATAL: byte-exactness assertions ran ${byteAsserted} times but ${signedCount} signed vectors exist — the runner is not performing its own checks`);
+    process.exit(1);
   }
   return cards;
 };
 
 const loadGenerated = (dir) => {
   const cards = [];
+  let crossChecked = 0;     // v1.7.0 meta-integrity counters
+  let stageCrossChecked = 0;
   const genIndex = existsSync(join(dir, '_generated-index.json'))
     ? JSON.parse(readFileSync(join(dir, '_generated-index.json'), 'utf8'))
     : null;
@@ -210,6 +242,13 @@ const loadGenerated = (dir) => {
     const expected_stages = stagesOf(sigOk, anchorOk, inWindow, statusOk);
     const meta = genIndex?.find(m => m.card_id === card.card_id);
     if (meta) {
+      // v1.7.0 (found by mutation testing): bind the sidecar entry to THESE
+      // card bytes — on a uniform set, cross-checking against the WRONG
+      // entry still agrees on expected_verify; the sha256 does not.
+      if (meta.sha256 && meta.sha256 !== digest) {
+        console.error(`FATAL: ${card.card_id} — sidecar entry sha256 does not bind to these card bytes (sidecar ${meta.sha256.slice(0, 12)}…, card ${digest.slice(0, 12)}…). Cross-checking against the wrong sidecar row is a FATAL, not a pass.`);
+        process.exit(1);
+      }
       if (meta.expected_verify !== expected_verify) {
         console.error(`FATAL: ${card.card_id} — sidecar expected_verify=${meta.expected_verify} but derived truth is ${expected_verify}. The sidecar and the card bytes disagree; refusing to score.`);
         process.exit(1);
@@ -221,7 +260,9 @@ const loadGenerated = (dir) => {
             process.exit(1);
           }
         }
+        stageCrossChecked++;
       }
+      crossChecked++;
     }
     cards.push({
       id: `generated:${card.card_id}`,
@@ -231,6 +272,21 @@ const loadGenerated = (dir) => {
       digest,
     });
   }
+  // v1.7.0 (found by mutation testing): a runner can silently DISABLE the
+  // sidecar cross-check and look healthy — the counters prove the cross-check
+  // ran once per sidecar entry (and the stage cross-check once per entry that
+  // carries stages). A skipped cross-check is a FATAL, not a green run.
+  if (genIndex) {
+    if (crossChecked !== genIndex.length) {
+      console.error(`FATAL: sidecar cross-check ran ${crossChecked} times but the sidecar has ${genIndex.length} entries — the runner is not cross-checking every generated card`);
+      process.exit(1);
+    }
+    const withStages = genIndex.filter(m => m.expected_stages).length;
+    if (stageCrossChecked !== withStages) {
+      console.error(`FATAL: stage cross-check ran ${stageCrossChecked} times but ${withStages} sidecar entries carry expected_stages — the runner is not performing its own stage cross-checks`);
+      process.exit(1);
+    }
+  }
   return cards;
 };
 
@@ -239,19 +295,41 @@ const loadGenerated = (dir) => {
 // ============================================================================
 const fixed = loadCards();
 const generated = genDir ? loadGenerated(genDir) : [];
+// v1.7.0 fail-closed (found by mutation testing): a mutant of the argument
+// parsing silently NULLS OUT --generated, scores 14/14 and prints PASSED.
+// The assertion is on the COMMAND LINE, not the parsed result: if the flag
+// appeared, it must have been parsed AND produced scoreable cards.
+if (genIdx !== -1 && (genDir === null || generated.length === 0)) {
+  console.error(`FATAL: --generated appeared on the command line but ${genDir === null ? 'the argument could not be parsed (the flag cannot be silently ignored)' : `produced 0 scoreable cards from ${genDir}`} — refusing to score a silently-partial run`);
+  process.exit(1);
+}
 
 if (!wantMatrix) {
   // reference runner vs everything
   const s1 = score(reference, fixed);
-  console.log(`reference runner vs fixed vectors:   ${s1.ok}/${s1.total}`);
-  if (s1.failed.length) console.log(`  failures: ${s1.failed.join(', ')}`);
-  if (generated.length) {
-    const s2 = score(reference, generated);
-    console.log(`reference runner vs generated cards:  ${s2.ok}/${s2.total}`);
-    if (s2.failed.length) console.log(`  failures: ${s2.failed.join(', ')}`);
+  const s2 = generated.length ? score(reference, generated) : null;
+  const allOk = s1.ok === s1.total && (!s2 || s2.ok === s2.total);
+
+  if (wantJson) {
+    // machine-readable single object (for mutate-runner.mjs and CI)
+    const out = {
+      version: index.schema_version,
+      runner: 'reference',
+      fixed: { ok: s1.ok, total: s1.total, failed: s1.failed },
+      generated: s2 ? { ok: s2.ok, total: s2.total, failed: s2.failed } : null,
+      per_vector: [...s1.detail, ...(s2 ? s2.detail : [])],
+      result: allOk ? 'PASSED' : 'FAILED',
+    };
+    console.log(JSON.stringify(out));
+  } else {
+    console.log(`reference runner vs fixed vectors:   ${s1.ok}/${s1.total}`);
+    if (s1.failed.length) console.log(`  failures: ${s1.failed.join(', ')}`);
+    if (s2) {
+      console.log(`reference runner vs generated cards:  ${s2.ok}/${s2.total}`);
+      if (s2.failed.length) console.log(`  failures: ${s2.failed.join(', ')}`);
+    }
+    console.log(allOk ? '\nUTA CONFORMANCE: PASSED ✅' : '\nUTA CONFORMANCE: FAILED ❌');
   }
-  const allOk = s1.ok === s1.total && (!generated.length || score(reference, generated).ok === generated.length);
-  console.log(allOk ? '\nUTA CONFORMANCE: PASSED ✅' : '\nUTA CONFORMANCE: FAILED ❌');
   process.exit(allOk ? 0 : 1);
 }
 
