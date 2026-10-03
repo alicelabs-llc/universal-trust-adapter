@@ -1,6 +1,6 @@
 # @marketnow/uta-conformance
 
-**Conformance suite for agent-trust runners: 14 signed test vectors + reference scorer + card generator.**
+**Conformance suite for agent-trust runners: 14 signed test vectors (scored) + 2 third-party interop evidence vectors + reference scorer + card generator.**
 
 Does your agent runtime actually *verify* Agent Trust Cards, or does it just pattern-match?
 This suite separates real verifiers from three kinds of fake ones:
@@ -49,6 +49,19 @@ npx @marketnow/uta-conformance --generated /tmp/gen
 Cards are signed by the published test CA (`vectors/_test-ca-keys.json`, pinned as an
 additional anchor) with random content + `x_gen_*` extension fields — a memorizer that
 hardcoded the 14 fixed cards scores 0/50.
+
+## Third-party interop evidence (v1.6.0)
+
+`vectors/third-party/` holds two **evidence vectors** — not scored cards — capturing live
+transport-level interoperability with [AgentBouncer](https://agentbouncer.io) (beta):
+RFC 9421 signed requests with the `x-uta-trust` header as a *covered component*, so the
+trust token is bound into the request signature. AgentBouncer verifies the envelope
+(signature valid, replay checked); the UTA verdict (PASS / POLICY_FAIL) is produced
+independently by the MarketNow verifier — composed verdicts, clean attribution.
+The two cards are identical except for `network.egress` (allowlist vs none), which flips
+the UTA verdict while the transport verdict stays valid in both — isolating trust-policy
+from transport. Verified 3x pre-publication (crypto, isolation, wording); published with
+explicit user approval 2026-10-03. See `vectors/third-party/_interop-index.json`.
 
 ## What's in `vectors/`
 

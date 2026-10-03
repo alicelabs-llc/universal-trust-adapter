@@ -1,0 +1,182 @@
+{
+  "id": "agentbouncer-transport-denied",
+  "type": "third-party-interop",
+  "format": "atc-v1-trace",
+  "counterparty": "AgentBouncer (beta) — https://agentbouncer.io",
+  "counterparty_endpoint": "https://agentbouncer.io/api/public/agent-test/cmuqb6fpt000wzpd949zquzja",
+  "captured_at": "2026-10-02T02:04:18.532Z",
+  "transport": "RFC 9421 signed request; x-uta-trust covered component",
+  "expected_verify": true,
+  "reason": "transport-level interoperability with composed verdicts: AgentBouncer envelope verified (signature valid, replay checked); UTA verdict POLICY_FAIL (action mcp:tools/call requires network.egress=allowlist, card grants none) — denial attributable to trust-policy, not transport",
+  "card_id": "ATC-2026-003702",
+  "card": {
+    "spec_version": "ATC/1.0",
+    "card_id": "ATC-2026-003702",
+    "issuer": {
+      "ca_id": "alicelabs-sentinel-ca",
+      "ca_public_key": "MCowBQYDK2VwAyEA5qrMTtm6o2he+CyMf55CUW3an090aYlyLy80cTSFc0c=",
+      "ca_algorithm": "Ed25519",
+      "ca_url": "https://marketnow.site/api/atc"
+    },
+    "identity": {
+      "agent_id": "uta-interop-agent",
+      "agent_name": "UTA Interop Agent",
+      "agent_owner": "Alice Labs LLC"
+    },
+    "attestation": {
+      "subject_public_key": "MCowBQYDK2VwAyEARb0vbtQ5gGdo9YEoNzhcTuXlXzJ7t7ZBhSAItDKCZFA=",
+      "subject_algorithm": "Ed25519",
+      "signature": "oHws6+ZlAhfiUu1rV7kwrS9U/pf//mjx0iAeP6q567oQ/opZX/M7DEIl/CJdSJI+O4m23/vob0cKNFcTHyvmBg==",
+      "signed_payload_hash": "c913632d89c9a2e4031d7c9d7eacb2340c502bb401777cfb0dfff58f2429ef15"
+    },
+    "capabilities": {
+      "filesystem": {
+        "read": "own_dir",
+        "write": "own_dir"
+      },
+      "network": {
+        "egress": "none",
+        "ingress": "none"
+      },
+      "shell": {
+        "exec": "sandboxed",
+        "spawn": "none"
+      },
+      "credentials": {
+        "read_env": "none",
+        "read_files": "none"
+      },
+      "process": {
+        "subprocess": "none",
+        "signals": "own"
+      }
+    },
+    "evidence": {
+      "audit_pipeline": "Sentinel L2 Sandbox (10-layer)",
+      "audit_completed_at": "2026-10-02T02:04:17.651Z",
+      "static_checks": {
+        "total": 42,
+        "passed": 42,
+        "failed": 0
+      },
+      "dynamic_checks": {
+        "total": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "runtime_checks": {
+        "total": 7,
+        "passed": 7,
+        "failed": 0
+      },
+      "findings": []
+    },
+    "risk": {
+      "trust_score": 9,
+      "risk_level": "low",
+      "score_explanation": "Interop test card, clean sandbox audit",
+      "scored_at": "2026-10-02T02:04:17.651Z",
+      "decision_authority": "consumer"
+    },
+    "revocation": {
+      "revocation_check_url": "https://marketnow.site/api/atc?action=revocation-list",
+      "revocation_check_method": "simple_json",
+      "revocation_check_required": true
+    },
+    "validity": {
+      "issued_at": "2026-10-02T02:04:17.652Z",
+      "expires_at": "2026-12-31T02:04:17.652Z",
+      "max_ttl_days": 90
+    }
+  },
+  "request": {
+    "method": "POST",
+    "url": "https://agentbouncer.io/api/public/agent-test/cmuqb6fpt000wzpd949zquzja",
+    "covered_components": [
+      "@method",
+      "@authority",
+      "@path",
+      "content-digest",
+      "x-uta-trust",
+      "signature-agent"
+    ],
+    "signature_input": "sig1=(\"@method\" \"@authority\" \"@path\" \"content-digest\" \"x-uta-trust\" \"signature-agent\");created=1790906658;keyid=\"esyNqQIQrwkYCPRhMgCa8onQNEcMAEsisPz3PgSAe74\";alg=\"ed25519\";expires=1790906718;nonce=\"Q8OVYr1opJwgpgexNWSLwWI7c1CHQoTF5Cwp6CFEGGKkfoiLCp669OYiHgYbiBgeqf3pTYjwo44PsvsxmKtdhw==\";tag=\"web-bot-auth\"",
+    "signature": "sig1=:kNLgLWUAmsg0v4VZmQBGf9cp/zG9n6BD9OUjlc0JcZpzYKKJo+hVBNspC0jeG78FN+ITW+17udMaDTndbYoFAQ==:",
+    "content_digest": "sha-256=:vRx4QTR9SRY9lK3tmE4cM1/3IGpPXZ6ij1TcUI5mYmY=:",
+    "content_type": "application/json",
+    "signature_agent": "\"https://agentbouncer.io/project-agents/cmuqb6fpt000vzpd9dc08qb1p/b18cae8d-eae1-4710-a140-1f4258beff21\"",
+    "x_uta_trust_b64url": "eyJzcGVjX3ZlcnNpb24iOiJBVEMvMS4wIiwiY2FyZF9pZCI6IkFUQy0yMDI2LTAwMzcwMiIsImlzc3VlciI6eyJjYV9pZCI6ImFsaWNlbGFicy1zZW50aW5lbC1jYSIsImNhX3B1YmxpY19rZXkiOiJNQ293QlFZREsyVndBeUVBNXFyTVR0bTZvMmhlK0N5TWY1NUNVVzNhbjA5MGFZbHlMeTgwY1RTRmMwYz0iLCJjYV9hbGdvcml0aG0iOiJFZDI1NTE5IiwiY2FfdXJsIjoiaHR0cHM6Ly9tYXJrZXRub3cuc2l0ZS9hcGkvYXRjIn0sImlkZW50aXR5Ijp7ImFnZW50X2lkIjoidXRhLWludGVyb3AtYWdlbnQiLCJhZ2VudF9uYW1lIjoiVVRBIEludGVyb3AgQWdlbnQiLCJhZ2VudF9vd25lciI6IkFsaWNlIExhYnMgTExDIn0sImF0dGVzdGF0aW9uIjp7InN1YmplY3RfcHVibGljX2tleSI6Ik1Db3dCUVlESzJWd0F5RUFSYjB2YnRRNWdHZG85WUVvTnpoY1R1WGxYeko3dDdaQmhTQUl0REtDWkZBPSIsInN1YmplY3RfYWxnb3JpdGhtIjoiRWQyNTUxOSIsInNpZ25hdHVyZSI6Im9Id3M2K1psQWhmaVV1MXJWN2t3clM5VS9wZi8vbWp4MGlBZVA2cTU2N29RL29wWlgvTTdERUlsL0NKZFNKSStPNG0yMy92b2IwY0tORmNUSHl2bUJnPT0iLCJzaWduZWRfcGF5bG9hZF9oYXNoIjoiYzkxMzYzMmQ4OWM5YTJlNDAzMWQ3YzlkN2VhY2IyMzQwYzUwMmJiNDAxNzc3Y2ZiMGRmZmY1OGYyNDI5ZWYxNSJ9LCJjYXBhYmlsaXRpZXMiOnsiZmlsZXN5c3RlbSI6eyJyZWFkIjoib3duX2RpciIsIndyaXRlIjoib3duX2RpciJ9LCJuZXR3b3JrIjp7ImVncmVzcyI6Im5vbmUiLCJpbmdyZXNzIjoibm9uZSJ9LCJzaGVsbCI6eyJleGVjIjoic2FuZGJveGVkIiwic3Bhd24iOiJub25lIn0sImNyZWRlbnRpYWxzIjp7InJlYWRfZW52Ijoibm9uZSIsInJlYWRfZmlsZXMiOiJub25lIn0sInByb2Nlc3MiOnsic3VicHJvY2VzcyI6Im5vbmUiLCJzaWduYWxzIjoib3duIn19LCJldmlkZW5jZSI6eyJhdWRpdF9waXBlbGluZSI6IlNlbnRpbmVsIEwyIFNhbmRib3ggKDEwLWxheWVyKSIsImF1ZGl0X2NvbXBsZXRlZF9hdCI6IjIwMjYtMTAtMDJUMDI6MDQ6MTcuNjUxWiIsInN0YXRpY19jaGVja3MiOnsidG90YWwiOjQyLCJwYXNzZWQiOjQyLCJmYWlsZWQiOjB9LCJkeW5hbWljX2NoZWNrcyI6eyJ0b3RhbCI6MTgsInBhc3NlZCI6MTgsImZhaWxlZCI6MH0sInJ1bnRpbWVfY2hlY2tzIjp7InRvdGFsIjo3LCJwYXNzZWQiOjcsImZhaWxlZCI6MH0sImZpbmRpbmdzIjpbXX0sInJpc2siOnsidHJ1c3Rfc2NvcmUiOjksInJpc2tfbGV2ZWwiOiJsb3ciLCJzY29yZV9leHBsYW5hdGlvbiI6IkludGVyb3AgdGVzdCBjYXJkLCBjbGVhbiBzYW5kYm94IGF1ZGl0Iiwic2NvcmVkX2F0IjoiMjAyNi0xMC0wMlQwMjowNDoxNy42NTFaIiwiZGVjaXNpb25fYXV0aG9yaXR5IjoiY29uc3VtZXIifSwicmV2b2NhdGlvbiI6eyJyZXZvY2F0aW9uX2NoZWNrX3VybCI6Imh0dHBzOi8vbWFya2V0bm93LnNpdGUvYXBpL2F0Yz9hY3Rpb249cmV2b2NhdGlvbi1saXN0IiwicmV2b2NhdGlvbl9jaGVja19tZXRob2QiOiJzaW1wbGVfanNvbiIsInJldm9jYXRpb25fY2hlY2tfcmVxdWlyZWQiOnRydWV9LCJ2YWxpZGl0eSI6eyJpc3N1ZWRfYXQiOiIyMDI2LTEwLTAyVDAyOjA0OjE3LjY1MloiLCJleHBpcmVzX2F0IjoiMjAyNi0xMi0zMVQwMjowNDoxNy42NTJaIiwibWF4X3R0bF9kYXlzIjo5MH19"
+  },
+  "agentbouncer_verdict": {
+    "verified": true,
+    "allowed": true,
+    "reason": null,
+    "checks": {
+      "signature": "valid",
+      "timestamp": "valid",
+      "replay": "checked",
+      "provider": "unknown",
+      "projectKey": "known",
+      "policy": "matched"
+    },
+    "agent": {
+      "type": "PROJECT_KEY",
+      "provider": null,
+      "providerSlug": null,
+      "projectKey": {
+        "id": "b18cae8d-eae1-4710-a140-1f4258beff21",
+        "name": "uta-interop-agent",
+        "scopes": []
+      },
+      "signatureAgent": "https://agentbouncer.io/project-agents/cmuqb6fpt000vzpd9dc08qb1p/b18cae8d-eae1-4710-a140-1f4258beff21",
+      "keyid": "esyNqQIQrwkYCPRhMgCa8onQNEcMAEsisPz3PgSAe74"
+    },
+    "provider": null,
+    "request": {
+      "method": "POST",
+      "path": "/api/public/agent-test/cmuqb6fpt000wzpd949zquzja",
+      "tag": "web-bot-auth",
+      "expectedTag": "web-bot-auth",
+      "action": "tools:call",
+      "tool": "marketnow_search_skills"
+    },
+    "risk": {
+      "score": 5,
+      "level": "low"
+    },
+    "oauth": {
+      "status": "none",
+      "authenticated": false,
+      "sub": null,
+      "issuer": null,
+      "scopes": [],
+      "error": null
+    },
+    "policy": {
+      "mode": "BLOCK_UNKNOWN",
+      "minTier": "TIER_3",
+      "minTrustScore": 0,
+      "requireKnownProvider": true,
+      "requireTrusted": false,
+      "wouldBlockReason": null,
+      "matchedRule": null,
+      "defaultEffectApplied": false
+    },
+    "tag": "web-bot-auth",
+    "expectedTag": "web-bot-auth",
+    "trusted": false,
+    "confidence": 0.95
+  },
+  "uta_verdict": {
+    "verdict": "POLICY_FAIL",
+    "reason": "action mcp:tools/call requires network.egress=allowlist, card grants none"
+  },
+  "unsigned_control": {
+    "http_status": 200,
+    "reason": "no_signature"
+  },
+  "signature_algorithm": "Ed25519 (RFC 8032) over JCS(RFC 8785) canonical bytes",
+  "signed_at": "2026-10-02T02:04:18.532Z",
+  "notes": "Identical to vector agentbouncer-transport-allowed except network.egress=none (and card_id/timestamps/signature). Both cards pass 8/8 ATC controls; the only differential variable is the caps entry.",
+  "source_trace": "traces_20261002_final.json"
+}

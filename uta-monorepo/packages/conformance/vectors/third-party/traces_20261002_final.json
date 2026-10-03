@@ -1,0 +1,443 @@
+{
+  "started_at": "2026-10-02T02:04:17.649Z",
+  "project": "cmuqb6fpt000vzpd9dc08qb1p",
+  "test_url": "https://agentbouncer.io/api/public/agent-test/cmuqb6fpt000wzpd949zquzja",
+  "token_encoding": "base64url(JSON of full ATC/1.0 document)",
+  "cards": {
+    "A": {
+      "card_id": "ATC-2026-003701",
+      "egress": "allowlist",
+      "verify": {
+        "valid": true,
+        "controls": [
+          "ATC-001",
+          "ATC-002",
+          "ATC-003",
+          "ATC-004",
+          "ATC-005",
+          "ATC-006",
+          "ATC-007",
+          "ATC-008"
+        ],
+        "errors": []
+      }
+    },
+    "B": {
+      "card_id": "ATC-2026-003702",
+      "egress": "none",
+      "verify": {
+        "valid": true,
+        "controls": [
+          "ATC-001",
+          "ATC-002",
+          "ATC-003",
+          "ATC-004",
+          "ATC-005",
+          "ATC-006",
+          "ATC-007",
+          "ATC-008"
+        ],
+        "errors": []
+      }
+    }
+  },
+  "token_sizes_b64url": {
+    "A": 2227,
+    "B": 2220
+  },
+  "uta_verdicts": {
+    "A": {
+      "verdict": "PASS",
+      "reason": "8/8 controls + caps match"
+    },
+    "B": {
+      "verdict": "POLICY_FAIL",
+      "reason": "action mcp:tools/call requires network.egress=allowlist, card grants none"
+    }
+  },
+  "paths": {
+    "allowed_egress_allowlist": {
+      "label": "allowed_egress_allowlist",
+      "timestamp": "2026-10-02T02:04:17.657Z",
+      "card_id": "ATC-2026-003701",
+      "live_request": {
+        "url": "https://agentbouncer.io/api/public/agent-test/cmuqb6fpt000wzpd949zquzja",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "content-digest": "sha-256=:vRx4QTR9SRY9lK3tmE4cM1/3IGpPXZ6ij1TcUI5mYmY=:",
+          "x-uta-trust": "eyJzcGVjX3ZlcnNpb24iOiJBVEMvMS4wIiwiY2FyZF9pZCI6IkFUQy0yMDI2LTAwMzcwMSIsImlzc3VlciI6eyJjYV9pZCI6ImFsaWNlbGFicy1zZW50aW5lbC1jYSIsImNhX3B1YmxpY19rZXkiOiJNQ293QlFZREsyVndBeUVBNXFyTVR0bTZvMmhlK0N5TWY1NUNVVzNhbjA5MGFZbHlMeTgwY1RTRmMwYz0iLCJjYV9hbGdvcml0aG0iOiJFZDI1NTE5IiwiY2FfdXJsIjoiaHR0cHM6Ly9tYXJrZXRub3cuc2l0ZS9hcGkvYXRjIn0sImlkZW50aXR5Ijp7ImFnZW50X2lkIjoidXRhLWludGVyb3AtYWdlbnQiLCJhZ2VudF9uYW1lIjoiVVRBIEludGVyb3AgQWdlbnQiLCJhZ2VudF9vd25lciI6IkFsaWNlIExhYnMgTExDIn0sImF0dGVzdGF0aW9uIjp7InN1YmplY3RfcHVibGljX2tleSI6Ik1Db3dCUVlESzJWd0F5RUFSYjB2YnRRNWdHZG85WUVvTnpoY1R1WGxYeko3dDdaQmhTQUl0REtDWkZBPSIsInN1YmplY3RfYWxnb3JpdGhtIjoiRWQyNTUxOSIsInNpZ25hdHVyZSI6IkVDeEFJTTA1dTc4WVpXSXVWZXdRZm1wQ0hMZ0dNbVU2b0VuYzRTaW8yblR2RWdqQStneWxtTUJVbzBkMEhoY2dpclVFZHRUVFgwbEh0eFVKbmY3a0R3PT0iLCJzaWduZWRfcGF5bG9hZF9oYXNoIjoiMmYwOGQxNWE2YTZjNGZlZjQwMDcwNTIxZTIyMmQ0ZDg4ZTA4MDcxYzVkYThhOWIzYWJhMWNjYzVmNjEzZjYzYyJ9LCJjYXBhYmlsaXRpZXMiOnsiZmlsZXN5c3RlbSI6eyJyZWFkIjoib3duX2RpciIsIndyaXRlIjoib3duX2RpciJ9LCJuZXR3b3JrIjp7ImVncmVzcyI6ImFsbG93bGlzdCIsImluZ3Jlc3MiOiJub25lIn0sInNoZWxsIjp7ImV4ZWMiOiJzYW5kYm94ZWQiLCJzcGF3biI6Im5vbmUifSwiY3JlZGVudGlhbHMiOnsicmVhZF9lbnYiOiJub25lIiwicmVhZF9maWxlcyI6Im5vbmUifSwicHJvY2VzcyI6eyJzdWJwcm9jZXNzIjoibm9uZSIsInNpZ25hbHMiOiJvd24ifX0sImV2aWRlbmNlIjp7ImF1ZGl0X3BpcGVsaW5lIjoiU2VudGluZWwgTDIgU2FuZGJveCAoMTAtbGF5ZXIpIiwiYXVkaXRfY29tcGxldGVkX2F0IjoiMjAyNi0xMC0wMlQwMjowNDoxNy42NTFaIiwic3RhdGljX2NoZWNrcyI6eyJ0b3RhbCI6NDIsInBhc3NlZCI6NDIsImZhaWxlZCI6MH0sImR5bmFtaWNfY2hlY2tzIjp7InRvdGFsIjoxOCwicGFzc2VkIjoxOCwiZmFpbGVkIjowfSwicnVudGltZV9jaGVja3MiOnsidG90YWwiOjcsInBhc3NlZCI6NywiZmFpbGVkIjowfSwiZmluZGluZ3MiOltdfSwicmlzayI6eyJ0cnVzdF9zY29yZSI6OSwicmlza19sZXZlbCI6ImxvdyIsInNjb3JlX2V4cGxhbmF0aW9uIjoiSW50ZXJvcCB0ZXN0IGNhcmQsIGNsZWFuIHNhbmRib3ggYXVkaXQiLCJzY29yZWRfYXQiOiIyMDI2LTEwLTAyVDAyOjA0OjE3LjY1MVoiLCJkZWNpc2lvbl9hdXRob3JpdHkiOiJjb25zdW1lciJ9LCJyZXZvY2F0aW9uIjp7InJldm9jYXRpb25fY2hlY2tfdXJsIjoiaHR0cHM6Ly9tYXJrZXRub3cuc2l0ZS9hcGkvYXRjP2FjdGlvbj1yZXZvY2F0aW9uLWxpc3QiLCJyZXZvY2F0aW9uX2NoZWNrX21ldGhvZCI6InNpbXBsZV9qc29uIiwicmV2b2NhdGlvbl9jaGVja19yZXF1aXJlZCI6dHJ1ZX0sInZhbGlkaXR5Ijp7Imlzc3VlZF9hdCI6IjIwMjYtMTAtMDJUMDI6MDQ6MTcuNjUxWiIsImV4cGlyZXNfYXQiOiIyMDI2LTEyLTMxVDAyOjA0OjE3LjY1MVoiLCJtYXhfdHRsX2RheXMiOjkwfX0",
+          "signature-agent": "\"https://agentbouncer.io/project-agents/cmuqb6fpt000vzpd9dc08qb1p/b18cae8d-eae1-4710-a140-1f4258beff21\"",
+          "Signature": "sig1=:QtapZ09ztB3BjnrfuAfCSqy8YDXw1hMS2MZG+8j6LKW1+E6LX1G/2wXWA7kDJcwtmTxi87x4Qd5cO+WJ0XSHCA==:",
+          "Signature-Input": "sig1=(\"@method\" \"@authority\" \"@path\" \"content-digest\" \"x-uta-trust\" \"signature-agent\");created=1790906657;keyid=\"esyNqQIQrwkYCPRhMgCa8onQNEcMAEsisPz3PgSAe74\";alg=\"ed25519\";expires=1790906717;nonce=\"tMPe3hPGhIKqCt52xdier6EmSSh28hxWtXzz9M1bOEFrYsmpTk/NVwY9snrVVpokcz15xc6sQzsgs5DEHQVO2Q==\";tag=\"web-bot-auth\""
+        },
+        "body": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "method": "tools/call",
+          "params": {
+            "name": "marketnow_search_skills",
+            "arguments": {
+              "query": "interop"
+            }
+          }
+        }
+      },
+      "live_public_endpoint": {
+        "http_status": 200,
+        "response": null
+      },
+      "verify_request_payload": {
+        "url": "https://agentbouncer.io/api/v1/verify",
+        "method": "POST",
+        "authorization": "Bearer ab_live_***",
+        "body": {
+          "url": "https://agentbouncer.io/api/public/agent-test/cmuqb6fpt000wzpd949zquzja",
+          "method": "POST",
+          "headers": {
+            "content-type": "application/json",
+            "content-digest": "sha-256=:vRx4QTR9SRY9lK3tmE4cM1/3IGpPXZ6ij1TcUI5mYmY=:",
+            "x-uta-trust": "eyJzcGVjX3ZlcnNpb24iOiJBVEMvMS4wIiwiY2FyZF9pZCI6IkFUQy0yMDI2LTAwMzcwMSIsImlzc3VlciI6eyJjYV9pZCI6ImFsaWNlbGFicy1zZW50aW5lbC1jYSIsImNhX3B1YmxpY19rZXkiOiJNQ293QlFZREsyVndBeUVBNXFyTVR0bTZvMmhlK0N5TWY1NUNVVzNhbjA5MGFZbHlMeTgwY1RTRmMwYz0iLCJjYV9hbGdvcml0aG0iOiJFZDI1NTE5IiwiY2FfdXJsIjoiaHR0cHM6Ly9tYXJrZXRub3cuc2l0ZS9hcGkvYXRjIn0sImlkZW50aXR5Ijp7ImFnZW50X2lkIjoidXRhLWludGVyb3AtYWdlbnQiLCJhZ2VudF9uYW1lIjoiVVRBIEludGVyb3AgQWdlbnQiLCJhZ2VudF9vd25lciI6IkFsaWNlIExhYnMgTExDIn0sImF0dGVzdGF0aW9uIjp7InN1YmplY3RfcHVibGljX2tleSI6Ik1Db3dCUVlESzJWd0F5RUFSYjB2YnRRNWdHZG85WUVvTnpoY1R1WGxYeko3dDdaQmhTQUl0REtDWkZBPSIsInN1YmplY3RfYWxnb3JpdGhtIjoiRWQyNTUxOSIsInNpZ25hdHVyZSI6IkVDeEFJTTA1dTc4WVpXSXVWZXdRZm1wQ0hMZ0dNbVU2b0VuYzRTaW8yblR2RWdqQStneWxtTUJVbzBkMEhoY2dpclVFZHRUVFgwbEh0eFVKbmY3a0R3PT0iLCJzaWduZWRfcGF5bG9hZF9oYXNoIjoiMmYwOGQxNWE2YTZjNGZlZjQwMDcwNTIxZTIyMmQ0ZDg4ZTA4MDcxYzVkYThhOWIzYWJhMWNjYzVmNjEzZjYzYyJ9LCJjYXBhYmlsaXRpZXMiOnsiZmlsZXN5c3RlbSI6eyJyZWFkIjoib3duX2RpciIsIndyaXRlIjoib3duX2RpciJ9LCJuZXR3b3JrIjp7ImVncmVzcyI6ImFsbG93bGlzdCIsImluZ3Jlc3MiOiJub25lIn0sInNoZWxsIjp7ImV4ZWMiOiJzYW5kYm94ZWQiLCJzcGF3biI6Im5vbmUifSwiY3JlZGVudGlhbHMiOnsicmVhZF9lbnYiOiJub25lIiwicmVhZF9maWxlcyI6Im5vbmUifSwicHJvY2VzcyI6eyJzdWJwcm9jZXNzIjoibm9uZSIsInNpZ25hbHMiOiJvd24ifX0sImV2aWRlbmNlIjp7ImF1ZGl0X3BpcGVsaW5lIjoiU2VudGluZWwgTDIgU2FuZGJveCAoMTAtbGF5ZXIpIiwiYXVkaXRfY29tcGxldGVkX2F0IjoiMjAyNi0xMC0wMlQwMjowNDoxNy42NTFaIiwic3RhdGljX2NoZWNrcyI6eyJ0b3RhbCI6NDIsInBhc3NlZCI6NDIsImZhaWxlZCI6MH0sImR5bmFtaWNfY2hlY2tzIjp7InRvdGFsIjoxOCwicGFzc2VkIjoxOCwiZmFpbGVkIjowfSwicnVudGltZV9jaGVja3MiOnsidG90YWwiOjcsInBhc3NlZCI6NywiZmFpbGVkIjowfSwiZmluZGluZ3MiOltdfSwicmlzayI6eyJ0cnVzdF9zY29yZSI6OSwicmlza19sZXZlbCI6ImxvdyIsInNjb3JlX2V4cGxhbmF0aW9uIjoiSW50ZXJvcCB0ZXN0IGNhcmQsIGNsZWFuIHNhbmRib3ggYXVkaXQiLCJzY29yZWRfYXQiOiIyMDI2LTEwLTAyVDAyOjA0OjE3LjY1MVoiLCJkZWNpc2lvbl9hdXRob3JpdHkiOiJjb25zdW1lciJ9LCJyZXZvY2F0aW9uIjp7InJldm9jYXRpb25fY2hlY2tfdXJsIjoiaHR0cHM6Ly9tYXJrZXRub3cuc2l0ZS9hcGkvYXRjP2FjdGlvbj1yZXZvY2F0aW9uLWxpc3QiLCJyZXZvY2F0aW9uX2NoZWNrX21ldGhvZCI6InNpbXBsZV9qc29uIiwicmV2b2NhdGlvbl9jaGVja19yZXF1aXJlZCI6dHJ1ZX0sInZhbGlkaXR5Ijp7Imlzc3VlZF9hdCI6IjIwMjYtMTAtMDJUMDI6MDQ6MTcuNjUxWiIsImV4cGlyZXNfYXQiOiIyMDI2LTEyLTMxVDAyOjA0OjE3LjY1MVoiLCJtYXhfdHRsX2RheXMiOjkwfX0",
+            "signature-agent": "\"https://agentbouncer.io/project-agents/cmuqb6fpt000vzpd9dc08qb1p/b18cae8d-eae1-4710-a140-1f4258beff21\"",
+            "Signature": "sig1=:V0Bo1E88mFJC3gzqjr0OtXGRhqWFyu8a51Iu/pBKU/g7qGSoqANtb4sBz2fuovbqFU0vNEx37G3/nxxBLnOZCg==:",
+            "Signature-Input": "sig1=(\"@method\" \"@authority\" \"@path\" \"content-digest\" \"x-uta-trust\" \"signature-agent\");created=1790906658;keyid=\"esyNqQIQrwkYCPRhMgCa8onQNEcMAEsisPz3PgSAe74\";alg=\"ed25519\";expires=1790906718;nonce=\"FsTMCdpHPtu5rH9l2MeAtkdi7Jw6vswRb0BJIbnpZFnvONGma6I7p1aDlA8nOi0OEZTfnSPdzvnxbCdF2qSlCQ==\";tag=\"web-bot-auth\""
+          },
+          "bodyDigest": "sha-256=:vRx4QTR9SRY9lK3tmE4cM1/3IGpPXZ6ij1TcUI5mYmY=:",
+          "expectedTag": "web-bot-auth",
+          "action": "tools:call",
+          "tool": "marketnow_search_skills",
+          "userAgent": "UTA-Interop/1.0"
+        }
+      },
+      "api_v1_verify": {
+        "http_status": 200,
+        "response": {
+          "verified": true,
+          "allowed": true,
+          "reason": null,
+          "checks": {
+            "signature": "valid",
+            "timestamp": "valid",
+            "replay": "checked",
+            "provider": "unknown",
+            "projectKey": "known",
+            "policy": "matched"
+          },
+          "agent": {
+            "type": "PROJECT_KEY",
+            "provider": null,
+            "providerSlug": null,
+            "projectKey": {
+              "id": "b18cae8d-eae1-4710-a140-1f4258beff21",
+              "name": "uta-interop-agent",
+              "scopes": []
+            },
+            "signatureAgent": "https://agentbouncer.io/project-agents/cmuqb6fpt000vzpd9dc08qb1p/b18cae8d-eae1-4710-a140-1f4258beff21",
+            "keyid": "esyNqQIQrwkYCPRhMgCa8onQNEcMAEsisPz3PgSAe74"
+          },
+          "provider": null,
+          "request": {
+            "method": "POST",
+            "path": "/api/public/agent-test/cmuqb6fpt000wzpd949zquzja",
+            "tag": "web-bot-auth",
+            "expectedTag": "web-bot-auth",
+            "action": "tools:call",
+            "tool": "marketnow_search_skills"
+          },
+          "risk": {
+            "score": 5,
+            "level": "low"
+          },
+          "oauth": {
+            "status": "none",
+            "authenticated": false,
+            "sub": null,
+            "issuer": null,
+            "scopes": [],
+            "error": null
+          },
+          "policy": {
+            "mode": "BLOCK_UNKNOWN",
+            "minTier": "TIER_3",
+            "minTrustScore": 0,
+            "requireKnownProvider": true,
+            "requireTrusted": false,
+            "wouldBlockReason": null,
+            "matchedRule": null,
+            "defaultEffectApplied": false
+          },
+          "tag": "web-bot-auth",
+          "expectedTag": "web-bot-auth",
+          "trusted": false,
+          "confidence": 0.95
+        }
+      },
+      "uta_verdict": {
+        "verdict": "PASS",
+        "reason": "8/8 controls + caps match"
+      }
+    },
+    "denied_egress_none": {
+      "label": "denied_egress_none",
+      "timestamp": "2026-10-02T02:04:18.532Z",
+      "card_id": "ATC-2026-003702",
+      "live_request": {
+        "url": "https://agentbouncer.io/api/public/agent-test/cmuqb6fpt000wzpd949zquzja",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "content-digest": "sha-256=:vRx4QTR9SRY9lK3tmE4cM1/3IGpPXZ6ij1TcUI5mYmY=:",
+          "x-uta-trust": "eyJzcGVjX3ZlcnNpb24iOiJBVEMvMS4wIiwiY2FyZF9pZCI6IkFUQy0yMDI2LTAwMzcwMiIsImlzc3VlciI6eyJjYV9pZCI6ImFsaWNlbGFicy1zZW50aW5lbC1jYSIsImNhX3B1YmxpY19rZXkiOiJNQ293QlFZREsyVndBeUVBNXFyTVR0bTZvMmhlK0N5TWY1NUNVVzNhbjA5MGFZbHlMeTgwY1RTRmMwYz0iLCJjYV9hbGdvcml0aG0iOiJFZDI1NTE5IiwiY2FfdXJsIjoiaHR0cHM6Ly9tYXJrZXRub3cuc2l0ZS9hcGkvYXRjIn0sImlkZW50aXR5Ijp7ImFnZW50X2lkIjoidXRhLWludGVyb3AtYWdlbnQiLCJhZ2VudF9uYW1lIjoiVVRBIEludGVyb3AgQWdlbnQiLCJhZ2VudF9vd25lciI6IkFsaWNlIExhYnMgTExDIn0sImF0dGVzdGF0aW9uIjp7InN1YmplY3RfcHVibGljX2tleSI6Ik1Db3dCUVlESzJWd0F5RUFSYjB2YnRRNWdHZG85WUVvTnpoY1R1WGxYeko3dDdaQmhTQUl0REtDWkZBPSIsInN1YmplY3RfYWxnb3JpdGhtIjoiRWQyNTUxOSIsInNpZ25hdHVyZSI6Im9Id3M2K1psQWhmaVV1MXJWN2t3clM5VS9wZi8vbWp4MGlBZVA2cTU2N29RL29wWlgvTTdERUlsL0NKZFNKSStPNG0yMy92b2IwY0tORmNUSHl2bUJnPT0iLCJzaWduZWRfcGF5bG9hZF9oYXNoIjoiYzkxMzYzMmQ4OWM5YTJlNDAzMWQ3YzlkN2VhY2IyMzQwYzUwMmJiNDAxNzc3Y2ZiMGRmZmY1OGYyNDI5ZWYxNSJ9LCJjYXBhYmlsaXRpZXMiOnsiZmlsZXN5c3RlbSI6eyJyZWFkIjoib3duX2RpciIsIndyaXRlIjoib3duX2RpciJ9LCJuZXR3b3JrIjp7ImVncmVzcyI6Im5vbmUiLCJpbmdyZXNzIjoibm9uZSJ9LCJzaGVsbCI6eyJleGVjIjoic2FuZGJveGVkIiwic3Bhd24iOiJub25lIn0sImNyZWRlbnRpYWxzIjp7InJlYWRfZW52Ijoibm9uZSIsInJlYWRfZmlsZXMiOiJub25lIn0sInByb2Nlc3MiOnsic3VicHJvY2VzcyI6Im5vbmUiLCJzaWduYWxzIjoib3duIn19LCJldmlkZW5jZSI6eyJhdWRpdF9waXBlbGluZSI6IlNlbnRpbmVsIEwyIFNhbmRib3ggKDEwLWxheWVyKSIsImF1ZGl0X2NvbXBsZXRlZF9hdCI6IjIwMjYtMTAtMDJUMDI6MDQ6MTcuNjUxWiIsInN0YXRpY19jaGVja3MiOnsidG90YWwiOjQyLCJwYXNzZWQiOjQyLCJmYWlsZWQiOjB9LCJkeW5hbWljX2NoZWNrcyI6eyJ0b3RhbCI6MTgsInBhc3NlZCI6MTgsImZhaWxlZCI6MH0sInJ1bnRpbWVfY2hlY2tzIjp7InRvdGFsIjo3LCJwYXNzZWQiOjcsImZhaWxlZCI6MH0sImZpbmRpbmdzIjpbXX0sInJpc2siOnsidHJ1c3Rfc2NvcmUiOjksInJpc2tfbGV2ZWwiOiJsb3ciLCJzY29yZV9leHBsYW5hdGlvbiI6IkludGVyb3AgdGVzdCBjYXJkLCBjbGVhbiBzYW5kYm94IGF1ZGl0Iiwic2NvcmVkX2F0IjoiMjAyNi0xMC0wMlQwMjowNDoxNy42NTFaIiwiZGVjaXNpb25fYXV0aG9yaXR5IjoiY29uc3VtZXIifSwicmV2b2NhdGlvbiI6eyJyZXZvY2F0aW9uX2NoZWNrX3VybCI6Imh0dHBzOi8vbWFya2V0bm93LnNpdGUvYXBpL2F0Yz9hY3Rpb249cmV2b2NhdGlvbi1saXN0IiwicmV2b2NhdGlvbl9jaGVja19tZXRob2QiOiJzaW1wbGVfanNvbiIsInJldm9jYXRpb25fY2hlY2tfcmVxdWlyZWQiOnRydWV9LCJ2YWxpZGl0eSI6eyJpc3N1ZWRfYXQiOiIyMDI2LTEwLTAyVDAyOjA0OjE3LjY1MloiLCJleHBpcmVzX2F0IjoiMjAyNi0xMi0zMVQwMjowNDoxNy42NTJaIiwibWF4X3R0bF9kYXlzIjo5MH19",
+          "signature-agent": "\"https://agentbouncer.io/project-agents/cmuqb6fpt000vzpd9dc08qb1p/b18cae8d-eae1-4710-a140-1f4258beff21\"",
+          "Signature": "sig1=:kNLgLWUAmsg0v4VZmQBGf9cp/zG9n6BD9OUjlc0JcZpzYKKJo+hVBNspC0jeG78FN+ITW+17udMaDTndbYoFAQ==:",
+          "Signature-Input": "sig1=(\"@method\" \"@authority\" \"@path\" \"content-digest\" \"x-uta-trust\" \"signature-agent\");created=1790906658;keyid=\"esyNqQIQrwkYCPRhMgCa8onQNEcMAEsisPz3PgSAe74\";alg=\"ed25519\";expires=1790906718;nonce=\"Q8OVYr1opJwgpgexNWSLwWI7c1CHQoTF5Cwp6CFEGGKkfoiLCp669OYiHgYbiBgeqf3pTYjwo44PsvsxmKtdhw==\";tag=\"web-bot-auth\""
+        },
+        "body": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "method": "tools/call",
+          "params": {
+            "name": "marketnow_search_skills",
+            "arguments": {
+              "query": "interop"
+            }
+          }
+        }
+      },
+      "live_public_endpoint": {
+        "http_status": 200,
+        "response": null
+      },
+      "verify_request_payload": {
+        "url": "https://agentbouncer.io/api/v1/verify",
+        "method": "POST",
+        "authorization": "Bearer ab_live_***",
+        "body": {
+          "url": "https://agentbouncer.io/api/public/agent-test/cmuqb6fpt000wzpd949zquzja",
+          "method": "POST",
+          "headers": {
+            "content-type": "application/json",
+            "content-digest": "sha-256=:vRx4QTR9SRY9lK3tmE4cM1/3IGpPXZ6ij1TcUI5mYmY=:",
+            "x-uta-trust": "eyJzcGVjX3ZlcnNpb24iOiJBVEMvMS4wIiwiY2FyZF9pZCI6IkFUQy0yMDI2LTAwMzcwMiIsImlzc3VlciI6eyJjYV9pZCI6ImFsaWNlbGFicy1zZW50aW5lbC1jYSIsImNhX3B1YmxpY19rZXkiOiJNQ293QlFZREsyVndBeUVBNXFyTVR0bTZvMmhlK0N5TWY1NUNVVzNhbjA5MGFZbHlMeTgwY1RTRmMwYz0iLCJjYV9hbGdvcml0aG0iOiJFZDI1NTE5IiwiY2FfdXJsIjoiaHR0cHM6Ly9tYXJrZXRub3cuc2l0ZS9hcGkvYXRjIn0sImlkZW50aXR5Ijp7ImFnZW50X2lkIjoidXRhLWludGVyb3AtYWdlbnQiLCJhZ2VudF9uYW1lIjoiVVRBIEludGVyb3AgQWdlbnQiLCJhZ2VudF9vd25lciI6IkFsaWNlIExhYnMgTExDIn0sImF0dGVzdGF0aW9uIjp7InN1YmplY3RfcHVibGljX2tleSI6Ik1Db3dCUVlESzJWd0F5RUFSYjB2YnRRNWdHZG85WUVvTnpoY1R1WGxYeko3dDdaQmhTQUl0REtDWkZBPSIsInN1YmplY3RfYWxnb3JpdGhtIjoiRWQyNTUxOSIsInNpZ25hdHVyZSI6Im9Id3M2K1psQWhmaVV1MXJWN2t3clM5VS9wZi8vbWp4MGlBZVA2cTU2N29RL29wWlgvTTdERUlsL0NKZFNKSStPNG0yMy92b2IwY0tORmNUSHl2bUJnPT0iLCJzaWduZWRfcGF5bG9hZF9oYXNoIjoiYzkxMzYzMmQ4OWM5YTJlNDAzMWQ3YzlkN2VhY2IyMzQwYzUwMmJiNDAxNzc3Y2ZiMGRmZmY1OGYyNDI5ZWYxNSJ9LCJjYXBhYmlsaXRpZXMiOnsiZmlsZXN5c3RlbSI6eyJyZWFkIjoib3duX2RpciIsIndyaXRlIjoib3duX2RpciJ9LCJuZXR3b3JrIjp7ImVncmVzcyI6Im5vbmUiLCJpbmdyZXNzIjoibm9uZSJ9LCJzaGVsbCI6eyJleGVjIjoic2FuZGJveGVkIiwic3Bhd24iOiJub25lIn0sImNyZWRlbnRpYWxzIjp7InJlYWRfZW52Ijoibm9uZSIsInJlYWRfZmlsZXMiOiJub25lIn0sInByb2Nlc3MiOnsic3VicHJvY2VzcyI6Im5vbmUiLCJzaWduYWxzIjoib3duIn19LCJldmlkZW5jZSI6eyJhdWRpdF9waXBlbGluZSI6IlNlbnRpbmVsIEwyIFNhbmRib3ggKDEwLWxheWVyKSIsImF1ZGl0X2NvbXBsZXRlZF9hdCI6IjIwMjYtMTAtMDJUMDI6MDQ6MTcuNjUxWiIsInN0YXRpY19jaGVja3MiOnsidG90YWwiOjQyLCJwYXNzZWQiOjQyLCJmYWlsZWQiOjB9LCJkeW5hbWljX2NoZWNrcyI6eyJ0b3RhbCI6MTgsInBhc3NlZCI6MTgsImZhaWxlZCI6MH0sInJ1bnRpbWVfY2hlY2tzIjp7InRvdGFsIjo3LCJwYXNzZWQiOjcsImZhaWxlZCI6MH0sImZpbmRpbmdzIjpbXX0sInJpc2siOnsidHJ1c3Rfc2NvcmUiOjksInJpc2tfbGV2ZWwiOiJsb3ciLCJzY29yZV9leHBsYW5hdGlvbiI6IkludGVyb3AgdGVzdCBjYXJkLCBjbGVhbiBzYW5kYm94IGF1ZGl0Iiwic2NvcmVkX2F0IjoiMjAyNi0xMC0wMlQwMjowNDoxNy42NTFaIiwiZGVjaXNpb25fYXV0aG9yaXR5IjoiY29uc3VtZXIifSwicmV2b2NhdGlvbiI6eyJyZXZvY2F0aW9uX2NoZWNrX3VybCI6Imh0dHBzOi8vbWFya2V0bm93LnNpdGUvYXBpL2F0Yz9hY3Rpb249cmV2b2NhdGlvbi1saXN0IiwicmV2b2NhdGlvbl9jaGVja19tZXRob2QiOiJzaW1wbGVfanNvbiIsInJldm9jYXRpb25fY2hlY2tfcmVxdWlyZWQiOnRydWV9LCJ2YWxpZGl0eSI6eyJpc3N1ZWRfYXQiOiIyMDI2LTEwLTAyVDAyOjA0OjE3LjY1MloiLCJleHBpcmVzX2F0IjoiMjAyNi0xMi0zMVQwMjowNDoxNy42NTJaIiwibWF4X3R0bF9kYXlzIjo5MH19",
+            "signature-agent": "\"https://agentbouncer.io/project-agents/cmuqb6fpt000vzpd9dc08qb1p/b18cae8d-eae1-4710-a140-1f4258beff21\"",
+            "Signature": "sig1=:bG4gqAlarzxmLEtGb/aiuAVC5UVA6LObf7ozyNM56qJ4WHooMho2WKoWXI9R8WbX79ZXfcnkDcnGSnPGsD20BQ==:",
+            "Signature-Input": "sig1=(\"@method\" \"@authority\" \"@path\" \"content-digest\" \"x-uta-trust\" \"signature-agent\");created=1790906658;keyid=\"esyNqQIQrwkYCPRhMgCa8onQNEcMAEsisPz3PgSAe74\";alg=\"ed25519\";expires=1790906718;nonce=\"/QiHvu4dX+e3MhC7GhfCmCgxsJG5O5/RGDsj+MzyW6T2zgMx6JrdfwtsbgF19UbepLTxoKan6w7XuhlnnFzQXw==\";tag=\"web-bot-auth\""
+          },
+          "bodyDigest": "sha-256=:vRx4QTR9SRY9lK3tmE4cM1/3IGpPXZ6ij1TcUI5mYmY=:",
+          "expectedTag": "web-bot-auth",
+          "action": "tools:call",
+          "tool": "marketnow_search_skills",
+          "userAgent": "UTA-Interop/1.0"
+        }
+      },
+      "api_v1_verify": {
+        "http_status": 200,
+        "response": {
+          "verified": true,
+          "allowed": true,
+          "reason": null,
+          "checks": {
+            "signature": "valid",
+            "timestamp": "valid",
+            "replay": "checked",
+            "provider": "unknown",
+            "projectKey": "known",
+            "policy": "matched"
+          },
+          "agent": {
+            "type": "PROJECT_KEY",
+            "provider": null,
+            "providerSlug": null,
+            "projectKey": {
+              "id": "b18cae8d-eae1-4710-a140-1f4258beff21",
+              "name": "uta-interop-agent",
+              "scopes": []
+            },
+            "signatureAgent": "https://agentbouncer.io/project-agents/cmuqb6fpt000vzpd9dc08qb1p/b18cae8d-eae1-4710-a140-1f4258beff21",
+            "keyid": "esyNqQIQrwkYCPRhMgCa8onQNEcMAEsisPz3PgSAe74"
+          },
+          "provider": null,
+          "request": {
+            "method": "POST",
+            "path": "/api/public/agent-test/cmuqb6fpt000wzpd949zquzja",
+            "tag": "web-bot-auth",
+            "expectedTag": "web-bot-auth",
+            "action": "tools:call",
+            "tool": "marketnow_search_skills"
+          },
+          "risk": {
+            "score": 5,
+            "level": "low"
+          },
+          "oauth": {
+            "status": "none",
+            "authenticated": false,
+            "sub": null,
+            "issuer": null,
+            "scopes": [],
+            "error": null
+          },
+          "policy": {
+            "mode": "BLOCK_UNKNOWN",
+            "minTier": "TIER_3",
+            "minTrustScore": 0,
+            "requireKnownProvider": true,
+            "requireTrusted": false,
+            "wouldBlockReason": null,
+            "matchedRule": null,
+            "defaultEffectApplied": false
+          },
+          "tag": "web-bot-auth",
+          "expectedTag": "web-bot-auth",
+          "trusted": false,
+          "confidence": 0.95
+        }
+      },
+      "uta_verdict": {
+        "verdict": "POLICY_FAIL",
+        "reason": "action mcp:tools/call requires network.egress=allowlist, card grants none"
+      }
+    }
+  },
+  "unsigned_control": {
+    "http_status": 200,
+    "response": {
+      "ok": true,
+      "endpoint": "AgentBouncer public test endpoint",
+      "project": {
+        "id": "cmuqb6fpt000vzpd9dc08qb1p",
+        "name": "MarketNow UTA Interop",
+        "origin": null
+      },
+      "result": {
+        "verified": false,
+        "allowed": false,
+        "reason": "no_signature",
+        "detail": "\u0417\u0430\u043f\u0440\u043e\u0441 \u043d\u0435 \u043f\u043e\u0434\u043f\u0438\u0441\u0430\u043d: \u043d\u0435\u0442 Signature / Signature-Input. \u042d\u0442\u043e \u043d\u0435 \u0432\u0435\u0440\u0438\u0444\u0438\u0446\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439 \u0430\u0433\u0435\u043d\u0442.",
+        "checks": {
+          "signature": "missing",
+          "timestamp": "unknown",
+          "replay": "unknown",
+          "provider": "unknown",
+          "policy": "blocked"
+        },
+        "policy": {
+          "mode": "BLOCK_UNKNOWN",
+          "allowUnsigned": false,
+          "wouldBlockReason": "no_signature"
+        }
+      },
+      "help": {
+        "success": "If verified=true, the incoming request contained a valid HTTP Message Signature from a known provider key.",
+        "noSignature": "If reason=no_signature, the visitor reached the endpoint but did not send Signature / Signature-Input headers."
+      }
+    }
+  },
+  "finished_at": "2026-10-02T02:04:19.541Z",
+  "live_endpoint_bug_repro": {
+    "summary": "Same signature construction: POST /api/v1/verify = signature VALID, public test endpoint (live) = bad_signature/invalid. keyid+timestamp parse correctly on both (projectKey: known, timestamp: valid). Fails identically with 5-component SDK-standard coverage and 6-component (x-uta-trust) coverage. web-bot-auth 0.1.3 + @agentbouncer/sdk 0.2.0 libraries used.",
+    "attempts": {
+      "six_components_xuta": {
+        "ts": "2026-10-02T02:04:00.142Z",
+        "headers": {
+          "content-type": "application/json",
+          "content-digest": "sha-256=:AVq9f1zFei3ZS3WQ8ErYCEJzkF7jPsXOvq5iJ2qX+GI=:",
+          "x-uta-trust": "eyJ0IjoxfQ",
+          "Signature-Agent": "\"https://agentbouncer.io/project-agents/cmuqb6fpt000vzpd9dc08qb1p/b18cae8d-eae1-4710-a140-1f4258beff21\"",
+          "signature-agent": "\"https://agentbouncer.io/project-agents/cmuqb6fpt000vzpd9dc08qb1p/b18cae8d-eae1-4710-a140-1f4258beff21\"",
+          "Signature": "sig1=:a9vz2tyQokLBK+6m7AisGYJLn9eLlYWUorLTtxZojQvnVfhspFBAhvwhy5GI6GwUnBwqoxsF0ZaRakMSYaOWDA==:",
+          "Signature-Input": "sig1=(\"@method\" \"@authority\" \"@path\" \"content-digest\" \"x-uta-trust\" \"signature-agent\");created=1790906640;keyid=\"esyNqQIQrwkYCPRhMgCa8onQNEcMAEsisPz3PgSAe74\";alg=\"ed25519\";expires=1790906700;nonce=\"JUdG5Eny6S2I8BNNxUIe7UaqG1aw+HUD5VNAcN6Oak9z5X2exlWNhTPEwT/VRCWaYNe7SAYrnuKkGU/1m8Yb+A==\";tag=\"web-bot-auth\""
+        },
+        "response": {
+          "ok": true,
+          "endpoint": "AgentBouncer public test endpoint",
+          "project": {
+            "id": "cmuqb6fpt000vzpd9dc08qb1p",
+            "name": "MarketNow UTA Interop",
+            "origin": null
+          },
+          "result": {
+            "verified": false,
+            "allowed": false,
+            "reason": "bad_signature",
+            "detail": "\u041f\u043e\u0434\u043f\u0438\u0441\u044c \u043d\u0435 \u043f\u0440\u043e\u0448\u043b\u0430 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0443 \u043f\u0443\u0431\u043b\u0438\u0447\u043d\u044b\u043c \u043a\u043b\u044e\u0447\u043e\u043c.",
+            "agentClaimed": "uta-interop-agent",
+            "checks": {
+              "signature": "invalid",
+              "timestamp": "valid",
+              "replay": "unknown",
+              "provider": "unknown",
+              "projectKey": "known",
+              "policy": "blocked"
+            },
+            "policy": {
+              "mode": "BLOCK_UNKNOWN",
+              "minTier": "TIER_3",
+              "minTrustScore": 0,
+              "requireKnownProvider": true,
+              "requireTrusted": false,
+              "wouldBlockReason": "bad_signature"
+            }
+          },
+          "help": {
+            "success": "If verified=true, the incoming request contained a valid HTTP Message Signature from a known provider key.",
+            "noSignature": "If reason=no_signature, the visitor reached the endpoint but did not send Signature / Signature-Input headers."
+          }
+        }
+      },
+      "five_components_std": {
+        "ts": "2026-10-02T02:04:00.808Z",
+        "headers": {
+          "content-type": "application/json",
+          "content-digest": "sha-256=:AVq9f1zFei3ZS3WQ8ErYCEJzkF7jPsXOvq5iJ2qX+GI=:",
+          "Signature-Agent": "\"https://agentbouncer.io/project-agents/cmuqb6fpt000vzpd9dc08qb1p/b18cae8d-eae1-4710-a140-1f4258beff21\"",
+          "signature-agent": "\"https://agentbouncer.io/project-agents/cmuqb6fpt000vzpd9dc08qb1p/b18cae8d-eae1-4710-a140-1f4258beff21\"",
+          "Signature": "sig1=:JVoym9IwPdQBUetdErvepfJAZd4ZOa3OVLM8e07PrUF1zUoFJ5J5uuZhoxonHfsMPv+NJOdQJPzA4CIH3uh2Aw==:",
+          "Signature-Input": "sig1=(\"@method\" \"@authority\" \"@path\" \"content-digest\" \"signature-agent\");created=1790906640;keyid=\"esyNqQIQrwkYCPRhMgCa8onQNEcMAEsisPz3PgSAe74\";alg=\"ed25519\";expires=1790906700;nonce=\"/WLjV7MR1ehSTtiRzbvajDnrq86eP3l2ZvwK9mnpYVeVxOgYTC+LFkZ5HyJ38HoBTvKiPemjGCmIJniStjrmvg==\";tag=\"web-bot-auth\""
+        },
+        "response": {
+          "ok": true,
+          "endpoint": "AgentBouncer public test endpoint",
+          "project": {
+            "id": "cmuqb6fpt000vzpd9dc08qb1p",
+            "name": "MarketNow UTA Interop",
+            "origin": null
+          },
+          "result": {
+            "verified": false,
+            "allowed": false,
+            "reason": "bad_signature",
+            "detail": "\u041f\u043e\u0434\u043f\u0438\u0441\u044c \u043d\u0435 \u043f\u0440\u043e\u0448\u043b\u0430 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0443 \u043f\u0443\u0431\u043b\u0438\u0447\u043d\u044b\u043c \u043a\u043b\u044e\u0447\u043e\u043c.",
+            "agentClaimed": "uta-interop-agent",
+            "checks": {
+              "signature": "invalid",
+              "timestamp": "valid",
+              "replay": "unknown",
+              "provider": "unknown",
+              "projectKey": "known",
+              "policy": "blocked"
+            },
+            "policy": {
+              "mode": "BLOCK_UNKNOWN",
+              "minTier": "TIER_3",
+              "minTrustScore": 0,
+              "requireKnownProvider": true,
+              "requireTrusted": false,
+              "wouldBlockReason": "bad_signature"
+            }
+          },
+          "help": {
+            "success": "If verified=true, the incoming request contained a valid HTTP Message Signature from a known provider key.",
+            "noSignature": "If reason=no_signature, the visitor reached the endpoint but did not send Signature / Signature-Input headers."
+          }
+        }
+      }
+    }
+  },
+  "diagnosis_notes": [
+    "Live endpoint parses Signature-Input (timestamp valid, keyid resolved, agentClaimed=uta-interop-agent) but signature check fails",
+    "/api/v1/verify validates the identical construction (signature: valid, replay: checked, policy: matched, allowed: true)",
+    "Node-crypto hand-rolled signature over the exact web-bot-auth base also validates via /api/v1/verify (verified server-side)",
+    "Suggests the live path reconstructs the signature base differently (URL/authority or params serialization), not a key resolution issue"
+  ]
+}

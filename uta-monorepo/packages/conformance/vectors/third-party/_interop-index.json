@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.6.0",
+  "published_at": "2026-10-03T02:30:00Z",
+  "publisher": "AliceLabs LLC",
+  "description": "Third-party interoperability evidence vectors: live transport-level interoperability between UTA and external agent-trust gateways, captured from real exchanges. These are evidence artifacts, not scored cards — the fixed vectors in ../_index.json remain the scored set, unchanged byte-for-byte.",
+  "vectors": [
+    {
+      "id": "agentbouncer-transport-allowed",
+      "type": "third-party-interop",
+      "format": "atc-v1-trace",
+      "expected_verify": true,
+      "reason": "transport-level interoperability with composed verdicts: AgentBouncer envelope verified (signature valid, replay checked); UTA verdict PASS (8/8 controls + caps match, network.egress=allowlist)",
+      "card_id": "ATC-2026-003701",
+      "counterparty": "AgentBouncer (beta) — https://agentbouncer.io",
+      "transport": "RFC 9421 signed request; x-uta-trust covered component",
+      "agentbouncer_verdict": {
+        "verified": true,
+        "allowed": true,
+        "checks": {
+          "signature": "valid",
+          "timestamp": "valid",
+          "replay": "checked",
+          "provider": "unknown",
+          "projectKey": "known",
+          "policy": "matched"
+        }
+      },
+      "uta_verdict": {
+        "verdict": "PASS",
+        "reason": "8/8 controls + caps match"
+      },
+      "signature_algorithm": "Ed25519 (RFC 8032) over JCS(RFC 8785) canonical bytes",
+      "signed_at": "2026-10-02T02:04:17.657Z",
+      "trace_file": "traces_20261002_final.json (path: allowed_egress_allowlist)",
+      "notes": "AgentBouncer verifies the envelope incl. covered x-uta-trust header; it does not parse the ATC or enforce its capabilities (per vendor clarification 2026-10-01). UTA verdict produced independently by the MarketNow verifier.",
+      "evidence_file": "agentbouncer-transport-allowed.json"
+    },
+    {
+      "id": "agentbouncer-transport-denied",
+      "type": "third-party-interop",
+      "format": "atc-v1-trace",
+      "expected_verify": true,
+      "reason": "transport-level interoperability with composed verdicts: AgentBouncer envelope verified (signature valid, replay checked); UTA verdict POLICY_FAIL (action mcp:tools/call requires network.egress=allowlist, card grants none) — denial attributable to trust-policy, not transport",
+      "card_id": "ATC-2026-003702",
+      "counterparty": "AgentBouncer (beta) — https://agentbouncer.io",
+      "transport": "RFC 9421 signed request; x-uta-trust covered component",
+      "agentbouncer_verdict": {
+        "verified": true,
+        "allowed": true,
+        "checks": {
+          "signature": "valid",
+          "timestamp": "valid",
+          "replay": "checked",
+          "provider": "unknown",
+          "projectKey": "known",
+          "policy": "matched"
+        }
+      },
+      "uta_verdict": {
+        "verdict": "POLICY_FAIL",
+        "reason": "action mcp:tools/call requires network.egress=allowlist, card grants none"
+      },
+      "signature_algorithm": "Ed25519 (RFC 8032) over JCS(RFC 8785) canonical bytes",
+      "signed_at": "2026-10-02T02:04:18.532Z",
+      "trace_file": "traces_20261002_final.json (path: denied_egress_none)",
+      "notes": "Identical to vector agentbouncer-transport-allowed except network.egress=none (and card_id/timestamps/signature). Both cards pass 8/8 ATC controls; the only differential variable is the caps entry.",
+      "evidence_file": "agentbouncer-transport-denied.json"
+    }
+  ],
+  "source_traces": "traces_20261002_final.json",
+  "publication_record": {
+    "user_approval": "2026-10-03 — explicit publish instruction after personal review",
+    "pre_publication_verifications": [
+      "V1 crypto — APROBADA: SHA-256(JCS canónico con signature='' y hash='') == signed_payload_hash en ambas tarjetas; firma Ed25519 de la CA (issuer.ca_public_key) válida sobre los mismos bytes; subject_key != ca_key; ventana de validez cubre el test",
+      "V2 isolation/consistency — APROBADA (10/10): tarjetas difieren SOLO en card_id, timestamps (1ms secuencial), egress (allowlist vs none) y firma+hash re-firmada; veredictos consistentes con caps; x-uta-trust cubierto por Signature-Input (RFC 9421) en ambos paths; transporte válido en ambos (verified=true, signature=valid)",
+      "V3 wording/claims — APROBADA (10/10): cada claim verificado contra trazas + clarificación del vendor (2026-10-01: transport-level interoperability, NOT end-to-end UTA policy enforcement by AgentBouncer)"
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "@marketnow/uta-conformance",
-  "version": "1.3.5",
+  "version": "1.4.0",
   "description": "UTA conformance suite for agent-trust runners — 14 signed test vectors (v1.3.3) + reference scorer + card generator. Separates real verifiers from memorizers, stage-liars and over-rejectors. Zero deps.",
   "main": "score-runner.mjs",
   "bin": {

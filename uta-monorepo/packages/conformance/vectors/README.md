@@ -141,3 +141,22 @@ v1.2.0 made the reject side honest: deleting Ed25519, skipping key selection, or
 - RFC 8785 JCS: https://datatracker.ietf.org/doc/html/rfc8785
 - Original test vectors: https://github.com/alicelabs-llc/universal-trust-adapter/tree/main/spec/test-vectors
 - Changelog: `updates` array in `_index.json` (v1.1.0 → v1.2.0 → v1.3.0)
+
+
+## Third-party interop evidence (v1.6.0)
+
+`third-party/` — two evidence vectors (`agentbouncer-transport-allowed`,
+`agentbouncer-transport-denied`) + `_interop-index.json` + the source traces
+(`traces_20261002_final.json`). These document a live interop test with AgentBouncer
+(beta) over RFC 9421 signed transport with `x-uta-trust` as a covered component.
+They are **not** scored cards and are not loaded by `score-runner.mjs`; the scored set
+is the 14 vectors above, unchanged byte-for-byte.
+
+- `agentbouncer-transport-allowed` — card ATC-2026-003701, `network.egress=allowlist`;
+  AgentBouncer: verified/allowed; UTA: PASS (8/8 controls + caps match).
+- `agentbouncer-transport-denied` — card ATC-2026-003702, `network.egress=none`;
+  AgentBouncer: verified/allowed (transport fine); UTA: POLICY_FAIL — denial attributable
+  to trust-policy, not transport. Both cards differ only in the caps entry (and
+  card_id/timestamps/signature), making the differential variable explicit.
+- `unsigned_control` inside each evidence doc: a request without a signature is rejected
+  by AgentBouncer (`no_signature`), so the envelope verification is real.
