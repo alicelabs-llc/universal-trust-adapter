@@ -178,5 +178,8 @@
   "signature_algorithm": "Ed25519 (RFC 8032) over JCS(RFC 8785) canonical bytes",
   "signed_at": "2026-10-02T02:04:17.657Z",
   "notes": "AgentBouncer verifies the envelope incl. covered x-uta-trust header; it does not parse the ATC or enforce its capabilities (per vendor clarification 2026-10-01). UTA verdict produced independently by the MarketNow verifier.",
-  "source_trace": "traces_20261002_final.json"
+  "source_trace": "traces_20261002_final.json",
+  "verification_method": "AgentBouncer verdict obtained via POST /api/v1/verify (AgentBouncer beta, 2026-10-02), called with the headers of a separately signed request. Not produced inline on the request delivered to the public test endpoint, which returned bad_signature at capture time (AgentBouncer-side live-path issue; see post_capture_diagnosis in traces_20261002_final.json).",
+  "allowed_note": "allowed=true reflects the AgentBouncer project policy (known project key, BLOCK_UNKNOWN mode) and is independent of the UTA verdict.",
+  "status": "Evidence artifact produced by MarketNow; not a certification or endorsement by AgentBouncer."
 }

@@ -2,7 +2,7 @@
   "schema_version": "1.6.0",
   "published_at": "2026-10-03T02:30:00Z",
   "publisher": "AliceLabs LLC",
-  "description": "Third-party interoperability evidence vectors: live transport-level interoperability between UTA and external agent-trust gateways, captured from real exchanges. These are evidence artifacts, not scored cards — the fixed vectors in ../_index.json remain the scored set, unchanged byte-for-byte.",
+  "description": "Third-party interoperability evidence vectors: live transport-level interoperability between UTA and external agent-trust gateways, captured from real exchanges. These are evidence artifacts, not scored cards — the fixed vectors in ../_index.json remain the scored set, unchanged byte-for-byte. Verification method, policy meaning of allowed=true, and non-endorsement status clarified 2026-10-04 at the counterparty's request; raw captures unchanged.",
   "vectors": [
     {
       "id": "agentbouncer-transport-allowed",
@@ -75,5 +75,8 @@
       "V2 isolation/consistency — APROBADA (10/10): tarjetas difieren SOLO en card_id, timestamps (1ms secuencial), egress (allowlist vs none) y firma+hash re-firmada; veredictos consistentes con caps; x-uta-trust cubierto por Signature-Input (RFC 9421) en ambos paths; transporte válido en ambos (verified=true, signature=valid)",
       "V3 wording/claims — APROBADA (10/10): cada claim verificado contra trazas + clarificación del vendor (2026-10-01: transport-level interoperability, NOT end-to-end UTA policy enforcement by AgentBouncer)"
     ]
-  }
+  },
+  "verification_method": "AgentBouncer verdict obtained via POST /api/v1/verify (AgentBouncer beta, 2026-10-02), called with the headers of a separately signed request. Not produced inline on the request delivered to the public test endpoint, which returned bad_signature at capture time (AgentBouncer-side live-path issue; see post_capture_diagnosis in traces_20261002_final.json).",
+  "allowed_note": "allowed=true reflects the AgentBouncer project policy (known project key, BLOCK_UNKNOWN mode) and is independent of the UTA verdict.",
+  "status": "Evidence artifact produced by MarketNow; not a certification or endorsement by AgentBouncer."
 }

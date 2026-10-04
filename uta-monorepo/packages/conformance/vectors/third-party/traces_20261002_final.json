@@ -313,7 +313,7 @@
         "verified": false,
         "allowed": false,
         "reason": "no_signature",
-        "detail": "\u0417\u0430\u043f\u0440\u043e\u0441 \u043d\u0435 \u043f\u043e\u0434\u043f\u0438\u0441\u0430\u043d: \u043d\u0435\u0442 Signature / Signature-Input. \u042d\u0442\u043e \u043d\u0435 \u0432\u0435\u0440\u0438\u0444\u0438\u0446\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439 \u0430\u0433\u0435\u043d\u0442.",
+        "detail": "Запрос не подписан: нет Signature / Signature-Input. Это не верифицированный агент.",
         "checks": {
           "signature": "missing",
           "timestamp": "unknown",
@@ -360,7 +360,7 @@
             "verified": false,
             "allowed": false,
             "reason": "bad_signature",
-            "detail": "\u041f\u043e\u0434\u043f\u0438\u0441\u044c \u043d\u0435 \u043f\u0440\u043e\u0448\u043b\u0430 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0443 \u043f\u0443\u0431\u043b\u0438\u0447\u043d\u044b\u043c \u043a\u043b\u044e\u0447\u043e\u043c.",
+            "detail": "Подпись не прошла проверку публичным ключом.",
             "agentClaimed": "uta-interop-agent",
             "checks": {
               "signature": "invalid",
@@ -407,7 +407,7 @@
             "verified": false,
             "allowed": false,
             "reason": "bad_signature",
-            "detail": "\u041f\u043e\u0434\u043f\u0438\u0441\u044c \u043d\u0435 \u043f\u0440\u043e\u0448\u043b\u0430 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0443 \u043f\u0443\u0431\u043b\u0438\u0447\u043d\u044b\u043c \u043a\u043b\u044e\u0447\u043e\u043c.",
+            "detail": "Подпись не прошла проверку публичным ключом.",
             "agentClaimed": "uta-interop-agent",
             "checks": {
               "signature": "invalid",
@@ -439,5 +439,13 @@
     "/api/v1/verify validates the identical construction (signature: valid, replay: checked, policy: matched, allowed: true)",
     "Node-crypto hand-rolled signature over the exact web-bot-auth base also validates via /api/v1/verify (verified server-side)",
     "Suggests the live path reconstructs the signature base differently (URL/authority or params serialization), not a key resolution issue"
-  ]
+  ],
+  "post_capture_diagnosis": {
+    "added_at": "2026-10-04T00:30:00Z",
+    "added_by": "MarketNow (artifact publisher)",
+    "source": "AgentBouncer operator (Alexey), email 2026-10-03T11:45Z",
+    "finding": "Both live_endpoint_bug_repro attempts sent 'Signature-Agent' and 'signature-agent' as two separate headers. Over HTTP, case-variant duplicates merge into one comma-joined value, which changes the signature-agent component in the signature base, while /api/v1/verify likely reads only one of them. This plausibly explains bad_signature on the live path for the same construction that validates via /api/v1/verify.",
+    "retest_plan": "Retry with a single signature-agent header (exact case matching the covered component name in Signature-Input) and capture the response body, after AgentBouncer deploys signature-base logging on the live path. The original project-agent signing key was ephemeral and is not retained; a fresh project agent will be registered for the retest.",
+    "response_capture_note": "live_public_endpoint response bodies are recorded in live_endpoint_bug_repro.attempts and unsigned_control; the main paths carry status-only summaries by design."
+  }
 }
