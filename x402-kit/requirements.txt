@@ -1,0 +1,3 @@
+x402[fastapi,httpx,evm]>=2.25
+fastapi
+uvicorn
