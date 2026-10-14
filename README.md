@@ -259,6 +259,29 @@ The test CA keypair is intentionally published (including private key) for cross
 > [revocation registry](https://marketnow.site/api/crl) and the
 > [2026-09-08 incident postmortem](https://marketnow.site/security/incidents/2026-09-08).
 
+## 🛰️ Live x402 endpoint (production)
+
+The UTA Trust API is LIVE and payable with x402 (USDC, base-sepolia) — no API keys, no accounts, no signups:
+
+| | |
+|---|---|
+| **Verify one card** | `POST https://uta-trust-api.eddyflores100.workers.dev/v1/trust/verify` — 0.01 USDC |
+| **Batch (1..10 cards)** | `POST https://uta-trust-api.eddyflores100.workers.dev/v1/trust/batch` — 0.08 USDC |
+| **Free** | `GET /health` · `GET /v1` (machine-readable docs) · `GET /` (landing) |
+
+```bash
+# 1) ask the resource — you get 402 + accepts[] (payment requirements)
+curl -s https://uta-trust-api.eddyflores100.workers.dev/v1/trust/verify -X POST \
+  -H "Content-Type: application/json" -d '{"card": { ...ATC... }}'
+# 2) build the EIP-3009 payment for the quoted amount, base64-encode the payload JSON
+# 3) retry with  X-PAYMENT: <base64>  →  200 + X-PAYMENT-RESPONSE (settlement proof)
+```
+
+Any x402 client works (`x402-fetch`, `x402-requests`, or your own EIP-3009 signer). The edge
+verifier is a faithful port of the reference scorer semantics (JCS signed subtree, pinned trust
+anchors, two-sided validity window, active-status check) and scores **14/14** on the ATC/1.0
+conformance vectors. verify + settle run against the x402 facilitator — no settlement, no 200.
+
 ## 📋 Specs & docs
 
 - **ATC/1.0 Spec:** [MARKETNOW repo → `docs/atc-spec/SPEC.md`](https://github.com/alicelabs-llc/MARKETNOW/blob/master/docs/atc-spec/SPEC.md)
