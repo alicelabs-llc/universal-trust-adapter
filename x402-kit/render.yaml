@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: uta-trust-api
+    runtime: docker
+    plan: free
+    envVars:
+      - key: PAY_TO
+        sync: false          # 0xfD856E89Ac88757C339c67E9717528af0cD1d7Ee
+      - key: NETWORK
+        value: base-sepolia
+      - key: FACILITATOR
+        value: https://x402.org/facilitator
