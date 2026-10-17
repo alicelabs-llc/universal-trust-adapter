@@ -1,0 +1,15 @@
+{
+  "name": "uta-pay-mcp-bridge",
+  "version": "0.1.0",
+  "description": "Fail-closed spend-authority bridge for the Solana Pay MCP YAML policy — verifies the spending agent (ATC/1.0) before honoring any authorization, keeps runtime state (cumulative budgets, immediate revocation) and emits Ed25519-signed receipts. RFC: solana-foundation/pay#505",
+  "type": "module",
+  "main": "src/bridge.mjs",
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "keywords": ["x402", "solana", "pay-mcp", "agent-trust", "atc", "fail-closed", "uta"],
+  "license": "MIT",
+  "dependencies": {
+    "yaml": "^2.4.0"
+  }
+}

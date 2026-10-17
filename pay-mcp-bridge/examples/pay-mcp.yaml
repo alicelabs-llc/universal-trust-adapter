@@ -1,0 +1,27 @@
+# Pay MCP launch policy — consumed by both the Pay MCP and the UTA bridge.
+# This shape is DRAFT-0.1 pending the official schema (lgalabru, pay#505);
+# the bridge normalizer is deliberately tolerant (snake_case/camelCase,
+# `grants`/`authorizations`/`agents` keys) and will mirror the official
+# YAML 1:1 the moment it is published.
+
+budget:
+  total_usd: 50
+  per_spend_max_usd: 5
+  window: day
+
+authorizations:
+  - agent: "did:web:checkout-bot.alicelabs.site"
+    resources: ["solana:transfer", "x402:*"]
+    max_usd_per_day: 10
+    trust_band_min: "B1"        # grant class requires UTA trust band >= B1
+  - agent: "did:web:research-crawler.alicelabs.site"
+    resources: ["x402:fetch"]
+    max_usd_per_day: 4
+    trust_band_min: null        # no band requirement — verify still runs, fail-closed
+
+revocation:
+  check_url: "https://uta.alicelabs.site/v1/revocation"
+  fail_closed: true             # unverifiable revocation status => deny
+
+uta:
+  verify_url: "https://uta.alicelabs.site/v1/trust/verify"
