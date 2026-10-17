@@ -285,6 +285,7 @@ conformance vectors. verify + settle run against the x402 facilitator — no set
 ## 📋 Specs & docs
 
 - **ATC/1.0 Spec:** [MARKETNOW repo → `docs/atc-spec/SPEC.md`](https://github.com/alicelabs-llc/MARKETNOW/blob/master/docs/atc-spec/SPEC.md)
+- **ERC-8004 crosswalk:** [`docs/crosswalks/erc-8004-atc-v1.md`](./docs/crosswalks/erc-8004-atc-v1.md) — Trustless Agents identity ↔ ATC/1.0 verification
 - **ATC v3.0 RFC Draft:** [`spec/RFC-ATC-v3-Draft-00.md`](./spec/RFC-ATC-v3-Draft-00.md)
 - **UTS v1:** [`spec/UTS-v1.md`](./spec/UTS-v1.md) · [`spec/uts-v1.json`](./spec/uts-v1.json)
 - **Domain Reputation API spec:** [`api/reputation-spec.md`](./api/reputation-spec.md)
