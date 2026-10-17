@@ -30,14 +30,36 @@ const pick = (o, ...ks) => {
 // Minimal indent-based YAML subset parser (fallback when `yaml` is absent).
 // Supports: scalars, one-level nested maps, lists of scalars, lists of maps —
 // the shape of examples/pay-mcp.yaml.
-function parseMiniYaml(text) {
+export function parseMiniYaml(text) {
   const lines = text.split(/\r?\n/).filter((l) => l.trim() && !l.trim().startsWith("#"));
   let i = 0;
+  // strip an inline `# comment` only when it starts outside quotes and is
+  // preceded by whitespace (YAML rule: `a#b` inside a plain scalar is a value)
+  const stripComment = (s) => {
+    let q = null;
+    for (let k = 0; k < s.length; k++) {
+      const c = s[k];
+      if (q) { if (c === q) q = null; continue; }
+      if (c === '"' || c === "'") { q = c; continue; }
+      if (c === "#" && (k === 0 || /\s/.test(s[k - 1]))) return s.slice(0, k);
+    }
+    return s;
+  };
+  const parseFlowList = (s) => {
+    if (!(s.startsWith("[") && s.endsWith("]"))) return undefined;
+    const inner = s.slice(1, -1).trim();
+    if (!inner) return [];
+    return inner.split(",").map((x) => scalar(x.trim()));
+  };
   const scalar = (s) => {
-    s = s.trim();
+    s = stripComment(s).trim();
+    if (s === "") return null;
     if (/^-?\d+(\.\d+)?$/.test(s)) return Number(s);
     if (s === "true") return true;
     if (s === "false") return false;
+    if (s === "null" || s === "~") return null;
+    const flow = parseFlowList(s);
+    if (flow !== undefined) return flow;
     if ((s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'")))
       return s.slice(1, -1);
     return s;

@@ -197,3 +197,36 @@ test("external keypair: receipts verify with the operator key, not the ephemeral
   assert.equal(verifyReceipt(r.receipt, opKp.publicKey), true);
   assert.equal(h.publicKey, opKp.publicKey, "hook signs with the operator key when injected");
 });
+
+// ---- zero-dep fallback regression (the mini-parser must agree with the
+//      `yaml` package path — tracked after the 2026-10-17 post-push audit) ----
+
+import { parseMiniYaml } from "../src/bridge.mjs";
+
+test("fallback mini-parser: inline comments, null keyword, flow lists", () => {
+  const d = parseMiniYaml([
+    "budget:",
+    "  total_usd: 50       # ceiling for the whole launch",
+    "authorizations:",
+    '  - agent: "did:web:x.example"   # primary checkout bot',
+    '    resources: ["solana:transfer", "x402:*"]',
+    "    trust_band_min: null      # no band requirement",
+    "    max_usd_per_day: 10",
+    "  - agent: did:web:y.example#notacomment",
+    "    trust_band_min: B1",
+  ].join("\n"));
+  assert.equal(d.budget.total_usd, 50);
+  assert.equal(d.authorizations[0].agent, "did:web:x.example");
+  assert.deepEqual(d.authorizations[0].resources, ["solana:transfer", "x402:*"]);
+  assert.equal(d.authorizations[0].trust_band_min, null);
+  assert.equal(d.authorizations[0].max_usd_per_day, 10);
+  // `#` without preceding whitespace is part of the value (YAML rule)
+  assert.equal(d.authorizations[1].agent, "did:web:y.example#notacomment");
+  assert.equal(d.authorizations[1].trust_band_min, "B1");
+});
+
+test("fallback mini-parser normalizes identically to the active YAML path", () => {
+  const viaFallback = normalizePolicy(parseMiniYaml(POLICY_YAML));
+  const viaActivePath = policy(); // uses `yaml` when installed, fallback otherwise
+  assert.deepEqual(viaFallback, viaActivePath); // includes policy_sha256
+});

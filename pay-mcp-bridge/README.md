@@ -63,4 +63,4 @@ npm install   # only `yaml` (a minimal fallback parser ships in case it is absen
 npm test
 ```
 
-15 tests: allow path + receipt verification, band threshold, unreachable/500 verify, per-spend cap, daily cap via runtime state, total budget, revoked agent, revocation-down under both `fail_closed` settings, band-unavailable, no-grant, tamper detection, external operator key.
+17 tests: allow path + receipt verification, band threshold, unreachable/500 verify, per-spend cap, daily cap via runtime state, total budget, revoked agent, revocation-down under both `fail_closed` settings, band-unavailable, no-grant, tamper detection, external operator key — plus the zero-dep fallback regression pair (inline comments / `null` keyword / flow lists, and fallback ≡ `yaml`-path normalization, fixed 2026-10-17 after a post-push audit caught the fallback corrupting commented values).
