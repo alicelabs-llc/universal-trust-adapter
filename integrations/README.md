@@ -18,5 +18,6 @@ Every adapter here:
 | [`e2b-uta-attestation`](./e2b-uta-attestation/) | E2B sandboxes | pre-exec attestation wrapper |
 | [`anthropic-uta-guard`](./anthropic-uta-guard/) | Anthropic SDK | `tool_use` block interception (outside the SDK) |
 | [`vercel-ai-sdk-trust-example`](./vercel-ai-sdk-trust-example/) | Vercel AI SDK | `tool()` `execute` wrapper — tool call → `trustVerifier()` → UTA → ALLOW/DENY (pattern from vercel/ai#20147) |
+| [`cloudflare-agents-x402-trust`](./cloudflare-agents-x402-trust/) | Cloudflare Agents SDK + x402 | buyer-side trust gate between `402` and settlement — verify seller ATC (x402-paid) before `wrapFetchWithPayment` settles |
 
 Status: **POC**. APIs may change. Issues go in THIS repository.
