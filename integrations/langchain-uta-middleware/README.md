@@ -13,3 +13,14 @@ safe_tool = uta_verified(my_langchain_tool, trust_credential=card, min_trust_sco
 ```
 
 Config: `UTA_VERIFY_URL`, `UTA_VERIFY_TIMEOUT`. Status: **POC v0.1.0** · AL-1.0.
+
+## Fail-closed regression tests
+
+```sh
+python3 -m unittest test_fail_closed -v   # 11 tests, no network (HTTP stubbed)
+```
+
+Invariant: unreachable verifier, timeout, HTTP 500, non-JSON body, invalid
+verdict, missing score field, or score below policy — every path raises
+`UTADenied` **before** the wrapped tool's `invoke()` runs (asserted via a
+counting tool double). Added 2026-10-17 (Ola 2 of the deployment plan).
