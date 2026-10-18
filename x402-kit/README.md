@@ -67,3 +67,10 @@ node express/server.js   # paymentMiddleware oficial @x402/express
 - Explorador en vivo: https://x402scan.com
 - AP2 (Google) demuestra el flujo autónomo con x402: https://ap2-protocol.org
 - Especificación ATC/1.0: este repo (`spec/`)
+
+## Featured in
+
+- **XERJ Corpus Hub** — seleccionado como referencia de código funcionando para agentes:
+  "x402 paywall kit — sell ATC/1.0 trust checks per-call in USDC"
+  ([hub.xerj.org](https://hub.xerj.org) · [xerj](https://github.com/xerj-org/xerj)).
+  Si tu agente necesita cobrar llamadas API per-call en USDC, este kit es el patrón de referencia.
