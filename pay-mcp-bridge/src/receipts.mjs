@@ -66,3 +66,30 @@ export function verifyReceipt(signed, publicKey) {
     return false;
   }
 }
+
+// ---- signed verdicts (verifier -> seller), RFC-ATC v3 §5.2 ----
+// Same canonical-JSON Ed25519 scheme as receipts, separate sig field name.
+// The verdict MUST be bound to the transaction scope: {challenge, resource,
+// amount_usd} — a verdict without scope binding is a bearer token that a
+// cheap route can mint and an expensive route would accept until expiry.
+export function signVerdict(verdict, privateKey) {
+  const payload = canonicalize(verdict);
+  const sig = sign(null, Buffer.from(payload), privToKey(privateKey));
+  return { ...verdict, verdict_sig: sig.toString("base64") };
+}
+
+export function verifyVerdict(verdict, verdictSig, publicKey) {
+  if (!verdict || typeof verdict !== "object" || !verdictSig) return false;
+  const { verdict_sig, ...rest } = verdict; // tolerate the sig field being present
+  if (verdict_sig && verdict_sig !== verdictSig) return false; // two sigs disagree => fail
+  try {
+    return verify(
+      null,
+      Buffer.from(canonicalize(rest)),
+      pubToKey(publicKey),
+      Buffer.from(verdictSig, "base64")
+    );
+  } catch {
+    return false;
+  }
+}

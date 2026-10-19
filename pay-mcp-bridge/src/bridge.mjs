@@ -10,7 +10,7 @@
 // unavailable.** Any error in the trust path denies by default.
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { canonicalize, sha256Hex, makeKeyPair, signReceipt, verifyReceipt } from "./receipts.mjs";
+import { canonicalize, sha256Hex, makeKeyPair, signReceipt, verifyReceipt, verifyVerdict } from "./receipts.mjs";
 
 let YAML = null;
 try {
@@ -164,6 +164,11 @@ export function normalizePolicy(doc) {
     },
     uta: {
       verify_url: pick(uta, "verify_url", "verifyUrl") ?? "https://uta.alicelabs.site/v1/trust/verify",
+      // RFC-ATC v3 §5.2 — verdict scope binding. "strict" (default) requires a
+      // signed verdict bound to {challenge, resource, amount_usd}. "off" is the
+      // documented migration opt-out for verifiers that do not yet sign scope.
+      scope_binding: pick(uta, "scope_binding") ?? "strict",
+      verifier_public_key: pick(uta, "verifier_public_key", "publicKey") ?? null,
     },
   };
   policy.policy_sha256 = sha256Hex(canonicalize(policy));
@@ -192,6 +197,7 @@ export async function createUtaHook({
   revocationUrl,
   fetchImpl = fetch,
   keyPair = null,
+  verifierPublicKey = null, // pins the verifier key for §5.2 scope-binding checks
   now = () => Date.now(),
 } = {}) {
   if (!policy) policy = policyPath ? await loadPolicy(policyPath) : null;
@@ -248,8 +254,39 @@ export async function createUtaHook({
     }
     const verified = body.verified ?? body.valid;
     if (verified !== true) return { ok: false, reason: `verify negative: ${body.reason ?? "unverified"}` };
-    const band = body.band ?? body.uts?.trust?.band ?? null;
-    const verdict_id = body.verdict_id ?? `vrg_${sha256Hex(challenge).slice(0, 16)}`;
+
+    // RFC-ATC v3 §5.2 — verdict scope binding, fail-closed. The verdict must be
+    // signed by the pinned verifier key and bound to THIS attempt: the minted
+    // challenge (one-time freshness — a replayed verdict fails here with no
+    // seller state), the resource, and the amount. Without scope binding,
+    // verdict_id is a bearer token: a B1 verdict obtained for a $0.01 route
+    // could be presented at a $50 route until it expires.
+    const scopeMode = String(policy?.uta?.scope_binding ?? "strict").toLowerCase();
+    const vPub = verifierPublicKey ?? policy?.uta?.verifier_public_key ?? null;
+    if (scopeMode !== "off") {
+      const v = body.verdict, s = body.verdict_sig;
+      if (!v || !s || !vPub) {
+        return { ok: false, reason: "fail-closed: verdict scope binding missing (signed verdict + pinned verifier key required)" };
+      }
+      if (!verifyVerdict(v, s, vPub)) {
+        return { ok: false, reason: "fail-closed: verdict signature invalid" };
+      }
+      if (v.challenge !== challenge) {
+        return { ok: false, reason: "fail-closed: verdict challenge mismatch (stale or replayed verdict)" };
+      }
+      if (v.resource !== op.resource) {
+        return { ok: false, reason: "fail-closed: verdict resource mismatch" };
+      }
+      if (Number(v.amount_usd) !== Number(op.amountUsd)) {
+        return { ok: false, reason: "fail-closed: verdict amount mismatch" };
+      }
+      if (v.issued_at && v.expires_in && now() / 1000 > Date.parse(v.issued_at) / 1000 + Number(v.expires_in)) {
+        return { ok: false, reason: "fail-closed: verdict expired" };
+      }
+    }
+
+    const band = body.band ?? body.verdict?.band ?? body.uts?.trust?.band ?? null;
+    const verdict_id = body.verdict?.verdict_id ?? body.verdict_id ?? `vrg_${sha256Hex(challenge).slice(0, 16)}`;
     return { ok: true, band, verdict_id };
   }
 

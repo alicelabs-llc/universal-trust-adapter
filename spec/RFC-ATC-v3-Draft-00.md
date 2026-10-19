@@ -278,9 +278,31 @@ def verify_atc_v3(atc: dict, supported_formats: list[str]) -> dict:
 
 Each signature format adds ~1KB to the credential size and ~10-30ms to the issuance time. Verification of one format remains at v2.0 speed (~25ms offline).
 
+### 5.2 Verdict scope binding (required for paid-route presentation)
+
+A verdict produced by a verifier for presentation to a seller (the `verdict_id` object returned by a verify call) MUST be a signed object, and the signature MUST cover the transaction scope it is valid for:
+
+```
+verdict = { v, verdict_id, card_digest, challenge, resource, amount_usd,
+            band, stages, issued_at, expires_in }
+```
+
+The signature is Ed25519 over the RFC 8785 JCS canonicalization of the verdict minus its `verdict_sig` field, from a key the seller pins for the verifier.
+
+The presenting seller MUST check, fail-closed (any absence or mismatch ⇒ deny):
+
+1. `verdict_sig` verifies against the pinned verifier key;
+2. `challenge` equals the challenge the seller minted for THIS attempt (one-time freshness — a replayed verdict fails here with no seller-side state, since the seller mints a fresh challenge per attempt);
+3. `resource` equals the route being served;
+4. `amount_usd` equals the payable amount of this request;
+5. the window is valid (`issued_at` + `expires_in` not elapsed).
+
+A verdict whose signature covers none of `challenge`, `resource`, and `amount_usd` is a bearer token: it can be obtained for a cheap route and presented at an expensive one until it expires. Scope binding closes exactly that. Migration: sellers MAY run `scope_binding: off` against verifiers that do not yet sign scope until the verifier rollout completes; the requirement above is normative for paid-route verification under ATC/1.0 from v3.0 onward. (Motivated by external seller-side review of the pay-mcp-bridge reference flow — see parthod0x/satroot#2, comment by minia2auk.)
+
 ---
 
 ## 6. Migration from v2.0 to v3.0
+
 
 ### 6.1 Automatic
 
@@ -366,6 +388,7 @@ const credential = await engine.issue({
 ## 11. Changelog
 
 - **v3.0 Draft 00 (2026-08-20):** Initial publication. Introduces `signatures[]` array with multi-format support. Defines `atc-ed25519`, `eat-cwt`, `w3c-vc` formats. Maintains backward compatibility with v2.0.
+- **v3.0 Draft 00 rev 2 (2026-10-19):** §5.2 added — verdict scope binding required for paid-route presentation (signed verdict MUST cover challenge, resource, amount_usd; seller-side checks fail-closed). Motivated by external seller-side review (minia2auk, parthod0x/satroot#2).
 
 ---
 

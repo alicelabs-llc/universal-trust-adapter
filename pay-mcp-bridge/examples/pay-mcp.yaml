@@ -25,3 +25,9 @@ revocation:
 
 uta:
   verify_url: "https://uta.alicelabs.site/v1/trust/verify"
+  # RFC-ATC v3 §5.2 — verdict scope binding: the verifier's Ed25519-signed
+  # verdict must cover {challenge, resource, amount_usd}; the bridge enforces
+  # it fail-closed. Default: strict. "off" is the documented migration opt-out
+  # while the verifier rollout completes.
+  scope_binding: strict
+  verifier_public_key: null    # base64 SPKI — pin the verifier's key before production

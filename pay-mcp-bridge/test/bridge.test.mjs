@@ -2,27 +2,71 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { parsePolicyYaml, normalizePolicy, createUtaHook } from "../src/bridge.mjs";
 import { readFileSync } from "node:fs";
-import { verifyReceipt, makeKeyPair } from "../src/receipts.mjs";
+import { verifyReceipt, makeKeyPair, signVerdict } from "../src/receipts.mjs";
 
 const POLICY_YAML = readFileSync(new URL("../examples/pay-mcp.yaml", import.meta.url), "utf8");
 
 const BOT = "did:web:checkout-bot.alicelabs.site";
 const CRAWLER = "did:web:research-crawler.alicelabs.site";
 
-function okVerify() {
-  return async (url) => ({
+// Pinned verifier key for the tests — the bridge must reject verdicts signed
+// by any other key while strict scope binding (RFC-ATC v3 §5.2) is active.
+const VKEY = makeKeyPair();
+
+// Builds the verifier's 200 response: verdict signed over the exact request
+// scope (challenge/resource/amount_usd parsed from the request body), unless
+// overridden — overrides exist to prove the seller-side binding rejects them.
+function signedVerifyResponse(reqBody, {
+  band = "B2", key = VKEY, unsigned = false,
+  resourceOverride = null, amountOverride = null, challengeOverride = null,
+  issuedAt = null, expiresIn = 300,
+} = {}) {
+  const req = JSON.parse(reqBody);
+  const verdict = {
+    v: 1,
+    verdict_id: "vrg_test_001",
+    band,
+    challenge: challengeOverride ?? req.challenge,
+    resource: resourceOverride ?? req.resource,
+    amount_usd: amountOverride ?? req.amount_usd,
+    issued_at: issuedAt ?? new Date().toISOString(),
+    expires_in: expiresIn,
+  };
+  const signed = signVerdict(verdict, key.privateKey);
+  return {
     ok: true,
     status: 200,
-    json: async () => ({ verified: true, band: "B2", verdict_id: "vrg_test_001" }),
-  });
+    json: async () => unsigned
+      ? { verified: true, band, verdict_id: verdict.verdict_id }
+      : { verified: true, band, verdict_id: verdict.verdict_id, verdict, verdict_sig: signed.verdict_sig },
+  };
+}
+
+// Single fetchImpl covering both endpoints; options map 1:1 to the scenario.
+function fetcher({
+  band = "B2", revoked = false, revFail = false, verifyFail = false,
+  verify = {},
+  onVerify = null, // (init) => response — full override for replay tests
+} = {}) {
+  return async (url, init) => {
+    if (String(url).includes("/revocation")) {
+      return revFail
+        ? { ok: false, status: 503, json: async () => ({}) }
+        : { ok: true, status: 200, json: async () => ({ revoked, reason: revoked ? "compromised key" : undefined }) };
+    }
+    if (verifyFail) return { ok: false, status: 500, json: async () => ({}) };
+    if (onVerify) return onVerify(init);
+    return signedVerifyResponse(init.body, { band, ...verify });
+  };
 }
 
 function policy(text = POLICY_YAML) {
   return parsePolicyYaml(text);
 }
 
+// Injects the pinned verifier key by default — tests exercise the strict path.
 function hookWith(policyObj, fetchImpl, opts = {}) {
-  return createUtaHook({ policy: policyObj, fetchImpl, ...opts });
+  return createUtaHook({ policy: policyObj, fetchImpl, verifierPublicKey: VKEY.publicKey, ...opts });
 }
 
 test("example YAML parses and normalizes (schema-tolerant)", () => {
@@ -33,6 +77,7 @@ test("example YAML parses and normalizes (schema-tolerant)", () => {
   assert.equal(p.authorizations[0].agent, BOT);
   assert.equal(p.authorizations[0].trust_band_min, "B1");
   assert.equal(p.revocation.fail_closed, true);
+  assert.equal(p.uta.scope_binding, "strict"); // §5.2 default
   assert.match(p.policy_sha256, /^[0-9a-f]{64}$/);
   // normalization is deterministic
   assert.equal(p.policy_sha256, normalizePolicy(p).policy_sha256);
@@ -40,12 +85,12 @@ test("example YAML parses and normalizes (schema-tolerant)", () => {
 
 test("allow path: grant + budget + verified band + revocation ok => signed receipt", async () => {
   let revocationAsked = false;
-  const fetchImpl = async (url) => {
+  const fetchImpl = async (url, init) => {
     if (String(url).includes("/revocation")) {
       revocationAsked = true;
       return { ok: true, status: 200, json: async () => ({ revoked: false }) };
     }
-    return okVerify()(url);
+    return signedVerifyResponse(init.body);
   };
   const h = await hookWith(policy(), fetchImpl);
   const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 3, atc: { did: BOT } });
@@ -58,11 +103,7 @@ test("allow path: grant + budget + verified band + revocation ok => signed recei
 });
 
 test("deny: band below grant threshold", async () => {
-  const fetchImpl = async (url) =>
-    String(url).includes("/revocation")
-      ? { ok: true, status: 200, json: async () => ({ revoked: false }) }
-      : { ok: true, status: 200, json: async () => ({ verified: true, band: "B0", verdict_id: "vrg_x" }) };
-  const h = await hookWith(policy(), fetchImpl);
+  const h = await hookWith(policy(), fetcher({ band: "B0" }));
   const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
   assert.equal(r.allow, false);
   assert.match(r.reason, /below required B1/);
@@ -79,29 +120,28 @@ test("FAIL-CLOSED: verify unreachable => deny", async () => {
 });
 
 test("FAIL-CLOSED: verify HTTP 500 => deny", async () => {
-  const fetchImpl = async () => ({ ok: false, status: 500, json: async () => ({}) });
-  const h = await hookWith(policy(), fetchImpl);
+  const h = await hookWith(policy(), fetcher({ verifyFail: true }));
   const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
   assert.equal(r.allow, false);
   assert.match(r.reason, /fail-closed: verify HTTP 500/);
 });
 
 test("deny: no grant for agent/resource", async () => {
-  const h = await hookWith(policy(), okVerify());
+  const h = await hookWith(policy(), fetcher());
   const r = await h.authorize({ agent: "did:web:stranger.example", resource: "solana:transfer", amountUsd: 1, atc: {} });
   assert.equal(r.allow, false);
   assert.match(r.reason, /no grant/);
 });
 
 test("deny: per-spend cap", async () => {
-  const h = await hookWith(policy(), okVerify());
+  const h = await hookWith(policy(), fetcher());
   const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 6, atc: {} });
   assert.equal(r.allow, false);
   assert.match(r.reason, /per-spend cap/);
 });
 
 test("deny: daily cap uses runtime state (the YAML-snapshot gap)", async () => {
-  const h = await hookWith(policy(), okVerify());
+  const h = await hookWith(policy(), fetcher());
   await h.authorize({ agent: CRAWLER, resource: "x402:fetch", amountUsd: 3, atc: {} });
   const r2 = await h.authorize({ agent: CRAWLER, resource: "x402:fetch", amountUsd: 2, atc: {} }); // 3+2 > 4
   assert.equal(r2.allow, false);
@@ -119,7 +159,7 @@ authorizations:
     max_usd_per_day: 0
     trust_band_min: null
 `);
-  const h = await hookWith(p, okVerify());
+  const h = await hookWith(p, fetcher());
   await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 4, atc: {} });
   const r2 = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 2, atc: {} });
   assert.equal(r2.allow, false);
@@ -127,37 +167,29 @@ authorizations:
 });
 
 test("deny: agent revoked", async () => {
-  const fetchImpl = async (url) =>
-    String(url).includes("/revocation")
-      ? { ok: true, status: 200, json: async () => ({ revoked: true, reason: "compromised key" }) }
-      : okVerify()(url);
-  const h = await hookWith(policy(), fetchImpl);
+  const h = await hookWith(policy(), fetcher({ revoked: true }));
   const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
   assert.equal(r.allow, false);
   assert.match(r.reason, /revoked/);
 });
 
 test("revocation down: fail_closed=true denies, fail_closed=false allows with warning", async () => {
-  const fetchImpl = async (url) =>
-    String(url).includes("/revocation")
-      ? { ok: false, status: 503, json: async () => ({}) }
-      : okVerify()(url);
-  const h1 = await hookWith(policy(), fetchImpl);
+  const h1 = await hookWith(policy(), fetcher({ revFail: true }));
   const r1 = await h1.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
   assert.equal(r1.allow, false);
   assert.match(r1.reason, /fail-closed: revocation/);
 
   const p2 = policy(POLICY_YAML.replace("fail_closed: true", "fail_closed: false"));
-  const h2 = await hookWith(p2, fetchImpl);
+  const h2 = await hookWith(p2, fetcher({ revFail: true }));
   const r2 = await h2.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
   assert.equal(r2.allow, true);
 });
 
 test("band unavailable while threshold required => deny (fail-closed)", async () => {
-  const fetchImpl = async (url) =>
+  const fetchImpl = async (url, init) =>
     String(url).includes("/revocation")
       ? { ok: true, status: 200, json: async () => ({ revoked: false }) }
-      : { ok: true, status: 200, json: async () => ({ verified: true, band: null, verdict_id: "vrg_nb" }) };
+      : signedVerifyResponse(init.body, { band: null });
   const h = await hookWith(policy(), fetchImpl);
   const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
   assert.equal(r.allow, false);
@@ -165,21 +197,13 @@ test("band unavailable while threshold required => deny (fail-closed)", async ()
 });
 
 test("crawler without band requirement still gets verified and allowed", async () => {
-  const fetchImpl = async (url) =>
-    String(url).includes("/revocation")
-      ? { ok: true, status: 200, json: async () => ({ revoked: false }) }
-      : okVerify()(url);
-  const h = await hookWith(policy(), fetchImpl);
+  const h = await hookWith(policy(), fetcher());
   const r = await h.authorize({ agent: CRAWLER, resource: "x402:fetch", amountUsd: 1, atc: {} });
   assert.equal(r.allow, true); // verify ran (would deny if unreachable — covered above)
 });
 
 test("receipt tamper detection", async () => {
-  const fetchImpl = async (url) =>
-    String(url).includes("/revocation")
-      ? { ok: true, status: 200, json: async () => ({ revoked: false }) }
-      : okVerify()(url);
-  const h = await hookWith(policy(), fetchImpl);
+  const h = await hookWith(policy(), fetcher());
   const r = await h.authorize({ agent: CRAWLER, resource: "x402:fetch", amountUsd: 1, atc: {} });
   const tampered = { ...r.receipt, amount_usd: 0.01 };
   assert.equal(h.verifyReceipt(tampered), false);
@@ -187,15 +211,76 @@ test("receipt tamper detection", async () => {
 
 test("external keypair: receipts verify with the operator key, not the ephemeral one", async () => {
   const opKp = makeKeyPair();
-  const fetchImpl = async (url) =>
-    String(url).includes("/revocation")
-      ? { ok: true, status: 200, json: async () => ({ revoked: false }) }
-      : okVerify()(url);
-  const h = await hookWith(policy(), fetchImpl, { keyPair: opKp });
+  const h = await hookWith(policy(), fetcher(), { keyPair: opKp });
   const r = await h.authorize({ agent: CRAWLER, resource: "x402:fetch", amountUsd: 1, atc: {} });
   assert.equal(r.allow, true);
   assert.equal(verifyReceipt(r.receipt, opKp.publicKey), true);
   assert.equal(h.publicKey, opKp.publicKey, "hook signs with the operator key when injected");
+});
+
+// ---- RFC-ATC v3 §5.2 — verdict scope binding (motivated by minia2auk's
+//      review, parthod0x/satroot#2: an unbound verdict_id is a bearer token
+//      that a $0.01 route can mint and a $50 route would accept) ----
+
+test("§5.2 scope binding: verdict for another resource => deny (fail-closed)", async () => {
+  const h = await hookWith(policy(), fetcher({ verify: { resourceOverride: "solana:other-expensive-route" } }));
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, false);
+  assert.match(r.reason, /verdict resource mismatch/);
+});
+
+test("§5.2 scope binding: verdict for another amount => deny (fail-closed)", async () => {
+  const h = await hookWith(policy(), fetcher({ verify: { amountOverride: 0.01 } }));
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, false);
+  assert.match(r.reason, /verdict amount mismatch/);
+});
+
+test("§5.2 scope binding: verdict signed by a non-pinned key => deny", async () => {
+  const h = await hookWith(policy(), fetcher({ verify: { key: makeKeyPair() } }));
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, false);
+  assert.match(r.reason, /verdict signature invalid/);
+});
+
+test("§5.2 scope binding: replayed verdict (stale challenge) => deny without seller state", async () => {
+  let captured = null;
+  const fetchImpl = fetcher({
+    onVerify: (init) => {
+      if (captured) {
+        return { ok: true, status: 200, json: async () => captured };
+      }
+      const req = JSON.parse(init.body);
+      const verdict = {
+        v: 1, verdict_id: "vrg_test_001", band: "B2",
+        challenge: req.challenge, resource: req.resource, amount_usd: req.amount_usd,
+        issued_at: new Date().toISOString(), expires_in: 300,
+      };
+      const signed = signVerdict(verdict, VKEY.privateKey);
+      captured = { verified: true, band: "B2", verdict_id: verdict.verdict_id, verdict, verdict_sig: signed.verdict_sig };
+      return { ok: true, status: 200, json: async () => captured };
+    },
+  });
+  const h = await hookWith(policy(), fetchImpl);
+  const r1 = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r1.allow, true, "first presentation with fresh challenge allows");
+  const r2 = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r2.allow, false, "replay of the first verdict must deny");
+  assert.match(r2.reason, /challenge mismatch/);
+});
+
+test("§5.2 scope binding: legacy unsigned verifier response => deny under strict default", async () => {
+  const h = await hookWith(policy(), fetcher({ verify: { unsigned: true } }));
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, false);
+  assert.match(r.reason, /verdict scope binding missing/);
+});
+
+test("§5.2 scope binding: off => legacy unsigned response accepted (documented migration opt-out)", async () => {
+  const p = policy(POLICY_YAML.replace("scope_binding: strict", "scope_binding: off"));
+  const h = await hookWith(p, fetcher({ verify: { unsigned: true } }));
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, true, "explicit opt-out keeps the pre-§5.2 flow working");
 });
 
 // ---- zero-dep fallback regression (the mini-parser must agree with the
