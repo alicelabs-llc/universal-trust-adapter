@@ -17,7 +17,7 @@
 [![npm version](https://img.shields.io/npm/v/agent-trust-card.svg)](https://www.npmjs.com/package/agent-trust-card)
 [![GitHub release](https://img.shields.io/github/v/release/alicelabs-llc/universal-trust-adapter)](https://github.com/alicelabs-llc/universal-trust-adapter/releases)
 [![license](https://img.shields.io/badge/license-open--core%20MIT%20%C2%B7%20AL--1.0%20core-blue.svg)](https://marketnow.site/licensing)
-[![conformance](https://img.shields.io/badge/conformance-v1.3.5-brightgreen.svg)](https://www.marketnow.site/uta/conformance/)
+[![conformance](https://img.shields.io/badge/conformance-v1.4.0-brightgreen.svg)](https://www.marketnow.site/uta/conformance/)
 [![Rekor anchored](https://img.shields.io/badge/Sigstore%20Rekor-anchored-blue.svg)](https://www.marketnow.site/uta/conformance/anchors/)
 
 UTA translates between ALL trust credential formats used by AI agents via a canonical Universal Trust Schema (UTS).
@@ -96,7 +96,7 @@ The 2026 gray-market quota trust crisis, documented — plus the receipts-based 
 
 - **ATC Revocation + Transparency Log (MNR-CRL-1.0)** — a signed, append-only revocation registry for Agent Trust Cards and CA keys. The `/api/trust?action=revocation` page used to *promise* an OCSP responder that returned 404; now `GET /api/ocsp?card_id=…` / `?kid=…` answers for real: VALID / EXPIRED / REVOKED / SUPERSEDED / UNKNOWN, with PERMIT/DENY recommendation, fail-closed semantics, and the CRL signature embedded so any client can verify the signed layer independently (`GET /api/crl`). Seeded with real events — 3 superseded ATCs + the `mn-ca-002` key compromise (2026-09-08).
 - **Cryptographic Tool Fingerprinting (TFP-1.0)** — the OWASP MCP Cheat Sheet control "verify tool descriptions haven't changed", as an MCP tool: SHA-256 over the RFC 8785 JCS canonical form of each tool + a manifest fingerprint for the whole `tools/list` surface + drift reports (added / removed / changed) against pinned manifests. The core defense against tool poisoning and rug-pull redefinitions.
-- **MCP endpoint v1.15.0** (9 public remote tools — discovery/trust surface) and **npm `marketnow-mcp@1.15.0`** (15 local trust/security tools) — remote surface and package surface are different by design: the endpoint exposes public discovery over the live catalog, the package runs client-side against local credentials. The npm package also fixed the broken `repository.directory` link and upgraded the MCP SDK (DNS-rebinding advisory resolved; `npm audit` clean).
+- **MCP endpoint v1.16.0** (9 public remote tools — discovery/trust surface) and **npm `marketnow-mcp@1.16.0`** (15 local trust/security tools) — remote surface and package surface are different by design: the endpoint exposes public discovery over the live catalog, the package runs client-side against local credentials. The npm package also fixed the broken `repository.directory` link and upgraded the MCP SDK (DNS-rebinding advisory resolved; `npm audit` clean).
 - **Interceptor v1.1.0** (`@marketnow/cline-trust-plugin`, [npm](https://www.npmjs.com/package/@marketnow/cline-trust-plugin)) — revocation gate (fail-closed, 5-min TTL) + per-server tool-surface pinning/verification.
 - **Sentinel semgrep rules v2** — 29 rules: +tool-poisoning (MCP-TP), +exfiltration chains (MCP-EX), +multi-step attack chains (MCP-AC, roadmap v5.4 preview), +stale-trust caching (MCP-RR).
 - **Rekor anchor #4** (logIndex 2771735480) — the revocation registry itself is anchored in Sigstore's public log; the revocation history is third-party-checkable end-to-end.
@@ -168,7 +168,7 @@ npx marketnow-audit bit.ly        # domain scam-check + ATC + OCSP, CI exit code
 | Metric | Value |
 |---|---|
 | NPM packages | 12 (combined last-week downloads: 4,901+) |
-| Conformance (live) | 14 public vectors · 24 checks + 10 mutants · v1.3.5 (npm-synced) |
+| Conformance (live) | 14 public vectors · 24 checks + 10 mutants · v1.4.0 (npm-synced) |
 | Transparency anchors | 3 Rekor log entries (verify-rekor.mjs, 9 checks) |
 | CA key rotation | exercised 2026-09-08 (`mn-ca-002` → `mn-ca-003`) — [postmortem](https://marketnow.site/security/incidents/2026-09-08) |
 | Test vectors (ATC/1.0) | 5 frozen + manifest — [MARKETNOW repo](https://github.com/alicelabs-llc/MARKETNOW/tree/master/docs/atc-spec/test-vectors) |
@@ -181,7 +181,7 @@ npx marketnow-audit bit.ly        # domain scam-check + ATC + OCSP, CI exit code
 
 | Package | Version | Description | Downloads (last week) |
 |---|---|---|---|
-| [`marketnow-mcp`](https://www.npmjs.com/package/marketnow-mcp) | 1.15.0 | MCP server with 15 trust tools (+revocation, +fingerprinting; SDK hardened, `npm audit` clean) | 1,003/wk |
+| [`marketnow-mcp`](https://www.npmjs.com/package/marketnow-mcp) | 1.16.0 | MCP server with 15 trust tools (+revocation, +fingerprinting; SDK hardened, `npm audit` clean) | 1,003/wk |
 | [`agent-trust-card`](https://www.npmjs.com/package/agent-trust-card) | 1.4.1 | ATC/1.0 SDK (issue, verify, inspect) | 616/wk |
 | [`marketnow-install-stack`](https://www.npmjs.com/package/marketnow-install-stack) | 1.2.1 | Multi-source installer (5 stacks over the live catalog) | 178/wk |
 | [`@marketnow/uts`](https://www.npmjs.com/package/@marketnow/uts) | 2.0.3 | Universal Trust Schema | 298/wk |
@@ -189,7 +189,7 @@ npx marketnow-audit bit.ly        # domain scam-check + ATC + OCSP, CI exit code
 | [`@marketnow/trust-adapters`](https://www.npmjs.com/package/@marketnow/trust-adapters) | 1.0.4 | 9 format adapters (X509 exported; self-contained, zero deps) | 282/wk |
 | [`@marketnow/trust-gateway`](https://www.npmjs.com/package/@marketnow/trust-gateway) | 1.0.5 | MCP middleware gateway + ReceiptStore/ReceiptGenerator exported (self-contained, zero deps) | 307/wk |
 | [`@marketnow/cline-trust-plugin`](https://www.npmjs.com/package/@marketnow/cline-trust-plugin) | 1.1.2 | Cline interceptor: revocation gate + TFP tool-surface pinning | 346/wk |
-| [`@marketnow/uta-conformance`](https://www.npmjs.com/package/@marketnow/uta-conformance) | 1.3.5 | 14 signed vectors + reference scorer + card generator — `npx @marketnow/uta-conformance` | 307/wk |
+| [`@marketnow/uta-conformance`](https://www.npmjs.com/package/@marketnow/uta-conformance) | 1.4.0 | 14 signed vectors + reference scorer + card generator — `npx @marketnow/uta-conformance` | 307/wk |
 | [`@marketnow/sentinel-rules`](https://www.npmjs.com/package/@marketnow/sentinel-rules) | 1.1.2 | 29 MCP security rules: semgrep config + zero-dep lite scanner — `npx @marketnow/sentinel-rules --path .` | 471/wk |
 | [`@marketnow/trust-mcp-middleware`](https://www.npmjs.com/package/@marketnow/trust-mcp-middleware) | 1.0.2 | MCP `tools/call` wrapper: credential enforcement + signed audit receipts | 319/wk |
 | [`@marketnow/trust-observability`](https://www.npmjs.com/package/@marketnow/trust-observability) | 1.0.3 | Zero-dep observability: structured logging, tracing, Prometheus metrics | 461/wk |
