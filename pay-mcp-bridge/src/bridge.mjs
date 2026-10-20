@@ -9,7 +9,7 @@
 // Property enforced here: **no spend is ever honored because verification was
 // unavailable.** Any error in the trust path denies by default.
 import { readFile } from "node:fs/promises";
-import { createHash } from "node:crypto";
+import { createHash, randomBytes } from "node:crypto";
 import { canonicalize, sha256Hex, makeKeyPair, signReceipt, verifyReceipt, verifyVerdict } from "./receipts.mjs";
 
 let YAML = null;
@@ -137,6 +137,32 @@ export async function loadPolicy(policyPath) {
 
 const BAND_RANK = { B0: 0, B1: 1, B2: 2, B3: 3, A1: 4 };
 
+// RFC-ATC v3 §5.2 (rev 3): amounts travel as fixed-scale decimal strings with
+// exactly two fractional digits — the signed bytes are the JCS canonical form,
+// and JSON number serialization is where non-JS implementations diverge
+// (values beyond 2^53, sub-cent scales, numeric parsing of "0.10").
+// Returns null (fail-closed) for unparseable, negative, or sub-cent input.
+export function usdFixed(n) {
+  const s = typeof n === "string" ? n.trim() : null;
+  const x = s !== null ? (/^\d+(\.\d{1,2})?$/.test(s) ? Number(s) : NaN) : Number(n);
+  if (!Number.isFinite(x) || x < 0) return null;
+  // numeric input carrying sub-cent precision cannot be canonicalized losslessly
+  if (s === null && Math.abs(Math.round(x * 100) - x * 100) > 1e-6) return null;
+  return x.toFixed(2);
+}
+
+// §5.2 rev 3 — one entry of the verifier key pin set: {kid, public_key,
+// not_before, not_after}. The seller verifies against a pinned key whose kid
+// matches the verdict and whose validity window covers verdict.issued_at.
+function normalizePin(k, i) {
+  return {
+    kid: String(pick(k, "kid", "key_id", "keyId") ?? `pin-${i}`),
+    public_key: pick(k, "public_key", "publicKey", "key") ?? null,
+    not_before: pick(k, "not_before", "notBefore") ?? null,
+    not_after: pick(k, "not_after", "notAfter") ?? null,
+  };
+}
+
 function normalizeGrant(g, i) {
   return {
     agent: String(pick(g, "agent", "agent_id", "agentId", "did") ?? `agent-${i}`),
@@ -151,6 +177,7 @@ export function normalizePolicy(doc) {
   const grants = (pick(doc, "authorizations", "authorizations:", "grants", "agents") ?? []).map(normalizeGrant);
   const rev = pick(doc, "revocation", "revocations") ?? {};
   const uta = pick(doc, "uta", "trust") ?? {};
+  const vkRaw = pick(uta, "verifier_keys", "verifierKeys");
   const policy = {
     budget: {
       total_usd: Number(pick(budget, "total_usd", "totalUsd") ?? 0),
@@ -169,6 +196,9 @@ export function normalizePolicy(doc) {
       // documented migration opt-out for verifiers that do not yet sign scope.
       scope_binding: pick(uta, "scope_binding") ?? "strict",
       verifier_public_key: pick(uta, "verifier_public_key", "publicKey") ?? null,
+      // §5.2 rev 3 — multi-key pin set with rotation windows; the single
+      // verifier_public_key above is treated as a one-entry pin set.
+      verifier_keys: Array.isArray(vkRaw) ? vkRaw.map(normalizePin) : [],
     },
   };
   policy.policy_sha256 = sha256Hex(canonicalize(policy));
@@ -198,6 +228,7 @@ export async function createUtaHook({
   fetchImpl = fetch,
   keyPair = null,
   verifierPublicKey = null, // pins the verifier key for §5.2 scope-binding checks
+  verifierKeys = null, // §5.2 rev 3 pin set: [{kid, public_key, not_before, not_after}]
   now = () => Date.now(),
 } = {}) {
   if (!policy) policy = policyPath ? await loadPolicy(policyPath) : null;
@@ -234,14 +265,24 @@ export async function createUtaHook({
   }
 
   async function utaVerify(op) {
-    // one-time challenge per attempt: freshness is enforced by the verifier
-    const challenge = sha256Hex(canonicalize({ agent: op.agent, resource: op.resource, nonce: now(), salt: Math.random() }));
+    // §5.2 rev 3 — the request amount travels in the same fixed-scale string
+    // form the verdict must carry; an amount that cannot be canonicalized
+    // losslessly denies before any network call.
+    const reqAmount = usdFixed(op.amountUsd);
+    if (reqAmount === null)
+      return { ok: false, reason: "fail-closed: request amount not a canonical USD amount" };
+    // one-time challenge per attempt, SELLER-MINTED from a cryptographic RNG
+    // (§5.2 rev 3: a caller-supplied challenge lets the attacker pick the
+    // scope and replay it; predictability is where freshness starts to leak)
+    const challenge = sha256Hex(canonicalize({
+      agent: op.agent, resource: op.resource, nonce: now(), entropy: randomBytes(16).toString("hex"),
+    }));
     let res, body;
     try {
       res = await fetchImpl(vUrl, {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ atc: op.atc, challenge, resource: op.resource, amount_usd: op.amountUsd }),
+        body: JSON.stringify({ atc: op.atc, challenge, resource: op.resource, amount_usd: reqAmount }),
       });
     } catch (e) {
       return { ok: false, reason: `fail-closed: verify unreachable (${e.message})` };
@@ -263,12 +304,33 @@ export async function createUtaHook({
     // could be presented at a $50 route until it expires.
     const scopeMode = String(policy?.uta?.scope_binding ?? "strict").toLowerCase();
     const vPub = verifierPublicKey ?? policy?.uta?.verifier_public_key ?? null;
+    const vkOpt = Array.isArray(verifierKeys) ? verifierKeys : policy?.uta?.verifier_keys ?? [];
+    const pins = (vkOpt ?? []).filter((p) => p && p.public_key);
+    if (!pins.length && vPub) pins.push({ kid: null, public_key: vPub, not_before: null, not_after: null });
     if (scopeMode !== "off") {
       const v = body.verdict, s = body.verdict_sig;
-      if (!v || !s || !vPub) {
+      if (!v || !s || !pins.length) {
         return { ok: false, reason: "fail-closed: verdict scope binding missing (signed verdict + pinned verifier key required)" };
       }
-      if (!verifyVerdict(v, s, vPub)) {
+      if (!v.issued_at || !Number.isFinite(Number(v.expires_in))) {
+        return { ok: false, reason: "fail-closed: verdict missing validity window (issued_at/expires_in required)" };
+      }
+      // §5.2 rev 3 — key selection: kid match + validity window covering issued_at
+      const issued = Date.parse(v.issued_at);
+      let sel;
+      if (v.kid) {
+        sel = pins.find((p) => p.kid === v.kid);
+        if (!sel) return { ok: false, reason: `fail-closed: verdict kid not in pin set (${v.kid})` };
+      } else {
+        if (pins.length > 1)
+          return { ok: false, reason: "fail-closed: verdict missing kid and pin set is not single-key" };
+        sel = pins[0];
+      }
+      if (sel.not_before && issued < Date.parse(sel.not_before))
+        return { ok: false, reason: `fail-closed: pinned key ${sel.kid ?? "(single)"} not valid at verdict issued_at` };
+      if (sel.not_after && issued > Date.parse(sel.not_after))
+        return { ok: false, reason: `fail-closed: pinned key ${sel.kid ?? "(single)"} expired at verdict issued_at` };
+      if (!verifyVerdict(v, s, sel.public_key)) {
         return { ok: false, reason: "fail-closed: verdict signature invalid" };
       }
       if (v.challenge !== challenge) {
@@ -277,10 +339,12 @@ export async function createUtaHook({
       if (v.resource !== op.resource) {
         return { ok: false, reason: "fail-closed: verdict resource mismatch" };
       }
-      if (Number(v.amount_usd) !== Number(op.amountUsd)) {
-        return { ok: false, reason: "fail-closed: verdict amount mismatch" };
+      // fixed-scale string byte-compare — a JSON number or a non-canonical
+      // string in the signed scope denies (§5.2 rev 3)
+      if (v.amount_usd !== reqAmount) {
+        return { ok: false, reason: "fail-closed: verdict amount mismatch or non-canonical form (fixed-scale decimal string required)" };
       }
-      if (v.issued_at && v.expires_in && now() / 1000 > Date.parse(v.issued_at) / 1000 + Number(v.expires_in)) {
+      if (now() / 1000 > issued / 1000 + Number(v.expires_in)) {
         return { ok: false, reason: "fail-closed: verdict expired" };
       }
     }

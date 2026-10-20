@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { parsePolicyYaml, normalizePolicy, createUtaHook } from "../src/bridge.mjs";
+import { parsePolicyYaml, normalizePolicy, createUtaHook, usdFixed } from "../src/bridge.mjs";
 import { readFileSync } from "node:fs";
 import { verifyReceipt, makeKeyPair, signVerdict } from "../src/receipts.mjs";
 
@@ -14,12 +14,13 @@ const CRAWLER = "did:web:research-crawler.alicelabs.site";
 const VKEY = makeKeyPair();
 
 // Builds the verifier's 200 response: verdict signed over the exact request
-// scope (challenge/resource/amount_usd parsed from the request body), unless
-// overridden — overrides exist to prove the seller-side binding rejects them.
+// scope (challenge/resource/amount_usd parsed from the request body — the
+// request amount is already the fixed-scale string §5.2 rev 3 mandates),
+// unless overridden — overrides exist to prove the seller-side binding rejects them.
 function signedVerifyResponse(reqBody, {
   band = "B2", key = VKEY, unsigned = false,
   resourceOverride = null, amountOverride = null, challengeOverride = null,
-  issuedAt = null, expiresIn = 300,
+  issuedAt = null, expiresIn = 300, kid = null, omitWindow = false,
 } = {}) {
   const req = JSON.parse(reqBody);
   const verdict = {
@@ -32,6 +33,8 @@ function signedVerifyResponse(reqBody, {
     issued_at: issuedAt ?? new Date().toISOString(),
     expires_in: expiresIn,
   };
+  if (kid) verdict.kid = kid;
+  if (omitWindow) { delete verdict.issued_at; delete verdict.expires_in; }
   const signed = signVerdict(verdict, key.privateKey);
   return {
     ok: true,
@@ -230,7 +233,7 @@ test("§5.2 scope binding: verdict for another resource => deny (fail-closed)", 
 });
 
 test("§5.2 scope binding: verdict for another amount => deny (fail-closed)", async () => {
-  const h = await hookWith(policy(), fetcher({ verify: { amountOverride: 0.01 } }));
+  const h = await hookWith(policy(), fetcher({ verify: { amountOverride: "0.01" } }));
   const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
   assert.equal(r.allow, false);
   assert.match(r.reason, /verdict amount mismatch/);
@@ -281,6 +284,117 @@ test("§5.2 scope binding: off => legacy unsigned response accepted (documented 
   const h = await hookWith(p, fetcher({ verify: { unsigned: true } }));
   const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
   assert.equal(r.allow, true, "explicit opt-out keeps the pre-§5.2 flow working");
+});
+
+// ---- §5.2 rev 3 (minia2auk's follow-up review, 2026-10-20): normative field
+//      types, seller-minted challenges, kid + rotation windows ----
+
+test("§5.2 rev3: usdFixed canonicalizes amounts and rejects non-canonical input", () => {
+  assert.equal(usdFixed(1), "1.00");
+  assert.equal(usdFixed(0.01), "0.01");
+  assert.equal(usdFixed("50"), "50.00");
+  assert.equal(usdFixed("1.5"), "1.50");
+  assert.equal(usdFixed("1.005"), null, "sub-cent string precision");
+  assert.equal(usdFixed(0.005), null, "sub-cent numeric precision");
+  assert.equal(usdFixed("1e3"), null, "exponent notation");
+  assert.equal(usdFixed(-1), null, "negative");
+  assert.equal(usdFixed("abc"), null, "garbage");
+});
+
+test("§5.2 rev3: verdict carrying a JSON number amount => deny (signed form must be a fixed-scale string)", async () => {
+  const h = await hookWith(policy(), fetcher({ verify: { amountOverride: 1 } }));
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, false);
+  assert.match(r.reason, /non-canonical form/);
+});
+
+test("§5.2 rev3: verdict with non-canonical amount string => deny", async () => {
+  const h = await hookWith(policy(), fetcher({ verify: { amountOverride: "1.005" } }));
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, false);
+  assert.match(r.reason, /non-canonical form/);
+});
+
+test("§5.2 rev3: request amount with sub-cent precision => deny before any network call", async () => {
+  let called = false;
+  const fetchImpl = async () => { called = true; return signedVerifyResponse("{}", {}); };
+  const h = await hookWith(policy(), fetchImpl);
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1.005, atc: {} });
+  assert.equal(r.allow, false);
+  assert.match(r.reason, /not a canonical USD amount/);
+  assert.equal(called, false, "no verify call should be attempted");
+});
+
+test("§5.2 rev3: verdict missing issued_at/expires_in => deny (window is mandatory)", async () => {
+  const h = await hookWith(policy(), fetcher({ verify: { omitWindow: true } }));
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, false);
+  assert.match(r.reason, /missing validity window/);
+});
+
+test("§5.2 rev3: pin set — matching kid whose window covers issued_at => allow", async () => {
+  const h = await hookWith(policy(), fetcher({ verify: { kid: "verifier-2026-10" } }), {
+    verifierKeys: [{
+      kid: "verifier-2026-10", public_key: VKEY.publicKey,
+      not_before: new Date(Date.now() - 3600e3).toISOString(),
+      not_after: new Date(Date.now() + 3600e3).toISOString(),
+    }],
+  });
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, true);
+});
+
+test("§5.2 rev3: unknown kid => deny", async () => {
+  const h = await hookWith(policy(), fetcher({ verify: { kid: "verifier-2026-10" } }), {
+    verifierKeys: [{ kid: "other-key", public_key: VKEY.publicKey, not_before: null, not_after: null }],
+  });
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, false);
+  assert.match(r.reason, /kid not in pin set/);
+});
+
+test("§5.2 rev3: pinned key expired at verdict issued_at => deny", async () => {
+  const h = await hookWith(policy(), fetcher({ verify: { kid: "verifier-old" } }), {
+    verifierKeys: [{
+      kid: "verifier-old", public_key: VKEY.publicKey,
+      not_before: "2026-01-01T00:00:00Z", not_after: "2026-06-01T00:00:00Z",
+    }],
+  });
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, false);
+  assert.match(r.reason, /expired at verdict issued_at/);
+});
+
+test("§5.2 rev3: pinned key not yet valid at issued_at => deny", async () => {
+  const h = await hookWith(policy(), fetcher({ verify: { kid: "verifier-future" } }), {
+    verifierKeys: [{
+      kid: "verifier-future", public_key: VKEY.publicKey,
+      not_before: "2027-01-01T00:00:00Z", not_after: null,
+    }],
+  });
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, false);
+  assert.match(r.reason, /not valid at verdict issued_at/);
+});
+
+test("§5.2 rev3: multi-key pin set + verdict without kid => deny (ambiguous)", async () => {
+  const h = await hookWith(policy(), fetcher(), {
+    verifierKeys: [
+      { kid: "a", public_key: VKEY.publicKey, not_before: null, not_after: null },
+      { kid: "b", public_key: makeKeyPair().publicKey, not_before: null, not_after: null },
+    ],
+  });
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, false);
+  assert.match(r.reason, /missing kid and pin set is not single-key/);
+});
+
+test("§5.2 rev3: single-key pin set + verdict without kid => allow (unambiguous migration)", async () => {
+  const h = await hookWith(policy(), fetcher(), {
+    verifierKeys: [{ kid: "only", public_key: VKEY.publicKey, not_before: null, not_after: null }],
+  });
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, true);
 });
 
 // ---- zero-dep fallback regression (the mini-parser must agree with the

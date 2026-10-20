@@ -48,13 +48,13 @@ const decision = await hook.authorize({
 hook.verifyReceipt(decision.receipt); // true — against the hook's Ed25519 key
 ```
 
-Inject `fetchImpl` for deterministic tests; inject `keyPair` to sign receipts with the operator's key instead of an ephemeral one; inject `verifierPublicKey` to pin the verifier key for §5.2 scope-binding checks (strict by default — a verifier response without a signed verdict bound to `{challenge, resource, amount_usd}` denies).
+Inject `fetchImpl` for deterministic tests; inject `keyPair` to sign receipts with the operator's key instead of an ephemeral one; inject `verifierPublicKey` (single pin) or `verifierKeys` (§5.2 rev 3 pin set: `[{kid, public_key, not_before, not_after}]`) for §5.2 scope-binding checks (strict by default — a verifier response without a signed verdict bound to `{challenge, resource, amount_usd}` denies).
 
 ## Status
 
 - **Draft 0.1** — schema-tolerant normalizer (accepts `snake_case`/`camelCase`, `authorizations`/`grants`/`agents`). **The bridge will mirror the official Pay MCP YAML 1:1 the moment lgalabru publishes the schema** — the intent stated in [our reply](https://github.com/solana-foundation/pay/issues/505#issuecomment-6227808384).
 - `trust_band_min` is the seam between this bridge and UTA's ATC/1.0 verdicts (Ed25519 over RFC 8785 JCS, revocation fail-closed). See [universal-trust-adapter](https://github.com/alicelabs-llc/universal-trust-adapter).
-- **Verdict scope binding (RFC-ATC v3 §5.2):** the verifier's response must carry an Ed25519-signed verdict bound to `{challenge, resource, amount_usd}`; the bridge checks it fail-closed (`scope_binding: strict` by default — `off` is the documented migration opt-out while the verifier rollout completes). Pin the verifier key via `verifierPublicKey` (hook option) or `uta.verifier_public_key` (YAML). Without scope binding a `verdict_id` is a bearer token across routes and amounts.
+- **Verdict scope binding (RFC-ATC v3 §5.2, rev 3):** the verifier's response must carry an Ed25519-signed verdict bound to `{challenge, resource, amount_usd}`; the bridge checks it fail-closed (`scope_binding: strict` by default — `off` is the documented migration opt-out while the verifier rollout completes). Rev 3 hardening (from minia2auk's follow-up review): `amount_usd` must be a **fixed-scale decimal string** (a JSON number or non-canonical string in the signed scope denies — JCS makes serialization normative and non-JS implementations diverge); challenges are **seller-minted from a cryptographic RNG** (the reference bridge uses `randomBytes(16)`); verdicts must carry **`kid`**, verified against a pinned key set with `not_before`/`not_after` windows checked at `issued_at` (a missing `kid` is only accepted for a single-key pin); missing `issued_at`/`expires_in` denies; verifier-unreachable ⇒ deny is normative. Pin via `verifierPublicKey`/`uta.verifier_public_key` (single) or `verifierKeys`/`uta.verifier_keys` (pin set). Without scope binding a `verdict_id` is a bearer token across routes and amounts.
 - Receipt canonicalization: sorted-keys recursive JSON (RFC 8785-compatible for the ASCII subset receipts use).
 
 ## Run tests

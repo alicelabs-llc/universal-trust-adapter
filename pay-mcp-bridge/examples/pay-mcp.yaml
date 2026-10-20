@@ -25,9 +25,20 @@ revocation:
 
 uta:
   verify_url: "https://uta.alicelabs.site/v1/trust/verify"
-  # RFC-ATC v3 §5.2 — verdict scope binding: the verifier's Ed25519-signed
-  # verdict must cover {challenge, resource, amount_usd}; the bridge enforces
-  # it fail-closed. Default: strict. "off" is the documented migration opt-out
-  # while the verifier rollout completes.
+  # RFC-ATC v3 §5.2 (rev 3) — verdict scope binding: the verifier's Ed25519-signed
+  # verdict must cover {challenge, resource, amount_usd}; amount_usd travels as a
+  # fixed-scale decimal string ("0.01", "50.00" — never a JSON number); challenges
+  # are seller-minted from a cryptographic RNG. The bridge enforces all of it
+  # fail-closed. Default: strict. "off" is the documented migration opt-out while
+  # the verifier rollout completes.
   scope_binding: strict
   verifier_public_key: null    # base64 SPKI — pin the verifier's key before production
+  # §5.2 rev 3 — multi-key pin set with rotation windows (optional; the single
+  # verifier_public_key above is a one-entry pin set). The verdict's `kid` must
+  # match an entry whose validity window covers verdict.issued_at; a missing kid
+  # is only accepted when the pin set has exactly one key.
+  # verifier_keys:
+  #   - kid: "verifier-2026-10"
+  #     public_key: "base64 SPKI"
+  #     not_before: "2026-10-01T00:00:00Z"
+  #     not_after: "2027-01-01T00:00:00Z"

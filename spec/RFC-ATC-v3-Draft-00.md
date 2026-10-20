@@ -283,21 +283,32 @@ Each signature format adds ~1KB to the credential size and ~10-30ms to the issua
 A verdict produced by a verifier for presentation to a seller (the `verdict_id` object returned by a verify call) MUST be a signed object, and the signature MUST cover the transaction scope it is valid for:
 
 ```
-verdict = { v, verdict_id, card_digest, challenge, resource, amount_usd,
+verdict = { v, verdict_id, kid, card_digest, challenge, resource, amount_usd,
             band, stages, issued_at, expires_in }
 ```
 
-The signature is Ed25519 over the RFC 8785 JCS canonicalization of the verdict minus its `verdict_sig` field, from a key the seller pins for the verifier.
+The signature is Ed25519 over the RFC 8785 JCS canonicalization of the verdict minus its `verdict_sig` field, from a key the seller pins for the verifier (selected by `kid`, below).
+
+**Field types are normative, because the signed bytes are the JCS canonical form.**
+
+- `amount_usd` MUST be a fixed-scale decimal string with exactly two fractional digits (USD minor units), e.g. `"0.01"`, `"50.00"` — never a JSON number. JCS serializes numbers through ECMAScript number-to-string, which non-JavaScript implementations may not reproduce bit-for-bit (values beyond 2^53, sub-cent scales, and numeric parsing of `"0.10"` are where implementations diverge). A string has exactly one canonical form in every implementation, so the seller can byte-compare the signed scope against the payable amount it normalized from the request.
+- `challenge` MUST be a string carrying at least 128 bits of entropy from a cryptographic random source.
 
 The presenting seller MUST check, fail-closed (any absence or mismatch ⇒ deny):
 
-1. `verdict_sig` verifies against the pinned verifier key;
+1. `verdict_sig` verifies against the pinned verifier key selected below;
 2. `challenge` equals the challenge the seller minted for THIS attempt (one-time freshness — a replayed verdict fails here with no seller-side state, since the seller mints a fresh challenge per attempt);
 3. `resource` equals the route being served;
-4. `amount_usd` equals the payable amount of this request;
-5. the window is valid (`issued_at` + `expires_in` not elapsed).
+4. `amount_usd` equals the payable amount of this request, compared as fixed-scale strings (the seller normalizes the request amount to the same two-fractional-digit form and compares bytes; a verdict carrying a JSON number or a non-canonical string ⇒ deny);
+5. the window is valid (`issued_at` + `expires_in` not elapsed); `issued_at` and `expires_in` MUST be present in a signed verdict.
 
-A verdict whose signature covers none of `challenge`, `resource`, and `amount_usd` is a bearer token: it can be obtained for a cheap route and presented at an expensive one until it expires. Scope binding closes exactly that. Migration: sellers MAY run `scope_binding: off` against verifiers that do not yet sign scope until the verifier rollout completes; the requirement above is normative for paid-route verification under ATC/1.0 from v3.0 onward. (Motivated by external seller-side review of the pay-mcp-bridge reference flow — see parthod0x/satroot#2, comment by minia2auk.)
+**Challenges are seller-minted.** The challenge MUST be minted by the presenting seller (or its gateway) for this attempt, from a cryptographic random source, and MUST NOT be accepted from the caller. A seller that accepts caller-supplied challenges voids the freshness guarantee entirely: the attacker picks the challenge, obtains one verdict signed over it, and replays it within the window against every route that accepts it.
+
+**Verifier key identification and rotation.** The verdict MUST carry `kid`, identifying the verifier signing key. The seller pins a verifier key set of `{kid → public_key, not_before, not_after}` entries. The seller MUST verify the signature against a pinned entry whose `kid` matches the verdict and whose validity window covers the verdict's `issued_at`; an unknown `kid`, or a known `kid` with no pinned key valid at `issued_at`, ⇒ deny. A single-key pin set MAY accept a verdict without `kid` (the mapping is unambiguous); a multi-key pin set MUST fail closed on a missing `kid`.
+
+**Verifier availability.** Verifier unreachable, non-200, malformed, or negative ⇒ deny. Fail-closed is the specified behavior, not a degradation path; availability pressure is exactly where implementations drift.
+
+A verdict whose signature covers none of `challenge`, `resource`, and `amount_usd` is a bearer token: it can be obtained for a cheap route and presented at an expensive one until it expires. Scope binding closes exactly that. Migration: sellers MAY run `scope_binding: off` against verifiers that do not yet sign scope until the verifier rollout completes; the requirement above is normative for paid-route verification under ATC/1.0 from v3.0 onward. (Motivated by external seller-side review of the pay-mcp-bridge reference flow — see parthod0x/satroot#2, comment by minia2auk; §5.2 rev 3 hardening folded from minia2auk's follow-up review of 2026-10-20.)
 
 ---
 
@@ -389,6 +400,7 @@ const credential = await engine.issue({
 
 - **v3.0 Draft 00 (2026-08-20):** Initial publication. Introduces `signatures[]` array with multi-format support. Defines `atc-ed25519`, `eat-cwt`, `w3c-vc` formats. Maintains backward compatibility with v2.0.
 - **v3.0 Draft 00 rev 2 (2026-10-19):** §5.2 added — verdict scope binding required for paid-route presentation (signed verdict MUST cover challenge, resource, amount_usd; seller-side checks fail-closed). Motivated by external seller-side review (minia2auk, parthod0x/satroot#2).
+- **v3.0 Draft 00 rev 3 (2026-10-20):** §5.2 hardened from minia2auk's follow-up review (parthod0x/satroot#2): `amount_usd` pinned to a fixed-scale decimal string (JCS makes number serialization normative and non-JS implementations diverge), challenges normatively seller-minted with ≥128 bits of cryptographic entropy (caller-supplied challenges void freshness), `kid` + pinned-key validity windows (`not_before`/`not_after` checked against `issued_at`), and verifier-unreachable ⇒ deny made normative.
 
 ---
 
