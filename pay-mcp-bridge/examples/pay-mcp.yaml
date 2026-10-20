@@ -25,20 +25,27 @@ revocation:
 
 uta:
   verify_url: "https://uta.alicelabs.site/v1/trust/verify"
-  # RFC-ATC v3 §5.2 (rev 3) — verdict scope binding: the verifier's Ed25519-signed
+  # RFC-ATC v3 §5.2 (rev 4) — verdict scope binding: the verifier's Ed25519-signed
   # verdict must cover {challenge, resource, amount_usd}; amount_usd travels as a
-  # fixed-scale decimal string ("0.01", "50.00" — never a JSON number); challenges
-  # are seller-minted from a cryptographic RNG. The bridge enforces all of it
-  # fail-closed. Default: strict. "off" is the documented migration opt-out while
-  # the verifier rollout completes.
+  # fixed-scale decimal string with SIX fractional digits (micro-USD granularity,
+  # 1:1 with USDC's 6 decimals on Base — "0.005000" is a valid $0.005 route);
+  # challenges are seller-minted from a cryptographic RNG; the verdict window is
+  # bounded on both sides (max_skew_s / max_expires_in_s). Enforced fail-closed.
+  # Default: strict. "off" is the documented migration opt-out while the verifier
+  # rollout completes.
   scope_binding: strict
   verifier_public_key: null    # base64 SPKI — pin the verifier's key before production
-  # §5.2 rev 3 — multi-key pin set with rotation windows (optional; the single
+  max_skew_s: 60               # §5.2 rev 4 — reject issued_at further than 60s in the future
+  max_expires_in_s: 300        # §5.2 rev 4 — reject verdict windows longer than 300s
+  # §5.2 rev 3/4 — multi-key pin set with rotation windows (optional; the single
   # verifier_public_key above is a one-entry pin set). The verdict's `kid` must
   # match an entry whose validity window covers verdict.issued_at; a missing kid
-  # is only accepted when the pin set has exactly one key.
+  # is only accepted when the pin set has exactly one key. not_after is ROTATION,
+  # not revocation — revocation requires removing the kid from the pin set or a
+  # revoked_at cutoff checked against issued_at.
   # verifier_keys:
   #   - kid: "verifier-2026-10"
   #     public_key: "base64 SPKI"
   #     not_before: "2026-10-01T00:00:00Z"
   #     not_after: "2027-01-01T00:00:00Z"
+  #     revoked_at: null         # set when compromised; window alone does not revoke

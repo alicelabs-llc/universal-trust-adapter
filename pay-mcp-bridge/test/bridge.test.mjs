@@ -290,12 +290,15 @@ test("§5.2 scope binding: off => legacy unsigned response accepted (documented 
 //      types, seller-minted challenges, kid + rotation windows ----
 
 test("§5.2 rev3: usdFixed canonicalizes amounts and rejects non-canonical input", () => {
-  assert.equal(usdFixed(1), "1.00");
-  assert.equal(usdFixed(0.01), "0.01");
-  assert.equal(usdFixed("50"), "50.00");
-  assert.equal(usdFixed("1.5"), "1.50");
-  assert.equal(usdFixed("1.005"), null, "sub-cent string precision");
-  assert.equal(usdFixed(0.005), null, "sub-cent numeric precision");
+  // rev 4: six fractional digits — micro-USD granularity (USDC on Base is 6dp)
+  assert.equal(usdFixed(1), "1.000000");
+  assert.equal(usdFixed(0.01), "0.010000");
+  assert.equal(usdFixed("50"), "50.000000");
+  assert.equal(usdFixed("1.5"), "1.500000");
+  assert.equal(usdFixed("0.005"), "0.005000", "sub-cent routes stay inside scope binding");
+  assert.equal(usdFixed(0.005), "0.005000");
+  assert.equal(usdFixed("0.0000005"), null, "finer than 1 micro-USD");
+  assert.equal(usdFixed("1.0000005"), null, "seven fractional digits");
   assert.equal(usdFixed("1e3"), null, "exponent notation");
   assert.equal(usdFixed(-1), null, "negative");
   assert.equal(usdFixed("abc"), null, "garbage");
@@ -309,7 +312,7 @@ test("§5.2 rev3: verdict carrying a JSON number amount => deny (signed form mus
 });
 
 test("§5.2 rev3: verdict with non-canonical amount string => deny", async () => {
-  const h = await hookWith(policy(), fetcher({ verify: { amountOverride: "1.005" } }));
+  const h = await hookWith(policy(), fetcher({ verify: { amountOverride: "1.0000005" } }));
   const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
   assert.equal(r.allow, false);
   assert.match(r.reason, /non-canonical form/);
@@ -319,10 +322,47 @@ test("§5.2 rev3: request amount with sub-cent precision => deny before any netw
   let called = false;
   const fetchImpl = async () => { called = true; return signedVerifyResponse("{}", {}); };
   const h = await hookWith(policy(), fetchImpl);
-  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1.005, atc: {} });
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 0.0000005, atc: {} });
   assert.equal(r.allow, false);
   assert.match(r.reason, /not a canonical USD amount/);
   assert.equal(called, false, "no verify call should be attempted");
+});
+
+// ---- §5.2 rev 4 (minia2auk's second follow-up, 2026-10-20): sub-cent routes
+//      stay inside scope binding; window bounded on both sides; rotation ≠ revocation ----
+
+test("§5.2 rev4: sub-cent route ($0.005) => allow (micro-USD granularity)", async () => {
+  const h = await hookWith(policy(), fetcher());
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 0.005, atc: {} });
+  assert.equal(r.allow, true, "a $0.005 route signs 0.005000 and allows");
+  assert.equal(h.state().spends[0].amount_usd, 0.005);
+});
+
+test("§5.2 rev4: verdict issued_at in the future beyond skew => deny", async () => {
+  const h = await hookWith(policy(), fetcher({ verify: { issuedAt: new Date(Date.now() + 120e3).toISOString() } }));
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, false);
+  assert.match(r.reason, /issued_at in the future beyond allowed skew/);
+});
+
+test("§5.2 rev4: verdict expires_in over seller max => deny", async () => {
+  const h = await hookWith(policy(), fetcher({ verify: { expiresIn: 3600 } }));
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, false);
+  assert.match(r.reason, /expires_in exceeds seller max window/);
+});
+
+test("§5.2 rev4: revoked_at cutoff denies verdicts issued after revocation (rotation ≠ revocation)", async () => {
+  const h = await hookWith(policy(), fetcher({ verify: { kid: "verifier-rota" } }), {
+    verifierKeys: [{
+      kid: "verifier-rota", public_key: VKEY.publicKey,
+      not_before: "2026-01-01T00:00:00Z", not_after: "2027-01-01T00:00:00Z",
+      revoked_at: new Date(Date.now() - 60e3).toISOString(), // revoked a minute ago
+    }],
+  });
+  const r = await h.authorize({ agent: BOT, resource: "solana:transfer", amountUsd: 1, atc: {} });
+  assert.equal(r.allow, false, "key window still covers issued_at but revoked_at cuts it off");
+  assert.match(r.reason, /revoked before verdict issued_at/);
 });
 
 test("§5.2 rev3: verdict missing issued_at/expires_in => deny (window is mandatory)", async () => {

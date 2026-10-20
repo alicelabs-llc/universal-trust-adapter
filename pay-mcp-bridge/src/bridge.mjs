@@ -137,18 +137,19 @@ export async function loadPolicy(policyPath) {
 
 const BAND_RANK = { B0: 0, B1: 1, B2: 2, B3: 3, A1: 4 };
 
-// RFC-ATC v3 §5.2 (rev 3): amounts travel as fixed-scale decimal strings with
-// exactly two fractional digits — the signed bytes are the JCS canonical form,
-// and JSON number serialization is where non-JS implementations diverge
-// (values beyond 2^53, sub-cent scales, numeric parsing of "0.10").
-// Returns null (fail-closed) for unparseable, negative, or sub-cent input.
+// RFC-ATC v3 §5.2 (rev 4): amounts travel as fixed-scale decimal strings with
+// exactly six fractional digits — micro-USD granularity, the same precision as
+// USDC's six decimals on Base. Sub-cent routes stay inside scope binding (a
+// $0.005 route signs "0.005000"); pricing finer than 1 micro-USD cannot be
+// canonicalized and returns null (fail-closed). JSON numbers are rejected as a
+// signed form because JCS number serialization is where non-JS verifiers diverge.
 export function usdFixed(n) {
   const s = typeof n === "string" ? n.trim() : null;
-  const x = s !== null ? (/^\d+(\.\d{1,2})?$/.test(s) ? Number(s) : NaN) : Number(n);
+  const x = s !== null ? (/^\d+(\.\d{1,6})?$/.test(s) ? Number(s) : NaN) : Number(n);
   if (!Number.isFinite(x) || x < 0) return null;
-  // numeric input carrying sub-cent precision cannot be canonicalized losslessly
-  if (s === null && Math.abs(Math.round(x * 100) - x * 100) > 1e-6) return null;
-  return x.toFixed(2);
+  // numeric input carrying sub-micro-USD precision cannot be canonicalized losslessly
+  if (s === null && Math.abs(Math.round(x * 1e6) - x * 1e6) > 1e-3) return null;
+  return x.toFixed(6);
 }
 
 // §5.2 rev 3 — one entry of the verifier key pin set: {kid, public_key,
@@ -160,6 +161,10 @@ function normalizePin(k, i) {
     public_key: pick(k, "public_key", "publicKey", "key") ?? null,
     not_before: pick(k, "not_before", "notBefore") ?? null,
     not_after: pick(k, "not_after", "notAfter") ?? null,
+    // §5.2 rev 4 — not_after is rotation, not revocation: revocation is either
+    // removing the kid from the pin set or a revoked_at cutoff checked against
+    // verdict.issued_at.
+    revoked_at: pick(k, "revoked_at", "revokedAt") ?? null,
   };
 }
 
@@ -199,6 +204,12 @@ export function normalizePolicy(doc) {
       // §5.2 rev 3 — multi-key pin set with rotation windows; the single
       // verifier_public_key above is treated as a one-entry pin set.
       verifier_keys: Array.isArray(vkRaw) ? vkRaw.map(normalizePin) : [],
+      // §5.2 rev 4 — two-sided window bounds: issued_at may not sit further
+      // than max_skew_s in the future; expires_in may not exceed
+      // max_expires_in_s. A wrong or compromised verifier clock cannot widen
+      // the replay window on its own.
+      max_skew_s: Number(pick(uta, "max_skew_s", "maxSkewS") ?? 60),
+      max_expires_in_s: Number(pick(uta, "max_expires_in_s", "maxExpiresInS") ?? 300),
     },
   };
   policy.policy_sha256 = sha256Hex(canonicalize(policy));
@@ -228,7 +239,9 @@ export async function createUtaHook({
   fetchImpl = fetch,
   keyPair = null,
   verifierPublicKey = null, // pins the verifier key for §5.2 scope-binding checks
-  verifierKeys = null, // §5.2 rev 3 pin set: [{kid, public_key, not_before, not_after}]
+  verifierKeys = null, // §5.2 rev 3 pin set: [{kid, public_key, not_before, not_after, revoked_at}]
+  maxSkewS = null, // §5.2 rev 4 — max future issued_at skew (default 60s)
+  maxExpiresInS = null, // §5.2 rev 4 — max verdict window (default 300s)
   now = () => Date.now(),
 } = {}) {
   if (!policy) policy = policyPath ? await loadPolicy(policyPath) : null;
@@ -315,8 +328,15 @@ export async function createUtaHook({
       if (!v.issued_at || !Number.isFinite(Number(v.expires_in))) {
         return { ok: false, reason: "fail-closed: verdict missing validity window (issued_at/expires_in required)" };
       }
-      // §5.2 rev 3 — key selection: kid match + validity window covering issued_at
+      // §5.2 rev 4 — the window is bounded on both sides
       const issued = Date.parse(v.issued_at);
+      const skewMs = (maxSkewS ?? policy?.uta?.max_skew_s ?? 60) * 1000;
+      const maxExpS = maxExpiresInS ?? policy?.uta?.max_expires_in_s ?? 300;
+      if (issued > now() + skewMs)
+        return { ok: false, reason: `fail-closed: verdict issued_at in the future beyond allowed skew (${skewMs / 1000}s)` };
+      if (Number(v.expires_in) > maxExpS)
+        return { ok: false, reason: `fail-closed: verdict expires_in exceeds seller max window (${maxExpS}s)` };
+      // §5.2 rev 3 — key selection: kid match + validity window covering issued_at
       let sel;
       if (v.kid) {
         sel = pins.find((p) => p.kid === v.kid);
@@ -330,6 +350,9 @@ export async function createUtaHook({
         return { ok: false, reason: `fail-closed: pinned key ${sel.kid ?? "(single)"} not valid at verdict issued_at` };
       if (sel.not_after && issued > Date.parse(sel.not_after))
         return { ok: false, reason: `fail-closed: pinned key ${sel.kid ?? "(single)"} expired at verdict issued_at` };
+      // §5.2 rev 4 — not_after is rotation, not revocation
+      if (sel.revoked_at && issued >= Date.parse(sel.revoked_at))
+        return { ok: false, reason: `fail-closed: pinned key ${sel.kid ?? "(single)"} revoked before verdict issued_at` };
       if (!verifyVerdict(v, s, sel.public_key)) {
         return { ok: false, reason: "fail-closed: verdict signature invalid" };
       }
