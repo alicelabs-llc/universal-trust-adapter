@@ -28,6 +28,42 @@ Built by **Edison Flores** & **Alejandro Flores** at **AliceLabs LLC** (Wyoming,
 
 ---
 
+## 🔌 Use it now — verify any agent for $0.01 (x402, no account, no key)
+
+The reference verifier is live and fail-closed: **Base mainnet** (`eip155:8453`, PayAI facilitator) and
+**Base Sepolia** (`eip155:84532`, x402.org facilitator — zero-cost testing) at the same `$0.01/verify` · `$0.08/batch`.
+
+```bash
+# Machine-readable price + payment requirements (402 PAYMENT-REQUIRED):
+curl -s https://uta-trust-api.eddyflores100.workers.dev/.well-known/x402.json
+
+# Human + agent docs (OpenAPI, /llms.txt for agents):
+curl -s https://uta-trust-api.eddyflores100.workers.dev/docs
+```
+
+Any x402 client pays per call (USDC, `exact` scheme) — no signup, no API key. If the revocation check
+cannot be reached, the verdict is **DENY**: it never degrades to "probably fine".
+
+## 🏛 Where this is listed & reviewed (all verifiable)
+
+- **mcp.so** — [listed](https://mcp.so/servers/marketnow) (maintainer-confirmed 2026-10-16)
+- **Glama MCP** — rated **A** (remote-capable, maintenance A)
+- **x402scan** — indexed via the official `npx agentcash register` flow (openapi source, 2 resources)
+- **gold-402** — [merged](https://github.com/Haustorium12/gold-402/pull/355) (Gate PASSED ×2)
+- **awesome-agent-native-services** — [merged](https://github.com/haoruilee/awesome-agent-native-services/pull/229)
+- **Spec under public review**: scope-binding §5.2 reached rev 4 after seller-side and second-implementation
+  review by x402 core contributors (commit [`bcb53028`](https://github.com/alicelabs-llc/universal-trust-adapter/commit/bcb53028)).
+
+## 🤝 Contributing — Hacktoberfest 2026
+
+Real, spec-linked good first issues are open and review is async-in-writing:
+
+- [#57 — conformance vectors for §5.2 scope-binding (micro-USD fixed-6 string)](https://github.com/alicelabs-llc/universal-trust-adapter/issues/57)
+
+Read the Stranger Manifesto first: we merge vectors and receipts, not vibes.
+
+---
+
 ## ⚡ Verify our claims — the stranger test (30 seconds)
 
 Every trust claim in this repo is re-derivable by a stranger, from live public URLs, with no account and no trust in our endpoints:
