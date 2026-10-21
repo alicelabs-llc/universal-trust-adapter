@@ -17,8 +17,9 @@
 [![npm version](https://img.shields.io/npm/v/agent-trust-card.svg)](https://www.npmjs.com/package/agent-trust-card)
 [![GitHub release](https://img.shields.io/github/v/release/alicelabs-llc/universal-trust-adapter)](https://github.com/alicelabs-llc/universal-trust-adapter/releases)
 [![license](https://img.shields.io/badge/license-open--core%20MIT%20%C2%B7%20AL--1.0%20core-blue.svg)](https://marketnow.site/licensing)
-[![conformance](https://img.shields.io/badge/conformance-v1.3.5-brightgreen.svg)](https://www.marketnow.site/uta/conformance/)
+[![conformance](https://img.shields.io/badge/conformance-v1.4.0-brightgreen.svg)](https://www.marketnow.site/uta/conformance/)
 [![Rekor anchored](https://img.shields.io/badge/Sigstore%20Rekor-anchored-blue.svg)](https://www.marketnow.site/uta/conformance/anchors/)
+[![mcpservers.org](https://img.shields.io/badge/mcpservers.org-listed-2C8EBB.svg)](https://mcpservers.org/servers/alicelabs-llc/marketnow)
 
 UTA translates between ALL trust credential formats used by AI agents via a canonical Universal Trust Schema (UTS).
 
