@@ -1,0 +1,82 @@
+[
+  {
+    "card_id": "ATC-SCOPE-NEG-001",
+    "description": "Negative: amount_usd is a JSON number (0.005), not a string. Must reject under JCS RFC 8785 because numbers canonicalize differently across implementations.",
+    "expected_failure_reason": "amount_usd must be a fixed-scale decimal string with exactly 6 fractional digits, got number",
+    "payload": {
+      "card_id": "ATC-SCOPE-NEG-001",
+      "schema_version": "2.0.0",
+      "agent_id": "test-agent-scope-neg-001",
+      "scope_binding": {
+        "chain_id": "8453",
+        "asset": "USDC",
+        "payer": "0xabc1234567890abcdef1234567890abcdef1234",
+        "amount_usd": 0.005
+      }
+    }
+  },
+  {
+    "card_id": "ATC-SCOPE-NEG-002",
+    "description": "Negative: amount_usd has only 4 decimal digits ('0.0100'), not the required 6. Must reject.",
+    "expected_failure_reason": "amount_usd must have exactly 6 fractional digits, got 4 in '0.0100'",
+    "payload": {
+      "card_id": "ATC-SCOPE-NEG-002",
+      "schema_version": "2.0.0",
+      "agent_id": "test-agent-scope-neg-002",
+      "scope_binding": {
+        "chain_id": "8453",
+        "asset": "USDC",
+        "payer": "0xabc1234567890abcdef1234567890abcdef1234",
+        "amount_usd": "0.0100"
+      }
+    }
+  },
+  {
+    "card_id": "ATC-SCOPE-NEG-003",
+    "description": "Negative: scope_binding.asset is 'ETH' but the signed binding was for 'USDC'. A verdict for USDC cannot be replayed to authorize an ETH payment.",
+    "expected_failure_reason": "scope_binding asset mismatch: signed for USDC, presented ETH",
+    "payload": {
+      "card_id": "ATC-SCOPE-NEG-003",
+      "schema_version": "2.0.0",
+      "agent_id": "test-agent-scope-neg-003",
+      "scope_binding": {
+        "chain_id": "8453",
+        "asset": "ETH",
+        "payer": "0xabc1234567890abcdef1234567890abcdef1234",
+        "amount_usd": "0.005000"
+      }
+    }
+  },
+  {
+    "card_id": "ATC-SCOPE-NEG-004",
+    "description": "Negative: chain_id is '1' (mainnet) but the signed binding was for chain_id '8453' (Base). A verdict for Base cannot be replayed on mainnet.",
+    "expected_failure_reason": "scope_binding chain_id mismatch: signed for 8453, presented 1",
+    "payload": {
+      "card_id": "ATC-SCOPE-NEG-004",
+      "schema_version": "2.0.0",
+      "agent_id": "test-agent-scope-neg-004",
+      "scope_binding": {
+        "chain_id": "1",
+        "asset": "USDC",
+        "payer": "0xabc1234567890abcdef1234567890abcdef1234",
+        "amount_usd": "0.005000"
+      }
+    }
+  },
+  {
+    "card_id": "ATC-SCOPE-NEG-005",
+    "description": "Negative: amount_usd is '0.010000' but the signed binding was for '0.005000'. A verdict for $0.005 cannot authorize a $0.01 payment.",
+    "expected_failure_reason": "scope_binding amount_usd mismatch: signed for 0.005000, presented 0.010000",
+    "payload": {
+      "card_id": "ATC-SCOPE-NEG-005",
+      "schema_version": "2.0.0",
+      "agent_id": "test-agent-scope-neg-005",
+      "scope_binding": {
+        "chain_id": "8453",
+        "asset": "USDC",
+        "payer": "0xabc1234567890abcdef1234567890abcdef1234",
+        "amount_usd": "0.010000"
+      }
+    }
+  }
+]

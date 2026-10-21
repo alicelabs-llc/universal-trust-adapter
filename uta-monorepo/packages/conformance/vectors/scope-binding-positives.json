@@ -1,0 +1,202 @@
+[
+  {
+    "card_id": "ATC-SCOPE-POS-001",
+    "description": "Valid scope-binding: chain_id=8453, asset=USDC, payer=0xabc, amount_usd='0.005000' (sub-cent, 6 decimal string)",
+    "payload": {
+      "card_id": "ATC-SCOPE-POS-001",
+      "schema_version": "2.0.0",
+      "agent_id": "test-agent-scope-pos-001",
+      "agent_name": "Scope-Binding Positive Test Agent 001",
+      "identity": {
+        "public_key": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+        "key_algorithm": "Ed25519"
+      },
+      "scope_binding": {
+        "chain_id": "8453",
+        "asset": "USDC",
+        "payer": "0xabc1234567890abcdef1234567890abcdef1234",
+        "amount_usd": "0.005000"
+      },
+      "trust": {
+        "sentinel_review_score": 8,
+        "sentinel_score": 8,
+        "composite_trust": 8,
+        "risk_level": "low"
+      },
+      "capabilities": {
+        "provides": ["pay"],
+        "protocol_language": "mcp",
+        "translate": true
+      },
+      "payment": {
+        "method": "x402",
+        "wallet_address": "0xabc1234567890abcdef1234567890abcdef1234"
+      },
+      "metadata": {
+        "issued_at": "2026-10-20T00:00:00Z",
+        "expires_at": "2027-10-20T00:00:00Z",
+        "issuer": "MarketNow Sentinel CA"
+      }
+    },
+    "signature": {
+      "algorithm": "Ed25519 (RFC 8032)",
+      "value": "placeholder",
+      "signed_by": "MarketNow Sentinel Test CA (throwaway, vectors-only)",
+      "signed_at": "2026-10-20T00:00:00Z",
+      "canonical_json": "RFC_8785_JCS",
+      "ca_key_id": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+      "policy_version": "2.0.0"
+    },
+    "expected": "valid"
+  },
+  {
+    "card_id": "ATC-SCOPE-POS-002",
+    "description": "Valid scope-binding: chain_id=1, asset=USDC, payer=0xdef, amount_usd='1.000000' (whole dollar, 6 decimal string)",
+    "payload": {
+      "card_id": "ATC-SCOPE-POS-002",
+      "schema_version": "2.0.0",
+      "agent_id": "test-agent-scope-pos-002",
+      "agent_name": "Scope-Binding Positive Test Agent 002",
+      "identity": {
+        "public_key": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+        "key_algorithm": "Ed25519"
+      },
+      "scope_binding": {
+        "chain_id": "1",
+        "asset": "USDC",
+        "payer": "0xdef4567890abcdef1234567890abcdef12345678",
+        "amount_usd": "1.000000"
+      },
+      "trust": {
+        "sentinel_review_score": 7,
+        "sentinel_score": 7,
+        "composite_trust": 7,
+        "risk_level": "low"
+      },
+      "capabilities": {
+        "provides": ["pay"],
+        "protocol_language": "mcp",
+        "translate": false
+      },
+      "payment": {
+        "method": "x402",
+        "wallet_address": "0xdef4567890abcdef1234567890abcdef12345678"
+      },
+      "metadata": {
+        "issued_at": "2026-10-20T00:00:00Z",
+        "expires_at": "2027-10-20T00:00:00Z",
+        "issuer": "MarketNow Sentinel CA"
+      }
+    },
+    "signature": {
+      "algorithm": "Ed25519 (RFC 8032)",
+      "value": "placeholder",
+      "signed_by": "MarketNow Sentinel Test CA (throwaway, vectors-only)",
+      "signed_at": "2026-10-20T00:00:00Z",
+      "canonical_json": "RFC_8785_JCS",
+      "ca_key_id": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+      "policy_version": "2.0.0"
+    },
+    "expected": "valid"
+  },
+  {
+    "card_id": "ATC-SCOPE-POS-003",
+    "description": "Valid scope-binding: chain_id=8453, asset=USDC, payer=0xghi, amount_usd='0.010000' (1 cent, 6 decimal string)",
+    "payload": {
+      "card_id": "ATC-SCOPE-POS-003",
+      "schema_version": "2.0.0",
+      "agent_id": "test-agent-scope-pos-003",
+      "agent_name": "Scope-Binding Positive Test Agent 003",
+      "identity": {
+        "public_key": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+        "key_algorithm": "Ed25519"
+      },
+      "scope_binding": {
+        "chain_id": "8453",
+        "asset": "USDC",
+        "payer": "0xghi7890abcdef1234567890abcdef1234567890",
+        "amount_usd": "0.010000"
+      },
+      "trust": {
+        "sentinel_review_score": 9,
+        "sentinel_score": 9,
+        "composite_trust": 9,
+        "risk_level": "low"
+      },
+      "capabilities": {
+        "provides": ["pay"],
+        "protocol_language": "mcp",
+        "translate": true
+      },
+      "payment": {
+        "method": "x402",
+        "wallet_address": "0xghi7890abcdef1234567890abcdef1234567890"
+      },
+      "metadata": {
+        "issued_at": "2026-10-20T00:00:00Z",
+        "expires_at": "2027-10-20T00:00:00Z",
+        "issuer": "MarketNow Sentinel CA"
+      }
+    },
+    "signature": {
+      "algorithm": "Ed25519 (RFC 8032)",
+      "value": "placeholder",
+      "signed_by": "MarketNow Sentinel Test CA (throwaway, vectors-only)",
+      "signed_at": "2026-10-20T00:00:00Z",
+      "canonical_json": "RFC_8785_JCS",
+      "ca_key_id": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+      "policy_version": "2.0.0"
+    },
+    "expected": "valid"
+  },
+  {
+    "card_id": "ATC-SCOPE-POS-004",
+    "description": "Valid scope-binding: chain_id=137, asset=USDC, payer=0xjkl, amount_usd='100.000000' (large amount, 6 decimal string)",
+    "payload": {
+      "card_id": "ATC-SCOPE-POS-004",
+      "schema_version": "2.0.0",
+      "agent_id": "test-agent-scope-pos-004",
+      "agent_name": "Scope-Binding Positive Test Agent 004",
+      "identity": {
+        "public_key": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+        "key_algorithm": "Ed25519"
+      },
+      "scope_binding": {
+        "chain_id": "137",
+        "asset": "USDC",
+        "payer": "0xjkl0123456789abcdef1234567890abcdef1234",
+        "amount_usd": "100.000000"
+      },
+      "trust": {
+        "sentinel_review_score": 8,
+        "sentinel_score": 8,
+        "composite_trust": 8,
+        "risk_level": "low"
+      },
+      "capabilities": {
+        "provides": ["pay"],
+        "protocol_language": "mcp",
+        "translate": true
+      },
+      "payment": {
+        "method": "x402",
+        "wallet_address": "0xjkl0123456789abcdef1234567890abcdef1234"
+      },
+      "metadata": {
+        "issued_at": "2026-10-20T00:00:00Z",
+        "expires_at": "2027-10-20T00:00:00Z",
+        "issuer": "MarketNow Sentinel CA"
+      }
+    },
+    "signature": {
+      "algorithm": "Ed25519 (RFC 8032)",
+      "value": "placeholder",
+      "signed_by": "MarketNow Sentinel Test CA (throwaway, vectors-only)",
+      "signed_at": "2026-10-20T00:00:00Z",
+      "canonical_json": "RFC_8785_JCS",
+      "ca_key_id": "MCowBQYDK2VwAyEAgH8DWr5g+urV5s5puKrGIf126zfl4KMqRu0C/6YQ4J0=",
+      "policy_version": "2.0.0"
+    },
+    "expected": "valid"
+  }
+]
