@@ -65,3 +65,45 @@ npm test
 ```
 
 17 tests: allow path + receipt verification, band threshold, unreachable/500 verify, per-spend cap, daily cap via runtime state, total budget, revoked agent, revocation-down under both `fail_closed` settings, band-unavailable, no-grant, tamper detection, external operator key — plus the zero-dep fallback regression pair (inline comments / `null` keyword / flow lists, and fallback ≡ `yaml`-path normalization, fixed 2026-10-17 after a post-push audit caught the fallback corrupting commented values).
+
+---
+
+## The #514 contract: `SpendRequest` → UTA (`src/spend514.mjs`)
+
+[solana-foundation/pay#514](https://github.com/solana-foundation/pay/pull/514) adds an optional `SpendingAuthority` hook: after the SDK selects a real offer and before signing, a trusted host consults runtime spending policy. This bridge now ships the **tested reference implementation** of that surface backed by UTA.
+
+| `SpendRequest` field (#514) | What the bridge does with it |
+|---|---|
+| `operation_id` (1–128 `[A-Za-z0-9-_.:]`) | durable replay guard: `(caller, operation)` is atomically bound to the attempt + offer hash; a new attempt on a claimed operation **fails closed** |
+| `attempt_id` | bound into the receipt; distinguishes attempts across process lifetimes |
+| `caller_id` (trusted host assertion) | ATC verification subject (`agent`) — never taken from `clientInfo` or tool args |
+| `request.{method,url,headers,body}` | hostile-header gate (`Authorization`/`Cookie`/x402-payment/sign-in) + case-insensitive duplicate rejection; `request_sha256` bound into the receipt |
+| `amount_atomic` (integer string) | scaled by `assetDecimals` (default 6 = USDC on Solana) into the budget/band pipeline |
+| `asset` / `network` / `recipient` | optional `spend_rules` allowlists — present-but-unmatched denies |
+| `execution_network` | must equal `network` (offer/execution mismatch denies) |
+| `accepted` (canonical offer) | scheme gate (x402 V2 exact only) + `offer_sha256` bound into the receipt |
+
+Decision mapping, matching `docs/external-spending-authority.md` in #514:
+
+- genuine policy denial → `Ok(AuthorityDecision::Deny)` (`{decision:"deny", unavailable:false}`)
+- trust-path transport failure → `Err(AuthorityUnavailable)` (`{decision:"deny", unavailable:true}`) — opaque to the agent, never falls back to allow
+- deadline (default 5s, ≤60s) → `AuthorityUnavailable`
+- receipts are Ed25519-signed and now bind `operation_id`, `attempt_id`, `offer_sha256`, `request_sha256` on top of `verdict_id` + `band` + `policy_sha256`
+
+Nothing from `request` or `accepted` is logged — only ids, hashes and decisions.
+
+```js
+import { createUtaHook } from "./src/bridge.mjs";
+import { createSpendAuthority } from "./src/spend514.mjs";
+
+const hook = await createUtaHook({ policyPath: "./examples/pay-mcp.yaml" });
+const authority = createSpendAuthority(hook, { timeoutMs: 5000, assetDecimals: 6 });
+
+const r = await authority.authorize(spendRequest); // SpendRequest JSON mirror
+// r.decision: "allow" | "deny";  r.unavailable: provider failure (fail-closed)
+// r.receipt: signed, bound to the full #514 fact set
+```
+
+A Rust wiring template for the host side lives in [`authority/uta_authority.rs`](authority/uta_authority.rs).
+
+**Tests:** 9 new (`test/authority514.test.mjs`) mirroring the #514 contract — allow path, replay/attempt binding, hostile headers, duplicate headers, scheme gate (V1/non-exact), fail-closed unreachable, deadline, allowlists/network match, deny-keeps-claim. Full suite: 47 passing.
