@@ -211,7 +211,7 @@ npx marketnow-audit bit.ly        # domain scam-check + ATC + OCSP, CI exit code
 | Test vectors (ATC/1.0) | 5 frozen + manifest — [MARKETNOW repo](https://github.com/alicelabs-llc/MARKETNOW/tree/master/docs/atc-spec/test-vectors) |
 | Test vectors (ATC v3.0) | 36 (8 positive + 17 negative + 5 mutation + 6 cross-language) — [`uta-monorepo/vectors/`](./uta-monorepo/vectors/) |
 | Format adapters | 9 (ATC, EAT-AI, ZTA, A2A, MCP Card, W3C VC, OAuth, SPIFFE, X.509) |
-| Dev.to articles | 100 (EN + 15 languages) |
+| Dev.to articles | 194 (EN + 15 languages) |
 | Download channels | 5 (NPM, jsDelivr, unpkg, marketnow.site, GitHub) |
 
 ## 📦 Packages
