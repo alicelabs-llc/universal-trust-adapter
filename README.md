@@ -337,9 +337,9 @@ conformance vectors. verify + settle run against the x402 facilitator — no set
 ## 🌐 Community
 
 - **GitHub Discussions:** [discussions](https://github.com/alicelabs-llc/universal-trust-adapter/discussions)
-- **Dev.to:** [@edison_flores_6d2cd381b13](https://dev.to/edison_flores_6d2cd381b13) — 96 articles
+- **Dev.to:** [@edison_flores_6d2cd381b13](https://dev.to/edison_flores_6d2cd381b13) — 194 articles
 - **Issues:** [Report a bug](https://github.com/alicelabs-llc/universal-trust-adapter/issues/new?labels=bug&template=bug-report.md)
-- **Email:** info@alicelabs.site
+- **Email:** contacto@alicelabs.site
 
 ## 📄 License
 
@@ -351,7 +351,7 @@ conformance vectors. verify + settle run against the x402 facilitator — no set
 
 ---
 
-**Author:** Edison Flores · **Email:** info@alicelabs.site · **Website:** https://marketnow.site  
+**Author:** Edison Flores · **Email:** contacto@alicelabs.site · **Website:** https://marketnow.site  
 **Company:** AliceLabs LLC (Wyoming, USA)
 
 ## License
