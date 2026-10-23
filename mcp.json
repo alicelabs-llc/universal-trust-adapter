@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "uta-trust-api": {
+      "url": "https://uta-trust-api.eddyflores100.workers.dev/mcp",
+      "transport": "streamable-http"
+    }
+  }
+}
