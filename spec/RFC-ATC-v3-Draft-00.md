@@ -314,6 +314,23 @@ A verdict whose signature covers none of `challenge`, `resource`, and `amount_us
 
 ---
 
+### 5.3 Settlement receipt ledger (paid routes)
+
+A seller operating paid routes (x402 or equivalent accountless payment) MUST record one ledger line per payment attempt it serves, at the moment the outcome is known. Authorizations are accountless: the ledger is what "did we already serve this authorization" is answered from, so its fields are normative:
+
+- `outcome` — `settled`, `settlement-unknown`, or `denied`. A `denied` line records that the route refused before serving work; the other two record what happened after work was served or the authorization captured.
+- `resource`, `amount_usd` (same fixed-scale form as §5.2), `timestamp`.
+- `chain_id`, `asset`, `payer`, `nonce` — `payer` and `nonce` from the payer's EIP-3009 `authorization` (`from`, `nonce`); `chain_id` and `asset` from the payment requirements the seller itself advertises, never from payer-controlled fields the seller does not check. The payer's address is a per-key identity: it bounds a key, not a buyer, and MUST NOT be read as a customer count or a returning-user signal.
+- On `settlement-unknown` lines: `valid_after` and `valid_before`, kept as the strings the signer sent. The horizon bounds the re-check schedule: the row needs re-checking only while `block.timestamp < valid_before` and the nonce is still unconsumed; past `valid_before` with the nonce unconsumed, the row closes as not-charged.
+
+**Idempotency key.** The canonical key for "did we already serve this authorization" is the tuple `(chain_id, asset, payer, nonce)`. EIP-3009 scopes `authorizationState[from][nonce]` per token contract per authorizer, so the same `(from, nonce)` under two deployments of the same asset — or under two different EIP-3009 tokens — is two independent authorizations. A ledger keyed on the pair alone does two wrong things: it rejects a legitimate second authorization that happens to share a nonce across deployments, and it lets a reconciler join an authorization on one deployment to a settlement on another with the join succeeding silently. UTA's own discovery document serves USDC on both `eip155:8453` and `eip155:84532` — same asset symbol, two `(chain_id, asset)` pairs, one payer address space — so this is a live case for the reference deployment, not a hypothetical.
+
+**The transaction hash is settlement evidence, not an idempotency key.** It answers "did this transfer land" for one settlement; re-signing the same intent with a shifted `valid_before` produces a new hash for the same authorization. Conversely, `authorizationState[from][nonce]` returns true for any transfer that consumed the nonce regardless of value or recipient: a mismatched transfer (same tuple, different `value` or `to`) makes the unknown row terminal, not pending — the nonce cannot be spent again, so re-checking can never resolve it, and the row leaves the bounded schedule on the first mismatch.
+
+(Motivated by the seller-side reviews in parthod0x/satroot#2 — minia2auk, 2026-10-20 and 2026-10-21; parthod0x's correction of 2026-10-24. The on-chain `authorizationState` lookup remains a suggestion for reconcilers, not a deployed feature.)
+
+---
+
 ## 6. Migration from v2.0 to v3.0
 
 
@@ -404,6 +421,7 @@ const credential = await engine.issue({
 - **v3.0 Draft 00 rev 2 (2026-10-19):** §5.2 added — verdict scope binding required for paid-route presentation (signed verdict MUST cover challenge, resource, amount_usd; seller-side checks fail-closed). Motivated by external seller-side review (minia2auk, parthod0x/satroot#2).
 - **v3.0 Draft 00 rev 3 (2026-10-20):** §5.2 hardened from minia2auk's follow-up review (parthod0x/satroot#2): `amount_usd` pinned to a fixed-scale decimal string (JCS makes number serialization normative and non-JS implementations diverge), challenges normatively seller-minted with ≥128 bits of cryptographic entropy (caller-supplied challenges void freshness), `kid` + pinned-key validity windows (`not_before`/`not_after` checked against `issued_at`), and verifier-unreachable ⇒ deny made normative.
 - **v3.0 Draft 00 rev 4 (2026-10-20):** §5.2 hardened from minia2auk's second follow-up (parthod0x/satroot#2): `amount_usd` moved to six fractional digits — micro-USD granularity matching USDC's six decimals on Base, because two digits silently excluded the sub-cent routes where x402 micro-payments operate (pricing finer than 1 micro-USD excluded normatively and visibly); verdict window bounded on both sides (`issued_at` rejected beyond the seller's clock skew, `expires_in` capped by seller policy — a wrong or compromised verifier clock cannot widen the replay window alone); rotation separated from revocation (`not_after` does not revoke verdicts signed before it — revocation requires removing the `kid` from the pin set or a `revoked_at` cutoff checked against `issued_at`).
+- **v3.0 Draft 00 rev 5 (2026-10-24):** §5.3 added — settlement receipt ledger for paid routes: one line per served payment attempt carrying `outcome` (`settled` / `settlement-unknown` / `denied`) plus `chain_id`, `asset`, `payer`, `nonce` taken from the payer's EIP-3009 authorization and the seller's own payment requirements; the idempotency key is the 4-tuple `(chain_id, asset, payer, nonce)` (the 2-tuple breaks the moment two deployments of the same asset are served — the UTA discovery document does, on `eip155:8453` and `eip155:84532`); the tx hash pinned as settlement evidence only; `settlement-unknown` lines carry `valid_after`/`valid_before` bounding the re-check schedule, and a nonce consumed by a mismatched transfer is terminal, not pending. Motivated by the parthod0x/satroot#2 reviews (minia2auk 2026-10-20/21, parthod0x correction 2026-10-24).
 
 ---
 
