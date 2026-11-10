@@ -1,5 +1,7 @@
 # Universal Trust Adapter (UTA)
 
+[![XERJ Corpus Hub: contributor](https://hub.xerj.org/contributors/eddyflores100-lang/badge.svg)](https://hub.xerj.org/contributors/eddyflores100-lang)
+
 > **Repo ecosystem (one owner per concern, split 2026-09-26):** this repo owns the
 > **ATC protocol** — the v3.0 RFC draft ([`spec/`](./spec/)), the UTS schema, the
 > 36-vector conformance corpus ([`uta-monorepo/vectors/`](./uta-monorepo/vectors/)),
