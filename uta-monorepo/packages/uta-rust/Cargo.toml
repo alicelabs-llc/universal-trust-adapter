@@ -4,7 +4,7 @@ version = "1.0.0"
 edition = "2021"
 description = "UTA Rust SDK — verify UTA credentials (ATC v3, JWT, W3C VC) in pure Rust"
 license = "AL-1.0"
-repository = "https://github.com/eddyflores100-lang/universal-trust-adapter"
+repository = "https://github.com/alicelabs-llc/universal-trust-adapter"
 keywords = ["trust", "ed25519", "jwt", "w3c-vc", "atc"]
 categories = ["cryptography", "authentication"]
 
