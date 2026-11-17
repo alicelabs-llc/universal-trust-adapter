@@ -74,7 +74,7 @@ If Oracle Cloud is too complex, use Vercel:
 4. Deploy
 5. Set webhook:
    ```bash
-   curl "https://api.telegram.org/bot8724927280:AAGbG4EaDuMjTBd0tRcNM-vCue9XfUzWEA4/setWebhook?url=https://YOUR-APP.vercel.app/api/webhook"
+   curl "https://api.telegram.org/bot$UTA_BOT_TOKEN/setWebhook?url=https://YOUR-APP.vercel.app/api/webhook"
    ```
 
 **Limitations:** 100k invocations/month, 10s timeout (enough for verify)
