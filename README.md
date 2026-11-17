@@ -343,6 +343,12 @@ conformance vectors. verify + settle run against the x402 facilitator — no set
 - **Issues:** [Report a bug](https://github.com/alicelabs-llc/universal-trust-adapter/issues/new?labels=bug&template=bug-report.md)
 - **Email:** contacto@alicelabs.site
 
+## 🤝 Agents & Partners — sell with us
+
+- **Live paid API (x402 v2, Base mainnet):** [UTA Trust API](https://uta-trust-api.eddyflores100.workers.dev) — Ed25519 agent-trust verification at **$0.01/verify, $0.08/batch**, paid in USDC via EIP-3009 (facilitator pays the gas). `GET /health` and the 402 challenge are public; point your agent at `POST /v1/trust/verify`.
+- **Integrator revenue share:** route paying agents/integrations and get a referral share. Write to **contacto@alicelabs.site** or **eddyflores100@gmail.com** (subject: `PARTNER`) and we set up your link.
+- **Business kits:** [alicelabs.gumroad.com](https://alicelabs.gumroad.com) — 120+ products live; affiliate program open at 30% commission (reply `AFFILIATE` for your personal link).
+
 ## 📄 License
 
 | Component | License |
