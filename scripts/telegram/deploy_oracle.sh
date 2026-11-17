@@ -14,7 +14,7 @@
 
 set -e
 
-BOT_TOKEN="8724927280:AAGbG4EaDuMjTBd0tRcNM-vCue9XfUzWEA4"
+BOT_TOKEN="${TELEGRAM_BOT_TOKEN:?export TELEGRAM_BOT_TOKEN}"
 REPO_URL="https://github.com/alicelabs-llc/universal-trust-adapter"
 INSTALL_DIR="/opt/uta-bot"
 

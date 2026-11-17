@@ -70,7 +70,7 @@ If Oracle Cloud is too complex, use Vercel:
 
 1. Push `uta_bot_vercel.py` to a GitHub repo
 2. Import on vercel.com
-3. Set env var: `UTA_BOT_TOKEN=8724927280:AAGbG4EaDuMjTBd0tRcNM-vCue9XfUzWEA4`
+3. Set env var: `UTA_BOT_TOKEN` (valor en el entorno local o GitHub Secret — NUNCA en el repo)
 4. Deploy
 5. Set webhook:
    ```bash

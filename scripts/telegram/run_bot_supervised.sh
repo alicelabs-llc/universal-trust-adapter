@@ -4,7 +4,7 @@
 
 LOG="/home/z/my-project/download/telegram/bot.log"
 SCRIPT="/home/z/my-project/scripts/telegram/uta_verify_bot.py"
-export UTA_BOT_TOKEN="8724927280:AAGbG4EaDuMjTBd0tRcNM-vCue9XfUzWEA4"
+export export UTA_export UTA_BOT_TOKEN="${TELEGRAM_BOT_TOKEN:?export TELEGRAM_BOT_TOKEN}"
 
 mkdir -p /home/z/my-project/download/telegram
 
